@@ -1,0 +1,103 @@
+[
+    {
+      "name": "Arizona State University",
+      "website": "https://www.asu.edu/",
+      "image": "partners/asu.png"
+    },
+    {
+      "name": "Autoware",
+      "website": "https://www.autoware.org/",
+      "image": "partners/autoware.jpg"
+    },
+    {
+      "name": "Binghamton University",
+      "website": "https://www.binghamton.edu/",
+      "image": "partners/binghamton.png"
+    },
+    {
+      "name": "Carnegie Mellon University",
+      "website": "https://www.cmu.edu/",
+      "image": "partners/cmu.jpg"
+    },
+    {
+      "name": "City University of New York (CUNY)",
+      "website": "https://www.cuny.edu/",
+      "image": "partners/cuny.png"
+    },
+    {
+      "name": "Clemson University",
+      "website": "http://www.clemson.edu/",
+      "image": "partners/clemson.png"
+    },
+    {
+      "name": "Columbia University",
+      "website": "https://www.columbia.edu/",
+      "image": "partners/columbia.png"
+    },
+    {
+      "name": "Czech Technical University",
+      "website": "https://www.cvut.cz/en",
+      "image": "partners/czech.png"
+    },
+    {
+      "name": "Duke University",
+      "website": "https://duke.edu/",
+      "image": "partners/duke.png"
+    },
+    {
+      "name": "ETH Zurich",
+      "website": "https://ethz.ch/en.html",
+      "image": "partners/ethzurich.png"
+    },
+    {
+      "name": "George Mason University",
+      "website": "https://www2.gmu.edu/",
+      "image": "partners/georgemason.png"
+    },
+    {
+      "name": "Georgia Tech",
+      "website": "https://www.gatech.edu/",
+      "image": "partners/GAtech.png"
+    },
+    {
+      "name": "Guizhou University",
+      "website": "http://www.gzu.edu.cn/en/",
+      "image": "partners/guizhoulogo.png"
+    },
+    {
+      "name": "Hong Kong Polytechnic University",
+      "website": "https://www.polyu.edu.hk/en/",
+      "image": "partners/hongkongpoly.png"
+    },
+    {
+      "name": "Indian Institute of Technology Bombay",
+      "website": "http://www.iitb.ac.in/",
+      "image": "partners/iit.png"
+    },
+    {
+      "name": "KAIST",
+      "website": "http://www.kaist.edu/",
+      "image": "partners/kaist.png"
+    },
+    {
+      "name": "Massachusetts Institute of Technology (MIT)",
+      "website": "http://www.mit.edu/",
+      "image": "partners/mit.png"
+    },
+    {
+      "name": "New York University (NYU)",
+      "website": "https://www.nyu.edu/",
+      "image": "partners/nyu.png"
+    },
+    {
+      "name": "University of California, Berkeley",
+      "website": "https://www.berkeley.edu/",
+      "image": "partners/ucb.png"
+    },
+    {
+      "name": "University of Pennsylvania",
+      "website": "https://www.upenn.edu/",
+      "image": "partners/upenn.png"
+    }
+  ]
+  
