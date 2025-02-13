@@ -1,0 +1,51 @@
+[
+      {
+        "title": "AutoDRIVE-F1TENTH-Autoware Integration",
+        "platform": "AutoDRIVE",
+        "date": "Feb 10, 2024",
+        "description": "This work focuses on developing autonomy-oriented digital twins of vehicles across different scales and configurations to help support the streamlined development and deployment of Autoware Core/Universe stack.",
+        "link": "https://autodrive-ecosystem.github.io",
+        "thumbnail": "https://img.youtube.com/vi/FsbARE8vwXI/hqdefault.jpg"
+      },
+      {
+        "title": "Digital Twin of F1TENTH in AutoDRIVE Simulator - A First Look",
+        "platform": "AutoDRIVE",
+        "date": "Oct 13, 2023",
+        "description": "AutoDRIVE is envisioned to be a comprehensive, flexible, and integrated ecosystem for autonomous driving research and education.",
+        "link": "https://autodrive-ecosystem.github.io",
+        "thumbnail": "https://img.youtube.com/vi/Rq7Wwcwn1uk/hqdefault.jpg"
+      },
+      {
+        "title": "Model- and Acceleration-based Pursuit Controller for High-Performance Autonomous Racing",
+        "platform": "D-ITET Center for Project-Based Learning",
+        "date": "July 2023",
+        "description": "The video describes the MAP controller, highlighting how it differs from the standard Pure Pursuit algorithm.",
+        "link": "https://github.com/ETH-PBL/MAP-Controller",
+        "thumbnail": "https://img.youtube.com/vi/lE_Dk1iJHHg/hqdefault.jpg"
+      },
+      {
+        "title": "The Fast and the Autonomous",
+        "platform": "UNC Research",
+        "date": "May 15, 2020",
+        "description": "A fleet of pint-size cars that can see and navigate independently, winning races for the team of UNC computer science students that created them.",
+        "link": "https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+        "thumbnail": "https://img.youtube.com/vi/FiC58K9zAwc/hqdefault.jpg"
+      },
+      {
+        "title": "Adventures in Autonomous Vehicles",
+        "platform": "Medium",
+        "date": "April 21, 2020",
+        "description": "A chronicle of the work Penn Engineering’s mLAB is doing in autonomous vehicles.",
+        "link": "https://medium.com/adventures-in-autonomous-vehicles",
+        "thumbnail": "https://miro.medium.com/max/1400/1*MU35Lr-u7cj8yOry5LnYWA.jpeg"
+      },
+      {
+        "title": "Engineering Out Loud: The Age of Autonomous Vehicles",
+        "platform": "Stitcher",
+        "date": "February 12, 2020",
+        "description": "The F1TENTH talk starts at around 08:00 and ends at 14:00.",
+        "link": "https://app.stitcher.com/splayer/f/125922/67297121",
+        "thumbnail": "https://static.libsyn.com/p/assets/e/e/f/d/eefd0fe31b3fede0/iTunes_Graphic.jpg"
+      }
+    ]
+  

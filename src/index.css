@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* * {
+  border: 1px solid blue;
+}
+
+div {
+  border: 1px solid red;
+} */
+
+/* reusable responsive padding classx */
+@layer utilities {
+  .responsive-padding {
+    @apply px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  min-height: 100svh;
+}
+
+h1 {
+  font-family: var(--font-kanit), sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-family: var(--font-kanit), sans-serif;
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+
+h3 {
+  font-family: var(--font-kanit), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+h4 {
+  font-family: var(--font-archivo), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+} 
+
+h5 {
+  font-family: var(--font-archivo), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+p {
+  font-family: var(--font-archivo), sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.sulphur-font {
+  font-family: var(--font-kanit), sans-serif;
+}
+
+.open-sans-font {
+  font-family: var(--font-archivo), sans-serif;
+}
+
+.branded-card {
+  border-radius: 20px;
+  border: 1px solid white;
+  padding: 20px;
+}
+
+.branded-card::after {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.dotted-bg {
+  backdrop-filter: blur(10px);
+  background: 
+  radial-gradient(transparent 0%, transparent 30%, rgba(0, 0, 0, 0.5) 0%);
+  background-repeat: repeat;
+  background-size: 5px 5px;
+}
+
+.dotted-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, black, rgba(0, 0, 0, 0.5), black),
+  linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  z-index: -1;
+}
+
+.navbar {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 999px;
+  /* overflow: hidden; */
+  padding: 0.5rem 1.5rem;
+  z-index: 10;
+  width: 90%;
+  backdrop-filter: blur(10px);
+  background: 
+  linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)),
+  linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9));
+}
+
+.navbar-alt {
+  /* background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9));   */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  padding-bottom: 0.75rem;
+  color: black;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.black-center-grad {
+  background: linear-gradient(to right, transparent, black, transparent);
+}
+
+.hover-gradient {
+  background: linear-gradient(to left, transparent, #00D1DA, transparent);
+  z-index: 10;
+}
+
+.select-gradient {
+  background: linear-gradient(to left, #FC00FF, transparent, #FC00FF);
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    padding: 0.75rem 1.75rem;
+    width: auto;
+  }
+  .navbar-alt {
+    padding: 1.75rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
+.big-blur::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(40px);
+  z-index: 1;
+  pointer-events: none;
+}
