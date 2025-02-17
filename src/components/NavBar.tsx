@@ -114,6 +114,17 @@ export default function Navbar() {
           transition={{ type: "spring", stiffness: 120, damping: 12 }}
         />
 
+        <motion.div
+          className="absolute select-gradient top-0 bottom-0 rounded-lg -z-10"
+          animate={{
+            left: links.find(link => link.href === currentPath)?.href ? (document.querySelector(`a[href='${currentPath}']`) as HTMLElement)?.offsetLeft || 0 : 0,
+            width: links.find(link => link.href === currentPath)?.href ? (document.querySelector(`a[href='${currentPath}']`) as HTMLElement)?.offsetWidth || 0 : 0,
+            height: "100%",
+            opacity: 0.7, 
+          }}
+          transition={{ type: "spring", stiffness: 120, damping: 12 }}
+        />
+
         {links.map((link, index) => (
           <Link
             key={link.href}
@@ -141,7 +152,7 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="absolute top-full left-0 w-full p-4 flex flex-col items-center gap-2 md:hidden z-[40] text-white"
+            className="absolute top-full left-0 w-full my-2 flex flex-col items-center gap-2 md:hidden z-[40] text-white"
             initial="hidden"
             animate="visible"
             exit="hidden"

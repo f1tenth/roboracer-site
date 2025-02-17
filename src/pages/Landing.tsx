@@ -1,9 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 
-import PoppingParticles from "../components/PoppingParticles";
 import FloatingTestimonials from "../components/FloatingTestimonials";
+import TerrainRenderer from "../components/TerrainRenderer";
 
 const sections = [
   {
@@ -34,19 +34,18 @@ const sections = [
 export default function Home() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  //prevent unnecessary re renders
-  const memoizedParticles = useMemo(() => <PoppingParticles />, []);
+  useEffect(() => {
+    console.log("Video element:", document.querySelector("video"));
+    console.log("Video source:", document.querySelector("video source")?.getAttribute("src"));
+  }, []);
 
   const toggleSection = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center overflow-hidden min-h-screen bg-black text-white">
-      <div className="big-blur fixed w-[100vw] h-[100vh] inset-0 pointer-events-none">
-          {memoizedParticles}
-      </div>
-      <div id="landing" className="relative w-[100svw] h-[100svh]">
+    <div className="flex flex-col gap-10 responsive-padding items-center justify-center overflow-hidden min-h-screen bg-black text-white">
+      {/* <div id="landing" className="relative w-[100vw] h-[100svh]">
       <div className="absolute inset-0 bg-black bg-opacity-50 z-[5]"></div>
         <video 
         autoPlay 
@@ -56,7 +55,7 @@ export default function Home() {
         webkit-playsinline="true"
         disablePictureInPicture
          className="absolute w-full h-full object-cover">
-          <source src="landing/f110_fpv.mp4" type="video/mp4"/>
+          <source src="/landing/f110_fpv.mp4" type="video/mp4"/>
         </video>
         <div className="absolute w-full h-full bg-opacity-50 flex items-center justify-center lg:px-[10svw] z-[6]">
           <img
@@ -67,22 +66,41 @@ export default function Home() {
             height={50}
           />
         </div>
+      </div> */}
+
+      <div className='absolute w-full z-[8] top-0 p-5 pt-16 md:pt-20 md:p-20'>
+        <div className='w-full h-full text-center rounded-md border border-red-800 p-3 md:p-5 flex items-center justify-center'>
+         <h5>Over the last 5 years, RoboRacer has enjoyed tremendous growth and community support. The organization has grown up and we are ready to go beyond just the 1/10th-scale vehicles for broader community-driven engagements. This includes new platform scales and more challenging competitions for a modern AI-enabled autonomy. Stay tuned as we migrate F1Tenth.org to RoboRacer.AI!</h5>
+        </div>
       </div>
 
-      <div id="mission" className="relative w-full text-center responsive-padding pt-32">
+      <div className="w-screen h-screen bg-black-grad flex items-center justify-center lg:px-[10svw] z-[6]">
+          <img
+            src="/logos/Logo_Gradient.gif"
+            alt="Logo Gradient"
+            className="w-full"
+            width={200}
+            height={50}
+          />
+      </div>
+      <div className='w-screen h-full fixed inset-0'>
+          <TerrainRenderer />
+      </div>
+
+      <div id="mission" className="relative w-full flex flex-col text-center gap-5">
 
         <h1 className="relative z-2">The RoboRacer Program and Foundation Promote STEM Education</h1>
-        <h2 className="relative z-2">We advance robotics and autonomous vehicle education through the following initiatives:</h2>
+        <h4 className="relative z-2">We advance robotics and autonomous vehicle education through the following initiatives:</h4>
 
         <div className="relative z-2 w-full max-w-lg mx-auto space-y-6 py-12">
           {sections.map((item, index) => (
-            <div key={index} className="border-b border-gray-700 pb-4">
+            <div key={index} className="border-b border-slate-500 p-4 pt-1">
               <button
-                className="w-full text-left focus:outline-none flex justify-between items-center py-2"
+                className="w-full text-left cursor-pointer focus:outline-none flex justify-between items-center py-2"
                 onClick={() => toggleSection(index)}
               >
-                <h2>{item.title}</h2>
-                <span className="text-lg">{openIndex === index ? "▲" : "▼"}</span>
+                <h3>{item.title}</h3>
+                <span className="hidden md:visible md:block pointer text-lg">{openIndex === index ? "▲" : "▼"}</span>
               </button>
 
               <motion.div
@@ -103,11 +121,11 @@ export default function Home() {
         </div>
       </div>
 
-      <div id="join" className="relative w-full flex flex-col md:flex-row-reverse gap-8 justify-center items-center responsive-padding">
+      <div id="join" className="relative w-full flex flex-col md:flex-row-reverse gap-8 justify-center items-center">
         <div>
           <h2>Simple. Fast. Open Source.</h2>
           <h4>Join the future of autonomous racing.</h4>
-          <div className="flex flex-col bg-blue-200 rounded-md p-4 mt-4">
+          <div className="flex flex-col bg-slate-400 rounded-md p-4 mt-4">
             <input type="text" placeholder="Enter your email" className="p-2 rounded-md mb-2" />
           </div>
         </div>

@@ -1,6 +1,5 @@
 {
   "name": "roboracer-site",
-  "homepage": "https://roboracer.ai/roboracer-site/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,13 +11,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.15",
+    "@fullcalendar/daygrid": "^6.1.15",
+    "@fullcalendar/google-calendar": "^6.1.15",
+    "@fullcalendar/react": "^6.1.15",
     "@tailwindcss/vite": "^4.0.6",
     "@tsparticles/react": "^3.0.0",
+    "alea": "^1.0.1",
+    "embla-carousel-react": "^8.5.2",
     "framer-motion": "^12.4.2",
+    "gl-matrix": "^3.4.3",
     "motion": "^12.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
+    "simplex-noise": "^4.0.3",
     "tsparticles": "^3.8.1"
   },
   "devDependencies": {

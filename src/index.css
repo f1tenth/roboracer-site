@@ -1,16 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  /* --background: #f5f5f5; */
+  --background: white;
   --foreground: #171717;
 }
 
+html, body {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden auto;
+}
+
+
 /* * {
-  border: 1px solid blue;
+  border: 0.5px solid blue;
 }
 
 div {
-  border: 1px solid red;
+  border: 0.5px solid red;
 } */
 
 /* reusable responsive padding classx */
@@ -22,8 +33,9 @@ div {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* --background: #0a0a0a;
+    --foreground: #ededed; */
+    --background: white;
   }
 }
 
@@ -34,39 +46,48 @@ body {
 }
 
 h1 {
-  font-family: var(--font-kanit), sans-serif;
-  font-size: 2rem;
+  font-family: "Space Grotesk", serif;
+  font-size: 2.5rem;
   font-weight: 600;
+  line-height: 110%;
 }
 
 h2 {
-  font-family: var(--font-kanit), sans-serif;
+  font-family: "Space Grotesk", serif;
   font-size: 1.75rem;
-  font-weight: 500;
+  color: #A4F5F9;
+  font-weight: 200;
+  line-height: 110%;
 }
 
 h3 {
-  font-family: var(--font-kanit), sans-serif;
+  font-family: "Space Grotesk", serif;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 500;
+  line-height: 110%;
 }
 
 h4 {
-  font-family: var(--font-archivo), sans-serif;
+  font-family: "Manrope", serif;
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 500;
+  line-height: 110%;
 } 
 
 h5 {
-  font-family: var(--font-archivo), sans-serif;
+  font-family: "Manrope", serif;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 p {
-  font-family: var(--font-archivo), sans-serif;
+  font-family: "Manrope", serif;
   font-size: 1rem;
   font-weight: 400;
+}
+
+a {
+  font-family: "Manrope", serif;
 }
 
 .sulphur-font {
@@ -77,10 +98,8 @@ p {
   font-family: var(--font-archivo), sans-serif;
 }
 
-.branded-card {
-  border-radius: 20px;
-  border: 1px solid white;
-  padding: 20px;
+.purple-radial-gradient {
+  background: radial-gradient( circle at 70% 30%, #fb00ff85, transparent);
 }
 
 .branded-card::after {
@@ -103,8 +122,8 @@ p {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, black, rgba(0, 0, 0, 0.5), black),
-  linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  background: linear-gradient(to right, black, rgba(0, 0, 0, 0.3), black),
+  linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
   z-index: -1;
 }
 
@@ -142,7 +161,8 @@ p {
 }
 
 .black-center-grad {
-  background: linear-gradient(to right, transparent, black, transparent);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), black,rgba(0, 0, 0, 0.5));
+  border-radius: 999px;
 }
 
 .hover-gradient {
@@ -152,6 +172,14 @@ p {
 
 .select-gradient {
   background: linear-gradient(to left, #FC00FF, transparent, #FC00FF);
+}
+
+.bg-brand-gradient {
+  background: radial-gradient( #FC00FF, #00D1DA);
+}
+
+.bg-black-grad {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
 }
 
 @media (min-width: 768px) {
@@ -173,4 +201,79 @@ p {
   backdrop-filter: blur(40px);
   z-index: 1;
   pointer-events: none;
+}
+
+.landing-bg-grad {
+  background: linear-gradient(to bottom right, #000000, #FC00FF);
+}
+
+/* Scrollbar Styling */
+* {
+  scrollbar-width: thin;
+}
+
+/* WebKit (Chrome, Safari, Edge) */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Gradient Thumb */
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+
+/* Gradient Track */
+*::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Hide scrollbar for Chrome, Safari, and Edge */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
+/* slide carousel */
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  height: 100%;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  height: 100%;
+}
+
+.embla-viewport {
+  overflow: hidden;
+  height: 100%;
+}
+
+.embla__prev,
+.embla__next {
+  top: 50%;
+  transform: translateY(-100%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.embla__prev {
+  left: 10px;
+}
+
+.embla__next {
+  right: 10px;
 }
