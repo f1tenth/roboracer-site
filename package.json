@@ -15,6 +15,7 @@
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/google-calendar": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
+    "@retorquere/bibtex-parser": "^9.0.17",
     "@tailwindcss/vite": "^4.0.6",
     "@tsparticles/react": "^3.0.0",
     "alea": "^1.0.1",
