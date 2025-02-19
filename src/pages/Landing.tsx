@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import FloatingTestimonials from "../components/FloatingTestimonials";
 import TerrainRenderer from "../components/TerrainRenderer";
+import EmailSubscribeForm from "../components/EmailSubscribeForm";
 
 const sections = [
   {
@@ -123,8 +124,8 @@ export default function Home() {
         <div>
           <h2>Simple. Fast. Open Source.</h2>
           <h4>Join the future of autonomous racing.</h4>
-          <div className="flex flex-col bg-slate-400 rounded-md p-4 mt-4">
-            <input type="text" placeholder="Enter your email" className="p-2 rounded-md mb-2" />
+          <div className="flex flex-col bg-white rounded-md p-4 mt-4">
+            <EmailSubscribeForm />
           </div>
         </div>
         <div>

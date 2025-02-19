@@ -80,6 +80,10 @@ h5 {
   font-weight: 400;
 }
 
+input {
+  font-family: "Manrope", serif;
+}
+
 p {
   font-family: "Manrope", serif;
   font-size: 1rem;
