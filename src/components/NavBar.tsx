@@ -3,14 +3,14 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
-  { href: "/about", text: "ABOUT" },
-  { href: "/rules", text: "RULES" },
-  { href: "/build", text: "BUILD" },
-  { href: "/learn", text: "LEARN" },
-  { href: "/race", text: "RACE" },
-  { href: "/course", text: "COURSE" },
-  { href: "/research", text: "RESEARCH" },
-  { href: "/news", text: "NEWS" },
+  { href: "/about", text: "About" },
+  { href: "/rules", text: "Rules" },
+  { href: "/build", text: "Build" },
+  { href: "/learn", text: "Learn" },
+  { href: "/race", text: "Race" },
+  { href: "/course", text: "Course" },
+  { href: "/research", text: "Research" },
+  { href: "/news", text: "News" },
 ];
 
 export default function Navbar() {
@@ -90,7 +90,7 @@ export default function Navbar() {
         </motion.div>
       </Link>
 
-      <div className="hidden md:flex flex-row items-center gap-6 ml-6 text-white relative">
+      <div className="hidden md:flex flex-row items-center gap-4 ml-6 text-white relative">
         <motion.div
           className="absolute hover-gradient top-0 bottom-0 rounded-lg -z-10"
           animate={
