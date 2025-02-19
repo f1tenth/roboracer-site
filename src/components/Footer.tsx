@@ -7,7 +7,7 @@ export default function Footer() {
 
   return (
 <footer
-  className={`${isAltFooter ? "hidden" : ""} dotted-bg flex flex-col md:justify-between items-center text-white responsive-padding pt-6 gap-6 md:gap-12`}
+  className={`${isAltFooter ? "hidden" : ""} dotted-bg flex flex-col md:justify-between items-center text-white responsive-padding pt-8 gap-6 md:gap-12`}
 >
   <div className='w-full flex text-center md:text-start justify-between flex-col md:flex-row items-end gap-6 md:gap-12'>
   {/* slack link */}
@@ -19,7 +19,7 @@ export default function Footer() {
       className="flex flex-row items-center gap-2 text-lg font-medium hover:underline"
     >
       <img src="/logos/slack-logo.svg" alt="Slack Logo" width={24} height={24} />
-      <p>Join Our Community!</p>
+      <h3>Join Our Community!</h3>
     </a>
     <p className="text-gray-300 text-start">
       Join Slack to learn how to get started and get your questions answered.

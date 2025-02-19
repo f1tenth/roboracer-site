@@ -11,6 +11,8 @@
         font-size: 2rem;
         font-weight: 700;
         line-height: 110%;
+        padding-top: 20px;
+        padding-bottom: 10px;
     }
     
     .rules h2 {
@@ -19,6 +21,8 @@
         font-weight: 600;
         line-height: 110%;
         color: #FC00FF;
+        padding-top: 15px;
+        padding-bottom: 10px;
     }
     
     .rules h3 {
