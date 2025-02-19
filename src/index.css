@@ -94,12 +94,13 @@ a {
   font-family: "Manrope", serif;
 }
 
-.sulphur-font {
-  font-family: var(--font-kanit), sans-serif;
+.space-font {
+  font-family: "Space Grotesk", serif;
+  font-weight: 600;
 }
 
-.open-sans-font {
-  font-family: var(--font-archivo), sans-serif;
+.manrope-font {
+  font-family: "Manrope", serif;
 }
 
 .purple-radial-gradient {
@@ -186,6 +187,11 @@ a {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
 }
 
+.bg-brand-radial {
+  background: radial-gradient(circle at 50% -100%, #FC00FF, #00d3da68);
+  color: white;
+}
+
 @media (min-width: 768px) {
   .navbar {
     padding: 0.75rem 1.75rem;
@@ -197,6 +203,21 @@ a {
   }
 }
 
+@keyframes rotateBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.border-animated {
+  position: relative;
+  padding: 2px;
+  border-radius: 12px;
+  background: linear-gradient(45deg, #FC00FF, #00DBDE, #FC00FF);
+  background-size: 400% 400%;
+  animation: rotateBorder 6s infinite linear;
+}
+
 .big-blur::before {
   content: "";
   position: absolute;
@@ -205,10 +226,6 @@ a {
   backdrop-filter: blur(40px);
   z-index: 1;
   pointer-events: none;
-}
-
-.landing-bg-grad {
-  background: linear-gradient(to bottom right, #000000, #FC00FF);
 }
 
 /* Scrollbar Styling */

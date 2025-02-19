@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-const TESTIMONIALS_JSON_PATH = "/data/testimonies.json";
-
 interface TestimonialProps {
   author: string;
   institution: string;
@@ -16,7 +14,7 @@ export default function FloatingTestimonials() {
   const scrollInterval = useRef<number | null>(null); // Use 'number' instead of 'NodeJS.Timeout'
 
   useEffect(() => {
-    fetch(TESTIMONIALS_JSON_PATH)
+    fetch("/data/testimonies.json")
       .then((res) => res.json())
       .then((data) => setTestimonials(data))
       .catch((err) => console.error("Error loading testimonials:", err));

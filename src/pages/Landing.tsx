@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import FloatingTestimonials from "../components/FloatingTestimonials";
 import TerrainRenderer from "../components/TerrainRenderer";
@@ -35,40 +35,12 @@ const sections = [
 export default function Home() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  useEffect(() => {
-    console.log("Video element:", document.querySelector("video"));
-    console.log("Video source:", document.querySelector("video source")?.getAttribute("src"));
-  }, []);
-
   const toggleSection = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
     <div className="flex flex-col gap-10 responsive-padding items-center justify-center overflow-hidden min-h-screen bg-black text-white">
-      {/* <div id="landing" className="relative w-[100vw] h-[100svh]">
-      <div className="absolute inset-0 bg-black bg-opacity-50 z-[5]"></div>
-        <video 
-        autoPlay 
-        muted 
-        loop
-        playsInline 
-        webkit-playsinline="true"
-        disablePictureInPicture
-         className="absolute w-full h-full object-cover">
-          <source src="/landing/f110_fpv.mp4" type="video/mp4"/>
-        </video>
-        <div className="absolute w-full h-full bg-opacity-50 flex items-center justify-center lg:px-[10svw] z-[6]">
-          <img
-            src="/logos/Logo_Gradient.gif"
-            alt="Logo Gradient"
-            className="w-full"
-            width={200}
-            height={50}
-          />
-        </div>
-      </div> */}
-
       <div className='absolute w-full z-[8] top-0 p-5 pt-16 md:pt-20 md:p-20'>
         <div className='w-full h-full text-center rounded-md border border-red-800 p-3 md:p-5 flex items-center justify-center'>
          <h5>Over the last 5 years, RoboRacer has enjoyed tremendous growth and community support. The organization has grown up and we are ready to go beyond just the 1/10th-scale vehicles for broader community-driven engagements. This includes new platform scales and more challenging competitions for a modern AI-enabled autonomy. Stay tuned as we migrate F1Tenth.org to RoboRacer.AI!</h5>
@@ -88,6 +60,7 @@ export default function Home() {
 
       <div id="mission" className="relative w-full flex flex-col text-center gap-5">
 
+        {/* insert stats */}
         <h1 className="relative z-2">The RoboRacer Program and Foundation Promote STEM Education</h1>
         <h4 className="relative z-2">We advance robotics and autonomous vehicle education through the following initiatives:</h4>
 

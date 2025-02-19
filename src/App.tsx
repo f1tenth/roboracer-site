@@ -6,7 +6,7 @@ import Build from "./pages/Build";
 import Course from "./pages/Course";
 import Learn from "./pages/Learn";
 import News from "./pages/News";
-import Race from "./pages/Race";
+import RaceCalendar from "./pages/Race";
 import Research from "./pages/Research";
 import Rules from "./pages/Rules";
 
@@ -22,7 +22,7 @@ function App() {
           <Route path="/course" element={<Course />} />
           <Route path="/learn" element={<Learn />} />
           <Route path="/news" element={<News />} />
-          <Route path="/race" element={<Race />} />
+          <Route path="/race" element={<RaceCalendar />} />
           <Route path="/research" element={<Research />} />
           <Route path="/rules" element={<Rules />} />
         </Route>
