@@ -76,11 +76,9 @@ export default function Home() {
 
       <div className="w-screen h-screen bg-black-grad flex items-center justify-center lg:px-[10svw] z-[6]">
           <img
-            src="/logos/Logo_Gradient.gif"
+            src="/logos/logo-white-vector-animated.svg"
             alt="Logo Gradient"
-            className="w-full"
-            width={200}
-            height={50}
+            className="w-full p-8"
           />
       </div>
       <div className='w-screen h-full fixed inset-0'>

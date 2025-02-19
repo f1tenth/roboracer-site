@@ -7,7 +7,7 @@ export default function Footer() {
 
   return (
 <footer
-  className={`${isAltFooter ? "hidden" : ""} dotted-bg flex flex-col md:justify-between items-center text-white responsive-padding py-6 gap-6 md:gap-12`}
+  className={`${isAltFooter ? "hidden" : ""} dotted-bg flex flex-col md:justify-between items-center text-white responsive-padding pt-6 gap-6 md:gap-12`}
 >
   <div className='w-full flex text-center md:text-start justify-between flex-col md:flex-row items-end gap-6 md:gap-12'>
   {/* slack link */}
@@ -37,7 +37,7 @@ export default function Footer() {
   </div>
 
   {/* license */}
-  <div className="w-full text-center pt-2 border-t border-slate-500">
+  <div className="w-full text-xs text-center bg-black py-5">
     <p>Copyright ©2025 RoboRacer Foundation</p>
     <p>All rights reserved</p>
     <p>Creative Commons License</p>

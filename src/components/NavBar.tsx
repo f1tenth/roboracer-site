@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
   { href: "/about", text: "ABOUT" },
+  { href: "/rules", text: "RULES" },
   { href: "/build", text: "BUILD" },
   { href: "/learn", text: "LEARN" },
   { href: "/race", text: "RACE" },
@@ -159,7 +160,7 @@ export default function Navbar() {
             variants={menuVariants}
           >
             {links.map((link) => (
-              <motion.div key={link.href} variants={itemVariants} className="black-center-grad flex w-full justify-center hover:text-red-400">
+              <motion.div key={link.href} variants={itemVariants} className="black-center-grad flex w-full justify-center hover:text-[#00D1DA]">
                 <Link to={link.href} className="text-md py-2 hover:italic" onClick={() => setMenuOpen(false)}>
                   {link.text}
                 </Link>

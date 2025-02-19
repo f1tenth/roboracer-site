@@ -14,12 +14,12 @@ interface NewsBlockProps {
 
 const NewsBlock: React.FC<NewsBlockProps> = ({ title, platform, date, description, link, thumbnail }) => {
   return (
-    <a href={link} target="_blank" rel="noreferrer noopener" className="w-full h-auto flex flex-col md:flex-row justify-center md:items-start gap-4 p-4 border rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+    <a href={link} target="_blank" rel="noreferrer noopener" className="w-full h-auto flex flex-col md:flex-row justify-center md:items-start gap-5 p-4 rounded-lg shadow-inner hover:shadow-xl transition-shadow">
       <img src={thumbnail} alt={title} className="h-32 w-auto object-cover rounded-lg" />
       <div className='flex flex-col gap-2 text-center md:text-left'>
       <h3 className="text-xl font-bold">{title}</h3>
-      <p className="text-gray-600">{description}</p>
       <p className="text-sm font-medium">{platform} - {date}</p>
+      <p className="text-gray-600">{description}</p>
       </div>
     </a>
   );

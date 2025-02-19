@@ -1,0 +1,76 @@
+    .rules body {
+        line-height: 1.6;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+    }
+
+    .rules h1 {
+        font-family: "Space Grotesk", serif;
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 110%;
+    }
+    
+    .rules h2 {
+        font-family: "Space Grotesk", serif;
+        font-size: 1.75rem;
+        font-weight: 600;
+        line-height: 110%;
+        color: #FC00FF;
+    }
+    
+    .rules h3 {
+        font-family: "Space Grotesk", serif;
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 110%;
+    }
+    
+    .rules h4 {
+        font-family: "Manrope", serif;
+        font-size: 1.25rem;
+        font-weight: 500;
+        line-height: 110%;
+    } 
+    
+    .rules h5 {
+        font-family: "Manrope", serif;
+        font-size: 1rem;
+        font-weight: 400;
+    }
+    
+    .rules p {
+        font-family: "Manrope", serif;
+        font-size: 1rem;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+    .rules ol, ul {
+        padding-left: 20px;
+        margin-bottom: 10px;
+    }
+
+    .rules li {
+        margin-bottom: 5px;
+    }
+
+    /* Custom list styles */
+    .rules ul {
+        color: red;
+    }
+
+    .rules a {
+        color: #0073e6;
+        text-decoration: none;
+    }
+
+    .rules a:hover {
+        text-decoration: underline;
+    }
+
+    .rules p {
+        margin-bottom: 10px;
+    }
