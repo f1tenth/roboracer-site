@@ -27,8 +27,6 @@ const TerrainRenderer: React.FC = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      console.log("Canvas resized:", canvas.width, canvas.height);
-
       if (renderRef.current) {
         renderRef.current = renderer(ctx, canvas.width, canvas.height);
       }
@@ -43,7 +41,6 @@ const TerrainRenderer: React.FC = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (renderRef.current) {
-        console.log("Rendering frame at time:", t);
         renderRef.current(t);
       }
 

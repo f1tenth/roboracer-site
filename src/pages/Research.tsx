@@ -93,7 +93,7 @@ export default function Research() {
       <h1 className="text-3xl font-bold">Publications</h1>
       <ul className="flex flex-col gap-5">
         {publications.map((pub, index) => (
-          <li key={index} className="flex flex-col gap-1 p-5 shadow-inner rounded-lg bg-white">
+          <li key={index} className="flex flex-col gap-1 p-5 shadow-inner rounded-lg bg-white border border-gray-200">
             <h4>{pub.title}</h4>
             <p className="text-gray-600">By {pub.author}</p>
             <p>{pub.year}</p>
