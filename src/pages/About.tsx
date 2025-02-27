@@ -143,7 +143,9 @@ export default function About() {
                 </ol>
             </div>
 
-            <h1 className="text-2xl text-center font-bold mt-12">Meet the Team</h1>
+            <a href="/rules" className="p-4 rounded-lg bg-purple-radial shadow-inner hover:shadow-md">Read the Competition Rules</a>
+
+            <h1 className="text-2xl text-center font-bold mt-4">Meet the Team</h1>
             <ProfileList title="Developers" data={developers} />
             <ProfileList title="Alumni" data={alumni} />
 

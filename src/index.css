@@ -193,6 +193,12 @@ a {
   color: white;
 }
 
+.bg-purple-radial {
+  /* background: radial-gradient(circle at 50% -100%, #FC00FF, #00d3da68); */
+  background: radial-gradient(circle at 50% -100%, #FC00FF, #fec4ff);
+  color: white;
+}
+
 @media (min-width: 768px) {
   .navbar {
     padding: 0.75rem 1.75rem;

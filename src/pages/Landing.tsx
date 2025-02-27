@@ -63,7 +63,7 @@ export default function Home() {
 
       <div id="mission" className="relative w-full max-w-[70svh] flex flex-col text-center justify-center items-center gap-5">
 
-      {/* <div className="w-fit px-10 flex flex-row justify-center md:gap-24 gap-6 bg-[rgba(255,255,255,0.1)] rounded-lg backdrop-blur-md text-white text-center py-4 mb-5">
+      <div className="w-fit px-10 flex flex-row justify-center md:gap-24 gap-6 bg-[rgba(255,255,255,0.1)] rounded-lg backdrop-blur-md text-white text-center py-4 mb-5">
         <div className='flex flex-col justify-center items-center gap-2'>
           <h1 className="md:text-[3rem]">90+</h1>
           <p>Universities</p>
@@ -76,7 +76,7 @@ export default function Home() {
           <h1 className='md:text-[3rem]'>60+</h1>
           <p>Publications</p>
         </div>
-      </div> */}
+      </div>
         <h1 className="relative z-2">The RoboRacer Program and Foundation Promote STEM Education</h1>
         <h4 className="relative z-2">We advance robotics and autonomous vehicle education through the following initiatives:</h4>
 

@@ -4,10 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
   { href: "/about", text: "About" },
-  { href: "/rules", text: "Rules" },
-  { href: "/build", text: "Build" },
-  { href: "/learn", text: "Learn" },
-  { href: "/race", text: "Race" },
+  { href: "/build", text: "BUILD" },
+  { href: "/learn", text: "LEARN" },
+  { href: "/race", text: "RACE" },
   { href: "/course", text: "Course" },
   { href: "/research", text: "Research" },
   { href: "/news", text: "News" },
@@ -140,7 +139,7 @@ export default function Navbar() {
               });
             }}
           >
-            <span className="relative z-10">{link.text}</span>
+            <span className={`relative z-10 ${(link.text === "BUILD" || link.text === "LEARN" || link.text === "RACE") && 'font-bold italic'}`}>{link.text}</span>
           </Link>
         ))}
       </div>
