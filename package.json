@@ -16,6 +16,8 @@
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/google-calendar": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
+    "@react-three/drei": "^10.0.4",
+    "@react-three/fiber": "^9.1.0",
     "@retorquere/bibtex-parser": "^9.0.17",
     "@tailwindcss/vite": "^4.0.6",
     "@tsparticles/react": "^3.0.0",
@@ -29,6 +31,7 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
     "simplex-noise": "^4.0.3",
+    "three": "^0.174.0",
     "tsparticles": "^3.8.1"
   },
   "devDependencies": {

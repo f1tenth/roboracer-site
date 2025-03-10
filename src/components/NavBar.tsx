@@ -10,6 +10,7 @@ const links = [
   { href: "/course", text: "Course" },
   { href: "/research", text: "Research" },
   { href: "/news", text: "News" },
+  { href: "https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg", text: "Contact" },
 ];
 
 export default function Navbar() {

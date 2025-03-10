@@ -6,6 +6,8 @@ import FloatingTestimonials from "../components/FloatingTestimonials";
 import TerrainRenderer from "../components/TerrainRenderer";
 import EmailSubscribeForm from "../components/EmailSubscribeForm";
 
+import ModelViewer from "../components/ModelViewer";
+
 const sections = [
   {
     title: "Educational Materials Development",
@@ -125,6 +127,7 @@ export default function Home() {
       <div id="testimonies" className="relative w-full">
         <FloatingTestimonials />
       </div>
+
     </div>
   );
 }
