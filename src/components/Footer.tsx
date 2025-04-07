@@ -21,11 +21,11 @@ export default function Footer() {
       <img src="/logos/slack-logo.svg" alt="Slack Logo" width={24} height={24} />
       <h3>Join Our Community!</h3>
     </a>
-    <p className="text-gray-300 text-start">
+    <p className="text-gray-300 text-start mb-10">
       Join Slack to learn how to get started and get your questions answered.
     </p>
     <a href="mailto:contact@roboracer.ai" className="hover:text-gray-300">
-    ✉ Contact Us
+    <h3>✉ Contact Us</h3>
     </a>
   </div>
 

@@ -64,7 +64,7 @@ export default function Navbar() {
   return (
     <nav
       ref={navRef}
-      className={`${isAltNav ? "navbar-alt dotted-bg" : "navbar"} relative`}
+      className="navbar"
       onMouseLeave={() => setHoveredIndex(null)}
     >
       <Link to="/" ref={logoRef}>
@@ -90,7 +90,7 @@ export default function Navbar() {
         </motion.div>
       </Link>
 
-      <div className="hidden md:flex flex-row items-center gap-4 ml-6 text-white relative">
+      <div className="hidden md:flex flex-row items-center gap-6 ml-6 text-white relative">
         <motion.div
           className="absolute hover-gradient top-0 bottom-0 rounded-lg -z-10"
           animate={

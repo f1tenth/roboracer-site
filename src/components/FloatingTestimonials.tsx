@@ -48,29 +48,29 @@ export default function FloatingTestimonials() {
   }, [testimonials]);
 
   return (
-    <div className="w-full flex flex-col items-center py-12 scrollbar-hide">
-      <h1 className="text-3xl font-bold mb-6">From Our Community</h1>
+    <div className="w-full flex flex-col gap-10 items-start py-12 scrollbar-hide">
+      <h1>Hear Their <span className='tilted-highlight'>Voices.</span></h1>
       <div
         ref={scrollContainerRef}
-        className="w-full max-w-5xl overflow-x-auto flex gap-4 px-4 snap-x snap-mandatory scrollbar-hide scroll-smooth"
+        className="w-full overflow-x-auto  flex gap-16 p-4 snap-x snap-mandatory scrollbar-hide scroll-smooth"
         style={{ scrollBehavior: "smooth", display: "flex", overflowX: "scroll", scrollSnapType: "x mandatory" }}
       >
         {testimonials.map((testimonial, index) => (
           <div
             key={index}
-            className="flex-shrink-0 w-80 p-6  rounded-lg shadow-lg snap-center"
+            className="bg-[url('/landing/testimony-outline.png')] bg-contain bg-no-repeat bg-[position:top_-55px__left_-40px] relative flex-shrink-0 w-140 h-110 p-16 rounded-lg shadow-md shadow-inner-lg snap-center"
           >
-            <p>{testimonial.quote}</p>
-            <div className="mt-4 flex items-center">
+            <p className='h-60 overflow-y-scroll scrollbar-hide'>{testimonial.quote}</p>
+            <div className="absolute w-[100%] left-5 bottom-0 p-4 pb-6 flex justify-between items-end">
+              <div>
+                <h3 style={{fontSize: "3rem", fontWeight: 700}}>{testimonial.author}</h3>
+                <p className="text-slate-500">{testimonial.institution}</p>
+              </div>
               <img
                 src={testimonial.image}
                 alt={testimonial.author}
-                className="w-12 h-12 rounded-full mr-4 object-cover"
+                className="w-36 h-36 rounded-full mr-4 object-cover shadow-md"
               />
-              <div>
-                <h4>{testimonial.author}</h4>
-                <p className="text-slate-200">{testimonial.institution}</p>
-              </div>
             </div>
           </div>
         ))}
