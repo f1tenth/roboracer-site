@@ -9,6 +9,7 @@ import News from "./pages/News";
 import RaceCalendar from "./pages/Race";
 import Research from "./pages/Research";
 import Rules from "./pages/Rules";
+import Events from "./pages/Events";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/race" element={<RaceCalendar />} />
           <Route path="/research" element={<Research />} />
           <Route path="/rules" element={<Rules />} />
+          <Route path="/events" element={<Events />} />
         </Route>
       </Routes>
     </Router>
