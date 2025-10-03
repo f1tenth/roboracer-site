@@ -4,7 +4,6 @@ import { useState } from "react";
 
 import FloatingTestimonials from "../components/FloatingTestimonials";
 import EmailSubscribeForm from "../components/EmailSubscribeForm";
-import GlobeView from "../components/GlobeView";
 
 const sections = [
   {
