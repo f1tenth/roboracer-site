@@ -10,7 +10,6 @@ const links = [
   { href: "/course", text: "Course" },
   { href: "/research", text: "Research" },
   { href: "/news", text: "News" },
-  { href: "/events", text: "Events" },
   { href: "https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg", text: "Contact" },
 ];
 
