@@ -21,7 +21,7 @@ These rules are prepared for the _24th International Roboracer Autonomous
 Racing Competition_. Rules are subject to change. The latest version
 can be found [here](http://icra2025-race.roboracer.ai/rules.html).
 
-Date: 2025-02-03
+Date: 2026-01-10
 
 
 # 1. General
@@ -30,24 +30,26 @@ International Roboracer Autonomous Racing Competition is an autonomuos vehicle r
 
 The competition is organized as an in-person competition.
 
-Teams can register for the competition using a [registration form](https://forms.gle/S13buonfEA4VgzHN8).
+Teams can register for the competition using a [registration form](https://forms.gle/FdfY9sKXREdu772u6).
 
 The preferred communication method with the organizers is the _#ICRA2025_ channel on [Roboracer-teams Slack](https://join.slack.com/t/robo-racer/shared_invite/zt-2sfu4qr7p-3oe27mCnH98muwRR9uEAbg).
 
 
 # 2. In-person (physical) competition
 
-1. The competition will comprise three parts – *Inspection and Orientation*, *Time
-Trials* and *Vehicle Head-to-Head* race. Every participant must pass
-qualification and will be automatically registered to both races.
+1. The competition will comprise two main stages – Online Qualification and Vehicle Head-to-Head Knockout Races.
+
+In the online qualification round, teams must submit a 1-minute video showing their car driving autonomously on a track without any human intervention.
+
+Teams that qualify will compete in-person at Techfest, IIT Bombay, where they will first get a 15-minute practice session on the track, followed by an open track trial for all teams.
+
+The knockout races will then determine the winners, with the fastest lap deciding each matchup. In case of a tie, the best lap time from the open track trials will be used.
 
 2. Teams registered for the in-person competition need to provide and build a Roboracer car by themselves according to the constraints listed below. In addition, each team must have a unique vehicle (i.e., a research lab may not field six teams with one car).
 
-3. To qualify for the in-person competition, teams should submit a video of their car driving autonomously around a track. The video should be at least 1 minute long and show the car driving around the track without any human intervention. The video should be submitted to the organizers by the deadline listed in the timeline page.
-
 4. To increase the quality of the future Roboracer competitions, the top 3 teams of each race are encourage to publish the code of their algorithm under an open-source license in the [Roboracer repository](https://github.com/f1tenth) on Github.
 
-5. In order to better accomodate all participating teams, all teams should have **at most 4 team members** present at the race space (includes sideline and seating area) during the event. Teams with more than 4 members will be required to either register as separate teams or discard/cycle their members during the event. There are no restrictions on the number of team members otherwise and all members will receive certificates of participation.
+5. In order to better accomodate all participating teams, all teams should have **at most 10 team members** present at the race space (includes sideline and seating area) during the event. There are no restrictions on the number of team members otherwise and all members will receive certificates of participation.
 
 6. Teams should not display any national flags or national symbols. This competition is between peers, not nations.
 
@@ -62,9 +64,9 @@ Only cars that meet the following constraints will be allowed to participate:
   4. _Main Computation Unit_:
       Due to supply chain issues, we're removing constraints on the main computation unit. Any suitable computing unit that physically fits on the vehicle within the size limit is allowed. Examples inlcude Nvidia Jetson Xavier NX, Nvidia Jetson Orin Nano, Nvidia Jetson TX2, Nvidia Jetson Nano, Intel NUC, Raspberry Pi, etc. In the spirit of the competition, all computation must be done onboard the vehicle.
   5. _LiDAR_:
-      [**Hokuyo UTM-30LX**](https://www.hokuyo-aut.jp/search/single.php?serial=169), its equivalent, or anything of lower specifications is allowed. The main observed characteristics are: detection range (30 m), scanning frequency (40 Hz), and angular resolution (0.25°).
+      [**Hokuyo UTM-30LX**](https://www.hokuyo-aut.jp/search/single.php?serial=169), its equivalent, or any 2D LiDAR with similar specifications is recommended but not required. The main characteristics are detection range (~30 m), scanning frequency (~40 Hz), and angular resolution (~0.25°).
   6. _Camera_:
-      Both *monocamera* (e.g. Logitech C270, Logitech C920, Raspberry Pi Camera Module V2, Arducam) and *stereocameras* (e.g. Intel Realsense, ZED) are allowed.
+     The recommended camera for the competition is Intel RealSense D455 or similar; other monocameras (e.g., Logitech C270, Logitech C920, Raspberry Pi Camera Module V2, Arducam) and stereocameras (e.g., ZED) are also recommended for practice, but only the Intel RealSense D455 or similar should be used during the competition runs.
   7. _Engine_:
       Only brushless DC motors are allowed. The [**Velineon 3500 kV**](https://traxxas.com/products/parts/motors/velineon3500motor), its equivalent, or anything of lower specifications regarding power and torque are allowed. The car must have **only one** DC motor driving the wheels. The motor could either be sensored or sensorless as long as it meets the specifications
   8.  _Other sensors_:
@@ -163,25 +165,13 @@ The competition will take place inside [Georgia World Congress Center](https://w
 2. Upon crashing the track border or the static obstacle the team has to stop the car and move it (by hand or using the remote control) to the latest position before crash. After repairing the track and returning the obstacles to their appropriate locations, the race may continue. The time spent on moving the car to the checkpoint and repairing the track is considered the penalty.
 
 ### 2.4.5 Evaluation
+The competition consists of two heats: the first heat will be the trial, and the second heat will be the final. Each team will be evaluated based on the fastest lap time achieved during the competition. The final score will be cumulative, combining the results from the time trial and the head-to-head knockout races.
 
-Each team will be evaluated based on the following criteria:
+Fastest lap time: Teams are ranked based on their fastest lap times. In the knockout races, the car with the fastest lap wins each matchup.
 
-1. *Fastest lap time*. The laptime will be measured with a time-keeping system provided by the race director.
-2. *Number of consecutive uninterrupted laps*
+Tie-breaker: If two or more teams have identical lap times in the knockout stage, the best lap time from the open track trials on Day 2 will be used to break the tie.
 
-There will be two results tables based on these criteria.
-
-The final score for the qualification consists of two parts:
-
-1. **Fastest laptimes**: Teams are ranked based on their fastest lap times. Points are awarded according to the ranking. For example, with 10 teams, the fastest team receives 10 points, the second fastest receives 9 points, the third fastest receives 8 points, and so on.
-
-2. **Consecutive uninterrupted laps**: Teams are also ranked based on the number of consecutive uninterrupted laps they complete. Points are awarded similarly. For example, with 10 teams, the team with the most laps receives 10 points, the second team receives 9 points, the third team receives 8 points, and so on.
-
-The final score is the sum of the points from both categories. Note that the best lap times and the number of laps can be achieved in different time slots. This allows teams to push their algorithms to the limits in each of the two categories.
-
-Should a tie occur in the final ranking, the team with more laps is ranked higher.
-
-The qualification is passed by finishing a single lap without crashing. Otherwise, the team is disqualified from the competition.
+To pass the qualification, a team must complete at least one lap without crashing. Teams failing to do so will be disqualified from the in-person competition.
 
 ## 2.5 Head-to-Head Race
 
@@ -226,14 +216,6 @@ The qualification is passed by finishing a single lap without crashing. Otherwis
 
 12. Ultimately, organizers reserve the right to assign blame in the case of vehicle collision in the head-to-head tournament.
 
-13. The race stewards will utilize a system of colored flags to communicate with the teams. The flags are as follows:
-
-    1. **Checkered flag**: The steward holds a checkered flag in each hand, one for each team. A flag is raised if the team is on the last lap. The flag is dropped and then waved when the team finishes and wins the current round.
-    2. **Red flag**: The steward holds a red flag in each hand, one for each team. A flag is raised if a race-stopping car crash occurs. The flag is dropped after all cars are stopped, and the team representatives are allowed to approach the track. After the crash is resolved by the stewards, the flag is dropped and the race resumes.
-    3. **Yellow flag**: The steward holds a yellow flag in each hand, one for each team. A flag is raised if the team is warned for a rule violation.
-    4. **Black flag**: The steward holds the black flag in each hand, one for each team. A flag is raised if the team is disqualified. The flag is dropped after the disqualified team stops the car and leaves the track. The opponent is allowed to continue the race till completion of the set number of laps.
-    5. **Green flag**: Optional - raised to signal that the race is safe to continue. The flag is dropped after the race resumes.
-    * The flag assignment is done at the start based on the qualification results. The team with the higher qualification result that starts on the right side of the track is assigned the flag set in the right hand. The team with the lower qualification result that starts on the left side of the track is assigned the flag set in the left hand.
 
 14. Collisions are judged by the referees.
     1. Collisions with track boundaries do not stop the race. The team that crashed into the track boundary must fix the track and place the car at the location of the crash. The opponent is allowed to continue. The crashed team bears the burden of the time spent on fixing the track and placing the car.
@@ -261,18 +243,23 @@ The qualification is passed by finishing a single lap without crashing. Otherwis
 
 ### 2.5.3 Penalties
 
-1. Touching the border of the track or a static obstacle is not penalized. Excessive, repeated touching (up to the organizers) is considered a crash. (Same rules as for Time Trial.)
+Track abuse: If a team abuses the track (e.g., deliberately cutting corners, damaging the track, or violating race boundaries excessively), they will be penalized. Penalties will be decided by a group of referees, and their decisions are final.
 
-2. Touching the opponent is not penalized unless one of the cars significantly diverges from its expected trajectory.
+Touching the border of the track or a static obstacle is not penalized. Excessive, repeated touching (up to the organizers) is considered a crash. (Same rules as for Time Trial.)
 
-3. Upon crashing the border of the track, the team has to fix the track and place the car on the side of the track at the place where the car first crashed the border. Then, the car can continue the race. During all of this, the opponent’s car must not be restricted by the team’s actions and the opponent is allowed to further race without stopping its car. The penalty is the time spent on fixing the track and placing the car.
+Touching the opponent is not penalized unless one of the cars significantly diverges from its expected trajectory.
 
-4. Upon crashing the opponent, these steps are applied:
+Upon crashing the border of the track, the team has to fix the track and place the car on the side of the track at the place where the car first crashed the border. Then, the car can continue the race. During all of this, the opponent’s car must not be restricted by the team’s actions and the opponent is allowed to further race without stopping its car. The penalty is the time spent on fixing the track and placing the car.
 
-    1. Refrees call the crash and signal for it by raising the red flag.
-    2. Referees judge which car is at fault.
-    3. Both cars are placed at the location of the crash, with the at-fault car placed behind the other car by 2 meters.
-    4. The referees restart the race with a green flag.
+Upon crashing the opponent, these steps are applied:
+
+Referees call the crash and signal for it by raising the red flag.
+
+Referees judge which car is at fault.
+
+Both cars are placed at the location of the crash, with the at-fault car placed behind the other car by 2 meters.
+
+The referees restart the race with a green flag.
 
 ### 2.5.4 Evaluation
 
@@ -280,69 +267,4 @@ The qualification is passed by finishing a single lap without crashing. Otherwis
 2. There will be at least three referees.
 3. One referee will be assigned to each car and is solely responsible to call flag raises and rule violations per-team. The third referee is tasked with enforcing penalties, crash resolution, and time-keeping.
 
-# 3. Virtual (simulation) competition
 
-## 3.1 General
-  1. The virtual competition will be completely done in an simulation environment only and no hardware is involved.
-
-  2. This simulation environment is based on the [AutoDrive Ecosystem](https://autodrive-ecosystem.github.io/). The Roboracer virtual competition will be complete done in this environment only and teams need to submit their code in time to this platform.
-
-  3. The virtual competition will comprise two parts – *Time Trials* and *2 Vehicle Head-to-Head* race. Every participant must pass the Time Trials and will be automatically registered to both races.
-
-  4. Roboracer reserves the right to reject any submission that we deem illegal due to circumstances such as exploiting the simulation environment. Therefore their source code submission will be examined by the race stuarts after the race.
-
-  5. The map used for all the races (Time Trials, Head-to-Head) will be the same. In the Time Trials this map will have added obstacles for the obstacle avoidance task.
-
-  6. All details will be posted on the official page for the virtual competition [here](https://autodrive-ecosystem.github.io/competitions/f1tenth-sim-racing-icra-2025/#f1tenth-sim-racing-league-icra-2025).
-
-<!-- ## 3.2 Registration, Training, Code Submission.
-
-2. Teams must register themselves for the 24th F1TENTH Autonomous Racing Competition on the Riders.Ai platform on their own with their team name.
-
-3. We will provide test environments (maps) for the teams to use this platform as a training and evaluation environment while they develop their code.
-
-4. Teams need to prepare their code with their local machine.
-
-5. Teams need to submit their code with their local machine.
-
-6. All simulation event evaluations are done on the Riders.Ai cloud. Based on this evaluation the leaderboard will be created.
-
-7. We define deadlines for the submissions of the Time-Trial code and the Head-to-Head for the teams. No extensions are given.
-
-## 3.3 Time Trials
-
-1. The Time Trials in the F1TENTH simulation environment are here to define both the capabilities of the vehicles to race in a static environment with and without obstacles as well as for creation of the seeding in the Head-to-Head race.
-
-2. The Time Trials are single vehicle races only.
-
-3. The Time Trials consist of 2 races:
-
-  1. **Qualification** race: Race 2 laps of track as quickly as possible without collision into the walls (determines Racing Competition seeding). If an agent can finish without collision with the environment, it’ll receive a lap time and update its ranking on the leaderboard.
-
-  2. **Obstacle avoidance** race: Race 2 laps around the track with added obstacles unknown to participants. The car needs to go round 2 laps without collision. The location and the size of the obstacles will not be revealed prior to submission. Some example maps with obstacles will be provided.
-
-4. The submission of the Time Trial Code is done via the Riders.ai platform
-
-5. The code for both Qualification and Obstacle avoidance race needs to be the same.
-
-## 3.4 Head To Head Race
-
-1. The Head-to-Head race is a race with two cars on the track at the same time.
-
-2. The car that crosses the finish line first after 2 laps wins the race.
-
-3. The Head-to-Head race is a best of 3 trials. The car that wins two races moves on to the next round.
-
-  1. The third race is a tie-braker if the first two races are 1:1. In the third race, the cars starting again on their predifined P1 and P2 position. The car that is seeded in the qualification higher is located on P1.
-
-4. The cars start in alternating position (inside, outside) in each of the races.
-
-5. Seeding: The elimination bracket of the tournament will be filled by submissions that passed the obstacle avoidance test and seeded by the result of the timed trials. For example, with 8 teams, the bracket of the first round will be (#1 vs. #8, #2 vs. #7, #3 vs. #6, and #4 vs. #5).
-
-6. Overtaking: According to the circumstances, may be carried out on either the right or the left. Maneuvers liable to hinder other drivers, such as deliberate crowding of a car beyond the edge of the track or any other abnormal change of direction, are strictly prohibited. The stewards will have the final say in whether a driver is in violation of the rule.
-
-7. Causing a collision (decided by the stewards) for more than 3 times will result in automatic disqualification of one car.
-
-8. Collisions at the fault of both vehicles will result in a redo trial. After 3 redos of the same case, both vehicles are disqualified.
-
-9. The stewards reserve the right to have the final say. -->
