@@ -1,4 +1,3 @@
-import React from "react";
 import avhad from "./assets/7th.png";
 import tf from "./assets/tfLogo.png";
 import iitb from "./assets/iitb.png";

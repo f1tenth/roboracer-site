@@ -1,6 +1,4 @@
-import React from 'react'
 import car from "./assets/car.png"
-import racing from "./assets/car.jpeg"
 import lecture from "./assets/lecture.png"
 import f1tenth from "./assets/f1tenth.gif"
 
@@ -68,8 +66,6 @@ const GettingStarted = () => {
               alt="Roboracer Simulation GIF"
               className="w-full h-full object-cover"
               style={{ maxWidth: '100%', maxHeight: '100%' }}
-              loop="true"
-              autoPlay
             />
           </div>
         </div>

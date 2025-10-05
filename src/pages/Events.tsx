@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import About from "./sections/About";
 import Rules from "./sections/Rules";
@@ -20,7 +20,7 @@ const tabs = [
 const Events = () => {
   const [tab, setTab] = useState("about");
   const [opacity, setOpacity] = useState(1);
-  const infoRef = useRef(null);
+  const infoRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = () => {
     infoRef.current?.scrollIntoView({ behavior: "smooth" });
