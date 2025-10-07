@@ -8,11 +8,12 @@ import mittal from "./assets/mittal.webp";
 import roboracer from "./assets/roboracer_video.gif";
 import parth from "./assets/parth.jpg";
 import sedrica from "./assets/sedrica.png";
+import techfestBrochure from "./assets/Techfest_Brochure.pdf";
 
 const organizers = [
   {
     name: "Rahul Mangharam",
-    role: "Associate Professor",
+    role: "Professor",
     dept: "Department of Electrical and Systems Engineering",
     org: "University of Pennsylvania",
     img: rahul,
@@ -48,14 +49,18 @@ const About = () => {
   return (
     <div className="max-w-5xl mx-auto text-center space-y-8">
       {/* Heading */}
-      {/* <h2 className="text-3xl md:text-4xl font-bold text-gray-900"> */}
       <h1 className="text-4xl md:text-6xl font-extrabold text-black text-center">
-       26th Roboracer Autonomous Racing Competition at Techfest, IIT Bombay
+        26th Roboracer Autonomous Racing Competition at Techfest, IIT Bombay
       </h1>
 
       {/* First Paragraph */}
       <p className="text-lg text-gray-700 text-justify">
-       The Roboracer Autonomous Racing Competition brings together researchers, engineers, and enthusiasts from around the world to push the limits of autonomous driving. This year, the 26th edition will be hosted at Techfest, IIT Bombay, where teams will race their 1:10 scaled autonomous cars on a specially designed track. The challenge is simple but tough — don’t crash, and complete the lap in the shortest possible time.
+        The Roboracer Autonomous Racing Competition brings together researchers,
+        engineers, and enthusiasts from around the world to push the limits of
+        autonomous driving. This year, the 26th edition will be hosted at
+        Techfest, IIT Bombay, where teams will race their 1:10 scaled autonomous
+        cars on a specially designed track. The challenge is simple but tough —
+        don’t crash, and complete the lap in the shortest possible time.
       </p>
 
       {/* Video Embed */}
@@ -70,36 +75,87 @@ const About = () => {
         </div>
       </div>
 
-
       {/* More Content */}
       <p className="text-lg text-gray-700 text-justify">
-     Each team will bring its own Roboracer car and write the software that drives it. A detailed build manual and open-source tools are available to help teams get started, but the real test lies in developing smart and reliable algorithms. The organizers at Techfest will provide the rules, the track, and the race infrastructure, creating a level playing field for everyone.
-<br />
-<br />
-Roboracer Autonomous Racing at Techfest, IIT Bombay is a two-stage competition where teams first submit a 1-minute autonomous time trial video and then compete in-person with practice and open track sessions before head-to-head knockout races. With standardized hardware, teams focus on their perception, planning, and control systems to complete laps efficiently on an unpredictable, reflective track. The final score combines performance from both the time trial and knockout races.<br />
-<br />
-The 26th Roboracer at Techfest, IIT Bombay promises thrilling battles, innovative solutions, and an unforgettable showcase of autonomous racing technology </p>
+        Each team will bring its own Roboracer car and write the software that
+        drives it. A detailed build manual and open-source tools are available
+        to help teams get started, but the real test lies in developing smart
+        and reliable algorithms. The organizers at Techfest will provide the
+        rules, the track, and the race infrastructure, creating a level playing
+        field for everyone.
+        <br />
+        <br />
+        Roboracer Autonomous Racing at Techfest, IIT Bombay is a two-stage
+        competition where teams first submit a 1-minute autonomous time trial
+        video and then compete in-person with practice and open track sessions
+        before head-to-head knockout races. With standardized hardware, teams
+        focus on their perception, planning, and control systems to complete
+        laps efficiently on an unpredictable, reflective track. The final score
+        combines performance from both the time trial and knockout races.
+        <br />
+        <br />
+        The 26th Roboracer at Techfest, IIT Bombay promises thrilling battles,
+        innovative solutions, and an unforgettable showcase of autonomous racing
+        technology.
+      </p>
 
-      {/* Image */}
-      <a href="https://techfest.org" target="_blank" rel="noopener noreferrer">
-      <img
-        src={tf}
-        alt="Roboracer Event"
-        className="w-full md:w-1/2 mx-auto rounded-lg"
-      />
-      </a>
-      <br />
-      <img
-        src={iitb}
-        alt="Roboracer Event"
-        className="w-full md:w-1/3 mx-auto rounded-lg"
-      />
-      <br />
-      <img
-        src={sedrica}
-        alt="sedrica"
-        className="w-full md:w-1/4 mx-auto rounded-lg"
-      />
+      {/* Techfest Section */}
+      <h2 className="text-4xl md:text-6xl font-extrabold text-black text-center mt-12">
+        Know more about Techfest
+      </h2>
+
+      {/* Brochure + Video */}
+      <div className="flex flex-col items-center justify-center space-y-6">
+        {/* Brochure View (opens in new tab) */}
+        <a
+          href={techfestBrochure}
+          target="_blank"
+          rel="noreferrer"
+          className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-transform duration-300"
+        >
+          Have a Lookback
+        </a>
+
+        {/* Aftermovie Embed */}
+        <div className="w-full md:w-3/4 aspect-video rounded-xl shadow-lg overflow-hidden">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/yPpfN0giVVM?si=35MSRRs8PrMkAzJX"
+            title="Techfest Aftermovie"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            className="w-full h-full"
+          ></iframe>
+        </div>
+      </div>
+
+      {/* Techfest Images */}
+      <div className="space-y-6 mt-8">
+        <a
+          href="https://techfest.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={tf}
+            alt="Techfest Logo"
+            className="w-full md:w-1/2 mx-auto rounded-lg"
+          />
+        </a>
+        <img
+          src={iitb}
+          alt="IIT Bombay Logo"
+          className="w-full md:w-1/3 mx-auto rounded-lg"
+        />
+        <img
+          src={sedrica}
+          alt="Sedrica Logo"
+          className="w-full md:w-1/4 mx-auto rounded-lg"
+        />
+      </div>
 
       {/* Divider */}
       <hr className="my-10 border-gray-300" />
@@ -107,18 +163,23 @@ The 26th Roboracer at Techfest, IIT Bombay promises thrilling battles, innovativ
       {/* Organizers Section */}
       <div>
         <h3 className="text-2xl font-bold mb-8">Organizers</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 justify-items-center">
-          {organizers.map((org, idx) => (
-            <div key={idx} className="text-center space-y-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {organizers.map((person, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center text-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+            >
               <img
-                src={org.img}
-                alt={org.name}
-                className="w-32 h-32 mx-auto object-cover rounded-md shadow-md"
+                src={person.img}
+                alt={person.name}
+                className="w-32 h-32 object-cover rounded-full mb-4"
               />
-              <h4 className="font-semibold text-lg">{org.name}</h4>
-              <p className="text-sm font-medium text-gray-600">{org.role}</p>
-              <p className="text-sm text-gray-700">{org.dept}</p>
-              <p className="text-sm text-gray-700 font-semibold">{org.org}</p>
+              <h4 className="text-lg font-semibold">{person.name}</h4>
+              <p className="text-gray-600">{person.role}</p>
+              {person.dept && (
+                <p className="text-gray-500 text-sm">{person.dept}</p>
+              )}
+              <p className="text-gray-500 text-sm">{person.org}</p>
             </div>
           ))}
         </div>
