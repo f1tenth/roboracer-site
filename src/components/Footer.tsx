@@ -13,7 +13,7 @@ export default function Footer() {
   {/* slack link */}
   <div className="flex flex-col items-start md:items-start gap-3 md:max-w-sm">
     <a
-      href="https://robo-racer.slack.com/ssb/redirect"
+      href="https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg"
       target="_blank"
       rel="noreferrer noopener"
       className="flex flex-row items-center gap-2 text-lg font-medium hover:underline"

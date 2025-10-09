@@ -11,7 +11,8 @@ const links = [
   { href: "/research", text: "Research" },
   { href: "/news", text: "News" },
   { href: "/events", text: "Events" },
-  { href: "https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg", text: "Contact" },
+  { href: "https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg", text: "Contact", external: true },
+  { href: "https://autodrive-ecosystem.github.io/", text: "Simulator", external: true },
 ];
 
 export default function Navbar() {
@@ -131,6 +132,8 @@ export default function Navbar() {
           <Link
             key={link.href}
             to={link.href}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noreferrer noopener" : undefined}
             className="relative text-sm transition-colors px-3"
             onMouseEnter={(e) => {
               setHoveredIndex(index);

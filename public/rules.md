@@ -32,7 +32,7 @@ The competition is organized as an in-person competition.
 
 Teams can register for the competition using a [registration form](https://forms.gle/FdfY9sKXREdu772u6).
 
-The preferred communication method with the organizers is the _#ICRA2025_ channel on [Roboracer-teams Slack](https://join.slack.com/t/robo-racer/shared_invite/zt-2sfu4qr7p-3oe27mCnH98muwRR9uEAbg).
+The preferred communication method with the organizers is the _#ICRA2025_ channel on [Roboracer-teams Slack](https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg).
 
 
 # 2. In-person (physical) competition
