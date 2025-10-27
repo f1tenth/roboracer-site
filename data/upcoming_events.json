@@ -1,0 +1,38 @@
+[
+    {
+        "title": "IEEE 25th International Conference on Control, Automation, and Systems (ICCAS 2025)",
+        "dates": "Nov 4-6, 2025",
+        "location": "Songdo ConvensiA, Incheon, Korea",
+        "url": "https://2025.iccas.org/"
+    },
+    {
+        "title": "25th Roboracer Autonomous Racing Competition at the IEEE Conference on Decision and Control (CDC 2025)",
+        "dates": "Dec 9-12, 2025",
+        "location": "Rio de Janeiro, Brazil",
+        "url": "https://cdc2025-race.roboracer.ai/"
+    },
+    {
+        "title": "26th Roboracer Autonomous Racing Competition at Techfest IIT-Bombay",
+        "dates": "Dec 22-24, 2025",
+        "location": "IIT Bombay, India",
+        "url": "https://techfest.org/"
+    },
+    {
+        "title": "27th Roboracer Autonomous Racing Competition at the International Conference on Robotics and Automation (ICRA 2026)",
+        "dates": "June 1-5, 2026",
+        "location": "Vienna, Austria",
+        "url": "https://2026.ieee-icra.org/"
+    },
+    {
+        "title": "28th Roboracer Autonomous Racing Competition at the IEEE Intelligent Vehicles Symposium (IV 2026)",
+        "dates": "June 22-25, 2026",
+        "location": "Detroit, MI, USA",
+        "url": "https://ieee-iv.org/2026/"
+    },
+    {
+        "title": "29th Roboracer Autonomous Racing Competition at the IEEE Vehicular Technology Conference (VTC 2026)",
+        "dates": "Sep 6-9, 2026",
+        "location": "Boston, MA, USA",
+        "url": "https://events.vtsociety.org/vtc2026-fall/"
+    }
+]
