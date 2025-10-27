@@ -112,10 +112,26 @@ export default function Home() {
       <div id="join" className="relative w-full flex flex-col md:flex-row-reverse gap-8 justify-center items-center">
         <div>
           <h2>Simple. Fast. Open Source.</h2>
-          <h4>Join the future of autonomous racing.</h4>
-          <div className="flex flex-col bg-white rounded-md p-4 mt-4">
+          {/* <h4>Join the future of autonomous racing.</h4> */}
+          {/* <div className="flex flex-col bg-white rounded-md p-4 mt-4">
             <EmailSubscribeForm />
+          </div> */}
+          {/* REMOVE LATER */}
+          <div className="flex flex-col items-start md:items-start gap-3 md:max-w-sm mt-4">
+            <a
+              href="https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="flex flex-row items-center gap-2 text-lg font-medium hover:underline"
+            >
+              <img src="/logos/slack-logo.svg" alt="Slack Logo" width={24} height={24} />
+              <h3>Join Our Community!</h3>
+            </a>
+            <p className="text-gray-300 text-start">
+              Join Slack to learn how to get started and get your questions answered.
+            </p>
           </div>
+
         </div>
         <div>
           <img src="/landing/car-inside.png" alt="Car Image" width={400} height={300} />
