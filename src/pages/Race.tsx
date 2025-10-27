@@ -6,7 +6,7 @@ class Race {
 }
 
 class UpcomingEvent {
-  name!: string;
+  title!: string;
   dates!: string;
   location!: string;
   url!: string;
@@ -44,7 +44,7 @@ export default function RaceCalendar() {
               rel={event.url ? "noopener noreferrer" : undefined}
               className="p-4 rounded-lg bg-brand-radial flex flex-col items-start justify-center gap-2 shadow-inner hover:shadow-md hover:scale-[1.01] transition-transform"
               >
-              <h3 className="text-lg font-semibold space-font">{event.name}</h3>
+              <h3 className="text-lg font-semibold space-font">{event.title}</h3>
               {event.dates && <p className="text-sm text-neutral-300">{event.dates}</p>}
               {event.location && <p className="text-sm text-neutral-400">{event.location}</p>}
               {event.url && <span className="mt-2 text-xs text-blue-300 underline">View details</span>}
