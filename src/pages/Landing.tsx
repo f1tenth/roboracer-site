@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import FloatingTestimonials from "../components/FloatingTestimonials";
 import TerrainRenderer from "../components/TerrainRenderer";
-import EmailSubscribeForm from "../components/EmailSubscribeForm";
+// import EmailSubscribeForm from "../components/EmailSubscribeForm";
 
 const sections = [
   {
