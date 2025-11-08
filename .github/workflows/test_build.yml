@@ -2,7 +2,7 @@ name: Test Build (Vite)
 
 on:
   pull_request:
-    types: [ opened, reopened ]
+    types: [ opened, reopened, review_requested ]
     branches: [ main ]   # or your default branch
   workflow_dispatch: {}
 
