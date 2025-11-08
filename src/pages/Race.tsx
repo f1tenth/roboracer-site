@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Events from "./Events";
 
 class Race {
   name!: string;
@@ -15,6 +16,8 @@ class UpcomingEvent {
 export default function RaceCalendar() {
   const [pastRaces, setPastRaces] = useState<Race[]>([]);
   const [upcomingEvents, setUpcomingEvents] = useState<UpcomingEvent[]>([]);
+  const [showEventsInline, setShowEventsInline] = useState(false);
+  const [inlineEventTitle, setInlineEventTitle] = useState<string | null>(null);
     
   useEffect(() => {
       fetch("/data/past_races.json")
@@ -36,21 +39,53 @@ export default function RaceCalendar() {
           className='w-full h-[60svh] border-animated'></iframe> */}
             <h1>Upcoming Events</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
-            {upcomingEvents.map((event, index) => (
-              <a
-              key={event.url ?? index}
-              href={event.url ?? "#"}
-              target={event.url ? "_blank" : undefined}
-              rel={event.url ? "noopener noreferrer" : undefined}
-              className="p-4 rounded-lg bg-brand-radial flex flex-col items-start justify-center gap-2 shadow-inner hover:shadow-md hover:scale-[1.01] transition-transform"
-              >
-              <h3 className="text-lg font-semibold space-font">{event.title}</h3>
-              {event.dates && <p className="text-sm text-neutral-300">{event.dates}</p>}
-              {event.location && <p className="text-sm text-neutral-400">{event.location}</p>}
-              {event.url && <span className="mt-2 text-xs text-blue-300 underline">View details</span>}
-              </a>
-            ))}
+            {upcomingEvents.map((event, index) => {
+              const isTechfest =
+                (event.title && event.title.toLowerCase().includes("techfest")) ||
+                (event.url && event.url.includes("techfest"));
+
+              return (
+                <div
+                  key={event.url ?? index}
+                  className="p-4 rounded-lg bg-brand-radial flex flex-col items-start justify-center gap-2 shadow-inner hover:shadow-md hover:scale-[1.01] transition-transform"
+                  onClick={() => {
+                    if (isTechfest) {
+                      setInlineEventTitle(event.title ?? null);
+                      setShowEventsInline((s) => !s);
+                    } else {
+                      setShowEventsInline(false);
+                    }
+                  }}
+                >
+                  <h3 className="text-lg font-semibold space-font">{event.title}</h3>
+                  {event.dates && <p className="text-sm text-neutral-300">{event.dates}</p>}
+                  {event.location && <p className="text-sm text-neutral-400">{event.location}</p>}
+                  {event.url && (
+                    <a
+                      href={event.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 text-xs text-blue-300 underline"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      View details
+                    </a>
+                  )}
+                </div>
+              );
+            })}
             </div>
+
+            {/* Inline events content (e.g. Events page) */}
+            {showEventsInline && (
+              <div className="w-full mt-8">
+                {/* optional title for context */}
+                {inlineEventTitle && (
+                  <h2 className="mb-4">{inlineEventTitle} — Details</h2>
+                )}
+                <Events />
+              </div>
+            )}
 
           <h1>Past Events</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
