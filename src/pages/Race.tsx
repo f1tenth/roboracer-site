@@ -86,12 +86,13 @@ export default function RaceCalendar() {
           <h1>Past Events</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
             {pastRaces.map((race, index) => (
-              <div key={index} 
-              // href={race.url} 
-              // target="_blank" 
+              <a key={index}
+              href={race.url}
+              target="_blank"
+              rel="noopener noreferrer"
               className="p-4 rounded-lg bg-brand-radial flex items-center justify-center shadow-inner hover:shadow-md">
                 <p className="text-center space-font">{race.name}</p>
-              </div>
+              </a>
             ))}
           </div>
       </div>
