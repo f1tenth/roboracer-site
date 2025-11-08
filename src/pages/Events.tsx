@@ -59,17 +59,18 @@ const Events = () => {
   return (
     <main className="relative w-full overflow-x-hidden font-sans">
       {/* Fixed Background */}
-      <div
+      {/* <div
         className="fixed top-0 left-0 w-full h-screen bg-cover bg-center -z-10"
         style={{
           backgroundImage: `url(${bgImage})`,
           backgroundAttachment: "fixed",
           filter: "brightness(0.6)",
         }}
-      />
+      /> */}
 
       {/* Hero Section */}
-      <section className="relative h-screen flex justify-center items-center">
+
+      {/* <section className="relative h-screen flex justify-center items-center">
         <motion.div
           onClick={handleClick}
           className="cursor-pointer flex justify-center items-center w-3/4 md:w-1/2 h-1/2 rounded-3xl shadow-2xl relative overflow-hidden"
@@ -82,7 +83,6 @@ const Events = () => {
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.5 }}
         >
-          {/* Overlay */}
           <motion.div
             className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70 backdrop-blur-sm flex items-center justify-center rounded-3xl"
             style={{ opacity }}
@@ -102,7 +102,6 @@ const Events = () => {
           </motion.div>
         </motion.div>
 
-        {/* Scroll Down Arrow */}
         <motion.div
           onClick={handleClick}
           className="absolute bottom-8 cursor-pointer"
@@ -126,9 +125,8 @@ const Events = () => {
           </svg>
         </motion.div>
 
-        {/* Bottom fade */}
         <div className="absolute bottom-0 w-full h-24 bg-gradient-to-t from-white/80 to-transparent" />
-      </section>
+      </section> */}
 
       {/* Info Section with Tabs */}
       <section

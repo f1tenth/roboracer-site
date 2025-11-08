@@ -78,11 +78,7 @@ export default function RaceCalendar() {
 
             {/* Inline events content (e.g. Events page) */}
             {showEventsInline && (
-              <div className="w-full mt-8">
-                {/* optional title for context */}
-                {inlineEventTitle && (
-                  <h2 className="mb-4">{inlineEventTitle} — Details</h2>
-                )}
+              <div className="w-full">
                 <Events />
               </div>
             )}
