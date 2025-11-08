@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
   { href: "/about", text: "About" },
-  { href: "/build", text: "BUILD" },
-  { href: "/learn", text: "LEARN" },
-  { href: "/race", text: "RACE" },
+  { href: "/build", text: "Build" },
+  { href: "/learn", text: "Learn" },
+  { href: "/race", text: "Race" },
   { href: "/course", text: "Course" },
   { href: "/research", text: "Research" },
   { href: "/news", text: "News" },
@@ -27,17 +27,17 @@ export default function Navbar() {
   const navRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLAnchorElement>(null);
 
-  useEffect(() => {
-    function handleResize() {
-      if (window.matchMedia("(min-width: 768px)").matches) {
-        setMenuOpen(false);
-      }
-    }
+  // useEffect(() => {
+  //   function handleResize() {
+  //     if (window.matchMedia("(min-width: 768px)").matches) {
+  //       setMenuOpen(false);
+  //     }
+  //   }
 
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
-    mediaQuery.addEventListener("change", handleResize);
-    return () => mediaQuery.removeEventListener("change", handleResize);
-  }, []);
+  //   const mediaQuery = window.matchMedia("(min-width: 768px)");
+  //   mediaQuery.addEventListener("change", handleResize);
+  //   return () => mediaQuery.removeEventListener("change", handleResize);
+  // }, []);
 
   useEffect(() => {
     if (currentPath === "/" && logoRef.current) {
