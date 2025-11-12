@@ -1,0 +1,40 @@
+name: Test Build (Vite)
+
+on:
+  pull_request:
+    types: [ opened, reopened, review_requested ]
+    branches: [ main ]   # or your default branch
+  workflow_dispatch: {}
+
+permissions:
+  contents: write  # needed to push to gh-pages
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: SPA fallback (404 -> index)
+        # Ensures client-side routing works on refresh
+        run: |
+          cp dist/index.html dist/404.html || true
+
+      - name: Disable Jekyll
+        # Prevents GitHub Pages from ignoring files/folders starting with underscore
+        run: |
+          touch dist/.nojekyll
