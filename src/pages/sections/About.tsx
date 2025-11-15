@@ -7,14 +7,31 @@ import mittal from "./assets/mittal.webp";
 import roboracer from "./assets/roboracer_video.gif";
 import parth from "./assets/parth.jpg";
 import sedrica from "./assets/sedrica.png";
+import chinmay from "./assets/Chinmay_Samak.jpg";
+import tanmay from "./assets/Tanmay_Samak.jpg";
+import venkat from "./assets/Venkat_Krovi.jpg";
 
 const organizers = [
   {
     name: "Rahul Mangharam",
-    role: "Associate Professor",
+    role: "Professor",
     dept: "Department of Electrical and Systems Engineering",
     org: "University of Pennsylvania",
     img: rahul,
+  },
+  {
+    name: "Venkat Krovi",
+    role: "Michelin SmartState Chair Professor of Vehicle Automation",
+    dept: "Department of Automotive Engineering",
+    org: "CU-ICAR",
+    img: venkat,
+  },
+  {
+    name: "Archak Mittal",
+    role: "Assistant Professor",
+    dept: "Department of Civil Engineering",
+    org: "IIT Bombay",
+    img: mittal,
   },
   {
     name: "Mike Coraluzzi",
@@ -23,11 +40,16 @@ const organizers = [
     img: mike,
   },
   {
-    name: "Archak Mittal",
-    role: "Assistant Professor",
-    dept: "Department of Civil Engineering",
-    org: "IIT Bombay",
-    img: mittal,
+    name: "Chinmay Samak",
+    role: "Ph.D. Candidate",
+    org: "CU-ICAR",
+    img: chinmay,
+  },
+  {
+    name: "Tanmay Samak",
+    role: "Ph.D. Candidate",
+    org: "CU-ICAR",
+    img: tanmay,
   },
   {
     name: "Parth Agrawal",
