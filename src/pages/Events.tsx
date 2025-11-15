@@ -6,8 +6,8 @@ import Resources from "./sections/Resources";
 import Timeline from "./sections/Timeline";
 import GettingStarted from "./sections/GettingStarted";
 import Registration from "./sections/Registration";
-import bgImage from "./sections/assets/bg.jpeg";
-import heroImage from "./sections/assets/bg.jpeg";
+// import bgImage from "./sections/assets/bg.jpeg";
+// import heroImage from "./sections/assets/bg.jpeg";
 
 const tabs = [
   { id: "about", label: "About" },
@@ -22,9 +22,9 @@ const Events = () => {
   const [opacity, setOpacity] = useState(1);
   const infoRef = useRef<HTMLDivElement | null>(null);
 
-  const handleClick = () => {
-    infoRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  // const handleClick = () => {
+  //   infoRef.current?.scrollIntoView({ behavior: "smooth" });
+  // };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +32,8 @@ const Events = () => {
       const fadePoint = window.innerHeight / 1.2;
       setOpacity(Math.max(1 - scrollY / fadePoint, 0));
     };
+
+    opacity;
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);

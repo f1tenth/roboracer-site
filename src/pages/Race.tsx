@@ -20,6 +20,9 @@ export default function RaceCalendar() {
   const [inlineEventTitle, setInlineEventTitle] = useState<string | null>(null);
     
   useEffect(() => {
+
+      inlineEventTitle;
+    
       fetch("/data/past_races.json")
         .then((res) => res.json())
         .then((data) => setPastRaces(data))
