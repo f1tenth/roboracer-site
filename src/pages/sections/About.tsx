@@ -102,7 +102,7 @@ Roboracer Autonomous Racing at Techfest, IIT Bombay is a two-stage competition w
 The 26th Roboracer at Techfest, IIT Bombay promises thrilling battles, innovative solutions, and an unforgettable showcase of autonomous racing technology </p>
 
       {/* Image */}
-      <a href="https://techfest.org" target="_blank" rel="noopener noreferrer">
+      <a href="https://techfest.org/competitions/Roboracer" target="_blank" rel="noopener noreferrer">
       <img
         src={tf}
         alt="Roboracer Event"
