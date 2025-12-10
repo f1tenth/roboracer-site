@@ -18,15 +18,14 @@ function App() {
         {/* Wrap all routes inside Layout */}
         <Route element={<Layout />}>
           <Route path="/" element={<Landing />} />
-          <Route path="/about" element={<About />} />
+          {/* <Route path="/about" element={<About />} />
           <Route path="/build" element={<Build />} />
           <Route path="/course" element={<Course />} />
           <Route path="/learn" element={<Learn />} />
           <Route path="/news" element={<News />} />
           <Route path="/race" element={<RaceCalendar />} />
           <Route path="/research" element={<Research />} />
-          <Route path="/rules" element={<Rules />} />
-          {/* <Route path="/events" element={<Events />} /> */}
+          <Route path="/rules" element={<Rules />} /> */}
         </Route>
       </Routes>
     </Router>
