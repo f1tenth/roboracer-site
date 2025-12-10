@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -10,166 +10,120 @@ const links = [
   { href: "/course", text: "Course" },
   { href: "/research", text: "Research" },
   { href: "/news", text: "News" },
-  // { href: "/events", text: "Events" },
-  { href: "https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg", text: "Contact", external: true },
-  { href: "https://autodrive-ecosystem.github.io/", text: "Simulator", external: true },
 ];
 
 export default function Navbar() {
   const location = useLocation();
-  const currentPath = location.pathname;
-  const isAltNav = ["/learn", "/build", "/course"].includes(currentPath);
-
   const [menuOpen, setMenuOpen] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [hoverPos, setHoverPos] = useState({ left: 0, width: 0, height: "100%" });
+  const [scrolled, setScrolled] = useState(false);
 
-  const navRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLAnchorElement>(null);
-
-  // useEffect(() => {
-  //   function handleResize() {
-  //     if (window.matchMedia("(min-width: 768px)").matches) {
-  //       setMenuOpen(false);
-  //     }
-  //   }
-
-  //   const mediaQuery = window.matchMedia("(min-width: 768px)");
-  //   mediaQuery.addEventListener("change", handleResize);
-  //   return () => mediaQuery.removeEventListener("change", handleResize);
-  // }, []);
-
+  // Detect scroll for shadow enhancement
   useEffect(() => {
-    if (currentPath === "/" && logoRef.current) {
-      setHoverPos({
-        left: logoRef.current.offsetLeft,
-        width: logoRef.current.offsetWidth,
-        height: "100%",
-      });
-    }
-  }, [currentPath]);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const menuVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { staggerChildren: 0.05, ease: "easeOut" },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: -10 },
-    visible: { opacity: 1, y: 0 },
-  };
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
 
   return (
-    <nav
-      ref={navRef}
-      className={`${isAltNav ? "navbar-alt dotted-bg" : "navbar"} relative`}
-      onMouseLeave={() => setHoveredIndex(null)}
-    >
-      <Link to="/" ref={logoRef}>
-        <motion.div
-          className="relative flex items-center justify-center"
-          onMouseEnter={() => {
-            if (logoRef.current) {
-              setHoverPos({
-                left: logoRef.current.offsetLeft,
-                width: logoRef.current.offsetWidth,
-                height: "100%",
-              });
-            }
-          }}
-        >
-          <img
-            src={currentPath === "/" ? "/logos/logo-white-gradient.svg" : "/logos/logo-white.svg"}
-            className="w-[100px] min-w-[80px] max-w-[120px] object-cover h-auto flex-shrink-0 -mt-[3px]"
-            alt="RoboRacer Logo"
-            width={currentPath === "/" ? 120 : 100}
-            height={50}
-          />
-        </motion.div>
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      {/* Logo */}
+      <Link to="/" className="logo">
+        <img
+          src="/logos/logo-white-gradient.svg"
+          alt="RoboRacer"
+          className="h-10 w-auto"
+        />
       </Link>
 
-      <div className="hidden md:flex flex-row items-center gap-4 ml-6 text-white relative">
-        <motion.div
-          className="absolute hover-gradient top-0 bottom-0 rounded-lg -z-10"
-          animate={
-            hoveredIndex !== null
-              ? {
-                  left: hoverPos.left,
-                  width: hoverPos.width,
-                  height: hoverPos.height,
-                  opacity: 0.5,
-                }
-              : {
-                  left: links.some((link) => link.href === currentPath)
-                    ? (document.querySelector(`a[href='${currentPath}']`) as HTMLElement)?.offsetLeft || 0
-                    : 0,
-                  width: links.some((link) => link.href === currentPath)
-                    ? (document.querySelector(`a[href='${currentPath}']`) as HTMLElement)?.offsetWidth || 0
-                    : 0,
-                  height: "100%",
-                  opacity: 0.5,
-                }
-          }
-          transition={{ type: "spring", stiffness: 120, damping: 12 }}
-        />
-
-        <motion.div
-          className="absolute select-gradient top-0 bottom-0 rounded-lg -z-10"
-          animate={{
-            left: links.find(link => link.href === currentPath)?.href ? (document.querySelector(`a[href='${currentPath}']`) as HTMLElement)?.offsetLeft || 0 : 0,
-            width: links.find(link => link.href === currentPath)?.href ? (document.querySelector(`a[href='${currentPath}']`) as HTMLElement)?.offsetWidth || 0 : 0,
-            height: "100%",
-            opacity: 0.7, 
-          }}
-          transition={{ type: "spring", stiffness: 120, damping: 12 }}
-        />
-
-        {links.map((link, index) => (
+      {/* Desktop Links */}
+      <div className="nav-links">
+        {links.map((link) => (
           <Link
             key={link.href}
             to={link.href}
-            target={link.external ? "_blank" : undefined}
-            rel={link.external ? "noreferrer noopener" : undefined}
-            className="relative text-sm transition-colors px-3"
-            onMouseEnter={(e) => {
-              setHoveredIndex(index);
-              setHoverPos({
-                left: e.currentTarget.offsetLeft,
-                width: e.currentTarget.offsetWidth,
-                height: "100%",
-              });
-            }}
+            className={`nav-link ${location.pathname === link.href ? 'active' : ''}`}
           >
-            <span className={`relative z-10 ${(link.text === "BUILD" || link.text === "LEARN" || link.text === "RACE") && 'font-bold italic'}`}>{link.text}</span>
+            {link.text}
           </Link>
         ))}
+        
+        {/* CTA Buttons */}
+        <a 
+          href="https://autodrive-ecosystem.github.io/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="nav-link"
+        >
+          Simulator
+        </a>
+        
+        <a 
+          href="https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg"
+          target="_blank"
+          rel="noopener noreferrer" 
+          className="nav-cta"
+        >
+          Join Community
+        </a>
       </div>
 
-      <button className="ml-auto md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-        <img src="/buttons/three-lines.svg" className="h-6" alt="Menu Button" width={30} height={15} />
+      {/* Mobile Menu Button */}
+      <button 
+        className="md:hidden"
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-label="Toggle menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          {menuOpen ? (
+            <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          ) : (
+            <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          )}
+        </svg>
       </button>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="absolute top-full left-0 w-full my-2 flex flex-col items-center gap-2 md:hidden z-[40] text-white"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={menuVariants}
+            className="mobile-menu md:hidden"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
           >
             {links.map((link) => (
-              <motion.div key={link.href} variants={itemVariants} className="black-center-grad flex w-full justify-center hover:text-[#00D1DA]">
-                <Link to={link.href} className="text-md py-2 hover:italic" onClick={() => setMenuOpen(false)}>
-                  {link.text}
-                </Link>
-              </motion.div>
+              <Link
+                key={link.href}
+                to={link.href}
+                className="mobile-menu-link"
+              >
+                {link.text}
+              </Link>
             ))}
+            <a 
+              href="https://autodrive-ecosystem.github.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mobile-menu-link"
+            >
+              Simulator
+            </a>
+            <a 
+              href="https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mobile-menu-link"
+            >
+              Join Community
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
