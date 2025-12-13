@@ -55,7 +55,7 @@ h1 {
 h2 {
   font-family: "Space Grotesk", serif;
   font-size: 1.75rem;
-  color: #A4F5F9;
+  /* color: #A4F5F9; */
   font-weight: 200;
   line-height: 110%;
 }
