@@ -61,11 +61,11 @@ export default function Landing() {
   const [showBanner, setShowBanner] = useState(true);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white pt-[68px] md:pt-[85px]">
       
       {/* ==================== ANNOUNCEMENT BANNER ==================== */}
       {showBanner && (
-        <div className="bg-red-50 border-b border-red-200">
+        <div className="bg-red-50 border border-red-200">
           <div className="max-w-7xl mx-auto px-6 py-3">
             <div className="flex items-center justify-between gap-4">
               <p className="text-sm md:text-base text-red-900 flex-1">
