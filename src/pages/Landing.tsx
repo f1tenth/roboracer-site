@@ -231,7 +231,7 @@ export default function Landing() {
               <img 
                 src="/landing/car-inside.png" 
                 alt="RoboRacer Community" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
           </div>
