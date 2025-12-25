@@ -7,9 +7,9 @@ import FloatingTestimonials from "../components/FloatingTestimonials";
 // ============================================
 
 const HERO_CONFIG = {
-  useBackgroundImage: false, // Toggle to true when you add hero image
+  useBackgroundImage: true,
   backgroundImage: '/landing/hero-bg.jpg',
-  backgroundOpacity: 0.1,
+  backgroundOpacity: 0.3,
 };
 
 const STATS = [
@@ -92,7 +92,7 @@ export default function Landing() {
         {/* Background Image (conditional) */}
         {HERO_CONFIG.useBackgroundImage && (
           <div 
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0 bg-cover bg-center pt-[68px] md:pt-[85px]"
             style={{
               backgroundImage: `url(${HERO_CONFIG.backgroundImage})`,
               opacity: HERO_CONFIG.backgroundOpacity,
@@ -111,7 +111,7 @@ export default function Landing() {
           </h1>
           
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl font-bold text-gray-800 mb-8 max-w-3xl mx-auto">
             Open-source hardware, global competitions, and comprehensive learning resources powering the next generation of robotics innovators.
           </p>
           

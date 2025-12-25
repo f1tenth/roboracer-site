@@ -36,7 +36,7 @@ export default function Navbar() {
       {/* Logo */}
       <Link to="/" className="logo">
         <img
-          src="/logos/logo-white-gradient.svg"
+          src="/logos/logo-black-gradient.png"
           alt="RoboRacer"
           className="h-10 w-auto"
         />
@@ -59,9 +59,14 @@ export default function Navbar() {
           href="https://autodrive-ecosystem.github.io/" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="nav-link"
+          className="nav-link inline-flex items-center gap-1"
         >
           Simulator
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
         </a>
         
         <a 
@@ -112,9 +117,14 @@ export default function Navbar() {
               href="https://autodrive-ecosystem.github.io/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mobile-menu-link"
+              className="mobile-menu-link flex items-center gap-2"
             >
               Simulator
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
             </a>
             <a 
               href="https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg"
