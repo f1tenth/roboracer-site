@@ -69,7 +69,7 @@ export default function FloatingTestimonials() {
               />
               <div>
                 <h4>{testimonial.author}</h4>
-                <p className="text-slate-200">{testimonial.institution}</p>
+                <p className="text-slate-500">{testimonial.institution}</p>
               </div>
             </div>
           </div>
