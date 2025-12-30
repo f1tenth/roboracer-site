@@ -30,7 +30,13 @@
         "url": "https://ieee-iv.org/2026/"
     },
     {
-        "title": "29th Roboracer Autonomous Racing Competition at the IEEE Vehicular Technology Conference (VTC 2026)",
+        "title": "29th Roboracer Autonomous Racing Competition at the International Federation of Automatic Control (IFAC 2026)",
+        "dates": "August 24-27, 2026",
+        "location": "Busan, Republic of Korea",
+        "url": "http://ifac2026-race.roboracer.ai/"
+    },
+    {
+        "title": "30th Roboracer Autonomous Racing Competition at the IEEE Vehicular Technology Conference (VTC 2026)",
         "dates": "Sep 6-9, 2026",
         "location": "Boston, MA, USA",
         "url": "https://events.vtsociety.org/vtc2026-fall/"
