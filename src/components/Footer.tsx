@@ -91,7 +91,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto responsive-padding py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm">
-              © 2025 RoboRacer Foundation. All rights reserved.
+              © 2026 RooRacer Foundation. All rights reserved.
             </p>
             <p className="text-gray-500 text-sm">
               Creative Commons License

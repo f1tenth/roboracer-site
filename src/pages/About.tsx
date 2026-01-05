@@ -143,7 +143,7 @@ export default function About() {
                 </ol>
             </div>
 
-            <a href="/rules" className="p-4 rounded-lg bg-purple-radial shadow-inner hover:shadow-md">Read the Competition Rules</a>
+            <a href="/rules" className="px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold shadow-lg hover:shadow-xl hover:from-purple-700 hover:to-pink-700 transition-all">Read the Competition Rules</a>
 
             <h1 className="text-2xl text-center font-bold mt-4">Meet the Team</h1>
             <ProfileList title="Developers" data={developers} />
