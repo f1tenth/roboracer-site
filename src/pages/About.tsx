@@ -104,7 +104,7 @@ export default function About() {
     return (
         <div className="w-full flex flex-col items-center gap-8 responsive-padding py-24 sm:px-12 ">
             <div className="relative lg:max-w-[75svw] shadow-inner rounded-lg p-8 bg-brand-radial text-center flex flex-col gap-8 items-center justify-center overflow-hidden z-[5]">
-                <p className='lg:max-w-[70svw] space-font z-[5]'>
+                <p className='lg:max-w-[70svw] space-font z-[5] text-gray-900 font-semibold p-6 rounded-lg hover:bg-white/90 hover:backdrop-blur-sm transition-all duration-300'>
                     RoboRacer is an international community of researchers, engineers, and autonomous systems enthusiasts. 
                     It was originally founded at the University of Pennsylvania in 2016 but has since spread to many other institutions worldwide. 
                     Our mission is to foster interest, excitement, and critical thinking about the increasingly ubiquitous field of autonomous systems.
@@ -118,27 +118,29 @@ export default function About() {
                                 <img 
                                 src={url} 
                                 alt={`Creative Piece Image ${index + 1}`} 
-                                className="absolute inset-0 w-full h-full object-cover"
+                                className="absolute inset-0 w-full h-full object-cover opacity-20"
                                 />
                             </div>
                             ))}
                         </div>
                         </div>
                     </div>
+                    {/* Dark overlay for better text readability */}
+                    <div className="absolute inset-0 bg-black/30"></div>
                 </div>
 
-                <ol className='flex flex-col text-left gap-4 z-[5]'>
+                <ol className='flex flex-col text-left gap-4 z-[5] text-gray-900 p-6 rounded-lg hover:bg-white/90 hover:backdrop-blur-sm transition-all duration-300'>
                     <li>
-                    <span className='space-font'>Build:</span> We designed and maintain the RoboRacer Autonomous Vehicle System, a powerful and versatile open-source platform for autonomous systems research and education.
+                    <span className='space-font font-bold'>Build:</span> We designed and maintain the RoboRacer Autonomous Vehicle System, a powerful and versatile open-source platform for autonomous systems research and education.
                     </li>
                     <li>
-                    <span className='space-font'>Learn:</span> We create courses that teach the foundations of autonomy but also emphasize the analytical skills to recognize and reason about situations with moral content in the design of autonomous.
+                    <span className='space-font font-bold'>Learn:</span> We create courses that teach the foundations of autonomy but also emphasize the analytical skills to recognize and reason about situations with moral content in the design of autonomous.
                     </li>
                     <li>
-                    <span className='space-font'>Race:</span> We bring our international community together by holding a number of autonomous race car competitions each year where teams from all around the world gather to compete.
+                    <span className='space-font font-bold'>Race:</span> We bring our international community together by holding a number of autonomous race car competitions each year where teams from all around the world gather to compete.
                     </li>
                     <li>
-                    <span className='space-font'>Research:</span> Our platform is powerful and versatile enough to be used for a variety of research that includes and is not limited to autonomous racing, reinforcement learning, robotics, communication systems, and much more.
+                    <span className='space-font font-bold'>Research:</span> Our platform is powerful and versatile enough to be used for a variety of research that includes and is not limited to autonomous racing, reinforcement learning, robotics, communication systems, and much more.
                     </li>
                 </ol>
             </div>
