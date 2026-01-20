@@ -58,34 +58,9 @@ const PILLARS = [
 // ============================================
 
 export default function Landing() {
-  const [showBanner, setShowBanner] = useState(true);
 
   return (
     <div className="min-h-screen bg-white pt-[68px] md:pt-[85px]">
-      
-      {/* ==================== ANNOUNCEMENT BANNER ==================== */}
-      {showBanner && (
-        <div className="bg-red-50 border border-red-200">
-          <div className="max-w-7xl mx-auto px-6 py-3">
-            <div className="flex items-center justify-between gap-4">
-              <p className="text-sm md:text-base text-red-900 flex-1">
-                Over the last 5 years, RoboRacer has enjoyed tremendous growth and community support. 
-                We are ready to go beyond just the 1/10th-scale vehicles for broader community-driven engagements. 
-                Stay tuned as we migrate F1Tenth.org to RoboRacer.AI!
-              </p>
-              <button
-                onClick={() => setShowBanner(false)}
-                className="text-red-900 hover:text-red-700 flex-shrink-0 p-1"
-                aria-label="Dismiss announcement"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
       
       {/* ==================== HERO SECTION ==================== */}
       <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
