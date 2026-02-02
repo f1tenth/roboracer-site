@@ -50,7 +50,7 @@ export default function RaceCalendar() {
               return (
                 <div
                   key={event.url ?? index}
-                  className="p-4 rounded-lg bg-brand-radial flex flex-col items-start justify-center gap-2 shadow-inner hover:shadow-md hover:scale-[1.01] transition-transform"
+                  className="p-4 rounded-lg bg-gradient-to-br from-purple-100 via-pink-50 to-gray-100 flex flex-col items-start justify-center gap-2 shadow-lg hover:shadow-xl hover:scale-[1.01] transition-transform cursor-pointer"
                   onClick={() => {
                     if (isTechfest) {
                       setInlineEventTitle(event.title ?? null);
@@ -60,15 +60,15 @@ export default function RaceCalendar() {
                     }
                   }}
                 >
-                  <h3 className="text-lg font-semibold space-font">{event.title}</h3>
-                  {event.dates && <p className="text-sm text-neutral-300">{event.dates}</p>}
-                  {event.location && <p className="text-sm text-neutral-400">{event.location}</p>}
+                  <h3 className="text-lg font-semibold space-font text-gray-900">{event.title}</h3>
+                  {event.dates && <p className="text-sm text-gray-700">{event.dates}</p>}
+                  {event.location && <p className="text-sm text-gray-600">{event.location}</p>}
                   {event.url && (
                     <a
                       href={event.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-2 text-xs text-blue-300 underline"
+                      className="mt-2 text-xs text-blue-600 underline hover:text-blue-700"
                       onClick={(e) => e.stopPropagation()}
                     >
                       View details
@@ -93,8 +93,8 @@ export default function RaceCalendar() {
               href={race.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 rounded-lg bg-brand-radial flex items-center justify-center shadow-inner hover:shadow-md">
-                <p className="text-center space-font">{race.name}</p>
+              className="p-4 rounded-lg bg-gradient-to-br from-purple-100 via-pink-50 to-gray-100 flex items-center justify-center shadow-lg hover:shadow-xl transition-all">
+                <p className="text-center space-font text-gray-900">{race.name}</p>
               </a>
             ))}
           </div>

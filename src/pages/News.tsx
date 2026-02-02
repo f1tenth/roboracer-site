@@ -14,7 +14,7 @@ interface NewsBlockProps {
 
 const NewsBlock: React.FC<NewsBlockProps> = ({ title, platform, date, description, link, thumbnail }) => {
   return (
-    <a href={link} target="_blank" rel="noreferrer noopener" className="w-full h-auto flex flex-col md:flex-row justify-center md:items-start gap-5 p-4 rounded-lg shadow-inner hover:shadow-xl transition-shadow">
+    <a href={link} target="_blank" rel="noreferrer noopener" className="w-full h-auto flex flex-col md:flex-row justify-center md:items-start gap-5 p-4 rounded-lg bg-gradient-to-br from-purple-100 via-pink-50 to-gray-100 shadow-lg hover:shadow-xl transition-all">
       <img src={thumbnail} alt={title} className="h-32 w-auto object-cover rounded-lg" />
       <div className='flex flex-col gap-2 text-center md:text-left'>
       <h3 className="text-xl font-bold">{title}</h3>

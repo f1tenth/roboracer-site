@@ -42,7 +42,7 @@ export default function MarkdownViewer() {
     }, []);
 
     return (
-        <div className="rules responsive-padding flex flex-col gap-5 py-20">
+        <div className="rules responsive-padding flex flex-col gap-5 py-20 pt-[88px] md:pt-[105px]">
             <nav dangerouslySetInnerHTML={{ __html: tableOfContents }} className="toc" />
             <div dangerouslySetInnerHTML={{ __html: markdownContent }} />
         </div>
