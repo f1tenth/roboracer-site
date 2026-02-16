@@ -139,7 +139,7 @@ export default function RaceLanding() {
       </section>
 
       {/* Locations Section */}
-      <section className="py-20 bg-gray-50">
+      {/* <section className="py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
             Race Around the World
@@ -155,7 +155,7 @@ export default function RaceLanding() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="py-20 bg-red-600 text-white">
