@@ -6,12 +6,6 @@ import VideoSlider from "../components/VideoSlider";
 // CONFIGURATION
 // ============================================
 
-const HERO_CONFIG = {
-  useBackgroundImage: true,
-  backgroundImage: '/landing/hero-bg.jpg',
-  backgroundOpacity: 0.3,
-};
-
 const STATS = [
   { number: '90+', label: 'Universities' },
   { number: '20+', label: 'Countries' },
@@ -71,30 +65,48 @@ export default function Landing() {
       
       {/* ==================== HERO SECTION ==================== */}
       <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image (conditional) */}
-        {HERO_CONFIG.useBackgroundImage && (
-          <div 
-            className="absolute inset-0 bg-cover bg-center pt-[68px] md:pt-[85px]"
-            style={{
-              backgroundImage: `url(${HERO_CONFIG.backgroundImage})`,
-              opacity: HERO_CONFIG.backgroundOpacity,
-            }}
-          />
-        )}
+        {/* Background Video */}
+        <div className="absolute inset-0 w-full h-full">
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            playsInline 
+            preload="metadata"
+            poster="https://xlab.upenn.edu/img/xlab_logo_colors_wide.gif"
+            className="absolute inset-0 w-full h-full object-cover opacity-30"
+          >
+            <source src="https://pub-6191ce2447d545b0ba681f0dc19a861c.r2.dev/f110_fpv.mp4" type="video/mp4" />
+          </video>
+        </div>
         
         {/* Solid Background Fallback */}
         <div className="absolute inset-0 bg-white -z-10" />
         
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          {/* Headline */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-            The Leading Platform for Autonomous Racing Education and Research
+          {/* Animated Logo */}
+          <div className="mb-8 flex justify-center">
+            <img 
+              src="/logos/Logo_Gradient.gif" 
+              alt="RoboRacer Logo" 
+              className="w-64 md:w-80 lg:w-96 h-auto"
+            />
+          </div>
+          
+          {/* Tagline */}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
+            Join the future of autonomous racing
           </h1>
           
-          {/* Subheadline */}
-          <p className="text-lg md:text-xl font-bold text-gray-800 mb-8 max-w-3xl mx-auto">
-            Open-source hardware, global competitions, and comprehensive learning resources powering the next generation of robotics innovators.
+          {/* Subtitle */}
+          <p className="text-xl md:text-2xl text-gray-700 mb-6">
+            Fast, simple and open source
+          </p>
+          
+          {/* Headline */}
+          <p className="text-base md:text-lg text-gray-600 mb-8 max-w-3xl mx-auto">
+            The leading platform for autonomous racing education and research. Open-source hardware, global competitions, and comprehensive learning resources powering the next generation of robotics innovators.
           </p>
           
           {/* CTA Button */}
