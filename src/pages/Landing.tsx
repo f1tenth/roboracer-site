@@ -1,5 +1,6 @@
 "use client";
 import FloatingTestimonials from "../components/FloatingTestimonials";
+import VideoSlider from "../components/VideoSlider";
 
 // ============================================
 // CONFIGURATION
@@ -50,6 +51,13 @@ const PILLARS = [
     link: '/build',
     linkText: 'Explore resources',
   },
+];
+
+const VIDEOS = [
+  'https://www.youtube.com/watch?v=wPHYLAnpMOU',
+  'https://youtu.be/zuyOdaQ2xuw',
+  'https://youtu.be/R87Qlq_wSY8',
+  'https://www.youtube.com/watch?v=_RB63z6lUEE',
 ];
 
 // ============================================
@@ -219,6 +227,19 @@ export default function Landing() {
             What Our Community Says
           </h2>
           <FloatingTestimonials />
+        </div>
+      </section>
+
+      {/* ==================== VIDEOS ==================== */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
+            See RoboRacer in Action
+          </h2>
+          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+            Watch highlights from our autonomous racing competitions and educational events
+          </p>
+          <VideoSlider videos={VIDEOS} />
         </div>
       </section>
 
