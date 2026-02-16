@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 export default function Footer() {
   const location = useLocation();
   const isAltFooter = 
-    location.pathname === "/learn" || 
-    location.pathname === "/build" || 
+    location.pathname === "/learn/coursekit" || 
+    location.pathname === "/build/docs" || 
     location.pathname === "/course";
   
   if (isAltFooter) return null;
