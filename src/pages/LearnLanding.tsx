@@ -149,8 +149,8 @@ export default function LearnLanding() {
               <div className="text-gray-600 font-medium">Countries Worldwide</div>
             </div>
             <div>
-              <div className="text-5xl font-bold text-green-700 mb-2">60+</div>
-              <div className="text-gray-600 font-medium">Research Publications</div>
+              <div className="text-5xl font-bold text-green-700 mb-2">2000+</div>
+              <div className="text-gray-600 font-medium">Community Members</div>
             </div>
           </div>
         </div>

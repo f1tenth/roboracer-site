@@ -9,7 +9,7 @@ import VideoSlider from "../components/VideoSlider";
 const STATS = [
   { number: '90+', label: 'Universities' },
   { number: '20+', label: 'Countries' },
-  { number: '60+', label: 'Publications' },
+  { number: '2000+', label: 'Community Members' },
 ];
 
 const PILLARS = [
