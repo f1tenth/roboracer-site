@@ -149,7 +149,7 @@ export default function Landing() {
       </section>
 
       {/* ==================== FOUR PILLARS ==================== */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-10 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           {/* Section Header */}
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
@@ -198,7 +198,7 @@ export default function Landing() {
       </section>
 
       {/* ==================== COMMUNITY CTA ==================== */}
-      <section className="py-20 bg-white">
+      <section className="py-10 bg-white">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Left Column: CTA Content */}
@@ -233,17 +233,17 @@ export default function Landing() {
       </section>
 
       {/* ==================== TESTIMONIALS ==================== */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-10 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+          {/* <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
             What Our Community Says
-          </h2>
+          </h2> */}
           <FloatingTestimonials />
         </div>
       </section>
 
       {/* ==================== VIDEOS ==================== */}
-      <section className="py-20 bg-white">
+      <section className="py-10 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
             See RoboRacer in Action
