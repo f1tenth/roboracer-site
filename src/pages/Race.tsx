@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Events from "./Events";
 
 class Race {
   name!: string;
@@ -16,13 +15,8 @@ class UpcomingEvent {
 export default function RaceCalendar() {
   const [pastRaces, setPastRaces] = useState<Race[]>([]);
   const [upcomingEvents, setUpcomingEvents] = useState<UpcomingEvent[]>([]);
-  const [showEventsInline, setShowEventsInline] = useState(false);
-  const [inlineEventTitle, setInlineEventTitle] = useState<string | null>(null);
     
   useEffect(() => {
-
-      inlineEventTitle;
-    
       fetch("/data/past_races.json")
         .then((res) => res.json())
         .then((data) => setPastRaces(data))
@@ -42,49 +36,20 @@ export default function RaceCalendar() {
           className='w-full h-[60svh] border-animated'></iframe> */}
             <h1>Upcoming Events</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
-            {upcomingEvents.map((event, index) => {
-              const isTechfest =
-                (event.title && event.title.toLowerCase().includes("techfest")) ||
-                (event.url && event.url.includes("techfest"));
-
-              return (
-                <div
+            {upcomingEvents.map((event, index) => (
+                <a
                   key={event.url ?? index}
+                  href={event.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="p-4 rounded-lg bg-gradient-to-br from-purple-100 via-pink-50 to-gray-100 flex flex-col items-start justify-center gap-2 shadow-lg hover:shadow-xl hover:scale-[1.01] transition-transform cursor-pointer"
-                  onClick={() => {
-                    if (isTechfest) {
-                      setInlineEventTitle(event.title ?? null);
-                      setShowEventsInline((s) => !s);
-                    } else {
-                      setShowEventsInline(false);
-                    }
-                  }}
                 >
                   <h3 className="text-lg font-semibold space-font text-gray-900">{event.title}</h3>
                   {event.dates && <p className="text-sm text-gray-700">{event.dates}</p>}
                   {event.location && <p className="text-sm text-gray-600">{event.location}</p>}
-                  {event.url && (
-                    <a
-                      href={event.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-2 text-xs text-blue-600 underline hover:text-blue-700"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      View details
-                    </a>
-                  )}
-                </div>
-              );
-            })}
+                </a>
+            ))}
             </div>
-
-            {/* Inline events content (e.g. Events page) */}
-            {showEventsInline && (
-              <div className="w-full">
-                <Events />
-              </div>
-            )}
 
           <h1>Past Events</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
