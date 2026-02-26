@@ -114,6 +114,18 @@
       {
         "name": "Embedded Systems Week 2016 - Pittsburgh, Pennsylvania",
         "url": "pittsburgh2016.html"
+      },
+      {
+          "title": "ICCAS 2025 Race",
+          "url": "https://2025.iccas.org/"
+      },
+      {
+          "title": "CDC 2025 Race",
+          "url": "https://cdc2025-race.roboracer.ai/"
+      },
+      {
+          "title": "Techfest IIT-Bombay 2025 Race",
+          "url": "https://techfest.org/competitions/Roboracer"
       }
     ]
   
