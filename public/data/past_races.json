@@ -1,5 +1,17 @@
 [
       {
+          "name": "ICCAS 2025 Race",
+          "url": "https://2025.iccas.org/"
+      },
+      {
+          "name": "CDC 2025 Race",
+          "url": "https://cdc2025-race.roboracer.ai/"
+      },
+      {
+          "name": "Techfest IIT-Bombay 2025 Race",
+          "url": "https://techfest.org/competitions/Roboracer"
+      },
+      {
         "name": "CDC 2024 Race",
         "url": "https://cdc2024-race.f1tenth.org/"
       },
@@ -114,18 +126,6 @@
       {
         "name": "Embedded Systems Week 2016 - Pittsburgh, Pennsylvania",
         "url": "pittsburgh2016.html"
-      },
-      {
-          "title": "ICCAS 2025 Race",
-          "url": "https://2025.iccas.org/"
-      },
-      {
-          "title": "CDC 2025 Race",
-          "url": "https://cdc2025-race.roboracer.ai/"
-      },
-      {
-          "title": "Techfest IIT-Bombay 2025 Race",
-          "url": "https://techfest.org/competitions/Roboracer"
       }
     ]
   
