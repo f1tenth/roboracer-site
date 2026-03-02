@@ -210,7 +210,14 @@ export default function Landing() {
                 Connect with researchers, students, and autonomous racing enthusiasts from around the world. Get support, share insights, and collaborate on cutting-edge robotics projects.
               </p>
               <a
-              href="https://join.slack.com/t/robo-racer/shared_invite/zt-3r2d2fe4k-6pvIKjwJH_M28DTyEuR5uQ"
+                href="https://join.slack.com/t/robo-racer/shared_invite/zt-3r2d2fe4k-6pvIKjwJH_M28DTyEuR5uQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-blue-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"
+              >
+                <img src="/logos/slack-logo.svg" alt="" width={20} height={20} />
+                Join on Slack
+              </a>
             </div>
             
             {/* Right Column: Image */}
