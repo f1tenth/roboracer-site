@@ -27,7 +27,7 @@ export default function BuildLanding() {
               </svg>
             </Link>
             <a
-              href="https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg"
+              href="https://join.slack.com/t/robo-racer/shared_invite/zt-3r2d2fe4k-6pvIKjwJH_M28DTyEuR5uQ"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-white text-blue-900 border-2 border-blue-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-50 transition-colors"
@@ -109,7 +109,7 @@ export default function BuildLanding() {
               <p className="text-gray-600 text-sm mb-4">
                 Join our Slack community for help, tips, and collaboration with other builders.
               </p>
-              <a href="https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 font-medium text-sm inline-flex items-center gap-1">
+              <a href="https://join.slack.com/t/robo-racer/shared_invite/zt-3r2d2fe4k-6pvIKjwJH_M28DTyEuR5uQ" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 font-medium text-sm inline-flex items-center gap-1">
                 Join Slack →
               </a>
             </div>
