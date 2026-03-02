@@ -2,6 +2,13 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
+// ============================================
+// CONFIGURATION
+// ============================================
+
+// Items displayed outside hamburger menu (on desktop)
+const VISIBLE_LINKS = ["build", "learn", "race"];
+
 const links = [
   { href: "/about", text: "About" },
   { href: "/build", text: "Build" },
@@ -16,6 +23,14 @@ export default function Navbar() {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  // Split links based on visibility configuration
+  const visibleLinks = links.filter(link => 
+    VISIBLE_LINKS.includes(link.href.replace('/', '').toLowerCase())
+  );
+  const hamburgerLinks = links.filter(link => 
+    !VISIBLE_LINKS.includes(link.href.replace('/', '').toLowerCase())
+  );
 
   // Detect scroll for shadow enhancement
   useEffect(() => {
@@ -44,7 +59,8 @@ export default function Navbar() {
 
       {/* Desktop Links */}
       <div className="nav-links">
-        {links.map((link) => (
+        {/* Visible Links */}
+        {visibleLinks.map((link) => (
           <Link
             key={link.href}
             to={link.href}
@@ -53,6 +69,26 @@ export default function Navbar() {
             {link.text}
           </Link>
         ))}
+        
+        {/* Hamburger Menu Button (Desktop) */}
+        <button 
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="nav-link inline-flex items-center gap-1 cursor-pointer"
+          aria-label="More menu items"
+        >
+          <span>More</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            {menuOpen ? (
+              <path d="M18 6L6 18M6 6l12 12"/>
+            ) : (
+              <>
+                <circle cx="12" cy="12" r="1"/>
+                <circle cx="12" cy="5" r="1"/>
+                <circle cx="12" cy="19" r="1"/>
+              </>
+            )}
+          </svg>
+        </button>
         
         {/* CTA Buttons */}
         <a 
@@ -70,7 +106,7 @@ export default function Navbar() {
         </a>
         
         <a 
-          href="https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg"
+          href="https://join.slack.com/t/robo-racer/shared_invite/zt-3r2d2fe4k-6pvIKjwJH_M28DTyEuR5uQ"
           target="_blank"
           rel="noopener noreferrer" 
           className="nav-cta"
@@ -81,7 +117,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Button */}
       <button 
-        className="md:hidden"
+        className="md:hidden flex items-center gap-1"
         onClick={() => setMenuOpen(!menuOpen)}
         aria-label="Toggle menu"
       >
@@ -94,46 +130,60 @@ export default function Navbar() {
         </svg>
       </button>
 
-      {/* Mobile Menu */}
+      {/* Dropdown Menu (Desktop & Mobile) */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="mobile-menu md:hidden"
+            className="dropdown-menu"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
           >
-            {links.map((link) => (
+            {/* Show all links on mobile, only hamburger links on desktop */}
+            {hamburgerLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className="mobile-menu-link"
+                className="dropdown-menu-link"
               >
                 {link.text}
               </Link>
             ))}
-            <a 
-              href="https://autodrive-ecosystem.github.io/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mobile-menu-link flex items-center gap-2"
-            >
-              Simulator
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/>
-                <line x1="10" y1="14" x2="21" y2="3"/>
-              </svg>
-            </a>
-            <a 
-              href="https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mobile-menu-link"
-            >
-              Join Community
-            </a>
+            
+            {/* Mobile-only: Show visible links + external links */}
+            <div className="md:hidden border-t border-gray-200 pt-2 mt-2">
+              {visibleLinks.map((link) => (
+                <Link
+                  key={`mobile-${link.href}`}
+                  to={link.href}
+                  className="dropdown-menu-link"
+                >
+                  {link.text}
+                </Link>
+              ))}
+              <a 
+                href="https://autodrive-ecosystem.github.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="dropdown-menu-link flex items-center gap-2"
+              >
+                Simulator
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+              <a 
+                href="https://join.slack.com/t/robo-racer/shared_invite/zt-3r2d2fe4k-6pvIKjwJH_M28DTyEuR5uQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="dropdown-menu-link"
+              >
+                Join Community
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
