@@ -9,6 +9,7 @@ import News from "./pages/News";
 import RaceCalendar from "./pages/Race";
 import Research from "./pages/Research";
 import Rules from "./pages/Rules";
+import Chat from "./pages/Chat";
 // import Events from "./pages/Events";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/race" element={<RaceCalendar />} />
           <Route path="/research" element={<Research />} />
           <Route path="/rules" element={<Rules />} />
+          <Route path="/chat" element={<Chat />} />
         </Route>
       </Routes>
     </Router>
