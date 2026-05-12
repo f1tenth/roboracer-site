@@ -91,7 +91,7 @@ export default function Landing() {
           
           {/* CTA Button */}
           <a
-            href="https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg"
+            href="https://join.slack.com/t/robo-racer/shared_invite/zt-2sfu4qr7p-3oe27mCnH98muwRR9uEAbg"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-blue-900 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
@@ -190,7 +190,7 @@ export default function Landing() {
                 Connect with researchers, students, and autonomous racing enthusiasts from around the world. Get support, share insights, and collaborate on cutting-edge robotics projects.
               </p>
               <a
-                href="https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg"
+                href="https://join.slack.com/t/robo-racer/shared_invite/zt-2sfu4qr7p-3oe27mCnH98muwRR9uEAbg"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-blue-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"

@@ -70,7 +70,7 @@ export default function Navbar() {
         </a>
         
         <a 
-          href="https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg"
+          href="https://join.slack.com/t/robo-racer/shared_invite/zt-2sfu4qr7p-3oe27mCnH98muwRR9uEAbg"
           target="_blank"
           rel="noopener noreferrer" 
           className="nav-cta"
@@ -127,7 +127,7 @@ export default function Navbar() {
               </svg>
             </a>
             <a 
-              href="https://join.slack.com/t/robo-racer/shared_invite/zt-2pq4fuyjq-gTUflzeZDKDDGjuVoeZqNg"
+              href="https://join.slack.com/t/robo-racer/shared_invite/zt-2sfu4qr7p-3oe27mCnH98muwRR9uEAbg"
               target="_blank"
               rel="noopener noreferrer"
               className="mobile-menu-link"
