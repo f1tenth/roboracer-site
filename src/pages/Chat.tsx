@@ -8,7 +8,7 @@ declare global {
 
 const CHAT_WIDGET_SITE_ID = "cmq95bbl00003pc0plc684lw0";
 const CHAT_WIDGET_SRC = "https://altegolabs.com/widget.js";
-const BUILD_IFRAME_SRC = "https://f1tenth.readthedocs.io/en/foxy_test/";
+const BUILD_IFRAME_SRC = "https://f1tenth.readthedocs.io/en/main/";
 
 export default function Chat() {
   useEffect(() => {

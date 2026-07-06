@@ -57,7 +57,7 @@ The knockout races will then determine the winners, with the fastest lap decidin
 
 Only cars that meet the following constraints will be allowed to participate:
 
-  1. The vehicle is constructed according to the official [bill of materials](https://f1tenth.readthedocs.io/en/foxy_test/getting_started/build_car/bom.html#bill-of-materials). The teams are allowed to use components of similar or lower specifications.
+  1. The vehicle is constructed according to the official [bill of materials](https://f1tenth.readthedocs.io/en/main/getting_started/build_car/bom.html#bill-of-materials). The teams are allowed to use components of similar or lower specifications.
   2. Each vehicle will be inspected as a part of qualification whether it meets the criteria. In case the criteria are not met, the vehicle is disqualified.
   3. _Chassis_:
       Any chassis listed as *1:10 scale* car is allowed. Preferably **1:10 Traxxas** (e.g., [TRA74054](https://traxxas.com/products/models/electric/ford-fiesta-st-rally), [TRA6804R](https://traxxas.com/products/models/electric/6804Rslash4x4platinum), [TRA68086](https://traxxas.com/products/models/electric/slash-4x4-tsm)), but generally, any chassis with similar dimensions is allowed. Both 4WD and 2WD are permitted.
