@@ -1,11 +1,5 @@
 [
     {
-        "title": "27th Roboracer Autonomous Racing Competition at the International Conference on Robotics and Automation (ICRA 2026)",
-        "dates": "June 1-5, 2026",
-        "location": "Vienna, Austria",
-        "url": "https://icra2026-race.roboracer.ai/registration.html"
-    },
-    {
         "title": "28th Roboracer Autonomous Racing Competition at the IEEE Intelligent Vehicles Symposium (IV 2026)",
         "dates": "June 22-25, 2026",
         "location": "Detroit, MI, USA",
@@ -22,5 +16,11 @@
         "dates": "Sep 6-9, 2026",
         "location": "Boston, MA, USA",
         "url": "https://events.vtsociety.org/vtc2026-fall/"
+    },
+    {
+        "title": "31st Roboracer Autonomous Racing Competition at the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2026)",
+        "dates": "September 27-30, 2026",
+        "location": "Pittsburgh, PA, USA",
+        "url": "https://iros2026-race.roboracer.ai/registration.html"
     }
 ]
