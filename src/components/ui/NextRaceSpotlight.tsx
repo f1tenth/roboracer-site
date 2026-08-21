@@ -66,7 +66,7 @@ export default function NextRaceSpotlight({
           <p className="mt-4 text-body text-text-on-ink-muted">{title}</p>
         </div>
         {remaining && (
-          <div aria-label="Time until the competition starts" className="flex gap-6">
+          <div role="group" aria-label="Time until the competition starts" className="flex gap-6">
             {(
               [
                 ["days", remaining.days],

@@ -68,7 +68,7 @@ export default function TeamGrid({ teams, showUnverified = false }: TeamGridProp
                   <a
                     href={team.website}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="text-small font-semibold text-text-on-ink underline underline-offset-4 decoration-rr-magenta hover:decoration-2"
                   >
                     Team site

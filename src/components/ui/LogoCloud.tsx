@@ -15,7 +15,7 @@ export default function LogoCloud({ partners, logoHeight = 48 }: LogoCloudProps)
     <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
       {sorted.map((p) => (
         <li key={p.name} className="flex items-center" style={{ height: logoHeight }}>
-          <a href={p.website} target="_blank" rel="noreferrer" className="flex items-center">
+          <a href={p.website} target="_blank" rel="noopener noreferrer" className="flex items-center">
             <img
               src={`${import.meta.env.BASE_URL}${p.image}`}
               alt={p.name}

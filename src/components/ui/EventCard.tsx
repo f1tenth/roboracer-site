@@ -54,7 +54,7 @@ export default function EventCard({
         <a
           href={href}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           className={`mt-auto w-fit text-small font-semibold underline underline-offset-4 decoration-rr-magenta hover:decoration-2 ${ink ? "text-text-on-ink" : "text-text-strong"}`}
         >
           {variant === "upcoming" ? "Details and registration" : "Event site"}

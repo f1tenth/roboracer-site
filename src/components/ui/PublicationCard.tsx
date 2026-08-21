@@ -18,7 +18,7 @@ export default function PublicationCard({ publication, tagLabels = {} }: Publica
     <article className="flex h-full flex-col gap-3 rounded-card bg-paper-50 p-6 shadow-card transition-shadow duration-[var(--duration-fast)] hover:shadow-card-hover">
       <h3 className="font-display font-semibold text-text-strong">
         {href ? (
-          <a href={href} target="_blank" rel="noreferrer" className="hover:underline">
+          <a href={href} target="_blank" rel="noopener noreferrer" className="hover:underline">
             {publication.title}
           </a>
         ) : (

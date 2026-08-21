@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 
 export type HighlightItem = {
@@ -16,8 +17,10 @@ type HighlightReelProps = {
 
 /**
  * 2-4 short muted loops in a staggered two-column masonry with captions.
- * Reduced motion: posters only. Placeholder media is allowed here only
- * until Cedric swaps real clips in (template per docs/PLAN.md).
+ * Videos mount only when their tile nears the viewport (IntersectionObserver,
+ * same pattern as ExplodedModel) so off-screen tiles cost a poster, not a
+ * stream. Reduced motion: posters only. Placeholder media is allowed here
+ * only until Cedric swaps real clips in (template per docs/PLAN.md).
  */
 export default function HighlightReel({ items }: HighlightReelProps) {
   const reduced = usePrefersReducedMotion();
@@ -28,30 +31,9 @@ export default function HighlightReel({ items }: HighlightReelProps) {
           <figure>
             <div className="overflow-hidden rounded-media border border-ink-700 bg-ink-800">
               {reduced ? (
-                <img
-                  src={item.poster}
-                  alt=""
-                  width={item.width}
-                  height={item.height}
-                  loading="lazy"
-                  decoding="async"
-                  className="aspect-video w-full object-cover"
-                />
+                <PosterImg item={item} />
               ) : (
-                <video
-                  className="aspect-video w-full object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  poster={item.poster}
-                  width={item.width}
-                  height={item.height}
-                  aria-hidden="true"
-                >
-                  <source src={item.src} type="video/mp4" />
-                </video>
+                <LazyLoopVideo item={item} />
               )}
             </div>
             <figcaption className="mt-3 flex flex-wrap items-baseline justify-between gap-2">
@@ -62,5 +44,63 @@ export default function HighlightReel({ items }: HighlightReelProps) {
         </li>
       ))}
     </ul>
+  );
+}
+
+function PosterImg({ item }: { item: HighlightItem }) {
+  return (
+    <img
+      src={item.poster}
+      alt=""
+      width={item.width}
+      height={item.height}
+      loading="lazy"
+      decoding="async"
+      className="aspect-video w-full object-cover"
+    />
+  );
+}
+
+function LazyLoopVideo({ item }: { item: HighlightItem }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "200px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref}>
+      {inView ? (
+        <video
+          className="aspect-video w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={item.poster}
+          width={item.width}
+          height={item.height}
+          aria-hidden="true"
+        >
+          <source src={item.src} type="video/mp4" />
+        </video>
+      ) : (
+        <PosterImg item={item} />
+      )}
+    </div>
   );
 }
