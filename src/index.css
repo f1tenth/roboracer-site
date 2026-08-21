@@ -23,9 +23,10 @@
  */
 @theme {
   /* ---- Brand accent (the only accent family) ---- */
-  --color-rr-magenta: #d946ef;      /* flat accent: links on ink, chips, active states */
-  --color-rr-violet: #7c3aed;       /* gradient partner only, never solo UI chrome */
-  --color-rr-cyan: #00d1da;         /* logo endpoint + telemetry/data accents only */
+  --color-rr-magenta: #d946ef;      /* logo + legacy pages only (accent decision 2026-08-21) */
+  --color-rr-violet: #7c3aed;       /* THE purple: solid Button fill + hover underline + focus ring */
+  --color-rr-violet-deep: #6d28d9;  /* primary Button hover state */
+  --color-rr-cyan: #00d1da;         /* logo endpoint only */
   --color-rr-grad-start: #fb00ff;   /* gradient text + animated border, start stop */
   --color-rr-grad-end: #6d28d9;     /* gradient text + animated border, end stop */
   --color-rr-magenta-bright: #e879f9; /* accent TEXT on ink and magenta tints (AA) */
@@ -116,7 +117,7 @@ body {
 
 /* Visible focus everywhere; Button overrides color on ink surfaces. */
 :focus-visible {
-  outline: 2px solid var(--color-rr-magenta);
+  outline: 2px solid var(--color-rr-violet);
   outline-offset: 2px;
 }
 
@@ -177,38 +178,45 @@ body {
 /* Delete each block when its page migrates in Phase 3 (CLAUDE.md 10). */
 /* ------------------------------------------------------------------ */
 
-h1 {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
-  font-weight: 600;
-  line-height: 110%;
-}
+/* Heading defaults for pre-revamp pages, in @layer base (fix 2026-08-21):
+   unlayered these beat every layered Tailwind utility, so text-display-xl/-l/-m
+   were silently capped at 2.5/1.75rem site-wide (measured 40px hero h1 at 1440).
+   In the base layer, pages without type utilities render exactly as before and
+   the v2 type scale finally wins where it is declared. */
+@layer base {
+  h1 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 110%;
+  }
 
-h2 {
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 600; /* was 200; killed per docs/DESIGN.md (approved 2026-08-20) */
-  line-height: 110%;
-}
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 600; /* was 200; killed per docs/DESIGN.md (approved 2026-08-20) */
+    line-height: 110%;
+  }
 
-h3 {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 110%;
-}
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 110%;
+  }
 
-h4 {
-  font-family: var(--font-sans);
-  font-size: 1.25rem;
-  font-weight: 500;
-  line-height: 110%;
-}
+  h4 {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 110%;
+  }
 
-h5 {
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  font-weight: 400;
+  h5 {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+  }
 }
 
 @layer utilities {
@@ -282,8 +290,10 @@ h5 {
   padding: 0.25rem 0;
 }
 
+/* Cyan purge (accent decision 2026-08-21): the fixed nav renders on the
+   landing; hover stays ink, the underline signals the state. */
 .nav-link:hover {
-  color: #00d1da;
+  color: #1a1a1a;
 }
 
 .nav-link::after {
@@ -293,7 +303,7 @@ h5 {
   left: 0;
   width: 0;
   height: 2px;
-  background: #00d1da;
+  background: #0b0c14;
   transition: width 0.3s ease;
 }
 
@@ -313,9 +323,8 @@ h5 {
 }
 
 .nav-cta:hover {
-  background: #00d1da;
+  background: #242841;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 209, 218, 0.3);
 }
 
 .mobile-menu {
