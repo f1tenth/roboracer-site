@@ -138,9 +138,12 @@ export default function VideoHero({ video, className = "" }: VideoHeroProps) {
         </button>
       )}
 
+      {/* Idle cue is motion choreography; under reduced motion the hero is a
+          static poster and gets no cue at all (director, 2026-08-21). */}
+      {!reduced && (
       <div
         aria-hidden="true"
-        className={`pointer-events-none absolute inset-x-0 bottom-[calc(68px+1.75rem)] z-10 flex flex-col items-center gap-2 transition-opacity duration-[var(--duration-base)] motion-reduce:transition-none md:bottom-[calc(85px+1.75rem)] ${
+        className={`pointer-events-none absolute inset-x-0 bottom-[calc(68px+1.75rem)] z-10 flex flex-col items-center gap-2 transition-opacity duration-[var(--duration-base)] md:bottom-[calc(85px+1.75rem)] ${
           cue === "visible" ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -161,6 +164,7 @@ export default function VideoHero({ video, className = "" }: VideoHeroProps) {
           />
         </svg>
       </div>
+      )}
     </section>
   );
 }

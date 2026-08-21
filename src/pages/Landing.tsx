@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import {
+  loadHighlights,
   loadPartners,
   loadPublications,
   loadTeams,
   loadUpcomingEvents,
   tagLabelMap,
+  type Highlight,
   type Partner,
   type PublicationsFile,
   type Team,
@@ -20,6 +22,19 @@ import StatCounter from "../components/ui/StatCounter";
 import NextRaceSpotlight from "../components/ui/NextRaceSpotlight";
 import TeamGrid from "../components/ui/TeamGrid";
 import PublicationCard from "../components/ui/PublicationCard";
+import VideoHero from "../components/ui/VideoHero";
+import HeadlineReveal from "../components/ui/HeadlineReveal";
+import HighlightReel from "../components/ui/HighlightReel";
+
+const HERO_VIDEO = {
+  mp4_1920: "/media/hero/hero-fpv-loop-1280.mp4",
+  mp4_960: "/media/hero/hero-fpv-loop-960.mp4",
+  poster: "/media/hero/hero-fpv-poster.webp",
+  width: 1280,
+  height: 720,
+};
+
+const HEADLINE_LINES = ["Autonomous racing,", "built and raced", "in the open"];
 
 const SCHOLAR_URL =
   "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=";
@@ -63,9 +78,8 @@ const PILLARS = [
 /**
  * Landing v2 composition (final order, plan rev 2): hero video, headline,
  * highlights, next race, the car, platform, scale data line, partners, teams,
- * research, get started. Sections 1 (hero), 2 (headline) and 5 (car) are
- * local stubs; the director wires VideoHero / HeadlineReveal / HighlightReel /
- * ExplodedModel from revamp/v2-hero and revamp/v2-car at integration.
+ * research, get started. Section 5 (car) is a local stub until revamp/v2-car
+ * merges; everything else is wired.
  */
 export default function Landing() {
   useLenis();
@@ -73,12 +87,14 @@ export default function Landing() {
   const [partners, setPartners] = useState<Partner[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
   const [pubs, setPubs] = useState<PublicationsFile | null>(null);
+  const [highlights, setHighlights] = useState<Highlight[]>([]);
 
   useEffect(() => {
     loadUpcomingEvents().then(setEvents).catch(() => setEvents([]));
     loadPartners().then(setPartners).catch(() => setPartners([]));
     loadTeams().then(setTeams).catch(() => setTeams([]));
     loadPublications().then(setPubs).catch(() => setPubs(null));
+    loadHighlights().then(setHighlights).catch(() => setHighlights([]));
   }, []);
 
   // The data-driven sections (next race, teams, research) mount after their
@@ -86,7 +102,7 @@ export default function Landing() {
   // ScrollTrigger starts or the stat counters fire hundreds of px early.
   useEffect(() => {
     ScrollTrigger.refresh();
-  }, [events, partners, teams, pubs]);
+  }, [events, partners, teams, pubs, highlights]);
 
   const race = events.find((e) => e.spotlight);
   const featured = pubs?.items.filter((p) => p.featured && p.status === "published").slice(0, 3) ?? [];
@@ -94,17 +110,10 @@ export default function Landing() {
   return (
     <div className="pt-[68px] md:pt-[85px]">
       {/* 1 · Hero (ink): video and nothing else */}
-      <section aria-label="Race footage" className="flex min-h-svh items-center justify-center bg-ink-950">
-        <p className="font-mono text-small text-text-on-ink-muted">TODO(wire): VideoHero from revamp/v2-hero</p>
-      </section>
+      <VideoHero video={HERO_VIDEO} />
 
-      {/* 2 · Headline (paper): the page h1; A's HeadlineReveal replaces the static block */}
-      <Section aria-labelledby="headline">
-        <h1 id="headline" className="font-display text-display-xl font-semibold text-text-strong">
-          Autonomous racing, built and raced in the open
-        </h1>
-        <p className="mt-8 font-mono text-small text-text-muted">TODO(wire): HeadlineReveal from revamp/v2-hero</p>
-      </Section>
+      {/* 2 · Headline (paper): the page h1, pinned per-word reveal */}
+      <HeadlineReveal lines={HEADLINE_LINES} />
 
       {/* 3 · 01 Highlights (paper, full-bleed): the two-row strip lands at integration */}
       <Section edge rule width="bleed" aria-labelledby="highlights">
@@ -117,9 +126,7 @@ export default function Landing() {
             lead="From Pittsburgh to Busan, teams have raced 1/10-scale autonomous cars since 2016. Podiums, overtakes, packed exhibition halls."
           />
         </div>
-        <div className="flex min-h-[30vh] items-center justify-center border-y border-ink-950/10">
-          <p className="font-mono text-small text-text-muted">TODO(wire): HighlightReel strip from revamp/v2-hero</p>
-        </div>
+        <HighlightReel items={highlights} />
       </Section>
 
       {/* 4 · 02 Next race (paper) */}

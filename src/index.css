@@ -154,7 +154,8 @@ body {
     flex-wrap: wrap;
     justify-content: center;
   }
-  .rr-marquee-track[aria-hidden="true"] {
+  .rr-marquee-track[aria-hidden="true"],
+  .rr-marquee-clone {
     display: none;
   }
 }
@@ -353,7 +354,10 @@ body {
 }
 
 .mobile-menu-link:hover {
-  color: #00d1da;
+  /* was cyan #00d1da; cyan is logo-only (accent contract, 2026-08-21) */
+  color: #0b0c14;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 @media (max-width: 768px) {
