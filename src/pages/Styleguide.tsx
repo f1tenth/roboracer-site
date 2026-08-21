@@ -32,7 +32,6 @@ import ExplodedModel from "../components/ui/ExplodedModel";
 const HERO_VIDEO = {
   mp4_1920: "/media/hero/hero-fpv-loop-1920.mp4",
   mp4_960: "/media/hero/hero-fpv-loop-960.mp4",
-  webm_1920: "/media/hero/hero-fpv-loop-1920.webm",
   poster: "/media/hero/hero-fpv-poster.webp",
   width: 1920,
   height: 1080,
