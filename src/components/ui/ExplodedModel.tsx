@@ -73,7 +73,7 @@ export default function ExplodedModel() {
         });
         captions.forEach((cap, i) => {
           tl.to(cap, { opacity: 1, duration: 0.3 }, i);
-          if (i > 0) tl.to(captions[i - 1], { opacity: 0.45, duration: 0.3 }, i);
+          if (i > 0) tl.to(captions[i - 1], { opacity: 0.62, duration: 0.3 }, i);
         });
       });
     },
@@ -86,10 +86,10 @@ export default function ExplodedModel() {
         <li
           key={s.caption}
           data-em-caption={stacked ? undefined : true}
-          style={stacked ? undefined : { opacity: i === 0 ? 1 : 0.45 }}
+          style={stacked ? undefined : { opacity: i === 0 ? 1 : 0.62 }}
         >
           <p className="font-display font-semibold text-text-on-ink">{s.caption}</p>
-          <p className="mt-1 text-small text-text-on-ink-muted">{s.body}</p>
+          <p className="mt-1 text-small text-text-on-ink">{s.body}</p>
         </li>
       ))}
     </ol>

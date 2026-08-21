@@ -59,7 +59,7 @@ export default function TeamGrid({ teams, showUnverified = false }: TeamGridProp
                 </div>
               </div>
               {best && (
-                <p className="w-fit rounded-pill bg-rr-magenta/15 px-3 py-1.5 text-small font-semibold text-rr-magenta">
+                <p className="w-fit rounded-pill bg-rr-magenta/15 px-3 py-1.5 text-small font-semibold text-rr-magenta-bright">
                   {best.result}, {best.event}
                 </p>
               )}

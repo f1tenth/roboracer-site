@@ -14,6 +14,8 @@
   --color-rr-cyan: #00d1da;         /* logo endpoint + telemetry/data accents only */
   --color-rr-grad-start: #fb00ff;   /* gradient text + animated border, start stop */
   --color-rr-grad-end: #6d28d9;     /* gradient text + animated border, end stop */
+  --color-rr-magenta-bright: #e879f9; /* accent TEXT on ink and magenta tints (AA) */
+  --color-rr-magenta-deep: #a21caf;   /* accent TEXT on magenta-tinted paper chips (AA) */
 
   /* ---- Ink base: cinematic sections (hero, chapters, footer) ---- */
   --color-ink-950: #07070d;
@@ -29,7 +31,7 @@
   /* ---- Text roles ---- */
   --color-text-strong: #0b0c14;
   --color-text-body: #3b3f55;
-  --color-text-muted: #6b7089;      /* AA floor on paper, never lighter */
+  --color-text-muted: #62677f;      /* AA floor: >=4.5 on paper-50/100/200 */
   --color-text-on-ink: #f5f5fa;
   --color-text-on-ink-muted: #a8acc4;
 

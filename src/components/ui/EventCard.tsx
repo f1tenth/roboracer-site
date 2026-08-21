@@ -12,7 +12,7 @@ type EventCardProps = {
 };
 
 const CHIP: Record<EventCardProps["variant"], { label: string; cls: string }> = {
-  upcoming: { label: "Upcoming", cls: "bg-rr-magenta/15 text-rr-magenta" },
+  upcoming: { label: "Upcoming", cls: "bg-rr-magenta/15 text-rr-magenta-bright" },
   past: { label: "Past", cls: "bg-ink-700/40 text-text-on-ink-muted" },
 };
 
@@ -29,7 +29,11 @@ export default function EventCard({
 }: EventCardProps) {
   const ink = on === "ink";
   const chip = CHIP[variant];
-  const chipCls = ink ? chip.cls : variant === "upcoming" ? chip.cls : "bg-paper-200 text-text-muted";
+  const chipCls = ink
+    ? chip.cls
+    : variant === "upcoming"
+      ? "bg-rr-magenta/15 text-rr-magenta-deep"
+      : "bg-paper-200 text-text-muted";
   return (
     <article
       className={

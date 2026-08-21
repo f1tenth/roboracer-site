@@ -93,7 +93,7 @@ export default function Footer() {
             <p className="text-gray-400 text-sm">
               © 2026 RoboRacer Foundation. All rights reserved.
             </p>
-            <p className="text-gray-500 text-sm">
+            <p className="text-gray-400 text-sm">
               Creative Commons License
             </p>
           </div>

@@ -51,7 +51,7 @@ export default function PinnedChapter({
           tl.fromTo(panel, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1 }, i);
         });
         captions.forEach((cap, i) => {
-          tl.to(cap, { opacity: i === 0 ? 0.45 : 1, duration: 0.5 }, i === 0 ? 1 : i);
+          tl.to(cap, { opacity: i === 0 ? 0.62 : 1, duration: 0.5 }, i === 0 ? 1 : i);
         });
       });
     },
@@ -65,7 +65,7 @@ export default function PinnedChapter({
         <ol className="mt-12 flex flex-col gap-16">
           {states.map((s) => (
             <li key={s.caption}>
-              <Caption caption={s.caption} body={s.body} active />
+              <Caption caption={s.caption} body={s.body} />
               <div className="mt-6">{s.node}</div>
             </li>
           ))}
@@ -93,8 +93,8 @@ export default function PinnedChapter({
           </div>
           <ol className="flex flex-col gap-6">
             {states.map((s, i) => (
-              <li key={s.caption} data-chapter-caption style={{ opacity: i === 0 ? 1 : 0.45 }}>
-                <Caption caption={s.caption} body={s.body} active={i === 0} />
+              <li key={s.caption} data-chapter-caption style={{ opacity: i === 0 ? 1 : 0.62 }}>
+                <Caption caption={s.caption} body={s.body} />
               </li>
             ))}
           </ol>
@@ -113,13 +113,13 @@ function ChapterHeader({ eyebrow, title }: { eyebrow?: string; title: string }) 
   );
 }
 
-function Caption({ caption, body, active }: { caption: string; body?: string; active?: boolean }) {
+function Caption({ caption, body }: { caption: string; body?: string }) {
   return (
     <div>
-      <p className={`font-display font-semibold ${active ? "text-text-on-ink" : "text-text-on-ink-muted"}`}>
+      <p className="font-display font-semibold text-text-on-ink">
         {caption}
       </p>
-      {body && <p className="mt-1 text-small text-text-on-ink-muted">{body}</p>}
+      {body && <p className="mt-1 text-small text-text-on-ink">{body}</p>}
     </div>
   );
 }

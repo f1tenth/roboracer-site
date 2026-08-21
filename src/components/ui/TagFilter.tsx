@@ -14,7 +14,9 @@ export default function TagFilter({ tags, selected, onChange, label, on = "paper
   const idle = ink
     ? "border border-ink-700 text-text-on-ink-muted hover:border-text-on-ink-muted hover:text-text-on-ink"
     : "border border-paper-200 text-text-body hover:border-text-muted";
-  const active = "border border-rr-magenta bg-rr-magenta/15 text-rr-magenta";
+  const active = ink
+    ? "border border-rr-magenta bg-rr-magenta/15 text-rr-magenta-bright"
+    : "border border-rr-magenta bg-rr-magenta/15 text-rr-magenta-deep";
   return (
     <div role="group" aria-label={label} className="flex flex-wrap gap-2">
       <button

@@ -57,9 +57,9 @@ export default function NextRaceSpotlight({
       <p className="eyebrow mb-4 text-rr-magenta">Next race</p>
       <div className="flex flex-wrap items-end justify-between gap-8">
         <div className="max-w-2xl">
-          <h3 className="font-display text-display-l font-semibold text-text-on-ink">
+          <h2 className="font-display text-display-l font-semibold text-text-on-ink">
             {datesHeadline}
-          </h3>
+          </h2>
           {datesSecondary && (
             <p className="mt-2 text-lead text-text-on-ink-muted">{datesSecondary}</p>
           )}
