@@ -7,7 +7,7 @@ user-invocable: false
 # Media pipeline
 
 ## Budgets (hard)
-- Nothing over 1.5 MB in git, with ONE standing exception (Cedric, 2026-08-20): the landing hero loop encodes in `public/media/hero/` are committed (each under 3 MB; desktop 1920 wide, mobile 960 wide). There is no Cloudflare account for site media; do not reference media.roboracer.ai. Images: WebP (AVIF where quality allows), max 1920 px long edge for full-bleed, 1200 px for cards, 400 px for headshots, 320 px for logos (SVG preferred). Every `<video>` has a `poster` (WebP, under 150 KB). Every image has explicit `width` and `height`.
+- Nothing over 1.5 MB in git, with ONE standing exception (Cedric, 2026-08-20; revised 2026-08-21): the landing hero loop encodes in `public/media/hero/` are committed - desktop at the source's NATIVE resolution (1280, up to 8 MB; never upscale), mobile 960 wide under 3 MB. Fit budgets with two-pass bitrate targeting, not crf sweeps, when a crf misses. There is no Cloudflare account for site media; do not reference media.roboracer.ai. Images: WebP (AVIF where quality allows), max 1920 px long edge for full-bleed, 1200 px for cards, 400 px for headshots, 320 px for logos (SVG preferred). Every `<video>` has a `poster` (WebP, under 150 KB). Every image has explicit `width` and `height`.
 - Total first-load transfer for the landing page under 2.5 MB on desktop and 1.2 MB on mobile (video poster counts, the video stream does not).
 
 ## Locations
