@@ -231,3 +231,71 @@ Landing.tsx is edited by F only. Everything else is a stub in F until merge.
 - Lint, build, /qa-page landing, @qa-reviewer, impeccable critique all pass; no
   `import.meta.env.DEV` gates hiding content; 1.5 MB rule respected (hero exception only).
 - Screenshots at 1440 and 390 of every section in `docs/qa/landing-v3/`.
+
+## Drift check against the code (director, 2026-08-21, HEAD 7e3acb1)
+
+Written from a read-only clone; corrected here after reading the working tree.
+Where this section conflicts with the text above, this section wins.
+
+- The page top padding `pt-[68px] md:pt-[85px]` is on the root div of
+  `src/pages/Landing.tsx` (and `Styleguide.tsx`), NOT in `Layout.tsx`. Builder A does
+  not touch `Layout.tsx`; F removes the padding from `Landing.tsx`. `NavBar.tsx` decides
+  "landing or not" from `useLocation().pathname === "/"`.
+- `NavBar.tsx` is `src/components/NavBar.tsx` (legacy `.navbar` / `.nav-link` /
+  `.nav-cta` / `.mobile-menu` rules in the unlayered LEGACY block of `src/index.css`;
+  measured height 68 px mobile / 85 px desktop; logo `h-10`). Logo assets:
+  `/logos/logo-black-gradient.png` (2736x491) and `/logos/logo-white-gradient.svg`.
+  New nav CSS must be layered (`@layer components`) or scoped to a class; an unlayered
+  rule silently beats every Tailwind utility (two shipped bugs).
+- Car files live in `src/components/`: `RacecarAssembly.tsx`, `racecarAssemblyData.ts`,
+  `racecarMaterials.ts`; the chapter is `src/components/ui/ExplodedModel.tsx` +
+  `ExplodedModelScene.tsx`. The scene already has ACES tone mapping, `StudioLighting`
+  (drei `Environment preset="studio"` with a neutral fallback) plus one directional,
+  `ContactShadows opacity 0.4`; canvas `h-[55svh]`, grid `md:grid-cols-[1fr_20rem]`,
+  camera rest distance 0.72 (wide). The `#82878f` chassis multiplier is at
+  `racecarMaterials.ts` as described.
+- LiDAR facts for the diagnosis: `racecar_mesh.xacro` `base_to_laser_model` origin is
+  `xyz` only (no rpy) and `laser_model/visual` has no `<origin>`; the LiDAR GLB node
+  carries only `scale 0.046187`; the chassis GLB node carries `translation
+  [0.203053, 0.001068, 0.072273]` + `scale 0.224685`; the assembly root group applies
+  `rotation [-PI/2, 0, 0]` (Z-up source to Y-up). Source of truth:
+  `/home/cedric/Documents/UPenn/xLAB/Roboracer/f1tenth_gym_ros/meshes/roboracer.usd`
+  and `scripts/usd_to_mesh.py` there. The assembled position in the part table
+  (`0.095512 = 0.266962 - 0.17145`) matches the xacro.
+- `src/lib/data.ts` had no owner. F adds, in a prep commit on `revamp/integration`
+  BEFORE the worktrees branch: `Highlight.event/href` (optional), `Publication.thumbnail/
+  arxiv/pdf` (optional; `data/publications.schema.json` already has them), `EventsMap`
+  + `loadEventsMap()`, `Community` + `loadCommunity()`. Nobody else edits `data.ts`.
+- `.gitignore` ignores `public/media/**/*.mp4|webm` except the hero loop. The prep commit
+  re-includes `public/media/highlights/` and `public/media/platform/` clips; the 1.5 MB
+  rule is enforced by `scripts/media.sh report public/media`, not by the ignore file.
+- `_harvest/drive/2026-iv/Photos` is EMPTY (0 files). The IV 2026 Drive folder holds only
+  orientation recordings, banners, shirts, certificates: no race photos. IV 2026 podium
+  photos must come from Cedric (see the closing report).
+- Tools on this machine: `ffmpeg`, `ffprobe`, `pdftoppm`, ImageMagick 6 `convert` (WebP
+  delegate present), Python PIL 10. NOT present: `cwebp`, `magick`, `heif-convert`.
+  `scripts/paper_thumbs.py` and the media commands must use `convert` or PIL.
+- `highlights.json` already carries `event` and `href` (15 entries, 1 live).
+  `events_map.json` and `world-land.svg` are already generated and committed; the
+  devDependencies are installed.
+- `publications.json`: 67 items, newest year 2024, two items with `year: 0` (fix or hide).
+- `StatCounter` today: `start: "bottom bottom"`, 1.8 s. Marquee logos today: `max-h-9
+  max-w-32`, gap 12.
+- `TeamGrid` already renders a country mono line (section 8 is satisfied; the aliasing
+  flag stands).
+- `Styleguide.tsx` is owned by A (HeroChapter + nav demo); F adds the remaining demos at
+  integration. Nobody else touches it.
+- Dev ports: A 5181, B 5182, C 5183, E 5185, F 5186. Worktrees under
+  `../roboracer-site-wt/v3-<name>`, branched from `revamp/integration` after the prep
+  commit. `_harvest/` is symlinked into every worktree.
+- Reserved media filenames (D produces, F wires):
+  `public/media/highlights/highlight-<event>-<subject>-NN-960.mp4` + `-poster.webp`,
+  `highlight-<event>-<subject>-NN-1200.webp`;
+  `public/media/race/race-iros2026-hero-1920.webp`;
+  `public/media/car/car-photo-01-1200.webp`, `car-photo-02-1200.webp`;
+  `public/media/platform/platform-build-960.mp4` + `platform-build-poster.webp`,
+  `platform-learn-1200.webp`, `platform-race-960.mp4` + `platform-race-poster.webp`,
+  `platform-research-mppi-960.mp4` + `platform-research-mppi-poster.webp`;
+  `public/media/join/join-icra2026-crowd-1200.webp`;
+  `public/media/team/team-<slug>-800.webp` (slug = teams.json name lowercased,
+  non-alphanumerics to hyphens).

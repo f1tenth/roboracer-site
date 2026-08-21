@@ -31,6 +31,9 @@ public/media/**/*.webm
 # exception approved by Cedric 2026-08-20 (CLAUDE.md rule 3): committed hero loop
 !public/media/hero/hero-fpv-loop-*.mp4
 !public/media/hero/hero-fpv-loop-*.webm
+# landing v3 (2026-08-21): curated clips under 1.5 MB each; size enforced by scripts/media.sh report
+!public/media/highlights/*.mp4
+!public/media/platform/*.mp4
 data/.discover-cache.json
 
 # python bytecode (was accidentally tracked from the harness commit)
