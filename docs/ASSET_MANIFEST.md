@@ -1,0 +1,286 @@
+# Asset Manifest — roboracer.ai revamp
+
+Generated 2026-08-20 by the asset-harvester agent. Raw material lives in `_harvest/` (git-ignored, not committed). This file is the catalog; nothing here has been copied into `public/` or `src/` by this pass — promotion is a page-builder/human decision after review and compression.
+
+Budgets (from `.claude/skills/roboracer-media/SKILL.md`): nothing over 1.5 MB in git; hero video under 3 MB per encode, hosted on Cloudflare; images WebP/AVIF, 1920/1200/400/320 px tiers; every `<video>` needs a poster under 150 KB.
+
+Tools available in this environment: `ffmpeg`/`ffprobe` (with `libx264`, `libsvtav1`, `libwebp`), `curl`, `python3`. **Not available**: `gh` CLI, `cwebp`, ImageMagick (`magick`). Org-repo inspection below was done via the GitHub REST/Git-Trees API over `curl` instead of `gh clone`; image dimensions were read with `ffprobe` instead of `magick identify` (works for raster stills too).
+
+---
+
+## 1. Local — `public/` (already in git, current branch)
+
+194 files, 104,767,051 bytes (~99.9 MB) total. Breakdown by extension: 75 png, 53 jpg, 44 jpeg, 8 svg, 8 json (data, not media), 1 mp4, 1 gif, 1 glb, 1 md, 1 html, 1 CNAME.
+
+**14 files exceed the 1.5 MB git budget today** — these are already committed and are the most urgent cleanup targets:
+
+| id | file | type | WxH | size | what it shows | provenance | permission | candidate use | notes |
+|---|---|---|---|---|---|---|---|---|---|
+| L-01 | `public/crew/YashPant.jpg` | jpg | 3838x3626 | 14,501,068 B (13.8 MB) | crew headshot | site-owner (old f1tenth.org crew photo) | granted (own team member) | about/team | needs 400x400 WebP crop, ~35x over budget |
+| L-02 | `public/landing/f110_fpv.mp4` | mp4 | 1280x720, 41.3 s | 13,222,373 B (12.6 MB) | old FPV racecar hero clip (predecessor of `_harvest/hero/roboracer_fpv.mp4`) | site-owner | granted | hero (legacy) | superseded by new hero encodes in §Hero task below; move off git to Cloudflare or delete |
+| L-03 | `public/crew/pablo.png` | png | 2084x2085 | 7,413,737 B | crew headshot | site-owner | granted | about/team | PNG of a photo — re-export as JPG/WebP first |
+| L-04 | `public/crew/achin.jpg` | jpg | 4000x4000 | 6,093,264 B | crew headshot | site-owner | granted | about/team | needs 400x400 crop |
+| L-05 | `public/landing/hero-bg.jpg` | jpg | 4032x3024 | 4,508,005 B | landing hero background still | site-owner | granted | hero | resize to 1920 long edge |
+| L-06 | `public/crew/susan.png` | png | 1488x1486 | 3,921,237 B | crew headshot | site-owner | granted | about/team | PNG of a photo |
+| L-07 | `public/logos/Logo_Gradient.gif` | gif | 1920x842 | 3,910,117 B | animated gradient wordmark | site-owner | granted | brand/nav | convert to short MP4/WebM loop or static WebP + CSS animation |
+| L-08 | `public/crew/kuk.jpg` | jpg | 2412x2412 | 3,477,113 B | crew headshot | site-owner | granted | about/team | |
+| L-09 | `public/crew/billy.png` | png | 2084x2085 | 2,985,691 B | crew headshot | site-owner | granted | about/team | |
+| L-10 | `public/crew/Nagarakshith_Makam_Sreenivasulu.jpg` | jpg | 4016x3971 | 2,919,664 B | crew headshot | site-owner | granted | about/team | |
+| L-11 | `public/models/anim_2.glb` | glb | — | 2,632,508 B | 3D animation model (legacy, unclear referencer) | site-owner | granted | — | **deletion candidate** — flagged by skill memory as unused; confirm no reference then delete |
+| L-12 | `public/crew/Roshan_Benefo.jpeg` | jpeg | 2327x2370 | 2,235,735 B | crew headshot | site-owner | granted | about/team | |
+| L-13 | `public/about/image-2.JPG` | jpg | 6000x4000 | 1,675,116 B | about-page team/venue photo | site-owner | granted | about | |
+| L-14 | `public/crew/Raymond_Bjorkman.jpg` | jpg | 1536x1540 | 1,646,912 B | crew headshot | site-owner | granted | about/team | |
+
+Just under budget but still oversized for their use (headshots should be ≤400x400 WebP, ~20-60 KB): `public/crew/Brandon_McBride.jpg` (3024x3062, 1,530,357 B), `public/about/image-3.JPG` (6000x4000, 1,467,000 B), `public/crew/thejas.JPG` (1632x1632, 1,503,959 B), `public/partners/duke.png` (3208x1700, 1,045,197 B).
+
+**Other local categories** (not individually itemized — full listing in `_harvest/` working notes if needed):
+
+| category | dir | count | total size | notes |
+|---|---|---|---|---|
+| crew headshots | `public/crew/` | 76 | ~63 MB | raw phone/DSLR photos, no resizing pipeline applied yet; single biggest cleanup opportunity |
+| partner/sponsor logos | `public/partners/` | 67 | ~9 MB | all raster PNG/JPG, **zero SVGs** — see §Logos |
+| brand logos | `public/logos/` | 7 | ~4.3 MB | see §Logos |
+| about-page photos | `public/about/` | 3 | 3.7 MB | `image-2.JPG`, `image-3.JPG` over/near budget; `upenn-ppl-min.jpg` (582,675 B) already compressed |
+| testimonial headshots | `public/testimonials/` | 22 | ~1.6 MB | all reasonably sized already (12-148 KB each) |
+| events | `public/events/` | 1 | 132,218 B | only a generic `placeholder.png` — **gap**, no real event photography in repo |
+| buttons/icons | `public/buttons/` | 1 | 316 B | `three-lines.svg` (hamburger icon) |
+| 3D models (current branch) | `public/models/` | 1 | 2,632,508 B | `anim_2.glb` only — racecar meshes are on `feat/assembly-viewer`, see Task B below |
+| data (JSON, not media) | `public/data/` | 8 | ~68 KB | content, out of scope for this manifest |
+
+---
+
+## 2. `_harvest/` (git-ignored, this session)
+
+| id | file | type | WxH | size | what it shows | provenance | permission | candidate use | notes |
+|---|---|---|---|---|---|---|---|---|---|
+| H-01 | `_harvest/hero/roboracer_fpv.mp4` | mp4 (h264+aac) | 1280x720, 38.0 s | 8,174,230 B | FPV lap of a racecar around an orange-barrier indoor track (garage/expo hall), organizer footage, people visible in some frames | organizer (Cedric's IROS2026 working dir); byte-identical file also served live at `iros2026-race.roboracer.ai/images/Roboracer/roboracer_fpv.mp4` | granted (own footage) | hero | source for encodes below |
+| H-02 | `_harvest/hero/derived/hero-fpv-loop-1920.mp4` | mp4 (h264) | 1920x1080, 12.07 s | 3,086,381 B (2.94 MB) | 12 s loop (t=16-28s of source), crf 34 | derived from H-01 | granted | hero | **under 3 MB budget**; intended path `https://media.roboracer.ai/hero/hero-fpv-loop-1920.mp4` |
+| H-03 | `_harvest/hero/derived/hero-fpv-loop-960.mp4` | mp4 (h264) | 960x540, 12.07 s | 2,342,992 B (2.23 MB) | same loop, mobile width, crf 26 | derived from H-01 | granted | hero (mobile) | under budget; intended path `https://media.roboracer.ai/hero/hero-fpv-loop-960.mp4` |
+| H-04 | `_harvest/hero/derived/hero-fpv-loop-1920.webm` | webm (AV1/libsvtav1) | 1920x1080, 12.08 s | 2,770,280 B (2.64 MB) | same loop, AV1, crf 44 preset 8 | derived from H-01 | granted | hero (first `<source>`) | under budget; intended path `https://media.roboracer.ai/hero/hero-fpv-loop-1920.webm` |
+| H-05 | `_harvest/hero/derived/hero-fpv-loop-poster.webp` | webp | 1920x1080 | 51,456 B | still frame at t=1.5 s into the loop (car + barrier in motion) | derived from H-02 | granted | hero poster | **well under 150 KB budget**; small enough to go in git — ready for a human/page-builder to copy to `public/media/hero/hero-fpv-poster.webp` (not done by this agent, see house rule) |
+| H-06 | `_harvest/wayback/race-20240109144455.html` | html | — | 19,337 B | archived `f1tenth.org/race.html`, 2024-01-09 snapshot | Wayback Machine, timestamp 20240109144455 | n/a (archival page, not media) | reference | image URLs extracted below |
+| H-07 | `_harvest/wayback/about-20240109144454.html` | html | — | 67,194 B | archived `f1tenth.org/about.html`, 2024-01-09 snapshot | Wayback Machine, timestamp 20240109144454 | n/a | reference | image URLs extracted below |
+| H-08 | `_harvest/wayback/racesites/iros2026-race_roboracer_ai.html` | html | — | 12,629 B | live IROS 2026 race site HTML | race-site | n/a | reference | |
+| H-09 | `_harvest/wayback/racesites/icra2026-race_roboracer_ai.html` | html | — | 17,808 B | live ICRA 2026 race site HTML | race-site | n/a | reference | |
+| H-10 | `_harvest/wayback/racesites/iv2026-race_roboracer_ai.html` | html | — | 9,964 B | live IV 2026 race site HTML | race-site | n/a | reference | |
+
+`_harvest/drive/` does **not exist** in this environment — Google Drive sync folders (Logo, Posters 2026, Old Banners, 2026 ICRA/Media, Logos) were not inventoried. Dead end this pass; re-run step 3 once Cedric syncs the folder locally.
+
+---
+
+## 3. f1tenth GitHub org repos (via GitHub REST API, no `gh` CLI available)
+
+`gh` is not installed in this environment; repo inspection was done with `curl` against `api.github.com` (repo list + recursive git-trees), which is equivalent for cataloging purposes but did not clone working copies into `_harvest/repos/`. 51 repos in the org; only three carry meaningful media, and none matched the "site/web/race/.github.io" naming pattern the harvest script targets (that pattern only matches this `roboracer-site` repo itself).
+
+| id | repo | count | total size | what it shows | provenance | permission | candidate use | notes |
+|---|---|---|---|---|---|---|---|---|
+| G-01 | `f1tenth/f1tenth_media` | 4 files | 816,531 B | `ifac2020-schedule.png` (346,748 B), `ifac2020-schedule-cet.png` (340,790 B), `berlinbanner.png` (94,987 B), `iros2020.png` (34,006 B) — old event banners/schedules | org repo, dedicated "for public media" | granted (org asset) | news/archive | small, stale (2020), low value for 2026 revamp |
+| G-02 | `f1tenth/f1tenth_doc` | 291 blobs, 218 image-like | not summed (many files) | car-build step photos/GIFs (`img/buildCar.gif` 3.83 MB, Jetson setup, VESC wiring, chassis assembly) | org repo (course/build documentation) | granted (org asset) | build/course chapter | several GIFs and JPGs individually over 1.5 MB budget; would need MP4 conversion and resize before use |
+| G-03 | `f1tenth/f1tenth_coursekit` | 130 blobs, 32 image-like | not summed | course lecture GIFs, race clips (`assignments/races/img/race01-04.gif`, up to 4.37 MB), syllabus graphic | org repo (course materials) | granted (org asset) | course chapter, race gallery | race GIFs (`race01.gif` 2.04 MB, `race02.gif` 3.89 MB, `race03.gif` 1.06 MB, `race04.gif` 0.50 MB) are actual race footage — convert to MP4 loops, strong race-page candidates |
+
+Other repos checked and found to have **no media**: `roboracer_rules` (2 blobs, docs only). Remaining 47 repos are code-only (drivers, planners, simulators, lab templates) — not inspected individually for media, low expected yield given naming/description.
+
+---
+
+## 4. Wayback Machine — f1tenth.org, 2024-01-09 snapshot
+
+Image `src` URLs extracted from the archived HTML (H-06, H-07). Cross-checked against `public/`: **the crew and partner sets already in `public/crew/` and `public/partners/` match this snapshot 1:1** — the current repo already carries the same files the 2024 site served, so Wayback did not surface new headshots or logos. It did surface a handful of **race-page banner images not currently in `public/`**:
+
+| id | file/URL | type | provenance | permission | candidate use | notes |
+|---|---|---|---|---|---|---|
+| W-01 | `f1tenth.org/race/5thF1Ann-small.png` | png | Wayback, 20240109144455 | granted (org asset) | race/news archive | 5th anniversary banner |
+| W-02 | `f1tenth.org/race/10 10 times.png` | png | Wayback, 20240109144455 | granted | race/news archive | |
+| W-03 | `f1tenth.org/race/cps2023_darktext.png` | png | Wayback, 20240109144455 | granted | race archive | CPS 2023 event banner |
+| W-04 | `f1tenth.org/race/GermanRace2022.png` | png | Wayback, 20240109144455 | granted | race archive | |
+| W-05 | `f1tenth.org/race/icra2022.png`, `icra2022_workshop.png`, `icra2023.jpg` | png/jpg | Wayback, 20240109144455 | granted | race archive | |
+| W-06 | `f1tenth.org/race/iros2020.png`, `iros2021.png` | png | Wayback, 20240109144455 | granted | race archive | |
+| W-07 | `f1tenth.org/race/IROS-LOGO.svg` | **svg** | Wayback, 20240109144455 | granted | partner/event logo | one of the only SVGs found anywhere in this harvest |
+| W-08 | `f1tenth.org/race/korea_2.png`, `korea-race.png` | png | Wayback, 20240109144455 | granted | race archive | |
+| W-09 | `f1tenth.org/race/irs-workshop.png`, `esw2018-Italy.png`, `CPSW2018-Porto.png`, `CPS&IoTW2019-Montreal.png` | png | Wayback, 20240109144455 | granted | race archive | oldest event banners, historical value only |
+
+Byte sizes were not fetched individually for W-01…W-09 (HTML reference only, per task scope of "record snapshot timestamp per file"); download and re-measure before use.
+
+---
+
+## 5. Race sites (`public/data/past_races.json` + `upcoming_events.json`, 2026 events)
+
+URLs recorded only; nothing downloaded over 5 MB (one asset — R-06 — exceeds that and was explicitly *not* downloaded, HEAD-checked only).
+
+| id | file/URL | type | size (HEAD) | what it shows | provenance | permission | candidate use | notes |
+|---|---|---|---|---|---|---|---|---|
+| R-01 | `iros2026-race.roboracer.ai/images/IROS.png` | png | 21,438 B | IROS 2026 event logo | race-site | granted (own event site) | race page | |
+| R-02 | `iros2026-race.roboracer.ai/images/Roboracer/roboracer_fpv.mp4` | mp4 | 8,174,230 B | **byte-identical to H-01** — confirms hero source is the live race-site video | race-site | granted | hero | already harvested as H-01, no need to re-download |
+| R-03 | `iros2026-race.roboracer.ai/images/organizer/*.jpg/.jpeg` | jpg | not measured individually | 9 organizer headshots (Ahmad, Amr El-Wakeel, Cedric, Chinmay Samak, John Dolan, Mohamed, Rahul, Tanmay Samak, Venkat, Wenshan Wang) | race-site | granted (organizers, own site) | about/race organizers | |
+| R-04 | `icra2026-race.roboracer.ai/images/ICRA2026.png` | png | 12,986 B | ICRA 2026 event logo | race-site | granted | race page | |
+| R-05 | `icra2026-race.roboracer.ai/images/sponsors/*.png` | png | FFG 7,665 B; Magna 43,625 B; TU Wien 68,569 B; also HTU, Knapp, BMIMI, Qualisys (not measured) | Austrian/German ICRA 2026 sponsor logos (FFG, Magna, TU Wien, HTU, Knapp, BMIMI, Qualisys) | race-site | granted (sponsors of an org-run event) | partner/sponsor | new sponsor set not yet in `public/partners/` |
+| R-06 | `icra2026-race.roboracer.ai/images/Roboracer/roboracer_video.gif` | gif | **21,480,151 B (20.5 MB)** | animated hero GIF, same footage as roboracer_fpv.mp4 | race-site | granted | — | **not downloaded** (>5 MB limit); also a textbook GIF→MP4 conversion candidate per the skill, already superseded by H-02/H-03/H-04 |
+| R-07 | `iv2026-race.roboracer.ai/images/IV2026.png` | png | not measured | IV 2026 event logo | race-site | granted | race page | |
+| R-08 | `iv2026-race.roboracer.ai/images/organizer/*.jpg/.jpeg/.png` | jpg/png | not measured | 7 organizer headshots (overlaps with R-03; adds Amr El-Wakeel new photo, Mohamed Elgouhary) | race-site | granted | about/race organizers | |
+| R-09 | `iv2026-race.roboracer.ai/images/Roboracer/roboracer_video.gif` | gif | not measured (same file as R-06 by name) | same hero GIF reused across all three 2026 race sites | race-site | granted | — | confirms the org has no other hero video yet — reinforces the need for H-02/03/04 |
+
+---
+
+## 6. Community media (LinkedIn) — permission not yet requested
+
+Per `.claude/skills/roboracer-media/SKILL.md`, this agent does **not** scrape LinkedIn. The following are tracking rows only, sourced from the post-author list in the skill file (from Rahul, 2026-08-16). No files exist in `_harvest/community/` yet.
+
+| id | file/URL | type | what it shows | provenance | permission | candidate use | notes |
+|---|---|---|---|---|---|---|---|
+| C-01 | LinkedIn post — Amr El-Wakeel (3rd place) | photo/video (unknown) | race result content | community/LinkedIn | **not-asked** | race/news | |
+| C-02 | LinkedIn post — Milan Manoj | unknown | — | community/LinkedIn | **not-asked** | race/news | |
+| C-03 | LinkedIn post — Seif Eldaby (Assiut Motorsport) | unknown | — | community/LinkedIn | **not-asked** | race/news | |
+| C-04 | LinkedIn post — William Hecoin (IEEE IV 2026, Autoware) | unknown | — | community/LinkedIn | **not-asked** | race/news | |
+| C-05 | LinkedIn post — Jooncheol Park (TU Wien) | unknown | — | community/LinkedIn | **not-asked** | race/news | |
+| C-06 | LinkedIn post — Mattia Dal Bo | unknown | — | community/LinkedIn | **not-asked** | race/news | |
+| C-07 | LinkedIn post — Cedric Hollande (ICRA/IV 2026) | unknown | — | community/LinkedIn | **not-asked** | race/news | owner is Cedric himself — fastest permission to close |
+| C-08 | LinkedIn post — Elias Eckermann | unknown | — | community/LinkedIn | **not-asked** | race/news | |
+| C-09 | LinkedIn post — Luis Denninger (Team Unicorn) | unknown | — | community/LinkedIn | **not-asked** | race/news | |
+| C-10 | LinkedIn post — Nayeem Islam Shanto | unknown | — | community/LinkedIn | **not-asked** | race/news | |
+| C-11 | LinkedIn post — F. Pomerleau | unknown | — | community/LinkedIn | **not-asked** | race/news | |
+| C-12 | LinkedIn post — Megha J. Kabra | unknown | — | community/LinkedIn | **not-asked** | race/news | |
+| C-13 | LinkedIn post — Maninder Kaur | unknown | — | community/LinkedIn | **not-asked** | race/news | |
+| C-14 | LinkedIn activity URL #1 (author unnamed) | unknown | — | community/LinkedIn | **not-asked** | race/news | full URL in Slack #general, 2026-08-16 thread |
+| C-15 | LinkedIn activity URL #2 (author unnamed) | unknown | — | community/LinkedIn | **not-asked** | race/news | ditto |
+| C-16 | LinkedIn activity URL #3 (author unnamed) | unknown | — | community/LinkedIn | **not-asked** | race/news | ditto |
+
+Use the outreach template at `.claude/skills/roboracer-media/templates/permission-request.md`. Do not use any of C-01…C-16 until status moves to `granted <date, by whom, scope>`.
+
+---
+
+## Task A — Hero video encode (detail)
+
+**Input**: `_harvest/hero/roboracer_fpv.mp4` — h264/aac, 1280x720, 30000/1001 fps, 38.005 s, video bitrate ≈1.62 Mbps, 8,174,230 B.
+
+**Loop selection**: sampled frames at 2, 6, 10, 14, 18, 22, 26, 30, 34 s. Frames 22-34 s show clean, fast FPV motion past the orange track barrier with no faces filling the frame (frames around 6-18 s have organizers standing in the background, still usable but busier). Selected **16-28 s (12 s)** as the loop window — car in motion the whole time, loops reasonably cleanly.
+
+Commands actually run (from `_harvest/hero/roboracer_fpv.mp4`, working dir = repo root):
+
+```bash
+ffmpeg -y -ss 16 -t 12 -i _harvest/hero/roboracer_fpv.mp4 -c copy _harvest/hero/derived/cut.mp4
+
+# 1920 H.264 — crf raised from the skill's default 24 to 34: at crf 24 the upscaled
+# (source is native 720p) 1920-wide encode came out 11.5 MB, far over the 3 MB budget.
+# crf 34 was the lowest (best-quality) value that still cleared the budget on this clip.
+ffmpeg -y -i _harvest/hero/derived/cut.mp4 -an -vf "scale=1920:-2:flags=lanczos,fps=30" \
+  -c:v libx264 -preset slow -crf 34 -pix_fmt yuv420p -movflags +faststart \
+  _harvest/hero/derived/hero-fpv-loop-1920.mp4
+
+# 960 H.264 — skill's default crf 26 fit the budget directly, no adjustment needed
+ffmpeg -y -i _harvest/hero/derived/cut.mp4 -an -vf "scale=960:-2:flags=lanczos,fps=30" \
+  -c:v libx264 -preset slow -crf 26 -pix_fmt yuv420p -movflags +faststart \
+  _harvest/hero/derived/hero-fpv-loop-960.mp4
+
+# 1920 AV1/WebM — skill's crf 34 example gave 4.7 MB (larger than the mp4, AV1 psnr-tune
+# struggles on this grainy/motion-blurred footage); crf 44 preset 8 fit the budget
+ffmpeg -y -i _harvest/hero/derived/cut.mp4 -an -vf "scale=1920:-2" \
+  -c:v libsvtav1 -crf 44 -preset 8 _harvest/hero/derived/hero-fpv-loop-1920.webm
+
+# poster at 1.5 s into the loop
+ffmpeg -ss 1.5 -i _harvest/hero/derived/hero-fpv-loop-1920.mp4 -frames:v 1 -q:v 2 \
+  _harvest/hero/derived/poster.jpg
+# cwebp not installed in this environment; used ffmpeg's libwebp encoder instead
+ffmpeg -y -i _harvest/hero/derived/poster.jpg -vf "scale=1920:-2" -q:v 80 -compression_level 6 \
+  _harvest/hero/derived/hero-fpv-loop-poster.webp
+```
+
+**Outputs** (all in `_harvest/hero/derived/`, git-ignored, not in `public/`):
+
+| file | resolution | duration | size | vs. 3 MB budget |
+|---|---|---|---|---|
+| `hero-fpv-loop-1920.mp4` | 1920x1080 | 12.07 s | 3,086,381 B (2.94 MB) | **under** (98% of budget) |
+| `hero-fpv-loop-960.mp4` | 960x540 | 12.07 s | 2,342,992 B (2.23 MB) | **under** |
+| `hero-fpv-loop-1920.webm` (AV1) | 1920x1080 | 12.08 s | 2,770,280 B (2.64 MB) | **under** |
+| `hero-fpv-loop-poster.webp` | 1920x1080 | — | 51,456 B | **under** the 150 KB poster budget |
+
+Note on quality: the source is native 720p, so the 1920-wide encodes are an upscale, not added resolution — at the skill's default crf 24 the upscale alone produces an 11.5 MB file (crf 28 → 7.6 MB, crf 32 → 5.2 MB, crf 36 → 3.7 MB), all over budget at the original 18 s cut. Shortening the loop to 12 s bought back enough headroom to use crf 34 instead of a more aggressive crf ~40, which is the better quality/size tradeoff. Flag for Cedric: consider asking whoever shot this footage for a higher-resolution source if one exists, since a true 1080p+ source would make the budget much easier to hit at good quality.
+
+**Intended Cloudflare paths** (not yet uploaded — Ahmad or Rahul hold account access per the skill):
+- `https://media.roboracer.ai/hero/hero-fpv-loop-1920.mp4`
+- `https://media.roboracer.ai/hero/hero-fpv-loop-960.mp4`
+- `https://media.roboracer.ai/hero/hero-fpv-loop-1920.webm`
+
+Only the poster (`hero-fpv-loop-poster.webp`, 51,456 B) is small enough and appropriate to eventually land in git at `public/media/hero/hero-fpv-poster.webp` — that copy was **not** performed by this agent (writing to `public/` is out of scope for asset-harvester; a human or the page-builder does the promotion).
+
+---
+
+## Task B — Racecar meshes on `feat/assembly-viewer` (not on this branch)
+
+Read via `git ls-tree -r --long feat/assembly-viewer -- public/models/racecar` (working tree untouched, no checkout performed):
+
+```
+100644 blob 4c5a5792e2473fe9dff680873350c5ada9705d5f  155,684  public/models/racecar/roboracer_accent.stl
+100644 blob 255089d6c47ec0e1cfa28bd19088d7b60e8f2d31  706,284  public/models/racecar/roboracer_chassis.glb
+100644 blob cdbd8c70a3a0ae00dd41df23cbb0dc6b9ecd4b7c   39,696  public/models/racecar/roboracer_lidar.glb
+100644 blob 0cd64202057b224cea1e00c23051d3010b50c707  331,220  public/models/racecar/roboracer_wheel_front_left.glb
+100644 blob f61792a255e9b82a2d20067b97257bd326919ef7  314,576  public/models/racecar/roboracer_wheel_front_right.glb
+100644 blob 123ef9edc94f0659b3f611fe940951b87f716380  331,364  public/models/racecar/roboracer_wheel_rear_left.glb
+100644 blob 870ba2c9c6e002adbd7aca8bb71b283d9dddc979  314,672  public/models/racecar/roboracer_wheel_rear_right.glb
+```
+
+| file | format | size | notes |
+|---|---|---|---|
+| `roboracer_accent.stl` | STL | 155,684 B | only non-GLB mesh; STL carries no material/texture data, just geometry |
+| `roboracer_chassis.glb` | GLB | 706,284 B | largest file, still under the 1.5 MB budget individually |
+| `roboracer_lidar.glb` | GLB | 39,696 B | smallest |
+| `roboracer_wheel_front_left.glb` | GLB | 331,220 B | |
+| `roboracer_wheel_front_right.glb` | GLB | 314,576 B | |
+| `roboracer_wheel_rear_left.glb` | GLB | 331,364 B | |
+| `roboracer_wheel_rear_right.glb` | GLB | 314,672 B | |
+
+**Total payload: 2,193,496 B (2.09 MB) across 7 files.** No single file exceeds the 1.5 MB per-file budget, so nothing here is individually flagged — but the combined 2.09 MB, loaded together for one assembled view, is worth Draco/meshopt treatment before `/assembly` ships, per the skill's own note ("run `scripts/media.sh report public/models` before committing").
+
+**Compression estimate**: these are small CAD-derived meshes (racecar body panels + 4 wheels + LiDAR housing), not texture-heavy — geometry is the dominant payload. Draco geometry compression on GLB typically yields 60-90% reduction on this kind of low-texture mechanical mesh; meshopt (`gltf-transform optimize --compress draco`) is the tool named in the skill's own memory note. A conservative estimate: **2.09 MB -> roughly 0.4-0.8 MB** combined after Draco, well inside a single 1.5 MB budget even loaded all at once. The STL has no compressed-GLB equivalent as-is; converting it to GLB first (it's just the accent trim geometry) would let Draco apply to all 7 files uniformly. This estimate was not verified with an actual `gltf-transform` run — `npx gltf-transform` was not executed in this pass (out of scope: this task was read-only sizing, not a compression pass) — flag for whoever picks up `feat/assembly-viewer` next.
+
+**`public/models/anim_2.glb`** — confirmed on the **current branch** (`infra/claude-harness`) at HEAD, 2,632,508 B, tracked since commit `353ebc8`. This is already in git and **already over the 1.5 MB budget** (1.67x). Per skill memory, this is a stale/unused animation asset superseded by the assembly viewer — deletion candidate once nothing in `src/` still references it (not verified in this pass; a repo grep for `anim_2` is needed before deleting).
+
+---
+
+## Top 20 candidates (landing + race pages)
+
+1. **H-02/H-03/H-04** — new hero FPV loop (1920 mp4, 960 mp4, AV1 webm), all under budget — landing hero, replaces both `public/landing/f110_fpv.mp4` (L-02, over budget, in git) and the race-sites' 20 MB GIF (R-06/R-09)
+2. **H-05** — hero poster WebP, 51 KB, ready to promote to `public/media/hero/hero-fpv-poster.webp`
+3. **G-03 race GIFs** (`race01-04.gif` from `f1tenth_coursekit`) — real race footage, convert to MP4 loops for a race-page gallery
+4. **R-03/R-08** — organizer headshots from the three live 2026 race sites (Cedric, Ahmad, Rahul, Chinmay/Tanmay Samak, Venkat, John Dolan, Amr El-Wakeel, Mohamed, Wenshan Wang) — about/race organizer grid, already granted
+5. **R-05** — ICRA 2026 sponsor logo set (FFG, Magna, TU Wien, HTU, Knapp, BMIMI, Qualisys) — new sponsor row not yet on the site
+6. **W-07** — `IROS-LOGO.svg`, one of the only vector logos found in this whole harvest — reuse instead of rasterizing
+7. **W-01…W-09** — historical race-event banners (2018-2023) for a news/archive timeline chapter
+8. **L-05** `hero-bg.jpg` (after resize) — fallback poster/backup hero still if video is disabled
+9. **G-02** `f1tenth_doc` build-step photos — strong candidate for the `/build` chapter once resized
+10. **L-01, L-03, L-04, L-06, L-08, L-09, L-10, L-12, L-14** — the 9 oversized crew headshots, first batch for a resize pass (about/team)
+11. **public/partners/** (67 files) — entire set, once converted to consistent WebP/SVG, for the partner marquee
+12. **R-04, R-01, R-07** — three 2026 event logos (ICRA2026.png, IROS.png, IV2026.png) for the race page event switcher
+13. Remaining `public/testimonials/` (22 files, already reasonably sized) — testimonial carousel, low effort
+14. **C-01…C-16** — once permission is granted, LinkedIn race-day photos/videos are the best source of *current* (2026) competition action shots — highest potential value, zero usable rows today
+
+---
+
+## Gaps
+
+- **No 2026 team/podium photography exists anywhere in this harvest.** `public/events/` has only a placeholder; the three live 2026 race sites have no gallery, only organizer headshots and the one reused hero GIF; Wayback and org repos are all pre-2024. This is the single biggest hole for the race page.
+- **No short (10-20 s) hero loop existed before this session.** Filled by H-02/H-03/H-04, but they're an upscale of a 720p source — ask whoever shot `roboracer_fpv.mp4` for a higher-resolution original if one exists.
+- **No podium/awards-ceremony shot** (IROS-style stage photo) for the race page — not found in any of the five sources.
+- **No 2026 team group photo.** Crew photos in `public/crew/` are individual headshots, several years old judging by the identical set appearing in the 2024-01-09 Wayback snapshot.
+- **Zero SVG partner/sponsor logos.** All 67 files in `public/partners/` are raster (PNG/JPG); only two SVG logos surfaced in the *entire* harvest (`IROS-LOGO.svg` on Wayback, plus the existing `public/logos/*.svg` brand marks). Every partner logo is a rasterization candidate for replacement.
+- **`_harvest/drive/` was never populated in this environment** — Cedric's Drive sync folders (Logo, Posters 2026, Old Banners, 2026 ICRA/Media, Logos) were not inventoried; likely the richest source for 2026-specific material and worth a follow-up pass once synced locally.
+- **No community/LinkedIn media is usable yet** — 16 tracked rows, all `permission: not-asked`. This is probably the fastest path to real 2026 race photos; C-07 (Cedric's own post) is the lowest-friction one to clear first.
+- **Race GIFs across all three 2026 race sites (`roboracer_video.gif`, R-06/R-09, 20.5 MB) are the *only* motion asset currently live on those sites** — worth telling Ahmad/Rahul the new H-02/H-03/H-04 encodes exist so the race sites themselves can swap to them, independent of the roboracer.ai revamp.
+
+---
+
+## Logos
+
+| id | file/URL | background | format | size | source | flag |
+|---|---|---|---|---|---|---|
+| LG-01 | `public/logos/logo-black-gradient.png` | dark | raster PNG | 202,810 B | site-owner | rasterized — has an SVG sibling (LG-04) covering a similar mark, prefer that |
+| LG-02 | `public/logos/Logo_Gradient.gif` | any (animated) | raster GIF | 3,910,117 B | site-owner | **rasterized + oversized**, over budget by 2.6x; convert to short MP4/WebM loop or a static WebP + CSS gradient animation |
+| LG-03 | `public/logos/logo square with text.png` | light | raster PNG | 141,760 B | site-owner | rasterized, no SVG equivalent found — candidate for vectorization |
+| LG-04 | `public/logos/logo-white-gradient.svg` | dark | **SVG** | 4,442 B | site-owner | good — vector, small |
+| LG-05 | `public/logos/logo-white.svg` | dark | **SVG** | 4,184 B | site-owner | good |
+| LG-06 | `public/logos/logo-white-vector-animated.svg` | dark | **SVG** (animated) | 61,014 B | site-owner | good, already vector+animated — check `prefers-reduced-motion` handling in the SVG itself |
+| LG-07 | `public/logos/slack-logo.svg` | any | **SVG** | 1,019 B | third-party (Slack brand mark) | fine — standard brand icon usage |
+| LG-08 | `public/logo-square.svg` (repo root of `public/`) | any | **SVG** | not measured | site-owner | good, vector |
+| LG-09 | `public/partners/*.png` / `*.jpg` (67 files) | mostly light/white | raster PNG/JPG | ~9 MB combined | site-owner (old f1tenth.org partner set) | **all 67 rasterized**, zero SVGs — biggest logo-quality gap on the whole site; most have no transparent background (flat white square behind the mark going by file sizes/formats — JPGs like `autoware.jpg`, `cmu.jpg`, `halmstad.jpg`, `monterrey.jpg`, `polytechparis.jpg`, `unimore.jpg` cannot have transparency at all) |
+| LG-10 | `R-05` ICRA 2026 sponsor logos (FFG, Magna, TU Wien, HTU, Knapp, BMIMI, Qualisys) | unknown (not fetched, HEAD-only) | raster PNG | 7.7-68.6 KB each | race-site | rasterized, new set not yet in `public/partners/` |
+| LG-11 | `W-07` `f1tenth.org/race/IROS-LOGO.svg` | unknown | **SVG** | not measured | Wayback, 20240109144455 | good — one of the only vector event logos found; pull this instead of rasterizing IROS branding again |
+
+**Recommendation for the revamp**: standardize on SVG for every partner/sponsor logo (320 px tier per the skill). Given 65 of 67 current partner logos are raster with no SVG source in any harvested location, most will need either (a) requesting official SVG marks from each partner/university's brand page, or (b) a one-time vectorization/redraw pass. This is a larger, separate effort from asset harvesting — flagging for Cedric/Ayagoz to scope.
