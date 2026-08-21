@@ -101,6 +101,17 @@ export type Team = {
   source?: string;
 };
 
+export type Highlight = {
+  id: string;
+  type: "image" | "video";
+  src: string;
+  poster: string;
+  caption: string;
+  credit: string;
+  aspect: "16/9" | "3/2";
+  status: "placeholder" | "live";
+};
+
 async function loadJson<T>(name: string): Promise<T> {
   const res = await fetch(`${import.meta.env.BASE_URL}data/${name}`);
   if (!res.ok) throw new Error(`Failed to load ${name}: ${res.status}`);
@@ -116,4 +127,5 @@ export const loadTeamDevelopers = () => loadJson<TeamMember[]>("team_developers.
 export const loadTeamAlumni = () => loadJson<TeamMember[]>("team_alumni.json");
 export const loadPublications = () => loadJson<PublicationsFile>("publications.json");
 export const loadTeams = () => loadJson<Team[]>("teams.json");
+export const loadHighlights = () => loadJson<Highlight[]>("highlights.json");
 
