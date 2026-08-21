@@ -162,7 +162,7 @@ export default function Landing() {
       </div>
 
       {/* 04 · Platform (paper): hairline rows, 5/7 split */}
-      <Section aria-labelledby="pillars" guides>
+      <Section aria-labelledby="pillars">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
             <SectionHeader
@@ -195,8 +195,11 @@ export default function Landing() {
 
       {/* 05 · Scale (paper data strip) */}
       <Section tight rule aria-labelledby="scale">
-        <h2 id="scale" className="sr-only">
-          Community scale
+        <h2 id="scale" className="mb-4 flex items-center gap-2 font-mono text-small font-normal text-text-muted">
+          <span aria-hidden="true" className="h-1 w-1 bg-rr-magenta" />
+          <span>05</span>
+          <span aria-hidden="true">/</span>
+          <span>Scale</span>
         </h2>
         <div className="grid grid-cols-2 gap-8 border-y border-ink-950/10 py-8 md:grid-cols-4">
           <StatCounter value={90} suffix="+" label="universities" />
@@ -249,7 +252,7 @@ export default function Landing() {
       </Section>
 
       {/* 09 · Research (paper, 5/7) */}
-      <Section rule aria-labelledby="research" guides>
+      <Section rule aria-labelledby="research">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
             <SectionHeader

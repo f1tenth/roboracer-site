@@ -61,6 +61,37 @@ file recorded in CLAUDE.md rule 3; literal crf 22 measured 16.2 MB), mobile
 960 = 2.97 MB, poster regraded. Teams render every entry with a mono
 "unverified" tag - nothing hidden on localhost. Deadline displayed plainly.
 
-## After
+## After (same dual-agent method, rebuilt landing)
 
-(filled by the post-rebuild critique at the end of this pass)
+| Measure | Before | After |
+|---|---|---|
+| Nielsen total (H7/H10 n/a) | 20/32 | **27/32** |
+| Detector findings (browser, full ruleset) | 36 (23 groups) | **8** |
+| Specificity verdict | "partially AI-dark-SaaS" | **"Authored - nobody would call this an AI neon game site"** |
+
+Detector delta: ai-color-palette -17, kicker-above-heading -8, wide-tracking
+-4, gradient-text -2, dark-glow/layout-transition/marquee -3. The 8 that
+remain: 6x nested-cards (5 judged false-positive-shaped - dashed slot,
+segmented team cells, bare column parents; SponsorCTA is the one honest
+match), tight-leading on a display heading, overused-font on the approved
+display face.
+
+What the after-critique still flagged, fixed before merge: mobile team-cell
+clipping (min-w-0 + per-cell hairlines instead of the gap-px backdrop, which
+also kills the empty-cell gray slab), column guides scoped away from running
+text, visible "05 / Scale" index (numbered documents invite counting), a
+mono pause/play control on the hero loop (WCAG 2.2.2), spotlight ledger
+wrapping at 390px.
+
+Still open by design: the four-column legacy footer (Phase 3.5), Space
+Grotesk share-of-text (approved face), SponsorCTA panel nesting (accepted -
+it is the section's one framed object). Assessment A's suggestion worth a
+decision from Cedric: fill the teams grid's last empty cell with a dashed
+"your team here - register" slot as a conversion hook.
+
+## Photos still needed from Cedric
+
+1. ICRA 2026 Vienna group photo -> full-bleed in 02 / Highlights (slot reserved).
+2. IV 2026 Detroit podium photo(s) -> next-race or teams area with mono caption + credit.
+3. Any 2026 race-action stills -> additional highlight tiles (slots render honestly until then).
+_harvest/drive is empty on this machine; drop files there or give paths in chat.

@@ -25,15 +25,15 @@ export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
   const ink = on === "ink";
   if (teams.length === 0) return null;
   return (
-    <ul className="grid gap-px overflow-hidden rounded-card border border-ink-950/10 bg-ink-950/10 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="grid overflow-hidden rounded-card border border-ink-950/10 sm:grid-cols-2 lg:grid-cols-3">
       {teams.map((team) => {
         const best = team.highlights?.[0];
         const institution = team.institution?.startsWith("TODO(content)") ? undefined : team.institution;
         return (
-          <li key={team.name} className={ink ? "bg-ink-900" : "bg-paper-50"}>
+          <li key={team.name} className={`min-w-0 -mt-px -ml-px border-t border-l border-ink-950/10 ${ink ? "bg-ink-900" : "bg-paper-50"}`}>
             <article className="flex h-full flex-col gap-3 p-6">
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-3">
+              <div className="flex min-w-0 items-start justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-3">
                   {team.logo ? (
                     <img
                       src={team.logo}
@@ -52,7 +52,7 @@ export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
                       {initials(team.name)}
                     </span>
                   )}
-                  <div>
+                  <div className="min-w-0">
                     <h3 className={`font-display font-semibold ${ink ? "text-text-on-ink" : "text-text-strong"}`}>
                       {team.name}
                     </h3>

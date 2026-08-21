@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 
 export type HeroVideoSources = {
@@ -26,6 +26,20 @@ type VideoHeroProps = {
  */
 export default function VideoHero({ headline, lead, actions, video, credit }: VideoHeroProps) {
   const reduced = usePrefersReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [paused, setPaused] = useState(false);
+
+  const togglePlayback = () => {
+    const el = videoRef.current;
+    if (!el) return;
+    if (el.paused) {
+      void el.play();
+      setPaused(false);
+    } else {
+      el.pause();
+      setPaused(true);
+    }
+  };
   return (
     <section className="relative flex min-h-svh items-end overflow-hidden bg-ink-950 text-text-on-ink">
       {reduced ? (
@@ -38,6 +52,7 @@ export default function VideoHero({ headline, lead, actions, video, credit }: Vi
         />
       ) : (
         <video
+          ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover"
           autoPlay
           muted
@@ -66,7 +81,19 @@ export default function VideoHero({ headline, lead, actions, video, credit }: Vi
         </h1>
         {lead && <p className="mt-6 max-w-[60ch] text-lead text-text-on-ink-muted">{lead}</p>}
         {actions && <div className="mt-8 flex flex-wrap gap-4">{actions}</div>}
-        {credit && <p className="mt-8 font-mono text-eyebrow tracking-normal text-text-on-ink-muted">{credit}</p>}
+        <p className="mt-8 flex items-center gap-4 font-mono text-eyebrow tracking-normal text-text-on-ink-muted">
+          {credit && <span>{credit}</span>}
+          {!reduced && (
+            <button
+              type="button"
+              onClick={togglePlayback}
+              aria-pressed={paused}
+              className="underline underline-offset-4 decoration-rr-magenta hover:decoration-2 focus-visible:outline-text-on-ink"
+            >
+              {paused ? "play footage" : "pause footage"}
+            </button>
+          )}
+        </p>
       </div>
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2" aria-hidden="true">
         <div className="rr-scroll-cue h-10 w-6 rounded-pill border border-text-on-ink-muted/60">

@@ -62,7 +62,7 @@ export default function NextRaceSpotlight({
       <div className={`flex flex-col justify-between gap-6 border-ink-950/10 md:col-span-5 md:border-l md:pl-8 ${ink ? "md:border-text-on-ink/15" : ""}`}>
         <dl className={`flex flex-col gap-2 font-mono text-small ${muted}`}>
           {remaining && (
-            <div className="flex justify-between gap-4">
+            <div className="flex flex-wrap justify-between gap-x-4 gap-y-0.5">
               <dt>starts in</dt>
               <dd className={`tabular-nums ${strong}`}>
                 {remaining.days}d {String(remaining.hours).padStart(2, "0")}h{" "}
@@ -71,12 +71,12 @@ export default function NextRaceSpotlight({
             </div>
           )}
           {registerNote && (
-            <div className="flex justify-between gap-4">
+            <div className="flex flex-wrap justify-between gap-x-4 gap-y-0.5">
               <dt>registration closes</dt>
               <dd className={`tabular-nums ${strong}`}>{registerNote}</dd>
             </div>
           )}
-          <div className="flex justify-between gap-4">
+          <div className="flex flex-wrap justify-between gap-x-4 gap-y-0.5">
             <dt>format</dt>
             <dd className={strong}>multi-agent, 4 cars</dd>
           </div>
