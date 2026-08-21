@@ -1,0 +1,127 @@
+[
+  {
+    "name": "LAMARRacing",
+    "institution": "TODO(content): unknown. Skill lists 'LaMar Racing (Cedric's example; confirm exact name and institution)' -- exact team name confirmed as 'LAMARRacing' from the results page, institution still unconfirmed.",
+    "highlights": [
+      {
+        "event": "ICRA 2026 (Vienna)",
+        "result": "1st, Time Trials, 14.590s, 54 points"
+      }
+    ],
+    "status": "verify",
+    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, Time Trial Rankings table, fetched 2026-08-20."
+  },
+  {
+    "name": "UPenn Autonomous Racing",
+    "institution": "University of Pennsylvania",
+    "country": "United States",
+    "logo": "partners/upenn.png",
+    "highlights": [
+      {
+        "event": "ICRA 2026 (Vienna)",
+        "result": "2nd, Time Trials, 16.179s, 52 points"
+      }
+    ],
+    "status": "verify",
+    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, Time Trial Rankings table, fetched 2026-08-20. Corroborates skill statement 'Penn placed 2nd in time trials, 5th head-to-head' at ICRA 2026."
+  },
+  {
+    "name": "ForzaETH",
+    "institution": "ETH Zurich",
+    "country": "Switzerland",
+    "logo": "partners/ethzurich.png",
+    "highlights": [
+      {
+        "event": "ICRA 2026 (Vienna)",
+        "result": "3rd, Time Trials, 17.010s, 51 points"
+      }
+    ],
+    "status": "verify",
+    "source": "Institution from skill 'Featured teams section' candidate list ('ForzaETH (ETH Zurich)'); placement/time from ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-20. Corroborated by publications.json entry 'baumann-2024-forzaeth' (ForzaETH Race Stack, ETH Zurich authors)."
+  },
+  {
+    "name": "UNICORN_Racing",
+    "institution": "University of Bonn",
+    "country": "Germany",
+    "highlights": [
+      {
+        "event": "ICRA 2026 (Vienna)",
+        "result": "1st, Master Cup; 4th, Time Trials, 15.940s, 51 points"
+      }
+    ],
+    "status": "verify",
+    "source": "Institution from skill 'Featured teams section' candidate list ('Team Unicorn (University of Bonn)'); team's competition alias confirmed as 'UNICORN_Racing' and placements from ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-20."
+  },
+  {
+    "name": "UBM-Tom",
+    "institution": "TODO(content): unknown. Possible but unconfirmed match to West Virginia University's claimed '3rd at ICRA 2026' per skill -- do not publish this mapping without Cedric/Rahul confirmation.",
+    "highlights": [
+      {
+        "event": "ICRA 2026 (Vienna)",
+        "result": "3rd, Master Cup; 5th, Time Trials, 17.780s, 48 points"
+      }
+    ],
+    "status": "verify",
+    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-20."
+  },
+  {
+    "name": "UBM-Atlas",
+    "institution": "TODO(content): unknown, see note on UBM-Tom above (possibly the same institution's second team).",
+    "highlights": [
+      {
+        "event": "ICRA 2026 (Vienna)",
+        "result": "2nd, Master Cup; 6th, Time Trials, 18.520s, 44 points"
+      }
+    ],
+    "status": "verify",
+    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-20."
+  },
+  {
+    "name": "VAUL 2",
+    "institution": "TODO(content): unknown.",
+    "highlights": [
+      {
+        "event": "ICRA 2026 (Vienna)",
+        "result": "1st, Classic Cup; 7th, Time Trials, 18.690s, 43 points"
+      }
+    ],
+    "status": "verify",
+    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-20."
+  },
+  {
+    "name": "DeepSpeed",
+    "institution": "TODO(content): unknown.",
+    "highlights": [
+      {
+        "event": "ICRA 2026 (Vienna)",
+        "result": "8th, Time Trials, 19.280s, 38 points"
+      }
+    ],
+    "status": "verify",
+    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-20."
+  },
+  {
+    "name": "Brake Check Buddies",
+    "institution": "TODO(content): unknown.",
+    "highlights": [
+      {
+        "event": "ICRA 2026 (Vienna)",
+        "result": "2nd, Classic Cup"
+      }
+    ],
+    "status": "verify",
+    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-20."
+  },
+  {
+    "name": "tron racing",
+    "institution": "TODO(content): unknown.",
+    "highlights": [
+      {
+        "event": "ICRA 2026 (Vienna)",
+        "result": "3rd, Classic Cup"
+      }
+    ],
+    "status": "verify",
+    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-20."
+  }
+]
