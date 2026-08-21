@@ -15,6 +15,7 @@ import {
   RACECAR_PARTS,
   type RacecarPart,
   type RacecarPartId,
+  type VectorTuple,
 } from "./racecarAssemblyData";
 
 const glbAssets = RACECAR_PARTS.filter((part) => part.format === "glb").map(
@@ -121,25 +122,45 @@ function StlGeometry({ part, selected, hovered, wireframe }: ModelGeometryProps)
 type ExplodedPartProps = {
   part: RacecarPart;
   explosion: number;
+  /** When set, overrides `explosion` every frame without re-rendering React
+   * (scroll-driven landing chapter). */
+  explosionRef?: RefObject<number>;
   visible: boolean;
   labelsVisible: boolean;
   selected: boolean;
   wireframe: boolean;
+  /** Pointer selection/hover; the landing chapter turns this off. */
+  interactive?: boolean;
   onSelect: (part: RacecarPartId) => void;
 };
 
 function ExplodedPart({
   part,
   explosion,
+  explosionRef,
   visible,
   labelsVisible,
   selected,
   wireframe,
+  interactive = true,
   onSelect,
 }: ExplodedPartProps) {
   const group = useRef<Group>(null);
   const [hovered, setHovered] = useState(false);
   const target = useMemo(() => new Vector3(), []);
+  const initialExplosion = useMemo(
+    () => explosionRef?.current ?? explosion,
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- mount pose only
+    [],
+  );
+  const initialPosition = useMemo<VectorTuple>(
+    () => [
+      part.position[0] + part.explosion[0] * initialExplosion,
+      part.position[1] + part.explosion[1] * initialExplosion,
+      part.position[2] + part.explosion[2] * initialExplosion,
+    ],
+    [part, initialExplosion],
+  );
 
   useEffect(() => {
     if (!hovered) return;
@@ -152,10 +173,11 @@ function ExplodedPart({
 
   useFrame((_, delta) => {
     if (!group.current) return;
+    const amount = explosionRef ? explosionRef.current : explosion;
     target.set(
-      part.position[0] + part.explosion[0] * explosion,
-      part.position[1] + part.explosion[1] * explosion,
-      part.position[2] + part.explosion[2] * explosion,
+      part.position[0] + part.explosion[0] * amount,
+      part.position[1] + part.explosion[1] * amount,
+      part.position[2] + part.explosion[2] * amount,
     );
     group.current.position.lerp(target, 1 - Math.exp(-11 * delta));
   });
@@ -169,14 +191,18 @@ function ExplodedPart({
     <group
       ref={group}
       name={part.id}
-      position={part.position}
+      position={initialPosition}
       visible={visible}
-      onClick={handleSelect}
-      onPointerEnter={(event) => {
-        event.stopPropagation();
-        setHovered(true);
-      }}
-      onPointerLeave={() => setHovered(false)}
+      onClick={interactive ? handleSelect : undefined}
+      onPointerEnter={
+        interactive
+          ? (event) => {
+              event.stopPropagation();
+              setHovered(true);
+            }
+          : undefined
+      }
+      onPointerLeave={interactive ? () => setHovered(false) : undefined}
     >
       {part.format === "glb" ? (
         <GlbGeometry
@@ -245,6 +271,55 @@ function SceneReady({ onReady }: { onReady: () => void }) {
   return null;
 }
 
+type RacecarAssemblyPartsProps = {
+  explosion: number;
+  explosionRef?: RefObject<number>;
+  hiddenParts?: ReadonlySet<RacecarPartId>;
+  labelsVisible?: boolean;
+  selectedPart?: RacecarPartId | null;
+  wireframe?: boolean;
+  interactive?: boolean;
+  groupRef?: RefObject<Group | null>;
+  onSelect?: (part: RacecarPartId | null) => void;
+};
+
+/**
+ * The one shared assembly scene graph (design system: "do not build a second
+ * loader"). /assembly renders it inside RacecarAssemblyCanvas with full
+ * controls; the landing ExplodedModel chapter renders it in its own light
+ * canvas with a scroll-driven explosionRef.
+ */
+export function RacecarAssemblyParts({
+  explosion,
+  explosionRef,
+  hiddenParts,
+  labelsVisible = false,
+  selectedPart = null,
+  wireframe = false,
+  interactive = true,
+  groupRef,
+  onSelect,
+}: RacecarAssemblyPartsProps) {
+  return (
+    <group ref={groupRef} name="f1tenth_xacro_assembly" rotation={[-Math.PI / 2, 0, 0]}>
+      {RACECAR_PARTS.map((part) => (
+        <ExplodedPart
+          key={part.id}
+          part={part}
+          explosion={explosion}
+          explosionRef={explosionRef}
+          visible={!hiddenParts?.has(part.id)}
+          labelsVisible={labelsVisible}
+          selected={selectedPart === part.id}
+          wireframe={wireframe}
+          interactive={interactive}
+          onSelect={onSelect ?? (() => {})}
+        />
+      ))}
+    </group>
+  );
+}
+
 type RacecarAssemblyCanvasProps = {
   explosion: number;
   hiddenParts: ReadonlySet<RacecarPartId>;
@@ -293,20 +368,15 @@ export function RacecarAssemblyCanvas({
       <spotLight color="#7057ff" intensity={12} angle={0.42} penumbra={0.8} position={[-1, 1.3, -1]} />
 
       <Suspense fallback={null}>
-        <group ref={assemblyRef} name="f1tenth_xacro_assembly" rotation={[-Math.PI / 2, 0, 0]}>
-          {RACECAR_PARTS.map((part) => (
-            <ExplodedPart
-              key={part.id}
-              part={part}
-              explosion={explosion}
-              visible={!hiddenParts.has(part.id)}
-              labelsVisible={labelsVisible}
-              selected={selectedPart === part.id}
-              wireframe={wireframe}
-              onSelect={onSelect}
-            />
-          ))}
-        </group>
+        <RacecarAssemblyParts
+          explosion={explosion}
+          hiddenParts={hiddenParts}
+          labelsVisible={labelsVisible}
+          selectedPart={selectedPart}
+          wireframe={wireframe}
+          groupRef={assemblyRef}
+          onSelect={onSelect}
+        />
         <SceneReady onReady={onReady} />
       </Suspense>
 

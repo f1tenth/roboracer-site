@@ -1,124 +1,232 @@
 @import "tailwindcss";
 
-:root {
-  /* --background: #f5f5f5; */
-  --background: white;
-  --foreground: #171717;
+/*
+ * RoboRacer design tokens - FINAL (Phase 2, approved by Cedric 2026-08-20).
+ * Source: docs/DESIGN.md + docs/design/tokens.proposed.css.
+ * Decisions: magenta accent (cyan = logo/telemetry only), ink/paper bases,
+ * Space Grotesk + Manrope, radius-card 1.25rem, gradient only on display
+ * text and the logo. Ayagoz may still override pairing/radius later.
+ */
+@theme {
+  /* ---- Brand accent (the only accent family) ---- */
+  --color-rr-magenta: #d946ef;      /* flat accent: links on ink, chips, active states */
+  --color-rr-violet: #7c3aed;       /* gradient partner only, never solo UI chrome */
+  --color-rr-cyan: #00d1da;         /* logo endpoint + telemetry/data accents only */
+  --color-rr-grad-start: #fb00ff;   /* gradient text + animated border, start stop */
+  --color-rr-grad-end: #6d28d9;     /* gradient text + animated border, end stop */
+  --color-rr-magenta-bright: #e879f9; /* accent TEXT on ink and magenta tints (AA) */
+  --color-rr-magenta-deep: #a21caf;   /* accent TEXT on magenta-tinted paper chips (AA) */
+
+  /* ---- Ink base: cinematic sections (hero, chapters, footer) ---- */
+  --color-ink-950: #07070d;
+  --color-ink-900: #0e0f1a;
+  --color-ink-800: #171a2b;
+  --color-ink-700: #242841;
+
+  /* ---- Paper base: reading sections ---- */
+  --color-paper-50: #fbfbfd;
+  --color-paper-100: #f3f4f8;
+  --color-paper-200: #e6e8f0;
+
+  /* ---- Text roles ---- */
+  --color-text-strong: #0b0c14;
+  --color-text-body: #3b3f55;
+  --color-text-muted: #62677f;      /* AA floor: >=4.5 on paper-50/100/200 */
+  --color-text-on-ink: #f5f5fa;
+  --color-text-on-ink-muted: #a8acc4;
+
+  /* ---- Type families (Google Fonts; self-host woff2 pending Ayagoz) ---- */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* ---- Type scale (display weight is always 600) ---- */
+  --text-display-xl: clamp(2.75rem, 6vw, 5.5rem);
+  --text-display-xl--line-height: 1.02;
+  --text-display-xl--letter-spacing: -0.02em;
+  --text-display-l: clamp(2.25rem, 4.5vw, 4rem);
+  --text-display-l--line-height: 1.05;
+  --text-display-l--letter-spacing: -0.015em;
+  --text-display-m: clamp(1.75rem, 3vw, 2.75rem);
+  --text-display-m--line-height: 1.1;
+  --text-lead: clamp(1.125rem, 1.4vw, 1.375rem);
+  --text-lead--line-height: 1.55;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.14em;
+
+  /* ---- Spacing rhythm ---- */
+  --spacing-section: clamp(5rem, 12vw, 10rem);
+  --spacing-section-tight: clamp(3rem, 7vw, 6rem);
+  --spacing-gutter: 1.5rem;
+
+  /* ---- Containers ---- */
+  --container-content: 72rem;
+  --container-wide: 90rem;
+
+  /* ---- Shape ---- */
+  --radius-card: 1.25rem;
+  --radius-media: 0.75rem;
+  --radius-btn: 0.5rem;
+  --radius-pill: 999px;
+
+  /* ---- Elevation (paper only; ink elevates by surface + border) ---- */
+  --shadow-card: 0 1px 2px rgb(11 12 20 / 0.06), 0 4px 12px rgb(11 12 20 / 0.06);
+  --shadow-card-hover: 0 2px 4px rgb(11 12 20 / 0.08), 0 12px 28px rgb(11 12 20 / 0.10);
+  --shadow-nav: 0 2px 8px rgb(11 12 20 / 0.08);
+
+  /* ---- Motion (mirrored in src/lib/motion.ts for GSAP) ---- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --duration-fast: 180ms;
+  --duration-base: 420ms;
+  --duration-slow: 900ms;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  background: var(--background);
-  color: var(--foreground);
-  overflow-x: hidden auto;
-}
-
-
-/* * {
-  border: 0.5px solid blue;
-}
-
-div {
-  border: 0.5px solid red;
-} */
-
-/* reusable responsive padding classx */
-@layer utilities {
-  .responsive-padding {
-    @apply px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* --background: #0a0a0a;
-    --foreground: #ededed; */
-    --background: white;
-  }
-}
-
+html,
 body {
-  color: var(--foreground);
-  background: var(--background);
+  width: 100%;
   min-height: 100svh;
+  background: var(--color-paper-50);
+  color: var(--color-text-body);
+  /* clip, not hidden: hidden would make html/body scroll containers and
+     stop content below the 100svh Layout root from painting */
+  overflow-x: clip;
+  font-family: var(--font-sans);
 }
+
+/* Visible focus everywhere; Button overrides color on ink surfaces. */
+:focus-visible {
+  outline: 2px solid var(--color-rr-magenta);
+  outline-offset: 2px;
+}
+
+/* Gradient text: display sizes only, at most once per viewport. */
+@utility text-gradient-brand {
+  background-image: linear-gradient(90deg, var(--color-rr-grad-start), var(--color-rr-grad-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* Marquee (design system "Marquee" pattern; static wrapped grid on reduce) */
+@keyframes rr-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.rr-marquee {
+  overflow: hidden;
+  display: flex;
+}
+.rr-marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  min-width: 100%;
+  animation: rr-marquee var(--rr-marquee-duration, 50s) linear infinite;
+}
+.rr-marquee:hover .rr-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rr-marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .rr-marquee-track[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+/* Hero scroll cue */
+@keyframes rr-scroll-cue {
+  0%, 100% { transform: translateY(0); opacity: 0.9; }
+  50% { transform: translateY(8px); opacity: 0.4; }
+}
+.rr-scroll-cue {
+  animation: rr-scroll-cue 1.8s var(--ease-in-out-quart) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rr-scroll-cue {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* LEGACY below: styles the pre-revamp pages still depend on.          */
+/* Delete each block when its page migrates in Phase 3 (CLAUDE.md 10). */
+/* ------------------------------------------------------------------ */
 
 h1 {
-  font-family: "Space Grotesk", serif;
+  font-family: var(--font-display);
   font-size: 2.5rem;
   font-weight: 600;
   line-height: 110%;
 }
 
 h2 {
-  font-family: "Space Grotesk", serif;
+  font-family: var(--font-display);
   font-size: 1.75rem;
-  /* color: #A4F5F9; */
-  font-weight: 200;
+  font-weight: 600; /* was 200; killed per docs/DESIGN.md (approved 2026-08-20) */
   line-height: 110%;
 }
 
 h3 {
-  font-family: "Space Grotesk", serif;
+  font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 500;
   line-height: 110%;
 }
 
 h4 {
-  font-family: "Manrope", serif;
+  font-family: var(--font-sans);
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 110%;
-} 
+}
 
 h5 {
-  font-family: "Manrope", serif;
+  font-family: var(--font-sans);
   font-size: 1rem;
   font-weight: 400;
 }
 
-input {
-  font-family: "Manrope", serif;
-}
-
-p {
-  font-family: "Manrope", serif;
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-a {
-  font-family: "Manrope", serif;
+@layer utilities {
+  .responsive-padding {
+    @apply px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32;
+  }
 }
 
 .space-font {
-  font-family: "Space Grotesk", serif;
+  font-family: var(--font-display);
   font-weight: 600;
 }
 
 .manrope-font {
-  font-family: "Manrope", serif;
+  font-family: var(--font-sans);
 }
 
 .purple-radial-gradient {
-  background: radial-gradient( circle at 70% 30%, #fb00ff85, transparent);
-}
-
-.branded-card::after {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.5);
+  background: radial-gradient(circle at 70% 30%, #fb00ff85, transparent);
 }
 
 .dotted-bg {
   backdrop-filter: blur(10px);
-  background: 
-  radial-gradient(transparent 0%, transparent 30%, rgba(0, 0, 0, 0.5) 0%);
+  background:
+    radial-gradient(transparent 0%, transparent 30%, rgba(0, 0, 0, 0.5) 0%);
   background-repeat: repeat;
   background-size: 5px 5px;
 }
@@ -128,7 +236,7 @@ a {
   position: absolute;
   inset: 0;
   background: linear-gradient(to right, black, rgba(0, 0, 0, 0.3), black),
-  linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
   z-index: -1;
 }
 
@@ -168,7 +276,7 @@ a {
 }
 
 .nav-link:hover {
-  color: #00D1DA;
+  color: #00d1da;
 }
 
 .nav-link::after {
@@ -178,7 +286,7 @@ a {
   left: 0;
   width: 0;
   height: 2px;
-  background: #00D1DA;
+  background: #00d1da;
   transition: width 0.3s ease;
 }
 
@@ -198,12 +306,11 @@ a {
 }
 
 .nav-cta:hover {
-  background: #00D1DA;
+  background: #00d1da;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 209, 218, 0.3);
 }
 
-/* Mobile Menu */
 .mobile-menu {
   position: absolute;
   top: 100%;
@@ -230,14 +337,14 @@ a {
 }
 
 .mobile-menu-link:hover {
-  color: #00D1DA;
+  color: #00d1da;
 }
 
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem 1.5rem;
   }
-  
+
   .nav-links {
     display: none;
   }
@@ -253,9 +360,15 @@ a {
   position: relative;
   padding: 2px;
   border-radius: 12px;
-  background: linear-gradient(45deg, #FC00FF, #00DBDE, #FC00FF);
+  background: linear-gradient(45deg, #fc00ff, #00dbde, #fc00ff);
   background-size: 400% 400%;
   animation: rotateBorder 6s infinite linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .border-animated {
+    animation: none;
+  }
 }
 
 .big-blur::before {
@@ -268,38 +381,31 @@ a {
   pointer-events: none;
 }
 
-/* Scrollbar Styling */
 * {
   scrollbar-width: thin;
 }
 
-/* WebKit (Chrome, Safari, Edge) */
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-/* Gradient Thumb */
 *::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
-/* Gradient Track */
 *::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
-/* Hide scrollbar for Chrome, Safari, and Edge */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for Firefox */
 .scrollbar-hide {
   scrollbar-width: none;
 }
 
-/* slide carousel */
 .embla {
   overflow: hidden;
 }

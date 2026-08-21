@@ -7,13 +7,13 @@ user-invocable: false
 # Media pipeline
 
 ## Budgets (hard)
-- Nothing over 1.5 MB in git. Hero video under 3 MB per encode (two encodes: desktop 1920 wide, mobile 960 wide), hosted on Cloudflare, not in the repo. Images: WebP (AVIF where quality allows), max 1920 px long edge for full-bleed, 1200 px for cards, 400 px for headshots, 320 px for logos (SVG preferred). Every `<video>` has a `poster` (WebP, under 150 KB). Every image has explicit `width` and `height`.
+- Nothing over 1.5 MB in git, with ONE standing exception (Cedric, 2026-08-20): the landing hero loop encodes in `public/media/hero/` are committed (each under 3 MB; desktop 1920 wide, mobile 960 wide). There is no Cloudflare account for site media; do not reference media.roboracer.ai. Images: WebP (AVIF where quality allows), max 1920 px long edge for full-bleed, 1200 px for cards, 400 px for headshots, 320 px for logos (SVG preferred). Every `<video>` has a `poster` (WebP, under 150 KB). Every image has explicit `width` and `height`.
 - Total first-load transfer for the landing page under 2.5 MB on desktop and 1.2 MB on mobile (video poster counts, the video stream does not).
 
 ## Locations
 - `_harvest/` (git-ignored): raw material. `_harvest/repos/` (old site and race-site sources), `_harvest/wayback/` (web.archive.org pulls with timestamps), `_harvest/drive/` (folders Cedric syncs from Google Drive: Logo, Posters 2026, Old Banners Flyers Shirts Stickers, 2026 ICRA Media, 2026 ICRA Logos), `_harvest/community/` (media received from LinkedIn authors after permission).
 - `public/media/<section>/` for processed images (`hero/`, `race/`, `about/`, `partners/`, `sponsors/`, `team/`, `research/`, `news/`). Keep the existing `public/partners`, `public/crew`, `public/testimonials` until a page migrates, then move and delete.
-- Cloudflare: videos and large GIF-to-MP4 conversions go to the RoboRacer Cloudflare account (R2 bucket with a custom domain, or Stream). Proposed base URL `https://media.roboracer.ai/` (VERIFY with Cedric; until configured, reference `/media/...` locally and keep the file out of git via `.gitignore` `public/media/**/*.mp4`). Ahmad or Rahul hold account access.
+- Video hosting decision (Cedric, 2026-08-20): NO Cloudflare. The hero loop is committed under `public/media/hero/` (see Budgets); any OTHER video or large GIF must be cut to fit the 1.5 MB git rule, converted to a poster + link, or dropped. `.gitignore` re-includes only `public/media/hero/hero-fpv-loop-*` files.
 - `docs/ASSET_MANIFEST.md`: the catalog (written by the asset-harvester agent). Columns: `id | file/URL | type | WxH | size | what it shows | provenance | license/permission | candidate use | notes`.
 
 ## Provenance and permission
