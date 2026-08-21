@@ -2,7 +2,7 @@
 name: design-extractor
 description: Extracts design language from reference sites and the current roboracer.ai into docs/DESIGN.md and a proposed RoboRacer token set. Use when defining or revising the visual system, comparing against neobotics.org or cedrichollande.com, or documenting motion patterns to replicate. Read-only on product source.
 tools: Read, Glob, Grep, Bash, WebFetch, WebSearch
-model: inherit
+model: fable
 skills:
   - create-design-md
   - frontend-design

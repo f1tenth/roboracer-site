@@ -1,0 +1,41 @@
+{
+  "note": "TODO(content): no sponsors are confirmed for IROS 2026 or any current event as of 2026-08-20. LiveTime and MyLaps declined; Traxxas outreach pending per skill 'Next race: Sponsors'. Do not populate the tier arrays below with any name until Cedric provides written confirmation. This file is a structural skeleton for the new Sponsors section (Landing + About), tiers proposed per skill 'Partners, sponsors, team'.",
+  "cta": {
+    "label": "Become a sponsor",
+    "mailto": "mailto:contact@roboracer.ai?subject=RoboRacer%20sponsorship",
+    "flyer_url": null,
+    "flyer_note": "TODO(content): Sponsorship Flyer lives in Drive (file id 1t3aNWomqUpKMcDWbTofqmpHYkW1QAWEg). Export to public/docs/ only after Cedric approves making it public."
+  },
+  "tiers": [
+    {
+      "id": "title",
+      "label": "Title",
+      "description": "TODO(content): define benefits with Cedric/Rahul before publishing.",
+      "sponsors": []
+    },
+    {
+      "id": "gold",
+      "label": "Gold",
+      "description": "TODO(content): define benefits with Cedric/Rahul before publishing.",
+      "sponsors": []
+    },
+    {
+      "id": "community",
+      "label": "Community",
+      "description": "TODO(content): define benefits with Cedric/Rahul before publishing.",
+      "sponsors": []
+    }
+  ],
+  "sponsor_entry_schema": {
+    "name": "string",
+    "website": "string",
+    "logo": "string (path under public/sponsors/)",
+    "tier": "title | gold | community",
+    "events": "string[] (which events they sponsored, e.g. ['IROS 2026'])",
+    "status": "verify | published"
+  },
+  "historical_sponsors": {
+    "note": "TODO(content): ask Rahul. Check Drive '2026 ICRA/Sponsorship Materials' (1ta9cTQiZq2L3ppe_qyVs2BeMRs4gVASR) and old f1tenth.org pages in the asset harvest per skill 'Partners, sponsors, team'.",
+    "entries": []
+  }
+}

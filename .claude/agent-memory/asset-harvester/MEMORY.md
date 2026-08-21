@@ -1,0 +1,3 @@
+- [Env tooling gaps](env_tooling.md) — no `gh`/`cwebp`/`magick` in this sandbox; curl+GitHub API and ffmpeg-as-webp-encoder are working substitutes
+- [Hero video encode notes](hero_video_encode_notes.md) — skill's example crf values don't fit budget on this 720p FPV source; 12s/crf34 (h264) and 12s/crf44 preset8 (AV1) do
+- [Source yield by harvest step](source_yield.md) — org repos and Wayback are low-yield now (already captured), race sites and LinkedIn permission outreach are where new 2026 material is
