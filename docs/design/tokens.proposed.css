@@ -1,0 +1,88 @@
+/*
+ * RoboRacer design tokens — PROPOSED (Phase 1 discovery, 2026-08-20)
+ * Source of truth: docs/DESIGN.md. Paste this @theme block into src/index.css
+ * (directly after `@import "tailwindcss";`) once Cedric + Ayagoz approve.
+ *
+ * Tailwind v4 namespaces used: --color-*, --font-*, --text-*, --spacing-*,
+ * --radius-*, --shadow-*, --ease-*, --container-*. The --duration-* entries
+ * are plain custom properties (no utility mapping); consume them via
+ * var(--duration-*) in CSS or read them in src/lib/motion.ts for GSAP.
+ */
+
+@theme {
+  /* ---- Brand accent (the only accent family; see DESIGN.md "Colors") ---- */
+  --color-rr-magenta: #d946ef;      /* flat accent: links on ink, chips, active states */
+  --color-rr-violet: #7c3aed;       /* gradient partner only, never solo UI chrome */
+  --color-rr-cyan: #00d1da;         /* logo endpoint + telemetry/data accents only (open question 1) */
+  --color-rr-grad-start: #fb00ff;   /* gradient text + animated border, start stop */
+  --color-rr-grad-end: #6d28d9;     /* gradient text + animated border, end stop */
+
+  /* ---- Ink base: cinematic sections (hero, chapters, footer) ---- */
+  --color-ink-950: #07070d;         /* page-edge dark: hero, footer */
+  --color-ink-900: #0e0f1a;         /* default ink section surface */
+  --color-ink-800: #171a2b;         /* cards on ink (elevation by surface, not shadow) */
+  --color-ink-700: #242841;         /* borders and dividers on ink */
+
+  /* ---- Paper base: reading sections (research, news, rules) ---- */
+  --color-paper-50: #fbfbfd;        /* default light surface */
+  --color-paper-100: #f3f4f8;       /* alternate section tint, cards */
+  --color-paper-200: #e6e8f0;       /* borders and dividers on paper */
+
+  /* ---- Text roles ---- */
+  --color-text-strong: #0b0c14;     /* headings on paper */
+  --color-text-body: #3b3f55;       /* paragraphs on paper */
+  --color-text-muted: #6b7089;      /* metadata on paper; AA floor, never lighter */
+  --color-text-on-ink: #f5f5fa;     /* headings on ink */
+  --color-text-on-ink-muted: #a8acc4; /* body and metadata on ink */
+
+  /* ---- Type families (Google Fonts today; self-host woff2 later) ---- */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* ---- Type scale (display weight is always 600; see DESIGN.md) ---- */
+  --text-display-xl: clamp(2.75rem, 6vw, 5.5rem);   /* h1, one per page */
+  --text-display-xl--line-height: 1.02;
+  --text-display-xl--letter-spacing: -0.02em;
+  --text-display-l: clamp(2.25rem, 4.5vw, 4rem);    /* chapter titles on ink */
+  --text-display-l--line-height: 1.05;
+  --text-display-l--letter-spacing: -0.015em;
+  --text-display-m: clamp(1.75rem, 3vw, 2.75rem);   /* section titles */
+  --text-display-m--line-height: 1.1;
+  --text-lead: clamp(1.125rem, 1.4vw, 1.375rem);    /* section intros, max 60ch */
+  --text-lead--line-height: 1.55;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+  --text-eyebrow: 0.75rem;                          /* uppercase, tracking 0.14em */
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.14em;
+
+  /* ---- Spacing rhythm ---- */
+  --spacing-section: clamp(5rem, 12vw, 10rem);       /* chapter padding-block */
+  --spacing-section-tight: clamp(3rem, 7vw, 6rem);   /* supporting bands: stats, marquee */
+  --spacing-gutter: 1.5rem;                          /* grid gutter, all breakpoints */
+
+  /* ---- Containers ---- */
+  --container-content: 72rem;   /* text and card columns */
+  --container-wide: 90rem;      /* breakout media, marquee */
+
+  /* ---- Shape ---- */
+  --radius-card: 1.25rem;       /* cards, spotlight panels (open question 6) */
+  --radius-media: 0.75rem;      /* images/video inside cards */
+  --radius-btn: 0.5rem;         /* buttons, inputs */
+  --radius-pill: 999px;         /* status chips, tags, filters */
+
+  /* ---- Elevation (paper only; ink uses surface steps + borders) ---- */
+  --shadow-card: 0 1px 2px rgb(11 12 20 / 0.06), 0 4px 12px rgb(11 12 20 / 0.06);
+  --shadow-card-hover: 0 2px 4px rgb(11 12 20 / 0.08), 0 12px 28px rgb(11 12 20 / 0.10);
+  --shadow-nav: 0 2px 8px rgb(11 12 20 / 0.08);      /* matches current scrolled navbar */
+
+  /* ---- Motion (shared with src/lib/motion.ts for GSAP) ---- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);     /* entrances, reveals */
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1); /* scrubbed state changes */
+  --duration-fast: 180ms;   /* hover, chips, micro-interactions */
+  --duration-base: 420ms;   /* reveals */
+  --duration-slow: 900ms;   /* hero-scale moves; 1.2s is the absolute per-element cap */
+}
