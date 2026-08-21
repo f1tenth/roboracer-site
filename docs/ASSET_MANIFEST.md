@@ -149,6 +149,20 @@ Use the outreach template at `.claude/skills/roboracer-media/templates/permissio
 
 ## Task A — Hero video encode (detail)
 
+**Superseded 2026-08-21 (this section kept for the crf tuning history below).** Final hero is encoded from the better master `/home/cedric/Downloads/FPV_IV.mp4` (1280x720, 30 fps, 52.3 s, 3.5 Mbps), loop cut 3s-36s per Cedric, via `scripts/media.sh video ... --start 3 --dur 33`. Committed to `public/media/hero/` under the CLAUDE.md rule-3 exception (no Cloudflare):
+
+| file | size | encode |
+|---|---|---|
+| `hero-fpv-loop-1920.mp4` | 2,657,578 B | H.264 crf 48 (budget-fit sweep from 40), lanczos upscale of the 720p master |
+| `hero-fpv-loop-960.mp4` | 2,867,927 B | H.264 crf 34 (sweep from 30) |
+| `hero-fpv-poster.webp` | 58,842 B | frame at t=5s (brightest sightline) |
+| AV1/WebM | dropped | at this grain it was larger than the H.264 at worse quality (2.96 MB at crf 58) |
+
+Gap: the master is 720p - ask the videographer for a higher-resolution original; re-encode is one command.
+
+<details><summary>2026-08-20 encode of the older roboracer_fpv.mp4 (superseded)</summary>
+
+
 **Input**: `_harvest/hero/roboracer_fpv.mp4` — h264/aac, 1280x720, 30000/1001 fps, 38.005 s, video bitrate ≈1.62 Mbps, 8,174,230 B.
 
 **Loop selection**: sampled frames at 2, 6, 10, 14, 18, 22, 26, 30, 34 s. Frames 22-34 s show clean, fast FPV motion past the orange track barrier with no faces filling the frame (frames around 6-18 s have organizers standing in the background, still usable but busier). Selected **16-28 s (12 s)** as the loop window — car in motion the whole time, loops reasonably cleanly.
@@ -202,6 +216,9 @@ Note on quality: the source is native 720p, so the 1920-wide encodes are an upsc
 Only the poster (`hero-fpv-loop-poster.webp`, 51,456 B) is small enough and appropriate to eventually land in git at `public/media/hero/hero-fpv-poster.webp` — that copy was **not** performed by this agent (writing to `public/` is out of scope for asset-harvester; a human or the page-builder does the promotion).
 
 ---
+
+
+</details>
 
 ## Task B — Racecar meshes on `feat/assembly-viewer` (not on this branch)
 

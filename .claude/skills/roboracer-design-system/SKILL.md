@@ -34,6 +34,7 @@ Normative sources, in order: Cedric > this skill > docs/DESIGN.md (rationale and
 - Shape: `rounded-card` 1.25rem, `rounded-media` 0.75rem, `rounded-btn` 0.5rem, `rounded-pill`.
 - Motion tokens: `--ease-out-expo`, `--ease-in-out-quart`, durations 180/420/900ms (1.2s per-element cap). GSAP mirrors them in `src/lib/motion.ts` (`EASE_OUT_EXPO`, `EASE_IN_OUT_QUART`, `DURATION`).
 - Utilities defined for the system: `eyebrow`, `text-gradient-brand` (display sizes only, at most once per viewport).
+- AA accent-text variants (QA 2026-08-21): `rr-magenta-bright #e879f9` for accent text/chips on ink and magenta tints; `rr-magenta-deep #a21caf` for accent text on magenta-tinted paper chips. Plain `rr-magenta` text is AA on ink-950/900 but NOT on `bg-rr-magenta/15` tints or paper - use the variants there.
 
 ## Motion vocabulary (GSAP + ScrollTrigger via `src/lib/motion.ts`; every pattern inside `gsap.matchMedia(MOTION_OK_QUERY)`)
 | Pattern | Primitive | Spec | reduced-motion fallback |
