@@ -271,7 +271,9 @@ export default function Landing() {
               <Button href={SCHOLAR_URL} variant="secondary" target="_blank" rel="noopener noreferrer">
                 See the Scholar query
               </Button>
-              <Button href="/research" variant="ghost">
+              {/* px-0!: ghost-as-text-link aligns to the column edge instead
+                  of inheriting button text padding (impeccable polish). */}
+              <Button href="/research" variant="ghost" className="px-0!">
                 All curated publications
               </Button>
             </div>
