@@ -1,0 +1,8 @@
+{
+  "members": 3000,
+  "members_display": "3,000+",
+  "timezones": 25,
+  "continents": 6,
+  "updated": "2026-08-21",
+  "source": "manual (Cedric, 2026-08-21: above 3,000 members, 25 time zones; continents estimated, verify with scripts/slack_stats.py)"
+}

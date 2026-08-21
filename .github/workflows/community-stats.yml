@@ -1,0 +1,35 @@
+name: community-stats
+# Refreshes public/data/community.json from Slack (members, time zones, continents).
+# Needs the SLACK_BOT_TOKEN repository secret (bot token, scope users:read).
+# Scheduled runs only fire on the default branch; until main switches to the revamp,
+# trigger it by hand (workflow_dispatch) on revamp/integration or run the script locally.
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Refresh community.json
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: python3 scripts/slack_stats.py
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- public/data/community.json; then
+            echo "no change"; exit 0
+          fi
+          git config user.name "roboracer-bot"
+          git config user.email "contact@roboracer.ai"
+          git add public/data/community.json
+          git commit -m "community: refresh Slack stats $(date -u +%F)"
+          git push

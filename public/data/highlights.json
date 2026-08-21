@@ -6,117 +6,23 @@
     "poster": "/media/hero/hero-fpv-poster.webp",
     "caption": "track-level lap · IV 2026, Detroit",
     "credit": "RoboRacer organizers",
+    "event": "iv2026",
+    "href": "https://iv2026-race.roboracer.ai/",
     "aspect": "16/9",
     "status": "live"
   },
-  {
-    "id": "iv2026-podium-1st",
-    "type": "image",
-    "src": "",
-    "poster": "",
-    "caption": "1st · Thunderbolt, UPenn · IV 2026, Detroit",
-    "credit": "",
-    "aspect": "3/2",
-    "status": "placeholder"
-  },
-  {
-    "id": "iv2026-podium-2nd",
-    "type": "image",
-    "src": "",
-    "poster": "",
-    "caption": "2nd · 404 Racers · IV 2026, Detroit",
-    "credit": "",
-    "aspect": "3/2",
-    "status": "placeholder"
-  },
-  {
-    "id": "iv2026-podium-3rd",
-    "type": "image",
-    "src": "",
-    "poster": "",
-    "caption": "3rd · West Virginia University · IV 2026, Detroit",
-    "credit": "",
-    "aspect": "3/2",
-    "status": "placeholder"
-  },
-  {
-    "id": "icra2026-group",
-    "type": "image",
-    "src": "",
-    "poster": "",
-    "caption": "ICRA 2026, Vienna · group photo",
-    "credit": "",
-    "aspect": "16/9",
-    "status": "placeholder"
-  },
-  {
-    "id": "icra2026-action",
-    "type": "image",
-    "src": "",
-    "poster": "",
-    "caption": "race action · ICRA 2026, Vienna",
-    "credit": "",
-    "aspect": "16/9",
-    "status": "placeholder"
-  },
-  {
-    "id": "icra2026-teams",
-    "type": "image",
-    "src": "",
-    "poster": "",
-    "caption": "35 teams · ICRA 2026, Vienna",
-    "credit": "",
-    "aspect": "3/2",
-    "status": "placeholder"
-  },
-  {
-    "id": "pittsburgh-2016",
-    "type": "image",
-    "src": "",
-    "poster": "",
-    "caption": "Embedded Systems Week 2016 - Pittsburgh, Pennsylvania",
-    "credit": "",
-    "aspect": "16/9",
-    "status": "placeholder"
-  },
-  {
-    "id": "porto-2018",
-    "type": "image",
-    "src": "",
-    "poster": "",
-    "caption": "Cyber Physical Systems Week 2018 - Porto, Portugal",
-    "credit": "",
-    "aspect": "3/2",
-    "status": "placeholder"
-  },
-  {
-    "id": "montreal-2019",
-    "type": "image",
-    "src": "",
-    "poster": "",
-    "caption": "CPS & IoTW 2019 Montreal",
-    "credit": "",
-    "aspect": "16/9",
-    "status": "placeholder"
-  },
-  {
-    "id": "germany-2022",
-    "type": "image",
-    "src": "",
-    "poster": "",
-    "caption": "RoboRacer Autonomous Championship Germany 2022",
-    "credit": "",
-    "aspect": "3/2",
-    "status": "placeholder"
-  },
-  {
-    "id": "iros-2024",
-    "type": "image",
-    "src": "",
-    "poster": "",
-    "caption": "IROS 2024 Race",
-    "credit": "",
-    "aspect": "16/9",
-    "status": "placeholder"
-  }
+  { "id": "icra2026-overtake-01", "type": "video", "src": "", "poster": "", "caption": "overtake · ICRA 2026, Vienna", "credit": "", "event": "icra2026", "href": "https://icra2026-race.roboracer.ai/", "aspect": "16/9", "status": "placeholder", "_curator": "Drive 2026-icra/Media/Chinmay-Tanmay/Master Cup MOV clips; 3-6 s loop" },
+  { "id": "icra2026-head2head", "type": "video", "src": "", "poster": "", "caption": "head-to-head final · ICRA 2026, Vienna", "credit": "", "event": "icra2026", "href": "https://icra2026-race.roboracer.ai/results.html", "aspect": "16/9", "status": "placeholder", "_curator": "Master Cup folder" },
+  { "id": "icra2026-hall-pan", "type": "video", "src": "", "poster": "", "caption": "exhibition hall · ICRA 2026, Vienna", "credit": "", "event": "icra2026", "href": "https://icra2026-race.roboracer.ai/", "aspect": "16/9", "status": "placeholder", "_curator": "ICRA 2026 intro.mp4 or a Teams Intro b-roll pan" },
+  { "id": "icra2026-team-broll", "type": "video", "src": "", "poster": "", "caption": "pit table · ICRA 2026, Vienna", "credit": "", "event": "icra2026", "href": "https://icra2026-race.roboracer.ai/", "aspect": "16/9", "status": "placeholder", "_curator": "Teams Intro *_edited.mov b-roll" },
+  { "id": "coursekit-race", "type": "video", "src": "", "poster": "", "caption": "head-to-head · course race", "credit": "RoboRacer organizers", "event": "course", "href": "", "aspect": "16/9", "status": "placeholder", "_curator": "f1tenth_coursekit assignments/races/img/race0X.gif -> mp4" },
+  { "id": "icra2026-crowd", "type": "video", "src": "", "poster": "", "caption": "crowd · ICRA 2026, Vienna", "credit": "", "event": "icra2026", "href": "https://icra2026-race.roboracer.ai/", "aspect": "16/9", "status": "placeholder", "_curator": "Practice or Master Cup MOV with spectators" },
+  { "id": "icra2026-podium", "type": "image", "src": "", "poster": "", "caption": "podium · ICRA 2026, Vienna", "credit": "Photo: Felix Jahncke", "event": "icra2026", "href": "https://icra2026-race.roboracer.ai/results.html", "aspect": "3/2", "status": "placeholder", "_curator": "Felix Jahncke DSLR set" },
+  { "id": "iv2026-podium", "type": "image", "src": "", "poster": "", "caption": "1st Thunderbolt, UPenn · IV 2026, Detroit", "credit": "", "event": "iv2026", "href": "https://iv2026-race.roboracer.ai/", "aspect": "3/2", "status": "placeholder", "_curator": "Drive 2026 IEEE IV folder; podium fact from the content skill" },
+  { "id": "icra2026-car-closeup", "type": "image", "src": "", "poster": "", "caption": "on the grid · ICRA 2026, Vienna", "credit": "Photo: Felix Jahncke", "event": "icra2026", "href": "", "aspect": "3/2", "status": "placeholder", "_curator": "DSLR close-up of a car with LiDAR visible" },
+  { "id": "icra2026-group", "type": "image", "src": "", "poster": "", "caption": "35 teams · ICRA 2026, Vienna", "credit": "Photo: Felix Jahncke", "event": "icra2026", "href": "https://icra2026-race.roboracer.ai/", "aspect": "3/2", "status": "placeholder", "_curator": "group photo; team count from the content skill (verify)" },
+  { "id": "icra2026-team-table", "type": "image", "src": "", "poster": "", "caption": "team table · ICRA 2026, Vienna", "credit": "Photo: Felix Jahncke", "event": "icra2026", "href": "", "aspect": "3/2", "status": "placeholder", "_curator": "" },
+  { "id": "icra2026-hall-wide", "type": "image", "src": "", "poster": "", "caption": "the hall · ICRA 2026, Vienna", "credit": "Photo: Felix Jahncke", "event": "icra2026", "href": "", "aspect": "3/2", "status": "placeholder", "_curator": "wide shot; also the source for race-iros2026-hero-1920.webp" },
+  { "id": "iv2026-track", "type": "image", "src": "", "poster": "", "caption": "track · IV 2026, Detroit", "credit": "", "event": "iv2026", "href": "https://iv2026-race.roboracer.ai/", "aspect": "3/2", "status": "placeholder", "_curator": "2026 IEEE IV folder" },
+  { "id": "pittsburgh-2016", "type": "image", "src": "", "poster": "", "caption": "where it started · ESWeek 2016, Pittsburgh", "credit": "", "event": "esweek2016", "href": "", "aspect": "3/2", "status": "placeholder", "_curator": "race-site repo pittsburgh2016 or Wayback; keep as the one historical tile" }
 ]
