@@ -4,9 +4,17 @@ description: The visual and motion system for the roboracer.ai revamp - final to
 user-invocable: false
 ---
 
-# RoboRacer design system (FINAL v1, 2026-08-21)
+# RoboRacer design system (FINAL v2 "sharpen", 2026-08-21)
 
-Direction in one line: the confidence and scroll choreography of neobotics.org, the hierarchy and calm of cedrichollande.com, RoboRacer's magenta energy, on a dark ink base for cinematic sections and a light paper base for reading.
+v2 direction (Cedric, after reviewing v1 on localhost: "AI-generated neon game site" - corrected):
+- Paper is the DEFAULT surface; ink only for the hero, the car chapter, and the footer.
+- Accent as hairline, not fill: max ONE solid magenta CTA per viewport; magenta otherwise only as 1px rules, the 4px index marker, chips, and link underlines. NO gradient text (logo only). Icons are ink-900 strokes.
+- Radii: card/button 4px, media 6px, pills unchanged. On ink: type, rules, media - never border+fill panels.
+- Structure made visible: optional hairline 12-col guides (Section `guides`), numbered mono eyebrows via SectionHeader `index` ("01 / Next race"), data and captions in mono, asymmetric 5/7 splits, display type lh 0.98 / tracking -0.03em.
+- Hero media: native-resolution encodes only (1280 desktop, 8 MB ceiling for that one file; 960 mobile under 3 MB).
+- TeamGrid renders every entry; non-published entries carry a mono "unverified" tag (nothing hidden on localhost).
+
+Direction in one line: an engineering publication about racing - paper-first, hairline-ruled, mono-annotated, with cinematic ink reserved for the hero and the car, and magenta rationed to one CTA per viewport.
 
 Normative sources, in order: Cedric > this skill > docs/DESIGN.md (rationale and migration analysis). The tokens live in `src/index.css` `@theme`; the primitives in `src/components/ui/`; `/styleguide` renders all of them with real data in both bases.
 

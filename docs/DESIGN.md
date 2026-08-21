@@ -66,15 +66,26 @@ typography:
     lineHeight: 1.5
     fontWeight: 400
 rounded:
-  card: 1.25rem
-  media: 0.75rem
-  button: 0.5rem
+  card: 0.25rem
+  media: 0.375rem
+  button: 0.25rem
   pill: 999px
 spacing:
   section: 10rem
   section-tight: 6rem
   gutter: 1.5rem
 ---
+
+## Direction v2 - sharpen (Cedric, 2026-08-21, normative; overrides conflicting text below)
+
+Verdict on v1: neon-on-dark accent fills read as an AI-generated game site. The correction:
+
+- **Paper is the default surface.** Ink is reserved for the hero, the car chapter, and the footer. Stats, pillars, research, sponsors, teams, get-started live on paper-50/paper-100 with hairline rules (1px ink-950/10).
+- **Accent as hairline, not fill.** At most ONE solid magenta CTA per viewport. Magenta otherwise appears only as 1px rules, a 4px index marker, chips, and link underlines. No gradient text anywhere - the gradient belongs to the logo alone. Icons are ink-900 strokes, never magenta fills.
+- **Sharp shapes.** Cards and panels 4px, media 6px, pills unchanged. On ink, no border+fill panels: type, rules, and media only.
+- **Visible structure.** 12-column grid with optional hairline column guides on wide sections; numbered mono section eyebrows ("01 / Next race"); captions and data in mono (lap times, counts, dates); asymmetric 5/7 splits over symmetric grids; display type at line-height 0.98 / tracking -0.03em against small mono captions.
+- **Feel references** (patterns only): neobotics.org (cinematic sections), mclaren.com/racing and formula-e.com (accent discipline, photography-first), linear.app (hairlines, density), ForzaETH (engineering seriousness).
+- **Photography-first evidence**: real people, podiums, halls, hardware; honest empty slots where photos are pending - never fake media.
 
 ## Overview
 
