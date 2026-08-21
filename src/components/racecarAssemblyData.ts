@@ -30,6 +30,9 @@ const ASSET_ROOT = `${import.meta.env.BASE_URL}models/racecar`;
 // These assembled transforms mirror urdf/racecar_mesh.xacro at s=1.0 and
 // lr=0.171450. Keeping them here, next to the display metadata, makes it easy
 // to compare the browser assembly with the robot_description source.
+// `color` drives the part label dots and panel swatches only; the values are
+// the neutral/real part tones from racecarMaterials.ts (product-render
+// direction, 2026-08-21) - no neon.
 export const RACECAR_PARTS: readonly RacecarPart[] = [
   {
     id: "chassis",
@@ -41,7 +44,7 @@ export const RACECAR_PARTS: readonly RacecarPart[] = [
     format: "glb",
     position: [-0.17145, 0, 0],
     explosion: [0, 0, 0],
-    color: "#65e7ed",
+    color: "#2c2f35",
   },
   {
     id: "accent",
@@ -53,7 +56,7 @@ export const RACECAR_PARTS: readonly RacecarPart[] = [
     format: "stl",
     position: [-0.17145, 0, 0],
     explosion: [0, 0, 0.12],
-    color: "#dca8ff",
+    color: "#4a4e55",
   },
   {
     id: "lidar",
@@ -65,7 +68,7 @@ export const RACECAR_PARTS: readonly RacecarPart[] = [
     format: "glb",
     position: [0.095512, 0.000249, 0.121636],
     explosion: [0.04, 0, 0.22],
-    color: "#ffd166",
+    color: "#e8641b",
   },
   {
     id: "front-left-wheel",
@@ -78,7 +81,7 @@ export const RACECAR_PARTS: readonly RacecarPart[] = [
     position: [0.150283, 0.132904, 0.051058],
     rotation: [-3.574, 0.068, 2.177].map(MathUtils.degToRad) as VectorTuple,
     explosion: [0.16, 0.35, 0.08],
-    color: "#ff9f68",
+    color: "#b4b9c1",
   },
   {
     id: "front-right-wheel",
@@ -91,7 +94,7 @@ export const RACECAR_PARTS: readonly RacecarPart[] = [
     position: [0.149152, -0.1316, 0.050883],
     rotation: [1.899, -0.046, 2.803].map(MathUtils.degToRad) as VectorTuple,
     explosion: [0.16, -0.35, 0.08],
-    color: "#ff9f68",
+    color: "#b4b9c1",
   },
   {
     id: "rear-left-wheel",
@@ -104,7 +107,7 @@ export const RACECAR_PARTS: readonly RacecarPart[] = [
     position: [-0.172283, 0.130772, 0.051076],
     rotation: [-2.543, -0.005, -0.246].map(MathUtils.degToRad) as VectorTuple,
     explosion: [-0.12, 0.35, 0.08],
-    color: "#8fe388",
+    color: "#26282d",
   },
   {
     id: "rear-right-wheel",
@@ -117,6 +120,6 @@ export const RACECAR_PARTS: readonly RacecarPart[] = [
     position: [-0.170617, -0.132075, 0.050856],
     rotation: [2.932, 0.007, -0.29].map(MathUtils.degToRad) as VectorTuple,
     explosion: [-0.12, -0.35, 0.08],
-    color: "#8fe388",
+    color: "#26282d",
   },
 ] as const;
