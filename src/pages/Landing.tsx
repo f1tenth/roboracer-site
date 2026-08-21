@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import {
   loadHighlights,
   loadPartners,
+  loadPlatform,
   loadPublications,
   loadTeams,
   loadUpcomingEvents,
   tagLabelMap,
   type Highlight,
   type Partner,
+  type PlatformRow,
   type PublicationsFile,
   type Team,
   type UpcomingEvent,
@@ -22,10 +24,12 @@ import StatCounter from "../components/ui/StatCounter";
 import NextRaceSpotlight from "../components/ui/NextRaceSpotlight";
 import TeamGrid from "../components/ui/TeamGrid";
 import PublicationCard from "../components/ui/PublicationCard";
+import HighlightReel from "../components/ui/HighlightReel";
+import PlatformPanel from "../components/ui/PlatformPanel";
+import ExplodedModel from "../components/ui/ExplodedModel";
+// TODO(wire): replaced by HeroChapter (revamp/v3-hero-nav) at integration.
 import VideoHero from "../components/ui/VideoHero";
 import HeadlineReveal from "../components/ui/HeadlineReveal";
-import HighlightReel from "../components/ui/HighlightReel";
-import ExplodedModel from "../components/ui/ExplodedModel";
 
 const HERO_VIDEO = {
   mp4_1920: "/media/hero/hero-fpv-loop-1280.mp4",
@@ -35,52 +39,25 @@ const HERO_VIDEO = {
   height: 720,
 };
 
-const HEADLINE_LINES = ["Autonomous racing,", "built and raced", "in the open"];
+// Landing-v3 copy: no comma, three authored lines.
+const HEADLINE_LINES = ["Autonomous racing", "built and raced", "in the open"];
 
 const SCHOLAR_URL =
   "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=";
 
-const SLACK_URL =
-  "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g";
-
-// Four pillars as hairline rows (content-skill voice; numbers live in the
-// data strip, not repeated here).
-const PILLARS = [
-  {
-    n: "01",
-    title: "Build",
-    body: "An open-source vehicle system: hardware designs and software anyone can build and race.",
-    href: "/build",
-    linkText: "Build the car",
-  },
-  {
-    n: "02",
-    title: "Learn",
-    body: "Course materials on perception, localization, planning, and safe control.",
-    href: "/learn",
-    linkText: "Start the course",
-  },
-  {
-    n: "03",
-    title: "Race",
-    body: "An international competition series at the major robotics conferences.",
-    href: "/race",
-    linkText: "See the races",
-  },
-  {
-    n: "04",
-    title: "Research",
-    body: "A common, citable platform for autonomy research.",
-    href: "/research",
-    linkText: "Browse the research",
-  },
-] as const;
+// Reserved by the media curator (landing-v3 section 3): the best wide hall
+// shot of a past competition. Hidden until the file lands (onError).
+const RACE_HERO = {
+  src: "/media/race/race-iros2026-hero-1920.webp",
+  caption: "the hall · ICRA 2026, Vienna",
+  credit: "Photo: Felix Jahncke",
+};
 
 /**
- * Landing v2 composition (final order, plan rev 2): hero video, headline,
- * highlights, next race, the car, platform, scale data line, partners, teams,
- * research, get started. Section 5 (car) is a local stub until revamp/v2-car
- * merges; everything else is wired.
+ * Landing v3 composition (docs/plans/landing-v3.md): hero chapter, highlights,
+ * next race, the car, platform panel, community map, data line + partner
+ * ribbon, teams, research, join. Sections marked TODO(wire) are stubs until
+ * the parallel branches (A hero-nav, B car, C map-community, E papers) merge.
  */
 export default function Landing() {
   useLenis();
@@ -89,6 +66,8 @@ export default function Landing() {
   const [teams, setTeams] = useState<Team[]>([]);
   const [pubs, setPubs] = useState<PublicationsFile | null>(null);
   const [highlights, setHighlights] = useState<Highlight[]>([]);
+  const [platform, setPlatform] = useState<PlatformRow[]>([]);
+  const [raceHeroOk, setRaceHeroOk] = useState(true);
 
   useEffect(() => {
     loadUpcomingEvents().then(setEvents).catch(() => setEvents([]));
@@ -96,18 +75,17 @@ export default function Landing() {
     loadTeams().then(setTeams).catch(() => setTeams([]));
     loadPublications().then(setPubs).catch(() => setPubs(null));
     loadHighlights().then(setHighlights).catch(() => setHighlights([]));
+    loadPlatform().then(setPlatform).catch(() => setPlatform([]));
   }, []);
 
-  // The data-driven sections (next race, teams, research) mount after their
-  // fetches resolve and shift everything below them; recompute the cached
-  // ScrollTrigger starts or the stat counters fire hundreds of px early.
+  // Data-driven sections mount after their fetches resolve and shift
+  // everything below them; recompute the cached ScrollTrigger starts.
   useEffect(() => {
     ScrollTrigger.refresh();
-  }, [events, partners, teams, pubs, highlights]);
+  }, [events, partners, teams, pubs, highlights, platform]);
 
   // Webfonts finish after GSAP's own load-time refresh and change layout
-  // heights, leaving stale trigger starts (measured 216px early on the car
-  // chapter before this).
+  // heights, leaving stale trigger starts.
   useEffect(() => {
     let live = true;
     document.fonts?.ready.then(() => {
@@ -122,21 +100,21 @@ export default function Landing() {
   const featured = pubs?.items.filter((p) => p.featured && p.status === "published").slice(0, 3) ?? [];
 
   return (
-    <div className="pt-[68px] md:pt-[85px]">
-      {/* 1 · Hero (ink): video and nothing else */}
-      <VideoHero video={HERO_VIDEO} />
-
-      {/* 2 · Headline (paper): the page h1, pinned per-word reveal */}
+    <div>
+      {/* 1 · Hero + headline chapter (ink) - newbie. TODO(wire): HeroChapter
+          from revamp/v3-hero-nav replaces these two; the page no longer
+          carries the nav offset (the video runs under the transparent nav). */}
+      <div className="pt-[68px] md:pt-[85px]">
+        <VideoHero video={HERO_VIDEO} />
+      </div>
       <HeadlineReveal lines={HEADLINE_LINES} />
 
-      {/* 3 · 01 Highlights (paper, full-bleed): the two-row strip lands at integration */}
+      {/* 2 · 01 Highlights (paper, full-bleed) - newbie, press */}
       <Section edge rule width="bleed" aria-labelledby="highlights">
         <div className="mx-auto max-w-content px-6">
           <h2 id="highlights" className="sr-only">
             Highlights
           </h2>
-          {/* Demoted header (impeccable review 2026-08-21): the strip is the
-              section's voice - mono label + one line, media persuades. */}
           <p aria-hidden="true" className="mb-3 flex items-center gap-2 font-mono text-small text-text-muted">
             <span className="h-1 w-1 bg-ink-950" />
             <span>01</span>
@@ -150,10 +128,30 @@ export default function Landing() {
         <HighlightReel items={highlights} />
       </Section>
 
-      {/* 4 · 02 Next race (paper) */}
+      {/* 3 · 02 Next race (paper) - competitor: one big hall photo, then the ledger */}
       {race && (
         <Section aria-labelledby="next-race" guides>
-          <SectionHeader index="02" eyebrow="Next race" id="next-race" title="IROS 2026" />
+          <SectionHeader index="02" eyebrow="Next race" id="next-race" title="IROS 2026" size="s" />
+          {raceHeroOk && (
+            <figure className="mb-10">
+              <div className="aspect-[21/9] overflow-hidden rounded-media border border-ink-950/10 bg-paper-100">
+                <img
+                  src={RACE_HERO.src}
+                  alt="Exhibition hall during a RoboRacer competition, teams and track in view"
+                  width={1920}
+                  height={823}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                  onError={() => setRaceHeroOk(false)}
+                />
+              </div>
+              <figcaption className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 font-mono text-small">
+                <span className="text-text-strong">{RACE_HERO.caption}</span>
+                <span className="text-text-muted">{RACE_HERO.credit}</span>
+              </figcaption>
+            </figure>
+          )}
           <NextRaceSpotlight
             title={race.title}
             datesHeadline={race.dates_headline ?? `${race.dates}, ${race.location}`}
@@ -166,169 +164,139 @@ export default function Landing() {
         </Section>
       )}
 
-      {/* 5 · The car (ink chapter): outward-and-hold explosion, carries its
-          own "03 / The car" header */}
+      {/* 4 · 03 The car (ink chapter) - builder, newbie. Carries its own
+          header; revamp/v3-car brings the bigger canvas, product render,
+          LiDAR fix and photo slots. */}
       <div className="bg-ink-950">
         <ExplodedModel />
       </div>
 
-      {/* 6 · 04 Platform (paper): hairline rows, 5/7 split */}
-      <Section aria-labelledby="pillars">
-        <div className="grid gap-10 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <SectionHeader
-              index="04"
-              eyebrow="Platform"
-              id="pillars"
-              title="Build. Learn. Race. Research."
-              lead="Four things working together: a car anyone can build, courses that teach autonomy, races that test it, and research that grows on top."
-            />
-          </div>
-          <ul className="md:col-span-7">
-            {PILLARS.map((p) => (
-              <li key={p.title} className="border-t border-ink-950/10 py-6 last:border-b">
-                <div className="grid gap-2 sm:grid-cols-12 sm:items-baseline">
-                  <span className="font-mono text-small text-text-muted sm:col-span-1">{p.n}</span>
-                  <h3 className="font-display text-lg font-semibold text-text-strong sm:col-span-3">{p.title}</h3>
-                  <p className="text-small text-text-body sm:col-span-5">{p.body}</p>
-                  <a
-                    href={p.href}
-                    className="inline-block py-1 text-small font-semibold text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2 sm:col-span-3 sm:justify-self-end"
-                  >
-                    {p.linkText}
-                  </a>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+      {/* 5 · 04 Platform (paper): sticky media panel beside the four rows -
+          learner, faculty */}
+      <Section rule aria-labelledby="pillars">
+        <SectionHeader
+          index="04"
+          eyebrow="Platform"
+          id="pillars"
+          title="Build. Learn. Race. Research."
+          lead="A car anyone can build, courses that teach autonomy, races that test it, and research that grows on top."
+          size="s"
+        />
+        <PlatformPanel rows={platform} />
       </Section>
 
-      {/* 7 · Scale (paper): a data line, not a section - no header, no marker */}
-      <Section tight rule aria-labelledby="scale" className="pb-0">
-        <h2 id="scale" className="sr-only">
-          Community scale
-        </h2>
-        <div className="grid grid-cols-2 gap-8 border-y border-ink-950/10 py-8 md:grid-cols-4">
-          <StatCounter value={90} suffix="+" label="universities" />
-          <StatCounter value={20} suffix="+" label="countries" />
-          <StatCounter value={1000} suffix="+" label="publications" />
-          <StatCounter value={30} label="competitions held" />
+      {/* 6 · 05 Community map (ink, pinned) - sponsor, press.
+          TODO(wire): WorldMapChapter from revamp/v3-map-community. */}
+      <Section variant="ink" edge rule aria-labelledby="community">
+        <SectionHeader
+          index="05"
+          eyebrow="Community"
+          id="community"
+          title="Teams from around the world"
+          on="ink"
+          size="s"
+        />
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+          <StatCounter value={90} suffix="+" label="universities" on="ink" />
+          <StatCounter value={20} suffix="+" label="countries" on="ink" />
+          <StatCounter value={1000} suffix="+" label="publications" on="ink" />
+          <StatCounter value={30} label="competitions held" on="ink" />
         </div>
-        <p className="mt-3 text-right font-mono text-small text-text-muted">across the partner institutions below</p>
+        <p className="mt-8 font-mono text-small text-text-on-ink-muted">TODO(wire): world map chapter</p>
       </Section>
 
-      {/* 8 · Partners (paper): marquee with a demoted mono label; reads as one
-          unit with the data line above */}
-      <Section tight width="bleed" aria-labelledby="partners" className="pt-6">
+      {/* 7 · Data line + partner ribbon (paper) - sponsor, faculty. No title:
+          the numbers above are the voice; the line ties them to the logos. */}
+      <Section tight width="bleed" aria-labelledby="partners" className="pb-10">
         <div className="mx-auto max-w-content px-6">
-          <h2 id="partners" className="mb-6 font-mono text-eyebrow font-normal tracking-normal text-text-muted">
-            partner institutions
-          </h2>
+          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-ink-950/10 pb-4">
+            <h2 id="partners" className="font-mono text-small font-normal tracking-normal text-text-muted">
+              across the partner institutions below
+            </h2>
+            <p className="font-mono text-eyebrow tracking-normal text-text-muted">{partners.length} institutions · alphabetical</p>
+          </div>
         </div>
-        <Marquee label="Partner institutions" duration={55}>
-          {partners.map((p) => (
-            <img
-              key={p.name}
-              src={`${import.meta.env.BASE_URL}${p.image}`}
-              alt={p.name}
-              height={36}
-              width="auto"
-              loading="lazy"
-              decoding="async"
-              className="max-h-9 w-auto max-w-32 object-contain grayscale transition-[filter] duration-[var(--duration-fast)] hover:grayscale-0"
-            />
-          ))}
-        </Marquee>
+        <div className="mt-8">
+          <Marquee label="Partner institutions" duration={55} gap="gap-16 pr-16">
+            {partners.map((p) => (
+              <a
+                key={p.name}
+                href={p.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex h-[84px] w-auto shrink-0 flex-col items-center justify-start md:h-28"
+              >
+                <span className="flex h-14 items-center md:h-20">
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    height={80}
+                    width="auto"
+                    loading="lazy"
+                    decoding="async"
+                    className="max-h-14 w-auto max-w-44 object-contain grayscale transition-[filter] duration-[var(--duration-fast)] group-hover:grayscale-0 group-focus-visible:grayscale-0 md:max-h-20 md:max-w-56"
+                  />
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="mt-2 whitespace-nowrap border border-ink-950/15 bg-paper-50 px-2 py-0.5 font-mono text-eyebrow tracking-normal text-text-strong opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100"
+                >
+                  {p.name} ↗
+                </span>
+              </a>
+            ))}
+          </Marquee>
+        </div>
       </Section>
 
       {/* SponsorCTA removed from landing 2026-08-21 (Cedric): zero-sponsor state lives on /about and /race for now */}
 
-      {/* 9 · 05 Teams (paper) */}
+      {/* 8 · 06 Teams (paper) - competitor */}
       <Section edge rule aria-labelledby="teams">
         <SectionHeader
-          index="05"
+          index="06"
           eyebrow="Teams"
           id="teams"
           title="Who competes"
           lead="Seeded from the results pages of recent competitions; entries are tagged until verified."
+          size="s"
         />
         <TeamGrid teams={teams} />
       </Section>
 
-      {/* 10 · 06 Research (paper, 5/7) */}
+      {/* 9 · 07 Research (paper): three featured papers with thumbnails -
+          learner, faculty. PublicationCard's media slot lands with
+          revamp/v3-papers. */}
       <Section rule aria-labelledby="research">
-        <div className="grid gap-10 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <SectionHeader
-              index="06"
-              eyebrow="Research"
-              id="research"
-              title="1,000+ publications build on this platform"
-              lead="A Google Scholar search for the platform returns more than a thousand results. A few of the papers we feature:"
-            />
-            <div className="flex flex-col items-start gap-3">
+        <SectionHeader
+          index="07"
+          eyebrow="Research"
+          id="research"
+          title="1,000+ publications build on this platform"
+          lead="A Google Scholar search for the platform returns more than a thousand results. A few of the papers we feature:"
+          action={
+            <div className="flex flex-wrap items-center gap-4">
               <Button href={SCHOLAR_URL} variant="secondary" target="_blank" rel="noopener noreferrer">
                 See the Scholar query
               </Button>
-              {/* px-0!: ghost-as-text-link aligns to the column edge instead
-                  of inheriting button text padding (impeccable polish). */}
               <Button href="/research" variant="ghost" className="px-0!">
                 All curated publications
               </Button>
             </div>
-          </div>
-          <Reveal stagger className="flex flex-col gap-4 md:col-span-7">
-            {featured.map((p) => (
-              <PublicationCard key={p.id} publication={p} tagLabels={pubs ? tagLabelMap(pubs.tags) : {}} />
-            ))}
-          </Reveal>
-        </div>
+          }
+        />
+        <Reveal stagger className="grid gap-6 md:grid-cols-3">
+          {featured.map((p) => (
+            <PublicationCard key={p.id} publication={p} tagLabels={pubs ? tagLabelMap(pubs.tags) : {}} />
+          ))}
+        </Reveal>
       </Section>
 
-      {/* 11 · 07 Get started (paper) */}
-      <Section edge rule aria-labelledby="get-started">
-        <SectionHeader
-          index="07"
-          eyebrow="Get started"
-          id="get-started"
-          title="Bring your car to the grid"
-          lead="Build the car, take the course, and race."
-        />
-        <ul>
-          {(
-            [
-              ["Build", "Hardware designs, bill of materials, and software to get a car driving.", "/build", "Start building"],
-              ["Learn", "The course materials universities teach autonomy with.", "/learn", "Start learning"],
-            ] as const
-          ).map(([title, body, href, cta]) => (
-            <li key={title} className="border-t border-ink-950/10 py-6 last:border-b">
-              <div className="grid gap-2 sm:grid-cols-12 sm:items-baseline">
-                <h3 className="font-display text-lg font-semibold text-text-strong sm:col-span-3">{title}</h3>
-                <p className="text-small text-text-body sm:col-span-6">{body}</p>
-                <a
-                  href={href}
-                  className="inline-block py-1 text-small font-semibold text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2 sm:col-span-3 sm:justify-self-end"
-                >
-                  {cta}
-                </a>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-12 flex flex-wrap items-center gap-6">
-          <Button href={SLACK_URL} target="_blank" rel="noopener noreferrer">
-            Join the community on Slack
-          </Button>
-          <p className="font-mono text-small text-text-muted">
-            <a
-              className="inline-block py-1 text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2"
-              href="mailto:contact@roboracer.ai"
-            >
-              contact@roboracer.ai
-            </a>
-          </p>
-        </div>
+      {/* 10 · 08 Join (paper) - everyone. TODO(wire): CommunityJoin from
+          revamp/v3-map-community. */}
+      <Section edge rule aria-labelledby="join">
+        <SectionHeader index="08" eyebrow="Join" id="join" title="Join 3,000+ people building and racing" />
+        <p className="font-mono text-small text-text-muted">TODO(wire): CommunityJoin</p>
       </Section>
     </div>
   );

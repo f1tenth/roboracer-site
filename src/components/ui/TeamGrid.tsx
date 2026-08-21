@@ -17,8 +17,8 @@ function initials(name: string): string {
 
 /**
  * Featured teams as hairline cells, each with a square neutral image slot on
- * top: the team logo (object-contain) when one exists, mono initials
- * otherwise. Every entry renders (Cedric, 2026-08-21: nothing hidden on
+ * top: the team photo (object-cover) when the media curator found one, else
+ * the team logo (object-contain), else mono initials. Every entry renders (Cedric, 2026-08-21: nothing hidden on
  * localhost); entries not yet "published" carry a mono "unverified" tag.
  * Results and TODO-marked institutions render as data, in mono. 10 teams =
  * two clean rows of five on desktop, five rows of two on mobile.
@@ -35,7 +35,17 @@ export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
           <li key={team.name} className={`min-w-0 -mt-px -ml-px border-t border-l border-ink-950/10 ${ink ? "bg-ink-900" : "bg-paper-50"}`}>
             <article className="flex h-full min-w-0 flex-col">
               <div className={`relative aspect-square ${ink ? "bg-ink-800" : "bg-paper-200"}`}>
-                {team.logo ? (
+                {team.photo ? (
+                  <img
+                    src={`${import.meta.env.BASE_URL}${team.photo.replace(/^\//, "")}`}
+                    alt={`${team.name} team photo`}
+                    width={800}
+                    height={800}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                ) : team.logo ? (
                   <img
                     src={`${import.meta.env.BASE_URL}${team.logo}`}
                     alt=""

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "build",
+    "n": "01",
+    "title": "Build",
+    "body": "An open-source vehicle system: hardware designs and software anyone can build and race.",
+    "href": "/build",
+    "linkText": "Build the car",
+    "media": {
+      "type": "video",
+      "src": "/media/platform/platform-build-960.mp4",
+      "poster": "/media/platform/platform-build-poster.webp",
+      "caption": "assembling the car · build guide",
+      "credit": "RoboRacer organizers"
+    }
+  },
+  {
+    "id": "learn",
+    "n": "02",
+    "title": "Learn",
+    "body": "Course materials on perception, localization, planning, and safe control.",
+    "href": "/learn",
+    "linkText": "Start the course",
+    "media": {
+      "type": "image",
+      "src": "/media/platform/platform-learn-1200.webp",
+      "poster": "/media/platform/platform-learn-1200.webp",
+      "caption": "LiDAR scan in RViz · course lab",
+      "credit": "RoboRacer organizers"
+    }
+  },
+  {
+    "id": "race",
+    "n": "03",
+    "title": "Race",
+    "body": "An international competition series at the major robotics conferences.",
+    "href": "/race",
+    "linkText": "See the races",
+    "media": {
+      "type": "video",
+      "src": "/media/platform/platform-race-960.mp4",
+      "poster": "/media/platform/platform-race-poster.webp",
+      "caption": "head-to-head · ICRA 2026, Vienna",
+      "credit": ""
+    }
+  },
+  {
+    "id": "research",
+    "n": "04",
+    "title": "Research",
+    "body": "A common, citable platform for autonomy research.",
+    "href": "/research",
+    "linkText": "Browse the research",
+    "media": {
+      "type": "video",
+      "src": "/media/platform/platform-research-mppi-960.mp4",
+      "poster": "/media/platform/platform-research-mppi-poster.webp",
+      "caption": "MPPI overtaking in the gym · UPenn",
+      "credit": "Video: Cedric Hollande"
+    }
+  }
+]

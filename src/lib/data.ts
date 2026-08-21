@@ -160,6 +160,25 @@ export type EventsMap = {
   countries: MapCountry[];
 };
 
+/** public/data/platform.json: the four pillars with their media panel slot. */
+export type PlatformMedia = {
+  type: "image" | "video";
+  src: string;
+  poster: string;
+  caption: string;
+  credit?: string;
+};
+
+export type PlatformRow = {
+  id: string;
+  n: string;
+  title: string;
+  body: string;
+  href: string;
+  linkText: string;
+  media: PlatformMedia;
+};
+
 /** public/data/community.json (seed values; refreshed by scripts/slack_stats.py). */
 export type Community = {
   members: number;
@@ -188,4 +207,5 @@ export const loadTeams = () => loadJson<Team[]>("teams.json");
 export const loadHighlights = () => loadJson<Highlight[]>("highlights.json");
 export const loadEventsMap = () => loadJson<EventsMap>("events_map.json");
 export const loadCommunity = () => loadJson<Community>("community.json");
+export const loadPlatform = () => loadJson<PlatformRow[]>("platform.json");
 

@@ -9,6 +9,9 @@ type SectionHeaderProps = {
   action?: ReactNode;
   on?: "paper" | "ink";
   id?: string;
+  /** "m" (default) = display-m title; "s" = demoted header for sections whose
+   * media is the voice: the title drops to display-s-like lead size. */
+  size?: "m" | "s";
 };
 
 /**
@@ -23,10 +26,12 @@ export default function SectionHeader({
   action,
   on = "paper",
   id,
+  size = "m",
 }: SectionHeaderProps) {
   const ink = on === "ink";
+  const titleSize = size === "s" ? "text-lead font-semibold" : "text-display-m font-semibold";
   return (
-    <header className="mb-12 flex flex-wrap items-end justify-between gap-6">
+    <header className={`${size === "s" ? "mb-8" : "mb-12"} flex flex-wrap items-end justify-between gap-6`}>
       <div className="max-w-2xl">
         {(index || eyebrow) && (
           <p
@@ -40,12 +45,14 @@ export default function SectionHeader({
         )}
         <h2
           id={id}
-          className={`font-display text-display-m font-semibold ${ink ? "text-text-on-ink" : "text-text-strong"}`}
+          className={`font-display ${titleSize} ${ink ? "text-text-on-ink" : "text-text-strong"}`}
         >
           {title}
         </h2>
         {lead && (
-          <p className={`mt-4 max-w-[60ch] text-lead ${ink ? "text-text-on-ink-muted" : "text-text-body"}`}>
+          <p
+            className={`max-w-[60ch] ${size === "s" ? "mt-2 text-body" : "mt-4 text-lead"} ${ink ? "text-text-on-ink-muted" : "text-text-body"}`}
+          >
             {lead}
           </p>
         )}
