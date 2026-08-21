@@ -117,8 +117,3 @@ export const loadTeamAlumni = () => loadJson<TeamMember[]>("team_alumni.json");
 export const loadPublications = () => loadJson<PublicationsFile>("publications.json");
 export const loadTeams = () => loadJson<Team[]>("teams.json");
 
-/** Teams safe to render publicly. Unverified entries appear only where
- * `includeUnverified` is set (dev/styleguide contexts). */
-export function visibleTeams(teams: Team[], includeUnverified = false): Team[] {
-  return includeUnverified ? teams : teams.filter((t) => t.status === "published");
-}

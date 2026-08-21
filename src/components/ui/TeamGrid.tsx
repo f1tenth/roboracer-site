@@ -1,10 +1,8 @@
 import type { Team } from "../../lib/data";
-import { visibleTeams } from "../../lib/data";
 
 type TeamGridProps = {
   teams: Team[];
-  /** Dev/styleguide only: also render status "verify" entries, badged. */
-  showUnverified?: boolean;
+  on?: "paper" | "ink";
 };
 
 function initials(name: string): string {
@@ -18,70 +16,72 @@ function initials(name: string): string {
 }
 
 /**
- * Featured teams, always rendered below the sponsors block. A team renders
- * publicly only with status "published" (a recorded source); "verify"
- * entries appear solely when showUnverified is set, marked as unverified.
+ * Featured teams as hairline cards, always below the sponsors block. Every
+ * entry renders (Cedric, 2026-08-21: nothing hidden on localhost); entries
+ * not yet "published" carry a mono "unverified" tag. Results and TODO-marked
+ * institutions render as data, in mono.
  */
-export default function TeamGrid({ teams, showUnverified = false }: TeamGridProps) {
-  const list = visibleTeams(teams, showUnverified);
-  if (list.length === 0) return null;
+export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
+  const ink = on === "ink";
+  if (teams.length === 0) return null;
   return (
-    <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {list.map((team) => {
+    <ul className="grid gap-px overflow-hidden rounded-card border border-ink-950/10 bg-ink-950/10 sm:grid-cols-2 lg:grid-cols-3">
+      {teams.map((team) => {
         const best = team.highlights?.[0];
+        const institution = team.institution?.startsWith("TODO(content)") ? undefined : team.institution;
         return (
-          <li key={team.name}>
-            <article className="flex h-full flex-col gap-4 rounded-card border border-ink-700 bg-ink-800 p-6">
-              <div className="flex items-center gap-4">
-                {team.logo ? (
-                  <img
-                    src={team.logo}
-                    alt=""
-                    width={48}
-                    height={48}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-12 w-12 rounded-media object-contain"
-                  />
-                ) : (
-                  <span
-                    aria-hidden="true"
-                    className="flex h-12 w-12 items-center justify-center rounded-media bg-ink-700 font-display font-semibold text-text-on-ink"
-                  >
-                    {initials(team.name)}
+          <li key={team.name} className={ink ? "bg-ink-900" : "bg-paper-50"}>
+            <article className="flex h-full flex-col gap-3 p-6">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  {team.logo ? (
+                    <img
+                      src={team.logo}
+                      alt=""
+                      width={40}
+                      height={40}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-10 w-10 rounded-btn object-contain"
+                    />
+                  ) : (
+                    <span
+                      aria-hidden="true"
+                      className={`flex h-10 w-10 items-center justify-center rounded-btn border font-mono text-small ${ink ? "border-text-on-ink/20 text-text-on-ink" : "border-ink-950/15 text-text-strong"}`}
+                    >
+                      {initials(team.name)}
+                    </span>
+                  )}
+                  <div>
+                    <h3 className={`font-display font-semibold ${ink ? "text-text-on-ink" : "text-text-strong"}`}>
+                      {team.name}
+                    </h3>
+                    <p className={`font-mono text-eyebrow tracking-normal ${ink ? "text-text-on-ink-muted" : "text-text-muted"}`}>
+                      {[institution, team.country].filter(Boolean).join(" · ") || "institution tbc"}
+                    </p>
+                  </div>
+                </div>
+                {team.status !== "published" && (
+                  <span className={`font-mono text-eyebrow tracking-normal ${ink ? "text-text-on-ink-muted" : "text-text-muted"}`}>
+                    unverified
                   </span>
                 )}
-                <div>
-                  <h3 className="font-display font-semibold text-text-on-ink">{team.name}</h3>
-                  <p className="text-small text-text-on-ink-muted">
-                    {[team.institution, team.country].filter(Boolean).join(" · ")}
-                  </p>
-                </div>
               </div>
               {best && (
-                <p className="w-fit rounded-pill bg-rr-magenta/15 px-3 py-1.5 text-small font-semibold text-rr-magenta-bright">
-                  {best.result}, {best.event}
+                <p className="mt-auto border-t border-ink-950/10 pt-3 font-mono text-small text-rr-magenta-deep">
+                  {best.result} · {best.event}
                 </p>
               )}
-              <div className="mt-auto flex items-center justify-between gap-3">
-                {team.website ? (
-                  <a
-                    href={team.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-small font-semibold text-text-on-ink underline underline-offset-4 decoration-rr-magenta hover:decoration-2"
-                  >
-                    Team site
-                  </a>
-                ) : (
-                  <span />
-                )}
-                {team.status !== "published" && (
-                  <span className="eyebrow rounded-pill border border-ink-700 px-3 py-1.5 text-text-on-ink-muted">
-                    Unverified
-                  </span>
-                )}
-              </div>
+              {team.website && (
+                <a
+                  href={team.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-fit text-small font-semibold underline underline-offset-4 decoration-rr-magenta hover:decoration-2 ${ink ? "text-text-on-ink" : "text-text-strong"}`}
+                >
+                  Team site
+                </a>
+              )}
             </article>
           </li>
         );

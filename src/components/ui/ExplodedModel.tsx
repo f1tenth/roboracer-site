@@ -5,6 +5,13 @@ import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 
 const ExplodedModelScene = lazy(() => import("./ExplodedModelScene"));
 
+// Chapter-scoped explosion ceiling (Cedric, 2026-08-21): half the viewer's
+// offsets so parts start closer; /assembly keeps its full 0-1 range.
+export const CHAPTER_MAX_EXPLOSION = 0.5;
+// The car must be fully assembled by 70% of the pin so the closing rotation
+// has scroll room to read.
+const ASSEMBLED_AT = 0.7;
+
 // Captions come from the URDF-mirrored part table (racecarAssemblyData.ts);
 // no invented specs. TODO(content): final chapter copy from Cedric.
 const STATES = [
@@ -31,7 +38,7 @@ const STATES = [
  */
 export default function ExplodedModel() {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const explosionRef = useRef(1);
+  const explosionRef = useRef(CHAPTER_MAX_EXPLOSION);
   const reduced = usePrefersReducedMotion();
   const [inView, setInView] = useState(false);
   const weakDevice =
@@ -65,9 +72,10 @@ export default function ExplodedModel() {
             trigger: wrap,
             start: "top top",
             end: "bottom bottom",
-            scrub: 0.8,
+            scrub: 0.6,
             onUpdate: (self) => {
-              explosionRef.current = 1 - self.progress;
+              const assembly = Math.min(self.progress / ASSEMBLED_AT, 1);
+              explosionRef.current = CHAPTER_MAX_EXPLOSION * (1 - assembly);
             },
           },
         });
@@ -86,9 +94,13 @@ export default function ExplodedModel() {
         <li
           key={s.caption}
           data-em-caption={stacked ? undefined : true}
+          className="border-t border-text-on-ink/15 pt-4"
           style={stacked ? undefined : { opacity: i === 0 ? 1 : 0.62 }}
         >
-          <p className="font-display font-semibold text-text-on-ink">{s.caption}</p>
+          <p className="font-mono text-eyebrow tracking-normal text-text-on-ink-muted">
+            {String(i + 1).padStart(2, "0")}
+          </p>
+          <p className="mt-1 font-display font-semibold text-text-on-ink">{s.caption}</p>
           <p className="mt-1 text-small text-text-on-ink">{s.body}</p>
         </li>
       ))}
@@ -106,7 +118,12 @@ export default function ExplodedModel() {
 
   const header = (
     <header>
-      <p className="eyebrow mb-3 text-rr-magenta">The platform</p>
+      <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-on-ink-muted">
+        <span aria-hidden="true" className="h-1 w-1 bg-rr-magenta" />
+        <span>03</span>
+        <span aria-hidden="true">/</span>
+        <span>The car</span>
+      </p>
       <h2 className="font-display text-display-l font-semibold text-text-on-ink">
         One tenth the size, the full problem
       </h2>
@@ -118,7 +135,7 @@ export default function ExplodedModel() {
       <div className="mx-auto max-w-content px-6">
         {header}
         <div className="mt-10 grid gap-10 md:grid-cols-[1fr_20rem]">
-          <div className="min-h-[40svh] rounded-card border border-ink-700 bg-ink-800">
+          <div className="min-h-[40svh]">
             {!weakDevice && (
               <Suspense fallback={null}>
                 <ExplodedModelScene explosionRef={explosionRef} staticPose />
@@ -135,7 +152,7 @@ export default function ExplodedModel() {
   }
 
   return (
-    <div ref={wrapRef} style={{ minHeight: "230vh" }}>
+    <div ref={wrapRef} style={{ minHeight: "120vh" }}>
       <div className="sticky top-0 flex min-h-svh flex-col justify-center py-12">
         <div className="mx-auto w-full max-w-content px-6">
           {header}
