@@ -1,0 +1,46 @@
+name: Discover new RoboRacer publications
+
+# Weekly sweep of OpenAlex and Semantic Scholar for papers that use or cite the platform.
+# Opens (or updates) a PR with candidates for human review. Nothing is published automatically:
+# candidates live in data/publications.candidates.json and are promoted with /add-paper.
+on:
+  schedule:
+    - cron: "17 9 * * 1"   # Mondays 09:17 UTC
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Look back this many days"
+        default: "45"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Discover candidates
+        env:
+          S2_API_KEY: ${{ secrets.S2_API_KEY }}   # optional; raises Semantic Scholar rate limits
+        run: python3 scripts/discover_papers.py --days "${{ github.event.inputs.days || '45' }}"
+      - name: Validate data
+        run: |
+          python3 scripts/validate-publications.py || true
+          python3 scripts/validate-publications.py --file data/publications.candidates.json || true
+      - name: Open or update PR
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: content/paper-candidates
+          title: "content(research): new publication candidates"
+          commit-message: "content(research): weekly publication candidates"
+          body-path: docs/publications-candidates.md
+          labels: content
+          add-paths: |
+            data/publications.candidates.json
+            data/.discover-cache.json
+            docs/publications-candidates.md

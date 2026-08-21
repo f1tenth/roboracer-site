@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# revamp tooling (appended by scripts/rr.sh setup; merge into .gitignore)
+_harvest/
+docs/qa/**/*.png
+public/media/**/*.mp4
+public/media/**/*.webm
+data/.discover-cache.json

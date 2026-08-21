@@ -1,0 +1,1608 @@
+{
+  "version": 1,
+  "updated": "2026-08-20",
+  "scholar_query_url": "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=",
+  "tags": [
+    {
+      "id": "reinforcement-learning",
+      "label": "Reinforcement learning",
+      "scholar_query": "reinforcement learning"
+    },
+    {
+      "id": "planning",
+      "label": "Planning",
+      "scholar_query": "planning"
+    },
+    {
+      "id": "raceline-optimization",
+      "label": "Raceline optimization",
+      "scholar_query": "raceline OR \"minimum curvature\" OR \"minimum time\""
+    },
+    {
+      "id": "control-mpc",
+      "label": "Control and MPC",
+      "scholar_query": "\"model predictive control\" OR MPC OR MPPI"
+    },
+    {
+      "id": "perception-estimation",
+      "label": "Perception and state estimation",
+      "scholar_query": "localization OR SLAM OR perception OR \"state estimation\""
+    },
+    {
+      "id": "sim-to-real",
+      "label": "Sim-to-real and simulation",
+      "scholar_query": "simulation OR sim-to-real OR \"digital twin\""
+    },
+    {
+      "id": "multi-agent",
+      "label": "Multi-agent and racing strategy",
+      "scholar_query": "overtaking OR \"head-to-head\" OR multi-agent"
+    },
+    {
+      "id": "safety",
+      "label": "Safety and verification",
+      "scholar_query": "safety OR \"control barrier\" OR verification"
+    },
+    {
+      "id": "systems-platform",
+      "label": "Systems and platform",
+      "scholar_query": "platform OR hardware OR ROS"
+    },
+    {
+      "id": "education",
+      "label": "Education",
+      "scholar_query": "education OR course OR teaching"
+    }
+  ],
+  "items": [
+    {
+      "id": "zachariah-2024-hybrid",
+      "title": "A Hybrid Autonomous Intersection Management for Minimizing Delays Using Fuzzy Logic",
+      "authors": [
+        "Babangida Zachariah",
+        "Khalid Elgazzar",
+        "Sanaa Alwidian"
+      ],
+      "year": 2024,
+      "venue": "2024 IEEE International Conference on Smart Mobility (SM)",
+      "venue_short": "2024 IEEE International ",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key zachariah2024hybrid"
+    },
+    {
+      "id": "hell-2024-lidar",
+      "title": "A lidar-based approach to autonomous racing with model-free reinforcement learning",
+      "authors": [
+        "Máté Hell",
+        "Gergely Hajgató",
+        "Ármin Bogár-Németh",
+        "Gergely Bári"
+      ],
+      "year": 2024,
+      "venue": "2024 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "reinforcement-learning",
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key hell2024lidar"
+    },
+    {
+      "id": "elmoghazy-2024-real",
+      "title": "A Real-World Testbed for V2X in Autonomous Vehicles: From Simulation to Actual Road Testing",
+      "authors": [
+        "Ammar Elmoghazy",
+        "Khalid Elgazzar",
+        "Sanaa Alwidian"
+      ],
+      "year": 2024,
+      "venue": "2024 IEEE 8th International Conference on Fog and Edge Computing (ICFEC)",
+      "venue_short": "2024 IEEE 8th Internatio",
+      "type": "conference",
+      "tags": [
+        "sim-to-real",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key elmoghazy2024real"
+    },
+    {
+      "id": "samak-2024-autonomy",
+      "title": "Autonomy Oriented Digital Twins for Real2Sim2Real Autoware Deployment",
+      "authors": [
+        "Chinmay Vilas Samak",
+        "Tanmay Vilas Samak"
+      ],
+      "year": 2024,
+      "venue": "arXiv preprint arXiv:2402.14739",
+      "venue_short": "arXiv",
+      "type": "journal",
+      "tags": [
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key samak2024autonomy"
+    },
+    {
+      "id": "kuipers-2024-conformal",
+      "title": "Conformal Off-Policy Prediction for Multi-Agent Systems",
+      "authors": [
+        "Tom Kuipers",
+        "Renukanandan Tumu",
+        "Shuo Yang",
+        "Milad Kazemi",
+        "Rahul Mangharam",
+        "Nicola Paoletti"
+      ],
+      "year": 2024,
+      "venue": "arXiv preprint arXiv:2403.16871",
+      "venue_short": "arXiv",
+      "type": "journal",
+      "tags": [
+        "multi-agent"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key kuipers2024conformal"
+    },
+    {
+      "id": "choi-2024-development",
+      "title": "Development of AI Model for Lidar Localization for F1TENTH",
+      "authors": [
+        "TaeYoung Choi",
+        "Min Son",
+        "MinSung Shin",
+        "YoHaBin Lim",
+        "YunHaeng Jo",
+        "Kuk Won Ko"
+      ],
+      "year": 2024,
+      "venue": "2024 24th International Conference on Control, Automation and Systems (ICCAS)",
+      "venue_short": "2024 24th International ",
+      "type": "conference",
+      "tags": [
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key choi2024development"
+    },
+    {
+      "id": "lee-2024-development",
+      "title": "Development of Simulator for AI Data Construction of F1TENTH Autonomous Championship and AI Model for Lateral Control",
+      "authors": [
+        "MinJun Lee",
+        "HyunTae Mo",
+        "DongHyun Yoon",
+        "JaeWon Lee",
+        "BoMin Son",
+        "Kuk Won Ko"
+      ],
+      "year": 2024,
+      "venue": "2024 24th International Conference on Control, Automation and Systems (ICCAS)",
+      "venue_short": "2024 24th International ",
+      "type": "conference",
+      "tags": [
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key lee2024development"
+    },
+    {
+      "id": "tanmay-vilas-samak-2024-ea",
+      "title": "EA Scalable and Parallelizable Digital Twin Framework for Sustainable Sim2Real Transition of Multi-Agent Reinforcement Learning Systems",
+      "authors": [
+        "Tanmay Vilas Samak, Venkat Krovi Chinmay Vilas Samak"
+      ],
+      "year": 2024,
+      "venue": "International Design Engineering Technical Conferences and Computers and Information in Engineering Conference",
+      "venue_short": "International Design Eng",
+      "type": "conference",
+      "tags": [
+        "sim-to-real",
+        "reinforcement-learning",
+        "multi-agent"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key raman2018empowering"
+    },
+    {
+      "id": "fazekas-2024-evaluation",
+      "title": "Evaluation of local planner-based stanley control in autonomous rc car racing series",
+      "authors": [
+        "Máté Fazekas",
+        "Zalán Demeter",
+        "János Tóth",
+        "Ármin Bogár-Németh",
+        "Gergely Bári"
+      ],
+      "year": 2024,
+      "venue": "2024 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "planning"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key fazekas2024evaluation"
+    },
+    {
+      "id": "moualhi-2024-experimental",
+      "title": "Experimental Evaluation of Deep Neural Networks for Vehicle Model Identification",
+      "authors": [
+        "Amira Moualhi",
+        "Maryam Nezami",
+        "Saleh Mulhem",
+        "Georg Schildbach"
+      ],
+      "year": 2024,
+      "venue": "",
+      "venue_short": "",
+      "type": "journal",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key moualhi2024experimental"
+    },
+    {
+      "id": "betz-2024-f1tenth",
+      "title": "F1TENTH: Enhancing Autonomous Systems Education Through Hands-On Learning and Competition",
+      "authors": [
+        "Johannes Betz",
+        "Hongrui Zheng",
+        "Felix Jahncke",
+        "Zirui Zang",
+        "Florian Sauerbeck",
+        "Y Rosa Zheng",
+        "Joydeep Biswas",
+        "Venkat Krovi",
+        "Rahul Mangharam"
+      ],
+      "year": 2024,
+      "venue": "IEEE Transactions on Intelligent Vehicles",
+      "venue_short": "T-IV",
+      "type": "journal",
+      "tags": [
+        "education"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key betz2024f1tenth"
+    },
+    {
+      "id": "baumann-2024-forzaeth",
+      "title": "ForzaETH Race Stack - Scaled Autonomous Head-to-Head Racing on Fully Commercial off-the-Shelf Hardware",
+      "authors": [
+        "Nicolas Baumann",
+        "Edoardo Ghignone",
+        "Jonas Kühne",
+        "Niklas Bastuck",
+        "Jonathan Becker",
+        "Nadine Imholz",
+        "Tobias Kränzlin",
+        "Tian Yi Lim",
+        "Michael Lötscher",
+        "Luca Schwarzenbach",
+        "Luca Tognoni",
+        "Christian Vogt",
+        "Andrea Carron",
+        "Michele Magno"
+      ],
+      "year": 2024,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "multi-agent",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key baumann2024forzaeth",
+      "arxiv": "2403.11784",
+      "url": "https://arxiv.org/abs/2403.11784"
+    },
+    {
+      "id": "floch-2024-gaussian",
+      "title": "Gaussian-process-based adaptive trajectory tracking control for autonomous ground vehicles",
+      "authors": [
+        "Kristóf Floch",
+        "Tamás Péni",
+        "Roland Tóth"
+      ],
+      "year": 2024,
+      "venue": "2024 European Control Conference (ECC)",
+      "venue_short": "2024 European Control Co",
+      "type": "conference",
+      "tags": [
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key floch2024gaussian"
+    },
+    {
+      "id": "evans-2024-high",
+      "title": "High-performance Racing on Unmapped Tracks using Local Maps",
+      "authors": [
+        "Benjamin David Evans",
+        "Hendrik Willem Jordaan",
+        "Herman Arnold Engelbrecht"
+      ],
+      "year": 2024,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key evans2024highperformance",
+      "arxiv": "2401.17732",
+      "url": "https://arxiv.org/abs/2401.17732"
+    },
+    {
+      "id": "berducci-2024-learning",
+      "title": "Learning adaptive safety for multi-agent systems",
+      "authors": [
+        "Luigi Berducci",
+        "Shuo Yang",
+        "Rahul Mangharam",
+        "Radu Grosu"
+      ],
+      "year": 2024,
+      "venue": "2024 IEEE International Conference on Robotics and Automation (ICRA)",
+      "venue_short": "ICRA",
+      "type": "conference",
+      "tags": [
+        "multi-agent",
+        "safety"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key berducci2024learning"
+    },
+    {
+      "id": "w-kegrzynowski-2024-learning",
+      "title": "Learning dynamics models for velocity estimation in autonomous racing",
+      "authors": [
+        "Jan W\\kegrzynowski",
+        "Grzegorz Czechmanowski",
+        "Piotr Kicki",
+        "Krzysztof Walas"
+      ],
+      "year": 2024,
+      "venue": "2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)",
+      "venue_short": "IROS",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key wkegrzynowski2024learning"
+    },
+    {
+      "id": "trumpp-2024-racemop",
+      "title": "RaceMOP: Mapless Online Path Planning for Multi-Agent Autonomous Racing using Residual Policy Learning",
+      "authors": [
+        "Raphael Trumpp",
+        "Ehsan Javanmardi",
+        "Jin Nakazato",
+        "Manabu Tsukada",
+        "Marco Caccamo"
+      ],
+      "year": 2024,
+      "venue": "arXiv preprint arXiv:2403.07129",
+      "venue_short": "arXiv",
+      "type": "journal",
+      "tags": [
+        "reinforcement-learning",
+        "planning",
+        "multi-agent"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key trumpp2024racemop"
+    },
+    {
+      "id": "lim-2024-robustness",
+      "title": "Robustness Evaluation of Localization Techniques for Autonomous Racing",
+      "authors": [
+        "Tian Yi Lim",
+        "Edoardo Ghignone",
+        "Nicolas Baumann",
+        "Michele Magno"
+      ],
+      "year": 2024,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key lim2024robustness",
+      "arxiv": "2401.07658",
+      "url": "https://arxiv.org/abs/2401.07658"
+    },
+    {
+      "id": "horvath-2024-teaching",
+      "title": "Teaching Aspects of ROS 2 and Autonomous Vehicles",
+      "authors": [
+        "Ernő Horváth",
+        "Gergő Ignéczi",
+        "Norbert Markó",
+        "Rudolf Krecht",
+        "Miklós Unger"
+      ],
+      "year": 2024,
+      "venue": "Engineering Proceedings",
+      "venue_short": "Engineering Proceedings",
+      "type": "journal",
+      "tags": [
+        "systems-platform",
+        "education"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key horvath2024teaching",
+      "doi": "10.3390/engproc2024079049",
+      "url": "https://doi.org/10.3390/engproc2024079049"
+    },
+    {
+      "id": "zarrar-2024-tinylidarnet",
+      "title": "TinyLidarNet: 2D LiDAR-based End-to-End Deep Learning Model for F1TENTH Autonomous Racing",
+      "authors": [
+        "Mohammed Misbah Zarrar",
+        "Qitao Weng",
+        "Bakhbyergyen Yerjan",
+        "Ahmet Soyyigit",
+        "Heechul Yun"
+      ],
+      "year": 2024,
+      "venue": "2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)",
+      "venue_short": "IROS",
+      "type": "conference",
+      "tags": [
+        "perception-estimation",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key zarrar2024tinylidarnet"
+    },
+    {
+      "id": "samak-2024-validation",
+      "title": "Towards Validation of Autonomous Vehicles Across Scales using an Integrated Digital Twin Framework",
+      "authors": [
+        "Tanmay Vilas Samak",
+        "Chinmay Vilas Samak",
+        "Venkat Narayan Krovi"
+      ],
+      "year": 2024,
+      "venue": "arXiv preprint arXiv:2402.12670",
+      "venue_short": "arXiv",
+      "type": "journal",
+      "tags": [
+        "sim-to-real",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key samak2024towards"
+    },
+    {
+      "id": "nearchou-2023-assurance",
+      "title": "An Assurance Case Driven Development Paradigm for Autonomous Vehicles: An F1TENTH Racing Car Case Study",
+      "authors": [
+        "Ioannis Nearchou",
+        "Lance Rafalko",
+        "Ryan Phillips",
+        "Matthew Anderson",
+        "Wuwei Shen",
+        "Steve Drager"
+      ],
+      "year": 2023,
+      "venue": "2023 IEEE/ACIS 21st International Conference on Software Engineering Research, Management and Applications (SERA)",
+      "venue_short": "2023 IEEE/ACIS 21st Inte",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key nearchou2023assurance"
+    },
+    {
+      "id": "loetscher-2023-assessing",
+      "title": "Assessing the Robustness of LiDAR, Radar and Depth Cameras Against Ill-Reflecting Surfaces in Autonomous Vehicles: An Experimental Study",
+      "authors": [
+        "Michael Loetscher",
+        "Nicolas Baumann",
+        "Edoardo Ghignone",
+        "Andrea Ronco",
+        "Michele Magno"
+      ],
+      "year": 2023,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key loetscher2023assessing",
+      "arxiv": "2309.10504",
+      "url": "https://arxiv.org/abs/2309.10504"
+    },
+    {
+      "id": "evans-2023-bypassing",
+      "title": "Bypassing the Simulation-to-reality Gap: Online Reinforcement Learning using a Supervisor",
+      "authors": [
+        "Benjamin David Evans",
+        "Johannes Betz",
+        "Hongrui Zheng",
+        "Herman A Engelbrecht",
+        "Rahul Mangharam",
+        "Hendrik W Jordaan"
+      ],
+      "year": 2023,
+      "venue": "2023 21st International Conference on Advanced Robotics (ICAR)",
+      "venue_short": "2023 21st International ",
+      "type": "conference",
+      "tags": [
+        "reinforcement-learning",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key evans2023bypassing"
+    },
+    {
+      "id": "evans-2023-comparing",
+      "title": "Comparing deep reinforcement learning architectures for autonomous racing",
+      "authors": [
+        "Benjamin David Evans",
+        "Hendrik Willem Jordaan",
+        "Herman Arnold Engelbrecht"
+      ],
+      "year": 2023,
+      "venue": "Machine Learning with Applications",
+      "venue_short": "Machine Learning with Ap",
+      "type": "journal",
+      "tags": [
+        "reinforcement-learning",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key EVANS2023100496",
+      "doi": "10.1016/j.mlwa.2023.100496",
+      "url": "https://www.sciencedirect.com/science/article/pii/S266682702300049X"
+    },
+    {
+      "id": "zou-2023-constrained",
+      "title": "Constrained Residual Race: An Efficient Hybrid Controller for Autonomous Racing",
+      "authors": [
+        "Mengmeng Zou",
+        "Yiwen Lu",
+        "Hanxiao Liu",
+        "Yilin Mo",
+        "Xiaoqiang Ren"
+      ],
+      "year": 2023,
+      "venue": "2023 China Automation Congress (CAC)",
+      "venue_short": "2023 China Automation Co",
+      "type": "conference",
+      "tags": [
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key zou2023constrained"
+    },
+    {
+      "id": "joglekar-2023-data",
+      "title": "Data-Driven Modeling and Experimental Validation of Autonomous Vehicles Using Koopman Operator: Distribution A: Approved for Public Release; Distribution Unlimited. OPSEC\\# 7248",
+      "authors": [
+        "Ajinkya Joglekar",
+        "Sarang Sutavani",
+        "Chinmay Samak",
+        "Tanmay Samak",
+        "Krishna Chaitanya Kosaraju",
+        "Jonathon Smereka",
+        "David Gorsich",
+        "Umesh Vaidya",
+        "Venkat Krovi"
+      ],
+      "year": 2023,
+      "venue": "2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)",
+      "venue_short": "IROS",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key joglekar2023data"
+    },
+    {
+      "id": "zhang-2023-f1tenth",
+      "title": "F1tenth: An over-taking algorithm using machine learning",
+      "authors": [
+        "Jiancheng Zhang",
+        "Hans-Wolfgang Loidl"
+      ],
+      "year": 2023,
+      "venue": "2023 28th International Conference on Automation and Computing (ICAC)",
+      "venue_short": "2023 28th International ",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key zhang2023f1tenth"
+    },
+    {
+      "id": "evans-2023-high",
+      "title": "High-speed autonomous racing using trajectory-aided deep reinforcement learning",
+      "authors": [
+        "Benjamin David Evans",
+        "Herman Arnold Engelbrecht",
+        "Hendrik Willem Jordaan"
+      ],
+      "year": 2023,
+      "venue": "IEEE Robotics and Automation Letters",
+      "venue_short": "RA-L",
+      "type": "journal",
+      "tags": [
+        "reinforcement-learning"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key evans2023high"
+    },
+    {
+      "id": "dighe-2023-kinematics",
+      "title": "Kinematics-only differential flatness based trajectory tracking for autonomous racing",
+      "authors": [
+        "Yashom Dighe",
+        "Youngjin Kim",
+        "Smit Rajguru",
+        "Yash Turkar",
+        "Tarunraj Singh",
+        "Karthik Dantu"
+      ],
+      "year": 2023,
+      "venue": "2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)",
+      "venue_short": "IROS",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key dighe2023kinematics"
+    },
+    {
+      "id": "becker-2023-model",
+      "title": "Model-and acceleration-based pursuit controller for high-performance autonomous racing",
+      "authors": [
+        "Jonathan Becker",
+        "Nadine Imholz",
+        "Luca Schwarzenbach",
+        "Edoardo Ghignone",
+        "Nicolas Baumann",
+        "Michele Magno"
+      ],
+      "year": 2023,
+      "venue": "2023 IEEE International Conference on Robotics and Automation (ICRA)",
+      "venue_short": "ICRA",
+      "type": "conference",
+      "tags": [
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key becker2023model"
+    },
+    {
+      "id": "samak-2023-multi",
+      "title": "Multi-Agent Deep Reinforcement Learning for Cooperative and Competitive Autonomous Vehicles using AutoDRIVE Ecosystem",
+      "authors": [
+        "Tanmay Vilas Samak",
+        "Chinmay Vilas Samak",
+        "Venkat Krovi"
+      ],
+      "year": 2023,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "reinforcement-learning",
+        "multi-agent"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key samak2023multiagent",
+      "arxiv": "2309.10007",
+      "url": "https://arxiv.org/abs/2309.10007"
+    },
+    {
+      "id": "muzzini-2023-optimized",
+      "title": "Optimized Local Path Planner Implementation for GPU-Accelerated Embedded Systems",
+      "authors": [
+        "Filippo Muzzini",
+        "Nicola Capodieci",
+        "Federico Ramanzin",
+        "Paolo Burgio"
+      ],
+      "year": 2023,
+      "venue": "IEEE Embedded Systems Letters",
+      "venue_short": "IEEE Embedded Systems Le",
+      "type": "journal",
+      "tags": [
+        "planning"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key muzzini2023frenet",
+      "doi": "10.1109/les.2023.3298733",
+      "url": "https://doi.org/10.1109/les.2023.3298733"
+    },
+    {
+      "id": "trumpp-2023-residual",
+      "title": "Residual policy learning for vehicle control of autonomous racing cars",
+      "authors": [
+        "Raphael Trumpp",
+        "Denis Hoornaert",
+        "Marco Caccamo"
+      ],
+      "year": 2023,
+      "venue": "2023 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "reinforcement-learning"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key trumpp2023residual"
+    },
+    {
+      "id": "heetmeyer-2023-rpgd",
+      "title": "RPGD: A Small-Batch Parallel Gradient Descent Optimizer with Explorative Resampling for Nonlinear Model Predictive Control",
+      "authors": [
+        "Frederik Heetmeyer",
+        "Marcin Paluch",
+        "Diego Bolliger",
+        "Florian Bolli",
+        "Xiang Deng",
+        "Ennio Filicicchia",
+        "Tobi Delbruck"
+      ],
+      "year": 2023,
+      "venue": "2023 IEEE International Conference on Robotics and Automation (ICRA)",
+      "venue_short": "ICRA",
+      "type": "conference",
+      "tags": [
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key heetmeyer2023rpgd"
+    },
+    {
+      "id": "evans-2023-safe",
+      "title": "Safe reinforcement learning for high-speed autonomous racing",
+      "authors": [
+        "Benjamin D. Evans",
+        "Hendrik W. Jordaan",
+        "Herman A. Engelbrecht"
+      ],
+      "year": 2023,
+      "venue": "Cognitive Robotics",
+      "venue_short": "Cognitive Robotics",
+      "type": "journal",
+      "tags": [
+        "reinforcement-learning",
+        "safety"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key EVANS2023107",
+      "doi": "10.1016/j.cogr.2023.04.002",
+      "url": "https://www.sciencedirect.com/science/article/pii/S2667241323000125"
+    },
+    {
+      "id": "honda-2023-stein",
+      "title": "Stein Variational Guided Model Predictive Path Integral Control: Proposal and Experiments with Fast Maneuvering Vehicles",
+      "authors": [
+        "Kohei Honda",
+        "Naoki Akai",
+        "Kosuke Suzuki",
+        "Mizuho Aoki",
+        "Hirotaka Hosogaya",
+        "Hiroyuki Okuda",
+        "Tatsuya Suzuki"
+      ],
+      "year": 2023,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key honda2023stein",
+      "arxiv": "2309.11040",
+      "url": "https://arxiv.org/abs/2309.11040"
+    },
+    {
+      "id": "gonultas-2023-system",
+      "title": "System identification and control of front-steered ackermann vehicles through differentiable physics",
+      "authors": [
+        "Burak M Gonultas",
+        "Pratik Mukherjee",
+        "O Goktug Poyrazoglu",
+        "Volkan Isler"
+      ],
+      "year": 2023,
+      "venue": "2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)",
+      "venue_short": "IROS",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key gonultas2023system"
+    },
+    {
+      "id": "ghignone-2023-tc",
+      "title": "TC-Driver: A Trajectory Conditioned Reinforcement Learning Approach to Zero-Shot Autonomous Racing",
+      "authors": [
+        "Edoardo Ghignone",
+        "Nicolas Baumann",
+        "Michele Magno"
+      ],
+      "year": 2023,
+      "venue": "Field Robotics",
+      "venue_short": "Field Robotics",
+      "type": "journal",
+      "tags": [
+        "reinforcement-learning"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key 20.500.11850/620280",
+      "doi": "10.3929/ethz-b-000620280",
+      "url": "https://doi.org/10.3929/ethz-b-000620280"
+    },
+    {
+      "id": "bernardi-2022-fpga",
+      "title": "An FPGA overlay for efficient real-time localization in 1/10th scale autonomous vehicles",
+      "authors": [
+        "Andrea Bernardi",
+        "Gianluca Brilli",
+        "Alessandro Capotondi",
+        "Andrea Marongiu",
+        "Paolo Burgio"
+      ],
+      "year": 2022,
+      "venue": "2022 Design, Automation & Test in Europe Conference & Exhibition (DATE)",
+      "venue_short": "2022 Design, Automation ",
+      "type": "conference",
+      "tags": [
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key bernardi2022fpga"
+    },
+    {
+      "id": "betz-2022-autonomous",
+      "title": "Autonomous Vehicles on the Edge: A Survey on Autonomous Vehicle Racing",
+      "authors": [
+        "Johannes Betz",
+        "Hongrui Zheng",
+        "Alexander Liniger",
+        "Ugo Rosolia",
+        "Phillip Karle",
+        "Madhur Behl",
+        "Venkat Krovi",
+        "Rahul Mangharam"
+      ],
+      "year": 2022,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key 2202.07008",
+      "arxiv": "2202.07008",
+      "url": "https://arxiv.org/abs/2202.07008"
+    },
+    {
+      "id": "kochdumper-2022-conformant",
+      "title": "Conformant synthesis for Koopman operator linearized control systems",
+      "authors": [
+        "Niklas Kochdumper",
+        "Stanley Bak"
+      ],
+      "year": 2022,
+      "venue": "2022 IEEE 61st Conference on Decision and Control (CDC)",
+      "venue_short": "CDC",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key kochdumper2022conformant"
+    },
+    {
+      "id": "bhargav-2022-deriving",
+      "title": "Deriving spatial policies for overtaking maneuvers with autonomous vehicles",
+      "authors": [
+        "Jayanth Bhargav",
+        "Johannes Betz",
+        "Hongrui Zehng",
+        "Rahul Mangharam"
+      ],
+      "year": 2022,
+      "venue": "2022 14th International Conference on COMmunication Systems & NETworkS (COMSNETS)",
+      "venue_short": "2022 14th International ",
+      "type": "conference",
+      "tags": [
+        "multi-agent"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key bhargav2022deriving"
+    },
+    {
+      "id": "zheng-2022-gradient",
+      "title": "Gradient-free multi-domain optimization for autonomous systems",
+      "authors": [
+        "Hongrui Zheng",
+        "Johannes Betz",
+        "Rahul Mangharam"
+      ],
+      "year": 2022,
+      "venue": "arXiv preprint arXiv:2202.13525",
+      "venue_short": "arXiv",
+      "type": "journal",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key zheng2022gradient"
+    },
+    {
+      "id": "atreya-2022-high",
+      "title": "High-speed accurate robot control using learned forward kinodynamics and non-linear least squares optimization",
+      "authors": [
+        "Pranav Atreya",
+        "Haresh Karnan",
+        "Kavan Singh Sikand",
+        "Xuesu Xiao",
+        "Sadegh Rabiee",
+        "Joydeep Biswas"
+      ],
+      "year": 2022,
+      "venue": "2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)",
+      "venue_short": "IROS",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key atreya2022high"
+    },
+    {
+      "id": "brunnbauer-2022-latent",
+      "title": "Latent imagination facilitates zero-shot transfer in autonomous racing",
+      "authors": [
+        "Axel Brunnbauer",
+        "Luigi Berducci",
+        "Andreas Brandstátter",
+        "Mathias Lechner",
+        "Ramin Hasani",
+        "Daniela Rus",
+        "Radu Grosu"
+      ],
+      "year": 2022,
+      "venue": "2022 international conference on robotics and automation (ICRA)",
+      "venue_short": "ICRA",
+      "type": "conference",
+      "tags": [
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key brunnbauer2022latent"
+    },
+    {
+      "id": "xiao-2022-learning",
+      "title": "Learning Inverse Kinodynamics for Accurate High-Speed Off-Road Navigation on Unstructured Terrain",
+      "authors": [
+        "Joydeep Biswas Xuesu Xiao",
+        "Peter Stone"
+      ],
+      "year": 2022,
+      "venue": "IEEE Robotics and Automation Letters (RA-L)",
+      "venue_short": "RA-L",
+      "type": "journal",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key xiao2021ikd",
+      "doi": "10.1109/lra.2021.3090023",
+      "url": "https://doi.org/10.1109/lra.2021.3090023"
+    },
+    {
+      "id": "zhang-2022-residual",
+      "title": "Residual policy learning facilitates efficient model-free autonomous racing",
+      "authors": [
+        "Ruiqi Zhang",
+        "Jing Hou",
+        "Guang Chen",
+        "Zhijun Li",
+        "Jianxiao Chen",
+        "Alois Knoll"
+      ],
+      "year": 2022,
+      "venue": "IEEE Robotics and Automation Letters",
+      "venue_short": "RA-L",
+      "type": "journal",
+      "tags": [
+        "reinforcement-learning"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key zhang2022residual"
+    },
+    {
+      "id": "bak-2022-stress",
+      "title": "Stress testing autonomous racing overtake maneuvers with rrt",
+      "authors": [
+        "Stanley Bak",
+        "Johannes Betz",
+        "Abhinav Chawla",
+        "Hongrui Zheng",
+        "Rahul Mangharam"
+      ],
+      "year": 2022,
+      "venue": "2022 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "planning"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key bak2022stress"
+    },
+    {
+      "id": "bosello-2022-train",
+      "title": "Train in austria, race in montecarlo: Generalized rl for cross-track f1 tenth lidar-based races",
+      "authors": [
+        "Michael Bosello",
+        "Rita Tse",
+        "Giovanni Pau"
+      ],
+      "year": 2022,
+      "venue": "2022 IEEE 19th Annual Consumer Communications & Networking Conference (CCNC)",
+      "venue_short": "2022 IEEE 19th Annual Co",
+      "type": "conference",
+      "tags": [
+        "reinforcement-learning",
+        "perception-estimation",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key bosello2022train"
+    },
+    {
+      "id": "karnan-2022-vi",
+      "title": "Vi-ikd: High-speed accurate off-road navigation using learned visual-inertial inverse kinodynamics",
+      "authors": [
+        "Haresh Karnan",
+        "Kavan Singh Sikand",
+        "Pranav Atreya",
+        "Sadegh Rabiee",
+        "Xuesu Xiao",
+        "Garrett Warnell",
+        "Peter Stone",
+        "Joydeep Biswas"
+      ],
+      "year": 2022,
+      "venue": "2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)",
+      "venue_short": "IROS",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key karnan2022vi"
+    },
+    {
+      "id": "jain-2020-bayesrace",
+      "title": "BayesRace: Learning to race autonomously using prior experience",
+      "authors": [
+        "Achin Jain",
+        "Matthew O'Kelly",
+        "Pratik Chaudhari",
+        "Manfred Morari"
+      ],
+      "year": 2020,
+      "venue": "Proceedings of the 4th Conference on Robot Learning (CoRL)",
+      "venue_short": "CoRL",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key JainBayesRace2020"
+    },
+    {
+      "id": "ivanov-2020-case",
+      "title": "Case study: verifying the safety of an autonomous racing car with a neural network controller",
+      "authors": [
+        "Radoslav Ivanov",
+        "Taylor J Carpenter",
+        "James Weimer",
+        "Rajeev Alur",
+        "George J Pappas",
+        "Insup Lee"
+      ],
+      "year": 2020,
+      "venue": "Proceedings of the 23rd International Conference on Hybrid Systems: Computation and Control",
+      "venue_short": "Proceedings of the 23rd ",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "safety"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key ivanov2020case"
+    },
+    {
+      "id": "okelly-2020-f1tenth",
+      "title": "F1tenth: An open-source evaluation environment for continuous control and reinforcement learning",
+      "authors": [
+        "Matthew O'Kelly",
+        "Hongrui Zheng",
+        "Dhruv Karthik",
+        "Rahul Mangharam"
+      ],
+      "year": 2020,
+      "venue": "Proceedings of Machine Learning Research",
+      "venue_short": "Proceedings of Machine L",
+      "type": "journal",
+      "tags": [
+        "reinforcement-learning",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key o2020f1tenth"
+    },
+    {
+      "id": "sinha-2020-formulazero",
+      "title": "Formulazero: Distributionally robust online adaptation via offline population synthesis",
+      "authors": [
+        "Aman Sinha",
+        "Matthew O’Kelly",
+        "Hongrui Zheng",
+        "Rahul Mangharam",
+        "John Duchi",
+        "Russ Tedrake"
+      ],
+      "year": 2020,
+      "venue": "International Conference on Machine Learning",
+      "venue_short": "International Conference",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key sinha2020formulazero"
+    },
+    {
+      "id": "bulsara-2020-obstacle",
+      "title": "Obstacle Avoidance Using Model Predictive Control: An Implementation and Validation Study Using Scaled Vehicles",
+      "authors": [
+        "Ardashir Bulsara",
+        "Adhiti Raman",
+        "Srivatsav Kamarajugadda",
+        "Matthias Schmid",
+        "Venkat N Krovi"
+      ],
+      "year": 2020,
+      "venue": "SAE Technical Paper",
+      "venue_short": "SAE Technical Paper",
+      "type": "report",
+      "tags": [
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key bulsara2020obstacle"
+    },
+    {
+      "id": "ueter-2020-project",
+      "title": "Project-based CPS education: A case study of an autonomous driving student project",
+      "authors": [
+        "Niklas Ueter",
+        "Kuan-Hsun Chen",
+        "Jian-Jia Chen"
+      ],
+      "year": 2020,
+      "venue": "IEEE Design & Test",
+      "venue_short": "IEEE Design & Test",
+      "type": "journal",
+      "tags": [
+        "education"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key ueter2020project"
+    },
+    {
+      "id": "agnihotri-2020-teaching",
+      "title": "Teaching autonomous systems at 1/10thscale: A project-based course and community",
+      "authors": [
+        "A Agnihotri",
+        "M O’Kelly",
+        "H Abbas",
+        "R Mangharam"
+      ],
+      "year": 2020,
+      "venue": "ACM Special Interest Group on Computer Science Education (SIGCSE). ACM",
+      "venue_short": "ACM Special Interest Gro",
+      "type": "journal",
+      "tags": [
+        "education"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key agnihotri2020teaching"
+    },
+    {
+      "id": "okelly-2020-tunercar",
+      "title": "Tunercar: A superoptimization toolchain for autonomous racing",
+      "authors": [
+        "Matthew O’Kelly",
+        "Hongrui Zheng",
+        "Achin Jain",
+        "Joseph Auckley",
+        "Kim Luong",
+        "Rahul Mangharam"
+      ],
+      "year": 2020,
+      "venue": "2020 IEEE international conference on robotics and automation (ICRA)",
+      "venue_short": "ICRA",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key o2020tunercar"
+    },
+    {
+      "id": "guedes-2019-robotic",
+      "title": "A Robotic Platooning Testbed for Cooperative ITS Components",
+      "authors": [
+        "Nuno Miguel Santos Guedes"
+      ],
+      "year": 2019,
+      "venue": "",
+      "venue_short": "",
+      "type": "thesis",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key guedes2019robotic"
+    },
+    {
+      "id": "almeida-2019-implementing",
+      "title": "Implementing and Tuning an Autonomous Racing Car Tesbed",
+      "authors": [
+        "Daniel Gonçalves Almeida"
+      ],
+      "year": 2019,
+      "venue": "",
+      "venue_short": "",
+      "type": "thesis",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key almeida2019implementing"
+    },
+    {
+      "id": "dusil-2019-slip",
+      "title": "Slip detection for RoboRacer model car",
+      "authors": [
+        "Jan Dusil"
+      ],
+      "year": 2019,
+      "venue": "",
+      "venue_short": "",
+      "type": "journal",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key dusil2019slip"
+    },
+    {
+      "id": "raman-2018-empowering",
+      "title": "Empowering graduate engineering students with proficiency in autonomy",
+      "authors": [
+        "Adhiti T Raman",
+        "Venkat N Krovi",
+        "Matthias JA Schmid"
+      ],
+      "year": 2018,
+      "venue": "International Design Engineering Technical Conferences and Computers and Information in Engineering Conference",
+      "venue_short": "International Design Eng",
+      "type": "conference",
+      "tags": [
+        "education"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key raman2018empowering"
+    },
+    {
+      "id": "vajnar-2017-model",
+      "title": "Model car for the RoboRacer autonomous car racing competition",
+      "authors": [
+        "Martin Vajnar"
+      ],
+      "year": 2017,
+      "venue": "Master’s thesis, Czech Technical University in Prague, Faculty of Electrical~…",
+      "venue_short": "Master’s thesis, Czech T",
+      "type": "thesis",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key vajnar2017model"
+    },
+    {
+      "id": "kerner-2017-software",
+      "title": "Software testing for embedded applications in autonomous vehicles",
+      "authors": [
+        "Bc Jiř\\'\\i Kerner"
+      ],
+      "year": 2017,
+      "venue": "",
+      "venue_short": "",
+      "type": "journal",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key kerner2017software"
+    },
+    {
+      "id": "tongrui-li-0-onevision",
+      "title": "OneVision: Centralized to Distributed Controller Synthesis with Delay Compensation",
+      "authors": [
+        "Tongrui Li, Swarat Chaudhuri, Isil Dillig Jiayi Wei",
+        "Joydeep Biswas"
+      ],
+      "year": 0,
+      "venue": "Intelligent Robots and Systems (IROS), IEEE/RSJ International Conference on",
+      "venue_short": "IROS",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key wei2021onevision",
+      "doi": "10.1109/iros51168.2021.9636164",
+      "url": "https://doi.org/10.1109/iros51168.2021.9636164"
+    },
+    {
+      "id": "atreya-0-state",
+      "title": "State Supervised Steering Function for Sampling-based Kinodynamic Planning",
+      "authors": [
+        "Pranav Atreya",
+        "Joydeep Biswas"
+      ],
+      "year": 0,
+      "venue": "International Conference on Autonomous Agents and Multiagent Systems (AAMAS)",
+      "venue_short": "International Conference",
+      "type": "conference",
+      "tags": [
+        "planning",
+        "multi-agent"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-08-20",
+      "source": "bibtex-migration",
+      "notes": "bibtex key atreya2022s3f"
+    }
+  ]
+}
