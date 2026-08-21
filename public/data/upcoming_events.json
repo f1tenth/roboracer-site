@@ -1,26 +1,27 @@
 [
-    {
-        "title": "28th Roboracer Autonomous Racing Competition at the IEEE Intelligent Vehicles Symposium (IV 2026)",
-        "dates": "June 22-25, 2026",
-        "location": "Detroit, MI, USA",
-        "url": "https://iv2026-race.roboracer.ai/registration.html"
-    },
-    {
-        "title": "29th Roboracer Autonomous Racing Competition at the International Federation of Automatic Control (IFAC 2026)",
-        "dates": "August 24-27, 2026",
-        "location": "Busan, Republic of Korea",
-        "url": "https://2026ifac-roboracer.com/en/registration.html"
-    },
-    {
-        "title": "30th Roboracer Autonomous Racing Competition at the IEEE Vehicular Technology Conference (VTC 2026)",
-        "dates": "Sep 6-9, 2026",
-        "location": "Boston, MA, USA",
-        "url": "https://events.vtsociety.org/vtc2026-fall/"
-    },
-    {
-        "title": "31st Roboracer Autonomous Racing Competition at the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2026)",
-        "dates": "September 27-30, 2026",
-        "location": "Pittsburgh, PA, USA",
-        "url": "https://iros2026-race.roboracer.ai/registration.html"
-    }
+  {
+    "title": "29th Roboracer Autonomous Racing Competition at the International Federation of Automatic Control (IFAC 2026)",
+    "dates": "August 24-27, 2026",
+    "location": "Busan, Republic of Korea",
+    "url": "https://2026ifac-roboracer.com/en/registration.html"
+  },
+  {
+    "title": "30th Roboracer Autonomous Racing Competition at the IEEE Vehicular Technology Conference (VTC 2026 Fall)",
+    "dates": "Sep 6-9, 2026",
+    "location": "Boston, MA, USA",
+    "url": "https://events.vtsociety.org/vtc2026-fall/"
+  },
+  {
+    "title": "31st Roboracer Autonomous Racing Competition at the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2026)",
+    "dates": "September 28-30, 2026",
+    "location": "Pittsburgh, PA, USA",
+    "url": "https://iros2026-race.roboracer.ai/registration.html",
+    "registration_deadline": "September 5, 2026",
+    "spotlight": true,
+    "dates_headline": "September 28 to 30, 2026, Pittsburgh",
+    "dates_secondary": "Check-in and practice September 27",
+    "starts_at": "2026-09-28T09:30:00-04:00",
+    "register_url": "https://iros2026-race.roboracer.ai/registration.html",
+    "rules_url": "https://iros2026-race.roboracer.ai/"
+  }
 ]

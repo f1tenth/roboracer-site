@@ -6,6 +6,14 @@ export type UpcomingEvent = {
   dates: string;
   location: string;
   url: string;
+  /** Next-race spotlight fields (one entry carries spotlight: true). */
+  spotlight?: boolean;
+  dates_headline?: string;
+  dates_secondary?: string;
+  starts_at?: string;
+  registration_deadline?: string;
+  register_url?: string;
+  rules_url?: string;
 };
 
 export type PastRace = {
