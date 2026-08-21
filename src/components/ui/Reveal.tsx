@@ -28,6 +28,7 @@ export default function Reveal({
     () => {
       const el = ref.current;
       if (!el) return;
+      if (stagger && el.children.length === 0) return; // data not loaded yet; render static
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK_QUERY, () => {
         gsap.from(stagger ? Array.from(el.children) : el, {
