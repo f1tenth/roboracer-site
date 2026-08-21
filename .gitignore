@@ -32,3 +32,7 @@ public/media/**/*.webm
 !public/media/hero/hero-fpv-loop-*.mp4
 !public/media/hero/hero-fpv-loop-*.webm
 data/.discover-cache.json
+
+# python bytecode (was accidentally tracked from the harness commit)
+__pycache__/
+*.pyc
