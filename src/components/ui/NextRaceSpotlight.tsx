@@ -55,7 +55,7 @@ export default function NextRaceSpotlight({
       className={`grid gap-8 rounded-card border p-8 md:grid-cols-12 md:p-10 ${ink ? "border-text-on-ink/15" : "border-ink-950/10 bg-paper-50"}`}
     >
       <div className="md:col-span-7">
-        <h2 className={`font-display text-display-l font-semibold ${strong}`}>{datesHeadline}</h2>
+        <h3 className={`font-display text-display-l font-semibold ${strong}`}>{datesHeadline}</h3>
         {datesSecondary && <p className={`mt-3 text-lead ${ink ? "text-text-on-ink-muted" : "text-text-body"}`}>{datesSecondary}</p>}
         <p className={`mt-5 max-w-[55ch] text-small ${muted}`}>{title}</p>
       </div>

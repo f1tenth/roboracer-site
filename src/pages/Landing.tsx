@@ -114,7 +114,7 @@ export default function Landing() {
       {/* 01 · Next race (paper) */}
       {race && (
         <Section aria-labelledby="next-race" guides>
-          <SectionHeader index="01" eyebrow="Next race" id="next-race" title="IROS 2026, Pittsburgh" />
+          <SectionHeader index="01" eyebrow="Next race" id="next-race" title="IROS 2026" />
           <NextRaceSpotlight
             title={race.title}
             datesHeadline={race.dates_headline ?? `${race.dates}, ${race.location}`}
@@ -139,12 +139,13 @@ export default function Landing() {
         <HighlightReel
           items={[
             {
-              src: HERO_VIDEO.mp4_960,
+              // same file the hero already streamed - a cache hit, not a second download
+              src: HERO_VIDEO.mp4_1920,
               poster: HERO_VIDEO.poster,
               caption: "track-level lap · IV 2026, Detroit",
               credit: "RoboRacer organizers",
-              width: 960,
-              height: 540,
+              width: 1280,
+              height: 720,
             },
             {
               kind: "slot",
@@ -181,7 +182,7 @@ export default function Landing() {
                   <p className="text-small text-text-body sm:col-span-5">{p.body}</p>
                   <a
                     href={p.href}
-                    className="text-small font-semibold text-text-strong underline underline-offset-4 decoration-rr-magenta hover:decoration-2 sm:col-span-3 sm:justify-self-end"
+                    className="inline-block py-1 text-small font-semibold text-text-strong underline underline-offset-4 decoration-rr-magenta hover:decoration-2 sm:col-span-3 sm:justify-self-end"
                   >
                     {p.linkText}
                   </a>
@@ -297,7 +298,7 @@ export default function Landing() {
                 <p className="text-small text-text-body sm:col-span-6">{body}</p>
                 <a
                   href={href}
-                  className="text-small font-semibold text-text-strong underline underline-offset-4 decoration-rr-magenta hover:decoration-2 sm:col-span-3 sm:justify-self-end"
+                  className="inline-block py-1 text-small font-semibold text-text-strong underline underline-offset-4 decoration-rr-magenta hover:decoration-2 sm:col-span-3 sm:justify-self-end"
                 >
                   {cta}
                 </a>

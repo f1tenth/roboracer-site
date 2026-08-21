@@ -32,11 +32,11 @@
     "highlights": [
       {
         "event": "IV 2026 (Detroit)",
-        "result": "3rd place; exact team/competition alias TODO(content), institution led by Amr El-Wakeel's group per skill"
+        "result": "3rd"
       }
     ],
     "status": "verify",
-    "source": "Cedric, 2026-08-20 (direct fact, overrides stale results page; see note on Thunderbolt entry). Skill 'Featured teams section' corrects an earlier note that mistakenly placed this at ICRA 2026 -- it was IV 2026. Do not confuse with ICRA 2026 Vienna teams 'UBM-Tom' / 'UBM-Atlas' below; no confirmed link between those aliases and WVU."
+    "source": "Cedric, 2026-08-20 (direct fact, overrides stale results page; see note on Thunderbolt entry). Skill 'Featured teams section' corrects an earlier note that mistakenly placed this at ICRA 2026 -- it was IV 2026. Do not confuse with ICRA 2026 Vienna teams 'UBM-Tom' / 'UBM-Atlas' below; no confirmed link between those aliases and WVU. Team name/alias at IV 2026: TODO(content); group led by Amr El-Wakeel per the content skill."
   },
   {
     "name": "LAMARRacing",

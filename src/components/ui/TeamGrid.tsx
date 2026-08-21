@@ -77,7 +77,7 @@ export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
                   href={team.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-fit text-small font-semibold underline underline-offset-4 decoration-rr-magenta hover:decoration-2 ${ink ? "text-text-on-ink" : "text-text-strong"}`}
+                  className={`inline-block w-fit py-1 text-small font-semibold underline underline-offset-4 decoration-rr-magenta hover:decoration-2 ${ink ? "text-text-on-ink" : "text-text-strong"}`}
                 >
                   Team site
                 </a>
