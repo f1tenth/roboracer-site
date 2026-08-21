@@ -10,8 +10,9 @@ export default function Layout() {
     currentPath === "/learn" ||
     currentPath === "/build" ||
     currentPath === "/course" ||
-    currentPath === "/chat";
-  const isHiddenRoute = currentPath === "/chat";
+    currentPath === "/chat" ||
+    currentPath === "/assembly";
+  const isHiddenRoute = currentPath === "/chat" || currentPath === "/assembly";
   return (
     <div className={`flex flex-col h-[100svh] ${isAltLayout && "overflow-hidden"}`}>
       {!isHiddenRoute && <Navbar />}

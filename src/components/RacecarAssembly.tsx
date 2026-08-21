@@ -1,0 +1,337 @@
+import { Suspense, useEffect, useMemo, useRef, useState, type RefObject } from "react";
+import { Canvas, type ThreeEvent, useFrame, useLoader, useThree } from "@react-three/fiber";
+import { ContactShadows, Grid, Html, OrbitControls, useGLTF } from "@react-three/drei";
+import {
+  ACESFilmicToneMapping,
+  Color,
+  Mesh,
+  type Group,
+  type Material,
+  type Object3D,
+  Vector3,
+} from "three";
+import { STLLoader, type GLTF, type OrbitControls as OrbitControlsImpl } from "three-stdlib";
+import {
+  RACECAR_PARTS,
+  type RacecarPart,
+  type RacecarPartId,
+} from "./racecarAssemblyData";
+
+const glbAssets = RACECAR_PARTS.filter((part) => part.format === "glb").map(
+  (part) => part.asset,
+);
+
+glbAssets.forEach((asset) => useGLTF.preload(asset));
+
+type ViewerMaterial = Material & {
+  emissive?: Color;
+  emissiveIntensity?: number;
+  wireframe?: boolean;
+};
+
+function cloneScene(scene: Object3D) {
+  const clone = scene.clone(true);
+
+  clone.traverse((child) => {
+    const mesh = child as Mesh;
+    if (!mesh.isMesh) return;
+
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+    const clonedMaterials = materials.map((material) => {
+      const cloned = material.clone() as ViewerMaterial;
+      if (cloned.emissive) {
+        cloned.userData.viewerEmissive = cloned.emissive.clone();
+        cloned.userData.viewerEmissiveIntensity = cloned.emissiveIntensity ?? 1;
+      }
+      return cloned;
+    });
+    mesh.material = Array.isArray(mesh.material) ? clonedMaterials : clonedMaterials[0];
+  });
+
+  return clone;
+}
+
+function updateSceneAppearance(
+  scene: Object3D,
+  isActive: boolean,
+  isHovered: boolean,
+  wireframe: boolean,
+) {
+  scene.traverse((child) => {
+    const mesh = child as Mesh;
+    if (!mesh.isMesh) return;
+
+    const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+    materials.forEach((material) => {
+      const viewerMaterial = material as ViewerMaterial;
+      viewerMaterial.wireframe = wireframe;
+      if (!viewerMaterial.emissive) return;
+
+      const original = viewerMaterial.userData.viewerEmissive as Color | undefined;
+      viewerMaterial.emissive.copy(original ?? new Color("#000000"));
+      if (isActive || isHovered) {
+        viewerMaterial.emissive.lerp(new Color("#65e7ed"), isActive ? 0.55 : 0.25);
+        viewerMaterial.emissiveIntensity = isActive ? 0.8 : 0.45;
+      } else {
+        viewerMaterial.emissiveIntensity =
+          (viewerMaterial.userData.viewerEmissiveIntensity as number | undefined) ?? 1;
+      }
+      viewerMaterial.needsUpdate = true;
+    });
+  });
+}
+
+type ModelGeometryProps = {
+  part: RacecarPart;
+  selected: boolean;
+  hovered: boolean;
+  wireframe: boolean;
+};
+
+function GlbGeometry({ part, selected, hovered, wireframe }: ModelGeometryProps) {
+  const gltf = useGLTF(part.asset) as GLTF;
+  const scene = useMemo(() => cloneScene(gltf.scene), [gltf.scene]);
+
+  useEffect(() => {
+    updateSceneAppearance(scene, selected, hovered, wireframe);
+  }, [hovered, scene, selected, wireframe]);
+
+  return <primitive object={scene} rotation={part.rotation ?? [0, 0, 0]} />;
+}
+
+function StlGeometry({ part, selected, hovered, wireframe }: ModelGeometryProps) {
+  const geometry = useLoader(STLLoader, part.asset);
+
+  return (
+    <mesh geometry={geometry} castShadow receiveShadow>
+      <meshStandardMaterial
+        color="#7151ff"
+        emissive={selected || hovered ? "#65e7ed" : "#1a103d"}
+        emissiveIntensity={selected ? 0.85 : hovered ? 0.4 : 0.2}
+        metalness={0.58}
+        roughness={0.25}
+        wireframe={wireframe}
+      />
+    </mesh>
+  );
+}
+
+type ExplodedPartProps = {
+  part: RacecarPart;
+  explosion: number;
+  visible: boolean;
+  labelsVisible: boolean;
+  selected: boolean;
+  wireframe: boolean;
+  onSelect: (part: RacecarPartId) => void;
+};
+
+function ExplodedPart({
+  part,
+  explosion,
+  visible,
+  labelsVisible,
+  selected,
+  wireframe,
+  onSelect,
+}: ExplodedPartProps) {
+  const group = useRef<Group>(null);
+  const [hovered, setHovered] = useState(false);
+  const target = useMemo(() => new Vector3(), []);
+
+  useEffect(() => {
+    if (!hovered) return;
+    const previousCursor = document.body.style.cursor;
+    document.body.style.cursor = "pointer";
+    return () => {
+      document.body.style.cursor = previousCursor;
+    };
+  }, [hovered]);
+
+  useFrame((_, delta) => {
+    if (!group.current) return;
+    target.set(
+      part.position[0] + part.explosion[0] * explosion,
+      part.position[1] + part.explosion[1] * explosion,
+      part.position[2] + part.explosion[2] * explosion,
+    );
+    group.current.position.lerp(target, 1 - Math.exp(-11 * delta));
+  });
+
+  const handleSelect = (event: ThreeEvent<MouseEvent>) => {
+    event.stopPropagation();
+    onSelect(part.id);
+  };
+
+  return (
+    <group
+      ref={group}
+      name={part.id}
+      position={part.position}
+      visible={visible}
+      onClick={handleSelect}
+      onPointerEnter={(event) => {
+        event.stopPropagation();
+        setHovered(true);
+      }}
+      onPointerLeave={() => setHovered(false)}
+    >
+      {part.format === "glb" ? (
+        <GlbGeometry
+          part={part}
+          selected={selected}
+          hovered={hovered}
+          wireframe={wireframe}
+        />
+      ) : (
+        <StlGeometry
+          part={part}
+          selected={selected}
+          hovered={hovered}
+          wireframe={wireframe}
+        />
+      )}
+
+      {labelsVisible && explosion > 0.08 && (
+        <Html position={[0, 0, 0.085]} center distanceFactor={0.75} zIndexRange={[20, 0]}>
+          <div className={`assembly-label ${selected ? "is-selected" : ""}`}>
+            <span style={{ backgroundColor: part.color }} />
+            {part.name}
+          </div>
+        </Html>
+      )}
+    </group>
+  );
+}
+
+type CameraControllerProps = {
+  autoRotate: boolean;
+  resetKey: number;
+};
+
+function CameraController({ autoRotate, resetKey }: CameraControllerProps) {
+  const controls = useRef<OrbitControlsImpl>(null);
+  const { camera } = useThree();
+
+  useEffect(() => {
+    camera.position.set(0.93, 0.62, 0.93);
+    camera.up.set(0, 1, 0);
+    controls.current?.target.set(-0.015, 0.09, 0);
+    controls.current?.update();
+  }, [camera, resetKey]);
+
+  return (
+    <OrbitControls
+      ref={controls}
+      makeDefault
+      autoRotate={autoRotate}
+      autoRotateSpeed={0.7}
+      enableDamping
+      dampingFactor={0.06}
+      enablePan={false}
+      minDistance={0.42}
+      maxDistance={2.5}
+      minPolarAngle={0.12}
+      maxPolarAngle={Math.PI * 0.49}
+      target={[-0.015, 0.09, 0]}
+    />
+  );
+}
+
+function SceneReady({ onReady }: { onReady: () => void }) {
+  useEffect(onReady, [onReady]);
+  return null;
+}
+
+type RacecarAssemblyCanvasProps = {
+  explosion: number;
+  hiddenParts: ReadonlySet<RacecarPartId>;
+  labelsVisible: boolean;
+  selectedPart: RacecarPartId | null;
+  wireframe: boolean;
+  autoRotate: boolean;
+  resetKey: number;
+  assemblyRef: RefObject<Group | null>;
+  onReady: () => void;
+  onSelect: (part: RacecarPartId | null) => void;
+};
+
+export function RacecarAssemblyCanvas({
+  explosion,
+  hiddenParts,
+  labelsVisible,
+  selectedPart,
+  wireframe,
+  autoRotate,
+  resetKey,
+  assemblyRef,
+  onReady,
+  onSelect,
+}: RacecarAssemblyCanvasProps) {
+  return (
+    <Canvas
+      className="assembly-canvas"
+      camera={{ fov: 38, near: 0.01, far: 30, position: [0.93, 0.62, 0.93] }}
+      dpr={[1, 1.75]}
+      shadows
+      gl={{ antialias: true, toneMapping: ACESFilmicToneMapping }}
+      onPointerMissed={() => onSelect(null)}
+    >
+      <color attach="background" args={["#080a0d"]} />
+      <fog attach="fog" args={["#080a0d", 1.8, 4]} />
+      <ambientLight intensity={0.72} />
+      <hemisphereLight args={["#d9fbff", "#13131a", 1.45]} />
+      <directionalLight
+        castShadow
+        color="#dbfbff"
+        intensity={3.2}
+        position={[1.2, 1.7, 0.8]}
+        shadow-mapSize={[1024, 1024]}
+      />
+      <spotLight color="#7057ff" intensity={12} angle={0.42} penumbra={0.8} position={[-1, 1.3, -1]} />
+
+      <Suspense fallback={null}>
+        <group ref={assemblyRef} name="f1tenth_xacro_assembly" rotation={[-Math.PI / 2, 0, 0]}>
+          {RACECAR_PARTS.map((part) => (
+            <ExplodedPart
+              key={part.id}
+              part={part}
+              explosion={explosion}
+              visible={!hiddenParts.has(part.id)}
+              labelsVisible={labelsVisible}
+              selected={selectedPart === part.id}
+              wireframe={wireframe}
+              onSelect={onSelect}
+            />
+          ))}
+        </group>
+        <SceneReady onReady={onReady} />
+      </Suspense>
+
+      <ContactShadows
+        position={[0, -0.003, 0]}
+        opacity={0.48}
+        scale={2.2}
+        blur={2.5}
+        far={1.2}
+        resolution={512}
+      />
+      <Grid
+        position={[0, -0.006, 0]}
+        args={[3, 3]}
+        cellSize={0.075}
+        cellThickness={0.55}
+        cellColor="#263036"
+        sectionSize={0.3}
+        sectionThickness={0.9}
+        sectionColor="#34434a"
+        fadeDistance={2.2}
+        fadeStrength={1.5}
+        infiniteGrid
+      />
+      <CameraController autoRotate={autoRotate} resetKey={resetKey} />
+    </Canvas>
+  );
+}

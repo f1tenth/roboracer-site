@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Landing from "./pages/Landing";
@@ -11,6 +12,8 @@ import Research from "./pages/Research";
 import Rules from "./pages/Rules";
 import Chat from "./pages/Chat";
 // import Events from "./pages/Events";
+
+const Assembly = lazy(() => import("./pages/Assembly"));
 
 function App() {
   return (
@@ -28,6 +31,7 @@ function App() {
           <Route path="/research" element={<Research />} />
           <Route path="/rules" element={<Rules />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/assembly" element={<Suspense fallback={null}><Assembly /></Suspense>} />
         </Route>
       </Routes>
     </Router>

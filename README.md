@@ -1,4 +1,36 @@
-# React + TypeScript + Vite
+# RoboRacer website
+
+## F1TENTH assembly viewer
+
+The `/assembly` route is a lightweight, interactive renderer for the visual
+assembly defined in `../f1tenth_gym_ros/urdf/racecar_mesh.xacro`.
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:5173/assembly](http://localhost:5173/assembly). The viewer
+supports orbit/zoom controls, a continuous exploded-view slider, selectable and
+hideable components, labels, wireframe mode, auto-rotation, and camera reset.
+The `E` key toggles between assembled and exploded; `R` resets the camera.
+
+The checked-in browser assets are copies of the ROS meshes. After changing or
+re-exporting a mesh in `f1tenth_gym_ros/meshes`, refresh those copies with:
+
+```bash
+npm run sync:racecar
+```
+
+The download tool in the top-right toolbar exports
+`f1tenth-xacro-assembly.gltf`. It always exports the complete assembly at the
+canonical Xacro transforms, even when parts are hidden or the browser view is
+exploded. The file uses meters and a Y-up coordinate system and can be imported
+into Onshape as mesh geometry. It is useful as an assembly/layout reference,
+but it is not editable parametric B-rep CAD; a STEP/Parasolid assembly requires
+the original solid CAD or a reverse-engineering pass.
+
+## Development stack
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
