@@ -184,8 +184,10 @@ export default function Styleguide() {
         </div>
       </Section>
 
-      {/* HighlightReel - two-row counter-scrolling strip from highlights.json */}
-      <Section edge rule width="bleed">
+      {/* HighlightReel - two-row counter-scrolling strip from highlights.json.
+          Plain paper-50 surface so the paper-100 placeholder frames read as
+          tiles, not background. */}
+      <Section rule width="bleed">
         <div className="mx-auto max-w-content px-6">
           <Spec name="HighlightReel · two-row counter-scroll, 52s/60s, pause on hover/focus" />
         </div>

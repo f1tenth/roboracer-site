@@ -94,11 +94,16 @@ export default function VideoHero({ video, className = "" }: VideoHeroProps) {
         </video>
       )}
 
+      {/* The section is min-h-svh but starts one nav-offset below the top of
+          the viewport (pages add pt-[68px] md:pt-[85px]), so anything anchored
+          to the section bottom sits below the fold at rest. The cue, the
+          pause control, and the darkening band are raised by that offset so
+          they are visible before the first scroll. */}
       {/* Faint bottom darkening only - enough contrast for the cue and the
           pause control, never a headline scrim. */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-[15%] bg-gradient-to-t from-ink-950/50 to-transparent"
+        className="absolute inset-x-0 bottom-[68px] h-[15%] bg-gradient-to-t from-ink-950/50 to-transparent md:bottom-[85px]"
       />
 
       {!reduced && (
@@ -107,7 +112,7 @@ export default function VideoHero({ video, className = "" }: VideoHeroProps) {
           onClick={togglePlayback}
           aria-pressed={paused}
           aria-label={paused ? "Play footage" : "Pause footage"}
-          className={`absolute bottom-6 right-6 z-10 flex h-10 w-10 items-center justify-center rounded-btn border border-text-on-ink/30 bg-ink-950/40 text-text-on-ink transition-opacity duration-[var(--duration-fast)] focus-visible:opacity-100 focus-visible:outline-text-on-ink ${
+          className={`absolute bottom-[calc(68px+1.5rem)] right-6 z-10 flex h-10 w-10 items-center justify-center rounded-btn border border-text-on-ink/30 bg-ink-950/40 text-text-on-ink transition-opacity duration-[var(--duration-fast)] focus-visible:opacity-100 focus-visible:outline-text-on-ink md:bottom-[calc(85px+1.5rem)] ${
             paused ? "opacity-100" : "opacity-0 group-hover:opacity-100"
           }`}
         >
@@ -135,7 +140,7 @@ export default function VideoHero({ video, className = "" }: VideoHeroProps) {
 
       <div
         aria-hidden="true"
-        className={`pointer-events-none absolute inset-x-0 bottom-7 z-10 flex flex-col items-center gap-2 transition-opacity duration-[var(--duration-base)] motion-reduce:transition-none ${
+        className={`pointer-events-none absolute inset-x-0 bottom-[calc(68px+1.75rem)] z-10 flex flex-col items-center gap-2 transition-opacity duration-[var(--duration-base)] motion-reduce:transition-none md:bottom-[calc(85px+1.75rem)] ${
           cue === "visible" ? "opacity-100" : "opacity-0"
         }`}
       >

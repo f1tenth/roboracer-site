@@ -76,11 +76,15 @@ export default function HeadlineReveal({ as = "h1", lines, className = "" }: Hea
         }
       >
         <div className="mx-auto w-full max-w-wide px-6">
-          <Tag
-            aria-label={sentence}
-            className="font-display text-[clamp(2.6rem,9vw,9.5rem)] font-semibold leading-[0.98] tracking-[-0.03em] text-text-strong"
-          >
-            <span aria-hidden="true" className="rr-headline-block block">
+          {/* Display type lives on the span, not the heading element: the
+              legacy unlayered h1/h2 rules in index.css override utility
+              classes (Tailwind v4 layers), but no element rule targets
+              spans. */}
+          <Tag aria-label={sentence} className="block">
+            <span
+              aria-hidden="true"
+              className="rr-headline-block block font-display text-[clamp(1.8rem,9vw,9.25rem)] font-semibold leading-[0.98] tracking-[-0.03em] text-text-strong"
+            >
               {lines.map((line) => (
                 <span key={line} className="block">
                   {line.split(" ").map((word, wi) => (
