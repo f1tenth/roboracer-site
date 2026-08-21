@@ -17,21 +17,9 @@ import Button from "../components/ui/Button";
 import Reveal from "../components/ui/Reveal";
 import Marquee from "../components/ui/Marquee";
 import StatCounter from "../components/ui/StatCounter";
-import VideoHero from "../components/ui/VideoHero";
-import HighlightReel from "../components/ui/HighlightReel";
 import NextRaceSpotlight from "../components/ui/NextRaceSpotlight";
-import ExplodedModel from "../components/ui/ExplodedModel";
-import SponsorCTA from "../components/ui/SponsorCTA";
 import TeamGrid from "../components/ui/TeamGrid";
 import PublicationCard from "../components/ui/PublicationCard";
-
-const HERO_VIDEO = {
-  mp4_1920: "/media/hero/hero-fpv-loop-1280.mp4",
-  mp4_960: "/media/hero/hero-fpv-loop-960.mp4",
-  poster: "/media/hero/hero-fpv-poster.webp",
-  width: 1280,
-  height: 720,
-};
 
 const SCHOLAR_URL =
   "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=";
@@ -72,6 +60,13 @@ const PILLARS = [
   },
 ] as const;
 
+/**
+ * Landing v2 composition (final order, plan rev 2): hero video, headline,
+ * highlights, next race, the car, platform, scale data line, partners, teams,
+ * research, get started. Sections 1 (hero), 2 (headline) and 5 (car) are
+ * local stubs; the director wires VideoHero / HeadlineReveal / HighlightReel /
+ * ExplodedModel from revamp/v2-hero and revamp/v2-car at integration.
+ */
 export default function Landing() {
   useLenis();
   const [events, setEvents] = useState<UpcomingEvent[]>([]);
@@ -91,30 +86,39 @@ export default function Landing() {
 
   return (
     <div className="pt-[68px] md:pt-[85px]">
-      {/* Hero (ink): the feeling of racing. One solid CTA. */}
-      <VideoHero
-        headline="Autonomous racing, built and raced in the open"
-        lead="RoboRacer, formerly F1TENTH, is an international community of researchers, engineers, and students racing open-source autonomous cars at 1/10 scale."
-        actions={
-          <>
-            {race && (
-              <Button href={race.register_url ?? race.url} on="ink" target="_blank" rel="noopener noreferrer">
-                Register for IROS 2026
-              </Button>
-            )}
-            <Button href={SLACK_URL} on="ink" variant="ghost" target="_blank" rel="noopener noreferrer">
-              Join the community
-            </Button>
-          </>
-        }
-        video={HERO_VIDEO}
-        credit="footage: RoboRacer at IV 2026, Detroit"
-      />
+      {/* 1 · Hero (ink): video and nothing else */}
+      <section aria-label="Race footage" className="flex min-h-svh items-center justify-center bg-ink-950">
+        <p className="font-mono text-small text-text-on-ink-muted">TODO(wire): VideoHero from revamp/v2-hero</p>
+      </section>
 
-      {/* 01 · Next race (paper) */}
+      {/* 2 · Headline (paper): the page h1; A's HeadlineReveal replaces the static block */}
+      <Section aria-labelledby="headline">
+        <h1 id="headline" className="font-display text-display-xl font-semibold text-text-strong">
+          Autonomous racing, built and raced in the open
+        </h1>
+        <p className="mt-8 font-mono text-small text-text-muted">TODO(wire): HeadlineReveal from revamp/v2-hero</p>
+      </Section>
+
+      {/* 3 · 01 Highlights (paper, full-bleed): the two-row strip lands at integration */}
+      <Section edge rule width="bleed" aria-labelledby="highlights">
+        <div className="mx-auto max-w-content px-6">
+          <SectionHeader
+            index="01"
+            eyebrow="Highlights"
+            id="highlights"
+            title="30 competitions. One community."
+            lead="From Pittsburgh to Busan, teams have raced 1/10-scale autonomous cars since 2016. Podiums, overtakes, packed exhibition halls."
+          />
+        </div>
+        <div className="flex min-h-[30vh] items-center justify-center border-y border-ink-950/10">
+          <p className="font-mono text-small text-text-muted">TODO(wire): HighlightReel strip from revamp/v2-hero</p>
+        </div>
+      </Section>
+
+      {/* 4 · 02 Next race (paper) */}
       {race && (
         <Section aria-labelledby="next-race" guides>
-          <SectionHeader index="01" eyebrow="Next race" id="next-race" title="IROS 2026" />
+          <SectionHeader index="02" eyebrow="Next race" id="next-race" title="IROS 2026" />
           <NextRaceSpotlight
             title={race.title}
             datesHeadline={race.dates_headline ?? `${race.dates}, ${race.location}`}
@@ -127,41 +131,12 @@ export default function Landing() {
         </Section>
       )}
 
-      {/* 02 · Highlights (paper): real footage + honest slots until photos land */}
-      <Section edge rule aria-labelledby="highlights">
-        <SectionHeader
-          index="02"
-          eyebrow="Highlights"
-          id="highlights"
-          title="30 competitions. One community."
-          lead="From Pittsburgh to Busan, teams have raced 1/10-scale autonomous cars since 2016. Podiums, overtakes, packed exhibition halls."
-        />
-        <HighlightReel
-          items={[
-            {
-              // same file the hero already streamed - a cache hit, not a second download
-              src: HERO_VIDEO.mp4_1920,
-              poster: HERO_VIDEO.poster,
-              caption: "track-level lap · IV 2026, Detroit",
-              credit: "RoboRacer organizers",
-              width: 1280,
-              height: 720,
-            },
-            {
-              kind: "slot",
-              // TODO(content): ICRA 2026 Vienna group photo from Cedric, full-bleed treatment
-              caption: "ICRA 2026, Vienna · group photo",
-            },
-          ]}
-        />
-      </Section>
+      {/* 5 · The car (ink chapter): B's ExplodedModel carries its own "03 / The car" header */}
+      <section className="flex min-h-svh items-center justify-center bg-ink-950">
+        <p className="font-mono text-small text-text-on-ink-muted">TODO(wire): ExplodedModel chapter from revamp/v2-car</p>
+      </section>
 
-      {/* 03 · The car (ink chapter - one of the three ink surfaces) */}
-      <div className="bg-ink-950">
-        <ExplodedModel />
-      </div>
-
-      {/* 04 · Platform (paper): hairline rows, 5/7 split */}
+      {/* 6 · 04 Platform (paper): hairline rows, 5/7 split */}
       <Section aria-labelledby="pillars">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
@@ -182,7 +157,7 @@ export default function Landing() {
                   <p className="text-small text-text-body sm:col-span-5">{p.body}</p>
                   <a
                     href={p.href}
-                    className="inline-block py-1 text-small font-semibold text-text-strong underline underline-offset-4 decoration-rr-magenta hover:decoration-2 sm:col-span-3 sm:justify-self-end"
+                    className="inline-block py-1 text-small font-semibold text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2 sm:col-span-3 sm:justify-self-end"
                   >
                     {p.linkText}
                   </a>
@@ -193,13 +168,10 @@ export default function Landing() {
         </div>
       </Section>
 
-      {/* 05 · Scale (paper data strip) */}
-      <Section tight rule aria-labelledby="scale">
-        <h2 id="scale" className="mb-4 flex items-center gap-2 font-mono text-small font-normal text-text-muted">
-          <span aria-hidden="true" className="h-1 w-1 bg-rr-magenta" />
-          <span>05</span>
-          <span aria-hidden="true">/</span>
-          <span>Scale</span>
+      {/* 7 · Scale (paper): a data line, not a section - no header, no marker */}
+      <Section tight rule aria-labelledby="scale" className="pb-0">
+        <h2 id="scale" className="sr-only">
+          Community scale
         </h2>
         <div className="grid grid-cols-2 gap-8 border-y border-ink-950/10 py-8 md:grid-cols-4">
           <StatCounter value={90} suffix="+" label="universities" />
@@ -207,18 +179,16 @@ export default function Landing() {
           <StatCounter value={1000} suffix="+" label="publications" />
           <StatCounter value={30} label="competitions held" />
         </div>
+        <p className="mt-3 text-right font-mono text-small text-text-muted">across the partner institutions below</p>
       </Section>
 
-      {/* 06 · Partners (paper) */}
-      <Section tight width="bleed" aria-labelledby="partners">
+      {/* 8 · Partners (paper): marquee with a demoted mono label; reads as one
+          unit with the data line above */}
+      <Section tight width="bleed" aria-labelledby="partners" className="pt-6">
         <div className="mx-auto max-w-content px-6">
-          <SectionHeader
-            index="06"
-            eyebrow="Partners"
-            id="partners"
-            title="Partner institutions"
-            lead="The universities and organizations that build, teach, and race with the platform."
-          />
+          <h2 id="partners" className="mb-6 font-mono text-eyebrow font-normal tracking-normal text-text-muted">
+            partner institutions
+          </h2>
         </div>
         <Marquee label="Partner institutions" duration={55}>
           {partners.map((p) => (
@@ -236,27 +206,26 @@ export default function Landing() {
         </Marquee>
       </Section>
 
-      {/* 07 · Sponsors + 08 · Teams (paper) */}
-      <Section edge rule aria-labelledby="sponsors">
-        <SectionHeader index="07" eyebrow="Sponsorship" id="sponsors" title="Sponsors" />
-        <SponsorCTA />
-        <div className="mt-24">
-          <SectionHeader
-            index="08"
-            eyebrow="Teams"
-            title="Who competes"
-            lead="Seeded from the results pages of recent competitions; entries are tagged until verified."
-          />
-          <TeamGrid teams={teams} />
-        </div>
+      {/* SponsorCTA removed from landing 2026-08-21 (Cedric): zero-sponsor state lives on /about and /race for now */}
+
+      {/* 9 · 05 Teams (paper) */}
+      <Section edge rule aria-labelledby="teams">
+        <SectionHeader
+          index="05"
+          eyebrow="Teams"
+          id="teams"
+          title="Who competes"
+          lead="Seeded from the results pages of recent competitions; entries are tagged until verified."
+        />
+        <TeamGrid teams={teams} />
       </Section>
 
-      {/* 09 · Research (paper, 5/7) */}
+      {/* 10 · 06 Research (paper, 5/7) */}
       <Section rule aria-labelledby="research">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
             <SectionHeader
-              index="09"
+              index="06"
               eyebrow="Research"
               id="research"
               title="1,000+ publications build on this platform"
@@ -279,10 +248,10 @@ export default function Landing() {
         </div>
       </Section>
 
-      {/* 10 · Get started (paper) */}
+      {/* 11 · 07 Get started (paper) */}
       <Section edge rule aria-labelledby="get-started">
         <SectionHeader
-          index="10"
+          index="07"
           eyebrow="Get started"
           id="get-started"
           title="Bring your car to the grid"
@@ -301,7 +270,7 @@ export default function Landing() {
                 <p className="text-small text-text-body sm:col-span-6">{body}</p>
                 <a
                   href={href}
-                  className="inline-block py-1 text-small font-semibold text-text-strong underline underline-offset-4 decoration-rr-magenta hover:decoration-2 sm:col-span-3 sm:justify-self-end"
+                  className="inline-block py-1 text-small font-semibold text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2 sm:col-span-3 sm:justify-self-end"
                 >
                   {cta}
                 </a>
@@ -315,7 +284,7 @@ export default function Landing() {
           </Button>
           <p className="font-mono text-small text-text-muted">
             <a
-              className="underline underline-offset-4 decoration-rr-magenta hover:decoration-2"
+              className="text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2"
               href="mailto:contact@roboracer.ai"
             >
               contact@roboracer.ai
