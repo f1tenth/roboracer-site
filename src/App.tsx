@@ -11,7 +11,6 @@ import RaceCalendar from "./pages/Race";
 import Research from "./pages/Research";
 import Rules from "./pages/Rules";
 import Chat from "./pages/Chat";
-// import Events from "./pages/Events";
 
 const Assembly = lazy(() => import("./pages/Assembly"));
 
