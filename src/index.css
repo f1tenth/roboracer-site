@@ -116,9 +116,14 @@ body {
 }
 
 /* Visible focus everywhere; Button overrides color on ink surfaces. */
-:focus-visible {
-  outline: 2px solid var(--color-rr-violet);
-  outline-offset: 2px;
+/* Layered so per-component focus-ring utilities (e.g. the hero pause
+   button's on-ink white ring) can override; unlayered, this rule beat every
+   Tailwind utility (qa-reviewer, 2026-08-21). */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-rr-violet);
+    outline-offset: 2px;
+  }
 }
 
 @utility eyebrow {

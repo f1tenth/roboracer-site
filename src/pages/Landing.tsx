@@ -132,13 +132,20 @@ export default function Landing() {
       {/* 3 · 01 Highlights (paper, full-bleed): the two-row strip lands at integration */}
       <Section edge rule width="bleed" aria-labelledby="highlights">
         <div className="mx-auto max-w-content px-6">
-          <SectionHeader
-            index="01"
-            eyebrow="Highlights"
-            id="highlights"
-            title="30 competitions. One community."
-            lead="From Pittsburgh to Busan, teams have raced 1/10-scale autonomous cars since 2016. Podiums, overtakes, packed exhibition halls."
-          />
+          <h2 id="highlights" className="sr-only">
+            Highlights
+          </h2>
+          {/* Demoted header (impeccable review 2026-08-21): the strip is the
+              section's voice - mono label + one line, media persuades. */}
+          <p aria-hidden="true" className="mb-3 flex items-center gap-2 font-mono text-small text-text-muted">
+            <span className="h-1 w-1 bg-ink-950" />
+            <span>01</span>
+            <span>/</span>
+            <span>Highlights</span>
+          </p>
+          <p className="mb-10 font-mono text-small text-text-muted">
+            30 competitions since 2016. Podiums, overtakes, packed exhibition halls.
+          </p>
         </div>
         <HighlightReel items={highlights} />
       </Section>
@@ -260,7 +267,7 @@ export default function Landing() {
               title="1,000+ publications build on this platform"
               lead="A Google Scholar search for the platform returns more than a thousand results. A few of the papers we feature:"
             />
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col items-start gap-3">
               <Button href={SCHOLAR_URL} variant="secondary" target="_blank" rel="noopener noreferrer">
                 See the Scholar query
               </Button>
@@ -313,7 +320,7 @@ export default function Landing() {
           </Button>
           <p className="font-mono text-small text-text-muted">
             <a
-              className="text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2"
+              className="inline-block py-1 text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2"
               href="mailto:contact@roboracer.ai"
             >
               contact@roboracer.ai

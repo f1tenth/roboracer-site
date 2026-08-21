@@ -1,10 +1,43 @@
 {
-  "errors": [],
-  "warnings": [
-    "[.WebGL-0x2f6c0015d600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
-    "[.WebGL-0x2f6c0015d600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
-    "[.WebGL-0x2f6c0015d600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
-    "[.WebGL-0x2f6c0015d600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+ "console": [],
+ "failed_requests": [],
+ "audits": {
+  "h1_count": 1,
+  "overflow_x": 1440,
+  "imgs_no_dims": [
+   "logos/logo-black-gradient.png",
+   "logos/logo-white-gradient.svg",
+   "logos/slack-logo.svg"
   ],
-  "failedRequests": []
+  "videos_no_poster": 0,
+  "pin_heights_vh": [
+   180,
+   140
+  ],
+  "links": [
+   "http://localhost:4176/",
+   "http://localhost:4176/about",
+   "http://localhost:4176/build",
+   "http://localhost:4176/learn",
+   "http://localhost:4176/race",
+   "http://localhost:4176/course",
+   "http://localhost:4176/research",
+   "http://localhost:4176/news",
+   "https://autodrive-ecosystem.github.io/",
+   "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+   "https://iros2026-race.roboracer.ai/registration.html",
+   "https://iros2026-race.roboracer.ai/",
+   "http://localhost:4176/assembly",
+   "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=",
+   "https://arxiv.org/abs/2403.11784",
+   "mailto:contact@roboracer.ai"
+  ],
+  "accent_leaks": [],
+  "axe_serious_critical": [],
+  "axe_all_counts": {},
+  "overflow_x_390": 390,
+  "rm_h1_visible": true,
+  "rm_scrollHeight": 8885,
+  "nojs_h1_text": "NO H1"
+ }
 }

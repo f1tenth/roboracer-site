@@ -6,13 +6,13 @@ type TeamGridProps = {
 };
 
 function initials(name: string): string {
-  return name
-    .split(/\s+/)
-    .map((w) => w[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
+  // Split on spaces, hyphens, and underscores so "UBM-Tom" -> "UT" and
+  // "UNICORN_Racing" -> "UR" instead of a wall of identical "U" tiles.
+  const segments = name.split(/[\s_-]+/).filter(Boolean);
+  if (segments.length >= 2) {
+    return (segments[0][0] + segments[1][0]).toUpperCase();
+  }
+  return name.slice(0, 2).toUpperCase();
 }
 
 /**

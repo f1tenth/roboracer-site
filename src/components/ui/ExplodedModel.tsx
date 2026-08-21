@@ -146,7 +146,7 @@ export default function ExplodedModel() {
   const explore = (
     <Link
       to="/assembly"
-      className="mt-8 inline-block text-small font-semibold text-text-on-ink underline underline-offset-4 decoration-text-on-ink/30 hover:decoration-rr-violet hover:decoration-2"
+      className="mt-8 inline-block py-1 text-small font-semibold text-text-on-ink underline underline-offset-4 decoration-text-on-ink/30 hover:decoration-rr-violet hover:decoration-2"
     >
       Explore the car in the interactive viewer
     </Link>

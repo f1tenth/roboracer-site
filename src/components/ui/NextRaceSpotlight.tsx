@@ -78,7 +78,7 @@ export default function NextRaceSpotlight({
           )}
           <div className="flex flex-wrap justify-between gap-x-4 gap-y-0.5">
             <dt>format</dt>
-            <dd className={strong}>multi-agent, 4 cars</dd>
+            <dd className={strong}>multi-agent, up to 4 cars</dd>
           </div>
         </dl>
         <div className="flex flex-wrap items-center gap-4">

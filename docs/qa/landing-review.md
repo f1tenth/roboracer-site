@@ -1,104 +1,320 @@
-# Independent QA review: `/` (landing)
+# Independent QA review: `/` (landing v2), secondary pass on `/assembly`
 
-Reviewer pass, separate from the builder's self-QA at `docs/qa/landing.md`. Branch `revamp/landing`, production build served via `vite preview` on `http://localhost:5198/`. First pass 2026-08-21 (commit `3981eab`); re-verified same day after fixes at commit `cc0a868`. Both passes used my own Playwright scripts (network capture, `PerformanceObserver` for CLS, axe-core 4.13.0) independent of the builder's self-QA numbers.
+Reviewer: independent QA agent, separate from the builder/director sessions. Worktree
+`/home/cedric/Documents/UPenn/xLAB/Roboracer/roboracer-site-wt/v2-page`, branch
+`revamp/v2-page`, HEAD `e0fe55b` ("landing: wire the car chapter; fonts.ready
+ScrollTrigger refresh; styleguide chip update"), working tree clean at both the start
+and end of this review (verified via `git status`/`git rev-parse HEAD` before writing
+this report). Reviewed against `docs/plans/landing-v2.md` and
+`docs/design/NEOBOTICS_STRUCTURE.md` (this session's authoritative contract), not the
+superseded parts of `docs/DESIGN.md`/the design-system skill where they conflict, per
+the task brief. A second, unrelated review process (`.impeccable/review/`,
+`docs/qa/landing/console.json`) was running concurrently in the same worktree during
+this pass (own Chromium instance visible via `ps`, heavy CPU load, port 4176) — it did
+not touch source and HEAD did not move, so it did not affect this review, but it did
+slow some of my own Playwright runs (noted where relevant).
+
+Dev server: `npm run dev -- --port 5177 --strictPort` (all functional/DOM/axe/console
+checks). A second `npm run preview -- --port 5178 --strictPort` was started only to get
+byte-accurate production network-transfer numbers (dev mode serves unminified,
+unbundled ESM and is not representative of real payload size). Both killed at the end
+of this review.
 
 ## Verdict: SHIP
 
-Both blockers from the first pass are fixed and independently re-verified with my own measurements (not the builder's). No new issues introduced by the fix commit. Remaining items are should-fix/nice-to-have, none ship-blocking.
+Zero console errors, zero axe violations (serious/critical or otherwise) at true rest
+on all three viewports in both normal and `prefers-reduced-motion: reduce` modes, zero
+lint warnings, a clean build, no off-token colors anywhere on the page, exactly one
+`h1`, no horizontal overflow at 390px, every internal route and all but one external
+link resolve, and the hero/headline/car-chapter motion — the three most technically
+ambitious pieces of this rebuild — all degrade to fully readable static layouts under
+reduced motion, verified independently at every viewport, not just visually inspected.
+The items below are real but none of them block shipping.
 
-## Blockers from first pass — now resolved (re-verified independently, commit `cc0a868`)
-
-1. ~~Highlights chapter double-autoplayed the same placeholder video off-screen~~ — **FIXED.** `HighlightReel` now gates each `<video>` behind an `IntersectionObserver` (poster `<img>` until near viewport). Re-measured with a fresh Playwright network capture (fullPage load, networkidle): initial-load transfer **3.468 MB desktop, 3.468 MB tablet, 3.182 MB mobile** (was 8.94 / 8.95 / 9.14 MB). Exactly **one** video request fires at initial load per viewport — the hero's own encode only (1920 on desktop/tablet at 2595.3 KB, 960 on mobile at 2303.2 KB) — confirmed by inspecting every network response, not just the top-N by size. axe's `no-autoplay-audio` incomplete dropped from 3 nodes to 1 (only one live `<video>` exists at load now). Matches the reported 3.18-3.47 MB / 2.36-2.66 MB figures.
-2. ~~CLS 0.327 ("poor") on tablet from webfont swap~~ — **FIXED.** Space Grotesk 500/600 is now self-hosted (`public/fonts/space-grotesk-latin-500-600.woff2`, 22,288 bytes) and preloaded (`<link rel="preload" as="font" crossorigin>` in `index.html`); the Google Fonts stylesheet link no longer requests Space Grotesk (Manrope + JetBrains Mono only, still `display=swap`). Re-measured CLS with my own `PerformanceObserver({type:'layout-shift', buffered:true})` injected pre-navigation: **desktop 0.0126, tablet 0.0197, mobile 0.0599** (was 0.028 / 0.327 / 0.060). All three now solidly in Core Web Vitals "good" territory (<0.1). Matches the reported 0.013 / 0.020 / 0.060 almost exactly.
-
-## Should-fix — resolved
-
-3. ~~Mobile video encode larger than desktop's~~ — **FIXED.** `hero-fpv-loop-960.mp4` re-encoded to 2,358,458 bytes (2.25 MB), now smaller than `hero-fpv-loop-1920.mp4` at 2,657,578 bytes (2.53 MB), confirmed on disk.
-4. ~~"Roboracer" mis-casing~~ — **FIXED.** Zero remaining instances of lowercase "Roboracer" in `public/data/upcoming_events.json` or `past_races.json`; grep confirms 3 and 9 correct "RoboRacer" instances respectively.
-6. ~~`aria-prohibited-attr` on the countdown wrapper~~ — **FIXED.** `NextRaceSpotlight.tsx:69` now reads `<div role="group" aria-label="Time until the competition starts" ...>`. That axe "incomplete" no longer appears in the fresh run.
-
-## Should-fix — remaining (non-blocking)
-
-5. **`rel="noopener noreferrer"` fix was partial.** `TeamGrid.tsx` and `PublicationCard.tsx` now correctly use `rel="noopener noreferrer"` (confirmed in source and in rendered DOM). `NextRaceSpotlight.tsx` lines 89 and 93 ("Register your team", "Rules and resources" — both external, `target="_blank"`) still hardcode `rel="noreferrer"` only; these weren't in the fix commit's stated scope (EventCard/LogoCloud/TeamGrid/PublicationCard). Still functionally safe (`noreferrer` alone blocks `window.opener`), still just a consistency nit.
-7. **Registration-deadline VERIFY caveat** — intentionally left open per the coordinator's note; still flagged to Cedric to confirm "September 5, 2026" hasn't been extended before/at ship. Unchanged from first pass.
-
-## Nice-to-have (unchanged from first pass, not re-verified in depth)
-
-8. Pillar-card links hand-roll `Button`'s ghost-variant classes instead of reusing the component.
-9. `ExplodedModel` car renders small in a large empty canvas at desktop width (subjective).
-10. No sitewide `<meta name="description">` (pre-existing, out of scope for this branch).
-11. `NextRaceSpotlight` still nests a visible `<h2>` right after the section's `sr-only` `<h2>`.
-12. Full-page screenshots of the pinned 3D chapter still render as an empty gap — confirmed in the first pass to be a Playwright/Chromium `position: sticky` capture artifact, not a page bug; not re-litigated here.
-
-## Re-verification method (this pass)
-
-- `npm run lint` (0 errors/warnings) and `npm run build` (passes, 5.75s) re-run clean at `cc0a868`; bundle chunk sizes unchanged from the first pass (this was a media/font/data fix, not a logic change) — `RacecarAssembly` 955.23 kB/260.34 kB gzip still correctly deferred, Landing's own critical-path JS+CSS still ~187 kB gzip.
-- Full three-viewport Playwright pass re-run fresh (own script, not reused numbers): console **0 errors** at all viewports, axe **0 violations** at all viewports (2 "incomplete" remain: `color-contrast`, unchanged/expected — text over the hero video+scrim, axe cannot resolve a video background; `no-autoplay-audio`, now 1 node instead of 3).
-- Confirmed via source + rendered DOM: font preload link present, Google Fonts link no longer includes Space Grotesk, both video file sizes on disk, zero "Roboracer" mis-casings, `role="group"` on the countdown div, `rel` values on every `target="_blank"` link on the page.
-
-## Evidence
-
-- Refreshed screenshots (this pass overwrote the first pass's, reflecting current state): `docs/qa/landing/review/{desktop,tablet,mobile}.png` (full page), `-rm.png`, `-nojs.png`, `-t0.5.png`/`-t3.png`.
-- Network/CLS raw data captured in-session via Playwright (`page.on('response')` body-size capture; `PerformanceObserver` layout-shift, buffered) — not persisted as a file per scope; exact figures quoted above.
-- Commit under review: `cc0a868` "landing: address qa-reviewer blockers".
-
-## Summary for Cedric
-
-Both blockers are fixed and I re-verified both independently rather than trusting the reported numbers: first-load transfer is down to 3.18-3.47 MB (was 8.9-9.1 MB, confirmed only the hero video streams at load now) and CLS is 0.013-0.060 across all three viewports (was up to 0.327 on tablet, now all "good"). Lint and build are clean, console and axe are clean. One small leftover: two links in `NextRaceSpotlight` still use `rel="noreferrer"` instead of `noopener noreferrer` (safe, just inconsistent, wasn't in this fix's scope). The registration-deadline VERIFY stays open for you as planned. Ready to ship.
-
-
----
-
-## v2 sharpen re-review (2026-08-21)
-
-Independent re-review after the full visual-direction change (`docs/design/SHARPEN.md`, "Direction v2" in `docs/DESIGN.md`). Branch `revamp/sharpen`, HEAD `c0bf60e` ("qa(landing v2): zero errors, zero axe violations after sharpen"). Reviewed against Direction v2, not the superseded ink-heavy v1 rules this same file's first pass used. Production preview on `http://localhost:5198/`. Own Playwright (Node, `chromium.launch`) + CDP `Network` domain for byte-accurate transfer accounting + axe-core 4.13.0 + hand-computed WCAG contrast ratios — independent of the builder's self-QA (`c0bf60e`'s own commit message).
-
-### Verdict: SHIP
-
-Zero axe violations (any impact) at all three viewports, zero console errors, zero failed/non-2xx requests anywhere on the page (checked at first load and across a full scroll-through), lint and build clean, hero media inside its approved budget, and the Direction v2 rules (paper-default, one-magenta-CTA-per-viewport, no gradient text, 4/6px radii, mono eyebrows, 5/7 splits) all independently verified true, not just visually plausible. Findings below are real but non-blocking.
-
-### Blockers
+## Blockers
 
 None.
 
-### Should-fix
+## Should-fix
 
-1. **`HighlightReel` re-fetches the hero footage at a second resolution.** `src/pages/Landing.tsx`'s Highlights item hardcodes `src: HERO_VIDEO.mp4_960` regardless of viewport. Verified with a network probe: on desktop/tablet the hero already streams `hero-fpv-loop-1280.mp4` (7.6 MB), then scrolling one section further to Highlights fires a **second, distinct** request for `hero-fpv-loop-960.mp4` (2.97 MB) — the same IV 2026 Detroit clip, different encode, both now in flight. A desktop visitor can be streaming ~10.5 MB of video within the first two sections. Fix: give `HighlightReel`'s video item the same responsive `<source media>` pair the hero uses, or reuse the hero's own buffered element instead of declaring a second one.
-2. **Authoring note leaked into public copy.** `public/data/teams.json`, West Virginia University entry: `"result": "3rd place; exact team/competition alias TODO(content), institution led by Amr El-Wakeel's group per skill"`. This renders verbatim on the live Teams card (confirmed in `TeamGrid.tsx`, which renders `best.result` directly) — including the literal string "TODO(content)" and "per skill" (an internal cross-reference to the content skill file, meaningless to a visitor). This is distinct from the intentional "unverified" tag mechanism (which is correct, by design). Only this one entry has leaked scaffolding text; the other 9 are clean. Fix is data-only: move the alias/institution caveat into the existing `source` field (already present, already not rendered) and shorten `result` to something like `"3rd place, IV 2026 (Detroit)"`.
-3. **Touch targets under the WCAG 2.5.8 24px floor on mobile**, systematically on the hairline-row link pattern: `<a>` elements in the Platform pillars ("Build the car", "Start the course", "See the races", "Browse the research"), Get-started rows ("Start building", "Start learning"), and the car chapter's "Explore the car in the interactive viewer" measure **342×21px / 267×21px** — generous width, but only 21px of the anchor's own hit-box is tall (the row's `py-6` padding lives on the parent `<li>`, not the `<a>` itself, so it doesn't extend the actual click target). Measured at 390×844 via `getBoundingClientRect()` on every rendered `a[href]`/`button`. Fix: move vertical padding onto the anchor (e.g. `py-2` inline) or make the whole row a stretched-link.
-4. **Redundant stacked `<h2>` in the Next Race section.** `SectionHeader` renders `<h2>IROS 2026, Pittsburgh</h2>`, immediately followed by `NextRaceSpotlight`'s own `<h2>September 28 to 30, 2026, Pittsburgh</h2>` — two visible H2s back to back saying almost the same thing (visible in `docs/qa/landing/review/v2-sharpen/desktop.png`, y≈1150-1250). Not an axe violation (no level skipped), but a rhythm/hierarchy nit carried over from the previous pass's item 11. `NextRaceSpotlight`'s internal headline should drop to `h3`.
-5. **Slack invite link returns 403 to curl** (`https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g`): HEAD and GET, default and browser user-agent, all land on a 302 to `robo-racer.slack.com/join/...` then a `403` from Slack's own domain. This contradicts the content skill's "confirmed valid by Cedric, 2026-08-20" note. Most likely Slack's anti-bot/WAF challenging non-interactive requests (common for Slack invite pages, a real browser navigation may pass fine) rather than an actually-dead invite, but flagging for a manual click-through since curl cannot confirm it either way.
+1. **Unlayered global `:focus-visible` rule silently defeats every
+   `focus-visible:outline-{color}` component override, including the hero's own
+   on-ink ring.** `src/index.css:119-122` declares `:focus-visible { outline: 2px
+   solid var(--color-rr-violet); ... }` with no `@layer` wrapper. Tailwind v4's
+   generated utilities (including `focus-visible:outline-text-on-ink`, used verbatim
+   in `src/components/ui/VideoHero.tsx`'s pause button and in `Button.tsx`'s
+   `on="ink"` variants) live in the `utilities` layer, and per the CSS Cascade Layers
+   spec, ANY unlayered rule beats ANY layered rule regardless of source order or
+   specificity. Net effect: the pause control's intended near-white ring (the plan
+   explicitly allows "components over video/imagery may keep a white ring") never
+   renders — every focusable element on the page gets the same violet ring instead.
+   Confirmed by keyboard-tabbing to the control and reading `getComputedStyle(...)
+   .outlineColor`: measured `rgb(124, 58, 237)` (violet), not `rgb(245, 245, 250)`
+   (text-on-ink). Screenshot:
+   `docs/qa/landing/review/desktop-keyboard-pause-control-focus.png`. This is the
+   same category of bug the codebase already fixed once this session for heading
+   defaults (see the `src/index.css:182` comment "unlayered these beat every layered
+   Tailwind utility") — just not yet applied here. Not a contrast failure in
+   practice (the plan's own math has violet at 3.5:1 on ink-950, which passes the
+   3:1 non-text minimum), so not blocking, but it is dead code and a real
+   maintainability trap. Fix: wrap the `:focus-visible` rule in `@layer base`.
+2. **A few interactive targets are still under the 24×24px touch-target floor**,
+   measured via `getBoundingClientRect()` on every rendered `a[href]`/`button` at
+   390×844: "Explore the car in the interactive viewer" (`ExplodedModel.tsx`,
+   267×21px) and the Get-started section's `contact@roboracer.ai` mono link
+   (`Landing.tsx`, 142×20px) — both owned by this session. The Pillars/Get-started
+   hairline-row links ("Build the car", "Start learning", etc.) that were flagged in
+   the prior QA pass are now fixed (measured 342×29px, well over the floor) — good,
+   that fix stuck. Two Footer-only instances (`contact@roboracer.ai` 160×18px and the
+   Quick Links/Resources columns at 19px tall each) are pre-existing and out of this
+   session's file ownership (`Footer.tsx`/`NavBar.tsx` weren't touched per the plan's
+   worktree table) but are still live on this page. Fix for the two in-scope ones:
+   move padding onto the anchor itself, same pattern already used for the pillar rows.
+3. **All 10 Teams cards render "unverified."** Every entry in `public/data/teams.json`
+   currently has `"status": "verify"`, none `"published"`, so `TeamGrid` (correctly,
+   per its own doc comment: "nothing hidden on localhost") renders a mono
+   "unverified" tag on every single card — confirmed in
+   `docs/qa/landing/review/desktop-scroll-08.png`. The underlying data is actually
+   well-sourced (each entry's `source` field cites a specific results page or
+   Cedric directly, cross-checked: UPenn's ICRA 2026 "2nd Time Trials / 5th Master
+   Cup" independently matches the content skill's "2nd in time trials, 5th overall"
+   almost verbatim), so this isn't fabricated content — but a full 2-row grid of
+   "unverified" tags is worth Cedric's explicit sign-off before this ships publicly,
+   since it may read as unfinished to a visitor even though it isn't. No code
+   change implied; this is a data/judgment flag, not a bug. (Confirmed clean:
+   no leaked `TODO(content)`/scaffolding text renders anywhere in `result` fields —
+   the exact bug the prior "sharpen" QA pass caught on the West Virginia entry is
+   fixed; TODO-marked `institution` values also correctly fall back to "institution
+   tbc" rather than leaking.)
+4. **Slack invite link returns 403 to curl** (HEAD and GET, default and full browser
+   User-Agent): `https://join.slack.com/t/robo-racer/shared_invite/...`. Same finding
+   as the prior "sharpen" QA pass under the same content-skill claim ("confirmed
+   valid by Cedric, 2026-08-20"). Most likely Slack's own anti-automation
+   WAF/Cloudflare challenge rejecting non-interactive requests (this is common for
+   Slack invite pages and would very plausibly pass in a real browser), not
+   necessarily a dead invite — automated tooling cannot resolve this either way.
+   Flagging again for a manual click-through before ship, since this is the page's
+   only remaining solid-CTA-adjacent link I could not positively verify.
 
-### Nice-to-have
+## Nice-to-have
 
-- Partner marquee logos (`src/pages/Landing.tsx` partners `<img>`) use `width="auto"` (not a valid HTML width value) with `height={36}`; browsers can't reserve aspect-ratio space from that pair the way a numeric width/height would. Low risk (lazy, below the fold, empirically added ~0 measurable CLS in this pass), but worth a real width per logo.
-- `ExplodedModel` car still renders small inside a large empty canvas at 1440 width (subjective, carried over from the previous pass). On mobile the car chapter's front/rear-left wheels are slightly clipped at the canvas edge (`docs/qa/landing/review/v2-sharpen/mobile-car-chapter.png`).
-- Legacy `NavBar`/`Footer` logos (`logo-black-gradient.png` 198 KB, out of scope per this task's known-accepted list) have no `width`/`height` attributes, only a CSS `h-10`; low CLS risk since height is fixed, but still not the belt-and-suspenders pattern used elsewhere on this page.
-- Several `public/partners/*.png` referenced by the marquee are uncompressed and large (`duke.png` 1.0 MB, `kaist.png` 204 KB, `czech.png` 174 KB) — pre-existing data, not introduced by this branch, but now genuinely in the Landing page's payload once a user scrolls to Partners.
-- No team in `teams.json` currently has a `website` value, so `TeamGrid`'s "Team site" link never renders yet — correct guard behavior, just a content gap, not a bug.
+- **No-JS renders a fully blank page** at all three viewports (`body.innerText`
+  length 0; `docs/qa/landing/review/{desktop,tablet,mobile}-nojs.png`). This is
+  expected and correct for the current architecture (`index.html` has no
+  `<noscript>` fallback, no SSR/prerendering — confirmed via `index.html`; this is a
+  site-wide characteristic of every route, not something introduced by or fixable
+  within this branch). Flagging only because the task asked me to check it
+  explicitly; not a landing-v2 regression and not actionable in this PR.
+- **Two pending studio-photo assets (`car-studio.webp`, `car-studio-cutout.webp`)
+  don't exist yet** (confirmed: not in `public/media/hero/` on disk) — exactly as
+  `docs/plans/landing-v2.md` anticipates ("If the file 404s (it will until Cedric
+  ships it)"). Worth knowing precisely how this behaves: the dev/preview server's
+  SPA-fallback (`public/404.html`) returns `200 text/html` for the missing path
+  rather than a real `404` (so it never shows up in a naive network-404 scan on
+  localhost — on the real GH Pages deploy a request for a missing extensioned asset
+  typically returns a genuine 404 with the custom error body). Either way, the
+  `<img>` still fails to decode that HTML as WebP, `onError` fires, and I confirmed
+  empirically (DOM query after settling on the car chapter) that the photo layer is
+  correctly removed with zero broken-image icon and zero console error — the chapter
+  runs 3D-only exactly as designed. No action needed beyond Cedric shipping the two
+  files per the plan's asset list.
+- **The car-chapter's studio HDR environment map loads from a third-party CDN at
+  runtime** (`raw.githack.com` → 301 → `raw.githubusercontent.com`, 1.68 MB,
+  confirmed 200 in a real browser context; curl's default UA gets a 403 from
+  Cloudflare, browser UA does not). Works today, but it's a live runtime dependency
+  on an external host with no SLA; the design system doc itself prefers a small
+  bundled HDR under `public/media/hero/env/` when one exists. Not blocking (the code
+  falls back to a neutral directional light if this fails, per `ExplodedModelScene`'s
+  design), just a production-reliability note.
+- Two team names that are hyphenated single tokens ("UBM-Tom", "UBM-Atlas") both
+  collapse to the initials placeholder "U" (`initials()` in `TeamGrid.tsx` splits on
+  whitespace only). Harmless — the full name renders directly below every placeholder
+  — but a hyphen-aware split would disambiguate the two squares at a glance.
+- `NextRaceSpotlight`'s hardcoded "format: multi-agent, 4 cars" slightly overstates
+  precision versus the content skill's "up to 4 vehicles on track" — minor wording,
+  not incorrect, just tighter than the source.
+- Partner marquee logos (`Landing.tsx`) aren't wrapped in links to `partner.website`;
+  not required by the spec, but a common/expected affordance for a partner wall.
+- Pre-existing, out of this session's scope but still live on this page: no
+  skip-to-content link anywhere on the site (confirmed via keyboard — first Tab
+  stop is the nav logo, not a bypass link); three logo images
+  (`logo-black-gradient.png`, `logo-white-gradient.svg`, `slack-logo.svg`) render
+  without explicit `width`/`height` attributes (empirically ~0 measured CLS impact —
+  see Performance below); Footer's "© 2026 RoboRacer Foundation" names a legal entity
+  not present anywhere in the content skill (worth a VERIFY, not a landing-v2 issue).
+- `/assembly` secondary pass: at 390px the floating "Scene tree" parts panel
+  (`assembly.css`'s `@media (max-width: 880px)` rule, `position` anchored
+  `bottom-right`) visually sits over the car's rear wheel
+  (`docs/qa/landing/review/assembly-mobile.png`). This is a deliberate compact-panel
+  choice, not a layout bug (confirmed in the CSS, not an accident), but it is a real
+  visual trade-off worth a look before `/assembly` gets its own full pass.
+- Vite build warning (pre-existing pattern, not new): `Research-CPUI5Q2G.js` (802.55
+  kB / 172.58 kB gzip) and `RacecarAssembly-DLcQmeGG.js` (1,011.83 kB / 279.85 kB
+  gzip) exceed the 500 kB chunk-size hint. Both are correctly route/lazy-isolated
+  (confirmed by network capture: neither loads on `/` until its trigger fires), so
+  this doesn't affect landing's actual payload, just a build-log line.
+- axe "incomplete" (not violations, so not counted above): `color-contrast` (serious,
+  3 nodes, desktop/tablet only) on the Next Race card's headline/lead/countdown text
+  — most likely the hairline `guides` grid overlay makes automated background
+  sampling ambiguous; visually confirmed dark text on solid `paper-50` in every
+  screenshot, so almost certainly a tool limitation, not a real failure, but flagging
+  since axe couldn't resolve it definitively. `no-autoplay-audio` (moderate, 1-2
+  nodes, all viewports) on the two `muted` video elements — a known axe limitation
+  for programmatically-muted video, not a real issue (confirmed `muted` in the DOM).
 
-### Evidence
+## Evidence
 
-**Build/lint** (this branch, HEAD `c0bf60e`): `npm run lint` — 0 errors, 0 warnings. `npm run build` — passes in 6.04s, 1080 modules. Chunk-size warning (>500 kB) for `RacecarAssembly-CYUwcTrF.js` (955.23 kB / 260.34 kB gzip) and `Research-C5mmvrRn.js` (802.55 kB / 172.58 kB gzip) — both confirmed lazy (network-probed: `RacecarAssembly` only fetches once the car chapter's `IntersectionObserver` fires, never at first load).
+**Lint / build** (this branch, HEAD `e0fe55b`): `npm run lint` → 0 errors, 0
+warnings. `npm run build` → `tsc -b && vite build` succeeds in 6.18s. Code-split
+output (vs. the `docs/AUDIT.md` pre-revamp baseline: one monolithic
+`index-BAp6Q3mR.js`, 1,229.14 kB / 310.75 kB gzip, loaded on every route):
+- Landing's own initial-load JS/CSS: shared `index-d9Vsyncd.js` 345.90 kB/111.95 kB
+  gzip + `Landing-zFgNDzGt.js` 7.65 kB/2.82 kB gzip + `index-BlXkPK9Y.css` 55.30
+  kB/12.03 kB gzip ≈ **126.8 kB gzip critical-path JS+CSS**, about 41% of the old
+  monolithic bundle's gzip size, and unlike before it isn't shipped to every route.
+- Heavy chunks are now isolated and lazy: `RacecarAssembly-DLcQmeGG.js` (1,011.83
+  kB/279.85 kB gzip, three.js/R3F) and `Research-CPUI5Q2G.js` (802.55 kB/172.58 kB
+  gzip, BibTeX tooling) — confirmed via live network capture that neither loads on
+  `/` at initial view; `ExplodedModel-CurmYiPS.js` (166.16 kB/61.80 kB gzip, the
+  chapter wrapper, not the 3D engine itself) loads eagerly with the route, the actual
+  `ExplodedModelScene` R3F chunk stays behind its `lazy()`+IntersectionObserver gate.
+- One build warning, pre-existing pattern: "(!) Some chunks are larger than 500 kB"
+  for the two chunks above (see Nice-to-have).
 
-**Bundle vs `docs/AUDIT.md` baseline**: Landing's critical path = `index-BM0Pruyg.js` (345.90 kB/111.95 kB gzip) + `PublicationCard-CXqnpM3H.js` (161.57 kB/60.43 kB gzip — string-searched, this chunk actually carries GSAP+ScrollTrigger+Lenis+`lib/data.ts`+`PublicationCard`, Rollup's automatic shared-chunk naming just picked that name) + `Landing-DJI32aEE.js` (7.90 kB/2.93 kB gzip) + `index-DNbZEyB9.css` (53.67 kB/11.58 kB gzip) = **569.04 kB raw / 186.89 kB gzip**. `docs/AUDIT.md`'s pre-revamp baseline (single unsplit bundle, every route): 1,273.14 kB raw / 320.39 kB gzip. Delta: **-703.1 kB raw (-55.2%), -133.5 kB gzip (-41.7%)**, despite materially more functionality today (3D chapter, GSAP choreography, more data-driven sections) — the baseline predates all code-splitting so this is directional, not apples-to-apples, but the direction is unambiguous. Apples-to-apples: this same file's previous pass measured Landing's own critical JS+CSS at "~187 kB gzip" pre-sharpen (commit `cc0a868`) — today's 186.89 kB gzip confirms the visual rewrite added no bundle weight.
+**Screenshots** (`docs/qa/landing/review/`, 1440×900 / 768×1024 / 390×844):
+- `{desktop,tablet,mobile}-scroll-NN.png` — reliable section-by-section captures
+  (real `window.scrollTo` + CDP `Page.captureScreenshot`, no viewport resizing).
+  **Use these, not** `{desktop,tablet,mobile}.png`: those three are Playwright's
+  `full_page=True` captures and are corrupted by a real tool artifact I traced and
+  confirmed — this page uses `svh`/`vh`-sized `position: sticky` wrappers (hero
+  `min-h-svh`, headline `h-[180vh]`, car chapter `min-h-[140vh]`), and Playwright's
+  full-page capture works by resizing the viewport to the page's `scrollHeight`;
+  because these sections size themselves off the viewport height, resizing the
+  viewport to ~10,449px inflates `document.documentElement.scrollHeight` to
+  ~50,679px (verified directly: DOM element counts stay correct — 1 `nav`, 1
+  `video`, 1 `footer`, 1 `h1` — at every viewport size tested, so this is a capture
+  artifact, not a real duplicate-render bug). Playwright does restore the real
+  viewport size synchronously after the screenshot (verified), so this did not
+  affect any axe/console/DOM measurement in this report, only those three PNGs.
+- `{name}-rm-top.png`, `{name}-rm-car.png` — reduced-motion: hero is a static poster
+  `<img>` (no `<video>`, no pause button), headline has no `180vh` pin wrapper and
+  renders full-size immediately, car chapter shows exactly one static `<canvas>`
+  frame with all three captions simultaneously visible, marquee is a static wrapped
+  grid (`animation-name: none`) — all confirmed via DOM/computed-style queries, not
+  just screenshots, at all three viewports.
+- `{name}-nojs.png` — blank (see Nice-to-have).
+- `{name}-t0.5.png` / `{name}-t3.png` — timed captures for visual layout-shift
+  comparison; paired with numeric CLS via an injected `PerformanceObserver`.
+- `desktop-car-chapter-cdp.png` / `-exploded-cdp.png` — WebGL car canvas confirmed
+  painting real geometry (satin-graphite chassis, brushed standoffs, Hokuyo-style
+  LiDAR with its orange ring, black tires) at two points in the outward-explosion
+  scrub, captured via CDP per the task's guidance (`page.screenshot` did time out
+  once elsewhere in this session under heavy concurrent load — see below — so the
+  CDP path was used throughout for anything near the WebGL scene).
+- `desktop-keyboard-pause-control-focus.png` — should-fix #1 above.
+- `assembly-desktop.png` / `assembly-mobile.png` — `/assembly` secondary pass.
 
-**Hero media budget** (CLAUDE.md rule 3 exception): `public/media/hero/hero-fpv-loop-1280.mp4` 7,612,616 bytes (7.26 MiB) inside the 8 MB budget; `hero-fpv-loop-960.mp4` 2,969,014 bytes (2.83 MiB) inside the 3 MB mobile budget; poster 36,636 bytes.
+**Console / network**: zero `console.error`/`pageerror` events at any viewport, in
+both normal and reduced-motion modes (checked at true rest, not mid-animation).
+Zero non-2xx responses other than expected `304 Not Modified` (font revalidation)
+and a `301` HDR redirect that resolves `200` (see Nice-to-have). One `page.screenshot`
+call did hit Playwright's documented "can hang on live WebGL" failure mode
+(`TimeoutError: Page.screenshot: Timeout 30000ms exceeded`) during a full sweep;
+switching to CDP `Page.captureScreenshot` (as instructed) resolved it immediately and
+was used for the rest of the WebGL-adjacent work.
 
-**Console/network**: 0 errors at all viewports. Desktop only: 4 `GL Driver Message ... GPU stall due to ReadPixels` WebGL warnings (software/headless GPU driver noise from the 3D chapter, not application code). 0 failed requests, 0 non-2xx responses (206 partial-content on the ranged video requests excluded) — checked both at first load and across a full scroll-through (50 total responses observed).
+**Accessibility**: axe-core 4.13.0, `resultTypes: ['violations','incomplete']`, run
+at true rest (scrolled smoothly to top, ≥1.5s settle after the last scroll so GSAP's
+`scrub: 0.8` fully catches up — see methodology note below) — **0 violations at all
+three viewports**, both normal and reduced motion. Exactly one `<h1>` at every
+viewport (`main_pass_results.json`). Heading order clean, no skipped levels (H1→H2→H3
+throughout, verified programmatically). All 89 `<img>` elements on the settled page
+have an `alt` attribute; meaningful images (partner/team logos) carry full names,
+decorative/redundantly-captioned images correctly use `alt=""`. Both live `<video>`
+elements have a `poster`. Keyboard: tab order reaches the hero's "Pause footage"
+button at stop 11 of 14 (`aria-label`/`aria-pressed` both present, 40×40px), every
+stop gets a visible 2px outline (should-fix #1 notwithstanding, it's still clearly
+visible, just the wrong shade for on-ink components).
+**Methodology note on a false positive I caught and corrected**: an early, sloppier
+pass of mine (programmatic scroll-to-bottom then instant `scrollTo(0,0)`, only 400ms
+settle) surfaced one spurious `color-contrast` "violation" on a headline word frozen
+mid-tween (`opacity: 0.0953`) — that was an artifact of teleporting the scroll
+position faster than GSAP's `scrub: 0.8` easing can follow, not a real bug (a human
+scrolling normally never teleports). I re-ran cleanly (smooth incremental scroll, full
+settle time, no teleporting) and got 0 violations; I'm reporting the clean numbers
+above and flagging the methodology so it isn't mistaken for a real regression if
+re-tested.
 
-**Performance**: first-load transfer (CDP `Network.dataReceived`, summed per request, snapshotted before any scroll/screenshot could trigger lazy content) = 508.1 KB identical baseline (JS/CSS/fonts/poster/JSON) at all three viewports, plus the hero video streaming progressively in the background (desktop/tablet: ~5.0-5.25 MB of the 7.61 MB file buffered by ~5.5s post-load per `video.buffered`; mobile: the full 2.97 MB file buffered by the same mark). Largest asset: the hero video (within its approved budget); second largest never-at-first-load asset: `RacecarAssembly-CYUwcTrF.js`. CLS (`PerformanceObserver({type:'layout-shift', buffered:true})`, injected pre-navigation): **desktop 0.0125, tablet 0.0190, mobile 0.0598** — all "good" (<0.1), matching the previous pass's 0.013/0.020/0.060 almost exactly (no regression). Visually confirmed no shift between `*-t0.5.png` and `*-t3.png` at all three viewports.
+**Design-token compliance**: computed-style scan of `color`/`background-color`/
+`border-color`/`fill`/`stroke`/`outline-color`/`text-decoration-color` across every
+element on the settled page (excluding logo images/elements), all three viewports:
+**zero matches** for `rr-magenta #d946ef`, `rr-magenta-bright #e879f9`,
+`rr-magenta-deep #a21caf`, `rr-cyan #00d1da`, or the gradient stops `#fb00ff`/
+`#fc00ff`/`#00dbde`. Static grep confirms the only remaining uses of those tokens in
+`src/index.css` (`.purple-radial-gradient`, `.border-animated`) are applied only in
+`Race.tsx`, never on `/` or in shared chrome. Exactly 2 elements site-wide match
+`rr-violet`'s `background-color` (`rgb(124, 58, 237)`): "Register your team" (Next
+Race, section 4 of 11) and "Join the community on Slack" (Get started, section 11 of
+11) — far enough apart that they never share a viewport, satisfying "max one solid
+violet CTA per viewport." Radii, mono eyebrows, numbered `NN /` section markers,
+5/7 and hairline-row layouts all match the plan section-by-section.
 
-**Accessibility**: axe — **0 violations** (any impact) at 1440×900, 768×1024, 390×844. "Incomplete" (not violations) at every viewport: `color-contrast` (16/26/4 nodes) and `no-autoplay-audio` (1 node, the muted hero `<video>` — axe cannot verify a muted element carries no audio track, expected). Investigated `color-contrast` rather than waving it through: every flagged node's `failureSummary` is either "background color could not be determined due to a background gradient" (the hero's scrim over video — genuinely unresolvable by axe, expected) or "...because it partially overlaps other elements" (text inside `md:col-span-N` CSS Grid layouts — Platform, Research, PublicationCard). Re-ran axe after a full scroll-through forcing every GSAP `ScrollTrigger` reveal to complete first: same 16 nodes still flagged, ruling out a pre-animation opacity:0 cause. Hand-computed WCAG contrast for every flagged token pair: text-strong/paper-50 18.87:1, text-body/paper-50 10.02:1, text-muted/paper-50 5.40:1, text-muted/paper-100 5.07:1, text-muted/paper-200 4.56:1, `rr-magenta-deep`/paper-50 6.12:1, `rr-magenta`/ink-950 5.81:1 — all pass AA (≥4.5:1). Conclusion: axe-core CSS-Grid geometry limitation, not a real contrast defect. Heading order: exactly one `h1`, no skipped levels (h1→h2→h3 throughout). Alt text: present on every `<img>` (0 missing). Focus: global `:focus-visible` (magenta 2px outline) in `src/index.css`. Touch targets: see should-fix 3.
+**Content**: every fact I could cross-check traced cleanly to
+`.claude/skills/roboracer-content` or a cited, resolving source page (see should-fix
+#3 for the one item worth Cedric's sign-off). Zero em dashes and zero "lorem ipsum"
+anywhere in `src/` or `public/data/` (full-tree grep). Dates ("September 28 to 30,
+2026, Pittsburgh", "Check-in and practice September 27", "registration closes
+September 5, 2026") match the content skill's FINAL copy verbatim. Scale numbers in
+the markup are 90+/20+/1,000+/30 exactly per the content skill (a couple of my
+screenshots caught the `StatCounter` mid-count-up — e.g. "81+/18+/896+/27" — that's
+the 1.8s intentional count-up animation being sampled mid-flight by a timed
+screenshot, not wrong data; the final DOM value is correct from first render, per
+`StatCounter.tsx`).
 
-**Design conformance (Direction v2)**: paper-default confirmed (only the hero wrapper and `<div className="bg-ink-950"><ExplodedModel/></div>` are ink; all other 8 `Section`s default to paper). One-magenta-CTA-per-viewport verified by computed style (`background-color: rgb(217, 70, 239)`), not eyeballed: exactly 4 solid-fill CTAs on the whole page ("Register for IROS 2026" y≈793, "Register your team" y≈1406, "Become a sponsor" y≈5467, "Join the community on Slack" y≈8308 at 1440×900) — consecutive gaps of 613/4061/2841px, so no two are ever simultaneously visible in a 900px-tall viewport. No gradient text: computed-style scan (`background-clip: text` + non-`none` `background-image`) across every `h1-h4/p/span/a` returned zero matches at all three viewports. Radii: `--radius-card: 0.25rem`, `--radius-media: 0.375rem` (`src/index.css:87-88`), visually confirmed sharp. Numbered mono eyebrows, mono data/captions, 5/7 splits (Platform, Research), and `text-display-*` line-height 0.98 all confirmed in source and screenshots. No emoji icons, no 2x2 SaaS pillar grid (Platform correctly uses hairline numbered rows instead — the exact anti-pattern SHARPEN.md called out), no carousel, single token set.
+**Links**: 9 internal routes all 200 on the dev server (`/`, `/about`, `/build`,
+`/learn`, `/race`, `/course`, `/research`, `/news`, `/assembly`). External, via curl
+`-L` with a real browser User-Agent: `autodrive-ecosystem.github.io` 200,
+`iros2026-race.roboracer.ai` (both registration and rules) 200, Google Scholar query
+200, the featured arXiv paper 200, and — cross-checking the Teams data — both
+`icra2026-race.roboracer.ai/results.html` and `iv2026-race.roboracer.ai/results.html`
+200 (these back every result cited in `teams.json`). Only the Slack invite fails (see
+should-fix #4). Every `target="_blank"` link already carries `rel="noopener
+noreferrer"` (verified in the rendered DOM, all 6 instances) — the prior QA pass's
+should-fix on this (partial `noreferrer`-only on `NextRaceSpotlight`) is fully fixed.
 
-**Content**: race dates/deadlines/format ("September 28 to 30, 2026, Pittsburgh", "Check-in and practice September 27", "registration closes / September 5, 2026", "multi-agent, 4 cars") and the scale strip ("90+", "20+", "1,000+", "30 competitions held") match `.claude/skills/roboracer-content` verbatim. Thunderbolt and 404 Racers team results match Cedric's IV 2026 Detroit podium notes verbatim. Zero em dashes, zero lorem ipsum, zero images missing alt text. One content bug found: should-fix 2 above.
+**Performance** (production `vite preview`, not dev server, for realistic numbers):
+first-load transfer at 1440×900 = **7.77 MB across 20 requests**, of which the single
+hero video (`hero-fpv-loop-1280.mp4`) is 7.43 MB — within the CLAUDE.md rule 3 approved
+exception (desktop encode, ≤8 MB). Excluding that one approved file, the real
+application payload is ≈0.51 MB (JS 109.8 KB + ExplodedModel chunk 60.8 KB + poster
+36 KB + 3 fonts ~78 KB combined + CSS 12.1 KB + JSON data + small SVGs). No duplicate
+video request (the highlights strip's lazy video is correctly gated behind its own
+`IntersectionObserver` and never fires until scrolled near). CLS (own
+`PerformanceObserver({type:'layout-shift', buffered:true})`, injected pre-navigation):
+**desktop 0.0523, tablet 0.00035, mobile 0.00102** — all solidly in Core Web Vitals
+"good" (<0.1); the desktop figure is the highest only because of the 3 pre-existing,
+out-of-scope logo images without explicit dimensions (see Nice-to-have). No horizontal
+overflow at any viewport (`document.documentElement.scrollWidth === clientWidth`
+exactly at 1440/768/390).
 
-**Links**: all 9 internal routes (`/`, `/about`, `/build`, `/learn`, `/race`, `/course`, `/research`, `/news`, `/assembly`) return 200 from the preview server. External links 200 except the Slack invite (should-fix 5). Every `target="_blank"` link (11 found) carries `rel="noopener noreferrer"` — the previous pass's partial-fix item (`NextRaceSpotlight` using bare `noreferrer`) is now fully resolved.
+**`/assembly` secondary pass**: 0 console errors, 0 axe violations at 1440×900 and
+390×844. Canvas fills the viewport and paints correctly at both sizes (confirmed via
+screenshot, not just element presence). Light `paper-100`-family CAD-configurator
+theme confirmed (13 distinct computed colors site-wide, all ink/paper/grey plus one
+legitimate real part color — the LiDAR's `#e8641b` sensor-orange swatch, which
+matches `racecarAssemblyData.ts`'s authored `color` field exactly — no neon/magenta/
+cyan anywhere). One nice-to-have noted above (mobile parts-panel overlap).
 
-**Screenshots**: `docs/qa/landing/review/v2-sharpen/{desktop,tablet,mobile}.png` (full page), `-t0.5.png`/`-t3.png` (CLS comparison pairs), `-rm.png` (reduced motion, full page — confirmed poster `<img>` replaces `<video>`, no pinned-chapter gap), `-nojs.png` (JS disabled, above the fold — blank shell, the known-accepted no-noscript SPA state), `-car-chapter.png` (mid-scroll capture of the pinned 3D chapter, since full-page capture renders sticky sections as a gap, same Chromium artifact noted in the previous pass).
+## Summary for Cedric
 
-### Summary for Cedric
+Ship it. Zero console errors, zero axe violations, zero off-token colors, and the
+hero/headline/car-chapter — the three hardest pieces this session touched — all
+verified to degrade correctly under reduced motion at every viewport, not just
+eyeballed. The real should-fix list is short: an unlayered CSS rule quietly overrides
+the hero pause button's intended white focus ring with violet (harmless today, still
+worth a one-line `@layer` fix), two links are a touch under the 24px tap-target floor,
+all 10 Teams cards read "unverified" right now (data is solid, just wants your
+explicit okay before it's public), and the Slack invite 403s to every automated tool
+I threw at it (probably Slack's own bot-wall, not a dead link — worth one manual
+click). Nothing here should hold up merging.
 
-Zero blockers: axe is clean (0 violations at every viewport, and I hand-verified the "incomplete" contrast flags are an axe/CSS-Grid limitation, not real failures), console and network are clean, and the Direction v2 rules — paper-default, one magenta CTA per viewport, no gradient text, sharp radii — all measured true, not just eyeballed. Bundle weight for Landing is unchanged from the pre-sharpen pass (~187 kB gzip critical path) and 42% lighter than the old pre-revamp baseline. Two real should-fix items worth a fast follow-up: `HighlightReel` silently re-downloads the hero clip at a second resolution (~3 MB avoidable on desktop/tablet), and one `teams.json` entry leaks an authoring TODO into public copy. Ship it; fix those two plus the mobile touch-target sizing when convenient.

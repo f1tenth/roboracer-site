@@ -94,12 +94,16 @@ function Row({ items, duration, reverse = false }: RowProps) {
 
 function Tile({ item, reduced }: { item: Highlight; reduced: boolean }) {
   if (item.status === "placeholder") {
+    // Same figure/caption skeleton as live tiles so both row edges stay
+    // flush (impeccable review 2026-08-21): honest empty frame, mono
+    // caption below.
     return (
-      <div
-        className={`${ROW_H} ${ASPECT[item.aspect]} flex shrink-0 items-center justify-center rounded-media border border-ink-950/10 bg-paper-100 px-6`}
-      >
-        <p className="text-center font-mono text-small text-text-muted">{item.caption}</p>
-      </div>
+      <figure className="shrink-0">
+        <div
+          className={`${ROW_H} ${ASPECT[item.aspect]} rounded-media border border-ink-950/10 bg-paper-100`}
+        />
+        <figcaption className="mt-2 font-mono text-small text-text-muted">{item.caption}</figcaption>
+      </figure>
     );
   }
   return (

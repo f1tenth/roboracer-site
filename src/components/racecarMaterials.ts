@@ -132,6 +132,12 @@ export function overridePartMaterial(partId: RacecarPartId, material: Material):
       // brushed hardware.
       cloned.roughness = 0.85;
     }
+    // The palette's deck tones render bright silver under studio IBL; the
+    // spec wants a satin-graphite dark-neutral body. A grey multiplier
+    // darkens every slot uniformly (decks go graphite, hardware stays
+    // relatively brighter) without erasing the palette's aluminum split.
+    cloned.color = new Color("#82878f");
+    cloned.envMapIntensity = 0.7;
     if (cloned.emissive) {
       cloned.emissive = new Color("#000000");
       cloned.emissiveIntensity = 1;

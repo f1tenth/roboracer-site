@@ -11,22 +11,39 @@ import { CHAPTER_MAX_EXPLOSION } from "./ExplodedModel";
 const VIEW_DIR = [0.666, 0.336, 0.666] as const;
 const TARGET = [0, 0.04, 0] as const;
 
-/** Frames the car by canvas aspect: closer on wide desktop boxes, further on
- * the portrait mobile box so the exploded span never crops. */
-function ChapterCamera() {
+/** Frames the car by canvas aspect and dollies with the explosion: a tight
+ * product-scale studio shot at rest, pulling back as the parts fly so the
+ * exploded span never crops (impeccable review, 2026-08-21). */
+function ChapterCamera({ explosionRef }: { explosionRef: RefObject<number> }) {
   const camera = useThree((s) => s.camera);
   const aspect = useThree((s) => s.viewport.aspect);
   const invalidate = useThree((s) => s.invalidate);
+  const wide = aspect > 1.2;
+  const rest = wide ? 0.72 : 0.98;
+  const exploded = wide ? 1.12 : 1.34;
+
   useEffect(() => {
-    const distance = aspect > 1.2 ? 1.05 : 1.28;
+    const progress = Math.min(1, (explosionRef.current ?? 0) / CHAPTER_MAX_EXPLOSION);
+    const d = rest + (exploded - rest) * progress;
     camera.position.set(
-      VIEW_DIR[0] * distance + TARGET[0],
-      VIEW_DIR[1] * distance + TARGET[1],
-      VIEW_DIR[2] * distance + TARGET[2],
+      VIEW_DIR[0] * d + TARGET[0],
+      VIEW_DIR[1] * d + TARGET[1],
+      VIEW_DIR[2] * d + TARGET[2],
     );
     camera.lookAt(TARGET[0], TARGET[1], TARGET[2]);
     invalidate();
-  }, [camera, aspect, invalidate]);
+  }, [camera, rest, exploded, explosionRef, invalidate]);
+
+  useFrame(() => {
+    const progress = Math.min(1, (explosionRef.current ?? 0) / CHAPTER_MAX_EXPLOSION);
+    const d = rest + (exploded - rest) * progress;
+    camera.position.set(
+      VIEW_DIR[0] * d + TARGET[0],
+      VIEW_DIR[1] * d + TARGET[1],
+      VIEW_DIR[2] * d + TARGET[2],
+    );
+    camera.lookAt(TARGET[0], TARGET[1], TARGET[2]);
+  });
   return null;
 }
 
@@ -66,7 +83,7 @@ export default function ExplodedModelScene({ explosionRef, staticPose = false }:
       onCreated={({ camera }) => camera.lookAt(0, 0.04, 0)}
       aria-hidden="true"
     >
-      <ChapterCamera />
+      <ChapterCamera explosionRef={staticPose ? zeroRef : explosionRef} />
       {/* Neutral studio light only - alpha canvas over ink-950, no colored
           rims, no fog (product-render direction, 2026-08-21). Dimmer than
           /assembly so the aluminum does not blow out against ink. */}
