@@ -31,19 +31,19 @@ import NextRaceSpotlight from "../components/ui/NextRaceSpotlight";
 import ExplodedModel from "../components/ui/ExplodedModel";
 
 const HERO_VIDEO = {
-  mp4_1920: "/media/hero/hero-fpv-loop-1920.mp4",
+  mp4_1920: "/media/hero/hero-fpv-loop-1280.mp4",
   mp4_960: "/media/hero/hero-fpv-loop-960.mp4",
   poster: "/media/hero/hero-fpv-poster.webp",
-  width: 1920,
-  height: 1080,
+  width: 1280,
+  height: 720,
 };
 
-/** Small mono chip naming each primitive for review with Ayagoz. */
+/** Mono spec chip naming each primitive for review with Ayagoz. */
 function Spec({ name, on = "paper" }: { name: string; on?: "ink" | "paper" }) {
   return (
     <p
-      className={`mb-6 w-fit rounded-pill border px-3 py-1 font-mono text-eyebrow ${
-        on === "ink" ? "border-ink-700 text-rr-cyan" : "border-paper-200 text-text-muted"
+      className={`mb-6 w-fit border px-2.5 py-1 font-mono text-eyebrow tracking-normal ${
+        on === "ink" ? "border-text-on-ink/20 text-text-on-ink-muted" : "border-ink-950/15 text-text-muted"
       }`}
     >
       {name}
@@ -52,9 +52,9 @@ function Spec({ name, on = "paper" }: { name: string; on?: "ink" | "paper" }) {
 }
 
 /**
- * /styleguide: every design-system primitive with real data, in both ink and
- * paper variants, reviewed on localhost by Cedric and Ayagoz before any page
- * is built with them (docs/PLAN.md Phase 2 gate).
+ * /styleguide: every primitive under the sharpen direction (2026-08-21) -
+ * paper default, hairline accents, mono data, 4px radii. Reviewed on
+ * localhost by Cedric and Ayagoz.
  */
 export default function Styleguide() {
   useLenis();
@@ -71,73 +71,79 @@ export default function Styleguide() {
     loadPublications().then(setPubs).catch(() => setPubs(null));
   }, []);
 
-  const iros = events.find((e) => e.title.includes("IROS 2026"));
-  const upcoming = events.filter((e) => !e.title.includes("IV 2026")).slice(0, 2);
-
-  const tagOptions = useMemo(
-    () => (pubs ? pubs.tags.map(({ id, label }) => ({ id, label })) : []),
-    [pubs],
-  );
+  const race = events.find((e) => e.spotlight);
+  const upcoming = events.filter((e) => !e.spotlight).slice(0, 2);
+  const tagOptions = useMemo(() => (pubs ? pubs.tags.map(({ id, label }) => ({ id, label })) : []), [pubs]);
   const tagLabels = useMemo(() => (pubs ? tagLabelMap(pubs.tags) : {}), [pubs]);
   const shownPubs = useMemo(() => {
     if (!pubs) return [];
-    const pool = pubs.items.filter((p) => p.status === "published");
-    const featured = pool.filter((p) => p.featured);
-    const base = featured.length > 0 ? featured : pool.filter((p) => p.year >= 2023);
-    return base.filter((p) => (tag ? p.tags.includes(tag) : true)).slice(0, 6);
+    const pool = pubs.items.filter((p) => p.status === "published" && p.featured);
+    return pool.filter((p) => (tag ? p.tags.includes(tag) : true)).slice(0, 6);
   }, [pubs, tag]);
 
   return (
     <div className="pt-[68px] md:pt-[85px]">
-      {/* ---- VideoHero (ink, bleed) ---- */}
+      {/* VideoHero - ink, one solid CTA, no gradient text */}
       <VideoHero
-        headline={
-          <>
-            Autonomous racing at <span className="text-gradient-brand">1/10 scale</span>
-          </>
-        }
+        headline="Autonomous racing at 1/10 scale"
         lead="RoboRacer, formerly F1TENTH, is an international community of researchers, engineers, and students racing open-source autonomous cars."
         actions={
           <>
-            <Button href="https://iros2026-race.roboracer.ai/registration.html" on="ink" target="_blank" rel="noreferrer">
+            <Button href="https://iros2026-race.roboracer.ai/registration.html" on="ink" target="_blank" rel="noopener noreferrer">
               Register for IROS 2026
             </Button>
-            <Button href="/about" on="ink" variant="secondary">
+            <Button href="/about" on="ink" variant="ghost">
               What is RoboRacer
             </Button>
           </>
         }
         video={HERO_VIDEO}
-        credit="Footage: RoboRacer at IV 2026, Detroit"
+        credit="footage: RoboRacer at IV 2026, Detroit"
       />
 
-      {/* ---- NextRaceSpotlight (ink) ---- */}
-      <Section variant="ink" edge>
-        <Spec name="NextRaceSpotlight - ink" on="ink" />
-        <NextRaceSpotlight
-          title={iros?.title ?? "31st RoboRacer Autonomous Racing Competition at IROS 2026"}
-          datesHeadline="September 28 to 30, 2026, Pittsburgh"
-          datesSecondary="Check-in and practice September 27"
-          registerHref="https://iros2026-race.roboracer.ai/registration.html"
-          registerNote="Registration closes September 5, 2026"
-          rulesHref="https://iros2026-race.roboracer.ai/"
-          startsAt="2026-09-28T09:30:00-04:00"
+      {/* NextRaceSpotlight - paper hairline panel */}
+      <Section guides>
+        <Spec name="NextRaceSpotlight · paper, 7/5, mono data lines" />
+        {race ? (
+          <NextRaceSpotlight
+            title={race.title}
+            datesHeadline={race.dates_headline ?? `${race.dates}, ${race.location}`}
+            datesSecondary={race.dates_secondary}
+            registerHref={race.register_url ?? race.url}
+            registerNote={race.registration_deadline}
+            rulesHref={race.rules_url}
+            startsAt={race.starts_at ?? ""}
+          />
+        ) : (
+          <p className="font-mono text-small text-text-muted">upcoming_events.json has no spotlight entry</p>
+        )}
+      </Section>
+
+      {/* SectionHeader anatomy */}
+      <Section edge rule>
+        <Spec name="SectionHeader · numbered mono eyebrow + 4px index marker" />
+        <SectionHeader
+          index="01"
+          eyebrow="Section name"
+          title="Display M title, tighter"
+          lead="Lead text, max 60ch. Numbers over adjectives; dates as September 28 to 30, 2026."
+          action={<Button variant="secondary">Action</Button>}
         />
       </Section>
 
-      {/* ---- ExplodedModel chapter (ink, pinned scrub) ---- */}
+      {/* ExplodedModel - ink chapter */}
       <div className="bg-ink-950">
         <div className="mx-auto max-w-content px-6 pt-16">
-          <Spec name="ExplodedModel - pinned scrub, reuses /assembly scene" on="ink" />
+          <Spec name="ExplodedModel · ink chapter, 120vh pin, ceiling 0.5" on="ink" />
         </div>
         <ExplodedModel />
       </div>
 
-      {/* ---- PinnedChapter (ink, generic states) ---- */}
-      <Section variant="ink" width="content" className="!py-0">
-        <Spec name="PinnedChapter - 3 states, scrub 0.8" on="ink" />
-      </Section>
+      {/* PinnedChapter - generic, type-and-rules states */}
       <div className="bg-ink-900">
+        <div className="mx-auto max-w-content px-6 pt-16">
+          <Spec name="PinnedChapter · 3 states, scrub 0.8" on="ink" />
+        </div>
         <div className="mx-auto max-w-content px-6">
           <PinnedChapter
             eyebrow="Four pillars"
@@ -146,82 +152,69 @@ export default function Styleguide() {
               {
                 caption: "Build",
                 body: "An open-source 1/10-scale vehicle system.",
-                node: <PillarPanel text="Build the car from the open-source vehicle system" />,
+                node: <ChapterLine text="Build the car from the open-source vehicle system" />,
               },
               {
                 caption: "Race",
-                body: "An international competition series at the major robotics conferences.",
-                node: <PillarPanel text="Race it against teams from 90+ universities" />,
+                body: "An international competition series.",
+                node: <ChapterLine text="Race it at the major robotics conferences" />,
               },
               {
                 caption: "Research",
                 body: "A platform referenced by 1,000+ publications.",
-                node: <PillarPanel text="Publish on the platform behind 1,000+ papers" />,
+                node: <ChapterLine text="Publish on the platform behind 1,000+ papers" />,
               },
             ]}
           />
         </div>
       </div>
 
-      {/* ---- StatCounter (ink band) ---- */}
-      <Section variant="ink" tight aria-labelledby="sg-stats">
-        <Spec name="StatCounter - ink" on="ink" />
+      {/* StatCounter - paper data strip */}
+      <Section tight aria-labelledby="sg-stats">
+        <Spec name="StatCounter · mono data strip" />
         <h2 id="sg-stats" className="sr-only">
           Community scale
         </h2>
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-4 md:divide-x md:divide-ink-700 [&>*]:md:px-8 [&>:first-child]:md:pl-0">
-          <StatCounter value={90} suffix="+" label="Universities" on="ink" />
-          <StatCounter value={20} suffix="+" label="Countries" on="ink" />
-          <StatCounter value={1000} suffix="+" label="Publications" on="ink" />
-          <StatCounter value={30} label="Competitions held" on="ink" />
+        <div className="grid grid-cols-2 gap-8 border-y border-ink-950/10 py-8 md:grid-cols-4">
+          <StatCounter value={90} suffix="+" label="universities" />
+          <StatCounter value={20} suffix="+" label="countries" />
+          <StatCounter value={1000} suffix="+" label="publications" />
+          <StatCounter value={30} label="competitions held" />
         </div>
       </Section>
 
-      {/* ---- HighlightReel (ink; placeholder clip pending real media) ---- */}
-      <Section variant="ink">
-        <Spec name="HighlightReel - placeholder media, Cedric swaps clips" on="ink" />
-        <SectionHeader on="ink" eyebrow="Highlights" title="Moments from the grid" />
+      {/* HighlightReel - paper, real clip + honest slot */}
+      <Section edge rule>
+        <Spec name="HighlightReel · media 6px, mono captions, slot state" />
         <HighlightReel
           items={[
             {
               src: HERO_VIDEO.mp4_960,
               poster: HERO_VIDEO.poster,
-              caption: "FPV lap, IV 2026 Detroit",
+              caption: "track-level lap · IV 2026, Detroit",
               credit: "RoboRacer organizers",
               width: 960,
               height: 540,
             },
-            {
-              src: HERO_VIDEO.mp4_960,
-              poster: HERO_VIDEO.poster,
-              caption: "TODO(content): ICRA 2026 clip",
-              width: 960,
-              height: 540,
-            },
+            { kind: "slot", caption: "ICRA 2026, Vienna · group photo" },
           ]}
         />
       </Section>
 
-      {/* ---- SponsorCTA (ink), TeamGrid below sponsors (rule) ---- */}
-      <Section variant="ink" edge>
-        <Spec name="SponsorCTA - ink" on="ink" />
-        <SponsorCTA on="ink" />
-        <div className="mt-24">
-          <Spec name="TeamGrid - dev preview: status=verify entries shown" on="ink" />
-          <SectionHeader
-            on="ink"
-            eyebrow="Featured teams"
-            title="Who competes"
-            lead="Seeded from the ICRA 2026 Vienna results page. Every entry is unverified until Cedric confirms it; unverified teams never render outside this styleguide."
-          />
-          <TeamGrid teams={teams} showUnverified />
+      {/* SponsorCTA + TeamGrid - paper */}
+      <Section rule>
+        <Spec name="SponsorCTA · hairline panel, the viewport's one solid CTA" />
+        <SponsorCTA />
+        <div className="mt-20">
+          <Spec name="TeamGrid · hairline cells, mono tags" />
+          <TeamGrid teams={teams} />
         </div>
       </Section>
 
-      {/* ---- Marquee + LogoCloud (paper) ---- */}
-      <Section variant="paper" tight width="bleed" aria-labelledby="sg-partners">
+      {/* Marquee + LogoCloud */}
+      <Section tight width="bleed" aria-labelledby="sg-partners">
         <div className="mx-auto max-w-content px-6">
-          <Spec name="Marquee - partners, pause on hover" />
+          <Spec name="Marquee · grayscale, pause on hover / LogoCloud static" />
           <h2 id="sg-partners" className="sr-only">
             Partners
           </h2>
@@ -232,43 +225,25 @@ export default function Styleguide() {
               key={p.name}
               src={`${import.meta.env.BASE_URL}${p.image}`}
               alt={p.name}
-              height={40}
+              height={36}
               width="auto"
               loading="lazy"
               decoding="async"
-              className="max-h-10 w-auto"
+              className="max-h-9 w-auto max-w-32 object-contain grayscale transition-[filter] duration-[var(--duration-fast)] hover:grayscale-0"
             />
           ))}
         </Marquee>
-        <div className="mx-auto mt-16 max-w-content px-6">
-          <Spec name="LogoCloud - static grid" />
-          <LogoCloud partners={partners.slice(0, 12)} logoHeight={40} />
+        <div className="mx-auto mt-14 max-w-content px-6">
+          <LogoCloud partners={partners.slice(0, 12)} logoHeight={36} />
         </div>
       </Section>
 
-      {/* ---- EventCard (paper grid) ---- */}
-      <Section variant="paper" edge>
-        <Spec name="EventCard - upcoming/past, paper" />
-        <SectionHeader
-          eyebrow="Race calendar"
-          title="Upcoming and past"
-          action={
-            <Button href="/race" variant="secondary">
-              Full calendar
-            </Button>
-          }
-        />
+      {/* EventCard */}
+      <Section edge rule>
+        <Spec name="EventCard · hairline, mono status + meta" />
         <Reveal stagger className="grid gap-6 md:grid-cols-3">
           {upcoming.map((e) => (
-            <EventCard
-              key={e.title}
-              title={e.title}
-              dates={e.dates}
-              location={e.location}
-              href={e.url}
-              variant="upcoming"
-              on="paper"
-            />
+            <EventCard key={e.title} title={e.title} dates={e.dates} location={e.location} href={e.url} variant="upcoming" />
           ))}
           <EventCard
             title="28th RoboRacer Autonomous Racing Competition at IV 2026"
@@ -276,22 +251,21 @@ export default function Styleguide() {
             location="Detroit, MI, USA"
             href="https://iv2026-race.roboracer.ai/"
             variant="past"
-            on="paper"
           />
         </Reveal>
       </Section>
 
-      {/* ---- PublicationCard + TagFilter (paper) ---- */}
-      <Section variant="paper" aria-labelledby="sg-research">
-        <Spec name="PublicationCard + TagFilter - paper only" />
+      {/* PublicationCard + TagFilter */}
+      <Section aria-labelledby="sg-research" rule>
+        <Spec name="PublicationCard + TagFilter" />
         <SectionHeader
-          id="sg-research"
+          index="09"
           eyebrow="Research"
-          title="Built on by 1,000+ publications"
-          lead="A curated selection; the full list lives on Google Scholar."
+          id="sg-research"
+          title="Featured publications"
           action={
             pubs && (
-              <Button href={pubs.scholar_query_url} variant="secondary" target="_blank" rel="noreferrer">
+              <Button href={pubs.scholar_query_url} variant="secondary" target="_blank" rel="noopener noreferrer">
                 Google Scholar
               </Button>
             )
@@ -305,28 +279,19 @@ export default function Styleguide() {
         </div>
       </Section>
 
-      {/* ---- Specimen: type, color, buttons, media ---- */}
-      <Section variant="paper" edge aria-labelledby="sg-specimen">
-        <Spec name="Type scale / colors / Button / Reveal / MediaFrame" />
+      {/* Specimen */}
+      <Section edge rule aria-labelledby="sg-specimen">
+        <Spec name="Type / color / Button / MediaFrame" />
         <h2 id="sg-specimen" className="font-display text-display-m font-semibold text-text-strong">
           Specimen
         </h2>
         <div className="mt-10 flex flex-col gap-6">
           <p className="font-display text-display-xl font-semibold text-text-strong">Display XL</p>
           <p className="font-display text-display-l font-semibold text-text-strong">Display L</p>
-          <p className="font-display text-display-m font-semibold text-text-strong">
-            Display M with a <span className="text-gradient-brand">gradient span</span>
-          </p>
-          <p className="max-w-[60ch] text-lead">
-            Lead. Confident, concrete, international, engineering-minded. Short sentences. Numbers
-            over adjectives.
-          </p>
-          <p className="max-w-[68ch] text-body">
-            Body. Dates as September 28 to 30, 2026 in prose and Sep 28-30, 2026 in cards.
-          </p>
-          <p className="text-small text-text-muted">Small, muted metadata. AA floor on paper.</p>
-          <p className="eyebrow text-text-muted">Eyebrow, tracked 0.14em</p>
-          <p className="font-mono text-small">mono 14.590s - lap times and telemetry</p>
+          <p className="font-display text-display-m font-semibold text-text-strong">Display M</p>
+          <p className="max-w-[60ch] text-lead">Lead. Confident, concrete, international, engineering-minded.</p>
+          <p className="max-w-[68ch] text-body">Body. Short sentences. Numbers over adjectives.</p>
+          <p className="font-mono text-small text-text-muted">mono · 14.590s · Sep 28-30, 2026 · data and captions</p>
         </div>
 
         <div className="mt-12 grid gap-3 sm:grid-cols-4 lg:grid-cols-8">
@@ -343,18 +308,19 @@ export default function Styleguide() {
             ] as const
           ).map(([name, cls]) => (
             <div key={name}>
-              <div className={`h-14 rounded-media border border-paper-200 ${cls}`} />
-              <p className="mt-2 font-mono text-eyebrow text-text-muted">{name}</p>
+              <div className={`h-14 rounded-media border border-ink-950/10 ${cls}`} />
+              <p className="mt-2 font-mono text-eyebrow tracking-normal text-text-muted">{name}</p>
             </div>
           ))}
         </div>
 
         <div className="mt-12 flex flex-wrap items-center gap-4">
-          <Button>Primary on paper</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="ghost">Ghost</Button>
-          <Button size="sm">Small</Button>
-          <Button size="lg">Large</Button>
+          <Button>Primary (one per viewport)</Button>
+          <Button variant="secondary">Secondary hairline</Button>
+          <Button variant="ghost">Ghost underline</Button>
+          <Button size="sm" variant="secondary">
+            Small
+          </Button>
         </div>
         <div className="mt-6 flex flex-wrap items-center gap-4 rounded-card bg-ink-900 p-6">
           <Button on="ink">Primary on ink</Button>
@@ -366,31 +332,29 @@ export default function Styleguide() {
           </Button>
         </div>
 
-        <Reveal stagger className="mt-12 grid gap-6 md:grid-cols-2">
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
           <MediaFrame
             src={HERO_VIDEO.poster}
-            alt="Poster frame from the IV 2026 FPV hero loop"
-            width={1920}
-            height={1080}
+            alt="Poster frame from the IV 2026 hero loop"
+            width={1280}
+            height={720}
             aspect="16 / 9"
           />
-          <div className="rounded-card border-animated">
-            <div className="flex h-full min-h-40 items-center justify-center rounded-[10px] bg-ink-950 p-8 text-center">
-              <p className="font-display font-semibold text-text-on-ink">
-                Animated gradient border - the signature, at most once per page
-              </p>
-            </div>
+          <div className="flex min-h-40 items-center justify-center rounded-media border border-ink-950/10 p-8 text-center">
+            <p className="max-w-md font-mono text-small text-text-muted">
+              gradient is reserved for the logo · no gradient text, no gradient buttons
+            </p>
           </div>
-        </Reveal>
+        </div>
       </Section>
     </div>
   );
 }
 
-function PillarPanel({ text }: { text: string }) {
+function ChapterLine({ text }: { text: string }) {
   return (
-    <div className="flex h-full min-h-[50svh] items-center justify-center rounded-card border border-ink-700 bg-ink-800 p-10 text-center">
-      <p className="max-w-md font-display text-display-m font-semibold text-text-on-ink">{text}</p>
+    <div className="flex h-full min-h-[50svh] items-center border-t border-text-on-ink/15 pt-8">
+      <p className="max-w-xl font-display text-display-l font-semibold text-text-on-ink">{text}</p>
     </div>
   );
 }

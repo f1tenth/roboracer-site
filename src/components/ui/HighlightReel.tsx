@@ -1,26 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 
-export type HighlightItem = {
-  /** MP4 loop; poster is mandatory (media skill). */
-  src: string;
-  poster: string;
-  caption: string;
-  credit?: string;
-  width: number;
-  height: number;
-};
+export type HighlightItem =
+  | {
+      kind?: "video";
+      src: string;
+      poster: string;
+      caption: string;
+      credit?: string;
+      width: number;
+      height: number;
+    }
+  | {
+      /** Explicitly reserved slot: rendered as an honest empty frame with a
+       * mono label, never fake media (photos pending from Cedric). */
+      kind: "slot";
+      caption: string;
+    };
 
 type HighlightReelProps = {
   items: HighlightItem[];
 };
 
 /**
- * 2-4 short muted loops in a staggered two-column masonry with captions.
- * Videos mount only when their tile nears the viewport (IntersectionObserver,
- * same pattern as ExplodedModel) so off-screen tiles cost a poster, not a
- * stream. Reduced motion: posters only. Placeholder media is allowed here
- * only until Cedric swaps real clips in (template per docs/PLAN.md).
+ * Highlights on paper: media at 6px radius inside hairline frames, mono
+ * captions and credits, staggered two-column rhythm. Videos mount behind an
+ * IntersectionObserver; reduced motion shows posters.
  */
 export default function HighlightReel({ items }: HighlightReelProps) {
   const reduced = usePrefersReducedMotion();
@@ -29,16 +34,18 @@ export default function HighlightReel({ items }: HighlightReelProps) {
       {items.slice(0, 4).map((item, i) => (
         <li key={item.caption} className={i % 2 === 1 ? "sm:mt-12" : undefined}>
           <figure>
-            <div className="overflow-hidden rounded-media border border-ink-700 bg-ink-800">
-              {reduced ? (
-                <PosterImg item={item} />
-              ) : (
-                <LazyLoopVideo item={item} />
-              )}
-            </div>
-            <figcaption className="mt-3 flex flex-wrap items-baseline justify-between gap-2">
-              <span className="text-small font-semibold text-text-on-ink">{item.caption}</span>
-              {item.credit && <span className="text-eyebrow text-text-on-ink-muted">{item.credit}</span>}
+            {item.kind === "slot" ? (
+              <div className="flex aspect-video w-full items-center justify-center rounded-media border border-dashed border-ink-950/20">
+                <p className="font-mono text-small text-text-muted">photo slot reserved</p>
+              </div>
+            ) : (
+              <div className="overflow-hidden rounded-media border border-ink-950/10">
+                {reduced ? <PosterImg item={item} /> : <LazyLoopVideo item={item} />}
+              </div>
+            )}
+            <figcaption className="mt-3 flex flex-wrap items-baseline justify-between gap-2 font-mono text-small">
+              <span className="text-text-strong">{item.caption}</span>
+              {item.kind !== "slot" && item.credit && <span className="text-text-muted">{item.credit}</span>}
             </figcaption>
           </figure>
         </li>
@@ -47,7 +54,9 @@ export default function HighlightReel({ items }: HighlightReelProps) {
   );
 }
 
-function PosterImg({ item }: { item: HighlightItem }) {
+type VideoItem = Extract<HighlightItem, { kind?: "video" }>;
+
+function PosterImg({ item }: { item: VideoItem }) {
   return (
     <img
       src={item.poster}
@@ -61,7 +70,7 @@ function PosterImg({ item }: { item: HighlightItem }) {
   );
 }
 
-function LazyLoopVideo({ item }: { item: HighlightItem }) {
+function LazyLoopVideo({ item }: { item: VideoItem }) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
 

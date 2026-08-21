@@ -5,10 +5,11 @@ type ButtonVariant = "primary" | "secondary" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
 
 type CommonProps = {
+  /** primary = THE one solid magenta CTA of its viewport (accent-as-fill is
+   * rationed to one per viewport; everything else is hairline or underline). */
   variant?: ButtonVariant;
   size?: ButtonSize;
-  /** Surface context: decides the solid color per docs/DESIGN.md (no gradients). */
-  on?: "ink" | "paper";
+  on?: "paper" | "ink";
   className?: string;
   children: ReactNode;
 };
@@ -26,18 +27,16 @@ const SIZE: Record<ButtonSize, string> = {
   lg: "px-8 py-4 text-body",
 };
 
-function classesFor(variant: ButtonVariant, on: "ink" | "paper"): string {
+function classesFor(variant: ButtonVariant, on: "paper" | "ink"): string {
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-btn font-sans font-semibold transition-[background-color,color,border-color,transform,box-shadow] duration-[var(--duration-fast)] motion-safe:hover:-translate-y-0.5";
+    "inline-flex items-center justify-center gap-2 rounded-btn font-sans font-semibold transition-colors duration-[var(--duration-fast)]";
   if (variant === "primary") {
-    return on === "ink"
-      ? `${base} bg-rr-magenta text-ink-950 hover:bg-rr-grad-start focus-visible:outline-text-on-ink`
-      : `${base} bg-ink-950 text-text-on-ink hover:bg-ink-800`;
+    return `${base} bg-rr-magenta text-ink-950 hover:bg-rr-grad-start${on === "ink" ? " focus-visible:outline-text-on-ink" : ""}`;
   }
   if (variant === "secondary") {
     return on === "ink"
-      ? `${base} border border-ink-700 text-text-on-ink hover:border-text-on-ink-muted focus-visible:outline-text-on-ink`
-      : `${base} border border-paper-200 text-text-strong hover:border-text-muted`;
+      ? `${base} border border-text-on-ink/25 text-text-on-ink hover:border-text-on-ink/60 focus-visible:outline-text-on-ink`
+      : `${base} border border-ink-950/20 text-text-strong hover:border-ink-950/50`;
   }
   return on === "ink"
     ? `${base} text-text-on-ink underline underline-offset-4 decoration-rr-magenta hover:decoration-2 focus-visible:outline-text-on-ink`

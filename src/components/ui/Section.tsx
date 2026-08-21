@@ -1,15 +1,20 @@
 import type { ReactNode } from "react";
 
-export type SectionVariant = "ink" | "paper";
+export type SectionVariant = "paper" | "ink";
 export type SectionWidth = "content" | "wide" | "bleed";
 
 type SectionProps = {
+  /** Paper is the default surface; ink is reserved for the hero, the car
+   * chapter, and the footer (sharpen direction, 2026-08-21). */
   variant?: SectionVariant;
   width?: SectionWidth;
-  /** Tighter padding band for supporting rows (stats, marquee). */
   tight?: boolean;
-  /** Deepest surface: ink-950 / paper-100 instead of the defaults. */
+  /** Alternate surface tint: paper-100 / ink-950. */
   edge?: boolean;
+  /** Hairline 12-column guides on wide sections, desktop only. */
+  guides?: boolean;
+  /** 1px top rule closing the section against the previous one. */
+  rule?: boolean;
   id?: string;
   className?: string;
   "aria-labelledby"?: string;
@@ -17,8 +22,8 @@ type SectionProps = {
 };
 
 const SURFACE: Record<SectionVariant, { base: string; edge: string }> = {
-  ink: { base: "bg-ink-900 text-text-on-ink-muted", edge: "bg-ink-950 text-text-on-ink-muted" },
   paper: { base: "bg-paper-50 text-text-body", edge: "bg-paper-100 text-text-body" },
+  ink: { base: "bg-ink-900 text-text-on-ink-muted", edge: "bg-ink-950 text-text-on-ink-muted" },
 };
 
 const WIDTH: Record<SectionWidth, string> = {
@@ -27,12 +32,13 @@ const WIDTH: Record<SectionWidth, string> = {
   bleed: "",
 };
 
-/** Owns section rhythm and surface so pages never hand-roll either. */
 export default function Section({
   variant = "paper",
   width = "content",
   tight = false,
   edge = false,
+  guides = false,
+  rule = false,
   id,
   className = "",
   children,
@@ -40,9 +46,25 @@ export default function Section({
 }: SectionProps) {
   const surface = SURFACE[variant][edge ? "edge" : "base"];
   const pad = tight ? "py-section-tight" : "py-section";
+  const topRule = rule ? (variant === "ink" ? "border-t border-text-on-ink/10" : "border-t border-ink-950/10") : "";
   return (
-    <section id={id} data-variant={variant} className={`${surface} ${pad} ${className}`} {...aria}>
-      <div className={WIDTH[width]}>{children}</div>
+    <section
+      id={id}
+      data-variant={variant}
+      className={`relative ${surface} ${pad} ${topRule} ${className}`}
+      {...aria}
+    >
+      {guides && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 mx-auto hidden max-w-content grid-cols-12 gap-x-6 px-6 md:grid"
+        >
+          {Array.from({ length: 12 }, (_, i) => (
+            <div key={i} className={i === 0 ? "" : "border-l border-ink-950/5"} />
+          ))}
+        </div>
+      )}
+      <div className={`relative ${WIDTH[width]}`}>{children}</div>
     </section>
   );
 }

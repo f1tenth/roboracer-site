@@ -107,7 +107,12 @@ export default function PinnedChapter({
 function ChapterHeader({ eyebrow, title }: { eyebrow?: string; title: string }) {
   return (
     <header>
-      {eyebrow && <p className="eyebrow mb-3 text-rr-magenta">{eyebrow}</p>}
+      {eyebrow && (
+        <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-on-ink-muted">
+          <span aria-hidden="true" className="h-1 w-1 bg-rr-magenta" />
+          <span>{eyebrow}</span>
+        </p>
+      )}
       <h2 className="font-display text-display-l font-semibold text-text-on-ink">{title}</h2>
     </header>
   );

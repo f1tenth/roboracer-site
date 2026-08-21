@@ -39,6 +39,10 @@ vendor https://github.com/ibelick/ui-skills skills/fixing-metadata fixing-metada
 vendor https://github.com/addyosmani/web-quality-skills skills/web-quality-audit web-quality-audit
 # antfu/skills (vite)
 vendor https://github.com/antfu/skills skills/vite vite
+# Vercek web-design-guidelines - dense review checklist, strongest on interaction details
+vendor https://github.com/vercel-labs/agent-skills skills/web-design-guidelines web-design-guidelines
+# UI-UX-Pro-Max Skill
+vendor https://github.com/nextlevelbuilder/ui-ux-pro-max-skill .claude/skills/ui-ux-pro-max ui-ux-pro-max
 echo
 echo "done. Inside Claude Code also run once:"
 echo "  /plugin marketplace add anthropics/claude-plugins-official   (if not already added)"

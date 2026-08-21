@@ -1,17 +1,22 @@
 import type { ReactNode } from "react";
 
 type SectionHeaderProps = {
+  /** Two-digit section index, e.g. "01" - rendered as a mono marker. */
+  index?: string;
   eyebrow?: string;
   title: ReactNode;
   lead?: ReactNode;
   action?: ReactNode;
-  /** Matches the enclosing Section variant for text colors. */
-  on?: "ink" | "paper";
+  on?: "paper" | "ink";
   id?: string;
 };
 
-/** The sanctioned section-top layout: eyebrow + display-m title + lead + action. */
+/**
+ * Section top: numbered mono eyebrow ("01 / Next race") with a 4px magenta
+ * index marker, tight display title, optional lead and right-aligned action.
+ */
 export default function SectionHeader({
+  index,
   eyebrow,
   title,
   lead,
@@ -23,8 +28,15 @@ export default function SectionHeader({
   return (
     <header className="mb-12 flex flex-wrap items-end justify-between gap-6">
       <div className="max-w-2xl">
-        {eyebrow && (
-          <p className={`eyebrow mb-3 ${ink ? "text-rr-magenta" : "text-text-muted"}`}>{eyebrow}</p>
+        {(index || eyebrow) && (
+          <p
+            className={`mb-4 flex items-center gap-2 font-mono text-small ${ink ? "text-text-on-ink-muted" : "text-text-muted"}`}
+          >
+            <span aria-hidden="true" className="h-1 w-1 bg-rr-magenta" />
+            {index && <span>{index}</span>}
+            {index && eyebrow && <span aria-hidden="true">/</span>}
+            {eyebrow && <span>{eyebrow}</span>}
+          </p>
         )}
         <h2
           id={id}

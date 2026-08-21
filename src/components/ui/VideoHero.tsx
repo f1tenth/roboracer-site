@@ -66,7 +66,7 @@ export default function VideoHero({ headline, lead, actions, video, credit }: Vi
         </h1>
         {lead && <p className="mt-6 max-w-[60ch] text-lead text-text-on-ink-muted">{lead}</p>}
         {actions && <div className="mt-8 flex flex-wrap gap-4">{actions}</div>}
-        {credit && <p className="mt-8 text-eyebrow text-text-on-ink-muted">{credit}</p>}
+        {credit && <p className="mt-8 font-mono text-eyebrow tracking-normal text-text-on-ink-muted">{credit}</p>}
       </div>
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2" aria-hidden="true">
         <div className="rr-scroll-cue h-10 w-6 rounded-pill border border-text-on-ink-muted/60">

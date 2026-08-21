@@ -3,36 +3,30 @@ import Button from "./Button";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 
 type NextRaceSpotlightProps = {
-  /** e.g. "31st RoboRacer Autonomous Racing Competition at IROS 2026" */
   title: string;
-  /** Public-copy headline, e.g. "September 28 to 30, 2026, Pittsburgh" */
   datesHeadline: string;
-  /** Secondary line, e.g. "Check-in and practice September 27" */
   datesSecondary?: string;
   registerHref: string;
   registerNote?: string;
   rulesHref?: string;
-  /** ISO start of the competition, drives the countdown. */
   startsAt: string;
+  on?: "paper" | "ink";
 };
 
-type Remaining = { days: number; hours: number; minutes: number; seconds: number };
+type Remaining = { days: number; hours: number; minutes: number };
 
 function remainingUntil(iso: string): Remaining | null {
   const ms = new Date(iso).getTime() - Date.now();
   if (Number.isNaN(ms) || ms <= 0) return null;
-  const s = Math.floor(ms / 1000);
-  return {
-    days: Math.floor(s / 86400),
-    hours: Math.floor((s % 86400) / 3600),
-    minutes: Math.floor((s % 3600) / 60),
-    seconds: s % 60,
-  };
+  const m = Math.floor(ms / 60000);
+  return { days: Math.floor(m / 1440), hours: Math.floor((m % 1440) / 60), minutes: m % 60 };
 }
 
 /**
- * The next-race call to teams: dates and city lead, register CTA, countdown
- * in mono digits. Reduced motion shows a static days count (no ticking).
+ * The next-race call to teams as a hairline panel, 7/5 split: dates lead in
+ * tight display type; logistics on the right as mono data lines with a
+ * single-line countdown (no big digit blocks) and the section's one solid
+ * CTA. Reduced motion: the countdown renders once, without ticking.
  */
 export default function NextRaceSpotlight({
   title,
@@ -42,59 +36,61 @@ export default function NextRaceSpotlight({
   registerNote,
   rulesHref,
   startsAt,
+  on = "paper",
 }: NextRaceSpotlightProps) {
+  const ink = on === "ink";
   const reduced = usePrefersReducedMotion();
   const [remaining, setRemaining] = useState<Remaining | null>(() => remainingUntil(startsAt));
 
   useEffect(() => {
     if (reduced) return;
-    const id = window.setInterval(() => setRemaining(remainingUntil(startsAt)), 1000);
+    const id = window.setInterval(() => setRemaining(remainingUntil(startsAt)), 30_000);
     return () => window.clearInterval(id);
   }, [startsAt, reduced]);
 
+  const strong = ink ? "text-text-on-ink" : "text-text-strong";
+  const muted = ink ? "text-text-on-ink-muted" : "text-text-muted";
   return (
-    <article className="rounded-card border border-ink-700 bg-ink-800 p-8 md:p-12">
-      <p className="eyebrow mb-4 text-rr-magenta">Next race</p>
-      <div className="flex flex-wrap items-end justify-between gap-8">
-        <div className="max-w-2xl">
-          <h2 className="font-display text-display-l font-semibold text-text-on-ink">
-            {datesHeadline}
-          </h2>
-          {datesSecondary && (
-            <p className="mt-2 text-lead text-text-on-ink-muted">{datesSecondary}</p>
-          )}
-          <p className="mt-4 text-body text-text-on-ink-muted">{title}</p>
-        </div>
-        {remaining && (
-          <div role="group" aria-label="Time until the competition starts" className="flex gap-6">
-            {(
-              [
-                ["days", remaining.days],
-                ["hrs", remaining.hours],
-                ["min", remaining.minutes],
-                ...(reduced ? [] : [["sec", remaining.seconds] as [string, number]]),
-              ] as [string, number][]
-            ).map(([unit, n]) => (
-              <div key={unit} className="text-center">
-                <p className="font-mono text-display-m font-semibold tabular-nums text-text-on-ink">
-                  {String(n).padStart(2, "0")}
-                </p>
-                <p className="eyebrow mt-1 text-text-on-ink-muted">{unit}</p>
-              </div>
-            ))}
-          </div>
-        )}
+    <article
+      className={`grid gap-8 rounded-card border p-8 md:grid-cols-12 md:p-10 ${ink ? "border-text-on-ink/15" : "border-ink-950/10 bg-paper-50"}`}
+    >
+      <div className="md:col-span-7">
+        <h2 className={`font-display text-display-l font-semibold ${strong}`}>{datesHeadline}</h2>
+        {datesSecondary && <p className={`mt-3 text-lead ${ink ? "text-text-on-ink-muted" : "text-text-body"}`}>{datesSecondary}</p>}
+        <p className={`mt-5 max-w-[55ch] text-small ${muted}`}>{title}</p>
       </div>
-      <div className="mt-8 flex flex-wrap items-center gap-4">
-        <Button href={registerHref} on="ink" variant="primary" target="_blank" rel="noopener noreferrer">
-          Register your team
-        </Button>
-        {rulesHref && (
-          <Button href={rulesHref} on="ink" variant="secondary" target="_blank" rel="noopener noreferrer">
-            Rules and resources
+      <div className={`flex flex-col justify-between gap-6 border-ink-950/10 md:col-span-5 md:border-l md:pl-8 ${ink ? "md:border-text-on-ink/15" : ""}`}>
+        <dl className={`flex flex-col gap-2 font-mono text-small ${muted}`}>
+          {remaining && (
+            <div className="flex justify-between gap-4">
+              <dt>starts in</dt>
+              <dd className={`tabular-nums ${strong}`}>
+                {remaining.days}d {String(remaining.hours).padStart(2, "0")}h{" "}
+                {String(remaining.minutes).padStart(2, "0")}m
+              </dd>
+            </div>
+          )}
+          {registerNote && (
+            <div className="flex justify-between gap-4">
+              <dt>registration closes</dt>
+              <dd className={`tabular-nums ${strong}`}>{registerNote}</dd>
+            </div>
+          )}
+          <div className="flex justify-between gap-4">
+            <dt>format</dt>
+            <dd className={strong}>multi-agent, 4 cars</dd>
+          </div>
+        </dl>
+        <div className="flex flex-wrap items-center gap-4">
+          <Button href={registerHref} on={on} variant="primary" target="_blank" rel="noopener noreferrer">
+            Register your team
           </Button>
-        )}
-        {registerNote && <p className="text-small text-text-on-ink-muted">{registerNote}</p>}
+          {rulesHref && (
+            <Button href={rulesHref} on={on} variant="secondary" target="_blank" rel="noopener noreferrer">
+              Rules
+            </Button>
+          )}
+        </div>
       </div>
     </article>
   );

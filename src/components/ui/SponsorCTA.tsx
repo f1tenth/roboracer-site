@@ -1,38 +1,31 @@
 import Button from "./Button";
 
 type SponsorCTAProps = {
-  on?: "ink" | "paper";
+  on?: "paper" | "ink";
 };
 
 /**
- * Zero sponsors is the correct current state (Cedric, 2026-08-20): this
- * section replaces empty tier rows with a single call to action. Tiers
- * activate once a sponsor is confirmed (roboracer-content).
+ * Zero sponsors is the correct current state: a hairline panel with the one
+ * call to action, no empty tier rows, no filled feature box.
  */
-export default function SponsorCTA({ on = "ink" }: SponsorCTAProps) {
+export default function SponsorCTA({ on = "paper" }: SponsorCTAProps) {
   const ink = on === "ink";
   return (
     <div
-      className={
-        ink
-          ? "rounded-card border border-ink-700 bg-ink-800 p-10 text-center"
-          : "rounded-card bg-paper-100 p-10 text-center"
-      }
+      className={`grid gap-8 rounded-card border p-8 md:grid-cols-12 md:p-10 ${ink ? "border-text-on-ink/15" : "border-ink-950/10"}`}
     >
-      <p className="eyebrow mb-3 text-rr-magenta">Sponsorship</p>
-      <h3 className={`font-display text-display-m font-semibold ${ink ? "text-text-on-ink" : "text-text-strong"}`}>
-        Put your name on the grid
-      </h3>
-      <p className={`mx-auto mt-4 max-w-[60ch] text-lead ${ink ? "text-text-on-ink-muted" : "text-text-body"}`}>
-        RoboRacer races run at the major robotics conferences, with teams from
-        90+ universities. Back the next competition and reach them directly.
-      </p>
-      <div className="mt-8 flex justify-center">
-        <Button
-          href="mailto:contact@roboracer.ai?subject=RoboRacer%20sponsorship"
-          on={on}
-          variant="primary"
-        >
+      <div className="md:col-span-7">
+        <h3 className={`font-display text-display-m font-semibold ${ink ? "text-text-on-ink" : "text-text-strong"}`}>
+          Put your name on the grid
+        </h3>
+        <p className={`mt-4 max-w-[55ch] text-body ${ink ? "text-text-on-ink-muted" : "text-text-body"}`}>
+          RoboRacer races run at the major robotics conferences, in front of the
+          teams and labs that build the field. Back the next competition and
+          reach them directly.
+        </p>
+      </div>
+      <div className="flex items-end md:col-span-5 md:justify-end">
+        <Button href="mailto:contact@roboracer.ai?subject=RoboRacer%20sponsorship" on={on} variant="primary">
           Become a sponsor
         </Button>
       </div>
