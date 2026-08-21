@@ -5,6 +5,11 @@ Method: live Playwright pass at 1440x900 (headless Chromium), DOM measurements +
 never committed). This is a PATTERN AND PROPORTION reference. Rule 8 stands:
 no asset, no copy, no illustration style is ever taken from this site.
 
+Re-validated 2026-08-21 (second director pass, fresh fetch): section order,
+hero contents, accent role list, and nav style all confirmed unchanged. One
+addition: the NeoRacer feature cards are tap-to-expand collapsibles — their
+copy stays collapsed by default, reinforcing the copy-budget finding below.
+
 ## Global facts
 
 - Total page height: 4582px at a 900px viewport = **5.1 viewports for the
