@@ -3,6 +3,7 @@ name: page-builder
 description: Implements one page of the roboracer.ai revamp end to end on its own branch and worktree, following the design system, content skill, and media manifest, then runs QA and prepares the PR. Use when Cedric asks to build or rebuild a page in parallel with other work. For interactive page work in the main session use /build-page instead.
 tools: Read, Glob, Grep, Bash, Edit, Write, WebFetch
 model: inherit
+effort: max
 isolation: worktree
 skills:
   - roboracer-site-map
