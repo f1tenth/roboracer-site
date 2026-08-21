@@ -135,7 +135,7 @@ export default function Styleguide() {
       {/* ExplodedModel - ink chapter */}
       <div className="bg-ink-950">
         <div className="mx-auto max-w-content px-6 pt-16">
-          <Spec name="ExplodedModel · ink chapter, 120vh pin, ceiling 0.5" on="ink" />
+          <Spec name="ExplodedModel · ink chapter, 140vh pin, outward-and-hold, ceiling 0.5" on="ink" />
         </div>
         <ExplodedModel />
       </div>

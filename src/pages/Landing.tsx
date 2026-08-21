@@ -25,6 +25,7 @@ import PublicationCard from "../components/ui/PublicationCard";
 import VideoHero from "../components/ui/VideoHero";
 import HeadlineReveal from "../components/ui/HeadlineReveal";
 import HighlightReel from "../components/ui/HighlightReel";
+import ExplodedModel from "../components/ui/ExplodedModel";
 
 const HERO_VIDEO = {
   mp4_1920: "/media/hero/hero-fpv-loop-1280.mp4",
@@ -104,6 +105,19 @@ export default function Landing() {
     ScrollTrigger.refresh();
   }, [events, partners, teams, pubs, highlights]);
 
+  // Webfonts finish after GSAP's own load-time refresh and change layout
+  // heights, leaving stale trigger starts (measured 216px early on the car
+  // chapter before this).
+  useEffect(() => {
+    let live = true;
+    document.fonts?.ready.then(() => {
+      if (live) ScrollTrigger.refresh();
+    });
+    return () => {
+      live = false;
+    };
+  }, []);
+
   const race = events.find((e) => e.spotlight);
   const featured = pubs?.items.filter((p) => p.featured && p.status === "published").slice(0, 3) ?? [];
 
@@ -145,10 +159,11 @@ export default function Landing() {
         </Section>
       )}
 
-      {/* 5 · The car (ink chapter): B's ExplodedModel carries its own "03 / The car" header */}
-      <section className="flex min-h-svh items-center justify-center bg-ink-950">
-        <p className="font-mono text-small text-text-on-ink-muted">TODO(wire): ExplodedModel chapter from revamp/v2-car</p>
-      </section>
+      {/* 5 · The car (ink chapter): outward-and-hold explosion, carries its
+          own "03 / The car" header */}
+      <div className="bg-ink-950">
+        <ExplodedModel />
+      </div>
 
       {/* 6 · 04 Platform (paper): hairline rows, 5/7 split */}
       <Section aria-labelledby="pillars">
