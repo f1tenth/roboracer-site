@@ -1,6 +1,6 @@
 # Vendored skills
 
-Installed by scripts/install-skills.sh on 2026-08-20. Do not edit in place; re-run the script to update. Licenses: see each upstream repo (Apache-2.0 / MIT).
+Installed by scripts/install-skills.sh on 2026-08-21. Do not edit in place; re-run the script to update. Licenses: see each upstream repo (Apache-2.0 / MIT).
 
 | skill | source | path in source | commit |
 |---|---|---|---|
@@ -18,3 +18,5 @@ Installed by scripts/install-skills.sh on 2026-08-20. Do not edit in place; re-r
 | fixing-metadata | https://github.com/ibelick/ui-skills | skills/fixing-metadata | 33b35e7 |
 | web-quality-audit | https://github.com/addyosmani/web-quality-skills | skills/web-quality-audit | 95d6e25 |
 | vite | https://github.com/antfu/skills | skills/vite | a74f281 |
+| web-design-guidelines | https://github.com/vercel-labs/agent-skills | skills/web-design-guidelines | b8caa26 |
+| ui-ux-pro-max | https://github.com/nextlevelbuilder/ui-ux-pro-max-skill | .claude/skills/ui-ux-pro-max | bc826e2 |
