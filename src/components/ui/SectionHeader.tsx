@@ -12,7 +12,7 @@ type SectionHeaderProps = {
 };
 
 /**
- * Section top: numbered mono eyebrow ("01 / Next race") with a 4px magenta
+ * Section top: numbered mono eyebrow ("01 / Next race") with a 4px ink
  * index marker, tight display title, optional lead and right-aligned action.
  */
 export default function SectionHeader({
@@ -32,7 +32,7 @@ export default function SectionHeader({
           <p
             className={`mb-4 flex items-center gap-2 font-mono text-small ${ink ? "text-text-on-ink-muted" : "text-text-muted"}`}
           >
-            <span aria-hidden="true" className="h-1 w-1 bg-rr-magenta" />
+            <span aria-hidden="true" className={`h-1 w-1 ${ink ? "bg-text-on-ink" : "bg-ink-950"}`} />
             {index && <span>{index}</span>}
             {index && eyebrow && <span aria-hidden="true">/</span>}
             {eyebrow && <span>{eyebrow}</span>}
