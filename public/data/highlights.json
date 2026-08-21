@@ -1,0 +1,122 @@
+[
+  {
+    "id": "iv2026-lap",
+    "type": "video",
+    "src": "/media/hero/hero-fpv-loop-960.mp4",
+    "poster": "/media/hero/hero-fpv-poster.webp",
+    "caption": "track-level lap · IV 2026, Detroit",
+    "credit": "RoboRacer organizers",
+    "aspect": "16/9",
+    "status": "live"
+  },
+  {
+    "id": "iv2026-podium-1st",
+    "type": "image",
+    "src": "",
+    "poster": "",
+    "caption": "1st · Thunderbolt, UPenn · IV 2026, Detroit",
+    "credit": "",
+    "aspect": "3/2",
+    "status": "placeholder"
+  },
+  {
+    "id": "iv2026-podium-2nd",
+    "type": "image",
+    "src": "",
+    "poster": "",
+    "caption": "2nd · 404 Racers · IV 2026, Detroit",
+    "credit": "",
+    "aspect": "3/2",
+    "status": "placeholder"
+  },
+  {
+    "id": "iv2026-podium-3rd",
+    "type": "image",
+    "src": "",
+    "poster": "",
+    "caption": "3rd · West Virginia University · IV 2026, Detroit",
+    "credit": "",
+    "aspect": "3/2",
+    "status": "placeholder"
+  },
+  {
+    "id": "icra2026-group",
+    "type": "image",
+    "src": "",
+    "poster": "",
+    "caption": "ICRA 2026, Vienna · group photo",
+    "credit": "",
+    "aspect": "16/9",
+    "status": "placeholder"
+  },
+  {
+    "id": "icra2026-action",
+    "type": "image",
+    "src": "",
+    "poster": "",
+    "caption": "race action · ICRA 2026, Vienna",
+    "credit": "",
+    "aspect": "16/9",
+    "status": "placeholder"
+  },
+  {
+    "id": "icra2026-teams",
+    "type": "image",
+    "src": "",
+    "poster": "",
+    "caption": "35 teams · ICRA 2026, Vienna",
+    "credit": "",
+    "aspect": "3/2",
+    "status": "placeholder"
+  },
+  {
+    "id": "pittsburgh-2016",
+    "type": "image",
+    "src": "",
+    "poster": "",
+    "caption": "Embedded Systems Week 2016 - Pittsburgh, Pennsylvania",
+    "credit": "",
+    "aspect": "16/9",
+    "status": "placeholder"
+  },
+  {
+    "id": "porto-2018",
+    "type": "image",
+    "src": "",
+    "poster": "",
+    "caption": "Cyber Physical Systems Week 2018 - Porto, Portugal",
+    "credit": "",
+    "aspect": "3/2",
+    "status": "placeholder"
+  },
+  {
+    "id": "montreal-2019",
+    "type": "image",
+    "src": "",
+    "poster": "",
+    "caption": "CPS & IoTW 2019 Montreal",
+    "credit": "",
+    "aspect": "16/9",
+    "status": "placeholder"
+  },
+  {
+    "id": "germany-2022",
+    "type": "image",
+    "src": "",
+    "poster": "",
+    "caption": "RoboRacer Autonomous Championship Germany 2022",
+    "credit": "",
+    "aspect": "3/2",
+    "status": "placeholder"
+  },
+  {
+    "id": "iros-2024",
+    "type": "image",
+    "src": "",
+    "poster": "",
+    "caption": "IROS 2024 Race",
+    "credit": "",
+    "aspect": "16/9",
+    "status": "placeholder"
+  }
+]

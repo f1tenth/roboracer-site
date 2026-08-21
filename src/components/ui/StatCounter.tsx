@@ -10,8 +10,9 @@ type StatCounterProps = {
 
 /**
  * Data-strip stat: mono tabular value over a small mono label - a spec-sheet
- * row, not a hero-metric tile. Counts up once in view; the final number is
- * in the markup from first render.
+ * row, not a hero-metric tile. Counts up once the element is FULLY in view
+ * (start "bottom bottom"), 1.8s; the final number is in the markup from
+ * first render.
  */
 export default function StatCounter({ value, suffix = "", label, on = "paper" }: StatCounterProps) {
   const numberRef = useRef<HTMLSpanElement>(null);
@@ -25,9 +26,9 @@ export default function StatCounter({ value, suffix = "", label, on = "paper" }:
       const proxy = { n: 0 };
       gsap.to(proxy, {
         n: value,
-        duration: 1.2,
+        duration: 1.8,
         ease: "power2.out",
-        scrollTrigger: { trigger: el, start: "top 85%", once: true },
+        scrollTrigger: { trigger: el, start: "bottom bottom", once: true },
         onUpdate: () => {
           el.textContent = format(proxy.n);
         },

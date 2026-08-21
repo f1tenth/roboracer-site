@@ -38,6 +38,8 @@ export default function Navbar() {
         <img
           src="/logos/logo-black-gradient.png"
           alt="RoboRacer"
+          width={2736}
+          height={491}
           className="h-10 w-auto"
         />
       </Link>

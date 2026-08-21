@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import {
+  loadHighlights,
   loadPartners,
   loadPublications,
   loadTeams,
   loadUpcomingEvents,
   tagLabelMap,
+  type Highlight,
   type Partner,
   type PublicationsFile,
   type Team,
@@ -22,7 +24,8 @@ import EventCard from "../components/ui/EventCard";
 import LogoCloud from "../components/ui/LogoCloud";
 import TagFilter from "../components/ui/TagFilter";
 import PinnedChapter from "../components/ui/PinnedChapter";
-import VideoHero from "../components/ui/VideoHero";
+import VideoHero, { type HeroVideoSources } from "../components/ui/VideoHero";
+import HeadlineReveal from "../components/ui/HeadlineReveal";
 import HighlightReel from "../components/ui/HighlightReel";
 import TeamGrid from "../components/ui/TeamGrid";
 import PublicationCard from "../components/ui/PublicationCard";
@@ -30,7 +33,7 @@ import SponsorCTA from "../components/ui/SponsorCTA";
 import NextRaceSpotlight from "../components/ui/NextRaceSpotlight";
 import ExplodedModel from "../components/ui/ExplodedModel";
 
-const HERO_VIDEO = {
+const HERO_VIDEO: HeroVideoSources = {
   mp4_1920: "/media/hero/hero-fpv-loop-1280.mp4",
   mp4_960: "/media/hero/hero-fpv-loop-960.mp4",
   poster: "/media/hero/hero-fpv-poster.webp",
@@ -61,6 +64,7 @@ export default function Styleguide() {
   const [events, setEvents] = useState<UpcomingEvent[]>([]);
   const [partners, setPartners] = useState<Partner[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
+  const [highlights, setHighlights] = useState<Highlight[]>([]);
   const [pubs, setPubs] = useState<PublicationsFile | null>(null);
   const [tag, setTag] = useState<string | null>(null);
 
@@ -68,6 +72,7 @@ export default function Styleguide() {
     loadUpcomingEvents().then(setEvents).catch(() => setEvents([]));
     loadPartners().then(setPartners).catch(() => setPartners([]));
     loadTeams().then(setTeams).catch(() => setTeams([]));
+    loadHighlights().then(setHighlights).catch(() => setHighlights([]));
     loadPublications().then(setPubs).catch(() => setPubs(null));
   }, []);
 
@@ -83,23 +88,19 @@ export default function Styleguide() {
 
   return (
     <div className="pt-[68px] md:pt-[85px]">
-      {/* VideoHero - ink, one solid CTA, no gradient text */}
-      <VideoHero
-        headline="Autonomous racing at 1/10 scale"
-        lead="RoboRacer, formerly F1TENTH, is an international community of researchers, engineers, and students racing open-source autonomous cars."
-        actions={
-          <>
-            <Button href="https://iros2026-race.roboracer.ai/registration.html" on="ink" target="_blank" rel="noopener noreferrer">
-              Register for IROS 2026
-            </Button>
-            <Button href="/about" on="ink" variant="ghost">
-              What is RoboRacer
-            </Button>
-          </>
-        }
-        video={HERO_VIDEO}
-        credit="footage: RoboRacer at IV 2026, Detroit"
-      />
+      <h1 className="sr-only">Styleguide</h1>
+
+      {/* VideoHero - video-only (neobotics pattern): pause control on
+          hover/focus, one-shot idle scroll cue after 10 s, no headline */}
+      <VideoHero video={HERO_VIDEO} />
+
+      {/* HeadlineReveal - the page's one loud moment (h1 on landing, h2 here) */}
+      <div className="bg-paper-50">
+        <div className="mx-auto max-w-content px-6 pt-16">
+          <Spec name="HeadlineReveal · 180vh pin, per-word scrub, assembled by ~70%" />
+        </div>
+        <HeadlineReveal as="h2" lines={["Autonomous racing,", "built and raced", "in the open"]} />
+      </div>
 
       {/* NextRaceSpotlight - paper hairline panel */}
       <Section guides>
@@ -134,7 +135,7 @@ export default function Styleguide() {
       {/* ExplodedModel - ink chapter */}
       <div className="bg-ink-950">
         <div className="mx-auto max-w-content px-6 pt-16">
-          <Spec name="ExplodedModel · ink chapter, 120vh pin, ceiling 0.5" on="ink" />
+          <Spec name="ExplodedModel · ink chapter, 140vh pin, outward-and-hold, ceiling 0.5" on="ink" />
         </div>
         <ExplodedModel />
       </div>
@@ -183,22 +184,20 @@ export default function Styleguide() {
         </div>
       </Section>
 
-      {/* HighlightReel - paper, real clip + honest slot */}
-      <Section edge rule>
-        <Spec name="HighlightReel · media 6px, mono captions, slot state" />
-        <HighlightReel
-          items={[
-            {
-              src: HERO_VIDEO.mp4_960,
-              poster: HERO_VIDEO.poster,
-              caption: "track-level lap · IV 2026, Detroit",
-              credit: "RoboRacer organizers",
-              width: 960,
-              height: 540,
-            },
-            { kind: "slot", caption: "ICRA 2026, Vienna · group photo" },
-          ]}
-        />
+      {/* HighlightReel - two-row counter-scrolling strip from highlights.json.
+          Plain paper-50 surface so the paper-100 placeholder frames read as
+          tiles, not background. */}
+      <Section rule width="bleed">
+        <div className="mx-auto max-w-content px-6">
+          <Spec name="HighlightReel · two-row counter-scroll, 52s/60s, pause on hover/focus" />
+        </div>
+        {highlights.length > 0 ? (
+          <HighlightReel items={highlights} />
+        ) : (
+          <p className="mx-auto max-w-content px-6 font-mono text-small text-text-muted">
+            highlights.json failed to load
+          </p>
+        )}
       </Section>
 
       {/* SponsorCTA + TeamGrid - paper */}

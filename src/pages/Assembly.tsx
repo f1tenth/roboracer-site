@@ -230,8 +230,9 @@ export default function Assembly() {
 
       <section className="viewer-intro" aria-labelledby="assembly-title">
         <div className="viewer-kicker"><span /> Xacro visual assembly</div>
+        {/* Content skill: write "RoboRacer" everywhere (2026-08-21). */}
         <h1 id="assembly-title">
-          F1TENTH
+          RoboRacer
           <span>Assembly lab</span>
         </h1>
         <p>

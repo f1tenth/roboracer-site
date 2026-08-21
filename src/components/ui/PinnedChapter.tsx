@@ -109,7 +109,7 @@ function ChapterHeader({ eyebrow, title }: { eyebrow?: string; title: string }) 
     <header>
       {eyebrow && (
         <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-on-ink-muted">
-          <span aria-hidden="true" className="h-1 w-1 bg-rr-magenta" />
+          <span aria-hidden="true" className="h-1 w-1 bg-text-on-ink" />
           <span>{eyebrow}</span>
         </p>
       )}

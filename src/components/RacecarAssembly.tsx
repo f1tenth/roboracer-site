@@ -1,6 +1,15 @@
-import { Suspense, useEffect, useMemo, useRef, useState, type RefObject } from "react";
+import {
+  Component,
+  Suspense,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+  type RefObject,
+} from "react";
 import { Canvas, type ThreeEvent, useFrame, useLoader, useThree } from "@react-three/fiber";
-import { ContactShadows, Grid, Html, OrbitControls, useGLTF } from "@react-three/drei";
+import { ContactShadows, Environment, Grid, Html, OrbitControls, useGLTF } from "@react-three/drei";
 import {
   ACESFilmicToneMapping,
   Color,
@@ -17,6 +26,12 @@ import {
   type RacecarPartId,
   type VectorTuple,
 } from "./racecarAssemblyData";
+import {
+  FINISH,
+  HIGHLIGHT_EMISSIVE,
+  HIGHLIGHT_INTENSITY,
+  overridePartMaterial,
+} from "./racecarMaterials";
 
 const glbAssets = RACECAR_PARTS.filter((part) => part.format === "glb").map(
   (part) => part.asset,
@@ -30,7 +45,7 @@ type ViewerMaterial = Material & {
   wireframe?: boolean;
 };
 
-function cloneScene(scene: Object3D) {
+function cloneScene(scene: Object3D, partId: RacecarPartId) {
   const clone = scene.clone(true);
 
   clone.traverse((child) => {
@@ -41,7 +56,7 @@ function cloneScene(scene: Object3D) {
     mesh.receiveShadow = true;
     const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
     const clonedMaterials = materials.map((material) => {
-      const cloned = material.clone() as ViewerMaterial;
+      const cloned = overridePartMaterial(partId, material) as ViewerMaterial;
       if (cloned.emissive) {
         cloned.userData.viewerEmissive = cloned.emissive.clone();
         cloned.userData.viewerEmissiveIntensity = cloned.emissiveIntensity ?? 1;
@@ -70,12 +85,15 @@ function updateSceneAppearance(
       viewerMaterial.wireframe = wireframe;
       if (!viewerMaterial.emissive) return;
 
-      const original = viewerMaterial.userData.viewerEmissive as Color | undefined;
-      viewerMaterial.emissive.copy(original ?? new Color("#000000"));
       if (isActive || isHovered) {
-        viewerMaterial.emissive.lerp(new Color("#65e7ed"), isActive ? 0.55 : 0.25);
-        viewerMaterial.emissiveIntensity = isActive ? 0.8 : 0.45;
+        // Subtle brightness lift only - never a hue change.
+        viewerMaterial.emissive.set(HIGHLIGHT_EMISSIVE);
+        viewerMaterial.emissiveIntensity = isActive
+          ? HIGHLIGHT_INTENSITY.selected
+          : HIGHLIGHT_INTENSITY.hover;
       } else {
+        const original = viewerMaterial.userData.viewerEmissive as Color | undefined;
+        viewerMaterial.emissive.copy(original ?? new Color("#000000"));
         viewerMaterial.emissiveIntensity =
           (viewerMaterial.userData.viewerEmissiveIntensity as number | undefined) ?? 1;
       }
@@ -93,7 +111,7 @@ type ModelGeometryProps = {
 
 function GlbGeometry({ part, selected, hovered, wireframe }: ModelGeometryProps) {
   const gltf = useGLTF(part.asset) as GLTF;
-  const scene = useMemo(() => cloneScene(gltf.scene), [gltf.scene]);
+  const scene = useMemo(() => cloneScene(gltf.scene, part.id), [gltf.scene, part.id]);
 
   useEffect(() => {
     updateSceneAppearance(scene, selected, hovered, wireframe);
@@ -108,11 +126,13 @@ function StlGeometry({ part, selected, hovered, wireframe }: ModelGeometryProps)
   return (
     <mesh geometry={geometry} castShadow receiveShadow>
       <meshStandardMaterial
-        color="#7151ff"
-        emissive={selected || hovered ? "#65e7ed" : "#1a103d"}
-        emissiveIntensity={selected ? 0.85 : hovered ? 0.4 : 0.2}
-        metalness={0.58}
-        roughness={0.25}
+        color={FINISH.graphite.color}
+        emissive={HIGHLIGHT_EMISSIVE}
+        emissiveIntensity={
+          selected ? HIGHLIGHT_INTENSITY.selected : hovered ? HIGHLIGHT_INTENSITY.hover : 0
+        }
+        metalness={FINISH.graphite.metalness}
+        roughness={FINISH.graphite.roughness}
         wireframe={wireframe}
       />
     </mesh>
@@ -271,6 +291,55 @@ function SceneReady({ onReady }: { onReady: () => void }) {
   return null;
 }
 
+/** Neutral three-point substitute used while the studio HDR loads or when it
+ * cannot load at all (offline). Keeps the car readable, never black. */
+function NeutralStudioLights() {
+  return (
+    <>
+      <ambientLight intensity={0.85} />
+      <directionalLight intensity={2.4} position={[1.6, 2.2, 1.2]} />
+      <directionalLight intensity={1.0} position={[-1.8, 1.2, -1.4]} />
+    </>
+  );
+}
+
+type EnvironmentBoundaryProps = { children: ReactNode };
+
+class EnvironmentBoundary extends Component<EnvironmentBoundaryProps, { failed: boolean }> {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  componentDidCatch(error: unknown) {
+    console.warn("Studio environment unavailable, using neutral lights", error);
+  }
+
+  render() {
+    return this.state.failed ? <NeutralStudioLights /> : this.props.children;
+  }
+}
+
+/**
+ * Studio image-based lighting shared by both racecar canvases (the /assembly
+ * viewer and the landing ExplodedModel chapter). Poly Haven's CC0 1k studio
+ * HDRs all exceed the 1.5 MB git budget (checked 2026-08-21: 1.51-1.69 MB),
+ * so no binary is committed; drei's `preset="studio"` runtime fetch is used
+ * instead, with neutral lights while loading and if the fetch fails.
+ * Lighting-only: no `background` prop, so the landing canvas stays
+ * alpha-transparent over ink-950.
+ */
+export function StudioLighting({ intensity = 0.9 }: { intensity?: number }) {
+  return (
+    <EnvironmentBoundary>
+      <Suspense fallback={<NeutralStudioLights />}>
+        <Environment preset="studio" environmentIntensity={intensity} />
+      </Suspense>
+    </EnvironmentBoundary>
+  );
+}
+
 type RacecarAssemblyPartsProps = {
   explosion: number;
   explosionRef?: RefObject<number>;
@@ -354,18 +423,15 @@ export function RacecarAssemblyCanvas({
       gl={{ antialias: true, toneMapping: ACESFilmicToneMapping }}
       onPointerMissed={() => onSelect(null)}
     >
-      <color attach="background" args={["#080a0d"]} />
-      <fog attach="fog" args={["#080a0d", 1.8, 4]} />
-      <ambientLight intensity={0.72} />
-      <hemisphereLight args={["#d9fbff", "#13131a", 1.45]} />
+      <color attach="background" args={["#f3f4f8"]} />
+      <StudioLighting />
       <directionalLight
         castShadow
-        color="#dbfbff"
-        intensity={3.2}
+        color="#ffffff"
+        intensity={1.3}
         position={[1.2, 1.7, 0.8]}
         shadow-mapSize={[1024, 1024]}
       />
-      <spotLight color="#7057ff" intensity={12} angle={0.42} penumbra={0.8} position={[-1, 1.3, -1]} />
 
       <Suspense fallback={null}>
         <RacecarAssemblyParts
@@ -382,9 +448,9 @@ export function RacecarAssemblyCanvas({
 
       <ContactShadows
         position={[0, -0.003, 0]}
-        opacity={0.48}
+        opacity={0.34}
         scale={2.2}
-        blur={2.5}
+        blur={2.6}
         far={1.2}
         resolution={512}
       />
@@ -393,10 +459,10 @@ export function RacecarAssemblyCanvas({
         args={[3, 3]}
         cellSize={0.075}
         cellThickness={0.55}
-        cellColor="#263036"
+        cellColor="#dcdfe8"
         sectionSize={0.3}
         sectionThickness={0.9}
-        sectionColor="#34434a"
+        sectionColor="#ced2de"
         fadeDistance={2.2}
         fadeStrength={1.5}
         infiniteGrid

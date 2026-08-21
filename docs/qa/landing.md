@@ -1,42 +1,66 @@
-# QA report: / (landing) - sharpen v2
+# QA: landing (v2 rebuild) — 2026-08-21
 
-Date: 2026-08-21 (v2, sharpen pass) · Branch `revamp/sharpen` · Production build via `vite preview`. Supersedes the v1 report; v1 history in git.
+Route `/` on branch `revamp/v2-page` (A+B+C merged), production preview build.
+Supersedes the sharpen-v2 report (history in git). Companion reviews:
+`docs/qa/landing-review.md` (@qa-reviewer, verdict SHIP) and the /impeccable
+finish review (fix list applied, see "Fixes applied").
 
 ## Verdict: PASS
 
-Zero console errors, zero failed requests, **zero axe violations**, reduced-motion complete, links resolve, no new over-budget assets (net -4.5 MB).
-
-## Checks
-
 | Check | Result |
 |---|---|
-| lint / build | pass / pass. Largest chunks: `RacecarAssembly` 955 kB (lazy; loads only near the ExplodedModel chapter or on `/assembly`), `Research` 803 kB (pre-existing lazy page), entry `index` 346 kB |
-| Screenshots | [desktop](landing/desktop.png) · [tablet](landing/tablet.png) · [mobile](landing/mobile.png) (full-page) |
-| Reduced motion | [desktop-rm](landing/desktop-rm.png) / tablet-rm / mobile-rm - complete static page: hero poster, static countdown (no seconds), reel posters, assembled car + stacked captions, final stat numbers, wrapped logo grid |
-| Console | 0 errors, 0 failed requests ([console.json](landing/console.json)); remaining warnings are headless-GPU ReadPixels notices from screenshotting WebGL |
-| axe | **0 violations** ([axe.json](landing/axe.json)) |
-| Links | all http(s) 200 incl. the arXiv link from a featured publication; Slack invite 403 to bots (Cedric verified manually 2026-08-20); mailto + Scholar manual per skill |
-| Assets | new page media = committed hero set only. `public/landing/hero-bg.jpg` (4.5 MB) deleted - orphaned by this page, per PLAN. Remaining over-budget files are About/News assets (`about/image-2.JPG`, `crew/billy.png`, `crew/Roshan_Benefo.jpeg`) - scheduled for those page passes |
-| Pins | ExplodedModel 230vh (within 150-250 spec); no other pinned section |
-| Content | one `TODO(content)`: the second highlight tile awaits Cedric's ICRA 2026 clip (explicit template placeholder per PLAN). VERIFY-marked facts (180+/35 ICRA numbers) are NOT rendered. No lorem, no em dashes. teams.json TODOs stay in never-rendered `verify` entries |
+| `npm run lint` | pass |
+| `npm run build` | pass (largest chunks: RacecarAssembly 992K lazy, Research 784K lazy pre-existing, index 340K) |
+| Console errors / warnings (desktop walk, prod build) | 0 / 0 |
+| Failed network requests | 0 |
+| axe serious/critical | **0** (0 violations of any severity) |
+| One h1 | yes ("Autonomous racing, built and raced in the open") |
+| Horizontal overflow 1440 / 390 | none / none |
+| `<video>` without poster | 0 |
+| `<img>` without dimensions | 0 after fix (was 3: nav+footer logos) |
+| Pinned wrappers | 180vh (headline), 140vh (car) — both ≤ 250vh |
+| Reduced motion | complete static page: poster hero, no cue, full-size headline, wrapped static strip, static assembled car, final counter values (desktop-rm/tablet-rm/mobile-rm.png) |
+| Accent discipline | zero magenta/cyan computed styles on `/`; violet only as the two solid CTAs (Register, Slack) |
+| External links | all 200 except Slack invite 403 to curl (bot-wall; Cedric confirmed the invite valid 2026-08-20 — one manual click-through recommended) and Scholar (rate-limits, manual per protocol) |
+| Media budget | no new binaries; >1.5MB files are pre-existing (`crew/`, `about/`) + the approved hero exception |
+| TODO(content) | only sanctioned: final car-chapter copy; studio photo dims pending `car-studio*.webp` |
+| Em dashes in copy | none |
 
-## Fixes applied during QA
+## Screenshots (this folder; full-page files are stitched scroll-throughs)
 
-1. `Reveal` warned (`GSAP target not found`) when staggering a container whose data had not loaded yet - now renders static until children exist.
-2. Deleted orphaned `public/landing/hero-bg.jpg` (4.5 MB, the old hero background this page replaces).
+`desktop.png`, `tablet.png`, `mobile.png`, `*-rm.png`, `desktop-nojs.png`,
+`axe.json`, `console.json`, plus `review/` (58 files from @qa-reviewer).
+Note: naive `full_page=True`/`captureBeyondViewport` captures mangle this page
+(vh-based pins re-trigger on the resize); the full-page files here are
+stitched viewport walks instead — pinned content legitimately repeats across
+its travel in them.
 
-## Notes for review
+## Fixes applied during QA (all verified on the preview build)
 
-- Featured-teams section is built but hidden: every `teams.json` entry is `status: "verify"`. It appears (below sponsors) as soon as Cedric flips entries to `"published"`.
-- `public/landing/car-inside.png` (530 kB) is also orphaned now; left for the About pass to decide.
-- The white legacy navbar over the ink hero remains until the Phase 3.5 nav/footer pass.
+1. Car body to satin graphite (grey multiplier + envMapIntensity on the
+   chassis palette — aluminum split preserved) and product-scale camera that
+   dollies out with the explosion (impeccable material 1–2).
+2. Highlights header demoted to mono label + one-line lead; placeholder tiles
+   share the live tiles' caption-below skeleton so row edges stay flush
+   (impeccable material 4, polish 5).
+3. Research CTAs stacked left-aligned; TeamGrid initials split on `_-` so
+   UBM-Tom/UBM-Atlas/UNICORN_Racing render UT/UA/UR, not U/U/U (polish 6–7).
+4. `:focus-visible` wrapped in `@layer base` so component ring overrides work
+   again — hero pause button ring measured white rgb(245,245,250) over video
+   (qa-reviewer should-fix 1).
+5. Touch targets: "Explore the car" and the mailto link now ≥24px tall at 390
+   (qa-reviewer should-fix 2).
+6. Nav/footer logo `width`/`height` attributes (CLS hygiene).
+7. Spotlight format line corrected to "multi-agent, up to 4 cars" (content
+   skill wording).
 
-## Sharpen v2 re-run (2026-08-21)
+## Flags for Cedric (no action taken)
 
-Re-ran the full matrix after the paper-first rebuild: **0 console errors, 0
-failed requests, 0 axe violations** at all three viewports (one fix during
-the pass: dimmed caption index digits moved to `text-on-ink`). All links
-200 (Slack 403s to bots as before). Hero files: 1280 = 7.61 MB (within its
-8 MB exception), 960 = 2.97 MB, poster 36.6 KB. First-load video = one hero
-stream per viewport (highlight tiles remain gated). Remaining over-budget
-assets are unchanged About/News files scheduled for those passes.
+- All 10 teams render with the mono "unverified" tag (per your instruction;
+  qa-reviewer suggests explicit sign-off before public ship).
+- Slack invite: bot-walled to automated checks; one manual click-through.
+- No-JS renders a blank SPA shell — site-wide architecture, pre-existing,
+  not a landing regression; noscript fallback is a Phase 4 candidate.
+- Car chapter studio HDR loads from the drei preset CDN at runtime (all
+  CC0 1k studio HDRs measured >1.5MB, so none entered git); neutral-light
+  fallback covers offline.
