@@ -150,7 +150,11 @@ body {
   min-width: 100%;
   animation: rr-marquee var(--rr-marquee-duration, 50s) linear infinite;
 }
-.rr-marquee:hover .rr-marquee-track {
+/* Pause on hover AND on keyboard focus within (the partner ribbon's logo
+   links). This must live here, unlayered: the `animation` shorthand above
+   resets play-state and beats any layered utility. */
+.rr-marquee:hover .rr-marquee-track,
+.rr-marquee:focus-within .rr-marquee-track {
   animation-play-state: paused;
 }
 @media (prefers-reduced-motion: reduce) {

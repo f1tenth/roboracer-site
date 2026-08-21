@@ -17,7 +17,8 @@ type MarqueeProps = {
  * the accessibility tree) so interactive children - the partner ribbon's
  * logo links - are reachable exactly once by keyboard. The animation pauses
  * on hover (index.css) and on focus-within (here) so a focused link holds
- * still. `.rr-marquee-clone` disappears under prefers-reduced-motion, where
+ * still (both rules live in index.css: the unlayered `.rr-marquee-track
+ * { animation }` shorthand would beat a layered utility). `.rr-marquee-clone` disappears under prefers-reduced-motion, where
  * the first track wraps into a static grid and the second is hidden.
  */
 export default function Marquee({ duration = 50, label, className = "", gap = "gap-12 pr-12", children }: MarqueeProps) {
@@ -32,7 +33,7 @@ export default function Marquee({ duration = 50, label, className = "", gap = "g
   );
   return (
     <div
-      className={`rr-marquee [&:focus-within_.rr-marquee-track]:[animation-play-state:paused] ${className}`}
+      className={`rr-marquee ${className}`}
       role="group"
       aria-label={label}
       style={style}

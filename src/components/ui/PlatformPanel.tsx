@@ -137,15 +137,27 @@ export default function PlatformPanel({ rows }: PlatformPanelProps) {
               data-row={row.id}
               onMouseEnter={() => setHovered(i)}
               onFocus={() => setHovered(i)}
-              className={`border-t border-ink-950/10 py-8 transition-opacity duration-[var(--duration-base)] last:border-b md:py-10 ${
-                isActive || reduced ? "opacity-100" : "opacity-55"
-              }`}
+              className="border-t border-ink-950/10 py-8 last:border-b md:py-10"
             >
+              {/* Active row = strong ink; inactive rows drop to text-muted, the
+                  AA floor, instead of opacity (axe color-contrast). */}
               <div className="grid gap-3 sm:grid-cols-12 sm:gap-x-4">
                 <span className="font-mono text-small text-text-muted sm:col-span-2">{row.n}</span>
                 <div className="sm:col-span-10">
-                  <h3 className="font-display text-display-m font-semibold text-text-strong">{row.title}</h3>
-                  <p className="mt-2 max-w-[40ch] text-body text-text-body">{row.body}</p>
+                  <h3
+                    className={`font-display text-display-m font-semibold transition-colors duration-[var(--duration-base)] ${
+                      isActive || reduced ? "text-text-strong" : "text-text-muted"
+                    }`}
+                  >
+                    {row.title}
+                  </h3>
+                  <p
+                    className={`mt-2 max-w-[40ch] text-body transition-colors duration-[var(--duration-base)] ${
+                      isActive || reduced ? "text-text-body" : "text-text-muted"
+                    }`}
+                  >
+                    {row.body}
+                  </p>
                   <Link
                     to={row.href}
                     className="mt-4 inline-block py-1 text-small font-semibold text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2"
