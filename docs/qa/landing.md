@@ -1,6 +1,6 @@
-# QA report: / (landing)
+# QA report: / (landing) - sharpen v2
 
-Date: 2026-08-21 · Branch `revamp/landing` (off `revamp/integration`) · Production build via `vite preview`.
+Date: 2026-08-21 (v2, sharpen pass) · Branch `revamp/sharpen` · Production build via `vite preview`. Supersedes the v1 report; v1 history in git.
 
 ## Verdict: PASS
 
@@ -30,3 +30,13 @@ Zero console errors, zero failed requests, **zero axe violations**, reduced-moti
 - Featured-teams section is built but hidden: every `teams.json` entry is `status: "verify"`. It appears (below sponsors) as soon as Cedric flips entries to `"published"`.
 - `public/landing/car-inside.png` (530 kB) is also orphaned now; left for the About pass to decide.
 - The white legacy navbar over the ink hero remains until the Phase 3.5 nav/footer pass.
+
+## Sharpen v2 re-run (2026-08-21)
+
+Re-ran the full matrix after the paper-first rebuild: **0 console errors, 0
+failed requests, 0 axe violations** at all three viewports (one fix during
+the pass: dimmed caption index digits moved to `text-on-ink`). All links
+200 (Slack 403s to bots as before). Hero files: 1280 = 7.61 MB (within its
+8 MB exception), 960 = 2.97 MB, poster 36.6 KB. First-load video = one hero
+stream per viewport (highlight tiles remain gated). Remaining over-budget
+assets are unchanged About/News files scheduled for those passes.

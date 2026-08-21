@@ -97,7 +97,7 @@ export default function ExplodedModel() {
           className="border-t border-text-on-ink/15 pt-4"
           style={stacked ? undefined : { opacity: i === 0 ? 1 : 0.62 }}
         >
-          <p className="font-mono text-eyebrow tracking-normal text-text-on-ink-muted">
+          <p className="font-mono text-eyebrow tracking-normal text-text-on-ink">
             {String(i + 1).padStart(2, "0")}
           </p>
           <p className="mt-1 font-display font-semibold text-text-on-ink">{s.caption}</p>
