@@ -86,11 +86,11 @@ export default function NextRaceSpotlight({
         )}
       </div>
       <div className="mt-8 flex flex-wrap items-center gap-4">
-        <Button href={registerHref} on="ink" variant="primary" target="_blank" rel="noreferrer">
+        <Button href={registerHref} on="ink" variant="primary" target="_blank" rel="noopener noreferrer">
           Register your team
         </Button>
         {rulesHref && (
-          <Button href={rulesHref} on="ink" variant="secondary" target="_blank" rel="noreferrer">
+          <Button href={rulesHref} on="ink" variant="secondary" target="_blank" rel="noopener noreferrer">
             Rules and resources
           </Button>
         )}
