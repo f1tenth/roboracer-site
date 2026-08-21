@@ -28,4 +28,7 @@ _harvest/
 docs/qa/**/*.png
 public/media/**/*.mp4
 public/media/**/*.webm
+# exception approved by Cedric 2026-08-20 (CLAUDE.md rule 3): committed hero loop
+!public/media/hero/hero-fpv-loop-*.mp4
+!public/media/hero/hero-fpv-loop-*.webm
 data/.discover-cache.json
