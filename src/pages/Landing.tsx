@@ -10,7 +10,7 @@ import {
   type Team,
   type UpcomingEvent,
 } from "../lib/data";
-import { useLenis } from "../lib/motion";
+import { ScrollTrigger, useLenis } from "../lib/motion";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
@@ -80,6 +80,13 @@ export default function Landing() {
     loadTeams().then(setTeams).catch(() => setTeams([]));
     loadPublications().then(setPubs).catch(() => setPubs(null));
   }, []);
+
+  // The data-driven sections (next race, teams, research) mount after their
+  // fetches resolve and shift everything below them; recompute the cached
+  // ScrollTrigger starts or the stat counters fire hundreds of px early.
+  useEffect(() => {
+    ScrollTrigger.refresh();
+  }, [events, partners, teams, pubs]);
 
   const race = events.find((e) => e.spotlight);
   const featured = pubs?.items.filter((p) => p.featured && p.status === "published").slice(0, 3) ?? [];
