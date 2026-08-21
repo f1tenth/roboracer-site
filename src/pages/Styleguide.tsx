@@ -4,6 +4,7 @@ import {
   loadPublications,
   loadTeams,
   loadUpcomingEvents,
+  tagLabelMap,
   type Partner,
   type PublicationsFile,
   type Team,
@@ -74,9 +75,10 @@ export default function Styleguide() {
   const upcoming = events.filter((e) => !e.title.includes("IV 2026")).slice(0, 2);
 
   const tagOptions = useMemo(
-    () => (pubs ? Object.entries(pubs.tags).map(([id, label]) => ({ id, label })) : []),
+    () => (pubs ? pubs.tags.map(({ id, label }) => ({ id, label })) : []),
     [pubs],
   );
+  const tagLabels = useMemo(() => (pubs ? tagLabelMap(pubs.tags) : {}), [pubs]);
   const shownPubs = useMemo(() => {
     if (!pubs) return [];
     const pool = pubs.items.filter((p) => p.status === "published");
@@ -298,7 +300,7 @@ export default function Styleguide() {
         <TagFilter tags={tagOptions} selected={tag} onChange={setTag} label="Filter publications by topic" />
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {shownPubs.map((p) => (
-            <PublicationCard key={p.id} publication={p} tagLabels={pubs?.tags} />
+            <PublicationCard key={p.id} publication={p} tagLabels={tagLabels} />
           ))}
         </div>
       </Section>

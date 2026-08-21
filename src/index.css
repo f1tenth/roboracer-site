@@ -91,7 +91,9 @@ body {
   min-height: 100svh;
   background: var(--color-paper-50);
   color: var(--color-text-body);
-  overflow-x: hidden;
+  /* clip, not hidden: hidden would make html/body scroll containers and
+     stop content below the 100svh Layout root from painting */
+  overflow-x: clip;
   font-family: var(--font-sans);
 }
 

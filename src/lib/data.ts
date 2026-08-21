@@ -59,13 +59,24 @@ export type Publication = {
   notes?: string;
 };
 
+export type PublicationTag = {
+  id: string;
+  label: string;
+  scholar_query?: string;
+};
+
 export type PublicationsFile = {
   version: number | string;
   updated: string;
   scholar_query_url: string;
-  tags: Record<string, string>;
+  tags: PublicationTag[];
   items: Publication[];
 };
+
+/** id -> label map for rendering tag pills. */
+export function tagLabelMap(tags: PublicationTag[]): Record<string, string> {
+  return Object.fromEntries(tags.map((t) => [t.id, t.label]));
+}
 
 export type TeamHighlight = { event: string; result: string };
 
