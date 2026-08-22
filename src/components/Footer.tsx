@@ -16,9 +16,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Company Info */}
           <div className="lg:col-span-1 space-y-4">
-            <img 
-              src="/logos/logo-white-gradient.svg" 
-              alt="RoboRacer" 
+            <img
+              src="/logos/logo-white-gradient.svg"
+              alt="RoboRacer"
+              width={151}
+              height={26}
               className="h-10 w-auto"
             />
             <p className="text-gray-400 text-sm leading-relaxed">
@@ -72,9 +74,11 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-md transition-colors duration-200 text-sm font-medium mb-4"
             >
-              <img 
-                src="/logos/slack-logo.svg" 
-                alt="Slack" 
+              <img
+                src="/logos/slack-logo.svg"
+                alt="Slack"
+                width={20}
+                height={20}
                 className="h-5 w-5"
               />
               Join Slack
@@ -93,7 +97,7 @@ export default function Footer() {
             <p className="text-gray-400 text-sm">
               © 2026 RoboRacer Foundation. All rights reserved.
             </p>
-            <p className="text-gray-500 text-sm">
+            <p className="text-gray-400 text-sm">
               Creative Commons License
             </p>
           </div>
