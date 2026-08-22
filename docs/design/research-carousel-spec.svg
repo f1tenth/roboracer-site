@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1398" width="1440" height="1398" font-family="JetBrains Mono, ui-monospace, Menlo, monospace"><rect width="1440" height="1398" fill="#fbfbfd"/>
+<rect x="144" y="78" width="4" height="4" fill="#0b0c14"/>
+<text x="156" y="84" font-size="14" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">07 / Research</text>
+<text x="144" y="140" font-size="43" fill="#0b0c14" font-family="Space Grotesk, Manrope, ui-sans-serif, sans-serif" font-weight="600" letter-spacing="-0.02em">1,000+ publications build on this platform</text>
+<text x="144" y="176" font-size="20" fill="#3b3f55" font-family="Manrope, ui-sans-serif, sans-serif">A Google Scholar search for the platform returns more than a thousand results. Eight of the papers we feature:</text>
+<text x="144" y="220" font-size="13" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">[ See the Scholar query ]  (secondary button, unchanged)      All curated publications  (ghost link, unchanged)</text>
+<rect x="144" y="260" width="120" height="440" rx="4" fill="#f3f4f8" stroke="rgba(11,12,20,0.1)"/>
+<rect x="145" y="261" width="118" height="438" rx="4" fill="#fbfbfd" opacity="0.55"/>
+<text x="154" y="472.0" font-size="12" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">prev</text>
+<text x="154" y="490.0" font-size="12" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">figure,</text>
+<text x="154" y="506.0" font-size="12" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">object-cover</text>
+<text x="154" y="522.0" font-size="12" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">opacity 0.45</text>
+<rect x="1176" y="260" width="120" height="440" rx="4" fill="#f3f4f8" stroke="rgba(11,12,20,0.1)"/>
+<rect x="1177" y="261" width="118" height="438" rx="4" fill="#fbfbfd" opacity="0.55"/>
+<text x="1186" y="472.0" font-size="12" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">next</text>
+<text x="1186" y="490.0" font-size="12" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">figure,</text>
+<text x="1186" y="506.0" font-size="12" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">object-cover</text>
+<text x="1186" y="522.0" font-size="12" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">opacity 0.45</text>
+<rect x="288" y="260" width="864" height="440" rx="4" fill="#fbfbfd" stroke="rgba(11,12,20,0.1)"/>
+<rect x="288" y="260" width="480" height="440" fill="#f3f4f8"/>
+<rect x="312" y="284" width="432" height="392" fill="none" stroke="rgba(11,12,20,0.15)" stroke-dasharray="4 4"/>
+<text x="408.0" y="480.0" font-size="13" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">main figure, 1600 px WebP, object-contain</text>
+<text x="408.0" y="500.0" font-size="13" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">paper-100 pane, 24 px inset</text>
+<text x="800" y="302" font-size="12" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">3 / 8 · ICRA 2025 · reinforcement learning · sim-to-real</text>
+<text x="800" y="336" font-size="22" fill="#0b0c14" font-family="Space Grotesk, Manrope, ui-sans-serif, sans-serif" font-weight="600" letter-spacing="-0.01em">RLPP: A Residual Method for</text>
+<text x="800" y="362" font-size="22" fill="#0b0c14" font-family="Space Grotesk, Manrope, ui-sans-serif, sans-serif" font-weight="600" letter-spacing="-0.01em">Zero-Shot Real-World Autonomous</text>
+<text x="800" y="388" font-size="22" fill="#0b0c14" font-family="Space Grotesk, Manrope, ui-sans-serif, sans-serif" font-weight="600" letter-spacing="-0.01em">Racing on Scaled Platforms</text>
+<text x="800" y="420" font-size="14" fill="#3b3f55" font-family="Manrope, ui-sans-serif, sans-serif">Ghignone, Baumann, Hu, Magno</text>
+<text x="800" y="450" font-size="15" fill="#3b3f55" font-family="Manrope, ui-sans-serif, sans-serif">The paper&#x27;s own abstract, verbatim from the abstract</text>
+<text x="800" y="473" font-size="15" fill="#3b3f55" font-family="Manrope, ui-sans-serif, sans-serif">field in publications.json, set at 15 px on a 23 px</text>
+<text x="800" y="496" font-size="15" fill="#3b3f55" font-family="Manrope, ui-sans-serif, sans-serif">line, text-body, clamped to six lines with an</text>
+<text x="800" y="519" font-size="15" fill="#3b3f55" font-family="Manrope, ui-sans-serif, sans-serif">ellipsis; never rewritten, never summarised by us.</text>
+<text x="800" y="542" font-size="15" fill="#3b3f55" font-family="Manrope, ui-sans-serif, sans-serif">Placeholder text: this sentence only shows the</text>
+<text x="800" y="565" font-size="15" fill="#3b3f55" font-family="Manrope, ui-sans-serif, sans-serif">measure and the clamp, the real copy is the authors&#x27;</text>
+<text x="800" y="602" font-size="14" fill="#0b0c14" font-family="Manrope, ui-sans-serif, sans-serif" font-weight="600" text-decoration="underline">Read the paper ↗</text>
+<rect x="800" y="618" width="150" height="22" fill="none" stroke="rgba(11,12,20,0.15)"/>
+<text x="808" y="633" font-size="11" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">REINFORCEMENT LEARNING</text>
+<rect x="958" y="618" width="92" height="22" fill="none" stroke="rgba(11,12,20,0.15)"/>
+<text x="966" y="633" font-size="11" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">SIM-TO-REAL</text>
+<text x="288" y="718" font-size="12" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">Figure: Ghignone et al. (mono eyebrow, under the figure pane, as PublicationCard does now)</text>
+<rect x="144" y="744" width="128.0" height="2" fill="rgba(11,12,20,0.1)"/>
+<rect x="144" y="744" width="128.0" height="2" fill="#0b0c14" opacity="0.9"/>
+<rect x="280.0" y="744" width="128.0" height="2" fill="rgba(11,12,20,0.1)"/>
+<rect x="280.0" y="744" width="128.0" height="2" fill="#0b0c14" opacity="0.9"/>
+<rect x="416.0" y="744" width="128.0" height="2" fill="rgba(11,12,20,0.1)"/>
+<rect x="416.0" y="744" width="79.36" height="2" fill="#0b0c14" opacity="0.9"/>
+<rect x="552.0" y="744" width="128.0" height="2" fill="rgba(11,12,20,0.1)"/>
+<rect x="688.0" y="744" width="128.0" height="2" fill="rgba(11,12,20,0.1)"/>
+<rect x="824.0" y="744" width="128.0" height="2" fill="rgba(11,12,20,0.1)"/>
+<rect x="960.0" y="744" width="128.0" height="2" fill="rgba(11,12,20,0.1)"/>
+<rect x="1096.0" y="744" width="128.0" height="2" fill="rgba(11,12,20,0.1)"/>
+<rect x="1224" y="729" width="32" height="32" rx="4" fill="none" stroke="rgba(11,12,20,0.15)"/>
+<text x="1233" y="750" font-size="16" fill="#0b0c14" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">←</text>
+<rect x="1264" y="729" width="32" height="32" rx="4" fill="none" stroke="rgba(11,12,20,0.15)"/>
+<text x="1273" y="750" font-size="16" fill="#0b0c14" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">→</text>
+<text x="144" y="770" font-size="12" fill="#62677f" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">8 segments, 2 px, gap 8, width 128; done = ink 0.9, current fills left to right over 8 s (linear), rest = track ink 0.10; two 32 px hairline arrows at the right</text>
+<line x1="0" y1="790" x2="1440" y2="790" stroke="rgba(11,12,20,0.2)"/>
+<text x="24" y="814" font-size="12.5" fill="#0b0c14" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">RESEARCH CAROUSEL SPEC (landing v5 section 5). Copy the values literally. Frame = 1440 wide, content 1152 (max-w-content), section 07 on paper. New</text>
+<text x="24" y="833" font-size="12.5" fill="#0b0c14" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   component ui/ResearchCarousel.tsx; PublicationCard stays for /research.</text>
+<text x="24" y="856" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">STAGE (md and up): [prev thumb 120] 24 [current card 864 x 440] 24 [next thumb 120]. Card: hairline rgb(11 12 20 / 0.10), radius-card 4 px, paper-50.</text>
+<text x="24" y="875" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   Figure pane 480 wide, paper-100, the figure object-contain with a 24 px inset, credit line &#x27;Figure: &lt;surname&gt; et al.&#x27; under the pane (mono eyebrow,</text>
+<text x="24" y="894" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   text-muted, via figureCredit). Text pane: padding 32, width 320 inside: mono 12 px text-muted &#x27;&lt;i&gt; / 8 · &lt;venue_short&gt; &lt;year&gt; · &lt;tags&gt;&#x27;; title</text>
+<text x="24" y="913" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   display 600 22 px text-strong, at most 3 lines; authors 14 px text-body (authorLine); abstract 15 px / 23 px text-body, line-clamp 6 (the</text>
+<text x="24" y="932" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   `abstract` field, verbatim, no rewriting; ellipsis at the clamp); &#x27;Read the paper ↗&#x27; 14 px 600 ink underline (hover violet underline, the site link</text>
+<text x="24" y="951" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   rule); tag chips as PublicationCard.</text>
+<text x="24" y="974" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">THUMBS: the previous and next papers&#x27; figures, object-cover, opacity 0.45 (0.8 on hover and focus-visible), each a button &#x27;Previous: &lt;title&gt;&#x27; / &#x27;Next:</text>
+<text x="24" y="993" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   &lt;title&gt;&#x27;. No text in the thumbs.</text>
+<text x="24" y="1016" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">TIMER: 8 s per paper, all 8 in order, loops. Pauses while the pointer is over the stage, while focus is inside the section, while the section is less</text>
+<text x="24" y="1035" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   than 50 percent in view, and when document.hidden; resumes where it left off. Any manual move (arrow, thumb, segment) restarts the 8 s for the new</text>
+<text x="24" y="1054" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   paper.</text>
+<text x="24" y="1077" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">STRIP: 8 segments 2 px tall, gap 8, between the arrows; segments are buttons &#x27;Go to paper &lt;i&gt;: &lt;title&gt;&#x27;. Done segments ink 0.9, the current one fills</text>
+<text x="24" y="1096" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   left to right over the 8 s (transform scaleX from the left, linear, driven by requestAnimationFrame, not a CSS animation that can drift from the</text>
+<text x="24" y="1115" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   timer), upcoming ones track only. On wrap, all segments reset.</text>
+<text x="24" y="1138" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">SWAP: the card content crossfades in place, no physical slide: outgoing text pane and figure opacity 1 -&gt; 0 in 140 ms; incoming opacity 0 -&gt; 1 and</text>
+<text x="24" y="1157" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   translateX 16 px -&gt; 0 (from the travel direction) in 260 ms ease-out-expo; thumbs crossfade in the same 260 ms. Height never changes (card is 440</text>
+<text x="24" y="1176" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   fixed from md). Reduced motion: no timer, no transforms, 180 ms opacity only, arrows and strip work.</text>
+<text x="24" y="1199" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">A11Y: section role region, aria-roledescription &#x27;carousel&#x27;, aria-label &#x27;Featured publications&#x27;; the current card role group aria-roledescription</text>
+<text x="24" y="1218" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   &#x27;slide&#x27; aria-label &#x27;&lt;i&gt; of 8&#x27;; an sr-only aria-live polite line announces the current title on change; arrow keys on the strip move; the strip is a</text>
+<text x="24" y="1237" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   tablist-free row of buttons (no roving focus needed).</text>
+<text x="24" y="1260" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">UNDER MD: the card stacks (figure 16/10 on top, text below, abstract clamp 5), no thumbs, no timer; horizontal scroll-snap between the eight cards</text>
+<text x="24" y="1279" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   with the strip as static position indicators; arrows hidden.</text>
+<text x="24" y="1302" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">DATA (stream C): featured_order 1..8 on eight papers in publications.json; the figure file per paper is `figure` (1600 px wide WebP under 200 KB,</text>
+<text x="24" y="1321" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   public/media/research/) made with scripts/paper_thumbs.py extended with --figure &lt;n&gt; (nth arXiv HTML figure) and --size 1600; the `abstract` field</text>
+<text x="24" y="1340" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   filled from arXiv or OpenAlex where missing (verbatim, source in `source`); THUMBS.md rows per file. Page-1 crops are not figures: a paper without</text>
+<text x="24" y="1359" font-size="12.5" fill="#3b3f55" font-family="JetBrains Mono, ui-monospace, Menlo, monospace">   a real figure does not go in the eight.</text>
+</svg>
