@@ -3,47 +3,68 @@
 import { Suspense, useEffect, useRef, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows } from "@react-three/drei";
-import { ACESFilmicToneMapping, type Group } from "three";
-import { RacecarAssemblyParts, StudioLighting } from "../RacecarAssembly";
+import { ACESFilmicToneMapping, MathUtils, type Group } from "three";
+import { ProductLighting, RacecarAssemblyParts } from "../RacecarAssembly";
 import { CHAPTER_MAX_EXPLOSION } from "./ExplodedModel";
 
-// Three-quarter view direction (normalized) and the point the camera studies.
-const VIEW_DIR = [0.666, 0.336, 0.666] as const;
-const TARGET = [0, 0.04, 0] as const;
+// Product camera (docs/design/CAR_CHAPTER.md): a long lens pitched gently
+// down. The 40 degree lens of v2 made the only tall vertical on the car, the
+// LiDAR, lean by several degrees whenever it sat off-center, which read as a
+// wrong sensor frame while the car turned. At 26 degrees the lean stays
+// under 3 degrees at the 70% framing.
+export const CHAPTER_FOV = 26;
+const PITCH_DEG = 17;
+const AZIMUTH_DEG = 45;
+// Projected width of the car along the view (meters) at its widest turntable
+// pose (the diagonal): assembled 0.53 (0.45 m long, 0.30 m wide), at the
+// chapter's explosion ceiling 0.78 (wheels out 0.175 m each side). The
+// camera distance is solved so this span fills FILL of the canvas width at
+// any aspect; measured 2026-08-21 at 1440x900: 0.70 at rest, 0.69 at the
+// ceiling, nothing crops.
+const SPAN = { rest: 0.49, exploded: 0.74 };
+const FILL = 0.7;
+// The point the camera studies: the car's center at rest, lifted as the
+// LiDAR and wheels rise.
+const TARGET = { rest: [0.03, 0.06, 0], exploded: [0.03, 0.1, 0] } as const;
+
+const VIEW_DIR = (() => {
+  const p = MathUtils.degToRad(PITCH_DEG);
+  const a = MathUtils.degToRad(AZIMUTH_DEG);
+  return [Math.cos(p) * Math.cos(a), Math.sin(p), Math.cos(p) * Math.sin(a)] as const;
+})();
+
+/** Camera distance that fits `span` meters into FILL of the canvas width. */
+function chapterDistance(aspect: number, progress: number) {
+  const span = MathUtils.lerp(SPAN.rest, SPAN.exploded, progress);
+  const halfTan = Math.tan(MathUtils.degToRad(CHAPTER_FOV / 2)) * Math.max(aspect, 0.45);
+  return span / FILL / (2 * halfTan);
+}
 
 /** Frames the car by canvas aspect and dollies with the explosion: a tight
- * product-scale studio shot at rest, pulling back as the parts fly so the
- * exploded span never crops (impeccable review, 2026-08-21). */
+ * product shot at rest, pulling back as the parts fly so the exploded span
+ * never crops. */
 function ChapterCamera({ explosionRef }: { explosionRef: RefObject<number> }) {
   const camera = useThree((s) => s.camera);
   const aspect = useThree((s) => s.viewport.aspect);
   const invalidate = useThree((s) => s.invalidate);
-  const wide = aspect > 1.2;
-  const rest = wide ? 0.72 : 0.98;
-  const exploded = wide ? 1.12 : 1.34;
+
+  const place = () => {
+    const progress = Math.min(1, (explosionRef.current ?? 0) / CHAPTER_MAX_EXPLOSION);
+    const d = chapterDistance(aspect, progress);
+    const tx = MathUtils.lerp(TARGET.rest[0], TARGET.exploded[0], progress);
+    const ty = MathUtils.lerp(TARGET.rest[1], TARGET.exploded[1], progress);
+    const tz = MathUtils.lerp(TARGET.rest[2], TARGET.exploded[2], progress);
+    camera.position.set(VIEW_DIR[0] * d + tx, VIEW_DIR[1] * d + ty, VIEW_DIR[2] * d + tz);
+    camera.lookAt(tx, ty, tz);
+  };
 
   useEffect(() => {
-    const progress = Math.min(1, (explosionRef.current ?? 0) / CHAPTER_MAX_EXPLOSION);
-    const d = rest + (exploded - rest) * progress;
-    camera.position.set(
-      VIEW_DIR[0] * d + TARGET[0],
-      VIEW_DIR[1] * d + TARGET[1],
-      VIEW_DIR[2] * d + TARGET[2],
-    );
-    camera.lookAt(TARGET[0], TARGET[1], TARGET[2]);
+    place();
     invalidate();
-  }, [camera, rest, exploded, explosionRef, invalidate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- re-place on aspect change only
+  }, [camera, aspect, invalidate]);
 
-  useFrame(() => {
-    const progress = Math.min(1, (explosionRef.current ?? 0) / CHAPTER_MAX_EXPLOSION);
-    const d = rest + (exploded - rest) * progress;
-    camera.position.set(
-      VIEW_DIR[0] * d + TARGET[0],
-      VIEW_DIR[1] * d + TARGET[1],
-      VIEW_DIR[2] * d + TARGET[2],
-    );
-    camera.lookAt(TARGET[0], TARGET[1], TARGET[2]);
-  });
+  useFrame(place);
   return null;
 }
 
@@ -52,6 +73,8 @@ type ExplodedModelSceneProps = {
   explosionRef: RefObject<number>;
   /** Render one assembled frame and stop (reduced motion). */
   staticPose?: boolean;
+  /** False while the chapter is off-screen: the render loop pauses. */
+  active?: boolean;
 };
 
 function SpinGroup({
@@ -72,23 +95,34 @@ function SpinGroup({
   return <group ref={spin}>{children}</group>;
 }
 
-export default function ExplodedModelScene({ explosionRef, staticPose = false }: ExplodedModelSceneProps) {
+export default function ExplodedModelScene({
+  explosionRef,
+  staticPose = false,
+  active = true,
+}: ExplodedModelSceneProps) {
   const zeroRef = useRef(0);
+  const frameloop = staticPose ? "demand" : active ? "always" : "never";
+  const smallScreen = typeof window !== "undefined" && window.innerWidth < 768;
   return (
     <Canvas
-      camera={{ fov: 40, near: 0.01, far: 30, position: [0.95, 0.52, 0.95] }}
+      camera={{ fov: CHAPTER_FOV, near: 0.05, far: 40, position: [1.6, 0.6, 1.6] }}
       dpr={[1, 1.5]}
-      frameloop={staticPose ? "demand" : "always"}
-      gl={{ antialias: true, alpha: true, toneMapping: ACESFilmicToneMapping }}
-      onCreated={({ camera }) => camera.lookAt(0, 0.04, 0)}
+      frameloop={frameloop}
+      shadows="soft"
+      gl={{
+        antialias: true,
+        alpha: true,
+        toneMapping: ACESFilmicToneMapping,
+        toneMappingExposure: 1.15,
+      }}
+      onCreated={({ camera }) => camera.lookAt(TARGET.rest[0], TARGET.rest[1], TARGET.rest[2])}
       aria-hidden="true"
     >
       <ChapterCamera explosionRef={staticPose ? zeroRef : explosionRef} />
-      {/* Neutral studio light only - alpha canvas over ink-950, no colored
-          rims, no fog (product-render direction, 2026-08-21). Dimmer than
-          /assembly so the aluminum does not blow out against ink. */}
-      <StudioLighting intensity={0.6} />
-      <directionalLight color="#ffffff" intensity={1.1} position={[1.4, 1.9, 1.0]} />
+      {/* Product lighting shared with /assembly: studio IBL, a 35 degree key
+          with a soft shadow, a white rim from behind-left. Alpha canvas over
+          ink-950, no fog, no colored lights. */}
+      <ProductLighting shadowMapSize={smallScreen ? 1024 : 2048} />
       <Suspense fallback={null}>
         {staticPose ? (
           <RacecarAssemblyParts explosion={0} explosionRef={zeroRef} interactive={false} />
@@ -98,7 +132,7 @@ export default function ExplodedModelScene({ explosionRef, staticPose = false }:
             <RacecarAssemblyParts explosion={0} explosionRef={explosionRef} interactive={false} />
           </SpinGroup>
         )}
-        <ContactShadows position={[0, -0.003, 0]} opacity={0.4} scale={2.2} blur={2.5} far={1.2} resolution={512} />
+        <ContactShadows position={[0, -0.003, 0]} opacity={0.55} scale={2.4} blur={2.4} far={1.2} resolution={512} />
       </Suspense>
     </Canvas>
   );
