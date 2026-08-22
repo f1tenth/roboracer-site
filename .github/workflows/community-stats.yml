@@ -1,15 +1,22 @@
 name: community-stats
-# Refreshes public/data/community.json from Slack (members, time zones, continents).
-# Needs the SLACK_BOT_TOKEN repository secret (bot token, scope users:read).
+# Refreshes public/data/community.json from Slack (members, time zones, continents)
+# with scripts/slack_stats.py. Needs the SLACK_BOT_TOKEN repository secret (a bot
+# token with the users:read scope; Ayagoz is workspace admin). Without the secret the
+# script exits 0 and leaves the file untouched, so the run is a clean no-op and the
+# seed values (source: manual) keep rendering.
 # Scheduled runs only fire on the default branch; until main switches to the revamp,
 # trigger it by hand (workflow_dispatch) on revamp/integration or run the script locally.
 on:
   schedule:
-    - cron: "17 6 * * *"
+    - cron: "17 6 * * 1"   # Mondays 06:17 UTC
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: community-stats
+  cancel-in-progress: false
 
 jobs:
   refresh:
@@ -23,6 +30,8 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         run: python3 scripts/slack_stats.py
+      - name: Validate the file
+        run: python3 -c "import json; d = json.load(open('public/data/community.json')); assert {'members', 'members_display', 'timezones', 'continents', 'updated', 'source'} <= d.keys(), d"
       - name: Commit if changed
         run: |
           if git diff --quiet -- public/data/community.json; then
