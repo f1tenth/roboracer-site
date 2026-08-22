@@ -26,13 +26,10 @@ import PublicationCard from "../components/ui/PublicationCard";
 import HighlightReel from "../components/ui/HighlightReel";
 import PlatformPanel from "../components/ui/PlatformPanel";
 import ExplodedModel from "../components/ui/ExplodedModel";
+import HeroChapter, { type HeroVideoSources } from "../components/ui/HeroChapter";
 import WorldMapChapter from "../components/ui/WorldMapChapter";
 import CommunityJoin from "../components/ui/CommunityJoin";
-// TODO(wire): replaced by HeroChapter (revamp/v3-hero-nav) at integration.
-import VideoHero from "../components/ui/VideoHero";
-import HeadlineReveal from "../components/ui/HeadlineReveal";
-
-const HERO_VIDEO = {
+const HERO_VIDEO: HeroVideoSources = {
   mp4_1920: "/media/hero/hero-fpv-loop-1280.mp4",
   mp4_960: "/media/hero/hero-fpv-loop-960.mp4",
   poster: "/media/hero/hero-fpv-poster.webp",
@@ -57,8 +54,7 @@ const RACE_HERO = {
 /**
  * Landing v3 composition (docs/plans/landing-v3.md): hero chapter, highlights,
  * next race, the car, platform panel, community map, data line + partner
- * ribbon, teams, research, join. Sections marked TODO(wire) are stubs until
- * the parallel branches (A hero-nav, B car, C map-community, E papers) merge.
+ * ribbon, teams, research, join.
  */
 export default function Landing() {
   useLenis();
@@ -102,13 +98,9 @@ export default function Landing() {
 
   return (
     <div>
-      {/* 1 · Hero + headline chapter (ink) - newbie. TODO(wire): HeroChapter
-          from revamp/v3-hero-nav replaces these two; the page no longer
-          carries the nav offset (the video runs under the transparent nav). */}
-      <div className="pt-[68px] md:pt-[85px]">
-        <VideoHero video={HERO_VIDEO} />
-      </div>
-      <HeadlineReveal lines={HEADLINE_LINES} />
+      {/* 1 · Hero + headline chapter (ink, pinned 320vh) - newbie. The video
+          runs under the transparent nav: no page top padding on this route. */}
+      <HeroChapter video={HERO_VIDEO} lines={HEADLINE_LINES} />
 
       {/* 2 · 01 Highlights (paper, full-bleed) - newbie, press */}
       <Section edge rule width="bleed" aria-labelledby="highlights">

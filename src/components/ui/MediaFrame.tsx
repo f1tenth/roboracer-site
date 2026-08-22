@@ -11,7 +11,7 @@ type MediaFrameProps = {
 };
 
 /** Image frame with mandatory dimensions (no layout shift), lazy loading,
- * and the media radius. Video belongs to VideoHero / HighlightReel. */
+ * and the media radius. Video belongs to HeroChapter / HighlightReel. */
 export default function MediaFrame({
   src,
   alt,
