@@ -40,3 +40,6 @@ data/.discover-cache.json
 __pycache__/
 *.pyc
 .claude/worktrees/
+
+# impeccable live-server state
+.impeccable/live/
