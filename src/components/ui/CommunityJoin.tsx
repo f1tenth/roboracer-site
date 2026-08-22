@@ -116,7 +116,7 @@ export default function CommunityJoin({ className = "" }: CommunityJoinProps) {
           )}
           <figcaption className="mt-3 font-mono text-small text-text-muted">
             {photo ? photo.caption : "photo pending"}
-            {photo?.credit && <span className="text-text-muted/70"> · {photo.credit}</span>}
+            {photo?.credit && <span className="text-text-muted"> · {photo.credit}</span>}
           </figcaption>
         </figure>
       </div>
