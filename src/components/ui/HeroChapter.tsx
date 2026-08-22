@@ -43,6 +43,11 @@ type HeroChapterProps = {
  *                continues to 1.55 (1.49 mobile) by 0.95; video brightness
  *                -> 0.12 by 1.0
  *   p 0.00-1.00  video push-in scale 1 -> 1.12, linear
+ *   p 0.72-0.95  nav fill: NavBar reads `data-nav-fill` off the wrapper and
+ *                ramps --nav-alpha 0 -> 1 over these p values (transparent
+ *                through assembly, hold and zoom; paper by the time the
+ *                Highlights strip slides over the hero). The static layout
+ *                publishes its own ramp over the poster's scroll-out.
  *
  * Blur decision (spec: `filter: blur(0 -> 10px)` on the video from p 0.12 to
  * 0.45 only if it costs under 4 ms a frame at 1440x900). Measured 2026-08-21
@@ -84,7 +89,16 @@ const SCHEDULE = {
      * narrow breakpoint scales proportionally. */
     scaleMultiplier: 1.55 / 1.3,
   },
+  /** Nav fill, published on the wrapper as data-nav-fill="from to" in the
+   * wrapper's own scroll progress (start "top top", end "bottom bottom").
+   * Pinned layout: pin progress. Static layout (reduced motion / weak
+   * device: poster + paper headline): the bar is paper well before the ink
+   * headline block reaches it. */
+  nav: { fillStart: 0.72, fillEnd: 0.95 },
+  navStatic: { fillStart: 0.1, fillEnd: 0.6 },
 } as const;
+
+const navFill = (r: { fillStart: number; fillEnd: number }) => `${r.fillStart} ${r.fillEnd}`;
 
 const WIDE_QUERY = "(min-width: 768px)";
 
@@ -310,7 +324,12 @@ export default function HeroChapter({ video, lines, as = "h1", className = "" }:
     // Reduced motion or a weak device: the poster, then the headline on paper
     // (line 1 in ink here: the logo gradient's cyan stop is 1.9:1 on paper).
     return (
-      <section aria-labelledby={headingId} className={className}>
+      <section
+        aria-labelledby={headingId}
+        className={className}
+        data-hero-chapter=""
+        data-nav-fill={navFill(SCHEDULE.navStatic)}
+      >
         <div className="relative h-svh overflow-hidden bg-ink-950">
           <img
             src={video.poster}
@@ -332,6 +351,8 @@ export default function HeroChapter({ video, lines, as = "h1", className = "" }:
       ref={scope}
       aria-labelledby={headingId}
       className={`relative h-[320vh] bg-ink-950 ${className}`}
+      data-hero-chapter=""
+      data-nav-fill={navFill(SCHEDULE.nav)}
     >
       <div className="group sticky top-0 h-svh overflow-hidden text-text-on-ink">
         <video

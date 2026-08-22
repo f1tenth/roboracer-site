@@ -17,12 +17,35 @@ const SLACK_URL = "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50
 
 /**
  * Routes whose first viewport is the HeroChapter: the nav starts transparent
- * over the video and fills in over the first 0.9vh of scroll. Everywhere else
- * --nav-alpha stays 1 (the paper nav). /styleguide carries the HeroChapter
- * demo under the same rule so the demo matches the landing.
+ * over the video and fills in with the chapter's own progress. Everywhere
+ * else --nav-alpha stays 1 (the paper nav). /styleguide carries the
+ * HeroChapter demo under the same rule so the demo matches the landing.
  */
 const HERO_ROUTES = new Set(["/", "/styleguide"]);
-const NAV_FILL_VH = 0.9;
+
+/**
+ * The chapter publishes its ramp on the wrapper as `data-nav-fill="from to"`
+ * in its own scroll progress (start "top top", end "bottom bottom"); the
+ * pinned chapter says 0.72 0.95 (transparent through assembly, hold and
+ * zoom, paper by the time Highlights slides over the hero). Read off the DOM
+ * rather than imported so this bundle never pulls HeroChapter (and GSAP) in.
+ */
+const DEFAULT_NAV_FILL: readonly [number, number] = [0.72, 0.95];
+const CHAPTER_SELECTOR = "[data-hero-chapter]";
+
+function parseNavFill(value: string | undefined): readonly [number, number] {
+  const parts = (value ?? "").trim().split(/\s+/).map(Number);
+  return parts.length === 2 && parts.every((n) => Number.isFinite(n)) && parts[0] < parts[1]
+    ? [parts[0], parts[1]]
+    : DEFAULT_NAV_FILL;
+}
+
+/** Chapter progress without GSAP, for the first paint before the chunk lands. */
+function chapterProgress(chapter: HTMLElement): number {
+  const top = chapter.getBoundingClientRect().top + window.scrollY;
+  const range = chapter.offsetHeight - window.innerHeight;
+  return range > 0 ? (window.scrollY - top) / range : 1;
+}
 
 /**
  * The wordmark inline (paths from /logos/logo-white-gradient.svg, 151x26):
@@ -93,13 +116,17 @@ export default function Navbar() {
     setMenuOpen(false);
   }, [location.pathname]);
 
-  // --nav-alpha = clamp(scrollY / (0.9 * innerHeight), 0, 1), written by a
-  // ScrollTrigger (Lenis drives scroll on the landing, so this stays in the
-  // one scroll pipeline) straight onto the element: no React render per
-  // scroll frame. Every nav color is mixed from it in index.css. The motion
-  // module is imported lazily so GSAP stays out of the shared bundle on the
-  // routes that never animate; the first value is set synchronously from
-  // scrollY, so there is no opaque flash before the chunk arrives.
+  // --nav-alpha = clamp((p - from) / (to - from), 0, 1) where p is the hero
+  // chapter's scroll progress, written by a ScrollTrigger on the chapter's
+  // wrapper (Lenis drives scroll on the landing, so this stays in the one
+  // scroll pipeline) straight onto the element: no React render per scroll
+  // frame. Every nav color is mixed from it in index.css. The motion module
+  // is imported lazily so GSAP stays out of the shared bundle on the routes
+  // that never animate; the first value is computed synchronously from the
+  // chapter's geometry, so there is no opaque flash before the chunk arrives.
+  // The route chunk is lazy too: until the chapter is in the DOM the bar is
+  // paper (over the blank page), and a MutationObserver attaches the ramp
+  // the moment it lands, before that frame paints.
   useEffect(() => {
     const nav = navRef.current;
     if (!nav) return;
@@ -108,26 +135,51 @@ export default function Navbar() {
       setAlpha(1);
       return;
     }
-    const fill = () => window.innerHeight * NAV_FILL_VH;
-    setAlpha(Math.min(1, Math.max(0, window.scrollY / fill())));
     let cancelled = false;
     let ctx: { revert: () => void } | undefined;
-    void import("../lib/motion").then(({ gsap, ScrollTrigger }) => {
-      if (cancelled) return;
-      ctx = gsap.context(() => {
-        ScrollTrigger.create({
-          start: 0,
-          end: fill,
-          onUpdate: (self) => setAlpha(self.progress),
-          onRefresh: (self) => setAlpha(self.progress),
+    let observer: MutationObserver | undefined;
+
+    const attach = (chapter: HTMLElement) => {
+      const [from, to] = parseNavFill(chapter.dataset.navFill);
+      const alphaOf = (p: number) => Math.min(1, Math.max(0, (p - from) / (to - from)));
+      setAlpha(alphaOf(chapterProgress(chapter)));
+      void import("../lib/motion").then(({ gsap, ScrollTrigger }) => {
+        if (cancelled) return;
+        ctx = gsap.context(() => {
+          const trigger = ScrollTrigger.create({
+            trigger: chapter,
+            start: "top top",
+            end: "bottom bottom",
+            onUpdate: (self) => setAlpha(alphaOf(self.progress)),
+            onRefresh: (self) => setAlpha(alphaOf(self.progress)),
+          });
+          setAlpha(alphaOf(trigger.progress));
         });
       });
-    });
+    };
+
+    const existing = document.querySelector<HTMLElement>(CHAPTER_SELECTOR);
+    if (existing) {
+      attach(existing);
+    } else {
+      setAlpha(1);
+      observer = new MutationObserver(() => {
+        const chapter = document.querySelector<HTMLElement>(CHAPTER_SELECTOR);
+        if (!chapter) return;
+        observer?.disconnect();
+        observer = undefined;
+        attach(chapter);
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
     return () => {
       cancelled = true;
+      observer?.disconnect();
       ctx?.revert();
     };
-  }, [transparent]);
+    // Re-attach on every route change: two hero routes in a row swap the
+    // chapter element without flipping `transparent`.
+  }, [transparent, location.pathname]);
 
   return (
     <nav ref={navRef} className="navbar" aria-label="Main">

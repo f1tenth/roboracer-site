@@ -100,7 +100,7 @@ export default function Styleguide() {
       <HeroChapter as="h2" video={HERO_VIDEO} lines={HERO_LINES} />
       <div className="bg-paper-50">
         <div className="mx-auto max-w-content px-6 pt-16">
-          <Spec name="HeroChapter · 320vh sticky, scrub 0.6 · video only to p 0.08, assemble 0.10-0.42, zoom 0.42-0.82, thrown exit 0.82-1.0 · nav alpha 0 -> 1 over 0.9vh" />
+          <Spec name="HeroChapter · 320vh sticky, scrub 0.6 · video only to p 0.08, assemble 0.10-0.42, zoom 0.42-0.82, thrown exit 0.82-1.0 · nav alpha 0 -> 1 over p 0.72-0.95" />
         </div>
       </div>
 
