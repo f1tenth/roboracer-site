@@ -278,8 +278,8 @@ export default function Landing() {
         </Reveal>
       </Section>
 
-      {/* 10 · 08 Join (paper) - everyone: live Slack numbers, crowd photo,
-          the three ways in. */}
+      {/* 10 · 08 Join (paper) - everyone: live Slack numbers, the Korea photo,
+          four channels, two community cards (landing v4 section 8). */}
       <CommunityJoin />
     </div>
   );
