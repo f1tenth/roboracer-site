@@ -1,26 +1,46 @@
 {
- "desktop": {
-  "height": 14457,
-  "entries": []
- },
- "desktop-rm": {
-  "height": 11448,
-  "entries": []
- },
- "tablet": {
-  "height": 16141,
-  "entries": []
- },
- "tablet-rm": {
-  "height": 12666,
-  "entries": []
- },
- "mobile": {
-  "height": 16445,
-  "entries": []
- },
- "mobile-rm": {
-  "height": 14209,
-  "entries": []
- }
+ "console": [
+  {
+   "type": "warning",
+   "text": "Allow attribute will take precedence over 'allowfullscreen'."
+  },
+  {
+   "type": "warning",
+   "text": "No available adapters."
+  },
+  {
+   "type": "warning",
+   "text": "Failed to execute 'postMessage' on 'DOMWindow': The target origin provided ('http://localhost:54601') does not match the recipient window's origin ('https://www.youtube-nocookie.com')."
+  }
+ ],
+ "failed": [
+  {
+   "url": "http://localhost:54601/media/platform/platform-race-960.mp4",
+   "err": "net::ERR_ABORTED"
+  },
+  {
+   "url": "http://localhost:54601/media/platform/platform-research-mppi-960.mp4",
+   "err": "net::ERR_ABORTED"
+  },
+  {
+   "url": "https://www.youtube-nocookie.com/api/stats/qoe?fmt=396&afmt=251&cpn=E4EpAeC6IwBnETd-&el=embedded&ns=yt&fexp=v1%2C100673651%2C-76669007%2C27058999%2C34656%2C124674%2C117689%2C9252%2C3479%2C13030%2C2320",
+   "err": "net::ERR_ABORTED"
+  },
+  {
+   "url": "https://www.youtube-nocookie.com/ptracking?html5=1&video_id=wPHYLAnpMOU&cpn=E4EpAeC6IwBnETd-&ei=MkGJaoWrDf-LkucP8qzlwAQ&ptk=youtube_multi&oid=L3rdz6zNy7O3wJRk1u6-lg.MIT4h2OXfu16-MLApUEooA&pltype=conte",
+   "err": "net::ERR_ABORTED"
+  },
+  {
+   "url": "https://www.youtube-nocookie.com/api/stats/playback?ns=yt&el=embedded&cpn=E4EpAeC6IwBnETd-&ver=2&cmt=0.016&fmt=396&fs=0&rt=0.343&euri=http%3A%2F%2Flocalhost%3A54601%2F&lact=364&cl=967286233&mos=1&volu",
+   "err": "net::ERR_ABORTED"
+  },
+  {
+   "url": "https://www.youtube-nocookie.com/api/stats/watchtime?ns=yt&el=embedded&cpn=E4EpAeC6IwBnETd-&ver=2&cmt=2.681&fmt=396&fs=0&rt=3.006&euri=http%3A%2F%2Flocalhost%3A54601%2F&lact=3027&cl=967286233&state=pl",
+   "err": "net::ERR_ABORTED"
+  },
+  {
+   "url": "https://www.youtube-nocookie.com/api/stats/qoe?fmt=396&afmt=251&cpn=E4EpAeC6IwBnETd-&el=embedded&ns=yt&fexp=v1%2C100673651%2C-76669007%2C27058999%2C34656%2C124674%2C117689%2C9252%2C3479%2C13030%2C2320",
+   "err": "net::ERR_ABORTED"
+  }
+ ]
 }
