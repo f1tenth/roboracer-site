@@ -32,7 +32,7 @@ export type CarPhoto = {
 
 // Reserved files from the media curator (landing-v3 drift section). Each
 // slot hides itself onError until its file lands, never a broken image.
-// TODO(content): captions and credits from docs/media/SELECTION.md at
+// Default captions; Landing passes the curated captions and credits through
 // integration (pass them through the `photos` prop).
 const DEFAULT_PHOTOS: readonly CarPhoto[] = [
   {
