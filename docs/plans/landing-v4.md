@@ -320,9 +320,10 @@ paths in section 5 and does not edit the JSON.
   our post on LinkedIn ↗` and links RoboRacer's own post (Cedric, 2026-08-22). Post-card video:
   `join-openrobotics-post-960.mp4` 1.0 MB (960x540, 10 s of Open Robotics'
   post, Cedric's mid-session swap for the Foundation's own race-day post;
-  poster 80 KB). Learn
-  row runs at 2x (5.9 s) because `assembling_car.mp4` is 11.8 s; 4x would give
-  3 s.
+  poster 80 KB). The assembling clip runs at 2x (5.9 s) because `assembling_car.mp4` is 11.8 s
+  (4x would give 3 s); Cedric moved it from the Learn row to the Build row
+  ("we are literally building a car"), so Learn now carries the pit-work photo
+  (`platform-learn-1200.webp`, ex Build) and the clip is `platform-build-960.mp4`.
 - Ribbon: `.rr-marquee:has(a:focus-visible)` replaces `:focus-within`; proven
   with a pointer click on a logo (new tab closed, pointer moved off: running;
   Tab onto the link: paused).
