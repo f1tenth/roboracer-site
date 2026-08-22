@@ -299,3 +299,53 @@ Where this section conflicts with the text above, this section wins.
   `public/media/join/join-icra2026-crowd-1200.webp`;
   `public/media/team/team-<slug>-800.webp` (slug = teams.json name lowercased,
   non-alphanumerics to hyphens).
+
+## Final motion numbers (director, 2026-08-21, as shipped on revamp/v3-page)
+
+Hero chapter (`HeroChapter.tsx`, p = progress over the 320vh pin, scrub 0.6, sticky
+CSS pin so `anticipatePin` is a no-op):
+- video `scale 1 -> 1.12` over p 0-1; `brightness 1 -> 0.38`, `saturate 1 -> 0.75` over
+  p 0.08-0.45; `brightness -> 0.12` over p 0.82-1.00; blur OFF (`blurPx = 0`: under
+  software GL the video pipeline alone costs 130-180 ms/frame so the blur delta could
+  not be measured; white on brightness 0.38 is 6.2:1, AAA; re-test on a GPU by setting
+  `SCHEDULE.video.blurPx = 10`).
+- p 0.00-0.08 video only; p 0.10-0.42 assembly, 7 units (line 1 as one unit, then
+  built / and / raced / in / the / open), each `yPercent 110 -> 0`, opacity 0 -> 1,
+  duration 0.11, ease-in-out-quart, starts 0.035 apart (spec said 0.06: seven units
+  at 0.06 cannot land by 0.42), last lands at 0.42.
+- p 0.42-0.82 block `scale 1 -> 1.30` (1.25 under 768 px) with `power2.in`, so
+  0.42-0.55 reads as the hold (scale <= 1.03) and the zoom is obvious by 0.70 (1.13).
+- p 0.82-0.957 exit, last line first, starts 0.012 apart, `y 0 -> -1.2 x innerHeight`
+  over 0.12 `power2.out`, opacity 1 -> 0 over 0.05 starting 0.015 after each throw;
+  scale 1.30 -> 1.55 (1.25 -> 1.49 mobile) over 0.82-0.95.
+- Type `clamp(2rem, 8.5vw, 8.5rem)` (2.4rem floor clipped at 390 x 1.30), leading
+  0.95, tracking -0.03em; line 1 gradient `--color-rr-cyan -> --color-rr-grad-start`
+  clipped to text; line 1 = 76vw at rest and 99vw at the ceiling at 1440.
+- Nav: `--nav-alpha = clamp((p - 0.72) / 0.23, 0, 1)` from the chapter's own
+  ScrollTrigger (transparent through assembly, hold and zoom; fills in during the
+  throw; paper by 0.95). Type/CTA/ring flip ink at alpha 0.45; shadow above 0.9;
+  alpha fixed at 1 on non-hero routes and while the mobile menu is open. Reduced
+  motion: static ramp over the poster `data-nav-fill="0.1 0.6"`.
+
+Car chapter (`ExplodedModel.tsx` / `ExplodedModelScene.tsx`): 140vh pin unchanged,
+explosion 0 -> 0.5 over the first 65% then hold; lens fov 26, azimuth 45, pitch 17;
+camera distance solved so the car spans FILL = 0.78 of the canvas width at rest
+(0.49 m span) and stays in frame at the ceiling (0.74 m span); canvas 72svh, grid
+7/5. LiDAR root cause: transforms were correct end to end (part table = xacro = GLB,
+pivot on the bbox center); the 40-degree lens pitched about 20 degrees down made
+the one tall vertical lean and flip its lean as it crossed the frame. See
+`docs/design/CAR_CHAPTER.md`.
+
+Map chapter (`WorldMapChapter.tsx`): 260vh pin, scrub 0.6; phase 1 country discs p
+0.05-0.40 (ISO codes fade out 0.35-0.42); phase 2 pins chronological p 0.35-0.85,
+`attr r 0 -> 7` `back.out`, 0.03 each, counter capped at 30 (content skill) and
+holding while CDC 2025, ICRA 2026, IV 2026, IFAC, VTC pop; IROS 2026 violet with a
+pulsing ring; "31st / coming up · Pittsburgh" at the end; phase 3 hold. Map fills
+the 7-column width (826 px at 1440).
+
+StatCounter: time mode starts only when fully in view (`start: "bottom bottom"`,
+once), 3.2 s, `power2.out`, `delay` 0.15 s per tile; progress mode via
+`StatCounterHandle.setProgress` inside the map chapter.
+
+Partner ribbon: logo box 112 px desktop / 84 px mobile, logos max-h 80 / 56,
+gap 64 px, 55 s loop; pause on hover and focus-within; clones `inert`.
