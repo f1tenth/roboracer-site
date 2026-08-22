@@ -62,16 +62,36 @@ function layerOpacityAt(i: number, progress: number, count: number): number {
 }
 
 /**
+ * Tile surfaces (md and up). Selection is colour only: the active tile takes
+ * a faint violet fill and a violet hairline, the others stay flat paper
+ * behind ink hairlines. Violet is the site's one interactive accent
+ * (index.css: solid Button fill, hover underline, focus ring); magenta and
+ * cyan are logo-only. 8 percent keeps text-muted above AA on the fill
+ * (4.8:1 on paper-50), 30 percent makes the rule readable without turning it
+ * into a frame. No scale, shadow, glow or translate: the fill "lights up"
+ * and nothing moves.
+ */
+const TILE_ACTIVE = "md:border-rr-violet/30 md:bg-rr-violet/8";
+const TILE_IDLE = "border-ink-950/10";
+
+/** Colour-only transition shared by the tile and the text inside it. */
+const FADE_COLORS = "transition-colors duration-[var(--duration-base)] ease-[var(--ease-out-expo)]";
+
+/**
  * Platform panel (landing-v4 section 5): one media frame beside the four
- * hairline pillar rows. On desktop the panel pins for 300vh (sticky viewport
- * over a 300vh wrapper, the PinnedChapter pattern) and scroll progress alone
- * drives it: four equal bands, a 0.04 crossfade at each boundary, the active
- * row emphasised. Hover and focus never change the active row; the row links
- * keep working and keyboard users reach every row by scrolling. The active
- * layer plays, the next layer preloads, inactive layers pause.
- * Under md: posters inline per row, no pin, no video.
- * Reduced motion: the four posters as a static 2x2 grid beside the rows, all
- * rows at full emphasis, no pin, no crossfade, no video.
+ * pillar tiles. On desktop the panel pins for 300vh (sticky viewport over a
+ * 300vh wrapper, the PinnedChapter pattern) and scroll progress alone drives
+ * it: four equal bands, a 0.04 crossfade at each boundary, the active tile
+ * lit. Hover and focus never change the active tile; the tile links keep
+ * working and keyboard users reach every tile by scrolling. The active layer
+ * plays, the next layer preloads, inactive layers pause.
+ * The tiles sit in a 2x2 grid beside the frame (Build, Learn, Race, Research
+ * in reading order; one column between md and lg where the 5/12 column is
+ * too narrow for two) and stretch to the pinned height, so the chapter fills
+ * tall viewports with tiles instead of a band of air below a list.
+ * Under md: posters inline per tile, hairline rows, no pin, no video.
+ * Reduced motion: the four posters as a static 2x2 grid beside the tiles, all
+ * tiles at full emphasis, no pin, no crossfade, no video.
  */
 export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
   const reduced = usePrefersReducedMotion();
@@ -83,7 +103,7 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
 
   // Pin choreography: progress over the wrapper is the only input. The
   // opacities are written straight to the layers (opacity only) and the
-  // active index is React state for the row emphasis and the caption.
+  // active index is React state for the tile emphasis and the caption.
   useGSAP(
     () => {
       const wrap = wrapRef.current;
@@ -141,7 +161,7 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
   const next = Math.min(count - 1, active + 1);
   const mount = pinned && mounted;
   // The active marker exists only where progress drives it (desktop, motion
-  // OK); under md and under reduced motion every row is the same.
+  // OK); under md and under reduced motion every tile is the same.
   const marked = pinned && !reduced;
 
   return (
@@ -150,16 +170,18 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
         className={
           reduced
             ? undefined
-            : "md:motion-safe:sticky md:motion-safe:top-0 md:motion-safe:flex md:motion-safe:flex-col md:motion-safe:min-h-svh md:motion-safe:pt-[calc(85px+2.5rem)] md:motion-safe:pb-10 md:motion-safe:[@media(max-height:940px)]:pt-[85px] md:motion-safe:[@media(max-height:940px)]:pb-4"
+            : "md:motion-safe:sticky md:motion-safe:top-0 md:motion-safe:flex md:motion-safe:flex-col md:motion-safe:min-h-svh md:motion-safe:pt-[calc(85px+2.5rem)] md:motion-safe:pb-10 md:motion-safe:[@media(max-height:940px)]:pt-[calc(85px+1.5rem)] md:motion-safe:[@media(max-height:940px)]:pb-6"
         }
       >
         <div className="grid w-full gap-10 md:flex-1 md:grid-cols-12 md:grid-rows-[auto_1fr] md:gap-12">
           {/* One header element for every layout: row 1 of the left column on
-              desktop (the list spans both rows), the top of the stack under md. */}
-          {header && <div className="md:col-span-7 md:self-start">{header}</div>}
+              desktop (the tiles span both rows), the top of the stack under md. */}
+          {header && <div className="md:col-span-6 md:self-start lg:col-span-7">{header}</div>}
           {/* Desktop: the media frame under the header. Under md the list has
-              no frame; each row carries its own poster instead. */}
-          <div className="hidden md:col-span-7 md:block md:self-center">
+              no frame; each tile carries its own poster instead. The split is
+              7/5 from lg; between md and lg it is 6/6 so two tiles fit side
+              by side (a one-column stack of four tiles outgrows a tablet). */}
+          <div className="hidden md:col-span-6 md:block md:self-center lg:col-span-7">
             <figure>
               {reduced ? (
                 <div className="grid grid-cols-2 gap-3">
@@ -199,49 +221,48 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
             </figure>
           </div>
 
-          {/* The list stretches to the pinned height and each row takes an equal
-              share, so the chapter fills tall viewports instead of leaving a
-              band below the rows (Cedric, 2026-08-22). */}
-          <ul className="md:col-span-5 md:col-start-8 md:row-span-2 md:row-start-1 md:flex md:flex-col">
+          {/* The tile grid spans both rows of the pinned composition and its
+              rows are 1fr, so the four tiles share the full pinned height
+              (Cedric, 2026-08-22: no band of air below the list). Content is
+              top-aligned inside each tile; the air lives inside the tiles. */}
+          <ul className="md:col-span-6 md:col-start-7 md:row-span-2 md:row-start-1 md:grid md:grid-cols-2 md:auto-rows-[1fr] md:gap-2 lg:col-span-5 lg:col-start-8">
             {rows.map((row, i) => {
-              const isActive = i === active;
+              const lit = marked && i === active;
+              const dim = marked && i !== active;
               return (
                 <li
                   key={row.id}
                   data-row={row.id}
-                  data-active={marked && isActive ? "true" : undefined}
-                  className="border-t border-ink-950/10 py-8 last:border-b md:flex md:flex-1 md:flex-col md:justify-center md:py-5 md:[@media(max-height:820px)]:py-3"
+                  data-active={lit ? "true" : undefined}
+                  className={`border-t py-8 last:border-b md:flex md:flex-col md:rounded-card md:border md:p-4 lg:p-6 lg:[@media(max-height:820px)]:p-4 ${FADE_COLORS} ${
+                    lit ? TILE_ACTIVE : TILE_IDLE
+                  }`}
                 >
                   <div className="mb-5 md:hidden">
                     <RowPoster row={row} />
                   </div>
-                  {/* Active row = strong ink; inactive rows drop to text-muted,
-                      the AA floor, instead of opacity (axe color-contrast). */}
-                  <div className="grid gap-3 sm:grid-cols-12 sm:gap-x-4">
-                    <span className="font-mono text-small text-text-muted sm:col-span-2">{row.n}</span>
-                    <div className="sm:col-span-10">
-                      <h3
-                        className={`font-display text-display-m font-semibold transition-colors duration-[var(--duration-base)] ${
-                          isActive || reduced ? "text-text-strong" : "text-text-strong md:text-text-muted"
-                        }`}
-                      >
-                        {row.title}
-                      </h3>
-                      <p
-                        className={`mt-2 max-w-[40ch] text-body transition-colors duration-[var(--duration-base)] ${
-                          isActive || reduced ? "text-text-body" : "text-text-body md:text-text-muted"
-                        }`}
-                      >
-                        {row.body}
-                      </p>
-                      <Link
-                        to={row.href}
-                        className="mt-4 inline-block py-1 text-small font-semibold text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2 md:[@media(max-height:820px)]:mt-2"
-                      >
-                        {row.linkText}
-                      </Link>
-                    </div>
-                  </div>
+                  {/* Lit tile = strong ink; dim tiles drop to text-muted, the AA
+                      floor, instead of opacity (axe color-contrast). The mono
+                      index is annotation and stays muted everywhere. */}
+                  <span className="font-mono text-small text-text-muted">{row.n}</span>
+                  <h3
+                    className={`mt-3 font-display text-lead font-semibold ${FADE_COLORS} ${
+                      dim ? "text-text-muted" : "text-text-strong"
+                    }`}
+                  >
+                    {row.title}
+                  </h3>
+                  <p className={`mt-2 max-w-[40ch] text-body ${FADE_COLORS} ${dim ? "text-text-muted" : "text-text-body"}`}>
+                    {row.body}
+                  </p>
+                  <Link
+                    to={row.href}
+                    className={`mt-4 inline-block w-fit py-1 text-small font-semibold underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2 ${FADE_COLORS} ${
+                      dim ? "text-text-muted" : "text-text-strong"
+                    }`}
+                  >
+                    {row.linkText}
+                  </Link>
                 </li>
               );
             })}
@@ -339,7 +360,7 @@ function MediaLayer({ row, state, mount }: { row: PlatformRow; state: LayerState
   );
 }
 
-/** Mobile: the row's poster inline (no clip playback on phones, no sticky). */
+/** Mobile: the tile's poster inline (no clip playback on phones, no sticky). */
 function RowPoster({ row }: { row: PlatformRow }) {
   const [failed, setFailed] = useState(false);
   const src = row.media.type === "video" ? row.media.poster : row.media.src;
