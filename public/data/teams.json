@@ -88,7 +88,8 @@
       }
     ],
     "status": "verify",
-    "source": "Institution from skill 'Featured teams section' candidate list ('ForzaETH (ETH Zurich)'); placements from ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-21. Corroborated by publications.json entry 'baumann-2024-forzaeth' (ForzaETH Race Stack, ETH Zurich authors)."
+    "source": "Institution from skill 'Featured teams section' candidate list ('ForzaETH (ETH Zurich)'); placements from ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-21. Corroborated by publications.json entry 'baumann-2024-forzaeth' (ForzaETH Race Stack, ETH Zurich authors).",
+    "photo": "media/team/team-forzaeth-800.webp"
   },
   {
     "name": "UNICORN_Racing",
@@ -117,7 +118,8 @@
       }
     ],
     "status": "verify",
-    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-21. A related but distinct entry 'VAUL 1' placed 7th in Master Cup on the same page -- likely the same lab fielding two cars; institution unconfirmed for both."
+    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-21. A related but distinct entry 'VAUL 1' placed 7th in Master Cup on the same page -- likely the same lab fielding two cars; institution unconfirmed for both.",
+    "photo": "media/team/team-vaul-2-800.webp"
   },
   {
     "name": "UBM-Tom",
@@ -145,6 +147,7 @@
       }
     ],
     "status": "verify",
-    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-21."
+    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-21.",
+    "photo": "media/team/team-ubm-atlas-800.webp"
   }
 ]

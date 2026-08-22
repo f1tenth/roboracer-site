@@ -20,13 +20,14 @@ import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
 import Reveal from "../components/ui/Reveal";
 import Marquee from "../components/ui/Marquee";
-import StatCounter from "../components/ui/StatCounter";
 import NextRaceSpotlight from "../components/ui/NextRaceSpotlight";
 import TeamGrid from "../components/ui/TeamGrid";
 import PublicationCard from "../components/ui/PublicationCard";
 import HighlightReel from "../components/ui/HighlightReel";
 import PlatformPanel from "../components/ui/PlatformPanel";
 import ExplodedModel from "../components/ui/ExplodedModel";
+import WorldMapChapter from "../components/ui/WorldMapChapter";
+import CommunityJoin from "../components/ui/CommunityJoin";
 // TODO(wire): replaced by HeroChapter (revamp/v3-hero-nav) at integration.
 import VideoHero from "../components/ui/VideoHero";
 import HeadlineReveal from "../components/ui/HeadlineReveal";
@@ -185,25 +186,9 @@ export default function Landing() {
         <PlatformPanel rows={platform} />
       </Section>
 
-      {/* 6 · 05 Community map (ink, pinned) - sponsor, press.
-          TODO(wire): WorldMapChapter from revamp/v3-map-community. */}
-      <Section variant="ink" edge rule aria-labelledby="community">
-        <SectionHeader
-          index="05"
-          eyebrow="Community"
-          id="community"
-          title="Teams from around the world"
-          on="ink"
-          size="s"
-        />
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-          <StatCounter value={90} suffix="+" label="universities" on="ink" />
-          <StatCounter value={20} suffix="+" label="countries" on="ink" />
-          <StatCounter value={1000} suffix="+" label="publications" on="ink" />
-          <StatCounter value={30} label="competitions held" on="ink" />
-        </div>
-        <p className="mt-8 font-mono text-small text-text-on-ink-muted">TODO(wire): world map chapter</p>
-      </Section>
+      {/* 6 · 05 Community map (ink, pinned 260vh) - sponsor, press. Owns its
+          header, the four counters (progress-bound) and its data. */}
+      <WorldMapChapter />
 
       {/* 7 · Data line + partner ribbon (paper) - sponsor, faculty. No title:
           the numbers above are the voice; the line ties them to the logos. */}
@@ -292,12 +277,9 @@ export default function Landing() {
         </Reveal>
       </Section>
 
-      {/* 10 · 08 Join (paper) - everyone. TODO(wire): CommunityJoin from
-          revamp/v3-map-community. */}
-      <Section edge rule aria-labelledby="join">
-        <SectionHeader index="08" eyebrow="Join" id="join" title="Join 3,000+ people building and racing" />
-        <p className="font-mono text-small text-text-muted">TODO(wire): CommunityJoin</p>
-      </Section>
+      {/* 10 · 08 Join (paper) - everyone: live Slack numbers, crowd photo,
+          the three ways in. */}
+      <CommunityJoin />
     </div>
   );
 }

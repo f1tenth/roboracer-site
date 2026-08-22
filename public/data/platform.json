@@ -7,11 +7,11 @@
     "href": "/build",
     "linkText": "Build the car",
     "media": {
-      "type": "video",
-      "src": "/media/platform/platform-build-960.mp4",
-      "poster": "/media/platform/platform-build-poster.webp",
-      "caption": "assembling the car · build guide",
-      "credit": "RoboRacer organizers"
+      "type": "image",
+      "src": "/media/platform/platform-build-1200.webp",
+      "poster": "/media/platform/platform-build-1200.webp",
+      "caption": "pit work on a car \u00b7 ICRA 2026, Vienna",
+      "credit": "Photo: Felix Jahncke"
     }
   },
   {
@@ -25,7 +25,7 @@
       "type": "image",
       "src": "/media/platform/platform-learn-1200.webp",
       "poster": "/media/platform/platform-learn-1200.webp",
-      "caption": "LiDAR scan in RViz · course lab",
+      "caption": "LiDAR scan and map in RViz \u00b7 course lab",
       "credit": "RoboRacer organizers"
     }
   },
@@ -40,8 +40,8 @@
       "type": "video",
       "src": "/media/platform/platform-race-960.mp4",
       "poster": "/media/platform/platform-race-poster.webp",
-      "caption": "head-to-head · ICRA 2026, Vienna",
-      "credit": ""
+      "caption": "head-to-head \u00b7 ICRA 2026, Vienna",
+      "credit": "Video: Chinmay and Tanmay Samak"
     }
   },
   {
@@ -55,7 +55,7 @@
       "type": "video",
       "src": "/media/platform/platform-research-mppi-960.mp4",
       "poster": "/media/platform/platform-research-mppi-poster.webp",
-      "caption": "MPPI overtaking in the gym · UPenn",
+      "caption": "MPPI overtaking in the gym \u00b7 UPenn",
       "credit": "Video: Cedric Hollande"
     }
   }
