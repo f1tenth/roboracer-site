@@ -18,7 +18,10 @@ const STATS = [
   { value: 1000, suffix: "+", label: "publications" },
   { value: 30, suffix: "", label: "competitions held" },
 ] as const;
-// "30 competitions held" until IROS 2026 happens; the ticker never claims more.
+// "30 competitions held" until IROS 2026 happens (content skill); the ticker
+// never claims more. The source lists 33 race-kind pins that already ran, so
+// the count reaches 30 at ICCAS 2025 and holds there while CDC 2025, ICRA 2026,
+// IV 2026 and the upcoming pins pop (director, 2026-08-21: honest, keep the cap).
 const COMPETITIONS_HELD = 30;
 
 // Pin schedule in chapter progress (0..1 over the 260vh wrapper), landing-v3 section 6.
@@ -32,7 +35,8 @@ const STATS_STAGGER = 0.05;
 const STATS_DURATION = 0.38;
 
 // Geometry in viewBox units (1600 wide). Desktop renders the map at about
-// 790 px, so 7 units is a 3.5 px dot; on mobile everything doubles.
+// 826 px (7 columns plus the left page gutter), so 7 units is a 3.6 px dot; on
+// mobile everything doubles.
 const R = { pin: 7, next: 8, country: 10, pulseFrom: 8, pulseTo: 38 } as const;
 const FONT = { label: 22, code: 20 } as const;
 const LABEL_GAP = 6;
@@ -328,8 +332,11 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
 
   const violet = "var(--color-rr-violet)";
 
+  // The map bleeds into the left page gutter (-ml-6) so the SVG reaches 826 px
+  // at 1440 (7 of 12 columns alone stop at 795): the chapter's visual, not a
+  // thumbnail (director, 2026-08-21).
   const map = (
-    <div className="order-first md:col-span-7">
+    <div className="order-first md:col-span-7 md:-ml-6">
       <svg
         viewBox={VIEWBOX}
         className="block h-auto w-full text-text-on-ink"
@@ -474,7 +481,7 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
 
   const grid = (
     <div className="mx-auto w-full max-w-wide px-6">
-      <div className="grid gap-10 md:grid-cols-12 md:items-center md:gap-x-10">
+      <div className="grid gap-10 md:grid-cols-12 md:items-center md:gap-x-6">
         {column}
         {map}
       </div>
@@ -496,7 +503,10 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
   return (
     <section aria-labelledby="community-title" data-variant="ink" className={`bg-ink-900 text-text-on-ink-muted ${className}`}>
       <div ref={wrapRef} data-map-chapter style={{ height: `${HEIGHT_VH}vh` }}>
-        <div className="sticky top-0 flex min-h-svh flex-col justify-center py-12">{grid}</div>
+        {/* Centered in the viewport below the fixed nav (68 / 85 px measured). */}
+        <div className="sticky top-0 flex min-h-svh flex-col justify-center pb-12 pt-[calc(68px+3rem)] md:pt-[calc(85px+3rem)]">
+          {grid}
+        </div>
       </div>
     </section>
   );
