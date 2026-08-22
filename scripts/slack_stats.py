@@ -2,16 +2,18 @@
 """Refresh public/data/community.json from the RoboRacer Slack workspace.
 
 Counts active human members, distinct time zones, and continents (first segment of the
-IANA tz id, e.g. "America/New_York" -> "America"). Needs a bot token with the users:read
-scope (Slack app -> OAuth & Permissions -> Bot Token Scopes -> users:read -> install to
-workspace; Ayagoz is workspace admin).
+IANA tz id, e.g. "America/New_York" -> "America"; "Etc/*" and "Antarctica" excluded).
+Needs a bot token with the users:read scope (Slack app -> OAuth & Permissions -> Bot
+Token Scopes -> users:read -> install to workspace; Ayagoz is workspace admin).
 
 Usage:
   SLACK_BOT_TOKEN=xoxb-... python3 scripts/slack_stats.py            # writes the file
   SLACK_BOT_TOKEN=xoxb-... python3 scripts/slack_stats.py --dry-run  # prints only
 
-Without a token the script exits 0 and leaves the file untouched, so the workflow never
-fails a build; the seed values (source: manual) keep rendering.
+Without a token the script exits 0 and leaves the file untouched, so the
+community-stats workflow never fails a build and never writes a broken file; the seed
+values (source: manual) keep rendering. The token is read from the environment only:
+never put it in a file or a commit.
 """
 from __future__ import annotations
 
@@ -27,11 +29,8 @@ from pathlib import Path
 
 OUT = Path("public/data/community.json")
 API = "https://slack.com/api/users.list"
-# Slack reports "Antarctica" and "Etc/*" ids for a few accounts; they are not continents
-# the page should count.
-CONTINENTS = {"Africa", "America", "Asia", "Australia", "Europe", "Pacific", "Atlantic", "Indian"}
-# Pacific/Atlantic/Indian are ocean zones (islands); fold them into a sensible continent
-# count by keeping them distinct but excluding Etc and Antarctica.
+SOURCE = "slack-api"
+NOT_CONTINENTS = {"Etc", "Antarctica"}
 
 
 def fetch_all(token: str) -> list[dict]:
@@ -58,7 +57,7 @@ def summarize(members: list[dict]) -> dict:
         if not m.get("deleted") and not m.get("is_bot") and m.get("id") != "USLACKBOT"
     ]
     tzs = {m.get("tz") for m in humans if m.get("tz")}
-    continents = {t.split("/")[0] for t in tzs} - {"Etc", "Antarctica"}
+    continents = {t.split("/")[0] for t in tzs} - NOT_CONTINENTS
     n = len(humans)
     # Display rounds DOWN to the nearest hundred and appends "+", so the page never claims
     # more than the real count.
@@ -69,7 +68,7 @@ def summarize(members: list[dict]) -> dict:
         "timezones": len(tzs),
         "continents": len(continents),
         "updated": dt.date.today().isoformat(),
-        "source": "slack users.list",
+        "source": SOURCE,
     }
 
 
@@ -82,6 +81,8 @@ def main() -> int:
         print("SLACK_BOT_TOKEN not set; leaving community.json untouched", file=sys.stderr)
         return 0
     stats = summarize(fetch_all(token))
+    if stats["members"] == 0:
+        raise SystemExit("slack returned no members; refusing to write an empty file")
     print(json.dumps(stats, indent=2))
     if args.dry_run:
         return 0
