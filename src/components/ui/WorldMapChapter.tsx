@@ -54,9 +54,13 @@ const STATS_DURATION = 0.45;
 const R = { pin: 6, next: 8, glow: 48, pulseFrom: 8, pulseTo: 38 } as const;
 const FONT = { label: 22 } as const;
 const LABEL_GAP = 6;
-// Labels the director checks at 1440 (Anchorage, Abu Dhabi, Rio, Jeju, Vienna,
-// Pittsburgh) get first pick of the free space.
-const LABEL_PRIORITY = ["iv2023", "iros2024", "cdc2025", "iv2024", "icra2026", "iros2026"];
+// Labels the director checks at 1440 (Philadelphia, Anchorage, Abu Dhabi, Rio,
+// Jeju, Vienna, Pittsburgh) get first pick of the free space. Philadelphia
+// (ICRA 2022, the home of the platform) leads: Cedric, 2026-08-22, "Boston
+// should be replaced by Philadelphia", so Boston keeps its pin and glow but
+// gives its label up.
+const LABEL_PRIORITY = ["icra2022", "iv2023", "iros2024", "cdc2025", "iv2024", "icra2026", "iros2026"];
+const LABEL_SKIP_CITIES = new Set(["Boston"]);
 
 // Region fills by held count (section 6 table); never above 0.60 so the pins
 // stay the brightest thing on the map. Partner-only countries are violet.
@@ -117,6 +121,7 @@ function placeLabels(pins: MapEvent[], r: number, fs: number): Map<string, Place
   const labelledCities = new Set<string>();
   const candidates = [...pins].sort((a, b) => rank(a) - rank(b));
   for (const e of candidates) {
+    if (LABEL_SKIP_CITIES.has(e.city)) continue;
     const cityDone = labelledCities.has(e.city);
     if (cityDone && e.verified) continue;
     const verifiedHere = pins.some((p) => p.verified && p.city === e.city);

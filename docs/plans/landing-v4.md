@@ -314,7 +314,8 @@ paths in section 5 and does not edit the JSON.
   8 s; poster 106 KB). The contract's 21/9 band cut the bottom strip of Ezio's
   composite off (Cedric, 2026-08-22: "short on the bottom, we need to see more
   of the bottom"), so the frame now takes the video's own aspect; native
-  1272-wide source, so not 1600. Post-card video:
+  1272-wide source, so not 1600. The credit line reads `Video: Ezio Bartocci ·
+  our post on LinkedIn ↗` and links RoboRacer's own post (Cedric, 2026-08-22). Post-card video:
   `join-icra2026-post-960.mp4` 1.04 MB (960x540, 8.8 s; poster 65 KB). Learn
   row runs at 2x (5.9 s) because `assembling_car.mp4` is 11.8 s; 4x would give
   3 s.

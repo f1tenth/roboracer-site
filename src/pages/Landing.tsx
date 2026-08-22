@@ -58,8 +58,10 @@ const RACE_HERO = {
   alt: "Ezio Bartocci's video from ICRA 2026 in Vienna: the race track seen from above and from the bridge",
   caption: "the hall · ICRA 2026, Vienna",
   credit: "Video: Ezio Bartocci",
-  creditHref:
-    "https://www.linkedin.com/posts/ezio-bartocci_facultyinformatics-tuwien-roboracer-ugcPost-7468278615458115584-VlAQ/",
+  // Cedric, 2026-08-22: the frame links to RoboRacer's own LinkedIn post, not
+  // Ezio's (the footage credit stays his).
+  creditLabel: "our post on LinkedIn ↗",
+  creditHref: "https://www.linkedin.com/posts/great-work-by-all-involved-ugcPost-7471631589169516544-ZPa-/",
 };
 
 // Car close-ups beside the 3D model (media curator, docs/media/SELECTION.md).
@@ -164,7 +166,7 @@ export default function Landing() {
                 rel="noopener noreferrer"
                 className="text-text-muted underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2"
               >
-                {RACE_HERO.credit} · LinkedIn ↗
+                {RACE_HERO.credit} · {RACE_HERO.creditLabel}
               </a>
             </figcaption>
           </figure>

@@ -158,6 +158,8 @@
       "verified": true,
       "number": 10,
       "source": "_harvest/repos/icra2022-race_website/index.html (icra2022-race.f1tenth.org): '10th F1TENTH Autonomous Grand Prix / May 23th - May 25th 2022 / Location: Philadelphia, USA'",
+      "labelDx": 16,
+      "labelDy": 6,
       "x": 491.1,
       "y": 205.9
     },
