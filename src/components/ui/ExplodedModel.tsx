@@ -58,11 +58,11 @@ const DEFAULT_PHOTOS: readonly CarPhoto[] = [
 const STATES = [
   {
     caption: "Race-ready",
-    body: "One car, assembled. Every transform on screen mirrors the open-source URDF.",
+    body: "One car, assembled. Chassis, plate, LiDAR and wheels sit where the open-source URDF puts them.",
   },
   {
     caption: "What is inside",
-    body: "Seven parts: the chassis, an accent plate, a top-mounted LiDAR, and four wheels. The rear pair is driven.",
+    body: "Eleven parts: the chassis, the accent plate, the LiDAR, the Jetson Orin, the power board, the VESC, the steering servo, and four wheels.",
   },
   {
     caption: "Build your own",
@@ -155,8 +155,8 @@ type ExplodedModelProps = {
  * Landing chapter: the car rests assembled (studio photo over the 3D canvas
  * when available, slow spin underneath), then its parts fly OUTWARD as you
  * scroll the pin and HOLD exploded to the end, still turning slowly. Once the
- * explosion settles, five part callouts fade in on hairline leaders and fade
- * out when the chapter releases. The pin starts only once the section is
+ * explosion settles, seven part callouts fade in on hairline leaders and stay
+ * up while the chapter scrolls past. The pin starts only once the section is
  * fully in view. Reuses the /assembly scene graph; /assembly stays the full
  * viewer.
  * Layout (landing-v3): header above, 7/5 grid, canvas 72svh on desktop so
@@ -217,8 +217,11 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK_QUERY, () => {
         const captions = gsap.utils.toArray<HTMLElement>("[data-em-caption]", wrap);
-        // Callouts: in once the hold point is reached and the parts have
-        // settled, out when scrolling back below it or past the chapter.
+        // Callouts: in (staggered) once the hold point is reached and the
+        // parts have settled; then they STAY for the rest of the chapter and
+        // leave the screen with it (Cedric, landing v4 review: "the
+        // descriptive titles do not stay when you scroll past"). Only
+        // scrubbing back up below the hold point takes them out again.
         let shown = false;
         let pending: gsap.core.Tween | null = null;
         const showCallouts = () => {
@@ -253,11 +256,9 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
                 el.style.opacity = String(photoOpacity);
                 el.style.visibility = photoOpacity <= 0.001 ? "hidden" : "visible";
               }
-              if (self.progress >= EXPLODED_AT && self.isActive) showCallouts();
+              if (self.progress >= EXPLODED_AT) showCallouts();
               else hideCallouts();
             },
-            onLeave: hideCallouts,
-            onEnterBack: showCallouts,
           },
         });
         captions.forEach((cap, i) => {
