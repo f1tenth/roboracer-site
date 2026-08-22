@@ -80,7 +80,7 @@ export default function CommunityJoin({ className = "" }: CommunityJoinProps) {
             </Button>
           </div>
           <p className="mt-6 font-mono text-small text-text-muted">
-            <a className={`inline-block py-1 ${LINK}`} href={`mailto:${CONTACT_EMAIL}`}>
+            <a className={`inline-block py-2 ${LINK}`} href={`mailto:${CONTACT_EMAIL}`}>
               {CONTACT_EMAIL}
             </a>
           </p>
