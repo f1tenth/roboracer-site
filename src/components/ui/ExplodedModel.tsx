@@ -21,6 +21,32 @@ const PHOTO_FADE_END = 0.15;
 const CAR_STUDIO_PHOTO = "/media/hero/car-studio.webp";
 const CAR_STUDIO_CUTOUT = "/media/hero/car-studio-cutout.webp";
 
+export type CarPhoto = {
+  src: string;
+  alt: string;
+  /** Mono caption under the frame. */
+  caption: string;
+  /** "Photo: <name>" when known (media skill credit convention). */
+  credit?: string;
+};
+
+// Reserved files from the media curator (landing-v3 drift section). Each
+// slot hides itself onError until its file lands, never a broken image.
+// TODO(content): captions and credits from docs/media/SELECTION.md at
+// integration (pass them through the `photos` prop).
+const DEFAULT_PHOTOS: readonly CarPhoto[] = [
+  {
+    src: "/media/car/car-photo-01-1200.webp",
+    alt: "The RoboRacer car, close-up",
+    caption: "RoboRacer car, photo 01",
+  },
+  {
+    src: "/media/car/car-photo-02-1200.webp",
+    alt: "The RoboRacer car, close-up",
+    caption: "RoboRacer car, photo 02",
+  },
+];
+
 // Captions come from the URDF-mirrored part table (racecarAssemblyData.ts);
 // no invented specs. TODO(content): final chapter copy from Cedric.
 const STATES = [
@@ -40,23 +66,70 @@ const STATES = [
 
 type PhotoStatus = "loading" | "ok" | "failed";
 
+/** Two 4/3 photo slots beside the canvas; a slot whose file is missing
+ * removes itself (onError) so the row never shows a broken image. */
+function PhotoRow({ photos }: { photos: readonly CarPhoto[] }) {
+  const [failed, setFailed] = useState<ReadonlySet<string>>(() => new Set());
+  const live = photos.filter((photo) => !failed.has(photo.src));
+  if (live.length === 0) return null;
+  return (
+    <ul className="grid grid-cols-2 gap-4">
+      {live.map((photo) => (
+        <li key={photo.src}>
+          <figure>
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              width={1200}
+              height={900}
+              loading="lazy"
+              decoding="async"
+              className="aspect-[4/3] w-full rounded-media object-cover"
+              onError={() =>
+                setFailed((current) => {
+                  const next = new Set(current);
+                  next.add(photo.src);
+                  return next;
+                })
+              }
+            />
+            <figcaption className="mt-2 font-mono text-eyebrow tracking-normal text-text-on-ink-muted">
+              {photo.caption}
+              {photo.credit ? ` · ${photo.credit}` : ""}
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+type ExplodedModelProps = {
+  /** Photo slots beside the canvas; defaults to the curator's reserved files. */
+  photos?: readonly CarPhoto[];
+};
+
 /**
  * Landing chapter: the car rests assembled (studio photo over the 3D canvas
  * when available, slow spin underneath), then its parts fly OUTWARD as you
  * scroll the pin and HOLD exploded to the end - the spin eases out as the
  * explosion rises. The pin starts only once the section is fully in view.
  * Reuses the /assembly scene graph; /assembly stays the full viewer.
+ * Layout (landing-v3): header above, 7/5 grid, canvas 72svh on desktop so
+ * the car owns the viewport; two photo slots under the captions. Mobile:
+ * canvas first at 56svh, captions below, photos revealed as the pin ends.
  * Reduced motion: static layout preferring the studio cutout, else one
  * assembled 3D frame, with the captions stacked. Weak devices and no-JS keep
  * the readable caption list.
  */
-export default function ExplodedModel() {
+export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModelProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const photoLayerRef = useRef<HTMLDivElement>(null);
   const creditRef = useRef<HTMLParagraphElement>(null);
   const explosionRef = useRef(0);
   const reduced = usePrefersReducedMotion();
   const [inView, setInView] = useState(false);
+  const [active, setActive] = useState(false);
   const [photoStatus, setPhotoStatus] = useState<PhotoStatus>("loading");
   const weakDevice =
     typeof navigator !== "undefined" && (navigator.hardwareConcurrency ?? 8) < 4;
@@ -69,17 +142,25 @@ export default function ExplodedModel() {
   useEffect(() => {
     const el = wrapRef.current;
     if (!el || weakDevice) return;
-    const io = new IntersectionObserver(
+    // Mount the three.js chunk 600px ahead; render only while on screen.
+    const mount = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
           setInView(true);
-          io.disconnect();
+          mount.disconnect();
         }
       },
       { rootMargin: "600px 0px" },
     );
-    io.observe(el);
-    return () => io.disconnect();
+    const visible = new IntersectionObserver((entries) => {
+      setActive(entries.some((e) => e.isIntersecting));
+    });
+    mount.observe(el);
+    visible.observe(el);
+    return () => {
+      mount.disconnect();
+      visible.disconnect();
+    };
   }, [weakDevice]);
 
   useGSAP(
@@ -125,7 +206,7 @@ export default function ExplodedModel() {
   );
 
   const captionList = (stacked: boolean) => (
-    <ol className={stacked ? "flex flex-col gap-6" : "flex flex-col gap-8"}>
+    <ol className={stacked ? "flex flex-col gap-6" : "flex flex-col gap-6 lg:gap-8"}>
       {STATES.map((s, i) => (
         <li
           key={s.caption}
@@ -146,7 +227,7 @@ export default function ExplodedModel() {
   const explore = (
     <Link
       to="/assembly"
-      className="mt-8 inline-block py-1 text-small font-semibold text-text-on-ink underline underline-offset-4 decoration-text-on-ink/30 hover:decoration-rr-violet hover:decoration-2"
+      className="inline-block self-start py-1 text-small font-semibold text-text-on-ink underline underline-offset-4 decoration-text-on-ink/30 hover:decoration-rr-violet hover:decoration-2"
     >
       Explore the car in the interactive viewer
     </Link>
@@ -160,7 +241,7 @@ export default function ExplodedModel() {
         <span aria-hidden="true">/</span>
         <span>The car</span>
       </p>
-      <h2 className="font-display text-display-l font-semibold text-text-on-ink">
+      <h2 className="font-display text-display-m font-semibold text-text-on-ink">
         One tenth the size, the full problem
       </h2>
     </header>
@@ -176,9 +257,9 @@ export default function ExplodedModel() {
     return (
       <div className="mx-auto max-w-content px-6">
         {header}
-        <div className="mt-10 grid gap-10 md:grid-cols-[1fr_20rem]">
+        <div className="mt-10 grid gap-10 md:grid-cols-[7fr_5fr]">
           <div>
-            <div className="relative min-h-[40svh]">
+            <div className="relative h-[40svh] md:h-[56svh]">
               {photoStatus === "failed" && !weakDevice && (
                 <Suspense fallback={null}>
                   <ExplodedModelScene explosionRef={explosionRef} staticPose />
@@ -201,9 +282,10 @@ export default function ExplodedModel() {
             </div>
             {photoStatus === "ok" && credit}
           </div>
-          <div>
+          <div className="flex flex-col gap-8">
             {captionList(true)}
             {explore}
+            <PhotoRow photos={photos} />
           </div>
         </div>
       </div>
@@ -212,15 +294,20 @@ export default function ExplodedModel() {
 
   return (
     <div ref={wrapRef} style={{ minHeight: "140vh" }}>
-      <div className="sticky top-0 flex min-h-svh flex-col justify-center py-12">
+      {/* The fixed nav (68px mobile / 85px desktop) is opaque over this ink
+          chapter, so the pinned content starts below it. Desktop pins the
+          whole block; on mobile the block is taller than the viewport, so
+          only the canvas cell pins (sticky inside the flex column) and the
+          captions and photos scroll beneath it. */}
+      <div className="pb-6 pt-[calc(68px+1rem)] md:sticky md:top-0 md:flex md:min-h-svh md:flex-col md:justify-center md:pt-[calc(85px+1rem)]">
         <div className="mx-auto w-full max-w-content px-6">
           {header}
-          <div className="mt-6 grid items-center gap-10 md:grid-cols-[1fr_20rem]">
-            <div>
-              <div className="relative h-[55svh]">
+          <div className="mt-6 flex flex-col gap-8 md:grid md:grid-cols-[7fr_5fr] md:items-center md:gap-10">
+            <div className="sticky top-[68px] z-10 bg-ink-950 md:static md:bg-transparent">
+              <div className="relative h-[56svh] md:h-[60svh] lg:h-[72svh]">
                 {inView && (
                   <Suspense fallback={null}>
-                    <ExplodedModelScene explosionRef={explosionRef} />
+                    <ExplodedModelScene explosionRef={explosionRef} active={active} />
                   </Suspense>
                 )}
                 {photoStatus !== "failed" && (
@@ -242,9 +329,10 @@ export default function ExplodedModel() {
               </div>
               {photoStatus === "ok" && credit}
             </div>
-            <div>
+            <div className="flex flex-col gap-6 lg:gap-8">
               {captionList(false)}
               {explore}
+              <PhotoRow photos={photos} />
             </div>
           </div>
         </div>
