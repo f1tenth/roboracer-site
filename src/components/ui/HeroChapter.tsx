@@ -43,7 +43,7 @@ type HeroChapterProps = {
  *                2026-08-22, on the drafts: "way slower, get to 0 once we are
  *                basically off that page", then "start a bit later so it
  *                doesn't disappear while we are still reading it ... slow
- *                start ... sigmoid": 0.96 at 0.70, 0.5 at 0.81, 0.13 at 0.90,
+ *                start ... sigmoid": 0.96 at 0.70, 0.5 at 0.81, 0.07 at 0.90,
  *                0 as the pin lets go
  *   p 0.72-0.95  nav fill: NavBar reads `data-nav-fill` off the wrapper and
  *                ramps --nav-alpha 0 -> 1 over these p values (transparent
