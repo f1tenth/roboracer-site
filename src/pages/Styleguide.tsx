@@ -24,8 +24,7 @@ import EventCard from "../components/ui/EventCard";
 import LogoCloud from "../components/ui/LogoCloud";
 import TagFilter from "../components/ui/TagFilter";
 import PinnedChapter from "../components/ui/PinnedChapter";
-import VideoHero, { type HeroVideoSources } from "../components/ui/VideoHero";
-import HeadlineReveal from "../components/ui/HeadlineReveal";
+import HeroChapter, { type HeroVideoSources } from "../components/ui/HeroChapter";
 import HighlightReel from "../components/ui/HighlightReel";
 import TeamGrid from "../components/ui/TeamGrid";
 import PublicationCard from "../components/ui/PublicationCard";
@@ -40,6 +39,9 @@ const HERO_VIDEO: HeroVideoSources = {
   width: 1280,
   height: 720,
 };
+
+// Landing v3 copy (no comma): line 1 is one gradient unit, the rest is word by word.
+const HERO_LINES = ["Autonomous racing", "built and raced", "in the open"];
 
 /** Mono spec chip naming each primitive for review with Ayagoz. */
 function Spec({ name, on = "paper" }: { name: string; on?: "ink" | "paper" }) {
@@ -87,19 +89,19 @@ export default function Styleguide() {
   }, [pubs, tag]);
 
   return (
-    <div className="pt-[68px] md:pt-[85px]">
+    // No top padding: the hero runs under the transparent nav exactly as on
+    // the landing (NavBar treats /styleguide as a hero route).
+    <div>
       <h1 className="sr-only">Styleguide</h1>
 
-      {/* VideoHero - video-only (neobotics pattern): pause control on
-          hover/focus, one-shot idle scroll cue after 10 s, no headline */}
-      <VideoHero video={HERO_VIDEO} />
-
-      {/* HeadlineReveal - the page's one loud moment (h1 on landing, h2 here) */}
+      {/* HeroChapter - the landing's first 320vh (h1 there, h2 here): video
+          under the nav, the headline assembling in front of it with line 1
+          in the logo gradient, an obvious zoom, then the words thrown upward */}
+      <HeroChapter as="h2" video={HERO_VIDEO} lines={HERO_LINES} />
       <div className="bg-paper-50">
         <div className="mx-auto max-w-content px-6 pt-16">
-          <Spec name="HeadlineReveal · 180vh pin, per-word scrub, assembled by ~70%" />
+          <Spec name="HeroChapter · 320vh sticky, scrub 0.6 · video only to p 0.08, assemble 0.10-0.42, zoom 0.42-0.82, thrown exit 0.82-1.0 · nav alpha 0 -> 1 over 0.9vh" />
         </div>
-        <HeadlineReveal as="h2" lines={["Autonomous racing,", "built and raced", "in the open"]} />
       </div>
 
       {/* NextRaceSpotlight - paper hairline panel */}
@@ -341,7 +343,7 @@ export default function Styleguide() {
           />
           <div className="flex min-h-40 items-center justify-center rounded-media border border-ink-950/10 p-8 text-center">
             <p className="max-w-md font-mono text-small text-text-muted">
-              gradient is reserved for the logo · no gradient text, no gradient buttons
+              gradient is reserved for the logo and the hero's first line · no other gradient text, no gradient buttons
             </p>
           </div>
         </div>
