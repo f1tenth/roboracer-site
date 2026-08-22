@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { loadCommunity, type Community, type JoinPost, type JoinYouTube } from "../../lib/data";
 import Section from "./Section";
 import SectionHeader from "./SectionHeader";
@@ -171,13 +172,35 @@ function PostCard({ post }: { post: JoinPost }) {
   );
 }
 
-/** Facade: our poster and a play glyph; the privacy-enhanced embed (and any
- * YouTube request) exists only after the click. */
+/** Our poster and a play glyph until the card is mostly in view; then the
+ * privacy-enhanced embed loads and plays muted on its own (Cedric,
+ * 2026-08-22: "automatically play ... start it with volume muted"). Under
+ * reduced motion it stays a click-to-play facade, and nothing from YouTube
+ * loads before that click. */
 function YouTubeCard({ yt }: { yt: JoinYouTube }) {
+  const reduced = usePrefersReducedMotion();
+  const ref = useRef<HTMLElement>(null);
   const [playing, setPlaying] = useState(false);
-  const embed = `https://www.youtube-nocookie.com/embed/${yt.video_id}?autoplay=1&rel=0`;
+  const embed = `https://www.youtube-nocookie.com/embed/${yt.video_id}?autoplay=1&mute=1&playsinline=1&rel=0`;
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || reduced || playing) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.intersectionRatio >= 0.6)) {
+          setPlaying(true);
+          io.disconnect();
+        }
+      },
+      { threshold: [0.6] },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [reduced, playing]);
+
   return (
-    <article className={`flex h-full flex-col overflow-hidden ${CARD}`}>
+    <article ref={ref} className={`flex h-full flex-col overflow-hidden ${CARD}`}>
       <div className="relative aspect-video border-b border-ink-950/10 bg-ink-950">
         {playing ? (
           <iframe
