@@ -162,11 +162,14 @@ body {
   min-width: 100%;
   animation: rr-marquee var(--rr-marquee-duration, 50s) linear infinite;
 }
-/* Pause on hover AND on keyboard focus within (the partner ribbon's logo
-   links). This must live here, unlayered: the `animation` shorthand above
-   resets play-state and beats any layered utility. */
+/* Pause on hover AND on keyboard focus (the partner ribbon's logo links).
+   `:has(a:focus-visible)`, not `:focus-within`: a clicked logo keeps focus
+   after its new tab opens, and focus-within kept the ribbon frozen until the
+   next click (landing v4 section 7). This must live here, unlayered: the
+   `animation` shorthand above resets play-state and beats any layered
+   utility. */
 .rr-marquee:hover .rr-marquee-track,
-.rr-marquee:focus-within .rr-marquee-track {
+.rr-marquee:has(a:focus-visible) .rr-marquee-track {
   animation-play-state: paused;
 }
 @media (prefers-reduced-motion: reduce) {

@@ -25,29 +25,30 @@ type HeroChapterProps = {
 
 /**
  * Scroll schedule in pin progress p (0 = chapter top reaches the viewport
- * top, 1 = the 320vh wrapper releases). Landing v3 section 1, tuned on the
- * dev server at 1440x900 and 390x844 (2026-08-21):
+ * top, 1 = the HEIGHT wrapper releases). Landing v4 section 1 (Cedric's v3
+ * review: zoom with the words, then fade in place instead of throwing them):
  *
  *   p 0.00-0.08  video only
  *   p 0.08-0.45  video brightness 1 -> 0.38, saturate 1 -> 0.75 (the scrim)
  *   p 0.10-0.42  headline assembles: 7 units (line 1, then 6 words), each
  *                yPercent 110 -> 0 + opacity 0 -> 1 over 0.11 of the pin,
- *                ease in-out quart, unit starts 0.035 apart, last lands at 0.42
- *   p 0.42-0.82  zoom: block scale 1 -> 1.30 (1.20 under 768px), power2.in,
- *                so 0.42-0.55 reads as a hold (scale <= 1.03) before it grows
- *   p 0.82-0.98  exit: words thrown upward, last line first, starts 0.012
- *                apart (0.82 .. 0.892): y 0 -> -120vh over 0.12 (power2.out,
- *                so the impulse comes first and a word is ~60vh away when
- *                its fade is halfway), opacity 1 -> 0 over 0.05 starting
- *                0.015 after the throw (last fade ends at 0.957); block scale
- *                continues to 1.55 (1.49 mobile) by 0.95; video brightness
- *                -> 0.12 by 1.0
- *   p 0.00-1.00  video push-in scale 1 -> 1.12, linear
+ *                ease in-out quart, unit starts 0.035 apart, last lands at 0.42;
+ *                AND the block scales 1 -> 1.30 (1.20 under 768px) over the
+ *                same window, power1.inOut, so the scale is at its max exactly
+ *                as the last unit lands
+ *   p 0.42-0.54  hold: full text, no transforms
+ *   p 0.54-1.00  fade: block opacity 1 -> 0, power1.in; no y, no scale
+ *                change, no stagger (the block fades as one). Cedric on the
+ *                0.54-0.84 draft (2026-08-22): "way slower, get to 0 once we
+ *                are basically off that page", so the fade runs to the
+ *                release: 0.57 at 0.84, 0.21 at 0.95, 0 as the pin lets go
  *   p 0.72-0.95  nav fill: NavBar reads `data-nav-fill` off the wrapper and
  *                ramps --nav-alpha 0 -> 1 over these p values (transparent
- *                through assembly, hold and zoom; paper by the time the
- *                Highlights strip slides over the hero). The static layout
- *                publishes its own ramp over the poster's scroll-out.
+ *                through assembly, hold and the first half of the fade;
+ *                paper by the time the Highlights strip slides over the hero). The static
+ *                layout publishes its own ramp over the poster's scroll-out.
+ *   p 0.84-1.00  video brightness -> 0.12 (under the tail of the fade)
+ *   p 0.00-1.00  video push-in scale 1 -> 1.12, linear
  *
  * Blur decision (spec: `filter: blur(0 -> 10px)` on the video from p 0.12 to
  * 0.45 only if it costs under 4 ms a frame at 1440x900). Measured 2026-08-21
@@ -69,26 +70,17 @@ const SCHEDULE = {
     dimEnd: 0.45,
     brightness: 0.38,
     saturate: 0.75,
+    /** Near-black ramp under the tail of the fade. */
+    exitDimStart: 0.84,
     exitBrightness: 0.12,
     blurPx: 0,
   },
   assemble: { start: 0.1, end: 0.42, unitDuration: 0.11, yPercent: 110 },
-  zoom: { start: 0.42, end: 0.82, wide: 1.3, narrow: 1.2 },
-  exit: {
-    start: 0.82,
-    stagger: 0.012,
-    /** power2.out: the impulse comes first, so a word is already ~60vh away
-     * when its fade is halfway (with an ease-in it ghosted next to its
-     * line, which read as fading, not thrown). */
-    yDuration: 0.12,
-    yVh: -1.2,
-    fadeDelay: 0.015,
-    fadeDuration: 0.05,
-    scaleEnd: 0.95,
-    /** 1.30 -> 1.55 on the spec's desktop numbers; applied as a ratio so the
-     * narrow breakpoint scales proportionally. */
-    scaleMultiplier: 1.55 / 1.3,
-  },
+  /** Rides the assembly window so the scale peaks as the last unit lands. */
+  zoom: { start: 0.1, end: 0.42, wide: 1.3, narrow: 1.2 },
+  /** 0.42-0.54 is the hold: nothing is tweened there. The fade ends with
+   * the pin, so the words are still faintly there as the chapter leaves. */
+  fade: { start: 0.54, end: 1.0 },
   /** Nav fill, published on the wrapper as data-nav-fill="from to" in the
    * wrapper's own scroll progress (start "top top", end "bottom bottom").
    * Pinned layout: pin progress. Static layout (reduced motion / weak
@@ -97,6 +89,11 @@ const SCHEDULE = {
   nav: { fillStart: 0.72, fillEnd: 0.95 },
   navStatic: { fillStart: 0.1, fillEnd: 0.6 },
 } as const;
+
+/** Pin length. v3 shipped 320vh; kept in v4 (the fade now runs to the
+ * release, so there is no dead scroll at the end; section 12 of
+ * docs/plans/landing-v4.md). */
+const HEIGHT_CLASS = "h-[320vh]";
 
 const navFill = (r: { fillStart: number; fillEnd: number }) => `${r.fillStart} ${r.fillEnd}`;
 
@@ -121,8 +118,8 @@ const DISPLAY_TYPE =
 
 /**
  * The landing's first 320vh: the FPV loop under the transparent nav, the
- * headline assembling in front of it, an obvious zoom, then the words thrown
- * upward as the pin releases and the paper Highlights strip slides over the
+ * headline assembling in front of it while it zooms, a hold, then the whole
+ * block fading in place before the paper Highlights strip slides over the
  * darkened hero. CSS sticky does the pinning (works without JS); one scrubbed
  * GSAP timeline does everything else. Ships the WCAG 2.2.2 pause control
  * (hover/focus reveal, always tabbable) and the one-shot idle scroll cue.
@@ -213,9 +210,9 @@ export default function HeroChapter({ video, lines, as = "h1", className = "" }:
             vid,
             {
               filter: videoFilter(S.video.exitBrightness, S.video.saturate, S.video.blurPx),
-              duration: 1 - S.exit.start,
+              duration: 1 - S.video.exitDimStart,
             },
-            S.exit.start,
+            S.video.exitDimStart,
           );
 
         // Assembly: line 1 as one unit, then word by word; the last unit lands
@@ -231,48 +228,30 @@ export default function HeroChapter({ video, lines, as = "h1", className = "" }:
           );
         });
 
-        // Zoom: hold-then-grow, continuing through the exit.
+        // Zoom: rides the assembly window, so the block is at its largest the
+        // instant the last word lands; nothing moves during the hold.
         tl.fromTo(
           block,
           { scale: 1 },
-          { scale: zoom, duration: S.zoom.end - S.zoom.start, ease: "power2.in" },
+          { scale: zoom, duration: S.zoom.end - S.zoom.start, ease: "power1.inOut" },
           S.zoom.start,
-        ).to(
-          block,
-          { scale: zoom * S.exit.scaleMultiplier, duration: S.exit.scaleEnd - S.exit.start },
-          S.exit.start,
         );
 
-        // Exit: thrown upward, last line first. `y` is separate from the
-        // assembly's `yPercent` so the two never fight. Every tween is
-        // clamped to end by 1.0: a timeline longer than the pin would map
-        // every p to a later moment (the whole schedule ran 3% early before
-        // this clamp).
-        [...units].reverse().forEach((el, i) => {
-          const at = S.exit.start + i * S.exit.stagger;
-          const fadeAt = at + S.exit.fadeDelay;
-          tl.fromTo(
-            el,
-            { y: 0 },
-            {
-              y: () => S.exit.yVh * window.innerHeight,
-              duration: Math.min(S.exit.yDuration, 1 - at),
-              ease: "power2.out",
-              immediateRender: false,
-            },
-            at,
-          ).fromTo(
-            el,
-            { opacity: 1 },
-            {
-              opacity: 0,
-              duration: Math.min(S.exit.fadeDuration, 1 - fadeAt),
-              ease: "power1.in",
-              immediateRender: false,
-            },
-            fadeAt,
-          );
-        });
+        // Fade: the whole block, as one, in place. Opacity lives on the block
+        // (the units' own opacity tweens ended with the assembly), no y, no
+        // scale change, no stagger. immediateRender off so the block is not
+        // forced to opacity 1 before the assembly has run.
+        tl.fromTo(
+          block,
+          { opacity: 1 },
+          {
+            opacity: 0,
+            duration: S.fade.end - S.fade.start,
+            ease: "power1.in",
+            immediateRender: false,
+          },
+          S.fade.start,
+        );
       });
     },
     { scope, dependencies: [isStatic, sentence], revertOnUpdate: true },
@@ -352,7 +331,7 @@ export default function HeroChapter({ video, lines, as = "h1", className = "" }:
     <section
       ref={scope}
       aria-labelledby={headingId}
-      className={`relative h-[320vh] bg-ink-950 ${className}`}
+      className={`relative ${HEIGHT_CLASS} bg-ink-950 ${className}`}
       data-hero-chapter=""
       data-nav-fill={navFill(SCHEDULE.nav)}
     >
