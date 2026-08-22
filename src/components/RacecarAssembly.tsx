@@ -30,10 +30,11 @@ import {
   type VectorTuple,
 } from "./racecarAssemblyData";
 import {
-  FINISH,
+  ACCENT_FINISH,
   HIGHLIGHT_EMISSIVE,
   HIGHLIGHT_INTENSITY,
   overridePartMaterial,
+  resolveAccentVariant,
 } from "./racecarMaterials";
 
 const glbAssets = RACECAR_PARTS.filter((part) => part.format === "glb").map(
@@ -133,20 +134,25 @@ function GlbGeometry({ part, selected, hovered, wireframe }: ModelGeometryProps)
   return <primitive object={scene} rotation={rotation} />;
 }
 
+/** The accent plate: anodized cyan (or magenta) with a light clearcoat, the
+ * one colored part of the car (racecarMaterials.ts, ACCENT_FINISH). */
 function StlGeometry({ part, selected, hovered, wireframe }: ModelGeometryProps) {
   const geometry = useLoader(STLLoader, part.asset);
+  const finish = ACCENT_FINISH[resolveAccentVariant()];
 
   return (
     <mesh geometry={geometry} castShadow receiveShadow>
-      <meshStandardMaterial
-        color={FINISH.graphite.color}
+      <meshPhysicalMaterial
+        color={finish.color}
         emissive={HIGHLIGHT_EMISSIVE}
         emissiveIntensity={
           selected ? HIGHLIGHT_INTENSITY.selected : hovered ? HIGHLIGHT_INTENSITY.hover : 0
         }
-        envMapIntensity={FINISH.graphite.envMapIntensity}
-        metalness={FINISH.graphite.metalness}
-        roughness={FINISH.graphite.roughness}
+        envMapIntensity={finish.envMapIntensity}
+        metalness={finish.metalness}
+        roughness={finish.roughness}
+        clearcoat={finish.clearcoat}
+        clearcoatRoughness={finish.clearcoatRoughness}
         wireframe={wireframe}
       />
     </mesh>

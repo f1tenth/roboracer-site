@@ -1,10 +1,12 @@
 // Product-render material overrides for the shared racecar scene graph
 // (RacecarAssemblyParts). One mapping serves both the landing ExplodedModel
 // chapter and /assembly. Direction (landing-v3, 2026-08-21): neutral studio
-// finishes only - satin graphite decks, brushed aluminum hardware, rubber,
-// and the LiDAR's real sensor colors. No purple, no cyan, no emissive neon,
-// and no flat grey multiplier: tone is controlled per material through
-// `envMapIntensity`, metalness and roughness (docs/design/CAR_CHAPTER.md).
+// finishes only - satin decks, brushed aluminum hardware, rubber, and the
+// LiDAR's real sensor colors. No purple, no emissive neon, and no flat grey
+// multiplier: tone is controlled per material through `envMapIntensity`,
+// metalness and roughness (docs/design/CAR_CHAPTER.md). The one colored part
+// is the accent plate (landing-v4 section 4, Cedric's third accent exception
+// after the headline gradient and the map): anodized cyan, or magenta.
 import { Color, MeshStandardMaterial, type Material } from "three";
 import type { RacecarPartId } from "./racecarAssemblyData";
 
@@ -16,12 +18,52 @@ export type Finish = {
   envMapIntensity: number;
 };
 
+/** A finish with a clearcoat layer (MeshPhysicalMaterial). */
+export type PhysicalFinish = Finish & {
+  clearcoat: number;
+  clearcoatRoughness: number;
+};
+
+export type AccentVariant = "cyan" | "magenta";
+
+/** Committed default for the accent plate; the director picks from the
+ * captures (`docs/qa/landing-v4/b-plate-cyan.png`, `b-plate-magenta.png`). */
+export const ACCENT_VARIANT: AccentVariant = "cyan";
+
+/** Anodized finish of the STL accent plate (the upper deck the sim tints per
+ * agent). Same finish for both hues; only the base color differs. */
+export const ACCENT_FINISH: Readonly<Record<AccentVariant, PhysicalFinish>> = {
+  cyan: {
+    color: "#00d1da",
+    metalness: 0.55,
+    roughness: 0.32,
+    envMapIntensity: 0.9,
+    clearcoat: 0.3,
+    clearcoatRoughness: 0.25,
+  },
+  magenta: {
+    color: "#fc00ff",
+    metalness: 0.55,
+    roughness: 0.32,
+    envMapIntensity: 0.9,
+    clearcoat: 0.3,
+    clearcoatRoughness: 0.25,
+  },
+};
+
+/** The accent variant to render. In development only, `?carAccent=magenta`
+ * (or `cyan`) overrides the committed default so both can be captured without
+ * an edit; Vite compiles the branch out of production bundles. */
+export function resolveAccentVariant(): AccentVariant {
+  if (import.meta.env.DEV && typeof window !== "undefined") {
+    const requested = new URLSearchParams(window.location.search).get("carAccent");
+    if (requested === "cyan" || requested === "magenta") return requested;
+  }
+  return ACCENT_VARIANT;
+}
+
 /** Named finishes; racecarAssemblyData label dots reuse these tones. */
 export const FINISH = {
-  /** Satin graphite - the STL accent shell, which is the upper platform deck
-   * (the plate the sim tints per agent). Low metalness and a rough surface so
-   * the flat top does not mirror the studio ceiling into light grey. */
-  graphite: { color: "#2e3138", metalness: 0.2, roughness: 0.66, envMapIntensity: 0.16 },
   /** Anodized aluminum compute case on the upper deck. */
   caseAluminum: { color: "#8c9198", metalness: 0.8, roughness: 0.42, envMapIntensity: 0.8 },
   /** Lower deck plate: dark anodized, satin. Flat plates seen at a grazing
@@ -40,7 +82,7 @@ export const FINISH = {
   /** Light grey connector plastic. */
   connector: { color: "#9aa0a8", metalness: 0, roughness: 0.7, envMapIntensity: 0.5 },
   /** Electronics tones, muted from the source's toy-plastic saturation
-   * (battery/ESC blue, connector green, switch red). */
+   * (motor can and driveline blue, connector green, switch red). */
   slate: { color: "#262b3d", metalness: 0.2, roughness: 0.5, envMapIntensity: 0.5 },
   pcb: { color: "#2e4a34", metalness: 0.1, roughness: 0.6, envMapIntensity: 0.5 },
   oxide: { color: "#8a4a42", metalness: 0.05, roughness: 0.6, envMapIntensity: 0.5 },
@@ -51,7 +93,8 @@ export const FINISH = {
   lidarBody: { color: "#10141f", metalness: 0.15, roughness: 0.45, envMapIntensity: 0.6 },
   /** Sensor base and cap plastic. */
   lidarBase: { color: "#17191f", metalness: 0.2, roughness: 0.55, envMapIntensity: 0.5 },
-  /** The orange optical window band; glossier than the housing. */
+  /** The amber optical window band; glossier than the housing. Stays amber
+   * whatever the accent variant (landing-v4 section 4). */
   lidarWindow: { color: "#e8641b", metalness: 0.1, roughness: 0.28, envMapIntensity: 0.9 },
 } satisfies Record<string, Finish>;
 
@@ -65,12 +108,12 @@ export const FINISH = {
  */
 const CHASSIS_FINISH: Readonly<Record<string, Finish>> = {
   // Verified with a flat-color debug render (2026-08-21): the upper platform
-  // deck is NOT in this mesh, it is the accent STL (FINISH.graphite).
+  // deck is NOT in this mesh, it is the accent STL (ACCENT_FINISH).
   chassis_gray: FINISH.deck, // lower deck plate
-  metal: FINISH.caseAluminum, // compute case on the upper deck
+  metal: FINISH.caseAluminum, // aluminum box at the rear of the upper deck (the ESC) and the deck's front edge
   black: FINISH.plastic, // chassis tub, arms, towers, bumper frame
   black_002: FINISH.plastic, // housing on the upper deck
-  gray_001: FINISH.plastic, // small top plate
+  gray_001: FINISH.plastic, // small top plate (the compute module)
   bumper: FINISH.plastic, // front bumper
   metal_001: FINISH.aluminum, // small hardware on the upper deck
   standoff: FINISH.aluminum, // deck standoffs
@@ -107,6 +150,8 @@ function standard(finish: Finish, name: string) {
  * - wheels: "rim" + "tire" - neutral aluminum hub over near-black rubber.
  * - lidar: "black" / "hokuyo" / "orange" - the sensor's real colors, with
  *   the housing steered to blue-black.
+ * The STL accent plate is not a GLB; RacecarAssembly.tsx builds its
+ * MeshPhysicalMaterial from ACCENT_FINISH directly.
  */
 export function overridePartMaterial(partId: RacecarPartId, material: Material): Material {
   if (partId === "chassis") {

@@ -1,10 +1,11 @@
 // Lazy chunk: everything that pulls three.js/R3F for the landing chapter
 // lives here so the hero never waits for it (design system: ExplodedModel).
-import { Suspense, useEffect, useRef, type RefObject } from "react";
+import { Suspense, useEffect, useMemo, useRef, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { ContactShadows } from "@react-three/drei";
-import { ACESFilmicToneMapping, MathUtils, type Group } from "three";
+import { ContactShadows, Html } from "@react-three/drei";
+import { ACESFilmicToneMapping, MathUtils, Vector3, type Group, type Object3D } from "three";
 import { ProductLighting, RacecarAssemblyParts } from "../RacecarAssembly";
+import { RACECAR_CALLOUTS, RACECAR_PARTS } from "../racecarAssemblyData";
 import { CHAPTER_MAX_EXPLOSION } from "./ExplodedModel";
 
 // Product camera (docs/design/CAR_CHAPTER.md): a long lens pitched gently
@@ -15,17 +16,38 @@ import { CHAPTER_MAX_EXPLOSION } from "./ExplodedModel";
 export const CHAPTER_FOV = 26;
 const PITCH_DEG = 17;
 const AZIMUTH_DEG = 45;
-// Projected width of the car along the view (meters) at its widest turntable
-// pose (the diagonal): assembled 0.53 (0.45 m long, 0.30 m wide), at the
-// chapter's explosion ceiling 0.78 (wheels out 0.175 m each side). The
-// camera distance is solved so this span fills FILL of the canvas width at
-// any aspect; measured 2026-08-21 at 1440x900: 0.70 at rest, 0.69 at the
-// ceiling, nothing crops.
-const SPAN = { rest: 0.49, exploded: 0.74 };
+// Projected width of the car (meters) at its widest turntable pose, solved
+// from the mesh vertices under this lens, perspective included (landing-v4,
+// docs/design/CAR_CHAPTER.md section 2): assembled 0.53, at the chapter's
+// hold pose 0.62 (wheels out 0.055 m each side, LiDAR up 0.07 m; v3's 0.74
+// belonged to the old 0.175 m wheel offsets). The camera distance is solved
+// so this span fills FILL of the canvas width at any aspect, so no yaw ever
+// crops a wheel. At 1440x900 (canvas 621x648): rest 1.54 m, hold 1.78 m.
+const SPAN = { rest: 0.53, exploded: 0.62 };
 const FILL = 0.78;
+// Canvases narrower than this aspect are phones (390: 0.72); desktop columns
+// (1440: 0.96) and tablets (768: 1.09) are not. v3 used `< 1`, which put the
+// desktop canvas on the phone fill and over-filled it (probe: 0.93 at the
+// hold, wheels touching the edge).
+const PHONE_ASPECT = 0.85;
 // The point the camera studies: the car's center at rest, lifted as the
-// LiDAR and wheels rise.
-const TARGET = { rest: [0.03, 0.06, 0], exploded: [0.03, 0.1, 0] } as const;
+// LiDAR and the plate rise.
+const TARGET = { rest: [0.03, 0.06, 0], exploded: [0.03, 0.09, 0] } as const;
+// Turntable rate (rad/s): slow at rest, slower but never still at the hold
+// pose (landing-v4: "the hold pose is this modest explosion, rotating slowly").
+const SPIN = { rest: 0.3, hold: 0.16 };
+
+// Dev-only capture hook (landing-v4 section 4): `?carYaw=<degrees>` freezes
+// the turntable at that yaw so the LiDAR can be checked at 0/90/180/270.
+// `import.meta.env.DEV` is a compile-time constant, so production bundles
+// carry none of this.
+const DEV_YAW: number | null = (() => {
+  if (!import.meta.env.DEV || typeof window === "undefined") return null;
+  const raw = new URLSearchParams(window.location.search).get("carYaw");
+  if (raw === null || raw === "") return null;
+  const yaw = Number(raw);
+  return Number.isFinite(yaw) ? yaw : null;
+})();
 
 const VIEW_DIR = (() => {
   const p = MathUtils.degToRad(PITCH_DEG);
@@ -37,9 +59,10 @@ const VIEW_DIR = (() => {
 function chapterDistance(aspect: number, progress: number) {
   const span = MathUtils.lerp(SPAN.rest, SPAN.exploded, progress);
   const halfTan = Math.tan(MathUtils.degToRad(CHAPTER_FOV / 2)) * Math.max(aspect, 0.45);
-  // Portrait canvases (phones) have height to spare: let the car use almost
-  // the full width there (critique: ~45% on 390 with the desktop fill).
-  const fill = aspect < 1 ? 0.95 : FILL;
+  // Phone canvases have height to spare: let the car use most of the width
+  // there (critique: ~45% on 390 with the desktop fill). 0.90, not v3's
+  // 0.95: at 0.95 the widest yaw put a tire on the canvas edge (b-car-390).
+  const fill = aspect < PHONE_ASPECT ? 0.9 : FILL;
   return span / fill / (2 * halfTan);
 }
 
@@ -59,6 +82,16 @@ function ChapterCamera({ explosionRef }: { explosionRef: RefObject<number> }) {
     const tz = MathUtils.lerp(TARGET.rest[2], TARGET.exploded[2], progress);
     camera.position.set(VIEW_DIR[0] * d + tx, VIEW_DIR[1] * d + ty, VIEW_DIR[2] * d + tz);
     camera.lookAt(tx, ty, tz);
+    if (import.meta.env.DEV && typeof window !== "undefined") {
+      // Dev-only probe for the capture harness (compiled out of production).
+      (window as Window & { __rrCar?: unknown }).__rrCar = {
+        distance: d,
+        explosion: explosionRef.current,
+        progress,
+        aspect,
+        fov: (camera as { fov?: number }).fov,
+      };
+    }
   };
 
   useEffect(() => {
@@ -78,6 +111,10 @@ type ExplodedModelSceneProps = {
   staticPose?: boolean;
   /** False while the chapter is off-screen: the render loop pauses. */
   active?: boolean;
+  /** Render the five part callouts inside the canvas (md and up). */
+  callouts?: boolean;
+  /** Callouts fade in (staggered) when true and out when false. */
+  calloutsVisible?: boolean;
 };
 
 function SpinGroup({
@@ -90,18 +127,148 @@ function SpinGroup({
   const spin = useRef<Group>(null);
   useFrame((_, delta) => {
     if (!spin.current) return;
-    // Slow rotation at rest; it eases out as the parts fly apart
-    // (spin factor = 1 - explosion / ceiling).
-    const spinFactor = 1 - explosionRef.current / CHAPTER_MAX_EXPLOSION;
-    spin.current.rotation.y += delta * 0.3 * Math.max(0, spinFactor);
+    if (DEV_YAW !== null) {
+      spin.current.rotation.y = MathUtils.degToRad(DEV_YAW);
+      return;
+    }
+    const progress = Math.min(1, explosionRef.current / CHAPTER_MAX_EXPLOSION);
+    spin.current.rotation.y += delta * MathUtils.lerp(SPIN.rest, SPIN.hold, progress);
   });
   return <group ref={spin}>{children}</group>;
+}
+
+type CarCalloutsProps = {
+  visible: boolean;
+  /** False under reduced motion: no transitions, the labels are simply shown. */
+  animate: boolean;
+};
+
+const CALLOUT_STAGGER_MS = 80;
+
+/**
+ * Five part labels on hairline leaders (landing-v4 section 4), anchored to
+ * points on the 3D parts: drei `Html`, projected every frame, no occlusion,
+ * no pointer events. Each anchor follows its part's group, so it rides the
+ * explosion and the turntable. A label flips to the left of its leader when
+ * its anchor sits in the right part of the frame, so the text always runs
+ * toward the canvas center and never clips.
+ */
+function CarCallouts({ visible, animate }: CarCalloutsProps) {
+  const scene = useThree((s) => s.scene);
+  const camera = useThree((s) => s.camera);
+  const size = useThree((s) => s.size);
+  const invalidate = useThree((s) => s.invalidate);
+  const anchors = useRef<(Group | null)[]>([]);
+  const labels = useRef<(HTMLDivElement | null)[]>([]);
+  const labelWidths = useRef<number[]>([]);
+  const partObjects = useRef(new Map<string, Object3D>());
+  const world = useMemo(() => new Vector3(), []);
+  const ndc = useMemo(() => new Vector3(), []);
+  const partById = useMemo(() => new Map(RACECAR_PARTS.map((part) => [part.id, part])), []);
+
+  useFrame(() => {
+    let moved = false;
+    RACECAR_CALLOUTS.forEach((callout, i) => {
+      const anchor = anchors.current[i];
+      const part = partById.get(callout.part);
+      if (!anchor || !part) return;
+      let object = partObjects.current.get(callout.part);
+      if (!object || !object.parent) {
+        object = scene.getObjectByName(callout.part) ?? undefined;
+        if (!object) return;
+        partObjects.current.set(callout.part, object);
+      }
+      // The anchor is given in the car frame at rest; the part group's origin
+      // is `part.position` in that frame, so subtract it to get mesh-local.
+      world.set(
+        callout.anchor[0] - part.position[0],
+        callout.anchor[1] - part.position[1],
+        callout.anchor[2] - part.position[2],
+      );
+      object.updateWorldMatrix(true, false);
+      object.localToWorld(world);
+      if (anchor.position.distanceToSquared(world) > 1e-10) {
+        anchor.position.copy(world);
+        anchor.updateMatrixWorld();
+        moved = true;
+      }
+      const label = labels.current[i];
+      if (label) {
+        // Run the text toward the canvas center whenever it would not fit on
+        // the anchor's right; the label width is measured once per element.
+        let width = labelWidths.current[i] ?? 0;
+        if (!width) {
+          width = label.querySelector<HTMLElement>("[data-callout-text]")?.offsetWidth ?? 0;
+          labelWidths.current[i] = width;
+        }
+        ndc.copy(world).project(camera);
+        const screenX = ((ndc.x + 1) / 2) * size.width;
+        const fitsRight = screenX + width + 12 <= size.width;
+        const fitsLeft = screenX - width - 12 >= 0;
+        label.dataset.flip = !fitsRight && fitsLeft ? "true" : "false";
+      }
+    });
+    // Demand-mode canvases (reduced motion) need one more frame for the
+    // labels to settle on their anchors.
+    if (moved) invalidate();
+  });
+
+  return (
+    <>
+      {RACECAR_CALLOUTS.map((callout, i) => (
+        <group
+          key={callout.id}
+          ref={(el) => {
+            anchors.current[i] = el;
+          }}
+        >
+          <Html zIndexRange={[10, 0]} pointerEvents="none" wrapperClass="pointer-events-none">
+            <div
+              ref={(el) => {
+                labels.current[i] = el;
+              }}
+              data-flip="false"
+              className={`group relative h-0 w-0 ${animate ? "transition-opacity duration-200" : ""} ${
+                visible ? "opacity-100" : "opacity-0"
+              }`}
+              style={{ transitionDelay: visible && animate ? `${i * CALLOUT_STAGGER_MS}ms` : "0ms" }}
+            >
+              <span
+                aria-hidden="true"
+                className="absolute left-0 top-0 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-text-on-ink/80"
+              />
+              <span
+                aria-hidden="true"
+                className={`absolute left-0 w-px bg-text-on-ink/35 ${
+                  callout.side === "above" ? "bottom-0" : "top-0"
+                }`}
+                style={{ height: callout.reach }}
+              />
+              <span
+                data-callout-text=""
+                className={`absolute left-0 flex items-center gap-2 whitespace-nowrap font-mono text-eyebrow uppercase text-text-on-ink/80 group-data-[flip=true]:left-auto group-data-[flip=true]:right-0 group-data-[flip=true]:flex-row-reverse ${
+                  // Center the text line on the leader's far end.
+                  callout.side === "above" ? "translate-y-1/2" : "-translate-y-1/2"
+                }`}
+                style={callout.side === "above" ? { bottom: callout.reach } : { top: callout.reach }}
+              >
+                <span aria-hidden="true" className="h-px w-3 shrink-0 bg-text-on-ink/35" />
+                {callout.label}
+              </span>
+            </div>
+          </Html>
+        </group>
+      ))}
+    </>
+  );
 }
 
 export default function ExplodedModelScene({
   explosionRef,
   staticPose = false,
   active = true,
+  callouts = false,
+  calloutsVisible = false,
 }: ExplodedModelSceneProps) {
   const zeroRef = useRef(0);
   const frameloop = staticPose ? "demand" : active ? "always" : "never";
@@ -135,6 +302,7 @@ export default function ExplodedModelScene({
             <RacecarAssemblyParts explosion={0} explosionRef={explosionRef} interactive={false} />
           </SpinGroup>
         )}
+        {callouts && <CarCallouts visible={calloutsVisible} animate={!staticPose} />}
         <ContactShadows position={[0, -0.003, 0]} opacity={0.55} scale={2.4} blur={2.4} far={1.2} resolution={512} />
       </Suspense>
     </Canvas>
