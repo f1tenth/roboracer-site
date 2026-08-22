@@ -285,14 +285,16 @@ paths in section 5 and does not edit the JSON.
 
 ## 12. Final numbers (director fills at the end)
 
-- Hero: chapter height 320vh (kept: the fade now runs to the release, so there
+- Hero: chapter height 320vh (kept: the fade runs to the release, so there
   is no dead scroll to cut); zoom 0.10-0.42 `power1.inOut` to 1.30 (1.20 under
-  768), at its max as the last unit lands at 0.42; hold 0.42-0.54; fade
-  0.54-1.00 `power1.in` on the block (Cedric mid-session, 2026-08-22: "way
-  slower, get to 0 once we are basically off that page" replaces the 0.54-0.84
-  draft: opacity 0.58 at 0.84, 0.21 at 0.95, 0 at release); video dim to 0.12
-  runs 0.84-1.00 under the tail of the fade; nav fill unchanged 0.72-0.95.
-  Measured on the dev server: scale 1.30 at p 0.42, translate 0 throughout.
+  768), at its max as the last unit lands at 0.42; hold 0.42-0.62; fade
+  0.62-1.00 `power2.inOut` (sigmoid) on the block. Cedric's three notes on the
+  drafts (2026-08-22): "way slower, get to 0 once we are basically off that
+  page", then "start a bit later so it doesn't disappear while we are still
+  reading it ... slow start ... sigmoid": opacity 0.96 at 0.70, 0.50 at 0.81,
+  0.13 at 0.90, 0 at release; video dim to 0.12 runs 0.84-1.00 under the tail;
+  nav fill unchanged 0.72-0.95. Measured on the dev server: scale 1.30 at
+  p 0.42, translate 0 throughout.
 - Car: explosion ceilings wheels lateral 0.11 / front x +0.05 / rear x -0.04 /
   z 0.03, LiDAR `[0.02, 0, 0.14]`, accent `[0, 0, 0.07]`, chapter max explosion
   0.5 so the hold pose moves a wheel 0.055 m (one tire width); `SPAN.exploded`

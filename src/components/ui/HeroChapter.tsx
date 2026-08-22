@@ -36,12 +36,15 @@ type HeroChapterProps = {
  *                AND the block scales 1 -> 1.30 (1.20 under 768px) over the
  *                same window, power1.inOut, so the scale is at its max exactly
  *                as the last unit lands
- *   p 0.42-0.54  hold: full text, no transforms
- *   p 0.54-1.00  fade: block opacity 1 -> 0, power1.in; no y, no scale
- *                change, no stagger (the block fades as one). Cedric on the
- *                0.54-0.84 draft (2026-08-22): "way slower, get to 0 once we
- *                are basically off that page", so the fade runs to the
- *                release: 0.57 at 0.84, 0.21 at 0.95, 0 as the pin lets go
+ *   p 0.42-0.62  hold: full text, no transforms
+ *   p 0.62-1.00  fade: block opacity 1 -> 0, power2.inOut (a sigmoid: slow
+ *                start, accelerating through the middle, easing out); no y,
+ *                no scale change, no stagger (the block fades as one). Cedric,
+ *                2026-08-22, on the drafts: "way slower, get to 0 once we are
+ *                basically off that page", then "start a bit later so it
+ *                doesn't disappear while we are still reading it ... slow
+ *                start ... sigmoid": 0.96 at 0.70, 0.5 at 0.81, 0.13 at 0.90,
+ *                0 as the pin lets go
  *   p 0.72-0.95  nav fill: NavBar reads `data-nav-fill` off the wrapper and
  *                ramps --nav-alpha 0 -> 1 over these p values (transparent
  *                through assembly, hold and the first half of the fade;
@@ -78,9 +81,9 @@ const SCHEDULE = {
   assemble: { start: 0.1, end: 0.42, unitDuration: 0.11, yPercent: 110 },
   /** Rides the assembly window so the scale peaks as the last unit lands. */
   zoom: { start: 0.1, end: 0.42, wide: 1.3, narrow: 1.2 },
-  /** 0.42-0.54 is the hold: nothing is tweened there. The fade ends with
+  /** 0.42-0.62 is the hold: nothing is tweened there. The fade ends with
    * the pin, so the words are still faintly there as the chapter leaves. */
-  fade: { start: 0.54, end: 1.0 },
+  fade: { start: 0.62, end: 1.0, ease: "power2.inOut" },
   /** Nav fill, published on the wrapper as data-nav-fill="from to" in the
    * wrapper's own scroll progress (start "top top", end "bottom bottom").
    * Pinned layout: pin progress. Static layout (reduced motion / weak
@@ -247,7 +250,7 @@ export default function HeroChapter({ video, lines, as = "h1", className = "" }:
           {
             opacity: 0,
             duration: S.fade.end - S.fade.start,
-            ease: "power1.in",
+            ease: S.fade.ease,
             immediateRender: false,
           },
           S.fade.start,
