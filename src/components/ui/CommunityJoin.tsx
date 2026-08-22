@@ -181,7 +181,10 @@ function YouTubeCard({ yt }: { yt: JoinYouTube }) {
   const reduced = usePrefersReducedMotion();
   const ref = useRef<HTMLElement>(null);
   const [playing, setPlaying] = useState(false);
-  const embed = `https://www.youtube-nocookie.com/embed/${yt.video_id}?autoplay=1&mute=1&playsinline=1&rel=0`;
+  // `origin` keeps the player's postMessage handshake quiet in the console;
+  // `allow` (not the legacy allowfullscreen attribute) grants fullscreen.
+  const origin = typeof window === "undefined" ? "" : `&origin=${encodeURIComponent(window.location.origin)}`;
+  const embed = `https://www.youtube-nocookie.com/embed/${yt.video_id}?autoplay=1&mute=1&playsinline=1&rel=0${origin}`;
 
   useEffect(() => {
     const el = ref.current;
@@ -208,7 +211,6 @@ function YouTubeCard({ yt }: { yt: JoinYouTube }) {
             src={embed}
             title={yt.title}
             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-            allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
           />
         ) : (
