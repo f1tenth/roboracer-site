@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { gsap, useGSAP, ScrollTrigger } from "../../lib/motion";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
@@ -6,6 +6,11 @@ import type { PlatformRow } from "../../lib/data";
 
 type PlatformPanelProps = {
   rows: PlatformRow[];
+  /** The section header (eyebrow, title, lead). It renders inside the pinned
+   * composition, above the media frame, so the chapter never shows a blank
+   * band between a header outside the pin and the content centred inside it
+   * (Cedric, 2026-08-22: "big white gap"). Under md it sits above the list. */
+  header?: ReactNode;
 };
 
 // Intrinsic media dimensions (16/10 frame; the encodes are 960 wide clips and
@@ -68,7 +73,7 @@ function layerOpacityAt(i: number, progress: number, count: number): number {
  * Reduced motion: the four posters as a static 2x2 grid beside the rows, all
  * rows at full emphasis, no pin, no crossfade, no video.
  */
-export default function PlatformPanel({ rows }: PlatformPanelProps) {
+export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
   const reduced = usePrefersReducedMotion();
   const pinned = useSyncExternalStore(subscribePin, getPin, () => false);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -145,13 +150,16 @@ export default function PlatformPanel({ rows }: PlatformPanelProps) {
         className={
           reduced
             ? undefined
-            : "md:motion-safe:sticky md:motion-safe:top-0 md:motion-safe:flex md:motion-safe:min-h-svh md:motion-safe:items-center md:motion-safe:pt-[85px]"
+            : "md:motion-safe:sticky md:motion-safe:top-0 md:motion-safe:flex md:motion-safe:flex-col md:motion-safe:min-h-svh md:motion-safe:pt-[calc(85px+2.5rem)] md:motion-safe:pb-10 md:motion-safe:[@media(max-height:940px)]:pt-[85px] md:motion-safe:[@media(max-height:940px)]:pb-4"
         }
       >
-        <div className="grid w-full gap-10 md:grid-cols-12 md:items-center md:gap-12">
-          {/* Desktop: the media frame. Under md the list has no frame; each
-              row carries its own poster instead. */}
-          <div className="hidden md:col-span-7 md:block">
+        <div className="grid w-full gap-10 md:flex-1 md:grid-cols-12 md:grid-rows-[auto_1fr] md:gap-12">
+          {/* One header element for every layout: row 1 of the left column on
+              desktop (the list spans both rows), the top of the stack under md. */}
+          {header && <div className="md:col-span-7 md:self-start">{header}</div>}
+          {/* Desktop: the media frame under the header. Under md the list has
+              no frame; each row carries its own poster instead. */}
+          <div className="hidden md:col-span-7 md:block md:self-center">
             <figure>
               {reduced ? (
                 <div className="grid grid-cols-2 gap-3">
@@ -191,7 +199,10 @@ export default function PlatformPanel({ rows }: PlatformPanelProps) {
             </figure>
           </div>
 
-          <ul className="md:col-span-5">
+          {/* The list stretches to the pinned height and each row takes an equal
+              share, so the chapter fills tall viewports instead of leaving a
+              band below the rows (Cedric, 2026-08-22). */}
+          <ul className="md:col-span-5 md:col-start-8 md:row-span-2 md:row-start-1 md:flex md:flex-col">
             {rows.map((row, i) => {
               const isActive = i === active;
               return (
@@ -199,7 +210,7 @@ export default function PlatformPanel({ rows }: PlatformPanelProps) {
                   key={row.id}
                   data-row={row.id}
                   data-active={marked && isActive ? "true" : undefined}
-                  className="border-t border-ink-950/10 py-8 last:border-b md:py-5 md:[@media(max-height:820px)]:py-3"
+                  className="border-t border-ink-950/10 py-8 last:border-b md:flex md:flex-1 md:flex-col md:justify-center md:py-5 md:[@media(max-height:820px)]:py-3"
                 >
                   <div className="mb-5 md:hidden">
                     <RowPoster row={row} />

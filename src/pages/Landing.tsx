@@ -192,15 +192,19 @@ export default function Landing() {
       {/* 5 · 04 Platform (paper): pinned 300vh chapter, scroll walks the four
           rows with the media crossfading beside them - learner, faculty */}
       <Section rule aria-labelledby="pillars">
-        <SectionHeader
-          index="04"
-          eyebrow="Platform"
-          id="pillars"
-          title="Build. Learn. Race. Research."
-          lead="A car anyone can build, courses that teach autonomy, races that test it, and research that grows on top."
-          size="s"
+        <PlatformPanel
+          rows={platform}
+          header={
+            <SectionHeader
+              index="04"
+              eyebrow="Platform"
+              id="pillars"
+              title="Build. Learn. Race. Research."
+              lead="A car anyone can build, courses that teach autonomy, races that test it, and research that grows on top."
+              size="s"
+            />
+          }
         />
-        <PlatformPanel rows={platform} />
       </Section>
 
       {/* 6 · 05 Community map (ink, pinned 260vh) - sponsor, press. Owns its

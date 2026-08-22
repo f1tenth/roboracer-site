@@ -15,16 +15,16 @@
       "credit": "Photo: Cedric Hollande"
     },
     "post": {
-      "video": "/media/join/join-icra2026-post-960.mp4",
-      "poster": "/media/join/join-icra2026-post-poster.webp",
+      "video": "/media/join/join-openrobotics-post-960.mp4",
+      "poster": "/media/join/join-openrobotics-post-poster.webp",
       "width": 960,
       "height": 540,
-      "author": "The RoboRacer Foundation",
+      "author": "Open Robotics",
       "author_url": "",
-      "post_url": "https://www.linkedin.com/posts/today-was-our-first-race-day-at-ieee-ugcPost-7468073672411336704-I1kC/",
-      "credit": "Video: The RoboRacer Foundation · LinkedIn",
-      "excerpt": "First race day at ICRA 2026 in Vienna, seen from above the hall track.",
-      "excerpt_note": "TODO(content): one sentence in Cedric's words; this draft describes the clip, not the post text"
+      "post_url": "https://www.linkedin.com/posts/it-is-wild-to-see-just-how-far-the-roboracer-ugcPost-7467510093027205120-hCNe/",
+      "credit": "Video: Open Robotics · LinkedIn",
+      "excerpt": "Featured by Open Robotics: how far the community has come in a few short years.",
+      "excerpt_note": "TODO(content): one sentence in Cedric's words; this draft is ours, not the post text"
     },
     "youtube": {
       "poster": "/media/join/join-youtube-icra2025-poster-1200.webp",

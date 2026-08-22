@@ -304,7 +304,9 @@ paths in section 5 and does not edit the JSON.
   and counters sit on water, which is why land is 1,076 px, not the full
   1,392. The ordinal ticker became a one-line mono flash ("label · city");
   Torino's label yields to Milan.
-- Platform: wrapper `min-h-[300vh]` with a sticky `min-h-svh` child (200vh of
+- Platform: the section header renders inside the pinned composition (left
+  column, above the frame; top-aligned) after Cedric's "big white gap" note;
+  wrapper `min-h-[300vh]` with a sticky `min-h-svh` child (200vh of
   travel; ScrollTrigger "top top" to "bottom bottom"); bands Build 0-0.25,
   Learn 0.25-0.50, Race 0.50-0.75, Research 0.75-1.00; crossfade 0.04 centred
   on each boundary, opacity only. Root cause of the silent Research row: the
@@ -316,7 +318,9 @@ paths in section 5 and does not edit the JSON.
   of the bottom"), so the frame now takes the video's own aspect; native
   1272-wide source, so not 1600. The credit line reads `Video: Ezio Bartocci ·
   our post on LinkedIn ↗` and links RoboRacer's own post (Cedric, 2026-08-22). Post-card video:
-  `join-icra2026-post-960.mp4` 1.04 MB (960x540, 8.8 s; poster 65 KB). Learn
+  `join-openrobotics-post-960.mp4` 1.0 MB (960x540, 10 s of Open Robotics'
+  post, Cedric's mid-session swap for the Foundation's own race-day post;
+  poster 80 KB). Learn
   row runs at 2x (5.9 s) because `assembling_car.mp4` is 11.8 s; 4x would give
   3 s.
 - Ribbon: `.rr-marquee:has(a:focus-visible)` replaces `:focus-within`; proven
