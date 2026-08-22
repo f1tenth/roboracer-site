@@ -3,7 +3,7 @@
     0,
     0,
     1600,
-    820
+    706
   ],
   "projection": "naturalEarth1",
   "updated": "2026-08-21",
@@ -21,7 +21,7 @@
       "verified": true,
       "source": "past_races.json entry 'Embedded Systems Week 2016 - Pittsburgh, Pennsylvania'",
       "x": 472,
-      "y": 260.3
+      "y": 203.3
     },
     {
       "id": "cpsweek2018",
@@ -36,7 +36,7 @@
       "verified": true,
       "source": "past_races.json entry 'Cyber Physical Systems Week 2018 - Porto, Portugal'",
       "x": 764.7,
-      "y": 256.7
+      "y": 199.7
     },
     {
       "id": "esweek2018",
@@ -51,7 +51,7 @@
       "verified": true,
       "source": "past_races.json entry 'Embedded Systems Week 2018 - Torino, Italy'",
       "x": 830.8,
-      "y": 236.7
+      "y": 179.7
     },
     {
       "id": "cpsiot2019",
@@ -66,7 +66,7 @@
       "verified": true,
       "source": "past_races.json entry 'CPS & IoTW 2019 Montreal'",
       "x": 505.6,
-      "y": 234.5
+      "y": 177.5
     },
     {
       "id": "columbia2019",
@@ -81,7 +81,7 @@
       "verified": true,
       "source": "f1tenth.org race page (Wayback 2024-01-09 copy, _harvest/wayback/race-20240109144455.html): 'Oct. 13 - 18, 2019 / New York City, New York / Columbia University'; results on columbia2019.html (old-site repo)",
       "x": 497.2,
-      "y": 258.5
+      "y": 201.5
     },
     {
       "id": "ifac2020",
@@ -97,7 +97,7 @@
       "number": 7,
       "source": "f1tenth.org race page (Wayback 2024-01-09): 'July 12 - 17, 2020 / Berlin, Germany / IFAC', '7th F1/10 Autonomous Grand Prix'; ifac2020.html (old-site repo) lists timed replays, the race ran virtually with Berlin as the congress host",
       "x": 851.5,
-      "y": 199.3
+      "y": 142.3
     },
     {
       "id": "iros2020",
@@ -112,7 +112,7 @@
       "verified": true,
       "source": "old-site repo iros2020/iros2020-schedule.png: 'IROS 2020 Las Vegas Prix', race day Oct 27 2020 by submission; iros2020.html results list lap-time submissions (virtual, Las Vegas = conference host)",
       "x": 319.5,
-      "y": 282.4
+      "y": 225.4
     },
     {
       "id": "icra2021-workshop",
@@ -127,7 +127,7 @@
       "verified": false,
       "source": "linklab-uva.github.io/icra-autonomous-racing read 2026-08-21: '2021 ICRA Full-Day Workshop, May 31, 2021, held online'; no city on the page, Xi'an is only the ICRA 2021 nominal host; stays unverified",
       "x": 1257.8,
-      "y": 291.8
+      "y": 234.8
     },
     {
       "id": "iros2021",
@@ -143,7 +143,7 @@
       "number": 9,
       "source": "_harvest/repos/iros2021_website/index.html (iros2021.f1tenth.org): '9th F1TENTH Autonomous Grand Prix / September 27th - October 1st 2021 / Location: Prague, Czech Republic'; the site offered an in-person variant (travel to Prague) and a Riders.ai virtual variant; status kept 'virtual' (IROS 2021 went online), confirm with Rahul whether the Prague race ran",
       "x": 856.3,
-      "y": 211.5
+      "y": 154.5
     },
     {
       "id": "icra2022",
@@ -159,7 +159,7 @@
       "number": 10,
       "source": "_harvest/repos/icra2022-race_website/index.html (icra2022-race.f1tenth.org): '10th F1TENTH Autonomous Grand Prix / May 23th - May 25th 2022 / Location: Philadelphia, USA'",
       "x": 491.1,
-      "y": 262.9
+      "y": 205.9
     },
     {
       "id": "germany2022",
@@ -174,7 +174,22 @@
       "verified": true,
       "source": "f1tenth.org race page banner (old-site repo race/GermanRace2022.png): 'F1TENTH Autonomous Grand Prix Germany 2022 / August 20 - 21 2022 / Lausitzring, Germany' (TUM logo); germany-race2022.f1tenth.org is offline (404, 2026-08-21)",
       "x": 853.8,
-      "y": 204.2
+      "y": 147.2
+    },
+    {
+      "id": "esweek2022",
+      "year": 2022,
+      "label": "ESWeek 2022",
+      "city": "Shanghai",
+      "country": "China",
+      "lat": 31.2304,
+      "lng": 121.4737,
+      "kind": "race",
+      "status": "held",
+      "verified": true,
+      "source": "_harvest/repos/esweek2022-race/index.html (esweek2022-race.f1tenth.org): 'ESWEEK 2022 F1-TENTH CAR RACE / October 10th - October 12th 2022 / Location: Shanghai, China'; in-person, the virtual variant was cancelled; East China Normal University and UPenn organizers; no number on the site; not in past_races.json (added 2026-08-21 on the director's call)",
+      "x": 1315.9,
+      "y": 251
     },
     {
       "id": "korea2022",
@@ -189,7 +204,7 @@
       "verified": true,
       "source": "_harvest/repos/korea-race/_data/index.yml: location '66 Tapdong-ro, Ramada Plaza by Wyndham Jeju, Jeju island, Republic of Korea' (KSMTE 2022); korea-race.f1tenth.org read 2026-08-21: December 12-13, 2022",
       "x": 1333.1,
-      "y": 296.1
+      "y": 239.1
     },
     {
       "id": "cps2023",
@@ -205,7 +220,7 @@
       "number": 12,
       "source": "_harvest/repos/cps2023-race_website/index.html (cps2023-race.f1tenth.org): '12th F1TENTH Autonomous Grand Prix / May 8th - 9th 2023 / Location: San Antonio, Texas USA'",
       "x": 379.4,
-      "y": 317.3
+      "y": 260.3
     },
     {
       "id": "icra2023",
@@ -221,7 +236,7 @@
       "number": 11,
       "source": "_harvest/repos/icra2023-race_website/index.html (icra2023-race.f1tenth.org): '11th F1TENTH Autonomous Grand Prix / May 29th - June 1st 2023 / Location: Excel, London, UK'",
       "x": 799.5,
-      "y": 204.3
+      "y": 147.3
     },
     {
       "id": "iv2023",
@@ -236,7 +251,7 @@
       "verified": true,
       "source": "_harvest/repos/iv2023_race/index.html (iv2023-race.f1tenth.org): 'F1Tenth IV2023 Championship / June 04 - June 07 2023 / Location: Anchorage Alaska, USA'",
       "x": 258.4,
-      "y": 157.6
+      "y": 100.6
     },
     {
       "id": "iros2023",
@@ -252,7 +267,7 @@
       "number": 14,
       "source": "_harvest/repos/iros2023-race_website/index.html (iros2023-race.f1tenth.org): '14th F1TENTH Autonomous Grand Prix / Oct 1st - 5th 2023 / Location: Huntington Place, Detroit, MI, USA'",
       "x": 462.4,
-      "y": 250.6
+      "y": 193.6
     },
     {
       "id": "iros2023-madgames",
@@ -267,7 +282,7 @@
       "verified": true,
       "source": "_harvest/repos/iros2023_madgames_website/index.html: '1st Workshop on MAD-Games / October 1, 2023 / Detroit, Michigan, USA, Huntington Place, Room 252A'",
       "x": 462.4,
-      "y": 250.6
+      "y": 193.6
     },
     {
       "id": "korea2023",
@@ -282,7 +297,7 @@
       "verified": true,
       "source": "korea-race23.f1tenth.org read 2026-08-21: '2023, Oct 17th - Oct 19th / Location SonoCalm Yeosu at Yeosu, Korea' (held with ICCAS 2023)",
       "x": 1335.6,
-      "y": 289.7
+      "y": 232.7
     },
     {
       "id": "course2024",
@@ -297,7 +312,7 @@
       "verified": false,
       "source": "past_races.json 'RoboRacer Autonomous Racing Competition - Spring 2024 Course' (no URL); Penn campus assumed, confirm with Rahul; stays unverified",
       "x": 491,
-      "y": 262.9
+      "y": 205.9
     },
     {
       "id": "icra2024",
@@ -313,7 +328,7 @@
       "number": 15,
       "source": "_harvest/repos/icra2024-race_website/index.html (icra2024-race.f1tenth.org): '15th F1TENTH Autonomous Grand Prix / May 13th - 17th 2024 / Location: PACIFICO Yokohama, Yokohama, Kanagawa, Japan'",
       "x": 1384.4,
-      "y": 286.1
+      "y": 229.1
     },
     {
       "id": "icra2024-madgames",
@@ -328,7 +343,7 @@
       "verified": true,
       "source": "_harvest/repos/icra2024_madgames_website/index.html: '2nd Workshop on MAD-Games / May 13th 2024 / F201, Annex Hall, PACIFICO Yokohama, Japan'",
       "x": 1384.4,
-      "y": 286.1
+      "y": 229.1
     },
     {
       "id": "cpsweek2024",
@@ -344,7 +359,7 @@
       "number": 17,
       "source": "_harvest/repos/cpsweek2024-race_website/index.html (cpsweek2024-race.f1tenth.org): '17th F1TENTH Autonomous Grand Prix / May 14th - 16th 2024 / Location: Hong Kong Science and Technology Park, Hong Kong SAR'",
       "x": 1296.6,
-      "y": 354.2
+      "y": 297.2
     },
     {
       "id": "iv2024",
@@ -358,11 +373,11 @@
       "status": "held",
       "verified": true,
       "number": 18,
-      "labelDx": 0,
-      "labelDy": 20,
       "source": "_harvest/repos/iv2024_race/index.html (iv2024-race.f1tenth.org): '18th RoboRacer Autonomous Racing Competition / June 3rd - 5th 2024 / Location: Jeju Shinhwa World, Jeju Island, Korea'",
+      "labelDx": 12,
+      "labelDy": 11,
       "x": 1332.7,
-      "y": 297.2
+      "y": 240.2
     },
     {
       "id": "sm2024",
@@ -378,7 +393,7 @@
       "number": 19,
       "source": "sm2024-race.f1tenth.org (read 2026-08-21) and _harvest/repos/sm2024_race/index.html: '19th F1TENTH Autonomous Grand Prix / 2024 IEEE International Conference on Smart Mobility (SM 2024) / September 16th - 18th 2024 / Location: Niagara Falls, Ontario, Canada' (Ontario Tech University organizers)",
       "x": 479.7,
-      "y": 246.8
+      "y": 189.8
     },
     {
       "id": "itsc2024",
@@ -394,7 +409,7 @@
       "number": 20,
       "source": "_harvest/repos/itsc2024_race/index.html (itsc2024-race.f1tenth.org): '20th F1TENTH Autonomous Grand Prix / September 24th - 27th 2024 / Location: Edmonton Convention Centre, Edmonton, Canada'",
       "x": 366.8,
-      "y": 194.3
+      "y": 137.3
     },
     {
       "id": "iros2024",
@@ -410,7 +425,7 @@
       "number": 21,
       "source": "_harvest/repos/iros2024_race/index.html (iros2024-race.f1tenth.org): '21st F1TENTH Autonomous Grand Prix / October 14th - 18th 2024 / Location: Abu Dhabi National Exhibition Centre (ADNEC), Abu Dhabi, UAE'",
       "x": 1035.4,
-      "y": 343.1
+      "y": 286.1
     },
     {
       "id": "korea2024",
@@ -425,7 +440,7 @@
       "verified": true,
       "source": "3rd Korea F1TENTH Race flyer (old-site repo race/3rd Korea F1tenth Race Flyer.png): 'The 3rd F1TENTH Korea Championship / Oct 29 - Nov 1, 2024 / ICCAS 2024 / Jeju Shinhwa World at Jeju, Korea'; korea-race24f1tenth.org does not resolve (2026-08-21); the korea_race3-website repo is an uncustomized IROS 2024 template",
       "x": 1332.7,
-      "y": 297.2
+      "y": 240.2
     },
     {
       "id": "bu2024",
@@ -441,7 +456,7 @@
       "number": 23,
       "source": "_harvest/repos/bu2024_race/index.html (bu2024-race.f1tenth.org): 'BU F1TENTH Autonomous Grand Prix / November 22nd, 2024 / Location: Boston University, Boston, USA'; old-site race flyer '23rd F1tenth Race Flyer - Boston U'",
       "x": 511,
-      "y": 250.5
+      "y": 193.5
     },
     {
       "id": "cdc2024",
@@ -457,7 +472,39 @@
       "number": 22,
       "source": "_harvest/repos/cdc2024_race/index.html (cdc2024-race.f1tenth.org): '22nd F1TENTH Autonomous Grand Prix / December 16th - 19th 2024 / Location: Allianz MiCo, Milan Convention Centre, Italy'",
       "x": 836.8,
-      "y": 234.7
+      "y": 177.7
+    },
+    {
+      "id": "icra2025",
+      "year": 2025,
+      "label": "ICRA 2025",
+      "city": "Atlanta",
+      "country": "United States",
+      "lat": 33.7589,
+      "lng": -84.3975,
+      "kind": "race",
+      "status": "held",
+      "verified": true,
+      "number": 24,
+      "source": "_harvest/repos/icra2025_race/index.html (icra2025-race.roboracer.ai): '24th Roboracer Autonomous Racing Competition / May 19th - 23rd 2025 / Location: Georgia World Congress Center, Atlanta, GA, United States'; not in past_races.json (added 2026-08-21 on the director's call)",
+      "x": 444.6,
+      "y": 237.9
+    },
+    {
+      "id": "iv2025",
+      "year": 2025,
+      "label": "IV 2025",
+      "city": "Cluj-Napoca",
+      "country": "Romania",
+      "lat": 46.7712,
+      "lng": 23.6236,
+      "kind": "race",
+      "status": "held",
+      "verified": true,
+      "number": 25,
+      "source": "_harvest/repos/iv2025_race/index.html (iv2025-race.roboracer.ai): '25th Roboracer Autonomous Racing Competition / June 22nd - 23rd 2025 / Location: UTCN HUB, Cluj-Napoca, Romania' (the CDC 2025 site also claims 25th); not in past_races.json (added 2026-08-21 on the director's call)",
+      "x": 893.9,
+      "y": 171
     },
     {
       "id": "techfest2025",
@@ -472,7 +519,22 @@
       "verified": true,
       "source": "past_races.json 'Techfest IIT-Bombay 2025 Race'; IIT Bombay campus, Mumbai",
       "x": 1119.2,
-      "y": 370.7
+      "y": 313.7
+    },
+    {
+      "id": "iccas2025",
+      "year": 2025,
+      "label": "ICCAS 2025",
+      "city": "Incheon",
+      "country": "Republic of Korea",
+      "lat": 37.3822,
+      "lng": 126.6565,
+      "kind": "race",
+      "status": "held",
+      "verified": true,
+      "source": "2025.iccas.org read 2026-08-21: 'November 4 (Tue)~7 (Fri), 2025, Songdo ConvensiA, Incheon, Korea'; the conference program lists '2025 The 4th F1Tenth Korea Championship'",
+      "x": 1326.1,
+      "y": 219.1
     },
     {
       "id": "cdc2025",
@@ -488,22 +550,7 @@
       "number": 25,
       "source": "_harvest/repos/cdc2025_race/index.html (cdc2025-race.roboracer.ai): '25th RoboRacer Autonomous Racing Competition / December 10th - 12th 2025 / Location: Windsor Convention Center, Rio de Janeiro, Brazil' (the IV 2025 site also says 25th; numbering collision on the race sites)",
       "x": 612.5,
-      "y": 587.7
-    },
-    {
-      "id": "iccas2025",
-      "year": 2025,
-      "label": "ICCAS 2025",
-      "city": "Incheon",
-      "country": "Republic of Korea",
-      "lat": 37.3822,
-      "lng": 126.6565,
-      "kind": "race",
-      "status": "held",
-      "verified": true,
-      "source": "2025.iccas.org read 2026-08-21: 'November 4 (Tue)~7 (Fri), 2025, Songdo ConvensiA, Incheon, Korea'; the conference program lists '2025 The 4th F1Tenth Korea Championship'",
-      "x": 1326.1,
-      "y": 276.1
+      "y": 530.7
     },
     {
       "id": "icra2026",
@@ -517,9 +564,11 @@
       "status": "held",
       "verified": true,
       "number": 27,
+      "labelDx": 10,
+      "labelDy": -16,
       "source": "content skill: 27th RoboRacer Autonomous Racing Competition, ICRA 2026 Vienna",
       "x": 864.6,
-      "y": 220.8
+      "y": 163.8
     },
     {
       "id": "iv2026",
@@ -535,7 +584,7 @@
       "number": 28,
       "source": "content skill: 28th RoboRacer Autonomous Racing Competition, IV 2026 Detroit",
       "x": 462.4,
-      "y": 250.6
+      "y": 193.6
     },
     {
       "id": "ifac2026",
@@ -551,7 +600,7 @@
       "number": 29,
       "source": "upcoming_events.json: 29th, IFAC 2026, Busan, Aug 24-27 2026 (becomes 'held' after Aug 27)",
       "x": 1340.7,
-      "y": 287.5
+      "y": 230.5
     },
     {
       "id": "vtc2026",
@@ -567,7 +616,7 @@
       "number": 30,
       "source": "upcoming_events.json: 30th, VTC 2026 Fall, Boston, Sep 6-9 2026",
       "x": 511.2,
-      "y": 250.5
+      "y": 193.5
     },
     {
       "id": "iros2026",
@@ -581,9 +630,11 @@
       "status": "upcoming",
       "verified": true,
       "number": 31,
+      "labelDx": -7,
+      "labelDy": 12.5,
       "source": "content skill: 31st RoboRacer Autonomous Racing Competition, IROS 2026 Pittsburgh, Sep 28-30 2026",
       "x": 472,
-      "y": 260.3
+      "y": 203.3
     }
   ],
   "countries": [
@@ -595,7 +646,7 @@
       "why": "UPenn, CMU, MIT, Berkeley, Georgia Tech, Duke, ASU, Clemson, Columbia, NYU, CUNY, Binghamton, George Mason, WVU (partners.json, teams.json)",
       "verified": true,
       "x": 394.6,
-      "y": 263.6
+      "y": 206.6
     },
     {
       "iso2": "CH",
@@ -605,7 +656,7 @@
       "why": "ETH Zurich / ForzaETH (partners.json, teams.json)",
       "verified": true,
       "x": 832.6,
-      "y": 227.9
+      "y": 170.9
     },
     {
       "iso2": "DE",
@@ -615,7 +666,7 @@
       "why": "UNICORN_Racing (teams.json)",
       "verified": true,
       "x": 840.3,
-      "y": 205.9
+      "y": 148.9
     },
     {
       "iso2": "CZ",
@@ -625,7 +676,7 @@
       "why": "Czech Technical University (partners.json)",
       "verified": true,
       "x": 860.6,
-      "y": 212.8
+      "y": 155.8
     },
     {
       "iso2": "CN",
@@ -635,7 +686,7 @@
       "why": "Guizhou University (partners.json)",
       "verified": true,
       "x": 1235.3,
-      "y": 283.8
+      "y": 226.8
     },
     {
       "iso2": "HK",
@@ -645,7 +696,7 @@
       "why": "Hong Kong Polytechnic University (partners.json)",
       "verified": true,
       "x": 1296.7,
-      "y": 354.3
+      "y": 297.3
     },
     {
       "iso2": "IN",
@@ -655,7 +706,7 @@
       "why": "IIT Bombay (partners.json)",
       "verified": true,
       "x": 1144.8,
-      "y": 363.1
+      "y": 306.1
     },
     {
       "iso2": "KR",
@@ -665,7 +716,7 @@
       "why": "KAIST (partners.json)",
       "verified": true,
       "x": 1333.1,
-      "y": 280.7
+      "y": 223.7
     },
     {
       "iso2": "AT",
@@ -675,7 +726,7 @@
       "why": "TU Wien: 'TUfast TUfurious' won IFAC 2020 (old-site ifac2020.html); TU Wien organized ICRA 2026 (content skill)",
       "verified": true,
       "x": 857.8,
-      "y": 224.4
+      "y": 167.4
     },
     {
       "iso2": "IT",
@@ -685,7 +736,7 @@
       "why": "University of Modena and Reggio Emilia: 'HiPeRT Modena' 1st at IROS 2020, 3rd at IFAC 2020, 'Unimore' at Columbia 2019 (old-site results pages); CDC 2024 host (Milan)",
       "verified": true,
       "x": 851.1,
-      "y": 248.2
+      "y": 191.2
     },
     {
       "iso2": "BE",
@@ -695,7 +746,7 @@
       "why": "public/partners/antwerp.png exists (old site partner set); no team read yet, confirm",
       "verified": false,
       "x": 817.9,
-      "y": 208.8
+      "y": 151.8
     },
     {
       "iso2": "JP",
@@ -705,7 +756,7 @@
       "why": "ICRA 2024 host (Yokohama); no Japanese team or partner read yet, confirm from ICRA 2024 results",
       "verified": false,
       "x": 1377.1,
-      "y": 282.2
+      "y": 225.2
     },
     {
       "iso2": "FR",
@@ -715,7 +766,7 @@
       "why": "Ecole Polytechnique - IP Paris ('CarLIX') at IFAC 2020 and IROS 2020 (old-site results pages)",
       "verified": true,
       "x": 809.5,
-      "y": 228.9
+      "y": 171.9
     },
     {
       "iso2": "PL",
@@ -725,7 +776,7 @@
       "why": "'Dzik' (Polish Academy of Sciences) 1st in the Columbia 2019 second trial, 2nd at IFAC 2020 (old-site results pages)",
       "verified": true,
       "x": 874.8,
-      "y": 201.9
+      "y": 144.9
     },
     {
       "iso2": "MX",
@@ -735,7 +786,7 @@
       "why": "Tecnológico de Monterrey ('Edison', 'NSH MX') at IFAC 2020 and IROS 2020 (old-site results pages)",
       "verified": true,
       "x": 355.5,
-      "y": 347.6
+      "y": 290.6
     },
     {
       "iso2": "CR",
@@ -745,7 +796,7 @@
       "why": "University of Costa Rica ('Aquerdan') at IFAC 2020 (old-site ifac2020.html)",
       "verified": true,
       "x": 427.2,
-      "y": 418.4
+      "y": 361.4
     },
     {
       "iso2": "HR",
@@ -755,7 +806,7 @@
       "why": "University of Zagreb ('FERrari') 4th at IROS 2020 (old-site iros2020.html); Zagreb on the IROS 2024 organizer list",
       "verified": true,
       "x": 864.1,
-      "y": 236
+      "y": 179
     },
     {
       "iso2": "GB",
@@ -765,7 +816,7 @@
       "why": "Newcastle University ('Tyne Team') at IROS 2020 (old-site iros2020.html); ICRA 2023 host (London)",
       "verified": true,
       "x": 790.5,
-      "y": 192.1
+      "y": 135.1
     },
     {
       "iso2": "IE",
@@ -775,7 +826,7 @@
       "why": "Trinity College Dublin ('R2DU') at IROS 2020 (old-site iros2020.html)",
       "verified": true,
       "x": 769.4,
-      "y": 195.5
+      "y": 138.5
     },
     {
       "iso2": "BR",
@@ -785,7 +836,7 @@
       "why": "Universidade Federal de Santa Catarina ('Lego Team') at IROS 2020 (old-site iros2020.html); CDC 2025 host (Rio)",
       "verified": true,
       "x": 569.6,
-      "y": 523.6
+      "y": 466.6
     },
     {
       "iso2": "AE",
@@ -795,7 +846,7 @@
       "why": "United Arab Emirates University and Khalifa University on the IROS 2024 organizer list (_harvest/repos/iros2024_race/index.html)",
       "verified": true,
       "x": 1035.3,
-      "y": 345.5
+      "y": 288.5
     },
     {
       "iso2": "CA",
@@ -805,7 +856,7 @@
       "why": "Ontario Tech University organized IEEE SM 2024 (_harvest/repos/sm2024_race/index.html); CPS-IoT Week 2019 (Montreal) and ITSC 2024 (Edmonton) hosts",
       "verified": true,
       "x": 419.4,
-      "y": 192.1
+      "y": 135.1
     },
     {
       "iso2": "RO",
@@ -815,7 +866,7 @@
       "why": "Technical University of Cluj-Napoca hosted and organized IV 2025 (_harvest/repos/iv2025_race/index.html)",
       "verified": true,
       "x": 899.8,
-      "y": 232.5
+      "y": 175.5
     },
     {
       "iso2": "EG",
@@ -825,7 +876,7 @@
       "why": "German University in Cairo on the IV 2025 organizer list (_harvest/repos/iv2025_race/index.html); Assiut Motorsport is a teams.json candidate",
       "verified": true,
       "x": 929.1,
-      "y": 331
+      "y": 274
     }
   ]
 }
