@@ -63,6 +63,31 @@
   text-decoration: none;
 }
 
+.viewer-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.viewer-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid color-mix(in oklab, var(--ink) 20%, transparent);
+  border-radius: 999px;
+  font: 600 13px/1 var(--font-sans, system-ui, sans-serif);
+  color: var(--ink);
+  text-decoration: none;
+  background: color-mix(in oklab, #fff 72%, transparent);
+  transition: border-color 160ms ease;
+}
+
+.viewer-back:hover,
+.viewer-back:focus-visible {
+  border-color: color-mix(in oklab, var(--ink) 50%, transparent);
+}
+
 .viewer-brand img {
   width: 34px;
   height: 34px;

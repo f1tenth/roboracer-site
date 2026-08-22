@@ -165,13 +165,20 @@ export default function Assembly() {
       <div className="assembly-vignette" aria-hidden="true" />
 
       <header className="viewer-header">
-        <a className="viewer-brand" href="/" aria-label="Back to RoboRacer home">
-          <img src="/logo-square.svg" alt="" />
-          <span>
-            RoboRacer
-            <small>Assembly workspace</small>
-          </span>
-        </a>
+        <div className="viewer-nav">
+          <a className="viewer-brand" href="/" aria-label="Back to RoboRacer home">
+            <img src="/logo-square.svg" alt="" />
+            <span>
+              RoboRacer
+              <small>Assembly workspace</small>
+            </span>
+          </a>
+          {/* A plain way back to the site (Cedric, 2026-08-22: the viewer hides
+              the main nav, so the brand mark alone was not read as an exit). */}
+          <a className="viewer-back" href="/build">
+            <span aria-hidden="true">←</span> Back to Build
+          </a>
+        </div>
 
         <div className="viewer-tools" aria-label="Viewer tools">
           <ToggleButton

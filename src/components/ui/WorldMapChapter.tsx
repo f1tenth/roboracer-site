@@ -1,4 +1,14 @@
-import { createRef, useEffect, useId, useMemo, useRef, useState, useSyncExternalStore, type RefObject } from "react";
+import {
+  createRef,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type CSSProperties,
+  type RefObject,
+} from "react";
 import { loadEventsMap, type EventsMap, type MapEvent, type MapRegion } from "../../lib/data";
 import { gsap, useGSAP, MOTION_OK_QUERY, ScrollTrigger } from "../../lib/motion";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
@@ -12,21 +22,16 @@ const LAND_PATH = /\sd="([^"]+)"/.exec(worldLandSvg)?.[1] ?? "";
 const VIEWBOX = /viewBox="([^"]+)"/.exec(worldLandSvg)?.[1] ?? "0 0 1600 706";
 const [, , VB_W, VB_H] = VIEWBOX.split(" ").map(Number);
 
-// Overlay frame (xl and up, landing-v4 section 6): the land keeps its
-// coordinates; the viewBox grows left and down so the header sits over open
-// North Pacific, the counters over the South Pacific and the legend below
-// Australia. 450 units left of the antimeridian clear Alaska's tip (x 210) and
-// Hawaii (x 110, y 300) for a header 27.5 percent of the map wide; 60 units
-// below Patagonia and New Zealand give the legend a free row.
-const PAD_LEFT = 450;
-const PAD_BOTTOM = 60;
-const VIEWBOX_OVERLAY = `${-PAD_LEFT} 0 ${VB_W + PAD_LEFT} ${VB_H + PAD_BOTTOM}`;
-
-/**
- * `regions` from events_map.json (one Natural Earth path per country that
- * hosted a competition or fields a partner). Typed here until
- * src/lib/data.ts carries it (stream D owns that file in v4).
- */
+// Paper chapter (Cedric, 2026-08-22): the land-fitted viewBox, no overlay
+// frame; the header sits above the map, the counters and the legend below.
+// Base state before the reveal: continents as hairline slate outlines on
+// paper, no fill, no labels, no pins.
+const LAND_STROKE = "#1e3a48";
+const ASPECT = VB_W / VB_H;
+// Everything around the map inside the pinned viewport (nav 85, header row,
+// gaps, counters row, paddings) at md and up; the map is capped so the
+// chapter never overflows the viewport and grows with the screen.
+const CHROME_PX = 356;
 
 // Scale statements from the content skill (kept until Rahul answers).
 const STATS = [
@@ -36,23 +41,29 @@ const STATS = [
   { value: 30, suffix: "", label: "competitions held" },
 ] as const;
 
-// Pin schedule in chapter progress (0..1 over the 260vh wrapper), landing-v3
-// section 6, kept in v4: regions take the old country step.
+// Reveal schedule in chapter progress (0..1 over the 260vh wrapper), landing
+// v4 (Cedric, 2026-08-22): one radial reveal from Philadelphia. Every pin pops
+// at a time set by its distance from Philadelphia (nothing is drawn for the
+// wavefront), a country tints as its first pin pops, partner-only countries
+// follow in the last stretch of the wave, and the counters run from the
+// first scroll of the chapter.
 const HEIGHT_VH = 260;
-const REGIONS_IN = [0.05, 0.4] as const;
-const PINS = [0.35, 0.85] as const;
+const ORIGIN_ID = "icra2022"; // ICRA 2022, Philadelphia: where the platform started
+const PINS = [0.06, 0.82] as const;
 const POP = 0.03;
-// Counters start together with the first pins and finish before the hold; a
-// visible stagger left the last tile reading "0+" mid-pin (critique).
-const STATS_START = 0.36;
+// t ~ (d / dmax)^0.75: the Northeast cluster stays readable as a sequence and
+// East Asia still lands last.
+const RADIAL_EASE = 0.75;
+const PARTNER_TAIL = 0.08;
+const STATS_START = 0.06;
 const STATS_STAGGER = 0.015;
 const STATS_DURATION = 0.45;
 
-// Geometry in viewBox units (1600 wide land). The overlay frame renders the
-// land at about 1,076 px at 1440, so 6 units is a 4 px dot radius; under md the
-// map is a quarter of that and every mark doubles.
-const R = { pin: 6, next: 8, glow: 48, pulseFrom: 8, pulseTo: 38 } as const;
-const FONT = { label: 22 } as const;
+// Geometry in viewBox units (1600 wide land). At 1440x900 the map renders
+// about 1,270 px wide, so 6 units is a 5 px dot radius; under md the map is a
+// quarter of that and every mark doubles.
+const R = { pin: 5.5, ring: 11, glow: 30 } as const;
+const FONT = { label: 13 } as const;
 const LABEL_GAP = 6;
 // Labels the director checks at 1440 (Philadelphia, Anchorage, Abu Dhabi, Rio,
 // Jeju, Vienna, Pittsburgh) get first pick of the free space. Philadelphia
@@ -62,17 +73,13 @@ const LABEL_GAP = 6;
 const LABEL_PRIORITY = ["icra2022", "iv2023", "iros2024", "cdc2025", "iv2024", "icra2026", "iros2026"];
 const LABEL_SKIP_CITIES = new Set(["Boston"]);
 
-// Region fills by held count (section 6 table); never above 0.60 so the pins
-// stay the brightest thing on the map. Partner-only countries are violet.
-const REGION_TIERS = [
-  { min: 4, fill: 0.6, stroke: 0.85 },
-  { min: 2, fill: 0.4, stroke: 0.65 },
-  { min: 1, fill: 0.22, stroke: 0.47 },
-] as const;
-const PARTNER_TIER = { fill: 0.22, stroke: 0.47 } as const;
+// Cedric's exact map spec (2026-08-22, replaces contract section 6 colours):
+// four flat region tints by races held, no violet anywhere, one ink for
+// region strokes, pin rings and labels.
+const REGION_FILL = { four: "#71e4ea", two: "#a1ecf0", one: "#c4f2f5", partner: "#e4f7fa" } as const;
+const MAP_INK = "#0b6b73";
 
 const DESKTOP_QUERY = "(min-width: 768px)";
-const OVERLAY_QUERY = "(min-width: 1280px)";
 
 type Anchor = "start" | "middle" | "end";
 type Placed = { x: number; y: number; anchor: Anchor; text: string };
@@ -121,11 +128,9 @@ function placeLabels(pins: MapEvent[], r: number, fs: number): Map<string, Place
   const labelledCities = new Set<string>();
   const candidates = [...pins].sort((a, b) => rank(a) - rank(b));
   for (const e of candidates) {
-    if (LABEL_SKIP_CITIES.has(e.city)) continue;
-    const cityDone = labelledCities.has(e.city);
-    if (cityDone && e.verified) continue;
-    const verifiedHere = pins.some((p) => p.verified && p.city === e.city);
-    const text = e.verified ? e.city : cityDone || verifiedHere ? "tbc" : `${e.city} · tbc`;
+    if (LABEL_SKIP_CITIES.has(e.city) || labelledCities.has(e.city)) continue;
+    // One plain city name per city (no "tbc" text: the dashed ring says it).
+    const text = e.city;
     const forcedAnchor: Anchor = e.labelDx === 0 ? "middle" : (e.labelDx ?? 1) < 0 ? "end" : "start";
     const tries: Array<[number, number, Anchor]> =
       e.labelDx !== undefined || e.labelDy !== undefined
@@ -151,22 +156,19 @@ function placeLabels(pins: MapEvent[], r: number, fs: number): Map<string, Place
   return placed;
 }
 
-function regionStyle(r: MapRegion) {
-  // A country with only an upcoming race is treated as a one-race host (no
-  // such country today: every upcoming venue already hosted).
+function regionFill(r: MapRegion): string {
+  // A country with only an upcoming race is treated as a one-race host.
   const held = Math.max(r.held, r.upcoming > 0 ? 1 : 0);
-  const hosted = held > 0;
-  const tier = hosted ? (REGION_TIERS.find((t) => held >= t.min) ?? REGION_TIERS[2]) : PARTNER_TIER;
-  // An unverified partner country (no race on record, affiliation still to be
-  // read from a source) keeps the outline but half the fill.
-  return { hosted, fill: r.verified ? tier.fill : tier.fill / 2, stroke: tier.stroke };
+  if (held >= 4) return REGION_FILL.four;
+  if (held >= 2) return REGION_FILL.two;
+  if (held >= 1) return REGION_FILL.one;
+  return REGION_FILL.partner;
 }
 
 function flashText(e: MapEvent): string {
   const tags = [e.label, e.city];
   if (e.status === "upcoming") tags.push("upcoming");
   else if (e.status === "virtual") tags.push("virtual");
-  if (!e.verified) tags.push("tbc");
   return tags.join(" · ");
 }
 
@@ -174,15 +176,62 @@ type WorldMapChapterProps = {
   className?: string;
 };
 
+// Event countries -> Natural Earth region names (mirrors build-world-map.mjs;
+// Hong Kong's events count toward China's region, the pin stays on Hong Kong).
+const NE_NAME: Record<string, string> = {
+  "United States": "United States of America",
+  "Republic of Korea": "South Korea",
+  "Hong Kong": "China",
+};
+const regionNameFor = (country: string) => NE_NAME[country] ?? country;
+
+function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+  return 2 * 6371 * Math.asin(Math.sqrt(a));
+}
+
+type Timing = { pinAt: Map<string, number>; regionAt: Map<string, number>; order: MapEvent[] };
+
+/** The radial schedule: pin times by distance from the origin, region times
+ * from their first pin, partner-only regions in the tail of the wave. */
+function radialTiming(pins: MapEvent[], regions: MapRegion[], origin: MapEvent | undefined): Timing {
+  const span = PINS[1] - PINS[0] - POP;
+  const dist = new Map<string, number>();
+  let dmax = 1;
+  for (const e of pins) {
+    const d = origin ? haversineKm(origin.lat, origin.lng, e.lat, e.lng) : 0;
+    dist.set(e.id, d);
+    dmax = Math.max(dmax, d);
+  }
+  const pinAt = new Map<string, number>();
+  for (const e of pins) pinAt.set(e.id, PINS[0] + span * Math.pow((dist.get(e.id) ?? 0) / dmax, RADIAL_EASE));
+  const regionAt = new Map<string, number>();
+  const partnerOnly: string[] = [];
+  for (const r of regions) {
+    const times = pins.filter((e) => regionNameFor(e.country) === r.name).map((e) => pinAt.get(e.id) ?? PINS[1]);
+    if (times.length) regionAt.set(r.name, Math.min(...times));
+    else partnerOnly.push(r.name);
+  }
+  const tailStep = partnerOnly.length > 1 ? PARTNER_TAIL / (partnerOnly.length - 1) : 0;
+  partnerOnly.forEach((name, i) => regionAt.set(name, PINS[1] - PARTNER_TAIL + i * tailStep));
+  const order = [...pins].sort((a, b) => (pinAt.get(a.id) ?? 0) - (pinAt.get(b.id) ?? 0));
+  return { pinAt, regionAt, order };
+}
+
 /**
  * Landing section 05 / Community (serves the sponsor and the press, audiences
- * skill): a pinned ink chapter. Phase 1 tints the host and partner countries
- * (cyan by races held, violet for partner-only), phase 2 pops every
- * competition venue in chronological order with a glow under each race held
- * while the four scale numbers count up, phase 3 holds with IROS 2026 pulsing
- * as the only violet pin. From xl the header, the counters and the legend sit
- * over the ocean of a container-wide map; below xl they stack around it.
- * Reduced motion and no-JS get the final state: every region, pin and number.
+ * skill): a pinned paper chapter. The base state is the bare land as hairline
+ * slate outlines; as the reader scrolls, one radial reveal runs out from
+ * Philadelphia: every venue pops in order of distance, a country tints cyan
+ * (deeper with more races held) as its first venue lands, partner-only
+ * countries tint palest in the tail, and the four scale numbers count up from
+ * the first scroll. Philadelphia is the one filled marker; no violet anywhere.
+ * Header above the map, counters and legend below; the map takes the width
+ * the viewport height allows (up to 1,800 px). Reduced motion and no-JS get
+ * the final state: every region, pin and number.
  */
 export default function WorldMapChapter({ className = "" }: WorldMapChapterProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -191,7 +240,6 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
   const glowId = useId();
   const reduced = usePrefersReducedMotion();
   const desktop = useMatchMedia(DESKTOP_QUERY);
-  const overlay = useMatchMedia(OVERLAY_QUERY);
   const [data, setData] = useState<EventsMap | null>(null);
 
   useEffect(() => {
@@ -211,16 +259,17 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
   // Mobile renders the map at a quarter of the desktop width: double the marks.
   const k = desktop ? 1 : 2;
   const rPin = R.pin * k;
-  const rNext = R.next * k;
+  const rRing = R.ring * k;
   const rGlow = R.glow * k;
 
   const pins = useMemo(
     () => (data?.events ?? []).filter((e) => !(e.lat === 0 && e.lng === 0)),
     [data],
   );
-  // Already sorted by held count, biggest first (build-world-map.mjs).
   const regions = useMemo(() => data?.regions ?? [], [data]);
   const next = useMemo(() => [...pins].reverse().find((e) => e.status === "upcoming"), [pins]);
+  const origin = useMemo(() => pins.find((e) => e.id === ORIGIN_ID), [pins]);
+  const timing = useMemo(() => radialTiming(pins, regions, origin), [pins, regions, origin]);
   const labels = useMemo(() => placeLabels(pins, rPin, FONT.label), [pins, rPin]);
   const finalFlash = next ? `coming up · ${next.city}` : "";
 
@@ -233,12 +282,10 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
         const regionEls = gsap.utils.toArray<SVGPathElement>("[data-region]", wrap);
         const glowEls = gsap.utils.toArray<SVGCircleElement>("[data-glow]", wrap);
         const pinEls = gsap.utils.toArray<SVGGElement>("[data-pin]", wrap);
-        const pulseWrap = wrap.querySelector<SVGGElement>("[data-pulse-wrap]");
-        const pulse = wrap.querySelector<SVGCircleElement>("[data-pulse]");
         const flashEl = flashRef.current;
         const glowById = new Map(glowEls.map((el) => [el.dataset.glow, el]));
+        const popAt = timing.order.map((e) => timing.pinAt.get(e.id) ?? PINS[0]);
 
-        const pinStep = (PINS[1] - PINS[0] - POP) / Math.max(pinEls.length - 1, 1);
         let lastIndex = -2;
         const flash = contextSafe?.(() => {
           if (flashEl) gsap.fromTo(flashEl, { opacity: 0.25 }, { opacity: 1, duration: 0.35, overwrite: true });
@@ -250,20 +297,23 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
             start: "top top",
             end: "bottom bottom",
             scrub: 0.6,
-            onToggle: (self) => pulseTween.paused(!self.isActive),
           },
           onUpdate: () => update(tl.progress()),
         });
         const update = (p: number) => {
-          // Ticker: the latest pin whose pop is half way.
-          const i = Math.min(Math.floor((p - PINS[0] - POP / 2) / pinStep), pinEls.length - 1);
+          // Ticker: the latest pin (in wave order) whose pop is half way.
+          let i = -1;
+          for (let j = 0; j < popAt.length; j += 1) {
+            if (p >= popAt[j] + POP / 2) i = j;
+            else break;
+          }
           if (i !== lastIndex) {
             lastIndex = i;
-            const e = pins[i];
+            const e = timing.order[i];
             if (flashEl) {
               if (i < 0) {
                 // Non-breaking space keeps the line's height: no jump.
-                flashEl.textContent = " ";
+                flashEl.textContent = " ";
               } else {
                 flashEl.textContent = e === next ? finalFlash : flashText(e);
                 flash?.();
@@ -275,22 +325,27 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
           });
         };
         // The markup carries the final state (reduced motion / no JS); the
-        // pinned run starts from phase 0 the moment the timeline exists.
+        // pinned run starts from the bare land the moment the timeline exists.
         update(0);
 
-        // Phase 1: regions fade in, biggest host first.
-        if (regionEls.length) {
-          const regionStagger = (REGIONS_IN[1] - REGIONS_IN[0] - 0.06) / Math.max(regionEls.length - 1, 1);
-          tl.fromTo(regionEls, { opacity: 0 }, { opacity: 1, duration: 0.06, stagger: regionStagger, ease: "none" }, REGIONS_IN[0]);
-        }
+        // Countries tint as the wave reaches their first venue.
+        regionEls.forEach((el) => {
+          const t = timing.regionAt.get(el.dataset.region ?? "") ?? PINS[1];
+          tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: POP * 2, ease: "none" }, Math.max(0, t - POP));
+        });
 
-        // Phase 2: pins pop in array (chronological) order, each race held
+        // Pins pop in order of distance from Philadelphia; each race held
         // brings its glow, labels follow.
-        pinEls.forEach((g, i) => {
-          const t = PINS[0] + i * pinStep;
+        pinEls.forEach((g) => {
+          const t = timing.pinAt.get(g.dataset.pin ?? "") ?? PINS[0];
           const dot = g.querySelector<SVGCircleElement>("[data-dot]");
+          const ring = g.querySelector<SVGCircleElement>("[data-ring]");
           const label = g.querySelector<SVGTextElement>("[data-label]");
           const glow = glowById.get(g.dataset.pin);
+          if (ring) {
+            const r = Number(ring.getAttribute("r"));
+            tl.fromTo(ring, { attr: { r: 0 } }, { attr: { r }, duration: POP * 2, ease: "power2.out" }, t);
+          }
           if (glow) {
             const r = Number(glow.getAttribute("r"));
             tl.fromTo(glow, { attr: { r: 0 } }, { attr: { r }, duration: POP * 2, ease: "power2.out" }, t);
@@ -301,35 +356,23 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
           }
           if (label) tl.fromTo(label, { opacity: 0 }, { opacity: 1, duration: POP, ease: "none" }, t + POP / 2);
         });
-        if (pulseWrap) {
-          // Hidden from creation (a zero-duration set at position 0 does not
-          // render at progress 0); revealed once the last pin has landed.
-          gsap.set(pulseWrap, { autoAlpha: 0 });
-          tl.set(pulseWrap, { autoAlpha: 1 }, PINS[1] + 0.005);
-        }
-        // Phase 3: hold. The next-race ring pulses on its own clock.
-        const pulseTween = pulse
-          ? gsap.fromTo(
-              pulse,
-              { attr: { r: R.pulseFrom * k }, opacity: 0.8 },
-              { attr: { r: R.pulseTo * k }, opacity: 0, duration: 2.4, repeat: -1, ease: "power1.out", paused: true },
-            )
-          : gsap.to({}, { duration: 0 });
-
         wrap.dataset.mapReady = "1";
       });
       document.fonts?.ready?.then(() => ScrollTrigger.refresh());
     },
-    { scope: wrapRef, dependencies: [pins, regions, reduced, k, overlay], revertOnUpdate: true },
+    { scope: wrapRef, dependencies: [pins, regions, reduced, k, timing], revertOnUpdate: true },
   );
 
-  const violet = "var(--color-rr-violet)";
+  // The map's width cap follows the viewport height.
+  const chapterVars = {
+    "--map-max": `calc((100svh - ${CHROME_PX}px) * ${ASPECT.toFixed(4)})`,
+  } as CSSProperties;
 
   const svg = (
     <svg
       data-map-svg
-      viewBox={overlay ? VIEWBOX_OVERLAY : VIEWBOX}
-      className="block h-auto w-full max-h-[35svh] text-text-on-ink xl:max-h-none"
+      viewBox={VIEWBOX}
+      className="block h-auto max-h-[40svh] w-full md:max-h-none"
       role="img"
       aria-labelledby="community-map-title"
       aria-describedby="community-map-desc"
@@ -337,43 +380,39 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
       <title id="community-map-title">World map of RoboRacer competition venues and partner countries since 2016</title>
       <desc id="community-map-desc">
         Countries that hosted a competition are tinted cyan, deeper with more races; countries with partner
-        institutions and no race yet are tinted violet. Dots mark every competition venue, with a glow under each
-        race held, hollow when the race ran online, is still to come, or the venue is still to be confirmed. The
-        violet dot is the next competition.
+        institutions and no race yet carry the palest tint. Rings mark every competition venue, with a glow under
+        each race held; a dashed ring means the race is still to come or the venue is still to be confirmed. The
+        one filled dot is Philadelphia, where the platform started.
       </desc>
       <defs>
         <radialGradient id={glowId}>
-          <stop offset="0" className="[stop-color:var(--color-rr-cyan)]" stopOpacity={0.35} />
+          <stop offset="0" className="[stop-color:var(--color-rr-cyan)]" stopOpacity={0.26} />
           <stop offset="1" className="[stop-color:var(--color-rr-cyan)]" stopOpacity={0} />
         </radialGradient>
       </defs>
       <path
         d={LAND_PATH}
-        fill="currentColor"
-        fillOpacity={0.1}
-        stroke="currentColor"
-        strokeOpacity={0.18}
-        strokeWidth={1}
+        fill="none"
+        stroke={LAND_STROKE}
+        strokeOpacity={0.32}
+        strokeWidth={0.9}
         strokeLinejoin="round"
         vectorEffect="non-scaling-stroke"
       />
       <g aria-hidden="true">
-        {regions.map((r) => {
-          const s = regionStyle(r);
-          return (
-            <path
-              key={r.name}
-              data-region
-              d={r.d}
-              className={s.hosted ? "fill-rr-cyan stroke-rr-cyan" : "fill-rr-violet stroke-rr-violet"}
-              fillOpacity={s.fill}
-              strokeOpacity={s.stroke}
-              strokeWidth={1}
-              strokeLinejoin="round"
-              vectorEffect="non-scaling-stroke"
-            />
-          );
-        })}
+        {regions.map((r) => (
+          <path
+            key={r.name}
+            data-region={r.name}
+            d={r.d}
+            fill={regionFill(r)}
+            stroke={MAP_INK}
+            strokeOpacity={0.35}
+            strokeWidth={0.7}
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        ))}
       </g>
       <g aria-hidden="true">
         {pins.map((e) =>
@@ -384,30 +423,39 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
       </g>
       <g aria-hidden="true">
         {pins.map((e) => {
-          const isNext = e === next;
-          const hollow = !isNext && (!e.verified || e.status !== "held");
+          // Philadelphia is the one filled marker; a second venue in the same
+          // city adds nothing on top of it.
+          const originCity = origin !== undefined && e.city === origin.city;
+          if (originCity && e.id !== ORIGIN_ID) return null;
+          const dashed = !originCity && (!e.verified || e.status !== "held");
           const label = labels.get(e.id);
-          const color = isNext ? violet : "currentColor";
-          const r = isNext ? rNext : rPin;
           return (
             <g key={e.id} data-pin={e.id} transform={`translate(${e.x} ${e.y})`}>
-              {isNext && (
-                <g data-pulse-wrap>
+              {originCity ? (
+                <>
                   <circle
-                    data-pulse
-                    r={R.pulseFrom * 1.8 * k}
-                    fill="none"
-                    stroke={violet}
-                    strokeWidth={2}
-                    opacity={0.5}
+                    data-ring
+                    r={rRing}
+                    fill="var(--color-paper-50)"
+                    fillOpacity={0.7}
+                    stroke={MAP_INK}
+                    strokeOpacity={0.6}
+                    strokeWidth={1.7}
                     vectorEffect="non-scaling-stroke"
                   />
-                </g>
-              )}
-              {hollow ? (
-                <circle data-dot r={r} fill="none" stroke={color} strokeWidth={1.25} vectorEffect="non-scaling-stroke" />
+                  <circle data-dot r={rPin} fill={MAP_INK} />
+                </>
               ) : (
-                <circle data-dot r={r} fill={color} />
+                <circle
+                  data-dot
+                  r={rPin}
+                  fill="var(--color-paper-50)"
+                  stroke={MAP_INK}
+                  strokeOpacity={dashed ? 0.45 : 1}
+                  strokeWidth={1.7}
+                  strokeDasharray={dashed ? "2.5 2" : undefined}
+                  vectorEffect="non-scaling-stroke"
+                />
               )}
               {label && (
                 <text
@@ -417,8 +465,8 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
                   textAnchor={label.anchor}
                   dominantBaseline="middle"
                   fontSize={FONT.label}
-                  fill="currentColor"
-                  fillOpacity={0.85}
+                  fill={MAP_INK}
+                  fillOpacity={0.9}
                   className="hidden font-mono md:block"
                 >
                   {label.text}
@@ -432,33 +480,31 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
   );
 
   const header = (
-    <div className={overlay ? "absolute left-0 top-0 w-[27.5%]" : ""}>
-      <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-on-ink-muted">
-        <span aria-hidden="true" className="h-1 w-1 bg-text-on-ink" />
-        <span>05</span>
-        <span aria-hidden="true">/</span>
-        <span>Community</span>
-      </p>
-      <h2 id="community-title" className="font-display text-display-l font-semibold text-text-on-ink">
-        Teams from around the world
-      </h2>
-      <p className="mt-5 max-w-[38ch] text-lead text-text-on-ink-muted">
-        From Pittsburgh to Busan, students build and race the same open-source car.
-      </p>
-      <p ref={flashRef} className="mt-4 min-h-[1.5em] font-mono text-small text-text-on-ink-muted" aria-live="off">
-        {finalFlash}
-      </p>
+    <div className="grid gap-3 md:grid-cols-12 md:items-end md:gap-6">
+      <div className="md:col-span-6">
+        <p className="mb-3 flex items-center gap-2 font-mono text-small text-text-muted">
+          <span aria-hidden="true" className="h-1 w-1 bg-ink-950" />
+          <span>05</span>
+          <span aria-hidden="true">/</span>
+          <span>Community</span>
+        </p>
+        <h2 id="community-title" className="font-display text-display-m font-semibold text-text-strong">
+          Teams from around the world
+        </h2>
+      </div>
+      <div className="md:col-span-5 md:col-start-8">
+        <p className="max-w-[38ch] text-lead text-text-body">
+          From Pittsburgh to Busan, students build and race the same open-source car.
+        </p>
+        <p ref={flashRef} className="mt-2 min-h-[1.5em] font-mono text-small text-text-muted" aria-live="off">
+          {finalFlash}
+        </p>
+      </div>
     </div>
   );
 
   const counters = (
-    <div
-      className={
-        overlay
-          ? "absolute bottom-0 left-0 flex items-end gap-x-8"
-          : "grid grid-cols-2 gap-x-6 gap-y-8 border-t border-text-on-ink/15 pt-6 md:border-0 md:pt-0"
-      }
-    >
+    <div className="grid grid-cols-2 gap-x-8 gap-y-6 sm:flex sm:items-end sm:gap-x-10">
       {STATS.map((s, j) => (
         <StatCounter
           key={s.label}
@@ -466,7 +512,7 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
           value={s.value}
           suffix={s.suffix}
           label={s.label}
-          on="ink"
+          on="paper"
           mode="progress"
         />
       ))}
@@ -474,18 +520,21 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
   );
 
   const legend = (
-    <ul
-      aria-label="Map key"
-      className={`flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-small text-text-on-ink-muted ${
-        overlay ? "absolute bottom-0 right-0" : "md:justify-end"
-      }`}
-    >
+    <ul aria-label="Map key" className="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-small text-text-muted">
       <li className="flex items-center gap-2">
-        <span aria-hidden="true" className="inline-block h-2.5 w-2.5 border border-rr-cyan/85 bg-rr-cyan/60" />
+        <span
+          aria-hidden="true"
+          className="inline-block h-2.5 w-2.5"
+          style={{ background: REGION_FILL.four, border: `1px solid ${MAP_INK}59` }}
+        />
         hosted a race, deeper with more
       </li>
       <li className="flex items-center gap-2">
-        <span aria-hidden="true" className="inline-block h-2.5 w-2.5 border border-rr-violet/85 bg-rr-violet/60" />
+        <span
+          aria-hidden="true"
+          className="inline-block h-2.5 w-2.5"
+          style={{ background: REGION_FILL.partner, border: `1px solid ${MAP_INK}59` }}
+        />
         partner institutions
       </li>
     </ul>
@@ -499,26 +548,16 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
     </ul>
   );
 
-  const layout = overlay ? (
-    <div className="mx-auto w-full max-w-wide px-6">
-      <div className="relative">
-        {svg}
-        {header}
+  // Toward the edges (Cedric): the map runs on a 1,800 px bleed with 24 px
+  // margins, capped by the viewport height so the pinned chapter always fits.
+  const layout = (
+    <div className="mx-auto w-full max-w-[1800px] px-6">
+      {header}
+      <div className="mx-auto mt-4 w-full md:mt-5 md:max-w-[var(--map-max)]">{svg}</div>
+      {venues}
+      <div className="mt-4 flex flex-col gap-5 border-t border-ink-950/10 pt-4 md:mt-5 md:flex-row md:items-end md:justify-between">
         {counters}
         {legend}
-      </div>
-      {venues}
-    </div>
-  ) : (
-    <div className="mx-auto w-full max-w-wide px-6">
-      <div className="grid gap-8 md:grid-cols-12 md:items-end md:gap-6">
-        <div className="md:col-span-7">{header}</div>
-        <div className="order-2 md:order-none md:col-span-5">{counters}</div>
-        <div className="order-1 md:order-none md:col-span-12">
-          {svg}
-          {venues}
-        </div>
-        <div className="order-3 md:col-span-12">{legend}</div>
       </div>
     </div>
   );
@@ -527,8 +566,8 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
     return (
       <section
         aria-labelledby="community-title"
-        data-variant="ink"
-        className={`bg-ink-950 py-section text-text-on-ink-muted ${className}`}
+        className={`bg-paper-50 py-section text-text-body ${className}`}
+        style={chapterVars}
       >
         {layout}
       </section>
@@ -536,10 +575,10 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
   }
 
   return (
-    <section aria-labelledby="community-title" data-variant="ink" className={`bg-ink-950 text-text-on-ink-muted ${className}`}>
+    <section aria-labelledby="community-title" className={`bg-paper-50 text-text-body ${className}`} style={chapterVars}>
       <div ref={wrapRef} data-map-chapter style={{ height: `${HEIGHT_VH}vh` }}>
         {/* Centered in the viewport below the fixed nav (68 / 85 px measured). */}
-        <div className="sticky top-0 flex min-h-svh flex-col justify-center pb-10 pt-[calc(68px+3rem)] md:pt-[calc(85px+3rem)]">
+        <div className="sticky top-0 flex min-h-svh flex-col justify-center pb-6 pt-[calc(68px+1rem)] md:pt-[calc(85px+1rem)]">
           {layout}
         </div>
       </div>
