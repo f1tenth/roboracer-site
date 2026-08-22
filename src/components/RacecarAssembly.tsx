@@ -13,7 +13,10 @@ import { ContactShadows, Environment, Grid, Html, OrbitControls, useGLTF } from 
 import {
   ACESFilmicToneMapping,
   Color,
+  Euler,
+  MathUtils,
   Mesh,
+  type EulerOrder,
   type Group,
   type Material,
   type Object3D,
@@ -38,6 +41,12 @@ const glbAssets = RACECAR_PARTS.filter((part) => part.format === "glb").map(
 );
 
 glbAssets.forEach((asset) => useGLTF.preload(asset));
+
+// URDF `rpy` is a fixed-axis roll, pitch, yaw (R = Rz * Ry * Rx). three.js
+// Euler order "ZYX" is that same matrix; the default "XYZ" is not
+// (docs/design/CAR_CHAPTER.md, transform chain).
+const URDF_EULER_ORDER: EulerOrder = "ZYX";
+const NO_ROTATION: [number, number, number, EulerOrder] = [0, 0, 0, URDF_EULER_ORDER];
 
 type ViewerMaterial = Material & {
   emissive?: Color;
@@ -112,12 +121,16 @@ type ModelGeometryProps = {
 function GlbGeometry({ part, selected, hovered, wireframe }: ModelGeometryProps) {
   const gltf = useGLTF(part.asset) as GLTF;
   const scene = useMemo(() => cloneScene(gltf.scene, part.id), [gltf.scene, part.id]);
+  const rotation = useMemo<[number, number, number, EulerOrder]>(
+    () => (part.rotation ? [...part.rotation, URDF_EULER_ORDER] : NO_ROTATION),
+    [part.rotation],
+  );
 
   useEffect(() => {
     updateSceneAppearance(scene, selected, hovered, wireframe);
   }, [hovered, scene, selected, wireframe]);
 
-  return <primitive object={scene} rotation={part.rotation ?? [0, 0, 0]} />;
+  return <primitive object={scene} rotation={rotation} />;
 }
 
 function StlGeometry({ part, selected, hovered, wireframe }: ModelGeometryProps) {
@@ -131,6 +144,7 @@ function StlGeometry({ part, selected, hovered, wireframe }: ModelGeometryProps)
         emissiveIntensity={
           selected ? HIGHLIGHT_INTENSITY.selected : hovered ? HIGHLIGHT_INTENSITY.hover : 0
         }
+        envMapIntensity={FINISH.graphite.envMapIntensity}
         metalness={FINISH.graphite.metalness}
         roughness={FINISH.graphite.roughness}
         wireframe={wireframe}
@@ -257,14 +271,21 @@ type CameraControllerProps = {
   resetKey: number;
 };
 
+// /assembly opens on the same long lens as the landing chapter (30 degrees);
+// the orbit distances are scaled from the old 38 degree setup so the car
+// frames identically.
+const VIEWER_FOV = 30;
+const VIEWER_HOME = new Vector3(1.19, 0.8, 1.19);
+const VIEWER_TARGET = new Vector3(-0.015, 0.09, 0);
+
 function CameraController({ autoRotate, resetKey }: CameraControllerProps) {
   const controls = useRef<OrbitControlsImpl>(null);
   const { camera } = useThree();
 
   useEffect(() => {
-    camera.position.set(0.93, 0.62, 0.93);
+    camera.position.copy(VIEWER_HOME);
     camera.up.set(0, 1, 0);
-    controls.current?.target.set(-0.015, 0.09, 0);
+    controls.current?.target.copy(VIEWER_TARGET);
     controls.current?.update();
   }, [camera, resetKey]);
 
@@ -277,11 +298,11 @@ function CameraController({ autoRotate, resetKey }: CameraControllerProps) {
       enableDamping
       dampingFactor={0.06}
       enablePan={false}
-      minDistance={0.42}
-      maxDistance={2.5}
+      minDistance={0.54}
+      maxDistance={3.2}
       minPolarAngle={0.12}
       maxPolarAngle={Math.PI * 0.49}
-      target={[-0.015, 0.09, 0]}
+      target={VIEWER_TARGET.toArray() as VectorTuple}
     />
   );
 }
@@ -330,13 +351,91 @@ class EnvironmentBoundary extends Component<EnvironmentBoundaryProps, { failed: 
  * Lighting-only: no `background` prop, so the landing canvas stays
  * alpha-transparent over ink-950.
  */
+// The studio HDR is turned so its big softbox is not in the mirror direction
+// of the car's flat decks as seen from the front-right three-quarter camera
+// (azimuth 45): at 0 the plates mirrored it and read as light grey whatever
+// their albedo; at -90 degrees they read as dark satin and the aluminum still
+// catches the light (measured in the live chapter, docs/design/CAR_CHAPTER.md).
+const STUDIO_ROTATION = new Euler(0, -Math.PI / 2, 0);
+
 export function StudioLighting({ intensity = 0.9 }: { intensity?: number }) {
   return (
     <EnvironmentBoundary>
       <Suspense fallback={<NeutralStudioLights />}>
-        <Environment preset="studio" environmentIntensity={intensity} />
+        <Environment
+          preset="studio"
+          environmentIntensity={intensity}
+          environmentRotation={STUDIO_ROTATION}
+        />
       </Suspense>
     </EnvironmentBoundary>
+  );
+}
+
+/** World position of a light `distance` meters away at an azimuth in the
+ * ground plane (0 = car front, 90 = car right) and an elevation above it. */
+function lightPosition(azimuthDeg: number, elevationDeg: number, distance: number): VectorTuple {
+  const az = MathUtils.degToRad(azimuthDeg);
+  const el = MathUtils.degToRad(elevationDeg);
+  return [
+    distance * Math.cos(el) * Math.cos(az),
+    distance * Math.sin(el),
+    distance * Math.cos(el) * Math.sin(az),
+  ];
+}
+
+type ProductLightingProps = {
+  /** Studio IBL strength. */
+  environment?: number;
+  /** Key directional strength (35 degrees elevation, soft shadow). */
+  keyIntensity?: number;
+  /** Rim from behind-left of the three-quarter view, white. */
+  rimIntensity?: number;
+  shadowMapSize?: number;
+  /** Half extent (meters) of the key light's shadow frustum. */
+  shadowExtent?: number;
+};
+
+/**
+ * The product-render light rig shared by /assembly and the landing chapter
+ * (landing-v3 section 4): studio IBL, one key directional at 35 degrees
+ * elevation casting a soft shadow, one white rim from behind-left at 0.6. No
+ * fog, no colored lights. Both canvases sit the camera at azimuth 45 degrees
+ * (front-right three-quarter), so the key comes from the camera's left-front
+ * (azimuth 85) and the rim from behind-left (azimuth 180, the car's rear).
+ */
+export function ProductLighting({
+  environment = 0.5,
+  // Physically-sized lights: next to the studio HDR (radiance in the units
+  // digits), a key below ~4 leaves no visible shape or shadow.
+  keyIntensity = 5,
+  rimIntensity = 2,
+  shadowMapSize = 2048,
+  shadowExtent = 0.6,
+}: ProductLightingProps) {
+  const key = useMemo(() => lightPosition(85, 35, 3), []);
+  const rim = useMemo(() => lightPosition(180, 28, 3), []);
+  return (
+    <>
+      <StudioLighting intensity={environment} />
+      <directionalLight
+        castShadow
+        color="#ffffff"
+        intensity={keyIntensity}
+        position={key}
+        shadow-mapSize-width={shadowMapSize}
+        shadow-mapSize-height={shadowMapSize}
+        shadow-bias={-0.00015}
+        shadow-normalBias={0.004}
+        shadow-camera-left={-shadowExtent}
+        shadow-camera-right={shadowExtent}
+        shadow-camera-top={shadowExtent}
+        shadow-camera-bottom={-shadowExtent}
+        shadow-camera-near={0.5}
+        shadow-camera-far={6}
+      />
+      <directionalLight color="#ffffff" intensity={rimIntensity} position={rim} />
+    </>
   );
 }
 
@@ -417,21 +516,16 @@ export function RacecarAssemblyCanvas({
   return (
     <Canvas
       className="assembly-canvas"
-      camera={{ fov: 38, near: 0.01, far: 30, position: [0.93, 0.62, 0.93] }}
+      camera={{ fov: VIEWER_FOV, near: 0.01, far: 30, position: VIEWER_HOME.toArray() }}
       dpr={[1, 1.75]}
-      shadows
-      gl={{ antialias: true, toneMapping: ACESFilmicToneMapping }}
+      shadows="soft"
+      gl={{ antialias: true, toneMapping: ACESFilmicToneMapping, toneMappingExposure: 1.15 }}
       onPointerMissed={() => onSelect(null)}
     >
       <color attach="background" args={["#f3f4f8"]} />
-      <StudioLighting />
-      <directionalLight
-        castShadow
-        color="#ffffff"
-        intensity={1.3}
-        position={[1.2, 1.7, 0.8]}
-        shadow-mapSize={[1024, 1024]}
-      />
+      {/* Same rig as the landing chapter; the full 0-1 explosion range needs
+          a wider shadow frustum. */}
+      <ProductLighting shadowExtent={0.85} />
 
       <Suspense fallback={null}>
         <RacecarAssemblyParts
@@ -448,9 +542,9 @@ export function RacecarAssemblyCanvas({
 
       <ContactShadows
         position={[0, -0.003, 0]}
-        opacity={0.34}
-        scale={2.2}
-        blur={2.6}
+        opacity={0.55}
+        scale={2.4}
+        blur={2.4}
         far={1.2}
         resolution={512}
       />

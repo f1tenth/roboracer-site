@@ -1,159 +1,128 @@
 // Product-render material overrides for the shared racecar scene graph
 // (RacecarAssemblyParts). One mapping serves both the landing ExplodedModel
-// chapter and /assembly. Direction (landing-v2 spec, 2026-08-21): neutral
-// studio finishes only - graphite, aluminum, rubber, and the LiDAR's real
-// sensor colors. No purple, no cyan, no emissive neon anywhere.
-import {
-  CanvasTexture,
-  Color,
-  MeshStandardMaterial,
-  SRGBColorSpace,
-  type Material,
-  type Texture,
-} from "three";
+// chapter and /assembly. Direction (landing-v3, 2026-08-21): neutral studio
+// finishes only - satin graphite decks, brushed aluminum hardware, rubber,
+// and the LiDAR's real sensor colors. No purple, no cyan, no emissive neon,
+// and no flat grey multiplier: tone is controlled per material through
+// `envMapIntensity`, metalness and roughness (docs/design/CAR_CHAPTER.md).
+import { Color, MeshStandardMaterial, type Material } from "three";
 import type { RacecarPartId } from "./racecarAssemblyData";
 
-type Finish = {
+export type Finish = {
   color: string;
   metalness: number;
   roughness: number;
+  /** Studio IBL reflectance: decks 0.5, aluminum 1.2 (landing-v3 section 4). */
+  envMapIntensity: number;
 };
 
 /** Named finishes; racecarAssemblyData label dots reuse these tones. */
 export const FINISH = {
-  /** Satin graphite - the STL accent shell and dark structural plastic. */
-  graphite: { color: "#4a4e55", metalness: 0.4, roughness: 0.5 },
-  /** Brushed aluminum - wheel hubs; the chassis palette texture already
-   * carries its own aluminum slots for standoffs and hardware. */
-  aluminum: { color: "#b4b9c1", metalness: 0.9, roughness: 0.35 },
+  /** Satin graphite - the STL accent shell, which is the upper platform deck
+   * (the plate the sim tints per agent). Low metalness and a rough surface so
+   * the flat top does not mirror the studio ceiling into light grey. */
+  graphite: { color: "#2e3138", metalness: 0.2, roughness: 0.66, envMapIntensity: 0.16 },
+  /** Anodized aluminum compute case on the upper deck. */
+  caseAluminum: { color: "#8c9198", metalness: 0.8, roughness: 0.42, envMapIntensity: 0.8 },
+  /** Lower deck plate: dark anodized, satin. Flat plates seen at a grazing
+   * angle Fresnel-reflect the studio ceiling, so the IBL term is kept low. */
+  deck: { color: "#22252b", metalness: 0.12, roughness: 0.68, envMapIntensity: 0.16 },
+  /** Black structural plastic and housings (bumper, mounts, battery tray). */
+  plastic: { color: "#15171c", metalness: 0.05, roughness: 0.74, envMapIntensity: 0.2 },
+  /** Brushed aluminum - wheel hubs, standoffs, shock bodies, hardware. */
+  aluminum: { color: "#b4b9c1", metalness: 0.9, roughness: 0.35, envMapIntensity: 1.2 },
+  /** Polished steel pins and fasteners. */
+  steel: { color: "#a6abb4", metalness: 0.95, roughness: 0.28, envMapIntensity: 1.2 },
+  /** Brass header pins. */
+  brass: { color: "#8f7640", metalness: 0.9, roughness: 0.38, envMapIntensity: 1.0 },
   /** Tire rubber. */
-  rubber: { color: "#131316", metalness: 0, roughness: 0.9 },
+  rubber: { color: "#131316", metalness: 0, roughness: 0.9, envMapIntensity: 0.3 },
+  /** Light grey connector plastic. */
+  connector: { color: "#9aa0a8", metalness: 0, roughness: 0.7, envMapIntensity: 0.5 },
+  /** Electronics tones, muted from the source's toy-plastic saturation
+   * (battery/ESC blue, connector green, switch red). */
+  slate: { color: "#262b3d", metalness: 0.2, roughness: 0.5, envMapIntensity: 0.5 },
+  pcb: { color: "#2e4a34", metalness: 0.1, roughness: 0.6, envMapIntensity: 0.5 },
+  oxide: { color: "#8a4a42", metalness: 0.05, roughness: 0.6, envMapIntensity: 0.5 },
+  /** Status LEDs, unlit. */
+  lampGreen: { color: "#2a3a2c", metalness: 0, roughness: 0.4, envMapIntensity: 0.6 },
+  lampAmber: { color: "#5f592a", metalness: 0, roughness: 0.4, envMapIntensity: 0.6 },
   /** Hokuyo-style blue-black sensor housing. */
-  lidarBody: { color: "#10141f", metalness: 0.15, roughness: 0.45 },
-  /** Sensor base and cable plastic. */
-  lidarBase: { color: "#17191f", metalness: 0.2, roughness: 0.55 },
+  lidarBody: { color: "#10141f", metalness: 0.15, roughness: 0.45, envMapIntensity: 0.6 },
+  /** Sensor base and cap plastic. */
+  lidarBase: { color: "#17191f", metalness: 0.2, roughness: 0.55, envMapIntensity: 0.5 },
   /** The orange optical window band; glossier than the housing. */
-  lidarWindow: { color: "#e8641b", metalness: 0.1, roughness: 0.28 },
+  lidarWindow: { color: "#e8641b", metalness: 0.1, roughness: 0.28, envMapIntensity: 0.9 },
 } satisfies Record<string, Finish>;
+
+/**
+ * Chassis material names come from the source mesh
+ * (f1tenth_gym_ros/meshes/roboracer_chassis.glb, inspected 2026-08-21; what
+ * each one covers was read off its vertex bounds, see
+ * docs/design/CAR_CHAPTER.md). The site copy is re-exported with
+ * `--palette false` so these names survive meshopt compression and each one
+ * gets its own finish.
+ */
+const CHASSIS_FINISH: Readonly<Record<string, Finish>> = {
+  // Verified with a flat-color debug render (2026-08-21): the upper platform
+  // deck is NOT in this mesh, it is the accent STL (FINISH.graphite).
+  chassis_gray: FINISH.deck, // lower deck plate
+  metal: FINISH.caseAluminum, // compute case on the upper deck
+  black: FINISH.plastic, // chassis tub, arms, towers, bumper frame
+  black_002: FINISH.plastic, // housing on the upper deck
+  gray_001: FINISH.plastic, // small top plate
+  bumper: FINISH.plastic, // front bumper
+  metal_001: FINISH.aluminum, // small hardware on the upper deck
+  standoff: FINISH.aluminum, // deck standoffs
+  silver: FINISH.steel, // small plate at the left
+  gold_pin_001: FINISH.brass, // pin header
+  white_connector: FINISH.steel, // shock springs
+  motor_blue: FINISH.slate,
+  green_connector: FINISH.pcb,
+  red_switch: FINISH.oxide,
+  green_light_001: FINISH.lampGreen,
+  yellow_light_001: FINISH.lampAmber,
+};
 
 /** Subtle brightness lift for hover/selected states - a small white emissive,
  * never a hue change. */
 export const HIGHLIGHT_EMISSIVE = "#ffffff";
 export const HIGHLIGHT_INTENSITY = { hover: 0.12, selected: 0.2 } as const;
 
-function standard(finish: Finish) {
+function standard(finish: Finish, name: string) {
   const material = new MeshStandardMaterial();
+  material.name = name;
   material.color = new Color(finish.color);
   material.metalness = finish.metalness;
   material.roughness = finish.roughness;
+  material.envMapIntensity = finish.envMapIntensity;
   return material;
 }
 
 /**
- * The chassis palette strip carries three saturated slots (decoded from the
- * source GLB, 2026-08-21): battery/ESC blue #0600a4, connector green #42c54f,
- * switch red #ce4c41. They read like toy plastic under studio light, so they
- * are muted to technical tones. Everything else in the strip (graphite darks,
- * aluminum lights, brass) is kept untouched.
- */
-const CHASSIS_PALETTE_REMAP: ReadonlyArray<{ from: [number, number, number]; to: [number, number, number] }> = [
-  { from: [0x06, 0x00, 0xa4], to: [0x26, 0x2b, 0x3d] }, // blue -> dark slate blue
-  { from: [0x42, 0xc5, 0x4f], to: [0x2e, 0x4a, 0x34] }, // green -> dark PCB green
-  { from: [0xce, 0x4c, 0x41], to: [0x8a, 0x4a, 0x42] }, // red -> muted oxide red
-];
-
-function remapChassisPalette(material: MeshStandardMaterial) {
-  const map = material.map;
-  const image = map?.image as CanvasImageSource & { width?: number; height?: number };
-  if (!map || !image || typeof document === "undefined") return;
-  const width = Number(image.width ?? 0);
-  const height = Number(image.height ?? 0);
-  // Only ever touch the tiny palette strip, never a real texture.
-  if (!width || !height || width > 256 || height > 256) return;
-
-  const canvas = document.createElement("canvas");
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
-  ctx.drawImage(image, 0, 0);
-  const pixels = ctx.getImageData(0, 0, width, height);
-  const data = pixels.data;
-  for (let i = 0; i < data.length; i += 4) {
-    for (const { from, to } of CHASSIS_PALETTE_REMAP) {
-      if (
-        Math.abs(data[i] - from[0]) <= 8 &&
-        Math.abs(data[i + 1] - from[1]) <= 8 &&
-        Math.abs(data[i + 2] - from[2]) <= 8
-      ) {
-        data[i] = to[0];
-        data[i + 1] = to[1];
-        data[i + 2] = to[2];
-        break;
-      }
-    }
-  }
-  ctx.putImageData(pixels, 0, 0);
-
-  const remapped = copyTextureSettings(new CanvasTexture(canvas), map);
-  material.map = remapped;
-  material.needsUpdate = true;
-}
-
-function copyTextureSettings(target: Texture, source: Texture) {
-  target.colorSpace = SRGBColorSpace;
-  target.flipY = source.flipY;
-  target.wrapS = source.wrapS;
-  target.wrapT = source.wrapT;
-  target.magFilter = source.magFilter;
-  target.minFilter = source.minFilter;
-  target.generateMipmaps = source.generateMipmaps;
-  target.needsUpdate = true;
-  return target;
-}
-
-/**
- * Returns the display material for one primitive of a part's GLB. Material
- * names come from the source meshes (inspected 2026-08-21):
- * - chassis: one "PaletteMaterial001" with palette base-color and
- *   metallic-roughness textures that ALREADY split graphite decks, aluminum
- *   standoffs/hardware, and small real electronics tones. We keep those maps
- *   (replacing them with one flat graphite would erase the aluminum split the
- *   product-render direction asks for) and pull roughness toward satin.
+ * Returns the display material for one primitive of a part's GLB:
+ * - chassis: one finish per source material name (table above); unknown
+ *   names fall back to the deck finish so a future re-export never renders
+ *   white.
  * - wheels: "rim" + "tire" - neutral aluminum hub over near-black rubber.
- * - lidar: "black" / "hokuyo" / "orange" - kept as the sensor's real colors,
- *   with the housing steered to blue-black.
+ * - lidar: "black" / "hokuyo" / "orange" - the sensor's real colors, with
+ *   the housing steered to blue-black.
  */
 export function overridePartMaterial(partId: RacecarPartId, material: Material): Material {
   if (partId === "chassis") {
-    const cloned = material.clone() as MeshStandardMaterial;
-    if ("roughness" in cloned) {
-      // Multiplies the palette's per-region roughness map: satin body,
-      // brushed hardware.
-      cloned.roughness = 0.85;
-    }
-    // The palette's deck tones render bright silver under studio IBL; the
-    // spec wants a satin-graphite dark-neutral body. A grey multiplier
-    // darkens every slot uniformly (decks go graphite, hardware stays
-    // relatively brighter) without erasing the palette's aluminum split.
-    cloned.color = new Color("#82878f");
-    cloned.envMapIntensity = 0.7;
-    if (cloned.emissive) {
-      cloned.emissive = new Color("#000000");
-      cloned.emissiveIntensity = 1;
-    }
-    remapChassisPalette(cloned);
-    return cloned;
+    return standard(CHASSIS_FINISH[material.name] ?? FINISH.deck, material.name);
   }
 
   if (partId === "lidar") {
-    if (material.name === "orange") return standard(FINISH.lidarWindow);
-    if (material.name === "hokuyo") return standard(FINISH.lidarBody);
-    return standard(FINISH.lidarBase);
+    if (material.name === "orange") return standard(FINISH.lidarWindow, material.name);
+    if (material.name === "hokuyo") return standard(FINISH.lidarBody, material.name);
+    return standard(FINISH.lidarBase, material.name);
   }
 
   if (partId.endsWith("wheel")) {
-    return material.name === "rim" ? standard(FINISH.aluminum) : standard(FINISH.rubber);
+    return material.name === "rim"
+      ? standard(FINISH.aluminum, material.name)
+      : standard(FINISH.rubber, material.name);
   }
 
   return material.clone();

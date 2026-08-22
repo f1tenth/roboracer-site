@@ -30,6 +30,10 @@ const ASSET_ROOT = `${import.meta.env.BASE_URL}models/racecar`;
 // These assembled transforms mirror urdf/racecar_mesh.xacro at s=1.0 and
 // lr=0.171450. Keeping them here, next to the display metadata, makes it easy
 // to compare the browser assembly with the robot_description source.
+// `rotation` is the visual-origin rpy in radians, applied with three.js Euler
+// order "ZYX" (= URDF fixed-axis rpy) by RacecarAssembly.tsx. The LiDAR has
+// no rotation on purpose: its mesh is authored upright, centered on its
+// bounding box, and verified at yaw 0/90/180/270 (docs/design/CAR_CHAPTER.md).
 // `color` drives the part label dots and panel swatches only; the values are
 // the neutral/real part tones from racecarMaterials.ts (product-render
 // direction, 2026-08-21) - no neon.
