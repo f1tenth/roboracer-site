@@ -22,7 +22,7 @@ const AZIMUTH_DEG = 45;
 // any aspect; measured 2026-08-21 at 1440x900: 0.70 at rest, 0.69 at the
 // ceiling, nothing crops.
 const SPAN = { rest: 0.49, exploded: 0.74 };
-const FILL = 0.7;
+const FILL = 0.78;
 // The point the camera studies: the car's center at rest, lifted as the
 // LiDAR and wheels rise.
 const TARGET = { rest: [0.03, 0.06, 0], exploded: [0.03, 0.1, 0] } as const;

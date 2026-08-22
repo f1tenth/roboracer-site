@@ -25,7 +25,7 @@ import TeamGrid from "../components/ui/TeamGrid";
 import PublicationCard from "../components/ui/PublicationCard";
 import HighlightReel from "../components/ui/HighlightReel";
 import PlatformPanel from "../components/ui/PlatformPanel";
-import ExplodedModel from "../components/ui/ExplodedModel";
+import ExplodedModel, { type CarPhoto } from "../components/ui/ExplodedModel";
 import HeroChapter, { type HeroVideoSources } from "../components/ui/HeroChapter";
 import WorldMapChapter from "../components/ui/WorldMapChapter";
 import CommunityJoin from "../components/ui/CommunityJoin";
@@ -50,6 +50,12 @@ const RACE_HERO = {
   caption: "the hall · ICRA 2026, Vienna",
   credit: "Photo: Felix Jahncke",
 };
+
+// Car close-ups beside the 3D model (media curator, docs/media/SELECTION.md).
+const CAR_PHOTOS: readonly CarPhoto[] = [
+  { src: "/media/car/car-photo-01-1200.webp", alt: "A RoboRacer car on the wooden bridge of the ICRA 2026 track", caption: "on the bridge · ICRA 2026, Vienna", credit: "Photo: Felix Jahncke" },
+  { src: "/media/car/car-photo-02-1200.webp", alt: "The ForzaETH car with its LiDAR on the ICRA 2026 starting grid", caption: "ForzaETH on the grid · ICRA 2026, Vienna", credit: "Photo: Felix Jahncke" },
+];
 
 /**
  * Landing v3 composition (docs/plans/landing-v3.md): hero chapter, highlights,
@@ -161,7 +167,7 @@ export default function Landing() {
           header; revamp/v3-car brings the bigger canvas, product render,
           LiDAR fix and photo slots. */}
       <div className="bg-ink-950">
-        <ExplodedModel />
+        <ExplodedModel photos={CAR_PHOTOS} />
       </div>
 
       {/* 5 · 04 Platform (paper): sticky media panel beside the four rows -
