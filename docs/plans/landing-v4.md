@@ -308,16 +308,23 @@ paths in section 5 and does not edit the JSON.
   cap (no transform changed). Callouts: Hokuyo UST-10LX · 2D LiDAR, NVIDIA
   Jetson · compute, VESC · motor controller, Brushless DC motor, Traxxas Slash
   4x4 · 1/10 chassis (all confirmed in the harvested rules and build page).
-- Map: SVG 1392 x 520 px at 1440x900 (57.8vh; land about 1,076 px wide, v3
-  was 826), 1392 x 520 at 1920x1080 (48.2vh). Region opacities as the table;
-  one addition: an unverified partner-only country (Belgium) at half fill
-  0.11. Two reasoned deviations: the ocean-overlay layout starts at `xl`
-  (1280), md-lg shows header beside the 2x2 counters with the map below
-  (capped at 35svh so landscape tablets fit the pin); and the viewBox is
-  extended 450 units of ocean to the left (`-450 0 2050 766`) so the header
-  and counters sit on water, which is why land is 1,076 px, not the full
-  1,392. The ordinal ticker became a one-line mono flash ("label · city");
-  Torino's label yields to Milan.
+- Map (rebuilt mid-session to Cedric's exact spec, which replaces section 6's
+  colours and layout): paper chapter; base state = land as hairline slate
+  outlines (`#1e3a48` 0.32, 0.9px), no fill, no pins, no labels; regions flat
+  `#71e4ea` (4+ held) / `#a1ecf0` (2-3) / `#c4f2f5` (1) / `#e4f7fa` (partner-only),
+  stroke `#0b6b73` 0.35 at 0.7px, no violet anywhere; glow `#00D1DA` 0.26 -> 0 at
+  r 30 under held races; pins hollow paper-filled rings `#0b6b73` 1.7px r 5.5,
+  dashed `2.5 2` at 0.45 for upcoming/unverified (no "tbc" text); one filled
+  marker, Philadelphia (dot r 5.5 in a ring r 11); labels mono 13px `#0b6b73`
+  0.9, one per city, collision-checked, skipped when they cannot fit; no
+  dashed reveal ring. Reveal: pins pop in order of great-circle distance from
+  Philadelphia (t ~ (d/dmax)^0.75 over 0.06-0.82), a country tints as its
+  first pin pops, partner-only countries in the last 0.08, counters run from
+  0.06 (Cedric: they started late). Layout: header above, map on a 1,800 px
+  bleed capped by the viewport height (`calc((100svh - 356px) * aspect)`),
+  counters and legend below. Measured: 1233 x 544 px at 1440x900 (60vh),
+  1641 x 724 at 1920x1080, 934 x 412 at 1366x768; the pinned box is exactly
+  one viewport tall at all three.
 - Platform: the section header renders inside the pinned composition (left
   column, above the frame; top-aligned) after Cedric's "big white gap" note;
   wrapper `min-h-[300vh]` with a sticky `min-h-svh` child (200vh of
