@@ -152,12 +152,24 @@ export type MapCountry = {
   verified: boolean;
 };
 
+/** One Natural Earth path per country that hosted a competition or fields a
+ * partner (landing v4 section 6; emitted by scripts/build-world-map.mjs). */
+export type MapRegion = {
+  name: string;
+  held: number;
+  upcoming: number;
+  partner: boolean;
+  verified: boolean;
+  d: string;
+};
+
 export type EventsMap = {
   viewBox: [number, number, number, number];
   projection: string;
   updated: string;
   events: MapEvent[];
   countries: MapCountry[];
+  regions: MapRegion[];
 };
 
 /** public/data/platform.json: the four pillars with their media panel slot. */

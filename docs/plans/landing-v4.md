@@ -294,14 +294,27 @@ paths in section 5 and does not edit the JSON.
   runs 0.84-1.00 under the tail of the fade; nav fill unchanged 0.72-0.95.
   Measured on the dev server: scale 1.30 at p 0.42, translate 0 throughout.
 - Car: TODO(director) explosion ceilings, plate variant chosen, LiDAR finding in one sentence.
-- Map: TODO(director) on-screen width and height at 1440x900, region opacities if changed.
+- Map: SVG 1392 x 520 px at 1440x900 (57.8vh; land about 1,076 px wide, v3
+  was 826), 1392 x 520 at 1920x1080 (48.2vh). Region opacities as the table;
+  one addition: an unverified partner-only country (Belgium) at half fill
+  0.11. Two reasoned deviations: the ocean-overlay layout starts at `xl`
+  (1280), md-lg shows header beside the 2x2 counters with the map below
+  (capped at 35svh so landscape tablets fit the pin); and the viewBox is
+  extended 450 units of ocean to the left (`-450 0 2050 766`) so the header
+  and counters sit on water, which is why land is 1,076 px, not the full
+  1,392. The ordinal ticker became a one-line mono flash ("label · city");
+  Torino's label yields to Milan.
 - Platform: wrapper `min-h-[300vh]` with a sticky `min-h-svh` child (200vh of
   travel; ScrollTrigger "top top" to "bottom bottom"); bands Build 0-0.25,
   Learn 0.25-0.50, Race 0.50-0.75, Research 0.75-1.00; crossfade 0.04 centred
   on each boundary, opacity only. Root cause of the silent Research row: the
   `<video>` elements were never mounted (the in-view observer subscribed
   before the rows had loaded), not the encodes.
-- Next-race video size: TODO(director); post-card video size: TODO(director).
+- Next-race video: `race-iros2026-hero-1280.mp4` 886 KB (1280x548, 8 s, native
+  1272-wide source so not 1600; poster 93 KB). Post-card video:
+  `join-icra2026-post-960.mp4` 1.04 MB (960x540, 8.8 s; poster 65 KB). Learn
+  row runs at 2x (5.9 s) because `assembling_car.mp4` is 11.8 s; 4x would give
+  3 s.
 - Ribbon: `.rr-marquee:has(a:focus-visible)` replaces `:focus-within`; proven
   with a pointer click on a logo (new tab closed, pointer moved off: running;
   Tab onto the link: paused).

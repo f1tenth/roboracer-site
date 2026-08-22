@@ -1,5 +1,5 @@
 import { createRef, useEffect, useId, useMemo, useRef, useState, useSyncExternalStore, type RefObject } from "react";
-import { loadEventsMap, type EventsMap, type MapEvent } from "../../lib/data";
+import { loadEventsMap, type EventsMap, type MapEvent, type MapRegion } from "../../lib/data";
 import { gsap, useGSAP, MOTION_OK_QUERY, ScrollTrigger } from "../../lib/motion";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import StatCounter, { type StatCounterHandle } from "./StatCounter";
@@ -27,15 +27,6 @@ const VIEWBOX_OVERLAY = `${-PAD_LEFT} 0 ${VB_W + PAD_LEFT} ${VB_H + PAD_BOTTOM}`
  * hosted a competition or fields a partner). Typed here until
  * src/lib/data.ts carries it (stream D owns that file in v4).
  */
-export type MapRegion = {
-  name: string;
-  held: number;
-  upcoming: number;
-  partner: boolean;
-  verified: boolean;
-  d: string;
-};
-type EventsMapWithRegions = EventsMap & { regions?: MapRegion[] };
 
 // Scale statements from the content skill (kept until Rahul answers).
 const STATS = [
@@ -196,7 +187,7 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
   const reduced = usePrefersReducedMotion();
   const desktop = useMatchMedia(DESKTOP_QUERY);
   const overlay = useMatchMedia(OVERLAY_QUERY);
-  const [data, setData] = useState<EventsMapWithRegions | null>(null);
+  const [data, setData] = useState<EventsMap | null>(null);
 
   useEffect(() => {
     let live = true;
