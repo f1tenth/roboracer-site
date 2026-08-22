@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { gsap, useGSAP, ScrollTrigger } from "../../lib/motion";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
@@ -71,8 +71,12 @@ function layerOpacityAt(i: number, progress: number, count: number): number {
  * into a frame. No scale, shadow, glow or translate: the fill "lights up"
  * and nothing moves.
  */
-const TILE_ACTIVE = "md:border-rr-violet/30 md:bg-rr-violet/8";
-const TILE_IDLE = "border-ink-950/10";
+// Cedric, 2026-08-22, third pass: no box outline; the selected tile sits on
+// a light, very transparent violet cloud (a radial tint that fades to
+// nothing by 72 percent of the tile), and only the tint's opacity animates.
+const CLOUD =
+  "pointer-events-none absolute inset-0 hidden rounded-[32px] bg-[radial-gradient(ellipse_at_center,var(--cloud)_0%,transparent_72%)] transition-opacity duration-[var(--duration-base)] md:block";
+const CLOUD_VARS = { "--cloud": "color-mix(in oklab, var(--color-rr-violet) 11%, transparent)" } as CSSProperties;
 
 /** Colour-only transition shared by the tile and the text inside it. */
 const FADE_COLORS = "transition-colors duration-[var(--duration-base)] ease-[var(--ease-out-expo)]";
@@ -173,7 +177,9 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
             : "md:motion-safe:sticky md:motion-safe:top-0 md:motion-safe:flex md:motion-safe:flex-col md:motion-safe:min-h-svh md:motion-safe:pt-[calc(85px+2.5rem)] md:motion-safe:pb-10 md:motion-safe:[@media(max-height:940px)]:pt-[calc(85px+1.5rem)] md:motion-safe:[@media(max-height:940px)]:pb-6"
         }
       >
-        <div className="grid w-full gap-10 md:flex-1 md:grid-cols-12 md:grid-rows-[auto_1fr] md:gap-12">
+        {/* Toward the edges (Cedric): the panel runs on the same 1,800 px bleed
+            as the map; the Section itself is `bleed`. */}
+        <div className="mx-auto grid w-full max-w-[1800px] gap-10 px-6 md:flex-1 md:grid-cols-12 md:grid-rows-[auto_1fr] md:gap-12">
           {/* One header element for every layout: row 1 of the left column on
               desktop (the tiles span both rows), the top of the stack under md. */}
           {header && <div className="md:col-span-6 md:self-start lg:col-span-7">{header}</div>}
@@ -221,11 +227,10 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
             </figure>
           </div>
 
-          {/* The tile grid spans both rows of the pinned composition and its
-              rows are 1fr, so the four tiles share the full pinned height
-              (Cedric, 2026-08-22: no band of air below the list). Content is
-              top-aligned inside each tile; the air lives inside the tiles. */}
-          <ul className="md:col-span-6 md:col-start-7 md:row-span-2 md:row-start-1 md:grid md:grid-cols-2 md:auto-rows-[1fr] md:gap-2 lg:col-span-5 lg:col-start-8">
+          {/* The four pillars at their natural height, centred against the
+              frame (Cedric, third pass: compact, the old row type, no
+              contour). Under md they are hairline rows with inline posters. */}
+          <ul className="md:col-span-6 md:col-start-7 md:row-span-2 md:row-start-1 md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-2 md:self-center lg:col-span-5 lg:col-start-8">
             {rows.map((row, i) => {
               const lit = marked && i === active;
               const dim = marked && i !== active;
@@ -234,35 +239,37 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
                   key={row.id}
                   data-row={row.id}
                   data-active={lit ? "true" : undefined}
-                  className={`border-t py-8 last:border-b md:flex md:flex-col md:rounded-card md:border md:p-4 lg:p-6 lg:[@media(max-height:820px)]:p-4 ${FADE_COLORS} ${
-                    lit ? TILE_ACTIVE : TILE_IDLE
-                  }`}
+                  className="relative border-t border-ink-950/10 py-8 last:border-b md:border-0 md:p-6 md:last:border-b-0"
+                  style={CLOUD_VARS}
                 >
-                  <div className="mb-5 md:hidden">
+                  <span aria-hidden="true" className={`${CLOUD} ${lit ? "opacity-100" : "opacity-0"}`} />
+                  <div className="relative mb-5 md:hidden">
                     <RowPoster row={row} />
                   </div>
                   {/* Lit tile = strong ink; dim tiles drop to text-muted, the AA
                       floor, instead of opacity (axe color-contrast). The mono
                       index is annotation and stays muted everywhere. */}
-                  <span className="font-mono text-small text-text-muted">{row.n}</span>
-                  <h3
-                    className={`mt-3 font-display text-lead font-semibold ${FADE_COLORS} ${
-                      dim ? "text-text-muted" : "text-text-strong"
-                    }`}
-                  >
-                    {row.title}
-                  </h3>
-                  <p className={`mt-2 max-w-[40ch] text-body ${FADE_COLORS} ${dim ? "text-text-muted" : "text-text-body"}`}>
-                    {row.body}
-                  </p>
-                  <Link
-                    to={row.href}
-                    className={`mt-4 inline-block w-fit py-1 text-small font-semibold underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2 ${FADE_COLORS} ${
-                      dim ? "text-text-muted" : "text-text-strong"
-                    }`}
-                  >
-                    {row.linkText}
-                  </Link>
+                  <div className="relative">
+                    <span className="font-mono text-small text-text-muted">{row.n}</span>
+                    <h3
+                      className={`mt-2 font-display text-display-m font-semibold ${FADE_COLORS} ${
+                        dim ? "text-text-muted" : "text-text-strong"
+                      }`}
+                    >
+                      {row.title}
+                    </h3>
+                    <p className={`mt-2 max-w-[40ch] text-body ${FADE_COLORS} ${dim ? "text-text-muted" : "text-text-body"}`}>
+                      {row.body}
+                    </p>
+                    <Link
+                      to={row.href}
+                      className={`mt-4 inline-block w-fit py-1 text-small font-semibold underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2 ${FADE_COLORS} ${
+                        dim ? "text-text-muted" : "text-text-strong"
+                      }`}
+                    >
+                      {row.linkText}
+                    </Link>
+                  </div>
                 </li>
               );
             })}
