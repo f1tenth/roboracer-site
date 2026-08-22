@@ -32,3 +32,19 @@ mangles the vh pins; Playwright screenshot hangs on the live WebGL canvas).
 
 Screenshots: `docs/qa/landing/desktop.png`, `tablet.png`, `mobile.png`, `*-rm.png`,
 `desktop-nojs.png`; per-section builder evidence in `docs/qa/landing-v3/`.
+
+## After the impeccable critique (same day)
+
+Critique 22/32 (heuristics 7 and 10 n/a); snapshot in `.impeccable/critique/`. Fixes
+applied on `revamp/v3-page` (ffe7320, b503f0e):
+- highlight captions no longer widen their tiles (`w-0 min-w-full`); tiles evenly spaced
+- hero -> Highlights seam: tight top padding on section 01
+- platform panel under `md`: poster inline per row, no muted rows (the sticky frame had no range)
+- phone headline 9.5vw (37 px at 390, zoom ceiling 1.20; no clipping); portrait car fill 0.95
+- partner ribbon clones `aria-hidden` + `tabIndex -1` instead of `inert` (pointer live on every copy)
+- map counters start together (0.36, stagger 0.015): no "0+" mid-pin
+- research header action slot wraps at 390
+- nav underline animates `transform` instead of `width`
+Re-checked: axe 0 violations at 1440 and 390 (`axe-after-fixes-*.json`), 0 console errors.
+Open (not this session's contract): the legacy footer (Phase 3.5), the team roster's
+"unverified" density (facts for Cedric), nav CTA on the video-only hero (chrome, by design).
