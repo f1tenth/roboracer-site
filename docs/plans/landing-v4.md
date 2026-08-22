@@ -293,7 +293,21 @@ paths in section 5 and does not edit the JSON.
   draft: opacity 0.58 at 0.84, 0.21 at 0.95, 0 at release); video dim to 0.12
   runs 0.84-1.00 under the tail of the fade; nav fill unchanged 0.72-0.95.
   Measured on the dev server: scale 1.30 at p 0.42, translate 0 throughout.
-- Car: TODO(director) explosion ceilings, plate variant chosen, LiDAR finding in one sentence.
+- Car: explosion ceilings wheels lateral 0.11 / front x +0.05 / rear x -0.04 /
+  z 0.03, LiDAR `[0.02, 0, 0.14]`, accent `[0, 0, 0.07]`, chapter max explosion
+  0.5 so the hold pose moves a wheel 0.055 m (one tire width); `SPAN.exploded`
+  0.74 -> 0.62, `SPAN.rest` 0.49 -> 0.53; `FILL` 0.78 -> 0.86 (director: at
+  0.78 the hold pose matched v3's size because v3's portrait branch had been
+  using the phone fill on desktop). Plate: cyan `#00D1DA` (metalness 0.55,
+  roughness 0.32, envMapIntensity 0.9, clearcoat 0.3); magenta captured and
+  rejected as a third loud accent next to the violet CTA, while cyan is the
+  logo's left stop and the map's accent already. LiDAR finding: the transform
+  chain was right all along; the v3 mesh body tapered upward (54 -> 48 mm)
+  under a 56 mm ring and cap, which read as an upside-down sensor, so the part
+  is re-exported as a straight cylinder with the amber band flush under the
+  cap (no transform changed). Callouts: Hokuyo UST-10LX · 2D LiDAR, NVIDIA
+  Jetson · compute, VESC · motor controller, Brushless DC motor, Traxxas Slash
+  4x4 · 1/10 chassis (all confirmed in the harvested rules and build page).
 - Map: SVG 1392 x 520 px at 1440x900 (57.8vh; land about 1,076 px wide, v3
   was 826), 1392 x 520 at 1920x1080 (48.2vh). Region opacities as the table;
   one addition: an unverified partner-only country (Belgium) at half fill

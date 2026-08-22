@@ -24,7 +24,7 @@ const AZIMUTH_DEG = 45;
 // so this span fills FILL of the canvas width at any aspect, so no yaw ever
 // crops a wheel. At 1440x900 (canvas 621x648): rest 1.54 m, hold 1.78 m.
 const SPAN = { rest: 0.53, exploded: 0.62 };
-const FILL = 0.78;
+const FILL = 0.86; // v4: 0.78 kept the hold pose at v3's size; Cedric wanted the car bigger
 // Canvases narrower than this aspect are phones (390: 0.72); desktop columns
 // (1440: 0.96) and tablets (768: 1.09) are not. v3 used `< 1`, which put the
 // desktop canvas on the phone fill and over-filled it (probe: 0.93 at the
