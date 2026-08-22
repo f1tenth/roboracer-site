@@ -44,3 +44,4 @@ __pycache__/
 
 # impeccable live-server state
 .impeccable/live/
+.claude/agent-memory/
