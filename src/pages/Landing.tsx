@@ -170,8 +170,8 @@ export default function Landing() {
         <ExplodedModel photos={CAR_PHOTOS} />
       </div>
 
-      {/* 5 · 04 Platform (paper): sticky media panel beside the four rows -
-          learner, faculty */}
+      {/* 5 · 04 Platform (paper): pinned 300vh chapter, scroll walks the four
+          rows with the media crossfading beside them - learner, faculty */}
       <Section rule aria-labelledby="pillars">
         <SectionHeader
           index="04"

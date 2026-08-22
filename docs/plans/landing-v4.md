@@ -285,11 +285,26 @@ paths in section 5 and does not edit the JSON.
 
 ## 12. Final numbers (director fills at the end)
 
-- Hero: chapter height, zoom window, fade window.
-- Car: explosion ceilings, plate variant chosen, LiDAR finding in one sentence.
-- Map: on-screen width and height at 1440x900, region opacities if changed.
-- Platform: pin length, band boundaries.
-- Next-race video size; post-card video size.
+- Hero: chapter height 320vh (kept: the fade now runs to the release, so there
+  is no dead scroll to cut); zoom 0.10-0.42 `power1.inOut` to 1.30 (1.20 under
+  768), at its max as the last unit lands at 0.42; hold 0.42-0.54; fade
+  0.54-1.00 `power1.in` on the block (Cedric mid-session, 2026-08-22: "way
+  slower, get to 0 once we are basically off that page" replaces the 0.54-0.84
+  draft: opacity 0.58 at 0.84, 0.21 at 0.95, 0 at release); video dim to 0.12
+  runs 0.84-1.00 under the tail of the fade; nav fill unchanged 0.72-0.95.
+  Measured on the dev server: scale 1.30 at p 0.42, translate 0 throughout.
+- Car: TODO(director) explosion ceilings, plate variant chosen, LiDAR finding in one sentence.
+- Map: TODO(director) on-screen width and height at 1440x900, region opacities if changed.
+- Platform: wrapper `min-h-[300vh]` with a sticky `min-h-svh` child (200vh of
+  travel; ScrollTrigger "top top" to "bottom bottom"); bands Build 0-0.25,
+  Learn 0.25-0.50, Race 0.50-0.75, Research 0.75-1.00; crossfade 0.04 centred
+  on each boundary, opacity only. Root cause of the silent Research row: the
+  `<video>` elements were never mounted (the in-view observer subscribed
+  before the rows had loaded), not the encodes.
+- Next-race video size: TODO(director); post-card video size: TODO(director).
+- Ribbon: `.rr-marquee:has(a:focus-visible)` replaces `:focus-within`; proven
+  with a pointer click on a logo (new tab closed, pointer moved off: running;
+  Tab onto the link: paused).
 
 ## 13. Acceptance (director walks it from captures; one `/qa-page landing` after)
 
