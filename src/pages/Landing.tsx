@@ -212,9 +212,12 @@ export default function Landing() {
       <WorldMapChapter />
 
       {/* 7 · Data line + partner ribbon (paper) - sponsor, faculty. No title:
-          the numbers above are the voice; the line ties them to the logos. */}
-      <Section tight width="bleed" aria-labelledby="partners" className="pb-10">
-        <div className="mx-auto max-w-content px-6">
+          the numbers above are the voice; the line ties them to the logos.
+          No top padding and the map's own 1,800 px bleed, so the line sits
+          right under the chapter's counters (Cedric, 2026-08-22: the ribbon
+          read as detached from the geography). */}
+      <Section tight width="bleed" aria-labelledby="partners" className="pt-0! pb-10">
+        <div className="mx-auto max-w-[1800px] px-6">
           <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-ink-950/10 pb-4">
             <h2 id="partners" className="font-mono text-small font-normal tracking-normal text-text-muted">
               across the partner institutions below
