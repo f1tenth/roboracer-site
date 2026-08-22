@@ -146,7 +146,7 @@ type CarCalloutsProps = {
 const CALLOUT_STAGGER_MS = 80;
 
 /**
- * Five part labels on hairline leaders (landing-v4 section 4), anchored to
+ * Seven part labels on hairline leaders (landing-v4 section 4), anchored to
  * points on the 3D parts: drei `Html`, projected every frame, no occlusion,
  * no pointer events. Each anchor follows its part's group, so it rides the
  * explosion and the turntable. A label flips to the left of its leader when

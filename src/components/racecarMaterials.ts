@@ -62,6 +62,22 @@ export function resolveAccentVariant(): AccentVariant {
   return ACCENT_VARIANT;
 }
 
+/** The accent plate goes close to transparent as the car explodes (Cedric,
+ * landing v4 review: "the more we are [exploded] the more it should be
+ * transparent"): opacity 1 assembled, easing down to `floor` at explosion
+ * `at` (the landing chapter's hold pose, CHAPTER_MAX_EXPLOSION) and held
+ * there over /assembly's larger slider values. Cubic ease-out, so the plate
+ * is already dissolving while it lifts through the deck electronics it
+ * leaves behind. Both canvases render the plate through RacecarAssembly.tsx
+ * (StlGeometry), so both get it. */
+export const ACCENT_FADE = { floor: 0.13, at: 0.5 } as const;
+
+export function accentOpacity(explosion: number): number {
+  const t = Math.min(1, Math.max(0, explosion / ACCENT_FADE.at));
+  const eased = 1 - (1 - t) ** 3;
+  return 1 - (1 - ACCENT_FADE.floor) * eased;
+}
+
 /** Named finishes; racecarAssemblyData label dots reuse these tones. */
 export const FINISH = {
   /** Anodized aluminum compute case on the upper deck. */
@@ -96,6 +112,11 @@ export const FINISH = {
   /** The amber optical window band; glossier than the housing. Stays amber
    * whatever the accent variant (landing-v4 section 4). */
   lidarWindow: { color: "#e8641b", metalness: 0.1, roughness: 0.28, envMapIntensity: 0.9 },
+  /** Dark anodized aluminum (the VESC case); a step lighter than the tub's
+   * plastic so the controller still reads inside the tub. */
+  anodized: { color: "#32363e", metalness: 0.7, roughness: 0.42, envMapIntensity: 0.9 },
+  /** Green screw-terminal plastic on the power board. */
+  terminal: { color: "#38663f", metalness: 0, roughness: 0.6, envMapIntensity: 0.5 },
 } satisfies Record<string, Finish>;
 
 /**
@@ -109,22 +130,49 @@ export const FINISH = {
 const CHASSIS_FINISH: Readonly<Record<string, Finish>> = {
   // Verified with a flat-color debug render (2026-08-21): the upper platform
   // deck is NOT in this mesh, it is the accent STL (ACCENT_FINISH).
+  // B2 (2026-08-22): the ROS mesh's abstract deck electronics (black_002,
+  // gray_001, metal_001, silver, gold_pin_001, green_connector, red_switch,
+  // the two lights, the rear screws of `metal` and the seven board standoffs)
+  // are gone from the chassis re-export; the site models them as parts
+  // instead (SITE_PART_FINISH). Seven materials remain.
   chassis_gray: FINISH.deck, // lower deck plate
-  metal: FINISH.caseAluminum, // aluminum box at the rear of the upper deck (the ESC) and the deck's front edge
-  black: FINISH.plastic, // chassis tub, arms, towers, bumper frame
-  black_002: FINISH.plastic, // housing on the upper deck
-  gray_001: FINISH.plastic, // small top plate (the compute module)
+  metal: FINISH.caseAluminum, // the deck's front edge strips
+  black: FINISH.plastic, // chassis tub, arms, towers, bumper frame, battery
   bumper: FINISH.plastic, // front bumper
-  metal_001: FINISH.aluminum, // small hardware on the upper deck
-  standoff: FINISH.aluminum, // deck standoffs
-  silver: FINISH.steel, // small plate at the left
-  gold_pin_001: FINISH.brass, // pin header
+  standoff: FINISH.aluminum, // the four 45 mm chassis-to-deck standoffs
   white_connector: FINISH.steel, // shock springs
-  motor_blue: FINISH.slate,
-  green_connector: FINISH.pcb,
-  red_switch: FINISH.oxide,
-  green_light_001: FINISH.lampGreen,
-  yellow_light_001: FINISH.lampAmber,
+  motor_blue: FINISH.slate, // motor can and driveline
+};
+
+/** Finishes of the site-modeled parts, keyed by the material names their
+ * GLBs carry (docs/design/CAR_CHAPTER.md section 7). */
+const SITE_PART_FINISH: Readonly<
+  Partial<Record<RacecarPartId, Readonly<Record<string, Finish>>>>
+> = {
+  jetson: {
+    standoff: FINISH.aluminum,
+    pcb: FINISH.pcb, // carrier board
+    ports: FINISH.plastic, // I/O stack, expansion header, DC jack
+    module: FINISH.plastic,
+    heatsink: FINISH.caseAluminum, // anodized fins
+  },
+  pcb: {
+    standoff: FINISH.aluminum,
+    board: FINISH.pcb,
+    terminal: FINISH.terminal,
+    component: FINISH.plastic, // DC-DC module, inductor, header, switch base
+    capacitor: FINISH.slate,
+    switch: FINISH.oxide, // toggle lever
+  },
+  vesc: {
+    case: FINISH.anodized,
+    wires: FINISH.plastic,
+  },
+  servo: {
+    body: FINISH.plastic,
+    shaft: FINISH.brass,
+    horn: FINISH.connector,
+  },
 };
 
 /** Subtle brightness lift for hover/selected states - a small white emissive,
@@ -150,6 +198,7 @@ function standard(finish: Finish, name: string) {
  * - wheels: "rim" + "tire" - neutral aluminum hub over near-black rubber.
  * - lidar: "black" / "hokuyo" / "orange" - the sensor's real colors, with
  *   the housing steered to blue-black.
+ * - jetson / pcb / vesc / servo: SITE_PART_FINISH by material name.
  * The STL accent plate is not a GLB; RacecarAssembly.tsx builds its
  * MeshPhysicalMaterial from ACCENT_FINISH directly.
  */
@@ -162,6 +211,11 @@ export function overridePartMaterial(partId: RacecarPartId, material: Material):
     if (material.name === "orange") return standard(FINISH.lidarWindow, material.name);
     if (material.name === "hokuyo") return standard(FINISH.lidarBody, material.name);
     return standard(FINISH.lidarBase, material.name);
+  }
+
+  const sitePart = SITE_PART_FINISH[partId];
+  if (sitePart) {
+    return standard(sitePart[material.name] ?? FINISH.plastic, material.name);
   }
 
   if (partId.endsWith("wheel")) {
