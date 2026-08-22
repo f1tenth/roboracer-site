@@ -29,6 +29,7 @@ import ExplodedModel, { type CarPhoto } from "../components/ui/ExplodedModel";
 import HeroChapter, { type HeroVideoSources } from "../components/ui/HeroChapter";
 import WorldMapChapter from "../components/ui/WorldMapChapter";
 import CommunityJoin from "../components/ui/CommunityJoin";
+import MediaFrame from "../components/ui/MediaFrame";
 const HERO_VIDEO: HeroVideoSources = {
   mp4_1920: "/media/hero/hero-fpv-loop-1280.mp4",
   mp4_960: "/media/hero/hero-fpv-loop-960.mp4",
@@ -43,12 +44,24 @@ const HEADLINE_LINES = ["Autonomous racing", "built and raced", "in the open"];
 const SCHOLAR_URL =
   "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=";
 
-// Reserved by the media curator (landing-v3 section 3): the best wide hall
-// shot of a past competition. Hidden until the file lands (onError).
+// Landing v4 section 3: Ezio Bartocci's ICRA 2026 race-day video (LinkedIn;
+// organizer media, Cedric owns asking Ezio; docs/ASSET_MANIFEST.md V4-11) in
+// its own 1272x720 frame: the contract's 21/9 band cut the bottom strip of his
+// composite off (Cedric, 2026-08-22: "short on the bottom"), so the encode is
+// the full native frame, not 1600 wide (no upscaling, CLAUDE.md rule 3). The
+// poster carries the frame under reduced motion.
 const RACE_HERO = {
-  src: "/media/race/race-iros2026-hero-1920.webp",
+  video: "/media/race/race-iros2026-hero-1272.mp4",
+  poster: "/media/race/race-iros2026-hero-poster.webp",
+  width: 1272,
+  height: 720,
+  alt: "Ezio Bartocci's video from ICRA 2026 in Vienna: the race track seen from above and from the bridge",
   caption: "the hall · ICRA 2026, Vienna",
-  credit: "Photo: Felix Jahncke",
+  credit: "Video: Ezio Bartocci",
+  // Cedric, 2026-08-22: the frame links to RoboRacer's own LinkedIn post, not
+  // Ezio's (the footage credit stays his).
+  creditLabel: "our post on LinkedIn ↗",
+  creditHref: "https://www.linkedin.com/posts/great-work-by-all-involved-ugcPost-7471631589169516544-ZPa-/",
 };
 
 // Car close-ups beside the 3D model (media curator, docs/media/SELECTION.md).
@@ -70,7 +83,6 @@ export default function Landing() {
   const [pubs, setPubs] = useState<PublicationsFile | null>(null);
   const [highlights, setHighlights] = useState<Highlight[]>([]);
   const [platform, setPlatform] = useState<PlatformRow[]>([]);
-  const [raceHeroOk, setRaceHeroOk] = useState(true);
 
   useEffect(() => {
     loadUpcomingEvents().then(setEvents).catch(() => setEvents([]));
@@ -127,30 +139,37 @@ export default function Landing() {
         <HighlightReel items={highlights} />
       </Section>
 
-      {/* 3 · 02 Next race (paper) - competitor: one big hall photo, then the ledger */}
+      {/* 3 · 02 Next race (paper) - competitor: Ezio's race-day video in the 21/9 frame, then the ledger */}
       {race && (
         <Section aria-labelledby="next-race" guides>
           <SectionHeader index="02" eyebrow="Next race" id="next-race" title="IROS 2026" size="s" />
-          {raceHeroOk && (
-            <figure className="mb-10">
-              <div className="aspect-[21/9] overflow-hidden rounded-media border border-ink-950/10 bg-paper-100">
-                <img
-                  src={RACE_HERO.src}
-                  alt="Exhibition hall during a RoboRacer competition, teams and track in view"
-                  width={1920}
-                  height={823}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full w-full object-cover"
-                  onError={() => setRaceHeroOk(false)}
-                />
-              </div>
-              <figcaption className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 font-mono text-small">
-                <span className="text-text-strong">{RACE_HERO.caption}</span>
-                <span className="text-text-muted">{RACE_HERO.credit}</span>
-              </figcaption>
-            </figure>
-          )}
+          <figure className="mb-10">
+            <div
+              className="overflow-hidden rounded-media border border-ink-950/10 bg-paper-100"
+              style={{ aspectRatio: `${RACE_HERO.width} / ${RACE_HERO.height}` }}
+            >
+              <MediaFrame
+                src={RACE_HERO.poster}
+                video={RACE_HERO.video}
+                alt={RACE_HERO.alt}
+                width={RACE_HERO.width}
+                height={RACE_HERO.height}
+                radius="none"
+                className="h-full"
+              />
+            </div>
+            <figcaption className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 font-mono text-small">
+              <span className="text-text-strong">{RACE_HERO.caption}</span>
+              <a
+                href={RACE_HERO.creditHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-muted underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2"
+              >
+                {RACE_HERO.credit} · {RACE_HERO.creditLabel}
+              </a>
+            </figcaption>
+          </figure>
           <NextRaceSpotlight
             title={race.title}
             datesHeadline={race.dates_headline ?? `${race.dates}, ${race.location}`}
@@ -170,18 +189,22 @@ export default function Landing() {
         <ExplodedModel photos={CAR_PHOTOS} />
       </div>
 
-      {/* 5 · 04 Platform (paper): sticky media panel beside the four rows -
-          learner, faculty */}
-      <Section rule aria-labelledby="pillars">
-        <SectionHeader
-          index="04"
-          eyebrow="Platform"
-          id="pillars"
-          title="Build. Learn. Race. Research."
-          lead="A car anyone can build, courses that teach autonomy, races that test it, and research that grows on top."
-          size="s"
+      {/* 5 · 04 Platform (paper): pinned 300vh chapter, scroll walks the four
+          rows with the media crossfading beside them - learner, faculty */}
+      <Section rule width="bleed" aria-labelledby="pillars">
+        <PlatformPanel
+          rows={platform}
+          header={
+            <SectionHeader
+              index="04"
+              eyebrow="Platform"
+              id="pillars"
+              title="Build. Learn. Race. Research."
+              lead="A car anyone can build, courses that teach autonomy, races that test it, and research that grows on top."
+              size="s"
+            />
+          }
         />
-        <PlatformPanel rows={platform} />
       </Section>
 
       {/* 6 · 05 Community map (ink, pinned 260vh) - sponsor, press. Owns its
@@ -189,9 +212,12 @@ export default function Landing() {
       <WorldMapChapter />
 
       {/* 7 · Data line + partner ribbon (paper) - sponsor, faculty. No title:
-          the numbers above are the voice; the line ties them to the logos. */}
-      <Section tight width="bleed" aria-labelledby="partners" className="pb-10">
-        <div className="mx-auto max-w-content px-6">
+          the numbers above are the voice; the line ties them to the logos.
+          No top padding and the map's own 1,800 px bleed, so the line sits
+          right under the chapter's counters (Cedric, 2026-08-22: the ribbon
+          read as detached from the geography). */}
+      <Section tight width="bleed" aria-labelledby="partners" className="pt-0! pb-10">
+        <div className="mx-auto max-w-[1800px] px-6">
           <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-ink-950/10 pb-4">
             <h2 id="partners" className="font-mono text-small font-normal tracking-normal text-text-muted">
               across the partner institutions below
@@ -278,8 +304,8 @@ export default function Landing() {
         </Reveal>
       </Section>
 
-      {/* 10 · 08 Join (paper) - everyone: live Slack numbers, crowd photo,
-          the three ways in. */}
+      {/* 10 · 08 Join (paper) - everyone: live Slack numbers, the Korea photo,
+          four channels, two community cards (landing v4 section 8). */}
       <CommunityJoin />
     </div>
   );

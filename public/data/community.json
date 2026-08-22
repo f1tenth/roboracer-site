@@ -4,5 +4,37 @@
   "timezones": 25,
   "continents": 6,
   "updated": "2026-08-21",
-  "source": "manual (Cedric, 2026-08-21: above 3,000 members, 25 time zones; continents estimated, verify with scripts/slack_stats.py)"
+  "source": "manual (Cedric, 2026-08-21: above 3,000 members, 25 time zones; continents estimated, verify with scripts/slack_stats.py)",
+  "join": {
+    "photo": {
+      "src": "/media/join/join-korea2025-group-1200.webp",
+      "width": 1200,
+      "height": 900,
+      "alt": "Participants of the 4th F1TENTH Korea Championship pose under the event banner in a conference hall in Incheon, Nov 2025.",
+      "caption": "4th F1TENTH Korea Championship · Incheon, Nov 2025 · verify",
+      "credit": "Photo: Cedric Hollande"
+    },
+    "post": {
+      "video": "/media/join/join-openrobotics-post-960.mp4",
+      "poster": "/media/join/join-openrobotics-post-poster.webp",
+      "width": 960,
+      "height": 540,
+      "author": "Open Robotics",
+      "author_url": "",
+      "post_url": "https://www.linkedin.com/posts/it-is-wild-to-see-just-how-far-the-roboracer-ugcPost-7467510093027205120-hCNe/",
+      "credit": "Video: Open Robotics · LinkedIn",
+      "excerpt": "Featured by Open Robotics: how far the community has come in a few short years.",
+      "excerpt_note": "TODO(content): one sentence in Cedric's words; this draft is ours, not the post text"
+    },
+    "youtube": {
+      "poster": "/media/join/join-youtube-icra2025-poster-1200.webp",
+      "width": 1200,
+      "height": 675,
+      "video_id": "wPHYLAnpMOU",
+      "title": "Autonomous RC Racing (The RoboRacer Foundation 24th Race Highlights)",
+      "channel": "The Robotics Club",
+      "channel_url": "https://www.youtube.com/@madeautonomous",
+      "caption": "ICRA 2025, Atlanta · video by The Robotics Club"
+    }
+  }
 }

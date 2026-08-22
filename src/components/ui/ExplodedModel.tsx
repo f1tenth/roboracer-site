@@ -1,18 +1,24 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Link } from "react-router-dom";
 import { gsap, useGSAP, MOTION_OK_QUERY, ScrollTrigger } from "../../lib/motion";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
+import { RACECAR_CALLOUTS } from "../racecarAssemblyData";
 
 const ExplodedModelScene = lazy(() => import("./ExplodedModelScene"));
 
 // Chapter-scoped explosion ceiling (Cedric, 2026-08-21): half the viewer's
-// offsets so parts stay close; /assembly keeps its full 0-1 range.
+// offsets so parts stay close; /assembly keeps its full 0-1 range. The
+// offsets themselves were cut in landing-v4 (racecarAssemblyData.ts).
 export const CHAPTER_MAX_EXPLOSION = 0.5;
 // Outward-and-hold (landing-v2 spec): explosion reaches the ceiling at 65% of
 // the pin, then HOLDS exploded to the end. No reassembly.
 const EXPLODED_AT = 0.65;
 // The studio photo hands off to the 3D model over the first 15% of the pin.
 const PHOTO_FADE_END = 0.15;
+// Callouts appear once the explosion has settled: the scrub catches up over
+// 0.7 s and the parts lerp behind it, so wait this long (seconds) after the
+// hold point is reached.
+const CALLOUT_SETTLE_DELAY = 0.6;
 
 // Studio photography (Cedric is producing it; files do not exist yet - the
 // layers hide themselves onError until the assets land):
@@ -52,11 +58,11 @@ const DEFAULT_PHOTOS: readonly CarPhoto[] = [
 const STATES = [
   {
     caption: "Race-ready",
-    body: "One car, assembled. Every transform on screen mirrors the open-source URDF.",
+    body: "One car, assembled. Chassis, plate, LiDAR and wheels sit where the open-source URDF puts them.",
   },
   {
     caption: "What is inside",
-    body: "Seven parts: the chassis, an accent shell, a top-mounted LiDAR, and four wheels. The rear pair is driven.",
+    body: "Eleven parts: the chassis, the accent plate, the LiDAR, the Jetson Orin, the power board, the VESC, the steering servo, and four wheels.",
   },
   {
     caption: "Build your own",
@@ -65,6 +71,24 @@ const STATES = [
 ] as const;
 
 type PhotoStatus = "loading" | "ok" | "failed";
+
+// Tailwind `md`: at and above it the callouts live inside the canvas; below
+// it they are a list under the canvas (landing-v4 section 4).
+const MD_QUERY = "(min-width: 768px)";
+
+function subscribeMd(onChange: () => void) {
+  const mql = window.matchMedia(MD_QUERY);
+  mql.addEventListener("change", onChange);
+  return () => mql.removeEventListener("change", onChange);
+}
+
+function getMdSnapshot() {
+  return window.matchMedia(MD_QUERY).matches;
+}
+
+function useMdUp(): boolean {
+  return useSyncExternalStore(subscribeMd, getMdSnapshot, () => true);
+}
 
 /** Two 4/3 photo slots beside the canvas; a slot whose file is missing
  * removes itself (onError) so the row never shows a broken image. */
@@ -104,6 +128,24 @@ function PhotoRow({ photos }: { photos: readonly CarPhoto[] }) {
   );
 }
 
+/** The five part callouts as a plain list (below `md`, and for anyone who
+ * cannot see the canvas). Same copy as the 3D labels. */
+function CalloutList() {
+  return (
+    <ul className="mt-4 flex flex-col gap-1.5 pb-4 md:hidden" aria-label="Main parts of the car">
+      {RACECAR_CALLOUTS.map((callout) => (
+        <li
+          key={callout.id}
+          className="flex items-center gap-3 font-mono text-eyebrow uppercase text-text-on-ink/80"
+        >
+          <span aria-hidden="true" className="h-px w-3 shrink-0 bg-text-on-ink/35" />
+          {callout.label}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 type ExplodedModelProps = {
   /** Photo slots beside the canvas; defaults to the curator's reserved files. */
   photos?: readonly CarPhoto[];
@@ -112,15 +154,18 @@ type ExplodedModelProps = {
 /**
  * Landing chapter: the car rests assembled (studio photo over the 3D canvas
  * when available, slow spin underneath), then its parts fly OUTWARD as you
- * scroll the pin and HOLD exploded to the end - the spin eases out as the
- * explosion rises. The pin starts only once the section is fully in view.
- * Reuses the /assembly scene graph; /assembly stays the full viewer.
+ * scroll the pin and HOLD exploded to the end, still turning slowly. Once the
+ * explosion settles, seven part callouts fade in on hairline leaders and stay
+ * up while the chapter scrolls past. The pin starts only once the section is
+ * fully in view. Reuses the /assembly scene graph; /assembly stays the full
+ * viewer.
  * Layout (landing-v3): header above, 7/5 grid, canvas 72svh on desktop so
  * the car owns the viewport; two photo slots under the captions. Mobile:
- * canvas first at 56svh, captions below, photos revealed as the pin ends.
+ * canvas first at 56svh with the callout list under it, captions below,
+ * photos revealed as the pin ends.
  * Reduced motion: static layout preferring the studio cutout, else one
- * assembled 3D frame, with the captions stacked. Weak devices and no-JS keep
- * the readable caption list.
+ * assembled 3D frame with the callouts simply visible, captions stacked.
+ * Weak devices and no-JS keep the readable caption and callout lists.
  */
 export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModelProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -128,8 +173,10 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
   const creditRef = useRef<HTMLParagraphElement>(null);
   const explosionRef = useRef(0);
   const reduced = usePrefersReducedMotion();
+  const mdUp = useMdUp();
   const [inView, setInView] = useState(false);
   const [active, setActive] = useState(false);
+  const [calloutsVisible, setCalloutsVisible] = useState(false);
   const [photoStatus, setPhotoStatus] = useState<PhotoStatus>("loading");
   const weakDevice =
     typeof navigator !== "undefined" && (navigator.hardwareConcurrency ?? 8) < 4;
@@ -170,6 +217,28 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK_QUERY, () => {
         const captions = gsap.utils.toArray<HTMLElement>("[data-em-caption]", wrap);
+        // Callouts: in (staggered) once the hold point is reached and the
+        // parts have settled; then they STAY for the rest of the chapter and
+        // leave the screen with it (Cedric, landing v4 review: "the
+        // descriptive titles do not stay when you scroll past"). Only
+        // scrubbing back up below the hold point takes them out again.
+        let shown = false;
+        let pending: gsap.core.Tween | null = null;
+        const showCallouts = () => {
+          if (shown || pending) return;
+          pending = gsap.delayedCall(CALLOUT_SETTLE_DELAY, () => {
+            pending = null;
+            shown = true;
+            setCalloutsVisible(true);
+          });
+        };
+        const hideCallouts = () => {
+          pending?.kill();
+          pending = null;
+          if (!shown) return;
+          shown = false;
+          setCalloutsVisible(false);
+        };
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: wrap,
@@ -187,6 +256,8 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
                 el.style.opacity = String(photoOpacity);
                 el.style.visibility = photoOpacity <= 0.001 ? "hidden" : "visible";
               }
+              if (self.progress >= EXPLODED_AT) showCallouts();
+              else hideCallouts();
             },
           },
         });
@@ -262,7 +333,12 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
             <div className="relative h-[40svh] md:h-[56svh]">
               {photoStatus === "failed" && !weakDevice && (
                 <Suspense fallback={null}>
-                  <ExplodedModelScene explosionRef={explosionRef} staticPose />
+                  <ExplodedModelScene
+                    explosionRef={explosionRef}
+                    staticPose
+                    callouts={mdUp}
+                    calloutsVisible
+                  />
                 </Suspense>
               )}
               {photoStatus !== "failed" && (
@@ -280,6 +356,7 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
                 />
               )}
             </div>
+            <CalloutList />
             {photoStatus === "ok" && credit}
           </div>
           <div className="flex flex-col gap-8">
@@ -307,7 +384,12 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
               <div className="relative h-[56svh] md:h-[60svh] lg:h-[72svh]">
                 {inView && (
                   <Suspense fallback={null}>
-                    <ExplodedModelScene explosionRef={explosionRef} active={active} />
+                    <ExplodedModelScene
+                      explosionRef={explosionRef}
+                      active={active}
+                      callouts={mdUp}
+                      calloutsVisible={calloutsVisible}
+                    />
                   </Suspense>
                 )}
                 {photoStatus !== "failed" && (
@@ -327,6 +409,7 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
                   </div>
                 )}
               </div>
+              <CalloutList />
               {photoStatus === "ok" && credit}
             </div>
             <div className="flex flex-col gap-6 lg:gap-8">

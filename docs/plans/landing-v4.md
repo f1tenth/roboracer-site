@@ -285,11 +285,83 @@ paths in section 5 and does not edit the JSON.
 
 ## 12. Final numbers (director fills at the end)
 
-- Hero: chapter height, zoom window, fade window.
-- Car: explosion ceilings, plate variant chosen, LiDAR finding in one sentence.
-- Map: on-screen width and height at 1440x900, region opacities if changed.
-- Platform: pin length, band boundaries.
-- Next-race video size; post-card video size.
+- Hero: chapter height 320vh (kept: the fade runs to the release, so there
+  is no dead scroll to cut); zoom 0.10-0.42 `power1.inOut` to 1.30 (1.20 under
+  768), at its max as the last unit lands at 0.42; hold 0.42-0.62; fade
+  0.62-1.00 `power2.inOut` (sigmoid) on the block. Cedric's three notes on the
+  drafts (2026-08-22): "way slower, get to 0 once we are basically off that
+  page", then "start a bit later so it doesn't disappear while we are still
+  reading it ... slow start ... sigmoid": opacity 0.96 at 0.70, 0.50 at 0.81,
+  0.07 at 0.90, 0 at release; video dim to 0.12 runs 0.84-1.00 under the tail;
+  nav fill unchanged 0.72-0.95. Measured on the dev server: scale 1.30 at
+  p 0.42, translate 0 throughout.
+- Car: explosion ceilings wheels lateral 0.11 / front x +0.05 / rear x -0.04 /
+  z 0.03, LiDAR `[0.02, 0, 0.14]`, chapter max explosion 0.5 so the hold pose
+  moves a wheel 0.055 m (one tire width); `SPAN.exploded` 0.74 -> 0.62,
+  `SPAN.rest` 0.49 -> 0.53; `FILL` 0.78 -> 0.86 (at 0.78 the hold pose matched
+  v3's size because v3's portrait branch had used the phone fill on desktop).
+  Plate: cyan `#00D1DA` (metalness 0.55, roughness 0.32, envMapIntensity 0.9,
+  clearcoat 0.3); magenta captured and rejected as a third loud accent next to
+  the violet CTA, while cyan is the logo's left stop and the map's accent.
+  Cedric's round 2 (2026-08-22): the plate's explosion rises 0.07 -> 0.11 so
+  at the hold it floats between the Jetson Orin's top (z 0.111) and the LiDAR
+  (z 0.145), and its opacity follows the explosion in the shared material
+  (1.0 assembled, 0.24 mid, 0.13 at the hold and in /assembly), which also
+  covers the assembly viewer. LiDAR finding: the transform chain was right all
+  along; the v3 mesh tapered upward under a wider ring and cap, which read as
+  upside-down; stream B re-exported a straight cylinder, then Cedric
+  corrected the part itself: the car carries a Hokuyo UTM-30LX (USB), so the
+  mesh is now the 60 x 60 x 87 mm unit (square body, smoked window, amber
+  band `#e8641b`, flat square cap) inside the old envelope, no transform
+  changed. Four parts added to the shared assembly (landing + /assembly):
+  NVIDIA Jetson Orin, power board (PCB), VESC, steering servo (model
+  `· verify`); chassis re-exported without the ROS deck abstraction (155 ->
+  90 KB). Callouts: seven, anchored on the parts, and they stay once shown
+  (Cedric: the titles must not vanish when scrolling past): `Hokuyo UTM-30LX ·
+  2D LiDAR`, `NVIDIA Jetson Orin · compute`, `Power board · PCB`, `VESC ·
+  motor controller`, `Brushless DC motor`, `Steering servo · verify`,
+  `Traxxas Slash 4x4 · 1/10 chassis`. Mesh generators kept in
+  `scripts/car-mesh/`; every number is in `docs/design/CAR_CHAPTER.md`.
+- Map (rebuilt mid-session to Cedric's exact spec, which replaces section 6's
+  colours and layout): paper chapter; base state = land as hairline slate
+  outlines (`#1e3a48` 0.32, 0.9px), no fill, no pins, no labels; regions flat
+  `#71e4ea` (4+ held) / `#a1ecf0` (2-3) / `#c4f2f5` (1) / `#e4f7fa` (partner-only),
+  stroke `#0b6b73` 0.35 at 0.7px, no violet anywhere; glow `#00D1DA` 0.26 -> 0 at
+  r 30 under held races; pins hollow paper-filled rings `#0b6b73` 1.7px r 5.5,
+  dashed `2.5 2` at 0.45 for upcoming/unverified (no "tbc" text); one filled
+  marker, Philadelphia (dot r 5.5 in a ring r 11); labels mono 13px `#0b6b73`
+  0.9, one per city, collision-checked, skipped when they cannot fit; no
+  dashed reveal ring. Reveal: pins pop in order of great-circle distance from
+  Philadelphia (t ~ (d/dmax)^0.75 over 0.06-0.82), a country tints as its
+  first pin pops, partner-only countries in the last 0.08, counters run from
+  0.06 (Cedric: they started late). Layout: header above, map on a 1,800 px
+  bleed capped by the viewport height (`calc((100svh - 356px) * aspect)`),
+  counters and legend below. Measured: 1233 x 544 px at 1440x900 (60vh),
+  1641 x 724 at 1920x1080, 934 x 412 at 1366x768; the pinned box is exactly
+  one viewport tall at all three.
+- Platform: the section header renders inside the pinned composition (left
+  column, above the frame; top-aligned) after Cedric's "big white gap" note;
+  wrapper `min-h-[300vh]` with a sticky `min-h-svh` child (200vh of
+  travel; ScrollTrigger "top top" to "bottom bottom"); bands Build 0-0.25,
+  Learn 0.25-0.50, Race 0.50-0.75, Research 0.75-1.00; crossfade 0.04 centred
+  on each boundary, opacity only. Root cause of the silent Research row: the
+  `<video>` elements were never mounted (the in-view observer subscribed
+  before the rows had loaded), not the encodes.
+- Next-race video: `race-iros2026-hero-1272.mp4` 816 KB (1272x720 full frame,
+  8 s; poster 106 KB). The contract's 21/9 band cut the bottom strip of Ezio's
+  composite off (Cedric, 2026-08-22: "short on the bottom, we need to see more
+  of the bottom"), so the frame now takes the video's own aspect; native
+  1272-wide source, so not 1600. The credit line reads `Video: Ezio Bartocci ·
+  our post on LinkedIn ↗` and links RoboRacer's own post (Cedric, 2026-08-22). Post-card video:
+  `join-openrobotics-post-960.mp4` 1.0 MB (960x540, 10 s of Open Robotics'
+  post, Cedric's mid-session swap for the Foundation's own race-day post;
+  poster 80 KB). The assembling clip runs at 2x (5.9 s) because `assembling_car.mp4` is 11.8 s
+  (4x would give 3 s); Cedric moved it from the Learn row to the Build row
+  ("we are literally building a car"), so Learn now carries the pit-work photo
+  (`platform-learn-1200.webp`, ex Build) and the clip is `platform-build-960.mp4`.
+- Ribbon: `.rr-marquee:has(a:focus-visible)` replaces `:focus-within`; proven
+  with a pointer click on a logo (new tab closed, pointer moved off: running;
+  Tab onto the link: paused).
 
 ## 13. Acceptance (director walks it from captures; one `/qa-page landing` after)
 

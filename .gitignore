@@ -46,3 +46,6 @@ __pycache__/
 .impeccable/live/
 .claude/agent-memory/
 .taskmap/
+# landing v4 (2026-08-22): next-race video (up to 2.5 MB, Cedric's exception) and the Join post-card clip
+!public/media/race/*.mp4
+!public/media/join/*.mp4

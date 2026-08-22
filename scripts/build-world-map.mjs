@@ -108,7 +108,7 @@ mkdirSync("public/data", { recursive: true });
 
 // Fill and stroke use currentColor so the chapter can recolor it for ink or paper.
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true">
-<path d="${d}" fill="currentColor" fill-opacity="0.14" stroke="currentColor" stroke-opacity="0.28" stroke-width="0.8" stroke-linejoin="round"/>
+<path d="${d}" fill="currentColor" fill-opacity="0.10" stroke="currentColor" stroke-opacity="0.18" stroke-width="1" stroke-linejoin="round"/>
 </svg>
 `;
 writeFileSync("public/media/map/world-land.svg", svg);

@@ -152,12 +152,24 @@ export type MapCountry = {
   verified: boolean;
 };
 
+/** One Natural Earth path per country that hosted a competition or fields a
+ * partner (landing v4 section 6; emitted by scripts/build-world-map.mjs). */
+export type MapRegion = {
+  name: string;
+  held: number;
+  upcoming: number;
+  partner: boolean;
+  verified: boolean;
+  d: string;
+};
+
 export type EventsMap = {
   viewBox: [number, number, number, number];
   projection: string;
   updated: string;
   events: MapEvent[];
   countries: MapCountry[];
+  regions: MapRegion[];
 };
 
 /** public/data/platform.json: the four pillars with their media panel slot. */
@@ -180,6 +192,41 @@ export type PlatformRow = {
 };
 
 /** public/data/community.json (seed values; refreshed by scripts/slack_stats.py). */
+export type JoinPhoto = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  caption: string;
+  credit?: string;
+};
+
+/** A community LinkedIn post, re-hosted as a native video (landing v4 section 8). */
+export type JoinPost = {
+  video: string;
+  poster: string;
+  width: number;
+  height: number;
+  author: string;
+  author_url?: string;
+  post_url: string;
+  credit?: string;
+  /** One sentence in Cedric's words; never the post text. */
+  excerpt?: string;
+};
+
+/** YouTube facade: the poster is ours; the embed loads only after a click. */
+export type JoinYouTube = {
+  poster: string;
+  width: number;
+  height: number;
+  video_id: string;
+  title: string;
+  channel: string;
+  channel_url: string;
+  caption: string;
+};
+
 export type Community = {
   members: number;
   members_display: string;
@@ -187,6 +234,12 @@ export type Community = {
   continents: number;
   updated: string;
   source: string;
+  /** Written by the media curator (landing v4 section 9). */
+  join?: {
+    photo?: JoinPhoto;
+    post?: JoinPost;
+    youtube?: JoinYouTube;
+  };
 };
 
 async function loadJson<T>(name: string): Promise<T> {

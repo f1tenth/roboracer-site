@@ -19,6 +19,7 @@ import {
   type EulerOrder,
   type Group,
   type Material,
+  type MeshPhysicalMaterial,
   type Object3D,
   Vector3,
 } from "three";
@@ -30,10 +31,12 @@ import {
   type VectorTuple,
 } from "./racecarAssemblyData";
 import {
-  FINISH,
+  ACCENT_FINISH,
+  accentOpacity,
   HIGHLIGHT_EMISSIVE,
   HIGHLIGHT_INTENSITY,
   overridePartMaterial,
+  resolveAccentVariant,
 } from "./racecarMaterials";
 
 const glbAssets = RACECAR_PARTS.filter((part) => part.format === "glb").map(
@@ -116,6 +119,9 @@ type ModelGeometryProps = {
   selected: boolean;
   hovered: boolean;
   wireframe: boolean;
+  /** Current explosion amount; the accent plate's opacity follows it. */
+  explosion?: number;
+  explosionRef?: RefObject<number>;
 };
 
 function GlbGeometry({ part, selected, hovered, wireframe }: ModelGeometryProps) {
@@ -133,20 +139,53 @@ function GlbGeometry({ part, selected, hovered, wireframe }: ModelGeometryProps)
   return <primitive object={scene} rotation={rotation} />;
 }
 
-function StlGeometry({ part, selected, hovered, wireframe }: ModelGeometryProps) {
+/** The accent plate: anodized cyan (or magenta) with a light clearcoat, the
+ * one colored part of the car (racecarMaterials.ts, ACCENT_FINISH). Its
+ * opacity follows the explosion amount every frame (accentOpacity: opaque
+ * assembled, close to transparent from the landing chapter's hold pose on;
+ * /assembly gets the same since it renders through here). The plate is the
+ * only transparent object, so it draws after the opaque parts; depth writes
+ * stop while it is see-through so nothing behind it is culled, and it stops
+ * casting its shadow once mostly transparent. */
+function StlGeometry({
+  part,
+  selected,
+  hovered,
+  wireframe,
+  explosion = 0,
+  explosionRef,
+}: ModelGeometryProps) {
   const geometry = useLoader(STLLoader, part.asset);
+  const finish = ACCENT_FINISH[resolveAccentVariant()];
+  const mesh = useRef<Mesh>(null);
+  const material = useRef<MeshPhysicalMaterial>(null);
+
+  useFrame(() => {
+    const current = material.current;
+    if (!current) return;
+    const opacity = accentOpacity(explosionRef ? explosionRef.current : explosion);
+    if (Math.abs(current.opacity - opacity) < 1e-4) return;
+    current.opacity = opacity;
+    current.depthWrite = opacity > 0.999;
+    if (mesh.current) mesh.current.castShadow = opacity > 0.5;
+  });
 
   return (
-    <mesh geometry={geometry} castShadow receiveShadow>
-      <meshStandardMaterial
-        color={FINISH.graphite.color}
+    <mesh ref={mesh} geometry={geometry} castShadow receiveShadow>
+      <meshPhysicalMaterial
+        ref={material}
+        color={finish.color}
+        transparent
+        opacity={accentOpacity(explosionRef ? explosionRef.current : explosion)}
         emissive={HIGHLIGHT_EMISSIVE}
         emissiveIntensity={
           selected ? HIGHLIGHT_INTENSITY.selected : hovered ? HIGHLIGHT_INTENSITY.hover : 0
         }
-        envMapIntensity={FINISH.graphite.envMapIntensity}
-        metalness={FINISH.graphite.metalness}
-        roughness={FINISH.graphite.roughness}
+        envMapIntensity={finish.envMapIntensity}
+        metalness={finish.metalness}
+        roughness={finish.roughness}
+        clearcoat={finish.clearcoat}
+        clearcoatRoughness={finish.clearcoatRoughness}
         wireframe={wireframe}
       />
     </mesh>
@@ -251,6 +290,8 @@ function ExplodedPart({
           selected={selected}
           hovered={hovered}
           wireframe={wireframe}
+          explosion={explosion}
+          explosionRef={explosionRef}
         />
       )}
 
