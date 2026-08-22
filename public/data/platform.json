@@ -22,11 +22,11 @@
     "href": "/learn",
     "linkText": "Start the course",
     "media": {
-      "type": "image",
-      "src": "/media/platform/platform-learn-1200.webp",
-      "poster": "/media/platform/platform-learn-1200.webp",
-      "caption": "LiDAR scan and map in RViz · course lab",
-      "credit": "RoboRacer organizers"
+      "type": "video",
+      "src": "/media/platform/platform-learn-960.mp4",
+      "poster": "/media/platform/platform-learn-poster.webp",
+      "caption": "assembling a car, 2x speed · build tutorial",
+      "credit": "Video: Cedric Hollande"
     }
   },
   {
@@ -40,8 +40,8 @@
       "type": "video",
       "src": "/media/platform/platform-race-960.mp4",
       "poster": "/media/platform/platform-race-poster.webp",
-      "caption": "head-to-head · ICRA 2026, Vienna",
-      "credit": "Video: Chinmay and Tanmay Samak"
+      "caption": "two cars through the corner · ICRA 2025, Atlanta",
+      "credit": "Video: The Robotics Club"
     }
   },
   {

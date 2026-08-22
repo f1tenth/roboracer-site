@@ -4,5 +4,35 @@
   "timezones": 25,
   "continents": 6,
   "updated": "2026-08-21",
-  "source": "manual (Cedric, 2026-08-21: above 3,000 members, 25 time zones; continents estimated, verify with scripts/slack_stats.py)"
+  "source": "manual (Cedric, 2026-08-21: above 3,000 members, 25 time zones; continents estimated, verify with scripts/slack_stats.py)",
+  "join": {
+    "photo": {
+      "src": "/media/join/join-korea2025-group-1200.webp",
+      "width": 1200,
+      "height": 900,
+      "alt": "Participants of the 4th F1TENTH Korea Championship pose under the event banner in a conference hall in Incheon, Nov 2025.",
+      "caption": "4th F1TENTH Korea Championship · Incheon, Nov 2025 · verify",
+      "credit": "Photo: Cedric Hollande"
+    },
+    "post": {
+      "video": "/media/join/join-icra2026-post-960.mp4",
+      "poster": "/media/join/join-icra2026-post-poster.webp",
+      "width": 960,
+      "height": 540,
+      "author": "The RoboRacer Foundation",
+      "author_url": "",
+      "post_url": "https://www.linkedin.com/posts/today-was-our-first-race-day-at-ieee-ugcPost-7468073672411336704-I1kC/",
+      "credit": "Video: The RoboRacer Foundation · LinkedIn"
+    },
+    "youtube": {
+      "poster": "/media/join/join-youtube-icra2025-poster-1200.webp",
+      "width": 1200,
+      "height": 675,
+      "video_id": "wPHYLAnpMOU",
+      "title": "Autonomous RC Racing (The RoboRacer Foundation 24th Race Highlights)",
+      "channel": "The Robotics Club",
+      "channel_url": "https://www.youtube.com/@madeautonomous",
+      "caption": "ICRA 2025, Atlanta · video by The Robotics Club"
+    }
+  }
 }
