@@ -248,7 +248,7 @@ export default function Assembly() {
         </p>
         <dl className="viewer-stats">
           <div><dt>Scale</dt><dd>1:1</dd></div>
-          <div><dt>Parts</dt><dd>07</dd></div>
+          <div><dt>Parts</dt><dd>{String(RACECAR_PARTS.length).padStart(2, "0")}</dd></div>
           <div><dt>Wheelbase</dt><dd>0.322 m</dd></div>
         </dl>
       </section>
