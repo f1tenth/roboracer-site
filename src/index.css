@@ -135,6 +135,18 @@ body {
   text-transform: uppercase;
 }
 
+/* The logo gradient clipped to text. Gradient text is otherwise banned
+   (sharpen v2); the ONE exception is the hero's first line over the darkened
+   video (Cedric, landing v3, 2026-08-21). Ink context only: the cyan stop is
+   1.9:1 on paper. Apply to an inline-block so the gradient spans the words,
+   not the container. */
+@utility text-gradient-logo {
+  background-image: linear-gradient(90deg, var(--color-rr-cyan) 0%, var(--color-rr-grad-start) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* Marquee (design system "Marquee" pattern; static wrapped grid on reduce) */
 @keyframes rr-marquee {
   from { transform: translateX(0); }
