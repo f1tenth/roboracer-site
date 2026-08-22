@@ -24,6 +24,7 @@ dist-ssr
 *.sw?
 
 # revamp tooling (appended by scripts/rr.sh setup; merge into .gitignore)
+_harvest
 _harvest/
 docs/qa/**/*.png
 public/media/**/*.mp4
