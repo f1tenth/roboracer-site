@@ -296,20 +296,32 @@ paths in section 5 and does not edit the JSON.
   nav fill unchanged 0.72-0.95. Measured on the dev server: scale 1.30 at
   p 0.42, translate 0 throughout.
 - Car: explosion ceilings wheels lateral 0.11 / front x +0.05 / rear x -0.04 /
-  z 0.03, LiDAR `[0.02, 0, 0.14]`, accent `[0, 0, 0.07]`, chapter max explosion
-  0.5 so the hold pose moves a wheel 0.055 m (one tire width); `SPAN.exploded`
-  0.74 -> 0.62, `SPAN.rest` 0.49 -> 0.53; `FILL` 0.78 -> 0.86 (director: at
-  0.78 the hold pose matched v3's size because v3's portrait branch had been
-  using the phone fill on desktop). Plate: cyan `#00D1DA` (metalness 0.55,
-  roughness 0.32, envMapIntensity 0.9, clearcoat 0.3); magenta captured and
-  rejected as a third loud accent next to the violet CTA, while cyan is the
-  logo's left stop and the map's accent already. LiDAR finding: the transform
-  chain was right all along; the v3 mesh body tapered upward (54 -> 48 mm)
-  under a 56 mm ring and cap, which read as an upside-down sensor, so the part
-  is re-exported as a straight cylinder with the amber band flush under the
-  cap (no transform changed). Callouts: Hokuyo UST-10LX · 2D LiDAR, NVIDIA
-  Jetson · compute, VESC · motor controller, Brushless DC motor, Traxxas Slash
-  4x4 · 1/10 chassis (all confirmed in the harvested rules and build page).
+  z 0.03, LiDAR `[0.02, 0, 0.14]`, chapter max explosion 0.5 so the hold pose
+  moves a wheel 0.055 m (one tire width); `SPAN.exploded` 0.74 -> 0.62,
+  `SPAN.rest` 0.49 -> 0.53; `FILL` 0.78 -> 0.86 (at 0.78 the hold pose matched
+  v3's size because v3's portrait branch had used the phone fill on desktop).
+  Plate: cyan `#00D1DA` (metalness 0.55, roughness 0.32, envMapIntensity 0.9,
+  clearcoat 0.3); magenta captured and rejected as a third loud accent next to
+  the violet CTA, while cyan is the logo's left stop and the map's accent.
+  Cedric's round 2 (2026-08-22): the plate's explosion rises 0.07 -> 0.11 so
+  at the hold it floats between the Jetson Orin's top (z 0.111) and the LiDAR
+  (z 0.145), and its opacity follows the explosion in the shared material
+  (1.0 assembled, 0.24 mid, 0.13 at the hold and in /assembly), which also
+  covers the assembly viewer. LiDAR finding: the transform chain was right all
+  along; the v3 mesh tapered upward under a wider ring and cap, which read as
+  upside-down; stream B re-exported a straight cylinder, then Cedric
+  corrected the part itself: the car carries a Hokuyo UTM-30LX (USB), so the
+  mesh is now the 60 x 60 x 87 mm unit (square body, smoked window, amber
+  band `#e8641b`, flat square cap) inside the old envelope, no transform
+  changed. Four parts added to the shared assembly (landing + /assembly):
+  NVIDIA Jetson Orin, power board (PCB), VESC, steering servo (model
+  `· verify`); chassis re-exported without the ROS deck abstraction (155 ->
+  90 KB). Callouts: seven, anchored on the parts, and they stay once shown
+  (Cedric: the titles must not vanish when scrolling past): `Hokuyo UTM-30LX ·
+  2D LiDAR`, `NVIDIA Jetson Orin · compute`, `Power board · PCB`, `VESC ·
+  motor controller`, `Brushless DC motor`, `Steering servo · verify`,
+  `Traxxas Slash 4x4 · 1/10 chassis`. Mesh generators kept in
+  `scripts/car-mesh/`; every number is in `docs/design/CAR_CHAPTER.md`.
 - Map (rebuilt mid-session to Cedric's exact spec, which replaces section 6's
   colours and layout): paper chapter; base state = land as hairline slate
   outlines (`#1e3a48` 0.32, 0.9px), no fill, no pins, no labels; regions flat
