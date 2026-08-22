@@ -1,0 +1,2652 @@
+{
+  "version": 1,
+  "updated": "2026-08-21",
+  "items": [
+    {
+      "id": "koirala-2024-f1tenth",
+      "title": "F1tenth Autonomous Racing With Offline Reinforcement Learning Methods",
+      "authors": [
+        "Prajwal Koirala",
+        "Cody Fleming"
+      ],
+      "year": 2024,
+      "venue": "",
+      "venue_short": "",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "reinforcement-learning",
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "openalex",
+      "notes": "relevance score 6; review 2026-08-21: on-platform but 2024; outside the 2025-2026 acceptance window of this pass",
+      "doi": "10.1109/itsc58415.2024.10920216",
+      "url": "https://doi.org/10.1109/itsc58415.2024.10920216",
+      "abstract": "Autonomous racing serves as a critical platform for evaluating automated driving systems and enhancing vehicle mobility intelligence. This work investigates offline reinforcement learning methods to train agents within the dynamic F1tenth racing environment. The study begins by exploring the challenges of online training in the Austria race track environment, where agents consistently fail to complete the laps. Consequently, this research pivots towards an offline strategy, leveraging 'expert' demonstration dataset to facilitate agent training. A waypoint-based suboptimal controller is developed to gather data with successful lap episodes. This data is then employed to train offline learning-based algorithms, with a subsequent analysis of the agents' cross-track performance, evaluating their zero-shot transferability from seen to unseen scenarios and their capacity to adapt to changes in environment dynamics. Beyond mere algorithm benchmarking in autonomous racing scenarios, this study also introduces and describes the machinery of our return-conditioned decision treebased policy, comparing its performance with methods that employ fully connected neural networks, Transformers, and Diffusion Policies and highlighting some insights into method selection for training autonomous agents in driving interactions.",
+      "citations": 1,
+      "institutions": [
+        "Iowa State University"
+      ]
+    },
+    {
+      "id": "peterka-2025-sampling",
+      "title": "Sampling-Based Algorithm for Overtaking in the F1/10 Competition",
+      "authors": [
+        "Michal Peterka"
+      ],
+      "year": 2025,
+      "venue": "Cvut DSpace (Czech Technical University)",
+      "venue_short": "Cvut DSpace (Czech Techn",
+      "type": "conference",
+      "tags": [
+        "multi-agent",
+        "planning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "openalex",
+      "notes": "relevance score 6; review 2026-08-21: master's thesis (CTU Prague, Czech abstract); decide whether theses belong in the curated list",
+      "url": "http://hdl.handle.net/10467/122738",
+      "abstract": "Tato práce představuje plánovací algoritmus pro autonomní závodění s podporou předjíždění založený na vzorkování. Algoritmus generuje vzorky řídících vstupů, predikuje odpovídající trajektorie pomocí dynamického modelu auta a hodnotí je na základě postupu na trati a bezpečnostních kritérií. Algoritmus byl vyvinut pro závody autonomních vozidel v soutěži F1TENTH. Metoda byla otestována v rychlostních i head-to-head závodech na třech různých tratích. V rychlostních závodech algoritmus konzistentně překonával referenční metody dosažením kratších časů na kolo díky plánování zohledňujícímu zakřivení trati. V závodech head-to-head byl schopen provádět předjížděcí manévry. Výsledky ukazují, že algoritmus splňuje své cíle v oblasti rychlé jízdy po trati a schopnosti předjíždění."
+    },
+    {
+      "id": "arnolfo-2025-construccion",
+      "title": "Construcción y adaptación del vehículo autónomo F1TENTH: evaluación de alternativas de hardware",
+      "authors": [
+        "Emanuel Andrés Arnolfo"
+      ],
+      "year": 2025,
+      "venue": "e_Buah",
+      "venue_short": "e_Buah",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "openalex",
+      "notes": "relevance score 5; review 2026-08-21: bachelor's thesis (Alcala, Spanish); decide whether theses belong in the curated list",
+      "url": "http://hdl.handle.net/10017/68086",
+      "pdf": "https://ebuah.uah.es/dspace/bitstream/10017/68086/1/TFG_Arnolfo_2025.pdf",
+      "abstract": "En el presente trabajo se detalla todo el proceso de construcción de una plataforma física para vehículos autónomos a escala, utilizando el proyecto de código abierto F1TENTH como base. El objetivo principal fue crear un entorno de desarrollo de bajo costo, flexible y reproducible para experimentar con tecnologías de asistencia de conducción y algoritmos de conducción autónoma. En el trabajo se abordan los estudios previos y la justificación de cada elección, desde el proyecto base hasta las adaptaciones realizadas sobre el mismo. También se desarrolló código propio que se ejecuta sobre la plataforma y garantiza el funcionamiento de la misma como medio de investigación y estudio de vehículos autónomos."
+    },
+    {
+      "id": "li-2024-reduce",
+      "title": "Reduce Lap Time for Autonomous Racing with Curvature-Integrated MPCC Local Trajectory Planning Method",
+      "authors": [
+        "Zhouheng Li",
+        "Lei Xie",
+        "Cheng Hu",
+        "Hongye Su"
+      ],
+      "year": 2024,
+      "venue": "arXiv (Cornell University)",
+      "venue_short": "arXiv",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "raceline-optimization",
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "openalex",
+      "notes": "relevance score 3; review 2026-08-21: on-platform but 2024; outside the 2025-2026 acceptance window of this pass",
+      "doi": "10.1109/itsc58415.2024.10920215",
+      "url": "https://doi.org/10.1109/itsc58415.2024.10920215",
+      "pdf": "https://arxiv.org/pdf/2502.03695",
+      "abstract": "The widespread application of autonomous driving technology has significantly advanced the field of autonomous racing. Model Predictive Contouring Control (MPCC) is a highly effective local trajectory planning method for autonomous racing. However, the traditional MPCC method struggles with racetracks that have significant curvature changes, limiting the performance of the vehicle during autonomous racing. To address this issue, we propose a curvatureintegrated MPCC (CiMPCC) local trajectory planning method for autonomous racing. This method optimizes the velocity of the local trajectory based on the curvature of the racetrack centerline. The specific implementation involves mapping the curvature of the racetrack centerline to a reference velocity profile, which is then incorporated into the cost function for optimizing the velocity of the local trajectory. This reference velocity profile is created by normalizing and mapping the curvature of the racetrack centerline, thereby ensuring efficient and performance-oriented local trajectory planning in racetracks with significant curvature. The proposed CiMPCC method has been experimented on a self-built$\\mathbf{1: 1 0}$scale F1TENTH racing vehicle deployed with ROS platform. The experimental results demonstrate that the proposed method achieves outstanding results on a challenging racetrack with sharp curvature, improving the overall lap time by 11.4%-12.5% compared to other autonomous racing trajectory planning methods. Our code is available at https://github.com/zhouhengli/CiMPCC.",
+      "citations": 2,
+      "institutions": [
+        "Zhejiang University"
+      ]
+    },
+    {
+      "id": "manninen-2025-system",
+      "title": "System Design for an Autonomous Small-Scale Racing Car",
+      "authors": [
+        "Eetu B Manninen"
+      ],
+      "year": 2025,
+      "venue": "Tampere University Institutional Repository (Tampere University)",
+      "venue_short": "Tampere University Insti",
+      "type": "conference",
+      "tags": [
+        "perception-estimation",
+        "systems-platform",
+        "reinforcement-learning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "openalex",
+      "notes": "relevance score 3; review 2026-08-21: master's thesis (Tampere); decide whether theses belong in the curated list",
+      "url": "https://trepo.tuni.fi/handle/10024/228297",
+      "pdf": "https://trepo.tuni.fi/handle/10024/228297",
+      "abstract": "This thesis presents the design and implementation of a modular, high-performance autonomous small-scale racing car platform that closely emulates the dynamics of full-sized cars. The proposed system adopts Ackermann steering geometry and supports higher-speed operation, making it ideal for autonomous vehicle research and educational applications. Built on the RoboRacer (formerly F1Tenth) framework, the platform features two car configurations: Maverick Strada SC and Traxxas Slash 4X4 Ultimate. Both are equipped with Intel RealSense depth cameras, while the Traxxas model also integrates a LiDAR sensor for enhanced perception. The system is powered by an NVIDIA Jetson Orin Nano running ROS2, enabling real-time SLAM, localization, and autonomous navigation. This thesis covers a Robot Operating System 2 (ROS2)-based software stack with modified control algorithms and calibration procedures for odometry and steering. Experimental validation demonstrates successful autonomous navigation in indoor environments, with the Light Detection and Ranging (LiDAR)-equipped car outperforming the car equipped with only a depth camera in larger spaces. The results underscore the platform’s potential for advancing autonomous systems research and highlight areas for future development, including improved steering accuracy, reverse navigation, and chassis customization."
+    },
+    {
+      "id": "ye-2025-mctr",
+      "title": "MCTR: Midpoint Corrected Triangulation for Autonomous Racing via Digital Twin Simulation in CARLA",
+      "authors": [
+        "Junhao Ye",
+        "Cheng Hu",
+        "Yiqin Wang",
+        "Huang, Weizhan",
+        "Nicolas S. Baumann",
+        "Jie He",
+        "Mo Qu",
+        "Lei Xie",
+        "Hongye Su"
+      ],
+      "year": 2025,
+      "venue": "arXiv (Cornell University)",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "perception-estimation",
+        "sim-to-real",
+        "reinforcement-learning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "openalex",
+      "notes": "relevance score 3; review 2026-08-21: borderline: names the F1TENTH simulator only as a limitation; CARLA digital twin",
+      "doi": "10.48550/arxiv.2508.12729",
+      "url": "https://doi.org/10.48550/arxiv.2508.12729",
+      "pdf": "https://arxiv.org/pdf/2508.12729",
+      "abstract": "In autonomous racing, reactive controllers eliminate the computational burden of the full See-Think-Act autonomy stack by directly mapping sensor inputs to control actions. This bypasses the need for explicit localization and trajectory planning. A widely adopted baseline in this category is the Follow-The-Gap method, which performs trajectory planning using LiDAR data. Building on FTG, the Delaunay Triangulation-based Racing algorithm introduces further enhancements. However, DTR's use of circumcircles for trajectory generation often results in insufficiently smooth paths, ultimately degrading performance. Additionally, the commonly used F1TENTH-simulator for autonomous racing competitions lacks support for 3D LiDAR perception, limiting its effectiveness in realistic testing. To address these challenges, this work proposes the MCTR algorithm. MCTR improves trajectory smoothness through the use of Curvature Corrected Moving Average and implements a digital twin system within the CARLA simulator to validate the algorithm's robustness under 3D LiDAR perception. The proposed algorithm has been thoroughly validated through both simulation and real-world vehicle experiments."
+    },
+    {
+      "id": "madhavi-2026-real",
+      "title": "Real-Time Sensor Fusion Architecture with Adaptive Weighted Filtering for Autonomous Racing Systems",
+      "authors": [
+        "K. Reddy Madhavi",
+        "Venkata Naga Chetan Kumar Pulipati",
+        "Anusha Kothapalli",
+        "Chiluka Mahammad Shafi",
+        "Sykam Lakshmi Narasimha"
+      ],
+      "year": 2026,
+      "venue": "",
+      "venue_short": "",
+      "type": "conference",
+      "tags": [
+        "perception-estimation",
+        "sim-to-real",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "openalex",
+      "notes": "relevance score 3; review 2026-08-21: borderline: F1TENTH simulation used only for synthetic data; low-signal venue",
+      "doi": "10.23919/indiacom70271.2026.11526267",
+      "url": "https://doi.org/10.23919/indiacom70271.2026.11526267",
+      "abstract": "Autonomous racing requires precise location tracking and accurate object detection capabilities to function successfully during both high-speed driving and quick directional changes and simultaneous vehicle operations. The study introduces a sensor fusion system that operates in real time by combining traditional filtering techniques, which include Extended Kalman Filter (EKF), Unscented Kalman Filter (UKF), and Particle Filter (PF), with a new Adaptive Weighted Fusion Filter (AWFF), which changes sensor importance based on vehicle operation and environmental factors. The AWFF system conducts ongoing sensor updates to achieve precise sensor combination results, which operate with a verified average latency of 2.60 milliseconds, well within the 10-millisecond threshold needed for$\\mathbf{1 0 0 ~ H z}$real-time functioning. The fusion system uses LiDAR for creating spatial maps, radar for determining speeds, camera arrays for visual detection, and IMU sensors for measuring dynamic states. The system assessment used synthetic datasets, which were produced through the CARLA simulation environment and F1TENTH simulation tools and Roborace/IAC virtual racing scenarios. The first tests demonstrate a 75.3 % accuracy increase in multi-vehicle positioning results while maintaining 2.60 ms average fusion times, which existing methods struggle to match. The findings demonstrate that AWFF functions as an advanced fusion system that delivers fast results for both future autonomous racing systems and multiple agent systems that operate in unpredictable environments."
+    },
+    {
+      "id": "chastek-2025-improving",
+      "title": "Improving Controller Accuracy: Increasing Localization Accuracy Using Sensor Fusion",
+      "authors": [
+        "William Chastek",
+        "Goktug Poyrazoglu",
+        "Yukang Cao",
+        "Volkan Isler"
+      ],
+      "year": 2025,
+      "venue": "",
+      "venue_short": "",
+      "type": "conference",
+      "tags": [
+        "perception-estimation",
+        "control-mpc",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "openalex",
+      "notes": "relevance score 2; review 2026-08-21: student research report (UMN conservancy), not peer reviewed",
+      "url": "https://hdl.handle.net/11299/271871",
+      "abstract": "Accurate mobile robot localization enables safe and efficient navigation. In this report, the impact of using multiple sensors for localization was studied. Two sensors configurations were tested: IMU and IMU + LiDAR. This was deployed on both a simulated Turtlebot3 and a physical F1TENTH robotic platform, and was tasked to navigate to a goal position using a logMPPI controller. For both the simulation and real-world cases, the effects of using multiple sensors on the controller accuracy were studied. Accuracy was measured by calculating the Euclidean distance between the readings given from the robot versus the ground truth. This was accomplished by tracking the robot model in Gazebo, and using a PhaseSpace system for the physical robot. Using these metrics it was found that in an idealistic environment where sensor noise is minimal, sensor fusion is not the optimal option. However, in real-world scenarios, it was demonstrated that a particle filter fusing IMU and LiDAR readings reduced average localization error by at least 11%. This means real-world robotic platforms should aim to use multiple sensors for localization, to increase accuracy."
+    },
+    {
+      "id": "paluch-2026-hardware",
+      "title": "Hardware accelerated neural networks for robotic control",
+      "authors": [
+        "Marcin Paluch"
+      ],
+      "year": 2026,
+      "venue": "Open MIND",
+      "venue_short": "Open MIND",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "systems-platform",
+        "raceline-optimization"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "openalex",
+      "notes": "relevance score 2; review 2026-08-21: doctoral thesis (ETH); decide whether theses belong in the curated list",
+      "doi": "10.3929/ethz-c-000803772",
+      "url": "https://doi.org/10.3929/ethz-c-000803772",
+      "pdf": "https://doi.org/10.3929/ethz-c-000803772",
+      "abstract": "This thesis investigates hardware-accelerated neural control for robotics across three directions: optimization algorithms tailored to embedded neural accelerators, neural controller deployment on low-cost FPGAs (Field Programmable Gate Arrays), and adaptive control based on RNNs (Recurrent Neural Networks) with implicit parameter inference. First, we introduce RPGD (Resampling Parallel Gradient Descent), a nonlinear MPC (Model Predictive Control) optimizer designed for small-batch parallelism. By combining gradient-based refinement with elite plans selection and periodic resampling, RPGD achieves competitive performance with only 32 parallel trajectories—fewer than sampling-based methods typically require. A key insight is that warm-starting trajectory candidates across control steps, rather than merely the sampling distribution, allows gradient refinement to accumulate over time. We validate RPGD on five simulated systems and demonstrate real-time control on a physical cartpole (50 Hz) and F1TENTH race car (12.5–33 Hz) using both analytical and learned dynamics models. Second, we show that compact multilayer perceptrons trained to imitate MPC can serve as effective controllers on embedded FPGA hardware. On a physical cartpole, inference under 4 microseconds enables 1 kHz control, improving response speed and accuracy compared to the 50 Hz MPC teacher. On an F1TENTH car, the neural controller outperforms a Pure Pursuit baseline by 20% in lap time and generalizes to unseen track layouts. The FPGA achieves 10–30x speedup over CPU inference on the same SoC (System on Chip) at tens of milliwatts. We release an open-source pipeline for training, quantization, and deployment. Third, we propose A-NC (Adaptive Neural Controller), an RNN-based controller that adapts online to unmeasured parameters—mass, geometry, or sensor offsets—without explicit estimation. Trained by imitating an MPC with access to true parameters, A-NC infers privileged information from state-transition"
+    },
+    {
+      "id": "evans-2024-unifying",
+      "title": "Unifying F1TENTH Autonomous Racing: Survey, Methods and Benchmarks",
+      "authors": [
+        "B. D. Evans",
+        "Raphael Trumpp",
+        "Marco Caccamo",
+        "H. W. Jordaan",
+        "H. Engelbrecht"
+      ],
+      "year": 2024,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "systems-platform",
+        "reinforcement-learning",
+        "raceline-optimization"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 8, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2402.18558",
+      "arxiv": "2402.18558",
+      "url": "https://www.semanticscholar.org/paper/5ae20933c1301fc92a3ced2f32ecd176eae71aa0",
+      "abstract": "The F1TENTH autonomous driving platform, consisting of 1:10-scale remote-controlled cars, has evolved into a well-established education and research platform. The many publications and real-world competitions span many domains, from classical path planning to novel learning-based algorithms. Consequently, the field is wide and disjointed, hindering direct comparison of developed methods and making it difficult to assess the state-of-the-art. Therefore, we aim to unify the field by surveying current approaches, describing common methods, and providing benchmark results to facilitate clear comparisons and establish a baseline for future work. This research aims to survey past and current work with F1TENTH vehicles in the classical and learning categories and explain the different solution approaches. We describe particle filter localisation, trajectory optimisation and tracking, model predictive contouring control, follow-the-gap, and end-to-end reinforcement learning. We provide an open-source evaluation of benchmark methods and investigate overlooked factors of control frequency and localisation accuracy for classical methods as well as reward signal and training map for learning methods. The evaluation shows that the optimisation and tracking method achieves the fastest lap times, followed by the online planning approach. Finally, our work identifies and outlines the relevant research aspects to help motivate future work in the F1TENTH domain.",
+      "citations": 23
+    },
+    {
+      "id": "paluch-2024-hardware",
+      "title": "Hardware Neural Control of CartPole and F1TENTH Race Car",
+      "authors": [
+        "Marcin Paluch",
+        "Florian Bolli",
+        "Xiang Deng",
+        "A. Rios-Navarro",
+        "Chang Gao",
+        "Tobi Delbruck"
+      ],
+      "year": 2024,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "control-mpc",
+        "systems-platform",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 7, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2407.08681",
+      "arxiv": "2407.08681",
+      "url": "https://www.semanticscholar.org/paper/277724994f3678786e4f4b5579f947790f8afd66",
+      "abstract": "Nonlinear model predictive control (NMPC) has proven to be an effective control method, but it is expensive to compute. This work demonstrates the use of hardware FPGA neural network controllers trained to imitate NMPC with supervised learning. We use these Neural Controllers (NCs) implemented on inexpensive embedded FPGA hardware for high frequency control on physical cartpole and F1TENTH race car. Our results show that the NCs match the control performance of the NMPCs in simulation and outperform it in reality, due to the faster control rate that is afforded by the quick FPGA NC inference. We demonstrate kHz control rates for a physical cartpole and offloading control to the FPGA hardware on the F1TENTH car. Code and hardware implementation for this paper are available at https:// github.com/SensorsINI/Neural-Control-Tools.",
+      "citations": 1
+    },
+    {
+      "id": "qu-2024-deepriot",
+      "title": "DeepRIoT: Continuous Integration and Deployment Of Robotic-IoT Applications",
+      "authors": [
+        "Meixun Qu",
+        "Jie He",
+        "Zlatan Tucakovic",
+        "E. Bartocci",
+        "D. Ničković",
+        "Haris Isakovic",
+        "R. Grosu"
+      ],
+      "year": 2024,
+      "venue": "Design Automation Conference",
+      "venue_short": "Design Automation Conference",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "reinforcement-learning",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 4, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1145/3649329.3658250",
+      "url": "https://www.semanticscholar.org/paper/186050173bf3545684a982487ba848f0dee711bc",
+      "pdf": "https://doi.org/10.1145/3649329.3658250",
+      "abstract": "We present DeepRIoT, a continuous integration and continuous deployment (CI/CD) based architecture that accelerates the learning and deployment of a Robotic-IoT system trained from deep reinforcement learning (RL). We adopted a multi-stage approach that agilely trains a multi-objective RL controller in the simulator. We then collected traces from the real robot to optimize its plant model, and used transfer learning to adapt the controller to the updated model. We automated our framework through CI/CD pipelines, and finally, with low cost, succeeded in deploying our controller in a real F1tenth car that is able to reach the goal and avoid collision from a virtual car through mixed reality.",
+      "citations": 4
+    },
+    {
+      "id": "shaham-2024-learning",
+      "title": "Learning a Stable, Safe, Distributed Feedback Controller for a Heterogeneous Platoon of Vehicles",
+      "authors": [
+        "Michael Shaham",
+        "T. Padır"
+      ],
+      "year": 2024,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "control-mpc",
+        "sim-to-real",
+        "safety"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 4, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2404.12474",
+      "arxiv": "2404.12474",
+      "url": "https://www.semanticscholar.org/paper/b5397d65e41e5e7588e79f25827e003b155ced6f",
+      "abstract": "Platooning of autonomous vehicles has the potential to increase safety and fuel efficiency on highways. The goal of platooning is to have each vehicle drive at a specified speed (set by the leader) while maintaining a safe distance from its neighbors. Many prior works have analyzed various controllers for platooning, most commonly linear feedback and distributed model predictive controllers. In this work, we introduce an algorithm for learning a stable, safe, distributed controller for a heterogeneous platoon. Our algorithm relies on recent developments in learning neural network stability certificates. We train a controller for autonomous platooning in simulation and evaluate its performance on hardware with a platoon of four F1Tenth vehicles. We then perform further analysis in simulation with a platoon of 100 vehicles. Experimental results demonstrate the practicality of the algorithm and the learned controller by comparing the performance of the neural network controller to linear feedback and distributed model predictive controllers.",
+      "citations": 1
+    },
+    {
+      "id": "na-2024-autoku",
+      "title": "AutoKU: An Autonomous Driving System Design for the World’s First Mass-Produced Vehicle in Multi-Vehicle Racing Environment",
+      "authors": [
+        "Yuseung Na",
+        "Soyeong Kim",
+        "Ji-Kwon Seok",
+        "Jinsu Ha",
+        "Jeonghun Kang",
+        "Junhee Lee",
+        "Jaeyoung Jo",
+        "Jonghyun Lee",
+        "Hyunwook Kang",
+        "Jaehwan Lee",
+        "Kichun Jo"
+      ],
+      "year": 2024,
+      "venue": "2024 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 3, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/iv55156.2024.10588679",
+      "url": "https://www.semanticscholar.org/paper/a5587ac03f4af8bcea27b1993620ce392ed90e33",
+      "abstract": "The development of autonomous vehicles has been accelerating, marked by a variety of competitions that challenge teams with diverse missions. Recently, racing-based autonomous driving competitions have gained prominence. Notably, the 2023 Hyundai Motor Group Autonomous Driving Challenge (HMG ADC) stands out as a manufacturer-operated event with a racing concept. This competition was distinctive, featuring mass-produced vehicles on race track with multiple vehicles simultaneously. In this paper, we explore the AutoKU team’s participation in the HMG ADC, highlighting their system, which is designed for two types of driving: solo and multi-vehicle racing. We detail the use of an identical mass-produced Hyundai IONIQ 5 vehicle equipped for autonomous driving without any performance modifications. The paper will discuss AutoKU’s approach and performance in solo and multi-vehicle races, showcasing their strategies and achievements in this innovative autonomous racing challenge. (Video: https://youtu.be/wLtmUkahnYA?si=AjqH6hYe10O94laq).",
+      "citations": 2
+    },
+    {
+      "id": "nah-2025-design",
+      "title": "Design and Validation of Autonomous Driving System for High Speed One-on-One Racing",
+      "authors": [
+        "Sun-Young Nah",
+        "Seongwoo Moon",
+        "Hyunwoo Nam",
+        "Chanhoe Ryu",
+        "Dokyeong Kim",
+        "Jihyeok Kim",
+        "David Hyunchul Shim"
+      ],
+      "year": 2025,
+      "venue": "2025 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "perception-estimation",
+        "multi-agent",
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 3, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/iv64158.2025.11097696",
+      "url": "https://www.semanticscholar.org/paper/0e77b38ee272a0780078fc8693c05c14a8cb2513",
+      "abstract": "This paper presents the design and validation of our autonomous driving system developed for one-on-one high-speed racing at the Indy Autonomous Challenge (IAC) 2024. In this event, each team is required to pass the opponent car on an oval racetrack at very high speeds reaching more than 250 km/h. In order to meet the critical challenges of high-speed autonomous racing, we developed reliable perception, behavior planning for passing, and control algorithms stable in the high speed range. For perception, we constructed a multi-modal pipeline using cameras, LiDARs, and radars to achieve accurate and reliable real-time object detection. We also designed a new state machine-based algorithm for effective planning of overtaking maneuvers. As for the control, we improved the vehicle controller at higher speed ranges by building a more accurate engine torque map and fine-tuning the controller during the actual runs. Our newly designed racing system was proven effective, enabling our car to cruise stably at 250.1 km/h in solo lap and executing multiple successful overtaking maneuvers during the one-on-one races at the Las Vegas Motor Speedway (LVMS) for the Consumer Electronics Show (CES) 2024.",
+      "citations": 1
+    },
+    {
+      "id": "cha-2026-pocket",
+      "title": "Pocket Racer: An accessible autonomous racing educational platform",
+      "authors": [
+        "Jesse Cha",
+        "Junu Choe",
+        "Vladislav E Tsoy",
+        "Kittimate Chulajata",
+        "Sean Wu",
+        "E. Laukien",
+        "Dennis Hong",
+        "Daekyum Kim"
+      ],
+      "year": 2026,
+      "venue": "Scientific Reports",
+      "venue_short": "Scientific Reports",
+      "type": "conference",
+      "tags": [
+        "multi-agent",
+        "systems-platform",
+        "education"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 3, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1038/s41598-026-49690-x",
+      "url": "https://www.semanticscholar.org/paper/28c540c6dbd628714016f354f1434260ddea7058",
+      "pdf": "https://www.nature.com/articles/s41598-026-49690-x_reference.pdf",
+      "abstract": "Accessible autonomous racing can engage undergraduate students emersed in artificial intelligence (AI) and robotics to receive an education through the excitement of maneuvering sharp corners and overtaking opponents. In particular, the construction and programming of miniature mobile racing robots can facilitate head-to-head racing competitions for use indoors within classrooms and hallways. Unfortunately, existing racing platforms remain inaccessible for overtaking maneuvers in such confined settings because they are physically large or expensive due to the computational cost of enabling such high performance. In an attempt to address these issues, we present Pocket Racer, an open-source, pocket-sized racing robot capable of head-to-head racing within indoor environments in education, i.e. university hallways or classrooms. We demonstrate head-to-head autonomous racing with our Pocket Racer platforms, enabling high speed overtaking upwards of 15 km/h. Designed to be easily assembled with off the shelf components and a low-cost edge device (Raspberry Pi Zero 2 W), our Pocket Racer platform is made accessible through an open source website and dataset detailing build instructions. By making a pocket-sized head-to-head autonomous racing platform accessible for undergraduate students, our work hopes to further hands on education in the age of physical AI."
+    },
+    {
+      "id": "kumar-2025-racing",
+      "title": "Racing Line Optimization with Fuel Efficiency Using Reinforcement Learning",
+      "authors": [
+        "E. Kumar",
+        "D. D"
+      ],
+      "year": 2025,
+      "venue": "2025 IEEE Pune Section International Conference (PuneCon)",
+      "venue_short": "PuneCon",
+      "type": "conference",
+      "tags": [
+        "raceline-optimization",
+        "reinforcement-learning",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 3, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/punecon67554.2025.11378461",
+      "url": "https://www.semanticscholar.org/paper/445c49ed4e6040a268a02bdb5b1bd45c63c4fd05",
+      "abstract": "Conventional racing line optimization focuses on decreasing lap time without considering the energy expenditure, diminishing its impact on autonomous vehicles. This article presents a reinforcement learning approach with a modified Soft Actor-Critic algorithm and reward structure to simultaneously minimize lap time and fuel use while abiding to track limits. The agent is motivated towards energy-efficient driving while being penalized for violating track boundary and speeding. Results from experiments in a physics-based simulator depict smoother trajectories and evident fuel savings without drastically increasing lap time. Our results contribute to sustainable performance in autonomous racing."
+    },
+    {
+      "id": "lee-2025-sac",
+      "title": "SAC(λ): Efficient Reinforcement Learning for Sparse-Reward Autonomous Car Racing using Imperfect Demonstrations",
+      "authors": [
+        "Heeseong Lee",
+        "Sungpyo Sagong",
+        "Minhyeong Lee",
+        "Jeongmin Lee",
+        "Dongjun Lee"
+      ],
+      "year": 2025,
+      "venue": "IEEE/RJS International Conference on Intelligent RObots and Systems",
+      "venue_short": "IROS",
+      "type": "conference",
+      "tags": [
+        "reinforcement-learning",
+        "raceline-optimization",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 3, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/iros60139.2025.11246186",
+      "url": "https://www.semanticscholar.org/paper/027a12629934e9df84c5a198f742865d658c48aa",
+      "abstract": "Recent advances in Reinforcement Learning (RL) have demonstrated promising results in autonomous car racing. However, two fundamental challenges remain: sparse rewards, which hinder efficient learning process, and the quality of demonstrations, which directly affects the effectiveness of RL from Demonstration (RLfD) approaches. To address these issues, we propose SAC(λ), a novel RLfD algorithm tailored for sparse-reward racing tasks with imperfect demonstrations. SAC(λ) introduces two key components: (1) a discriminator-augmented Q-function, which integrates prior knowledge from demonstrations into value estimation while maintaining off-policy learning benefits, and (2) a Positive-Unlabeled (PU) learning framework with adaptive prior adjustment, which enables the agent to progressively refine its understanding of positive behaviors, while mitigating the overfitting problem. Through extensive experiments in the Assetto Corsa simulator, we demonstrate that SAC(λ) significantly accelerates training, surpasses the provided demonstrations, and achieves superior lap times over existing RL and RLfD approaches. Code and videos are available at https://heesungsung.github. io/AC-RLRacer/."
+    },
+    {
+      "id": "sun-2024-tgrl",
+      "title": "TGRL: A Trajectory-Guided Reinforcement Learning Approach for Robust Autonomous Racing",
+      "authors": [
+        "Yaofeng Sun",
+        "Dong Qu",
+        "Z. Zuo",
+        "Heng Zhang",
+        "Liang Xu",
+        "Xiaoqiang Ren",
+        "Xiaofan Wang"
+      ],
+      "year": 2024,
+      "venue": "ACM Cloud and Autonomic Computing Conference",
+      "venue_short": "ACM Cloud and Autonomic Computing Con...",
+      "type": "conference",
+      "tags": [
+        "reinforcement-learning",
+        "raceline-optimization",
+        "planning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 3, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/cac63892.2024.10865358",
+      "url": "https://www.semanticscholar.org/paper/f1bf5d08d9480f4e3db93020dd1c66e566f4e69e",
+      "abstract": "This paper presents a trajectory-guided reinforcement learning (TGRL) approach aimed at enhancing the robustness of autonomous racing by addressing model mismatch issues. Our proposed framework effectively mitigates these challenges by combining the heuristic strengths of reinforcement learning with the reliability of classical optimal planning methods. In this framework, the agent receives rewards based on the alignment of its actions with those selected by a classical planner that follows the optimal trajectory. Experimental results demonstrate that our method significantly improves generalization capabilities and robustness across various tracks, consistently outperforming baseline models under both normal and adverse conditions."
+    },
+    {
+      "id": "thu-2024-efficient",
+      "title": "An Efficient Path Planning Algorithm for Autonomous Racing Systems",
+      "authors": [
+        "Nguyen Thi Hoai Thu",
+        "Seung Woo Eun",
+        "Sin-Jae Kang",
+        "D. Han"
+      ],
+      "year": 2024,
+      "venue": "Information and Communication Technology Convergence",
+      "venue_short": "Information and Communication Technol...",
+      "type": "conference",
+      "tags": [
+        "planning",
+        "safety",
+        "education"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 3, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/ictc62082.2024.10827019",
+      "url": "https://www.semanticscholar.org/paper/c82fc9b79091eb632dd69408f2f304318f626693",
+      "abstract": "Autonomous driving (AD) has gained tremendous attention in recent years due to its great potential in enhancing road safety. This rising popularity has led to an emerging research field called autonomous racing. The idea of applying autonomous driving techniques to racing is expected to push the envelope of autonomous technology to its limits due to the requirement of high-speed processing and racing rules such as racing flags. In this paper, we propose a simple yet efficient path-planning algorithm for autonomous racing systems. The algorithm consists of two planners: global and local. The global planner is used to handle different flags in car racing and generate a global path, while the local planner with an adaptive-resolution occupancy grid-based planning method is deployed to avoid obstacles and enhance the safety of high-speed driving. The algorithm is implemented in an autonomous vehicle and tested at the proving ground of the Korea Intelligent Automotive Parts Promotion Institute (KIAPI), under the 2024 autonomous driving competition for university students, Daegu, Republic of Korea."
+    },
+    {
+      "id": "nah-2024-interaction",
+      "title": "Interaction-aware Trajectory Prediction for Opponent Vehicle in High Speed Autonomous Racing",
+      "authors": [
+        "Sun-Young Nah",
+        "Jihyeok Kim",
+        "Chanhoe Ryu",
+        "D. Shim"
+      ],
+      "year": 2024,
+      "venue": "2024 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "multi-agent",
+        "reinforcement-learning",
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 3, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/iv55156.2024.10588727",
+      "url": "https://www.semanticscholar.org/paper/0ddf9717826b78c4fcf96a847533afbf65598da9",
+      "abstract": "In this paper, we present an innovative trajectory prediction algorithm that is specifically crafted for high-speed autonomous racing, with a focus on the mutual influence between vehicles. This algorithm was developed in the context of the Hyundai Autonomous Challenge 2023, a pioneering event that featured the world’s first competitive racing scenario involving three autonomous vehicles simultaneously navigating a road course race track. Stable overtaking in 1:N races requires accurate prediction of the trajectories of surrounding vehicles, taking into account their inter-vehicle dynamics. To meet this challenge, our approach leverages the Model Predictive Path Integral technique, which not only considers information from neighboring vehicles but also incorporates prior knowledge of the race track. Furthermore, we have augmented our algorithm with maneuver intention estimation-based trajectory prediction, an approach that leverages a vehicle’s historical trajectory data to forecast its future path. By integrating these two methodologies, our algorithm adeptly anticipates the motion of other vehicles under a variety of conditions on the race track. The efficacy of our proposed solution has been substantiated through extensive simulation and real-world testing, demonstrating its capability to deliver real-time performance in high-speed environments, with a processing time as low as 20 milliseconds."
+    },
+    {
+      "id": "mokhtarian-2024-survey",
+      "title": "A Survey on Small-Scale Testbeds for Connected and Automated Vehicles and Robot Swarms: A Guide for Creating a New Testbed [Survey]",
+      "authors": [
+        "Armin Mokhtarian",
+        "Jianye Xu",
+        "Patrick Scheffe",
+        "Maximilian Kloock",
+        "Simon Schäfer",
+        "Heeseung Bang",
+        "Viet-Anh Le",
+        "Sangeet Sankaramangalam Ulhas",
+        "Johannes Betz",
+        "Sean Wilson",
+        "Spring Berman",
+        "Liam Paull",
+        "Amanda Prorok",
+        "Bassam Alrifaee"
+      ],
+      "year": 2024,
+      "venue": "IEEE robotics & automation magazine",
+      "venue_short": "IEEE robotics & automation magazine",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "sim-to-real",
+        "multi-agent"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.13140/rg.2.2.16176.74248/1",
+      "arxiv": "2408.14199",
+      "url": "https://www.semanticscholar.org/paper/bb2c1ef3db91cbfb3aa279fec85e12a5f229688c",
+      "abstract": "Connected and automated vehicles (CAVs) and robot swarms (RSs) hold transformative potential for enhancing safety, efficiency, and sustainability in the transportation and manufacturing sectors. Extensive testing and validation of these technologies are crucial for their deployment in the real world. While simulations are essential for initial testing, they often have limitations in capturing the complex dynamics of real-world interactions. This limitation underscores the importance of small-scale testbeds. These testbeds provide a realistic, cost-effective, and controlled environment for testing and validating algorithms, acting as an essential intermediary between simulation and full-scale experiments. This work serves to facilitate researchers’ efforts in identifying existing small-scale testbeds suitable for their experiments and provide insights for those who want to build their own. In addition, it delivers a comprehensive survey of the current landscape of these testbeds. We derive 62 characteristics of testbeds based on the well-known sense–plan–act paradigm and offer an online table comparing 23 small-scale testbeds based on these characteristics. The online table is hosted on our designated public webpage, https://bassamlab.github.io/testbeds-survey, and we invite testbed creators and developers to contribute to it. We closely examine nine testbeds in this article, demonstrating how the derived characteristics can be used to present testbeds. Furthermore, we discuss three ongoing challenges concerning small-scale testbeds that we identified, i.e., small-scale to full-scale transition, sustainability, and power and resource management.",
+      "citations": 28
+    },
+    {
+      "id": "li-2024-autonomous",
+      "title": "Autonomous Driving Small-Scale Cars: A Survey of Recent Development",
+      "authors": [
+        "Dian-Tao Li",
+        "Paul Auerbach",
+        "O. Okhrin"
+      ],
+      "year": 2024,
+      "venue": "IEEE transactions on intelligent transportation systems (Print)",
+      "venue_short": "T-ITS",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "education"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/tits.2025.3572394",
+      "arxiv": "2404.06229",
+      "url": "https://www.semanticscholar.org/paper/226477074c3f3f5747ad93d34b343797eb739a56",
+      "abstract": "While engaging with the unfolding revolution in autonomous driving, a challenge presents itself, how can we effectively raise societal awareness about this transformative trend? While full-scale autonomous driving vehicles often come with a hefty price tag, the emergence of scaled-down, small-scale car platforms offers a compelling alternative. These miniature vehicles are designed to perform predefined tasks and challenges, equipped with onboard sensors, processing units, and control actuators. These platforms not only serve as valuable educational tools for the broader public and young generations but also function as robust research platforms, contributing significantly to the ongoing advancements in autonomous driving technology. This survey outlines various small-scale car platforms, categorizing them and detailing the research advancements accomplished through their usage. The conclusion provides proposals for promising future directions in the field.",
+      "citations": 20
+    },
+    {
+      "id": "lelko-2024-optimal",
+      "title": "Optimal Motion Design for Autonomous Vehicles With Learning Aided Robust Control",
+      "authors": [
+        "Attila Lelkó",
+        "B. Németh"
+      ],
+      "year": 2024,
+      "venue": "IEEE Transactions on Vehicular Technology",
+      "venue_short": "IEEE Transactions on Vehicular Techno...",
+      "type": "conference",
+      "tags": [
+        "safety",
+        "reinforcement-learning",
+        "raceline-optimization"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/tvt.2024.3394699",
+      "url": "https://www.semanticscholar.org/paper/669d59fcaa3b99febfb6367075192256fe398810",
+      "pdf": "https://doi.org/10.1109/tvt.2024.3394699",
+      "abstract": "This paper presents a control design framework for the integration of robust controller and reinforcement learning-based (RL) control agent. The proposed integration method is applied to motion control of autonomous road vehicles, providing safe motion. The RL-based control agent is used to determine the steering angle and reference velocity of the vehicle to achieve high-performance motion. The chosen reward function is used to achieve different driving behaviors, e.g. high-velocity motion with minimal lap time, path following, or the limitation of control energy. The RL-based control through Proximal Policy Optimization method during episodes is performed. Safe motion is achieved by using a supervisory control framework which is based on the robust $\\mathcal {H}_\\infty$ control method, and able to keep limits on lateral path tracking error. The effectiveness of the proposed control through simulation examples with comparisons to predictive control methods is illustrated. Moreover, the applicability of the method through a real-life test scenario on a small-scaled test vehicle is demonstrated.",
+      "citations": 19
+    },
+    {
+      "id": "caleffi-2024-small",
+      "title": "Small-scale self-driving cars: A systematic literature review",
+      "authors": [
+        "Felipe Caleffi",
+        "Lauren da Silva Rodrigues",
+        "Joice da Silva Stamboroski",
+        "Brenda Medeiros Pereira"
+      ],
+      "year": 2024,
+      "venue": "Journal of Traffic and Transportation Engineering",
+      "venue_short": "Journal of Traffic and Transportation...",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1016/j.jtte.2023.09.005",
+      "url": "https://www.semanticscholar.org/paper/d9d13453a7c11becc1fae0461cefb88a5900a303",
+      "pdf": "https://doi.org/10.1016/j.jtte.2023.09.005",
+      "citations": 18
+    },
+    {
+      "id": "stachowicz-2024-racer",
+      "title": "RACER: Epistemic Risk-Sensitive RL Enables Fast Driving with Fewer Crashes",
+      "authors": [
+        "Kyle Stachowicz",
+        "Sergey Levine"
+      ],
+      "year": 2024,
+      "venue": "Robotics: Science and Systems Conference",
+      "venue_short": "RSS",
+      "type": "conference",
+      "tags": [
+        "reinforcement-learning",
+        "sim-to-real",
+        "multi-agent"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2405.04714",
+      "arxiv": "2405.04714",
+      "url": "https://www.semanticscholar.org/paper/a5710fb5ec14792f35cf7f6c0245e1d9a419a3b0",
+      "abstract": "Reinforcement learning provides an appealing framework for robotic control due to its ability to learn expressive policies purely through real-world interaction. However, this requires addressing real-world constraints and avoiding catastrophic failures during training, which might severely impede both learning progress and the performance of the final policy. In many robotics settings, this amounts to avoiding certain\"unsafe\"states. The high-speed off-road driving task represents a particularly challenging instantiation of this problem: a high-return policy should drive as aggressively and as quickly as possible, which often requires getting close to the edge of the set of\"safe\"states, and therefore places a particular burden on the method to avoid frequent failures. To both learn highly performant policies and avoid excessive failures, we propose a reinforcement learning framework that combines risk-sensitive control with an adaptive action space curriculum. Furthermore, we show that our risk-sensitive objective automatically avoids out-of-distribution states when equipped with an estimator for epistemic uncertainty. We implement our algorithm on a small-scale rally car and show that it is capable of learning high-speed policies for a real-world off-road driving task. We show that our method greatly reduces the number of safety violations during the training process, and actually leads to higher-performance policies in both driving and non-driving simulation environments with similar challenges.",
+      "citations": 12
+    },
+    {
+      "id": "paniego-2024-enhancing",
+      "title": "Enhancing end-to-end control in autonomous driving through kinematic-infused and visual memory imitation learning",
+      "authors": [
+        "Sergio Paniego",
+        "Roberto Calvo-Palomino",
+        "J. Cañas"
+      ],
+      "year": 2024,
+      "venue": "Neurocomputing",
+      "venue_short": "Neurocomputing",
+      "type": "conference",
+      "tags": [
+        "reinforcement-learning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1016/j.neucom.2024.128161",
+      "url": "https://www.semanticscholar.org/paper/94793be5aa7a5d03b69d487e1f7bc84818f8bd51",
+      "pdf": "https://doi.org/10.1016/j.neucom.2024.128161",
+      "citations": 11
+    },
+    {
+      "id": "hobbs-2024-quantitative",
+      "title": "Quantitative Safety-Driven Co-Synthesis of Cyber-Physical System Implementations",
+      "authors": [
+        "Clara Hobbs",
+        "Shengjie Xu",
+        "Bineet Ghosh",
+        "Enrico Fraccaroli",
+        "Parasara Sridhar Duggirala",
+        "Samarjit Chakraborty"
+      ],
+      "year": 2024,
+      "venue": "International Conference on Cyber-Physical Systems",
+      "venue_short": "ICCPS",
+      "type": "conference",
+      "tags": [
+        "safety",
+        "control-mpc",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/iccps61052.2024.00016",
+      "url": "https://www.semanticscholar.org/paper/f0d568fb2078867405feebcd3bc9492c7a7fc245",
+      "abstract": "Feedback controllers form the algorithmic core of many cyber-physical systems (CPSs). They are increasingly becoming computationally expensive and efficiently implementing them on resource-constrained platforms—such as those in the automotive domain—while guaranteeing safety is now an important challenge. Current workflows allow control strategies to be designed independently of the implementation environment and require control tasks to meet predetermined deadlines. Embedded systems engineers treat these control tasks as black boxes and focus on meeting all deadlines as the mechanism for ensuring safety. In this paper, we argue that deadlines are only a means to an end and should not be treated as \"first-class citizens.\" Instead, the focus should be on high-level safety properties of relevance. Our main technical contribution is in automatic synthesis of safe CPS implementations: given a set of controllers to be implemented on a shared resource, along with their safety properties (a form of state space trajectory robustness), we synthesize an implementation that does not necessarily meet all task deadlines, but guarantees the safety specifications of all controllers.",
+      "citations": 9
+    },
+    {
+      "id": "ghosh-2024-statistical",
+      "title": "Statistical verification of autonomous system controllers under timing uncertainties",
+      "authors": [
+        "B. Ghosh",
+        "Clara Hobbs",
+        "Shengjie Xu",
+        "Don Smith",
+        "James H. Anderson",
+        "P. S. Thiagarajan",
+        "Benjamin Berg",
+        "Parasara Sridhar Duggirala",
+        "Samarjit Chakraborty"
+      ],
+      "year": 2024,
+      "venue": "Real-time systems",
+      "venue_short": "Real-time systems",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "safety"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1007/s11241-023-09417-x",
+      "url": "https://www.semanticscholar.org/paper/1c38e91f3a2a61e8b154f4f6dc18f0e9cc353e5e",
+      "citations": 9
+    },
+    {
+      "id": "sarker-2024-comprehensive",
+      "title": "A Comprehensive Review on Traffic Datasets and Simulators for Autonomous Vehicles",
+      "authors": [
+        "Supriya Sarker",
+        "Brent Maples",
+        "Iftekharul Islam",
+        "Muyang Fan",
+        "Christos Papadopoulos",
+        "Weizi Li"
+      ],
+      "year": 2024,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "systems-platform",
+        "sim-to-real",
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2412.14207",
+      "arxiv": "2412.14207",
+      "url": "https://www.semanticscholar.org/paper/5d7ade42e1fc207839f2c6f8302afb2f0a354664",
+      "abstract": "Autonomous driving has rapidly evolved through synergistic developments in hardware and artificial intelligence. This comprehensive review investigates traffic datasets and simulators as dual pillars supporting autonomous vehicle (AV) development. Unlike prior surveys that examine these resources independently, we present an integrated analysis spanning the entire AV pipeline-perception, localization, prediction, planning, and control. We evaluate annotation practices and quality metrics while examining how geographic diversity and environmental conditions affect system reliability. Our analysis includes detailed characterizations of datasets organized by functional domains and an in-depth examination of traffic simulators categorized by their specialized contributions to research and development. The paper explores emerging trends, including novel architecture frameworks, multimodal AI integration, and advanced data generation techniques that address critical edge cases. By highlighting the interconnections between real-world data collection and simulation environments, this review offers researchers a roadmap for developing more robust and resilient autonomous systems equipped to handle the diverse challenges encountered in real-world driving environments.",
+      "citations": 7
+    },
+    {
+      "id": "yang-2024-learning",
+      "title": "Learning Local Control Barrier Functions for Safety Control of Hybrid Systems",
+      "authors": [
+        "Shuo Yang",
+        "Yu Chen",
+        "Xiang Yin",
+        "Rahul Mangharam"
+      ],
+      "year": 2024,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "safety"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2401.14907",
+      "url": "https://www.semanticscholar.org/paper/bfa04d24b3c120b40adbe92fd80c1a0dfd6f6e4d",
+      "citations": 7
+    },
+    {
+      "id": "reveles-martinez-2025-benchmarking",
+      "title": "Benchmarking YOLOv8 to YOLOv11 Architectures for Real-Time Traffic Sign Recognition in Embedded 1:10 Scale Autonomous Vehicles",
+      "authors": [
+        "Rafael Reveles-Martínez",
+        "Hamurabi Gamboa-Rosales",
+        "Erika Sánchez-Femat",
+        "Javier Saldívar-Pérez",
+        "Teodoro Ibarra-Pérez",
+        "L. C. Reveles-Gómez",
+        "O. Guirette-Barbosa",
+        "J. Galván-Tejada",
+        "C. Galván-Tejada",
+        "Huitzilopoztli Luna-García",
+        "J. Celaya-Padilla"
+      ],
+      "year": 2025,
+      "venue": "Technologies",
+      "venue_short": "Technologies",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.3390/technologies13110531",
+      "url": "https://www.semanticscholar.org/paper/0ddbfa679b5c47990c71f8a96336fd6ce7353343",
+      "pdf": "https://doi.org/10.3390/technologies13110531",
+      "abstract": "Traffic sign recognition is still one of the challenging aspects of intelligent vehicle systems, mainly when processor or memory resources are limited. In this work, real-time traffic sign detection was evaluated using five YOLO model variants—Nano, Small, Medium, Large, and XLarge—across versions 8 to 11. All models were trained and validated with a custom dataset collected in a simulated urban environment designed to replicate FIRA competition tracks. The models were then deployed and tested on a 1:10 scale autonomous vehicle equipped with a mini PC running the detector in real time. Performance was compared using mAP@50–95, F1-score, inference latency, and preprocessing and postprocessing times. The authors also analyzed training behavior, focusing on convergence speed and stopping criteria. The experiments showed that YOLOv10 B achieved the highest performance across varying conditions, while YOLOv8 M provided a better balance between speed and accuracy. These results can help practitioners select appropriate YOLO architectures for embedded traffic sign recognition systems that must operate in real time on resource-constrained autonomous vehicles.",
+      "citations": 6
+    },
+    {
+      "id": "zhou-2025-learning",
+      "title": "Learning to Drift With Individual Wheel Drive: Maneuvering Autonomous Vehicle at the Handling Limits",
+      "authors": [
+        "Yihan Zhou",
+        "Yiwen Lu",
+        "Bo Yang",
+        "Jiayun Li",
+        "Yilin Mo"
+      ],
+      "year": 2025,
+      "venue": "IEEE Robotics and Automation Letters",
+      "venue_short": "RA-L",
+      "type": "conference",
+      "tags": [
+        "sim-to-real",
+        "systems-platform",
+        "reinforcement-learning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/lra.2025.3595024",
+      "arxiv": "2507.23339",
+      "url": "https://www.semanticscholar.org/paper/30f8956d3580f07a7a016aa350a19741b342589d",
+      "abstract": "Drifting, characterized by controlled vehicle motion at high sideslip angles, is crucial for safely handling emergency scenarios at the friction limits. While recent reinforcement learning approaches show promise for drifting control, they struggle with the significant simulation-to-reality gap, as policies that perform well in simulation often fail when transferred to physical systems. In this letter, we present a reinforcement learning framework with GPU-accelerated parallel simulation and systematic domain randomization that effectively bridges the gap. The proposed approach is validated on both simulation and a custom-designed and open-sourced 1/10 scale Individual Wheel Drive (IWD) RC car platform featuring independent wheel speed control. Experiments across various scenarios from steady-state circular drifting to direction transitions and variable-curvature path following demonstrate that our approach achieves precise trajectory tracking while maintaining controlled sideslip angles throughout complex maneuvers in both simulated and real-world environments.",
+      "citations": 6
+    },
+    {
+      "id": "zhou-2025-hierarchical",
+      "title": "A Hierarchical Test Platform for Vision Language Model (VLM)-Integrated Real-World Autonomous Driving",
+      "authors": [
+        "Yupeng Zhou",
+        "Can Cui",
+        "Juntong Peng",
+        "Zichong Yang",
+        "Juanwu Lu",
+        "Jitesh H. Panchal",
+        "Bin Yao",
+        "Ziran Wang"
+      ],
+      "year": 2025,
+      "venue": "ACM Trans. Internet Things",
+      "venue_short": "ACM Trans. Internet Things",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "reinforcement-learning",
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1145/3769867",
+      "arxiv": "2506.14100",
+      "url": "https://www.semanticscholar.org/paper/7493bb78750502e633cd2dc4566b8f5df7a80950",
+      "pdf": "https://doi.org/10.1145/3769867",
+      "abstract": "Vision-Language Models (VLMs) have demonstrated significant promise for autonomous driving due to their powerful multimodal reasoning capabilities. However, adapting VLMs from generic data to safety-critical driving contexts introduces a notable challenge known as domain shift. Existing simulation-based and dataset-driven evaluation approaches struggle to accurately replicate real-world complexities, lacking repeatable closed-loop evaluation and flexible scenario manipulation. Furthermore, current real-world testing platforms typically focus on isolated modules and do not support comprehensive interaction with VLM-based systems. Consequently, there is a critical need for a holistic testing architecture capable of integrating perception, planning, and control modules, accommodating VLM-based systems, and supporting configurable real-world testing scenarios. In this article, we address this critical gap by proposing a hierarchical real-world test platform specialized in the rigorous evaluation of VLM-integrated autonomous driving systems. Specifically, our platform features have: a lightweight, structured, and low-latency middleware pipeline specialized for seamless VLM integration; a hierarchical modular architecture enabling flexible substitution between conventional and VLM-based autonomy components, providing exceptional deployment flexibility for rapid experimentation; and sophisticated closed-loop scenario-based testing capabilities on a controlled test track, facilitating comprehensive evaluation of the entire full-stack VLM-integrated autonomous driving pipeline, from perception, reasoning, decision-making, and planning to final vehicle maneuvers. Through an extensive real-world case study, we demonstrate the effectiveness of our platform in evaluating the performance and robustness of VLM-integrated autonomous driving under diverse realistic conditions. Project page and codes: https://github.com/YupengZhouPurdue/VLMTest.",
+      "citations": 6
+    },
+    {
+      "id": "zhu-2025-controllers",
+      "title": "Controllers for Edge-Cloud Cyber-Physical Systems",
+      "authors": [
+        "Tingan Zhu",
+        "Prateek Ganguli",
+        "Arkaprava Gupta",
+        "Shengjie Xu",
+        "Luigi Capogrosso",
+        "Enrico Fraccaroli",
+        "Marco Cristani",
+        "Franco Fummi",
+        "Samarjit Chakraborty"
+      ],
+      "year": 2025,
+      "venue": "International Conference on Communication Systems and Networks",
+      "venue_short": "International Conference on Communica...",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "perception-estimation",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/comsnets63942.2025.10885702",
+      "url": "https://www.semanticscholar.org/paper/c77d959c2d41e693c82f1908f4f0eba9b2f00cb8",
+      "abstract": "Deep Neural Networks (DNNs) are now widely used in Cyber-Physical Systems (CPSs), both for sensor data or perception processing and also as neural network controllers. However, resource constraints often prevent a full local deployment of the DNNs, e.g., on edge devices. Implementing them on the cloud, on the other hand, is associated with large delays and large volumes of data transfers. This has resulted in the emergence of Split Computing (SC), where a part of the DNN is implemented on an edge device and the rest in the cloud. However, how to design control strategies with such a setup has not been sufficiently investigated in the past. In this paper, we study controller design strategies where state estimates from sensor data processed on an edge device are combined with estimates obtained from the cloud. While the former is associated with low delays, the state estimates have higher errors or uncertainties. The estimates from the cloud, obtained with larger DNNs, are, however, delayed. We show that the problem of sizing the DNNs on the edge and the cloud can be formulated as an optimization problem with the goal of maximizing system safety.",
+      "citations": 6
+    },
+    {
+      "id": "zhou-2024-developing",
+      "title": "Developing Path Planning with Behavioral Cloning and Proximal Policy Optimization for Path-Tracking and Static Obstacle Nudging",
+      "authors": [
+        "Ming Zhou",
+        "Biao Wang",
+        "Xiatao Sun"
+      ],
+      "year": 2024,
+      "venue": "Academic Journal of Science and Technology",
+      "venue_short": "Academic Journal of Science and Techn...",
+      "type": "conference",
+      "tags": [
+        "reinforcement-learning",
+        "control-mpc",
+        "planning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.54097/189b3413",
+      "arxiv": "2409.05289",
+      "url": "https://www.semanticscholar.org/paper/43ccafc24f8c615260216a73f430fef78310cb8d",
+      "pdf": "https://doi.org/10.54097/189b3413",
+      "abstract": " In autonomous driving, end-to-end methods utilizing Imitation Learning (IL) and Reinforcement Learning (RL) are becoming more and more common. However, they do not involve explicit reasoning like classic robotics workflow and planning with horizons, resulting in strategies implicit and myopic. In this paper, we introduce a path planning method that uses Behavioral Cloning (BC) for path-tracking and Proximal Policy Optimization (PPO) for static obstacle nudging. It outputs lateral offset values to adjust the given reference waypoints and performs modified path for different controllers. Experimental results show that the algorithm can do path following that mimics the expert performance of path-tracking controllers, and avoid collision to fixed obstacles. The method makes a good attempt at planning with learning-based methods in path planning problems of autonomous driving.",
+      "citations": 6
+    },
+    {
+      "id": "ulhas-2024-gan",
+      "title": "GAN-Based Domain Adaptation for Creating Digital Twins of Small-Scale Driving Testbeds: Opportunities and Challenges",
+      "authors": [
+        "Sangeet Sankaramangalam Ulhas",
+        "Shenbagaraj Kannapiran",
+        "Spring Berman"
+      ],
+      "year": 2024,
+      "venue": "2024 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "sim-to-real",
+        "systems-platform",
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/iv55156.2024.10588594",
+      "url": "https://www.semanticscholar.org/paper/6f7a67a6672f3a6fe7b97cb787e49c40a83ade8a",
+      "abstract": "In recent years, small-scale driving testbeds have been developed as controlled physical environments for the evaluation of autonomous vehicle controllers. Such controllers are heavily dependent on computer vision algorithms that enable the vehicle to perceive its surroundings. To bridge the Sim2Real content and appearance gap between simulated and real-world image data for training these algorithms, we propose a novel transfer learning approach that performs domain adaptation using StyleGAN to generate style-mixed images that closely resemble real-world images. We explain our approach within the context of our small-scale driving testbed, CHARTOPOLIS, and demonstrate it on synthetic image data of two object classes, vehicles and buildings, from the driving simulator CARLA. Our results show that this approach works on the vehicle object class while failing on the building object class. This paper thus provides a plausible approach to bridging the Sim2Real gap through the use of custom pipelines that augment image datasets using a mix of techniques for domain adaptation and domain randomization.",
+      "citations": 6
+    },
+    {
+      "id": "shaham-2024-distributed",
+      "title": "Distributed Model Predictive Control for Heterogeneous Platoons with Affine Spacing Policies and Arbitrary Communication Topologies",
+      "authors": [
+        "Michael Shaham",
+        "T. Padır"
+      ],
+      "year": 2024,
+      "venue": "2024 IEEE 27th International Conference on Intelligent Transportation Systems (ITSC)",
+      "venue_short": "ITSC",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "systems-platform",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/itsc58415.2024.10920120",
+      "arxiv": "2404.12441",
+      "url": "https://www.semanticscholar.org/paper/3e5a2b61269deda297089c849cc8b9e0c3171ab6",
+      "pdf": "http://arxiv.org/pdf/2404.12441",
+      "abstract": "This paper presents a distributed model predictive control (DMPC) algorithm for a heterogeneous platoon using arbitrary communication topologies, provided each vehicle can communicate with a preceding vehicle in the platoon. The proposed DMPC algorithm can accommodate any spacing policy that is affine in a vehicle's velocity, which includes constant distance or constant time headway spacing policies. By analyzing the total cost for the entire platoon, a sufficient condition is derived to ensure platoon asymptotic stability. Simulation experiments with a platoon of 50 vehicles and hardware experiments with a platoon of four 1/10th-scale vehicles validate the algorithm and compare performance under different spacing policies and communication topologies. Code for the experiments and a video demonstration of the hardware experiment can be found at https://www.github.com/river-lab/dmpc_itsc_2024.git.",
+      "citations": 6
+    },
+    {
+      "id": "poyrazoglu-2025-unsupervised",
+      "title": "An Unsupervised C-Uniform Trajectory Sampler with Applications to Model Predictive Path Integral Control",
+      "authors": [
+        "O. G. Poyrazoglu",
+        "Rahul Moorthy",
+        "Yukang Cao",
+        "William Chastek",
+        "Volkan Isler"
+      ],
+      "year": 2025,
+      "venue": "IEEE/RJS International Conference on Intelligent RObots and Systems",
+      "venue_short": "IROS",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "planning",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/iros60139.2025.11247256",
+      "arxiv": "2503.05819",
+      "url": "https://www.semanticscholar.org/paper/9454e458ac27c6ddbc7360ab71cfb3a8e0b5b1b0",
+      "abstract": "Sampling-based model predictive controllers generate trajectories by sampling control inputs from a fixed, simple distribution such as the normal or uniform distributions. This sampling method yields trajectory samples that are tightly clustered around a mean trajectory. This clustering behavior in turn, limits the exploration capability of the controller and reduces the likelihood of finding feasible solutions in complex environments. Recent work has attempted to address this problem by either reshaping the resulting trajectory distribution or increasing the sample entropy to enhance diversity and promote exploration. In our recent work, we introduced the concept of C-Uniform trajectory generation [1] which allows the computation of control input probabilities to generate trajectories that sample the configuration space uniformly. In this work, we first address the main limitation of this method: lack of scalability due to computational complexity. We introduce Neural C-Uniform, an unsupervised C-Uniform trajectory sampler that mitigates scalability issues by computing control input probabilities without relying on a discretized configuration space. Experiments show that Neural C-Uniform achieves a similar uniformity ratio to the original C-Uniform approach and generates trajectories over a longer time horizon while preserving uniformity. Next, we present CU-MPPI, which integrates Neural C-Uniform sampling into existing MPPI variants. We analyze the performance of CU-MPPI in simulation and real-world experiments. Our results indicate that in settings where the optimal solution has high curvature, CU-MPPI leads to drastic improvements in performance. Additionally, it performs as well as or better than baseline methods in dynamic environments. Additional results can be found at the project website.",
+      "citations": 5
+    },
+    {
+      "id": "han-2025-wheeled",
+      "title": "Wheeled Lab: Modern Sim2Real for Low-cost, Open-source Wheeled Robotics",
+      "authors": [
+        "Tyler Han",
+        "Preet Shah",
+        "Sidharth Rajagopal",
+        "Yanda Bao",
+        "Sanghun Jung",
+        "Sidharth Talia",
+        "Gabriel Guo",
+        "Bryan Xu",
+        "Bhaumik Mehta",
+        "Emma Romig",
+        "Rosario Scalise",
+        "Byron Boots"
+      ],
+      "year": 2025,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "systems-platform",
+        "sim-to-real",
+        "education"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "arxiv": "2502.07380",
+      "url": "https://www.semanticscholar.org/paper/56f2237a2dd1331a40b541bb490d292a9790a725",
+      "abstract": "Reinforcement Learning (RL) has been pivotal in recent robotics milestones and is poised to play a prominent role in the future. However, these advances can rely on proprietary simulators, expensive hardware, and a daunting range of tools and skills. As a result, broader communities are disconnecting from the state-of-the-art; education curricula are poorly equipped to teach indispensable modern robotics skills involving hardware, deployment, and iterative development. To address this gap between the broader and scientific communities, we contribute Wheeled Lab, an ecosystem which integrates accessible, open-source wheeled robots with Isaac Lab, an open-source robot learning and simulation framework, that is widely adopted in the state-of-the-art. To kickstart research and education, this work demonstrates three state-of-the-art zero-shot policies for small-scale RC cars developed through Wheeled Lab: controlled drifting, elevation traversal, and visual navigation. The full stack, from hardware to software, is low-cost and open-source. Videos and additional materials can be found at: https://uwrobotlearning.github.io/WheeledLab/",
+      "citations": 5
+    },
+    {
+      "id": "lambertenghi-2025-multi",
+      "title": "A Multi-Modality Evaluation of the Reality Gap in Autonomous Driving Systems",
+      "authors": [
+        "Stefano Carlo Lambertenghi",
+        "Mirena Flores Valdez",
+        "Andrea Stocco"
+      ],
+      "year": 2025,
+      "venue": "International Conference on Automated Software Engineering",
+      "venue_short": "International Conference on Automated...",
+      "type": "conference",
+      "tags": [
+        "sim-to-real",
+        "systems-platform",
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/ase63991.2025.00230",
+      "arxiv": "2509.22379",
+      "url": "https://www.semanticscholar.org/paper/05aff5d36bf589f31856a4344384cab6d29339ba",
+      "abstract": "Simulation-based testing is a cornerstone of Autonomous Driving System (ADS) development, offering safe and scalable evaluation across diverse driving scenarios. However, discrepancies between simulated and real-world behavior, known as the reality gap, challenge the transferability of test results to deployed systems. In this paper, we present a comprehensive empirical study comparing four representative testing modalities: Software-in-the-Loop (SiL), Vehicle-in-the-Loop (ViL), Mixed-Reality (MR), and full real-world testing. Using a small-scale physical vehicle equipped with real sensors (camera and LiDAR) and its digital twin, we implement each setup and evaluate two ADS architectures (modular and end-to-end) across diverse indoor driving scenarios involving real obstacles, road topologies, and indoor environments. We systematically assess the impact of each testing modality along three dimensions of the reality gap: actuation, perception, and behavioral fidelity. Our results show that while SiL and ViL setups simplify critical aspects of real-world dynamics and sensing, MR testing improves perceptual realism without compromising safety or control. Importantly, we identify the conditions under which failures do not transfer across testing modalities and isolate the underlying dimensions of the gap responsible for these discrepancies. Our findings offer actionable insights into the respective strengths and limitations of each modality and outline a path toward more robust and transferable validation of autonomous driving systems.",
+      "citations": 4
+    },
+    {
+      "id": "sagmeister-2025-approaching",
+      "title": "Approaching Current Challenges in Developing a Software Stack for Fully Autonomous Driving",
+      "authors": [
+        "Simon Sagmeister",
+        "Simon Hoffmann",
+        "Tobias Betz",
+        "Dominic Ebner",
+        "Daniel Esser",
+        "Markus Lienkamp"
+      ],
+      "year": 2025,
+      "venue": "2025 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/iv64158.2025.11097792",
+      "arxiv": "2504.12813",
+      "url": "https://www.semanticscholar.org/paper/1296866591087e0256a2849eb8c0085f4380c77a",
+      "pdf": "https://arxiv.org/pdf/2504.12813",
+      "abstract": "Autonomous driving is a complex undertaking. A common approach is to break down the driving task into individual sub tasks through modularization. These sub-modules are usually developed and published separately. However, if these individually developed algorithms have to be combined again to form a full-stack autonomous driving software, this poses particular challenges. Drawing upon our practical experience in developing the software of TUM Autonomous Motorsport, we have identified and derived these challenges in developing an autonomous driving software stack within a scientific environment. We do not focus on the specific challenges of individual algorithms but on the general difficulties that arise when deploying research algorithms on real-world test vehicles. To overcome these challenges, we introduce strategies that have been effective in our development approach. We additionally provide open-source implementations that enable these concepts on GitHub. As a result, this paper's contributions will simplify future full-stack autonomous driving projects, which are essential for a thorough evaluation of the individual algorithms.",
+      "citations": 4
+    },
+    {
+      "id": "berducci-2025-hprs",
+      "title": "HPRS: hierarchical potential-based reward shaping from task specifications",
+      "authors": [
+        "Luigi Berducci",
+        "Edgar A. Aguilar",
+        "D. Ničković",
+        "R. Grosu"
+      ],
+      "year": 2025,
+      "venue": "Frontiers Robotics AI",
+      "venue_short": "Frontiers Robotics AI",
+      "type": "conference",
+      "tags": [
+        "safety",
+        "reinforcement-learning",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.3389/frobt.2024.1444188",
+      "url": "https://www.semanticscholar.org/paper/2bc1c619180c1490712af39710aa3d8729392e44",
+      "pdf": "https://doi.org/10.3389/frobt.2024.1444188",
+      "abstract": "The automatic synthesis of policies for robotics systems through reinforcement learning relies upon, and is intimately guided by, a reward signal. Consequently, this signal should faithfully reflect the designer’s intentions, which are often expressed as a collection of high-level requirements. Several works have been developing automated reward definitions from formal requirements, but they show limitations in producing a signal which is both effective in training and able to fulfill multiple heterogeneous requirements. In this paper, we define a task as a partially ordered set of safety, target, and comfort requirements and introduce an automated methodology to enforce a natural order among requirements into the reward signal. We perform this by automatically translating the requirements into a sum of safety, target, and comfort rewards, where the target reward is a function of the safety reward and the comfort reward is a function of the safety and target rewards. Using a potential-based formulation, we enhance sparse to dense rewards and formally prove this to maintain policy optimality. We call our novel approach hierarchical, potential-based reward shaping (HPRS). Our experiments on eight robotics benchmarks demonstrate that HPRS is able to generate policies satisfying complex hierarchical requirements. Moreover, compared with the state of the art, HPRS achieves faster convergence and superior performance with respect to the rank-preserving policy-assessment metric. By automatically balancing competing requirements, HPRS produces task-satisfying policies with improved comfort and without manual parameter tuning. Through ablation studies, we analyze the impact of individual requirement classes on emergent behavior. Our experiments show that HPRS benefits from comfort requirements when aligned with the target and safety and ignores them when in conflict with the safety or target requirements. Finally, we validate the practical usability of HPRS in real-world rob",
+      "citations": 4
+    },
+    {
+      "id": "capogrosso-2024-learning",
+      "title": "Learning-Enabled CPS for Edge-Cloud Computing",
+      "authors": [
+        "Luigi Capogrosso",
+        "Shengjie Xu",
+        "Enrico Fraccaroli",
+        "Marco Cristani",
+        "Franco Fummi",
+        "Samarjit Chakraborty"
+      ],
+      "year": 2024,
+      "venue": "International Symposium on Industrial Embedded Systems",
+      "venue_short": "International Symposium on Industrial...",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "perception-estimation",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/sies62473.2024.10767956",
+      "url": "https://www.semanticscholar.org/paper/9d161b5b3a1505a20112a596cd9d8a5d990c1647",
+      "abstract": "Many Cyber-Physical System (CPS), such as autonomous vehicles and robots, rely on compute intensive Machine Learning (ML) algorithms, especially for perception processing. A growing trend is to implement such ML algorithms in the cloud. However, the data transfer overhead and the delay introduced in the process necessitate some form of edge-cloud solution. Here, a part of the processing is done locally and the rest on the cloud, and how to do this partitioning is being explored in the body of work referred to as Split Computing (SC). In this position paper, we explore different SC architectures and discuss their implications on controller design for CPS. In particular, we discuss the delay and state estimation accuracy of these different SC architectures and how they would impact the design of the feedback controllers using them.",
+      "citations": 4
+    },
+    {
+      "id": "poyrazoglu-2024-c",
+      "title": "C-Uniform Trajectory Sampling for Fast Motion Planning",
+      "authors": [
+        "O. G. Poyrazoglu",
+        "Yukang Cao",
+        "Volkan Isler"
+      ],
+      "year": 2024,
+      "venue": "IEEE International Conference on Robotics and Automation",
+      "venue_short": "ICRA",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "reinforcement-learning",
+        "planning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/icra55743.2025.11127482",
+      "arxiv": "2409.12266",
+      "url": "https://www.semanticscholar.org/paper/5a8e40dd9488f904d07a1e3f82b52017a0e6b1b4",
+      "abstract": "We study the problem of sampling robot trajectories and introduce the notion of C-Uniformity. As opposed to the standard method of uniformly sampling control inputs (which lead to biased samples of the configuration space), C-Uniform trajectories are generated by control actions which lead to uniform sampling of the configuration space. After presenting an intuitive closed-form solution to generate C-Uniform trajectories for the 1D random-walker, we present a network-flow based optimization method to precompute action probabilities which lead to C-Uniform trajectories for general robot systems. We apply the notion of C-Uniformity to the design of Model Predictive Path Integral controllers. Through simulation experiments, we show that using C-Uniform trajectories significantly improvs the performance of MPPI-style controllers, achieving up to 40 % coverage performance gain compared to the best baseline. We demonstrate the practical applicability of our method with an implementation on a $1 / 10$th scale racer.",
+      "citations": 4
+    },
+    {
+      "id": "seong-2024-self",
+      "title": "Self-Supervised Interpretable End-to-End Learning via Latent Functional Modularity",
+      "authors": [
+        "Hyunki Seong",
+        "D. H. Shim"
+      ],
+      "year": 2024,
+      "venue": "International Conference on Machine Learning",
+      "venue_short": "ICML",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "arxiv": "2403.18947",
+      "url": "https://www.semanticscholar.org/paper/fb07c15ebcc21def11683bece6370d2aaef8bbf7",
+      "abstract": "We introduce MoNet, a novel functionally modular network for self-supervised and interpretable end-to-end learning. By leveraging its functional modularity with a latent-guided contrastive loss function, MoNet efficiently learns task-specific decision-making processes in latent space without requiring task-level supervision. Moreover, our method incorporates an online, post-hoc explainability approach that enhances the interpretability of end-to-end inferences without compromising sensorimotor control performance. In real-world indoor environments, MoNet demonstrates effective visual autonomous navigation, outperforming baseline models by 7% to 28% in task specificity analysis. We further explore the interpretability of our network through post-hoc analysis of perceptual saliency maps and latent decision vectors. This provides valuable insights into the incorporation of explainable artificial intelligence into robotic learning, encompassing both perceptual and behavioral perspectives. Supplementary materials are available at https://sites.google.com/view/monet-lgc.",
+      "citations": 4
+    },
+    {
+      "id": "shaham-2024-design",
+      "title": "Design and Realization of a Benchmarking Testbed for Evaluating Autonomous Platooning Algorithms",
+      "authors": [
+        "Michael Shaham",
+        "R. Ranjan",
+        "E. Kirda",
+        "T. Padır"
+      ],
+      "year": 2024,
+      "venue": "International Symposium on Experimental Robotics",
+      "venue_short": "International Symposium on Experiment...",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "control-mpc",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1007/978-3-031-63596-0_52",
+      "arxiv": "2402.09233",
+      "url": "https://www.semanticscholar.org/paper/140fa430b2a25bdcebc1083ebea0ba74b107b602",
+      "pdf": "https://arxiv.org/pdf/2402.09233",
+      "abstract": "Autonomous vehicle platoons present near- and long-term opportunities to enhance operational efficiencies and save lives. The past 30 years have seen rapid development in the autonomous driving space, enabling new technologies that will alleviate the strain placed on human drivers and reduce vehicle emissions. This paper introduces a testbed for evaluating and benchmarking platooning algorithms on 1/10th scale vehicles with onboard sensors. To demonstrate the testbed's utility, we evaluate three algorithms, linear feedback and two variations of distributed model predictive control, and compare their results on a typical platooning scenario where the lead vehicle tracks a reference trajectory that changes speed multiple times. We validate our algorithms in simulation to analyze the performance as the platoon size increases, and find that the distributed model predictive control algorithms outperform linear feedback on hardware and in simulation.",
+      "citations": 4
+    },
+    {
+      "id": "cheng-2025-safety",
+      "title": "Safety-Aware Scheduling of Real-Time Control Systems With Burst Computing Tasks",
+      "authors": [
+        "Ting Cheng",
+        "Yonghui Liang",
+        "Hui Li",
+        "Qimin Xu",
+        "Shanying Zhu"
+      ],
+      "year": 2025,
+      "venue": "IEEE Transactions on Industrial Cyber-Physical Systems",
+      "venue_short": "IEEE Transactions on Industrial Cyber...",
+      "type": "conference",
+      "tags": [
+        "safety",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/ticps.2025.3537961",
+      "url": "https://www.semanticscholar.org/paper/0db3367a6b5f00086e4976a74a64890cf0faf4ec",
+      "abstract": "This paper investigates the safety-aware task scheduling problem of real-time control systems in the presence of burst computing tasks. The basic idea is to adaptively release resources from low-criticality control tasks, ensuring timely completion of burst computing tasks and keeping the control system state within a safe threshold. An efficient algorithm called ADP-Opt is proposed to solve the problem. It first decouples the complex original problem into multiple subproblems, which greatly reduces the search space and improves the solution efficiency. In the subproblem, safety is maintained by limiting the upper bound of the system state's deviation to below the threshold. By introducing a penalty term in the cost function related to computing resources, we aim to balance the impact of control computing tasks on control performance and the consumption of computing resources. Consequently, the overall cost of the control system can be minimized while releasing enough resources for burst computing tasks. Simulation results show that the scheduling decisions made by ADP-Opt approach the optimal decision and maintain the safety of the control systems.",
+      "citations": 4
+    },
+    {
+      "id": "james-2024-mecqabot",
+      "title": "MecQaBot: A Modular Robot Sensing and Wireless Mechatronics Framework for Education and Research",
+      "authors": [
+        "Alice James",
+        "Avishkar Seth",
+        "S. Mukhopadhyay"
+      ],
+      "year": 2024,
+      "venue": "International Conference on Information Control Systems & Technologies",
+      "venue_short": "International Conference on Informati...",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "education"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/icst62759.2024.10992015",
+      "arxiv": "2411.13156",
+      "url": "https://www.semanticscholar.org/paper/fd3b29134e38cb11e529d88bdcd4a718ef0de96f",
+      "abstract": "We introduce MecQaBot, an open-source, affordable, and modular autonomous mobile robotics framework developed for education and research at Macquarie University, School of Engineering, since 2019. This platform aims to provide students and researchers with an accessible means for exploring autonomous robotics and fostering hands-on learning and innovation. Over the five years, the platform has engaged more than 240 undergraduate and postgraduate students across various engineering disciplines. The framework addresses the growing need for practical robotics training in response to the expanding robotics field and its increasing relevance in industry and academia. The platform facilitates teaching critical concepts insensing, programming, hardware-software integration, and autonomy within real-world contexts, igniting student interest and engagement. We describe the design and evolution of the MecQaBot framework and the underlying principles of scalability and flexibility, which are keys to its success. Complete documentation: https://github.com/AliceJames-1/MecQaBot",
+      "citations": 3
+    },
+    {
+      "id": "zheng-2024-bridging",
+      "title": "Bridging the Gap between Discrete Agent Strategies in Game Theory and Continuous Motion Planning in Dynamic Environments",
+      "authors": [
+        "Hongrui Zheng",
+        "Zhijun Zhuang",
+        "Stephanie Wu",
+        "Shuo Yang",
+        "Rahul Mangharam"
+      ],
+      "year": 2024,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "planning",
+        "multi-agent"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2403.11334",
+      "arxiv": "2403.11334",
+      "url": "https://www.semanticscholar.org/paper/ffa0b06eac8f8c05ce76b94bc7cef66a24425e60",
+      "abstract": "Generating competitive strategies and performing continuous motion planning simultaneously in an adversarial setting is a challenging problem. In addition, understanding the intent of other agents is crucial to deploying autonomous systems in adversarial multi-agent environments. Existing approaches either discretize agent action by grouping similar control inputs, sacrificing performance in motion planning, or plan in uninterpretable latent spaces, producing hard-to-understand agent behaviors. This paper proposes an agent strategy representation via Policy Characteristic Space that maps the agent policies to a pre-specified low-dimensional space. Policy Characteristic Space enables the discretization of agent policy switchings while preserving continuity in control. Also, it provides intepretability of agent policies and clear intentions of policy switchings. Then, regret-based game-theoretic approaches can be applied in the Policy Characteristic Space to obtain high performance in adversarial environments. Our proposed method is assessed by conducting experiments in an autonomous racing scenario using scaled vehicles. Statistical evidence shows that our method significantly improves the win rate of ego agent and the method also generalizes well to unseen environments.",
+      "citations": 3
+    },
+    {
+      "id": "koirala-2024-solving",
+      "title": "Solving Offline Reinforcement Learning with Decision Tree Regression",
+      "authors": [
+        "Prajwal Koirala",
+        "Cody H. Fleming"
+      ],
+      "year": 2024,
+      "venue": "Conference on Robot Learning",
+      "venue_short": "CoRL",
+      "type": "conference",
+      "tags": [
+        "reinforcement-learning",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "arxiv": "2401.11630",
+      "url": "https://www.semanticscholar.org/paper/d23617f3c005ba5dcadb7f0fcf3173552e4db99c",
+      "abstract": "This study presents a novel approach to addressing offline reinforcement learning (RL) problems by reframing them as regression tasks that can be effectively solved using Decision Trees. Mainly, we introduce two distinct frameworks: return-conditioned and return-weighted decision tree policies (RCDTP and RWDTP), both of which achieve notable speed in agent training as well as inference, with training typically lasting less than a few minutes. Despite the simplification inherent in this reformulated approach to offline RL, our agents demonstrate performance that is at least on par with the established methods. We evaluate our methods on D4RL datasets for locomotion and manipulation, as well as other robotic tasks involving wheeled and flying robots. Additionally, we assess performance in delayed/sparse reward scenarios and highlight the explainability of these policies through action distribution and feature importance.",
+      "citations": 3
+    },
+    {
+      "id": "zhu-2026-safety",
+      "title": "Safety-Driven DNN Sizing for Vehicular CPS",
+      "authors": [
+        "Tingan Zhu",
+        "Mier Li",
+        "Bineet Ghosh",
+        "Samarjit Chakraborty",
+        "Parasara Sridhar Duggirala"
+      ],
+      "year": 2026,
+      "venue": "IEEE Embedded Systems Letters",
+      "venue_short": "IEEE Embedded Systems Letters",
+      "type": "conference",
+      "tags": [
+        "perception-estimation",
+        "safety",
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/les.2025.3595839",
+      "url": "https://www.semanticscholar.org/paper/6a7a5285e5318276da54f3d686fdaf33fb0def2c",
+      "abstract": "Perception processing in cyber–physical systems (CPSs) is now almost exclusively done using deep neural networks (DNNs). Here, camera, radar, and LiDAR data—in autonomous vehicles or robots—is fed into DNNs that detect surrounding obstacles and distances to them. These results are used by controllers to compute appropriate actuation signals. But a CPS typically has multiple state components, where each of them might be estimated using a different camera, radar or LiDAR and an associated DNN. Hence, an emerging problem is to implement multiple DNNs on a resource-constrained graphics processing unit (GPU). While many GPUs from NVIDIA and AMD allow them to be split into multiple virtual GPUs, there is little work on how to partition them, and therefore size the corresponding DNNs, when they are a part of the same CPS. In contrast to the existing practice of focusing on the inference accuracy of individual DNNs in isolation, we propose a system-level safety-driven DNN sizing (and hence GPU partitioning) scheme for vehicular CPS. Our main technical contribution is a detailed experimental evaluation of this DNN sizing approach and an empirical validation of the formal technique behind it.",
+      "citations": 2
+    },
+    {
+      "id": "changwani-2025-model",
+      "title": "Model Predictive Path Tracking with Dynamic Obstacle Avoidance for Mobile Robots",
+      "authors": [
+        "Rishabh Changwani"
+      ],
+      "year": 2025,
+      "venue": "2025 3rd World Conference on Communication & Computing (WCONF)",
+      "venue_short": "WCONF",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/wconf64849.2025.11233759",
+      "url": "https://www.semanticscholar.org/paper/55bf8c9cbf051f42eb80c8a87d1740bfa3a98d00",
+      "abstract": "Efficient trajectory tracking is critical for autonomous mobile robots operating in dynamic environments. This study presents a model predictive control (MPC)-based approach for path tracking, integrating an artificial potential field (APF) method for real-time obstacle avoidance. The system employs both single-input single-output (SISO) and single-input multiple-output (SIMO) control models, optimizing navigation accuracy while adhering to kinematic constraints. Comparative simulations evaluate MPC against conventional PID controllers, demonstrating superior stability and adaptability. Results highlight the advantages of predictive control in generating feasible trajectories with minimal error, paving the way for improved autonomous navigation strategies.",
+      "citations": 2
+    },
+    {
+      "id": "sousa-2025-integrating",
+      "title": "Integrating Multimodal Perception into Ground Mobile Robots",
+      "authors": [
+        "Ricardo B. Sousa",
+        "H. Sobreira",
+        "João G. Martins",
+        "Paulo G. Costa",
+        "Manuel F. Silva",
+        "A. P. Moreira"
+      ],
+      "year": 2025,
+      "venue": "2025 IEEE International Conference on Autonomous Robot Systems and Competitions (ICARSC)",
+      "venue_short": "ICARSC",
+      "type": "conference",
+      "tags": [
+        "perception-estimation",
+        "systems-platform",
+        "multi-agent"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/icarsc65809.2025.10970176",
+      "url": "https://www.semanticscholar.org/paper/fab707abe87a859f831daf41a1f4c4f3bbede3fa",
+      "abstract": "Multimodal perception systems enhance the robustness and adaptability of autonomous mobile robots by integrating heterogeneous sensor modalities, improving long-term localisation and mapping in dynamic environments and human-robot interaction. Current mobile platforms often focus on specific sensor configurations and prioritise cost-effectiveness, possibly limiting the flexibility of the user to extend the original robots further. This paper presents a methodology to integrate multimodal perception into a ground mobile platform, incorporating wheel odometry, 2D laser scanners, 3D Light Detection and Ranging (LiDAR), and RGBD cameras. The methodology describes the electronics design to power devices, firmware, computation and networking architecture aspects, and mechanical mounting for the sensory system based on 3D printing, laser cutting, and bending metal sheet processes. Experiments demonstrate the usage of the revised platform in 2D and 3D localisation and mapping and pallet pocket estimation applications. All the documentation and designs are accessible in a public repository.",
+      "citations": 2
+    },
+    {
+      "id": "henzinger-2024-predictive",
+      "title": "Predictive Monitoring of Black-Box Dynamical Systems",
+      "authors": [
+        "T. Henzinger",
+        "Fabian Kresse",
+        "Kaushik Mallik",
+        "Emily Yu",
+        "Dorde Zikelic"
+      ],
+      "year": 2024,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "safety",
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2412.16564",
+      "arxiv": "2412.16564",
+      "url": "https://www.semanticscholar.org/paper/adc12328d991bfed938e5a2dc66532a8df8e5001",
+      "abstract": "We study the problem of predictive runtime monitoring of black-box dynamical systems with quantitative safety properties. The black-box setting stipulates that the exact semantics of the dynamical system and the controller are unknown, and that we are only able to observe the state of the controlled (aka, closed-loop) system at finitely many time points. We present a novel framework for predicting future states of the system based on the states observed in the past. The numbers of past states and of predicted future states are parameters provided by the user. Our method is based on a combination of Taylor's expansion and the backward difference operator for numerical differentiation. We also derive an upper bound on the prediction error under the assumption that the system dynamics and the controller are smooth. The predicted states are then used to predict safety violations ahead in time. Our experiments demonstrate practical applicability of our method for complex black-box systems, showing that it is computationally lightweight and yet significantly more accurate than the state-of-the-art predictive safety monitoring techniques.",
+      "citations": 2
+    },
+    {
+      "id": "meng-2024-conbat",
+      "title": "ConBaT: Control Barrier Transformer for Safe Robot Learning from Demonstrations",
+      "authors": [
+        "Yue Meng",
+        "Sai H. Vemprala",
+        "Rogerio Bonatti",
+        "Chuchu Fan",
+        "Ashish Kapoor"
+      ],
+      "year": 2024,
+      "venue": "IEEE International Conference on Robotics and Automation",
+      "venue_short": "ICRA",
+      "type": "conference",
+      "tags": [
+        "safety",
+        "reinforcement-learning",
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/icra57147.2024.10611109",
+      "url": "https://www.semanticscholar.org/paper/6a53ad0862e868d828a6b39c5066948306dc08c3",
+      "abstract": "Large-scale self-supervised models have recently revolutionized our ability to perform a variety of tasks within the vision and language domains. However, using such models for autonomous systems is challenging because of safety requirements: besides executing correct actions, an autonomous agent must also avoid the high cost and potentially fatal critical mistakes. Traditionally, self-supervised training mainly focuses on imitating previously observed behaviors, and the training demonstrations carry no notion of which behaviors should be explicitly avoided. In this work, we propose Control Barrier Transformer (ConBaT), an approach that learns safe behaviors from demonstrations in a self-supervised fashion. ConBaT is inspired by the concept of control barrier functions in control theory and uses a causal transformer that learns to predict safe robot actions autoregressively using a critic that requires minimal safety data labeling. During deployment, we employ a lightweight online optimization to find actions that ensure future states lie within the learned safe set. We apply our approach to different simulated control tasks and show that our method results in safer control policies compared to other classical and learning-based methods such as imitation learning, reinforcement learning, and model predictive control.",
+      "citations": 2
+    },
+    {
+      "id": "lee-2026-safeil",
+      "title": "SafeIL: Safety constrained imitation learning for autonomous systems",
+      "authors": [
+        "Gunmin Lee",
+        "Jaeseok Heo",
+        "Dohyeong Kim",
+        "Geunje Cheon",
+        "Jeongwoo Oh",
+        "Minyoung Hwang",
+        "Chanwoo Park",
+        "Kyungjae Lee",
+        "Songhwai Oh"
+      ],
+      "year": 2026,
+      "venue": "Robotics Auton. Syst.",
+      "venue_short": "Robotics Auton. Syst.",
+      "type": "conference",
+      "tags": [
+        "reinforcement-learning",
+        "safety"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1016/j.robot.2026.105376",
+      "url": "https://www.semanticscholar.org/paper/a15320a1133999fb4c89f73e30782040ccb5f31d",
+      "citations": 1
+    },
+    {
+      "id": "amine-2026-nonplanar",
+      "title": "Nonplanar Model Predictive Control for Autonomous Vehicles with Recursive Sparse Gaussian Process Dynamics",
+      "authors": [
+        "Ahmad Amine",
+        "Kabir Puri",
+        "Viet-Anh Le",
+        "Rahul Mangharam"
+      ],
+      "year": 2026,
+      "venue": "2026 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/iv66570.2026.11623981",
+      "arxiv": "2602.16206",
+      "url": "https://www.semanticscholar.org/paper/cefad7d7855a483cd201b8c067e27af56a605d73",
+      "abstract": "This paper proposes a nonplanar model predictive control (MPC) framework for autonomous vehicles operating on nonplanar terrain. To approximate complex vehicle dynamics in such environments, we develop a geometry-aware modeling approach that learns a residual Gaussian Process (GP). By utilizing a recursive sparse GP, the framework enables real-time adaptation to varying terrain geometry. The effectiveness of the learned model is demonstrated in a reference-tracking task using a Model Predictive Path Integral (MPPI) controller. Validation within a custom Isaac Sim environment confirms the framework’s capability to maintain high tracking accuracy on challenging 3D surfaces.",
+      "citations": 1
+    },
+    {
+      "id": "lelko-2025-robust",
+      "title": "Robust ℋ∞ Control Design with Learning Feature for Improving Vehicle Motion Performance Level",
+      "authors": [
+        "Attila Lelkó",
+        "B. Németh",
+        "Péter Gáspár"
+      ],
+      "year": 2025,
+      "venue": "European Control Conference",
+      "venue_short": "European Control Conference",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "raceline-optimization",
+        "reinforcement-learning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.23919/ecc65951.2025.11187148",
+      "url": "https://www.semanticscholar.org/paper/ce0a8a7ac03bda56bf79992b2980dd1d0c3b0546",
+      "abstract": "This paper presents a robust ℋ∞ control design method that incorporates learning feature. The goal of the work is to improve the performance level of the robust controller, which is achieved through reinforcement learning (RL) process. The contribution of the presented method is that the design of the ℋ∞ controller and the RL-based controller is structured in a joint optimization. This leads to an iterative design for the controllers. The developed design method is applied to the problem of minimizing lap time in vehicle control design. The presented simulation-based analysis shows that the proposed method is able to provide improved performance level, i.e., reduced lap time, compared to the robust control or the independent design process. The outcome of the joint design is that the lap time achieved with the ℋ∞ controller approaches the lap time achievable with the RL process.",
+      "citations": 1
+    },
+    {
+      "id": "jahncke-2025-mind",
+      "title": "MIND-Stack: Modular, Interpretable, End-to-End Differentiability for Autonomous Navigation",
+      "authors": [
+        "F. Jahncke",
+        "Johannes Betz"
+      ],
+      "year": 2025,
+      "venue": "2025 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "perception-estimation",
+        "control-mpc",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/iv64158.2025.11097814",
+      "arxiv": "2505.21734",
+      "url": "https://www.semanticscholar.org/paper/7daedfb1e29b90d58653916f608a6ca6b3b6b72c",
+      "abstract": "Developing robust, efficient navigation algorithms is challenging. Rule-based methods offer interpretability and modularity but struggle with learning from large datasets, while end-to-end neural networks excel in learning but lack transparency and modularity. In this paper, we present MIND-Stack, a modular software stack consisting of a localization network and a Stanley Controller with intermediate human interpretable state representations and end-to-end differentiability. Our approach enables the upstream localization module to reduce the downstream control error, extending its role beyond state estimation. Unlike existing research on differentiable algorithms that either lack modules of the autonomous stack to span from sensor input to actuator output or real-world implementation, MIND-Stack offers both capabilities. We conduct experiments that demonstrate the ability of the localization module to reduce the downstream control loss through its end-to-end differentiability while offering better performance than state-of-the-art algorithms based on traditional path tracking approaches. We showcase sim-to-real capabilities by deploying the algorithm on a real-world embedded autonomous platform with limited computation power and demonstrate simultaneous training of both the localization and controller towards one goal. While MIND-Stack shows good results, we discuss the incorporation of additional modules from the autonomous navigation pipeline in the future, promising even greater stability and performance in the next iterations of the framework.",
+      "citations": 1
+    },
+    {
+      "id": "kluner-2025-simulation",
+      "title": "Simulation to Reality: Testbeds and Architectures for Connected and Automated Vehicles",
+      "authors": [
+        "D. Klüner",
+        "Simon Schäfer",
+        "Lucas Hegerath",
+        "Jianye Xu",
+        "Julius Kahle",
+        "Hazem Ibrahim",
+        "Alexandru Kampmann",
+        "Bassam Alrifaee"
+      ],
+      "year": 2025,
+      "venue": "Advanced Intelligent Systems",
+      "venue_short": "Advanced Intelligent Systems",
+      "type": "conference",
+      "tags": [
+        "perception-estimation",
+        "systems-platform",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1002/aisy.202501102",
+      "arxiv": "2505.03472",
+      "url": "https://www.semanticscholar.org/paper/3d61cb900676f62567db8d8b42a9b78b7adb86af",
+      "pdf": "https://doi.org/10.1002/aisy.202501102",
+      "abstract": "This paper presents a lidar‐only state estimation and tracking framework, along with a roadside sensing unit for integration with existing urban infrastructure. Urban deployments demand scalable, real‐time tracking solutions, yet traditional remote sensing remains costly and computationally intensive, especially under perceptually degraded conditions. Our sensor node couples a single lidar with an edge computing unit and runs a computationally efficient, GPU‐free observer that simultaneously estimates object state, class, dimensions, and existence probability. The pipeline performs (i) state updates via an extended Kalman filter, (ii) dimension estimation using a 1D grid map/Bayesian update, (iii) class updates via a lookup table driven by the most probable object footprint, and (iv) existence estimation from track age and bounding box consistency. Experiments in dynamic urban‐like scenes with an instrumented passenger vehicle and additional road users demonstrate real‐time performance. Quantitative tracking accuracy is reported for the vehicle, while detection and classification performance are evaluated across all 48 annotated tracks. The complete end‐to‐end pipeline finishes within 100 ms for 99.88% of messages, with an excellent detection rate. Robustness is further confirmed under simulated wind‐induced sensor vibration. These results indicate that reliable, real‐time roadside tracking is feasible on CPU‐only edge hardware, enabling scalable, privacy‐friendly deployments within existing city infrastructure. The framework integrates with existing poles, traffic lights, and buildings, reducing deployment costs and simplifying large‐scale urban rollouts and maintenance efforts.",
+      "citations": 1
+    },
+    {
+      "id": "kochdumper-2025-robust",
+      "title": "Robust Identification of Hybrid Automata from Noisy Data",
+      "authors": [
+        "Niklas Kochdumper",
+        "Mohammed Foughali",
+        "P. Habermehl",
+        "Eugene Asarin"
+      ],
+      "year": 2025,
+      "venue": "International Conference on Hybrid Systems: Computation and Control",
+      "venue_short": "HSCC",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1145/3716863.3718030",
+      "url": "https://www.semanticscholar.org/paper/7c142cb833bfae22a253e7e07d5a8f4966d7fe6c",
+      "pdf": "https://dl.acm.org/doi/pdf/10.1145/3716863.3718030",
+      "abstract": "In recent years, many different methods for identifying hybrid automata from data have been proposed. However, most of these methods consider clean simulator data, and consequently do not perform well for noisy data measured from real systems. We address this shortcoming with a new approach for the identification of hybrid automata that is specifically designed to be robust to noise. In particular, we propose a new high-level strategy consisting of the following three steps: clustering based on the dynamics identified from a local dataset, state space partitioning using decision trees, and conversion of the decision tree to a hybrid automaton. In addition, we introduce several new concepts for the realization of the single steps. For example, we propose an automated regularization of the dynamic models used for clustering via rank adaption, as well as a new variant of the Gini impurity index for decision tree learning, tailored toward hybrid systems where different dynamics can be active within the same state space region. As our experiments on 19 challenging benchmarks with different characteristics demonstrate, in addition to being robust to both process and measurement noise, our approach avoids the need for extensive hyper-parameter tuning and also performs well for clean data without noise.",
+      "citations": 1
+    },
+    {
+      "id": "clement-2025-depth",
+      "title": "Depth Matters: Multimodal RGB-D Perception for Robust Autonomous Agents",
+      "authors": [
+        "Mihaela-Larisa Clement",
+        "M'onika Farsang",
+        "Felix Resch",
+        "R. Grosu"
+      ],
+      "year": 2025,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "systems-platform",
+        "control-mpc",
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2503.16711",
+      "arxiv": "2503.16711",
+      "url": "https://www.semanticscholar.org/paper/71aab446011b2936d47485fa1ae73d6025dd45d5",
+      "abstract": "Autonomous agents that rely purely on perception to make real-time control decisions require efficient and robust architectures. In this work, we demonstrate that augmenting RGB input with depth information significantly enhances our agents'ability to predict steering commands compared to using RGB alone. We benchmark lightweight recurrent controllers that leverage the fused RGB-D features for sequential decision-making. To train our models, we collect high-quality data using a small-scale autonomous car controlled by an expert driver via a physical steering wheel, capturing varying levels of steering difficulty. Our models were successfully deployed on real hardware and inherently avoided dynamic and static obstacles, under out-of-distribution conditions. Specifically, our findings reveal that the early fusion of depth data results in a highly robust controller, which remains effective even with frame drops and increased noise levels, without compromising the network's focus on the task.",
+      "citations": 1
+    },
+    {
+      "id": "xu-2025-small",
+      "title": "Small-Scale Testbeds for Connected and Automated Vehicles and Robot Swarms: Challenges and a Roadmap",
+      "authors": [
+        "Jianye Xu",
+        "Bassam Alrifaee",
+        "Johannes Betz",
+        "Armin Mokhtarian",
+        "A. Mittal",
+        "Mengchi Cai",
+        "Rahul Mangharam",
+        "O. Shehata",
+        "Catherine M. Elias",
+        "Jan-Nico Zaech",
+        "Patrick Scheffe",
+        "F. Jahncke",
+        "Sangeet Sankaramangalam Ulhas",
+        "Kaj Munhoz Arfvidsson"
+      ],
+      "year": 2025,
+      "venue": "IEEE Intelligent Transportation Systems Magazine",
+      "venue_short": "IEEE Intelligent Transportation Syste...",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "reinforcement-learning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/mits.2026.3666681",
+      "arxiv": "2503.05656",
+      "url": "https://www.semanticscholar.org/paper/1808bb3732dda3a5c6f27c2b2cc854a87bd25114",
+      "pdf": "https://arxiv.org/pdf/2503.05656",
+      "abstract": "This article proposes a roadmap to address the current challenges in small-scale testbeds for Connected and Automated Vehicles (CAVs) and robot swarms. The roadmap is a joint effort of participants in the workshop\"1st Workshop on Small-Scale Testbeds for Connected and Automated Vehicles and Robot Swarms,\"held on June 2 at the IEEE Intelligent Vehicles Symposium (IV) 2024 in Jeju, South Korea. The roadmap contains three parts: 1) enhancing accessibility and diversity, especially for underrepresented communities, 2) sharing best practices for the development and maintenance of testbeds, and 3) connecting testbeds through an abstraction layer to support collaboration. The workshop features eight invited speakers, four contributed papers [1]-[4], and a presentation of a survey paper on testbeds [5]. The survey paper provides an online comparative table of more than 25 testbeds, available at https://bassamlab.github.io/testbeds-survey. The workshop's own website is available at https://cpm-remote.lrt.unibw-muenchen.de/iv24-workshop.",
+      "citations": 1
+    },
+    {
+      "id": "livingston-2024-framework",
+      "title": "A Framework for Remotely Sharing Experimental Environments",
+      "authors": [
+        "S. Livingston"
+      ],
+      "year": 2024,
+      "venue": "2024 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "perception-estimation",
+        "safety"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/iv55156.2024.10588682",
+      "url": "https://www.semanticscholar.org/paper/51297966efde419a63b32e83e164b7e80811e03e",
+      "abstract": "Reproducibility is fundamental to robotics research, but access to appropriate hardware is a major limiting factor of reproducing experiments. This limitation usually arises from custom-built solutions without sufficient documentation and, simply, high costs. We propose that the best way to improve reproducibility is by removing barriers to safely sharing hardware. Towards this, we present a framework for making experimental environments remotely accessible. Modern virtualization tools like Linux containers are leveraged to enable reproducible and isolated access. The basic idea is to run user code in a container and transport all inputs and outputs through proxy programs that monitor for unsafe states. This interface is low-level: proxies can operate across serial lines, TCP, UDP, or HTTP connections. Thus, users are not locked into any particular programming library or application-level messaging system. The framework is shown in four case studies: the social robot Misty, the mobile robot Kobuki (base of the popular TurtleBot 2) with a LiDAR, wireless sensor networks, and Autoware.",
+      "citations": 1
+    },
+    {
+      "id": "mukherjee-2024-neural",
+      "title": "Neural $\\mathcal{L}_{1}$ Adaptive Control of Vehicle Lateral Dynamics",
+      "authors": [
+        "Pratik Mukherjee",
+        "Burak M. Gonultas",
+        "O. G. Poyrazoglu",
+        "Volkan Isler"
+      ],
+      "year": 2024,
+      "venue": "IEEE International Conference on Robotics and Automation",
+      "venue_short": "ICRA",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "sim-to-real",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/icra55743.2025.11128353",
+      "arxiv": "2405.16358",
+      "url": "https://www.semanticscholar.org/paper/2a857aed713fb0e63ab322a23c7cb1ab8a42cd12",
+      "abstract": "We address the problem of stable and robust control of vehicles with lateral error dynamics for the application of lane keeping. Lane departure is the primary reason for half of the fatalities in road accidents, making the development of stable, adaptive and robust controllers a necessity. Any disturbance or uncertainty introduced to the steering-angle input can be catastrophic for the vehicle. Therefore, controllers must be developed to actively handle such uncertainties. In this work, we introduce a Neural $\\mathcal{L}_1$ Adaptive controller (Neural-L1) which learns the uncertainties in the lateral error dynamics of a front-steered Ackermann vehicle and guarantees stability and robustness. Our contributions are threefold: i) We extend the theoretical results for guaranteed stability and robustness of conventional $\\mathcal{L}_1$ Adaptive controllers to Neural-L1; ii) We implement a Neural-L1 for the lane keeping application which learns uncertainties in the dynamics accurately; iii) We evaluate the performance of Neural-L1 on a physics-based simulator, PyBullet, and conduct extensive real-world experiments with the FlTENTH platform to demonstrate superior reference trajectory tracking performance of Neural-L1 compared to other state-of-the-art controllers, in the presence of uncertainties. Our project page, including supplementary material and videos, can be found at https://mukhe027.github.io/Neural-Adaptive-Control/",
+      "citations": 1
+    },
+    {
+      "id": "dawson-2024-radium",
+      "title": "RADIUM: Predicting and Repairing End-to-End Robot Failures Using Gradient-Accelerated Sampling",
+      "authors": [
+        "Charles Dawson",
+        "Anjali Parashar",
+        "Chuchu Fan"
+      ],
+      "year": 2024,
+      "venue": "IEEE Transactions on robotics",
+      "venue_short": "IEEE Transactions on robotics",
+      "type": "conference",
+      "tags": [
+        "sim-to-real",
+        "safety",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/tro.2025.3551198",
+      "arxiv": "2404.03412",
+      "url": "https://www.semanticscholar.org/paper/d9d2361df9c7e8bc75089bcb0c0cf17258ae4bc5",
+      "abstract": "Before deploying autonomous systems in safety-critical applications, we must be able to understand and verify the safety of these systems. For cases where the risk or cost of real-world testing is prohibitive, we propose a simulation-based framework for 1) predicting ways in which an autonomous system is likely to fail and 2) automatically adjusting the system's design and control policy to preemptively mitigate those failures. Existing tools for failure prediction struggle to search over high-dimensional environmental parameters, cannot efficiently handle end-to-end testing for systems with vision in the loop, and provide little guidance on how to mitigate failures once they are discovered. We approach this problem through the lens of approximate Bayesian inference, using differentiable simulation and rendering for efficient failure case prediction and repair (and providing a gradient-free version of our algorithm for cases where a differentiable simulator is not available). We include a theoretical and empirical evaluation of the tradeoffs between gradient-based and gradient-free methods, applying our approach to a range of robotics and control problems, including optimizing search patterns for robot swarms, UAV formation control, and robust network control. Compared to optimization-based falsification methods, our method predicts a more diverse, representative set of failure modes, and we find that our use of differentiable simulation yields solutions that have up to 10x lower cost and requires up to 2x fewer iterations to converge relative to gradient-free techniques. In hardware experiments, we find that repairing control policies using our method leads to a 5x robustness improvement.",
+      "citations": 1
+    },
+    {
+      "id": "reveles-martinez-2026-run",
+      "title": "Run-Level Evaluation of a Confidence-Gated Kalman Lane-Keeping Architecture for a 1:10-Scale Autonomous Vehicle",
+      "authors": [
+        "Rafael Reveles-Martínez",
+        "Hamurabi Gamboa-Rosales",
+        "Huitzilopoztli Luna-García",
+        "Erika Sánchez-Femat",
+        "Javier Saldívar-Pérez",
+        "F. Mirelez-Delgado",
+        "U. Hernández-González",
+        "C. Galván-Tejada",
+        "J. Galván-Tejada",
+        "J. Celaya-Padilla"
+      ],
+      "year": 2026,
+      "venue": "Automation",
+      "venue_short": "Automation",
+      "type": "conference",
+      "tags": [
+        "perception-estimation",
+        "control-mpc",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.3390/automation7040129",
+      "url": "https://www.semanticscholar.org/paper/7cfae48555ac6b71a47ce117aa34330bc3c8f740",
+      "pdf": "https://doi.org/10.3390/automation7040129",
+      "abstract": "Lane keeping under degraded visual confidence remains challenging because most existing approaches focus either on improving lane-feature extraction or on estimating vehicle motion, while giving less attention to how unreliable visual measurements should modify the estimator–controller interaction in a physical closed-loop system. This paper presents a confidence-gated Kalman lane-keeping architecture for a 1:10-scale autonomous vehicle. The methodological contribution lies in the direct coupling of visual confidence, state estimation, and steering control: unreliable lane measurements are down-weighted through confidence-dependent measurement noise, while the propagated lane-relative state remains available to the controller. The primary experimental unit is the run, defined as one logged lap under one control configuration; frame-level summaries are retained only as historical reproducibility material. In the run-level comparison, the autonomous vision, inertial measurement unit (IMU)-feedforward, and Kalman filter (KF) group KF_G1—the first inferential KF generation—had lower mean absolute error than the human baseline, while vision and KF_G1 had overlapping run-level confidence intervals for absolute error. KF_G1 shifted the mean signed bias closer to the lane reference than the vision and IMU groups, but with higher run-level spread than vision. KF_G2, the second observational KF generation, is reported only as an observational generation comparison, so no causal claim is made for its estimator–controller correction weight Ks=0.15 setting. KF_G3, the single descriptive adverse-condition KF run, is reported without an estimable confidence interval or population-level adverse-illumination inference. A further limitation is that the inertial prediction pathway was inactive in the logged Kalman-filter runs because the inertial coupling coefficient α=0. The main contribution is a reproducible run-level evaluation of confidence-gated estimator–controller coupling tha"
+    },
+    {
+      "id": "bandyopadhyay-2026-neoracer",
+      "title": "NeoRacer: An Open, Standardized 1:12 Scale Autonomous Race Car for Benchmarking and Education",
+      "authors": [
+        "Koneshka Bandyopadhyay",
+        "A. Mehta",
+        "B. Mabsout",
+        "Renato Mancuso"
+      ],
+      "year": 2026,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "systems-platform",
+        "education",
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "arxiv": "2607.26855",
+      "url": "https://www.semanticscholar.org/paper/55b26eac5438a3dbe7b02461de67aaf279af639b",
+      "abstract": "Many scientific fields rely on standard benchmarks and shared platforms to improve review and reproducibility, but autonomous systems research still lacks widely accepted open hardware. Where standardization has emerged, progress has accelerated. This is especially evident in autonomous racing, where teams often build custom systems or buy niche, expensive vehicles, making control and robotics research and education hard to compare and reproduce. High costs also limit access outside well-funded labs, while affordable educational robots are often underpowered. To address this gap, we present NeoRacer, an open-source 1:12 scale autonomous racing platform. It is built around an NVIDIA Jetson Orin Nano (67 TOPS), a 270{\\deg} LiDAR, a 120 fps global-shutter camera, and a 9-axis IMU. NeoRacer ships pre-assembled for USD 2,699, offering over 3x the compute of comparable platforms at less than half the cost of the nearest pre-assembled alternative. Co-developed by the Neobotics Foundation and Seeed Studio, and manufactured by Seeed Studio, NeoRacer combines open hardware and software design with scalable, repeatable production. The modular, extensible platform provides a standardized benchmarking environment for autonomous racing algorithms across institutions. We describe the hardware/software architecture, design decisions from two pilot deployments (MIT IAP, 15 students; BU CPS Lab, 10 students), and key cost-performance tradeoffs. Hardware is licensed under CERN-OHL-S v2 and software under GPLv3, with all design files, firmware, and ROS2 packages publicly accessible."
+    },
+    {
+      "id": "abdelaty-2026-verifiable",
+      "title": "A Verifiable Service-Oriented Industrial Cyber–Physical Systems Framework for Energy-Aware Autonomous Navigation Using a High-Fidelity Cyber–Physical Twin",
+      "authors": [
+        "Omar Abdelaty",
+        "Veera Ragavan Sampath Kumar",
+        "D. Gouwanda",
+        "M. Shanmugavel"
+      ],
+      "year": 2026,
+      "venue": "Software",
+      "venue_short": "Software",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "sim-to-real",
+        "multi-agent"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.3390/software5030031",
+      "url": "https://www.semanticscholar.org/paper/7c9bbb158f8ffc099c006df7032cfbd6ce77a9c2",
+      "pdf": "https://doi.org/10.3390/software5030031",
+      "abstract": "Autonomous Cyber–Physical Systems (CPS) must jointly satisfy energy efficiency, accuracy, and real-time constraints, which are typically treated separately in existing methods. This paper proposes a verifiable service-oriented CPS framework for energy-aware autonomous navigation using a high-fidelity cyber–physical twin. The approach integrates physics-based Model Predictive Control (MPC) with explicit power modeling (P=F·v) and Dubins curve-based trajectory generation under the 5C (connection, conversion, cyber, cognition, and configuration) architecture using CARLA for synchronized cyber–physical interaction. The proposed method achieves 30.7% reduction in mean power consumption and 12.5% reduction in total energy usage while maintaining sub-centimeter tracking error (<0.05 m). Mission duration increases by 26.3% with only 7% computational overhead, confirming real-time feasibility. The framework provides a verifiable CPS methodology that unifies physics-based control, digital twin synchronization, and service-oriented design for energy-aware autonomous navigation."
+    },
+    {
+      "id": "chen-2026-controller",
+      "title": "Controller-aware Perception Neural Network Pruning for CPS Safety Optimization",
+      "authors": [
+        "Jingxian Chen",
+        "Yukai Song",
+        "Shengjie Xu",
+        "Kyle Kessler",
+        "Prateek Ganguli",
+        "Arkaprava Gupta",
+        "Bineet Ghosh",
+        "Parasara Sridhar Duggirala",
+        "Tianlong Chen",
+        "Samarjit Chakraborty",
+        "Jingtong Hu"
+      ],
+      "year": 2026,
+      "venue": "ACM Transactions on Cyber-Physical Systems",
+      "venue_short": "ACM Transactions on Cyber-Physical Sy...",
+      "type": "conference",
+      "tags": [
+        "perception-estimation",
+        "safety",
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1145/3828657",
+      "url": "https://www.semanticscholar.org/paper/3ef10da948ad2cb5b9b987218449c663bd8e381a",
+      "abstract": "Traditional neural architecture pruning methods primarily focus on trade-offs between inference accuracy and computational cost (e.g., FLOPs), without accounting for system-level behaviors. In the context of cyber-physical systems (CPS), perception models and the downstream controllers that rely on their outputs are typically designed independently. In this paper, we study the joint design of neural architecture pruning strategies and the controllers that utilize the resulting inference outputs. We propose two key innovations: (i) incorporating system-level safety metrics into the pruning optimization loop, and (ii) a regression-based scaling law method that efficiently models the relationship between pruning ratios and system-level safety outcomes. This enables rapid pruning guided by system-level constraints, avoiding the inefficiency of exhaustive search or conventional neural architecture search approaches that focus on local accuracy or latency metrics. We demonstrate our approach on YOLO-based perception models deployed in control systems for distance estimation. To the best of our knowledge, this is the first work to introduce a scaling-law-guided pruning method for YOLO-based perception models, offering a principled design automation framework for safety-aware, machine learning–enabled CPS."
+    },
+    {
+      "id": "bouhaja-2026-safety",
+      "title": "Safety-Critical Sampling-Based Control for Aggressive Autonomous Systems",
+      "authors": [
+        "Youssef Bouhaja",
+        "Yassine Salih-Alj"
+      ],
+      "year": 2026,
+      "venue": "International Conference on Computational Intelligence and Communication Networks",
+      "venue_short": "International Conference on Computati...",
+      "type": "conference",
+      "tags": [
+        "safety",
+        "control-mpc",
+        "planning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/cicn70047.2026.11594194",
+      "url": "https://www.semanticscholar.org/paper/16b5c424fa61e9588f4b9d4de09d5dbda4eca2ff",
+      "abstract": "Autonomous racing pushes control systems to operate at the limits of tire-road friction, where small modeling errors can rapidly lead to instability or constraint violations. Sampling-based controllers such as Model Predictive Path Integral (MPPI) enable aggressive, high-performance behavior in nonlinear regimes, but enforce safety primarily through soft cost penalties, offering no formal guarantees under model mismatch or limited sampling. Conversely, Control Barrier Function (CBF) methods provide forward-invariance guarantees, yet are typically applied as reactive filters without trajectory-level stochastic optimization. A safety-critical sampling-based control architecture is proposed, where discrete-time CBF constraints are embedded within the MPPI framework. Barrier-informed cost shaping guides stochastic exploration away from unsafe regions, while a corrective CBF layer guarantees forward invariance at execution. This dual-layer structure enables aggressive behavior with short horizons and limited rollouts."
+    },
+    {
+      "id": "lin-2026-autosdv",
+      "title": "AutoSDV: A Software-Defined, 5G-Enabled Platform for Autoware Education and Development",
+      "authors": [
+        "Hsiang-Jui Lin",
+        "Chi-Sheng Shih"
+      ],
+      "year": 2026,
+      "venue": "2026 IEEE Intelligent Vehicles Symposium Workshops (IV Workshops)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "perception-estimation",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/ivworkshops71735.2026.11624126",
+      "url": "https://www.semanticscholar.org/paper/3dbcbcb99d808523c8a1c64c5cb0c68af3380f26",
+      "abstract": "Autoware provides production-grade autonomous driving software, but deploying it on custom hardware requires significant integration effort. This paper presents AutoSDV, a maintainable and customizable 1:8 scale platform that runs unmodified Autoware on NVIDIA Jetson Orin with optional 5G connectivity. The platform uses commodity RC chassis and off-the-shelf components—requiring no specialized wiring or PCB design skills—enabling researchers to build and repair vehicles using standard maker tools. We demonstrate customization through four platform variants: Base (vision-only), 360° LiDAR (Velodyne VLP-32C), Solid-State (Seyond Robin-W), and Connected (5G-enabled). Our primary technical contribution is CUDA-accelerated NDT localization achieving 1.32× speedup over Autoware’s OpenMP implementation on Jetson Orin, enabling real-time 10 Hz operation on embedded GPUs. We also present autoware-localrepo, a Debian-based deployment system reducing installation from hours of error-prone compilation to minutes. Experimental validation shows 3.8 cm mean pose difference versus Autoware’s reference implementation, confirming functional equivalence. The platform maintains full API compatibility with production Autoware, enabling direct knowledge transfer between small-scale research and full-scale deployments."
+    },
+    {
+      "id": "taupitz-2026-what",
+      "title": "What Do You Sense? Multimodal Feedback for Vehicle Teleoperation in Unstructured Environments",
+      "authors": [
+        "Richard Taupitz",
+        "Victor Desombre",
+        "Mateusz Szczesny",
+        "Frank Diermeyer"
+      ],
+      "year": 2026,
+      "venue": "2026 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "reinforcement-learning",
+        "perception-estimation",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/iv66570.2026.11623861",
+      "url": "https://www.semanticscholar.org/paper/71774f9ae0e823d0697577761099ebed57c34445",
+      "abstract": "Teleoperation enables a human to remotely assist an autonomous vehicle. However, physical separation between the operator and vehicle in teleoperation introduces significant challenges, particularly in unstructured environments where the operator has to rely on sensory perception. To compensate for missing sensory input, data from the vehicle’s range, acceleration, and sound sensors can be used to create visual augmentations and to provide the operator with auditory and haptic feedback. In this work, three human-machine interface (HMI) variants were developed to identify which information and feedback modalities best support teleoperation in unstructured environments. The interfaces were evaluated in a user study involving 33 participants who used a scaled-down vehicle platform on a static obstacle course. Beyond visual feedback, auditory and haptic cues subjectively improved operators’ understanding of vehicle behavior. Visual elements such as a bird’s-eye view and a visualization of the predicted vehicle path were perceived as useful. No significant differences were observed in task load, usability, or task completion times between the variants. Overall, the multimodal feedback was the most preferred."
+    },
+    {
+      "id": "li-2026-lightad",
+      "title": "LightAD: A Lightweight Vision-Based Autonomous Driving System",
+      "authors": [
+        "Yunge Li",
+        "Zhao-Ying Zhou",
+        "Shaibal Saha",
+        "Ali Irshayyid",
+        "Keer Chen",
+        "Lanyu Xu",
+        "Jun Chen"
+      ],
+      "year": 2026,
+      "venue": "Most",
+      "venue_short": "Most",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "reinforcement-learning",
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/most69733.2026.00015",
+      "url": "https://www.semanticscholar.org/paper/6d76a868e10e18af0934521c29dcfc978053e2a5",
+      "abstract": "Autonomous driving systems deployed in the real world suffer from excessive hardware redundancy and prohibitive deployment barriers. To address these challenges, LightAD is proposed as a lightweight, vision-based autonomous driving system framework tailored for simple, low-speed environments such as confined work zones and low-speed logistics. Diverging from industrial-grade solutions that rely on costly proprietary sensors and high-performance computing, LightAD implements system-level simplification. By leveraging consumer-grade hardware and lightweight algorithms for perception, planning, and control, LightAD significantly reduces costs and integration complexity while satisfying necessary autonomous driving functionality. Field trials at the Intelligent Ground Vehicle Competition on a physical vehicle confirmed the feasibility of LightAD and revealed practical implementation lessons. These results indicate that by combining low-cost general-purpose hardware with lightweight algorithms, LightAD effectively supports fundamental autonomous driving functionality in simple, well-defined, and low-speed environments, offering a feasible engineering pathway for cost-effective deployment of autonomous driving."
+    },
+    {
+      "id": "zhang-2026-teacar",
+      "title": "TEACar: An Open-Source Autonomous Driving Platform",
+      "authors": [
+        "Z. Zhang",
+        "Maxwell Ruyle",
+        "A. Kappes",
+        "T. Ruble",
+        "William Shaoul",
+        "Dana Moreno",
+        "J. Penn",
+        "Ivan Ruchkin"
+      ],
+      "year": 2026,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "systems-platform",
+        "reinforcement-learning",
+        "control-mpc"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2604.24934",
+      "arxiv": "2604.24934",
+      "url": "https://www.semanticscholar.org/paper/ae3044444bc03b18b865103415bea1c5379ba13a",
+      "abstract": "Intelligent Transportation Systems (ITS) increasingly rely on vision-based perception and learning-based control, necessitating experimental platforms that support realistic hardware-in-the-loop validation. Small-scale platforms for autonomous racing offer a practical path to hardware validation, but often suffer from limited modularity, high integration complexity, or restricted extensibility. This paper presents TEACAR, a 1/14- to 1/16-scale autonomous driving platform designed with modular mechanical architecture, hardware abstraction, and ROS 2-based software. The system adopts a four-layer deck structure that physically decouples sensing, computation, actuation, and power subsystems, improving structural rigidity while simplifying reconfiguration. We constructed and comprehensively evaluated the prototype of TEACAR. Its mechanical stability, structural characteristics, and software performance were quantified based on three CNN-based steering controllers. Inference latency, power consumption, and system operating time were measured to evaluate computational capability and robustness. Our experiments demonstrated that TEACAR offers a scalable, modular, and cost-effective testbed for ITS research, education, and development. Our project repository is available on GitHub."
+    },
+    {
+      "id": "le-2026-single",
+      "title": "Toward Single-Step MPPI via Differentiable Predictive Control",
+      "authors": [
+        "Viet-Anh Le",
+        "Renukanandan Tumu",
+        "Rahul Mangharam"
+      ],
+      "year": 2026,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "control-mpc",
+        "planning",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2604.01539",
+      "arxiv": "2604.01539",
+      "url": "https://www.semanticscholar.org/paper/9c970a8e74bb51115dfff2ee9508292ec7665aee",
+      "abstract": "Model predictive path integral (MPPI) is a sampling-based method for solving complex model predictive control (MPC) problems, but its real-time implementation faces two key challenges: the computational cost and sample requirements grow with the prediction horizon, and manually tuning the sampling covariance requires balancing exploration and noise. To address these issues, we propose Step-MPPI, a framework that learns a sampling distribution for efficient single-step lookahead MPPI implementation. Specifically, we use a neural network to parameterize the MPPI proposal distribution at each time step, and train it in a self-supervised manner over a long horizon using the MPC cost, constraint penalties, and a maximum-entropy regularization term. By embedding long-horizon objectives into training the neural distribution policy, Step-MPPI achieves the foresight of a multi-step optimizer with the millisecond-level latency of single-step lookahead. We demonstrate the efficiency of Step-MPPI across multiple challenging tasks in which MPPI suffers from high dimensionality and/or long control horizons."
+    },
+    {
+      "id": "cihlar-2026-autonomous",
+      "title": "Autonomous overtaking trajectory optimization using reinforcement learning and opponent pose estimation",
+      "authors": [
+        "M. Cihlar",
+        "Luka Siktar",
+        "Branimir Ćaran",
+        "M. Švaco"
+      ],
+      "year": 2026,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "multi-agent",
+        "reinforcement-learning",
+        "raceline-optimization"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2603.27207",
+      "arxiv": "2603.27207",
+      "url": "https://www.semanticscholar.org/paper/0416421e53175aeab256536540b55b8a2662c0ef",
+      "abstract": "Vehicle overtaking is one of the most complex driving maneuvers for autonomous vehicles. To achieve optimal autonomous overtaking, driving systems rely on multiple sensors that enable safe trajectory optimization and overtaking efficiency. This paper presents a reinforcement learning mechanism for multi-agent autonomous racing environments, enabling overtaking trajectory optimization, based on LiDAR and depth image data. The developed reinforcement learning agent uses pre-generated raceline data and sensor inputs to compute the steering angle and linear velocity for optimal overtaking. The system uses LiDAR with a 2D detection algorithm and a depth camera with YOLO-based object detection to identify the vehicle to be overtaken and its pose. The LiDAR and the depth camera detection data are fused using a UKF for improved opponent pose estimation and trajectory optimization for overtaking in racing scenarios. The results show that the proposed algorithm successfully performs overtaking maneuvers in both simulation and real-world experiments, with pose estimation RMSE of (0.0816, 0.0531) m in (x, y)."
+    },
+    {
+      "id": "domberg-2026-self",
+      "title": "Self-adapting Robotic Agents through Online Continual Reinforcement Learning with World Model Feedback",
+      "authors": [
+        "Fabian Domberg",
+        "Georg Schildbach"
+      ],
+      "year": 2026,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "reinforcement-learning",
+        "control-mpc",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2603.04029",
+      "arxiv": "2603.04029",
+      "url": "https://www.semanticscholar.org/paper/72d13098873da103d0870ef9fe924bec5defdbb6",
+      "abstract": "As learning-based robotic controllers are typically trained offline and deployed with fixed parameters, their ability to cope with unforeseen changes during operation is limited. Biologically inspired, this work presents a framework for online Continual Reinforcement Learning that enables automated adaptation during deployment. Building on DreamerV3, a model-based Reinforcement Learning algorithm, the proposed method leverages world model prediction residuals to detect out-of-distribution events and automatically trigger finetuning. Adaptation progress is monitored using both task-level performance signals and internal training metrics, allowing convergence to be assessed without external supervision and domain knowledge. The approach is validated on a variety of contemporary continuous control problems, including a quadruped robot in high-fidelity simulation, and a real-world model vehicle. Relevant metrics and their interpretation are presented and discussed, as well as resulting trade-offs described. The results sketch out how autonomous robotic agents could once move beyond static training regimes toward adaptive systems capable of self-reflection and -improvement during operation, just like their biological counterparts."
+    },
+    {
+      "id": "han-2026-development",
+      "title": "Development of an Ackermann steering robot platform with dual visual odometry and pan-tilt perception system",
+      "authors": [
+        "Seung Won Han",
+        "Hyeon Min Kim",
+        "Hyeon-Su Kim",
+        "Seonghun Hong",
+        "Myeong-Guen Jang",
+        "Dong-Hyun Lee"
+      ],
+      "year": 2026,
+      "venue": "International Journal of Advanced Robotic Systems",
+      "venue_short": "International Journal of Advanced Rob...",
+      "type": "conference",
+      "tags": [
+        "perception-estimation",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1177/17298806261438165",
+      "url": "https://www.semanticscholar.org/paper/901d67a0506de14d113e8203d0f48574a5cd8694",
+      "pdf": "https://doi.org/10.1177/17298806261438165",
+      "abstract": "This paper presents the design, implementation, and experimental validation of a compact Ackermann-steered mobile robot platform developed for autonomous navigation and diverse service applications. The platform integrates dual stereo cameras and an inertial measurement unit to ensure robust localization, alongside a pan-tilt RGB-D camera designed for active perception tasks. Specifically, the dual stereo cameras mounted at the front and rear provide bidirectional visual odometry, which is fused with inertial measurements via an extended Kalman filter to achieve accurate, drift-reduced state estimation. Furthermore, the pan-tilt actuator enables dynamic viewpoint control, facilitating robust object tracking and dense three-dimensional (3D) perception. The system is built upon the Robot Operating System 2 framework, providing a modular and extensible architecture that allows for seamless integration with various perception and navigation algorithms. Experimental evaluations—including velocity tracking, dual visual odometry benchmarking, mapless navigation, and real-time 3D mapping—validate the effectiveness and versatility of the proposed platform in outdoor environments."
+    },
+    {
+      "id": "avula-2025-waywiser",
+      "title": "WayWiseR: A Rapid Prototyping Platform for Validating Connected and Automated Vehicles",
+      "authors": [
+        "R. R. Avula",
+        "Marvin Damschen",
+        "Aria Mirzai",
+        "Karl Lundgren",
+        "Ashfaq Farooqui",
+        "Anders Thorsén"
+      ],
+      "year": 2025,
+      "venue": "International Conference on Control, Mechatronics and Automation",
+      "venue_short": "International Conference on Control,...",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "reinforcement-learning",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/iccma67641.2025.11369551",
+      "url": "https://www.semanticscholar.org/paper/8b824f040499abaa85dd61c8a42e0f24e0b70248",
+      "abstract": "Validating connected and automated vehicles (CAVs), specifically Automated Driving Systems (ADS), remains a challenge, particularly in ensuring safety and reliability across diverse operational scenarios. Before an ADS can be considered safe for deployment, it must be evaluated across a wide range of carefully designed test cases that capture both expected and edge case conditions. As recognized in the UNECE’s New Assessment/Test Method for Automated Driving (NATM), testing all such scenarios on a real system is often impractical, making virtual testing an essential complement to physical tests. To enable this, we present WayWiseR, an open-source rapid prototyping platform built on ROS2 that supports researchers in developing and evaluating validation methodologies for CAVs. By integrating modular components, simulation environments such as CARLA, and scaled vehicle hardware, WayWiseR enables reproducible experimentation and flexible orchestration of test scenarios across both virtual and physical platforms. We demonstrate the platform through two representative use cases: autonomous reverse docking in a logistics hub, and human detection and emergency braking in forestry environments. The results demonstrate WayWiseR’s ability to bridge simulation-based validation with real-world operational testing, thereby supporting the safer deployment of sufficiently validated CAVs."
+    },
+    {
+      "id": "donoso-2025-jetros",
+      "title": "JETROS: A Scalable Robotic Testbed for Experimental Evaluation of Algorithms for Cooperative Vehicle Platooning",
+      "authors": [
+        "Francisca Donoso",
+        "Nelson Salvador",
+        "Gonzalo Carvajal",
+        "Akramul Azim"
+      ],
+      "year": 2025,
+      "venue": "Conference of the Centre for Advanced Studies on Collaborative Research",
+      "venue_short": "Conference of the Centre for Advanced...",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "perception-estimation",
+        "reinforcement-learning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/cascon66301.2025.00059",
+      "url": "https://www.semanticscholar.org/paper/2d95398cd0436ecf15591038336647ecadc73a57",
+      "abstract": "This paper introduces JETROS, a modular and scalable robotic testbed for experimental evaluation of platooning strategies in autonomous vehicles. Each robot combines an NVIDIA Jetson Orin Nano board with a comprehensive sensor suite for implementing vision-based perception, and includes wireless interfaces for inter-vehicle communication. The integrated architecture provides a robust infrastructure for deploying and testing software-based strategies for addressing open challenges in coordinated platooning. Experiments using a leader-follower pair provide preliminary validation of core platooning functionalities, including lane detection, lane keeping, and control of intervehicle distance using layered PID controllers. Furthermore, the tested scenario leverages inter-vehicle communication for reference velocity sharing, as a way to improve safety in scenarios where sensor reliability is degraded, like when the cars move along curved paths. Availability of a high-performance embedded computing unit in each robot facilitates deployment and testing of sophisticated software stacks for perception, control, and communication. We expect that the flexibility and accessibility of the platform will promote experimental validation and critical examination of reported solutions for advanced platooning strategies, ultimately supporting the transition from simulation to real-world deployment."
+    },
+    {
+      "id": "schallau-2025-post",
+      "title": "Post-Hoc Scenario-Based Testing of Automated Driving Systems: Classification of Driving Scenarios and Checking of Functional Requirements in Recorded Data",
+      "authors": [
+        "Till Schallau",
+        "Dominik Schmid",
+        "Nick Pawlinorz",
+        "Harun Teper",
+        "Stefan Naujokat",
+        "Jian-Jia Chen",
+        "Falk Howar"
+      ],
+      "year": 2025,
+      "venue": "2025 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "safety"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/iv64158.2025.11097740",
+      "url": "https://www.semanticscholar.org/paper/6d2cbfa07174d554dddce3d86e7d89316f692e76",
+      "abstract": "We present a post-hoc approach for scenario-based testing of automated driving systems, enabling the analysis of safety and correctness for (cooperative) automated driving systems in many scenarios without conducting tests for individual scenarios. The system under test is operated in its physical environment’ and data is recorded during operation. Then, driving scenarios are identified in this data and functional requirements are checked, yielding pass or fail verdicts for individual scenarios. We validate the envisioned post-hoc approach in a single-case mechanism experiment by the example of a platooning controller, identifying a previously unknown bug in the tested system, as well as a functional insufficiency concerning the intended operational design domain."
+    },
+    {
+      "id": "kumari-2025-development",
+      "title": "Development of a Scaled Setup for Experimental Study of the Effect of Lateral Dynamics on Energy Consumption in Electric Vehicles",
+      "authors": [
+        "Simran Kumari",
+        "Anand Ronald K.",
+        "Siddhartha Mukhopadhyay",
+        "A. Hota"
+      ],
+      "year": 2025,
+      "venue": "2025 IEEE/AIAA Transportation Electrification Conference and Electric Aircraft Technologies Symposium (ITEC+EATS)",
+      "venue_short": "2025 IEEE/AIAA Transportation Electri...",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/itec63604.2025.11098029",
+      "arxiv": "2505.14575",
+      "url": "https://www.semanticscholar.org/paper/e764557d6ea109261a881c51d1c4760ff27dc617",
+      "abstract": "Most of the existing state-of-the-art approaches for energy consumption analysis do not account for the effect of lateral dynamics on energy consumption in electric vehicles (EVs) during vehicle maneuvers. This paper aims to validate this effect through an experimental study. We develop a scaled model using a radio-controlled (RC) car, modified to achieve dynamic similitude with on-road vehicles, to conduct scaled experiments. The experimental results confirm the impact of lateral dynamics on both energy demand and driving range in electric vehicles, aligning with our previous findings [1], and emphasize the need to incorporate these factors into energy consumption models."
+    },
+    {
+      "id": "al-bustami-2025-drivenetbench",
+      "title": "DriveNetBench: An Affordable and Configurable Single-Camera Benchmarking System for Autonomous Driving Networks",
+      "authors": [
+        "Ali Al-Bustami",
+        "Humberto Ruiz-Ochoa",
+        "Jaerock Kwon"
+      ],
+      "year": 2025,
+      "venue": "IEEE International Conference on Electro/Information Technology",
+      "venue_short": "IEEE International Conference on Elec...",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/eit64391.2025.11103658",
+      "arxiv": "2505.01893",
+      "url": "https://www.semanticscholar.org/paper/b53b4dc776ce015999ebd055f394269f6b4e239e",
+      "pdf": "https://arxiv.org/pdf/2505.01893",
+      "abstract": "Validating autonomous driving neural networks often demands expensive equipment and complex setups, limiting accessibility for researchers and educators. We introduce DriveNetBench, an affordable and configurable benchmarking system designed to evaluate autonomous driving networks using a single-camera setup. Leveraging low-cost, off-the-shelf hardware, and a flexible software stack, DriveNetBench enables easy integration of various driving models, such as object detection and lane following, while ensuring standardized evaluation in real-world scenarios. Our system replicates common driving conditions and provides consistent, repeatable metrics for comparing network performance. Through preliminary experiments with representative vision models, we illustrate how DriveNetBench effectively measures inference speed and accuracy within a controlled test environment. The key contributions of this work include its affordability, its replicability through open-source software, and its seamless integration into existing workflows, making autonomous vehicle research more accessible. Code and pre-trained models are available at https://gitthub.com/alibustami/DriveNetBench."
+    },
+    {
+      "id": "caleffi-2024-advancing",
+      "title": "Advancing urban planning and autonomous vehicles integration through scaled models",
+      "authors": [
+        "Felipe Caleffi",
+        "Lauren da Silva Rodrigues",
+        "Joice da Silva Stamboroski",
+        "Braian Vargas Rorig",
+        "Vanessa Zuchetto",
+        "Ítalo Brum Raguzzoni",
+        "Roberto Vidal dos Santos",
+        "Julia Brettas da Silva",
+        "V. Rosa",
+        "F. Machado"
+      ],
+      "year": 2024,
+      "venue": "Ciência e Natura",
+      "venue_short": "Ciência e Natura",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "reinforcement-learning",
+        "planning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.5902/2179460x86771",
+      "url": "https://www.semanticscholar.org/paper/4b7a17557b8cbd87b9302d2f7c0c69a0051fd777",
+      "pdf": "https://periodicos.ufsm.br/cienciaenatura/article/download/86771/65223",
+      "abstract": "In the evolving landscape of urban planning and transportation, the integration of autonomous vehicles (AVs) into the urban environment presents a transformative opportunity. This paper explores the potential of scaled models in advancing urban planning and AV integration, highlighting the intricate interdependence of transportation systems, urban planning, and socio-economic factors. The emergence of AVs promises unparalleled efficiency, safety, and environmental sustainability in urban mobility. However, their successful integration necessitates meticulous planning and a comprehensive understanding of the urban landscape. Scaled models offer a dynamic platform for urban planners and policymakers to simulate, assess, and strategize the incorporation of AVs into cities, enabling the visualization of potential changes and the formulation of sustainable and equitable development strategies. Despite the promising prospects of scaled models, challenges such as scaling accuracy and the simplification of complex urban dynamics persist. Addressing these challenges is crucial for bridging the gap between model experiments and real-world urban complexities. By harnessing the power of scaled models, this paper aims to deepen our understanding of the interaction between AVs and urban environments and to strategize their integration, marking a significant step towards smarter, safer, and more sustainable cities."
+    },
+    {
+      "id": "antal-2024-hook",
+      "title": "Hook-Based Aerial Payload Grasping from a Moving Platform",
+      "authors": [
+        "Péter Antal",
+        "T. Péni",
+        "R. T'oth"
+      ],
+      "year": 2024,
+      "venue": "IEEE International Conference on Robotics and Automation",
+      "venue_short": "ICRA",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "sim-to-real",
+        "raceline-optimization"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/icra55743.2025.11127483",
+      "arxiv": "2409.11788",
+      "url": "https://www.semanticscholar.org/paper/97371ca809d5cc5dc6ca9159a5d360ffd661775d",
+      "abstract": "This paper investigates payload grasping from a moving platform using a hook-equipped aerial manipulator. First, a computationally efficient trajectory optimization based on complementarity constraints is proposed to determine the optimal grasping time. To enable application in complex, dynamically changing environments, the future motion of the payload is predicted using a physics simulator-based model. The success of payload grasping under model uncertainties and external disturbances is formally verified through a robustness analysis method based on integral quadratic constraints. The proposed algorithms are evaluated in a high-fidelity physical simulator, and in real flight experiments using a customdesigned aerial manipulator platform."
+    },
+    {
+      "id": "morris-2024-slug",
+      "title": "Slug Mobile: Test-Bench for RL Testing",
+      "authors": [
+        "J. Morris",
+        "Vishruti Shah",
+        "Alex Besanceney",
+        "Daksh Shah",
+        "Leilani Gilpin"
+      ],
+      "year": 2024,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "sim-to-real",
+        "reinforcement-learning",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2409.10532",
+      "arxiv": "2409.10532",
+      "url": "https://www.semanticscholar.org/paper/3e96bee26faef5b1285d2a9890bbc483300c6c07",
+      "abstract": "Sim-to real gap in Reinforcement Learning is when a model trained in a simulator does not translate to the real world. This is a problem for Autonomous Vehicles (AVs) as vehicle dynamics can vary from simulation to reality, and also from vehicle to vehicle. Slug Mobile is a one tenth scale autonomous vehicle created to help address the sim-to-real gap for AVs by acting as a test-bench to develop models that can easily scale from one vehicle to another. In addition to traditional sensors found in other one tenth scale AVs, we have also included a Dynamic Vision Sensor so we can train Spiking Neural Networks running on neuromorphic hardware."
+    },
+    {
+      "id": "kang-2024-gnss",
+      "title": "GNSS-based Autonomous Driving System using AMR and Open Source",
+      "authors": [
+        "HyoeUk Kang",
+        "Seong-youb Chung"
+      ],
+      "year": 2024,
+      "venue": "Journal of the Korea Academia-Industrial cooperation Society",
+      "venue_short": "Journal of the Korea Academia-Industr...",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.5762/kais.2024.25.4.299",
+      "url": "https://www.semanticscholar.org/paper/e40e59244b4427d177a8a5133823a1b24bbb051f",
+      "pdf": "https://doi.org/10.5762/kais.2024.25.4.299",
+      "abstract": "In this paper, we implemented a GNSS-based autonomous driving system using open-source software and hardware platforms. Developing autonomous driving systems requires significant time and cost, so research utilizing open-source software has been actively pursued to overcome these challenges. In our study"
+    },
+    {
+      "id": "kumar-2024-energy",
+      "title": "Energy Efficient Implementation of MVM Operations Using Filament-Free Bulk RRAM Array",
+      "authors": [
+        "Ashwani Kumar",
+        "Jaeseoung Park",
+        "Yucheng Zhou",
+        "Jeong-Hoon Kim",
+        "Soumil Jain",
+        "Catherine D. Schuman",
+        "Gert Cauwenberghs",
+        "D. Kuzum"
+      ],
+      "year": 2024,
+      "venue": "Neuro Inspired Computational Elements Workshop",
+      "venue_short": "Neuro Inspired Computational Elements...",
+      "type": "conference",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/nice61972.2024.10549369",
+      "url": "https://www.semanticscholar.org/paper/a478f4bfb5981ce9f07150c4de75af4605927c44",
+      "abstract": "In this work, we present a hardware implementation of spiking neural network (SNN) model using trilayer bulk RRAM crossbar arrays for an autonomous navigation/racing task. We demonstrate multi-level switching in MΩ regime using trilayer (Al2O3/TiO2/TiOx) bulk RRAM devices without needing a compliance current. We also present a neuromorphic compute-in-memory (CIM) architecture based on trilayer bulk RRAM crossbars using energy-efficient voltage sensing and row differential encoding of weights to experimentally implement highly accurate matrix-vector-multiplications (MVM). Our results suggest that use of our bulk RRAM can reduce the energy consumption by more than 100× compared to other filamentary RRAMs. This work paves the way for neuromorphic computing at the edge under strict area and energy constraints."
+    },
+    {
+      "id": "zang-2024-poseinn",
+      "title": "PoseINN: Realtime Visual-based Pose Regression and Localization with Invertible Neural Networks",
+      "authors": [
+        "Zirui Zang",
+        "Ahmad Amine",
+        "Rahul Mangharam"
+      ],
+      "year": 2024,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.48550/arxiv.2404.13288",
+      "arxiv": "2404.13288",
+      "url": "https://www.semanticscholar.org/paper/9cf87f164f81cdad6e81b755aec8227fdaff04c0",
+      "abstract": "Estimating ego-pose from cameras is an important problem in robotics with applications ranging from mobile robotics to augmented reality. While SOTA models are becoming increasingly accurate, they can still be unwieldy due to high computational costs. In this paper, we propose to solve the problem by using invertible neural networks (INN) to find the mapping between the latent space of images and poses for a given scene. Our model achieves similar performance to the SOTA while being faster to train and only requiring offline rendering of low-resolution synthetic data. By using normalizing flows, the proposed method also provides uncertainty estimation for the output. We also demonstrated the efficiency of this method by deploying the model on a mobile robot."
+    },
+    {
+      "id": "schippers-2026-digital",
+      "title": "Digital Triplet for Developing Future Reliable 6G Cooperative Intelligent Transport Systems: Case Studies From Teleoperation to Platooning",
+      "authors": [
+        "H. Schippers",
+        "Niklas A. Wagner",
+        "Lennart Reiher",
+        "Harun Teper",
+        "L. Ostendorf",
+        "Jian-Jia Chen",
+        "Lutz Eckstein",
+        "C. Wietfeld"
+      ],
+      "year": 2026,
+      "venue": "IEEE Access",
+      "venue_short": "IEEE Access",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "systems-platform",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-08-21",
+      "source": "semanticscholar",
+      "notes": "relevance score 2, cites the F1TENTH platform paper; S2 channel, second pass 2026-08-21",
+      "doi": "10.1109/access.2026.3702246",
+      "url": "https://www.semanticscholar.org/paper/685a7aaeafcec81ae0f748a3e81fc203fe83ee5a",
+      "pdf": "https://doi.org/10.1109/access.2026.3702246",
+      "abstract": "Future Cooperative Intelligent Transport Systems (C-ITSs) will impose stringent requirements on 6G mobile networks in terms of latency, data rate, and reliability. These requirements must be met in rapidly changing wireless channel conditions. Hence, their fulfillment requires rigorous and reproducible testing environments that enable a seamless transition from simulation to real-world deployment. However, existing testbeds and simulation environments either lack physical realism or fail to scale cost-effectively, hindering comprehensive C-ITS evaluation. To overcome these limitations, we implement the concept of a Digital Triplet, comprising three complementary layers: a full-scale real-world test field, a co-simulation environment for integrating additional simulated entities, and a scaled-down replica of the test field. This architecture enables reliable, reproducible, and scalable testing of future 6G-enabled C-ITS applications across different levels of abstraction. We demonstrate the applicability of the Digital Triplet through multiple case studies. For remote driving, we deploy and optimize a low-latency video streaming system and simulate a mmWave communication channel incorporating Reconfigurable Intelligent Surfaces (RISs). An up to 74% reduced median Glass-to-Glass (G2G) latency is achieved in a mobile network compared to related work using a local network. Moreover, emulating real-world vehicle localization in the scaled test field enables the implementation of cross-domain Nonlinear Model Predictive Control (NMPC)-based vehicular platooning. Finally, we evaluate the NMPC platooning controller in both decentralized (on-vehicle) and centralized (edge cloud) configurations. The results highlight the strong potential of the Digital Triplet to accelerate the development and validation of C-ITS applications within future 6G networks. Video abstract: tiny.cc/digitaltriplet"
+    }
+  ]
+}
