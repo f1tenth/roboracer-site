@@ -117,28 +117,47 @@ def suggest_tags(title: str, abstract: str = "", venue: str = "") -> list[str]:
 
 
 def venue_short(venue: str) -> str:
-    v = venue or ""
+    """Acronym for the mono venue line: known venues, else the acronym in a trailing
+    "(...)", else the full name (truncated with an ellipsis past 40 characters)."""
+    v = (venue or "").strip()
     table = [
-        (r"robotics and automation letters|ra-l", "RA-L"),
+        (r"robotics and automation letters|\bra-l\b", "RA-L"),
+        (r"transactions on intelligent vehicles", "T-IV"),
+        (r"transactions on intelligent transportation", "T-ITS"),
+        (r"transactions on control systems technology", "T-CST"),
         (r"international conference on robotics and automation|\bicra\b", "ICRA"),
         (r"intelligent robots and systems|\biros\b", "IROS"),
         (r"conference on decision and control|\bcdc\b", "CDC"),
         (r"intelligent vehicles symposium|\biv\b", "IV"),
-        (r"intelligent transportation systems|\bitsc\b", "ITSC"),
+        (r"intelligent transportation systems conference|\bitsc\b", "ITSC"),
         (r"american control conference|\bacc\b", "ACC"),
         (r"learning for dynamics|l4dc", "L4DC"),
-        (r"conference on robot learning|corl", "CoRL"),
+        (r"conference on robot learning|\bcorl\b", "CoRL"),
         (r"neurips|neural information processing", "NeurIPS"),
+        (r"international conference on machine learning|\bicml\b", "ICML"),
+        (r"proceedings of machine learning research|\bpmlr\b", "PMLR"),
         (r"arxiv", "arXiv"),
-        (r"transactions on intelligent vehicles", "T-IV"),
-        (r"transactions on intelligent transportation", "T-ITS"),
+        (r"design, automation (&|and) test in europe|\bdate\b", "DATE"),
+        (r"design engineering technical conferences", "IDETC-CIE"),
+        (r"hybrid systems: computation and control|\bhscc\b", "HSCC"),
+        (r"autonomous agents and multiagent systems|\baamas\b", "AAMAS"),
+        (r"special interest group on computer science education|\bsigcse\b", "SIGCSE"),
+        (r"real-time and embedded technology and applications|\brtas\b", "RTAS"),
+        (r"robotics: science and systems|\brss\b", "RSS"),
+        (r"conference on cyber-physical systems|\biccps\b", "ICCPS"),
+        (r"conference on computing frontiers", "CF"),
+        (r"simp[oó]sio brasileiro de automa[cç][aã]o inteligente|\bsbai\b", "SBAI"),
+        (r"artificial intelligence, robotics and control|\bairc\b", "AIRC"),
         (r"field robotics", "Field Robotics"),
-        (r"sensors", "Sensors"),
+        (r"^sensors$", "Sensors"),
     ]
     for pat, short in table:
         if re.search(pat, v, re.I):
             return short
-    return v[:24]
+    m = re.search(r"\(([A-Z][A-Za-z0-9&'-]{1,14})\)\s*$", v)
+    if m:
+        return m.group(1)
+    return v if len(v) <= 40 else v[:37].rstrip() + "..."
 
 
 def load_data(path: Path = DATA_FILE) -> dict:
@@ -149,7 +168,11 @@ def load_data(path: Path = DATA_FILE) -> dict:
 
 def save_data(data: dict, path: Path = DATA_FILE) -> None:
     data["updated"] = today()
-    data["items"].sort(key=lambda i: (-int(i.get("year", 0)), i.get("title", "").lower()))
+    # Newest year first, then most cited (the landing shows the first three
+    # featured items in file order), then title.
+    data["items"].sort(
+        key=lambda i: (-int(i.get("year", 0)), -int(i.get("citations") or 0), i.get("title", "").lower())
+    )
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
 
