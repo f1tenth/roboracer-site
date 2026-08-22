@@ -1,103 +1,142 @@
 [
-    {
-      "name": "Arizona State University",
-      "website": "https://www.asu.edu/",
-      "image": "partners/asu.png"
-    },
-    {
-      "name": "Autoware",
-      "website": "https://www.autoware.org/",
-      "image": "partners/autoware.jpg"
-    },
-    {
-      "name": "Binghamton University",
-      "website": "https://www.binghamton.edu/",
-      "image": "partners/binghamton.png"
-    },
-    {
-      "name": "Carnegie Mellon University",
-      "website": "https://www.cmu.edu/",
-      "image": "partners/cmu.jpg"
-    },
-    {
-      "name": "City University of New York (CUNY)",
-      "website": "https://www.cuny.edu/",
-      "image": "partners/cuny.png"
-    },
-    {
-      "name": "Clemson University",
-      "website": "http://www.clemson.edu/",
-      "image": "partners/clemson.png"
-    },
-    {
-      "name": "Columbia University",
-      "website": "https://www.columbia.edu/",
-      "image": "partners/columbia.png"
-    },
-    {
-      "name": "Czech Technical University",
-      "website": "https://www.cvut.cz/en",
-      "image": "partners/czech.png"
-    },
-    {
-      "name": "Duke University",
-      "website": "https://duke.edu/",
-      "image": "partners/duke.png"
-    },
-    {
-      "name": "ETH Zurich",
-      "website": "https://ethz.ch/en.html",
-      "image": "partners/ethzurich.png"
-    },
-    {
-      "name": "George Mason University",
-      "website": "https://www2.gmu.edu/",
-      "image": "partners/georgemason.png"
-    },
-    {
-      "name": "Georgia Tech",
-      "website": "https://www.gatech.edu/",
-      "image": "partners/GAtech.png"
-    },
-    {
-      "name": "Guizhou University",
-      "website": "http://www.gzu.edu.cn/en/",
-      "image": "partners/guizhoulogo.png"
-    },
-    {
-      "name": "Hong Kong Polytechnic University",
-      "website": "https://www.polyu.edu.hk/en/",
-      "image": "partners/hongkongpoly.png"
-    },
-    {
-      "name": "Indian Institute of Technology Bombay",
-      "website": "http://www.iitb.ac.in/",
-      "image": "partners/iit.png"
-    },
-    {
-      "name": "KAIST",
-      "website": "http://www.kaist.edu/",
-      "image": "partners/kaist.png"
-    },
-    {
-      "name": "Massachusetts Institute of Technology (MIT)",
-      "website": "http://www.mit.edu/",
-      "image": "partners/mit.png"
-    },
-    {
-      "name": "New York University (NYU)",
-      "website": "https://www.nyu.edu/",
-      "image": "partners/nyu.png"
-    },
-    {
-      "name": "University of California, Berkeley",
-      "website": "https://www.berkeley.edu/",
-      "image": "partners/ucb.png"
-    },
-    {
-      "name": "University of Pennsylvania",
-      "website": "https://www.upenn.edu/",
-      "image": "partners/upenn.png"
-    }
-  ]
-  
+  {
+    "name": "Arizona State University",
+    "website": "https://www.asu.edu/",
+    "image": "partners/asu.png",
+    "image_rest": "partners/tint/asu.webp",
+    "image_hover": "partners/color/asu.webp"
+  },
+  {
+    "name": "Autoware",
+    "website": "https://www.autoware.org/",
+    "image": "partners/autoware.jpg",
+    "image_rest": "partners/tint/autoware.webp",
+    "image_hover": "partners/color/autoware.webp"
+  },
+  {
+    "name": "Binghamton University",
+    "website": "https://www.binghamton.edu/",
+    "image": "partners/binghamton.png",
+    "image_rest": "partners/tint/binghamton.webp",
+    "image_hover": "partners/color/binghamton.webp"
+  },
+  {
+    "name": "Carnegie Mellon University",
+    "website": "https://www.cmu.edu/",
+    "image": "partners/cmu.jpg",
+    "image_rest": "partners/tint/cmu.webp",
+    "image_hover": "partners/color/cmu.webp"
+  },
+  {
+    "name": "City University of New York (CUNY)",
+    "website": "https://www.cuny.edu/",
+    "image": "partners/cuny.png",
+    "image_rest": "partners/tint/cuny.webp",
+    "image_hover": "partners/color/cuny.webp"
+  },
+  {
+    "name": "Clemson University",
+    "website": "https://www.clemson.edu/",
+    "image": "partners/clemson.png",
+    "image_rest": "partners/tint/clemson.webp",
+    "image_hover": "partners/color/clemson.webp"
+  },
+  {
+    "name": "Columbia University",
+    "website": "https://www.columbia.edu/",
+    "image": "partners/columbia.png",
+    "image_rest": "partners/tint/columbia.webp",
+    "image_hover": "partners/color/columbia.webp"
+  },
+  {
+    "name": "Czech Technical University",
+    "website": "https://www.cvut.cz/en",
+    "image": "partners/czech.png",
+    "image_rest": "partners/tint/czech.webp",
+    "image_hover": "partners/color/czech.webp"
+  },
+  {
+    "name": "Duke University",
+    "website": "https://duke.edu/",
+    "image": "partners/duke.png",
+    "image_rest": "partners/tint/duke.webp",
+    "image_hover": "partners/color/duke.webp"
+  },
+  {
+    "name": "ETH Zurich",
+    "website": "https://ethz.ch/en.html",
+    "image": "partners/ethzurich.png",
+    "image_rest": "partners/tint/ethzurich.webp",
+    "image_hover": "partners/color/ethzurich.webp"
+  },
+  {
+    "name": "George Mason University",
+    "website": "https://www2.gmu.edu/",
+    "image": "partners/georgemason.png",
+    "image_rest": "partners/tint/georgemason.webp",
+    "image_hover": "partners/color/georgemason.webp"
+  },
+  {
+    "name": "Georgia Tech",
+    "website": "https://www.gatech.edu/",
+    "image": "partners/GAtech.png",
+    "image_rest": "partners/tint/gatech.webp",
+    "image_hover": "partners/color/gatech.webp"
+  },
+  {
+    "name": "Guizhou University",
+    "website": "https://www.gzu.edu.cn/en/",
+    "image": "partners/guizhoulogo.png",
+    "image_rest": "partners/tint/guizhoulogo.webp",
+    "image_hover": "partners/color/guizhoulogo.webp"
+  },
+  {
+    "name": "Hong Kong Polytechnic University",
+    "website": "https://www.polyu.edu.hk/en/",
+    "image": "partners/hongkongpoly.png",
+    "image_rest": "partners/tint/hongkongpoly.webp",
+    "image_hover": "partners/color/hongkongpoly.webp"
+  },
+  {
+    "name": "Indian Institute of Technology Bombay",
+    "website": "https://www.iitb.ac.in/",
+    "image": "partners/iit.png",
+    "image_rest": "partners/tint/iit.webp",
+    "image_hover": "partners/color/iit.webp"
+  },
+  {
+    "name": "KAIST",
+    "website": "https://www.kaist.edu/",
+    "image": "partners/kaist.png",
+    "image_rest": "partners/tint/kaist.webp",
+    "image_hover": "partners/color/kaist.webp"
+  },
+  {
+    "name": "Massachusetts Institute of Technology (MIT)",
+    "website": "https://www.mit.edu/",
+    "image": "partners/mit.png",
+    "image_rest": "partners/tint/mit.webp",
+    "image_hover": "partners/color/mit.webp"
+  },
+  {
+    "name": "New York University (NYU)",
+    "website": "https://www.nyu.edu/",
+    "image": "partners/nyu.png",
+    "image_rest": "partners/tint/nyu.webp",
+    "image_hover": "partners/color/nyu.webp"
+  },
+  {
+    "name": "University of California, Berkeley",
+    "website": "https://www.berkeley.edu/",
+    "image": "partners/ucb.png",
+    "image_rest": "partners/tint/ucb.webp",
+    "image_hover": "partners/color/ucb.webp"
+  },
+  {
+    "name": "University of Pennsylvania",
+    "website": "https://www.upenn.edu/",
+    "image": "partners/upenn.png",
+    "image_rest": "partners/tint/upenn.webp",
+    "image_hover": "partners/color/upenn.webp"
+  }
+]
