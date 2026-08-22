@@ -33,7 +33,7 @@ type HeroChapterProps = {
  *   p 0.10-0.42  headline assembles: 7 units (line 1, then 6 words), each
  *                yPercent 110 -> 0 + opacity 0 -> 1 over 0.11 of the pin,
  *                ease in-out quart, unit starts 0.035 apart, last lands at 0.42
- *   p 0.42-0.82  zoom: block scale 1 -> 1.30 (1.25 under 768px), power2.in,
+ *   p 0.42-0.82  zoom: block scale 1 -> 1.30 (1.20 under 768px), power2.in,
  *                so 0.42-0.55 reads as a hold (scale <= 1.03) before it grows
  *   p 0.82-0.98  exit: words thrown upward, last line first, starts 0.012
  *                apart (0.82 .. 0.892): y 0 -> -120vh over 0.12 (power2.out,
@@ -73,7 +73,7 @@ const SCHEDULE = {
     blurPx: 0,
   },
   assemble: { start: 0.1, end: 0.42, unitDuration: 0.11, yPercent: 110 },
-  zoom: { start: 0.42, end: 0.82, wide: 1.3, narrow: 1.25 },
+  zoom: { start: 0.42, end: 0.82, wide: 1.3, narrow: 1.2 },
   exit: {
     start: 0.82,
     stagger: 0.012,
@@ -115,7 +115,9 @@ function isWeakDevice(): boolean {
 }
 
 const DISPLAY_TYPE =
-  "block text-center font-display text-[clamp(2rem,8.5vw,8.5rem)] font-semibold leading-[0.95] tracking-[-0.03em]";
+  // Phones: 9.5vw (37 px at 390) so the headline is a headline, not a caption;
+  // line 1 = 315 px at rest, 378 px at the 1.2 ceiling, no clipping.
+  "block text-center font-display text-[9.5vw] font-semibold leading-[0.95] tracking-[-0.03em] md:text-[clamp(2rem,8.5vw,8.5rem)]";
 
 /**
  * The landing's first 320vh: the FPV loop under the transparent nav, the

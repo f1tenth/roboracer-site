@@ -92,8 +92,10 @@ export default function PlatformPanel({ rows }: PlatformPanelProps) {
     <div className="grid gap-10 md:grid-cols-12 md:gap-12">
       {/* Media column: sticky below the nav on every viewport so the frame
           stays on screen while the rows scroll past it. */}
-      <div className="md:col-span-7">
-        <figure className="sticky top-[84px] md:top-[104px]">
+      {/* Desktop: one sticky frame. Under md the list has no height for the
+          frame to stick in, so each row carries its own poster instead. */}
+      <div className="hidden md:col-span-7 md:block">
+        <figure className="sticky top-[104px]">
           {reduced ? (
             <div className="grid grid-cols-2 gap-3">
               {rows.map((row) => (
@@ -139,6 +141,9 @@ export default function PlatformPanel({ rows }: PlatformPanelProps) {
               onFocus={() => setHovered(i)}
               className="border-t border-ink-950/10 py-8 last:border-b md:py-10"
             >
+              <div className="mb-5 md:hidden">
+                <RowPoster row={row} />
+              </div>
               {/* Active row = strong ink; inactive rows drop to text-muted, the
                   AA floor, instead of opacity (axe color-contrast). */}
               <div className="grid gap-3 sm:grid-cols-12 sm:gap-x-4">
@@ -146,14 +151,14 @@ export default function PlatformPanel({ rows }: PlatformPanelProps) {
                 <div className="sm:col-span-10">
                   <h3
                     className={`font-display text-display-m font-semibold transition-colors duration-[var(--duration-base)] ${
-                      isActive || reduced ? "text-text-strong" : "text-text-muted"
+                      isActive || reduced ? "text-text-strong" : "text-text-strong md:text-text-muted"
                     }`}
                   >
                     {row.title}
                   </h3>
                   <p
                     className={`mt-2 max-w-[40ch] text-body transition-colors duration-[var(--duration-base)] ${
-                      isActive || reduced ? "text-text-body" : "text-text-muted"
+                      isActive || reduced ? "text-text-body" : "text-text-body md:text-text-muted"
                     }`}
                   >
                     {row.body}
@@ -232,6 +237,34 @@ function MediaLayer({ row, active, mount }: { row: PlatformRow; active: boolean;
       className={`${cls} object-cover`}
       onError={() => setFailed(true)}
     />
+  );
+}
+
+/** Mobile: the row's poster inline (no clip playback on phones, no sticky). */
+function RowPoster({ row }: { row: PlatformRow }) {
+  const [failed, setFailed] = useState(false);
+  const src = row.media.type === "video" ? row.media.poster : row.media.src;
+  return (
+    <figure>
+      <div className="aspect-[16/10] overflow-hidden rounded-media border border-ink-950/10 bg-paper-100">
+        {!failed && (
+          <img
+            src={src}
+            alt=""
+            width={MEDIA_W}
+            height={MEDIA_H}
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover"
+            onError={() => setFailed(true)}
+          />
+        )}
+      </div>
+      <figcaption className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 font-mono text-small">
+        <span className="text-text-strong">{row.media.caption}</span>
+        {row.media.credit && <span className="text-text-muted">{row.media.credit}</span>}
+      </figcaption>
+    </figure>
   );
 }
 

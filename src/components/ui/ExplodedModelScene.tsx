@@ -37,7 +37,10 @@ const VIEW_DIR = (() => {
 function chapterDistance(aspect: number, progress: number) {
   const span = MathUtils.lerp(SPAN.rest, SPAN.exploded, progress);
   const halfTan = Math.tan(MathUtils.degToRad(CHAPTER_FOV / 2)) * Math.max(aspect, 0.45);
-  return span / FILL / (2 * halfTan);
+  // Portrait canvases (phones) have height to spare: let the car use almost
+  // the full width there (critique: ~45% on 390 with the desktop fill).
+  const fill = aspect < 1 ? 0.95 : FILL;
+  return span / fill / (2 * halfTan);
 }
 
 /** Frames the car by canvas aspect and dollies with the explosion: a tight

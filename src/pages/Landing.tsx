@@ -109,7 +109,7 @@ export default function Landing() {
       <HeroChapter video={HERO_VIDEO} lines={HEADLINE_LINES} />
 
       {/* 2 · 01 Highlights (paper, full-bleed) - newbie, press */}
-      <Section edge rule width="bleed" aria-labelledby="highlights">
+      <Section edge rule width="bleed" aria-labelledby="highlights" className="pt-section-tight!">
         <div className="mx-auto max-w-content px-6">
           <h2 id="highlights" className="sr-only">
             Highlights
@@ -201,12 +201,14 @@ export default function Landing() {
         </div>
         <div className="mt-8">
           <Marquee label="Partner institutions" duration={55} gap="gap-16 pr-16">
-            {partners.map((p) => (
+            {({ clone }) =>
+              partners.map((p) => (
               <a
                 key={p.name}
                 href={p.website}
                 target="_blank"
                 rel="noopener noreferrer"
+                tabIndex={clone ? -1 : undefined}
                 className="group flex h-[84px] w-auto shrink-0 flex-col items-center justify-start md:h-28"
               >
                 <span className="flex h-14 items-center md:h-20">
@@ -227,7 +229,8 @@ export default function Landing() {
                   {p.name} ↗
                 </span>
               </a>
-            ))}
+              ))
+            }
           </Marquee>
         </div>
       </Section>

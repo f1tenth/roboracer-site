@@ -102,7 +102,7 @@ function Tile({ item, reduced }: { item: Highlight; reduced: boolean }) {
         <div
           className={`${ROW_H} ${ASPECT[item.aspect]} rounded-media border border-ink-950/10 bg-paper-100`}
         />
-        <figcaption className="mt-2 font-mono text-small text-text-muted">{item.caption}</figcaption>
+        <figcaption className="mt-2 w-0 min-w-full font-mono text-small text-text-muted">{item.caption}</figcaption>
       </figure>
     );
   }
@@ -113,7 +113,10 @@ function Tile({ item, reduced }: { item: Highlight; reduced: boolean }) {
       >
         {item.type === "video" && !reduced ? <LazyLoopVideo item={item} /> : <TileImage item={item} />}
       </div>
-      <figcaption className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 font-mono text-small">
+      {/* w-0 min-w-full: the caption takes the media's width and wraps instead
+          of widening the figure (impeccable critique: tiles were spaced by
+          caption length). */}
+      <figcaption className="mt-2 flex w-0 min-w-full flex-wrap items-baseline justify-between gap-x-4 gap-y-1 font-mono text-small">
         <span className="text-text-strong">{item.caption}</span>
         {item.credit && <span className="text-text-muted">{item.credit}</span>}
       </figcaption>

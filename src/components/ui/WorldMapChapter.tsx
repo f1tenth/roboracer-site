@@ -30,9 +30,11 @@ const COUNTRIES_IN = [0.05, 0.4] as const;
 const CODES_OUT = [0.35, 0.42] as const;
 const PINS = [0.35, 0.85] as const;
 const POP = 0.03;
-const STATS_START = 0.4;
-const STATS_STAGGER = 0.05;
-const STATS_DURATION = 0.38;
+// Counters start together with the first pins and finish before the hold; a
+// visible stagger left the last tile reading "0+" mid-pin (critique).
+const STATS_START = 0.36;
+const STATS_STAGGER = 0.015;
+const STATS_DURATION = 0.45;
 
 // Geometry in viewBox units (1600 wide). Desktop renders the map at about
 // 826 px (7 columns plus the left page gutter), so 7 units is a 3.6 px dot; on
