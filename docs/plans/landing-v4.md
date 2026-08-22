@@ -310,8 +310,11 @@ paths in section 5 and does not edit the JSON.
   on each boundary, opacity only. Root cause of the silent Research row: the
   `<video>` elements were never mounted (the in-view observer subscribed
   before the rows had loaded), not the encodes.
-- Next-race video: `race-iros2026-hero-1280.mp4` 886 KB (1280x548, 8 s, native
-  1272-wide source so not 1600; poster 93 KB). Post-card video:
+- Next-race video: `race-iros2026-hero-1272.mp4` 816 KB (1272x720 full frame,
+  8 s; poster 106 KB). The contract's 21/9 band cut the bottom strip of Ezio's
+  composite off (Cedric, 2026-08-22: "short on the bottom, we need to see more
+  of the bottom"), so the frame now takes the video's own aspect; native
+  1272-wide source, so not 1600. Post-card video:
   `join-icra2026-post-960.mp4` 1.04 MB (960x540, 8.8 s; poster 65 KB). Learn
   row runs at 2x (5.9 s) because `assembling_car.mp4` is 11.8 s; 4x would give
   3 s.

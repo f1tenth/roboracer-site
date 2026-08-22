@@ -36,11 +36,11 @@
     "status": "live"
   },
   {
-    "id": "icra2026-start-01",
+    "id": "icra2026-grid-01",
     "type": "video",
-    "src": "/media/highlights/highlight-icra2025-start-01-960.mp4",
-    "poster": "/media/highlights/highlight-icra2025-start-01-poster.webp",
-    "caption": "off the line · ICRA 2025, Atlanta",
+    "src": "/media/highlights/highlight-icra2025-grid-01-960.mp4",
+    "poster": "/media/highlights/highlight-icra2025-grid-01-poster.webp",
+    "caption": "on the grid · ICRA 2025, Atlanta",
     "credit": "Video: The Robotics Club",
     "event": "icra2025",
     "href": "https://icra2025-race.roboracer.ai/",
@@ -48,11 +48,11 @@
     "status": "live"
   },
   {
-    "id": "icra2026-grid-01",
+    "id": "icra2026-start-01",
     "type": "video",
-    "src": "/media/highlights/highlight-icra2025-grid-01-960.mp4",
-    "poster": "/media/highlights/highlight-icra2025-grid-01-poster.webp",
-    "caption": "on the grid · ICRA 2025, Atlanta",
+    "src": "/media/highlights/highlight-icra2025-start-01-960.mp4",
+    "poster": "/media/highlights/highlight-icra2025-start-01-poster.webp",
+    "caption": "off the line · ICRA 2025, Atlanta",
     "credit": "Video: The Robotics Club",
     "event": "icra2025",
     "href": "https://icra2025-race.roboracer.ai/",

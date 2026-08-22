@@ -46,14 +46,15 @@ const SCHOLAR_URL =
 
 // Landing v4 section 3: Ezio Bartocci's ICRA 2026 race-day video (LinkedIn;
 // organizer media, Cedric owns asking Ezio; docs/ASSET_MANIFEST.md V4-11) in
-// the 21/9 frame. Native 1272-wide source, so the encode is 1280x548, not 1600
-// (no upscaling, CLAUDE.md rule 3). The poster carries the frame under
-// reduced motion.
+// its own 1272x720 frame: the contract's 21/9 band cut the bottom strip of his
+// composite off (Cedric, 2026-08-22: "short on the bottom"), so the encode is
+// the full native frame, not 1600 wide (no upscaling, CLAUDE.md rule 3). The
+// poster carries the frame under reduced motion.
 const RACE_HERO = {
-  video: "/media/race/race-iros2026-hero-1280.mp4",
+  video: "/media/race/race-iros2026-hero-1272.mp4",
   poster: "/media/race/race-iros2026-hero-poster.webp",
-  width: 1280,
-  height: 548,
+  width: 1272,
+  height: 720,
   alt: "Ezio Bartocci's video from ICRA 2026 in Vienna: the race track seen from above and from the bridge",
   caption: "the hall · ICRA 2026, Vienna",
   credit: "Video: Ezio Bartocci",
@@ -141,7 +142,10 @@ export default function Landing() {
         <Section aria-labelledby="next-race" guides>
           <SectionHeader index="02" eyebrow="Next race" id="next-race" title="IROS 2026" size="s" />
           <figure className="mb-10">
-            <div className="aspect-[21/9] overflow-hidden rounded-media border border-ink-950/10 bg-paper-100">
+            <div
+              className="overflow-hidden rounded-media border border-ink-950/10 bg-paper-100"
+              style={{ aspectRatio: `${RACE_HERO.width} / ${RACE_HERO.height}` }}
+            >
               <MediaFrame
                 src={RACE_HERO.poster}
                 video={RACE_HERO.video}
