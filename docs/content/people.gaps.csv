@@ -1,0 +1,115 @@
+name,group,has_photo,has_role,has_affiliation,has_link,what_is_missing
+Amr El-Wakeel,Faculty and advisors,yes,yes,yes,yes,nothing
+Francesco Gatti,Faculty and advisors,no,no,no,yes,"photo, role, affiliation"
+Houssam Abbas,Faculty and advisors,yes,yes,yes,yes,nothing
+Johannes Betz,Faculty and advisors,yes,yes,yes,yes,nothing
+John M. Dolan,Faculty and advisors,yes,yes,yes,yes,nothing
+Madhur Behl,Faculty and advisors,yes,yes,yes,yes,nothing
+Marko Bertogna,Faculty and advisors,yes,yes,yes,yes,nothing
+Paolo Burgio,Faculty and advisors,yes,yes,yes,yes,nothing
+Radu Grosu,Faculty and advisors,yes,yes,yes,yes,nothing
+Rahul Mangharam,Faculty and advisors,yes,yes,yes,yes,nothing
+Venkat Krovi,Faculty and advisors,yes,yes,yes,yes,nothing
+Ahmad Amine,Developers,yes,yes,yes,yes,nothing
+Ayagoz Smagulova,Developers,no,no,no,no,"photo, role, affiliation, link"
+Cedric Hollande,Developers,yes,yes,yes,yes,nothing
+Chinmay Samak,Developers,yes,yes,yes,no,link
+Dhruv Jaiswal,Developers,no,no,yes,no,"photo, role, link"
+Felix Jahncke,Developers,yes,yes,yes,no,link
+"Hongrui ""Billy"" Zheng",Developers,yes,yes,yes,yes,nothing
+Johnny Tian,Developers,no,no,yes,no,"photo, role, link"
+Mohamed Elgouhary,Developers,yes,yes,yes,no,link
+Tanmay Samak,Developers,yes,yes,yes,no,link
+Wenshan Wang,Developers,yes,yes,yes,no,link
+Yon Vanommeslaeghe,Developers,no,yes,yes,yes,photo
+Zirui Zang,Developers,no,yes,yes,yes,photo
+Abhay Deshpande,Contributors,yes,no,no,yes,"role, affiliation"
+AdeebTarzi,Contributors,yes,no,no,yes,"role, affiliation"
+AKHIL GUNDA,Contributors,yes,no,no,yes,"role, affiliation"
+Aman,Contributors,yes,no,no,yes,"role, affiliation"
+Amelia Peng,Contributors,yes,no,no,yes,"role, affiliation"
+Ayoub Raji,Contributors,yes,no,no,yes,"role, affiliation"
+Benjamin Evans,Contributors,yes,no,no,yes,"role, affiliation"
+Carperis,Contributors,yes,no,no,yes,"role, affiliation"
+Damian Owerko,Contributors,yes,no,no,yes,"role, affiliation"
+Diana,Contributors,yes,no,no,yes,"role, affiliation"
+Edoardo Ghignone,Contributors,yes,no,no,yes,"role, affiliation"
+Ernő Horváth,Contributors,yes,no,no,yes,"role, affiliation"
+Eunyul Kim,Contributors,yes,no,no,yes,"role, affiliation"
+excuice,Contributors,yes,no,no,yes,"role, affiliation"
+Ganesh Chandan,Contributors,yes,no,no,yes,"role, affiliation"
+hanseunghan,Contributors,yes,no,no,yes,"role, affiliation"
+Hongrui (Billy) Zheng,Contributors,yes,no,no,yes,"role, affiliation"
+Jaroslav Klapálek,Contributors,yes,no,no,yes,"role, affiliation"
+Jefferson Koumba Moussadji Lu,Contributors,yes,no,no,yes,"role, affiliation"
+Kurt Wilson,Contributors,yes,no,no,yes,"role, affiliation"
+Lawrence McDaniel,Contributors,yes,no,no,yes,"role, affiliation"
+Lee Milburn,Contributors,yes,no,no,yes,"role, affiliation"
+Luigi Berducci,Contributors,yes,no,no,yes,"role, affiliation"
+Matteo Fornaini,Contributors,yes,no,no,yes,"role, affiliation"
+Maxime Ellerbach,Contributors,yes,no,no,yes,"role, affiliation"
+MLN-MNJ,Contributors,yes,no,no,yes,"role, affiliation"
+Nandan Tumu,Contributors,yes,no,no,yes,"role, affiliation"
+Scott Noyes,Contributors,yes,no,no,yes,"role, affiliation"
+Shreyas Raorane,Contributors,yes,no,no,yes,"role, affiliation"
+Sophie A. Neubauer (née Gruenbacher),Contributors,yes,no,no,yes,"role, affiliation"
+Steven Gong,Contributors,yes,no,no,yes,"role, affiliation"
+Tejas Agarwal,Contributors,yes,no,no,yes,"role, affiliation"
+Thomas Balch,Contributors,yes,no,no,yes,"role, affiliation"
+Tinker Twins,Contributors,yes,no,no,yes,"role, affiliation"
+Valerio Magnago,Contributors,yes,no,no,yes,"role, affiliation"
+velinddimitrov-tri,Contributors,yes,no,no,yes,"role, affiliation"
+Vishnu Venkatesh,Contributors,yes,no,no,yes,"role, affiliation"
+ZhijunZhuang,Contributors,yes,no,no,yes,"role, affiliation"
+Arnav Dhamija,Past crew,no,no,no,yes,"photo, role, affiliation"
+Baihong Zeng,Past crew,no,no,no,yes,"photo, role, affiliation"
+Brandon McBride,Past crew,no,no,no,yes,"photo, role, affiliation"
+Chris Kennedy,Past crew,no,no,no,yes,"photo, role, affiliation"
+Christopher Kao,Past crew,no,no,no,yes,"photo, role, affiliation"
+David DePauw,Past crew,no,no,no,yes,"photo, role, affiliation"
+Dayong Tong,Past crew,no,no,no,yes,"photo, role, affiliation"
+Dhruv Karthik,Past crew,no,yes,no,yes,"photo, affiliation"
+Diana Hoang,Past crew,no,yes,no,yes,"photo, affiliation"
+Jack Harkins,Past crew,no,no,no,yes,"photo, role, affiliation"
+Jalaj Maheshwari,Past crew,no,no,no,yes,"photo, role, affiliation"
+Jayanth Bhargav,Past crew,yes,no,no,yes,"role, affiliation"
+Joe Auckley,Past crew,no,yes,no,yes,"photo, affiliation"
+Junfan Pan,Past crew,yes,no,no,yes,"role, affiliation"
+Kaiying Guo,Past crew,no,yes,no,yes,"photo, affiliation"
+Karel Smejkal,Past crew,no,no,no,yes,"photo, role, affiliation"
+Kim Luong,Past crew,no,yes,no,yes,"photo, affiliation"
+Kuk Jang,Past crew,no,yes,no,yes,"photo, affiliation"
+Lejun Jiang,Past crew,no,no,no,yes,"photo, role, affiliation"
+Malavika Manoj,Past crew,yes,no,no,yes,"role, affiliation"
+Manas Shukla,Past crew,no,no,no,yes,"photo, role, affiliation"
+Matthew Brady,Past crew,no,no,no,yes,"photo, role, affiliation"
+Matthew Lebermann,Past crew,no,yes,no,yes,"photo, affiliation"
+Matthew O'Kelly,Past crew,no,yes,no,yes,"photo, affiliation"
+Mike Coraluzzi,Past crew,yes,yes,no,yes,affiliation
+Nagarakshith Makam Sreenivasulu,Past crew,no,no,no,yes,"photo, role, affiliation"
+Nischal K N,Past crew,no,no,no,yes,"photo, role, affiliation"
+Nitesh Singh,Past crew,no,no,no,yes,"photo, role, affiliation"
+Paril Jain,Past crew,no,no,no,yes,"photo, role, affiliation"
+Paritosh Kelkar,Past crew,no,no,no,yes,"photo, role, affiliation"
+Peter Werner,Past crew,no,no,no,yes,"photo, role, affiliation"
+Ravi Konkimalla,Past crew,no,no,no,yes,"photo, role, affiliation"
+Raymond Bjorkman,Past crew,no,no,no,yes,"photo, role, affiliation"
+Roshan Benefo,Past crew,yes,no,no,yes,"role, affiliation"
+Saumya Shah,Past crew,no,no,no,yes,"photo, role, affiliation"
+Saurabh Kumthekar,Past crew,no,no,no,yes,"photo, role, affiliation"
+Siddharth Singh,Past crew,no,yes,no,yes,"photo, affiliation"
+Susan Xie,Past crew,no,yes,no,yes,"photo, affiliation"
+Thejas Kesari,Past crew,no,no,no,yes,"photo, role, affiliation"
+Tom Jose,Past crew,yes,no,no,no,"role, affiliation, link"
+Trevor Pennypacker,Past crew,no,no,no,yes,"photo, role, affiliation"
+Tuan Nguyen,Past crew,no,no,no,no,"photo, role, affiliation, link"
+Varundev Sukhil,Past crew,no,yes,no,yes,"photo, affiliation"
+Venkat Varun Velpula,Past crew,no,no,no,yes,"photo, role, affiliation"
+Wesley Yee,Past crew,no,no,no,yes,"photo, role, affiliation"
+Xiaozhou Zhang,Past crew,yes,no,no,yes,"role, affiliation"
+Xinlong Zheng,Past crew,yes,no,no,yes,"role, affiliation"
+Yash Pant,Past crew,no,no,no,yes,"photo, role, affiliation"
+Yash Trikannad,Past crew,no,no,no,yes,"photo, role, affiliation"
+Yuwei Wang,Past crew,no,yes,no,yes,"photo, affiliation"
+Zhihao Ruan,Past crew,no,no,no,yes,"photo, role, affiliation"
+Zirui Zang,Past crew,no,no,no,yes,"photo, role, affiliation"

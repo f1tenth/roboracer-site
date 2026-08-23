@@ -97,6 +97,8 @@ const CAR_PHOTOS: readonly CarPhoto[] = [
  * Landing composition: hero chapter, highlights, the car, platform panel,
  * community map, partner ribbons, next race, teams, research, join.
  */
+const MARQUEE_REF_ITEMS = 20;
+
 export default function Landing() {
   useLenis();
   const [events, setEvents] = useState<UpcomingEvent[]>([]);
@@ -115,6 +117,8 @@ export default function Landing() {
     loadPlatform().then(setPlatform).catch(() => setPlatform([]));
   }, []);
 
+  // The 55s / 82s loop was tuned when one row held all 20 partners. Scaling the
+  // duration by row length holds px/s constant as the roster grows.
   // Even indices to the top ribbon, odd to the bottom. Alternating rather than
   // splitting the sorted list in half, so each row gets a mix of wide and
   // narrow logos and no institution is ever in both rows at once.
@@ -222,8 +226,8 @@ export default function Landing() {
             <Marquee
               key={rowIndex}
               label={rowIndex === 0 ? "Partner institutions, first row" : "Partner institutions, second row"}
-              duration={55}
-              durationMd={82}
+              duration={Math.round(55 * (row.length / MARQUEE_REF_ITEMS))}
+              durationMd={Math.round(82 * (row.length / MARQUEE_REF_ITEMS))}
               direction={rowIndex === 0 ? "normal" : "reverse"}
               gap="gap-16 pr-16 md:gap-24 md:pr-24"
             >
@@ -235,19 +239,19 @@ export default function Landing() {
                     target="_blank"
                     rel="noopener noreferrer"
                     tabIndex={clone ? -1 : undefined}
-                    className="group flex h-[84px] w-auto shrink-0 flex-col items-center justify-start md:h-[168px]"
+                    className="group flex h-[60px] w-auto shrink-0 flex-col items-center justify-start md:h-[104px]"
                   >
-                    <span className="relative flex h-14 items-center md:h-[120px]">
+                    <span className="relative flex h-[34px] items-center md:h-[72px]">
                       <img
                         src={p.image_rest ?? p.image}
                         alt={p.name}
-                        height={80}
+                        height={72}
                         width="auto"
                         /* Marquee children are never lazy (CommunityJoin note). */
                         loading="eager"
                         fetchPriority="low"
                         decoding="async"
-                        className="max-h-14 w-auto max-w-44 object-contain md:max-h-[120px] md:max-w-[336px]"
+                        className="max-h-[34px] w-auto max-w-28 object-contain md:max-h-[72px] md:max-w-[202px]"
                       />
                       {p.image_hover && (
                         <img
@@ -259,7 +263,7 @@ export default function Landing() {
                           loading="eager"
                           fetchPriority="low"
                           decoding="async"
-                          className="absolute inset-0 m-auto max-h-14 w-auto max-w-44 object-contain opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100 md:max-h-[120px] md:max-w-[336px]"
+                          className="absolute inset-0 m-auto max-h-[34px] w-auto max-w-28 object-contain opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100 md:max-h-[72px] md:max-w-[202px]"
                         />
                       )}
                     </span>

@@ -13,6 +13,13 @@ export type UpcomingEvent = {
   dates_headline?: string;
   dates_secondary?: string;
   starts_at?: string;
+  /** End instant, so the season chain can compute concluded without a literal. */
+  ends_at?: string;
+  venue?: string;
+  /** Where to watch while the race runs. */
+  stream_url?: string;
+  /** `unconfirmed` until someone has seen a real stream go up. */
+  stream_status?: "confirmed" | "unconfirmed";
   registration_deadline?: string;
   /** The same deadline as an instant, so a countdown never parses prose. */
   registration_deadline_at?: string;
@@ -34,6 +41,9 @@ export type Partner = {
   image_rest?: string;
   /** Ribbon hover / focus state: the colour logo at the same size. */
   image_hover?: string;
+  /** Kind of institution, for the About wall's groups. Absent on older
+   * records, which fall back to one ungrouped wall. */
+  category?: "university" | "industry" | "organization" | "other";
 };
 
 export type NewsItem = {

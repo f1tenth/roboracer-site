@@ -5,7 +5,6 @@ import {
   loadUpcomingEvents,
   type MapEvent,
   type Team,
-  type UpcomingEvent,
 } from "../lib/data";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
@@ -16,6 +15,7 @@ import TeamGrid from "../components/ui/TeamGrid";
 import Reveal from "../components/ui/Reveal";
 import RaceTimeline from "../components/race/RaceTimeline";
 import SeasonChain from "../components/race/SeasonChain";
+import type { SeasonEvent } from "../components/race/eventState";
 
 // Same clip and the same credit as the landing's next-race section
 // (docs/ASSET_MANIFEST.md V4-11); the frame links to RoboRacer's own post,
@@ -26,8 +26,8 @@ const HERO = {
   width: 1272,
   height: 720,
   alt: "Ezio Bartocci's video from ICRA 2026 in Vienna: the race track seen from above and from the bridge",
-  caption: "the hall \u00b7 ICRA 2026, Vienna",
-  creditLabel: "our post on LinkedIn \u2197",
+  caption: "the hall · ICRA 2026, Vienna",
+  creditLabel: "our post on LinkedIn ↗",
   creditHref: "https://www.linkedin.com/posts/great-work-by-all-involved-ugcPost-7471631589169516544-ZPa-/",
 };
 
@@ -41,26 +41,49 @@ const ENTRY_STEPS = [
     n: "01",
     title: "Read the rules",
     body: "Vehicle specification, track, time trial, and the head-to-head format. IROS 2026 adds multi-agent racing with up to four cars on track.",
+    slack: false,
   },
   {
     n: "02",
     title: "Register your team",
     body: "One form per team. Teams may have any number of members, but at most ten are at the race space during the event.",
+    slack: false,
   },
   {
     n: "03",
     title: "Send the qualification video",
     body: "One minute of your car driving a track autonomously, with no human intervention.",
+    slack: false,
   },
   {
     n: "04",
     title: "Talk to the organizers",
-    body: "The competition channel on the RoboRacer teams Slack is where schedules, track details and answers are posted.",
+    body: "Schedules, track details and answers are posted in the competition channel.",
+    slack: true,
   },
 ] as const;
 
 const SLACK_URL =
   "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g";
+
+const LINK_ON_PAPER =
+  "text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
+
+/**
+ * Slack is never named without a way to reach it in the same breath, so the
+ * invite is always the word itself.
+ */
+function SlackLine() {
+  return (
+    <p className="mt-2 text-body text-text-body">
+      Feel free to reach out on{" "}
+      <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
+        Slack
+      </a>
+      .
+    </p>
+  );
+}
 
 /**
  * /race - the page that turns a reader into a competitor.
@@ -72,7 +95,7 @@ const SLACK_URL =
  * this been going long, and who would I be racing.
  */
 export default function RacePage() {
-  const [upcoming, setUpcoming] = useState<UpcomingEvent[]>([]);
+  const [upcoming, setUpcoming] = useState<SeasonEvent[]>([]);
   const [mapEvents, setMapEvents] = useState<MapEvent[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
 
@@ -96,6 +119,12 @@ export default function RacePage() {
   const past = mapEvents.filter((e) => e.status !== "upcoming");
   const city = race?.location.split(",")[0].trim();
 
+  // The series ordinal of the last competition already run, read off the map
+  // rather than typed into the copy, so the sentence cannot go stale on its
+  // own. Four continents: Asia, Europe, North and South America, from the
+  // host countries in events_map.json.
+  const held = past.reduce((max, e) => Math.max(max, e.number ?? 0), 0);
+
   return (
     <>
       {/* Hero: the next race, not a page title over an empty band. */}
@@ -110,9 +139,9 @@ export default function RacePage() {
               Come race with us
             </h1>
             <p className="mt-4 max-w-[60ch] text-lead text-text-on-ink-muted">
-              Thirty competitions since 2016, on six continents. Every one of them is open to any
-              team that can build a car and drive it autonomously - undergraduates, research labs
-              and companies race the same track under the same rules.
+              {held > 0 ? `${held} competitions` : "Competitions"} since 2016, on four continents.
+              Every one of them is open to any team that can build a car and drive it autonomously -
+              undergraduates, research labs and companies race the same track under the same rules.
             </p>
           </div>
 
@@ -145,7 +174,14 @@ export default function RacePage() {
                 </a>
               </figcaption>
             </figure>
-            <div className="md:col-span-5">
+            {/* The spotlight is the tallest thing in the hero and it only
+                exists once upcoming_events.json has landed. Without a
+                reserved slot the whole page below jumps down the moment the
+                fetch resolves (CLS 0.25 at 390). The reserve is deliberately
+                a little under the panel's real height at every width we
+                render, so it shrinks the jump without leaving a gap once the
+                panel is in. */}
+            <div className={`md:col-span-5${race ? "" : " min-h-[640px]"}`}>
               {race && (
                 <NextRaceSpotlight
                   on="ink"
@@ -172,8 +208,8 @@ export default function RacePage() {
           index="01"
           id="race-enter"
           title="Enter"
-          subtitle="Four steps between reading this and lining up on the grid"
-          lead="Registration and the qualification video are the two hard deadlines; everything else can be sorted out on Slack."
+          subtitle="How to enter"
+          lead="All the information for each competition is on that competition's own site. In short:"
           action={
             <div className="flex flex-wrap gap-4">
               <Button href={race?.register_url ?? "#"} variant="primary" target="_blank" rel="noopener noreferrer">
@@ -194,6 +230,7 @@ export default function RacePage() {
                   {step.title}
                 </h3>
                 <p className="mt-2 text-body text-text-body">{step.body}</p>
+                {step.slack && <SlackLine />}
               </li>
             ))}
           </ol>
@@ -212,12 +249,7 @@ export default function RacePage() {
           <div className="flex flex-wrap justify-between gap-x-4">
             <dt>questions</dt>
             <dd>
-              <a
-                href={SLACK_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
-              >
+              <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
                 RoboRacer teams Slack
               </a>
             </dd>
@@ -231,7 +263,7 @@ export default function RacePage() {
           id="race-season"
           title="This season"
           subtitle="The rest of 2026"
-          lead="Three competitions are still to run this year. Each has its own site, its own registration and its own organizing committee."
+          lead="Each competition has its own site, its own registration and its own organizing committee."
         />
         <SeasonChain events={upcoming} map={mapEvents} />
       </Section>
@@ -252,7 +284,7 @@ export default function RacePage() {
           index="04"
           id="race-teams"
           title="Who competes"
-          subtitle="Teams on the grid in 2026"
+          subtitle="Teams racing in 2026"
           lead="Undergraduate teams, research labs and company teams, racing the same specification. Entries still being sourced carry an unverified tag."
         />
         <TeamGrid teams={teams} />
