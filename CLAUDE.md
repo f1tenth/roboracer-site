@@ -37,6 +37,13 @@ scripts/rr.sh check        # lint + build
 9. Keep existing routes working (`/`, `/about`, `/build`, `/course`, `/learn`, `/news`, `/race`, `/research`, `/rules`, `/chat`). `/build`, `/learn`, `/course` stay iframes in v1 unless Cedric says otherwise.
 10. Prefer editing over adding. Delete dead code you replace. No parallel "v2" components living next to old ones after a page ships.
 
+## Start here
+
+`docs/HANDOFF.md` is the state of play: current branch, preview URL, what the
+landing still needs, the page inventory, and the environment traps (Playwright
+is Python-only, never `pkill -f`, write files atomically while the dev server
+runs). Read it before touching anything; update it when a page ships.
+
 ## How work flows
 
 Discovery (read-only agents, outputs in `docs/`) -> design system (`src/index.css` tokens + `src/components/ui/*` primitives) -> one page per branch via `/build-page <page>` -> `/qa-page <page>` -> Cedric reviews on localhost -> `/ship <page>` opens the PR -> Cedric merges -> Actions deploys.
