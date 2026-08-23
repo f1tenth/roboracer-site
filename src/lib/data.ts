@@ -25,6 +25,9 @@ export type UpcomingEvent = {
   registration_deadline_at?: string;
   registration_deadline_note?: string;
   register_url?: string;
+  /** Where the deadlines are published, when that is not the registration page.
+   * scripts/sync-event-deadlines.py reads this first. */
+  timeline_url?: string;
   rules_url?: string;
 };
 

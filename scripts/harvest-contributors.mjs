@@ -40,6 +40,18 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 const ORG = 'f1tenth';
 /**
+ * Contributors who are active on the project regardless of commit recency.
+ *
+ * Commit dates are only a proxy for activity: someone can be on the team now
+ * and not have pushed to a public repo in a while. Zirui Zang is on xLAB's
+ * current members page and Cedric confirmed him directly (2026-08-23), while
+ * his last public commit is 2023-03-28. Without this the next harvest would
+ * silently move him back to past.
+ */
+const ACTIVE_OVERRIDES = new Map([
+  ['zzangupenn', 'xLAB current members page; confirmed by Cedric 2026-08-23'],
+]);
+/**
  * Anyone with a commit on or after this instant counts as active.
  *
  * Eighteen months before the 2026-08-23 run. The brief asked for eighteen
@@ -699,7 +711,7 @@ function main() {
       commits_platform: commitsPlatform,
       first_commit: day(p.first),
       last_commit: day(p.last),
-      active: p.last >= ACTIVE_SINCE,
+      active: p.last >= ACTIVE_SINCE || ACTIVE_OVERRIDES.has(p.login),
       platform_contributor: commitsPlatform > 0,
       repos: repoList,
     };

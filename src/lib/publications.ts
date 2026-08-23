@@ -32,6 +32,43 @@ export function paperHref(p: Publication): string | undefined {
   return undefined;
 }
 
+/** The secondary links a paper carries beyond `paperHref`, deduplicated
+ * against it: arXiv, DOI, PDF, in that order. */
+export function paperExtras(p: Publication): { label: string; href: string }[] {
+  const main = paperHref(p);
+  const all = [
+    p.arxiv ? { label: "arXiv", href: `https://arxiv.org/abs/${p.arxiv}` } : undefined,
+    p.doi ? { label: "DOI", href: `https://doi.org/${p.doi}` } : undefined,
+    p.pdf ? { label: "PDF", href: p.pdf } : undefined,
+  ];
+  return all.filter((x): x is { label: string; href: string } => !!x && x.href !== main);
+}
+
+const TYPE_LABEL: Record<string, string> = {
+  conference: "Conference paper",
+  journal: "Journal article",
+  preprint: "Preprint",
+  thesis: "Thesis",
+  report: "Report",
+  other: "Paper",
+};
+
+/** "conference" -> "Conference paper". Unknown types render capitalised. */
+export function typeLabel(p: Publication): string {
+  const t = (p.type ?? "").trim().toLowerCase();
+  return TYPE_LABEL[t] ?? (t ? t[0].toUpperCase() + t.slice(1) : "Paper");
+}
+
+/** Content of the generated tile that stands in for a missing figure: the
+ * venue, at display size (an acronym on one line, a full name wrapped) until
+ * it is long enough to outgrow the plate, where `long` drops it to lead
+ * size. Falls back to the publication type so a tile is never empty. */
+export function venueTile(p: Publication): { token: string; long: boolean } {
+  const raw = (p.venue_short?.trim() || p.venue?.trim() || "").replace(/[\s.,;:]*(?:\.\.\.|…)$/, "");
+  const token = raw || typeLabel(p);
+  return { token, long: token.length > 26 };
+}
+
 /** Scholar deep link for a topic: (f1tenth | roboracer) plus the tag's extra terms. */
 export function scholarTagUrl(tag: PublicationTag): string {
   const q = tag.scholar_query ? `(f1tenth | roboracer) (${tag.scholar_query})` : "f1tenth | roboracer";

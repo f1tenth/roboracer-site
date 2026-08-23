@@ -11,8 +11,8 @@
     "repos_with_commits": 44,
     "classroom_repos": 0,
     "contributors": 49,
-    "active": 13,
-    "past": 36,
+    "active": 14,
+    "past": 35,
     "platform_contributors": 49
   },
   "contributors": [
@@ -262,7 +262,7 @@
       "commits_platform": 136,
       "first_commit": "2022-01-09",
       "last_commit": "2023-03-28",
-      "active": false,
+      "active": true,
       "platform_contributor": true,
       "repos": [
         {
@@ -315,7 +315,8 @@
           "commits": 1,
           "classroom": false
         }
-      ]
+      ],
+      "active_override": "xLAB current members page; confirmed by Cedric 2026-08-23"
     },
     {
       "login": "AhmadAmine998",

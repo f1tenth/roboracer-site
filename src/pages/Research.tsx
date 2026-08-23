@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { loadPublications, tagLabelMap, type Publication, type PublicationsFile } from "../lib/data";
-import { authorLine, fold, paperHref, scholarSearchUrl, scholarTagUrl } from "../lib/publications";
+import { fold, scholarSearchUrl, scholarTagUrl } from "../lib/publications";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
 import Reveal from "../components/ui/Reveal";
 import TagFilter from "../components/ui/TagFilter";
-import PublicationCard from "../components/ui/PublicationCard";
+import PaperCard from "../components/research/PaperCard";
+import PaperRow from "../components/research/PaperRow";
 
 const SCHOLAR_URL =
   "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=";
@@ -23,58 +24,11 @@ function matches(p: Publication, needle: string, labels: Record<string, string>)
   return needle.split(/\s+/).every((w) => hay.includes(w));
 }
 
-function Row({ p, labels }: { p: Publication; labels: Record<string, string> }) {
-  const href = paperHref(p);
-  const extras: { label: string; href: string }[] = [];
-  const arxivHref = p.arxiv ? `https://arxiv.org/abs/${p.arxiv}` : undefined;
-  const doiHref = p.doi ? `https://doi.org/${p.doi}` : undefined;
-  if (arxivHref && arxivHref !== href) extras.push({ label: "arXiv", href: arxivHref });
-  if (doiHref && doiHref !== href) extras.push({ label: "DOI", href: doiHref });
-  if (p.pdf && p.pdf !== href) extras.push({ label: "PDF", href: p.pdf });
-  return (
-    <li className="grid gap-3 py-5 md:grid-cols-[1fr_auto] md:gap-8">
-      <div>
-        <h4 className="font-display text-body font-semibold leading-snug text-text-strong">
-          {href ? (
-            <a href={href} target="_blank" rel="noopener noreferrer" className={LINK}>
-              {p.title}
-            </a>
-          ) : (
-            p.title
-          )}
-        </h4>
-        <p className="mt-1 text-small text-text-body">{authorLine(p.authors)}</p>
-        <p className="mt-1 font-mono text-eyebrow tracking-normal text-text-muted">
-          {p.venue_short?.trim() || p.venue || p.type}
-          {p.tags.length > 0 ? ` · ${p.tags.map((t) => labels[t] ?? t).join(", ")}` : ""}
-        </p>
-      </div>
-      {extras.length > 0 && (
-        <ul className="flex gap-4 font-mono text-small md:justify-end" aria-label="Links">
-          {extras.map((x) => (
-            <li key={x.label}>
-              <a
-                href={x.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${x.label}: ${p.title}`}
-                className={`text-text-strong ${LINK}`}
-              >
-                {x.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </li>
-  );
-}
-
 /**
  * /research on the paper surface: the 1,000+ message with the Scholar query,
- * a topic filter over the featured grid (thumbnails), every curated paper
- * grouped by year with search, and the submit CTA. Renders from
- * public/data/publications.json (content is data).
+ * a topic filter over the featured grid (a figure or a generated venue tile
+ * on every card), every curated paper grouped by year with search, and the
+ * submit CTA. Renders from public/data/publications.json (content is data).
  */
 export default function Research() {
   const [pubs, setPubs] = useState<PublicationsFile | null>(null);
@@ -190,7 +144,7 @@ export default function Research() {
             {featured.length > 0 ? (
               <Reveal key={tag ?? "all"} stagger className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {featured.map((p) => (
-                  <PublicationCard key={p.id} publication={p} tagLabels={labels} />
+                  <PaperCard key={p.id} publication={p} tagLabels={labels} />
                 ))}
               </Reveal>
             ) : (
@@ -263,7 +217,7 @@ export default function Research() {
                     </h3>
                     <ul className="divide-y divide-ink-950/10 md:col-span-10">
                       {items.map((p) => (
-                        <Row key={p.id} p={p} labels={labels} />
+                        <PaperRow key={p.id} publication={p} tagLabels={labels} />
                       ))}
                     </ul>
                   </section>

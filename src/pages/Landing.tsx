@@ -246,7 +246,7 @@ export default function Landing() {
                     target="_blank"
                     rel="noopener noreferrer"
                     tabIndex={clone ? -1 : undefined}
-                    className="group flex h-[60px] w-auto shrink-0 flex-col items-center justify-start md:h-[104px]"
+                    className="group relative flex h-[60px] w-auto shrink-0 flex-col items-center justify-start md:h-[104px]"
                   >
                     <span className="relative flex h-[34px] items-center md:h-[72px]">
                       <img
@@ -274,9 +274,13 @@ export default function Landing() {
                         />
                       )}
                     </span>
+                    {/* Absolute, so the name never contributes to the item's
+                        width: a long institution name used to stretch its own
+                        cell and shove its neighbours apart. The logo alone sets
+                        the width now, and the name wraps to two lines. */}
                     <span
                       aria-hidden="true"
-                      className="mt-2 whitespace-nowrap border border-ink-950/15 bg-paper-50 px-2 py-0.5 font-mono text-eyebrow tracking-normal text-text-strong opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100"
+                      className="pointer-events-none absolute left-1/2 top-[36px] line-clamp-2 w-max max-w-[9rem] -translate-x-1/2 border border-ink-950/15 bg-paper-50 px-2 py-0.5 text-center font-mono text-eyebrow leading-tight tracking-normal text-text-strong opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100 md:top-[74px] md:max-w-[14rem]"
                     >
                       {p.name} ↗
                     </span>

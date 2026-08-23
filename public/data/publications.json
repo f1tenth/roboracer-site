@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-21",
+  "updated": "2026-08-23",
   "scholar_query_url": "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=",
   "tags": [
     {
@@ -170,7 +170,7 @@
       "doi": "10.1049/itr2.70260",
       "url": "https://doi.org/10.1049/itr2.70260",
       "pdf": "https://doi.org/10.1049/itr2.70260",
-      "abstract": "ABSTRACT\n                  Generating overtaking trajectories in high‐speed scenarios is typically addressed through hierarchical planning, which often suffers from local optima due to single initial solutions and low computational efficiency during numerical optimization. To overcome these limitations, this paper proposes a spatio‐temporal topology and reachable set analysis enhanced overtaking trajectory planning framework (SROP). Specifically, by introducing topological classes to represent distinct overtaking behaviours, the upper‐layer planner performs a spatio‐temporal search to extract diverse initial paths, effectively preventing local optima. Subsequently, a lower‐layer planner conducts parallel trajectory evaluation using reachable sets, which decouples vehicle kinematic constraints from the optimization process to ensure feasibility and significantly accelerate computation. Numerical experiments demonstrate that SROP improves trajectory smoothness by 66.8% and reduces computation time by 62.9% compared to state‐of‐the‐art methods. Furthermore, by seamlessly integrating the method into the F1TENTH autonomous racing simulation platform, a 100‐lap sensitivity analysis demonstrates high overtaking success rates in challenging scenarios, thereby validating its practical utility, real‐time efficiency and robustness.",
+      "abstract": "Generating overtaking trajectories in high‐speed scenarios is typically addressed through hierarchical planning, which often suffers from local optima due to single initial solutions and low computational efficiency during numerical optimization. To overcome these limitations, this paper proposes a spatio‐temporal topology and reachable set analysis enhanced overtaking trajectory planning framework (SROP). Specifically, by introducing topological classes to represent distinct overtaking behaviours, the upper‐layer planner performs a spatio‐temporal search to extract diverse initial paths, effectively preventing local optima. Subsequently, a lower‐layer planner conducts parallel trajectory evaluation using reachable sets, which decouples vehicle kinematic constraints from the optimization process to ensure feasibility and significantly accelerate computation. Numerical experiments demonstrate that SROP improves trajectory smoothness by 66.8% and reduces computation time by 62.9% compared to state‐of‐the‐art methods. Furthermore, by seamlessly integrating the method into the F1TENTH autonomous racing simulation platform, a 100‐lap sensitivity analysis demonstrates high overtaking success rates in challenging scenarios, thereby validating its practical utility, real‐time efficiency and robustness.",
       "institutions": [
         "Shanghai Electric (China)",
         "Shanghai University of Electric Power",
@@ -337,7 +337,7 @@
       "arxiv": "2603.12960",
       "url": "https://arxiv.org/abs/2603.12960",
       "pdf": "https://arxiv.org/pdf/2603.12960",
-      "abstract": "Residual policy learning (RPL), in which a learned policy refines a static base policy using deep reinforcement learning (DRL), has shown strong performance across various robotic applications. Its effectiveness is particularly evident in autonomous racing, a domain that serves as a challenging benchmark for real-world DRL. However, deploying RPL-based controllers introduces system complexity and increases inference latency. We address this by introducing an extension of RPL named attenuated residual policy optimization ($α$-RPO). Unlike standard RPL, $α$-RPO yields a standalone neural policy by progressively attenuating the base policy, which initially serves to bootstrap learning. Furthermore, this mechanism enables a form of privileged learning, where the base policy is permitted to use sensor modalities not required for final deployment. We design $α$-RPO to integrate seamlessly with PPO, ensuring that the attenuated influence of the base controller is dynamically compensated during policy optimization. We evaluate $α$-RPO by building a framework for 1:10-scaled autonomous racing around it. In both simulation and zero-shot real-world transfer to Roboracer cars, $α$-RPO not only reduces system complexity but also improves driving performance compared to baselines - demonstrating its practicality for robotic deployment. Our code is available at: https://github.com/raphajaner/arpo_racing.",
+      "abstract": "Residual policy learning (RPL), in which a learned policy refines a static base policy using deep reinforcement learning (DRL), has shown strong performance across various robotic applications. Its effectiveness is particularly evident in autonomous racing, a domain that serves as a challenging benchmark for real-world DRL. However, deploying RPL-based controllers introduces system complexity and increases inference latency. We address this by introducing an extension of RPL named attenuated residual policy optimization (α-RPO). Unlike standard RPL, α-RPO yields a standalone neural policy by progressively attenuating the base policy, which initially serves to bootstrap learning. Furthermore, this mechanism enables a form of privileged learning, where the base policy is permitted to use sensor modalities not required for final deployment. We design α-RPO to integrate seamlessly with PPO, ensuring that the attenuated influence of the base controller is dynamically compensated during policy optimization. We evaluate α-RPO by building a framework for 1:10-scaled autonomous racing around it. In both simulation and zero-shot real-world transfer to Roboracer cars, α-RPO not only reduces system complexity but also improves driving performance compared to baselines - demonstrating its practicality for robotic deployment. Our code is available at: https://github.com/raphajaner/arpo_racing.",
       "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand",
       "citations": 0
     },
@@ -598,7 +598,7 @@
       "arxiv": "2607.13348",
       "url": "https://arxiv.org/abs/2607.13348",
       "pdf": "https://arxiv.org/pdf/2607.13348",
-      "abstract": "Autonomous racing overtaking requires balancing competitive performance with safety under nonlinear vehicle dynamics and real-time constraints. Model Predictive Control (MPC) combined with Control Barrier Functions (CBFs) provides a principled mechanism for certifying forward invariance of a safe set. However, commonly used fixed-decay discrete-time CBF formulations can become overly conservative in interactive racing scenarios, limiting overtaking performance and requiring manual tuning across track conditions. This paper proposes a hierarchical overtaking framework that explicitly separates maneuver-level decision making from safety-certified trajectory control, reducing conservatism while preserving safety. A high-level Mixed-Integer Quadratic Program (MIQP) resolves the combinatorial passing-side selection problem by selecting a feasible overtaking topology, while a nonlinear Frenet-frame MPC enforces vehicle dynamics and safety through embedded discrete-time CBF constraints. This decomposition isolates the combinatorial complexity of maneuver selection from the continuous trajectory optimization. To further mitigate the sensitivity of fixed-decay barrier constraints, a reinforcement learning policy adapts the discrete-time CBF decay parameter online, enabling context-dependent modulation of safety margins without directly controlling vehicle inputs. Simulation and scaled-hardware experiments show that no single fixed decay parameter achieves uniformly strong performance across tracks, whereas the adaptive strategy attains the highest aggregate success rate and consistently strong safety--performance trade-offs without per-track tuning, improving robustness to environment variation while maintaining safety constraint satisfaction in nominal operation.",
+      "abstract": "Autonomous racing overtaking requires balancing competitive performance with safety under nonlinear vehicle dynamics and real-time constraints. Model Predictive Control (MPC) combined with Control Barrier Functions (CBFs) provides a principled mechanism for certifying forward invariance of a safe set. However, commonly used fixed-decay discrete-time CBF formulations can become overly conservative in interactive racing scenarios, limiting overtaking performance and requiring manual tuning across track conditions. This paper proposes a hierarchical overtaking framework that explicitly separates maneuver-level decision making from safety-certified trajectory control, reducing conservatism while preserving safety. A high-level Mixed-Integer Quadratic Program (MIQP) resolves the combinatorial passing-side selection problem by selecting a feasible overtaking topology, while a nonlinear Frenet-frame MPC enforces vehicle dynamics and safety through embedded discrete-time CBF constraints. This decomposition isolates the combinatorial complexity of maneuver selection from the continuous trajectory optimization. To further mitigate the sensitivity of fixed-decay barrier constraints, a reinforcement learning policy adapts the discrete-time CBF decay parameter online, enabling context-dependent modulation of safety margins without directly controlling vehicle inputs. Simulation and scaled-hardware experiments show that no single fixed decay parameter achieves uniformly strong performance across tracks, whereas the adaptive strategy attains the highest aggregate success rate and consistently strong safety-performance trade-offs without per-track tuning, improving robustness to environment variation while maintaining safety constraint satisfaction in nominal operation.",
       "notes": "accepted from the 2026-08-21 discover-papers sweep (Semantic Scholar: cites the F1TENTH platform paper); reviewed by hand"
     },
     {
@@ -617,7 +617,7 @@
       "tags": [
         "raceline-optimization"
       ],
-      "featured": false,
+      "featured": true,
       "status": "published",
       "added": "2026-08-21",
       "source": "manual",
@@ -625,7 +625,8 @@
       "url": "https://arxiv.org/abs/2602.15642",
       "pdf": "https://arxiv.org/pdf/2602.15642",
       "abstract": "We present a closed-loop framework for autonomous raceline optimization that combines NURBS-based trajectory representation, CMA-ES global trajectory optimization, and controller-guided spatial feedback. Instead of treating tracking errors as transient disturbances, our method exploits them as informative signals of local track characteristics via a Kalman-inspired spatial update. This enables the construction of an adaptive, acceleration-based constraint map that iteratively refines trajectories toward near-optimal performance under spatially varying track and vehicle behavior. In simulation, our approach achieves a 17.38% lap time reduction compared to a controller parametrized with maximum static acceleration. On real hardware, tested with different tire compounds ranging from high to low friction, we obtain a 7.60% lap time improvement without explicitly parametrizing friction. This demonstrates robustness to changing grip conditions in real-world scenarios.",
-      "notes": "accepted from the 2026-08-21 discover-papers sweep (Semantic Scholar: cites the F1TENTH platform paper); reviewed by hand"
+      "notes": "accepted from the 2026-08-21 discover-papers sweep (Semantic Scholar: cites the F1TENTH platform paper); reviewed by hand",
+      "figure": "/media/research/research-wachter-2026-spatially-fig-1200.webp"
     },
     {
       "id": "piccinini-2026-trajectory",
@@ -709,7 +710,7 @@
         "multi-agent",
         "safety"
       ],
-      "featured": false,
+      "featured": true,
       "status": "published",
       "added": "2026-08-21",
       "source": "manual",
@@ -717,14 +718,15 @@
       "arxiv": "2308.10966",
       "url": "https://doi.org/10.1007/s10514-025-10194-8",
       "pdf": "https://link.springer.com/content/pdf/10.1007/s10514-025-10194-8.pdf",
-      "abstract": "Abstract\n                  \n                    We present an approach to ensure safe and deadlock-free navigation for decentralized multi-robot systems operating in constrained environments, including doorways and intersections. Although many solutions have been proposed that ensure safety and resolve deadlocks, optimally preventing deadlocks in a minimally invasive and decentralized fashion remains an open problem. We first formalize the objective as a non-cooperative, non-communicative, partially observable multi-robot navigation problem in constrained spaces with multiple conflicting agents, which we term as social mini-games. Formally, we solve a discrete-time optimal receding horizon control problem leveraging control barrier functions for safe long-horizon planning. Our approach to ensuring liveness rests on the insight that\n                    there exists barrier certificates that allow each robot to preemptively perturb their state in a minimally-invasive fashion onto liveness sets i.e. states where robots are deadlock-free\n                    . We evaluate our approach in simulation as well on physical robots using F1/10 robots, a Clearpath Jackal, as well as a Boston Dynamics Spot in a doorway, hallway, and corridor intersection scenario. Compared to both fully decentralized and centralized approaches with and without deadlock resolution capabilities, we demonstrate that our approach results in safer, more efficient, and smoother navigation, based on a comprehensive set of metrics including success rate, collision rate, stop time, change in velocity, path deviation, time-to-goal, and flow rate.",
+      "abstract": "We present an approach to ensure safe and deadlock-free navigation for decentralized multi-robot systems operating in constrained environments, including doorways and intersections. Although many solutions have been proposed that ensure safety and resolve deadlocks, optimally preventing deadlocks in a minimally invasive and decentralized fashion remains an open problem. We first formalize the objective as a non-cooperative, non-communicative, partially observable multi-robot navigation problem in constrained spaces with multiple conflicting agents, which we term as social mini-games. Formally, we solve a discrete-time optimal receding horizon control problem leveraging control barrier functions for safe long-horizon planning. Our approach to ensuring liveness rests on the insight that there exists barrier certificates that allow each robot to preemptively perturb their state in a minimally-invasive fashion onto liveness sets i.e. states where robots are deadlock-free. We evaluate our approach in simulation as well on physical robots using F1/10 robots, a Clearpath Jackal, as well as a Boston Dynamics Spot in a doorway, hallway, and corridor intersection scenario. Compared to both fully decentralized and centralized approaches with and without deadlock resolution capabilities, we demonstrate that our approach results in safer, more efficient, and smoother navigation, based on a comprehensive set of metrics including success rate, collision rate, stop time, change in velocity, path deviation, time-to-goal, and flow rate.",
       "citations": 10,
       "institutions": [
         "Sony Corporation (United States)",
         "The University of Texas at Austin",
         "University of Virginia"
       ],
-      "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand"
+      "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand",
+      "thumbnail": "/media/research/research-chandra-2025-deadlock-1200.webp"
     },
     {
       "id": "li-2025-data",
@@ -924,7 +926,7 @@
       "doi": "10.1109/itsc60802.2025.11423246",
       "arxiv": "2507.18396",
       "url": "https://doi.org/10.1109/itsc60802.2025.11423246",
-      "abstract": "In vehicle trajectory tracking tasks, the simplest approach is the Pure Pursuit (PP) Control. However, this singlepoint preview tracking strategy fails to consider vehicle model constraints, compromising driving safety. Model Predictive Control (MPC) as a widely adopted control method, optimizes control actions by incorporating mechanistic models and physical constraints. While its control performance critically depends on the accuracy of vehicle modeling. Traditional vehicle modeling approaches face inherent trade-offs between capturing nonlinear dynamics and maintaining computational efficiency, often resulting in reduced control performance. To address these challenges, this paper proposes Residual Koopman Model Predictive Control (RKMPC) framework. This method uses two linear MPC architecture to calculate control inputs: a Linear Model Predictive Control (LMPC) computes the baseline control input based on the vehicle kinematic model, and a neural network-based RKMPC caculates the compensation input. The final control command is obtained by adding these two components. This design preserves the reliability and interpretability of traditional mechanistic model while achieving performance optimization through residual modeling. This method has been validated on the Carsim-Matlab joint simulation platform and a physical 1:10 scale F1TENTH racing car. Experimental results show that RKMPC requires only 20 % of the training data needed by traditional Koopman Model Predictive Control (KMPC) while delivering superior tracking performance. Compared to traditional LMPC, RKMPC reduces lateral error by $\\mathbf{1 1. 7 \\% - 2 2. 1 \\%}$, decreases heading error by $\\mathbf{8. 9 \\% - 1 5. 8 \\%}$, and improves front-wheel steering stability by up to 27.6 %. The implementation code is available at: https://github.com/ZJU-DDRX/Residual_Koopman.",
+      "abstract": "In vehicle trajectory tracking tasks, the simplest approach is the Pure Pursuit (PP) Control. However, this singlepoint preview tracking strategy fails to consider vehicle model constraints, compromising driving safety. Model Predictive Control (MPC) as a widely adopted control method, optimizes control actions by incorporating mechanistic models and physical constraints. While its control performance critically depends on the accuracy of vehicle modeling. Traditional vehicle modeling approaches face inherent trade-offs between capturing nonlinear dynamics and maintaining computational efficiency, often resulting in reduced control performance. To address these challenges, this paper proposes Residual Koopman Model Predictive Control (RKMPC) framework. This method uses two linear MPC architecture to calculate control inputs: a Linear Model Predictive Control (LMPC) computes the baseline control input based on the vehicle kinematic model, and a neural network-based RKMPC caculates the compensation input. The final control command is obtained by adding these two components. This design preserves the reliability and interpretability of traditional mechanistic model while achieving performance optimization through residual modeling. This method has been validated on the Carsim-Matlab joint simulation platform and a physical 1:10 scale F1TENTH racing car. Experimental results show that RKMPC requires only 20 % of the training data needed by traditional Koopman Model Predictive Control (KMPC) while delivering superior tracking performance. Compared to traditional LMPC, RKMPC reduces lateral error by 11.7 % - 22.1 %, decreases heading error by 8.9 % - 15.8 %, and improves front-wheel steering stability by up to 27.6 %. The implementation code is available at: https://github.com/ZJU-DDRX/Residual_Koopman.",
       "citations": 3,
       "institutions": [
         "Zhejiang University"
@@ -977,7 +979,7 @@
         "safety",
         "control-mpc"
       ],
-      "featured": false,
+      "featured": true,
       "status": "published",
       "added": "2026-08-21",
       "source": "manual",
@@ -989,7 +991,8 @@
       "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; arXiv id found by title on the arXiv API, 2026-08-22; abstract verbatim from the arXiv API (2505.03830v1), 2026-08-22; landing v5 featured_order 8, 2026-08-22",
       "arxiv": "2505.03830",
       "figure": "/media/research/research-feng-2025-bridging-fig-1600.webp",
-      "featured_order": 8
+      "featured_order": 8,
+      "thumbnail": "/media/research/research-feng-2025-bridging-1200.webp"
     },
     {
       "id": "chen-2025-from",
@@ -1250,7 +1253,7 @@
       "source": "manual",
       "doi": "10.1109/tcst.2025.3632358",
       "url": "https://doi.org/10.1109/tcst.2025.3632358",
-      "abstract": "This article proposes an active-learning-based adaptive trajectory tracking control method for autonomous ground vehicles to compensate for modeling errors and unmodeled dynamics. The nominal vehicle model is decoupled into lateral and longitudinal subsystems, which are augmented with online Gaussian processes (GPs) using measurement data. The estimated mean functions of the GPs are used to construct a feedback compensator, which, together with a linear parameter-varying (LPV) state feedback controller designed for the nominal system, gives the adaptive control structure. To assist exploration of the dynamics, the article proposes a new, dynamic active learning method to collect the most informative samples to accelerate the training process. To analyze the performance of the overall learning tool-chain provided controller, a novel iterative, counterexample-based algorithm is proposed for calculating the induced$\\mathcal {L}_{2}$gain between the reference trajectory and the tracking error. The analysis can be executed for a set of possible realizations of the to-be-controlled system, giving a robust performance certificate of the learning method under variation of the vehicle dynamics. The efficiency of the proposed control approach is shown on a high-fidelity physics simulator and in real experiments using a 1/10 scale F1TENTH electric car.",
+      "abstract": "This article proposes an active-learning-based adaptive trajectory tracking control method for autonomous ground vehicles to compensate for modeling errors and unmodeled dynamics. The nominal vehicle model is decoupled into lateral and longitudinal subsystems, which are augmented with online Gaussian processes (GPs) using measurement data. The estimated mean functions of the GPs are used to construct a feedback compensator, which, together with a linear parameter-varying (LPV) state feedback controller designed for the nominal system, gives the adaptive control structure. To assist exploration of the dynamics, the article proposes a new, dynamic active learning method to collect the most informative samples to accelerate the training process. To analyze the performance of the overall learning tool-chain provided controller, a novel iterative, counterexample-based algorithm is proposed for calculating the induced L_2 gain between the reference trajectory and the tracking error. The analysis can be executed for a set of possible realizations of the to-be-controlled system, giving a robust performance certificate of the learning method under variation of the vehicle dynamics. The efficiency of the proposed control approach is shown on a high-fidelity physics simulator and in real experiments using a 1/10 scale F1TENTH electric car.",
       "citations": 1,
       "institutions": [
         "HUN-REN Institute for Computer Science and Control"
@@ -1336,24 +1339,25 @@
       "tags": [
         "sim-to-real"
       ],
-      "featured": false,
+      "featured": true,
       "status": "published",
       "added": "2026-08-21",
       "source": "manual",
       "doi": "10.1109/iv64158.2025.11097709",
       "url": "https://doi.org/10.1109/iv64158.2025.11097709",
-      "abstract": "Autonomous racing has emerged as a crucial testbed for autonomous driving algorithms, necessitating a simulation environment for both vehicle dynamics and sensor behavior. Striking the right balance between vehicle dynamics and sensor accuracy is crucial for pushing vehicles to their performance limits. However, autonomous racing developers often face a trade-off between accurate vehicle dynamics and high-fidelity sensor simulations. This paper introduces$\\mathcal{R}-\\mathbf{CARLA}$, an enhancement of the CARLA simulator that supports holistic full-stack testing, from perception to control, using a single system. By seamlessly integrating accurate vehicle dynamics with sensor simulations, opponents simulation as Non-Player Characters (NPCs), and a pipeline for creating digital twins from real-world robotic data,$\\mathcal{R}-\\mathbf{CARLA}$empowers researchers to push the boundaries of autonomous racing development. Furthermore, it is developed using CARLA's rich suite of sensor simulations. Our results indicate that incorporating the proposed digital-twin framework into$\\mathcal{R}-\\mathbf{CARLA}$enables more realistic full-stack testing, demonstrating a significant reduction in the Sim-to-Real gap of car dynamics simulation by 42% and by 82% in the case of sensor simulation across various testing scenarios.",
+      "abstract": "Autonomous racing has emerged as a crucial testbed for autonomous driving algorithms, necessitating a simulation environment for both vehicle dynamics and sensor behavior. Striking the right balance between vehicle dynamics and sensor accuracy is crucial for pushing vehicles to their performance limits. However, autonomous racing developers often face a trade-off between accurate vehicle dynamics and high-fidelity sensor simulations. This paper introduces R-CARLA, an enhancement of the CARLA simulator that supports holistic full-stack testing, from perception to control, using a single system. By seamlessly integrating accurate vehicle dynamics with sensor simulations, opponents simulation as Non-Player Characters (NPCs), and a pipeline for creating digital twins from real-world robotic data, R-CARLA empowers researchers to push the boundaries of autonomous racing development. Furthermore, it is developed using CARLA's rich suite of sensor simulations. Our results indicate that incorporating the proposed digital-twin framework into R-CARLA enables more realistic full-stack testing, demonstrating a significant reduction in the Sim-to-Real gap of car dynamics simulation by 42% and by 82% in the case of sensor simulation across various testing scenarios.",
       "citations": 1,
       "institutions": [
         "Institute for Biomedical Engineering"
       ],
       "arxiv": "2506.09629",
       "pdf": "https://arxiv.org/pdf/2506.09629",
-      "notes": "accepted from the 2026-08-21 discover-papers sweep (Semantic Scholar: cites the F1TENTH platform paper); reviewed by hand"
+      "notes": "accepted from the 2026-08-21 discover-papers sweep (Semantic Scholar: cites the F1TENTH platform paper); reviewed by hand",
+      "thumbnail": "/media/research/research-brunner-2025-rcarla-1200.webp"
     },
     {
       "id": "watson-2025-scenario",
-      "title": "Scenario-Based Compositional Verification of Autonomous Systems with Neural Perception",
+      "title": "Scenario-Based Compositional Verification of Autonomous Systems with Neural Perception",
       "authors": [
         "Christopher Watson",
         "Rajeev Alur",
@@ -1609,7 +1613,7 @@
       "source": "manual",
       "doi": "10.1109/lra.2025.3566591",
       "url": "https://doi.org/10.1109/lra.2025.3566591",
-      "abstract": "Autonomous racing serves as a critical benchmark for advancing autonomous vehicle technologies in challenging scenarios. Most traditional methods rely on complex vehicle dynamics models, posing significant challenges in modeling and computation. While reinforcement learning (RL) offers a promising alternative, ensuring safety remains a major challenge for real-world deployment. In this paper, we introduce safe RL into autonomous racing to reduce collisions. By formulating the problem as a Constrained Markov Decision Process (CMDP), agents are trained using two constrained RL algorithms. To further enhance safety, we propose a shielding framework based on vehicle rollover dynamics to limit the speed command. Experimental results in the F1TENTH simulator demonstrate the effectiveness of our method in improving safety while achieving competitive racing performance. We deploy different agents on a real 1/10-scale racecar without fine-tuning. With the maximum speed set to$ 4m/s$, our method successfully completes the track without colliding with the boundaries.",
+      "abstract": "Autonomous racing serves as a critical benchmark for advancing autonomous vehicle technologies in challenging scenarios. Most traditional methods rely on complex vehicle dynamics models, posing significant challenges in modeling and computation. While reinforcement learning (RL) offers a promising alternative, ensuring safety remains a major challenge for real-world deployment. In this paper, we introduce safe RL into autonomous racing to reduce collisions. By formulating the problem as a Constrained Markov Decision Process (CMDP), agents are trained using two constrained RL algorithms. To further enhance safety, we propose a shielding framework based on vehicle rollover dynamics to limit the speed command. Experimental results in the F1TENTH simulator demonstrate the effectiveness of our method in improving safety while achieving competitive racing performance. We deploy different agents on a real 1/10-scale racecar without fine-tuning. With the maximum speed set to 4m/s, our method successfully completes the track without colliding with the boundaries.",
       "institutions": [
         "Beijing Institute of Technology"
       ],
@@ -1647,7 +1651,7 @@
     },
     {
       "id": "preto-2025-follow",
-      "title": "Follow-the-Gap Control for Fast and Safe Autonomous Driving on F1Tenth\n\t\t\t\t\t\tVirtual Circuit",
+      "title": "Follow-the-Gap Control for Fast and Safe Autonomous Driving on F1Tenth Virtual Circuit",
       "authors": [
         "Fernando Zolubas Preto",
         "Antonio Colombini Neto",
@@ -1657,7 +1661,7 @@
         "Bruno Augusto Angélico"
       ],
       "year": 2025,
-      "venue": "Anais do XVII Simpósio Brasileiro de Automação Inteligente (SBAI\n\t\t\t\t\t2025) e XI Simpósio Brasileiro de Sistemas Elétricos (SBSE 2025)",
+      "venue": "Anais do XVII Simpósio Brasileiro de Automação Inteligente (SBAI 2025) e XI Simpósio Brasileiro de Sistemas Elétricos (SBSE 2025)",
       "venue_short": "SBAI",
       "type": "conference",
       "tags": [
@@ -2086,7 +2090,7 @@
         "planning",
         "multi-agent"
       ],
-      "featured": false,
+      "featured": true,
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
@@ -2094,7 +2098,7 @@
       "citations": 5,
       "arxiv": "2403.07129",
       "url": "https://doi.org/10.1109/iros58592.2024.10801657",
-      "figure": "/media/research/research-trumpp-2024-racemop-fig-1600.webp",
+      "figure": "/media/research/research-trumpp-2024-racemop-fig-1200.webp",
       "featured_order": 7,
       "abstract": "The interactive decision-making in multi-agent autonomous racing offers insights valuable beyond the domain of self-driving cars. Mapless online path planning is particularly of practical appeal but poses a challenge for safely overtaking opponents due to the limited planning horizon. To address this, we introduce RaceMOP, a novel method for mapless online path planning designed for multi-agent racing of F1TENTH cars. Unlike classical planners that rely on predefined racing lines, RaceMOP operates without a map, utilizing only local observations to execute high-speed overtaking maneuvers. Our approach combines an artificial potential field method as a base policy with residual policy learning to enable long-horizon planning. We advance the field by introducing a novel approach for policy fusion with the residual policy directly in probability space. Extensive experiments on twelve simulated racetracks validate that RaceMOP is capable of long-horizon decision-making with robust collision avoidance during overtaking maneuvers. RaceMOP demonstrates superior handling over existing mapless planners and generalizes to unknown racetracks, affirming its potential for broader applications in robotics. Our code is available at http://github.com/raphajaner/racemop.",
       "doi": "10.1109/iros58592.2024.10801657",
@@ -2118,7 +2122,7 @@
         "systems-platform",
         "education"
       ],
-      "featured": false,
+      "featured": true,
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
@@ -2150,8 +2154,10 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key zarrar2024tinylidarnet",
-      "citations": 5
+      "notes": "bibtex key zarrar2024tinylidarnet; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "citations": 5,
+      "doi": "10.1109/iros58592.2024.10801430",
+      "url": "https://doi.org/10.1109/iros58592.2024.10801430"
     },
     {
       "id": "evans-2024-high",
@@ -2221,7 +2227,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key zachariah2024hybrid"
+      "notes": "bibtex key zachariah2024hybrid; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/sm63044.2024.10733480",
+      "url": "https://doi.org/10.1109/sm63044.2024.10733480"
     },
     {
       "id": "hell-2024-lidar",
@@ -2244,7 +2252,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key hell2024lidar; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six)"
+      "notes": "bibtex key hell2024lidar; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six); link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/iv55156.2024.10588613",
+      "url": "https://doi.org/10.1109/iv55156.2024.10588613"
     },
     {
       "id": "elmoghazy-2024-real",
@@ -2266,7 +2276,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key elmoghazy2024real"
+      "notes": "bibtex key elmoghazy2024real; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/icfec61590.2024.00012",
+      "url": "https://doi.org/10.1109/icfec61590.2024.00012"
     },
     {
       "id": "samak-2024-autonomy",
@@ -2286,7 +2298,10 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key samak2024autonomy"
+      "notes": "bibtex key samak2024autonomy; link resolved 2026-08-23 from openalex by exact title, year and first-author match",
+      "arxiv": "2402.14739",
+      "doi": "10.48550/arxiv.2402.14739",
+      "url": "https://arxiv.org/abs/2402.14739"
     },
     {
       "id": "kuipers-2024-conformal",
@@ -2310,7 +2325,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key kuipers2024conformal"
+      "notes": "bibtex key kuipers2024conformal; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/cdc56724.2024.10886791",
+      "url": "https://doi.org/10.1109/cdc56724.2024.10886791"
     },
     {
       "id": "choi-2024-development",
@@ -2334,7 +2351,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key choi2024development"
+      "notes": "bibtex key choi2024development; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.23919/iccas63016.2024.10773105",
+      "url": "https://doi.org/10.23919/iccas63016.2024.10773105"
     },
     {
       "id": "lee-2024-development",
@@ -2358,13 +2377,17 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key lee2024development"
+      "notes": "bibtex key lee2024development; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.23919/iccas63016.2024.10773242",
+      "url": "https://doi.org/10.23919/iccas63016.2024.10773242"
     },
     {
       "id": "tanmay-vilas-samak-2024-ea",
-      "title": "EA Scalable and Parallelizable Digital Twin Framework for Sustainable Sim2Real Transition of Multi-Agent Reinforcement Learning Systems",
+      "title": "A Scalable and Parallelizable Digital Twin Framework for Sustainable Sim2Real Transition of Multi-Agent Reinforcement Learning Systems",
       "authors": [
-        "Tanmay Vilas Samak, Venkat Krovi Chinmay Vilas Samak"
+        "Chinmay Vilas Samak",
+        "Tanmay Vilas Samak",
+        "Venkat Krovi"
       ],
       "year": 2024,
       "venue": "International Design Engineering Technical Conferences and Computers and Information in Engineering Conference",
@@ -2379,7 +2402,7 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key raman2018empowering"
+      "notes": "bibtex key raman2018empowering; title and author order restored 2026-08-23 from the upstream pub.bibtex field (the migration split one comma-separated author string wrongly and dropped 'Reinforcement Learning' from the title; the stray leading E is a scrape artifact). No DOI: absent from Crossref, OpenAlex, arXiv and Semantic Scholar on 2026-08-23, so it renders unlinked"
     },
     {
       "id": "fazekas-2024-evaluation",
@@ -2403,7 +2426,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key fazekas2024evaluation; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six)"
+      "notes": "bibtex key fazekas2024evaluation; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six); link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/iv55156.2024.10588629",
+      "url": "https://doi.org/10.1109/iv55156.2024.10588629"
     },
     {
       "id": "moualhi-2024-experimental",
@@ -2425,7 +2450,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key moualhi2024experimental"
+      "notes": "bibtex key moualhi2024experimental; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.23919/ecc64448.2024.10591061",
+      "url": "https://doi.org/10.23919/ecc64448.2024.10591061"
     },
     {
       "id": "betz-2024-f1tenth",
@@ -2452,7 +2479,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key betz2024f1tenth"
+      "notes": "bibtex key betz2024f1tenth; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/tiv.2024.3495227",
+      "url": "https://doi.org/10.1109/tiv.2024.3495227"
     },
     {
       "id": "baumann-2024-forzaeth",
@@ -2481,7 +2510,7 @@
         "multi-agent",
         "systems-platform"
       ],
-      "featured": false,
+      "featured": true,
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
@@ -2492,7 +2521,8 @@
       "featured_order": 2,
       "abstract": "Autonomous racing in robotics combines high-speed dynamics with the necessity for reliability and real-time decision-making. While such racing pushes software and hardware to their limits, many existing full-system solutions necessitate complex, custom hardware and software, and usually focus on Time-Trials rather than full unrestricted Head-to-Head racing, due to financial and safety constraints. This limits their reproducibility, making advancements and replication feasible mostly for well-resourced laboratories with comprehensive expertise in mechanical, electrical, and robotics fields. Researchers interested in the autonomy domain but with only partial experience in one of these fields, need to spend significant time with familiarization and integration. The ForzaETH Race Stack addresses this gap by providing an autonomous racing software platform designed for F1TENTH, a 1:10 scaled Head-to-Head autonomous racing competition, which simplifies replication by using commercial off-the-shelf hardware. This approach enhances the competitive aspect of autonomous racing and provides an accessible platform for research and development in the field. The ForzaETH Race Stack is designed with modularity and operational ease of use in mind, allowing customization and adaptability to various environmental conditions, such as track friction and layout. Capable of handling both Time-Trials and Head-to-Head racing, the stack has demonstrated its effectiveness, robustness, and adaptability in the field by winning the official F1TENTH international competition multiple times.",
       "doi": "10.1002/rob.22429",
-      "pdf": "https://arxiv.org/pdf/2403.11784"
+      "pdf": "https://arxiv.org/pdf/2403.11784",
+      "thumbnail": "/media/research/research-baumann-2024-forzaeth-1200.webp"
     },
     {
       "id": "floch-2024-gaussian",
@@ -2513,7 +2543,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key floch2024gaussian"
+      "notes": "bibtex key floch2024gaussian; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.23919/ecc64448.2024.10591248",
+      "url": "https://doi.org/10.23919/ecc64448.2024.10591248"
     },
     {
       "id": "berducci-2024-learning",
@@ -2543,7 +2575,7 @@
       "id": "w-kegrzynowski-2024-learning",
       "title": "Learning dynamics models for velocity estimation in autonomous racing",
       "authors": [
-        "Jan W\\kegrzynowski",
+        "Jan Węgrzynowski",
         "Grzegorz Czechmanowski",
         "Piotr Kicki",
         "Krzysztof Walas"
@@ -2559,7 +2591,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key wkegrzynowski2024learning; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six)"
+      "notes": "bibtex key wkegrzynowski2024learning; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six); authors and link from the Crossref record for 10.1109/iros58592.2024.10802481 (exact title and year match)",
+      "doi": "10.1109/iros58592.2024.10802481",
+      "url": "https://doi.org/10.1109/iros58592.2024.10802481"
     },
     {
       "id": "samak-2024-validation",
@@ -2581,7 +2615,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key samak2024towards"
+      "notes": "bibtex key samak2024towards; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/aim55361.2024.10637205",
+      "url": "https://doi.org/10.1109/aim55361.2024.10637205"
     },
     {
       "id": "evans-2023-safe",
@@ -2652,14 +2688,15 @@
       "tags": [
         "perception-estimation"
       ],
-      "featured": false,
+      "featured": true,
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
       "notes": "bibtex key loetscher2023assessing; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six)",
       "arxiv": "2309.10504",
       "url": "https://arxiv.org/abs/2309.10504",
-      "citations": 9
+      "citations": 9,
+      "figure": "/media/research/research-loetscher-2023-assessing-fig-1200.webp"
     },
     {
       "id": "heetmeyer-2023-rpgd",
@@ -2684,9 +2721,11 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key heetmeyer2023rpgd; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six)",
+      "notes": "bibtex key heetmeyer2023rpgd; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six); link resolved 2026-08-23 from crossref by exact title, year and first-author match",
       "pdf": "https://www.zora.uzh.ch/id/eprint/254218/1/RPGD_ICRA_2023.pdf",
-      "citations": 7
+      "citations": 7,
+      "doi": "10.1109/icra48891.2023.10161233",
+      "url": "https://doi.org/10.1109/icra48891.2023.10161233"
     },
     {
       "id": "evans-2023-bypassing",
@@ -2711,8 +2750,10 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key evans2023bypassing; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six)",
-      "citations": 6
+      "notes": "bibtex key evans2023bypassing; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six); link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "citations": 6,
+      "doi": "10.1109/icar58858.2023.10406465",
+      "url": "https://doi.org/10.1109/icar58858.2023.10406465"
     },
     {
       "id": "gonultas-2023-system",
@@ -2734,8 +2775,10 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key gonultas2023system",
-      "citations": 5
+      "notes": "bibtex key gonultas2023system; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "citations": 5,
+      "doi": "10.1109/iros55552.2023.10342391",
+      "url": "https://doi.org/10.1109/iros55552.2023.10342391"
     },
     {
       "id": "zhang-2023-f1tenth",
@@ -2755,8 +2798,10 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key zhang2023f1tenth",
-      "citations": 4
+      "notes": "bibtex key zhang2023f1tenth; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "citations": 4,
+      "doi": "10.1109/icac57885.2023.10275226",
+      "url": "https://doi.org/10.1109/icac57885.2023.10275226"
     },
     {
       "id": "muzzini-2023-optimized",
@@ -2806,8 +2851,10 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key nearchou2023assurance",
-      "citations": 1
+      "notes": "bibtex key nearchou2023assurance; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "citations": 1,
+      "doi": "10.1109/sera57763.2023.10197746",
+      "url": "https://doi.org/10.1109/sera57763.2023.10197746"
     },
     {
       "id": "dighe-2023-kinematics",
@@ -2831,8 +2878,10 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key dighe2023kinematics",
-      "citations": 1
+      "notes": "bibtex key dighe2023kinematics; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "citations": 1,
+      "doi": "10.1109/iros55552.2023.10341603",
+      "url": "https://doi.org/10.1109/iros55552.2023.10341603"
     },
     {
       "id": "zou-2023-constrained",
@@ -2855,11 +2904,13 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key zou2023constrained"
+      "notes": "bibtex key zou2023constrained; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/cac59555.2023.10450932",
+      "url": "https://doi.org/10.1109/cac59555.2023.10450932"
     },
     {
       "id": "joglekar-2023-data",
-      "title": "Data-Driven Modeling and Experimental Validation of Autonomous Vehicles Using Koopman Operator: Distribution A: Approved for Public Release; Distribution Unlimited. OPSEC\\# 7248",
+      "title": "Data-Driven Modeling and Experimental Validation of Autonomous Vehicles Using Koopman Operator",
       "authors": [
         "Ajinkya Joglekar",
         "Sarang Sutavani",
@@ -2882,7 +2933,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key joglekar2023data; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six)"
+      "notes": "bibtex key joglekar2023data; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six); title, authors and link restored 2026-08-23 from the Crossref record for 10.1109/iros55552.2023.10341797; the scraped title carried the distribution statement 'Distribution A: Approved for Public Release; Distribution Unlimited. OPSEC# 7248'",
+      "doi": "10.1109/iros55552.2023.10341797",
+      "url": "https://doi.org/10.1109/iros55552.2023.10341797"
     },
     {
       "id": "evans-2023-high",
@@ -2903,7 +2956,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key evans2023high; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six)"
+      "notes": "bibtex key evans2023high; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six); link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/lra.2023.3295252",
+      "url": "https://doi.org/10.1109/lra.2023.3295252"
     },
     {
       "id": "becker-2023-model",
@@ -2927,7 +2982,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key becker2023model; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six)"
+      "notes": "bibtex key becker2023model; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six); link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/icra48891.2023.10161472",
+      "url": "https://doi.org/10.1109/icra48891.2023.10161472"
     },
     {
       "id": "samak-2023-multi",
@@ -2974,7 +3031,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key trumpp2023residual; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six)"
+      "notes": "bibtex key trumpp2023residual; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six); link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/iv55152.2023.10186744",
+      "url": "https://doi.org/10.1109/iv55152.2023.10186744"
     },
     {
       "id": "honda-2023-stein",
@@ -3047,7 +3106,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key bernardi2022fpga"
+      "notes": "bibtex key bernardi2022fpga; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.23919/date54114.2022.9774517",
+      "url": "https://doi.org/10.23919/date54114.2022.9774517"
     },
     {
       "id": "betz-2022-autonomous",
@@ -3095,7 +3156,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key kochdumper2022conformant"
+      "notes": "bibtex key kochdumper2022conformant; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/cdc51059.2022.9992324",
+      "url": "https://doi.org/10.1109/cdc51059.2022.9992324"
     },
     {
       "id": "bhargav-2022-deriving",
@@ -3117,7 +3180,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key bhargav2022deriving"
+      "notes": "bibtex key bhargav2022deriving; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/comsnets53615.2022.9668548",
+      "url": "https://doi.org/10.1109/comsnets53615.2022.9668548"
     },
     {
       "id": "zheng-2022-gradient",
@@ -3138,7 +3203,10 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key zheng2022gradient"
+      "notes": "bibtex key zheng2022gradient; link resolved 2026-08-23 from openalex by exact title, year and first-author match",
+      "arxiv": "2202.13525",
+      "doi": "10.48550/arxiv.2202.13525",
+      "url": "https://arxiv.org/abs/2202.13525"
     },
     {
       "id": "atreya-2022-high",
@@ -3162,7 +3230,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key atreya2022high"
+      "notes": "bibtex key atreya2022high; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/iros47612.2022.9981259",
+      "url": "https://doi.org/10.1109/iros47612.2022.9981259"
     },
     {
       "id": "brunnbauer-2022-latent",
@@ -3187,7 +3257,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key brunnbauer2022latent"
+      "notes": "bibtex key brunnbauer2022latent; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/icra46639.2022.9811650",
+      "url": "https://doi.org/10.1109/icra46639.2022.9811650"
     },
     {
       "id": "xiao-2022-learning",
@@ -3233,7 +3305,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key zhang2022residual"
+      "notes": "bibtex key zhang2022residual; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/lra.2022.3192770",
+      "url": "https://doi.org/10.1109/lra.2022.3192770"
     },
     {
       "id": "atreya-2022-state",
@@ -3280,7 +3354,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key bak2022stress"
+      "notes": "bibtex key bak2022stress; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/iv51971.2022.9827237",
+      "url": "https://doi.org/10.1109/iv51971.2022.9827237"
     },
     {
       "id": "bosello-2022-train",
@@ -3303,7 +3379,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key bosello2022train"
+      "notes": "bibtex key bosello2022train; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/ccnc49033.2022.9700730",
+      "url": "https://doi.org/10.1109/ccnc49033.2022.9700730"
     },
     {
       "id": "karnan-2022-vi",
@@ -3329,7 +3407,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key karnan2022vi"
+      "notes": "bibtex key karnan2022vi; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/iros47612.2022.9982060",
+      "url": "https://doi.org/10.1109/iros47612.2022.9982060"
     },
     {
       "id": "wei-2021-onevision",
@@ -3407,7 +3487,10 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key JainBayesRace2020"
+      "notes": "bibtex key JainBayesRace2020; link resolved 2026-08-23 from openalex by exact title, year and first-author match",
+      "arxiv": "2005.04755",
+      "doi": "10.48550/arxiv.2005.04755",
+      "url": "https://arxiv.org/abs/2005.04755"
     },
     {
       "id": "ivanov-2020-case",
@@ -3432,7 +3515,10 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key ivanov2020case"
+      "notes": "bibtex key ivanov2020case; link resolved 2026-08-23 from openalex by exact title, year and first-author match",
+      "arxiv": "1910.11309",
+      "doi": "10.48550/arxiv.1910.11309",
+      "url": "https://arxiv.org/abs/1910.11309"
     },
     {
       "id": "sinha-2020-formulazero",
@@ -3456,7 +3542,10 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key sinha2020formulazero"
+      "notes": "bibtex key sinha2020formulazero; link resolved 2026-08-23 from openalex by exact title, year and first-author match",
+      "arxiv": "2003.03900",
+      "doi": "10.48550/arxiv.2003.03900",
+      "url": "https://arxiv.org/abs/2003.03900"
     },
     {
       "id": "bulsara-2020-obstacle",
@@ -3479,7 +3568,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key bulsara2020obstacle"
+      "notes": "bibtex key bulsara2020obstacle; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.4271/2020-01-0109",
+      "url": "https://doi.org/10.4271/2020-01-0109"
     },
     {
       "id": "ueter-2020-project",
@@ -3500,21 +3591,23 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key ueter2020project"
+      "notes": "bibtex key ueter2020project; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/mdat.2020.3012085",
+      "url": "https://doi.org/10.1109/mdat.2020.3012085"
     },
     {
       "id": "agnihotri-2020-teaching",
-      "title": "Teaching autonomous systems at 1/10thscale: A project-based course and community",
+      "title": "Teaching Autonomous Systems at 1/10th-scale",
       "authors": [
-        "A Agnihotri",
-        "M O’Kelly",
-        "H Abbas",
-        "R Mangharam"
+        "Abhijeet Agnihotri",
+        "Matthew O'Kelly",
+        "Rahul Mangharam",
+        "Houssam Abbas"
       ],
       "year": 2020,
-      "venue": "ACM Special Interest Group on Computer Science Education (SIGCSE). ACM",
+      "venue": "Proceedings of the 51st ACM Technical Symposium on Computer Science Education",
       "venue_short": "SIGCSE",
-      "type": "journal",
+      "type": "conference",
       "tags": [
         "education"
       ],
@@ -3522,7 +3615,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key agnihotri2020teaching"
+      "notes": "bibtex key agnihotri2020teaching; title, authors, venue and link from the Crossref record for 10.1145/3328778.3366796 (event name: SIGCSE '20, the 51st ACM Technical Symposium on Computer Science Education); type set from the Crossref record type 'proceedings-article', 2026-08-23",
+      "doi": "10.1145/3328778.3366796",
+      "url": "https://doi.org/10.1145/3328778.3366796"
     },
     {
       "id": "okelly-2020-tunercar",
@@ -3546,7 +3641,9 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key o2020tunercar"
+      "notes": "bibtex key o2020tunercar; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1109/icra40945.2020.9197080",
+      "url": "https://doi.org/10.1109/icra40945.2020.9197080"
     },
     {
       "id": "guedes-2019-robotic",
@@ -3565,11 +3662,12 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key guedes2019robotic"
+      "notes": "bibtex key guedes2019robotic; type and link from the OpenAlex record (dissertation, 2019, hdl 10400.22/15647); institution not recorded in the source, so venue stays empty",
+      "url": "https://hdl.handle.net/10400.22/15647"
     },
     {
       "id": "almeida-2019-implementing",
-      "title": "Implementing and Tuning an Autonomous Racing Car Tesbed",
+      "title": "Implementing and Tuning an Autonomous Racing Car Testbed",
       "authors": [
         "Daniel Gonçalves Almeida"
       ],
@@ -3584,18 +3682,19 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key almeida2019implementing"
+      "notes": "bibtex key almeida2019implementing; title, type and link from the OpenAlex record (dissertation, 2019, hdl 10400.22/15485); the scraped title read 'Tesbed'. Institution not recorded in the source, so venue stays empty",
+      "url": "https://hdl.handle.net/10400.22/15485"
     },
     {
       "id": "dusil-2019-slip",
-      "title": "Slip detection for RoboRacer model car",
+      "title": "Slip detection for F1/10 model car",
       "authors": [
         "Jan Dusil"
       ],
       "year": 2019,
-      "venue": "",
-      "venue_short": "",
-      "type": "journal",
+      "venue": "Bachelor’s thesis, Czech Technical University in Prague",
+      "venue_short": "CTU Prague",
+      "type": "thesis",
       "tags": [
         "systems-platform"
       ],
@@ -3603,7 +3702,8 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key dusil2019slip"
+      "notes": "bibtex key dusil2019slip; title, venue, type and link restored 2026-08-23 from the CTU DSpace record (handle 10467/82910, dc.type bachelor thesis, dc.date.issued 2019-06-12, advisor Michal Sojka); the upstream pub.bibtex carries a later RoboRacer rename of a 2019 F1/10 title",
+      "url": "https://hdl.handle.net/10467/82910"
     },
     {
       "id": "raman-2018-empowering",
@@ -3624,17 +3724,19 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key raman2018empowering"
+      "notes": "bibtex key raman2018empowering; link resolved 2026-08-23 from crossref by exact title, year and first-author match",
+      "doi": "10.1115/detc2018-86316",
+      "url": "https://doi.org/10.1115/detc2018-86316"
     },
     {
       "id": "vajnar-2017-model",
-      "title": "Model car for the RoboRacer autonomous car racing competition",
+      "title": "Model car for the F1/10 autonomous car racing competition",
       "authors": [
         "Martin Vajnar"
       ],
       "year": 2017,
-      "venue": "Master’s thesis, Czech Technical University in Prague, Faculty of Electrical~…",
-      "venue_short": "Master’s thesis, Czech Technical Univ...",
+      "venue": "Master’s thesis, Czech Technical University in Prague",
+      "venue_short": "CTU Prague",
       "type": "thesis",
       "tags": [
         "systems-platform"
@@ -3643,18 +3745,19 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key vajnar2017model"
+      "notes": "bibtex key vajnar2017model; title, venue and link restored 2026-08-23 from the CTU DSpace record (handle 10467/68472, dc.type master thesis, dc.date.issued 2017-05-26, advisor Michal Sojka); the upstream pub.bibtex carries a later RoboRacer rename of a 2017 F1/10 title",
+      "url": "https://hdl.handle.net/10467/68472"
     },
     {
       "id": "kerner-2017-software",
       "title": "Software testing for embedded applications in autonomous vehicles",
       "authors": [
-        "Bc Jiř\\'\\i Kerner"
+        "Jiří Kerner"
       ],
       "year": 2017,
-      "venue": "",
-      "venue_short": "",
-      "type": "journal",
+      "venue": "Master’s thesis, Czech Technical University in Prague",
+      "venue_short": "CTU Prague",
+      "type": "thesis",
       "tags": [
         "systems-platform"
       ],
@@ -3662,7 +3765,8 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key kerner2017software"
+      "notes": "bibtex key kerner2017software; author, venue, type and link from the CTU DSpace record (handle 10467/68602, dc.type master thesis, dc.date.issued 2017-05-24); the bibtex author field carried the degree prefix Bc and a LaTeX-escaped given name",
+      "url": "https://hdl.handle.net/10467/68602"
     }
   ]
 }
