@@ -525,3 +525,69 @@ No AI attribution anywhere in the commits, the PR, or the report.
 
 - 2026-08-23 - Contract written by the director chat after Cedric's review of
   the pages-v1 halt.
+
+---
+
+## 14. Amendments after Cedric's pre-flight, 2026-08-23
+
+### 14.1 The chunk bug is diagnosed. Do not re-litigate it.
+
+A clean rebuild emits `StatCounter-CllGwoO1.js` with the **same hash** that 404'd
+on 4185. Identical hash means the source never changed, so the file was never
+permanently absent: it was missing only during the window in which `vite build`
+emptied `dist/assets` underneath the running preview server. Steps 1 and 2 of
+section 3.1 are answered. Record it and move on.
+
+Two consequences:
+
+- Still ship `lazyWithRetry` and the RouteBoundary reload path. GitHub Pages
+  changes every asset hash on every deploy and will do this to real readers.
+- **Never build into a dist that a preview server is serving.** Every QA preview
+  this session: `npx vite build --outDir dist-preview`, then
+  `npx vite preview --outDir dist-preview --port 4181 --strictPort`. Add
+  `dist-preview/` to `.gitignore`. The production pass in section 10 uses it too.
+
+### 14.2 There is no still-image encoder. Build one before the harvest lands.
+
+`scripts/media.sh` has only `video`, `poster` (a frame grabbed from a video) and
+`report`. Nothing turns a JPG into a budgeted WebP, and `cwebp` is not installed
+on this machine. Race needs 40 timeline photos, About needs headshots plus the
+three oversized assets re-encoded, News needs thumbnails. Write the tool once
+rather than an ad hoc ffmpeg line per image.
+
+Add `scripts/photo.py`, run with `/home/cedric/.venvs/ml/bin/python3` (Pillow is
+already there, `paper_thumbs.py` depends on it):
+
+- `ImageOps.exif_transpose` first. DSLR and phone JPGs from the Drive mirror
+  carry EXIF orientation and ffmpeg does not apply it to stills. Without this a
+  chunk of the race timeline renders sideways.
+- LANCZOS downscale to a target width: 1200 default, 800 for timeline tiles.
+- A quality-fitting loop in the shape of `fit_encode`: start at q=82 and step
+  down until the file is under budget (220 KB default, 150 KB for tiles). Fail
+  loudly rather than silently shipping something over budget.
+- `--report <dir>` in the same shape as `media.sh report`.
+- Expose it as `scripts/media.sh photo ...` so there stays one entry point.
+
+Section 5.1's reference to encoding timeline photos "via scripts/media.sh" means
+this command, once it exists.
+
+### 14.3 Dependency and bundle hygiene (director, while Wave A runs)
+
+Six packages have zero imports anywhere in `src/`: `motion`,
+`@tsparticles/react`, `tsparticles`, `gl-matrix`, `alea`, `simplex-noise`.
+`framer-motion` has exactly one import, `NavBar.tsx`, in a codebase whose motion
+library is GSAP, and it rides in the 497 KB entry chunk that every route pays
+for. `embla-carousel-react` has one import, `About.tsx`, which is being rebuilt
+this session.
+
+- Replace the framer-motion usage in `NavBar.tsx` with GSAP or plain CSS, then
+  uninstall `framer-motion`.
+- Uninstall the six unused packages. Uninstall `embla-carousel-react` too if the
+  About rebuild does not use a carousel.
+- Give `NavBar.tsx` a static import of `src/lib/motion.ts` like every other
+  consumer. That clears the build warning that the dynamic import cannot move
+  the module into its own chunk.
+- Run `npm audit` afterwards and report the remaining count. Do not chase the 48
+  Dependabot alerts on `main` this session; that is a separate job on a separate
+  branch.
+- Rebuild and put the entry-chunk size before and after in the report.
