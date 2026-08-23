@@ -11,9 +11,17 @@ type NextRaceSpotlightProps = {
   datesSecondary?: string;
   registerHref: string;
   registerNote?: string;
+  /** The registration deadline as an instant. On the race page this is the
+   * urgent number, so it counts down live above the race's own start. */
+  deadlineAt?: string;
   rulesHref?: string;
+  /** Race page: the rules live on this site, so the button stays internal. */
+  rulesInternal?: boolean;
   startsAt: string;
   on?: "paper" | "ink";
+  /** The panel sits under an h2 on the landing and directly under the page's
+   * h1 in the race hero, so the heading level follows its container. */
+  headingAs?: "h2" | "h3";
 };
 
 type Remaining = { days: number; hours: number; minutes: number };
@@ -41,19 +49,32 @@ export default function NextRaceSpotlight({
   datesSecondary,
   registerHref,
   registerNote,
+  deadlineAt,
   rulesHref,
+  rulesInternal = false,
   startsAt,
   on = "paper",
+  headingAs: Heading = "h3",
 }: NextRaceSpotlightProps) {
   const ink = on === "ink";
   const reduced = usePrefersReducedMotion();
   const [remaining, setRemaining] = useState<Remaining | null>(() => remainingUntil(startsAt));
+  const [toDeadline, setToDeadline] = useState<Remaining | null>(() =>
+    deadlineAt ? remainingUntil(deadlineAt) : null,
+  );
 
   useEffect(() => {
     if (reduced) return;
-    const id = window.setInterval(() => setRemaining(remainingUntil(startsAt)), 30_000);
+    const id = window.setInterval(() => {
+      setRemaining(remainingUntil(startsAt));
+      setToDeadline(deadlineAt ? remainingUntil(deadlineAt) : null);
+    }, 30_000);
     return () => window.clearInterval(id);
-  }, [startsAt, reduced]);
+  }, [startsAt, deadlineAt, reduced]);
+
+  // Once the deadline is behind us the row says so rather than counting
+  // negative or vanishing without explanation.
+  const deadlinePassed = Boolean(deadlineAt) && toDeadline === null;
 
   const strong = ink ? "text-text-on-ink" : "text-text-strong";
   const muted = ink ? "text-text-on-ink-muted" : "text-text-muted";
@@ -64,11 +85,11 @@ export default function NextRaceSpotlight({
       <div>
         {headline ? (
           <>
-            <h3 className={`font-display text-display-l font-semibold ${strong}`}>{headline}</h3>
+            <Heading className={`font-display text-display-l font-semibold ${strong}`}>{headline}</Heading>
             <p className={`mt-3 font-display text-display-s font-semibold ${strong}`}>{datesHeadline}</p>
           </>
         ) : (
-          <h3 className={`font-display text-display-l font-semibold ${strong}`}>{datesHeadline}</h3>
+          <Heading className={`font-display text-display-l font-semibold ${strong}`}>{datesHeadline}</Heading>
         )}
         {datesSecondary && <p className={`mt-3 text-lead ${ink ? "text-text-on-ink-muted" : "text-text-body"}`}>{datesSecondary}</p>}
       </div>
@@ -88,6 +109,18 @@ export default function NextRaceSpotlight({
             <dd className={`tabular-nums ${strong}`}>{registerNote}</dd>
           </div>
         )}
+        {deadlineAt && (
+          <div className="flex flex-wrap justify-between gap-x-4 gap-y-0.5">
+            <dt>{deadlinePassed ? "registration" : "closes in"}</dt>
+            <dd className={`tabular-nums ${strong}`}>
+              {deadlinePassed
+                ? "closed"
+                : `${toDeadline?.days}d ${String(toDeadline?.hours ?? 0).padStart(2, "0")}h ${String(
+                    toDeadline?.minutes ?? 0,
+                  ).padStart(2, "0")}m`}
+            </dd>
+          </div>
+        )}
         <div className="flex flex-wrap justify-between gap-x-4 gap-y-0.5">
           <dt>format</dt>
           <dd className={strong}>multi-agent, up to 4 cars</dd>
@@ -97,11 +130,16 @@ export default function NextRaceSpotlight({
         <Button href={registerHref} on={on} variant="primary" target="_blank" rel="noopener noreferrer">
           Register your team
         </Button>
-        {rulesHref && (
-          <Button href={rulesHref} on={on} variant="secondary" target="_blank" rel="noopener noreferrer">
-            Rules
-          </Button>
-        )}
+        {rulesHref &&
+          (rulesInternal ? (
+            <Button href={rulesHref} on={on} variant="secondary">
+              Read the rules
+            </Button>
+          ) : (
+            <Button href={rulesHref} on={on} variant="secondary" target="_blank" rel="noopener noreferrer">
+              Rules
+            </Button>
+          ))}
       </div>
       <p className={`mt-auto max-w-[55ch] text-small ${muted}`}>{title}</p>
     </article>

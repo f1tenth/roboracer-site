@@ -5,6 +5,26 @@ import Footer from "./Footer";
 import RouteBoundary from "./RouteBoundary";
 import { ScrollTrigger } from "../lib/motion";
 
+/**
+ * One document title per route. An SPA keeps the index.html title forever
+ * otherwise, so every page shared, bookmarked or read by a screen reader
+ * announced itself as plain "RoboRacer".
+ */
+const TITLES: Record<string, string> = {
+  "/": "RoboRacer - autonomous racing, built and raced in the open",
+  "/about": "About - RoboRacer",
+  "/build": "Build the car - RoboRacer",
+  "/course": "Course kit - RoboRacer",
+  "/learn": "Learn - RoboRacer",
+  "/news": "News - RoboRacer",
+  "/race": "Race - RoboRacer",
+  "/research": "Research - RoboRacer",
+  "/rules": "Competition rules - RoboRacer",
+  "/chat": "Chat - RoboRacer",
+  "/assembly": "Car assembly - RoboRacer",
+  "/styleguide": "Style guide - RoboRacer",
+};
+
 export default function Layout() {
   const location = useLocation();
   const currentPath = location.pathname;
@@ -22,6 +42,7 @@ export default function Layout() {
   // The landing's Lenis instance is created and destroyed with the landing
   // itself, so plain window scrolling is the right reset here.
   useLayoutEffect(() => {
+    document.title = TITLES[currentPath] ?? "RoboRacer";
     window.scrollTo(0, 0);
     const frame = requestAnimationFrame(() => ScrollTrigger.refresh());
     return () => cancelAnimationFrame(frame);

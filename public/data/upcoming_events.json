@@ -1,12 +1,14 @@
 [
   {
     "title": "29th RoboRacer Autonomous Racing Competition at the International Federation of Automatic Control (IFAC 2026)",
+    "short_name": "IFAC 2026",
     "dates": "August 24-27, 2026",
     "location": "Busan, Republic of Korea",
     "url": "https://2026ifac-roboracer.com/en/registration.html"
   },
   {
     "title": "30th RoboRacer Autonomous Racing Competition at the IEEE Vehicular Technology Conference (VTC 2026 Fall)",
+    "short_name": "VTC 2026 Fall",
     "dates": "Sep 6-9, 2026",
     "location": "Boston, MA, USA",
     "url": "https://events.vtsociety.org/vtc2026-fall/"
@@ -23,6 +25,8 @@
     "dates_secondary": "Check-in and practice September 27",
     "starts_at": "2026-09-28T09:30:00-04:00",
     "register_url": "https://iros2026-race.roboracer.ai/registration.html",
-    "rules_url": "https://iros2026-race.roboracer.ai/"
+    "rules_url": "https://iros2026-race.roboracer.ai/",
+    "registration_deadline_at": "2026-09-05T23:59:00-04:00",
+    "registration_deadline_note": "Cedric, 2026-08-21: display the Sep 5 date plainly. The instant is end of day Eastern, the conference's own time zone; the race page counts down to it."
   }
 ]

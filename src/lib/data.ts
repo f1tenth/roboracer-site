@@ -14,6 +14,9 @@ export type UpcomingEvent = {
   dates_secondary?: string;
   starts_at?: string;
   registration_deadline?: string;
+  /** The same deadline as an instant, so a countdown never parses prose. */
+  registration_deadline_at?: string;
+  registration_deadline_note?: string;
   register_url?: string;
   rules_url?: string;
 };
@@ -152,6 +155,12 @@ export type MapEvent = {
   source?: string;
   labelDx?: number;
   labelDy?: number;
+  /** The event's own page. Absent when none ever existed. */
+  url?: string;
+  /** live = answered 200 when last checked; archive = a Wayback capture
+   * because the original domain is dead; none = no page to link. */
+  url_status?: "live" | "archive" | "none";
+  url_note?: string;
 };
 
 export type MapCountry = {
