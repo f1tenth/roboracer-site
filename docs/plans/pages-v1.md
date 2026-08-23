@@ -260,3 +260,26 @@ dimensions; no layout shift; copy matches `roboracer-content`; QA report at
 ## 12. Change log
 
 - 2026-08-23 — Contract written.
+- 2026-08-23 — `/rules` corrected for the 31st competition and added to the nav
+  (`2129b6b`). The IROS 2026 venue is named from `events_map.json`'s cited
+  source, which outranks the content skill under the skill's own precedence
+  rule.
+- 2026-08-23 — Race rebuilt (`f6d6d58`). Thirteen broken links repaired, not
+  eleven: the audit's eleven plus `korea-race24f1tenth.org` (NXDOMAIN) and
+  `www.iros2021.org`, whose domain was resold and now serves a proton-therapy
+  conference. Every past-race URL now lives in `data/events_map.source.json`
+  as `url` + `url_status`, checked by hand. `past_races.json` is superseded
+  for the timeline and no longer read by any page.
+- 2026-08-23 — `upcoming_events.json` gains `registration_deadline_at` (an
+  instant, so no component parses "September 5, 2026") and short names for
+  IFAC and VTC. `NextRaceSpotlight` gains an optional deadline countdown, an
+  internal rules link and a heading level; the landing is unchanged.
+- 2026-08-23 — `Layout` sets a document title per route. The SPA announced
+  every page as plain "RoboRacer", which fails the "one h1 plus a page title"
+  rule on all of them at once.
+- 2026-08-23 — People harvest committed (`e9b04c2`). Director's calls: the
+  contributor activity window is the full eighteen months the brief asked for
+  rather than the six its quoted date gave; private repos stay out of the
+  published roster, which leaves ~48 private-only committers off it by design.
+- 2026-08-23 — **Halt for Cedric's review of /race on localhost.** About, News
+  and Research have not started.
