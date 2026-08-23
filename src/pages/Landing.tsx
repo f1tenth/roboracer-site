@@ -97,7 +97,15 @@ const CAR_PHOTOS: readonly CarPhoto[] = [
  * Landing composition: hero chapter, highlights, the car, platform panel,
  * community map, partner ribbons, next race, teams, research, join.
  */
+const PARTNER_ROW_COUNT = 3;
+/** The loop was tuned against a row of this many logos; duration scales with
+ * row length so a growing roster never speeds the scroll up. */
 const MARQUEE_REF_ITEMS = 20;
+/** Seconds for a reference row, under and over the md breakpoint. Cedric,
+ * 2026-08-23, twice: slower, then 65% of that speed again. A longer duration
+ * is a slower ribbon, so these are the tuned pair divided by 0.65. */
+const MARQUEE_BASE_S = 120;
+const MARQUEE_BASE_MD_S = 178;
 
 export default function Landing() {
   useLenis();
@@ -117,13 +125,13 @@ export default function Landing() {
     loadPlatform().then(setPlatform).catch(() => setPlatform([]));
   }, []);
 
-  // The 55s / 82s loop was tuned when one row held all 20 partners. Scaling the
-  // duration by row length holds px/s constant as the roster grows.
-  // Even indices to the top ribbon, odd to the bottom. Alternating rather than
-  // splitting the sorted list in half, so each row gets a mix of wide and
-  // narrow logos and no institution is ever in both rows at once.
+  // Three ribbons, dealt round-robin rather than sliced into thirds, so each row
+  // gets a mix of wide and narrow logos and no institution appears twice.
   const partnerRows = useMemo(
-    () => [partners.filter((_, i) => i % 2 === 0), partners.filter((_, i) => i % 2 === 1)],
+    () =>
+      Array.from({ length: PARTNER_ROW_COUNT }, (_, row) =>
+        partners.filter((_, i) => i % PARTNER_ROW_COUNT === row),
+      ),
     [partners],
   );
 
@@ -216,19 +224,18 @@ export default function Landing() {
             }
           />
         </div>
-        {/* Two ribbons travelling opposite ways. Even indices go up top, odd
-            below, rather than first-half/second-half: alternating keeps a mix
-            of wide and narrow logos in each row, and no institution appears in
-            both at once. Under reduced motion each row wraps into its own
-            static grid, so all 20 still render exactly once. */}
+        {/* Three ribbons: rows 1 and 3 run one way, row 2 the other. Under
+            reduced motion each row wraps into its own static grid, so every
+            institution still renders exactly once. */}
         <div className="mt-8 flex flex-col gap-2 md:gap-6">
           {partnerRows.map((row, rowIndex) => (
             <Marquee
               key={rowIndex}
-              label={rowIndex === 0 ? "Partner institutions, first row" : "Partner institutions, second row"}
-              duration={Math.round(55 * (row.length / MARQUEE_REF_ITEMS))}
-              durationMd={Math.round(82 * (row.length / MARQUEE_REF_ITEMS))}
-              direction={rowIndex === 0 ? "normal" : "reverse"}
+              label={`Partner institutions, row ${rowIndex + 1}`}
+              duration={Math.round(MARQUEE_BASE_S * (row.length / MARQUEE_REF_ITEMS))}
+              durationMd={Math.round(MARQUEE_BASE_MD_S * (row.length / MARQUEE_REF_ITEMS))}
+              // Rows 1 and 3 travel together, row 2 against them.
+              direction={rowIndex === 1 ? "reverse" : "normal"}
               gap="gap-16 pr-16 md:gap-24 md:pr-24"
             >
               {({ clone }) =>

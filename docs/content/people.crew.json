@@ -14,13 +14,14 @@
         "role": "Professor, Department of Electrical and Systems Engineering, University of Pennsylvania; faculty lead of RoboRacer",
         "affiliation": "University of Pennsylvania (xLAB / PRECISE / GRASP)",
         "photo": "crew/rahul-mangharam-400.webp",
-        "link": "https://directory.engineering.upenn.edu/rahul-mangharam/",
+        "link": "https://xlab.upenn.edu/team/rahul/",
         "source": "https://directory.engineering.upenn.edu/rahul-mangharam/",
         "status": "sourced",
         "group": "Faculty and advisors",
         "project_role": "Team Principal",
         "project_role_source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
-        "note": "Founded the platform at the University of Pennsylvania in 2016 and leads it as faculty lead."
+        "note": "Founded the platform at the University of Pennsylvania in 2016 and leads it as faculty lead.",
+        "link_source": "Cedric, 2026-08-23"
       },
       {
         "name": "Madhur Behl",
@@ -40,13 +41,14 @@
         "role": "Michelin SmartState Chair Professor of Vehicle Automation, School of Mechanical and Automotive Engineering, Clemson University; director of ARMLab",
         "affiliation": "Clemson University (CU-ICAR, ARMLab)",
         "photo": "crew/venkat-krovi-400.webp",
-        "link": "https://www.clemson.edu/cecas/departments/automotive-engineering/people/venkat-krovi.html",
+        "link": "https://www.clemson.edu/cecas/departments/automotive-engineering/people/Venkat%20Krovi.html",
         "source": "https://www.clemson.edu/cecas/departments/automotive-engineering/people/venkat-krovi.html",
         "status": "sourced",
         "group": "Faculty and advisors",
         "project_role": "Outreach Director",
         "project_role_source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
-        "note": null
+        "note": null,
+        "link_source": "https://iros2026-race.roboracer.ai/"
       },
       {
         "name": "Houssam Abbas",
@@ -169,7 +171,7 @@
       {
         "name": "Yon Vanommeslaeghe",
         "role": "Postdoc, University of Pennsylvania",
-        "affiliation": "University of Pennsylvania (xLab)",
+        "affiliation": "University of Pennsylvania (xLAB)",
         "photo": null,
         "link": "https://xlab.upenn.edu/members/",
         "source": "https://xlab.upenn.edu/members/",
@@ -179,7 +181,7 @@
       {
         "name": "Ahmad Amine",
         "role": "Ph.D. Student, University of Pennsylvania",
-        "affiliation": "University of Pennsylvania (xLab)",
+        "affiliation": "University of Pennsylvania (xLAB)",
         "photo": "crew/ahmad-amine-400.webp",
         "link": "https://ahmadamine998.github.io/",
         "source": "https://xlab.upenn.edu/members/",
@@ -189,7 +191,7 @@
       {
         "name": "Hongrui \"Billy\" Zheng",
         "role": "Ph.D. Student, University of Pennsylvania",
-        "affiliation": "University of Pennsylvania (xLab)",
+        "affiliation": "University of Pennsylvania (xLAB)",
         "photo": "crew/billy-zheng-400.webp",
         "link": "https://xlab.upenn.edu/members/",
         "source": "https://xlab.upenn.edu/members/",
@@ -201,13 +203,13 @@
       {
         "name": "Zirui Zang",
         "role": "Ph.D. Student, University of Pennsylvania",
-        "affiliation": "University of Pennsylvania (xLab)",
+        "affiliation": "University of Pennsylvania (xLAB)",
         "photo": null,
         "link": "https://github.com/zzangupenn",
         "source": "https://xlab.upenn.edu/members/",
         "status": "sourced",
         "group": "Developers",
-        "note": "Full name resolved from the f1tenth org commit history for GitHub user zzangupenn and confirmed against the xLab members list."
+        "note": "Full name resolved from the f1tenth org commit history for GitHub user zzangupenn and confirmed against the xLAB members list."
       },
       {
         "name": "Ayagoz Smagulova",
@@ -244,10 +246,11 @@
         "role": "Systems Scientist, Robotics Institute, Carnegie Mellon University",
         "affiliation": "Carnegie Mellon University",
         "photo": "crew/wenshan-wang-400.webp",
-        "link": null,
+        "link": "https://www.ri.cmu.edu/ri-faculty/wenshan-wang/",
         "source": "https://iros2026-race.roboracer.ai/",
         "status": "sourced",
-        "group": "Developers"
+        "group": "Developers",
+        "link_source": "https://iros2026-race.roboracer.ai/"
       },
       {
         "name": "Tanmay Samak",
@@ -274,10 +277,11 @@
         "role": "Graduate Research Assistant, Lane Department of Computer Science and Electrical Engineering, West Virginia University",
         "affiliation": "West Virginia University",
         "photo": "crew/mohamed-elgouhary-400.webp",
-        "link": null,
+        "link": "https://www.linkedin.com/in/elgouhary-ai",
         "source": "https://iros2026-race.roboracer.ai/",
         "status": "sourced",
-        "group": "Developers"
+        "group": "Developers",
+        "link_source": "https://iros2026-race.roboracer.ai/"
       },
       {
         "name": "Felix Jahncke",
@@ -328,12 +332,13 @@
         "name": "Ahmad Amine",
         "login": "AhmadAmine998",
         "avatar": "https://avatars.githubusercontent.com/u/35192516?v=4",
-        "link": "https://github.com/AhmadAmine998",
+        "link": "https://ahmadamine998.github.io/",
         "source": "https://github.com/f1tenth",
         "status": "sourced",
         "group": "Contributors",
         "active": true,
-        "commits": 62
+        "commits": 62,
+        "link_source": "https://iros2026-race.roboracer.ai/"
       },
       {
         "name": "Shreyas Raorane",
@@ -537,12 +542,13 @@
         "name": "Rahul Mangharam",
         "login": "rahulmangharam",
         "avatar": "https://avatars.githubusercontent.com/u/856857?v=4",
-        "link": "https://github.com/rahulmangharam",
+        "link": "https://xlab.upenn.edu/team/rahul/",
         "source": "https://github.com/f1tenth",
         "status": "sourced",
         "group": "Contributors",
         "active": false,
-        "commits": 2
+        "commits": 2,
+        "link_source": "Cedric, 2026-08-23"
       },
       {
         "name": "Thomas Balch",
@@ -625,12 +631,13 @@
         "name": "Cedric Hollande",
         "login": "cedrichld",
         "avatar": "https://avatars.githubusercontent.com/u/153796333?v=4",
-        "link": "https://github.com/cedrichld",
+        "link": "https://cedrichollande.com/",
         "source": "https://github.com/f1tenth",
         "status": "sourced",
         "group": "Contributors",
         "active": true,
-        "commits": 1
+        "commits": 1,
+        "link_source": "https://iros2026-race.roboracer.ai/"
       },
       {
         "name": "Ganesh Chandan",
