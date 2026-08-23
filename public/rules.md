@@ -1,21 +1,3 @@
-<style>
-.post ol {
-  list-style-type: lower-alpha;
-}
-
-.post ol ol,
-.post ul ol {
-  list-style-type: lower-roman;
-}
-.post ol, .post ul, .post p {
-  margin-bottom: 0rem;
-}
-h2, h3, h4, h5, h6 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-</style>
-
 [comment]: <> (NEW RACE CHANGE HERE)
 These rules are prepared for the _24th International Roboracer Autonomous
 Racing Competition_. Rules are subject to change. The latest version

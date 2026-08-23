@@ -311,7 +311,7 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
   const finalLine = last ? tickerLine(last) : "";
 
   useGSAP(
-    (_context, contextSafe) => {
+    () => {
       const wrap = wrapRef.current;
       if (!wrap || reduced || pins.length === 0) return;
       const mm = gsap.matchMedia();
@@ -335,7 +335,16 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
         // GSAP owns the transform from here: yPercent -50 replaces the
         // markup's translateY(-50%) and y/scale ride on top of it.
         rows.forEach((row) => gsap.set(row, { yPercent: -50, clearProps: "visibility" }));
-        const swap = contextSafe?.((i: number, animate: boolean) => {
+        // Deliberately NOT contextSafe. These two run on every scrub tick,
+        // and a contextSafe call re-enters gsap's Context.add wrapper, which
+        // does `prev.data.push(self)` on every invocation with no dedup. Under
+        // StrictMode's double mount that made two of this chapter's contexts
+        // land in each other's `data`; Context.getTweens then recursed until
+        // the stack blew, and because the throw happened during the landing's
+        // unmount it took the whole React root with it — every client-side
+        // navigation painted a white page until a manual reload. The tweens
+        // these two create are killed in this block's cleanup instead.
+        const swap = ((i: number, animate: boolean) => {
           rows.forEach((row, j) => {
             const t = wheelSlot(j - i);
             row.dataset.d = String(Math.min(2, Math.abs(j - i)));
@@ -351,7 +360,7 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
         });
 
         let lastIndex = -2;
-        const flash = contextSafe?.(() => {
+        const flash = (() => {
           if (flashEl) gsap.fromTo(flashEl, { opacity: 0.25 }, { opacity: 1, duration: 0.35, overwrite: true });
         });
 
@@ -378,9 +387,9 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
             if (flashEl) {
               // Non-breaking space keeps the line's height: no jump.
               flashEl.textContent = e ? tickerLine(e) : " ";
-              if (e && !first) flash?.();
+              if (e && !first) flash();
             }
-            swap?.(i, !first);
+            swap(i, !first);
           }
           // Every counter lands at STATS_END, the frame the last pin finishes.
           statRefs.current.forEach((ref, j) => {
@@ -426,6 +435,13 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
           if (label) tl.fromTo(label, { opacity: 0 }, { opacity: 1, duration: POP / 2, ease: "none" }, t + POP / 2);
         });
         wrap.dataset.mapReady = "1";
+
+        // swap/flash tweens are created outside any context (see above), so
+        // the context revert would not reach them. Kill them here.
+        return () => {
+          gsap.killTweensOf(rows);
+          if (flashEl) gsap.killTweensOf(flashEl);
+        };
       });
       document.fonts?.ready?.then(() => ScrollTrigger.refresh());
     },

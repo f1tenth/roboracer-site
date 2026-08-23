@@ -1,80 +1,88 @@
-    .rules body {
-        line-height: 1.6;
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 20px;
-        color: #333;
-    }
+/* Long-form rulebook typography. Scoped to `.rules` and inside
+   @layer components on purpose:
 
-    .rules h1 {
-        font-family: "Space Grotesk", serif;
-        font-size: 2rem;
-        font-weight: 700;
-        line-height: 110%;
-        padding-top: 20px;
-        padding-bottom: 10px;
-    }
-    
-    .rules h2 {
-        font-family: "Space Grotesk", serif;
-        font-size: 1.75rem;
-        font-weight: 600;
-        line-height: 110%;
-        color: #FC00FF;
-        padding-top: 15px;
-        padding-bottom: 10px;
-    }
-    
-    .rules h3 {
-        font-family: "Space Grotesk", serif;
-        font-size: 1.5rem;
-        font-weight: 500;
-        line-height: 110%;
-    }
-    
-    .rules h4 {
-        font-family: "Manrope", serif;
-        font-size: 1.25rem;
-        font-weight: 500;
-        line-height: 110%;
-    } 
-    
-    .rules h5 {
-        font-family: "Manrope", serif;
-        font-size: 1rem;
-        font-weight: 400;
-    }
-    
-    .rules p {
-        font-family: "Manrope", serif;
-        font-size: 1rem;
-        font-weight: 400;
-        margin-bottom: 10px;
-    }
+   - every selector is scoped, because `.rules ol, ul` used to leak a bare
+     `ul` rule to the whole site. Route chunks are never unloaded in an SPA,
+     so once anyone opened /rules every list on every page picked up its
+     padding until a full reload;
+   - the layer matters as much as the scope: unlayered CSS outranks every
+     Tailwind utility whatever the specificity, so an unlayered page
+     stylesheet quietly defeats `list-none`, `pl-0` and friends. In
+     @layer components the utilities win, base still loses. */
+@layer components {
+  .rules h1 {
+    font-family: "Space Grotesk", serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 110%;
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
 
-    .rules ol, ul {
-        padding-left: 20px;
-        margin-bottom: 10px;
-    }
+  .rules h2 {
+    font-family: "Space Grotesk", serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 110%;
+    color: #fc00ff;
+    padding-top: 15px;
+    padding-bottom: 10px;
+  }
 
-    .rules li {
-        margin-bottom: 5px;
-    }
+  .rules h3 {
+    font-family: "Space Grotesk", serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 110%;
+  }
 
-    /* Custom list styles */
-    .rules ul {
-        color: red;
-    }
+  .rules h4 {
+    font-family: "Manrope", serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 110%;
+  }
 
-    .rules a {
-        color: #0073e6;
-        text-decoration: none;
-    }
+  .rules h5 {
+    font-family: "Manrope", serif;
+    font-size: 1rem;
+    font-weight: 400;
+  }
 
-    .rules a:hover {
-        text-decoration: underline;
-    }
+  .rules p {
+    font-family: "Manrope", serif;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
 
-    .rules p {
-        margin-bottom: 10px;
-    }
+  .rules ol,
+  .rules ul {
+    padding-left: 20px;
+    margin-bottom: 10px;
+  }
+
+  .rules li {
+    margin-bottom: 5px;
+  }
+
+  /* The rulebook's nested lists, previously injected as a raw <style> block
+     through public/rules.md. */
+  .rules ol {
+    list-style-type: lower-alpha;
+  }
+
+  .rules ol ol,
+  .rules ul ol {
+    list-style-type: lower-roman;
+  }
+
+  .rules a {
+    color: #0073e6;
+    text-decoration: none;
+  }
+
+  .rules a:hover {
+    text-decoration: underline;
+  }
+}
