@@ -1,35 +1,48 @@
 [comment]: <> (NEW RACE CHANGE HERE)
-These rules are prepared for the _24th International Roboracer Autonomous
-Racing Competition_. Rules are subject to change. The latest version
-can be found [here](http://icra2025-race.roboracer.ai/rules.html).
+These rules are prepared for the _31st RoboRacer Autonomous Racing
+Competition_, held at the IEEE/RSJ International Conference on Intelligent
+Robots and Systems (IROS 2026) in Pittsburgh, PA, USA. Rules are subject to
+change. The latest version can be found
+[here](https://iros2026-race.roboracer.ai/).
 
-Date: 2026-01-10
+Date: 2026-08-23
+
+**Key dates.** Registration closes **September 5, 2026**. The qualification
+video is due **September 12, 2026**. Check-in and practice take place on
+**September 27, 2026**, and the competition runs **September 28 to 30, 2026**.
+
+**New this year.** IROS 2026 introduces **multi-agent racing with up to four
+vehicles on track at the same time**. The final rules for the multi-agent
+format will be published on this page and announced on Slack before the
+competition; everything below describes the format as it stands today.
 
 
 # 1. General
 
-International Roboracer Autonomous Racing Competition is an autonomuos vehicle racing competition open to teams of all levels. Competing teams may consist of any number of members; however, each participant should be a member of only one team.
+The International RoboRacer Autonomous Racing Competition is an autonomous vehicle racing competition open to teams of all levels. Competing teams may consist of any number of members; however, each participant should be a member of only one team.
 
 The competition is organized as an in-person competition.
 
-Teams can register for the competition using a [registration form](https://forms.gle/FdfY9sKXREdu772u6).
+Teams can register for the competition using the [registration form](https://forms.gle/nhDytwxKEy4EpUHa6). Registration closes on **September 5, 2026**. Details of the competition, including travel and venue information, are on the [IROS 2026 competition site](https://iros2026-race.roboracer.ai/).
 
-The preferred communication method with the organizers is the _#ICRA2025_ channel on [Roboracer-teams Slack](https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g).
+The preferred communication method with the organizers is the _#IROS2026_ channel on the [RoboRacer teams Slack](https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g).
+
+[comment]: <> (TODO&#40;content&#41;: confirm the exact Slack channel name for IROS 2026 with Cedric. The invite link is confirmed valid; the channel name follows the per-competition naming pattern used for every prior race.)
 
 
 # 2. In-person (physical) competition
 
 1. The competition will comprise two main stages – Online Qualification and Vehicle Head-to-Head Knockout Races.
 
-In the online qualification round, teams must submit a 1-minute video showing their car driving autonomously on a track without any human intervention.
+In the online qualification round, teams must submit a 1-minute video showing their car driving autonomously on a track without any human intervention. The video is due on **September 12, 2026**.
 
-Teams that qualify will compete in-person at Techfest, IIT Bombay, where they will first get a 15-minute practice session on the track, followed by an open track trial for all teams.
+Teams that qualify will compete in person at IROS 2026 in Pittsburgh, PA, USA, where they will first get a 15-minute practice session on the track, followed by an open track trial for all teams.
 
 The knockout races will then determine the winners, with the fastest lap deciding each matchup. In case of a tie, the best lap time from the open track trials will be used.
 
-2. Teams registered for the in-person competition need to provide and build a Roboracer car by themselves according to the constraints listed below. In addition, each team must have a unique vehicle (i.e., a research lab may not field six teams with one car).
+2. Teams registered for the in-person competition need to provide and build a RoboRacer car by themselves according to the constraints listed below. In addition, each team must have a unique vehicle (i.e., a research lab may not field six teams with one car).
 
-4. To increase the quality of the future Roboracer competitions, the top 3 teams of each race are encourage to publish the code of their algorithm under an open-source license in the [Roboracer repository](https://github.com/f1tenth) on Github.
+4. To increase the quality of the future RoboRacer competitions, the top 3 teams of each race are encourage to publish the code of their algorithm under an open-source license in the [RoboRacer repository](https://github.com/f1tenth) on Github.
 
 5. In order to better accomodate all participating teams, all teams should have **at most 10 team members** present at the race space (includes sideline and seating area) during the event. There are no restrictions on the number of team members otherwise and all members will receive certificates of participation.
 
@@ -68,7 +81,9 @@ Only cars that meet the following constraints will be allowed to participate:
 
 ## 2.2 Track & racing environment
 
-The competition will take place inside [Georgia World Congress Center](https://www.gwcca.org/georgia-world-congress-center). The characteristics of the environment where the track will be built are:
+The competition takes place at IEEE/RSJ IROS 2026 in Pittsburgh, PA, USA, on the bare floor of the exhibition hall. The characteristics of the environment where the track will be built are:
+
+[comment]: <> (TODO&#40;content&#41;: the exact hall and room inside the Pittsburgh venue are not in the content skill; add them once Cedric confirms.)
 
 1. The surface is flat and reflective. Therefore, LiDAR beams may reflect from the ground and measure the surrounding area rather than the ground. Similarly, depth cameras have problems with proper ground detection.
 2. The track border is constructed from single height air ducts of 33 cm diameter. Keep in mind that **there will be gaps** between the pipes through which the LiDAR beams can pass.
@@ -78,7 +93,7 @@ The competition will take place inside [Georgia World Congress Center](https://w
 6. No humans are allowed on the track at all times, except to repair the track or obstacles, or to remove a stopped car.
 7. Removing the car from or placing the car on the track should always be done at the border of the track from the outside.
 8. If the car is not able to drive anymore, the team has to remove the car from the track as soon as possible.
-9. All days of the competition will be streamed live on twitch on the official Roboracer channel. The stream will be available for the public to watch. 
+9. All days of the competition will be streamed live on twitch on the official RoboRacer channel. The stream will be available for the public to watch. 
 
 ## 2.3 Practice
 

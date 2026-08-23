@@ -464,14 +464,22 @@ body {
     text-decoration-color: var(--color-rr-violet);
   }
 
-  /* Below lg (1024px): the hamburger (lg:hidden) takes over. The seven
-     links plus the CTA need ~1,050 px at the 2rem gap, so between 768 and
+  /* Below lg (1024px): the hamburger (lg:hidden) takes over. The eight
+     links plus the CTA need ~1,110 px at the 2rem gap, so between 768 and
      1048 px the button sat off-screen (landing v5 QA). At lg the gap drops
-     to 1.25rem so 1024 fits; the old max-width: 768px overlapped Tailwind's
-     md breakpoint, so at exactly 768px neither rendered. */
+     so 1024 still fits - 0.875rem since Rules joined the row (pages v1);
+     the old max-width: 768px overlapped Tailwind's md breakpoint, so at
+     exactly 768px neither rendered. */
   @media (min-width: 64rem) and (max-width: 79.98rem) {
     .nav-links {
       gap: 1.25rem;
+    }
+  }
+  /* 1024-1152: the tightest band. Eight links, Simulator and the CTA only
+     clear the wordmark at this gap; below 1024 the hamburger takes over. */
+  @media (min-width: 64rem) and (max-width: 71.98rem) {
+    .nav-links {
+      gap: 0.6875rem;
     }
   }
   @media (max-width: 1023.98px) {

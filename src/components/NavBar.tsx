@@ -7,6 +7,9 @@ const links = [
   { href: "/build", text: "Build" },
   { href: "/learn", text: "Learn" },
   { href: "/race", text: "Race" },
+  // The rulebook used to be reachable only from a button part-way down the
+  // About page; a competitor looking for it would never have found it.
+  { href: "/rules", text: "Rules" },
   { href: "/course", text: "Course" },
   { href: "/research", text: "Research" },
   { href: "/news", text: "News" },
