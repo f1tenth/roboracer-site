@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import {
   loadHighlights,
   loadPartners,
@@ -94,9 +94,8 @@ const CAR_PHOTOS: readonly CarPhoto[] = [
 ];
 
 /**
- * Landing v3 composition (docs/plans/landing-v3.md): hero chapter, highlights,
- * next race, the car, platform panel, community map, data line + partner
- * ribbon, teams, research, join.
+ * Landing composition: hero chapter, highlights, the car, platform panel,
+ * community map, partner ribbons, next race, teams, research, join.
  */
 export default function Landing() {
   useLenis();
@@ -115,6 +114,14 @@ export default function Landing() {
     loadHighlights().then(setHighlights).catch(() => setHighlights([]));
     loadPlatform().then(setPlatform).catch(() => setPlatform([]));
   }, []);
+
+  // Even indices to the top ribbon, odd to the bottom. Alternating rather than
+  // splitting the sorted list in half, so each row gets a mix of wide and
+  // narrow logos and no institution is ever in both rows at once.
+  const partnerRows = useMemo(
+    () => [partners.filter((_, i) => i % 2 === 0), partners.filter((_, i) => i % 2 === 1)],
+    [partners],
+  );
 
   // Data-driven sections mount after their fetches resolve and shift
   // everything below them; recompute the cached ScrollTrigger starts.
@@ -186,77 +193,91 @@ export default function Landing() {
           header, the four counters (progress-bound) and its data. */}
       <WorldMapChapter />
 
-      {/* 7 · Data line + partner ribbon (paper) - sponsor, faculty. No title:
-          the numbers above are the voice; the line ties them to the logos.
-          No top padding and the map's own 1,800 px bleed, so the line sits
-          right under the chapter's counters (Cedric, 2026-08-22: the ribbon
-          read as detached from the geography). */}
+      {/* 6 · 05 Our Partners (paper) - sponsor, faculty. Keeps the map's own
+          1,800 px bleed and pt-0, so the ribbon still sits right under the
+          chapter's counters (Cedric, 2026-08-22: it read as detached from the
+          geography). The header goes inside that tight rhythm, not in a fresh
+          block of whitespace above it. */}
       <Section tight width="bleed" aria-labelledby="partners" className="pt-0! pb-10">
-        <div className="mx-auto max-w-page px-6">
-          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-ink-950/10 pb-4">
-            <h2 id="partners" className="font-mono text-small font-normal tracking-normal text-text-muted">
-              across the partner institutions below
-            </h2>
-            <p className="font-mono text-eyebrow tracking-normal text-text-muted">{partners.length} institutions · alphabetical</p>
-          </div>
-        </div>
-        <div className="mt-8">
-          {/* 1.5x from md (Cedric, landing v5 section 6.5): 120 px logos, wider
-              gaps, 82 s loop (same px/s as 55 s at 1x). Each link stacks the
-              tinted rest file (scripts/partner-tint.py, section 7) and the
-              colour file, crossfaded on hover and focus; `image` is the
-              fallback where the tint script has not run. Under md: as v4. */}
-          <Marquee label="Partner institutions" duration={55} durationMd={82} gap="gap-16 pr-16 md:gap-24 md:pr-24">
-            {({ clone }) =>
-              partners.map((p) => (
-              <a
-                key={p.name}
-                href={p.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                tabIndex={clone ? -1 : undefined}
-                className="group flex h-[84px] w-auto shrink-0 flex-col items-center justify-start md:h-[168px]"
-              >
-                <span className="relative flex h-14 items-center md:h-[120px]">
-                  <img
-                    src={p.image_rest ?? p.image}
-                    alt={p.name}
-                    height={80}
-                    width="auto"
-                    /* Marquee children are never lazy (CommunityJoin note). */
-                    loading="eager"
-                    fetchPriority="low"
-                    decoding="async"
-                    className="max-h-14 w-auto max-w-44 object-contain md:max-h-[120px] md:max-w-[336px]"
-                  />
-                  {p.image_hover && (
-                    <img
-                      src={p.image_hover}
-                      alt=""
-                      aria-hidden="true"
-                      height={80}
-                      width="auto"
-                      loading="eager"
-                      fetchPriority="low"
-                      decoding="async"
-                      className="absolute inset-0 m-auto max-h-14 w-auto max-w-44 object-contain opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100 md:max-h-[120px] md:max-w-[336px]"
-                    />
-                  )}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="mt-2 whitespace-nowrap border border-ink-950/15 bg-paper-50 px-2 py-0.5 font-mono text-eyebrow tracking-normal text-text-strong opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100"
-                >
-                  {p.name} ↗
-                </span>
-              </a>
-              ))
+        <div className="mx-auto max-w-page border-b border-ink-950/10 px-6 pb-6">
+          <SectionHeader
+            index="05"
+            id="partners"
+            title="Our Partners"
+            className="mb-0"
+            action={
+              <p className="font-mono text-eyebrow tracking-normal text-text-muted">
+                {partners.length} institutions · alphabetical
+              </p>
             }
-          </Marquee>
+          />
+        </div>
+        {/* Two ribbons travelling opposite ways. Even indices go up top, odd
+            below, rather than first-half/second-half: alternating keeps a mix
+            of wide and narrow logos in each row, and no institution appears in
+            both at once. Under reduced motion each row wraps into its own
+            static grid, so all 20 still render exactly once. */}
+        <div className="mt-8 flex flex-col gap-2 md:gap-6">
+          {partnerRows.map((row, rowIndex) => (
+            <Marquee
+              key={rowIndex}
+              label={rowIndex === 0 ? "Partner institutions, first row" : "Partner institutions, second row"}
+              duration={55}
+              durationMd={82}
+              direction={rowIndex === 0 ? "normal" : "reverse"}
+              gap="gap-16 pr-16 md:gap-24 md:pr-24"
+            >
+              {({ clone }) =>
+                row.map((p) => (
+                  <a
+                    key={p.name}
+                    href={p.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    tabIndex={clone ? -1 : undefined}
+                    className="group flex h-[84px] w-auto shrink-0 flex-col items-center justify-start md:h-[168px]"
+                  >
+                    <span className="relative flex h-14 items-center md:h-[120px]">
+                      <img
+                        src={p.image_rest ?? p.image}
+                        alt={p.name}
+                        height={80}
+                        width="auto"
+                        /* Marquee children are never lazy (CommunityJoin note). */
+                        loading="eager"
+                        fetchPriority="low"
+                        decoding="async"
+                        className="max-h-14 w-auto max-w-44 object-contain md:max-h-[120px] md:max-w-[336px]"
+                      />
+                      {p.image_hover && (
+                        <img
+                          src={p.image_hover}
+                          alt=""
+                          aria-hidden="true"
+                          height={80}
+                          width="auto"
+                          loading="eager"
+                          fetchPriority="low"
+                          decoding="async"
+                          className="absolute inset-0 m-auto max-h-14 w-auto max-w-44 object-contain opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100 md:max-h-[120px] md:max-w-[336px]"
+                        />
+                      )}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="mt-2 whitespace-nowrap border border-ink-950/15 bg-paper-50 px-2 py-0.5 font-mono text-eyebrow tracking-normal text-text-strong opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100"
+                    >
+                      {p.name} ↗
+                    </span>
+                  </a>
+                ))
+              }
+            </Marquee>
+          ))}
         </div>
       </Section>
 
-      {/* 6 · 05 Next race (paper, 1800 wide) - competitor. After the map
+      {/* 7 · 06 Next race (paper, 1800 wide) - competitor. After the map
           (Cedric, landing v5 round two: "say when the next race is once we've
           described it"): the section title, then Ezio's race-day video on
           the left and the registration panel on the right (headline "IROS
@@ -264,7 +285,7 @@ export default function Landing() {
       {race && (
         <Section width="bleed" aria-labelledby="next-race">
           <div className="mx-auto max-w-page px-6">
-            <SectionHeader index="05" id="next-race" title="Next race" subtitle="Come to our next race" />
+            <SectionHeader index="06" id="next-race" title="Next race" subtitle="Come to our next race" />
             <div className="grid gap-8 md:grid-cols-12 md:items-stretch md:gap-10">
               <figure className="md:col-span-7">
                 <div
@@ -312,10 +333,10 @@ export default function Landing() {
 
       {/* SponsorCTA removed from landing 2026-08-21 (Cedric): zero-sponsor state lives on /about and /race for now */}
 
-      {/* 8 · 06 Teams (paper) - competitor */}
+      {/* 8 · 07 Teams (paper) - competitor */}
       <Section edge rule width="page" aria-labelledby="teams">
         <SectionHeader
-          index="06"
+          index="07"
           id="teams"
           title="Teams"
           subtitle="Who competes"
@@ -324,14 +345,14 @@ export default function Landing() {
         <TeamGrid teams={teams} />
       </Section>
 
-      {/* 9 · 07 Research (paper): eight featured papers in a rotating
+      {/* 9 · 08 Research (paper): eight featured papers in a rotating
           carousel, one figure and its abstract at a time (landing v5 section
           5; ui/ResearchCarousel) - learner, faculty. Never hidden: with no
           featured_order items it renders the header and an empty stage. */}
       <Section rule width="bleed" aria-labelledby="research">
         <div className="mx-auto max-w-page px-6">
           <SectionHeader
-            index="07"
+            index="08"
             id="research"
             title="Research"
             subtitle="1,000+ publications build on this platform"
@@ -353,7 +374,7 @@ export default function Landing() {
         <ResearchCarousel items={featured} tagLabels={pubs ? tagLabelMap(pubs.tags) : {}} />
       </Section>
 
-      {/* 10 · 08 Join (paper) - everyone: live Slack numbers, the Korea photo,
+      {/* 10 · 09 Join (paper) - everyone: live Slack numbers, the Korea photo,
           four channels, two community cards (landing v4 section 8). */}
       <CommunityJoin />
     </div>

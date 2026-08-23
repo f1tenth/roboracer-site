@@ -1,4 +1,6 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
+import { isChunkLoadError } from "../lib/lazyWithRetry";
+import Button from "./ui/Button";
 
 type RouteBoundaryProps = {
   /** Changing this remounts the boundary, so a new route always gets a clean slate. */
@@ -32,14 +34,31 @@ export default class RouteBoundary extends Component<RouteBoundaryProps, RouteBo
   render() {
     const { error } = this.state;
     if (!error) return this.props.children;
+
+    // A missing chunk is not a broken page, it is an out-of-date one: the site
+    // was redeployed while this document was open. lazyWithRetry already tried
+    // a retry and one reload, so by the time we are here the reader has to be
+    // told what to do rather than shown a stack trace.
+    const stale = isChunkLoadError(error);
+
     return (
       <div className="mx-auto flex max-w-content flex-col items-start gap-4 px-6 py-32">
-        <p className="font-mono text-small text-text-muted">Something went wrong on this page</p>
-        <h1 className="text-display-m text-text-strong">This page did not load</h1>
-        <p className="max-w-prose text-body text-text-body">
-          The rest of the site still works — use the navigation above, or reload to try this page
-          again.
+        <p className="font-mono text-small text-text-muted">
+          {stale ? "This page was updated" : "Something went wrong on this page"}
         </p>
+        <h1 className="text-display-m text-text-strong">
+          {stale ? "Reload to get the new version" : "This page did not load"}
+        </h1>
+        <p className="max-w-prose text-body text-text-body">
+          {stale
+            ? "The site was updated while this tab was open, so part of this page is no longer available. Reloading fetches the current version."
+            : "The rest of the site still works — use the navigation above, or reload to try this page again."}
+        </p>
+        {stale && (
+          <Button variant="primary" size="md" onClick={() => window.location.reload()}>
+            Reload
+          </Button>
+        )}
         <p className="font-mono text-small text-text-muted">{error.message}</p>
       </div>
     );

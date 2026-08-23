@@ -29,6 +29,9 @@ const CARD =
 
 type CommunityJoinProps = {
   className?: string;
+  /** Section number, because the same Join block closes more than one page and
+   * each page counts its own sections. */
+  index?: string;
 };
 
 /**
@@ -40,7 +43,7 @@ type CommunityJoinProps = {
  * ICRA 2025 reel behind a click-to-load YouTube facade. All media paths come
  * from community.json (written by the media curator, landing v4 section 9).
  */
-export default function CommunityJoin({ className = "" }: CommunityJoinProps) {
+export default function CommunityJoin({ className = "", index = "09" }: CommunityJoinProps) {
   const [community, setCommunity] = useState<Community | null>(null);
 
   useEffect(() => {
@@ -67,7 +70,7 @@ export default function CommunityJoin({ className = "" }: CommunityJoinProps) {
 
   return (
     <Section edge rule width="page" id="join" aria-labelledby="join-title" className={className}>
-      <SectionHeader index="08" id="join-title" title="Join" subtitle={title} />
+      <SectionHeader index={index} id="join-title" title="Join" subtitle={title} />
       <div className="grid gap-10 md:grid-cols-12 md:gap-x-6">
         <div className="md:col-span-5">
           {community && (

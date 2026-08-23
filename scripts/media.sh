@@ -4,12 +4,16 @@
 #       hero ladder: 1920+960 mp4, webm, poster (crf flags set the sweep start)
 #   media.sh poster <video> <out.webp> [--at S]           poster frame, WebP, <150 KB budget
 #   media.sh report <dir>                                 sizes; flags files over the 1.5 MB git rule
-# Budgets (hard): hero encode <= 3 MB each, poster <= 150 KB. The committed
+#   media.sh photo <in|dir>... [-o out] [--width 1200] [--budget 220k] [--suffix -800]
+#       stills -> WebP, EXIF orientation applied first; --report <dir> for sizes; --help for the rest
+# Budgets (hard): hero encode <= 3 MB each, poster <= 150 KB, photo <= 220 KB
+# (150 KB for timeline tiles). The committed
 # hero loop in public/media/hero/ is the one approved exception to the git
 # rule (CLAUDE.md rule 3, Cedric 2026-08-20).
 set -euo pipefail
 
 MB3=3145728; KB150=153600; MB15=1572864
+PHOTO_PY=${PHOTO_PY:-/home/cedric/.venvs/ml/bin/python3}   # the venv that has Pillow
 
 size() { stat -c%s "$1"; }
 
@@ -62,6 +66,9 @@ cmd_poster() {
   [ "$s" -le $KB150 ] && echo "  $out: $s bytes OK" || echo "  WARN: $out $s bytes over the 150 KB poster budget"
 }
 
+# Stills are Pillow's job: cwebp is not installed and ffmpeg ignores EXIF orientation.
+cmd_photo() { "$PHOTO_PY" "$(dirname "$0")/photo.py" "$@"; }
+
 cmd_report() {
   local dir=$1 total=0 over=0
   while IFS= read -r f; do
@@ -83,5 +90,6 @@ case "${1:-}" in
   video) shift; cmd_video "$@";;
   poster) shift; cmd_poster "$@";;
   report) shift; cmd_report "$@";;
+  photo) shift; cmd_photo "$@";;
   *) sed -n '2,8p' "$0"; exit 1;;
 esac

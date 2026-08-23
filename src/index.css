@@ -172,6 +172,10 @@ body {
   flex-shrink: 0;
   min-width: 100%;
   animation: rr-marquee var(--rr-marquee-duration, 50s) linear infinite;
+  /* One ribbon left, one right, off the same keyframe. Set by Marquee's
+     `direction` prop; must live here with the shorthand above, which resets
+     animation-direction and would beat a layered utility. */
+  animation-direction: var(--rr-marquee-direction, normal);
 }
 @media (min-width: 48rem) {
   .rr-marquee-track {
