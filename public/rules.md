@@ -81,9 +81,7 @@ Only cars that meet the following constraints will be allowed to participate:
 
 ## 2.2 Track & racing environment
 
-The competition takes place at IEEE/RSJ IROS 2026 in Pittsburgh, PA, USA, on the bare floor of the exhibition hall. The characteristics of the environment where the track will be built are:
-
-[comment]: <> (TODO&#40;content&#41;: the exact hall and room inside the Pittsburgh venue are not in the content skill; add them once Cedric confirms.)
+The competition takes place at IEEE/RSJ IROS 2026, in the David L. Lawrence Convention Center, Pittsburgh, PA, USA, on the bare floor of the exhibition hall. The characteristics of the environment where the track will be built are:
 
 1. The surface is flat and reflective. Therefore, LiDAR beams may reflect from the ground and measure the surrounding area rather than the ground. Similarly, depth cameras have problems with proper ground detection.
 2. The track border is constructed from single height air ducts of 33 cm diameter. Keep in mind that **there will be gaps** between the pipes through which the LiDAR beams can pass.
