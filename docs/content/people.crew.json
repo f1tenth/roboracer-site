@@ -41,14 +41,14 @@
         "role": "Michelin SmartState Chair Professor of Vehicle Automation, School of Mechanical and Automotive Engineering, Clemson University; director of ARMLab",
         "affiliation": "Clemson University (CU-ICAR, ARMLab)",
         "photo": "crew/venkat-krovi-400.webp",
-        "link": "https://www.clemson.edu/cecas/departments/automotive-engineering/people/Venkat%20Krovi.html",
+        "link": "https://www.clemson.edu/cecas/departments/automotive-engineering/people/Venkat-Krovi.html",
         "source": "https://www.clemson.edu/cecas/departments/automotive-engineering/people/venkat-krovi.html",
         "status": "sourced",
         "group": "Faculty and advisors",
         "project_role": "Outreach Director",
         "project_role_source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
         "note": null,
-        "link_source": "https://iros2026-race.roboracer.ai/"
+        "link_source": "clemson.edu directory (the IROS 2026 site's own link 404s: it uses a space, the live page a hyphen)"
       },
       {
         "name": "Houssam Abbas",
