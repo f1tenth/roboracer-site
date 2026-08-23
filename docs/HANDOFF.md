@@ -59,9 +59,11 @@ The landing is a **v1.0 draft**, not finished. In priority order:
 | `/styleguide` | `Styleguide.tsx` | live | Every primitive; check changes here first |
 | `/about` | `About.tsx` | **old design** | React page, not yet revamped |
 | `/news` | `News.tsx` | **old design** | React page, reads `news.json` |
-| `/research` | `Research.tsx` | **old design** | React page, reads `publications.json`; `/add-paper` and `/discover-papers` feed it |
+| `/research` | `Research.tsx` | **revamped** | Rebuilt in `6d566b0`; reads `publications.json`; `/add-paper` and `/discover-papers` feed it. Fix list in `docs/NON_LANDING_AUDIT.md` |
 | `/rules` | `Rules.tsx` | **old design** | React page, long-form |
-| `/build` `/learn` `/course` `/race` `/chat` | iframes | **iframe of the old site** | `CLAUDE.md` rule 9: these stay iframes in v1 unless Cedric says otherwise |
+| `/race` | `Race.tsx` | **old design** | React page, not an iframe; reads `upcoming_events.json` and `past_races.json` |
+| `/build` `/learn` `/course` | iframes | **iframe of the old site** | `CLAUDE.md` rule 9: these stay iframes in v1 unless Cedric says otherwise |
+| `/chat` | `Chat.tsx` | old | Unchanged this revamp |
 
 When you build a page: one page per branch (`revamp/<page>`), `/build-page
 <page>`, then `/qa-page <page>`, then Cedric reviews on localhost, then `/ship
