@@ -32,23 +32,17 @@ const SCHOLAR_URL =
   "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=";
 const BEHL_SOURCE = "https://engineering.virginia.edu/faculty/madhur-behl";
 
-// Photos from public/about/ (docs/ASSET_MANIFEST.md L-13 and the two beside
-// it: site-owner media, permission granted). The originals were 1.5-1.7 MB
-// camera JPEGs drawn at thumbnail size; these are the 1200-wide WebP encodes.
-const PENN_PHOTO = {
-  src: "/about/about-penn-lab-1200.webp",
-  width: 1200,
-  height: 582,
-  alt: "About thirty people at the University of Pennsylvania standing and kneeling behind a row of RoboRacer cars",
-  caption: "the group at Penn",
+// One wide group shot rather than two stacked portraits: the pair sat in a
+// narrow column beside a short text column and left the section mostly white
+// (Cedric, 2026-08-23). Source in docs/ASSET_MANIFEST.md; site-owner media.
+const ICRA_GROUP_PHOTO = {
+  src: "/about/about-icra-group-1600.webp",
+  width: 1600,
+  height: 900,
+  alt: "The whole ICRA 2026 field in a group photo inside the orange-barrier track, arms raised",
+  caption: "the field at ICRA 2026",
 };
-const PITS_PHOTO = {
-  src: "/about/about-teams-pits-1200.webp",
-  width: 1200,
-  height: 800,
-  alt: "Six students in a competition hall holding their RoboRacer cars up for the camera after racing",
-  caption: "after the race",
-};
+
 const LINK_ON_PAPER =
   "text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
 const LINK_ON_INK =
@@ -56,12 +50,13 @@ const LINK_ON_INK =
 
 /** The hero ledger. Every number is from the roboracer-content skill; the
  * publications line links to the Scholar query it comes from. */
-const LEDGER: { term: string; value: string; href?: string }[] = [
-  { term: "founded", value: "2016, University of Pennsylvania" },
-  { term: "universities", value: "90+" },
-  { term: "countries", value: "20+" },
-  { term: "competitions held", value: "30" },
-  { term: "publications", value: "1,000+", href: SCHOLAR_URL },
+/** The counted rows run as big ticking numbers; "founded" is a sentence, so it
+ * stays a plain row underneath rather than pretending to be a metric. */
+const LEDGER_STATS: { label: string; value: number; suffix?: string; href?: string }[] = [
+  { label: "universities", value: 90, suffix: "+" },
+  { label: "countries", value: 20, suffix: "+" },
+  { label: "competitions held", value: 30 },
+  { label: "publications", value: 1000, suffix: "+", href: SCHOLAR_URL },
 ];
 
 function Figure({
@@ -153,28 +148,31 @@ export default function About() {
                 major robotics conferences.
               </p>
             </div>
-            <div className="md:col-span-5 md:col-start-9">
-              <dl className="flex flex-col gap-3 border-t border-text-on-ink/15 pt-6 font-mono text-small">
-                {LEDGER.map((row) => (
-                  <div key={row.term} className="flex flex-wrap justify-between gap-x-6 gap-y-1">
-                    <dt className="text-text-on-ink-muted">{row.term}</dt>
-                    <dd className="tabular-nums text-text-on-ink">
-                      {row.href ? (
-                        <a
-                          href={row.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={LINK_ON_INK}
-                        >
-                          {row.value} &#8599;
-                        </a>
-                      ) : (
-                        row.value
-                      )}
-                    </dd>
-                  </div>
+            <div className="md:col-span-5 md:col-start-8">
+              {/* Cedric, 2026-08-23: these were a small mono list and read as
+                  fine print. They are the scale of the project, so they run as
+                  big ticking numbers like the research masthead. */}
+              <dl className="grid grid-cols-2 gap-x-8 gap-y-8 border-t border-text-on-ink/15 pt-8">
+                {LEDGER_STATS.map((row, i) => (
+                  <StatCounter
+                    key={row.label}
+                    as="dl"
+                    on="ink"
+                    size="l"
+                    duration={2.5}
+                    delay={i * 0.12}
+                    value={row.value}
+                    suffix={row.suffix}
+                    label={row.label}
+                  />
                 ))}
               </dl>
+              <p className="mt-8 border-t border-text-on-ink/15 pt-6 font-mono text-small text-text-on-ink-muted">
+                founded 2016, University of Pennsylvania ·{" "}
+                <a href={SCHOLAR_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_INK}>
+                  the Scholar query &#8599;
+                </a>
+              </p>
             </div>
           </div>
         </div>
@@ -199,7 +197,7 @@ export default function About() {
           subtitle="One open car design, used for teaching, research and racing"
         />
         <div className="grid gap-10 md:grid-cols-12 md:gap-x-10">
-          <Reveal className="flex flex-col gap-5 md:col-span-7">
+          <Reveal className="flex flex-col gap-5 md:col-span-6">
             <p className="max-w-[62ch] text-lead text-text-body">
               RoboRacer started at the University of Pennsylvania in 2016 under the name F1TENTH.
               Rahul Mangharam leads it from Penn&apos;s xLAB. Madhur Behl, now at the University of
@@ -224,9 +222,8 @@ export default function About() {
               next one is at IROS 2026 in Pittsburgh, September 28 to 30.
             </p>
           </Reveal>
-          <div className="flex flex-col gap-8 md:col-span-5">
-            <Figure photo={PENN_PHOTO} />
-            <Figure photo={PITS_PHOTO} />
+          <div className="md:col-span-6">
+            <Figure photo={ICRA_GROUP_PHOTO} />
           </div>
         </div>
       </Section>

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
+import StatCounter from "../components/ui/StatCounter";
 import Reveal from "../components/ui/Reveal";
 import TagFilter from "../components/ui/TagFilter";
 import NewsCard from "../components/news/NewsCard";
@@ -43,7 +44,11 @@ export default function News() {
   }, []);
 
   const items = useMemo(() => feed?.items ?? [], [feed]);
-  const lead = items.find((i) => i.featured) ?? items[0];
+  // Prefer a featured item that actually carries a picture: `find` took file
+  // order and landed on the picture-less registration notice, so the page led
+  // with 1,600px of type before its first photograph.
+  const lead =
+    items.find((i) => i.featured && i.image) ?? items.find((i) => i.featured) ?? items[0];
   const rest = useMemo(() => items.filter((i) => i !== lead), [items, lead]);
 
   const events = useMemo(() => {
@@ -86,23 +91,33 @@ export default function News() {
             >
               What the teams have been racing
             </h1>
+            <p className="mt-6 max-w-[60ch] text-lead text-text-body">
+              Race reports, results and posts from the teams who build and run the cars.
+            </p>
           </div>
           {/* The ledger counts what is on the page; with no feed there is
               nothing to count and it stays out of the way. */}
           {items.length > 0 && (
-            <dl className="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-ink-950/10 pt-6 font-mono text-small text-text-muted md:col-span-4">
-              <div>
-                <dt>Items</dt>
-                <dd className="mt-1 font-display text-display-m font-semibold text-text-strong">
-                  {items.length}
-                </dd>
-              </div>
-              <div>
-                <dt>Competitions</dt>
-                <dd className="mt-1 font-display text-display-m font-semibold text-text-strong">
-                  {events.length}
-                </dd>
-              </div>
+            <dl className="grid grid-cols-2 gap-x-6 gap-y-7 border-t border-ink-950/10 pt-6 font-mono text-small text-text-muted md:col-span-4">
+              <StatCounter
+                key={`items-${items.length}`}
+                as="dl"
+                size="l"
+                tone="accent"
+                duration={2.5}
+                value={items.length}
+                label="Items"
+              />
+              <StatCounter
+                key={`events-${events.length}`}
+                as="dl"
+                size="l"
+                tone="accent"
+                duration={2.5}
+                delay={0.12}
+                value={events.length}
+                label="Competitions"
+              />
               <div>
                 <dt>Latest</dt>
                 <dd className="mt-1 text-text-strong">{newest ? formatIsoDate(newest) : ""}</dd>
@@ -141,6 +156,7 @@ export default function News() {
             eyebrow="Archive"
             id="all-news"
             title="Every year so far"
+            lead="Every item we have, newest first."
           />
           {events.length > 1 && (
             <TagFilter
@@ -160,22 +176,21 @@ export default function News() {
             </p>
           ) : (
             <div className="mt-6 divide-y divide-ink-950/10 border-t border-ink-950/10">
+              {/* The year was a sticky two-column rail; it cost every card a
+                  sixth of the page and the pictures were the part that paid
+                  (Cedric, 2026-08-23). Heading now, cards full width. */}
               {byYear.map(([year, group]) => (
-                <section
-                  key={year}
-                  aria-labelledby={`news-year-${year}`}
-                  className="grid gap-6 py-10 md:grid-cols-12"
-                >
+                <section key={year} aria-labelledby={`news-year-${year}`} className="py-10">
                   <h3
                     id={`news-year-${year}`}
-                    className="font-mono text-small text-text-muted md:sticky md:top-28 md:col-span-2 md:self-start"
+                    className="mb-6 font-display text-display-m font-semibold tabular-nums text-text-strong md:sticky md:top-24 md:z-10 md:bg-paper-100/95 md:py-2 md:backdrop-blur-sm"
                   >
                     {year}
                   </h3>
                   <Reveal
                     key={`${year}-${tag ?? "all"}`}
                     stagger
-                    className="grid gap-6 md:col-span-10 md:grid-cols-2"
+                    className="grid gap-6 md:grid-cols-2"
                   >
                     {group.map((item) => (
                       <NewsCard key={item.id} item={item} titleAs="h4" />

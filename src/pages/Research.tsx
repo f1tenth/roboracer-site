@@ -87,7 +87,8 @@ export default function Research() {
             </div>
           </div>
           {/* The counts are the argument this page makes, so they run big and
-              in violet and tick up over five seconds (Cedric, 2026-08-23).
+              in violet and tick up over two and a half seconds (Cedric,
+              2026-08-23: five felt slow).
               Violet, not the logo gradient: gradient text is ink-only, its
               cyan stop being 1.9:1 on paper. Keyed on the fetch so the tween
               starts from the real number rather than from the "…" placeholder. */}
@@ -99,7 +100,7 @@ export default function Research() {
                   as="dl"
                   size="l"
                   tone="accent"
-                  duration={5}
+                  duration={2.5}
                   value={published.length}
                   label="Curated papers"
                 />
@@ -108,7 +109,7 @@ export default function Research() {
                   as="dl"
                   size="l"
                   tone="accent"
-                  duration={5}
+                  duration={2.5}
                   value={featuredAll.length}
                   label="Featured"
                 />
@@ -117,7 +118,7 @@ export default function Research() {
                   as="dl"
                   size="l"
                   tone="accent"
-                  duration={5}
+                  duration={2.5}
                   delay={0.15}
                   value={pubs.tags.length}
                   label="Topics"
@@ -240,19 +241,19 @@ export default function Research() {
               </p>
             ) : (
               <div className="divide-y divide-ink-950/10 border-t border-ink-950/10">
+                {/* The year was a sticky two-column rail, which pushed every
+                    figure a sixth of the page in from the left and kept the
+                    pictures small (Cedric, 2026-08-23). It is a heading now,
+                    and the rows run the full width. */}
                 {byYear.map(([year, items]) => (
-                  <section
-                    key={year}
-                    aria-labelledby={`year-${year}`}
-                    className="grid gap-2 py-8 md:grid-cols-12 md:gap-6"
-                  >
+                  <section key={year} aria-labelledby={`year-${year}`} className="py-8">
                     <h3
                       id={`year-${year}`}
-                      className="font-mono text-small text-text-muted md:sticky md:top-28 md:col-span-2 md:self-start"
+                      className="mb-4 font-display text-display-m font-semibold tabular-nums text-text-strong"
                     >
                       {year}
                     </h3>
-                    <ul className="divide-y divide-ink-950/10 md:col-span-10">
+                    <ul className="divide-y divide-ink-950/10 border-t border-ink-950/10">
                       {items.map((p) => (
                         <PaperRow key={p.id} publication={p} tagLabels={labels} />
                       ))}
