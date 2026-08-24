@@ -13,10 +13,12 @@ type PeopleGroupProps = {
   compact?: boolean;
 };
 
-/** Cards per row at base / sm / lg, matching the grid classes below. */
+/** Cards per row at base / sm / lg, matching the grid classes below.
+ * Past crew doubles up at lg (Cedric, 2026-08-23: half the tile, so a reader
+ * reaches the partners without scrolling through fifty portraits). */
 const COLUMNS = {
   wide: [2, 3, 4],
-  compact: [3, 4, 6],
+  compact: [4, 7, 12],
 } as const;
 
 /** How many empty cells complete the last row at a given column count. */
@@ -32,7 +34,7 @@ const fillCount = (n: number, perRow: number) => (perRow - (n % perRow)) % perRo
 export default function PeopleGroup({ id, title, lead, people, compact = false }: PeopleGroupProps) {
   if (people.length === 0) return null;
   const cols = compact
-    ? "grid-cols-3 sm:grid-cols-4 lg:grid-cols-6"
+    ? "grid-cols-4 sm:grid-cols-7 lg:grid-cols-12"
     : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4";
   const [base, sm, lg] = compact ? COLUMNS.compact : COLUMNS.wide;
   const fillers: { key: string; visibility: string }[] = [

@@ -56,6 +56,193 @@
   ],
   "items": [
     {
+      "id": "wang-2026-ai",
+      "title": "AI Coaching for Accelerating Human Skill Development with Reinforcement Learning",
+      "authors": [
+        "Wei Wang",
+        "Enlin Gu",
+        "Antonio Loquercio",
+        "Haimin Hu",
+        "Rahul Mangharam"
+      ],
+      "year": 2026,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "reinforcement-learning",
+        "multi-agent",
+        "sim-to-real"
+      ],
+      "featured": true,
+      "status": "published",
+      "added": "2026-08-23",
+      "source": "arxiv",
+      "arxiv": "2606.25337",
+      "url": "https://arxiv.org/abs/2606.25337",
+      "pdf": "https://arxiv.org/pdf/2606.25337",
+      "abstract": "AI copilots can substantially boost human performance through shared control, but excessive assistance can induce over-reliance and skill atrophy. This paper studies how an embodied AI agent can act as a coach that accelerates human motor-skill development. We argue that effective coaching requires strategic scaffolding and stepping back that are aligned with the learner's capability, allowing productive failures that drive learning. We formalize the interactive AI coaching process as a non-cooperative dynamic game in which the learner optimizes task performance while the coach targets the learner's independent competence. Building on this formalism, we develop a reinforcement learning framework combining adaptive shared control with probabilistic models of the coach's causal influence on skill evolution, enabling tractable training of coaching policies. A comprehensive user study with 33 participants in a high-fidelity FPV drone racing simulator shows that learners coached by our method reduce lap time by 27.9% and per-lap failures by 3.52 on average, outperforming two shared-autonomy baselines on both objective performance and subjective ratings of safety, performance, agency and satisfaction.",
+      "institutions": [
+        "University of Pennsylvania"
+      ],
+      "notes": "added 2026-08-23 from the xLAB (Penn, Rahul Mangharam) project page https://xlab.upenn.edu/AI-Coaching/ at Cedric's request; xLAB is the lab RoboRacer/F1TENTH came out of, so its recent racing work leads the featured set. the project page carries no paper link; matched to arXiv 2606.25337 on identical abstract, title and author list (Wang, Gu, Loquercio, Hu, Mangharam). Metadata and abstract verbatim from the arXiv abstract page, 2026-08-23. Cedric named this one directly.",
+      "featured_order": 1,
+      "thumbnail": "/media/research/research-wang-2026-ai-1200.webp",
+      "figure": "/media/research/research-wang-2026-ai-fig-1600.webp",
+      "row_thumbnail": "/media/research/research-wang-2026-ai-row-320.webp"
+    },
+    {
+      "id": "amine-2026-nonplanar",
+      "title": "Nonplanar Model Predictive Control for Autonomous Vehicles with Recursive Sparse Gaussian Process Dynamics",
+      "authors": [
+        "Ahmad Amine",
+        "Kabir Puri",
+        "Viet-Anh Le",
+        "Rahul Mangharam"
+      ],
+      "year": 2026,
+      "venue": "2026 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "sim-to-real"
+      ],
+      "featured": true,
+      "status": "published",
+      "added": "2026-08-23",
+      "source": "arxiv",
+      "doi": "10.1109/iv66570.2026.11623981",
+      "arxiv": "2602.16206",
+      "url": "https://doi.org/10.1109/iv66570.2026.11623981",
+      "pdf": "https://arxiv.org/pdf/2602.16206",
+      "abstract": "This paper proposes a nonplanar model predictive control (MPC) framework for autonomous vehicles operating on nonplanar terrain. To approximate complex vehicle dynamics in such environments, we develop a geometry-aware modeling approach that learns a residual Gaussian Process (GP). By utilizing a recursive sparse GP, the framework enables real-time adaptation to varying terrain geometry. The effectiveness of the learned model is demonstrated in a reference-tracking task using a Model Predictive Path Integral (MPPI) controller. Validation within a custom Isaac Sim environment confirms the framework's capability to maintain high tracking accuracy on challenging 3D surfaces.",
+      "institutions": [
+        "University of Pennsylvania"
+      ],
+      "notes": "added 2026-08-23 from the xLAB (Penn, Rahul Mangharam) project page https://xlab.upenn.edu/nonplanar-racing/ at Cedric's request; xLAB is the lab RoboRacer/F1TENTH came out of, so its recent racing work leads the featured set. the page gives the BibTeX (IEEE IV 2026) but no link; DOI 10.1109/iv66570.2026.11623981 from OpenAlex, arXiv 2602.16206 (\"Accepted to IEEE Intelligent Vehicles Symposium (IV), 2026\"). Abstract verbatim from the arXiv abstract page, 2026-08-23.",
+      "featured_order": 2,
+      "thumbnail": "/media/research/research-amine-2026-nonplanar-1200.webp",
+      "figure": "/media/research/research-amine-2026-nonplanar-fig-1600.webp",
+      "row_thumbnail": "/media/research/research-amine-2026-nonplanar-row-320.webp"
+    },
+    {
+      "id": "zang-2026-sit",
+      "title": "SIT-LMPC: Safe Information-Theoretic Learning Model Predictive Control for Iterative Tasks",
+      "authors": [
+        "Zirui Zang",
+        "Ahmad Amine",
+        "Nick-Marios T. Kokolakis",
+        "Truong X. Nghiem",
+        "Ugo Rosolia",
+        "Rahul Mangharam"
+      ],
+      "year": 2026,
+      "venue": "IEEE Robotics and Automation Letters",
+      "venue_short": "RA-L",
+      "type": "journal",
+      "tags": [
+        "control-mpc",
+        "safety",
+        "planning"
+      ],
+      "featured": true,
+      "status": "published",
+      "added": "2026-08-23",
+      "source": "crossref",
+      "doi": "10.1109/lra.2025.3634881",
+      "arxiv": "2602.16187",
+      "url": "https://doi.org/10.1109/lra.2025.3634881",
+      "pdf": "https://arxiv.org/pdf/2602.16187",
+      "abstract": "Robots executing iterative tasks in complex, uncertain environments require control strategies that balance robustness, safety, and high performance. This paper introduces a safe information-theoretic learning model predictive control (SIT-LMPC) algorithm for iterative tasks. Specifically, we design an iterative control framework based on an information-theoretic model predictive control algorithm to address a constrained infinite-horizon optimal control problem for discrete-time nonlinear stochastic systems. An adaptive penalty method is developed to ensure safety while balancing optimality. Trajectories from previous iterations are utilized to learn a value function using normalizing flows, which enables richer uncertainty modeling compared to Gaussian priors. SIT-LMPC is designed for highly parallel execution on graphics processing units, allowing efficient real-time optimization. Benchmark simulations and hardware experiments demonstrate that SIT-LMPC iteratively improves system performance while robustly satisfying system constraints.",
+      "institutions": [
+        "University of Pennsylvania"
+      ],
+      "notes": "added 2026-08-23 from the xLAB (Penn, Rahul Mangharam) project page https://xlab.upenn.edu/SIT-LMPC/ at Cedric's request; xLAB is the lab RoboRacer/F1TENTH came out of, so its recent racing work leads the featured set. RA-L vol. 11 no. 1 (Jan 2026) pp. 986-993, presented at ICRA 2026; resolved through scripts/resolve_paper.py on DOI 10.1109/LRA.2025.3634881. Real-world experiment runs on the RoboRacer car. Cedric named this one directly.",
+      "featured_order": 3,
+      "thumbnail": "/media/research/research-zang-2026-sit-1200.webp",
+      "figure": "/media/research/research-zang-2026-sit-fig-1600.webp",
+      "row_thumbnail": "/media/research/research-zang-2026-sit-row-320.webp"
+    },
+    {
+      "id": "le-2025-hybrid",
+      "title": "A Hybrid Learning-to-Optimize Framework for Mixed-Integer Quadratic Programming",
+      "authors": [
+        "Viet-Anh Le",
+        "Mu Xie",
+        "Rahul Mangharam"
+      ],
+      "year": 2025,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "control-mpc",
+        "planning"
+      ],
+      "featured": true,
+      "status": "published",
+      "added": "2026-08-23",
+      "source": "arxiv",
+      "arxiv": "2511.19383",
+      "url": "https://arxiv.org/abs/2511.19383",
+      "pdf": "https://arxiv.org/pdf/2511.19383",
+      "abstract": "In this paper, we propose a learning-to-optimize (L2O) framework to accelerate solving parametric mixed-integer quadratic programming (MIQP) problems, with a particular focus on mixed-integer model predictive control (MI-MPC) applications. The framework learns to predict integer solutions with enhanced optimality and feasibility by integrating supervised learning (for optimality), self-supervised learning (for feasibility), and a differentiable quadratic programming (QP) layer, resulting in a hybrid L2O framework. Specifically, a neural network (NN) is used to learn the mapping from problem parameters to optimal integer solutions, while a differentiable QP layer is integrated to compute the corresponding continuous variables given the predicted integers and problem parameters. Moreover, a hybrid loss function is proposed, which combines a supervised loss with respect to the global optimal solution, and a self-supervised loss derived from the problem's objective and constraints. The effectiveness of the proposed framework is demonstrated on two benchmark MI-MPC problems, with comparative results against purely supervised and self-supervised learning models.",
+      "institutions": [
+        "University of Pennsylvania"
+      ],
+      "notes": "added 2026-08-23 from the xLAB (Penn, Rahul Mangharam) project page https://xlab.upenn.edu/L2OCA/ at Cedric's request; xLAB is the lab RoboRacer/F1TENTH came out of, so its recent racing work leads the featured set. the L2OCA project page (Learning to Optimize, Control and Adapt) links arXiv 2511.19383 as its mixed-integer MPC result; the same paper has its own /L4DC/ page. Metadata and abstract verbatim from the arXiv abstract page, 2026-08-23.",
+      "featured_order": 4,
+      "thumbnail": "/media/research/research-le-2025-hybrid-1200.webp",
+      "figure": "/media/research/research-le-2025-hybrid-fig-1600.webp",
+      "row_thumbnail": "/media/research/research-le-2025-hybrid-row-320.webp"
+    },
+    {
+      "id": "qiao-2024-av4ev",
+      "title": "AV4EV: Open-Source Modular Autonomous Electric Vehicle Platform for Making Mobility Research Accessible",
+      "authors": [
+        "Zhijie Qiao",
+        "Mingyan Zhou",
+        "Zhijun Zhuang",
+        "Tejas Agarwal",
+        "Felix Jahncke",
+        "Po-Jen Wang",
+        "Jason Friedman",
+        "Hongyi Lai",
+        "Divyanshu Sahu",
+        "Tomáš Nagy",
+        "Martin Endler",
+        "Jason Schlessman",
+        "Rahul Mangharam"
+      ],
+      "year": 2024,
+      "venue": "2024 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "systems-platform",
+        "perception-estimation"
+      ],
+      "featured": true,
+      "status": "published",
+      "added": "2026-08-23",
+      "source": "crossref",
+      "doi": "10.1109/iv55156.2024.10588611",
+      "arxiv": "2312.00951",
+      "url": "https://doi.org/10.1109/iv55156.2024.10588611",
+      "pdf": "https://arxiv.org/pdf/2312.00951",
+      "abstract": "When academic researchers develop and validate autonomous driving algorithms, there is a challenge in balancing high-performance capabilities with the cost and complexity of the vehicle platform. Much of today's research on autonomous vehicles (AV) is limited to experimentation on expensive commercial vehicles that require large skilled teams to retrofit the vehicles and test them in dedicated facilities. On the other hand, 1/10th-1/16th scaled-down vehicle platforms are more affordable but have limited similitude in performance and drivability. To address this issue, we present the design of a one-third-scale autonomous electric go-kart platform with open-source mechatronics design along with fully functional autonomous driving software. The platform's multi-modal driving system is capable of manual, autonomous, and teleoperation driving modes. It also features a flexible sensing suite for the algorithm deployment across perception, localization, planning, and control. This development serves as a bridge between full-scale vehicles and reduced-scale cars while accelerating cost-effective algorithmic advancements. Our experimental results demonstrate the AV4EV platform's capabilities and ease of use for developing new AV algorithms. All materials are available at AV4EV.org to stimulate collaborative efforts within the AV and electric vehicle (EV) communities.",
+      "citations": 5,
+      "institutions": [
+        "University of Pennsylvania"
+      ],
+      "notes": "added 2026-08-23 from the xLAB (Penn, Rahul Mangharam) project page https://xlab.upenn.edu/av4ev/ at Cedric's request; xLAB is the lab RoboRacer/F1TENTH came out of, so its recent racing work leads the featured set. one-third-scale autonomous go-kart, the step up from the 1:10 RoboRacer car; resolved through scripts/resolve_paper.py on DOI 10.1109/IV55156.2024.10588611, arXiv 2312.00951 found by arXiv title search. Project site https://www.av4ev.org.",
+      "featured_order": 5,
+      "thumbnail": "/media/research/research-qiao-2024-av4ev-1200.webp",
+      "figure": "/media/research/research-qiao-2024-av4ev-fig-1600.webp",
+      "row_thumbnail": "/media/research/research-qiao-2024-av4ev-row-320.webp"
+    },
+    {
       "id": "elgouhary-2026-learning",
       "title": "Learning to Tune Pure Pursuit in Autonomous Racing: Joint Lookahead and Steering-Gain Control With PPO",
       "authors": [
@@ -82,10 +269,10 @@
         "West Virginia University"
       ],
       "arxiv": "2602.18386",
-      "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; featured 2026-08-21: 2025-2026 pool ranked by citations, recency first; 2 citations on Semantic Scholar 2026-08-21; abstract verbatim from the arXiv API (2602.18386v1), 2026-08-22; landing v5 featured_order 5, 2026-08-22",
+      "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; featured 2026-08-21: 2025-2026 pool ranked by citations, recency first; 2 citations on Semantic Scholar 2026-08-21; abstract verbatim from the arXiv API (2602.18386v1), 2026-08-22; landing v5 featured_order 5, 2026-08-22; featured_order shifted +5 on 2026-08-23 so the xLAB papers lead",
       "thumbnail": "/media/research/research-elgouhary-2026-learning-1200.webp",
       "figure": "/media/research/research-elgouhary-2026-learning-fig-1600.webp",
-      "featured_order": 5,
+      "featured_order": 10,
       "row_thumbnail": "/media/research/research-elgouhary-2026-learning-row-320.webp"
     },
     {
@@ -672,11 +859,11 @@
       "url": "https://arxiv.org/abs/2605.19881",
       "pdf": "https://arxiv.org/pdf/2605.19881",
       "abstract": "We present a modular framework to benchmark new and existing methods for trajectory planning and control in high-acceleration maneuvers that push autonomous driving to the limits. Our framework includes time-optimal raceline generation, online time-optimal velocity replanning, geometric path tracking controllers, and a new model-structured neural network (MS-NN) to learn the inverse dynamics for steering control. We deploy our framework on a 1:10-scale RoboRacer platform, using two circuits. Through several ablations with cautious and aggressive racelines, we study the performance of single modules and their combinations. We show that our MS-NN significantly improves tracking accuracy, decreases steering oscillations, and is physically interpretable. Moreover, online velocity replanning improves lap times by compensating for execution errors, and enables the vehicle to safely reach higher speeds and accelerations. To support future research, our code, datasets, videos and results are publicly available at https://roboracer-benchmark.github.io/planning_control_benchmark/.",
-      "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; featured 2026-08-21: newest paper whose title names the RoboRacer platform, open hardware benchmark with public code and data (tie at 0 citations with mao-2026-overtaking); abstract verbatim from the arXiv API (2605.19881v1), 2026-08-22; landing v5 featured_order 3, 2026-08-22",
+      "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; featured 2026-08-21: newest paper whose title names the RoboRacer platform, open hardware benchmark with public code and data (tie at 0 citations with mao-2026-overtaking); abstract verbatim from the arXiv API (2605.19881v1), 2026-08-22; landing v5 featured_order 3, 2026-08-22; featured_order shifted +5 on 2026-08-23 so the xLAB papers lead",
       "citations": 0,
       "thumbnail": "/media/research/research-piccinini-2026-trajectory-1200.webp",
       "figure": "/media/research/research-piccinini-2026-trajectory-fig-1600.webp",
-      "featured_order": 3,
+      "featured_order": 8,
       "row_thumbnail": "/media/research/research-piccinini-2026-trajectory-row-320.webp"
     },
     {
@@ -776,10 +963,10 @@
         "Zhejiang University"
       ],
       "arxiv": "2410.11570",
-      "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; featured 2026-08-21: 2025-2026 pool ranked by citations (6 on Semantic Scholar), recency first; abstract verbatim from the arXiv API (2410.11570v3), 2026-08-22; landing v5 featured_order 4, 2026-08-22",
+      "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; featured 2026-08-21: 2025-2026 pool ranked by citations (6 on Semantic Scholar), recency first; abstract verbatim from the arXiv API (2410.11570v3), 2026-08-22; landing v5 featured_order 4, 2026-08-22; featured_order shifted +5 on 2026-08-23 so the xLAB papers lead",
       "thumbnail": "/media/research/research-li-2025-data-1200.webp",
       "figure": "/media/research/research-li-2025-data-fig-1600.webp",
-      "featured_order": 4,
+      "featured_order": 9,
       "row_thumbnail": "/media/research/research-li-2025-data-row-320.webp"
     },
     {
@@ -847,10 +1034,10 @@
         "Zhejiang University"
       ],
       "arxiv": "2501.17311",
-      "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; featured 2026-08-21: 2025-2026 pool ranked by citations, recency first; abstract verbatim from the arXiv API (2501.17311v2), 2026-08-22; landing v5 featured_order 6, 2026-08-22",
+      "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; featured 2026-08-21: 2025-2026 pool ranked by citations, recency first; abstract verbatim from the arXiv API (2501.17311v2), 2026-08-22; landing v5 featured_order 6, 2026-08-22; featured_order shifted +5 on 2026-08-23 so the xLAB papers lead",
       "thumbnail": "/media/research/research-ghignone-2025-rlpp-1200.webp",
       "figure": "/media/research/research-ghignone-2025-rlpp-fig-1600.webp",
-      "featured_order": 6,
+      "featured_order": 11,
       "row_thumbnail": "/media/research/research-ghignone-2025-rlpp-row-320.webp"
     },
     {
@@ -1010,10 +1197,10 @@
       "pdf": "https://doi.org/10.15607/rss.2025.xxi.114",
       "abstract": "Hamilton-Jacobi (HJ) reachability analysis is a widely used method for ensuring the safety of robotic systems. Traditional approaches compute reachable sets by numerically solving an HJ Partial Differential Equation (PDE) over a grid, which is computationally prohibitive due to the curse of dimensionality. Recent learning-based methods have sought to address this challenge by approximating reachability solutions using neural networks trained with PDE residual error. However, these approaches often suffer from unstable training dynamics and suboptimal solutions due to the weak learning signal provided by the residual loss. In this work, we propose a novel approach that leverages model predictive control (MPC) techniques to guide and accelerate the reachability learning process. Observing that HJ reachability is inherently rooted in optimal control, we utilize MPC to generate approximate reachability solutions at key collocation points, which are then used to tactically guide the neural network training by ensuring compliance with these approximations. Moreover, we iteratively refine the MPC generated solutions using the learned reachability solution, mitigating convergence to local optima. Case studies on a 2D vertical drone, a 13D quadrotor, a 7D F1Tenth car, and a 40D publisher-subscriber system demonstrate that bridging MPC with deep learning yields significant improvements in the robustness and accuracy of reachable sets, as well as corresponding safety assurances, compared to existing methods.",
       "citations": 2,
-      "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; arXiv id found by title on the arXiv API, 2026-08-22; abstract verbatim from the arXiv API (2505.03830v1), 2026-08-22; landing v5 featured_order 8, 2026-08-22",
+      "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; arXiv id found by title on the arXiv API, 2026-08-22; abstract verbatim from the arXiv API (2505.03830v1), 2026-08-22; landing v5 featured_order 8, 2026-08-22; featured_order shifted +5 on 2026-08-23 so the xLAB papers lead",
       "arxiv": "2505.03830",
       "figure": "/media/research/research-feng-2025-bridging-fig-1600.webp",
-      "featured_order": 8,
+      "featured_order": 13,
       "thumbnail": "/media/research/research-feng-2025-bridging-1200.webp",
       "row_thumbnail": "/media/research/research-feng-2025-bridging-row-320.webp"
     },
@@ -2137,12 +2324,12 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key trumpp2024racemop; abstract verbatim from the arXiv API (2403.07129v2), 2026-08-22; landing v5 featured_order 7, 2026-08-22; venue and doi from OpenAlex (IROS 2024), arXiv id from the old venue string, 2026-08-22",
+      "notes": "bibtex key trumpp2024racemop; abstract verbatim from the arXiv API (2403.07129v2), 2026-08-22; landing v5 featured_order 7, 2026-08-22; venue and doi from OpenAlex (IROS 2024), arXiv id from the old venue string, 2026-08-22; featured_order shifted +5 on 2026-08-23 so the xLAB papers lead",
       "citations": 5,
       "arxiv": "2403.07129",
       "url": "https://doi.org/10.1109/iros58592.2024.10801657",
       "figure": "/media/research/research-trumpp-2024-racemop-fig-1200.webp",
-      "featured_order": 7,
+      "featured_order": 12,
       "abstract": "The interactive decision-making in multi-agent autonomous racing offers insights valuable beyond the domain of self-driving cars. Mapless online path planning is particularly of practical appeal but poses a challenge for safely overtaking opponents due to the limited planning horizon. To address this, we introduce RaceMOP, a novel method for mapless online path planning designed for multi-agent racing of F1TENTH cars. Unlike classical planners that rely on predefined racing lines, RaceMOP operates without a map, utilizing only local observations to execute high-speed overtaking maneuvers. Our approach combines an artificial potential field method as a base policy with residual policy learning to enable long-horizon planning. We advance the field by introducing a novel approach for policy fusion with the residual policy directly in probability space. Extensive experiments on twelve simulated racetracks validate that RaceMOP is capable of long-horizon decision-making with robust collision avoidance during overtaking maneuvers. RaceMOP demonstrates superior handling over existing mapless planners and generalizes to unknown racetracks, affirming its potential for broader applications in robotics. Our code is available at http://github.com/raphajaner/racemop.",
       "doi": "10.1109/iros58592.2024.10801657",
       "pdf": "https://arxiv.org/pdf/2403.07129",
@@ -2564,11 +2751,11 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key baumann2024forzaeth; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six); abstract verbatim from the arXiv API (2403.11784v2), 2026-08-22; landing v5 featured_order 2, 2026-08-22; venue and doi from the arXiv journal_ref (Journal of Field Robotics (Early View, 2024)) and OpenAlex, 2026-08-22",
+      "notes": "bibtex key baumann2024forzaeth; auto-featured: recent + cited; un-featured 2026-08-21 (featured set cut to six); abstract verbatim from the arXiv API (2403.11784v2), 2026-08-22; landing v5 featured_order 2, 2026-08-22; venue and doi from the arXiv journal_ref (Journal of Field Robotics (Early View, 2024)) and OpenAlex, 2026-08-22; featured_order shifted +5 on 2026-08-23 so the xLAB papers lead",
       "arxiv": "2403.11784",
       "url": "https://doi.org/10.1002/rob.22429",
       "figure": "/media/research/research-baumann-2024-forzaeth-fig-1600.webp",
-      "featured_order": 2,
+      "featured_order": 7,
       "abstract": "Autonomous racing in robotics combines high-speed dynamics with the necessity for reliability and real-time decision-making. While such racing pushes software and hardware to their limits, many existing full-system solutions necessitate complex, custom hardware and software, and usually focus on Time-Trials rather than full unrestricted Head-to-Head racing, due to financial and safety constraints. This limits their reproducibility, making advancements and replication feasible mostly for well-resourced laboratories with comprehensive expertise in mechanical, electrical, and robotics fields. Researchers interested in the autonomy domain but with only partial experience in one of these fields, need to spend significant time with familiarization and integration. The ForzaETH Race Stack addresses this gap by providing an autonomous racing software platform designed for F1TENTH, a 1:10 scaled Head-to-Head autonomous racing competition, which simplifies replication by using commercial off-the-shelf hardware. This approach enhances the competitive aspect of autonomous racing and provides an accessible platform for research and development in the field. The ForzaETH Race Stack is designed with modularity and operational ease of use in mind, allowing customization and adaptability to various environmental conditions, such as track friction and layout. Capable of handling both Time-Trials and Head-to-Head racing, the stack has demonstrated its effectiveness, robustness, and adaptability in the field by winning the official F1TENTH international competition multiple times.",
       "doi": "10.1002/rob.22429",
       "pdf": "https://arxiv.org/pdf/2403.11784",
@@ -3527,13 +3714,13 @@
       "status": "published",
       "added": "2026-08-20",
       "source": "bibtex-migration",
-      "notes": "bibtex key o2020f1tenth; featured: the original paper; PMLR v123 (NeurIPS 2019 Competition and Demonstration Track); citations from Semantic Scholar 2026-08-21; abstract verbatim from the PMLR page https://proceedings.mlr.press/v123/o-kelly20a.html (OpenAlex carries the same text with one hyphenation artifact), 2026-08-22; landing v5 featured_order 1, 2026-08-22",
+      "notes": "bibtex key o2020f1tenth; featured: the original paper; PMLR v123 (NeurIPS 2019 Competition and Demonstration Track); citations from Semantic Scholar 2026-08-21; abstract verbatim from the PMLR page https://proceedings.mlr.press/v123/o-kelly20a.html (OpenAlex carries the same text with one hyphenation artifact), 2026-08-22; landing v5 featured_order 1, 2026-08-22; featured_order shifted +5 on 2026-08-23 so the xLAB papers lead",
       "citations": 242,
       "url": "https://proceedings.mlr.press/v123/o-kelly20a.html",
       "pdf": "https://proceedings.mlr.press/v123/o-kelly20a/o-kelly20a.pdf",
       "thumbnail": "/media/research/research-okelly-2020-f1tenth-1200.webp",
       "figure": "/media/research/research-okelly-2020-f1tenth-fig-1600.webp",
-      "featured_order": 1,
+      "featured_order": 6,
       "abstract": "The deployment and evaluation of learning algorithms on autonomous vehicles (AV) is expensive, slow, and potentially unsafe. This paper details the F1TENTH autonomous racing platform, an open-source evaluation framework for training, testing, and evaluating autonomous systems. With 1/10th-scale low-cost hardware and multiple virtual environments, F1TENTH enables safe and rapid experimentation of AV algorithms even in laboratory research settings. We present three benchmark tasks and baselines in the setting of autonomous racing, demonstrating the flexibility and features of our evaluation environment.",
       "row_thumbnail": "/media/research/research-okelly-2020-f1tenth-row-320.webp"
     },

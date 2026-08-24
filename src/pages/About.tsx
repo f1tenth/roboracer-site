@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { loadPartners, loadPlatform, type Partner, type PlatformRow } from "../lib/data";
+import {
+  loadCommunity,
+  loadPartners,
+  loadPlatform,
+  type JoinYouTube,
+  type Partner,
+  type PlatformRow,
+} from "../lib/data";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Reveal from "../components/ui/Reveal";
@@ -9,6 +16,7 @@ import PlatformList from "../components/about/PlatformList";
 import PeopleGroup from "../components/about/PeopleGroup";
 import ContributorStrip from "../components/about/ContributorStrip";
 import PartnerWall from "../components/about/PartnerWall";
+import YouTubeFacade from "../components/ui/YouTubeFacade";
 import NearViewport from "../components/about/NearViewport";
 import {
   DEVELOPERS,
@@ -32,23 +40,15 @@ const PENN_PHOTO = {
   width: 1200,
   height: 582,
   alt: "About thirty people at the University of Pennsylvania standing and kneeling behind a row of RoboRacer cars",
-  caption: "the group at Penn, with the cars",
+  caption: "the group at Penn",
 };
 const PITS_PHOTO = {
   src: "/about/about-teams-pits-1200.webp",
   width: 1200,
   height: 800,
-  alt: "Six students in a competition hall holding their RoboRacer cars up for the camera",
-  caption: "teams in the pits, between runs",
+  alt: "Six students in a competition hall holding their RoboRacer cars up for the camera after racing",
+  caption: "after the race",
 };
-const FIELD_PHOTO = {
-  src: "/about/about-competition-field-1200.webp",
-  width: 1200,
-  height: 800,
-  alt: "About fifty competitors gathered behind the barriers of a RoboRacer track, with eight cars lined up in front",
-  caption: "the field at a competition, behind the barriers",
-};
-
 const LINK_ON_PAPER =
   "text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
 const LINK_ON_INK =
@@ -96,6 +96,7 @@ function Figure({
 export default function About() {
   const [platform, setPlatform] = useState<PlatformRow[]>([]);
   const [partners, setPartners] = useState<Partner[]>([]);
+  const [youtube, setYoutube] = useState<JoinYouTube | null>(null);
   const [contributors, setContributors] = useState<ContributorsFile | null>(null);
 
   useEffect(() => {
@@ -103,6 +104,9 @@ export default function About() {
     loadPlatform()
       .then((d) => live && setPlatform(d))
       .catch(() => undefined);
+    loadCommunity()
+      .then((c) => live && setYoutube(c?.join?.youtube ?? null))
+      .catch(() => {});
     loadPartners()
       .then((d) => live && setPartners(d))
       .catch(() => undefined);
@@ -174,6 +178,16 @@ export default function About() {
             </div>
           </div>
         </div>
+        {/* The race reel used to sit at the very bottom of the page, under
+            everything. It belongs here: the fastest way to answer "what is a
+            RoboRacer competition" is to show one, and the hero had a column of
+            dead space under the text (Cedric, 2026-08-23). CommunityJoin's own
+            copy is switched off below so the page never plays it twice. */}
+        {youtube && (
+          <div className="mx-auto mt-12 max-w-page px-6">
+            <YouTubeFacade yt={youtube} />
+          </div>
+        )}
       </Section>
 
       {/* 01 What RoboRacer is */}
@@ -238,7 +252,6 @@ export default function About() {
           subtitle="Who runs RoboRacer"
           lead="Titles quote each person's own institutional page, or the organizing committee of the race they run. A name links to that page. Where no public page confirms a role, the card carries a verify tag instead of a guess."
         />
-        <Figure photo={FIELD_PHOTO} className="mb-16" />
         <div className="flex flex-col gap-16">
           <PeopleGroup
             id="about-faculty"
@@ -320,7 +333,7 @@ export default function About() {
           autoplaying 1.05 MB clip, which is 4.1 MB at first paint otherwise
           (see NearViewport). */}
       <NearViewport>
-        <CommunityJoin index="05" />
+        <CommunityJoin index="05" showYouTube={false} />
       </NearViewport>
     </>
   );

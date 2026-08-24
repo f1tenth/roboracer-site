@@ -62,7 +62,7 @@ export default function Research() {
   return (
     <div className="pt-[68px] md:pt-[85px]">
       {/* Header: the Scholar message, one secondary CTA, a mono data ledger */}
-      <Section aria-labelledby="research-title">
+      <Section width="page" aria-labelledby="research-title">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
             <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-muted">
@@ -148,7 +148,7 @@ export default function Research() {
       </Section>
 
       {/* Featured grid with the topic filter */}
-      <Section rule aria-labelledby="featured">
+      <Section width="page" rule aria-labelledby="featured">
         <SectionHeader
           eyebrow="Featured"
           id="featured"
@@ -195,7 +195,7 @@ export default function Research() {
       </Section>
 
       {/* Every curated paper, grouped by year, with search */}
-      <Section edge rule aria-labelledby="all-curated">
+      <Section width="page" edge rule aria-labelledby="all-curated">
         <SectionHeader
           eyebrow="All curated"
           id="all-curated"
@@ -266,7 +266,7 @@ export default function Research() {
       </Section>
 
       {/* Submit: the one solid CTA on the page */}
-      <Section rule aria-labelledby="submit">
+      <Section width="page" rule aria-labelledby="submit">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
           <div className="md:col-span-7">
             <SectionHeader

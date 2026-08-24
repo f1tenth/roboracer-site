@@ -12,16 +12,23 @@ survives re-runs). Credit line on the site: "Figure: <first author> et al."
   papers without arXiv HTML), the `figure` field (the landing research carousel).
   Letterboxed on paper-50 unless the source says cover. Never a page-1 crop.
 
-- `research-<id>-row-320.webp`: 320x200 WebP under 32 KB, one per curated paper, the
-  `row_thumbnail` field (the small picture beside every row of the all-papers list,
-  Cedric 2026-08-23). Cover-cropped when the figure is already near 16:10, otherwise
-  letterboxed on paper-50. Papers whose figure could not be pulled carry no field and
-  render the RoboRacer mark instead. Note: `scripts/paper_thumbs.py` rewrites this
-  header from its own LOG_HEADER, so this bullet is lost on its next run (the table
-  rows survive); fold it into the script when scripts/ is next touched.
-
 | id | file | source | license | bytes | review |
 |---|---|---|---|---|---|
+| wang-2026-ai | research-wang-2026-ai-1200.webp | arXiv HTML figure 1: https://arxiv.org/html/2606.25337v1/figures/traj.png | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 84306 |  |
+| wang-2026-ai | research-wang-2026-ai-fig-1600.webp | arXiv HTML figure 5: https://arxiv.org/html/2606.25337v1/figures/plots/simulation-overview.png | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 26050 |  |
+| amine-2026-nonplanar | research-amine-2026-nonplanar-1200.webp | xLAB project-page hero (the authors' own choice), figure 2 of the paper: https://xlab.upenn.edu/img/posts/nonplanar_racing/IsaacSim_resize.png | http://creativecommons.org/licenses/by/4.0/ (arXiv 2602.16206) | 118198 | checked 2026-08-23: Isaac Sim nonplanar track with the car; replaced the script's PDF page-1 crop and the 390 px trajectory plot, both too weak. Letterboxed on paper-50. |
+| amine-2026-nonplanar | research-amine-2026-nonplanar-fig-1600.webp | xLAB project-page hero (the authors' own choice), figure 2 of the paper: https://xlab.upenn.edu/img/posts/nonplanar_racing/IsaacSim_resize.png | http://creativecommons.org/licenses/by/4.0/ (arXiv 2602.16206) | 197776 | checked 2026-08-23: same hero at 1600x1000. |
+| zang-2026-sit | research-zang-2026-sit-1200.webp | arXiv HTML figure 1: https://arxiv.org/html/2602.16187v1/imgs/title/flow_diagram2.png | http://creativecommons.org/licenses/by/4.0/ | 36026 |  |
+| zang-2026-sit | research-zang-2026-sit-fig-1600.webp | arXiv HTML figure 5: https://arxiv.org/html/2602.16187v1/imgs/off-road-robot.jpg | http://creativecommons.org/licenses/by/4.0/ | 191264 |  |
+| le-2025-hybrid | research-le-2025-hybrid-1200.webp | arXiv HTML figure 1: https://arxiv.org/html/2511.19383v2/model.png | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 39648 |  |
+| le-2025-hybrid | research-le-2025-hybrid-fig-1600.webp | arXiv HTML figure 1: https://arxiv.org/html/2511.19383v2/model.png | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 51140 |  |
+| qiao-2024-av4ev | research-qiao-2024-av4ev-1200.webp | arXiv HTML figure 4: https://arxiv.org/html/2312.00951v2/media/optimal_raceline.jpg | http://creativecommons.org/licenses/by-nc-sa/4.0/ | 96554 | checked 2026-08-23: the raceline optimisation at the Purdue Grand Prix track reads better at card size than the figure-1 mechatronics diagram; re-encoded from the 1600 figure to stay under 120 KB. |
+| qiao-2024-av4ev | research-qiao-2024-av4ev-fig-1600.webp | arXiv HTML figure 4: https://arxiv.org/html/2312.00951v2/media/optimal_raceline.jpg | http://creativecommons.org/licenses/by-nc-sa/4.0/ | 181654 |  |
+| wang-2026-ai | research-wang-2026-ai-row-320.webp | downscaled from research-wang-2026-ai-fig-1600.webp | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 4032 |  |
+| amine-2026-nonplanar | research-amine-2026-nonplanar-row-320.webp | downscaled from research-amine-2026-nonplanar-fig-1600.webp | http://creativecommons.org/licenses/by/4.0/ (arXiv 2602.16206) | 6596 |  |
+| zang-2026-sit | research-zang-2026-sit-row-320.webp | downscaled from research-zang-2026-sit-fig-1600.webp | http://creativecommons.org/licenses/by/4.0/ | 23202 |  |
+| le-2025-hybrid | research-le-2025-hybrid-row-320.webp | downscaled from research-le-2025-hybrid-fig-1600.webp | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 7234 |  |
+| qiao-2024-av4ev | research-qiao-2024-av4ev-row-320.webp | downscaled from research-qiao-2024-av4ev-fig-1600.webp | http://creativecommons.org/licenses/by-nc-sa/4.0/ | 16464 |  |
 | elgouhary-2026-learning | research-elgouhary-2026-learning-1200.webp | arXiv HTML figure 1: https://arxiv.org/html/2602.18386v1/x1.png | http://creativecommons.org/licenses/by/4.0/ | 38266 | checked 2026-08-21: figure 1 is the method block diagram (data, PPO, deployment), legible at card size; kept |
 | elgouhary-2026-learning | research-elgouhary-2026-learning-row-320.webp | downscaled from research-elgouhary-2026-learning-fig-1600.webp - arXiv HTML figure 7: https://arxiv.org/html/2602.18386v1/Real_Experiment2.png | http://creativecommons.org/licenses/by/4.0/ | 6322 |  |
 | elgouhary-2026-learning | research-elgouhary-2026-learning-fig-1600.webp | arXiv HTML figure 7: https://arxiv.org/html/2602.18386v1/Real_Experiment2.png | http://creativecommons.org/licenses/by/4.0/ | 50318 | checked 2026-08-22: figure 7, the real-car tracking comparison on the mapped track (six controllers, legend top left); figure 1 (the thumbnail) is a text-heavy pipeline; kept |
@@ -119,5 +126,3 @@ survives re-runs). Credit line on the site: "Figure: <first author> et al."
 | jain-2020-bayesrace | research-jain-2020-bayesrace-row-320.webp | arXiv HTML figure 11: https://arxiv.org/html/2005.04755v2/plots/track_mpc_lap1.png | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 8084 |  |
 | ivanov-2020-case | research-ivanov-2020-case-row-320.webp | arXiv HTML figure 2: https://arxiv.org/html/1910.11309v1/fig/problem.png | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 9756 |  |
 | sinha-2020-formulazero | research-sinha-2020-formulazero-row-320.webp | arXiv HTML figure 8: https://arxiv.org/html/2003.03900v2/figs/system.png | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 9754 |  |
-
-| shihata-2026-arola | AROLA: A Modular Layered Architecture for Scaled Autonomous Racing | research-shihata-2026-arola-row-320.webp | https://arxiv.org/html/2602.02730v1/Figures/Full_example.png | arXiv HTML, author figure. Cedric asked for a picture on this paper by name. |

@@ -73,7 +73,7 @@ export default function News() {
   return (
     <div className="pt-[68px] md:pt-[85px]">
       {/* Masthead: what the page is, the ledger, and the lead story */}
-      <Section aria-labelledby="news-title">
+      <Section width="page" aria-labelledby="news-title">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
             <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-muted">
@@ -136,7 +136,7 @@ export default function News() {
 
       {/* Every item, grouped by year, filtered by competition */}
       {rest.length > 0 && (
-        <Section edge rule aria-labelledby="all-news">
+        <Section width="page" edge rule aria-labelledby="all-news">
           <SectionHeader
             eyebrow="Archive"
             id="all-news"
@@ -189,7 +189,7 @@ export default function News() {
       )}
 
       {/* Send us your news: the one solid CTA on the page */}
-      <Section rule aria-labelledby="contribute">
+      <Section width="page" rule aria-labelledby="contribute">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
           <div className="md:col-span-7">
             <SectionHeader
