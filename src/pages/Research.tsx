@@ -4,7 +4,7 @@ import { fold, scholarSearchUrl, scholarTagUrl } from "../lib/publications";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
-import StatCounter from "../components/ui/StatCounter";
+import StatTicker from "../components/ui/StatTicker";
 import Reveal from "../components/ui/Reveal";
 import TagFilter from "../components/ui/TagFilter";
 import PaperCard from "../components/research/PaperCard";
@@ -95,7 +95,7 @@ export default function Research() {
           <dl className="grid grid-cols-2 gap-x-6 gap-y-7 border-t border-ink-950/10 pt-6 font-mono text-small text-text-muted md:col-span-4">
             {pubs ? (
               <>
-                <StatCounter
+                <StatTicker
                   key={`curated-${published.length}`}
                   as="dl"
                   size="l"
@@ -104,7 +104,7 @@ export default function Research() {
                   value={published.length}
                   label="Curated papers"
                 />
-                <StatCounter
+                <StatTicker
                   key={`featured-${featuredAll.length}`}
                   as="dl"
                   size="l"
@@ -113,7 +113,7 @@ export default function Research() {
                   value={featuredAll.length}
                   label="Featured"
                 />
-                <StatCounter
+                <StatTicker
                   key={`topics-${pubs.tags.length}`}
                   as="dl"
                   size="l"

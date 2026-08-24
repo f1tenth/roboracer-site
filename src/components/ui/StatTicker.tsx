@@ -1,7 +1,7 @@
 import { useImperativeHandle, useRef, type Ref } from "react";
 import { gsap, useGSAP, MOTION_OK_QUERY } from "../../lib/motion";
 
-export type StatCounterHandle = {
+export type StatTickerHandle = {
   /**
    * Progress mode only: the owner's schedule position for this tile, 0..1.
    * Eased (power2.out) and written straight to the DOM; no React render, so
@@ -10,7 +10,7 @@ export type StatCounterHandle = {
   setProgress: (progress: number) => void;
 };
 
-type StatCounterProps = {
+type StatTickerProps = {
   value: number;
   suffix?: string;
   label: string;
@@ -34,7 +34,7 @@ type StatCounterProps = {
   /** "dl" renders dt/dd so the tile can sit inside an existing <dl> without
    * losing the term/value semantics. */
   as?: "div" | "dl";
-  ref?: Ref<StatCounterHandle>;
+  ref?: Ref<StatTickerHandle>;
 };
 
 // Landing-v3 timing (section 6): 3.2 s, power2.out, wherever a counter runs.
@@ -46,11 +46,17 @@ const format = (n: number) => Math.round(n).toLocaleString("en-US");
 
 /**
  * Data-strip stat: mono tabular value over a small mono label - a spec-sheet
- * row, not a hero-metric tile. The final number is in the markup from the
+ * row, not a hero-metric tile.
+ *
+ * Named StatTicker, not StatCounter: Vite names each chunk after its component,
+ * and "statcounter" is an analytics service that EasyPrivacy blocks by name, so
+ * Ghostery and uBlock refused to load assets/StatCounter-*.js and took the
+ * whole route down with it. Do not give a component a name that appears on a
+ * tracker filter list - ads, analytics, pixel, beacon, tracker. The final number is in the markup from the
  * first render (reduced motion and no-JS read it as is); motion only ever
  * rewrites the text node.
  */
-export default function StatCounter({
+export default function StatTicker({
   value,
   suffix = "",
   label,
@@ -62,7 +68,7 @@ export default function StatCounter({
   tone = "default",
   as = "div",
   ref,
-}: StatCounterProps) {
+}: StatTickerProps) {
   const numberRef = useRef<HTMLSpanElement>(null);
   const lastText = useRef<string | null>(null);
 

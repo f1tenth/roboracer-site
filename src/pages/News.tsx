@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
-import StatCounter from "../components/ui/StatCounter";
+import StatTicker from "../components/ui/StatTicker";
 import Reveal from "../components/ui/Reveal";
 import TagFilter from "../components/ui/TagFilter";
 import NewsCard from "../components/news/NewsCard";
@@ -99,7 +99,7 @@ export default function News() {
               nothing to count and it stays out of the way. */}
           {items.length > 0 && (
             <dl className="grid grid-cols-2 gap-x-6 gap-y-7 border-t border-ink-950/10 pt-6 font-mono text-small text-text-muted md:col-span-4">
-              <StatCounter
+              <StatTicker
                 key={`items-${items.length}`}
                 as="dl"
                 size="l"
@@ -108,7 +108,7 @@ export default function News() {
                 value={items.length}
                 label="Items"
               />
-              <StatCounter
+              <StatTicker
                 key={`events-${events.length}`}
                 as="dl"
                 size="l"

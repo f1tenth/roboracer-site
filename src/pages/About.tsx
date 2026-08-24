@@ -10,7 +10,7 @@ import {
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Reveal from "../components/ui/Reveal";
-import StatCounter from "../components/ui/StatCounter";
+import StatTicker from "../components/ui/StatTicker";
 import CommunityJoin from "../components/ui/CommunityJoin";
 import PlatformList from "../components/about/PlatformList";
 import PeopleGroup from "../components/about/PeopleGroup";
@@ -154,7 +154,7 @@ export default function About() {
                   big ticking numbers like the research masthead. */}
               <dl className="grid grid-cols-2 gap-x-8 gap-y-8 border-t border-text-on-ink/15 pt-8">
                 {LEDGER_STATS.map((row, i) => (
-                  <StatCounter
+                  <StatTicker
                     key={row.label}
                     as="dl"
                     on="ink"
@@ -319,7 +319,7 @@ export default function About() {
           lead="Partners use RoboRacer to teach and to do research. They are not sponsors: the wall is untiered, grouped by what the institution is, and alphabetical inside each group."
           action={
             partners.length > 0 ? (
-              <StatCounter value={partners.length} label="institutions" />
+              <StatTicker value={partners.length} label="institutions" />
             ) : undefined
           }
         />

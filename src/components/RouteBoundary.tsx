@@ -35,10 +35,13 @@ export default class RouteBoundary extends Component<RouteBoundaryProps, RouteBo
     const { error } = this.state;
     if (!error) return this.props.children;
 
-    // A missing chunk is not a broken page, it is an out-of-date one: the site
-    // was redeployed while this document was open. lazyWithRetry already tried
-    // a retry and one reload, so by the time we are here the reader has to be
-    // told what to do rather than shown a stack trace.
+    // A missing chunk usually means an out-of-date document: the site was
+    // redeployed while this one was open. It can also mean a blocker refused
+    // the file - Ghostery blocked assets/StatCounter-*.js outright, because
+    // "statcounter" is an analytics service on EasyPrivacy's list and Vite
+    // names each chunk after its component. That component is renamed, but the
+    // next collision would look identical from here, so the copy names both
+    // causes. lazyWithRetry has already retried and reloaded once by now.
     const stale = isChunkLoadError(error);
 
     return (
@@ -51,7 +54,7 @@ export default class RouteBoundary extends Component<RouteBoundaryProps, RouteBo
         </h1>
         <p className="max-w-prose text-body text-text-body">
           {stale
-            ? "The site was updated while this tab was open, so part of this page is no longer available. Reloading fetches the current version."
+            ? "This usually means the site was updated while the tab was open, so part of the page is no longer available — reloading fetches the current version. If reloading does not help, a content or ad blocker may be blocking one of the page's files; allowing roboracer.ai will fix it."
             : "The rest of the site still works — use the navigation above, or reload to try this page again."}
         </p>
         {stale && (

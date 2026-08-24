@@ -18,7 +18,7 @@ import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
 import Reveal from "../components/ui/Reveal";
 import Marquee from "../components/ui/Marquee";
-import StatCounter from "../components/ui/StatCounter";
+import StatTicker from "../components/ui/StatTicker";
 import MediaFrame from "../components/ui/MediaFrame";
 import EventCard from "../components/ui/EventCard";
 import LogoCloud from "../components/ui/LogoCloud";
@@ -172,17 +172,17 @@ export default function Styleguide() {
         </div>
       </div>
 
-      {/* StatCounter - paper data strip */}
+      {/* StatTicker - paper data strip */}
       <Section tight aria-labelledby="sg-stats">
-        <Spec name="StatCounter · mono data strip" />
+        <Spec name="StatTicker · mono data strip" />
         <h2 id="sg-stats" className="sr-only">
           Community scale
         </h2>
         <div className="grid grid-cols-2 gap-8 border-y border-ink-950/10 py-8 md:grid-cols-4">
-          <StatCounter value={90} suffix="+" label="universities" />
-          <StatCounter value={20} suffix="+" label="countries" />
-          <StatCounter value={1000} suffix="+" label="publications" />
-          <StatCounter value={30} label="competitions held" />
+          <StatTicker value={90} suffix="+" label="universities" />
+          <StatTicker value={20} suffix="+" label="countries" />
+          <StatTicker value={1000} suffix="+" label="publications" />
+          <StatTicker value={30} label="competitions held" />
         </div>
       </Section>
 
