@@ -42,7 +42,7 @@ function Tag({ children }: { children: string }) {
 function PhotoTile({ event }: { event: MapEvent }) {
   const photo = racePhoto(event.id);
   return (
-    <div className="w-24 shrink-0 overflow-hidden rounded-media border border-ink-950/10 bg-paper-100 sm:w-32 md:w-40">
+    <div className="w-32 shrink-0 overflow-hidden rounded-media border border-ink-950/10 bg-paper-100 sm:w-48 md:w-64 lg:w-72">
       <div className="relative" style={{ aspectRatio: `${PHOTO_WIDTH} / ${PHOTO_HEIGHT}` }}>
         {photo ? (
           <img
@@ -59,8 +59,8 @@ function PhotoTile({ event }: { event: MapEvent }) {
             src="/logo-square.svg"
             alt=""
             aria-hidden="true"
-            width={44}
-            height={44}
+            width={64}
+            height={64}
             loading="lazy"
             decoding="async"
             className="absolute left-1/2 top-1/2 h-[42%] w-auto -translate-x-1/2 -translate-y-1/2 opacity-25"
@@ -83,12 +83,12 @@ function PhotoTile({ event }: { event: MapEvent }) {
  * broken links the audit found were relative `*.html` paths that resolved
  * against /race into the SPA's 404, one empty href, and three dead domains.
  */
-export default function RaceTimeline({ events }: RaceTimelineProps) {
-  const groups = yearsDescending(events);
+/** Years from this one on stay open; everything earlier folds away. */
+const OPEN_FROM_YEAR = 2025;
+
+function YearRow({ year, list }: { year: number; list: MapEvent[] }) {
   return (
-    <ol className="flex flex-col">
-      {groups.map(([year, list]) => (
-        <li key={year} className="grid gap-x-8 gap-y-4 border-t border-ink-950/10 py-8 md:grid-cols-12">
+    <li className="grid gap-x-8 gap-y-4 border-t border-ink-950/10 py-8 md:grid-cols-12">
           <h3 className="font-mono text-small text-text-muted md:col-span-2">{year}</h3>
           <ul className="flex flex-col gap-6 md:col-span-10">
             {list.map((e) => {
@@ -132,9 +132,59 @@ export default function RaceTimeline({ events }: RaceTimelineProps) {
                 </li>
               );
             })}
-          </ul>
-        </li>
-      ))}
-    </ol>
+      </ul>
+    </li>
+  );
+}
+
+/**
+ * Ten years of racing is a long column, and the section after it - who
+ * competes - was being pushed off the bottom of the page (Cedric,
+ * 2026-08-23). Recent years stay open; everything from 2024 back folds into
+ * one disclosure.
+ *
+ * A native <details> rather than React state: it opens with JavaScript
+ * disabled, it is keyboard-operable and screen-reader-announced for free, and
+ * browser find-in-page can reach the closed content.
+ */
+export default function RaceTimeline({ events }: RaceTimelineProps) {
+  const groups = yearsDescending(events);
+  const recent = groups.filter(([year]) => year >= OPEN_FROM_YEAR);
+  const earlier = groups.filter(([year]) => year < OPEN_FROM_YEAR);
+  const earlierCount = earlier.reduce((n, [, list]) => n + list.length, 0);
+  const firstYear = earlier.length ? earlier[earlier.length - 1][0] : undefined;
+  const lastYear = earlier.length ? earlier[0][0] : undefined;
+
+  return (
+    <>
+      <ol className="flex flex-col">
+        {recent.map(([year, list]) => (
+          <YearRow key={year} year={year} list={list} />
+        ))}
+      </ol>
+      {earlier.length > 0 && (
+        <details className="group border-t border-ink-950/10">
+          <summary className="flex cursor-pointer list-none items-center gap-3 py-6 font-mono text-small text-text-muted transition-colors hover:text-text-strong">
+            <span
+              aria-hidden="true"
+              className="inline-block transition-transform duration-[var(--duration-fast)] group-open:rotate-90"
+            >
+              &#8250;
+            </span>
+            <span className="group-open:hidden">
+              Show the earlier races, {firstYear} to {lastYear} ({earlierCount})
+            </span>
+            <span className="hidden group-open:inline">
+              Hide the earlier races, {firstYear} to {lastYear} ({earlierCount})
+            </span>
+          </summary>
+          <ol className="flex flex-col">
+            {earlier.map(([year, list]) => (
+              <YearRow key={year} year={year} list={list} />
+            ))}
+          </ol>
+        </details>
+      )}
+    </>
   );
 }

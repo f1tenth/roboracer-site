@@ -203,6 +203,14 @@ body {
     animation: none;
     flex-wrap: wrap;
     justify-content: center;
+    /* The track is a flex item of .rr-marquee, and the moving state pins it at
+       flex-shrink: 0 with min-width: 100% so it can be wider than its box.
+       Leave those in place here and `flex-wrap: wrap` never fires: the track
+       just grows to 6,400px and overflow:hidden clips 21 of every 27 logos.
+       Releasing the width is what actually makes the static row wrap. */
+    flex-shrink: 1;
+    min-width: 0;
+    width: 100%;
   }
   .rr-marquee-track[aria-hidden="true"],
   .rr-marquee-clone {
@@ -559,38 +567,3 @@ body {
   scrollbar-width: none;
 }
 
-.embla {
-  overflow: hidden;
-}
-
-.embla__viewport {
-  overflow: hidden;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.embla__container {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-
-.embla__slide {
-  flex: 0 0 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.embla__slide img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.3;
-}

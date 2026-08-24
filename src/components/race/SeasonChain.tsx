@@ -57,6 +57,44 @@ function LiveTag({ children }: { children: string }) {
   );
 }
 
+
+/**
+ * The next races carry a real picture, not a thumbnail: these three are what a
+ * competitor is deciding about, so they get the space (Cedric, 2026-08-23).
+ * A race with no picture yet shows the RoboRacer mark on paper in the same
+ * 16:9 box, so the chain keeps one rhythm whether or not a photo exists.
+ */
+function SeasonPhoto({ event }: { event: SeasonEvent }) {
+  return (
+    <div className="overflow-hidden rounded-media border border-ink-950/10 bg-paper-100">
+      <div className="relative" style={{ aspectRatio: "16 / 9" }}>
+        {event.image ? (
+          <img
+            src={event.image}
+            alt={event.image_alt ?? ""}
+            width={800}
+            height={450}
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : (
+          <img
+            src="/logo-square.svg"
+            alt=""
+            aria-hidden="true"
+            width={64}
+            height={64}
+            loading="lazy"
+            decoding="async"
+            className="absolute left-1/2 top-1/2 h-[34%] w-auto -translate-x-1/2 -translate-y-1/2 opacity-25"
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
 /**
  * The 2026 season as a chain rather than a card grid: one row per race, the
  * series ordinal in mono, the name, dates and city, and the race's own site.
@@ -81,12 +119,15 @@ export default function SeasonChain({ events, map }: SeasonChainProps) {
         return (
           <li
             key={e.url}
-            className="grid gap-x-8 gap-y-2 border-t border-ink-950/10 py-6 md:grid-cols-12 md:items-baseline"
+            className="grid gap-x-8 gap-y-4 border-t border-ink-950/10 py-8 md:grid-cols-12"
           >
             <span className="font-mono text-small tabular-nums text-text-muted md:col-span-1">
               {n ? String(n).padStart(2, "0") : "--"}
             </span>
-            <div className="min-w-0 md:col-span-5">
+            <div className="md:col-span-4">
+              <SeasonPhoto event={e} />
+            </div>
+            <div className="min-w-0 md:col-span-4">
               <h3 className="flex flex-wrap items-center gap-x-3 gap-y-2">
                 <a
                   href={e.url}
@@ -120,8 +161,11 @@ export default function SeasonChain({ events, map }: SeasonChainProps) {
                 </p>
               )}
             </div>
-            <p className="font-mono text-small text-text-muted md:col-span-3">{e.dates}</p>
-            <p className="font-mono text-small text-text-muted md:col-span-3">{e.location}</p>
+            <div className="font-mono text-small text-text-muted md:col-span-3">
+              <p>{e.dates}</p>
+              <p className="mt-1">{e.location}</p>
+              {e.venue && <p className="mt-1">{e.venue}</p>}
+            </div>
           </li>
         );
       })}

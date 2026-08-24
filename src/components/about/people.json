@@ -1,0 +1,609 @@
+{
+  "note": "Generated from docs/content/people.crew.json (A4) and people.past.json (A5) by the About builder; see docs/content/about.sources.md for the transform. Groups are Faculty and advisors / Developers / Past crew; Contributors render from public/data/contributors.json. role is only ever the wording of the source named in `source`; a person with no sourced role carries status verify and a mono tag rather than a guessed title. project_role with project_role_verify comes from the archived f1tenth.org about page, where it was authored but never rendered.",
+  "updated": "2026-08-23",
+  "faculty": [
+    {
+      "name": "Rahul Mangharam",
+      "project_role": "Team Principal",
+      "project_role_verify": true,
+      "role": "Professor, Department of Electrical and Systems Engineering",
+      "affiliation": "University of Pennsylvania (xLAB / PRECISE / GRASP)",
+      "photo": "/crew/rahul-mangharam-400.webp",
+      "link": "https://xlab.upenn.edu/team/rahul/",
+      "source": "https://directory.engineering.upenn.edu/rahul-mangharam/",
+      "note": "Faculty lead of RoboRacer.",
+      "status": "sourced"
+    },
+    {
+      "name": "Madhur Behl",
+      "project_role": "Crew Chief",
+      "project_role_verify": true,
+      "role": "Associate Professor, Department of Computer Science",
+      "affiliation": "University of Virginia (Link Lab)",
+      "photo": "/crew/madhur-behl-400.webp",
+      "link": "https://engineering.virginia.edu/faculty/madhur-behl",
+      "source": "https://engineering.virginia.edu/faculty/madhur-behl",
+      "note": "Co-founded the platform and the competition series.",
+      "status": "sourced"
+    },
+    {
+      "name": "Houssam Abbas",
+      "project_role": "Formal Methods and Control Theory",
+      "project_role_verify": true,
+      "role": "Associate Professor, School of Electrical Engineering and Computer Science",
+      "affiliation": "Oregon State University",
+      "photo": "/crew/houssam-abbas-400.webp",
+      "link": "https://engineering.oregonstate.edu/people/houssam-abbas",
+      "source": "https://engineering.oregonstate.edu/people/houssam-abbas",
+      "status": "sourced"
+    },
+    {
+      "name": "Marko Bertogna",
+      "project_role": "Organizer",
+      "project_role_verify": true,
+      "role": "Full Professor and leader of the HiPeRT Lab",
+      "affiliation": "University of Modena and Reggio Emilia (HiPeRT Lab)",
+      "photo": "/crew/marko-bertogna-400.webp",
+      "link": "https://hipert.unimore.it/employees/bertogna/",
+      "source": "https://hipert.unimore.it/employees/bertogna/",
+      "status": "sourced"
+    },
+    {
+      "name": "Johannes Betz",
+      "role": "Rudolf Mößbauer Professor, Chair of Autonomous Vehicle Systems, TUM School of Engineering and Design",
+      "affiliation": "Technical University of Munich",
+      "photo": "/crew/johannes-betz-400.webp",
+      "link": "https://www.professoren.tum.de/en/betz-johannes",
+      "source": "https://www.professoren.tum.de/en/betz-johannes",
+      "status": "sourced"
+    },
+    {
+      "name": "Paolo Burgio",
+      "project_role": "Organizer",
+      "project_role_verify": true,
+      "role": "Research Fellow, HiPeRT Lab",
+      "affiliation": "University of Modena and Reggio Emilia (HiPeRT Lab)",
+      "photo": "/crew/paolo-burgio-400.webp",
+      "link": "https://www.linkedin.com/in/paoloburgio/",
+      "source": "https://hipert.unimore.it/",
+      "status": "sourced"
+    },
+    {
+      "name": "John M. Dolan",
+      "role": "Principal Systems Scientist, Robotics Institute",
+      "affiliation": "Carnegie Mellon University",
+      "photo": "/crew/john-dolan-400.webp",
+      "link": "https://www.ri.cmu.edu/ri-faculty/john-m-dolan/",
+      "source": "https://iros2026-race.roboracer.ai/",
+      "status": "sourced"
+    },
+    {
+      "name": "Amr El-Wakeel",
+      "role": "Assistant Professor and Director, Intelligent Cyber-Physical Systems Lab, Lane Department of Computer Science and Electrical Engineering",
+      "affiliation": "West Virginia University",
+      "photo": "/crew/amr-el-wakeel-400.webp",
+      "link": "https://directory.statler.wvu.edu/faculty-staff-directory/amr-el-wakeel",
+      "source": "https://directory.statler.wvu.edu/faculty-staff-directory/amr-el-wakeel",
+      "status": "sourced"
+    },
+    {
+      "name": "Francesco Gatti",
+      "project_role": "Organizer",
+      "project_role_verify": true,
+      "photo": "/crew/francesco-gatti-400.webp",
+      "link": "https://www.linkedin.com/in/francesco-gatti-5234aa163/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Radu Grosu",
+      "role": "Full Professor and Head of Research Unit, Research Unit of Cyber-Physical Systems",
+      "affiliation": "TU Wien",
+      "photo": "/crew/radu-grosu-400.webp",
+      "link": "https://informatics.tuwien.ac.at/people/radu-grosu",
+      "source": "https://informatics.tuwien.ac.at/people/radu-grosu",
+      "status": "sourced"
+    },
+    {
+      "name": "Venkat Krovi",
+      "project_role": "Outreach Director",
+      "project_role_verify": true,
+      "role": "Michelin SmartState Chair Professor of Vehicle Automation, School of Mechanical and Automotive Engineering",
+      "affiliation": "Clemson University (CU-ICAR, ARMLab)",
+      "photo": "/crew/venkat-krovi-400.webp",
+      "link": "https://www.clemson.edu/cecas/departments/automotive-engineering/people/venkat-krovi.html",
+      "source": "https://www.clemson.edu/cecas/departments/automotive-engineering/people/venkat-krovi.html",
+      "note": "Director of ARMLab.",
+      "status": "sourced"
+    }
+  ],
+  "developers": [
+    {
+      "name": "Ahmad Amine",
+      "role": "Ph.D. Student",
+      "affiliation": "University of Pennsylvania (xLAB)",
+      "photo": "/crew/ahmad-amine-400.webp",
+      "link": "https://ahmadamine998.github.io/",
+      "source": "https://xlab.upenn.edu/members/",
+      "status": "sourced"
+    },
+    {
+      "name": "Mohamed Elgouhary",
+      "role": "Graduate Research Assistant, Lane Department of Computer Science and Electrical Engineering",
+      "affiliation": "West Virginia University",
+      "photo": "/crew/mohamed-elgouhary-400.webp",
+      "link": "https://www.linkedin.com/in/elgouhary-ai",
+      "source": "https://iros2026-race.roboracer.ai/",
+      "status": "sourced"
+    },
+    {
+      "name": "Cedric Hollande",
+      "project_role": "Race Director, IROS 2026",
+      "role": "Researcher, Department of Electrical and Systems Engineering",
+      "affiliation": "University of Pennsylvania",
+      "photo": "/crew/cedric-hollande-400.webp",
+      "link": "https://cedrichollande.com/",
+      "source": "https://iros2026-race.roboracer.ai/",
+      "status": "sourced"
+    },
+    {
+      "name": "Felix Jahncke",
+      "role": "Ph.D. Candidate, Department of Mobility Systems Engineering",
+      "affiliation": "Technical University of Munich",
+      "photo": "/crew/felix-jahncke-400.webp",
+      "link": "https://icra2026-race.roboracer.ai/",
+      "source": "https://icra2026-race.roboracer.ai/",
+      "status": "sourced"
+    },
+    {
+      "name": "Dhruv Jaiswal",
+      "affiliation": "Carnegie Mellon University",
+      "link": "https://iros2026-race.roboracer.ai/",
+      "source": "https://iros2026-race.roboracer.ai/",
+      "status": "verify"
+    },
+    {
+      "name": "Chinmay Samak",
+      "role": "Ph.D. Candidate, Department of Automotive Engineering",
+      "affiliation": "Clemson University (CU-ICAR, ARMLab)",
+      "photo": "/crew/chinmay-samak-400.webp",
+      "link": "https://iros2026-race.roboracer.ai/",
+      "source": "https://iros2026-race.roboracer.ai/",
+      "status": "sourced"
+    },
+    {
+      "name": "Tanmay Samak",
+      "role": "Ph.D. Candidate, Department of Automotive Engineering",
+      "affiliation": "Clemson University (CU-ICAR, ARMLab)",
+      "photo": "/crew/tanmay-samak-400.webp",
+      "link": "https://iros2026-race.roboracer.ai/",
+      "source": "https://iros2026-race.roboracer.ai/",
+      "status": "sourced"
+    },
+    {
+      "name": "Ayagoz Smagulova",
+      "status": "verify"
+    },
+    {
+      "name": "Johnny Tian",
+      "affiliation": "Carnegie Mellon University",
+      "link": "https://iros2026-race.roboracer.ai/",
+      "source": "https://iros2026-race.roboracer.ai/",
+      "status": "verify"
+    },
+    {
+      "name": "Yon Vanommeslaeghe",
+      "role": "Postdoc",
+      "affiliation": "University of Pennsylvania (xLAB)",
+      "link": "https://xlab.upenn.edu/members/",
+      "source": "https://xlab.upenn.edu/members/",
+      "status": "sourced"
+    },
+    {
+      "name": "Wenshan Wang",
+      "role": "Systems Scientist, Robotics Institute",
+      "affiliation": "Carnegie Mellon University",
+      "photo": "/crew/wenshan-wang-400.webp",
+      "link": "https://www.ri.cmu.edu/ri-faculty/wenshan-wang/",
+      "source": "https://iros2026-race.roboracer.ai/",
+      "status": "sourced"
+    },
+    {
+      "name": "Zirui Zang",
+      "role": "Ph.D. Student",
+      "affiliation": "University of Pennsylvania (xLAB)",
+      "link": "https://github.com/zzangupenn",
+      "source": "https://xlab.upenn.edu/members/",
+      "status": "sourced",
+      "photo": "/crew/zirui-zang-400.webp"
+    },
+    {
+      "name": "Hongrui \"Billy\" Zheng",
+      "project_role": "Simulation and Race Infrastructure",
+      "project_role_verify": true,
+      "role": "Ph.D. Student",
+      "affiliation": "University of Pennsylvania (xLAB)",
+      "photo": "/crew/billy-zheng-400.webp",
+      "link": "https://xlab.upenn.edu/members/",
+      "source": "https://xlab.upenn.edu/members/",
+      "status": "sourced"
+    }
+  ],
+  "past": [
+    {
+      "name": "Joe Auckley",
+      "project_role": "Stabilizer",
+      "project_role_verify": true,
+      "photo": "/crew/joe-auckley-400.webp",
+      "link": "https://www.linkedin.com/in/joe-auckley-369b65130/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Roshan Benefo",
+      "photo": "/crew/roshan-benefo-400.webp",
+      "link": "https://www.linkedin.com/in/roshan-b-435296a3/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Jayanth Bhargav",
+      "photo": "/crew/jayanth-bhargav-400.webp",
+      "link": "https://www.linkedin.com/in/jayanthbhargav/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Raymond Bjorkman",
+      "photo": "/crew/raymond-bjorkman-400.webp",
+      "link": "https://www.linkedin.com/in/raybjork/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Matthew Brady",
+      "photo": "/crew/matthew-brady-400.webp",
+      "link": "https://www.linkedin.com/in/matthew-brady-b4ab1656/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Mike Coraluzzi",
+      "project_role": "Head of Industry Relations",
+      "project_role_verify": true,
+      "photo": "/crew/mike-coraluzzi-400.webp",
+      "link": "https://www.linkedin.com/in/michael-coraluzzi-7433a846/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "David DePauw",
+      "photo": "/crew/david-depauw-400.webp",
+      "link": "https://www.linkedin.com/in/david-m-depauw/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Arnav Dhamija",
+      "photo": "/crew/arnav-dhamija-400.webp",
+      "link": "https://www.linkedin.com/in/arnav-dhamija/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Kaiying Guo",
+      "project_role": "Past Principal Web Developer",
+      "project_role_verify": true,
+      "photo": "/crew/kaiying-guo-400.webp",
+      "link": "https://www.linkedin.com/in/48kaiying/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Jack Harkins",
+      "photo": "/crew/jack-harkins-400.webp",
+      "link": "https://www.linkedin.com/in/jharkins95/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Diana Hoang",
+      "project_role": "Principal Web Developer and Designer",
+      "project_role_verify": true,
+      "photo": "/crew/diana-hoang-400.webp",
+      "link": "https://www.linkedin.com/in/dnhoang/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Paril Jain",
+      "photo": "/crew/paril-jain-400.webp",
+      "link": "https://www.linkedin.com/in/pariljain/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Kuk Jang",
+      "project_role": "Localization",
+      "project_role_verify": true,
+      "photo": "/crew/kuk-jang-400.webp",
+      "link": "https://www.linkedin.com/in/kuk-jang-9a971014/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Lejun Jiang",
+      "link": "https://www.linkedin.com/in/lejun-jiang-a60274174/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Tom Jose",
+      "photo": "/crew/tom-jose-400.webp",
+      "link": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Christopher Kao",
+      "photo": "/crew/christopher-kao-400.webp",
+      "link": "https://www.linkedin.com/in/christopher-kao/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Dhruv Karthik",
+      "project_role": "Perception and Planning",
+      "project_role_verify": true,
+      "photo": "/crew/dhruv-karthik-400.webp",
+      "link": "https://www.linkedin.com/in/dhruvkarthik/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Paritosh Kelkar",
+      "photo": "/crew/paritosh-kelkar-400.webp",
+      "link": "https://www.linkedin.com/in/paritoshkelkar/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Chris Kennedy",
+      "link": "https://www.linkedin.com/in/cwkenned/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Thejas Kesari",
+      "photo": "/crew/thejas-kesari-400.webp",
+      "link": "https://www.linkedin.com/in/thejaskesari/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Ravi Konkimalla",
+      "photo": "/crew/ravi-konkimalla-400.webp",
+      "link": "https://www.linkedin.com/in/ravitejakonkimalla/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Saurabh Kumthekar",
+      "link": "https://www.linkedin.com/in/saurabh-kumthekar/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Matthew Lebermann",
+      "project_role": "Tire Changer",
+      "project_role_verify": true,
+      "photo": "/crew/matthew-lebermann-400.webp",
+      "link": "https://www.linkedin.com/in/mleb/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Kim Luong",
+      "project_role": "Education",
+      "project_role_verify": true,
+      "photo": "/crew/kim-luong-400.webp",
+      "link": "https://www.linkedin.com/in/kim-luong-a0579542/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Jalaj Maheshwari",
+      "photo": "/crew/jalaj-maheshwari-400.webp",
+      "link": "https://www.linkedin.com/in/jalajmaheshwari/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Malavika Manoj",
+      "photo": "/crew/malavika-manoj-400.webp",
+      "link": "https://www.linkedin.com/in/malavikamanoj/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Brandon McBride",
+      "photo": "/crew/brandon-mcbride-400.webp",
+      "link": "https://www.linkedin.com/in/bmcb/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Nischal K N",
+      "photo": "/crew/nischal-k-n-400.webp",
+      "link": "https://www.linkedin.com/in/nischalkn/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Tuan Nguyen",
+      "link": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Matthew O'Kelly",
+      "project_role": "Autonomous Driver",
+      "project_role_verify": true,
+      "photo": "/crew/matthew-o-kelly-400.webp",
+      "link": "https://www.linkedin.com/in/meokelly/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Junfan Pan",
+      "photo": "/crew/junfan-pan-400.webp",
+      "link": "https://www.linkedin.com/in/junfan-pan/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Yash Pant",
+      "photo": "/crew/yash-pant-400.webp",
+      "link": "https://yashpant.github.io/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Trevor Pennypacker",
+      "photo": "/crew/trevor-pennypacker-400.webp",
+      "link": "https://www.linkedin.com/in/trevor-pennypacker/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Zhihao Ruan",
+      "link": "https://www.linkedin.com/in/zhihao-ruan-29b29a13a/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Saumya Shah",
+      "photo": "/crew/saumya-shah-400.webp",
+      "link": "https://www.linkedin.com/in/saumya97/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Manas Shukla",
+      "photo": "/crew/manas-shukla-400.webp",
+      "link": "https://www.linkedin.com/in/shuklam20/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Nitesh Singh",
+      "photo": "/crew/nitesh-singh-400.webp",
+      "link": "https://www.linkedin.com/in/nitesh06/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Siddharth Singh",
+      "project_role": "Perception",
+      "project_role_verify": true,
+      "photo": "/crew/siddharth-singh-400.webp",
+      "link": "https://www.linkedin.com/in/siddharth-singh-764b49bb/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Karel Smejkal",
+      "link": "https://www.linkedin.com/in/karel-smejkal/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Nagarakshith Makam Sreenivasulu",
+      "photo": "/crew/nagarakshith-makam-sreenivasulu-400.webp",
+      "link": "https://www.linkedin.com/in/nagarakshith/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Varundev Sukhil",
+      "project_role": "Autonomous Driver",
+      "project_role_verify": true,
+      "photo": "/crew/varundev-sukhil-400.webp",
+      "link": "https://www.linkedin.com/in/varundev-sukhil-2aa340109/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Dayong Tong",
+      "link": "https://www.linkedin.com/in/dayong-tong/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Yash Trikannad",
+      "photo": "/crew/yash-trikannad-400.webp",
+      "link": "https://www.linkedin.com/in/yash-trikannad/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Venkat Varun Velpula",
+      "photo": "/crew/venkat-varun-velpula-400.webp",
+      "link": "https://www.linkedin.com/in/varun-velpula/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Yuwei Wang",
+      "project_role": "Learning and Control",
+      "project_role_verify": true,
+      "photo": "/crew/yuwei-wang-400.webp",
+      "link": "https://www.linkedin.com/in/yuwei-wang-956a68152/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Peter Werner",
+      "photo": "/crew/peter-werner-400.webp",
+      "link": "https://www.linkedin.com/in/wernerpe/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Susan Xie",
+      "project_role": "Past Principal Designer",
+      "project_role_verify": true,
+      "photo": "/crew/susan-xie-400.webp",
+      "link": "https://www.linkedin.com/in/susan-xie/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Wesley Yee",
+      "link": "https://www.linkedin.com/in/wesley-yee/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Baihong Zeng",
+      "photo": "/crew/baihong-zeng-400.webp",
+      "link": "https://www.linkedin.com/in/baihong-zeng-a5a3a512b/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Xiaozhou Zhang",
+      "photo": "/crew/xiaozhou-zhang-400.webp",
+      "link": "https://www.linkedin.com/in/xiaozhou-zhang-91760b13a/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    },
+    {
+      "name": "Xinlong Zheng",
+      "photo": "/crew/xinlong-zheng-400.webp",
+      "link": "https://www.linkedin.com/in/xinlong-zheng-47092316a/",
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "status": "verify"
+    }
+  ]
+}

@@ -28,6 +28,13 @@ export type UpcomingEvent = {
   /** Where the deadlines are published, when that is not the registration page.
    * scripts/sync-event-deadlines.py reads this first. */
   timeline_url?: string;
+  /** Published on the same timeline row as the registration close, so it
+   * shares that date rather than being typed separately. */
+  qualification_video_due?: string;
+  /** The race's own picture in the season chain. Absent until there is one:
+   * the chain renders its designed placeholder rather than an empty frame. */
+  image?: string;
+  image_alt?: string;
   rules_url?: string;
 };
 
@@ -63,12 +70,6 @@ export type Testimonial = {
   institution: string;
   image: string;
   quote: string;
-};
-
-export type TeamMember = {
-  name: string;
-  linkedin?: string;
-  image: string;
 };
 
 export type Publication = {
@@ -315,8 +316,6 @@ export const loadPastRaces = () => loadJson<PastRace[]>("past_races.json");
 export const loadPartners = () => loadJson<Partner[]>("partners.json");
 export const loadNews = () => loadJson<NewsItem[]>("news.json");
 export const loadTestimonials = () => loadJson<Testimonial[]>("testimonies.json");
-export const loadTeamDevelopers = () => loadJson<TeamMember[]>("team_developers.json");
-export const loadTeamAlumni = () => loadJson<TeamMember[]>("team_alumni.json");
 export const loadPublications = () => loadJson<PublicationsFile>("publications.json");
 export const loadTeams = () => loadJson<Team[]>("teams.json");
 export const loadHighlights = () => loadJson<Highlight[]>("highlights.json");

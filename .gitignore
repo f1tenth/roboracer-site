@@ -55,3 +55,6 @@ dist-preview/
 
 # throwaway build dirs used for bundle measurement and QA previews
 dist-*/
+
+# stray probe files from build agents
+*.probe.tmp

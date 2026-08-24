@@ -235,17 +235,23 @@ export default function RacePage() {
             ))}
           </ol>
         </Reveal>
-        <dl className="mt-12 flex flex-col gap-2 border-t border-ink-950/10 pt-6 font-mono text-small text-text-muted sm:max-w-[46ch]">
+        {/* The deadlines are a narrow list and left half the row empty, so the
+            bridge shot sits beside them rather than eating a full-width band
+            of its own (Cedric, 2026-08-23). */}
+        <div className="mt-12 grid items-start gap-x-8 gap-y-8 border-t border-ink-950/10 pt-6 md:grid-cols-12">
+        <dl className="flex flex-col gap-2 font-mono text-small text-text-muted md:col-span-5">
           {race?.registration_deadline && (
             <div className="flex flex-wrap justify-between gap-x-4">
               <dt>registration closes</dt>
               <dd className="tabular-nums text-text-strong">{race.registration_deadline}</dd>
             </div>
           )}
-          <div className="flex flex-wrap justify-between gap-x-4">
-            <dt>qualification video due</dt>
-            <dd className="tabular-nums text-text-strong">September 12, 2026</dd>
-          </div>
+          {race?.qualification_video_due && (
+            <div className="flex flex-wrap justify-between gap-x-4">
+              <dt>qualification video due</dt>
+              <dd className="tabular-nums text-text-strong">{race.qualification_video_due}</dd>
+            </div>
+          )}
           <div className="flex flex-wrap justify-between gap-x-4">
             <dt>questions</dt>
             <dd>
@@ -255,6 +261,15 @@ export default function RacePage() {
             </dd>
           </div>
         </dl>
+          <MediaFrame
+            src="/media/race/over-the-bridge-1600.webp"
+            alt="A RoboRacer car crossing the raised wooden bridge section of the track, the race hall behind it"
+            width={1600}
+            height={685}
+            aspect="21 / 9"
+            className="md:col-span-7"
+          />
+        </div>
       </Section>
 
       <Section width="page" edge aria-labelledby="race-season" rule>
@@ -266,19 +281,6 @@ export default function RacePage() {
           lead="Each competition has its own site, its own registration and its own organizing committee."
         />
         <SeasonChain events={upcoming} map={mapEvents} />
-        {/* The hall in Busan, set up for the race that is live this week. */}
-        <figure className="mt-12">
-          <MediaFrame
-            src="/media/race/ifac2026.webp"
-            alt="The IFAC 2026 track laid out in the BEXCO exhibition hall in Busan, barriers and sponsor boards in place before the race"
-            width={800}
-            height={450}
-            aspect="16 / 9"
-          />
-          <figcaption className="mt-2 font-mono text-small text-text-muted">
-            BEXCO, Busan - the 29th competition, set up and ready
-          </figcaption>
-        </figure>
       </Section>
 
       <Section width="page" aria-labelledby="race-history" rule>
@@ -290,19 +292,6 @@ export default function RacePage() {
           lead="Every competition the series has held, with a link to the event's own page. Where a race site has gone offline the link goes to an archived copy and says so."
         />
         <RaceTimeline events={past} />
-      </Section>
-
-      {/* A full-bleed breather between the history and the teams: one car,
-          mid-race, on the bridge at ICRA 2026. */}
-      <Section width="bleed" className="py-0">
-        <MediaFrame
-          src="/media/race/over-the-bridge-1600.webp"
-          alt="A RoboRacer car crossing the raised wooden bridge section of the track, the race hall behind it"
-          width={1600}
-          height={685}
-          aspect="21 / 9"
-          radius="none"
-        />
       </Section>
 
       <Section width="page" edge aria-labelledby="race-teams" rule>

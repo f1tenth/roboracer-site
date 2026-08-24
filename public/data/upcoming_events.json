@@ -11,7 +11,9 @@
     "schedule_note": "https://2026ifac-roboracer.com/ read 2026-08-23: '2026, Aug 24th - Aug 27th', 'BEXCO at Busan, Korea', held in person. No hour-level schedule is published, so the instants are the venue-local day bounds (KST) of the published dates.",
     "stream_url": "https://2026ifac-roboracer.com/",
     "stream_status": "unconfirmed",
-    "stream_note": "No stream URL exists as of 2026-08-23. The only YouTube link on the race site is an embed of tnn4isfdUCE, Unicorn Racing's sketch video of the 2025 Korea championship, not a stream. Replace stream_url and set stream_status to confirmed once a real stream goes up."
+    "stream_note": "No stream URL exists as of 2026-08-23. The only YouTube link on the race site is an embed of tnn4isfdUCE, Unicorn Racing's sketch video of the 2025 Korea championship, not a stream. Replace stream_url and set stream_status to confirmed once a real stream goes up.",
+    "image": "/media/race/ifac2026.webp",
+    "image_alt": "The IFAC 2026 track laid out in the BEXCO exhibition hall in Busan, barriers and sponsor boards in place before the race"
   },
   {
     "title": "30th RoboRacer Autonomous Racing Competition at the IEEE Vehicular Technology Conference (VTC 2026 Fall)",
@@ -41,6 +43,9 @@
     "rules_url": "https://iros2026-race.roboracer.ai/",
     "registration_deadline_at": "2026-09-09T23:59:00-04:00",
     "registration_deadline_note": "Cedric, 2026-08-21: display the Sep 5 date plainly. The instant is end of day Eastern, the conference's own time zone; the race page counts down to it.",
-    "timeline_url": "https://iros2026-race.roboracer.ai/timeline.html"
+    "timeline_url": "https://iros2026-race.roboracer.ai/timeline.html",
+    "image": "/media/race/race-iros2026-hero-poster.webp",
+    "image_alt": "Cars on the IROS 2026 track in Pittsburgh, seen from above",
+    "qualification_video_due": "September 9, 2026"
   }
 ]
