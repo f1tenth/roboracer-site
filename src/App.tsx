@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
 
@@ -11,7 +11,6 @@ import { lazyWithRetry } from "./lib/lazyWithRetry";
 const Landing = lazyWithRetry("Landing", () => import("./pages/Landing"));
 const About = lazyWithRetry("About", () => import("./pages/About"));
 const Build = lazyWithRetry("Build", () => import("./pages/Build"));
-const Course = lazyWithRetry("Course", () => import("./pages/Course"));
 const Learn = lazyWithRetry("Learn", () => import("./pages/Learn"));
 const News = lazyWithRetry("News", () => import("./pages/News"));
 const RaceCalendar = lazyWithRetry("Race", () => import("./pages/Race"));
@@ -31,7 +30,10 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/about" element={<About />} />
             <Route path="/build" element={<Build />} />
-            <Route path="/course" element={<Course />} />
+            {/* Ahmad Amine, Slack 2026-08-23: Learn and Course are two sets of
+                teaching material and keeping both means maintaining both. One
+                page now; /course still resolves so no shared link breaks. */}
+            <Route path="/course" element={<Navigate to="/learn" replace />} />
             <Route path="/learn" element={<Learn />} />
             <Route path="/news" element={<News />} />
             <Route path="/race" element={<RaceCalendar />} />

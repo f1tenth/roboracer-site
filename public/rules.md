@@ -263,3 +263,19 @@ The referees restart the race with a green flag.
 3. One referee will be assigned to each car and is solely responsible to call flag raises and rule violations per-team. The third referee is tasked with enforcing penalties, crash resolution, and time-keeping.
 
 
+
+# 3. Virtual (simulation) competition
+
+## 3.1 General
+
+1. The virtual competition is run entirely in a simulation environment; no hardware is involved.
+
+2. The simulation environment is the [AutoDrive Ecosystem](https://autodrive-ecosystem.github.io/). The RoboRacer virtual competition runs in that environment only, and teams submit their code to that platform before the deadline.
+
+3. The virtual competition has two parts, *Time Trials* and a *two-vehicle Head-to-Head* race. Every participant must pass the Time Trials and is automatically entered into both.
+
+4. RoboRacer reserves the right to reject any submission judged illegal, for example one that exploits the simulation environment. Source code is examined by the race stewards after the race.
+
+5. The same map is used for every race. The Time Trials run without obstacles; obstacles are introduced before the head-to-head races to test obstacle avoidance.
+
+6. Full details are on the [RoboRacer Sim Racing League page for IROS 2026](https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-iros-2026/).

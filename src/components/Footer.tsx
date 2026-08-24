@@ -2,10 +2,7 @@ import { useLocation } from "react-router-dom";
 
 export default function Footer() {
   const location = useLocation();
-  const isAltFooter = 
-    location.pathname === "/learn" || 
-    location.pathname === "/build" || 
-    location.pathname === "/course";
+  const isAltFooter = location.pathname === "/learn" || location.pathname === "/build";
   
   if (isAltFooter) return null;
 
@@ -51,7 +48,6 @@ export default function Footer() {
             <ul className="space-y-3">
               <li><a href="/learn" className="text-gray-400 hover:text-white text-sm transition-colors">Learn</a></li>
               <li><a href="/build" className="text-gray-400 hover:text-white text-sm transition-colors">Build</a></li>
-              <li><a href="/course" className="text-gray-400 hover:text-white text-sm transition-colors">Course</a></li>
               <li>
                 <a 
                   href="https://autodrive-ecosystem.github.io/" 

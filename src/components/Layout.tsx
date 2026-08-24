@@ -14,7 +14,6 @@ const TITLES: Record<string, string> = {
   "/": "RoboRacer - autonomous racing, built and raced in the open",
   "/about": "About - RoboRacer",
   "/build": "Build the car - RoboRacer",
-  "/course": "Course kit - RoboRacer",
   "/learn": "Learn - RoboRacer",
   "/news": "News - RoboRacer",
   "/race": "Race - RoboRacer",
@@ -31,7 +30,6 @@ export default function Layout() {
   const isAltLayout =
     currentPath === "/learn" ||
     currentPath === "/build" ||
-    currentPath === "/course" ||
     currentPath === "/chat" ||
     currentPath === "/assembly";
   const isHiddenRoute = currentPath === "/chat" || currentPath === "/assembly";
