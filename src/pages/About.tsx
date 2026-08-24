@@ -40,7 +40,7 @@ const ICRA_GROUP_PHOTO = {
   width: 1600,
   height: 900,
   alt: "The whole ICRA 2026 field in a group photo inside the orange-barrier track, arms raised",
-  caption: "the field at ICRA 2026",
+  caption: "group pic ICRA 2026",
 };
 
 const LINK_ON_PAPER =
@@ -159,6 +159,7 @@ export default function About() {
                     as="dl"
                     on="ink"
                     size="l"
+                    tone="accent"
                     duration={2.5}
                     delay={i * 0.12}
                     value={row.value}

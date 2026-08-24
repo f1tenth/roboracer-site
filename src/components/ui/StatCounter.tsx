@@ -27,8 +27,9 @@ type StatCounterProps = {
   duration?: number;
   /** "l" promotes the number to display-l for a masthead ledger. */
   size?: "m" | "l";
-  /** "accent" puts the number in violet. Paper-safe, unlike the logo gradient,
-   * whose cyan stop is 1.9:1 here. */
+  /** "accent" colours the number: violet on paper, magenta on ink. Each is the
+   * token documented as accent TEXT for that ground, and both hold AA - unlike
+   * the logo gradient, whose cyan stop is 1.9:1 on paper. */
   tone?: "default" | "accent";
   /** "dl" renders dt/dd so the tile can sit inside an existing <dl> without
    * losing the term/value semantics. */
@@ -120,7 +121,13 @@ export default function StatCounter({
 
   const ink = on === "ink";
   const numberColor =
-    tone === "accent" ? "text-rr-violet" : ink ? "text-text-on-ink" : "text-text-strong";
+    tone === "accent"
+      ? ink
+        ? "text-rr-magenta-bright"
+        : "text-rr-violet"
+      : ink
+        ? "text-text-on-ink"
+        : "text-text-strong";
   const numberClass = `font-mono ${size === "l" ? "text-display-l" : "text-display-m"} font-semibold tabular-nums ${numberColor}`;
   const labelClass = `font-mono text-small ${ink ? "text-text-on-ink-muted" : "text-text-muted"}`;
   const number = (
