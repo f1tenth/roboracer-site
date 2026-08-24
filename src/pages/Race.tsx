@@ -210,19 +210,15 @@ export default function RacePage() {
           title="Enter"
           subtitle="How to enter"
           lead="All the information for each competition is on that competition's own site. In short:"
-          action={
-            <div className="flex flex-wrap gap-4">
-              <Button href={race?.register_url ?? "#"} variant="primary" target="_blank" rel="noopener noreferrer">
-                Register your team
-              </Button>
-              <Button href="/rules" variant="secondary">
-                Read the rules
-              </Button>
-            </div>
-          }
         />
+        {/* The four steps, the buttons and the deadlines are all short, so they
+            share the left half and the bridge shot takes the right rather than
+            running full width and pushing the season out of view (Cedric,
+            2026-08-23). */}
+        <div className="grid items-start gap-x-10 gap-y-10 md:grid-cols-12">
+        <div className="md:col-span-7">
         <Reveal stagger>
-          <ol className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="grid gap-x-8 gap-y-10 sm:grid-cols-2">
             {ENTRY_STEPS.map((step) => (
               <li key={step.n} className="border-t border-ink-950/10 pt-5">
                 <p className="font-mono text-small text-text-muted">{step.n}</p>
@@ -235,11 +231,15 @@ export default function RacePage() {
             ))}
           </ol>
         </Reveal>
-        {/* The deadlines are a narrow list and left half the row empty, so the
-            bridge shot sits beside them rather than eating a full-width band
-            of its own (Cedric, 2026-08-23). */}
-        <div className="mt-12 grid items-start gap-x-8 gap-y-8 border-t border-ink-950/10 pt-6 md:grid-cols-12">
-        <dl className="flex flex-col gap-2 font-mono text-small text-text-muted md:col-span-5">
+        <div className="mt-10 flex flex-wrap gap-4">
+          <Button href={race?.register_url ?? "#"} variant="primary" target="_blank" rel="noopener noreferrer">
+            Register your team
+          </Button>
+          <Button href="/rules" variant="secondary">
+            Read the rules
+          </Button>
+        </div>
+        <dl className="mt-10 flex flex-col gap-2 border-t border-ink-950/10 pt-6 font-mono text-small text-text-muted">
           {race?.registration_deadline && (
             <div className="flex flex-wrap justify-between gap-x-4">
               <dt>registration closes</dt>
@@ -261,14 +261,15 @@ export default function RacePage() {
             </dd>
           </div>
         </dl>
-          <MediaFrame
-            src="/media/race/over-the-bridge-1600.webp"
-            alt="A RoboRacer car crossing the raised wooden bridge section of the track, the race hall behind it"
-            width={1600}
-            height={685}
-            aspect="21 / 9"
-            className="md:col-span-7"
-          />
+        </div>
+        <MediaFrame
+          src="/media/race/over-the-bridge-1200.webp"
+          alt="A RoboRacer car crossing the raised wooden bridge section of the track, the race hall behind it"
+          width={1200}
+          height={750}
+          aspect="16 / 10"
+          className="md:col-span-5"
+        />
         </div>
       </Section>
 

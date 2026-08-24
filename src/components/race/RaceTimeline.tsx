@@ -164,18 +164,20 @@ export default function RaceTimeline({ events }: RaceTimelineProps) {
       </ol>
       {earlier.length > 0 && (
         <details className="group border-t border-ink-950/10">
-          <summary className="flex cursor-pointer list-none items-center gap-3 py-6 font-mono text-small text-text-muted transition-colors hover:text-text-strong">
+          {/* "events", not "races": four of these are mad games, a workshop and
+              a course race, and the rows carry those tags. */}
+          <summary className="flex cursor-pointer list-none items-center gap-3 py-7 font-display text-lead font-semibold text-text-strong transition-colors hover:text-rr-violet">
             <span
               aria-hidden="true"
-              className="inline-block transition-transform duration-[var(--duration-fast)] group-open:rotate-90"
+              className="inline-block text-display-m leading-none transition-transform duration-[var(--duration-fast)] group-open:rotate-90"
             >
               &#8250;
             </span>
             <span className="group-open:hidden">
-              Show the earlier races, {firstYear} to {lastYear} ({earlierCount})
+              Show {earlierCount} earlier events, {firstYear} to {lastYear}
             </span>
             <span className="hidden group-open:inline">
-              Hide the earlier races, {firstYear} to {lastYear} ({earlierCount})
+              Hide the {firstYear} to {lastYear} events
             </span>
           </summary>
           <ol className="flex flex-col">
