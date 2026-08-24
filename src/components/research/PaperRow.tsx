@@ -28,7 +28,7 @@ function RowThumb({ publication }: { publication: Publication }) {
   const [failed, setFailed] = useState(false);
   const show = figure && !failed;
   return (
-    <div className="w-[72px] shrink-0 overflow-hidden rounded-media border border-ink-950/10 bg-paper-100 sm:w-[96px] md:w-[112px]">
+    <div className="w-[104px] shrink-0 overflow-hidden rounded-media border border-ink-950/10 bg-paper-100 sm:w-[144px] md:w-[184px]">
       <div className="relative aspect-[16/10]">
         {show ? (
           <img
@@ -76,11 +76,11 @@ export default function PaperRow({
   const href = paperHref(p);
   const extras = paperExtras(p);
   return (
-    <li className="grid gap-3 py-5 md:grid-cols-[1fr_auto] md:gap-8">
+    <li className="grid gap-3 py-6 md:grid-cols-[1fr_auto] md:gap-8">
       <div className="flex items-start gap-4 md:gap-5">
         <RowThumb publication={p} />
         <div className="min-w-0">
-          <h4 className="font-display text-body font-semibold leading-snug text-text-strong">
+          <h4 className="font-display text-lead font-semibold leading-snug text-text-strong">
             {href ? (
               <a href={href} target="_blank" rel="noopener noreferrer" className={LINK}>
                 {p.title}

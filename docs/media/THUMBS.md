@@ -119,3 +119,5 @@ survives re-runs). Credit line on the site: "Figure: <first author> et al."
 | jain-2020-bayesrace | research-jain-2020-bayesrace-row-320.webp | arXiv HTML figure 11: https://arxiv.org/html/2005.04755v2/plots/track_mpc_lap1.png | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 8084 |  |
 | ivanov-2020-case | research-ivanov-2020-case-row-320.webp | arXiv HTML figure 2: https://arxiv.org/html/1910.11309v1/fig/problem.png | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 9756 |  |
 | sinha-2020-formulazero | research-sinha-2020-formulazero-row-320.webp | arXiv HTML figure 8: https://arxiv.org/html/2003.03900v2/figs/system.png | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 9754 |  |
+
+| shihata-2026-arola | AROLA: A Modular Layered Architecture for Scaled Autonomous Racing | research-shihata-2026-arola-row-320.webp | https://arxiv.org/html/2602.02730v1/Figures/Full_example.png | arXiv HTML, author figure. Cedric asked for a picture on this paper by name. |
