@@ -1,7 +1,0 @@
-# Cloudflare Pages. Kept because it is the documented way to give an SPA route a
-# 200, but note it does NOT currently win: Pages serves the static 404.html
-# ahead of this rewrite, so deep routes answer 404 with the right page in the
-# body. GitHub Pages, which is the live host, has no equivalent mechanism at
-# all and behaves the same way. scripts/spa-fallback.mjs is what makes that
-# body correct on both.
-/*    /index.html   200
