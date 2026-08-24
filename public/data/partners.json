@@ -304,6 +304,14 @@
     "image_hover": "partners/color/northwestern.webp"
   },
   {
+    "name": "NVIDIA",
+    "website": "https://www.nvidia.com/",
+    "image": "partners/nvidia.png",
+    "image_rest": "partners/tint/nvidia.webp",
+    "image_hover": "partners/color/nvidia.webp",
+    "category": "industry"
+  },
+  {
     "name": "Oregon State University",
     "website": "https://oregonstate.edu/",
     "image": "partners/oregon.png",
