@@ -1,0 +1,16 @@
+{
+ "label": "desktop-1440-nojs",
+ "viewport": [
+  1440,
+  900
+ ],
+ "doc_height": 900,
+ "reduced_motion": false,
+ "js": false,
+ "console": [],
+ "pageerrors": [],
+ "h1": null,
+ "title": "RoboRacer",
+ "imgs_no_dims": [],
+ "imgs_eager": []
+}

@@ -1,0 +1,384 @@
+{
+ "external": {
+  "https://2025.iccas.org/": "200",
+  "https://2026ifac-roboracer.com/": "200",
+  "https://2026ifac-roboracer.com/en/registration.html": "200",
+  "https://bu2024-race.f1tenth.org/": "200",
+  "https://cdc2024-race.f1tenth.org/": "200",
+  "https://cdc2025-race.roboracer.ai/": "200",
+  "https://cps2023-race.f1tenth.org/": "200",
+  "https://cpsweek2024-race.f1tenth.org/index.html": "200",
+  "https://esweek2022-race.f1tenth.org/": "200",
+  "https://events.vtsociety.org/vtc2026-fall/": "200",
+  "https://f1tenth.github.io/columbia2019.html": "200",
+  "https://f1tenth.github.io/ifac2020.html": "200",
+  "https://f1tenth.github.io/iros2020.html": "200",
+  "https://f1tenth.github.io/montreal2019.html": "200",
+  "https://f1tenth.github.io/pittsburgh2016.html": "200",
+  "https://f1tenth.github.io/porto2018.html": "200",
+  "https://f1tenth.github.io/torino2018.html": "200",
+  "https://icra2022-race.f1tenth.org/": "200",
+  "https://icra2023-race.f1tenth.org/": "200",
+  "https://icra2024-madgames.f1tenth.org/": "200",
+  "https://icra2025-race.roboracer.ai/": "200",
+  "https://icra2026-race.roboracer.ai/": "200",
+  "https://iros2023-madgames.f1tenth.org/": "200",
+  "https://iros2023-race.f1tenth.org/": "200",
+  "https://iros2026-race.roboracer.ai/registration.html": "200",
+  "https://itsc2024-race.f1tenth.org/": "200",
+  "https://iv2023-race.f1tenth.org/": "200",
+  "https://iv2024-race.f1tenth.org/": "200",
+  "https://iv2025-race.roboracer.ai/": "200",
+  "https://iv2026-race.roboracer.ai/": "200",
+  "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g": "HTTP 403",
+  "https://korea-race.f1tenth.org/": "200",
+  "https://korea-race23.f1tenth.org/": "200",
+  "https://lamarr-institute.org/news/lamarracer-wins-roboracer-competition/": "200",
+  "https://linklab-uva.github.io/icra-autonomous-racing/": "200",
+  "https://sm2024-race.f1tenth.org/": "200",
+  "https://techfest.org/competitions/RoboRacer": "200",
+  "https://vaul.fsg.ulaval.ca/en": "200",
+  "https://web.archive.org/web/20220817154341/https://www.iros2021.org": "200",
+  "https://web.archive.org/web/20221002153150/https://germany-race2022.f1tenth.org/": "200",
+  "https://web.archive.org/web/20240720182003/https://korea-race24f1tenth.org/": "200",
+  "https://web.archive.org/web/20241107140818/https://iros2024-race.f1tenth.org/": "200",
+  "https://web.archive.org/web/20250908153518/https://icra2024-race.f1tenth.org/": "200",
+  "https://www.forzaeth.ch/": "200",
+  "https://www.linkedin.com/posts/great-work-by-all-involved-ugcPost-7471631589169516544-ZPa-/": "200",
+  "https://www.tuwien.at/inf/scuderia-segfault/": "200"
+ },
+ "internal": [
+  "http://localhost:4187/rules"
+ ],
+ "images": [
+  {
+   "src": "/media/race/iv2026.webp",
+   "w": "800",
+   "h": "450",
+   "loading": "lazy",
+   "alt": "Competitors holding a checkered flag behind the barriers, their cars lined up in front"
+  },
+  {
+   "src": "/media/race/icra2026.webp",
+   "w": "800",
+   "h": "450",
+   "loading": "lazy",
+   "alt": "A car cornering on the raised wooden track between orange tube barriers, spectators behind"
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/media/race/iccas2025.webp",
+   "w": "800",
+   "h": "450",
+   "loading": "lazy",
+   "alt": "A large group of competitors gathered inside the taped track in the exhibition hall"
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/media/race/columbia2019.webp",
+   "w": "800",
+   "h": "450",
+   "loading": "lazy",
+   "alt": "The field of competitors in a group photo behind a row of cars on the floor"
+  },
+  {
+   "src": "/media/race/cpsiot2019.webp",
+   "w": "800",
+   "h": "450",
+   "loading": "lazy",
+   "alt": "A RoboRacer car on an outdoor asphalt track beside a red and white kerb"
+  },
+  {
+   "src": "/media/race/esweek2018.webp",
+   "w": "800",
+   "h": "450",
+   "loading": "lazy",
+   "alt": "Competitors standing behind the track barrier with their arms raised at the end of the race"
+  },
+  {
+   "src": "/media/race/cpsweek2018.webp",
+   "w": "800",
+   "h": "450",
+   "loading": "lazy",
+   "alt": "A competitor leaning over the barrier to reach a car on the carpeted track, conference banners behind"
+  },
+  {
+   "src": "/logo-square.svg",
+   "w": "44",
+   "h": "44",
+   "loading": "lazy",
+   "alt": ""
+  },
+  {
+   "src": "/media/team/team-404-racers-800.webp",
+   "w": "800",
+   "h": "800",
+   "loading": "lazy",
+   "alt": "404 Racers team photo"
+  },
+  {
+   "src": "/media/team/team-west-virginia-university-800.webp",
+   "w": "800",
+   "h": "800",
+   "loading": "lazy",
+   "alt": "West Virginia University team photo"
+  },
+  {
+   "src": "/media/team/team-lamarracing-800.webp",
+   "w": "800",
+   "h": "800",
+   "loading": "lazy",
+   "alt": "LAMARRacing team photo"
+  },
+  {
+   "src": "/media/team/team-upenn-autonomous-racing-800.webp",
+   "w": "800",
+   "h": "800",
+   "loading": "lazy",
+   "alt": "UPenn Autonomous Racing team photo"
+  },
+  {
+   "src": "/media/team/team-forzaeth-800.webp",
+   "w": "800",
+   "h": "800",
+   "loading": "lazy",
+   "alt": "ForzaETH team photo"
+  },
+  {
+   "src": "/media/team/team-unicorn-racing-800.webp",
+   "w": "800",
+   "h": "800",
+   "loading": "lazy",
+   "alt": "UNICORN_Racing team photo"
+  },
+  {
+   "src": "/media/team/team-vaul-2-800.webp",
+   "w": "800",
+   "h": "800",
+   "loading": "lazy",
+   "alt": "VAUL team photo"
+  },
+  {
+   "src": "/media/team/team-ubm-atlas-800.webp",
+   "w": "800",
+   "h": "800",
+   "loading": "lazy",
+   "alt": "UBM-Tom/Atlas team photo"
+  },
+  {
+   "src": "/media/team/team-brake-check-buddies-800.webp",
+   "w": "800",
+   "h": "800",
+   "loading": "lazy",
+   "alt": "Brake Check Buddies team photo"
+  },
+  {
+   "src": "/media/team/team-scuderia-segfault-800.webp",
+   "w": "800",
+   "h": "800",
+   "loading": "lazy",
+   "alt": "Scuderia Segfault team photo"
+  }
+ ]
+}

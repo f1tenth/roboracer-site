@@ -1,0 +1,20 @@
+{
+ "console": [],
+ "pageerrors": [],
+ "requestfailed": [],
+ "http_errors": [],
+ "part_rows": 11,
+ "part_visibility_buttons": 0,
+ "h1": [
+  "RoboRacer\nASSEMBLY LAB"
+ ],
+ "canvas": 1,
+ "third_row_before": "part-row ",
+ "third_row_after": "part-row is-selected",
+ "third_row_label": "03\nLiDAR",
+ "selected_rows": 1,
+ "axe": {
+  "violations": [],
+  "passes": 36
+ }
+}

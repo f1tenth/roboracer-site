@@ -17,3 +17,14 @@ export function figureChain(p: Publication): FigureSource[] {
   if (p.figure) out.push({ src: resolve(p.figure), width: 1600, height: 1000 });
   return out;
 }
+
+/** The dense curated list needs its own small file: a 320x200 WebP under
+ * `public/media/research/*-row-320.webp` on the `row_thumbnail` field. It is
+ * deliberately separate from the featured chain above - 133 rows at card size
+ * would be megabytes - and lives off the Publication type, so the JSON can
+ * carry it without the featured fields changing shape. Null when no figure
+ * could be extracted; the row draws the logo tile instead. */
+export function rowThumb(p: Publication): FigureSource | null {
+  const src = (p as Publication & { row_thumbnail?: string }).row_thumbnail;
+  return src ? { src: resolve(src), width: 320, height: 200 } : null;
+}

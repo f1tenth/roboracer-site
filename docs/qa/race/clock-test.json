@@ -1,0 +1,179 @@
+[
+ {
+  "clock": "2026-08-23T09:00:00-04:00",
+  "why": "this morning Eastern, before the first race day begins in Busan",
+  "rows": [
+   {
+    "name": "IFAC 2026",
+    "tags": [
+     "next"
+    ],
+    "watch": null
+   },
+   {
+    "name": "VTC 2026 Fall",
+    "tags": [],
+    "watch": null
+   },
+   {
+    "name": "IROS 2026",
+    "tags": [],
+    "watch": null
+   }
+  ]
+ },
+ {
+  "clock": "2026-08-23T18:40:00-04:00",
+  "why": "the real moment this page was built (07:40 Aug 24 in Busan)",
+  "rows": [
+   {
+    "name": "IFAC 2026",
+    "tags": [
+     "Live"
+    ],
+    "watch": "https://2026ifac-roboracer.com/"
+   },
+   {
+    "name": "VTC 2026 Fall",
+    "tags": [
+     "next"
+    ],
+    "watch": null
+   },
+   {
+    "name": "IROS 2026",
+    "tags": [],
+    "watch": null
+   }
+  ]
+ },
+ {
+  "clock": "2026-08-25T12:00:00-04:00",
+  "why": "mid-competition",
+  "rows": [
+   {
+    "name": "IFAC 2026",
+    "tags": [
+     "Live"
+    ],
+    "watch": "https://2026ifac-roboracer.com/"
+   },
+   {
+    "name": "VTC 2026 Fall",
+    "tags": [
+     "next"
+    ],
+    "watch": null
+   },
+   {
+    "name": "IROS 2026",
+    "tags": [],
+    "watch": null
+   }
+  ]
+ },
+ {
+  "clock": "2026-08-27T10:00:00-04:00",
+  "why": "the last race day, still running in Busan",
+  "rows": [
+   {
+    "name": "IFAC 2026",
+    "tags": [
+     "Live"
+    ],
+    "watch": "https://2026ifac-roboracer.com/"
+   },
+   {
+    "name": "VTC 2026 Fall",
+    "tags": [
+     "next"
+    ],
+    "watch": null
+   },
+   {
+    "name": "IROS 2026",
+    "tags": [],
+    "watch": null
+   }
+  ]
+ },
+ {
+  "clock": "2026-08-28T12:00:00-04:00",
+  "why": "the day after IFAC ends",
+  "rows": [
+   {
+    "name": "IFAC 2026",
+    "tags": [
+     "concluded"
+    ],
+    "watch": null
+   },
+   {
+    "name": "VTC 2026 Fall",
+    "tags": [
+     "next"
+    ],
+    "watch": null
+   },
+   {
+    "name": "IROS 2026",
+    "tags": [],
+    "watch": null
+   }
+  ]
+ },
+ {
+  "clock": "2026-09-07T12:00:00-04:00",
+  "why": "during VTC",
+  "rows": [
+   {
+    "name": "IFAC 2026",
+    "tags": [
+     "concluded"
+    ],
+    "watch": null
+   },
+   {
+    "name": "VTC 2026 Fall",
+    "tags": [
+     "Live"
+    ],
+    "watch": "https://events.vtsociety.org/vtc2026-fall/"
+   },
+   {
+    "name": "IROS 2026",
+    "tags": [
+     "next"
+    ],
+    "watch": null
+   }
+  ]
+ },
+ {
+  "clock": "2026-10-01T12:00:00-04:00",
+  "why": "after the whole season",
+  "rows": [
+   {
+    "name": "IFAC 2026",
+    "tags": [
+     "concluded"
+    ],
+    "watch": null
+   },
+   {
+    "name": "VTC 2026 Fall",
+    "tags": [
+     "concluded"
+    ],
+    "watch": null
+   },
+   {
+    "name": "IROS 2026",
+    "tags": [
+     "concluded"
+    ],
+    "watch": null
+   }
+  ]
+ }
+]
