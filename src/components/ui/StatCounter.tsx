@@ -23,6 +23,16 @@ type StatCounterProps = {
   mode?: "time" | "progress";
   /** Time mode: seconds before the count starts (0.15 s stagger per tile). */
   delay?: number;
+  /** Count-up length in seconds. Defaults to the landing's 3.2 s. */
+  duration?: number;
+  /** "l" promotes the number to display-l for a masthead ledger. */
+  size?: "m" | "l";
+  /** "accent" puts the number in violet. Paper-safe, unlike the logo gradient,
+   * whose cyan stop is 1.9:1 here. */
+  tone?: "default" | "accent";
+  /** "dl" renders dt/dd so the tile can sit inside an existing <dl> without
+   * losing the term/value semantics. */
+  as?: "div" | "dl";
   ref?: Ref<StatCounterHandle>;
 };
 
@@ -46,6 +56,10 @@ export default function StatCounter({
   on = "paper",
   mode = "time",
   delay = 0,
+  duration = DURATION,
+  size = "m",
+  tone = "default",
+  as = "div",
   ref,
 }: StatCounterProps) {
   const numberRef = useRef<HTMLSpanElement>(null);
@@ -79,7 +93,7 @@ export default function StatCounter({
         const proxy = { n: 0 };
         gsap.to(proxy, {
           n: value,
-          duration: DURATION,
+          duration,
           delay,
           ease: EASE,
           scrollTrigger: {
@@ -101,19 +115,34 @@ export default function StatCounter({
         });
       });
     },
-    { dependencies: [value, mode, delay], revertOnUpdate: true },
+    { dependencies: [value, mode, delay, duration], revertOnUpdate: true },
   );
 
   const ink = on === "ink";
+  const numberColor =
+    tone === "accent" ? "text-rr-violet" : ink ? "text-text-on-ink" : "text-text-strong";
+  const numberClass = `font-mono ${size === "l" ? "text-display-l" : "text-display-m"} font-semibold tabular-nums ${numberColor}`;
+  const labelClass = `font-mono text-small ${ink ? "text-text-on-ink-muted" : "text-text-muted"}`;
+  const number = (
+    <>
+      <span ref={numberRef}>{format(value)}</span>
+      {suffix}
+    </>
+  );
+
+  if (as === "dl") {
+    return (
+      <div>
+        <dt className={labelClass}>{label}</dt>
+        <dd className={`mt-1 ${numberClass}`}>{number}</dd>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-1.5">
-      <p
-        className={`font-mono text-display-m font-semibold tabular-nums ${ink ? "text-text-on-ink" : "text-text-strong"}`}
-      >
-        <span ref={numberRef}>{format(value)}</span>
-        {suffix}
-      </p>
-      <p className={`font-mono text-small ${ink ? "text-text-on-ink-muted" : "text-text-muted"}`}>{label}</p>
+      <p className={numberClass}>{number}</p>
+      <p className={labelClass}>{label}</p>
     </div>
   );
 }

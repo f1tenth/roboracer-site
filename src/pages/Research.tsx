@@ -4,6 +4,7 @@ import { fold, scholarSearchUrl, scholarTagUrl } from "../lib/publications";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
+import StatCounter from "../components/ui/StatCounter";
 import Reveal from "../components/ui/Reveal";
 import TagFilter from "../components/ui/TagFilter";
 import PaperCard from "../components/research/PaperCard";
@@ -85,26 +86,62 @@ export default function Research() {
               </Button>
             </div>
           </div>
-          <dl className="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-ink-950/10 pt-6 font-mono text-small text-text-muted md:col-span-4">
+          {/* The counts are the argument this page makes, so they run big and
+              in violet and tick up over five seconds (Cedric, 2026-08-23).
+              Violet, not the logo gradient: gradient text is ink-only, its
+              cyan stop being 1.9:1 on paper. Keyed on the fetch so the tween
+              starts from the real number rather than from the "…" placeholder. */}
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-7 border-t border-ink-950/10 pt-6 font-mono text-small text-text-muted md:col-span-4">
+            {pubs ? (
+              <>
+                <StatCounter
+                  key={`curated-${published.length}`}
+                  as="dl"
+                  size="l"
+                  tone="accent"
+                  duration={5}
+                  value={published.length}
+                  label="Curated papers"
+                />
+                <StatCounter
+                  key={`featured-${featuredAll.length}`}
+                  as="dl"
+                  size="l"
+                  tone="accent"
+                  duration={5}
+                  value={featuredAll.length}
+                  label="Featured"
+                />
+                <StatCounter
+                  key={`topics-${pubs.tags.length}`}
+                  as="dl"
+                  size="l"
+                  tone="accent"
+                  duration={5}
+                  delay={0.15}
+                  value={pubs.tags.length}
+                  label="Topics"
+                />
+              </>
+            ) : (
+              <>
+                <div>
+                  <dt className="font-mono text-small text-text-muted">Curated papers</dt>
+                  <dd className="mt-1 font-mono text-display-l font-semibold text-text-muted">…</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-small text-text-muted">Featured</dt>
+                  <dd className="mt-1 font-mono text-display-l font-semibold text-text-muted">…</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-small text-text-muted">Topics</dt>
+                  <dd className="mt-1 font-mono text-display-l font-semibold text-text-muted">…</dd>
+                </div>
+              </>
+            )}
             <div>
-              <dt>Curated papers</dt>
-              <dd className="mt-1 font-display text-display-m font-semibold text-text-strong">
-                {pubs ? published.length : "…"}
-              </dd>
-            </div>
-            <div>
-              <dt>Featured</dt>
-              <dd className="mt-1 font-display text-display-m font-semibold text-text-strong">
-                {pubs ? featuredAll.length : "…"}
-              </dd>
-            </div>
-            <div>
-              <dt>Topics</dt>
-              <dd className="mt-1 text-text-strong">{pubs ? pubs.tags.length : "…"}</dd>
-            </div>
-            <div>
-              <dt>Updated</dt>
-              <dd className="mt-1 text-text-strong">{pubs ? pubs.updated : "…"}</dd>
+              <dt className="font-mono text-small text-text-muted">Updated</dt>
+              <dd className="mt-1 font-mono text-body text-text-strong">{pubs ? pubs.updated : "…"}</dd>
             </div>
           </dl>
         </div>
