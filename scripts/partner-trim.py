@@ -38,6 +38,12 @@ def ink_box(im: Image.Image):
     # Not a uniform frame: leave it alone rather than guess.
     if max(max(c) - min(c) for c in zip(*corners)) > 12:
         return None
+    # A uniform border is only margin when it is near-white. Binghamton is white
+    # type on a green panel: the panel IS the logo, and trimming to the "ink"
+    # cropped a 750x250 banner down to a 617x92 strip. Anything darker than this
+    # is a deliberate background and gets left alone.
+    if min(sum(c) / 3 for c in corners) < 233:
+        return None
     bg = Image.new("RGB", rgb.size, corners[0])
     # A small offset before the threshold keeps JPEG ringing from counting as ink.
     return ImageChops.difference(rgb, bg).convert("L").point(lambda v: 255 if v > 18 else 0).getbbox()

@@ -280,6 +280,14 @@
     "image_hover": "partners/color/nagoya.webp"
   },
   {
+    "name": "Neobotics Foundation",
+    "website": "https://neobotics.org/",
+    "image": "partners/neobotics.webp",
+    "category": "organization",
+    "image_rest": "partners/tint/neobotics.webp",
+    "image_hover": "partners/color/neobotics.webp"
+  },
+  {
     "name": "New York University (NYU)",
     "website": "https://www.nyu.edu/",
     "image": "partners/nyu.png",
@@ -408,7 +416,7 @@
     "image_hover": "partners/color/munich.webp"
   },
   {
-    "name": "Tecnol\u00f3gico de Monterrey",
+    "name": "Tecnológico de Monterrey",
     "website": "https://tec.mx/es",
     "image": "partners/monterrey.jpg",
     "category": "university",
@@ -560,7 +568,7 @@
     "image_hover": "partners/color/unimore.webp"
   },
   {
-    "name": "University of Nebraska\u2013Lincoln",
+    "name": "University of Nebraska–Lincoln",
     "website": "https://www.unl.edu/",
     "image": "partners/nebraska.png",
     "category": "university",

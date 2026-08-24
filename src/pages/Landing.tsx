@@ -277,10 +277,15 @@ export default function Landing() {
                     {/* Absolute, so the name never contributes to the item's
                         width: a long institution name used to stretch its own
                         cell and shove its neighbours apart. The logo alone sets
-                        the width now, and the name wraps to two lines. */}
+                        the width now, and the name wraps to two lines.
+                        Anchored to the bottom rather than below the logo: the
+                        marquee clips at the row height, so a second line used
+                        to push the pill's bottom border outside the box and
+                        the frame lost its lower edge. Growing upward keeps
+                        that edge on screen at any line count. */}
                     <span
                       aria-hidden="true"
-                      className="pointer-events-none absolute left-1/2 top-[36px] line-clamp-2 w-max max-w-[9rem] -translate-x-1/2 border border-ink-950/15 bg-paper-50 px-2 py-0.5 text-center font-mono text-eyebrow leading-tight tracking-normal text-text-strong opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100 md:top-[74px] md:max-w-[14rem]"
+                      className="pointer-events-none absolute bottom-0 left-1/2 line-clamp-2 w-max max-w-[9rem] -translate-x-1/2 border border-ink-950/15 bg-paper-50 px-2 py-0.5 text-center font-mono text-eyebrow leading-tight tracking-normal text-text-strong opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100 md:max-w-[14rem]"
                     >
                       {p.name} ↗
                     </span>
