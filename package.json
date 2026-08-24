@@ -6,7 +6,7 @@
   "homepage": "https://roboracer.ai/",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/spa-fallback.mjs",
     "sync:racecar": "node scripts/sync-racecar-assets.mjs",
     "deploy": "vite build && gh-pages -d dist",
     "lint": "eslint .",
