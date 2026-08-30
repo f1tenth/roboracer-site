@@ -155,3 +155,12 @@ report at `docs/qa/<page>.md`; Cedric approves on localhost.
 The landing's own history is in `docs/plans/landing-v2.md` through
 `landing-v5.md` — v5 section 11 lists the last round of changes and the final
 numbers, which is the best single read for how a chapter is specified here.
+
+## 8. Hero cinematic trial (branch `revamp/hero-cinematic`, 2026-08-30)
+
+An overnight trial of a scroll-scrubbed film hero (Higgsfield-generated from the ICRA 2026
+photos): contract `docs/plans/hero-cinematic-v1.md`, report `docs/hero-lab/REPORT.md`, QA
+`docs/qa/hero-cinematic.md`. Worktree `../roboracer-site-wt/hero-cinematic`; `/` shows the film,
+`/?hero=classic` the clip-cycle hero. The frames live only locally under `public/media/hero-cine/`
+(git-ignored; R2 upload is the first follow-up), so a dev server started before they were cut
+needs a restart. Nothing on `revamp/landing-v1` changed; the draft PR is for Cedric's decision.

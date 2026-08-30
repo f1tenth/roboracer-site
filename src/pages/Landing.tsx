@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
   loadHighlights,
   loadPartners,
@@ -25,6 +26,7 @@ import HighlightReel from "../components/ui/HighlightReel";
 import PlatformPanel from "../components/ui/PlatformPanel";
 import ExplodedModel, { type CarPhoto } from "../components/ui/ExplodedModel";
 import HeroChapter, { type HeroVideoSources } from "../components/ui/HeroChapter";
+import HeroCinematic, { type HeroBeats } from "../components/ui/HeroCinematic";
 import WorldMapChapter from "../components/ui/WorldMapChapter";
 import ResearchCarousel from "../components/ui/ResearchCarousel";
 import { featuredForLanding } from "../lib/publications";
@@ -51,6 +53,34 @@ const HERO_VIDEO: HeroVideoSources = {
   poster: "/media/hero/hero-fpv-poster.webp",
   width: 1280,
   height: 720,
+};
+
+// Hero cinematic v1 (docs/plans/hero-cinematic-v1.md, overnight trial
+// 2026-08-30): the same headline over a scroll-scrubbed film of two cars on
+// the ICRA 2026 track, generated with Higgsfield from the organizers' photos
+// (docs/hero-lab/REPORT.md). The frame sets come from
+// public/media/hero-cine/manifest.json (scripts/frames.sh) and are referenced
+// through mediaUrl so the R2 move is a config change; the two posters are
+// committed. `/?hero=classic` renders HeroChapter as before.
+const HERO_CINE = {
+  frames: {
+    // 720p take: the desktop set is the source's 1280 width (never upscaled).
+    desktop: { base: mediaUrl("/media/hero-cine/d/"), count: 121, width: 1280, height: 720 },
+    mobile: { base: mediaUrl("/media/hero-cine/m/"), count: 80, width: 960, height: 540 },
+  },
+  poster: {
+    desktop: "/media/hero-cine/poster-1280.webp",
+    mobile: "/media/hero-cine/poster-960.webp",
+    alt: "Two RoboRacer one-tenth-scale cars side by side on the ICRA 2026 track in Vienna, rendered from the organizers' photographs",
+  },
+  // Beats in pin progress, read off docs/hero-lab/takes/take-C-sheet.jpg:
+  // A at frame 45 (the lead car fills its third), B at frame 80 (half a
+  // length ahead, the overtake), C at frame 104 (both cars settled).
+  beats: [0.33, 0.55, 0.7] as HeroBeats,
+  // Cover-fit anchor for portrait phones: a 9:16 crop keeps about a quarter
+  // of the frame's width, so it follows the lead car (its tower sits at a
+  // third of the width) rather than the gap between the cars.
+  focusX: 0.35,
 };
 
 // Landing-v3 copy: no comma, three authored lines.
@@ -100,6 +130,8 @@ const CAR_PHOTOS: readonly CarPhoto[] = [
  */
 export default function Landing() {
   useLenis();
+  // `/?hero=classic` keeps the clip-cycle hero reachable next to the film.
+  const heroVariant = new URLSearchParams(useLocation().search).get("hero");
   const [events, setEvents] = useState<UpcomingEvent[]>([]);
   const [partners, setPartners] = useState<Partner[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
@@ -141,9 +173,21 @@ export default function Landing() {
 
   return (
     <div>
-      {/* 1 · Hero + headline chapter (ink, pinned 320vh) - newbie. The video
-          runs under the transparent nav: no page top padding on this route. */}
-      <HeroChapter video={HERO_VIDEO} lines={HEADLINE_LINES} description={HERO_DESCRIPTION} />
+      {/* 1 · Hero + headline chapter (ink, pinned) - newbie. The footage
+          runs under the transparent nav: no page top padding on this route.
+          The film (400vh) by default; the clip cycle (320vh) at ?hero=classic. */}
+      {heroVariant === "classic" ? (
+        <HeroChapter video={HERO_VIDEO} lines={HEADLINE_LINES} description={HERO_DESCRIPTION} />
+      ) : (
+        <HeroCinematic
+          frames={HERO_CINE.frames}
+          poster={HERO_CINE.poster}
+          lines={HEADLINE_LINES}
+          description={HERO_DESCRIPTION}
+          beats={HERO_CINE.beats}
+          focusX={HERO_CINE.focusX}
+        />
+      )}
 
       {/* 2 · 01 Highlights (paper, full-bleed) - newbie, press */}
       <Section edge rule width="bleed" aria-labelledby="highlights" className="pt-section-tight!">
