@@ -134,9 +134,11 @@ def wait_for_frames(page, seconds: float) -> dict:
             break
         page.wait_for_timeout(500)
     st["waited_s"] = round(time.time() - t0, 1)
-    # The idle glide fires about 2 s after the coarse pass and scrolls to p 0.55 over ~3 s; a walk
-    # that starts mid-glide fights it (and Lenis then finishes the glide's own smoothing under
-    # the first stops). Wait until the page has been still for a second before touching scroll.
+    # The idle glide fires about 2 s after the coarse pass and scrolls to the glide target over a
+    # few seconds; a walk that starts mid-glide fights it (and Lenis then finishes the glide's own
+    # smoothing under the first stops). A small set can finish loading before the glide has even
+    # fired, so give it its 2 s first, then wait until the page has been still for a second.
+    page.wait_for_timeout(2500)
     last = page.evaluate("Math.round(window.scrollY)")
     still_since = time.time()
     t1 = time.time()
