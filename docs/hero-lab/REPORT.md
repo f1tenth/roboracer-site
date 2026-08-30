@@ -10,8 +10,8 @@ push-in with the lead car edging ahead, closer to "two cars on the grid" than to
 Decide on localhost: `/` (film) against `/?hero=classic` (the clip cycle); 57.5 of the 278
 credits went, 220.5 remain.
 
-Draft PR: see the link at the end of this file (into `revamp/landing-v1`; nothing on that branch
-changed).
+Draft PR: https://github.com/f1tenth/roboracer-site/pull/18 (into `revamp/landing-v1`; nothing on
+that branch changed).
 
 ## Credits
 
