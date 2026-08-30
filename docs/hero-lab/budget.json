@@ -1,0 +1,10 @@
+{
+  "cap_total": 250,
+  "unattended_ceiling": 200,
+  "per_job_max": 40,
+  "balance_start": null,
+  "balance_now": null,
+  "spent_est": 0,
+  "jobs": [],
+  "refusals": []
+}
