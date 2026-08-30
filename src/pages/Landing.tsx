@@ -65,13 +65,13 @@ const HERO_VIDEO: HeroVideoSources = {
 const HERO_CINE = {
   frames: {
     // 720p take: the desktop set is the source's 1280 width (never upscaled).
-    desktop: { base: mediaUrl("/media/hero-cine/d/"), count: 121, width: 1280, height: 720 },
+    desktop: { base: mediaUrl("/media/hero-cine/d/"), count: 200, width: 1280, height: 720 },
     mobile: { base: mediaUrl("/media/hero-cine/m/"), count: 80, width: 960, height: 540 },
   },
   poster: {
     desktop: "/media/hero-cine/poster-1280.webp",
     mobile: "/media/hero-cine/poster-960.webp",
-    alt: "Two RoboRacer one-tenth-scale cars side by side on the ICRA 2026 track in Vienna, rendered from the organizers' photographs",
+    alt: "The RoboRacer car seen from behind, racing down the ICRA 2026 hall track a length behind the car it is about to overtake; rendered from the organizers' photographs",
   },
   // Beats in pin progress, read off docs/hero-lab/takes/take-C-sheet.jpg:
   // A at frame 45 (the lead car fills its third), B at frame 80 (half a
@@ -82,21 +82,22 @@ const HERO_CINE = {
   // third of the width) rather than the gap between the cars.
   focusX: 0.35,
   // Hero cinematic v2 (Cedric, 2026-08-30 morning): the four-act film, one
-  // concatenated frame set with the fade to black baked into the frames.
-  // Acts are [from, to) frame ranges in the DESKTOP set (the mobile set is the
-  // same film resampled); beatFrames are where headline lines 1, 2, 3 start
-  // to land. The words leave again over the dip and the exploded car plays
-  // alone. TODO(v2 frames): fill from public/media/hero-cine/manifest.json
-  // and the v2 contact sheets once the v2 frame set replaces the v1 set,
-  // then pass `film` to HeroCinematic below.
+  // frame set cut from three chained clips (docs/hero-lab/v2/ACTS.md): the
+  // chase behind our car overtaking the Unicorn car (A1), the drone move to
+  // its side and the hall dissolving into a dark void (A23), the exploded CAD
+  // view (A4, trimmed to 2.5 s) and a half-second hold; 314 film frames
+  // resampled to 200. Acts are [from, to) frame ranges in the DESKTOP set (the
+  // mobile set is the same film resampled); beatFrames are where headline
+  // lines 1, 2, 3 start to land (mid-chase, the pass, settled at the side).
+  // The words leave again over the dissolve and the exploded car plays alone.
   film: {
     acts: [
-      { name: "chase", from: 0, to: 60 },
-      { name: "side", from: 60, to: 120 },
-      { name: "dip", from: 120, to: 140 },
-      { name: "explode", from: 140, to: 200 },
+      { name: "chase", from: 0, to: 77 },
+      { name: "side", from: 77, to: 122 },
+      { name: "dip", from: 122, to: 138 },
+      { name: "explode", from: 138, to: 200 },
     ],
-    beatFrames: [52, 75, 95],
+    beatFrames: [25, 51, 70],
   } satisfies FilmSpec,
 };
 
@@ -223,8 +224,7 @@ export default function Landing() {
           description={HERO_DESCRIPTION}
           beats={HERO_CINE.beats}
           // Switched on when the v2 frame set replaces the v1 set:
-          // film={HERO_CINE.film}
-          film={undefined}
+          film={HERO_CINE.film}
           focusX={HERO_CINE.focusX}
         />
       )}
