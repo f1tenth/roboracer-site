@@ -120,6 +120,12 @@ vsync), the drawer painted 128 frames and coalesced 68 requests away. The captur
 the locked frame under the transparent nav; the phone crop follows the lead car; the words fade in
 place under the Highlights strip exactly as the classic hero does.
 
+Throttled network (dev server, record only): at 6 Mbps the poster shows 0.2 s after the chapter
+mounts, the canvas takes over at 22 s and the full set is in at 32 s; at 1.5 Mbps the poster leads
+by 2 s, a scroll at 27 s already lands line 1 over the poster, the coarse pass arrives at 104 s and
+only 56 of 121 frames were in after two minutes. The design holds (nothing waits on the network);
+the frames compete with the rest of the landing after `load`, which the R2 host and AVIF would ease.
+
 ## Decisions taken without you (all in `docs/hero-lab/LOG.md`)
 
 1. Stills on `nano_banana_2`, which the CLI resolves to Nano Banana Pro, at 2k: same price as 1k

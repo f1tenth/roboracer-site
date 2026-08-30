@@ -76,8 +76,24 @@ so the first words land on footage that still reads as footage.
 | caption prop | `caption={null}` removes the tag; default text shown |
 | assets | every `<img>` in the hero has `alt`, `width`, `height`; the poster `<picture>` serves the 1280 file from 768px and the 960 file below |
 
+## Throttled network (record only, `docs/qa/hero-cinematic/throttle.json`)
+
+CDP `Network.emulateNetworkConditions` at 1440x900 against the dev server (unminified modules, the
+whole landing loading at once, so the absolute numbers are pessimistic; a production build on R2
+serves the frames from a second host):
+
+| condition | chapter mounted | poster shown | scroll to p 0.55 while loading | canvas takes over (coarse pass) | all 121 frames |
+|---|---|---|---|---|---|
+| 6 Mbps, 60 ms | 5.9 s | 6.1 s | at 7.4 s: line 1 opacity 1, proxy frame 80, 7 frames loaded, canvas not ready | 22.1 s | 31.9 s |
+| 1.5 Mbps, 150 ms | 24.1 s | 26.1 s | at 27.3 s: line 1 opacity 1, proxy frame 80, 3 frames loaded | 103.9 s | not within 120 s (56 of 121 loaded, phase `fine`) |
+
+What it proves: the poster is up within 2 s of the chapter on both links, the headline schedule
+runs over the poster before any frame is in (nothing in the scroll path waits on the network), and
+the canvas fades in only when the coarse set is complete. What it flags: on a slow link the frames
+compete with the rest of the landing's media after `load`, so the film can arrive a minute after
+the poster; the R2 upload (parallel host) and AVIF frames (about half the bytes) are the levers.
+
 ## Not covered tonight
 
-Real-GPU frame timing (only software GL here); Safari and Firefox; a slow network throttle for the
-coarse-pass fade (the loader logic is exercised, the timing of the fade is not measured); the R2
-path (`VITE_MEDIA_BASE` set) until the frames are uploaded.
+Real-GPU frame timing (only software GL here); Safari and Firefox; the R2 path (`VITE_MEDIA_BASE`
+set) until the frames are uploaded; the throttle numbers above against a production build.

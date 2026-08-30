@@ -1,0 +1,50 @@
+{
+ "1.5mbps-150ms": {
+  "chapter_s": 24.1,
+  "poster_s": 26.1,
+  "coarse_ready_s": 103.9,
+  "all_frames_s": null,
+  "scroll_during_load": {
+   "at_s": 27.3,
+   "line1": 1,
+   "frame": 80.1,
+   "ready": false,
+   "loaded": 3
+  },
+  "final": {
+   "t": 120234,
+   "poster": true,
+   "ready": true,
+   "phase": "fine",
+   "loaded": 56,
+   "count": 121,
+   "frame": 80.1,
+   "line1": 1,
+   "scrollY": 1486
+  }
+ },
+ "6mbps-60ms": {
+  "chapter_s": 5.9,
+  "poster_s": 6.1,
+  "coarse_ready_s": 22.1,
+  "all_frames_s": 31.9,
+  "scroll_during_load": {
+   "at_s": 7.4,
+   "line1": 1,
+   "frame": 80.1,
+   "ready": false,
+   "loaded": 7
+  },
+  "final": {
+   "t": 31887,
+   "poster": true,
+   "ready": true,
+   "phase": "done",
+   "loaded": 121,
+   "count": 121,
+   "frame": 80.1,
+   "line1": 1,
+   "scrollY": 1486
+  }
+ }
+}
