@@ -113,15 +113,25 @@ def find_numbers(obj, key_re: re.Pattern, out: list) -> None:
             find_numbers(v, key_re, out)
 
 
-def find_strings(obj, out: list, key_hint: re.Pattern | None = None) -> None:
+def find_strings(obj, out: list, key_hint: re.Pattern | None = None, skip: tuple[str, ...] = ()) -> None:
+    """Depth-first: collect string values whose key matches key_hint; never descend into `skip` keys."""
     if isinstance(obj, dict):
         for k, v in obj.items():
+            if str(k) in skip:
+                continue
             if isinstance(v, str) and (key_hint is None or key_hint.search(str(k))):
                 out.append(v)
-            find_strings(v, out, key_hint)
+            find_strings(v, out, key_hint, skip)
     elif isinstance(obj, list):
         for v in obj:
-            find_strings(v, out, key_hint)
+            find_strings(v, out, key_hint, skip)
+
+
+# The job JSON echoes the request under `params` (input_images[].url and the like): those are the
+# uploaded references, not results. Seen 2026-08-30 on the first still: nine refs re-downloaded as
+# result-2..10 and `result.jpg` was a copy of ref-01.
+INPUT_KEYS = ("params", "input_image", "input_images", "image_references", "start_image", "end_image",
+              "video_references", "audio_references", "references", "request")
 
 
 def parse_json_loose(text: str):
@@ -281,10 +291,12 @@ def create(job_type: str, params: list[str], cost: float) -> int:
     find_strings(data, ids, re.compile(r"^(id|job_id|jobId)$", re.I))
     job_id = ids[0] if ids else None
     urls: list = []
-    find_strings(data, urls, re.compile(r"url|result|output|video|image|file", re.I))
+    find_strings(data, urls, re.compile(r"url|result|output|video|image|file", re.I), skip=INPUT_KEYS)
     urls = [u for u in urls if u.startswith("http") or u.startswith("file://")]
-    urls += [u for u in re.findall(r"(?:https?|file)://\S+", out + "\n" + err)
-             if any(u.lower().split("?")[0].endswith(e) for e in MEDIA_EXT) and u not in urls]
+    if not urls:
+        # No JSON result field: fall back to bare media URLs in the raw output.
+        urls += [u for u in re.findall(r"(?:https?|file)://\S+", out + "\n" + err)
+                 if any(u.lower().split("?")[0].endswith(e) for e in MEDIA_EXT) and u not in urls]
     seen: list = []
     urls = [u for u in urls if not (u in seen or seen.append(u))]
     files = download(urls, dest) if urls else []
