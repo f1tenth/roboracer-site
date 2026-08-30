@@ -26,7 +26,7 @@ import HighlightReel from "../components/ui/HighlightReel";
 import PlatformPanel from "../components/ui/PlatformPanel";
 import ExplodedModel, { type CarPhoto } from "../components/ui/ExplodedModel";
 import HeroChapter, { type HeroVideoSources } from "../components/ui/HeroChapter";
-import HeroCinematic, { type HeroBeats } from "../components/ui/HeroCinematic";
+import HeroCinematic, { type FilmSpec, type HeroBeats } from "../components/ui/HeroCinematic";
 import WorldMapChapter from "../components/ui/WorldMapChapter";
 import ResearchCarousel from "../components/ui/ResearchCarousel";
 import { featuredForLanding } from "../lib/publications";
@@ -81,6 +81,23 @@ const HERO_CINE = {
   // of the frame's width, so it follows the lead car (its tower sits at a
   // third of the width) rather than the gap between the cars.
   focusX: 0.35,
+  // Hero cinematic v2 (Cedric, 2026-08-30 morning): the four-act film, one
+  // concatenated frame set with the fade to black baked into the frames.
+  // Acts are [from, to) frame ranges in the DESKTOP set (the mobile set is the
+  // same film resampled); beatFrames are where headline lines 1, 2, 3 start
+  // to land. The words leave again over the dip and the exploded car plays
+  // alone. TODO(v2 frames): fill from public/media/hero-cine/manifest.json
+  // and the v2 contact sheets once the v2 frame set replaces the v1 set,
+  // then pass `film` to HeroCinematic below.
+  film: {
+    acts: [
+      { name: "chase", from: 0, to: 60 },
+      { name: "side", from: 60, to: 120 },
+      { name: "dip", from: 120, to: 140 },
+      { name: "explode", from: 140, to: 200 },
+    ],
+    beatFrames: [52, 75, 95],
+  } satisfies FilmSpec,
 };
 
 // Landing-v3 copy: no comma, three authored lines.
@@ -194,7 +211,8 @@ export default function Landing() {
     <div>
       {/* 1 · Hero + headline chapter (ink, pinned) - newbie. The footage
           runs under the transparent nav: no page top padding on this route.
-          The film (400vh) by default; the clip cycle (320vh) at ?hero=classic. */}
+          The film (400vh v1, 700vh once the v2 four-act set is in) by default;
+          the clip cycle (320vh) at ?hero=classic. */}
       {heroVariant === "classic" ? (
         <HeroChapter video={HERO_VIDEO} lines={HEADLINE_LINES} description={HERO_DESCRIPTION} />
       ) : (
@@ -204,6 +222,9 @@ export default function Landing() {
           lines={HEADLINE_LINES}
           description={HERO_DESCRIPTION}
           beats={HERO_CINE.beats}
+          // Switched on when the v2 frame set replaces the v1 set:
+          // film={HERO_CINE.film}
+          film={undefined}
           focusX={HERO_CINE.focusX}
         />
       )}

@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useId, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { EASE_IN_OUT_QUART, MOTION_OK_QUERY, ScrollTrigger, gsap, useGSAP } from "../../lib/motion";
-import { FrameCanvas, FrameLoader, frameAt, type FrameSet } from "../../lib/frameSequence";
+import { FrameCanvas, FrameLoader, frameAt, pAtFrame, type FrameSet } from "../../lib/frameSequence";
 
 export type HeroPoster = {
   /** Frame 1 of the desktop set (served from 768px up) and of the mobile set. */
@@ -12,6 +12,25 @@ export type HeroPoster = {
 
 export type HeroBeats = readonly [number, number, number];
 
+export type FilmActName = "chase" | "side" | "dip" | "explode";
+
+/** One act of the v2 film: a frame range [from, to) in the DESKTOP set (the
+ * mobile set is the same film resampled, so pin progress is shared). */
+export type FilmAct = { name: FilmActName; from: number; to: number };
+
+/**
+ * The v2 four-act film (Cedric, 2026-08-30 morning): one concatenated frame
+ * set whose fade to black is baked into the frames, described as frame
+ * ranges so the scrubber stays a plain scrubber. `beatFrames` are the desktop
+ * frame indices where headline lines 1, 2, 3 start to land; the words fade
+ * out again over the `dip` act and the `explode` act plays with no text.
+ */
+export type FilmSpec = {
+  acts: FilmAct[];
+  /** Frame indices (desktop set) where headline line 1, 2, 3 start to land. */
+  beatFrames: readonly [number, number, number];
+};
+
 type HeroCinematicProps = {
   frames: { desktop: FrameSet; mobile: FrameSet };
   poster: HeroPoster;
@@ -20,14 +39,18 @@ type HeroCinematicProps = {
   lines: string[];
   /** One sentence on what RoboRacer is, under the headline. */
   description?: string;
-  /** Pin progress at which each headline line starts to land: A when the lead
-   * car fills its third of the frame, B at the overtake, C when both settle.
-   * Read off the take's contact sheet. */
+  /** v1 schedule: pin progress at which each headline line starts to land (A
+   * when the lead car fills its third of the frame, B at the overtake, C when
+   * both settle), read off the take's contact sheet. Ignored when `film` is
+   * passed. */
   beats?: HeroBeats;
+  /** v2 schedule: acts and beats as frame indices; switches the chapter to the
+   * long four-act scroll (700vh, scrub 0.04..0.90, text exit over the dip). */
+  film?: FilmSpec;
   /** Cover-fit anchor (0..1) for the frames and the poster, so the cars stay
    * in frame on portrait phones. */
   focusX?: number;
-  /** Mono tag bottom-left from p 0.05; null hides it (Cedric's call). */
+  /** Mono tag bottom-left from the start of the film; null hides it (Cedric's call). */
   caption?: string | null;
   /** h1 on the landing (the page's one h1); h2 on /styleguide. */
   as?: "h1" | "h2";
@@ -36,8 +59,9 @@ type HeroCinematicProps = {
 
 /**
  * Scroll schedule in pin progress p (0 = the chapter top reaches the viewport
- * top, 1 = the 400vh wrapper releases), docs/plans/hero-cinematic-v1.md
- * section 7:
+ * top, 1 = the wrapper releases).
+ *
+ * v1 (no `film`, docs/plans/hero-cinematic-v1.md section 7, 400vh):
  *
  *   p 0.00-0.05  frame 1 (the locked composition), the film has not started
  *   p 0.05-0.80  frames 1..N, linear in p (SCRUB_START..SCRUB_END), scrub 0.8
@@ -51,10 +75,19 @@ type HeroCinematicProps = {
  *   p 0.80-1.00  hold on the last frame, full text, no transforms
  *   p 0.80-0.97  nav fill (data-nav-fill, read by NavBar)
  *
+ * v2 (`film` passed, 700vh): poster hold to 0.04, frames over 0.04..0.90,
+ * the beats come from `film.beatFrames` through pAtFrame; the same landing,
+ * zoom, dim and description rules; then over the `dip` act the block and the
+ * description fade to 0 in place (power2.inOut, no movement) and the footage
+ * filter returns to brightness 1 / saturate 1 (the void frames are dark on
+ * their own); the `explode` act plays with no text; hold 0.90..1.00 on the
+ * last frame; nav fill 0.90..0.98.
+ *
  * Scroll-out q (0 = the pin releases, 1 = the chapter's bottom reaches the
  * viewport top), copied from HeroChapter: the block fades as one over q
- * 0.22-0.62 (power2.inOut), the footage goes 0.42 -> 0.12 over q 0-0.6 while
- * the Highlights strip slides over the hero.
+ * 0.22-0.62 (power2.inOut) unless it already left during the dip, and the
+ * footage goes to brightness 0.12 over q 0-0.6 while the Highlights strip
+ * slides over the hero.
  */
 const SCHEDULE = {
   scrubStart: 0.05,
@@ -77,14 +110,27 @@ const SCHEDULE = {
   posterPushIn: { seconds: 12, scale: 1.06 },
 } as const;
 
-/** Pin length: three viewport heights of film plus the hold. */
-const HEIGHT_CLASS = "h-[400vh]";
+/** The v2 four-act numbers that differ from v1. */
+const FILM_SCHEDULE = {
+  scrubStart: 0.04,
+  scrubEnd: 0.9,
+  nav: { fillStart: 0.9, fillEnd: 0.98 },
+  /** The idle glide lands this much of p after line 1 starts to land. */
+  glideAfterBeat: 0.05,
+  /** Text exit over the dip act: the words leave in place. */
+  dipEase: "power2.inOut",
+} as const;
+
+/** Pin length: v1 three viewport heights of film plus the hold; v2 the four
+ * acts. Both literals stay in the source so Tailwind emits both classes. */
+const HEIGHT_CLASS = { v1: "h-[400vh]", film: "h-[700vh]" } as const;
 
 const WIDE_QUERY = "(min-width: 768px)";
 
 /** Idle glide: once the coarse frame set is in and the visitor is still at the
- * top GLIDE_DELAY_S later, the page glides once to GLIDE_TARGET_P (past beat
- * B) at 24 film frames a second or better; any input cancels it. */
+ * top GLIDE_DELAY_S later, the page glides once to the glide target (v1: past
+ * beat B; v2: just after line 1 lands) at 24 film frames a second or better;
+ * any input cancels it. */
 const GLIDE_DELAY_S = 2;
 const GLIDE_TARGET_P = 0.55;
 const GLIDE_MIN_FPS = 24;
@@ -133,18 +179,19 @@ const DISPLAY_TYPE =
 declare global {
   interface Window {
     /** Dev-only handle for the QA script (frame timing, painted vs skipped). */
-    __heroCine?: { loader: FrameLoader; drawer: FrameCanvas; proxy: { f: number }; set: FrameSet };
+    __heroCine?: { loader: FrameLoader; drawer: FrameCanvas; proxy: { f: number }; set: FrameSet; film?: FilmSpec };
   }
 }
 
 /**
- * The landing's first 400vh as a scroll-scrubbed film: the poster (frame 1)
+ * The landing's first chapter as a scroll-scrubbed film: the poster (frame 1)
  * under the transparent nav, the frames drawn on a canvas as the wheel moves,
- * the headline landing on three beats of the footage while it zooms, a hold
- * on the last frame, then the same fade-in-place scroll-out as HeroChapter
- * before the paper Highlights strip slides over. CSS sticky does the pinning;
- * one scrubbed GSAP timeline does everything else. Nothing plays on its own,
- * so there is no pause control.
+ * the headline landing on beats of the footage while it zooms, a hold on the
+ * last frame, then the same fade-in-place scroll-out as HeroChapter before
+ * the paper Highlights strip slides over. With `film` the chapter is the v2
+ * four-act cut: the words leave again over the dip to black and the exploded
+ * car plays alone. CSS sticky does the pinning; one scrubbed GSAP timeline
+ * does everything else. Nothing plays on its own, so there is no pause control.
  *
  * Loading: the poster is the LCP element; the frame set streams after the
  * window `load` event (every 6th frame first), the canvas fades in over the
@@ -163,6 +210,7 @@ export default function HeroCinematic({
   lines,
   description,
   beats = SCHEDULE.beats,
+  film,
   focusX = 0.5,
   caption = DEFAULT_CAPTION,
   as = "h1",
@@ -177,7 +225,7 @@ export default function HeroCinematic({
   const headingId = useId();
   const Tag = as;
   const sentence = lines.join(" ");
-  const beatsKey = beats.join(",");
+  const scheduleKey = film ? JSON.stringify(film) : beats.join(",");
   // Idle cue: "idle" until the 10 s timer fires; any scroll before that
   // cancels it forever; the first scroll after it shows hides it for good.
   const [cue, setCue] = useState<"idle" | "visible" | "hidden">("idle");
@@ -199,8 +247,8 @@ export default function HeroCinematic({
     };
   }, [isStatic]);
 
-  // The chapter's height is fixed (400vh), but the sticky box and the canvas
-  // mount after the route chunk: recompute the trigger starts once.
+  // The chapter's height is fixed, but the sticky box and the canvas mount
+  // after the route chunk: recompute the trigger starts once.
   useEffect(() => {
     if (isStatic) return;
     ScrollTrigger.refresh();
@@ -227,8 +275,26 @@ export default function HeroCinematic({
         const S = SCHEDULE;
         const set = wide ? frames.desktop : frames.mobile;
         const zoom = wide ? S.zoom.wide : S.zoom.narrow;
-        const [pA, , pC] = beats;
         const animated = [layer, block, ...(desc ? [desc] : []), ...units];
+
+        // The scrub window and the beats. v2 places everything by desktop
+        // frame index (the mobile set is the same film resampled, so p is
+        // shared) and turns it into p through pAtFrame.
+        const scrubStart = film ? FILM_SCHEDULE.scrubStart : S.scrubStart;
+        const scrubEnd = film ? FILM_SCHEDULE.scrubEnd : S.scrubEnd;
+        const toP = (frame: number) => pAtFrame(frame, scrubStart, scrubEnd, frames.desktop.count);
+        const beatP: HeroBeats = film
+          ? [toP(film.beatFrames[0]), toP(film.beatFrames[1]), toP(film.beatFrames[2])]
+          : beats;
+        const [pA, , pC] = beatP;
+        const descIn = pC + S.description.delay;
+        // The dip act (v2): the text leaves in place while the frames go to
+        // black. It can only start once the description is fully in.
+        const dipAct = film?.acts.find((a) => a.name === "dip");
+        const dipStart = dipAct ? Math.max(toP(dipAct.from), descIn + S.description.duration) : null;
+        const dipEnd = dipAct && dipStart !== null ? Math.max(dipStart + 0.02, toP(dipAct.to)) : null;
+        const textLeavesInPin = dipStart !== null && dipEnd !== null;
+        const glideTarget = film ? Math.min(scrubEnd, pA + FILM_SCHEDULE.glideAfterBeat) : GLIDE_TARGET_P;
 
         // Frame engine: the drawer paints the nearest loaded frame; the loader
         // starts after `load` so the poster (LCP) and the page's own assets
@@ -246,9 +312,9 @@ export default function HeroCinematic({
           glideTimer = window.setTimeout(() => {
             if (glideDone || window.scrollY > 8) return;
             glideDone = true;
-            const covered = frameAt(GLIDE_TARGET_P, S.scrubStart, S.scrubEnd, set.count) - frameAt(0, S.scrubStart, S.scrubEnd, set.count);
+            const covered = frameAt(glideTarget, scrubStart, scrubEnd, set.count) - frameAt(0, scrubStart, scrubEnd, set.count);
             const ms = Math.max(1500, (covered / GLIDE_MIN_FPS) * 1000);
-            const target = root.getBoundingClientRect().top + window.scrollY + GLIDE_TARGET_P * (root.offsetHeight - window.innerHeight);
+            const target = root.getBoundingClientRect().top + window.scrollY + glideTarget * (root.offsetHeight - window.innerHeight);
             cancelGlide = glideTo(target, ms);
           }, GLIDE_DELAY_S * 1000);
         };
@@ -269,7 +335,7 @@ export default function HeroCinematic({
             scheduleGlide();
           },
         });
-        if (import.meta.env.DEV) window.__heroCine = { loader, drawer, proxy, set };
+        if (import.meta.env.DEV) window.__heroCine = { loader, drawer, proxy, set, film };
         const ro = new ResizeObserver(() => drawer.resize());
         ro.observe(canvasEl);
         const kick = () => void loader.start();
@@ -307,11 +373,7 @@ export default function HeroCinematic({
 
         // The film: the proxy frame index runs 0..N-1 over the scrub window;
         // every update paints the nearest loaded frame (never a fetch).
-        tl.to(
-          proxy,
-          { f: set.count - 1, duration: S.scrubEnd - S.scrubStart, onUpdate: paint },
-          S.scrubStart,
-        );
+        tl.to(proxy, { f: set.count - 1, duration: scrubEnd - scrubStart, onUpdate: paint }, scrubStart);
 
         // Footage dims and desaturates from just before the first words to
         // the last beat. The near-black exit ramp lives on the scroll-out
@@ -328,7 +390,7 @@ export default function HeroCinematic({
         // the beat.
         lineEls.forEach((lineEl, li) => {
           const lineUnits = Array.from(lineEl.querySelectorAll<HTMLElement>(".rr-hero-unit"));
-          const beat = beats[Math.min(li, beats.length - 1)];
+          const beat = beatP[Math.min(li, beatP.length - 1)];
           const n = lineUnits.length;
           const dur = n > 1 ? S.wordDuration : S.lineDuration;
           const stagger = n > 1 ? (S.lineDuration - S.wordDuration) / (n - 1) : 0;
@@ -344,17 +406,12 @@ export default function HeroCinematic({
 
         // Description: fades in after the last line has landed (no movement).
         if (desc) {
-          tl.fromTo(
-            desc,
-            { opacity: 0 },
-            { opacity: 1, duration: S.description.duration, ease: "none" },
-            pC + S.description.delay,
-          );
+          tl.fromTo(desc, { opacity: 0 }, { opacity: 1, duration: S.description.duration, ease: "none" }, descIn);
         }
 
         // Caption: visible from the moment the film starts.
         if (cap) {
-          tl.fromTo(cap, { opacity: 0 }, { opacity: 1, duration: S.caption.duration, ease: "none" }, S.scrubStart);
+          tl.fromTo(cap, { opacity: 0 }, { opacity: 1, duration: S.caption.duration, ease: "none" }, scrubStart);
         }
 
         // Zoom: from just before the first beat to the last, so the block is
@@ -366,9 +423,40 @@ export default function HeroCinematic({
           pA - S.zoom.lead,
         );
 
+        // v2 dip: the words leave in place (opacity only, no movement) while
+        // the frames go to black, and the footage filter returns to neutral so
+        // the car on the void is not crushed by the dim; the explode act then
+        // plays with no text. immediateRender off so nothing is forced before
+        // the assembly has run.
+        if (textLeavesInPin && dipStart !== null && dipEnd !== null) {
+          const dur = dipEnd - dipStart;
+          tl.fromTo(
+            block,
+            { opacity: 1 },
+            { opacity: 0, duration: dur, ease: FILM_SCHEDULE.dipEase, immediateRender: false },
+            dipStart,
+          );
+          if (desc) {
+            tl.fromTo(
+              desc,
+              { opacity: 1 },
+              { opacity: 0, duration: dur, ease: FILM_SCHEDULE.dipEase, immediateRender: false },
+              dipStart,
+            );
+          }
+          tl.fromTo(
+            layer,
+            { filter: layerFilter(S.dim.brightness, S.dim.saturate) },
+            { filter: layerFilter(1, 1), duration: dur, immediateRender: false },
+            dipStart,
+          );
+        }
+
         // Scroll-out: copied from HeroChapter. The words fade as one, in
         // place, while the footage goes near-black under them and the hero
-        // rides up under the Highlights strip.
+        // rides up under the Highlights strip. When the words already left
+        // during the dip, only the footage ramp runs (a fade from 1 would pop
+        // them back).
         const out = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: {
@@ -379,25 +467,30 @@ export default function HeroCinematic({
             invalidateOnRefresh: true,
           },
         });
-        out
-          .to({ t: 0 }, { t: 1, duration: 1 }, 0)
-          .fromTo(
-            desc ?? block,
-            { opacity: 1 },
-            { opacity: 0, duration: S.fade.end - S.fade.start, ease: S.fade.ease, immediateRender: false },
-            S.fade.start,
-          )
-          .fromTo(
-            block,
-            { opacity: 1 },
-            { opacity: 0, duration: S.fade.end - S.fade.start, ease: S.fade.ease, immediateRender: false },
-            S.fade.start,
-          )
-          .to(
-            layer,
-            { filter: layerFilter(S.exit.brightness, S.dim.saturate), duration: S.exit.end - S.exit.start },
-            S.exit.start,
-          );
+        out.to({ t: 0 }, { t: 1, duration: 1 }, 0);
+        if (!textLeavesInPin) {
+          out
+            .fromTo(
+              desc ?? block,
+              { opacity: 1 },
+              { opacity: 0, duration: S.fade.end - S.fade.start, ease: S.fade.ease, immediateRender: false },
+              S.fade.start,
+            )
+            .fromTo(
+              block,
+              { opacity: 1 },
+              { opacity: 0, duration: S.fade.end - S.fade.start, ease: S.fade.ease, immediateRender: false },
+              S.fade.start,
+            );
+        }
+        out.to(
+          layer,
+          {
+            filter: layerFilter(S.exit.brightness, textLeavesInPin ? 1 : S.dim.saturate),
+            duration: S.exit.end - S.exit.start,
+          },
+          S.exit.start,
+        );
 
         return () => {
           window.clearTimeout(glideTimer);
@@ -413,7 +506,11 @@ export default function HeroCinematic({
         };
       });
     },
-    { scope, dependencies: [isStatic, sentence, frames.desktop.base, frames.mobile.base, beatsKey, focusX], revertOnUpdate: true },
+    {
+      scope,
+      dependencies: [isStatic, sentence, frames.desktop.base, frames.mobile.base, frames.desktop.count, scheduleKey, focusX],
+      revertOnUpdate: true,
+    },
   );
 
   const headline = (onInk: boolean) => (
@@ -490,10 +587,10 @@ export default function HeroCinematic({
     <section
       ref={scope}
       aria-labelledby={headingId}
-      className={`relative ${HEIGHT_CLASS} bg-ink-950 ${className}`}
+      className={`relative ${film ? HEIGHT_CLASS.film : HEIGHT_CLASS.v1} bg-ink-950 ${className}`}
       data-hero-chapter=""
       data-hero-cine="film"
-      data-nav-fill={navFill(SCHEDULE.nav)}
+      data-nav-fill={navFill(film ? FILM_SCHEDULE.nav : SCHEDULE.nav)}
     >
       <div className="sticky top-0 h-svh overflow-hidden text-text-on-ink">
         {/* The footage layer carries the push-in and the filter tweens: the

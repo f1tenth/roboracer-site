@@ -32,6 +32,17 @@ export function frameAt(p: number, scrubStart: number, scrubEnd: number, count: 
 }
 
 /**
+ * Inverse of `frameAt`: the pin progress at which the film shows `frame`
+ * (clamped to the set). The v2 schedule places beats and acts by frame index,
+ * read off the contact sheets, and turns them into p through this.
+ */
+export function pAtFrame(frame: number, scrubStart: number, scrubEnd: number, count: number): number {
+  if (count <= 1) return scrubStart;
+  const t = Math.max(0, Math.min(count - 1, frame)) / (count - 1);
+  return scrubStart + t * (scrubEnd - scrubStart);
+}
+
+/**
  * Loads a frame set in two passes: every `stride`-th frame first (so scrubbing
  * can start within a second or two), then the rest in order. `onFrame` fires
  * per decoded frame so the caller can repaint when the frame under the cursor
