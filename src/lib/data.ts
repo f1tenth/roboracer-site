@@ -13,8 +13,28 @@ export type UpcomingEvent = {
   dates_headline?: string;
   dates_secondary?: string;
   starts_at?: string;
+  /** End instant, so the season chain can compute concluded without a literal. */
+  ends_at?: string;
+  venue?: string;
+  /** Where to watch while the race runs. */
+  stream_url?: string;
+  /** `unconfirmed` until someone has seen a real stream go up. */
+  stream_status?: "confirmed" | "unconfirmed";
   registration_deadline?: string;
+  /** The same deadline as an instant, so a countdown never parses prose. */
+  registration_deadline_at?: string;
+  registration_deadline_note?: string;
   register_url?: string;
+  /** Where the deadlines are published, when that is not the registration page.
+   * scripts/sync-event-deadlines.py reads this first. */
+  timeline_url?: string;
+  /** Published on the same timeline row as the registration close, so it
+   * shares that date rather than being typed separately. */
+  qualification_video_due?: string;
+  /** The race's own picture in the season chain. Absent until there is one:
+   * the chain renders its designed placeholder rather than an empty frame. */
+  image?: string;
+  image_alt?: string;
   rules_url?: string;
 };
 
@@ -31,6 +51,9 @@ export type Partner = {
   image_rest?: string;
   /** Ribbon hover / focus state: the colour logo at the same size. */
   image_hover?: string;
+  /** Kind of institution, for the About wall's groups. Absent on older
+   * records, which fall back to one ungrouped wall. */
+  category?: "university" | "industry" | "organization" | "other";
 };
 
 export type NewsItem = {
@@ -47,12 +70,6 @@ export type Testimonial = {
   institution: string;
   image: string;
   quote: string;
-};
-
-export type TeamMember = {
-  name: string;
-  linkedin?: string;
-  image: string;
 };
 
 export type Publication = {
@@ -152,6 +169,12 @@ export type MapEvent = {
   source?: string;
   labelDx?: number;
   labelDy?: number;
+  /** The event's own page. Absent when none ever existed. */
+  url?: string;
+  /** live = answered 200 when last checked; archive = a Wayback capture
+   * because the original domain is dead; none = no page to link. */
+  url_status?: "live" | "archive" | "none";
+  url_note?: string;
 };
 
 export type MapCountry = {
@@ -293,8 +316,6 @@ export const loadPastRaces = () => loadJson<PastRace[]>("past_races.json");
 export const loadPartners = () => loadJson<Partner[]>("partners.json");
 export const loadNews = () => loadJson<NewsItem[]>("news.json");
 export const loadTestimonials = () => loadJson<Testimonial[]>("testimonies.json");
-export const loadTeamDevelopers = () => loadJson<TeamMember[]>("team_developers.json");
-export const loadTeamAlumni = () => loadJson<TeamMember[]>("team_alumni.json");
 export const loadPublications = () => loadJson<PublicationsFile>("publications.json");
 export const loadTeams = () => loadJson<Team[]>("teams.json");
 export const loadHighlights = () => loadJson<Highlight[]>("highlights.json");

@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { loadPublications, tagLabelMap, type Publication, type PublicationsFile } from "../lib/data";
-import { authorLine, fold, paperHref, scholarSearchUrl, scholarTagUrl } from "../lib/publications";
+import { fold, scholarSearchUrl, scholarTagUrl } from "../lib/publications";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
+import StatTicker from "../components/ui/StatTicker";
 import Reveal from "../components/ui/Reveal";
 import TagFilter from "../components/ui/TagFilter";
-import PublicationCard from "../components/ui/PublicationCard";
+import PaperCard from "../components/research/PaperCard";
+import PaperRow from "../components/research/PaperRow";
 
 const SCHOLAR_URL =
   "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=";
@@ -23,58 +25,11 @@ function matches(p: Publication, needle: string, labels: Record<string, string>)
   return needle.split(/\s+/).every((w) => hay.includes(w));
 }
 
-function Row({ p, labels }: { p: Publication; labels: Record<string, string> }) {
-  const href = paperHref(p);
-  const extras: { label: string; href: string }[] = [];
-  const arxivHref = p.arxiv ? `https://arxiv.org/abs/${p.arxiv}` : undefined;
-  const doiHref = p.doi ? `https://doi.org/${p.doi}` : undefined;
-  if (arxivHref && arxivHref !== href) extras.push({ label: "arXiv", href: arxivHref });
-  if (doiHref && doiHref !== href) extras.push({ label: "DOI", href: doiHref });
-  if (p.pdf && p.pdf !== href) extras.push({ label: "PDF", href: p.pdf });
-  return (
-    <li className="grid gap-3 py-5 md:grid-cols-[1fr_auto] md:gap-8">
-      <div>
-        <h4 className="font-display text-body font-semibold leading-snug text-text-strong">
-          {href ? (
-            <a href={href} target="_blank" rel="noopener noreferrer" className={LINK}>
-              {p.title}
-            </a>
-          ) : (
-            p.title
-          )}
-        </h4>
-        <p className="mt-1 text-small text-text-body">{authorLine(p.authors)}</p>
-        <p className="mt-1 font-mono text-eyebrow tracking-normal text-text-muted">
-          {p.venue_short?.trim() || p.venue || p.type}
-          {p.tags.length > 0 ? ` · ${p.tags.map((t) => labels[t] ?? t).join(", ")}` : ""}
-        </p>
-      </div>
-      {extras.length > 0 && (
-        <ul className="flex gap-4 font-mono text-small md:justify-end" aria-label="Links">
-          {extras.map((x) => (
-            <li key={x.label}>
-              <a
-                href={x.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${x.label}: ${p.title}`}
-                className={`text-text-strong ${LINK}`}
-              >
-                {x.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </li>
-  );
-}
-
 /**
  * /research on the paper surface: the 1,000+ message with the Scholar query,
- * a topic filter over the featured grid (thumbnails), every curated paper
- * grouped by year with search, and the submit CTA. Renders from
- * public/data/publications.json (content is data).
+ * a topic filter over the featured grid (a figure or a generated venue tile
+ * on every card), every curated paper grouped by year with search, and the
+ * submit CTA. Renders from public/data/publications.json (content is data).
  */
 export default function Research() {
   const [pubs, setPubs] = useState<PublicationsFile | null>(null);
@@ -107,7 +62,7 @@ export default function Research() {
   return (
     <div className="pt-[68px] md:pt-[85px]">
       {/* Header: the Scholar message, one secondary CTA, a mono data ledger */}
-      <Section aria-labelledby="research-title">
+      <Section width="page" aria-labelledby="research-title">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
             <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-muted">
@@ -131,33 +86,70 @@ export default function Research() {
               </Button>
             </div>
           </div>
-          <dl className="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-ink-950/10 pt-6 font-mono text-small text-text-muted md:col-span-4">
+          {/* The counts are the argument this page makes, so they run big and
+              in violet and tick up over two and a half seconds (Cedric,
+              2026-08-23: five felt slow).
+              Violet, not the logo gradient: gradient text is ink-only, its
+              cyan stop being 1.9:1 on paper. Keyed on the fetch so the tween
+              starts from the real number rather than from the "…" placeholder. */}
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-7 border-t border-ink-950/10 pt-6 font-mono text-small text-text-muted md:col-span-4">
+            {pubs ? (
+              <>
+                <StatTicker
+                  key={`curated-${published.length}`}
+                  as="dl"
+                  size="l"
+                  tone="accent"
+                  duration={2.5}
+                  value={published.length}
+                  label="Curated papers"
+                />
+                <StatTicker
+                  key={`featured-${featuredAll.length}`}
+                  as="dl"
+                  size="l"
+                  tone="accent"
+                  duration={2.5}
+                  value={featuredAll.length}
+                  label="Featured"
+                />
+                <StatTicker
+                  key={`topics-${pubs.tags.length}`}
+                  as="dl"
+                  size="l"
+                  tone="accent"
+                  duration={2.5}
+                  delay={0.15}
+                  value={pubs.tags.length}
+                  label="Topics"
+                />
+              </>
+            ) : (
+              <>
+                <div>
+                  <dt className="font-mono text-small text-text-muted">Curated papers</dt>
+                  <dd className="mt-1 font-mono text-display-l font-semibold text-text-muted">…</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-small text-text-muted">Featured</dt>
+                  <dd className="mt-1 font-mono text-display-l font-semibold text-text-muted">…</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-small text-text-muted">Topics</dt>
+                  <dd className="mt-1 font-mono text-display-l font-semibold text-text-muted">…</dd>
+                </div>
+              </>
+            )}
             <div>
-              <dt>Curated papers</dt>
-              <dd className="mt-1 font-display text-display-m font-semibold text-text-strong">
-                {pubs ? published.length : "…"}
-              </dd>
-            </div>
-            <div>
-              <dt>Featured</dt>
-              <dd className="mt-1 font-display text-display-m font-semibold text-text-strong">
-                {pubs ? featuredAll.length : "…"}
-              </dd>
-            </div>
-            <div>
-              <dt>Topics</dt>
-              <dd className="mt-1 text-text-strong">{pubs ? pubs.tags.length : "…"}</dd>
-            </div>
-            <div>
-              <dt>Updated</dt>
-              <dd className="mt-1 text-text-strong">{pubs ? pubs.updated : "…"}</dd>
+              <dt className="font-mono text-small text-text-muted">Updated</dt>
+              <dd className="mt-1 font-mono text-body text-text-strong">{pubs ? pubs.updated : "…"}</dd>
             </div>
           </dl>
         </div>
       </Section>
 
       {/* Featured grid with the topic filter */}
-      <Section rule aria-labelledby="featured">
+      <Section width="page" rule aria-labelledby="featured">
         <SectionHeader
           eyebrow="Featured"
           id="featured"
@@ -190,7 +182,7 @@ export default function Research() {
             {featured.length > 0 ? (
               <Reveal key={tag ?? "all"} stagger className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {featured.map((p) => (
-                  <PublicationCard key={p.id} publication={p} tagLabels={labels} />
+                  <PaperCard key={p.id} publication={p} tagLabels={labels} />
                 ))}
               </Reveal>
             ) : (
@@ -204,7 +196,7 @@ export default function Research() {
       </Section>
 
       {/* Every curated paper, grouped by year, with search */}
-      <Section edge rule aria-labelledby="all-curated">
+      <Section width="page" edge rule aria-labelledby="all-curated">
         <SectionHeader
           eyebrow="All curated"
           id="all-curated"
@@ -249,21 +241,21 @@ export default function Research() {
               </p>
             ) : (
               <div className="divide-y divide-ink-950/10 border-t border-ink-950/10">
+                {/* The year was a sticky two-column rail, which pushed every
+                    figure a sixth of the page in from the left and kept the
+                    pictures small (Cedric, 2026-08-23). It is a heading now,
+                    and the rows run the full width. */}
                 {byYear.map(([year, items]) => (
-                  <section
-                    key={year}
-                    aria-labelledby={`year-${year}`}
-                    className="grid gap-2 py-8 md:grid-cols-12 md:gap-6"
-                  >
+                  <section key={year} aria-labelledby={`year-${year}`} className="py-8">
                     <h3
                       id={`year-${year}`}
-                      className="font-mono text-small text-text-muted md:sticky md:top-28 md:col-span-2 md:self-start"
+                      className="mb-4 font-display text-display-m font-semibold tabular-nums text-text-strong"
                     >
                       {year}
                     </h3>
-                    <ul className="divide-y divide-ink-950/10 md:col-span-10">
+                    <ul className="divide-y divide-ink-950/10 border-t border-ink-950/10">
                       {items.map((p) => (
-                        <Row key={p.id} p={p} labels={labels} />
+                        <PaperRow key={p.id} publication={p} tagLabels={labels} />
                       ))}
                     </ul>
                   </section>
@@ -275,7 +267,7 @@ export default function Research() {
       </Section>
 
       {/* Submit: the one solid CTA on the page */}
-      <Section rule aria-labelledby="submit">
+      <Section width="page" rule aria-labelledby="submit">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
           <div className="md:col-span-7">
             <SectionHeader

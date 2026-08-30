@@ -54,3 +54,12 @@ public/media/hero-cine/**
 !public/media/hero-cine/manifest.json
 !public/media/hero-cine/poster-*.webp
 .overnight/
+
+# section 14.1: QA builds go to their own dir so a rebuild never empties the dist a preview server is serving
+dist-preview/
+
+# throwaway build dirs used for bundle measurement and QA previews
+dist-*/
+
+# stray probe files from build agents
+*.probe.tmp

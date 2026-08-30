@@ -16,7 +16,7 @@ export default function SponsorCTA({ on = "paper" }: SponsorCTAProps) {
     >
       <div className="md:col-span-7">
         <h3 className={`font-display text-display-m font-semibold ${ink ? "text-text-on-ink" : "text-text-strong"}`}>
-          Put your name on the grid
+          Sponsor a RoboRacer competition
         </h3>
         <p className={`mt-4 max-w-[55ch] text-body ${ink ? "text-text-on-ink-muted" : "text-text-body"}`}>
           RoboRacer races run at the major robotics conferences, in front of the

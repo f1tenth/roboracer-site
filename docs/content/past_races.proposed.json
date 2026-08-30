@@ -3,7 +3,7 @@
           "name": "28th Roboracer Autonomous Racing Competition (IV 2026, Detroit)",
           "url": "https://iv2026-race.roboracer.ai/",
           "status": "verify",
-          "note": "TODO(content): event occurred June 22-25, 2026 per upcoming_events.json (now past). Skill states UPenn xLab won the solo competition with an MPPI controller; the event's own results.html still reads 'Results will be posted after the competition' as of this audit (2026-08-20), so no podium data could be pulled from the results page itself. Ask Cedric to confirm the solo-competition result before publishing it on the site."
+          "note": "TODO(content): event occurred June 22-25, 2026 per upcoming_events.json (now past). Skill states UPenn xLAB won the solo competition with an MPPI controller; the event's own results.html still reads 'Results will be posted after the competition' as of this audit (2026-08-20), so no podium data could be pulled from the results page itself. Ask Cedric to confirm the solo-competition result before publishing it on the site."
       },
       {
           "name": "27th Roboracer Autonomous Racing Competition (ICRA 2026, Vienna)",

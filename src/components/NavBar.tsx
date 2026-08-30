@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { gsap, ScrollTrigger, DURATION, REDUCED_MOTION_QUERY } from "../lib/motion";
 
 const links = [
   { href: "/about", text: "About" },
   { href: "/build", text: "Build" },
   { href: "/learn", text: "Learn" },
   { href: "/race", text: "Race" },
-  { href: "/course", text: "Course" },
+  // The rulebook used to be reachable only from a button part-way down the
+  // About page; a competitor looking for it would never have found it.
+  { href: "/rules", text: "Rules" },
   { href: "/research", text: "Research" },
   { href: "/news", text: "News" },
 ];
@@ -107,7 +109,11 @@ function ExternalIcon() {
 export default function Navbar() {
   const location = useLocation();
   const navRef = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  // Mount tracks `menuOpen` on the way in and lags it on the way out, so the
+  // panel is still in the DOM while its close tween runs.
+  const [menuMounted, setMenuMounted] = useState(false);
   // The open mobile menu needs a solid bar behind it whatever the scroll.
   const transparent = HERO_ROUTES.has(location.pathname) && !menuOpen;
 
@@ -124,6 +130,50 @@ export default function Navbar() {
   // is imported lazily so GSAP stays out of the shared bundle on the routes
   // that never animate; the first value is computed synchronously from the
   // chapter's geometry, so there is no opaque flash before the chunk arrives.
+  useEffect(() => {
+    if (menuOpen) setMenuMounted(true);
+  }, [menuOpen]);
+
+  // Open and close the mobile panel. Reduced motion gets the end state with no
+  // tween at all, which also means the panel unmounts on the same frame it
+  // closes rather than waiting on a tween that never runs.
+  useEffect(() => {
+    if (!menuMounted) return;
+    const el = menuRef.current;
+    if (!el) return;
+    const reduce = window.matchMedia(REDUCED_MOTION_QUERY).matches;
+
+    if (menuOpen) {
+      if (reduce) {
+        gsap.set(el, { opacity: 1, y: 0 });
+        return;
+      }
+      const tween = gsap.fromTo(
+        el,
+        { opacity: 0, y: -10 },
+        { opacity: 1, y: 0, duration: DURATION.fast, ease: "power2.out" },
+      );
+      return () => {
+        tween.kill();
+      };
+    }
+
+    if (reduce) {
+      setMenuMounted(false);
+      return;
+    }
+    const tween = gsap.to(el, {
+      opacity: 0,
+      y: -10,
+      duration: DURATION.fast,
+      ease: "power2.in",
+      onComplete: () => setMenuMounted(false),
+    });
+    return () => {
+      tween.kill();
+    };
+  }, [menuOpen, menuMounted]);
+
   // The route chunk is lazy too: until the chapter is in the DOM the bar is
   // paper (over the blank page), and a MutationObserver attaches the ramp
   // the moment it lands, before that frame paints.
@@ -143,18 +193,16 @@ export default function Navbar() {
       const [from, to] = parseNavFill(chapter.dataset.navFill);
       const alphaOf = (p: number) => Math.min(1, Math.max(0, (p - from) / (to - from)));
       setAlpha(alphaOf(chapterProgress(chapter)));
-      void import("../lib/motion").then(({ gsap, ScrollTrigger }) => {
-        if (cancelled) return;
-        ctx = gsap.context(() => {
-          const trigger = ScrollTrigger.create({
-            trigger: chapter,
-            start: "top top",
-            end: "bottom bottom",
-            onUpdate: (self) => setAlpha(alphaOf(self.progress)),
-            onRefresh: (self) => setAlpha(alphaOf(self.progress)),
-          });
-          setAlpha(alphaOf(trigger.progress));
+      if (cancelled) return;
+      ctx = gsap.context(() => {
+        const trigger = ScrollTrigger.create({
+          trigger: chapter,
+          start: "top top",
+          end: "bottom bottom",
+          onUpdate: (self) => setAlpha(alphaOf(self.progress)),
+          onRefresh: (self) => setAlpha(alphaOf(self.progress)),
         });
+        setAlpha(alphaOf(trigger.progress));
       });
     };
 
@@ -236,37 +284,30 @@ export default function Navbar() {
         </svg>
       </button>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            id="nav-mobile-menu"
-            className="mobile-menu lg:hidden"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
+      {/* Mobile Menu. Kept mounted for the length of its exit tween, which is
+          what AnimatePresence used to do; unmounting on the state flip alone
+          would cut the close animation off at frame one. */}
+      {menuMounted && (
+        <div id="nav-mobile-menu" ref={menuRef} className="mobile-menu lg:hidden">
+          {links.map((link) => (
+            <Link key={link.href} to={link.href} className="mobile-menu-link">
+              {link.text}
+            </Link>
+          ))}
+          <a
+            href={SIMULATOR_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mobile-menu-link flex items-center gap-2"
           >
-            {links.map((link) => (
-              <Link key={link.href} to={link.href} className="mobile-menu-link">
-                {link.text}
-              </Link>
-            ))}
-            <a
-              href={SIMULATOR_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mobile-menu-link flex items-center gap-2"
-            >
-              Simulator
-              <ExternalIcon />
-            </a>
-            <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className="mobile-menu-link">
-              Join Community
-            </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            Simulator
+            <ExternalIcon />
+          </a>
+          <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className="mobile-menu-link">
+            Join Community
+          </a>
+        </div>
+      )}
     </nav>
   );
 }

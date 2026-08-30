@@ -1,0 +1,1836 @@
+{
+  "generated_at": "2026-08-23",
+  "note": "candidates for Cedric to approve; not published content",
+  "candidates": [
+    {
+      "name": "Rahul Mangharam",
+      "role": "Professor, Department of Electrical and Systems Engineering, University of Pennsylvania; faculty lead of RoboRacer",
+      "role_source": "Penn ESE directory: \"Professor\" / primary department \"Electrical and Systems Engineering\". Race sites 2023-2026 word it \"Associate Professor, Department of Electrical and Systems Engineering, University of Pennsylvania\" (CDC 2025 says \"Professor\").",
+      "affiliation": "University of Pennsylvania (xLAB / PRECISE / GRASP)",
+      "source_url": "https://directory.engineering.upenn.edu/rahul-mangharam/",
+      "evidence": {
+        "papers": 12,
+        "paper_titles": [
+          "F1tenth: An open-source evaluation environment for continuous control and reinforcement learning",
+          "Bypassing the Simulation-to-reality Gap: Online Reinforcement Learning using a Supervisor",
+          "AD-MPCC: Adaptive Differentiable Model Predictive Contouring Control for Autonomous Racing",
+          "Conformal Off-Policy Prediction for Multi-Agent Systems",
+          "F1TENTH: Enhancing Autonomous Systems Education Through Hands-On Learning and Competition"
+        ],
+        "years": [
+          2020,
+          2026
+        ],
+        "events_organised": [
+          "ICRA 2026 (27th, Vienna)",
+          "IROS 2026 (31st, Pittsburgh)",
+          "IV 2026 (28th, Detroit)",
+          "VTC 2026-Fall (30th, Boston)",
+          "IFAC 2026 (29th, Busan)",
+          "ICRA 2025 (24th, Atlanta)",
+          "IV 2025 (25th, Cluj-Napoca)",
+          "CDC 2025 (Rio de Janeiro)",
+          "CDC 2024 (22nd, Milan)",
+          "ITSC 2024 (20th, Edmonton)",
+          "IEEE SM 2024 (19th, Niagara Falls)",
+          "IV 2024 (18th, Jeju)",
+          "BU 2024 (23rd, Boston)",
+          "CPS-IoT Week 2024 (17th, Hong Kong)",
+          "IROS 2023 (14th, Detroit)",
+          "ICRA 2023 (11th, London)",
+          "RoboRacer Sim Racing League @ ICRA 2026"
+        ],
+        "teams": [],
+        "note": "Founder-side faculty lead. On all 16 organising committees checked and 12 papers 2020-2026. Penn directory now says Professor; every race site still says Associate Professor - use the directory wording."
+      },
+      "proposed_category": "faculty",
+      "confidence": "high"
+    },
+    {
+      "name": "Ahmad Amine",
+      "role": "Ph.D. Candidate, Department of Electrical and Systems Engineering, University of Pennsylvania",
+      "role_source": "\"Ph.D. Candidate, Department of Electrical and Systems Engineering, University of Pennsylvania\" (ICRA 2026 / IROS 2026 / IV 2026 / VTC 2026 organiser lists); xLAB members page says \"Ph.D. Student\".",
+      "affiliation": "University of Pennsylvania (xLAB)",
+      "source_url": "https://iros2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 1,
+        "paper_titles": [
+          "AD-MPCC: Adaptive Differentiable Model Predictive Contouring Control for Autonomous Racing"
+        ],
+        "years": [
+          2026,
+          2026
+        ],
+        "events_organised": [
+          "ICRA 2026 (27th, Vienna)",
+          "IROS 2026 (31st, Pittsburgh)",
+          "IV 2026 (28th, Detroit)",
+          "VTC 2026-Fall (30th, Boston)",
+          "ICRA 2025 (24th, Atlanta)",
+          "IV 2025 (25th, Cluj-Napoca)",
+          "CDC 2025 (Rio de Janeiro)",
+          "CDC 2024 (22nd, Milan)",
+          "ITSC 2024 (20th, Edmonton)",
+          "IEEE SM 2024 (19th, Niagara Falls)",
+          "IV 2024 (18th, Jeju)",
+          "RoboRacer Sim Racing League @ ICRA 2026"
+        ],
+        "teams": [],
+        "note": "Most frequent organiser after Rahul: 11 of the 16 committees checked, unbroken 2024-2026. Named 'supporting' in the content skill."
+      },
+      "proposed_category": "crew",
+      "confidence": "high"
+    },
+    {
+      "name": "Johannes Betz",
+      "role": "Rudolf Moessbauer Professor, Chair of Autonomous Vehicle Systems, TUM School of Engineering and Design, Technical University of Munich",
+      "role_source": "\"Rudolf Moessbauer Professor\" / \"Chair of Autonomous Vehicle Systems\" (TUM professors directory). Race sites 2023-2025 still say \"Assistant Professor, Department of Mobility Systems Engineering, Technical University of Munich\" - that wording is out of date.",
+      "affiliation": "Technical University of Munich",
+      "source_url": "https://www.professoren.tum.de/en/betz-johannes",
+      "evidence": {
+        "papers": 6,
+        "paper_titles": [
+          "Bypassing the Simulation-to-reality Gap: Online Reinforcement Learning using a Supervisor",
+          "F1TENTH: Enhancing Autonomous Systems Education Through Hands-On Learning and Competition",
+          "Autonomous Vehicles on the Edge: A Survey on Autonomous Vehicle Racing",
+          "Deriving spatial policies for overtaking maneuvers with autonomous vehicles",
+          "Gradient-free multi-domain optimization for autonomous systems"
+        ],
+        "years": [
+          2022,
+          2024
+        ],
+        "events_organised": [
+          "ICRA 2026 (27th, Vienna)",
+          "ICRA 2025 (24th, Atlanta)",
+          "IV 2025 (25th, Cluj-Napoca)",
+          "CDC 2025 (Rio de Janeiro)",
+          "CDC 2024 (22nd, Milan)",
+          "IV 2024 (18th, Jeju)",
+          "IROS 2023 (14th, Detroit)",
+          "ICRA 2023 (11th, London)",
+          "RoboRacer Sim Racing League @ ICRA 2026"
+        ],
+        "teams": [],
+        "note": "7 committees 2023-2025 and 6 papers 2022-2024, but absent from every 2026 committee I checked. Confirm whether he is still active. Photo exists at public/crew/betz.jpeg."
+      },
+      "proposed_category": "faculty",
+      "confidence": "high"
+    },
+    {
+      "name": "Venkat Krovi",
+      "role": "Michelin SmartState Chair Professor of Vehicle Automation, School of Mechanical and Automotive Engineering, Clemson University; director of ARMLab",
+      "role_source": "\"Michelin SmartState Chair Professor of Vehicle Automation\" (Clemson CECAS profile). Race sites word it \"Michelin Chair Professor, Department of Automotive Engineering, Clemson University\" (ICRA 2023: \"Michelin Endowed Chair Professor of Vehicle Automation\").",
+      "affiliation": "Clemson University (CU-ICAR, ARMLab)",
+      "source_url": "https://www.clemson.edu/cecas/departments/automotive-engineering/people/venkat-krovi.html",
+      "evidence": {
+        "papers": 4,
+        "paper_titles": [
+          "F1TENTH: Enhancing Autonomous Systems Education Through Hands-On Learning and Competition",
+          "Data-Driven Modeling and Experimental Validation of Autonomous Vehicles Using Koopman Operator: Distribution A: Approved for Public Release; Distribution Unlimited. OPSEC\\# 7248",
+          "Multi-Agent Deep Reinforcement Learning for Cooperative and Competitive Autonomous Vehicles using AutoDRIVE Ecosystem",
+          "Autonomous Vehicles on the Edge: A Survey on Autonomous Vehicle Racing"
+        ],
+        "years": [
+          2022,
+          2024
+        ],
+        "events_organised": [
+          "ICRA 2026 (27th, Vienna)",
+          "IROS 2026 (31st, Pittsburgh)",
+          "IV 2026 (28th, Detroit)",
+          "ICRA 2025 (24th, Atlanta)",
+          "CDC 2025 (Rio de Janeiro)",
+          "CDC 2024 (22nd, Milan)",
+          "IROS 2023 (14th, Detroit)",
+          "ICRA 2023 (11th, London)",
+          "RoboRacer Sim Racing League @ ICRA 2026"
+        ],
+        "teams": [],
+        "note": "8 of 16 committees, 2022-2026. Already on the site's stale developers roster with a photo (public/crew/venkatK.jpg)."
+      },
+      "proposed_category": "faculty",
+      "confidence": "high"
+    },
+    {
+      "name": "Chinmay Samak",
+      "role": "Ph.D. Candidate, Department of Automotive Engineering, Clemson University - ICAR",
+      "role_source": "\"Ph.D. Candidate, Department of Automotive Engineering, Clemson University - ICAR\" (ICRA 2026 / IROS 2026 / IV 2026 organiser lists).",
+      "affiliation": "Clemson University (CU-ICAR, ARMLab)",
+      "source_url": "https://iros2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 3,
+        "paper_titles": [
+          "Autonomy Oriented Digital Twins for Real2Sim2Real Autoware Deployment",
+          "Towards Validation of Autonomous Vehicles Across Scales using an Integrated Digital Twin Framework",
+          "Multi-Agent Deep Reinforcement Learning for Cooperative and Competitive Autonomous Vehicles using AutoDRIVE Ecosystem"
+        ],
+        "years": [
+          2023,
+          2024
+        ],
+        "events_organised": [
+          "ICRA 2026 (27th, Vienna)",
+          "IROS 2026 (31st, Pittsburgh)",
+          "IV 2026 (28th, Detroit)",
+          "ICRA 2025 (24th, Atlanta)",
+          "CDC 2025 (Rio de Janeiro)",
+          "CDC 2024 (22nd, Milan)",
+          "RoboRacer Sim Racing League @ ICRA 2026"
+        ],
+        "teams": [],
+        "note": "6 committees 2024-2026 plus contact for the RoboRacer Sim Racing League. In the content skill's IROS 2026 committee. Publishes as 'Chinmay Vilas Samak'."
+      },
+      "proposed_category": "crew",
+      "confidence": "high"
+    },
+    {
+      "name": "Tanmay Samak",
+      "role": "Ph.D. Candidate, Department of Automotive Engineering, Clemson University - ICAR",
+      "role_source": "\"Ph.D. Candidate, Department of Automotive Engineering, Clemson University - ICAR\" (ICRA 2026 / IROS 2026 / IV 2026 organiser lists).",
+      "affiliation": "Clemson University (CU-ICAR, ARMLab)",
+      "source_url": "https://iros2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 3,
+        "paper_titles": [
+          "Autonomy Oriented Digital Twins for Real2Sim2Real Autoware Deployment",
+          "Towards Validation of Autonomous Vehicles Across Scales using an Integrated Digital Twin Framework",
+          "Multi-Agent Deep Reinforcement Learning for Cooperative and Competitive Autonomous Vehicles using AutoDRIVE Ecosystem"
+        ],
+        "years": [
+          2023,
+          2024
+        ],
+        "events_organised": [
+          "ICRA 2026 (27th, Vienna)",
+          "IROS 2026 (31st, Pittsburgh)",
+          "IV 2026 (28th, Detroit)",
+          "ICRA 2025 (24th, Atlanta)",
+          "CDC 2025 (Rio de Janeiro)",
+          "CDC 2024 (22nd, Milan)",
+          "RoboRacer Sim Racing League @ ICRA 2026"
+        ],
+        "teams": [],
+        "note": "6 committees 2024-2026 plus the Sim Racing League. In the content skill's IROS 2026 committee. Publishes as 'Tanmay Vilas Samak'."
+      },
+      "proposed_category": "crew",
+      "confidence": "high"
+    },
+    {
+      "name": "Hongrui \"Billy\" Zheng",
+      "role": "Ph.D. Student, Department of Electrical and Systems Engineering, University of Pennsylvania",
+      "role_source": "\"Ph.D. Student\" (xLAB members page); \"Ph.D. Candidate, Department of Electrical and Systems Engineering, University of Pennsylvania\" (IROS 2023 / ICRA 2023 / CPS-IoT Week 2024 organiser lists).",
+      "affiliation": "University of Pennsylvania (xLAB)",
+      "source_url": "https://xlab.upenn.edu/members/",
+      "evidence": {
+        "papers": 8,
+        "paper_titles": [
+          "F1tenth: An open-source evaluation environment for continuous control and reinforcement learning",
+          "Bypassing the Simulation-to-reality Gap: Online Reinforcement Learning using a Supervisor",
+          "F1TENTH: Enhancing Autonomous Systems Education Through Hands-On Learning and Competition",
+          "Autonomous Vehicles on the Edge: A Survey on Autonomous Vehicle Racing",
+          "Gradient-free multi-domain optimization for autonomous systems"
+        ],
+        "years": [
+          2020,
+          2024
+        ],
+        "events_organised": [
+          "CPS-IoT Week 2024 (17th, Hong Kong)",
+          "IROS 2023 (14th, Detroit)",
+          "ICRA 2023 (11th, London)"
+        ],
+        "teams": [],
+        "note": "On the content skill's active five. Highest-cited RoboRacer author after Rahul (8 papers, 248 citations, incl. the F1TENTH platform paper). Organising record is 2023-2024 only; already has a photo at public/crew/billy.png."
+      },
+      "proposed_category": "crew",
+      "confidence": "high"
+    },
+    {
+      "name": "Michele Magno",
+      "role": "Privatdozent, Department of Information Technology and Electrical Engineering, ETH Zurich; head of the Center for Project-Based Learning D-ITET",
+      "role_source": "\"Privatdozent/in at the Department of Information Technology and Electrical Engineering\", \"Center for Project-Based Learning D-ITET\", \"ETH Zurich\" (ETH PBL group site).",
+      "affiliation": "ETH Zurich (Center for Project-Based Learning, D-ITET)",
+      "source_url": "https://pbl.ee.ethz.ch/",
+      "evidence": {
+        "papers": 14,
+        "paper_titles": [
+          "Assessing the Robustness of LiDAR, Radar and Depth Cameras Against Ill-Reflecting Surfaces in Autonomous Vehicles: An Experimental Study",
+          "RLPP: A Residual Method for Zero-Shot Real-World Autonomous Racing on Scaled Platforms",
+          "Residual Koopman Model Predictive Control for Enhanced Vehicle Dynamics with Small on-Track Data Input",
+          "FSDP: Fast and Safe Data-Driven Overtaking Trajectory Planning for Head-to-Head Autonomous Racing Competitions",
+          "Robustness Evaluation of Localization Techniques for Autonomous Racing"
+        ],
+        "years": [
+          2023,
+          2026
+        ],
+        "events_organised": [],
+        "teams": [],
+        "note": "Highest-output RoboRacer author in the corpus after Penn: 14 papers 2023-2026. His group is ForzaETH, a featured team in teams.json. No organising role found - he is a research lead, not crew. OpenAlex tags these papers 'Institute for Biomedical Engineering', which is the ETH/UZH joint institute, not a separate employer."
+      },
+      "proposed_category": "faculty",
+      "confidence": "high"
+    },
+    {
+      "name": "Edoardo Ghignone",
+      "role": null,
+      "role_source": null,
+      "affiliation": "ETH Zurich (Center for Project-Based Learning, D-ITET)",
+      "source_url": null,
+      "evidence": {
+        "papers": 13,
+        "paper_titles": [
+          "Assessing the Robustness of LiDAR, Radar and Depth Cameras Against Ill-Reflecting Surfaces in Autonomous Vehicles: An Experimental Study",
+          "RLPP: A Residual Method for Zero-Shot Real-World Autonomous Racing on Scaled Platforms",
+          "Residual Koopman Model Predictive Control for Enhanced Vehicle Dynamics with Small on-Track Data Input",
+          "Robustness Evaluation of Localization Techniques for Autonomous Racing",
+          "R-CARLA: High-Fidelity Sensor Simulations with Interchangeable Dynamics for Autonomous Racing"
+        ],
+        "years": [
+          2023,
+          2026
+        ],
+        "events_organised": [],
+        "teams": [],
+        "note": "UNCLASSIFIED (proposed_category is a placeholder). 13 papers 2023-2026, second only to Michele Magno. ForzaETH. Not on the ETH PBL group page I could fetch and on no committee - almost certainly a researcher rather than RoboRacer crew. ROLE UNSOURCED."
+      },
+      "proposed_category": "crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Nicolas Baumann",
+      "role": null,
+      "role_source": null,
+      "affiliation": "ETH Zurich (Center for Project-Based Learning, D-ITET)",
+      "source_url": null,
+      "evidence": {
+        "papers": 12,
+        "paper_titles": [
+          "Assessing the Robustness of LiDAR, Radar and Depth Cameras Against Ill-Reflecting Surfaces in Autonomous Vehicles: An Experimental Study",
+          "RLPP: A Residual Method for Zero-Shot Real-World Autonomous Racing on Scaled Platforms",
+          "FSDP: Fast and Safe Data-Driven Overtaking Trajectory Planning for Head-to-Head Autonomous Racing Competitions",
+          "Robustness Evaluation of Localization Techniques for Autonomous Racing",
+          "R-CARLA: High-Fidelity Sensor Simulations with Interchangeable Dynamics for Autonomous Racing"
+        ],
+        "years": [
+          2023,
+          2025
+        ],
+        "events_organised": [],
+        "teams": [],
+        "note": "UNCLASSIFIED (proposed_category is a placeholder). 12 papers 2023-2025, ForzaETH. Also an author of one of the site's existing testimonials (public/testimonials/). Not on the ETH PBL group page I could fetch and on no committee. ROLE UNSOURCED."
+      },
+      "proposed_category": "crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Radu Grosu",
+      "role": "Full Professor and Head of Research Unit, Research Unit of Cyber-Physical Systems, TU Wien",
+      "role_source": "\"Full Professor and Head of Research Unit, Research Unit of Cyber-Physical Systems, TU Wien\" (ICRA 2026 organiser list); TU Wien staff page confirms \"Full Professor\" and \"Head of Research Unit\" of \"Cyber-Physical Systems (E191-01)\".",
+      "affiliation": "TU Wien",
+      "source_url": "https://informatics.tuwien.ac.at/people/radu-grosu",
+      "evidence": {
+        "papers": 3,
+        "paper_titles": [
+          "Adaptive Control in Autonomous Driving via Real-Time Recurrent RL",
+          "Learning adaptive safety for multi-agent systems",
+          "Latent imagination facilitates zero-shot transfer in autonomous racing"
+        ],
+        "years": [
+          2022,
+          2026
+        ],
+        "events_organised": [
+          "ICRA 2026 (27th, Vienna)",
+          "RoboRacer Sim Racing League @ ICRA 2026"
+        ],
+        "teams": [],
+        "note": "ICRA 2026 Vienna host-side lead; 3 papers 2022-2026."
+      },
+      "proposed_category": "faculty",
+      "confidence": "high"
+    },
+    {
+      "name": "Amr El-Wakeel",
+      "role": "Assistant Professor and Director, Intelligent Cyber-Physical Systems Lab, Lane Department of Computer Science and Electrical Engineering, West Virginia University",
+      "role_source": "\"Assistant Professor, Director, Intelligent Cyber-Physical Systems Lab\" / \"Lane Department of Computer Science & Electrical Engineering\" / \"West Virginia University\" (IV 2026 organiser list); IROS 2026 says \"Assistant Professor, Lane Department of Computer Science and Electrical Engineering, West Virginia University\".",
+      "affiliation": "West Virginia University",
+      "source_url": "https://iv2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 2,
+        "paper_titles": [
+          "Learning to Tune Pure Pursuit in Autonomous Racing: Joint Lookahead and Steering-Gain Control With PPO",
+          "Dynamic Lookahead Distance via Reinforcement Learning-Based Pure Pursuit for Autonomous Racing"
+        ],
+        "years": [
+          2026,
+          2026
+        ],
+        "events_organised": [
+          "IROS 2026 (31st, Pittsburgh)",
+          "IV 2026 (28th, Detroit)"
+        ],
+        "teams": [],
+        "note": "Named in the content skill's IROS 2026 organising committee. WVU's own Statler directory returned 403 to me, so the wording above is the race site's."
+      },
+      "proposed_category": "faculty",
+      "confidence": "high"
+    },
+    {
+      "name": "Felix Jahncke",
+      "role": "Ph.D. Candidate, Department of Mobility Systems Engineering, Technical University of Munich",
+      "role_source": "\"Ph.D. Candidate, Department of Mobility Systems Engineering, Technical University of Munich\" (ICRA 2026 and IV 2025 organiser lists).",
+      "affiliation": "Technical University of Munich",
+      "source_url": "https://icra2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 2,
+        "paper_titles": [
+          "Trajectory Planning and Control near the Limits: an Open Experimental Benchmark on the RoboRacer Platform",
+          "F1TENTH: Enhancing Autonomous Systems Education Through Hands-On Learning and Competition"
+        ],
+        "years": [
+          2024,
+          2026
+        ],
+        "events_organised": [
+          "ICRA 2026 (27th, Vienna)",
+          "IV 2025 (25th, Cluj-Napoca)"
+        ],
+        "teams": [],
+        "note": "Two committees (IV 2025, ICRA 2026) and 2 papers 2024-2026."
+      },
+      "proposed_category": "crew",
+      "confidence": "high"
+    },
+    {
+      "name": "Mohamed Elgouhary",
+      "role": "Graduate Research Assistant, Lane Department of Computer Science and Electrical Engineering, West Virginia University",
+      "role_source": "\"Graduate Research Assistant\" (IROS 2026 organiser list); IV 2026 says \"PH.D. CANDIDATE\" in the same department. The two disagree.",
+      "affiliation": "West Virginia University",
+      "source_url": "https://iros2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 2,
+        "paper_titles": [
+          "Learning to Tune Pure Pursuit in Autonomous Racing: Joint Lookahead and Steering-Gain Control With PPO",
+          "Dynamic Lookahead Distance via Reinforcement Learning-Based Pure Pursuit for Autonomous Racing"
+        ],
+        "years": [
+          2026,
+          2026
+        ],
+        "events_organised": [
+          "IROS 2026 (31st, Pittsburgh)",
+          "IV 2026 (28th, Detroit)"
+        ],
+        "teams": [],
+        "note": "In the content skill's IROS 2026 committee. First-author on a 2026 RA-L paper. Pick one of the two titles with Cedric."
+      },
+      "proposed_category": "crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Lei Xie",
+      "role": null,
+      "role_source": null,
+      "affiliation": "Zhejiang University (from publications.json institution lists)",
+      "source_url": null,
+      "evidence": {
+        "papers": 7,
+        "paper_titles": [
+          "A Data-Driven Aggressive Autonomous Racing Framework Utilizing Local Trajectory Planning with Velocity Prediction",
+          "RLPP: A Residual Method for Zero-Shot Real-World Autonomous Racing on Scaled Platforms",
+          "Residual Koopman Model Predictive Control for Enhanced Vehicle Dynamics with Small on-Track Data Input",
+          "FSDP: Fast and Safe Data-Driven Overtaking Trajectory Planning for Head-to-Head Autonomous Racing Competitions",
+          "An Overtaking Trajectory Planning Framework Based on Spatio‐Temporal Topology and Reachable Set Analysis Ensuring Time Efficiency"
+        ],
+        "years": [
+          2025,
+          2026
+        ],
+        "events_organised": [],
+        "teams": [],
+        "note": "7 papers 2025-2026 - the fastest-growing group in the corpus (Zhejiang University, with ETH co-authors). ROLE UNSOURCED."
+      },
+      "proposed_category": "faculty",
+      "confidence": "low"
+    },
+    {
+      "name": "Dongsung Pae",
+      "role": "Assistant Professor, Department of Software, Sangmyung University",
+      "role_source": "\"Assistant Professor\", \"Department of Software\", Sangmyung University (IFAC 2026 organiser list); IV 2024 listed him as \"Local Arrangement and Competition Co-Chair\".",
+      "affiliation": "Sangmyung University",
+      "source_url": "https://2026ifac-roboracer.com/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IFAC 2026 (29th, Busan)",
+          "IV 2024 (18th, Jeju)"
+        ],
+        "teams": [],
+        "note": "Two committees (IV 2024, IFAC 2026) - the only recurring Korea-side organiser."
+      },
+      "proposed_category": "crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Ezio Bartocci",
+      "role": "Full Professor, Research Unit of Cyber-Physical Systems, TU Wien",
+      "role_source": "\"Full Professor, Research Unit of Cyber-Physical Systems, TU Wien (Vienna University of Technology)\" (ICRA 2026 organiser list).",
+      "affiliation": "TU Wien",
+      "source_url": "https://icra2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "ICRA 2026 (27th, Vienna)",
+          "RoboRacer Sim Racing League @ ICRA 2026"
+        ],
+        "teams": [],
+        "note": "ICRA 2026 host-side. Not confirmed against a TU Wien staff page."
+      },
+      "proposed_category": "faculty",
+      "confidence": "medium"
+    },
+    {
+      "name": "Paolo Burgio",
+      "role": "Research Fellow, HiPeRT Lab, University of Modena and Reggio Emilia",
+      "role_source": "\"Research Fellow\" / \"HiPeRT Lab, Universita di Modena and Reggio Emillia\" (CDC 2024 organiser list, site's own spelling).",
+      "affiliation": "University of Modena and Reggio Emilia (HiPeRT Lab)",
+      "source_url": "https://cdc2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 3,
+        "paper_titles": [
+          "Optimized Local Path Planner Implementation for GPU-Accelerated Embedded Systems",
+          "Multi-Partner Project: Scheduling-Deployment Workflow for Autonomous RoboRacer Driving Stacks in the HAL4SDV Project",
+          "An FPGA overlay for efficient real-time localization in 1/10th scale autonomous vehicles"
+        ],
+        "years": [
+          2022,
+          2026
+        ],
+        "events_organised": [
+          "CDC 2024 (22nd, Milan)"
+        ],
+        "teams": [],
+        "note": "CDC 2024 Milan host-side lead, 3 papers 2022-2026. On the stale developers roster with a photo (public/crew/Paolo_Burgio.jpg). unimore.it returned 403 so no university-page confirmation."
+      },
+      "proposed_category": "faculty",
+      "confidence": "medium"
+    },
+    {
+      "name": "Joydeep Biswas",
+      "role": "Associate Professor, Department of Computer Science, The University of Texas at Austin",
+      "role_source": "\"Associate Professor in the Computer Science department\" (UT Austin CS faculty page).",
+      "affiliation": "The University of Texas at Austin",
+      "source_url": "https://www.cs.utexas.edu/people/faculty-researchers/joydeep-biswas",
+      "evidence": {
+        "papers": 6,
+        "paper_titles": [
+          "Deadlock-free, safe, and decentralized multi-robot navigation in social mini-games via discrete-time control barrier functions",
+          "F1TENTH: Enhancing Autonomous Systems Education Through Hands-On Learning and Competition",
+          "High-speed accurate robot control using learned forward kinodynamics and non-linear least squares optimization",
+          "State Supervised Steering Function for Sampling-based Kinodynamic Planning",
+          "Vi-ikd: High-speed accurate off-road navigation using learned visual-inertial inverse kinodynamics"
+        ],
+        "years": [
+          2021,
+          2025
+        ],
+        "events_organised": [],
+        "teams": [],
+        "note": "6 papers 2021-2025 - the longest-running non-Penn US author. No organising role found. UT Austin also supplies a site testimonial author (Kunal R Nalamwar)."
+      },
+      "proposed_category": "faculty",
+      "confidence": "medium"
+    },
+    {
+      "name": "Federico Gavioli",
+      "role": "Ph.D. Candidate, HiPeRT Lab, University of Modena and Reggio Emilia",
+      "role_source": "\"Ph.D. Candidate\", \"HiPeRT Lab, Universita di Modena and Reggio Emillia\" (CDC 2024 organiser list).",
+      "affiliation": "University of Modena and Reggio Emilia",
+      "source_url": "https://cdc2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 1,
+        "paper_titles": [
+          "Multi-Partner Project: Scheduling-Deployment Workflow for Autonomous RoboRacer Driving Stacks in the HAL4SDV Project"
+        ],
+        "years": [
+          2026,
+          2026
+        ],
+        "events_organised": [
+          "CDC 2024 (22nd, Milan)"
+        ],
+        "teams": [],
+        "note": "CDC 2024 Milan local crew."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Felix Resch",
+      "role": "Project assistant, Research Unit of Cyber-Physical Systems, TU Wien",
+      "role_source": "\"Project assistant, Research Unit of Cyber-Physical Systems, TU Wien\" (ICRA 2026 organiser list).",
+      "affiliation": "TU Wien",
+      "source_url": "https://icra2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 1,
+        "paper_titles": [
+          "Adaptive Control in Autonomous Driving via Real-Time Recurrent RL"
+        ],
+        "years": [
+          2026,
+          2026
+        ],
+        "events_organised": [
+          "ICRA 2026 (27th, Vienna)"
+        ],
+        "teams": [],
+        "note": "ICRA 2026 Vienna host-side only."
+      },
+      "proposed_category": "crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "John M. Dolan",
+      "role": "Principal Systems Scientist, Robotics Institute, Carnegie Mellon University",
+      "role_source": "\"Principal Systems Scientist\" / \"Robotics Institute\" / \"Carnegie Mellon University\" (IROS 2026 organiser list). The CMU RI faculty page confirms \"John M. Dolan - The Robotics Institute - CMU\" but its title text did not load.",
+      "affiliation": "Carnegie Mellon University",
+      "source_url": "https://iros2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 1,
+        "paper_titles": [
+          "Disturbance Observer-based Control Barrier Functions with Residual Model Learning for Safe Reinforcement Learning"
+        ],
+        "years": [
+          2025,
+          2025
+        ],
+        "events_organised": [
+          "IROS 2026 (31st, Pittsburgh)"
+        ],
+        "teams": [],
+        "note": "Named in the content skill's IROS 2026 committee. Co-author on a 2025 RoboRacer paper."
+      },
+      "proposed_category": "faculty",
+      "confidence": "high"
+    },
+    {
+      "name": "Hongye Su",
+      "role": null,
+      "role_source": null,
+      "affiliation": "Zhejiang University (from publications.json institution lists)",
+      "source_url": null,
+      "evidence": {
+        "papers": 4,
+        "paper_titles": [
+          "A Data-Driven Aggressive Autonomous Racing Framework Utilizing Local Trajectory Planning with Velocity Prediction",
+          "Residual Koopman Model Predictive Control for Enhanced Vehicle Dynamics with Small on-Track Data Input",
+          "An Overtaking Trajectory Planning Framework Based on Spatio‐Temporal Topology and Reachable Set Analysis Ensuring Time Efficiency",
+          "Robust Spatiotemporal Motion Planning for Multi-Agent Autonomous Racing via Topological Gap Identification and Accelerated MPC"
+        ],
+        "years": [
+          2025,
+          2026
+        ],
+        "events_organised": [],
+        "teams": [],
+        "note": "4 papers 2025-2026, Zhejiang University group. ROLE UNSOURCED."
+      },
+      "proposed_category": "faculty",
+      "confidence": "low"
+    },
+    {
+      "name": "Andreas Brandstatter",
+      "role": "Senior Scientist, Research Unit of Cyber-Physical Systems, TU Wien",
+      "role_source": "\"Senior Scientist, Research Unit of Cyber-Physical Systems, TU Wien\" (ICRA 2026 organiser list).",
+      "affiliation": "TU Wien",
+      "source_url": "https://icra2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "ICRA 2026 (27th, Vienna)"
+        ],
+        "teams": [],
+        "note": "ICRA 2026 Vienna host-side. Name may carry an umlaut (Brandstaetter/Brandstatter) - check the spelling with Cedric."
+      },
+      "proposed_category": "crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "BaekGyu Kim",
+      "role": "Associate Professor, Department of Electrical Engineering and Computer Science, DGIST",
+      "role_source": "\"Associate Professor\", \"Department of Electrical Engineering and Computer Science\", DGIST (IFAC 2026 organiser list).",
+      "affiliation": "DGIST",
+      "source_url": "https://2026ifac-roboracer.com/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IFAC 2026 (29th, Busan)"
+        ],
+        "teams": [],
+        "note": "IFAC 2026 Busan local host."
+      },
+      "proposed_category": "faculty",
+      "confidence": "medium"
+    },
+    {
+      "name": "Cedric Hollande",
+      "role": "Race Director, IROS 2026; Researcher, Department of Electrical and Systems Engineering, University of Pennsylvania",
+      "role_source": "\"Researcher, Department of Electrical and Systems Engineering, University of Pennsylvania\" (IROS 2026 organiser list). 'Race Director' comes from the roboracer-content skill, not from a public page.",
+      "affiliation": "University of Pennsylvania",
+      "source_url": "https://iros2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IROS 2026 (31st, Pittsburgh)"
+        ],
+        "teams": [],
+        "note": "Not on the xLAB members page (checked 2026-08-23). Race Director title is internal - confirm before publishing it."
+      },
+      "proposed_category": "crew",
+      "confidence": "high"
+    },
+    {
+      "name": "Cheolhyeon Kwon",
+      "role": "Associate Professor, Department of Mechanical Engineering, UNIST",
+      "role_source": "\"Associate Professor\", \"Department of Mechanical Engineering\", UNIST (IFAC 2026 organiser list).",
+      "affiliation": "UNIST",
+      "source_url": "https://2026ifac-roboracer.com/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IFAC 2026 (29th, Busan)"
+        ],
+        "teams": [],
+        "note": "IFAC 2026 Busan local host."
+      },
+      "proposed_category": "faculty",
+      "confidence": "medium"
+    },
+    {
+      "name": "Jaroslav Klapalek",
+      "role": "University assistant, Research Unit of Cyber-Physical Systems, TU Wien",
+      "role_source": "\"University assistant, Research Unit of Cyber-Physical Systems, TU Wien\" (ICRA 2026 organiser list).",
+      "affiliation": "TU Wien",
+      "source_url": "https://icra2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "ICRA 2026 (27th, Vienna)"
+        ],
+        "teams": [],
+        "note": "ICRA 2026 Vienna host-side only. Previously associated with CTU Prague's Redkvicky team - not confirmed."
+      },
+      "proposed_category": "crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "JooYong Sim",
+      "role": "Assistant Professor, Department of Mechanical Systems Engineering, Sookmyung Women's University",
+      "role_source": "\"Assistant Professor\", \"Department of Mechanical Systems Engineering\", Sookmyung Women's University (IFAC 2026 organiser list).",
+      "affiliation": "Sookmyung Women's University",
+      "source_url": "https://2026ifac-roboracer.com/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IFAC 2026 (29th, Busan)"
+        ],
+        "teams": [],
+        "note": "IFAC 2026 Busan local host."
+      },
+      "proposed_category": "faculty",
+      "confidence": "medium"
+    },
+    {
+      "name": "Koneshka Bandyopadhyay",
+      "role": "Founder & CEO, Neobotics Foundation Inc.",
+      "role_source": "\"Founder & CEO\" of \"Neobotics Foundation Inc.\" (VTC 2026-Fall organiser list).",
+      "affiliation": "Neobotics Foundation Inc.",
+      "source_url": "https://vtc2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "VTC 2026-Fall (30th, Boston)"
+        ],
+        "teams": [],
+        "note": "UNCLASSIFIED (proposed_category is a placeholder). Partner-side co-host of VTC 2026-Fall Boston, not RoboRacer staff. May belong under partners rather than crew."
+      },
+      "proposed_category": "crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Moritz Christamentl",
+      "role": "Student Staff in Research and Administration, Research Unit of Cyber-Physical Systems, TU Wien",
+      "role_source": "\"Student Staff in Research and Administration, Research Unit of Cyber-Physical Systems, TU Wien\" (ICRA 2026 organiser list).",
+      "affiliation": "TU Wien",
+      "source_url": "https://icra2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "ICRA 2026 (27th, Vienna)"
+        ],
+        "teams": [],
+        "note": "ICRA 2026 Vienna host-side only."
+      },
+      "proposed_category": "crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Wenshan Wang",
+      "role": "Systems Scientist, Robotics Institute, Carnegie Mellon University",
+      "role_source": "\"Systems Scientist\" / \"Robotics Institute\" / \"Carnegie Mellon University\" (IROS 2026 organiser list).",
+      "affiliation": "Carnegie Mellon University",
+      "source_url": "https://iros2026-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IROS 2026 (31st, Pittsburgh)"
+        ],
+        "teams": [],
+        "note": "In the content skill's IROS 2026 committee. Not confirmed against a CMU page."
+      },
+      "proposed_category": "crew",
+      "confidence": "high"
+    },
+    {
+      "name": "Ammar Elmoghazy",
+      "role": "Master student, Department of Electrical and Computer Engineering, Ontario Tech University",
+      "role_source": "\"Master student, Department of Electrical and Computer Engineering, Ontario Tech University\" (IEEE SM 2024 organiser list).",
+      "affiliation": "Ontario Tech University",
+      "source_url": "https://sm2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 1,
+        "paper_titles": [
+          "A Real-World Testbed for V2X in Autonomous Vehicles: From Simulation to Actual Road Testing"
+        ],
+        "years": [
+          2024,
+          2024
+        ],
+        "events_organised": [
+          "IEEE SM 2024 (19th, Niagara Falls)"
+        ],
+        "teams": [],
+        "note": "IEEE SM 2024 local crew."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Filippo Muzzini",
+      "role": "Postdoctoral Researcher, HiPeRT Lab, University of Modena and Reggio Emilia",
+      "role_source": "\"Postdoctoral Researcher\", \"HiPeRT Lab, Universita di Modena and Reggio Emillia\" (CDC 2024 organiser list).",
+      "affiliation": "University of Modena and Reggio Emilia",
+      "source_url": "https://cdc2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 1,
+        "paper_titles": [
+          "Optimized Local Path Planner Implementation for GPU-Accelerated Embedded Systems"
+        ],
+        "years": [
+          2023,
+          2023
+        ],
+        "events_organised": [
+          "CDC 2024 (22nd, Milan)"
+        ],
+        "teams": [],
+        "note": "CDC 2024 Milan local crew."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Marco Caccamo",
+      "role": "Chair of Cyber-Physical Systems in Production Engineering, Technical University of Munich",
+      "role_source": "\"chair of Cyber-Physical Systems in Production Engineering at Technical University of Munich\", Alexander von Humboldt Professor (TUM professors directory / CPS institute page).",
+      "affiliation": "Technical University of Munich",
+      "source_url": "https://www.professoren.tum.de/en/caccamo-marco",
+      "evidence": {
+        "papers": 3,
+        "paper_titles": [
+          "RaceMOP: Mapless Online Path Planning for Multi-Agent Autonomous Racing using Residual Policy Learning",
+          "Efficient Real-World Autonomous Racing via Attenuated Residual Policy Optimization",
+          "Residual policy learning for vehicle control of autonomous racing cars"
+        ],
+        "years": [
+          2023,
+          2026
+        ],
+        "events_organised": [],
+        "teams": [],
+        "note": "3 papers 2023-2026. No organising role found."
+      },
+      "proposed_category": "faculty",
+      "confidence": "medium"
+    },
+    {
+      "name": "Nicola Paoletti",
+      "role": "Associate Professor, Department of Informatics, King's College London",
+      "role_source": "\"Associate Professor, Department of Informatics, Kings College London\" (ICRA 2023 organiser list, site's own spelling).",
+      "affiliation": "King's College London",
+      "source_url": "https://icra2023-race.f1tenth.org/",
+      "evidence": {
+        "papers": 1,
+        "paper_titles": [
+          "Conformal Off-Policy Prediction for Multi-Agent Systems"
+        ],
+        "years": [
+          2024,
+          2024
+        ],
+        "events_organised": [
+          "ICRA 2023 (11th, London)"
+        ],
+        "teams": [],
+        "note": "ICRA 2023 London local host."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Abdulla Al-Kaff",
+      "role": "Associate Professor, Department of Systems Engineering and Automation, Universidad Carlos III de Madrid",
+      "role_source": "\"Associate Professor, Department of Systems Engineering and Automation, Universidad Carlos III de Madrid\" (IV 2025 organiser list).",
+      "affiliation": "Universidad Carlos III de Madrid",
+      "source_url": "https://iv2025-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IV 2025 (25th, Cluj-Napoca)"
+        ],
+        "teams": [],
+        "note": "IV 2025 only."
+      },
+      "proposed_category": "faculty",
+      "confidence": "medium"
+    },
+    {
+      "name": "Bassam Alrifaee",
+      "role": "Professor, Department of Aerospace Engineering, University of the Bundeswehr Munich",
+      "role_source": "\"Professor, Department of Aerospace Engineering, University of the Bundeswehr Munich\" (IV 2025 organiser list).",
+      "affiliation": "University of the Bundeswehr Munich",
+      "source_url": "https://iv2025-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IV 2025 (25th, Cluj-Napoca)"
+        ],
+        "teams": [],
+        "note": "One committee (IV 2025). Not confirmed against a university page."
+      },
+      "proposed_category": "faculty",
+      "confidence": "medium"
+    },
+    {
+      "name": "Borja Perez Lopez",
+      "role": "Ph.D. Candidate, Department of Systems Engineering and Automation, Universidad Carlos III de Madrid",
+      "role_source": "\"Ph.D. Candidate, Department of Systems Engineering and Automation, Universidad Carlos III de Madrid\" (IV 2025 organiser list).",
+      "affiliation": "Universidad Carlos III de Madrid",
+      "source_url": "https://iv2025-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IV 2025 (25th, Cluj-Napoca)"
+        ],
+        "teams": [],
+        "note": "IV 2025 only. Name is rendered without accents on the site; correct form is likely 'Borja Perez Lopez' with accents."
+      },
+      "proposed_category": "crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Fernando Lizarralde",
+      "role": "Professor, Department of Electrical Engineering, Universidade Federal do Rio de Janeiro",
+      "role_source": "\"Professor, Department of Electrical Engineering, Universidade Federal do Rio de Janeiro\" (CDC 2025 organiser list).",
+      "affiliation": "Universidade Federal do Rio de Janeiro",
+      "source_url": "https://cdc2025-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "CDC 2025 (Rio de Janeiro)"
+        ],
+        "teams": [],
+        "note": "CDC 2025 Rio local host - race cancelled."
+      },
+      "proposed_category": "faculty",
+      "confidence": "low"
+    },
+    {
+      "name": "Gustavo Freitas",
+      "role": "Professor, Department of Electrical Engineering, Universidade Federal de Minas Gerais",
+      "role_source": "\"Professor, Department of Electrical Engineering, Universidade Federal de Minas Gerais\" (CDC 2025 organiser list).",
+      "affiliation": "Universidade Federal de Minas Gerais",
+      "source_url": "https://cdc2025-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "CDC 2025 (Rio de Janeiro)"
+        ],
+        "teams": [],
+        "note": "CDC 2025 Rio local host - the in-person race was cancelled for low registrations."
+      },
+      "proposed_category": "faculty",
+      "confidence": "low"
+    },
+    {
+      "name": "Julius Beerwerth",
+      "role": "Ph.D. Candidate, Department of Aerospace Engineering, University of the Bundeswehr Munich",
+      "role_source": "\"Ph.D. Candidate, Department of Aerospace Engineering, University of the Bundeswehr Munich\" (IV 2025 organiser list).",
+      "affiliation": "University of the Bundeswehr Munich",
+      "source_url": "https://iv2025-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IV 2025 (25th, Cluj-Napoca)"
+        ],
+        "teams": [],
+        "note": "IV 2025 Cluj-Napoca committee only."
+      },
+      "proposed_category": "crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Milena Pinto",
+      "role": "Professor, Department of Electronic Engineering, CEFET/RJ",
+      "role_source": "\"Professor, Department of Electronic Engineering, Centro Federal de Educacao Tecnologica Celso Suckow da Fonseca\" (CDC 2025 organiser list).",
+      "affiliation": "CEFET/RJ",
+      "source_url": "https://cdc2025-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "CDC 2025 (Rio de Janeiro)"
+        ],
+        "teams": [],
+        "note": "CDC 2025 Rio local host - race cancelled."
+      },
+      "proposed_category": "faculty",
+      "confidence": "low"
+    },
+    {
+      "name": "Mircea Paul Muresan",
+      "role": "Assistant Professor, Department of Computer Science, Technical University of Cluj-Napoca",
+      "role_source": "\"Assistant Professor, Department of Computer Science, Technical University of Cluj-Napoca\" (IV 2025 organiser list).",
+      "affiliation": "Technical University of Cluj-Napoca",
+      "source_url": "https://iv2025-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IV 2025 (25th, Cluj-Napoca)"
+        ],
+        "teams": [],
+        "note": "IV 2025 Cluj-Napoca local host."
+      },
+      "proposed_category": "faculty",
+      "confidence": "medium"
+    },
+    {
+      "name": "Omar M. Shehata",
+      "role": "Associate Professor, Department of Mechatronics Engineering, German University in Cairo",
+      "role_source": "\"Associate Professor, Department of Mechatronics Engineering, German University in Cairo\" (IV 2025 organiser list).",
+      "affiliation": "German University in Cairo",
+      "source_url": "https://iv2025-race.roboracer.ai/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IV 2025 (25th, Cluj-Napoca)"
+        ],
+        "teams": [],
+        "note": "IV 2025 only. Likely tied to the Assiut Motorsport / Egypt community named in the content skill - unconfirmed."
+      },
+      "proposed_category": "faculty",
+      "confidence": "medium"
+    },
+    {
+      "name": "Krzysztof Walas",
+      "role": null,
+      "role_source": null,
+      "affiliation": "IDEA of Development Foundation / Poznan University of Technology (unconfirmed)",
+      "source_url": null,
+      "evidence": {
+        "papers": 3,
+        "paper_titles": [
+          "Beyond Constant Parameters: Hyper Prediction Models and HyperMPC",
+          "On learning racing policies with reinforcement learning",
+          "Learning dynamics models for velocity estimation in autonomous racing"
+        ],
+        "years": [
+          2024,
+          2025
+        ],
+        "events_organised": [],
+        "teams": [],
+        "note": "3 papers 2024-2025 with Piotr Kicki and Grzegorz Czechmanowski; publications.json tags the group 'IDEA of Development Foundation'. No public professional page checked - ROLE UNSOURCED."
+      },
+      "proposed_category": "faculty",
+      "confidence": "low"
+    },
+    {
+      "name": "Peter Stone",
+      "role": "Professor, Department of Computer Science, The University of Texas at Austin",
+      "role_source": "\"Professor at the University of Texas at Austin, Department of Computer Science\" (his UT Austin homepage).",
+      "affiliation": "The University of Texas at Austin",
+      "source_url": "https://www.cs.utexas.edu/~pstone/",
+      "evidence": {
+        "papers": 3,
+        "paper_titles": [
+          "Deadlock-free, safe, and decentralized multi-robot navigation in social mini-games via discrete-time control barrier functions",
+          "Learning Inverse Kinodynamics for Accurate High-Speed Off-Road Navigation on Unstructured Terrain",
+          "Vi-ikd: High-speed accurate off-road navigation using learned visual-inertial inverse kinodynamics"
+        ],
+        "years": [
+          2022,
+          2025
+        ],
+        "events_organised": [],
+        "teams": [],
+        "note": "3 papers 2022-2025. No organising role found."
+      },
+      "proposed_category": "faculty",
+      "confidence": "medium"
+    },
+    {
+      "name": "Tobi Delbruck",
+      "role": "Titular Professor, Institute of Neuroinformatics, University of Zurich and ETH Zurich",
+      "role_source": "\"titular professor of physics and electrical engineering at ETH Zurich\", co-director of the Sensors group at the \"Institute of Neuroinformatics\", \"a joint institute of the University of Zurich and ETH Zurich\" (INI pages).",
+      "affiliation": "Institute of Neuroinformatics, UZH / ETH Zurich",
+      "source_url": "https://www.ini.uzh.ch/en/institute/people?uname=tobi",
+      "evidence": {
+        "papers": 3,
+        "paper_titles": [
+          "RPGD: A Small-Batch Parallel Gradient Descent Optimizer with Explorative Resampling for Nonlinear Model Predictive Control",
+          "FPGA Hardware Neural Control of CartPole and F1TENTH Race Car",
+          "Steering Prediction via a Multi-Sensor System for Autonomous Racing"
+        ],
+        "years": [
+          2023,
+          2025
+        ],
+        "events_organised": [],
+        "teams": [],
+        "note": "3 papers 2023-2025 (event-camera work on the platform). No organising role found. ETH's own master-robotics page lists him as \"Prof. em.\" - confirm emeritus status before publishing."
+      },
+      "proposed_category": "faculty",
+      "confidence": "medium"
+    },
+    {
+      "name": "Alessio Masola",
+      "role": "Postdoctoral Researcher, HiPeRT Lab, University of Modena and Reggio Emilia",
+      "role_source": "\"Postdoctoral Researcher\", \"HiPeRT Lab, Universita di Modena and Reggio Emillia\" (CDC 2024 organiser list).",
+      "affiliation": "University of Modena and Reggio Emilia",
+      "source_url": "https://cdc2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "CDC 2024 (22nd, Milan)"
+        ],
+        "teams": [],
+        "note": "CDC 2024 Milan local crew."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Enrico Mannocci",
+      "role": "Ph.D. Candidate, Universita di Bologna",
+      "role_source": "\"Ph.D. Candidate\", \"Universita di Bologna\" (CDC 2024 organiser list).",
+      "affiliation": "University of Bologna",
+      "source_url": "https://cdc2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "CDC 2024 (22nd, Milan)"
+        ],
+        "teams": [],
+        "note": "CDC 2024 Milan committee."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Francesco Moretti",
+      "role": "Ph.D. Candidate, HiPeRT Lab, University of Modena and Reggio Emilia",
+      "role_source": "\"Ph.D. Candidate\", \"HiPeRT Lab, Universita di Modena and Reggio Emillia\" (CDC 2024 organiser list).",
+      "affiliation": "University of Modena and Reggio Emilia",
+      "source_url": "https://cdc2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "CDC 2024 (22nd, Milan)"
+        ],
+        "teams": [],
+        "note": "CDC 2024 Milan local crew."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Francois Pomerleau",
+      "role": "Director, Boreal Robotics Laboratory (Norlab), Department of Electrical and Computer Engineering, Universite Laval",
+      "role_source": "\"Director, Boreal Robotics Laboratory (Norlab), Department of Electrical and Computer Engineering, Universite Laval\" (IEEE SM 2024 organiser list).",
+      "affiliation": "Universite Laval",
+      "source_url": "https://sm2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IEEE SM 2024 (19th, Niagara Falls)"
+        ],
+        "teams": [],
+        "note": "IEEE SM 2024 committee. Name carries a cedilla (Francois)."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Hyungchai Park",
+      "role": "Research Director of Mobility, Stanford Center at the Incheon Global Campus; Local Arrangement and Competition Co-Chair, IV 2024",
+      "role_source": "\"Research Director of Mobility\" and \"Local Arrangement and Competition Co-Chair\" at \"Stanford Center at the Incheon Global Campus, Korea\" (IV 2024 organiser list).",
+      "affiliation": "Stanford Center at the Incheon Global Campus",
+      "source_url": "https://iv2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IV 2024 (18th, Jeju)"
+        ],
+        "teams": [],
+        "note": "IV 2024 Jeju local host."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Joongheon Kim",
+      "role": "Associate Professor, Korea University; Local Arrangement and Competition Chair, IV 2024",
+      "role_source": "\"Associate Professor\" serving as \"Local Arrangement and Competition Chair\" at \"Korea University, Korea\" (IV 2024 organiser list).",
+      "affiliation": "Korea University",
+      "source_url": "https://iv2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IV 2024 (18th, Jeju)"
+        ],
+        "teams": [],
+        "note": "IV 2024 Jeju local host lead."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Khalid ElGazzar",
+      "role": "Canada Research Chair in Internet of Things, Department of Electrical and Computer Engineering, Ontario Tech University",
+      "role_source": "\"Canada Research Chair in Internet of Things, Department of Electrical and Computer Engineering, Ontario Tech University\" (IEEE SM 2024 organiser list).",
+      "affiliation": "Ontario Tech University",
+      "source_url": "https://sm2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IEEE SM 2024 (19th, Niagara Falls)"
+        ],
+        "teams": [],
+        "note": "IEEE SM 2024 Niagara Falls local host lead."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Maria Prandini",
+      "role": "Full Professor and Chair of the Automation and Control Engineering Program, DEIB, Politecnico di Milano",
+      "role_source": "\"Full Professor, Chair of the Automation and Control Engineering Program\", \"Dipartimento di Elettronica Informazione e Bioingegneria, Politecnico di Milano\" (CDC 2024 organiser list).",
+      "affiliation": "Politecnico di Milano",
+      "source_url": "https://cdc2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "CDC 2024 (22nd, Milan)"
+        ],
+        "teams": [],
+        "note": "CDC 2024 Milan local host."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Martina Maggio",
+      "role": "Professor, Department of Computer Science, Saarland University",
+      "role_source": "\"Professor\", \"Department of Computer Science, Saarland University\" (CDC 2024 organiser list).",
+      "affiliation": "Saarland University",
+      "source_url": "https://cdc2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "CDC 2024 (22nd, Milan)"
+        ],
+        "teams": [],
+        "note": "CDC 2024 Milan committee."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Renato Mancuso",
+      "role": "Associate Professor, Computer Science Department, Boston University",
+      "role_source": "\"Associate Professor\", \"Computer Science Department\", \"Boston University\" (BU 2024 organiser list).",
+      "affiliation": "Boston University",
+      "source_url": "https://bu2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "BU 2024 (23rd, Boston)"
+        ],
+        "teams": [],
+        "note": "BU 2024 local host."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Roberto Tron",
+      "role": "Robotics and Autonomous Systems Director and Associate Professor, Department of Mechanical Engineering, Boston University",
+      "role_source": "\"Robotics and Autonomous Systems Director; Associate Professor\", \"Department of Mechanical Engineering\", \"Boston University\" (BU 2024 organiser list).",
+      "affiliation": "Boston University",
+      "source_url": "https://bu2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "BU 2024 (23rd, Boston)"
+        ],
+        "teams": [],
+        "note": "BU 2024 Boston local host lead."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Shuyao Shi",
+      "role": "Postdoctoral Fellow, Department of Information Engineering, The Chinese University of Hong Kong",
+      "role_source": "\"Postdoctoral Fellow\", \"Department of Information Engineering\", \"The Chinese University of Hong Kong\" (CPS-IoT Week 2024 organiser list).",
+      "affiliation": "The Chinese University of Hong Kong",
+      "source_url": "https://cpsweek2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "CPS-IoT Week 2024 (17th, Hong Kong)"
+        ],
+        "teams": [],
+        "note": "CPS-IoT Week 2024 local crew."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Wenchao Li",
+      "role": "Associate Professor, Department of Electrical and Computer Engineering, Boston University",
+      "role_source": "\"Associate Professor\", \"Department of Electrical and Computer Engineering\", \"Boston University\" (BU 2024 organiser list).",
+      "affiliation": "Boston University",
+      "source_url": "https://bu2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "BU 2024 (23rd, Boston)"
+        ],
+        "teams": [],
+        "note": "BU 2024 local host."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Yuze He",
+      "role": "Postdoctoral Fellow, Department of Information Engineering, The Chinese University of Hong Kong",
+      "role_source": "\"Postdoctoral Fellow\", \"Department of Information Engineering\", \"The Chinese University of Hong Kong\" (CPS-IoT Week 2024 organiser list).",
+      "affiliation": "The Chinese University of Hong Kong",
+      "source_url": "https://cpsweek2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "CPS-IoT Week 2024 (17th, Hong Kong)"
+        ],
+        "teams": [],
+        "note": "CPS-IoT Week 2024 local crew."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Zeinab El-Sayegh",
+      "role": "Assistant Professor, Department of Automotive and Mechatronics Engineering, Ontario Tech University",
+      "role_source": "\"Assistant Professor, Department of Automotive and Mechatronics Engineering, Ontario Tech University\" (IEEE SM 2024 organiser list).",
+      "affiliation": "Ontario Tech University",
+      "source_url": "https://sm2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "IEEE SM 2024 (19th, Niagara Falls)"
+        ],
+        "teams": [],
+        "note": "IEEE SM 2024 local host."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Zhenyu Yan",
+      "role": "Research Assistant Professor, Department of Information Engineering, The Chinese University of Hong Kong",
+      "role_source": "\"Research Assistant Professor\", \"Department of Information Engineering\", \"The Chinese University of Hong Kong\" (CPS-IoT Week 2024 organiser list).",
+      "affiliation": "The Chinese University of Hong Kong",
+      "source_url": "https://cpsweek2024-race.f1tenth.org/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [
+          "CPS-IoT Week 2024 (17th, Hong Kong)"
+        ],
+        "teams": [],
+        "note": "CPS-IoT Week 2024 Hong Kong local host lead."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "medium"
+    },
+    {
+      "name": "Herman Arnold Engelbrecht",
+      "role": null,
+      "role_source": null,
+      "affiliation": "Stellenbosch University (unconfirmed)",
+      "source_url": null,
+      "evidence": {
+        "papers": 3,
+        "paper_titles": [
+          "Comparing deep reinforcement learning architectures for autonomous racing",
+          "High-performance Racing on Unmapped Tracks using Local Maps",
+          "High-speed autonomous racing using trajectory-aided deep reinforcement learning"
+        ],
+        "years": [
+          2023,
+          2024
+        ],
+        "events_organised": [],
+        "teams": [],
+        "note": "3 papers 2023-2024 with Hendrik Willem Jordaan and Benjamin David Evans. Affiliation inferred from the author group only. ROLE UNSOURCED."
+      },
+      "proposed_category": "faculty",
+      "confidence": "low"
+    },
+    {
+      "name": "Jayanth Bhargav",
+      "role": null,
+      "role_source": null,
+      "affiliation": null,
+      "source_url": null,
+      "evidence": {
+        "papers": 1,
+        "paper_titles": [
+          "Deriving spatial policies for overtaking maneuvers with autonomous vehicles"
+        ],
+        "years": [
+          2022,
+          2022
+        ],
+        "events_organised": [],
+        "teams": [],
+        "note": "From the site's existing team_alumni.json, photo public/crew/bhargav.jpeg. No role, affiliation, committee or paper found. ROLE UNSOURCED."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Madhur Behl",
+      "role": "Associate Professor, Department of Computer Science, University of Virginia",
+      "role_source": "\"Associate Professor in the department of Computer Science at the University of Virginia\" and \"co-founded the F1Tenth autonomous racing platform and the international F1Tenth (now Roboracer) Grand Prix competitions\" (UVA Engineering faculty profile).",
+      "affiliation": "University of Virginia (Link Lab)",
+      "source_url": "https://engineering.virginia.edu/faculty/madhur-behl",
+      "evidence": {
+        "papers": 1,
+        "paper_titles": [
+          "Autonomous Vehicles on the Edge: A Survey on Autonomous Vehicle Racing"
+        ],
+        "years": [
+          2022,
+          2022
+        ],
+        "events_organised": [],
+        "teams": [],
+        "note": "CO-FOUNDER. UVA's own faculty page says he co-founded the platform and the competition series. He is on the site's stale developers roster with a photo (public/crew/madhur.jpg) but appears in no committee list 2023-2026 and no paper in publications.json. Strong 'Faculty and advisors' candidate for the origin story; confirm current involvement."
+      },
+      "proposed_category": "faculty",
+      "confidence": "high"
+    },
+    {
+      "name": "Ayagoz Smagulova",
+      "role": null,
+      "role_source": null,
+      "affiliation": null,
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "On the content skill's active five and named in CLAUDE.md as design co-owner, but no role, affiliation or public professional page found. Appears in no committee list, no paper, no team entry. NEEDS A SOURCED ROLE."
+      },
+      "proposed_category": "crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Dhruv Jaiswal",
+      "role": null,
+      "role_source": null,
+      "affiliation": "Carnegie Mellon University (per the roboracer-content skill)",
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "Named in the content skill's IROS 2026 organising committee (CMU) but absent from the IROS 2026 site's organiser list and from every other source checked. ROLE UNSOURCED."
+      },
+      "proposed_category": "crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Houssam Abbas",
+      "role": "Associate Professor, School of Electrical Engineering and Computer Science, Oregon State University",
+      "role_source": "\"Associate Professor\" / \"Electrical Engineering and Computer Science\" / \"Oregon State University\" (OSU people page).",
+      "affiliation": "Oregon State University",
+      "source_url": "https://engineering.oregonstate.edu/people/houssam-abbas",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "On the site's existing alumni roster with a photo (public/crew/houssam.png). No committee appearance 2023-2026 and no paper in publications.json - alumni placement is the site's own, not something I could re-source."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "high"
+    },
+    {
+      "name": "Johnny Tian",
+      "role": null,
+      "role_source": null,
+      "affiliation": "Carnegie Mellon University (per the roboracer-content skill)",
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "Named in the content skill's IROS 2026 organising committee (CMU) but absent from the IROS 2026 site's organiser list and from every other source checked. ROLE UNSOURCED."
+      },
+      "proposed_category": "crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Junfan Pan",
+      "role": null,
+      "role_source": null,
+      "affiliation": null,
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "From team_alumni.json, photo public/crew/Junfan_Pan.jpg. ROLE UNSOURCED."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Karel Smejkal",
+      "role": null,
+      "role_source": null,
+      "affiliation": null,
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "From team_alumni.json, no photo. ROLE UNSOURCED."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Lejun Jiang",
+      "role": null,
+      "role_source": null,
+      "affiliation": null,
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "From team_alumni.json, no photo. ROLE UNSOURCED."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Malavika Manoj",
+      "role": null,
+      "role_source": null,
+      "affiliation": null,
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "From team_alumni.json, photo public/crew/Malavika_Manoj.jpg. ROLE UNSOURCED."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Marko Bertogna",
+      "role": "Full Professor and leader of the HiPeRT Lab, University of Modena and Reggio Emilia",
+      "role_source": "\"Full Professor and leader of the HiPeRT Lab since 2012\", \"University of Modena and Reggio-Emilia, Modena, Italy\" (HiPeRT Lab profile). Note his own CV file is titled \"Marko Bertogna - PhD, Associate Professor\" - the two disagree, use Full Professor.",
+      "affiliation": "University of Modena and Reggio Emilia (HiPeRT Lab)",
+      "source_url": "https://hipert.unimore.it/employees/bertogna/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "On the site's stale developers roster with a photo (public/crew/marko.jpg). No committee appearance and no paper in publications.json; HiPeRT Modena raced at IROS 2021. Confirm current involvement."
+      },
+      "proposed_category": "faculty",
+      "confidence": "medium"
+    },
+    {
+      "name": "Mike Coraluzzi",
+      "role": null,
+      "role_source": null,
+      "affiliation": null,
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "On the site's existing developers roster with a photo (public/crew/mike.jpeg) but no role or affiliation anywhere in the repo, no committee list, no paper. NEEDS A SOURCED ROLE."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Ravi Konkimalla",
+      "role": null,
+      "role_source": null,
+      "affiliation": null,
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "From team_alumni.json, no photo. ROLE UNSOURCED."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Roland Toth",
+      "role": null,
+      "role_source": null,
+      "affiliation": "HUN-REN Institute for Computer Science and Control (from publications.json)",
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "3 papers 2024-2026. Name is 'Roland Toth' with accents in the data. ROLE UNSOURCED."
+      },
+      "proposed_category": "faculty",
+      "confidence": "low"
+    },
+    {
+      "name": "Roshan Benefo",
+      "role": null,
+      "role_source": null,
+      "affiliation": null,
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "From team_alumni.json, photo public/crew/Roshan_Benefo.jpeg. ROLE UNSOURCED."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Tom Jose",
+      "role": null,
+      "role_source": null,
+      "affiliation": null,
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "From team_alumni.json, photo public/crew/Tom_Jose.jpeg. ROLE UNSOURCED."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Wesley Yee",
+      "role": null,
+      "role_source": null,
+      "affiliation": null,
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "From team_alumni.json, no photo (avatar placeholder). ROLE UNSOURCED."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Xiaozhou Zhang",
+      "role": null,
+      "role_source": null,
+      "affiliation": null,
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "From team_alumni.json, photo public/crew/zhang.jpg. ROLE UNSOURCED."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Xinlong Zheng",
+      "role": null,
+      "role_source": null,
+      "affiliation": null,
+      "source_url": null,
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "From team_alumni.json, photo public/crew/zheng.jpeg. ROLE UNSOURCED."
+      },
+      "proposed_category": "past-crew",
+      "confidence": "low"
+    },
+    {
+      "name": "Yon Vanommeslaeghe",
+      "role": "Postdoc @ University of Pennsylvania",
+      "role_source": "\"Postdoc @ University of Pennsylvania\" (xLAB members page). The content skill instead says 'Visiting Researcher, UPenn, co-organizer' - the two disagree.",
+      "affiliation": "University of Pennsylvania (xLAB)",
+      "source_url": "https://xlab.upenn.edu/members/",
+      "evidence": {
+        "papers": 0,
+        "paper_titles": [],
+        "years": null,
+        "events_organised": [],
+        "teams": [],
+        "note": "Named in the content skill as IROS 2026 co-organizer but does not appear on any public race-site committee list I could fetch. Resolve Postdoc vs Visiting Researcher with Cedric."
+      },
+      "proposed_category": "crew",
+      "confidence": "medium"
+    }
+  ]
+}

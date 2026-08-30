@@ -72,6 +72,12 @@
   --text-display-m: clamp(1.75rem, 3vw, 2.75rem);
   --text-display-m--line-height: 1.02;
   --text-display-m--letter-spacing: -0.02em;
+  /* The smallest display step. Two components have used text-display-s since
+     landing v4 while the token was never declared, so both were rendering at
+     the inherited size. */
+  --text-display-s: clamp(1.375rem, 2.2vw, 1.875rem);
+  --text-display-s--line-height: 1.08;
+  --text-display-s--letter-spacing: -0.015em;
   --text-lead: clamp(1.125rem, 1.4vw, 1.375rem);
   --text-lead--line-height: 1.55;
   --text-body: 1rem;
@@ -172,6 +178,10 @@ body {
   flex-shrink: 0;
   min-width: 100%;
   animation: rr-marquee var(--rr-marquee-duration, 50s) linear infinite;
+  /* One ribbon left, one right, off the same keyframe. Set by Marquee's
+     `direction` prop; must live here with the shorthand above, which resets
+     animation-direction and would beat a layered utility. */
+  animation-direction: var(--rr-marquee-direction, normal);
 }
 @media (min-width: 48rem) {
   .rr-marquee-track {
@@ -193,6 +203,14 @@ body {
     animation: none;
     flex-wrap: wrap;
     justify-content: center;
+    /* The track is a flex item of .rr-marquee, and the moving state pins it at
+       flex-shrink: 0 with min-width: 100% so it can be wider than its box.
+       Leave those in place here and `flex-wrap: wrap` never fires: the track
+       just grows to 6,400px and overflow:hidden clips 21 of every 27 logos.
+       Releasing the width is what actually makes the static row wrap. */
+    flex-shrink: 1;
+    min-width: 0;
+    width: 100%;
   }
   .rr-marquee-track[aria-hidden="true"],
   .rr-marquee-clone {
@@ -464,14 +482,22 @@ body {
     text-decoration-color: var(--color-rr-violet);
   }
 
-  /* Below lg (1024px): the hamburger (lg:hidden) takes over. The seven
-     links plus the CTA need ~1,050 px at the 2rem gap, so between 768 and
+  /* Below lg (1024px): the hamburger (lg:hidden) takes over. The eight
+     links plus the CTA need ~1,110 px at the 2rem gap, so between 768 and
      1048 px the button sat off-screen (landing v5 QA). At lg the gap drops
-     to 1.25rem so 1024 fits; the old max-width: 768px overlapped Tailwind's
-     md breakpoint, so at exactly 768px neither rendered. */
+     so 1024 still fits - 0.875rem since Rules joined the row (pages v1);
+     the old max-width: 768px overlapped Tailwind's md breakpoint, so at
+     exactly 768px neither rendered. */
   @media (min-width: 64rem) and (max-width: 79.98rem) {
     .nav-links {
       gap: 1.25rem;
+    }
+  }
+  /* 1024-1152: the tightest band. Eight links, Simulator and the CTA only
+     clear the wordmark at this gap; below 1024 the hamburger takes over. */
+  @media (min-width: 64rem) and (max-width: 71.98rem) {
+    .nav-links {
+      gap: 0.6875rem;
     }
   }
   @media (max-width: 1023.98px) {
@@ -541,38 +567,3 @@ body {
   scrollbar-width: none;
 }
 
-.embla {
-  overflow: hidden;
-}
-
-.embla__viewport {
-  overflow: hidden;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.embla__container {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-
-.embla__slide {
-  flex: 0 0 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.embla__slide img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.3;
-}

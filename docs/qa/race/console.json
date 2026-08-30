@@ -1,0 +1,118 @@
+{
+ "desktop": {
+  "height": 7909,
+  "console": [],
+  "requestfailed": [],
+  "overflowX": false
+ },
+ "page": {
+  "h1": [
+   "Come race with us"
+  ],
+  "h2": [
+   "IROS 2026, Pittsburgh",
+   "Enter",
+   "This season",
+   "Every race so far",
+   "Who competes"
+  ],
+  "imgsNoDim": [],
+  "imgsNoAlt": [],
+  "videosNoPoster": [],
+  "hrefs": [
+   "/",
+   "/about",
+   "/build",
+   "/learn",
+   "/race",
+   "/rules",
+   "/course",
+   "/research",
+   "/news",
+   "https://autodrive-ecosystem.github.io/",
+   "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+   "https://www.linkedin.com/posts/great-work-by-all-involved-ugcPost-7471631589169516544-ZPa-/",
+   "https://iros2026-race.roboracer.ai/registration.html",
+   "https://2026ifac-roboracer.com/en/registration.html",
+   "https://events.vtsociety.org/vtc2026-fall/",
+   "https://iv2026-race.roboracer.ai/",
+   "https://icra2026-race.roboracer.ai/",
+   "https://techfest.org/competitions/RoboRacer",
+   "https://iv2025-race.roboracer.ai/",
+   "https://icra2025-race.roboracer.ai/",
+   "https://2025.iccas.org/",
+   "https://cdc2025-race.roboracer.ai/",
+   "https://bu2024-race.f1tenth.org/",
+   "https://cdc2024-race.f1tenth.org/",
+   "https://web.archive.org/web/20241107140818/https://iros2024-race.f1tenth.org/",
+   "https://itsc2024-race.f1tenth.org/",
+   "https://sm2024-race.f1tenth.org/",
+   "https://iv2024-race.f1tenth.org/",
+   "https://cpsweek2024-race.f1tenth.org/index.html",
+   "https://web.archive.org/web/20250908153518/https://icra2024-race.f1tenth.org/",
+   "https://icra2024-madgames.f1tenth.org/",
+   "https://web.archive.org/web/20240720182003/https://korea-race24f1tenth.org/",
+   "https://iros2023-race.f1tenth.org/",
+   "https://cps2023-race.f1tenth.org/",
+   "https://icra2023-race.f1tenth.org/",
+   "https://iv2023-race.f1tenth.org/",
+   "https://iros2023-madgames.f1tenth.org/",
+   "https://korea-race23.f1tenth.org/",
+   "https://icra2022-race.f1tenth.org/",
+   "https://web.archive.org/web/20221002153150/https://germany-race2022.f1tenth.org/",
+   "https://esweek2022-race.f1tenth.org/",
+   "https://korea-race.f1tenth.org/",
+   "https://web.archive.org/web/20220817154341/https://www.iros2021.org",
+   "https://linklab-uva.github.io/icra-autonomous-racing/",
+   "https://f1tenth.github.io/iros2020.html",
+   "https://f1tenth.github.io/ifac2020.html",
+   "https://f1tenth.github.io/columbia2019.html",
+   "https://f1tenth.github.io/montreal2019.html",
+   "https://f1tenth.github.io/torino2018.html",
+   "https://f1tenth.github.io/porto2018.html",
+   "https://f1tenth.github.io/pittsburgh2016.html",
+   "https://lamarr-institute.org/news/lamarracer-wins-roboracer-competition/",
+   "https://www.forzaeth.ch/",
+   "https://vaul.fsg.ulaval.ca/en",
+   "https://www.tuwien.at/inf/scuderia-segfault/",
+   "mailto:contact@roboracer.ai"
+  ],
+  "title": "Race - RoboRacer",
+  "landmarks": {
+   "main": 1,
+   "nav": 1,
+   "footer": 1
+  }
+ },
+ "desktop-rm": {
+  "height": 7909,
+  "console": [],
+  "requestfailed": [],
+  "overflowX": false
+ },
+ "tablet": {
+  "height": 9605,
+  "console": [],
+  "requestfailed": [],
+  "overflowX": false
+ },
+ "tablet-rm": {
+  "height": 9605,
+  "console": [],
+  "requestfailed": [],
+  "overflowX": false
+ },
+ "mobile": {
+  "height": 11579,
+  "console": [],
+  "requestfailed": [],
+  "overflowX": false
+ },
+ "mobile-rm": {
+  "height": 11579,
+  "console": [],
+  "requestfailed": [],
+  "overflowX": false
+ },
+ "nojs_text_len": 0
+}

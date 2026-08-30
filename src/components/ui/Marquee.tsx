@@ -10,6 +10,10 @@ type MarqueeProps = {
   className?: string;
   /** Flex gap between items (Tailwind class). */
   gap?: string;
+  /** "normal" scrolls left (the -50% keyframe as written); "reverse" plays the
+   * same keyframe backwards, which is what makes a second ribbon travel the
+   * other way without a second set of keyframes. */
+  direction?: "normal" | "reverse";
   /** Items; when a function, it is called with `{ clone }` so interactive
    * children can set `tabIndex={-1}` on their clones. */
   children: ReactNode | ((opts: { clone: boolean }) => ReactNode);
@@ -28,10 +32,11 @@ type MarqueeProps = {
  * { animation }` shorthand would beat a layered utility). `.rr-marquee-clone` disappears under prefers-reduced-motion, where
  * the first track wraps into a static grid and the second is hidden.
  */
-export default function Marquee({ duration = 50, durationMd, label, className = "", gap = "gap-12 pr-12", children }: MarqueeProps) {
+export default function Marquee({ duration = 50, durationMd, label, className = "", gap = "gap-12 pr-12", direction = "normal", children }: MarqueeProps) {
   const style = {
     "--rr-marquee-duration": `${duration}s`,
     "--rr-marquee-duration-md": `${durationMd ?? duration}s`,
+    "--rr-marquee-direction": direction,
   } as React.CSSProperties;
   const render = (clone: boolean) => (typeof children === "function" ? children({ clone }) : children);
   const track = (hidden: boolean) => (

@@ -15,6 +15,9 @@ type SectionHeaderProps = {
   /** "m" (default) = display-m title; "s" = demoted header for sections whose
    * media is the voice: the title drops to display-s-like lead size. */
   size?: "m" | "s";
+  /** Override the default bottom margin where a section owns its own rhythm
+   * (the partner ribbons sit tight under the map counters). */
+  className?: string;
 };
 
 /**
@@ -31,11 +34,12 @@ export default function SectionHeader({
   on = "paper",
   id,
   size = "m",
+  className = "",
 }: SectionHeaderProps) {
   const ink = on === "ink";
   const titleSize = size === "s" ? "text-lead font-semibold" : "text-display-m font-semibold";
   return (
-    <header className={`${size === "s" ? "mb-8" : "mb-12"} flex flex-wrap items-end justify-between gap-6`}>
+    <header className={`${size === "s" ? "mb-8" : "mb-12"} flex flex-wrap items-end justify-between gap-6 ${className}`}>
       <div className="max-w-2xl">
         {(index || eyebrow) && (
           <p

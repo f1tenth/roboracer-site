@@ -1,0 +1,1211 @@
+{
+  "generated_from": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+  "local_copy": "_harvest/f1tenth-about-2024/about.html (snapshot taken 2024-01-09, retrieved 2026-08-23)",
+  "note": "One record per person found on the archived F1TENTH about page. role is only ever a role that page carries; where the page gives none, role is null. Employer lines the page rendered under a name live in position_2024 and are not roles. The word Alumni is the archived page's own tab label and is never used as a group here.",
+  "counts": {
+    "people": 61,
+    "new_to_repo": 41,
+    "with_role": 21,
+    "with_photo": 53,
+    "staged": 37
+  },
+  "people": [
+    {
+      "name": "Francesco Gatti",
+      "honorific_on_page": null,
+      "role": "Organizer",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": null,
+      "group": "Faculty and advisors",
+      "archive_section": [
+        "all"
+      ],
+      "photo_archive": "francesco_zRiQ.jpeg",
+      "photo_staged": "_harvest/pick/crew/francesco.jpeg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/francesco-gatti-5234aa163/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Houssam Abbas",
+      "honorific_on_page": "Dr.",
+      "role": "Formal Methods and Control Theory",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": null,
+      "group": "Faculty and advisors",
+      "archive_section": [
+        "organizers",
+        "all"
+      ],
+      "photo_archive": "houssam_zRiQ.png",
+      "photo_staged": null,
+      "photo_repo": "public/crew/houssam-abbas-400.webp",
+      "photo_repo_original": "public/crew/houssam.png",
+      "link": "https://www.linkedin.com/in/houssam-abbas-725642a/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Madhur Behl",
+      "honorific_on_page": "Dr.",
+      "role": "Crew Chief",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": null,
+      "group": "Faculty and advisors",
+      "archive_section": [
+        "organizers",
+        "all"
+      ],
+      "photo_archive": "madhur_zRiQ.jpg",
+      "photo_staged": null,
+      "photo_repo": "public/crew/madhur-behl-400.webp",
+      "photo_repo_original": "public/crew/madhur.jpg",
+      "link": "https://www.linkedin.com/in/madhurbehl/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Marko Bertogna",
+      "honorific_on_page": "Dr.",
+      "role": "Organizer",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": null,
+      "group": "Faculty and advisors",
+      "archive_section": [
+        "organizers",
+        "all"
+      ],
+      "photo_archive": "marko_zRiQ.jpg",
+      "photo_staged": null,
+      "photo_repo": "public/crew/marko-bertogna-400.webp",
+      "photo_repo_original": "public/crew/marko.jpg",
+      "link": "https://www.linkedin.com/in/marko-bertogna-19bbb99/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Paolo Burgio",
+      "honorific_on_page": "Dr.",
+      "role": "Organizer",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": null,
+      "group": "Faculty and advisors",
+      "archive_section": [
+        "organizers",
+        "all"
+      ],
+      "photo_archive": "Paolo_Burgio_zRiQ.jpg",
+      "photo_staged": null,
+      "photo_repo": "public/crew/paolo-burgio-400.webp",
+      "photo_repo_original": "public/crew/Paolo_Burgio.jpg",
+      "link": "https://www.linkedin.com/in/paoloburgio/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Rahul Mangharam",
+      "honorific_on_page": "Dr.",
+      "role": "Team Principal",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": null,
+      "group": "Faculty and advisors",
+      "archive_section": [
+        "organizers",
+        "all"
+      ],
+      "photo_archive": "mangharam_zRiQ.jpeg",
+      "photo_staged": null,
+      "photo_repo": "public/crew/rahul-mangharam-400.webp",
+      "photo_repo_original": "public/crew/mangharam.jpeg",
+      "link": "https://www.linkedin.com/in/mangharam/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Venkat Krovi",
+      "honorific_on_page": "Dr.",
+      "role": "Outreach Director",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": null,
+      "group": "Faculty and advisors",
+      "archive_section": [
+        "organizers",
+        "all"
+      ],
+      "photo_archive": "venkatK_zRiQ.jpg",
+      "photo_staged": null,
+      "photo_repo": "public/crew/venkat-krovi-400.webp",
+      "photo_repo_original": "public/crew/venkatK.jpg",
+      "link": "https://www.linkedin.com/in/venkatnkrovi/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Billy Zheng",
+      "honorific_on_page": null,
+      "role": "Simulation and Race Infrastructure",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": null,
+      "group": "Crew",
+      "archive_section": [
+        "people",
+        "all"
+      ],
+      "photo_archive": "billy_zRiQ.png",
+      "photo_staged": null,
+      "photo_repo": "public/crew/billy-zheng-400.webp",
+      "photo_repo_original": "public/crew/billy.png",
+      "link": "https://www.linkedin.com/in/hongruizheng/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Johannes Betz",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Crew",
+      "archive_section": [
+        "people",
+        "all"
+      ],
+      "photo_archive": "betz_zRiQ.jpeg",
+      "photo_staged": null,
+      "photo_repo": "public/crew/johannes-betz-400.webp",
+      "photo_repo_original": "public/crew/betz.jpeg",
+      "link": "https://www.linkedin.com/in/johannes-betz-254049107/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The archived page listed him under Developers in 2024. He is now faculty at TUM; the current grouping is A4's call, not this file's."
+    },
+    {
+      "name": "Arnav Dhamija",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Software Engineer, Jugaad Lab",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": "dhamja_zRiQ.jpeg",
+      "photo_staged": "_harvest/pick/crew/dhamja.jpeg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/arnav-dhamija/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Baihong Zeng",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Vehicle Enginner, Nissan",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "zeng_zRiQ.jpeg",
+      "photo_staged": "_harvest/pick/crew/zeng.jpeg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/baihong-zeng-a5a3a512b/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Brandon McBride",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": "Brandon_McBride_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/Brandon_McBride.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/bmcb/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Chris Kennedy",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": null,
+      "photo_staged": null,
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/cwkenned/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The archived page used its generic avatar placeholder for this person, so there is no headshot to take."
+    },
+    {
+      "name": "Christopher Kao",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Software Engineer, WePay",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "christopher_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/christopher.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/christopher-kao/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The page gives more than one employer line, which disagree with each other: Software Engineer, WePay / Embedded Computer Vision and Robotics, Built Robotics."
+    },
+    {
+      "name": "David DePauw",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": "David_DePauw_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/David_DePauw.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/david-m-depauw/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Dayong Tong",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": null,
+      "photo_staged": null,
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/dayong-tong/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The archived page used its generic avatar placeholder for this person, so there is no headshot to take."
+    },
+    {
+      "name": "Dhruv Karthik",
+      "honorific_on_page": null,
+      "role": "Perception and Planning",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": "Software Enginner, Apple",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "dhruv_zRiQ.jpeg",
+      "photo_staged": "_harvest/pick/crew/dhruv.jpeg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/dhruvkarthik/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Diana Hoang",
+      "honorific_on_page": null,
+      "role": "Principal Web Developer and Designer",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": "Recruiting Support Staff, Oracle",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "dianah_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/dianah.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/dnhoang/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Jack Harkins",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "System Software Engineer, NVIDIA",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "jack_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/jack.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/jharkins95/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The page gives more than one employer line, which disagree with each other: System Software Engineer, NVIDIA / GPU Firmware Engineer, NVIDIA."
+    },
+    {
+      "name": "Jalaj Maheshwari",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Research Engineer, Center for Injury Research and Prevention",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "jalaj_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/jalaj.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/jalajmaheshwari/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Jayanth Bhargav",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "bhargav_zRiQ.jpeg",
+      "photo_staged": null,
+      "photo_repo": "public/crew/jayanth-bhargav-400.webp",
+      "photo_repo_original": "public/crew/bhargav.jpeg",
+      "link": "https://www.linkedin.com/in/jayanthbhargav/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Joe Auckley",
+      "honorific_on_page": null,
+      "role": "Stabilizer",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": "Planning & Controls Software Engineer, Zoox",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "joe_auck_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/joe_auck.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/joe-auckley-369b65130/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Junfan Pan",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": "Junfan_Pan_zRiQ.jpg",
+      "photo_staged": null,
+      "photo_repo": "public/crew/junfan-pan-400.webp",
+      "photo_repo_original": "public/crew/Junfan_Pan.jpg",
+      "link": "https://www.linkedin.com/in/junfan-pan/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Kaiying Guo",
+      "honorific_on_page": null,
+      "role": "Past Principal Web Developer",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": "Software Enginner Intern, Facebook",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "kyg_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/kyg.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/48kaiying/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Karel Smejkal",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": null,
+      "photo_staged": null,
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/karel-smejkal/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The archived page used its generic avatar placeholder for this person, so there is no headshot to take."
+    },
+    {
+      "name": "Kim Luong",
+      "honorific_on_page": null,
+      "role": "Education",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "all"
+      ],
+      "photo_archive": "kiml_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/kiml.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/kim-luong-a0579542/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Kuk Jang",
+      "honorific_on_page": null,
+      "role": "Localization",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": "PhD Candidate, University of Pennsylvania",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "kuk_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/kuk.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/kuk-jang-9a971014/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The page also writes the name as Kuk Jin. The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Lejun Jiang",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": null,
+      "photo_staged": null,
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/lejun-jiang-a60274174/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The archived page used its generic avatar placeholder for this person, so there is no headshot to take."
+    },
+    {
+      "name": "Malavika Manoj",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": "Malavika_Manoj_zRiQ.jpg",
+      "photo_staged": null,
+      "photo_repo": "public/crew/malavika-manoj-400.webp",
+      "photo_repo_original": "public/crew/Malavika_Manoj.jpg",
+      "link": "https://www.linkedin.com/in/malavikamanoj/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Manas Shukla",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Machine Learning Engineer, Universal Logic",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "manas_zRiQ.JPG",
+      "photo_staged": "_harvest/pick/crew/manas.JPG",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/shuklam20/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Matthew Brady",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "HDE II Mechanical, Amazon Robotics",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "mattb_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/mattb.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/matthew-brady-b4ab1656/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The page gives more than one employer line, which disagree with each other: HDE II Mechanical, Amazon Robotics / Amazon Robotics."
+    },
+    {
+      "name": "Matthew Lebermann",
+      "honorific_on_page": null,
+      "role": "Tire Changer",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": "Research Intern, University of Pennsylvania",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "pablo_zRiQ.png",
+      "photo_staged": "_harvest/pick/crew/pablo.png",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/mleb/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Matthew O'Kelly",
+      "honorific_on_page": null,
+      "role": "Autonomous Driver",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": "Mechanical & Embedded Systems Enginner, Priority Designs",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "matt_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/matt.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/meokelly/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms. The visible employer line reads 'Mechanical & Embedded Systems Enginner, Priority Designs', which does not match the co-founder of the platform. Verify with Cedric before publishing that line."
+    },
+    {
+      "name": "Mike Coraluzzi",
+      "honorific_on_page": null,
+      "role": "Head of Industry Relations",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "organizers",
+        "all"
+      ],
+      "photo_archive": "mike_zRiQ.jpeg",
+      "photo_staged": null,
+      "photo_repo": "public/crew/mike-coraluzzi-400.webp",
+      "photo_repo_original": "public/crew/mike.jpeg",
+      "link": "https://www.linkedin.com/in/michael-coraluzzi-7433a846/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms. The archived page placed him under Organizers with a role. Cedric's standing decision for the About page keeps him in Past crew, so that is the group here."
+    },
+    {
+      "name": "Nagarakshith Makam Sreenivasulu",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": "Nagarakshith_Makam_Sreenivasulu_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/Nagarakshith_Makam_Sreenivasulu.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/nagarakshith/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Nischal K N",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Senior Autonomous Vehicle Software Engineer, NVIDIA",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "nischal_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/nischal.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/nischalkn/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The page gives more than one employer line, which disagree with each other: Senior Autonomous Vehicle Software Engineer, NVIDIA / Autonomous Vehicle Software Engineer, NVIDIA."
+    },
+    {
+      "name": "Nitesh Singh",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Senior Embedded Software Engineer, Rivian",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "nitesh_zRiQ.JPG",
+      "photo_staged": "_harvest/pick/crew/nitesh.JPG",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/nitesh06/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The page gives more than one employer line, which disagree with each other: Senior Embedded Software Engineer, Rivian / Embedded Software Engineer, Rivian."
+    },
+    {
+      "name": "Paril Jain",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Senior Autopilot Software Engineer, Tesla",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "paril_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/paril.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/pariljain/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The page gives more than one employer line, which disagree with each other: Senior Autopilot Software Engineer, Tesla / Software Engineer, Tesla."
+    },
+    {
+      "name": "Paritosh Kelkar",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Autonomous Vehicle Research Engineer, Honda R&D",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "paritosh_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/paritosh.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/paritoshkelkar/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Peter Werner",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Robotics, Institute for Dynamic Systems and Control",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": "werner_zRiQ.jpeg",
+      "photo_staged": "_harvest/pick/crew/werner.jpeg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/wernerpe/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Ravi Konkimalla",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": "Ravi Konkimalla_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/Ravi_Konkimalla.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/ravitejakonkimalla/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Raymond Bjorkman",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": "Raymond_Bjorkman_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/Raymond_Bjorkman.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/raybjork/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Roshan Benefo",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": "Roshan_Benefo_zRiQ.jpeg",
+      "photo_staged": null,
+      "photo_repo": "public/crew/roshan-benefo-400.webp",
+      "photo_repo_original": "public/crew/Roshan_Benefo.jpeg",
+      "link": "https://www.linkedin.com/in/roshan-b-435296a3/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Saumya Shah",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Autonomy Enginner, Skydio",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": "shah_zRiQ.jpeg",
+      "photo_staged": "_harvest/pick/crew/shah.jpeg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/saumya97/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Saurabh Kumthekar",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": null,
+      "photo_staged": null,
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/saurabh-kumthekar/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The archived page used its generic avatar placeholder for this person, so there is no headshot to take."
+    },
+    {
+      "name": "Siddharth Singh",
+      "honorific_on_page": null,
+      "role": "Perception",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": "Software Engineer, Amazon",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "siddharth_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/siddharth.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/siddharth-singh-764b49bb/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Susan Xie",
+      "honorific_on_page": null,
+      "role": "Past Principal Designer",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": "Tools Intern, Hi-Rez Studios",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "susan_zRiQ.png",
+      "photo_staged": "_harvest/pick/crew/susan.png",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/susan-xie/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Thejas Kesari",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Embedded Software Engineer, Rivian",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "thejas_zRiQ.JPG",
+      "photo_staged": "_harvest/pick/crew/thejas.JPG",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/thejaskesari/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Tom Jose",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": "Tom_Jose_zRiQ.jpeg",
+      "photo_staged": null,
+      "photo_repo": "public/crew/tom-jose-400.webp",
+      "photo_repo_original": "public/crew/Tom_Jose.jpeg",
+      "link": null,
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Trevor Pennypacker",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Cofounder, Paladin Drones",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "trevor_zRiQ.png",
+      "photo_staged": "_harvest/pick/crew/trevor.png",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/trevor-pennypacker/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Tuan Nguyen",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": null,
+      "photo_staged": null,
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": null,
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The archived page used its generic avatar placeholder for this person, so there is no headshot to take."
+    },
+    {
+      "name": "Varundev Sukhil",
+      "honorific_on_page": null,
+      "role": "Autonomous Driver",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": "Product Engineer, Scanoptix",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "varundev_zRiQ.png",
+      "photo_staged": "_harvest/pick/crew/varundev.png",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/varundev-sukhil-2aa340109/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Venkat Varun Velpula",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": "Venkat_Varun_Velpula_zRiQ.JPG",
+      "photo_staged": "_harvest/pick/crew/Venkat_Varun_Velpula.JPG",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/varun-velpula/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Wesley Yee",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": null,
+      "photo_staged": null,
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/wesley-yee/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The archived page used its generic avatar placeholder for this person, so there is no headshot to take."
+    },
+    {
+      "name": "Xiaozhou Zhang",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "zhang_zRiQ.jpg",
+      "photo_staged": null,
+      "photo_repo": "public/crew/xiaozhou-zhang-400.webp",
+      "photo_repo_original": "public/crew/zhang.jpg",
+      "link": "https://www.linkedin.com/in/xiaozhou-zhang-91760b13a/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Xinlong Zheng",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "zheng_zRiQ.jpeg",
+      "photo_staged": null,
+      "photo_repo": "public/crew/xinlong-zheng-400.webp",
+      "photo_repo_original": "public/crew/zheng.jpeg",
+      "link": "https://www.linkedin.com/in/xinlong-zheng-47092316a/",
+      "new_to_repo": false,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Yash Pant",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Postdoctoral Fellow, UC Berkeley",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "YashPant_zRiQ.jpg",
+      "photo_staged": "_harvest/pick/crew/YashPant.jpg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://yashpant.github.io/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Yash Trikannad",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Software Enginner, Motional",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "trikannad_zRiQ.jpeg",
+      "photo_staged": "_harvest/pick/crew/trikannad.jpeg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/yash-trikannad/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    },
+    {
+      "name": "Yuwei Wang",
+      "honorific_on_page": null,
+      "role": "Learning and Control",
+      "role_source": "archived page HTML comment, not rendered",
+      "position_2024": "Applied Scientist, Amazon",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "wang_zRiQ.jpeg",
+      "photo_staged": "_harvest/pick/crew/wang.jpeg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/yuwei-wang-956a68152/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The archived page carried two different headshots for this name: wang_zRiQ.jpeg, yuwei_zRiQ.jpg. Took the one shown in the visible Alumni tab; the second is yuwei_zRiQ.jpg. The role is written in the archived HTML as a commented-out heading, so it was authored by the F1TENTH team but never rendered to readers. Treat it as sourced-but-unpublished until Cedric confirms."
+    },
+    {
+      "name": "Zhihao Ruan",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": null,
+      "group": "Past crew",
+      "archive_section": [
+        "alumni"
+      ],
+      "photo_archive": null,
+      "photo_staged": null,
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/zhihao-ruan-29b29a13a/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": "The archived page used its generic avatar placeholder for this person, so there is no headshot to take."
+    },
+    {
+      "name": "Zirui Zang",
+      "honorific_on_page": null,
+      "role": null,
+      "role_source": null,
+      "position_2024": "Imaging Science, PerkinElmer",
+      "group": "Past crew",
+      "archive_section": [
+        "alumni",
+        "all"
+      ],
+      "photo_archive": "zang_zRiQ.jpeg",
+      "photo_staged": "_harvest/pick/crew/zang.jpeg",
+      "photo_repo": null,
+      "photo_repo_original": null,
+      "link": "https://www.linkedin.com/in/zirui-zang/",
+      "new_to_repo": true,
+      "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
+      "notes": null
+    }
+  ]
+}

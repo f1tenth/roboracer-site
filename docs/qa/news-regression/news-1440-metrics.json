@@ -1,0 +1,273 @@
+{
+ "sections": [
+  {
+   "id": "news-title",
+   "w": 1440
+  },
+  {
+   "id": "all-news",
+   "w": 1440
+  },
+  {
+   "id": "news-year-2026",
+   "w": 1392
+  },
+  {
+   "id": "news-year-2024",
+   "w": 1392
+  },
+  {
+   "id": "news-year-2023",
+   "w": 1392
+  },
+  {
+   "id": "news-year-2020",
+   "w": 1392
+  },
+  {
+   "id": "contribute",
+   "w": 1440
+  }
+ ],
+ "containers": [
+  1440,
+  1440,
+  1440
+ ],
+ "cards": [
+  {
+   "w": 1392,
+   "h": 325,
+   "img": false
+  },
+  {
+   "w": 448,
+   "h": 244,
+   "img": false
+  },
+  {
+   "w": 448,
+   "h": 545,
+   "img": true
+  },
+  {
+   "w": 448,
+   "h": 545,
+   "img": true
+  },
+  {
+   "w": 448,
+   "h": 586,
+   "img": true
+  },
+  {
+   "w": 448,
+   "h": 586,
+   "img": true
+  },
+  {
+   "w": 448,
+   "h": 586,
+   "img": true
+  },
+  {
+   "w": 448,
+   "h": 545,
+   "img": true
+  },
+  {
+   "w": 448,
+   "h": 545,
+   "img": true
+  },
+  {
+   "w": 448,
+   "h": 545,
+   "img": true
+  },
+  {
+   "w": 448,
+   "h": 545,
+   "img": true
+  },
+  {
+   "w": 448,
+   "h": 545,
+   "img": true
+  },
+  {
+   "w": 448,
+   "h": 545,
+   "img": true
+  },
+  {
+   "w": 448,
+   "h": 565,
+   "img": true
+  },
+  {
+   "w": 448,
+   "h": 565,
+   "img": true
+  },
+  {
+   "w": 448,
+   "h": 241,
+   "img": false
+  },
+  {
+   "w": 448,
+   "h": 304,
+   "img": false
+  },
+  {
+   "w": 448,
+   "h": 304,
+   "img": false
+  },
+  {
+   "w": 448,
+   "h": 288,
+   "img": false
+  },
+  {
+   "w": 448,
+   "h": 236,
+   "img": false
+  },
+  {
+   "w": 448,
+   "h": 236,
+   "img": false
+  }
+ ],
+ "h1": {
+  "w": 915,
+  "fs": "86.4px",
+  "text": "What the teams have been racing"
+ },
+ "headings": [
+  {
+   "t": "H1",
+   "fs": "86.4px",
+   "txt": "What the teams have been racing"
+  },
+  {
+   "t": "H2",
+   "fs": "43.2px",
+   "txt": "Registration for the 31st competition at IRO"
+  },
+  {
+   "t": "H2",
+   "fs": "43.2px",
+   "txt": "Every year so far"
+  },
+  {
+   "t": "H3",
+   "fs": "43.2px",
+   "txt": "2026"
+  },
+  {
+   "t": "H4",
+   "fs": "20.16px",
+   "txt": "The 29th competition opens in Busan on Augus"
+  },
+  {
+   "t": "H4",
+   "fs": "20px",
+   "txt": "KNAPP on what autonomous racing shares with "
+  },
+  {
+   "t": "H4",
+   "fs": "20px",
+   "txt": "Carnegie Mellon finish 5th of 17 teams at IV"
+  },
+  {
+   "t": "H4",
+   "fs": "20px",
+   "txt": "404 Racers take second place in Detroit \u2197"
+  },
+  {
+   "t": "H4",
+   "fs": "20px",
+   "txt": "Thunderbolt wins the 28th competition at IV "
+  },
+  {
+   "t": "H4",
+   "fs": "20px",
+   "txt": "A Frenet-frame MPC and an overtaking planner"
+  },
+  {
+   "t": "H4",
+   "fs": "20px",
+   "txt": "Roboracer @ Purdue place 10th in their first"
+  },
+  {
+   "t": "H4",
+   "fs": "20px",
+   "txt": "LAMARRacing set the fastest car of ICRA 2026"
+  },
+  {
+   "t": "H4",
+   "fs": "20px",
+   "txt": "UNICORN Racing win the RoboRacer competition"
+  },
+  {
+   "t": "H4",
+   "fs": "20px",
+   "txt": "Ingenuity Labs Racing race for the first tim"
+  }
+ ],
+ "paras": [
+  {
+   "w": 511,
+   "fs": "20.16px",
+   "txt": "The 31st RoboRacer Autonomous Racing Com"
+  },
+  {
+   "w": 398,
+   "fs": "14px",
+   "txt": "The 29th RoboRacer Autonomous Racing Com"
+  },
+  {
+   "w": 398,
+   "fs": "14px",
+   "txt": "On the parallels between autonomous moto"
+  },
+  {
+   "w": 398,
+   "fs": "14px",
+   "txt": "5th of 17 teams at IV 2026 in Detroit, r"
+  },
+  {
+   "w": 398,
+   "fs": "14px",
+   "txt": "2nd place at the 28th RoboRacer competit"
+  },
+  {
+   "w": 398,
+   "fs": "14px",
+   "txt": "UPenn Autonomous Racing took first place"
+  },
+  {
+   "w": 448,
+   "fs": "12px",
+   "txt": "Result: Cedric Hollande, Race Director. "
+  },
+  {
+   "w": 398,
+   "fs": "14px",
+   "txt": "Second place at IV 2026 with a Frenet-fr"
+  },
+  {
+   "w": 398,
+   "fs": "14px",
+   "txt": "Roboracer @ Purdue placed P10 at IV 2026"
+  },
+  {
+   "w": 398,
+   "fs": "14px",
+   "txt": "A first RoboRacer competition with Ingen"
+  }
+ ]
+}
