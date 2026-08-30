@@ -164,3 +164,9 @@ photos): contract `docs/plans/hero-cinematic-v1.md`, report `docs/hero-lab/REPOR
 `/?hero=classic` the clip-cycle hero. The frames live only locally under `public/media/hero-cine/`
 (git-ignored; R2 upload is the first follow-up), so a dev server started before they were cut
 needs a restart. Nothing on `revamp/landing-v1` changed; the draft PR is for Cedric's decision.
+
+v2 (morning of 2026-08-30, after Cedric's review): the branch now sits on `revamp/pages-v1` (PR #18
+re-based), and the film is the four-act story Cedric asked for (chase and overtake of the Unicorn
+car, drone move to the side, the hall dissolving into a dark void, the CAD explosion), 700vh, cut
+from three chained Seedance 2.0 Mini clips; storyboard and open questions in
+`docs/hero-lab/v2/ACTS.md`. Balance 173 credits.

@@ -1,6 +1,47 @@
-# Hero cinematic v1: morning report (overnight trial, 2026-08-30)
+# Hero cinematic: report (overnight v1 trial + the v2 morning round, 2026-08-30)
 
-## Verdict
+## v2 round (08:43-09:30, after Cedric's review)
+
+Cedric's notes: wrong base branch (should be `revamp/pages-v1`); the hero must be a real story:
+third person behind our racecar racing fast and overtaking the Unicorn car, the camera moving to the
+side like a drone, the whole background changing like in a movie into a bland or dark parallel
+dimension, then the car opening into its CAD exploded view, close to the real CAD; spend down to a
+170 balance for a wavelength check; the front page may be redesigned around the film afterwards.
+
+What is on the branch now (`docs/hero-lab/v2/ACTS.md` has the storyboard, clips, schedule and
+the questions):
+
+- Branch moved: `origin/revamp/pages-v1` merged in (landing-v1 is its ancestor, so no history
+  rewrite), PR #18 re-based onto `revamp/pages-v1`.
+- **The four-act film**, 700vh, 200 desktop / 80 mobile frames (7.56 / 2.07 MB), built from three
+  chained Seedance 2.0 Mini clips whose start and end frames are generated key frames, so every act
+  boundary is exact: **A1** the chase behind our car and the pass on the Unicorn car, the camera
+  swinging to its side; **A23** the drone move around the car in slow motion while the hall
+  dissolves into a dark void; **A4** the car exploding into its parts in the void, laid out from the
+  real CAD (renders of the site's three.js assembly were the references; the exploded still was
+  re-drawn once because the first had two LiDARs). Key frames and clip sheets:
+  [acts sheet](https://raw.githubusercontent.com/f1tenth/roboracer-site/revamp/hero-cinematic/docs/hero-lab/v2/acts-sheet.jpg) ·
+  [A1](https://raw.githubusercontent.com/f1tenth/roboracer-site/revamp/hero-cinematic/docs/hero-lab/v2/takes/a1-sheet.jpg) ·
+  [A23](https://raw.githubusercontent.com/f1tenth/roboracer-site/revamp/hero-cinematic/docs/hero-lab/v2/takes/a23-sheet.jpg) ·
+  [A4](https://raw.githubusercontent.com/f1tenth/roboracer-site/revamp/hero-cinematic/docs/hero-lab/v2/takes/a4-sheet.jpg) ·
+  [CAD references](https://raw.githubusercontent.com/f1tenth/roboracer-site/revamp/hero-cinematic/docs/hero-lab/v2/cad-refs-sheet.jpg).
+- **The schedule**: the headline lands over the chase and the pass (lines at frames 25, 51, 70),
+  stands with the description through the side move, fades out in place as the hall dissolves, and
+  the void and the explosion play clean with no text; hold on the exploded car; nav fills 0.90-0.98.
+  `HeroCinematic` got a `film` prop (acts and beats as frame indices) built by a fork; the v1 path
+  still exists behind it and `/?hero=classic` is untouched.
+- Credits: 47.5 this round (5 stills at 2, 3 clips at 12.5): balance **220.5 -> 173**.
+- Agents used (per Cedric's note): a Fable agent rendered the CAD references from `/assembly`
+  (`docs/hero-lab/v2/CAD_REFS.md`), a fork built the four-act schedule; the media curator's v1 sheets
+  were reused.
+- QA v2: `docs/qa/hero-cinematic-v2.md` (the smoke pass at 1440/390 was clean: 200/200 and 80/80
+  frames, 0 errors, one h1, reduced motion static, classic intact; the full pass is appended there).
+
+Decide from `/` on localhost (restart the dev server if frames 404): is this the wavelength? The
+open calls are in ACTS.md: act 4 generated versus a hand-off to the real three.js model, the speed
+of the dissolve, the beats, the phone crop, and the front-page redesign around the film.
+
+## Verdict (v1, overnight)
 
 Worth continuing: the scroll-scrubbed film works end to end on real generated footage, the take
 holds the car geometry through all 121 frames, and the whole chapter passes the section 10 checks.
