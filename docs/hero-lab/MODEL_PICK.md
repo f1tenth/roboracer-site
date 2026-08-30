@@ -59,3 +59,23 @@ Budget: spent 20 of the 200 unattended ceiling before the first take; 180 left a
 Start image only (no extra references), a different vendor, so a Seedance plan restriction does
 not reach it, and 1080p (1600-wide frames). Used if the first Seedance job errors with a plan
 restriction, or for take D if A to C fail the fidelity bar and the ledger allows it.
+
+## Outcome (02:30): the pick is plan-restricted, the fallback is in use
+
+The first real Seedance job (`_harvest/higgsfield/20260830-022952-seedance_2_0-...`) was refused by
+the API with `Error: "Pro" or "Ultimate" plan required` before it started; nothing was charged
+(balance still 258). The cost estimate had not revealed the restriction. Per contract section 4
+the run switched to the fallback for every take:
+
+```
+scripts/hf.sh kling3_0 --prompt "$(cat docs/hero-lab/takes/take-<L>.txt)" \
+  --start-image _harvest/higgsfield/locked-frame.png \
+  --duration 5 --aspect_ratio 16:9 --mode pro --sound off
+```
+
+8.75 credits a clip, 1080p, the locked frame as the first frame, no extra references (the start
+image carries the car geometry). Three takes = 26.25 credits. Not tried tonight, for Cedric to
+decide: `seedance_2_0_mini` (12.5, 720p, references; it may carry the same plan restriction) and
+`cinematic_studio_3_0` 720p (25, references, not under the 25 rule). If Kling 3.0 pro is also
+restricted the next rows down are `kling3_0 --mode std` (7.5, 720p), `kling3_0_turbo` 1080p (10),
+`wan2_7` 1080p (12.5) and `kling2_6` (5); a refused job costs nothing.
