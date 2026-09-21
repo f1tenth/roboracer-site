@@ -5,6 +5,15 @@
 
 export type NewsImage = { src: string; width: number; height: number; alt: string };
 
+/** A third-party post shown in place: the frame URL the publisher gives for
+ * embedding, and our own poster that holds the space until it loads. */
+export type NewsEmbed = {
+  provider: "linkedin";
+  src: string;
+  title: string;
+  poster: NewsImage;
+};
+
 export type NewsKind = "post" | "article" | "video" | "podcast" | "announcement";
 
 /** One item in the feed. `image: null` means a text card. */
@@ -29,6 +38,12 @@ export type NewsItem = {
   publisher: string;
   credit?: string | null;
   image: NewsImage | null;
+  /** Lead story only: the post itself, embedded beside the text. */
+  embed?: NewsEmbed | null;
+  /** Lead story only: the two or three numbers the story turns on. */
+  stats?: { value: string; label: string }[];
+  /** A second link beside the source, e.g. the results page. */
+  more?: { label: string; href: string } | null;
   featured?: boolean;
   status?: "published" | "verify";
 };

@@ -429,3 +429,24 @@ Eleven LinkedIn posts chosen by Cedric (one URL was listed twice: post 1 and pos
 |---|---|---|---|---|---|---|---|---|---|
 | V5-TEAM-03 | `public/media/team/team-404-racers-800.webp` | webp | 800x800 | 44 KB | 404 Racers team with their car | `_harvest/cedric-media/404Racers.jpeg` (1280x720), crop 720x720+225+0 (recropped 2026-08-22: right member was cut) | supplied by Cedric / the team | Cedric, 2026-08-22 | teams.json `404 Racers` |
 | V5-TEAM-04 | `public/media/team/team-west-virginia-university-800.webp` | webp | 800x800 | 110 KB | West Virginia University team with their car | `_harvest/cedric-media/WVU_Team.jpeg` (1280x960), crop 960x960+196+0 (recropped 2026-08-22: left member was cut) | supplied by Cedric / the team | Cedric, 2026-08-22 | teams.json `West Virginia University` |
+
+## About page video library posters (2026-09-21)
+
+Each file is the YouTube thumbnail of the video it fronts, used only as the click-to-load face of that video's own embed in `public/data/videos.json` (About, section 05). Fetched from `i.ytimg.com/vi/<id>/maxresdefault.jpg` (the course lecture only exists at `sddefault`, 640x480 letterboxed, centre-cropped to 16:9 and not upscaled), resized to 1200 wide, WebP q80. The ICRA 2025 card reuses V4-16.
+
+| id | file | type | dims | size | content | source | credit | permission | used by |
+|---|---|---|---|---|---|---|---|---|---|
+| AV-01 | `public/media/about/about-video-freshman-series-1200.webp` | webp | 1200x675 | 32 KB | FPV view over a car in a glass corridor, "self-driving" title | thumbnail of YouTube `k1tdeXjaJpk`, first video of playlist `PLTZBkBy9FMWaJoG6A5yjd0b2oEdniFA0j` | Steven Gong | NOT ASKED; embed poster of his public video, links to his channel; Cedric owns asking | videos.json `freshman-series` |
+| AV-02 | `public/media/about/about-video-student-view-1200.webp` | webp | 1200x675 | 51 KB | Foxglove dashboard with onboard camera, track map and acceleration plot | thumbnail of YouTube `_RB63z6lUEE` | xLAB for Safe Autonomous Systems | project's own channel | videos.json `student-view` |
+| AV-03 | `public/media/about/about-video-icra2026-interviews-1200.webp` | webp | 1200x675 | 116 KB | ICRA 2026 group photo inside the orange track under the roboracer wordmark | thumbnail of YouTube `vlt6veE4SJI`, first video of playlist `PLdAPk2ph3VEU` | xLAB for Safe Autonomous Systems | project's own channel | videos.json `icra2026-interviews` |
+| AV-04 | `public/media/about/about-video-course-lectures-640.webp` | webp | 640x360 | 14 KB | "Course Introduction" title slide, Rahul Mangharam, Penn Engineering | thumbnail of YouTube `v6w_zVHL8WQ`, first video of playlist `PL7rtKJAz_mPdFDJtufKmqfWRNu55s_LMc` | xLAB for Safe Autonomous Systems | project's own channel | videos.json `course-lectures` |
+| AV-05 | `public/media/about/about-video-build-hardware-1200.webp` | webp | 1200x675 | 27 KB | "Build the Hardware - Introduction" title card with the car | thumbnail of YouTube `iyOtTtlHcvw`, first video of playlist `PL7rtKJAz_mPdx6GCshW7tl10Da1oHVmQH` | xLAB for Safe Autonomous Systems | project's own channel | videos.json `build-hardware` |
+
+## News: IFAC 2026 lead story (2026-09-21)
+
+Both files come from slide 1 of the Roboracer Foundation's own LinkedIn post of 2026-09-12 (`activity-7504332939330048000`, 1080x1350), fetched from the post's public page. Requested by Cedric, 2026-09-21 ("embed the linkedin post from roboracer itself").
+
+| id | file | type | dims | size | content | source | credit | permission | used by |
+|---|---|---|---|---|---|---|---|---|---|
+| NEWS-01 | `public/media/news/news-ifac2026-group-1080.webp` | webp | 1080x531 | 114 KB | the whole IFAC 2026 field, arms raised, in front of the 29th competition screen at BEXCO | slide 1, crop 1080x531+0+331 (the photograph only, without the slide's type) | The Roboracer Foundation | organization's own post; Cedric, 2026-09-21 | news.json `ifac2026-busan-largest-field` image |
+| NEWS-02 | `public/media/news/news-ifac2026-post-1080.webp` | webp | 1080x1350 | 135 KB | slide 1 whole: "274 racers. Zero steering wheels. 56 teams, four days, BEXCO Busan." | slide 1, uncropped | The Roboracer Foundation | organization's own post; Cedric, 2026-09-21 | poster behind the LinkedIn embed on /news |

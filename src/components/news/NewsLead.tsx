@@ -1,4 +1,5 @@
 import { eventLabel, type NewsItem } from "./newsData";
+import LinkedInEmbed from "./LinkedInEmbed";
 
 const TITLE_LINK = "underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
 
@@ -14,7 +15,9 @@ const ACTION: Record<string, string> = {
  * The lead story, given the room a lead gets in print: a 7/5 split with the
  * picture on the left. An announcement with no picture keeps the same weight
  * as a ruled panel, headline left and the detail beside it, so the top of the
- * page never depends on whether a source gave us an image.
+ * page never depends on whether a source gave us an image. An item that
+ * carries an `embed` shows the post itself in the narrow column instead, with
+ * the headline, the numbers and the links in the wide one.
  */
 export default function NewsLead({ item }: { item: NewsItem }) {
   const image = item.image;
@@ -61,6 +64,49 @@ export default function NewsLead({ item }: { item: NewsItem }) {
       {ACTION[item.kind] ?? "Read the source"} on {item.publisher} ↗
     </a>
   );
+
+  if (item.embed) {
+    return (
+      // Splits at lg, not md: LinkedIn's frame is unreadable below about 340px
+      // and five columns of a tablet are 270.
+      <article className="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-12">
+        <div className="lg:col-span-7">
+          {meta}
+          {heading}
+          {item.excerpt && <p className="mt-5 max-w-[56ch] text-lead text-text-body">{item.excerpt}</p>}
+          {item.stats && item.stats.length > 0 && (
+            <dl className="mt-8 grid max-w-[36rem] grid-cols-3 gap-x-6 border-t border-ink-950/10 pt-6">
+              {item.stats.map((s) => (
+                <div key={s.label} className="flex flex-col-reverse">
+                  <dt className="mt-1 font-mono text-small text-text-muted">{s.label}</dt>
+                  <dd className="font-display text-display-m font-semibold tabular-nums text-text-strong">
+                    {s.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          )}
+          {who && <p className="mt-8 font-mono text-small text-text-muted">{who}</p>}
+          <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+            {action}
+            {item.more && (
+              <a
+                href={item.more.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-small font-semibold text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2"
+              >
+                {item.more.label} ↗
+              </a>
+            )}
+          </p>
+        </div>
+        <div className="lg:col-span-5">
+          <LinkedInEmbed embed={item.embed} href={item.link} />
+        </div>
+      </article>
+    );
+  }
 
   if (!image) {
     return (
