@@ -1,8 +1,9 @@
 # Handoff: where roboracer.ai stands, and how to work on it
 
 Read this once at the start of a session, then follow `CLAUDE.md` (loaded
-automatically) for the standing rules. This file is the state of play as of
-**2026-08-22**, after the v1.0 landing shipped. Keep it current: when you finish
+automatically) for the standing rules. Sections 1 and 3 are the state of play as
+of **2026-09-21**, when the whole site went up for merge to `main`; the rest
+dates from 2026-08-22, after the v1.0 landing. Keep it current: when you finish
 a page, update the table in section 3 and the open items in section 2.
 
 ---
@@ -11,8 +12,8 @@ a page, update the table in section 3 and the open items in section 2.
 
 | | |
 |---|---|
-| Working branch | `revamp/v1.0` (local and `origin/revamp/v1.0`), 28 commits from `main` |
-| `main` | untouched at `4ea2e09`. **Never commit or push to it.** Cedric merges. |
+| Working branch | `revamp/pages-v1` (local and origin). PR #17 takes it to `main`: the landing and every rebuilt page in one merge (Cedric, 2026-09-21: deploy rather than keep it in dev). `revamp/v1.0` is an ancestor of it. |
+| `main` | at `4ea2e09` until Cedric merges PR #17. **Never commit or push to it.** Cedric merges; the merge deploys roboracer.ai. |
 | Preview (safe to share) | <https://roboracer-preview.pages.dev> — Cloudflare Pages, project `roboracer-preview`, redeploy with `npx wrangler pages deploy dist --project-name roboracer-preview --branch v1-preview --commit-dirty=true` |
 | Live site | roboracer.ai = Porkbun DNS -> **GitHub Pages** from `gh-pages`. The preview above cannot affect it. |
 | Large media | Cloudflare R2 bucket `roboracer-media`, public base `https://pub-1174c726236842f08529a0a5cc0c68fb.r2.dev`. `.env.production` sets `VITE_MEDIA_BASE`; `src/lib/media.ts` resolves `/media/...` paths through it in production and to the local file on localhost. |
@@ -57,12 +58,12 @@ The landing is a **v1.0 draft**, not finished. In priority order:
 | `/` | `src/pages/Landing.tsx` | **v1.0 draft** | Nine sections, the reference for the visual system |
 | `/assembly` | `Assembly.tsx` | v1.0 | Part focus mode: click a part, the rest goes grey, camera flies in |
 | `/styleguide` | `Styleguide.tsx` | live | Every primitive; check changes here first |
-| `/about` | `About.tsx` | **old design** | React page, not yet revamped |
-| `/news` | `News.tsx` | **old design** | React page, reads `news.json` |
+| `/about` | `About.tsx` | **revamped** | Ends on section 05 Videos (`videos.json`, click-to-load `YouTubeFacade`) and the shared Join block |
+| `/news` | `News.tsx` | **revamped** | Reads `news.json`; a lead item with an `embed` shows the LinkedIn post itself (`news/LinkedInEmbed.tsx`) |
 | `/research` | `Research.tsx` | **revamped** | Rebuilt in `6d566b0`; reads `publications.json`; `/add-paper` and `/discover-papers` feed it. Fix list in `docs/NON_LANDING_AUDIT.md` |
-| `/rules` | `Rules.tsx` | **old design** | React page, long-form |
-| `/race` | `Race.tsx` | **old design** | React page, not an iframe; reads `upcoming_events.json` and `past_races.json` |
-| `/build` `/learn` `/course` | iframes | **iframe of the old site** | `CLAUDE.md` rule 9: these stay iframes in v1 unless Cedric says otherwise |
+| `/rules` | `Rules.tsx` | **revamped** | Long-form; `scripts/check-rules-drift.mjs` compares it with the published rules |
+| `/race` | `Race.tsx` | **revamped** | Reads `upcoming_events.json`, `past_races.json` and `events_map.json`; "N competitions since 2016" is the highest held `number` in the map, and an upcoming event past its `ends` date counts as held |
+| `/build` `/learn` `/course` | `Build.tsx`, `Learn.tsx` | see the files | `/course` redirects to `/learn` |
 | `/chat` | `Chat.tsx` | old | Unchanged this revamp |
 
 When you build a page: one page per branch (`revamp/<page>`), `/build-page
