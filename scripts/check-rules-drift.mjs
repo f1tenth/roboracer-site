@@ -1,33 +1,29 @@
-// Is public/rules.md still in step with the official ruleset repo?
+// Is public/rules.md still the official ruleset?
 //
-// Cedric believed the page was updated automatically from
-// github.com/f1tenth/roboracer_rules. It never was: there is no workflow, no
-// script, and the file is a hand-maintained copy. Ahmad noticed the page
-// stopped at section 2 while upstream had a section 3.
+// The page is not updated automatically: public/rules.md is a committed copy,
+// so a change to the rules is reviewed like any other change to the site.
+// Since 2026-09-21 (Cedric) that copy is verbatim: rules_v3.md on the dev-2026
+// branch of github.com/f1tenth/roboracer_rules, nothing added and nothing
+// removed. Competition-specific rules live on each competition's own site.
 //
-// This does NOT overwrite the page, and that is deliberate: upstream is
-// currently STALER than the site. Its README still opens on the 24th
-// competition dated 2025-02-03 and links to icra2025, while the site is
-// current for the 31st at IROS 2026. A blind sync would undo that.
+//   node scripts/check-rules-drift.mjs           report; exit 1 if the texts differ
+//   node scripts/check-rules-drift.mjs --write   replace the copy with upstream
 //
-// So it reports instead: which top-level sections each side has, and whether
-// upstream has moved since the last check. Run it before a competition, or
-// from CI on a schedule, and act on what it prints.
-import { readFileSync } from "node:fs";
+// Run it before a competition, or from CI on a schedule. When the ruleset
+// moves to another branch or file, change UPSTREAM here and SOURCE_URL in
+// src/pages/Rules.tsx together.
+import { readFileSync, renameSync, writeFileSync } from "node:fs";
 
 const UPSTREAM =
-  "https://raw.githubusercontent.com/f1tenth/roboracer_rules/main/README.md";
+  "https://raw.githubusercontent.com/f1tenth/roboracer_rules/dev-2026/rules_v3.md";
 const LOCAL = "public/rules.md";
 
-const sections = (md) =>
+const headings = (md) =>
   md
-    .split("\n")
-    // headings inside an HTML comment are not in force upstream (3.2-3.4 are
-    // commented out there), so drop commented blocks before scanning
-    .join("\n")
+    // a heading inside an HTML comment is not in force
     .replace(/<!--[\s\S]*?-->/g, "")
     .split("\n")
-    .filter((l) => /^#{1,2} /.test(l))
+    .filter((l) => /^#{1,3} /.test(l))
     .map((l) => l.replace(/^#+\s*/, "").trim());
 
 const res = await fetch(UPSTREAM);
@@ -35,17 +31,32 @@ if (!res.ok) {
   console.error(`rules-drift: upstream fetch failed (${res.status})`);
   process.exit(2);
 }
-const up = sections(await res.text());
-const local = sections(readFileSync(LOCAL, "utf8"));
+const upstream = await res.text();
+const local = readFileSync(LOCAL, "utf8");
 
-const missing = up.filter((s) => !local.includes(s));
-const extra = local.filter((s) => !up.includes(s));
+if (upstream === local) {
+  console.log(`no drift: ${LOCAL} matches upstream (${headings(local).length} headings).`);
+  process.exit(0);
+}
 
-console.log(`upstream sections: ${up.length}, local: ${local.length}`);
+if (process.argv.includes("--write")) {
+  // Rename over the original: Vite must never read a half-written file.
+  writeFileSync(`${LOCAL}.tmp`, upstream);
+  renameSync(`${LOCAL}.tmp`, LOCAL);
+  console.log(`${LOCAL} replaced with upstream. Review the diff, then check /rules in a browser.`);
+  process.exit(0);
+}
+
+const up = headings(upstream);
+const here = headings(local);
+const missing = up.filter((s) => !here.includes(s));
+const extra = here.filter((s) => !up.includes(s));
+const upLines = upstream.split("\n");
+const hereLines = local.split("\n");
+const changed = upLines.filter((l, i) => l !== hereLines[i]).length + Math.abs(upLines.length - hereLines.length);
+
+console.log(`drift: about ${changed} lines differ (upstream ${upLines.length} lines, site ${hereLines.length}).`);
 if (missing.length) console.log(`\nin the official ruleset but NOT on the site:\n  - ${missing.join("\n  - ")}`);
-if (extra.length) console.log(`\non the site but not upstream (usually competition-specific edits):\n  - ${extra.join("\n  - ")}`);
-if (!missing.length && !extra.length) console.log("\nno drift.");
-
-// Only a section the site is missing is a failure; site-only sections are
-// expected, since the page is edited per competition.
-process.exit(missing.length ? 1 : 0);
+if (extra.length) console.log(`\non the site but not upstream:\n  - ${extra.join("\n  - ")}`);
+console.log("\nrun again with --write to take the upstream text.");
+process.exit(1);
