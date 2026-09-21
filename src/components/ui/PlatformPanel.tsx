@@ -87,7 +87,7 @@ function layerOpacityAt(i: number, progress: number, count: number): number {
 // box (Cedric, v1.0: "centred with the title, not extended all the way to the
 // right, and a tinge less opaque").
 const CLOUD =
-  "pointer-events-none absolute -inset-x-[0.9em] -inset-y-[0.5em] hidden rounded-[32px] bg-[radial-gradient(ellipse_at_center,var(--cloud)_0%,transparent_70%)] transition-opacity duration-[var(--duration-base)] desktop:block";
+  "pointer-events-none absolute -inset-x-[0.9em] -inset-y-[0.5em] hidden rounded-[2rem] bg-[radial-gradient(ellipse_at_center,var(--cloud)_0%,transparent_70%)] transition-opacity duration-[var(--duration-base)] desktop:block";
 const CLOUD_VARS = { "--cloud": "color-mix(in oklab, var(--color-rr-violet) 7%, transparent)" } as CSSProperties;
 
 /** Colour-only transition shared by the tile and the text inside it. */
@@ -204,7 +204,7 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
         className={
           reduced
             ? undefined
-            : "desktop:motion-safe:sticky desktop:motion-safe:top-0 desktop:motion-safe:flex desktop:motion-safe:flex-col desktop:motion-safe:min-h-svh desktop:motion-safe:pt-[calc(85px+2.5rem)] desktop:motion-safe:pb-10 desktop:motion-safe:[@media(max-height:940px)]:pt-[calc(85px+1.5rem)] desktop:motion-safe:[@media(max-height:940px)]:pb-6 desktop:motion-safe:[@media(max-height:820px)]:pt-[calc(85px+0.5rem)] desktop:motion-safe:[@media(max-height:820px)]:pb-4"
+            : "desktop:motion-safe:sticky desktop:motion-safe:top-0 desktop:motion-safe:flex desktop:motion-safe:flex-col desktop:motion-safe:min-h-svh desktop:motion-safe:pt-[calc(5.3125rem+2.5rem)] desktop:motion-safe:pb-10 desktop:motion-safe:[@media(max-height:940px)]:pt-[calc(5.3125rem+1.5rem)] desktop:motion-safe:[@media(max-height:940px)]:pb-6 desktop:motion-safe:[@media(max-height:820px)]:pt-[calc(5.3125rem+0.5rem)] desktop:motion-safe:[@media(max-height:820px)]:pb-4"
         }
       >
         {/* Toward the edges (Cedric): the panel runs on the same 1,800 px bleed

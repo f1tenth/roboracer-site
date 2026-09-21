@@ -136,7 +136,7 @@ export default function About() {
           undefined bg-brand-radial panel whose text sat straight on the page
           background and only became legible on hover; this is a real ink
           surface with the AA text roles. */}
-      <Section variant="ink" width="bleed" className="pt-[88px] md:pt-[105px]">
+      <Section variant="ink" width="bleed" className="pt-[5.5rem] md:pt-[6.5625rem]">
         <div className="mx-auto max-w-page px-6">
           <div className="grid gap-10 md:grid-cols-12 md:gap-x-10">
             <div className="md:col-span-7">

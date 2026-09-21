@@ -403,7 +403,7 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
           whole block; on mobile the block is taller than the viewport, so
           only the canvas cell pins (sticky inside the flex column) and the
           captions and photos scroll beneath it. */}
-      <div className="pb-6 pt-[calc(68px+1rem)] desktop:sticky desktop:top-0 desktop:flex desktop:min-h-svh desktop:flex-col desktop:justify-center desktop:pt-[calc(85px+1rem)]">
+      <div className="pb-6 pt-[calc(4.25rem+1rem)] desktop:sticky desktop:top-0 desktop:flex desktop:min-h-svh desktop:flex-col desktop:justify-center desktop:pt-[calc(5.3125rem+1rem)]">
         {/* Wide container (1800, as the platform and partner blocks) and an
             8/4 split: the camera fits the car to the canvas width, so the
             wider cell is what makes the car big (Cedric, landing v5: "the
@@ -412,7 +412,7 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
         <div className="mx-auto w-full max-w-page px-6">
           {header}
           <div className="mt-6 flex flex-col gap-8 desktop:grid desktop:grid-cols-[8fr_4fr] desktop:items-center desktop:gap-10">
-            <div className="sticky top-[68px] z-10 bg-ink-950 desktop:static desktop:bg-transparent">
+            <div className="sticky top-[4.25rem] z-10 bg-ink-950 desktop:static desktop:bg-transparent">
               <div ref={labelBoxRef} className="relative h-[56svh] desktop:h-[60svh] lg:h-[72svh]">
                 {inView && (
                   <Suspense fallback={null}>

@@ -76,7 +76,7 @@ export default function News() {
   const selected = events.find((e) => e.id === tag);
 
   return (
-    <div className="pt-[68px] md:pt-[85px]">
+    <div className="pt-[4.25rem] md:pt-[5.3125rem]">
       {/* Masthead: what the page is, the ledger, and the lead story */}
       <Section width="page" aria-labelledby="news-title">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">

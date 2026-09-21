@@ -128,7 +128,7 @@ export default function RacePage() {
   return (
     <>
       {/* Hero: the next race, not a page title over an empty band. */}
-      <Section variant="ink" width="bleed" className="pt-[88px] md:pt-[105px]">
+      <Section variant="ink" width="bleed" className="pt-[5.5rem] md:pt-[6.5625rem]">
         <div className="mx-auto max-w-page px-6">
           <div className="max-w-3xl">
             <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-on-ink-muted">
@@ -181,7 +181,7 @@ export default function RacePage() {
                 a little under the panel's real height at every width we
                 render, so it shrinks the jump without leaving a gap once the
                 panel is in. */}
-            <div className={`md:col-span-5${race ? "" : " min-h-[640px]"}`}>
+            <div className={`md:col-span-5${race ? "" : " min-h-[40rem]"}`}>
               {race && (
                 <NextRaceSpotlight
                   on="ink"

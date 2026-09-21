@@ -8,7 +8,7 @@ type HighlightReelProps = {
 
 // Shared tile geometry: row height clamp per the landing-v2 spec; width
 // follows each tile's declared aspect.
-const ROW_H = "h-[clamp(160px,22vh,260px)]";
+const ROW_H = "h-[clamp(10rem,22vh,16.25rem)]";
 const ASPECT: Record<Highlight["aspect"], string> = {
   "16/9": "aspect-[16/9]",
   "3/2": "aspect-[3/2]",

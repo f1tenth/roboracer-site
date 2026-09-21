@@ -60,7 +60,7 @@ export default function Research() {
   const trimmed = query.trim();
 
   return (
-    <div className="pt-[68px] md:pt-[85px]">
+    <div className="pt-[4.25rem] md:pt-[5.3125rem]">
       {/* Header: the Scholar message, one secondary CTA, a mono data ledger */}
       <Section width="page" aria-labelledby="research-title">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">

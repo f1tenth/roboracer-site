@@ -53,6 +53,12 @@ const STRIP_MS = 700;
 const STRIP_EASE = "cubic-bezier(0.76, 0, 0.24, 1)";
 const ACTIVE_H = 560;
 const SIDE_H = 440;
+/** The stage is drawn in rem so it follows the fluid root size (index.css):
+ * these turn the design's 16px-root pixel numbers into rem, and into real
+ * pixels for the fit measurement. */
+const rem = (px: number) => `${px / 16}rem`;
+const rootScale = () =>
+  (parseFloat(getComputedStyle(document.documentElement).fontSize) || 16) / 16;
 const STAGE_QUERY = DESKTOP_QUERY; // wide AND tall enough for the 560px stage
 /** A frame gap longer than this (throttled or frozen tab) counts as a pause. */
 const MAX_FRAME_MS = 1000;
@@ -414,10 +420,14 @@ export default function ResearchCarousel({
     if (!row || !stage) return;
     const measure = () => {
       const rowW = row.clientWidth;
-      const styles = getComputedStyle(row);
-      const strip = parseFloat(styles.getPropertyValue("--rc-i")) || 96;
-      const gap = parseFloat(styles.getPropertyValue("--rc-gap")) || 12;
-      const minActive = Math.min(rowW * MIN_ACTIVE_RATIO, Math.max(MIN_ACTIVE_PX, ACTIVE_H * MIN_ACTIVE_ASPECT));
+      const k = rootScale();
+      // --rc-i is clamp(4.5rem, 6vw, 7.5rem) and --rc-gap 0.75rem (rootClass).
+      const strip = Math.min(120 * k, Math.max(72 * k, window.innerWidth * 0.06));
+      const gap = 12 * k;
+      const minActive = Math.min(
+        rowW * MIN_ACTIVE_RATIO,
+        Math.max(MIN_ACTIVE_PX, ACTIVE_H * MIN_ACTIVE_ASPECT) * k,
+      );
       const fits = Math.floor((rowW - minActive) / (strip + gap));
       setMaxStrips(Math.max(0, Math.min(n - 1, fits)));
     };
@@ -517,12 +527,12 @@ export default function ResearchCarousel({
             onClick={() => select(i)}
             className="relative h-8 min-w-0 flex-1 cursor-pointer"
           >
-            <span className="absolute inset-x-0 top-[15px] h-0.5 bg-ink-950/10" />
+            <span className="absolute inset-x-0 top-[0.9375rem] h-0.5 bg-ink-950/10" />
             <span
               ref={(el) => {
                 fillRefs.current[i] = el;
               }}
-              className="absolute inset-x-0 top-[15px] h-0.5 origin-left bg-ink-950/90"
+              className="absolute inset-x-0 top-[0.9375rem] h-0.5 origin-left bg-ink-950/90"
             />
           </button>
         ))}
@@ -536,7 +546,7 @@ export default function ResearchCarousel({
     </div>
   );
 
-  const rootClass = `w-full [--rc-i:clamp(72px,6vw,120px)] [--rc-gap:12px] ${className}`;
+  const rootClass = `w-full [--rc-i:clamp(4.5rem,6vw,7.5rem)] [--rc-gap:0.75rem] ${className}`;
 
   if (n === 0) {
     // The section is never hidden: an empty stage at the populated height.
@@ -549,7 +559,7 @@ export default function ResearchCarousel({
         className={rootClass}
       >
         <p className="sr-only">No featured papers yet.</p>
-        <div className="px-6" style={{ height: ACTIVE_H }} aria-hidden="true">
+        <div className="px-6" style={{ height: rem(ACTIVE_H) }} aria-hidden="true">
           <div className={`h-full ${CARD}`} />
         </div>
         <p className={`${CREDIT} ${RAIL}`} aria-hidden="true">
@@ -584,7 +594,7 @@ export default function ResearchCarousel({
           <div
             ref={rowRef2}
             className="flex w-full items-center gap-[var(--rc-gap)] px-6"
-            style={{ height: ACTIVE_H }}
+            style={{ height: rem(ACTIVE_H) }}
             onPointerMove={onPointerMove}
             onPointerDown={onPointerMove}
             onPointerLeave={onPointerLeave}
@@ -615,7 +625,7 @@ export default function ResearchCarousel({
                       : shown
                         ? "var(--rc-i)"
                         : 0,
-                    height: isCurrent ? ACTIVE_H : SIDE_H,
+                    height: rem(isCurrent ? ACTIVE_H : SIDE_H),
                     opacity: shown ? 1 : 0,
                     marginRight: shown ? undefined : `calc(-1 * var(--rc-gap))`,
                     transition: motion,

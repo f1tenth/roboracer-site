@@ -137,6 +137,22 @@ body {
    button's on-ink white ring) can override; unlayered, this rule beat every
    Tailwind utility (qa-reviewer, 2026-08-21). */
 @layer base {
+  /* One design, every laptop. The site is drawn in rem and was tuned on a
+     1920px-wide window; a typical laptop is 1440 to 1600 CSS pixels wide, so at
+     a fixed 16px root everything read about 25% too large there and the pinned
+     home chapters no longer fit the shorter viewport (Cedric, 2026-09-21: "my
+     120% is everyone else's 100%"). The root size therefore follows the window:
+     full size from 1920 up, 1920-proportional below it, never under 75%.
+     Percent bounds keep a reader's own default font size in play, and browser
+     zoom still enlarges the page once the floor is reached. Phones, tablets
+     and touch screens keep the plain 100%: their layouts were designed at it.
+     Media queries ignore the root size, so no breakpoint moves. */
+  @media (min-width: 64rem) and (hover: hover) and (pointer: fine) {
+    html {
+      font-size: clamp(75%, calc(100vw / 120), 100%);
+    }
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-rr-violet);
     outline-offset: 2px;
