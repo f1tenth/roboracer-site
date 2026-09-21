@@ -166,6 +166,8 @@ export type MapEvent = {
   status: "held" | "upcoming" | "virtual" | string;
   verified: boolean;
   number?: number;
+  /** ISO date of the last day, on events that were upcoming when written. */
+  ends?: string;
   source?: string;
   labelDx?: number;
   labelDy?: number;
@@ -260,10 +262,19 @@ export type JoinYouTube = {
   width: number;
   height: number;
   video_id: string;
+  /** Set when the entry is a playlist; `video_id` is then its first video. */
+  playlist_id?: string;
   title: string;
   channel: string;
   channel_url: string;
   caption: string;
+};
+
+/** One card in the About page's video library (public/data/videos.json). */
+export type SiteVideo = JoinYouTube & {
+  id: string;
+  /** The card's headline in our words; `title` stays the video's own. */
+  heading: string;
 };
 
 /** One community LinkedIn post in the Join strip (landing v5 round two):
@@ -318,8 +329,21 @@ export const loadNews = () => loadJson<NewsItem[]>("news.json");
 export const loadTestimonials = () => loadJson<Testimonial[]>("testimonies.json");
 export const loadPublications = () => loadJson<PublicationsFile>("publications.json");
 export const loadTeams = () => loadJson<Team[]>("teams.json");
+export const loadVideos = () => loadJson<SiteVideo[]>("videos.json");
 export const loadHighlights = () => loadJson<Highlight[]>("highlights.json");
-export const loadEventsMap = () => loadJson<EventsMap>("events_map.json");
+/** An upcoming event whose `ends` date has passed reads as held straight away,
+ * the same rule scripts/build-world-map.mjs applies at the next rebuild, so
+ * "competitions held" does not wait for someone to regenerate the file. */
+export const loadEventsMap = async (): Promise<EventsMap> => {
+  const map = await loadJson<EventsMap>("events_map.json");
+  const today = new Date().toISOString().slice(0, 10);
+  return {
+    ...map,
+    events: map.events.map((e) =>
+      e.status === "upcoming" && e.ends && e.ends < today ? { ...e, status: "held" } : e,
+    ),
+  };
+};
 export const loadCommunity = () => loadJson<Community>("community.json");
 export const loadPlatform = () => loadJson<PlatformRow[]>("platform.json");
 
