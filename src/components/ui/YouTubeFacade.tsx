@@ -7,6 +7,11 @@ type YouTubeFacadeProps = {
   yt: JoinYouTube;
   /** Full-bleed band (the Join block and the About hero) rather than a card. */
   full?: boolean;
+  /** Start by itself once the reader is looking at it. Off for the About
+   * video library, where six players would otherwise start as they scroll by. */
+  autoStart?: boolean;
+  /** The card's headline (card mode only). */
+  heading?: string;
   className?: string;
 };
 
@@ -20,27 +25,36 @@ const LINK =
  * A YouTube video behind a click-to-load facade: the poster and a play button
  * ship, the iframe only mounts once the reader is looking at it, so no page
  * pays for YouTube's script until then. Under reduced motion it never
- * self-starts and waits for a real click.
+ * self-starts and waits for a real click. A self-started player is muted; one
+ * the reader clicked plays with sound.
  *
  * Lives here rather than inside CommunityJoin because the About hero shows the
  * same reel and a second copy of this would be a second thing to keep right.
  */
-export default function YouTubeFacade({ yt, full = false, className = "" }: YouTubeFacadeProps) {
+export default function YouTubeFacade({
+  yt,
+  full = false,
+  autoStart = true,
+  heading,
+  className = "",
+}: YouTubeFacadeProps) {
   const reduced = usePrefersReducedMotion();
   const ref = useRef<HTMLElement>(null);
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState<false | "auto" | "click">(false);
   // `origin` keeps the player's postMessage handshake quiet in the console;
   // `allow` (not the legacy allowfullscreen attribute) grants fullscreen.
   const origin = typeof window === "undefined" ? "" : `&origin=${encodeURIComponent(window.location.origin)}`;
-  const embed = `https://www.youtube-nocookie.com/embed/${yt.video_id}?autoplay=1&mute=1&playsinline=1&rel=0${origin}`;
+  const list = yt.playlist_id ? `&list=${yt.playlist_id}` : "";
+  const mute = playing === "auto" ? "&mute=1" : "";
+  const embed = `https://www.youtube-nocookie.com/embed/${yt.video_id}?autoplay=1${mute}&playsinline=1&rel=0${list}${origin}`;
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || reduced || playing) return;
+    if (!el || !autoStart || reduced || playing) return;
     const io = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.intersectionRatio >= 0.6)) {
-          setPlaying(true);
+          setPlaying("auto");
           io.disconnect();
         }
       },
@@ -48,7 +62,7 @@ export default function YouTubeFacade({ yt, full = false, className = "" }: YouT
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [reduced, playing]);
+  }, [autoStart, reduced, playing]);
 
   return (
     <article
@@ -71,7 +85,7 @@ export default function YouTubeFacade({ yt, full = false, className = "" }: YouT
         ) : (
           <button
             type="button"
-            onClick={() => setPlaying(true)}
+            onClick={() => setPlaying("click")}
             aria-label={`Play "${yt.title}" on YouTube`}
             className="group/play absolute inset-0 block h-full w-full cursor-pointer text-left"
           >
@@ -101,6 +115,9 @@ export default function YouTubeFacade({ yt, full = false, className = "" }: YouT
             : "flex flex-1 flex-col gap-3 p-6"
         }
       >
+        {heading && !full && (
+          <h3 className="font-display text-lead font-semibold text-text-strong">{heading}</h3>
+        )}
         <p className="font-mono text-small text-text-muted">{yt.caption}</p>
         <p className={full ? "text-small" : "mt-auto pt-1 text-small"}>
           <a href={yt.channel_url} target="_blank" rel="noopener noreferrer" className={LINK}>

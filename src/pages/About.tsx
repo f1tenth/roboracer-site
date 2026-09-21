@@ -3,9 +3,11 @@ import {
   loadCommunity,
   loadPartners,
   loadPlatform,
+  loadVideos,
   type JoinYouTube,
   type Partner,
   type PlatformRow,
+  type SiteVideo,
 } from "../lib/data";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
@@ -93,6 +95,7 @@ export default function About() {
   const [partners, setPartners] = useState<Partner[]>([]);
   const [youtube, setYoutube] = useState<JoinYouTube | null>(null);
   const [contributors, setContributors] = useState<ContributorsFile | null>(null);
+  const [videos, setVideos] = useState<SiteVideo[]>([]);
 
   useEffect(() => {
     let live = true;
@@ -107,6 +110,9 @@ export default function About() {
       .catch(() => undefined);
     loadContributors()
       .then((d) => live && setContributors(d))
+      .catch(() => undefined);
+    loadVideos()
+      .then((d) => live && setVideos(d))
       .catch(() => undefined);
     return () => {
       live = false;
@@ -326,12 +332,34 @@ export default function About() {
         <PartnerWall partners={partners} />
       </Section>
 
-      {/* 05 Join - the shared community block, same as the landing's. Gated
+      {/* 05 Videos - from public/data/videos.json. Click-to-load, never
+          self-starting: six players in a grid would otherwise all start as the
+          reader scrolls past. */}
+      {videos.length > 0 && (
+        <Section width="page" aria-labelledby="about-videos" rule>
+          <SectionHeader
+            index="05"
+            id="about-videos"
+            title="Videos"
+            subtitle="Watch the cars, the teams and the course"
+            lead="A student's first season with the car, the ICRA 2026 teams in their own words, race highlights, and the lectures and build guide the course runs on."
+          />
+          <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {videos.map((v) => (
+              <li key={v.id}>
+                <YouTubeFacade yt={v} heading={v.heading} autoStart={false} />
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+
+      {/* 06 Join - the shared community block, same as the landing's. Gated
           on the reader coming near it: its marquee mounts four copies of an
           autoplaying 1.05 MB clip, which is 4.1 MB at first paint otherwise
           (see NearViewport). */}
       <NearViewport>
-        <CommunityJoin index="05" showYouTube={false} />
+        <CommunityJoin index="06" showYouTube={false} />
       </NearViewport>
     </>
   );
