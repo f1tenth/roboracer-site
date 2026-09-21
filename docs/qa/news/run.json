@@ -1,0 +1,1515 @@
+{
+ "desktop-1440-motion": {
+  "info": {
+   "h1": [
+    "Race reports, coverage and posts from the teams"
+   ],
+   "title": "News - RoboRacer",
+   "cards": 21,
+   "images": [
+    {
+     "src": "/media/join/posts/post-knapp-538432-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-dhruv-jaiswal-498753-800.webp",
+     "w": "800",
+     "h": "516",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-manasi-shrekhar-990273-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/highlights/highlight-iv2026-group-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/media/join/posts/post-milan-manoj-110976-800.webp",
+     "w": "800",
+     "h": "450",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-meghaj-kabra-054784-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-samir-shehadeh-344832-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-unicorn-racing-344833-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/join/posts/post-mateus-karvat-541826-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-lukas-kutsch-701952-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-roboracer-foundation-197760-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-cedric-hollande-699200-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/highlights/highlight-icra2026-awards-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/logos/logo-white-gradient.svg",
+     "w": "151",
+     "h": "26",
+     "loading": null,
+     "alt": "RoboRacer",
+     "natural": 151
+    },
+    {
+     "src": "/logos/slack-logo.svg",
+     "w": "20",
+     "h": "20",
+     "loading": null,
+     "alt": "Slack",
+     "natural": 127
+    }
+   ],
+   "links": [
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "https://iros2026-race.roboracer.ai/",
+    "https://iros2026-race.roboracer.ai/",
+    "https://2026ifac-roboracer.com/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/company/knapp-ag",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/in/dhruvjaiswal412",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/in/manasishrekhar",
+    "https://iv2026-race.roboracer.ai/",
+    "https://iv2026-race.roboracer.ai/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/in/milan-manoj-7a2805279",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/in/meghajkabra",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/in/samir-shehadeh-2820761b4",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/company/unicorn-racing",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/in/mateus-karvat",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/in/kutsch",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/company/roboracer-foundation",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/in/cedric-hollande",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://autoware.org/f1tenth-korea-delegation-at-upenn/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://github.com/ETH-PBL/MAP-Controller",
+    "https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+    "https://medium.com/adventures-in-autonomous-vehicles",
+    "mailto:contact@roboracer.ai?subject=RoboRacer%20news",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "mailto:contact@roboracer.ai",
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g"
+   ],
+   "text": "About\nBuild\nLearn\nRace\nRules\nCourse\nResearch\nNews\nSimulator\nJoin Community\n\nNews\n\nRace reports, coverage and posts from the teams\n\nNewest first. Every item links to its source, with the author and the credit beside it.\n\nItems\n21\nCompetitions\n4\nLatest\nAug 23, 2026\nOldest\n2020\n\nLatest\n\nAug 23, 2026\n\u00b7\nRoboRacer\nIROS 2026\n\nRegistration for the 31st competition at IROS 2026 closes September 5\n\nThe 31st",
+   "scrollH": 8097
+  },
+  "console": [],
+  "axe": []
+ },
+ "tablet-768-motion": {
+  "info": {
+   "h1": [
+    "Race reports, coverage and posts from the teams"
+   ],
+   "title": "News - RoboRacer",
+   "cards": 21,
+   "images": [
+    {
+     "src": "/media/join/posts/post-knapp-538432-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-dhruv-jaiswal-498753-800.webp",
+     "w": "800",
+     "h": "516",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-manasi-shrekhar-990273-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/highlights/highlight-iv2026-group-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/media/join/posts/post-milan-manoj-110976-800.webp",
+     "w": "800",
+     "h": "450",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-meghaj-kabra-054784-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-samir-shehadeh-344832-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-unicorn-racing-344833-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/join/posts/post-mateus-karvat-541826-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-lukas-kutsch-701952-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-roboracer-foundation-197760-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-cedric-hollande-699200-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/highlights/highlight-icra2026-awards-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/logos/logo-white-gradient.svg",
+     "w": "151",
+     "h": "26",
+     "loading": null,
+     "alt": "RoboRacer",
+     "natural": 151
+    },
+    {
+     "src": "/logos/slack-logo.svg",
+     "w": "20",
+     "h": "20",
+     "loading": null,
+     "alt": "Slack",
+     "natural": 127
+    }
+   ],
+   "links": [
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "https://iros2026-race.roboracer.ai/",
+    "https://iros2026-race.roboracer.ai/",
+    "https://2026ifac-roboracer.com/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/company/knapp-ag",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/in/dhruvjaiswal412",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/in/manasishrekhar",
+    "https://iv2026-race.roboracer.ai/",
+    "https://iv2026-race.roboracer.ai/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/in/milan-manoj-7a2805279",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/in/meghajkabra",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/in/samir-shehadeh-2820761b4",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/company/unicorn-racing",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/in/mateus-karvat",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/in/kutsch",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/company/roboracer-foundation",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/in/cedric-hollande",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://autoware.org/f1tenth-korea-delegation-at-upenn/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://github.com/ETH-PBL/MAP-Controller",
+    "https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+    "https://medium.com/adventures-in-autonomous-vehicles",
+    "mailto:contact@roboracer.ai?subject=RoboRacer%20news",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "mailto:contact@roboracer.ai",
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g"
+   ],
+   "text": "News\n\nRace reports, coverage and posts from the teams\n\nNewest first. Every item links to its source, with the author and the credit beside it.\n\nItems\n21\nCompetitions\n4\nLatest\nAug 23, 2026\nOldest\n2020\n\nLatest\n\nAug 23, 2026\n\u00b7\nRoboRacer\nIROS 2026\n\nRegistration for the 31st competition at IROS 2026 closes September 5\n\nThe 31st RoboRacer Autonomous Racing Competition runs September 28 to 30, 2026 at th",
+   "scrollH": 7977
+  },
+  "console": []
+ },
+ "mobile-390-motion": {
+  "info": {
+   "h1": [
+    "Race reports, coverage and posts from the teams"
+   ],
+   "title": "News - RoboRacer",
+   "cards": 21,
+   "images": [
+    {
+     "src": "/media/join/posts/post-knapp-538432-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-dhruv-jaiswal-498753-800.webp",
+     "w": "800",
+     "h": "516",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-manasi-shrekhar-990273-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/highlights/highlight-iv2026-group-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/media/join/posts/post-milan-manoj-110976-800.webp",
+     "w": "800",
+     "h": "450",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-meghaj-kabra-054784-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-samir-shehadeh-344832-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-unicorn-racing-344833-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/join/posts/post-mateus-karvat-541826-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-lukas-kutsch-701952-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-roboracer-foundation-197760-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-cedric-hollande-699200-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/highlights/highlight-icra2026-awards-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/logos/logo-white-gradient.svg",
+     "w": "151",
+     "h": "26",
+     "loading": null,
+     "alt": "RoboRacer",
+     "natural": 151
+    },
+    {
+     "src": "/logos/slack-logo.svg",
+     "w": "20",
+     "h": "20",
+     "loading": null,
+     "alt": "Slack",
+     "natural": 127
+    }
+   ],
+   "links": [
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "https://iros2026-race.roboracer.ai/",
+    "https://iros2026-race.roboracer.ai/",
+    "https://2026ifac-roboracer.com/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/company/knapp-ag",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/in/dhruvjaiswal412",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/in/manasishrekhar",
+    "https://iv2026-race.roboracer.ai/",
+    "https://iv2026-race.roboracer.ai/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/in/milan-manoj-7a2805279",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/in/meghajkabra",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/in/samir-shehadeh-2820761b4",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/company/unicorn-racing",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/in/mateus-karvat",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/in/kutsch",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/company/roboracer-foundation",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/in/cedric-hollande",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://autoware.org/f1tenth-korea-delegation-at-upenn/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://github.com/ETH-PBL/MAP-Controller",
+    "https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+    "https://medium.com/adventures-in-autonomous-vehicles",
+    "mailto:contact@roboracer.ai?subject=RoboRacer%20news",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "mailto:contact@roboracer.ai",
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g"
+   ],
+   "text": "News\n\nRace reports, coverage and posts from the teams\n\nNewest first. Every item links to its source, with the author and the credit beside it.\n\nItems\n21\nCompetitions\n4\nLatest\nAug 23, 2026\nOldest\n2020\n\nLatest\n\nAug 23, 2026\n\u00b7\nRoboRacer\nIROS 2026\n\nRegistration for the 31st competition at IROS 2026 closes September 5\n\nThe 31st RoboRacer Autonomous Racing Competition runs September 28 to 30, 2026 at th",
+   "scrollH": 13281
+  },
+  "console": []
+ },
+ "landscape-844-motion": {
+  "info": {
+   "h1": [
+    "Race reports, coverage and posts from the teams"
+   ],
+   "title": "News - RoboRacer",
+   "cards": 21,
+   "images": [
+    {
+     "src": "/media/join/posts/post-knapp-538432-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-dhruv-jaiswal-498753-800.webp",
+     "w": "800",
+     "h": "516",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-manasi-shrekhar-990273-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/highlights/highlight-iv2026-group-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/media/join/posts/post-milan-manoj-110976-800.webp",
+     "w": "800",
+     "h": "450",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-meghaj-kabra-054784-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-samir-shehadeh-344832-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-unicorn-racing-344833-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/join/posts/post-mateus-karvat-541826-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-lukas-kutsch-701952-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-roboracer-foundation-197760-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-cedric-hollande-699200-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/highlights/highlight-icra2026-awards-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/logos/logo-white-gradient.svg",
+     "w": "151",
+     "h": "26",
+     "loading": null,
+     "alt": "RoboRacer",
+     "natural": 151
+    },
+    {
+     "src": "/logos/slack-logo.svg",
+     "w": "20",
+     "h": "20",
+     "loading": null,
+     "alt": "Slack",
+     "natural": 127
+    }
+   ],
+   "links": [
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "https://iros2026-race.roboracer.ai/",
+    "https://iros2026-race.roboracer.ai/",
+    "https://2026ifac-roboracer.com/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/company/knapp-ag",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/in/dhruvjaiswal412",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/in/manasishrekhar",
+    "https://iv2026-race.roboracer.ai/",
+    "https://iv2026-race.roboracer.ai/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/in/milan-manoj-7a2805279",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/in/meghajkabra",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/in/samir-shehadeh-2820761b4",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/company/unicorn-racing",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/in/mateus-karvat",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/in/kutsch",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/company/roboracer-foundation",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/in/cedric-hollande",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://autoware.org/f1tenth-korea-delegation-at-upenn/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://github.com/ETH-PBL/MAP-Controller",
+    "https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+    "https://medium.com/adventures-in-autonomous-vehicles",
+    "mailto:contact@roboracer.ai?subject=RoboRacer%20news",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "mailto:contact@roboracer.ai",
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g"
+   ],
+   "text": "News\n\nRace reports, coverage and posts from the teams\n\nNewest first. Every item links to its source, with the author and the credit beside it.\n\nItems\n21\nCompetitions\n4\nLatest\nAug 23, 2026\nOldest\n2020\n\nLatest\n\nAug 23, 2026\n\u00b7\nRoboRacer\nIROS 2026\n\nRegistration for the 31st competition at IROS 2026 closes September 5\n\nThe 31st RoboRacer Autonomous Racing Competition runs September 28 to 30, 2026 at th",
+   "scrollH": 8018
+  },
+  "console": []
+ },
+ "desktop-1440-rm": {
+  "info": {
+   "h1": [
+    "Race reports, coverage and posts from the teams"
+   ],
+   "title": "News - RoboRacer",
+   "cards": 21,
+   "images": [
+    {
+     "src": "/media/join/posts/post-knapp-538432-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-dhruv-jaiswal-498753-800.webp",
+     "w": "800",
+     "h": "516",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-manasi-shrekhar-990273-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/highlights/highlight-iv2026-group-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/media/join/posts/post-milan-manoj-110976-800.webp",
+     "w": "800",
+     "h": "450",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-meghaj-kabra-054784-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-samir-shehadeh-344832-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-unicorn-racing-344833-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/join/posts/post-mateus-karvat-541826-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-lukas-kutsch-701952-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-roboracer-foundation-197760-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-cedric-hollande-699200-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/highlights/highlight-icra2026-awards-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/logos/logo-white-gradient.svg",
+     "w": "151",
+     "h": "26",
+     "loading": null,
+     "alt": "RoboRacer",
+     "natural": 151
+    },
+    {
+     "src": "/logos/slack-logo.svg",
+     "w": "20",
+     "h": "20",
+     "loading": null,
+     "alt": "Slack",
+     "natural": 127
+    }
+   ],
+   "links": [
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "https://iros2026-race.roboracer.ai/",
+    "https://iros2026-race.roboracer.ai/",
+    "https://2026ifac-roboracer.com/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/company/knapp-ag",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/in/dhruvjaiswal412",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/in/manasishrekhar",
+    "https://iv2026-race.roboracer.ai/",
+    "https://iv2026-race.roboracer.ai/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/in/milan-manoj-7a2805279",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/in/meghajkabra",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/in/samir-shehadeh-2820761b4",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/company/unicorn-racing",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/in/mateus-karvat",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/in/kutsch",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/company/roboracer-foundation",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/in/cedric-hollande",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://autoware.org/f1tenth-korea-delegation-at-upenn/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://github.com/ETH-PBL/MAP-Controller",
+    "https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+    "https://medium.com/adventures-in-autonomous-vehicles",
+    "mailto:contact@roboracer.ai?subject=RoboRacer%20news",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "mailto:contact@roboracer.ai",
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g"
+   ],
+   "text": "About\nBuild\nLearn\nRace\nRules\nCourse\nResearch\nNews\nSimulator\nJoin Community\n\nNews\n\nRace reports, coverage and posts from the teams\n\nNewest first. Every item links to its source, with the author and the credit beside it.\n\nItems\n21\nCompetitions\n4\nLatest\nAug 23, 2026\nOldest\n2020\n\nLatest\n\nAug 23, 2026\n\u00b7\nRoboRacer\nIROS 2026\n\nRegistration for the 31st competition at IROS 2026 closes September 5\n\nThe 31st",
+   "scrollH": 8097
+  },
+  "console": []
+ },
+ "tablet-768-rm": {
+  "info": {
+   "h1": [
+    "Race reports, coverage and posts from the teams"
+   ],
+   "title": "News - RoboRacer",
+   "cards": 21,
+   "images": [
+    {
+     "src": "/media/join/posts/post-knapp-538432-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-dhruv-jaiswal-498753-800.webp",
+     "w": "800",
+     "h": "516",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-manasi-shrekhar-990273-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/highlights/highlight-iv2026-group-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/media/join/posts/post-milan-manoj-110976-800.webp",
+     "w": "800",
+     "h": "450",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-meghaj-kabra-054784-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-samir-shehadeh-344832-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-unicorn-racing-344833-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/join/posts/post-mateus-karvat-541826-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-lukas-kutsch-701952-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-roboracer-foundation-197760-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-cedric-hollande-699200-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/highlights/highlight-icra2026-awards-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/logos/logo-white-gradient.svg",
+     "w": "151",
+     "h": "26",
+     "loading": null,
+     "alt": "RoboRacer",
+     "natural": 151
+    },
+    {
+     "src": "/logos/slack-logo.svg",
+     "w": "20",
+     "h": "20",
+     "loading": null,
+     "alt": "Slack",
+     "natural": 127
+    }
+   ],
+   "links": [
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "https://iros2026-race.roboracer.ai/",
+    "https://iros2026-race.roboracer.ai/",
+    "https://2026ifac-roboracer.com/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/company/knapp-ag",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/in/dhruvjaiswal412",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/in/manasishrekhar",
+    "https://iv2026-race.roboracer.ai/",
+    "https://iv2026-race.roboracer.ai/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/in/milan-manoj-7a2805279",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/in/meghajkabra",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/in/samir-shehadeh-2820761b4",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/company/unicorn-racing",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/in/mateus-karvat",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/in/kutsch",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/company/roboracer-foundation",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/in/cedric-hollande",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://autoware.org/f1tenth-korea-delegation-at-upenn/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://github.com/ETH-PBL/MAP-Controller",
+    "https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+    "https://medium.com/adventures-in-autonomous-vehicles",
+    "mailto:contact@roboracer.ai?subject=RoboRacer%20news",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "mailto:contact@roboracer.ai",
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g"
+   ],
+   "text": "News\n\nRace reports, coverage and posts from the teams\n\nNewest first. Every item links to its source, with the author and the credit beside it.\n\nItems\n21\nCompetitions\n4\nLatest\nAug 23, 2026\nOldest\n2020\n\nLatest\n\nAug 23, 2026\n\u00b7\nRoboRacer\nIROS 2026\n\nRegistration for the 31st competition at IROS 2026 closes September 5\n\nThe 31st RoboRacer Autonomous Racing Competition runs September 28 to 30, 2026 at th",
+   "scrollH": 7977
+  },
+  "console": []
+ },
+ "mobile-390-rm": {
+  "info": {
+   "h1": [
+    "Race reports, coverage and posts from the teams"
+   ],
+   "title": "News - RoboRacer",
+   "cards": 21,
+   "images": [
+    {
+     "src": "/media/join/posts/post-knapp-538432-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-dhruv-jaiswal-498753-800.webp",
+     "w": "800",
+     "h": "516",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-manasi-shrekhar-990273-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/highlights/highlight-iv2026-group-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/media/join/posts/post-milan-manoj-110976-800.webp",
+     "w": "800",
+     "h": "450",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-meghaj-kabra-054784-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-samir-shehadeh-344832-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-unicorn-racing-344833-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/join/posts/post-mateus-karvat-541826-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-lukas-kutsch-701952-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-roboracer-foundation-197760-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-cedric-hollande-699200-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/highlights/highlight-icra2026-awards-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/logos/logo-white-gradient.svg",
+     "w": "151",
+     "h": "26",
+     "loading": null,
+     "alt": "RoboRacer",
+     "natural": 151
+    },
+    {
+     "src": "/logos/slack-logo.svg",
+     "w": "20",
+     "h": "20",
+     "loading": null,
+     "alt": "Slack",
+     "natural": 127
+    }
+   ],
+   "links": [
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "https://iros2026-race.roboracer.ai/",
+    "https://iros2026-race.roboracer.ai/",
+    "https://2026ifac-roboracer.com/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/company/knapp-ag",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/in/dhruvjaiswal412",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/in/manasishrekhar",
+    "https://iv2026-race.roboracer.ai/",
+    "https://iv2026-race.roboracer.ai/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/in/milan-manoj-7a2805279",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/in/meghajkabra",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/in/samir-shehadeh-2820761b4",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/company/unicorn-racing",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/in/mateus-karvat",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/in/kutsch",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/company/roboracer-foundation",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/in/cedric-hollande",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://autoware.org/f1tenth-korea-delegation-at-upenn/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://github.com/ETH-PBL/MAP-Controller",
+    "https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+    "https://medium.com/adventures-in-autonomous-vehicles",
+    "mailto:contact@roboracer.ai?subject=RoboRacer%20news",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "mailto:contact@roboracer.ai",
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g"
+   ],
+   "text": "News\n\nRace reports, coverage and posts from the teams\n\nNewest first. Every item links to its source, with the author and the credit beside it.\n\nItems\n21\nCompetitions\n4\nLatest\nAug 23, 2026\nOldest\n2020\n\nLatest\n\nAug 23, 2026\n\u00b7\nRoboRacer\nIROS 2026\n\nRegistration for the 31st competition at IROS 2026 closes September 5\n\nThe 31st RoboRacer Autonomous Racing Competition runs September 28 to 30, 2026 at th",
+   "scrollH": 13281
+  },
+  "console": []
+ },
+ "landscape-844-rm": {
+  "info": {
+   "h1": [
+    "Race reports, coverage and posts from the teams"
+   ],
+   "title": "News - RoboRacer",
+   "cards": 21,
+   "images": [
+    {
+     "src": "/media/join/posts/post-knapp-538432-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-dhruv-jaiswal-498753-800.webp",
+     "w": "800",
+     "h": "516",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-manasi-shrekhar-990273-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/highlights/highlight-iv2026-group-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/media/join/posts/post-milan-manoj-110976-800.webp",
+     "w": "800",
+     "h": "450",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-meghaj-kabra-054784-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-samir-shehadeh-344832-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-unicorn-racing-344833-960.webp",
+     "w": "768",
+     "h": "960",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 768
+    },
+    {
+     "src": "/media/join/posts/post-mateus-karvat-541826-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-lukas-kutsch-701952-800.webp",
+     "w": "800",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-roboracer-foundation-197760-800.webp",
+     "w": "800",
+     "h": "531",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/join/posts/post-cedric-hollande-699200-800.webp",
+     "w": "800",
+     "h": "600",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 800
+    },
+    {
+     "src": "/media/highlights/highlight-icra2026-awards-01-1200.webp",
+     "w": "1200",
+     "h": "800",
+     "loading": "lazy",
+     "alt": "",
+     "natural": 1200
+    },
+    {
+     "src": "/logos/logo-white-gradient.svg",
+     "w": "151",
+     "h": "26",
+     "loading": null,
+     "alt": "RoboRacer",
+     "natural": 151
+    },
+    {
+     "src": "/logos/slack-logo.svg",
+     "w": "20",
+     "h": "20",
+     "loading": null,
+     "alt": "Slack",
+     "natural": 127
+    }
+   ],
+   "links": [
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "https://iros2026-race.roboracer.ai/",
+    "https://iros2026-race.roboracer.ai/",
+    "https://2026ifac-roboracer.com/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+    "https://www.linkedin.com/company/knapp-ag",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+    "https://www.linkedin.com/in/dhruvjaiswal412",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+    "https://www.linkedin.com/in/manasishrekhar",
+    "https://iv2026-race.roboracer.ai/",
+    "https://iv2026-race.roboracer.ai/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+    "https://www.linkedin.com/in/milan-manoj-7a2805279",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+    "https://www.linkedin.com/in/meghajkabra",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+    "https://www.linkedin.com/in/samir-shehadeh-2820761b4",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+    "https://www.linkedin.com/company/unicorn-racing",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+    "https://www.linkedin.com/in/mateus-karvat",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+    "https://www.linkedin.com/in/kutsch",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+    "https://www.linkedin.com/company/roboracer-foundation",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+    "https://www.linkedin.com/in/cedric-hollande",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://icra2026-race.roboracer.ai/results.html",
+    "https://autoware.org/f1tenth-korea-delegation-at-upenn/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://autodrive-ecosystem.github.io/",
+    "https://github.com/ETH-PBL/MAP-Controller",
+    "https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+    "https://medium.com/adventures-in-autonomous-vehicles",
+    "mailto:contact@roboracer.ai?subject=RoboRacer%20news",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+    "mailto:contact@roboracer.ai",
+    "https://autodrive-ecosystem.github.io/",
+    "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g"
+   ],
+   "text": "News\n\nRace reports, coverage and posts from the teams\n\nNewest first. Every item links to its source, with the author and the credit beside it.\n\nItems\n21\nCompetitions\n4\nLatest\nAug 23, 2026\nOldest\n2020\n\nLatest\n\nAug 23, 2026\n\u00b7\nRoboRacer\nIROS 2026\n\nRegistration for the 31st competition at IROS 2026 closes September 5\n\nThe 31st RoboRacer Autonomous Racing Competition runs September 28 to 30, 2026 at th",
+   "scrollH": 8018
+  },
+  "console": []
+ }
+}

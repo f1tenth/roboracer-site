@@ -1,0 +1,287 @@
+{
+ "sections": [
+  {
+   "id": "research-title",
+   "w": 1600
+  },
+  {
+   "id": "featured",
+   "w": 1600
+  },
+  {
+   "id": "all-curated",
+   "w": 1600
+  },
+  {
+   "id": "year-2026",
+   "w": 1552
+  },
+  {
+   "id": "year-2025",
+   "w": 1552
+  },
+  {
+   "id": "year-2024",
+   "w": 1552
+  },
+  {
+   "id": "year-2023",
+   "w": 1552
+  },
+  {
+   "id": "year-2022",
+   "w": 1552
+  },
+  {
+   "id": "year-2021",
+   "w": 1552
+  },
+  {
+   "id": "year-2020",
+   "w": 1552
+  },
+  {
+   "id": "year-2019",
+   "w": 1552
+  },
+  {
+   "id": "year-2018",
+   "w": 1552
+  },
+  {
+   "id": "year-2017",
+   "w": 1552
+  },
+  {
+   "id": "submit",
+   "w": 1600
+  }
+ ],
+ "containers": [
+  1600,
+  1600,
+  1600,
+  1600
+ ],
+ "cards": [
+  {
+   "w": 501,
+   "h": 627,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 627,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 627,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 628,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 628,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 628,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 628,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 628,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 628,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 628,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 628,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 628,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 627,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 627,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 627,
+   "img": false
+  },
+  {
+   "w": 501,
+   "h": 628,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 628,
+   "img": true
+  },
+  {
+   "w": 501,
+   "h": 628,
+   "img": true
+  }
+ ],
+ "h1": {
+  "w": 912,
+  "fs": "88px",
+  "text": "1,000+ publications reference the platform"
+ },
+ "headings": [
+  {
+   "t": "H1",
+   "fs": "88px",
+   "txt": "1,000+ publications reference the platform"
+  },
+  {
+   "t": "H2",
+   "fs": "44px",
+   "txt": "Selected papers"
+  },
+  {
+   "t": "H3",
+   "fs": "24px",
+   "txt": "AI Coaching for Accelerating Human Skill Dev"
+  },
+  {
+   "t": "H3",
+   "fs": "24px",
+   "txt": "Nonplanar Model Predictive Control for Auton"
+  },
+  {
+   "t": "H3",
+   "fs": "24px",
+   "txt": "SIT-LMPC: Safe Information-Theoretic Learnin"
+  },
+  {
+   "t": "H3",
+   "fs": "24px",
+   "txt": "AV4EV: Open-Source Modular Autonomous Electr"
+  },
+  {
+   "t": "H3",
+   "fs": "24px",
+   "txt": "Learning to Tune Pure Pursuit in Autonomous "
+  },
+  {
+   "t": "H3",
+   "fs": "24px",
+   "txt": "Spatially-Aware Adaptive Trajectory Optimiza"
+  },
+  {
+   "t": "H3",
+   "fs": "24px",
+   "txt": "Trajectory Planning and Control near the Lim"
+  },
+  {
+   "t": "H3",
+   "fs": "24px",
+   "txt": "Advancing Autonomous Racing: A Comprehensive"
+  },
+  {
+   "t": "H3",
+   "fs": "24px",
+   "txt": "Deadlock-free, safe, and decentralized multi"
+  },
+  {
+   "t": "H3",
+   "fs": "24px",
+   "txt": "A Data-Driven Aggressive Autonomous Racing F"
+  },
+  {
+   "t": "H3",
+   "fs": "24px",
+   "txt": "RLPP: A Residual Method for Zero-Shot Real-W"
+  },
+  {
+   "t": "H3",
+   "fs": "24px",
+   "txt": "Bridging Model Predictive Control and Deep L"
+  }
+ ],
+ "paras": [
+  {
+   "w": 780,
+   "fs": "22px",
+   "txt": "A Google Scholar search for F1TENTH or R"
+  },
+  {
+   "w": 672,
+   "fs": "22px",
+   "txt": "Recent work on the platform, newest firs"
+  },
+  {
+   "w": 451,
+   "fs": "14px",
+   "txt": "Alexander Wachter, Alexander Willert, Ma"
+  },
+  {
+   "w": 672,
+   "fs": "22px",
+   "txt": "Every paper we track, grouped by year. T"
+  },
+  {
+   "w": 906,
+   "fs": "12px",
+   "txt": "arXiv \u00b7 Reinforcement learning, Multi-ag"
+  },
+  {
+   "w": 1140,
+   "fs": "12px",
+   "txt": "IET Intelligent Transport Systems \u00b7 Mult"
+  },
+  {
+   "w": 944,
+   "fs": "14px",
+   "txt": "Rodrigo Gutierrez-Garza, Daniel Quintana"
+  },
+  {
+   "w": 1096,
+   "fs": "14px",
+   "txt": "Shathushan Sivashangaran, Apoorva Khairn"
+  },
+  {
+   "w": 1086,
+   "fs": "12px",
+   "txt": "arXiv \u00b7 Multi-agent and racing strategy,"
+  },
+  {
+   "w": 1152,
+   "fs": "14px",
+   "txt": "Alexander Wachter, Alexander Willert, Ma"
+  }
+ ]
+}

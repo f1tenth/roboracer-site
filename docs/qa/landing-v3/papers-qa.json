@@ -1,0 +1,94 @@
+{
+ "desktop-1440": {
+  "h1_count": 1,
+  "h1_text": "1,000+ publications reference the platform",
+  "landmarks": [
+   "nav",
+   "main",
+   "header",
+   "header",
+   "form[search]",
+   "header",
+   "footer"
+  ],
+  "images_without_dims": [],
+  "images_total": 9,
+  "overflow_x": false,
+  "featured_cards": 6,
+  "cards_with_thumbs": 6,
+  "thumb_credit_lines": 6,
+  "rows_all_curated": 133,
+  "reveal_hidden_cards": 0,
+  "console_errors": [],
+  "console_warnings": [],
+  "failed_requests": [],
+  "axe_violations": []
+ },
+ "mobile-390": {
+  "h1_count": 1,
+  "h1_text": "1,000+ publications reference the platform",
+  "landmarks": [
+   "nav",
+   "main",
+   "header",
+   "header",
+   "form[search]",
+   "header",
+   "footer"
+  ],
+  "images_without_dims": [],
+  "images_total": 9,
+  "overflow_x": false,
+  "featured_cards": 6,
+  "cards_with_thumbs": 6,
+  "thumb_credit_lines": 6,
+  "rows_all_curated": 133,
+  "reveal_hidden_cards": 0,
+  "console_errors": [],
+  "console_warnings": [],
+  "failed_requests": [],
+  "axe_violations": []
+ },
+ "desktop-1440-rm": {
+  "h1_count": 1,
+  "h1_text": "1,000+ publications reference the platform",
+  "landmarks": [
+   "nav",
+   "main",
+   "header",
+   "header",
+   "form[search]",
+   "header",
+   "footer"
+  ],
+  "images_without_dims": [],
+  "images_total": 9,
+  "overflow_x": false,
+  "featured_cards": 6,
+  "cards_with_thumbs": 6,
+  "thumb_credit_lines": 6,
+  "rows_all_curated": 133,
+  "reveal_hidden_cards": 0,
+  "console_errors": [],
+  "console_warnings": [],
+  "failed_requests": []
+ },
+ "cards_crop": {
+  "cards": 3,
+  "clip": [
+   156,
+   111.515625,
+   1128,
+   677.3125
+  ]
+ },
+ "filter_rl": {
+  "aria_pressed": "true",
+  "featured_cards": 3,
+  "scholar_tag_link": "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=(f1tenth%20%7C%20roboracer)%20(reinforcement%20learning)",
+  "rows": 33
+ },
+ "search_forzaeth_rows": 1,
+ "search_empty_state": 1,
+ "focus_outline_sample": "A solid rgb(124, 58, 237)"
+}

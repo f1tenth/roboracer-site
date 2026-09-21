@@ -1,0 +1,32 @@
+{
+  "desktop_1440": {
+    "total_height": 14457,
+    "console": [],
+    "bad_responses": [],
+    "num_responses": 134
+  },
+  "tablet_768": {
+    "total_height": 16141,
+    "console": [],
+    "bad_responses": [],
+    "num_responses": 130
+  },
+  "mobile_390": {
+    "total_height": 16445,
+    "console": [],
+    "bad_responses": [],
+    "num_responses": 122
+  },
+  "desktop_1440_rm": {
+    "total_height": 11448,
+    "console": [],
+    "bad_responses": [],
+    "num_responses": 119
+  },
+  "mobile_390_rm": {
+    "total_height": 14209,
+    "console": [],
+    "bad_responses": [],
+    "num_responses": 115
+  }
+}

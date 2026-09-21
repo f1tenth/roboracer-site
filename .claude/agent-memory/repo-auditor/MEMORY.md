@@ -1,0 +1,2 @@
+- [Repo structure gotchas](repo_structure_gotchas.md) — dead `pages/sections/`, unused `publications.json`, two route-chrome lists, orphaned asset dirs, undeclared transitive deps.
+- [Audit scope and style](audit_scope_and_style.md) — read-only except AUDIT.md/SKILL.md, inspect unmerged branches via git show/merge-tree not checkout, cite exact paths/lines/bytes, always run build+lint live.

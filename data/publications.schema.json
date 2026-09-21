@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://roboracer.ai/schemas/publications.json",
+  "title": "RoboRacer curated publications",
+  "type": "object",
+  "required": ["version", "updated", "tags", "items"],
+  "properties": {
+    "version": { "const": 1 },
+    "updated": { "type": "string", "format": "date" },
+    "scholar_query_url": { "type": "string", "format": "uri" },
+    "tags": {
+      "type": "array",
+      "description": "Controlled vocabulary. Every item.tags entry must be one of these ids.",
+      "items": {
+        "type": "object",
+        "required": ["id", "label"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "label": { "type": "string" },
+          "scholar_query": { "type": "string", "description": "Extra terms appended to the Scholar query for this tag's deep link" }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "authors", "year", "tags", "featured", "status", "added"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$", "description": "slug: firstauthor-year-firstword" },
+          "title": { "type": "string", "minLength": 5 },
+          "authors": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "year": { "type": "integer", "minimum": 2015, "maximum": 2100 },
+          "venue": { "type": "string", "description": "Journal, conference, or 'arXiv preprint'" },
+          "venue_short": { "type": "string", "description": "ICRA, IROS, RA-L, CDC, arXiv ..." },
+          "type": { "type": "string", "enum": ["journal", "conference", "workshop", "preprint", "thesis", "report", "other"] },
+          "doi": { "type": "string", "pattern": "^10\\.[0-9]{4,9}/\\S+$" },
+          "arxiv": { "type": "string", "pattern": "^[0-9]{4}\\.[0-9]{4,5}(v[0-9]+)?$" },
+          "url": { "type": "string", "format": "uri" },
+          "pdf": { "type": "string", "format": "uri" },
+          "code": { "type": "string", "format": "uri" },
+          "video": { "type": "string", "format": "uri" },
+          "abstract": { "type": "string", "maxLength": 2000 },
+          "summary": { "type": "string", "maxLength": 280, "description": "One sentence for the card, written by us, plain language" },
+          "tags": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z0-9-]+$" } },
+          "institutions": { "type": "array", "items": { "type": "string" } },
+          "featured": { "type": "boolean" },
+          "status": { "type": "string", "enum": ["published", "candidate", "hidden"], "description": "candidate = auto-discovered, awaiting human review; hidden = keep record but do not render" },
+          "added": { "type": "string", "format": "date" },
+          "source": { "type": "string", "enum": ["bibtex-migration", "manual", "openalex", "semanticscholar", "crossref", "arxiv"] },
+          "citations": { "type": "integer", "minimum": 0 },
+          "thumbnail": { "type": "string" },
+          "figure": { "type": "string" },
+          "featured_order": { "type": "integer", "minimum": 1 },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

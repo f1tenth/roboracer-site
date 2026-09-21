@@ -1,124 +1,306 @@
 @import "tailwindcss";
 
-:root {
-  /* --background: #f5f5f5; */
-  --background: white;
-  --foreground: #171717;
+/* Display font is self-hosted and preloaded so the hero headline never
+   reflows on font swap (fixes tablet CLS 0.33 found by qa-reviewer).
+   Variable weight file covers the 500 and 600 we use; latin subset. */
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 500 600;
+  font-display: swap;
+  src: url("/fonts/space-grotesk-latin-500-600.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-html, body {
+/*
+ * RoboRacer design tokens - FINAL (Phase 2, approved by Cedric 2026-08-20).
+ * Source: docs/DESIGN.md + docs/design/tokens.proposed.css.
+ * Decisions: magenta accent (cyan = logo/telemetry only), ink/paper bases,
+ * Space Grotesk + Manrope, radius-card 1.25rem, gradient only on display
+ * text and the logo. Ayagoz may still override pairing/radius later.
+ */
+/* "desktop" = wide enough AND tall enough. Width-only breakpoints gave a
+   landscape phone (844x390) the pinned desktop layout, which needs vertical
+   room: the map collapsed to a sliver, the platform tiles clipped and the
+   research card was taller than the viewport (Cedric, v1.0). Chapters gate
+   their pinned layout on this and fall back to their mobile layout. */
+@custom-variant desktop (@media (min-width: 48rem) and (min-height: 34rem));
+
+@theme {
+  /* ---- Brand accent (the only accent family) ---- */
+  --color-rr-magenta: #d946ef;      /* logo + legacy pages only (accent decision 2026-08-21) */
+  --color-rr-violet: #7c3aed;       /* THE purple: solid Button fill + hover underline + focus ring */
+  --color-rr-violet-deep: #6d28d9;  /* primary Button hover state */
+  --color-rr-cyan: #00d1da;         /* logo endpoint only */
+  --color-rr-grad-start: #fb00ff;   /* gradient text + animated border, start stop */
+  --color-rr-grad-end: #6d28d9;     /* gradient text + animated border, end stop */
+  --color-rr-magenta-bright: #e879f9; /* accent TEXT on ink and magenta tints (AA) */
+  --color-rr-magenta-deep: #a21caf;   /* accent TEXT on magenta-tinted paper chips (AA) */
+
+  /* ---- Ink base: cinematic sections (hero, chapters, footer) ---- */
+  --color-ink-950: #07070d;
+  --color-ink-900: #0e0f1a;
+  --color-ink-800: #171a2b;
+  --color-ink-700: #242841;
+
+  /* ---- Paper base: reading sections ---- */
+  --color-paper-50: #fbfbfd;
+  --color-paper-100: #f3f4f8;
+  --color-paper-200: #e6e8f0;
+
+  /* ---- Text roles ---- */
+  --color-text-strong: #0b0c14;
+  --color-text-body: #3b3f55;
+  --color-text-muted: #62677f;      /* AA floor: >=4.5 on paper-50/100/200 */
+  --color-text-on-ink: #f5f5fa;
+  --color-text-on-ink-muted: #a8acc4;
+
+  /* ---- Type families (Google Fonts; self-host woff2 pending Ayagoz) ---- */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* ---- Type scale (display weight is always 600) ---- */
+  --text-display-xl: clamp(2.75rem, 6vw, 5.5rem);
+  --text-display-xl--line-height: 0.98;
+  --text-display-xl--letter-spacing: -0.03em;
+  --text-display-l: clamp(2.25rem, 4.5vw, 4rem);
+  --text-display-l--line-height: 0.98;
+  --text-display-l--letter-spacing: -0.03em;
+  --text-display-m: clamp(1.75rem, 3vw, 2.75rem);
+  --text-display-m--line-height: 1.02;
+  --text-display-m--letter-spacing: -0.02em;
+  /* The smallest display step. Two components have used text-display-s since
+     landing v4 while the token was never declared, so both were rendering at
+     the inherited size. */
+  --text-display-s: clamp(1.375rem, 2.2vw, 1.875rem);
+  --text-display-s--line-height: 1.08;
+  --text-display-s--letter-spacing: -0.015em;
+  --text-lead: clamp(1.125rem, 1.4vw, 1.375rem);
+  --text-lead--line-height: 1.55;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.14em;
+
+  /* ---- Spacing rhythm ---- */
+  --spacing-section: clamp(5rem, 12vw, 10rem);
+  --spacing-section-tight: clamp(3rem, 7vw, 6rem);
+  --spacing-gutter: 1.5rem;
+
+  /* ---- Containers ---- */
+  --container-content: 72rem;
+  --container-wide: 90rem;
+  /* The page container: every landing section shares it so a wide desktop
+     (1920) reads as one system (Cedric, v1.0). 1800px + the 24px gutters
+     leaves 36px of air each side at 1920. */
+  --container-page: 112.5rem;
+
+  /* ---- Shape ---- */
+  --radius-card: 0.25rem;   /* 4px - sharpen direction (Cedric, 2026-08-21) */
+  --radius-media: 0.375rem; /* 6px */
+  --radius-btn: 0.25rem;
+  --radius-pill: 999px;
+
+  /* ---- Elevation (paper only; ink elevates by surface + border) ---- */
+  --shadow-card: 0 1px 2px rgb(11 12 20 / 0.06), 0 4px 12px rgb(11 12 20 / 0.06);
+  --shadow-card-hover: 0 2px 4px rgb(11 12 20 / 0.08), 0 12px 28px rgb(11 12 20 / 0.10);
+  --shadow-nav: 0 2px 8px rgb(11 12 20 / 0.08);
+
+  /* ---- Motion (mirrored in src/lib/motion.ts for GSAP) ---- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --duration-fast: 180ms;
+  --duration-base: 420ms;
+  --duration-slow: 900ms;
+}
+
+html,
+body {
   width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  background: var(--background);
-  color: var(--foreground);
-  overflow-x: hidden auto;
+  min-height: 100svh;
+  background: var(--color-paper-50);
+  color: var(--color-text-body);
+  /* clip, not hidden: hidden would make html/body scroll containers and
+     stop content below the 100svh Layout root from painting */
+  overflow-x: clip;
+  font-family: var(--font-sans);
 }
 
-
-/* * {
-  border: 0.5px solid blue;
+/* Visible focus everywhere; Button overrides color on ink surfaces. */
+/* Layered so per-component focus-ring utilities (e.g. the hero pause
+   button's on-ink white ring) can override; unlayered, this rule beat every
+   Tailwind utility (qa-reviewer, 2026-08-21). */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-rr-violet);
+    outline-offset: 2px;
+  }
 }
 
-div {
-  border: 0.5px solid red;
-} */
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  font-weight: 500;
+  text-transform: uppercase;
+}
 
-/* reusable responsive padding classx */
+/* The logo gradient clipped to text. Gradient text is otherwise banned
+   (sharpen v2); the ONE exception is the hero's first line over the darkened
+   video (Cedric, landing v3, 2026-08-21). Ink context only: the cyan stop is
+   1.9:1 on paper. Apply to an inline-block so the gradient spans the words,
+   not the container. */
+@utility text-gradient-logo {
+  background-image: linear-gradient(90deg, var(--color-rr-cyan) 0%, var(--color-rr-grad-start) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Marquee (design system "Marquee" pattern; static wrapped grid on reduce) */
+@keyframes rr-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.rr-marquee {
+  overflow: hidden;
+  display: flex;
+}
+.rr-marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  min-width: 100%;
+  animation: rr-marquee var(--rr-marquee-duration, 50s) linear infinite;
+  /* One ribbon left, one right, off the same keyframe. Set by Marquee's
+     `direction` prop; must live here with the shorthand above, which resets
+     animation-direction and would beat a layered utility. */
+  animation-direction: var(--rr-marquee-direction, normal);
+}
+@media (min-width: 48rem) {
+  .rr-marquee-track {
+    animation-duration: var(--rr-marquee-duration-md, var(--rr-marquee-duration, 50s));
+  }
+}
+/* Pause on hover AND on keyboard focus (the partner ribbon's logo links).
+   `:has(a:focus-visible)`, not `:focus-within`: a clicked logo keeps focus
+   after its new tab opens, and focus-within kept the ribbon frozen until the
+   next click (landing v4 section 7). This must live here, unlayered: the
+   `animation` shorthand above resets play-state and beats any layered
+   utility. */
+.rr-marquee:hover .rr-marquee-track,
+.rr-marquee:has(a:focus-visible) .rr-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rr-marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* The track is a flex item of .rr-marquee, and the moving state pins it at
+       flex-shrink: 0 with min-width: 100% so it can be wider than its box.
+       Leave those in place here and `flex-wrap: wrap` never fires: the track
+       just grows to 6,400px and overflow:hidden clips 21 of every 27 logos.
+       Releasing the width is what actually makes the static row wrap. */
+    flex-shrink: 1;
+    min-width: 0;
+    width: 100%;
+  }
+  .rr-marquee-track[aria-hidden="true"],
+  .rr-marquee-clone {
+    display: none;
+  }
+}
+
+/* Hero scroll cue */
+@keyframes rr-scroll-cue {
+  0%, 100% { transform: translateY(0); opacity: 0.9; }
+  50% { transform: translateY(8px); opacity: 0.4; }
+}
+.rr-scroll-cue {
+  animation: rr-scroll-cue 1.8s var(--ease-in-out-quart) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rr-scroll-cue {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* LEGACY below: styles the pre-revamp pages still depend on.          */
+/* Delete each block when its page migrates in Phase 3 (CLAUDE.md 10). */
+/* ------------------------------------------------------------------ */
+
+/* Heading defaults for pre-revamp pages, in @layer base (fix 2026-08-21):
+   unlayered these beat every layered Tailwind utility, so text-display-xl/-l/-m
+   were silently capped at 2.5/1.75rem site-wide (measured 40px hero h1 at 1440).
+   In the base layer, pages without type utilities render exactly as before and
+   the v2 type scale finally wins where it is declared. */
+@layer base {
+  h1 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 110%;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 600; /* was 200; killed per docs/DESIGN.md (approved 2026-08-20) */
+    line-height: 110%;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 110%;
+  }
+
+  h4 {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 110%;
+  }
+
+  h5 {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+  }
+}
+
 @layer utilities {
   .responsive-padding {
     @apply px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* --background: #0a0a0a;
-    --foreground: #ededed; */
-    --background: white;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  min-height: 100svh;
-}
-
-h1 {
-  font-family: "Space Grotesk", serif;
-  font-size: 2.5rem;
-  font-weight: 600;
-  line-height: 110%;
-}
-
-h2 {
-  font-family: "Space Grotesk", serif;
-  font-size: 1.75rem;
-  /* color: #A4F5F9; */
-  font-weight: 200;
-  line-height: 110%;
-}
-
-h3 {
-  font-family: "Space Grotesk", serif;
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 110%;
-}
-
-h4 {
-  font-family: "Manrope", serif;
-  font-size: 1.25rem;
-  font-weight: 500;
-  line-height: 110%;
-} 
-
-h5 {
-  font-family: "Manrope", serif;
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-input {
-  font-family: "Manrope", serif;
-}
-
-p {
-  font-family: "Manrope", serif;
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-a {
-  font-family: "Manrope", serif;
-}
-
 .space-font {
-  font-family: "Space Grotesk", serif;
+  font-family: var(--font-display);
   font-weight: 600;
 }
 
 .manrope-font {
-  font-family: "Manrope", serif;
+  font-family: var(--font-sans);
 }
 
 .purple-radial-gradient {
-  background: radial-gradient( circle at 70% 30%, #fb00ff85, transparent);
-}
-
-.branded-card::after {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.5);
+  background: radial-gradient(circle at 70% 30%, #fb00ff85, transparent);
 }
 
 .dotted-bg {
   backdrop-filter: blur(10px);
-  background: 
-  radial-gradient(transparent 0%, transparent 30%, rgba(0, 0, 0, 0.5) 0%);
+  background:
+    radial-gradient(transparent 0%, transparent 30%, rgba(0, 0, 0, 0.5) 0%);
   background-repeat: repeat;
   background-size: 5px 5px;
 }
@@ -128,118 +310,204 @@ a {
   position: absolute;
   inset: 0;
   background: linear-gradient(to right, black, rgba(0, 0, 0, 0.3), black),
-  linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
   z-index: -1;
 }
 
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 2rem;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  z-index: 50;
-  transition: box-shadow 0.3s ease;
-}
-
-.navbar.scrolled {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.nav-link {
-  position: relative;
-  color: #1a1a1a;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  padding: 0.25rem 0;
-}
-
-.nav-link:hover {
-  color: #00D1DA;
-}
-
-.nav-link::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #00D1DA;
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-  width: 100%;
-}
-
-.nav-cta {
-  padding: 0.625rem 1.5rem;
-  background: #1a1a1a;
-  color: white;
-  border-radius: 6px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.nav-cta:hover {
-  background: #00D1DA;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 209, 218, 0.3);
-}
-
-/* Mobile Menu */
-.mobile-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: white;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-}
-
-.mobile-menu-link {
-  display: block;
-  padding: 0.875rem 0;
-  color: #1a1a1a;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
-  border-bottom: 1px solid #f0f0f0;
-  transition: color 0.2s ease;
-}
-
-.mobile-menu-link:last-child {
-  border-bottom: none;
-}
-
-.mobile-menu-link:hover {
-  color: #00D1DA;
-}
-
-@media (max-width: 768px) {
+/* ------------------------------------------------------------------ */
+/* Site nav (landing v3, 2026-08-21). Layered: an unlayered rule here   */
+/* would beat every Tailwind utility on the nav (two shipped bugs).      */
+/* --nav-alpha: 0 = transparent over the hero video, 1 = the paper bar.  */
+/* NavBar.tsx writes it from a ScrollTrigger on hero routes and pins it  */
+/* at 1 elsewhere. Every color below is mixed from it, so the bar, logo, */
+/* links, CTA and focus ring cross over together from one number.        */
+/* ------------------------------------------------------------------ */
+@layer components {
   .navbar {
-    padding: 1rem 1.5rem;
+    --nav-alpha: 1;
+    /* The bar's wash follows alpha continuously; the ink/paper roles of the
+       type flip at alpha 0.45 (--nav-flip is 0 below, 1 above) with a 180 ms
+       color transition. Measured on the dev server: mixing the type through
+       the same grey as the half-filled bar left the links at ~1.3:1 for 160 px
+       of scroll, and mixing the CTA's fill and label met in the middle with
+       the label gone. Flipping at 0.45 keeps every role >= 3.9:1 over the
+       darkened band and >= 5:1 once ink. */
+    --nav-flip: clamp(0, (var(--nav-alpha) - 0.45) * 1000, 1);
+    --nav-flip-mix: calc((1 - var(--nav-flip)) * 100%);
+    --nav-fg: color-mix(in oklab, var(--color-text-on-ink) var(--nav-flip-mix), var(--color-text-strong));
+    --nav-cta-bg: color-mix(in oklab, var(--color-paper-50) var(--nav-flip-mix), var(--color-text-strong));
+    --nav-cta-bg-hover: color-mix(in oklab, var(--color-paper-200) var(--nav-flip-mix), var(--color-ink-700));
+    --nav-cta-fg: color-mix(in oklab, var(--color-text-strong) var(--nav-flip-mix), var(--color-paper-50));
+    --nav-ring: color-mix(in oklab, var(--color-text-on-ink) var(--nav-flip-mix), var(--color-rr-violet));
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 2rem;
+    color: var(--nav-fg);
+    transition: color var(--duration-fast) ease;
+    background: rgb(251 251 253 / var(--nav-alpha));
+    -webkit-backdrop-filter: blur(calc(var(--nav-alpha) * 12px));
+    backdrop-filter: blur(calc(var(--nav-alpha) * 12px));
+    /* Shadow only once the bar is nearly solid: 0 up to alpha 0.9, full at 1. */
+    box-shadow: 0 2px 8px rgb(11 12 20 / calc(clamp(0, (var(--nav-alpha) - 0.9) * 10, 1) * 0.08));
   }
-  
+
+  /* Browsers without color-mix (Safari < 16.2) keep the paper bar everywhere. */
+  @supports not (color: color-mix(in oklab, red 50%, blue)) {
+    .navbar {
+      --nav-alpha: 1 !important;
+      color: var(--color-text-strong);
+    }
+  }
+
+  /* One inline wordmark (NavBar BrandLogo) at the height the nav has always
+     laid out; its letters follow --nav-fg via currentColor, so there is no
+     second image and nothing to cross-fade. */
+  .nav-logo {
+    display: block;
+    flex: none;
+    height: 2.5rem;
+    color: var(--nav-fg);
+    transition: color var(--duration-fast) ease;
+  }
+
+  .nav-logo svg {
+    display: block;
+    height: 100%;
+    width: auto;
+  }
+
   .nav-links {
-    display: none;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    position: relative;
+    color: var(--nav-fg);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.25rem 0;
+    transition: color var(--duration-fast) ease;
+  }
+
+  /* Hover keeps the text color; the underline signals the state (accent
+     contract 2026-08-21: no cyan, no colored link text). */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    /* Transform, not width: compositor-only (design system motion rule). */
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    transform: scaleX(1);
+  }
+
+  /* Ink pill on paper; inverts to a paper pill over the video. */
+  .nav-cta {
+    padding: 0.625rem 1.5rem;
+    background: var(--nav-cta-bg);
+    color: var(--nav-cta-fg);
+    border-radius: var(--radius-btn);
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      background-color var(--duration-fast) ease,
+      transform var(--duration-fast) ease;
+  }
+
+  .nav-cta:hover {
+    background: var(--nav-cta-bg-hover);
+    transform: translateY(-1px);
+  }
+
+  .nav-menu-button {
+    display: inline-flex;
+    padding: 0.5rem;
+    margin: -0.5rem;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  /* Focus rings stay visible in both states: white over the video, violet
+     on paper. Overrides the base-layer :focus-visible color only. */
+  .navbar :focus-visible {
+    outline-color: var(--nav-ring);
+  }
+
+  /* The open menu always sits on a solid bar (NavBar forces alpha 1). */
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-paper-50);
+    box-shadow: 0 8px 16px rgb(11 12 20 / 0.1);
+    padding: 1.5rem;
+  }
+
+  .mobile-menu-link {
+    display: block;
+    padding: 0.875rem 0;
+    color: var(--color-text-strong);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-paper-200);
+  }
+
+  .mobile-menu-link:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-menu-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--color-rr-violet);
+  }
+
+  /* Below lg (1024px): the hamburger (lg:hidden) takes over. The eight
+     links plus the CTA need ~1,110 px at the 2rem gap, so between 768 and
+     1048 px the button sat off-screen (landing v5 QA). At lg the gap drops
+     so 1024 still fits - 0.875rem since Rules joined the row (pages v1);
+     the old max-width: 768px overlapped Tailwind's md breakpoint, so at
+     exactly 768px neither rendered. */
+  @media (min-width: 64rem) and (max-width: 79.98rem) {
+    .nav-links {
+      gap: 1.25rem;
+    }
+  }
+  /* 1024-1152: the tightest band. Eight links, Simulator and the CTA only
+     clear the wordmark at this gap; below 1024 the hamburger takes over. */
+  @media (min-width: 64rem) and (max-width: 71.98rem) {
+    .nav-links {
+      gap: 0.6875rem;
+    }
+  }
+  @media (max-width: 1023.98px) {
+    .navbar {
+      padding: 1rem 1.5rem;
+    }
+
+    .nav-links {
+      display: none;
+    }
   }
 }
 
@@ -253,9 +521,15 @@ a {
   position: relative;
   padding: 2px;
   border-radius: 12px;
-  background: linear-gradient(45deg, #FC00FF, #00DBDE, #FC00FF);
+  background: linear-gradient(45deg, #fc00ff, #00dbde, #fc00ff);
   background-size: 400% 400%;
   animation: rotateBorder 6s infinite linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .border-animated {
+    animation: none;
+  }
 }
 
 .big-blur::before {
@@ -268,70 +542,28 @@ a {
   pointer-events: none;
 }
 
-/* Scrollbar Styling */
 * {
   scrollbar-width: thin;
 }
 
-/* WebKit (Chrome, Safari, Edge) */
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-/* Gradient Thumb */
 *::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
-/* Gradient Track */
 *::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
-/* Hide scrollbar for Chrome, Safari, and Edge */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for Firefox */
 .scrollbar-hide {
   scrollbar-width: none;
 }
 
-/* slide carousel */
-.embla {
-  overflow: hidden;
-}
-
-.embla__viewport {
-  overflow: hidden;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.embla__container {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-
-.embla__slide {
-  flex: 0 0 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.embla__slide img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.3;
-}

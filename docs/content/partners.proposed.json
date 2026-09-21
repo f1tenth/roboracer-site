@@ -1,0 +1,395 @@
+[
+  {
+    "name": "Arizona State University",
+    "website": "https://www.asu.edu/",
+    "image": "partners/asu.png"
+  },
+  {
+    "name": "Autoware",
+    "website": "https://www.autoware.org/",
+    "image": "partners/autoware.jpg"
+  },
+  {
+    "name": "Binghamton University",
+    "website": "https://www.binghamton.edu/",
+    "image": "partners/binghamton.png"
+  },
+  {
+    "name": "Carnegie Mellon University",
+    "website": "https://www.cmu.edu/",
+    "image": "partners/cmu.jpg"
+  },
+  {
+    "name": "City University of New York (CUNY)",
+    "website": "https://www.cuny.edu/",
+    "image": "partners/cuny.png"
+  },
+  {
+    "name": "Clemson University",
+    "website": "http://www.clemson.edu/",
+    "image": "partners/clemson.png"
+  },
+  {
+    "name": "Columbia University",
+    "website": "https://www.columbia.edu/",
+    "image": "partners/columbia.png"
+  },
+  {
+    "name": "Czech Technical University",
+    "website": "https://www.cvut.cz/en",
+    "image": "partners/czech.png"
+  },
+  {
+    "name": "Duke University",
+    "website": "https://duke.edu/",
+    "image": "partners/duke.png"
+  },
+  {
+    "name": "ETH Zurich",
+    "website": "https://ethz.ch/en.html",
+    "image": "partners/ethzurich.png"
+  },
+  {
+    "name": "George Mason University",
+    "website": "https://www2.gmu.edu/",
+    "image": "partners/georgemason.png"
+  },
+  {
+    "name": "Georgia Tech",
+    "website": "https://www.gatech.edu/",
+    "image": "partners/GAtech.png"
+  },
+  {
+    "name": "Guizhou University",
+    "website": "http://www.gzu.edu.cn/en/",
+    "image": "partners/guizhoulogo.png"
+  },
+  {
+    "name": "Hong Kong Polytechnic University",
+    "website": "https://www.polyu.edu.hk/en/",
+    "image": "partners/hongkongpoly.png"
+  },
+  {
+    "name": "Indian Institute of Technology Bombay",
+    "website": "http://www.iitb.ac.in/",
+    "image": "partners/iit.png"
+  },
+  {
+    "name": "KAIST",
+    "website": "http://www.kaist.edu/",
+    "image": "partners/kaist.png"
+  },
+  {
+    "name": "Massachusetts Institute of Technology (MIT)",
+    "website": "http://www.mit.edu/",
+    "image": "partners/mit.png"
+  },
+  {
+    "name": "New York University (NYU)",
+    "website": "https://www.nyu.edu/",
+    "image": "partners/nyu.png"
+  },
+  {
+    "name": "University of California, Berkeley",
+    "website": "https://www.berkeley.edu/",
+    "image": "partners/ucb.png"
+  },
+  {
+    "name": "University of Pennsylvania",
+    "website": "https://www.upenn.edu/",
+    "image": "partners/upenn.png"
+  },
+  {
+    "name": "University of Antwerp",
+    "website": "https://www.uantwerpen.be/en/",
+    "image": "partners/antwerp.png",
+    "status": "verify"
+  },
+  {
+    "name": "Boston University",
+    "website": "https://www.bu.edu/",
+    "image": "partners/bu.png",
+    "status": "verify"
+  },
+  {
+    "name": "University of Colorado Boulder",
+    "website": "https://www.colorado.edu/",
+    "image": "partners/colorado.png",
+    "status": "verify"
+  },
+  {
+    "name": "University of Costa Rica",
+    "website": "https://www.ucr.ac.cr/",
+    "image": "partners/costarica.png",
+    "status": "verify"
+  },
+  {
+    "name": "Halmstad University",
+    "website": "https://www.hh.se/english",
+    "image": "partners/halmstad.jpg",
+    "status": "verify"
+  },
+  {
+    "name": "University of Iowa",
+    "website": "https://uiowa.edu/",
+    "image": "partners/iowa.png",
+    "status": "verify"
+  },
+  {
+    "name": "University of Kansas",
+    "website": "https://ku.edu/",
+    "image": "partners/kansas.png",
+    "status": "verify"
+  },
+  {
+    "name": "Karlsruhe Institute of Technology (KIT)",
+    "website": "https://www.kit.edu/english/",
+    "image": "partners/kit.png",
+    "status": "verify"
+  },
+  {
+    "name": "KTH Royal Institute of Technology",
+    "website": "https://www.kth.se/en",
+    "image": "partners/kth.png",
+    "status": "verify"
+  },
+  {
+    "name": "Kyungpook National University",
+    "website": "https://www.knu.ac.kr/eng/",
+    "image": "partners/kyungpook.png",
+    "status": "verify"
+  },
+  {
+    "name": "Lehigh University",
+    "website": "https://www1.lehigh.edu/",
+    "image": "partners/lehigh.png",
+    "status": "verify",
+    "note": "Corroborated by testimonies.json: Rosa Zheng, Lehigh University."
+  },
+  {
+    "name": "Lund University",
+    "website": "https://www.lunduniversity.lu.se/",
+    "image": "partners/lund.png",
+    "status": "verify"
+  },
+  {
+    "name": "University of Maryland",
+    "website": "https://umd.edu/",
+    "image": "partners/maryland.png",
+    "status": "verify"
+  },
+  {
+    "name": "Tecnológico de Monterrey",
+    "website": "https://tec.mx/en",
+    "image": "partners/monterrey.jpg",
+    "status": "verify"
+  },
+  {
+    "name": "Technical University of Munich",
+    "website": "https://www.tum.de/en/",
+    "image": "partners/munich.png",
+    "status": "verify"
+  },
+  {
+    "name": "Nagoya University",
+    "website": "https://en.nagoya-u.ac.jp/",
+    "image": "partners/nagoya.png",
+    "status": "verify"
+  },
+  {
+    "name": "University of Nebraska",
+    "website": "https://www.unl.edu/",
+    "image": "partners/nebraska.png",
+    "status": "verify"
+  },
+  {
+    "name": "University of North Carolina",
+    "website": "https://www.unc.edu/",
+    "image": "partners/northcarolina.png",
+    "status": "verify",
+    "note": "Corroborated by news.json: 'The Fast and the Autonomous', UNC Research."
+  },
+  {
+    "name": "Northwestern University",
+    "website": "https://www.northwestern.edu/",
+    "image": "partners/northwestern.png",
+    "status": "verify"
+  },
+  {
+    "name": "University of Oregon",
+    "website": "https://www.uoregon.edu/",
+    "image": "partners/oregon.png",
+    "status": "verify"
+  },
+  {
+    "name": "Osaka University",
+    "website": "https://www.osaka-u.ac.jp/en",
+    "image": "partners/osaka.png",
+    "status": "verify"
+  },
+  {
+    "name": "TODO(content): unknown institution",
+    "website": null,
+    "image": "partners/pan.png",
+    "status": "verify",
+    "note": "TODO(content): filename too ambiguous to infer institution (possibly 'Pan-American' or a partial name). Ask Cedric/Rahul before publishing."
+  },
+  {
+    "name": "École Polytechnique (Paris)",
+    "website": "https://www.polytechnique.edu/en",
+    "image": "partners/polytechparis.jpg",
+    "status": "verify"
+  },
+  {
+    "name": "Purdue University",
+    "website": "https://www.purdue.edu/",
+    "image": "partners/purdue.png",
+    "status": "verify"
+  },
+  {
+    "name": "Rutgers University",
+    "website": "https://www.rutgers.edu/",
+    "image": "partners/rutgers.png",
+    "status": "verify"
+  },
+  {
+    "name": "Seoul National University",
+    "website": "https://en.snu.ac.kr/",
+    "image": "partners/seoulnationaluni.png",
+    "status": "verify"
+  },
+  {
+    "name": "Seoul National University of Science and Technology (SeoulTech)",
+    "website": "https://en.seoultech.ac.kr/",
+    "image": "partners/seoultech.png",
+    "status": "verify"
+  },
+  {
+    "name": "San José State University",
+    "website": "https://www.sjsu.edu/",
+    "image": "partners/sjsu.png",
+    "status": "verify"
+  },
+  {
+    "name": "Stony Brook University",
+    "website": "https://www.stonybrook.edu/",
+    "image": "partners/stonybrook.png",
+    "status": "verify"
+  },
+  {
+    "name": "Temple University",
+    "website": "https://www.temple.edu/",
+    "image": "partners/temple.png",
+    "status": "verify"
+  },
+  {
+    "name": "TODO(content): unknown institution",
+    "website": null,
+    "image": "partners/tu.png",
+    "status": "verify",
+    "note": "TODO(content): 'tu' could be any of several Technical Universities already represented by other files (munich.png=TUM, vienna.png=TU Wien, kit.png=KIT). Ask Cedric/Rahul which institution this logo is."
+  },
+  {
+    "name": "TODO(content): unknown institution",
+    "website": null,
+    "image": "partners/uant.png",
+    "status": "verify",
+    "note": "TODO(content): ambiguous, not obviously 'antwerp.png' (already separately identified as University of Antwerp). Ask Cedric/Rahul."
+  },
+  {
+    "name": "University of California, San Diego",
+    "website": "https://ucsd.edu/",
+    "image": "partners/ucdsd.png",
+    "status": "verify",
+    "note": "UC San Diego is already named as an example partner in Landing.tsx PILLARS copy ('including ... UC San Diego ...') but had no logo entry -- this fixes that contradiction."
+  },
+  {
+    "name": "University of Central Florida",
+    "website": "https://www.ucf.edu/",
+    "image": "partners/ucf.png",
+    "status": "verify"
+  },
+  {
+    "name": "University of California, Irvine",
+    "website": "https://uci.edu/",
+    "image": "partners/uci.png",
+    "status": "verify"
+  },
+  {
+    "name": "University of California, Los Angeles",
+    "website": "https://www.ucla.edu/",
+    "image": "partners/ucla.png",
+    "status": "verify"
+  },
+  {
+    "name": "University of Connecticut",
+    "website": "https://uconn.edu/",
+    "image": "partners/uconn.png",
+    "status": "verify"
+  },
+  {
+    "name": "University of California, Riverside",
+    "website": "https://www.ucr.edu/",
+    "image": "partners/ucr.png",
+    "status": "verify"
+  },
+  {
+    "name": "Università di Modena e Reggio Emilia (UNIMORE)",
+    "website": "https://www.unimore.it/en",
+    "image": "partners/unimore.jpg",
+    "status": "verify",
+    "note": "Corroborated by team_developers.json: Dr. Marko Bertogna, Dr. Paolo Burgio (UNIMORE affiliation)."
+  },
+  {
+    "name": "University of Texas at Austin",
+    "website": "https://www.utexas.edu/",
+    "image": "partners/unitexas.png",
+    "status": "verify",
+    "note": "Corroborated by testimonies.json: Kunal R Nalamwar, The University of Texas at Austin."
+  },
+  {
+    "name": "University of New Mexico",
+    "website": "https://www.unm.edu/",
+    "image": "partners/unm.png",
+    "status": "verify"
+  },
+  {
+    "name": "University of Southern California",
+    "website": "https://www.usc.edu/",
+    "image": "partners/usc.png",
+    "status": "verify"
+  },
+  {
+    "name": "University of Toronto",
+    "website": "https://www.utoronto.ca/",
+    "image": "partners/utoronto.png",
+    "status": "verify"
+  },
+  {
+    "name": "Vanderbilt University",
+    "website": "https://www.vanderbilt.edu/",
+    "image": "partners/vanderbilt.png",
+    "status": "verify"
+  },
+  {
+    "name": "TU Wien",
+    "website": "https://www.tuwien.at/en/",
+    "image": "partners/vienna.png",
+    "status": "verify",
+    "note": "ICRA 2026 was hosted in Vienna; 'Scuderia Segfault' (TU Wien) competed per ICRA 2026 results page."
+  },
+  {
+    "name": "University of Virginia",
+    "website": "https://www.virginia.edu/",
+    "image": "partners/virginia.png",
+    "status": "verify",
+    "note": "Corroborated by team_developers.json: Dr. Madhur Behl (UVA)."
+  },
+  {
+    "name": "Binghamton University",
+    "website": "https://www.binghamton.edu/",
+    "image": "partners/binghamtonUni.png",
+    "status": "verify",
+    "note": "TODO(content): duplicate asset. Binghamton University is already listed via partners/binghamton.png. Recommend deleting public/partners/binghamtonUni.png rather than adding a second entry, unless Cedric wants to swap which file is used."
+  }
+]

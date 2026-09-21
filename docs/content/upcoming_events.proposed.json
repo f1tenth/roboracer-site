@@ -1,0 +1,23 @@
+[
+    {
+        "title": "29th Roboracer Autonomous Racing Competition at the International Federation of Automatic Control (IFAC 2026)",
+        "dates": "August 24-27, 2026",
+        "location": "Busan, Republic of Korea",
+        "url": "https://2026ifac-roboracer.com/en/registration.html"
+    },
+    {
+        "title": "30th Roboracer Autonomous Racing Competition at the IEEE Vehicular Technology Conference (VTC 2026 Fall)",
+        "dates": "Sep 6-9, 2026",
+        "location": "Boston, MA, USA",
+        "url": "https://events.vtsociety.org/vtc2026-fall/"
+    },
+    {
+        "title": "31st Roboracer Autonomous Racing Competition at the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2026)",
+        "dates": "September 28-30, 2026",
+        "location": "Pittsburgh, PA, USA",
+        "url": "https://iros2026-race.roboracer.ai/registration.html",
+        "registration_deadline": "September 5, 2026",
+        "status": "verify",
+        "note": "TODO(content): confirm date framing with Cedric. Live site https://iros2026-race.roboracer.ai states the overall event window as 'September 27 - October 1, 2026' (setup Sat 26/Sun 27 through dismantle Thu Oct 1); this entry uses the skill's recommended public-facing 'competition days only' framing (Sep 28-30). Swap 'dates' to 'September 27-October 1, 2026' if Cedric prefers the site's framing. Registration deadline Sep 5, 2026 per skill; not published on the live site as of this audit and may be extended -- verify before publishing."
+    }
+]

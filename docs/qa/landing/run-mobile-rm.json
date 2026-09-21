@@ -1,0 +1,339 @@
+{
+ "name": "mobile-rm",
+ "viewport": [
+  390,
+  844
+ ],
+ "reduced_motion": true,
+ "console": [],
+ "pageerrors": [],
+ "requestfailed": [],
+ "http_errors": [],
+ "frames": [],
+ "scroll": [
+  {
+   "i": 0,
+   "target": 0,
+   "scrollY": 1,
+   "docH": 15308
+  },
+  {
+   "i": 1,
+   "target": 844,
+   "scrollY": 845,
+   "docH": 15308
+  },
+  {
+   "i": 2,
+   "target": 1688,
+   "scrollY": 1689,
+   "docH": 15308
+  },
+  {
+   "i": 3,
+   "target": 2532,
+   "scrollY": 2533,
+   "docH": 15308
+  },
+  {
+   "i": 4,
+   "target": 3376,
+   "scrollY": 3377,
+   "docH": 15308
+  },
+  {
+   "i": 5,
+   "target": 4220,
+   "scrollY": 4221,
+   "docH": 15308
+  },
+  {
+   "i": 6,
+   "target": 5064,
+   "scrollY": 5065,
+   "docH": 15308
+  },
+  {
+   "i": 7,
+   "target": 5908,
+   "scrollY": 5909,
+   "docH": 15308
+  },
+  {
+   "i": 8,
+   "target": 6752,
+   "scrollY": 6753,
+   "docH": 15308
+  },
+  {
+   "i": 9,
+   "target": 7596,
+   "scrollY": 7597,
+   "docH": 15308
+  },
+  {
+   "i": 10,
+   "target": 8440,
+   "scrollY": 8441,
+   "docH": 15308
+  },
+  {
+   "i": 11,
+   "target": 9284,
+   "scrollY": 9285,
+   "docH": 15308
+  },
+  {
+   "i": 12,
+   "target": 10128,
+   "scrollY": 10129,
+   "docH": 15308
+  },
+  {
+   "i": 13,
+   "target": 10972,
+   "scrollY": 10973,
+   "docH": 15308
+  },
+  {
+   "i": 14,
+   "target": 11816,
+   "scrollY": 11817,
+   "docH": 15308
+  },
+  {
+   "i": 15,
+   "target": 12660,
+   "scrollY": 12661,
+   "docH": 15308
+  },
+  {
+   "i": 16,
+   "target": 13504,
+   "scrollY": 13505,
+   "docH": 15308
+  },
+  {
+   "i": 17,
+   "target": 14348,
+   "scrollY": 14349,
+   "docH": 15308
+  },
+  {
+   "i": 18,
+   "target": 15192,
+   "scrollY": 14464,
+   "docH": 15308
+  }
+ ],
+ "walk_seconds": 17.2,
+ "frames_count": 19,
+ "sheet": [
+  390,
+  16036
+ ],
+ "carousel": {
+  "running": "false",
+  "running_after_s": 4.08,
+  "label_first": "Go to paper 1: F1tenth: An open-source evaluation environment for continuous control and reinforcement learning",
+  "label_changed_to": null,
+  "label_change_after_s": null
+ },
+ "audit": {
+  "vh": 844,
+  "vw": 390,
+  "docH": 15308,
+  "h1": 1,
+  "h1text": [
+   "Autonomous racing\nbuilt and raced\nin the open"
+  ],
+  "headings": [
+   "Highlights",
+   "One tenth the size, the full problem",
+   "Build. Learn. Race. Research.",
+   "Teams from around the world",
+   "across the partner institutions below",
+   "Come to our next race",
+   "Who competes",
+   "1,000+ publications build on this platform",
+   "Join 3,000+ people building and racing"
+  ],
+  "sections": [
+   {
+    "sel": "section",
+    "label": ":r0:",
+    "h": 1110,
+    "textLen": 45
+   },
+   {
+    "sel": "section.relative.bg-paper-100.text-text-body",
+    "label": "highlights",
+    "h": 1715,
+    "textLen": 358
+   },
+   {
+    "sel": "section.relative.bg-paper-50.text-text-body",
+    "label": "pillars",
+    "h": 2421,
+    "textLen": 711
+   },
+   {
+    "sel": "section.bg-paper-50.py-section.text-text-body",
+    "label": "community-title",
+    "h": 752,
+    "textLen": 1336
+   },
+   {
+    "sel": "section.relative.bg-paper-50.text-text-body",
+    "label": "partners",
+    "h": 216,
+    "textLen": 586
+   },
+   {
+    "sel": "section.relative.bg-paper-50.text-text-body",
+    "label": "next-race",
+    "h": 1218,
+    "textLen": 422
+   },
+   {
+    "sel": "section.relative.bg-paper-100.text-text-body",
+    "label": "teams",
+    "h": 2340,
+    "textLen": 1152
+   },
+   {
+    "sel": "section.relative.bg-paper-50.text-text-body",
+    "label": "research",
+    "h": 1318,
+    "textLen": 12911
+   },
+   {
+    "sel": "section#join.relative.bg-paper-100.text-text-body",
+    "label": "join-title",
+    "h": 1949,
+    "textLen": 2265
+   }
+  ],
+  "pins": {
+   "hero": {
+    "px": 1110,
+    "vh": 1.31
+   },
+   "platform": {
+    "px": 2260,
+    "vh": 2.68
+   },
+   "car": null,
+   "map": null
+  },
+  "imgs": 252,
+  "imgsNoDims": [],
+  "imgsNoAlt": [],
+  "videos": 0,
+  "videosNoPoster": [],
+  "credits": [],
+  "marquee": {
+   "left": 0,
+   "width": 390,
+   "trackDuration": "0s",
+   "trackName": "none"
+  },
+  "domOrder": {
+   "map": -1,
+   "nextRace": 1079,
+   "teams": 1117
+  },
+  "teamGrid": {
+   "cells": 10,
+   "cellsWithImg": 10,
+   "names": [
+    "404 Racers team photo",
+    "West Virginia University team photo",
+    "LAMARRacing team photo",
+    "UPenn Autonomous Racing team photo",
+    "ForzaETH team photo",
+    "UNICORN_Racing team photo",
+    "VAUL team photo",
+    "UBM-Tom/Atlas team photo",
+    "Brake Check Buddies team photo",
+    "Scuderia Segfault team photo"
+   ]
+  },
+  "hrefs": [
+   "/",
+   "/about",
+   "/build",
+   "/learn",
+   "/race",
+   "/course",
+   "/research",
+   "/news",
+   "https://autodrive-ecosystem.github.io/",
+   "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+   "/assembly",
+   "https://www.asu.edu/",
+   "https://www.autoware.org/",
+   "https://www.binghamton.edu/",
+   "https://www.cmu.edu/",
+   "https://www.cuny.edu/",
+   "https://www.clemson.edu/",
+   "https://www.columbia.edu/",
+   "https://www.cvut.cz/en",
+   "https://duke.edu/",
+   "https://ethz.ch/en.html",
+   "https://www2.gmu.edu/",
+   "https://www.gatech.edu/",
+   "https://www.gzu.edu.cn/en/",
+   "https://www.polyu.edu.hk/en/",
+   "https://www.iitb.ac.in/",
+   "https://www.kaist.edu/",
+   "https://www.mit.edu/",
+   "https://www.nyu.edu/",
+   "https://www.berkeley.edu/",
+   "https://www.upenn.edu/",
+   "https://www.linkedin.com/posts/great-work-by-all-involved-ugcPost-7471631589169516544-ZPa-/",
+   "https://iros2026-race.roboracer.ai/registration.html",
+   "https://iros2026-race.roboracer.ai/",
+   "https://www.forzaeth.ch/",
+   "https://www.tuwien.at/inf/scuderia-segfault/",
+   "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=",
+   "https://proceedings.mlr.press/v123/o-kelly20a.html",
+   "https://doi.org/10.1002/rob.22429",
+   "https://arxiv.org/abs/2605.19881",
+   "https://doi.org/10.1109/icra55743.2025.11128227",
+   "https://doi.org/10.1109/lra.2026.3669765",
+   "https://doi.org/10.1109/icra55743.2025.11127278",
+   "https://doi.org/10.1109/iros58592.2024.10801657",
+   "https://doi.org/10.15607/rss.2025.xxi.114",
+   "https://www.linkedin.com/company/roboracer-foundation",
+   "https://www.instagram.com/roboracer.ai/",
+   "https://github.com/f1tenth",
+   "mailto:contact@roboracer.ai",
+   "https://www.linkedin.com/company/open-source-robotics-foundation",
+   "https://www.linkedin.com/posts/it-is-wild-to-see-just-how-far-the-roboracer-ugcPost-7467510093027205120-hCNe/",
+   "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+   "https://www.linkedin.com/company/knapp-ag",
+   "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+   "https://www.linkedin.com/in/dhruvjaiswal412",
+   "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+   "https://www.linkedin.com/in/manasishrekhar",
+   "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+   "https://www.linkedin.com/in/milan-manoj-7a2805279",
+   "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+   "https://www.linkedin.com/in/meghajkabra",
+   "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+   "https://www.linkedin.com/in/samir-shehadeh-2820761b4",
+   "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+   "https://www.linkedin.com/in/mateus-karvat",
+   "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+   "https://www.linkedin.com/in/kutsch",
+   "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+   "https://www.linkedin.com/company/unicorn-racing",
+   "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+   "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+   "https://www.linkedin.com/in/cedric-hollande",
+   "https://www.youtube.com/@madeautonomous"
+  ],
+  "externalNoRel": []
+ }
+}

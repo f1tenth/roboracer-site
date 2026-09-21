@@ -1,0 +1,15 @@
+# Cloudflare Worker that serves roboracer.ai's large media (the landing hero
+# clips) from the R2 bucket `roboracer-media`. Deployed with
+# `npx wrangler deploy` from this directory after `npx wrangler login`.
+# Why a worker and not the r2.dev URL: r2.dev is rate-limited and meant for
+# development; workers.dev is production traffic. roboracer.ai's DNS is at
+# Porkbun, so an R2 custom domain (which needs the zone on Cloudflare) is not
+# available without moving the zone.
+name = "roboracer-media"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+workers_dev = true
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "roboracer-media"

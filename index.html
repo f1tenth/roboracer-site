@@ -7,10 +7,30 @@
     <title>RoboRacer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preload" href="/fonts/space-grotesk-latin-500-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="root"></div>
+    <!-- The site is a client-rendered SPA with no prerender step, so with
+         JavaScript off the root stays empty. Rather than show a blank page,
+         say so and hand over the destinations that do not need us: the docs,
+         the code and the community all live on other origins. -->
+    <noscript>
+      <div style="max-width:44rem;margin:0 auto;padding:4rem 1.5rem;font-family:ui-sans-serif,system-ui,sans-serif;color:#0b0c14;line-height:1.6">
+        <h1 style="font-size:2rem;line-height:1.1;margin:0 0 1rem">RoboRacer needs JavaScript</h1>
+        <p style="margin:0 0 1.5rem;color:#3b3f55">
+          This site renders in the browser, so it cannot show you anything with JavaScript
+          turned off. Everything below works without it.
+        </p>
+        <ul style="margin:0;padding-left:1.2rem;color:#3b3f55">
+          <li><a href="https://f1tenth-coursekit.readthedocs.io/en/latest/" style="color:#0b0c14">Course material and lectures</a></li>
+          <li><a href="https://f1tenth.readthedocs.io/en/main/" style="color:#0b0c14">Build the car: bill of materials and assembly</a></li>
+          <li><a href="https://github.com/f1tenth" style="color:#0b0c14">Source code and simulator on GitHub</a></li>
+          <li><a href="https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g" style="color:#0b0c14">Join the community on Slack</a></li>
+        </ul>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

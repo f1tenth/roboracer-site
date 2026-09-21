@@ -22,3 +22,39 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# revamp tooling (appended by scripts/rr.sh setup; merge into .gitignore)
+_harvest
+_harvest/
+docs/qa/**/*.png
+public/media/**/*.mp4
+public/media/**/*.webm
+# exception approved by Cedric 2026-08-20 (CLAUDE.md rule 3): committed hero loop
+!public/media/hero/hero-fpv-loop-*.mp4
+!public/media/hero/hero-fpv-loop-*.webm
+# landing v3 (2026-08-21): curated clips under 1.5 MB each; size enforced by scripts/media.sh report
+!public/media/highlights/*.mp4
+!public/media/platform/*.mp4
+data/.discover-cache.json
+
+# python bytecode (was accidentally tracked from the harness commit)
+__pycache__/
+*.pyc
+.claude/worktrees/
+
+# impeccable live-server state
+.impeccable/live/
+.claude/agent-memory/
+.taskmap/
+# landing v4 (2026-08-22): next-race video (up to 2.5 MB, Cedric's exception) and the Join post-card clip
+!public/media/race/*.mp4
+!public/media/join/*.mp4
+
+# section 14.1: QA builds go to their own dir so a rebuild never empties the dist a preview server is serving
+dist-preview/
+
+# throwaway build dirs used for bundle measurement and QA previews
+dist-*/
+
+# stray probe files from build agents
+*.probe.tmp
