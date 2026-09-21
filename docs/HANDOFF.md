@@ -61,7 +61,7 @@ The landing is a **v1.0 draft**, not finished. In priority order:
 | `/about` | `About.tsx` | **revamped** | Ends on section 05 Videos (`videos.json`, click-to-load `YouTubeFacade`) and the shared Join block |
 | `/news` | `News.tsx` | **revamped** | Reads `news.json`; a lead item with an `embed` shows the LinkedIn post itself (`news/LinkedInEmbed.tsx`) |
 | `/research` | `Research.tsx` | **revamped** | Rebuilt in `6d566b0`; reads `publications.json`; `/add-paper` and `/discover-papers` feed it. Fix list in `docs/NON_LANDING_AUDIT.md` |
-| `/rules` | `Rules.tsx` | **revamped** | Long-form; `scripts/check-rules-drift.mjs` compares it with the published rules |
+| `/rules` | `Rules.tsx` | **old design, new text** | A `marked` viewer over `public/rules.md`, which is `rules_v3.md` from `f1tenth/roboracer_rules` `dev-2026`, byte for byte. `scripts/check-rules-drift.mjs` compares the two; `--write` refreshes the copy. Typography is still the legacy `rules.css`, not the design system. |
 | `/race` | `Race.tsx` | **revamped** | Reads `upcoming_events.json`, `past_races.json` and `events_map.json`; "N competitions since 2016" is the highest held `number` in the map, and an upcoming event past its `ends` date counts as held |
 | `/build` `/learn` `/course` | `Build.tsx`, `Learn.tsx` | see the files | `/course` redirects to `/learn` |
 | `/chat` | `Chat.tsx` | old | Unchanged this revamp |
@@ -77,6 +77,12 @@ When you build a page: one page per branch (`revamp/<page>`), `/build-page
 Read `.claude/skills/roboracer-design-system` for the full contract. The parts
 that are easy to get wrong:
 
+- **Root size follows the window.** `html { font-size: clamp(75%, 100vw / 120, 100%) }`
+  from 1024 up on mouse devices (`src/index.css`): the design was tuned on a
+  1920-wide window and read 25% too large on ordinary 1440 to 1600 laptops,
+  cutting the pinned hero. So **size everything in rem** (or vw/%), never px:
+  a px value does not shrink with the rest. Media queries ignore the root size,
+  so breakpoints do not move. QA at 1536x730 and 1366x650, not only 1440x900.
 - **Containers.** `--container-page` (1800px) is the shared page width. Use
   `<Section width="page">`, or `mx-auto max-w-page px-6` inside a `bleed`
   section. Every landing section shares that edge; a new page must too.

@@ -290,7 +290,7 @@ export default function RacePage() {
           id="race-history"
           title="Every race so far"
           subtitle="From Pittsburgh 2016 to Pittsburgh 2026"
-          lead="Every competition the series has held, with a link to the event's own page. Where a race site has gone offline the link goes to an archived copy and says so."
+          lead="Every competition so far, with a link to its site. If a site has gone offline, the link goes to an archived copy."
         />
         <RaceTimeline events={past} />
       </Section>
@@ -301,7 +301,7 @@ export default function RacePage() {
           id="race-teams"
           title="Who competes"
           subtitle="Teams racing in 2026"
-          lead="Undergraduate teams, research labs and company teams, racing the same specification. Entries still being sourced carry an unverified tag."
+          lead="Undergraduate teams, research labs and companies, all racing the same car spec. An unverified tag means we are still confirming the details."
         />
         <TeamGrid teams={teams} />
       </Section>

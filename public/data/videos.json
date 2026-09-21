@@ -1,7 +1,7 @@
 [
   {
     "id": "freshman-series",
-    "heading": "A freshman learns to drive and race",
+    "heading": "A freshman's journey: learning to drive and race",
     "poster": "/media/about/about-video-freshman-series-1200.webp",
     "width": 1200,
     "height": 675,
@@ -15,7 +15,7 @@
   },
   {
     "id": "student-view",
-    "heading": "What it looks like from the student's seat",
+    "heading": "What it looks like from the student's view",
     "poster": "/media/about/about-video-student-view-1200.webp",
     "width": 1200,
     "height": 675,
@@ -41,7 +41,7 @@
   },
   {
     "id": "icra2026-interviews",
-    "heading": "The teams at ICRA 2026, in their own words",
+    "heading": "ICRA 2026 team interviews",
     "poster": "/media/about/about-video-icra2026-interviews-1200.webp",
     "width": 1200,
     "height": 675,
@@ -55,7 +55,7 @@
   },
   {
     "id": "course-lectures",
-    "heading": "The course, lecture by lecture",
+    "heading": "The course lectures",
     "poster": "/media/about/about-video-course-lectures-640.webp",
     "width": 640,
     "height": 360,
@@ -69,7 +69,7 @@
   },
   {
     "id": "build-hardware",
-    "heading": "Build the car",
+    "heading": "Building the car",
     "poster": "/media/about/about-video-build-hardware-1200.webp",
     "width": 1200,
     "height": 675,

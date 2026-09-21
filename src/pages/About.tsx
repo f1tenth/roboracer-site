@@ -41,7 +41,7 @@ const ICRA_GROUP_PHOTO = {
   src: "/about/about-icra-group-1600.webp",
   width: 1600,
   height: 900,
-  alt: "The whole ICRA 2026 field in a group photo inside the orange-barrier track, arms raised",
+  alt: "Everyone at ICRA 2026 in a group photo inside the orange-barrier track, arms raised",
   caption: "group pic ICRA 2026",
 };
 
@@ -224,8 +224,8 @@ export default function About() {
               autonomous systems.
             </p>
             <p className="max-w-[62ch] text-body text-text-body">
-              Ninety or more universities in over twenty countries run the platform, and more than a
-              thousand publications reference it. Thirty competitions have been held since 2016. The
+              More than 90 universities in over 20 countries use the platform, and more than a
+              thousand publications reference it. There have been 30 competitions since 2016. The
               next one is at IROS 2026 in Pittsburgh, September 28 to 30.
             </p>
           </Reveal>
@@ -242,7 +242,7 @@ export default function About() {
           id="about-platform"
           title="The platform"
           subtitle="Build, Learn, Race, Research"
-          lead="Four things the project maintains. Each one has its own home on this site."
+          lead="The four parts of RoboRacer. Each has its own page."
         />
         <PlatformList rows={platform} />
       </Section>
@@ -254,7 +254,7 @@ export default function About() {
           id="about-people"
           title="People"
           subtitle="Who runs RoboRacer"
-          lead="Titles quote each person's own institutional page, or the organizing committee of the race they run. A name links to that page. Where no public page confirms a role, the card carries a verify tag instead of a guess."
+          lead="Titles come from each person's own university page, or from the organizing committee of the race they run. Click a name to go there. A verify tag means we still need to confirm the role."
         />
         <div className="flex flex-col gap-16">
           <PeopleGroup
@@ -308,7 +308,7 @@ export default function About() {
           <PeopleGroup
             id="about-past-crew"
             title="Past crew"
-            lead="Everyone on the project's earlier rosters, from the archived F1TENTH about page. Roles written there were never displayed, so each one carries a verify tag until it is confirmed."
+            lead="Everyone from earlier team rosters, taken from the old F1TENTH about page. Their roles still need confirming, hence the verify tags."
             people={PAST_CREW}
             compact
           />
@@ -322,7 +322,7 @@ export default function About() {
           id="about-partners"
           title="Our Partners"
           subtitle="The institutions that run the platform"
-          lead="Partners use RoboRacer to teach and to do research. They are not sponsors: the wall is untiered, grouped by what the institution is, and alphabetical inside each group."
+          lead="Universities, companies and organizations that teach and do research with RoboRacer. Alphabetical within each group."
           action={
             partners.length > 0 ? (
               <StatTicker value={partners.length} label="institutions" />
@@ -341,8 +341,8 @@ export default function About() {
             index="05"
             id="about-videos"
             title="Videos"
-            subtitle="Watch the cars, the teams and the course"
-            lead="A student's first season with the car, the ICRA 2026 teams in their own words, race highlights, and the lectures and build guide the course runs on."
+            subtitle="Races, teams and the course"
+            lead="A freshman's first year with the car, one-minute interviews with the ICRA 2026 teams, race highlights, the course lectures and the build guide."
           />
           <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {videos.map((v) => (

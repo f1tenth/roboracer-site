@@ -77,8 +77,7 @@ export default function Research() {
             </h1>
             <p className="mt-6 max-w-[60ch] text-lead text-text-body">
               A Google Scholar search for F1TENTH or RoboRacer returns more than a thousand results.
-              This page curates a featured set by topic and lists every paper we track. The rest is
-              one query away.
+              Here is a selection by topic, and every paper we track. The rest are one search away.
             </p>
             <div className="mt-8">
               <Button href={scholarUrl} variant="secondary" target="_blank" rel="noopener noreferrer">
