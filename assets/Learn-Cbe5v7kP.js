@@ -1,1 +1,0 @@
-import{j as t}from"./index-DS_nltXd.js";function s(){return t.jsx("div",{className:"w-full h-[100svh] pt-[68px] md:pt-[85px]",children:t.jsx("iframe",{className:"w-full h-full border-none",src:"https://f1tenth-coursekit.readthedocs.io/en/latest/",title:"F1Tenth Course Kit Documentation"})})}export{s as default};

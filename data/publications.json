@@ -56,41 +56,6 @@
   ],
   "items": [
     {
-      "id": "amine-2026-nonplanar",
-      "title": "Nonplanar Model Predictive Control for Autonomous Vehicles with Recursive Sparse Gaussian Process Dynamics",
-      "authors": [
-        "Ahmad Amine",
-        "Kabir Puri",
-        "Viet-Anh Le",
-        "Rahul Mangharam"
-      ],
-      "year": 2026,
-      "venue": "2026 IEEE Intelligent Vehicles Symposium (IV)",
-      "venue_short": "IV",
-      "type": "conference",
-      "tags": [
-        "control-mpc",
-        "sim-to-real"
-      ],
-      "featured": true,
-      "status": "published",
-      "added": "2026-08-23",
-      "source": "arxiv",
-      "doi": "10.1109/iv66570.2026.11623981",
-      "arxiv": "2602.16206",
-      "url": "https://doi.org/10.1109/iv66570.2026.11623981",
-      "pdf": "https://arxiv.org/pdf/2602.16206",
-      "abstract": "This paper proposes a nonplanar model predictive control (MPC) framework for autonomous vehicles operating on nonplanar terrain. To approximate complex vehicle dynamics in such environments, we develop a geometry-aware modeling approach that learns a residual Gaussian Process (GP). By utilizing a recursive sparse GP, the framework enables real-time adaptation to varying terrain geometry. The effectiveness of the learned model is demonstrated in a reference-tracking task using a Model Predictive Path Integral (MPPI) controller. Validation within a custom Isaac Sim environment confirms the framework's capability to maintain high tracking accuracy on challenging 3D surfaces.",
-      "institutions": [
-        "University of Pennsylvania"
-      ],
-      "notes": "added 2026-08-23 from the xLAB (Penn, Rahul Mangharam) project page https://xlab.upenn.edu/nonplanar-racing/ at Cedric's request; xLAB is the lab RoboRacer/F1TENTH came out of, so its recent racing work leads the featured set. the page gives the BibTeX (IEEE IV 2026) but no link; DOI 10.1109/iv66570.2026.11623981 from OpenAlex, arXiv 2602.16206 (\"Accepted to IEEE Intelligent Vehicles Symposium (IV), 2026\"). Abstract verbatim from the arXiv abstract page, 2026-08-23.",
-      "featured_order": 1,
-      "thumbnail": "/media/research/research-amine-2026-nonplanar-1200.webp",
-      "figure": "/media/research/research-amine-2026-nonplanar-fig-1600.webp",
-      "row_thumbnail": "/media/research/research-amine-2026-nonplanar-row-320.webp"
-    },
-    {
       "id": "zang-2026-sit",
       "title": "SIT-LMPC: Safe Information-Theoretic Learning Model Predictive Control for Iterative Tasks",
       "authors": [
@@ -123,7 +88,7 @@
         "University of Pennsylvania"
       ],
       "notes": "added 2026-08-23 from the xLAB (Penn, Rahul Mangharam) project page https://xlab.upenn.edu/SIT-LMPC/ at Cedric's request; xLAB is the lab RoboRacer/F1TENTH came out of, so its recent racing work leads the featured set. RA-L vol. 11 no. 1 (Jan 2026) pp. 986-993, presented at ICRA 2026; resolved through scripts/resolve_paper.py on DOI 10.1109/LRA.2025.3634881. Real-world experiment runs on the RoboRacer car. Cedric named this one directly.",
-      "featured_order": 2,
+      "featured_order": 1,
       "thumbnail": "/media/research/research-zang-2026-sit-1200.webp",
       "figure": "/media/research/research-zang-2026-sit-fig-1600.webp",
       "row_thumbnail": "/media/research/research-zang-2026-sit-row-320.webp"
@@ -200,10 +165,45 @@
         "University of Pennsylvania"
       ],
       "notes": "added 2026-08-23 from the xLAB (Penn, Rahul Mangharam) project page https://xlab.upenn.edu/av4ev/ at Cedric's request; xLAB is the lab RoboRacer/F1TENTH came out of, so its recent racing work leads the featured set. one-third-scale autonomous go-kart, the step up from the 1:10 RoboRacer car; resolved through scripts/resolve_paper.py on DOI 10.1109/IV55156.2024.10588611, arXiv 2312.00951 found by arXiv title search. Project site https://www.av4ev.org.",
-      "featured_order": 3,
+      "featured_order": 2,
       "thumbnail": "/media/research/research-qiao-2024-av4ev-1200.webp",
       "figure": "/media/research/research-qiao-2024-av4ev-fig-1600.webp",
       "row_thumbnail": "/media/research/research-qiao-2024-av4ev-row-320.webp"
+    },
+    {
+      "id": "amine-2026-nonplanar",
+      "title": "Nonplanar Model Predictive Control for Autonomous Vehicles with Recursive Sparse Gaussian Process Dynamics",
+      "authors": [
+        "Ahmad Amine",
+        "Kabir Puri",
+        "Viet-Anh Le",
+        "Rahul Mangharam"
+      ],
+      "year": 2026,
+      "venue": "2026 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "sim-to-real"
+      ],
+      "featured": true,
+      "status": "published",
+      "added": "2026-08-23",
+      "source": "arxiv",
+      "doi": "10.1109/iv66570.2026.11623981",
+      "arxiv": "2602.16206",
+      "url": "https://doi.org/10.1109/iv66570.2026.11623981",
+      "pdf": "https://arxiv.org/pdf/2602.16206",
+      "abstract": "This paper proposes a nonplanar model predictive control (MPC) framework for autonomous vehicles operating on nonplanar terrain. To approximate complex vehicle dynamics in such environments, we develop a geometry-aware modeling approach that learns a residual Gaussian Process (GP). By utilizing a recursive sparse GP, the framework enables real-time adaptation to varying terrain geometry. The effectiveness of the learned model is demonstrated in a reference-tracking task using a Model Predictive Path Integral (MPPI) controller. Validation within a custom Isaac Sim environment confirms the framework's capability to maintain high tracking accuracy on challenging 3D surfaces.",
+      "institutions": [
+        "University of Pennsylvania"
+      ],
+      "notes": "added 2026-08-23 from the xLAB (Penn, Rahul Mangharam) project page https://xlab.upenn.edu/nonplanar-racing/ at Cedric's request; xLAB is the lab RoboRacer/F1TENTH came out of, so its recent racing work leads the featured set. the page gives the BibTeX (IEEE IV 2026) but no link; DOI 10.1109/iv66570.2026.11623981 from OpenAlex, arXiv 2602.16206 (\"Accepted to IEEE Intelligent Vehicles Symposium (IV), 2026\"). Abstract verbatim from the arXiv abstract page, 2026-08-23.",
+      "featured_order": 3,
+      "thumbnail": "/media/research/research-amine-2026-nonplanar-1200.webp",
+      "figure": "/media/research/research-amine-2026-nonplanar-fig-1600.webp",
+      "row_thumbnail": "/media/research/research-amine-2026-nonplanar-row-320.webp"
     },
     {
       "id": "elgouhary-2026-learning",
