@@ -1,5 +1,10 @@
 # xLAB recent papers on the research page
 
+> **2026-09-21, Cedric:** `wang-2026-ai` (AI Coaching, arXiv 2606.25337) was removed from
+> `publications.json` and its three thumbnails deleted. The study runs in an FPV drone racing
+> simulator, not on RoboRacer/F1TENTH; adding it was a mistake. The rows below that mention it
+> are kept as the record of how it got in. Do not re-add it.
+
 Requested by Cedric, 2026-08-23: *"Let's analyze the xLAB recent papers like SIT-LMPC
 etc. They should be in the featured papers (or selected) both in the research page and
 in the about page, and be the first paper that comes up."* Source: the lab's own

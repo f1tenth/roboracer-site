@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-23",
+  "updated": "2026-09-21",
   "scholar_query_url": "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=",
   "tags": [
     {
@@ -56,42 +56,6 @@
   ],
   "items": [
     {
-      "id": "wang-2026-ai",
-      "title": "AI Coaching for Accelerating Human Skill Development with Reinforcement Learning",
-      "authors": [
-        "Wei Wang",
-        "Enlin Gu",
-        "Antonio Loquercio",
-        "Haimin Hu",
-        "Rahul Mangharam"
-      ],
-      "year": 2026,
-      "venue": "arXiv preprint",
-      "venue_short": "arXiv",
-      "type": "preprint",
-      "tags": [
-        "reinforcement-learning",
-        "multi-agent",
-        "sim-to-real"
-      ],
-      "featured": true,
-      "status": "published",
-      "added": "2026-08-23",
-      "source": "arxiv",
-      "arxiv": "2606.25337",
-      "url": "https://arxiv.org/abs/2606.25337",
-      "pdf": "https://arxiv.org/pdf/2606.25337",
-      "abstract": "AI copilots can substantially boost human performance through shared control, but excessive assistance can induce over-reliance and skill atrophy. This paper studies how an embodied AI agent can act as a coach that accelerates human motor-skill development. We argue that effective coaching requires strategic scaffolding and stepping back that are aligned with the learner's capability, allowing productive failures that drive learning. We formalize the interactive AI coaching process as a non-cooperative dynamic game in which the learner optimizes task performance while the coach targets the learner's independent competence. Building on this formalism, we develop a reinforcement learning framework combining adaptive shared control with probabilistic models of the coach's causal influence on skill evolution, enabling tractable training of coaching policies. A comprehensive user study with 33 participants in a high-fidelity FPV drone racing simulator shows that learners coached by our method reduce lap time by 27.9% and per-lap failures by 3.52 on average, outperforming two shared-autonomy baselines on both objective performance and subjective ratings of safety, performance, agency and satisfaction.",
-      "institutions": [
-        "University of Pennsylvania"
-      ],
-      "notes": "added 2026-08-23 from the xLAB (Penn, Rahul Mangharam) project page https://xlab.upenn.edu/AI-Coaching/ at Cedric's request; xLAB is the lab RoboRacer/F1TENTH came out of, so its recent racing work leads the featured set. the project page carries no paper link; matched to arXiv 2606.25337 on identical abstract, title and author list (Wang, Gu, Loquercio, Hu, Mangharam). Metadata and abstract verbatim from the arXiv abstract page, 2026-08-23. Cedric named this one directly.",
-      "featured_order": 1,
-      "thumbnail": "/media/research/research-wang-2026-ai-1200.webp",
-      "figure": "/media/research/research-wang-2026-ai-fig-1600.webp",
-      "row_thumbnail": "/media/research/research-wang-2026-ai-row-320.webp"
-    },
-    {
       "id": "amine-2026-nonplanar",
       "title": "Nonplanar Model Predictive Control for Autonomous Vehicles with Recursive Sparse Gaussian Process Dynamics",
       "authors": [
@@ -121,7 +85,7 @@
         "University of Pennsylvania"
       ],
       "notes": "added 2026-08-23 from the xLAB (Penn, Rahul Mangharam) project page https://xlab.upenn.edu/nonplanar-racing/ at Cedric's request; xLAB is the lab RoboRacer/F1TENTH came out of, so its recent racing work leads the featured set. the page gives the BibTeX (IEEE IV 2026) but no link; DOI 10.1109/iv66570.2026.11623981 from OpenAlex, arXiv 2602.16206 (\"Accepted to IEEE Intelligent Vehicles Symposium (IV), 2026\"). Abstract verbatim from the arXiv abstract page, 2026-08-23.",
-      "featured_order": 2,
+      "featured_order": 1,
       "thumbnail": "/media/research/research-amine-2026-nonplanar-1200.webp",
       "figure": "/media/research/research-amine-2026-nonplanar-fig-1600.webp",
       "row_thumbnail": "/media/research/research-amine-2026-nonplanar-row-320.webp"
@@ -159,7 +123,7 @@
         "University of Pennsylvania"
       ],
       "notes": "added 2026-08-23 from the xLAB (Penn, Rahul Mangharam) project page https://xlab.upenn.edu/SIT-LMPC/ at Cedric's request; xLAB is the lab RoboRacer/F1TENTH came out of, so its recent racing work leads the featured set. RA-L vol. 11 no. 1 (Jan 2026) pp. 986-993, presented at ICRA 2026; resolved through scripts/resolve_paper.py on DOI 10.1109/LRA.2025.3634881. Real-world experiment runs on the RoboRacer car. Cedric named this one directly.",
-      "featured_order": 3,
+      "featured_order": 2,
       "thumbnail": "/media/research/research-zang-2026-sit-1200.webp",
       "figure": "/media/research/research-zang-2026-sit-fig-1600.webp",
       "row_thumbnail": "/media/research/research-zang-2026-sit-row-320.webp"
@@ -236,7 +200,7 @@
         "University of Pennsylvania"
       ],
       "notes": "added 2026-08-23 from the xLAB (Penn, Rahul Mangharam) project page https://xlab.upenn.edu/av4ev/ at Cedric's request; xLAB is the lab RoboRacer/F1TENTH came out of, so its recent racing work leads the featured set. one-third-scale autonomous go-kart, the step up from the 1:10 RoboRacer car; resolved through scripts/resolve_paper.py on DOI 10.1109/IV55156.2024.10588611, arXiv 2312.00951 found by arXiv title search. Project site https://www.av4ev.org.",
-      "featured_order": 4,
+      "featured_order": 3,
       "thumbnail": "/media/research/research-qiao-2024-av4ev-1200.webp",
       "figure": "/media/research/research-qiao-2024-av4ev-fig-1600.webp",
       "row_thumbnail": "/media/research/research-qiao-2024-av4ev-row-320.webp"
@@ -271,7 +235,7 @@
       "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; featured 2026-08-21: 2025-2026 pool ranked by citations, recency first; 2 citations on Semantic Scholar 2026-08-21; abstract verbatim from the arXiv API (2602.18386v1), 2026-08-22; landing v5 featured_order 5, 2026-08-22; featured_order shifted +5 on 2026-08-23 so the xLAB papers lead",
       "thumbnail": "/media/research/research-elgouhary-2026-learning-1200.webp",
       "figure": "/media/research/research-elgouhary-2026-learning-fig-1600.webp",
-      "featured_order": 9,
+      "featured_order": 8,
       "row_thumbnail": "/media/research/research-elgouhary-2026-learning-row-320.webp"
     },
     {
@@ -862,7 +826,7 @@
       "citations": 0,
       "thumbnail": "/media/research/research-piccinini-2026-trajectory-1200.webp",
       "figure": "/media/research/research-piccinini-2026-trajectory-fig-1600.webp",
-      "featured_order": 7,
+      "featured_order": 6,
       "row_thumbnail": "/media/research/research-piccinini-2026-trajectory-row-320.webp"
     },
     {
@@ -965,7 +929,7 @@
       "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; featured 2026-08-21: 2025-2026 pool ranked by citations (6 on Semantic Scholar), recency first; abstract verbatim from the arXiv API (2410.11570v3), 2026-08-22; landing v5 featured_order 4, 2026-08-22; featured_order shifted +5 on 2026-08-23 so the xLAB papers lead",
       "thumbnail": "/media/research/research-li-2025-data-1200.webp",
       "figure": "/media/research/research-li-2025-data-fig-1600.webp",
-      "featured_order": 8,
+      "featured_order": 7,
       "row_thumbnail": "/media/research/research-li-2025-data-row-320.webp"
     },
     {
@@ -1036,7 +1000,7 @@
       "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; featured 2026-08-21: 2025-2026 pool ranked by citations, recency first; abstract verbatim from the arXiv API (2501.17311v2), 2026-08-22; landing v5 featured_order 6, 2026-08-22; featured_order shifted +5 on 2026-08-23 so the xLAB papers lead",
       "thumbnail": "/media/research/research-ghignone-2025-rlpp-1200.webp",
       "figure": "/media/research/research-ghignone-2025-rlpp-fig-1600.webp",
-      "featured_order": 10,
+      "featured_order": 9,
       "row_thumbnail": "/media/research/research-ghignone-2025-rlpp-row-320.webp"
     },
     {
@@ -1199,7 +1163,7 @@
       "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand; arXiv id found by title on the arXiv API, 2026-08-22; abstract verbatim from the arXiv API (2505.03830v1), 2026-08-22; landing v5 featured_order 8, 2026-08-22; featured_order shifted +5 on 2026-08-23 so the xLAB papers lead",
       "arxiv": "2505.03830",
       "figure": "/media/research/research-feng-2025-bridging-fig-1600.webp",
-      "featured_order": 12,
+      "featured_order": 11,
       "thumbnail": "/media/research/research-feng-2025-bridging-1200.webp",
       "row_thumbnail": "/media/research/research-feng-2025-bridging-row-320.webp"
     },
@@ -2328,7 +2292,7 @@
       "arxiv": "2403.07129",
       "url": "https://doi.org/10.1109/iros58592.2024.10801657",
       "figure": "/media/research/research-trumpp-2024-racemop-fig-1200.webp",
-      "featured_order": 11,
+      "featured_order": 10,
       "abstract": "The interactive decision-making in multi-agent autonomous racing offers insights valuable beyond the domain of self-driving cars. Mapless online path planning is particularly of practical appeal but poses a challenge for safely overtaking opponents due to the limited planning horizon. To address this, we introduce RaceMOP, a novel method for mapless online path planning designed for multi-agent racing of F1TENTH cars. Unlike classical planners that rely on predefined racing lines, RaceMOP operates without a map, utilizing only local observations to execute high-speed overtaking maneuvers. Our approach combines an artificial potential field method as a base policy with residual policy learning to enable long-horizon planning. We advance the field by introducing a novel approach for policy fusion with the residual policy directly in probability space. Extensive experiments on twelve simulated racetracks validate that RaceMOP is capable of long-horizon decision-making with robust collision avoidance during overtaking maneuvers. RaceMOP demonstrates superior handling over existing mapless planners and generalizes to unknown racetracks, affirming its potential for broader applications in robotics. Our code is available at http://github.com/raphajaner/racemop.",
       "doi": "10.1109/iros58592.2024.10801657",
       "pdf": "https://arxiv.org/pdf/2403.07129",
@@ -2754,7 +2718,7 @@
       "arxiv": "2403.11784",
       "url": "https://doi.org/10.1002/rob.22429",
       "figure": "/media/research/research-baumann-2024-forzaeth-fig-1600.webp",
-      "featured_order": 6,
+      "featured_order": 5,
       "abstract": "Autonomous racing in robotics combines high-speed dynamics with the necessity for reliability and real-time decision-making. While such racing pushes software and hardware to their limits, many existing full-system solutions necessitate complex, custom hardware and software, and usually focus on Time-Trials rather than full unrestricted Head-to-Head racing, due to financial and safety constraints. This limits their reproducibility, making advancements and replication feasible mostly for well-resourced laboratories with comprehensive expertise in mechanical, electrical, and robotics fields. Researchers interested in the autonomy domain but with only partial experience in one of these fields, need to spend significant time with familiarization and integration. The ForzaETH Race Stack addresses this gap by providing an autonomous racing software platform designed for F1TENTH, a 1:10 scaled Head-to-Head autonomous racing competition, which simplifies replication by using commercial off-the-shelf hardware. This approach enhances the competitive aspect of autonomous racing and provides an accessible platform for research and development in the field. The ForzaETH Race Stack is designed with modularity and operational ease of use in mind, allowing customization and adaptability to various environmental conditions, such as track friction and layout. Capable of handling both Time-Trials and Head-to-Head racing, the stack has demonstrated its effectiveness, robustness, and adaptability in the field by winning the official F1TENTH international competition multiple times.",
       "doi": "10.1002/rob.22429",
       "pdf": "https://arxiv.org/pdf/2403.11784",
@@ -3719,7 +3683,7 @@
       "pdf": "https://proceedings.mlr.press/v123/o-kelly20a/o-kelly20a.pdf",
       "thumbnail": "/media/research/research-okelly-2020-f1tenth-1200.webp",
       "figure": "/media/research/research-okelly-2020-f1tenth-fig-1600.webp",
-      "featured_order": 5,
+      "featured_order": 4,
       "abstract": "The deployment and evaluation of learning algorithms on autonomous vehicles (AV) is expensive, slow, and potentially unsafe. This paper details the F1TENTH autonomous racing platform, an open-source evaluation framework for training, testing, and evaluating autonomous systems. With 1/10th-scale low-cost hardware and multiple virtual environments, F1TENTH enables safe and rapid experimentation of AV algorithms even in laboratory research settings. We present three benchmark tasks and baselines in the setting of autonomous racing, demonstrating the flexibility and features of our evaluation environment.",
       "row_thumbnail": "/media/research/research-okelly-2020-f1tenth-row-320.webp"
     },

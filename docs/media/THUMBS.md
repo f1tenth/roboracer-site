@@ -14,8 +14,6 @@ survives re-runs). Credit line on the site: "Figure: <first author> et al."
 
 | id | file | source | license | bytes | review |
 |---|---|---|---|---|---|
-| wang-2026-ai | research-wang-2026-ai-1200.webp | arXiv HTML figure 1: https://arxiv.org/html/2606.25337v1/figures/traj.png | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 84306 |  |
-| wang-2026-ai | research-wang-2026-ai-fig-1600.webp | arXiv HTML figure 5: https://arxiv.org/html/2606.25337v1/figures/plots/simulation-overview.png | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 26050 |  |
 | amine-2026-nonplanar | research-amine-2026-nonplanar-1200.webp | xLAB project-page hero (the authors' own choice), figure 2 of the paper: https://xlab.upenn.edu/img/posts/nonplanar_racing/IsaacSim_resize.png | http://creativecommons.org/licenses/by/4.0/ (arXiv 2602.16206) | 118198 | checked 2026-08-23: Isaac Sim nonplanar track with the car; replaced the script's PDF page-1 crop and the 390 px trajectory plot, both too weak. Letterboxed on paper-50. |
 | amine-2026-nonplanar | research-amine-2026-nonplanar-fig-1600.webp | xLAB project-page hero (the authors' own choice), figure 2 of the paper: https://xlab.upenn.edu/img/posts/nonplanar_racing/IsaacSim_resize.png | http://creativecommons.org/licenses/by/4.0/ (arXiv 2602.16206) | 197776 | checked 2026-08-23: same hero at 1600x1000. |
 | zang-2026-sit | research-zang-2026-sit-1200.webp | arXiv HTML figure 1: https://arxiv.org/html/2602.16187v1/imgs/title/flow_diagram2.png | http://creativecommons.org/licenses/by/4.0/ | 36026 |  |
@@ -24,7 +22,6 @@ survives re-runs). Credit line on the site: "Figure: <first author> et al."
 | le-2025-hybrid | research-le-2025-hybrid-fig-1600.webp | arXiv HTML figure 1: https://arxiv.org/html/2511.19383v2/model.png | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 51140 |  |
 | qiao-2024-av4ev | research-qiao-2024-av4ev-1200.webp | arXiv HTML figure 4: https://arxiv.org/html/2312.00951v2/media/optimal_raceline.jpg | http://creativecommons.org/licenses/by-nc-sa/4.0/ | 96554 | checked 2026-08-23: the raceline optimisation at the Purdue Grand Prix track reads better at card size than the figure-1 mechatronics diagram; re-encoded from the 1600 figure to stay under 120 KB. |
 | qiao-2024-av4ev | research-qiao-2024-av4ev-fig-1600.webp | arXiv HTML figure 4: https://arxiv.org/html/2312.00951v2/media/optimal_raceline.jpg | http://creativecommons.org/licenses/by-nc-sa/4.0/ | 181654 |  |
-| wang-2026-ai | research-wang-2026-ai-row-320.webp | downscaled from research-wang-2026-ai-fig-1600.webp | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 4032 |  |
 | amine-2026-nonplanar | research-amine-2026-nonplanar-row-320.webp | downscaled from research-amine-2026-nonplanar-fig-1600.webp | http://creativecommons.org/licenses/by/4.0/ (arXiv 2602.16206) | 6596 |  |
 | zang-2026-sit | research-zang-2026-sit-row-320.webp | downscaled from research-zang-2026-sit-fig-1600.webp | http://creativecommons.org/licenses/by/4.0/ | 23202 |  |
 | le-2025-hybrid | research-le-2025-hybrid-row-320.webp | downscaled from research-le-2025-hybrid-fig-1600.webp | http://arxiv.org/licenses/nonexclusive-distrib/1.0/ | 7234 |  |
