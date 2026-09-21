@@ -30,8 +30,9 @@ const LAND_STROKE = "#1e3a48";
 const ASPECT = VB_W / VB_H;
 // Everything around the map inside the pinned viewport (nav 85, header row,
 // gaps, counters row, paddings) at md and up; the map is capped so the
-// chapter never overflows the viewport and grows with the screen.
-const CHROME_PX = 356;
+// chapter never overflows the viewport and grows with the screen. In rem,
+// because that chrome is: it shrinks with the fluid root size (index.css).
+const CHROME_REM = 22.25;
 
 // Scale statements from the content skill (kept until Rahul answers).
 // Competitions carry a "+" (Cedric, 2026-08-22: "it's 30+ competitions").
@@ -452,7 +453,7 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
   const chapterVars = {
     // Floor: on a short viewport (landscape phone) the height-driven cap
     // would leave a sliver, so the width takes over below 420px.
-    "--map-max": `max(420px, calc((100svh - ${CHROME_PX}px) * ${ASPECT.toFixed(4)}))`,
+    "--map-max": `max(26.25rem, calc((100svh - ${CHROME_REM}rem) * ${ASPECT.toFixed(4)}))`,
   } as CSSProperties;
 
   const svg = (
@@ -691,7 +692,7 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
   const layout = (
     <div className="mx-auto w-full max-w-page px-6">
       {header}
-      <div className="mt-4 md:mt-5 xl:grid xl:grid-cols-[minmax(0,1fr)_280px] xl:items-center xl:gap-10">
+      <div className="mt-4 md:mt-5 xl:grid xl:grid-cols-[minmax(0,1fr)_17.5rem] xl:items-center xl:gap-10">
         <div className="mx-auto w-full md:max-w-[min(var(--map-max),100%)]">{svg}</div>
         {ticker}
       </div>
@@ -719,7 +720,7 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
     <section aria-labelledby="community-title" className={`bg-paper-50 text-text-body ${className}`} style={chapterVars}>
       <div ref={wrapRef} data-map-chapter style={{ height: `${HEIGHT_VH}vh` }}>
         {/* Centered in the viewport below the fixed nav (68 / 85 px measured). */}
-        <div className="sticky top-0 flex min-h-svh flex-col justify-center pb-6 pt-[calc(68px+1rem)] md:pt-[calc(85px+1rem)]">
+        <div className="sticky top-0 flex min-h-svh flex-col justify-center pb-6 pt-[calc(4.25rem+1rem)] md:pt-[calc(5.3125rem+1rem)]">
           {layout}
         </div>
       </div>

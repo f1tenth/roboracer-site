@@ -60,7 +60,7 @@ export default function Research() {
   const trimmed = query.trim();
 
   return (
-    <div className="pt-[68px] md:pt-[85px]">
+    <div className="pt-[4.25rem] md:pt-[5.3125rem]">
       {/* Header: the Scholar message, one secondary CTA, a mono data ledger */}
       <Section width="page" aria-labelledby="research-title">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
@@ -77,8 +77,7 @@ export default function Research() {
             </h1>
             <p className="mt-6 max-w-[60ch] text-lead text-text-body">
               A Google Scholar search for F1TENTH or RoboRacer returns more than a thousand results.
-              This page curates a featured set by topic and lists every paper we track. The rest is
-              one query away.
+              Here is a selection by topic, and every paper we track. The rest are one search away.
             </p>
             <div className="mt-8">
               <Button href={scholarUrl} variant="secondary" target="_blank" rel="noopener noreferrer">

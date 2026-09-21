@@ -19,10 +19,10 @@ export const RACE_PHOTOS: Record<string, string> = {
     "A competitor leaning over the barrier to reach a car on the carpeted track, conference banners behind",
   esweek2018: "Competitors standing behind the track barrier with their arms raised at the end of the race",
   cpsiot2019: "A RoboRacer car on an outdoor asphalt track beside a red and white kerb",
-  columbia2019: "The field of competitors in a group photo behind a row of cars on the floor",
-  icra2025: "The ICRA 2025 field in a group photo on the hall floor, teams holding their cars up",
+  columbia2019: "All the competitors in a group photo behind a row of cars on the floor",
+  icra2025: "Everyone at ICRA 2025 in a group photo on the hall floor, teams holding their cars up",
   iccas2025: "A large group of competitors gathered inside the taped track in the exhibition hall",
-  icra2026: "The whole ICRA 2026 field in a group photo inside the orange-barrier track, arms raised",
+  icra2026: "Everyone at ICRA 2026 in a group photo inside the orange-barrier track, arms raised",
   iv2026: "Competitors holding a checkered flag behind the barriers, their cars lined up in front",
 };
 

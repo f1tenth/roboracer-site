@@ -20,8 +20,8 @@ export default function SponsorCTA({ on = "paper" }: SponsorCTAProps) {
         </h3>
         <p className={`mt-4 max-w-[55ch] text-body ${ink ? "text-text-on-ink-muted" : "text-text-body"}`}>
           RoboRacer races run at the major robotics conferences, in front of the
-          teams and labs that build the field. Back the next competition and
-          reach them directly.
+          students, labs and companies working on autonomous driving. Back the
+          next competition and reach them directly.
         </p>
       </div>
       <div className="flex items-end md:col-span-5 md:justify-end">

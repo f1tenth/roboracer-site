@@ -164,7 +164,7 @@ export default function CommunityJoin({ className = "", index = "09", showYouTub
 }
 
 /** Strip card width: 320 under md, 360 from md (the marquee sets the gaps). */
-const STRIP_CARD = "w-[320px] shrink-0 md:w-[360px]";
+const STRIP_CARD = "w-[20rem] shrink-0 md:w-[22.5rem]";
 
 /** Month and year of a post: "Jun 2026". */
 function postDate(iso?: string): string {

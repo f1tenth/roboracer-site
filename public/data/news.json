@@ -2,12 +2,12 @@
   "updated": "2026-09-21",
   "items": [
     {
-      "id": "ifac2026-busan-largest-field",
+      "id": "ifac2026-busan-largest-race",
       "date": "2026-09-12",
       "date_display": "Sep 12, 2026",
       "date_precision": "day",
-      "title": "274 racers and 56 teams in Busan: the largest field in RoboRacer history",
-      "excerpt": "The 29th RoboRacer Autonomous Racing Competition ran August 24 to 27, 2026 at BEXCO in Busan, at the IFAC World Congress. Every team built its own car. InTheEND took first place and DDRX second; SMOC and 4D-REPUBLIC reached the semi-finals.",
+      "title": "274 racers and 56 teams in Busan: the largest race in RoboRacer history",
+      "excerpt": "The 29th RoboRacer Autonomous Racing Competition ran August 24 to 27, 2026 at BEXCO in Busan, during the IFAC World Congress. Every team built its own car. InTheEND won, DDRX came second, and SMOC and 4D-REPUBLIC reached the semi-finals.",
       "kind": "post",
       "event": "ifac2026",
       "link": "https://www.linkedin.com/posts/roboracer-foundation_ifac2026-roboracer-autonomousracing-activity-7504332939330048000-EW0F",
@@ -20,7 +20,7 @@
         "src": "/media/news/news-ifac2026-group-1080.webp",
         "width": 1080,
         "height": 531,
-        "alt": "The whole IFAC 2026 field, arms raised, in front of the 29th RoboRacer Autonomous Racing Competition screen and banners at BEXCO in Busan."
+        "alt": "Everyone at IFAC 2026, arms raised, in front of the 29th RoboRacer Autonomous Racing Competition screen and banners at BEXCO in Busan."
       },
       "stats": [
         {
@@ -51,7 +51,7 @@
         "label": "Full results",
         "href": "https://2026ifac-roboracer.com/en/results.html"
       },
-      "sources": "Counts (274 racers, 56 teams, four days, largest field in RoboRacer history): the Foundation's own post, slide 1, 2026-09-12. Placings: 2026ifac-roboracer.com/en/results.html, read 2026-09-21. Requested by Cedric 2026-09-21.",
+      "sources": "Counts (274 racers, 56 teams, four days, the post says \"the largest field in RoboRacer history\"; Cedric, 2026-09-21: say race, not field): the Foundation's own post, slide 1, 2026-09-12. Placings: 2026ifac-roboracer.com/en/results.html, read 2026-09-21. Requested by Cedric 2026-09-21.",
       "featured": true,
       "status": "published"
     },

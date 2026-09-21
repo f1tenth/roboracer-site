@@ -246,9 +246,9 @@ export default function Landing() {
                     target="_blank"
                     rel="noopener noreferrer"
                     tabIndex={clone ? -1 : undefined}
-                    className="group relative flex h-[60px] w-auto shrink-0 flex-col items-center justify-start md:h-[104px]"
+                    className="group relative flex h-[3.75rem] w-auto shrink-0 flex-col items-center justify-start md:h-[6.5rem]"
                   >
-                    <span className="relative flex h-[34px] items-center md:h-[72px]">
+                    <span className="relative flex h-[2.125rem] items-center md:h-[4.5rem]">
                       <img
                         src={p.image_rest ?? p.image}
                         alt={p.name}
@@ -258,7 +258,7 @@ export default function Landing() {
                         loading="eager"
                         fetchPriority="low"
                         decoding="async"
-                        className="max-h-[34px] w-auto max-w-28 object-contain md:max-h-[72px] md:max-w-[202px]"
+                        className="max-h-[2.125rem] w-auto max-w-28 object-contain md:max-h-[4.5rem] md:max-w-[12.625rem]"
                       />
                       {p.image_hover && (
                         <img
@@ -270,7 +270,7 @@ export default function Landing() {
                           loading="eager"
                           fetchPriority="low"
                           decoding="async"
-                          className="absolute inset-0 m-auto max-h-[34px] w-auto max-w-28 object-contain opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100 md:max-h-[72px] md:max-w-[202px]"
+                          className="absolute inset-0 m-auto max-h-[2.125rem] w-auto max-w-28 object-contain opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100 md:max-h-[4.5rem] md:max-w-[12.625rem]"
                         />
                       )}
                     </span>

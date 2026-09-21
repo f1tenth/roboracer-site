@@ -10,13 +10,62 @@
      stylesheet quietly defeats `list-none`, `pl-0` and friends. In
      @layer components the utilities win, base still loses. */
 @layer components {
+  .rules-source {
+    max-width: 68ch;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Section numbers, as the ruleset's own stylesheet draws them: "3." on a
+     section, "3.2." on a subsection, "a." on a sub-subsection. Subsection
+     counters restart with counter-set, not counter-reset: Chrome keeps
+     counting across sections otherwise (13.6, 13.7 instead of 13.1, 13.2). */
+  .rules-body {
+    counter-reset: h2 h3 h4;
+  }
+
+  .rules-body h2 {
+    counter-set: h3 0;
+  }
+
+  .rules-body h2::before {
+    counter-increment: h2;
+    content: counter(h2) ". ";
+  }
+
+  .rules-body h3 {
+    counter-set: h4 0;
+  }
+
+  .rules-body h3::before {
+    counter-increment: h3;
+    content: counter(h2) "." counter(h3) ". ";
+  }
+
+  .rules-body h4::before {
+    counter-increment: h4;
+    content: counter(h4, lower-alpha) ". ";
+  }
+
+  /* A link to a section lands below the fixed nav, not under it. */
+  .rules-body :is(h1, h2, h3, h4, a[id]) {
+    scroll-margin-top: 7rem;
+  }
+
+  /* The document puts each section's anchor under its heading, so the anchor
+     needs the heading's height on top of the nav's. */
+  .rules-body a[id] {
+    display: block;
+    scroll-margin-top: 11rem;
+  }
+
   .rules h1 {
     font-family: "Space Grotesk", serif;
     font-size: 2rem;
     font-weight: 700;
     line-height: 110%;
-    padding-top: 20px;
-    padding-bottom: 10px;
+    padding-top: 1.25rem;
+    padding-bottom: 0.625rem;
   }
 
   .rules h2 {
@@ -24,9 +73,9 @@
     font-size: 1.75rem;
     font-weight: 600;
     line-height: 110%;
-    color: #fc00ff;
-    padding-top: 15px;
-    padding-bottom: 10px;
+    color: var(--color-rr-violet-deep);
+    padding-top: 2rem;
+    padding-bottom: 0.625rem;
   }
 
   .rules h3 {
@@ -34,6 +83,8 @@
     font-size: 1.5rem;
     font-weight: 500;
     line-height: 110%;
+    padding-top: 1.25rem;
+    padding-bottom: 0.5rem;
   }
 
   .rules h4 {
@@ -41,6 +92,8 @@
     font-size: 1.25rem;
     font-weight: 500;
     line-height: 110%;
+    padding-top: 1rem;
+    padding-bottom: 0.375rem;
   }
 
   .rules h5 {
@@ -53,21 +106,38 @@
     font-family: "Manrope", serif;
     font-size: 1rem;
     font-weight: 400;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
+  }
+
+  .rules-body p,
+  .rules-body li {
+    max-width: 90ch;
   }
 
   .rules ol,
   .rules ul {
-    padding-left: 20px;
-    margin-bottom: 10px;
+    padding-left: 1.25rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .rules ul {
+    list-style-type: disc;
+  }
+
+  .rules ul ul {
+    list-style-type: circle;
   }
 
   .rules li {
-    margin-bottom: 5px;
+    margin-bottom: 0.3125rem;
   }
 
-  /* The rulebook's nested lists, previously injected as a raw <style> block
-     through public/rules.md. */
+  .rules li > ul,
+  .rules li > ol {
+    margin-top: 0.3125rem;
+    margin-bottom: 0;
+  }
+
   .rules ol {
     list-style-type: lower-alpha;
   }
@@ -77,12 +147,47 @@
     list-style-type: lower-roman;
   }
 
+  /* The draft marks its changes with inline red and orange text. Neither is a
+     site colour and orange on paper fails contrast, so both read as one quiet
+     highlight instead; !important is what it takes to beat an inline style. */
+  .rules mark,
+  .rules-body span[style*="color"] {
+    color: inherit !important;
+    background: color-mix(in oklab, var(--color-rr-violet) 14%, transparent);
+    border-radius: 2px;
+    padding: 0 0.15em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  .rules table {
+    border-collapse: collapse;
+    margin-bottom: 0.625rem;
+  }
+
+  .rules th,
+  .rules td {
+    border: 1px solid rgb(11 12 20 / 0.15);
+    padding: 0.375rem 0.75rem;
+    text-align: left;
+  }
+
+  /* Site-wide link contract: ink text, hairline underline, violet on hover. */
+  /* The legend sample sits in the muted source line; muted on the tint is
+     4.38:1, so it takes the strong ink. */
+  .rules mark {
+    color: var(--color-text-strong) !important;
+  }
+
   .rules a {
-    color: #0073e6;
-    text-decoration: none;
+    color: var(--color-text-strong);
+    text-decoration: underline;
+    text-decoration-color: rgb(11 12 20 / 0.25);
+    text-underline-offset: 4px;
   }
 
   .rules a:hover {
-    text-decoration: underline;
+    text-decoration-color: var(--color-rr-violet);
+    text-decoration-thickness: 2px;
   }
 }

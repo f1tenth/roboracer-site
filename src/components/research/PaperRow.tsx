@@ -28,7 +28,7 @@ function RowThumb({ publication }: { publication: Publication }) {
   const [failed, setFailed] = useState(false);
   const show = figure && !failed;
   return (
-    <div className="w-[120px] shrink-0 overflow-hidden rounded-media border border-ink-950/10 bg-paper-100 sm:w-[168px] md:w-[224px] lg:w-[320px]">
+    <div className="w-[7.5rem] shrink-0 overflow-hidden rounded-media border border-ink-950/10 bg-paper-100 sm:w-[10.5rem] md:w-[14rem] lg:w-[20rem]">
       <div className="relative aspect-[16/10]">
         {show ? (
           <img

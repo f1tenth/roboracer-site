@@ -76,7 +76,7 @@ export default function News() {
   const selected = events.find((e) => e.id === tag);
 
   return (
-    <div className="pt-[68px] md:pt-[85px]">
+    <div className="pt-[4.25rem] md:pt-[5.3125rem]">
       {/* Masthead: what the page is, the ledger, and the lead story */}
       <Section width="page" aria-labelledby="news-title">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
@@ -89,7 +89,7 @@ export default function News() {
               id="news-title"
               className="max-w-[18ch] font-display text-display-xl font-semibold text-text-strong"
             >
-              What the teams have been racing
+              News from the races
             </h1>
             <p className="mt-6 max-w-[60ch] text-lead text-text-body">
               Race reports, results and posts from the teams who build and run the cars.
@@ -155,8 +155,8 @@ export default function News() {
           <SectionHeader
             eyebrow="Archive"
             id="all-news"
-            title="Every year so far"
-            lead="Every item we have, newest first."
+            title="All news, by year"
+            lead="Newest first."
           />
           {events.length > 1 && (
             <TagFilter
@@ -171,8 +171,7 @@ export default function News() {
           </p>
           {filtered.length === 0 ? (
             <p className="mt-6 max-w-[60ch] text-body text-text-body">
-              Nothing from {selected?.label ?? "that competition"} is in the archive yet. The lead
-              story above and the other competitions cover the rest of the season.
+              Nothing from {selected?.label ?? "that competition"} yet.
             </p>
           ) : (
             <div className="mt-6 divide-y divide-ink-950/10 border-t border-ink-950/10">

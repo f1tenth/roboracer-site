@@ -128,7 +128,7 @@ export default function RacePage() {
   return (
     <>
       {/* Hero: the next race, not a page title over an empty band. */}
-      <Section variant="ink" width="bleed" className="pt-[88px] md:pt-[105px]">
+      <Section variant="ink" width="bleed" className="pt-[5.5rem] md:pt-[6.5625rem]">
         <div className="mx-auto max-w-page px-6">
           <div className="max-w-3xl">
             <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-on-ink-muted">
@@ -181,7 +181,7 @@ export default function RacePage() {
                 a little under the panel's real height at every width we
                 render, so it shrinks the jump without leaving a gap once the
                 panel is in. */}
-            <div className={`md:col-span-5${race ? "" : " min-h-[640px]"}`}>
+            <div className={`md:col-span-5${race ? "" : " min-h-[40rem]"}`}>
               {race && (
                 <NextRaceSpotlight
                   on="ink"
@@ -290,7 +290,7 @@ export default function RacePage() {
           id="race-history"
           title="Every race so far"
           subtitle="From Pittsburgh 2016 to Pittsburgh 2026"
-          lead="Every competition the series has held, with a link to the event's own page. Where a race site has gone offline the link goes to an archived copy and says so."
+          lead="Every competition so far, with a link to its site. If a site has gone offline, the link goes to an archived copy."
         />
         <RaceTimeline events={past} />
       </Section>
@@ -301,7 +301,7 @@ export default function RacePage() {
           id="race-teams"
           title="Who competes"
           subtitle="Teams racing in 2026"
-          lead="Undergraduate teams, research labs and company teams, racing the same specification. Entries still being sourced carry an unverified tag."
+          lead="Undergraduate teams, research labs and companies, all racing the same car spec. An unverified tag means we are still confirming the details."
         />
         <TeamGrid teams={teams} />
       </Section>
