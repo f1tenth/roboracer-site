@@ -131,8 +131,10 @@ export default function Navbar() {
 
   // The open menu behaves as a dialog on a phone (mobile audit CHROME-02):
   // the page under it neither scrolls nor takes focus (`inert` on everything
-  // beside the nav, so Tab stays in the bar and the menu), Escape closes it
-  // and hands focus back to the toggle, and so does a tap on the scrim.
+  // beside the nav), Tab and Shift+Tab loop over the bar and the menu (inert
+  // alone let Tab leave the last link for the browser's own controls),
+  // Escape closes it and hands focus back to the toggle, and so does a tap
+  // on the scrim.
   // Widening the window past the toggle closes it too, so the lock can never
   // outlive a menu that is no longer shown. The shared scroll lock stops the
   // page's own scrolling as well (lib/motion: Lenis, the hero's glide).
@@ -153,9 +155,26 @@ export default function Navbar() {
     for (const el of inerted) el.inert = true;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== "Escape") return;
-      setMenuOpen(false);
-      toggleRef.current?.focus();
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        toggleRef.current?.focus();
+        return;
+      }
+      if (event.key !== "Tab" || !nav) return;
+      // Every stop that is shown: the desktop link bar and the menu's own
+      // "Start here" are display: none at the sizes that do not use them.
+      const stops = Array.from(nav.querySelectorAll<HTMLElement>("a[href], button:not([disabled])")).filter(
+        (el) => el.getClientRects().length > 0,
+      );
+      if (stops.length === 0) return;
+      const first = stops[0];
+      const last = stops[stops.length - 1];
+      const current = document.activeElement;
+      const inside = current instanceof HTMLElement && nav.contains(current);
+      if (!inside || current === (event.shiftKey ? first : last)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      }
     };
     const linkBar = window.matchMedia(LINK_BAR_QUERY);
     const onLinkBar = () => {
@@ -364,7 +383,14 @@ export default function Navbar() {
         <div ref={scrimRef} className="mobile-menu-scrim lg:hidden" aria-hidden="true" onClick={closeFromScrim} />
       )}
       {menuMounted && (
-        <div id="nav-mobile-menu" ref={menuRef} className="mobile-menu lg:hidden">
+        <div
+          id="nav-mobile-menu"
+          ref={menuRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu"
+          className="mobile-menu lg:hidden"
+        >
           <Link to={START_HREF} className="nav-primary mobile-menu-primary min-[24.375rem]:hidden">
             Start here
           </Link>
