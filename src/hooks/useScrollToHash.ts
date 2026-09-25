@@ -91,7 +91,14 @@ export function useScrollToHash() {
   useEffect(() => {
     const firstVisit = key === arrivalKey.current;
     if (!hash) return;
-    const id = decodeURIComponent(hash.slice(1));
+    // A malformed fragment (/#%) is ignored, never thrown: decodeURIComponent
+    // raises URIError on it, which took the whole page down.
+    let id: string;
+    try {
+      id = decodeURIComponent(hash.slice(1));
+    } catch {
+      return;
+    }
     let raf = 0;
     let tries = 0;
     let stopGlide: (() => void) | undefined;
