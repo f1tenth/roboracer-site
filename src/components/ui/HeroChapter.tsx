@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useId, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { EASE_IN_OUT_QUART, MOTION_OK_QUERY, gsap, useGSAP } from "../../lib/motion";
-import { linkCanStream } from "../../lib/media";
+import { linkCanStream, linkStalled, markLinkStalled } from "../../lib/media";
 
 export type HeroClip = {
   /** Desktop encode (served from 768px up); the key keeps the media-skill
@@ -148,6 +148,12 @@ const CROSSFADE_S = 0.9;
  * until then the playing clip has the whole connection (docs/media/HERO_PERF.md). */
 const PRELOAD_LEAD_S = 3;
 const CROSSFADE_CLASS = "transition-opacity duration-[900ms] ease-linear";
+/** A clip that sits in `waiting` this long marks the link as stalled: the
+ * clips loaded after it use the 960 encode (lib/media markLinkStalled). */
+const STALL_MS = 1500;
+
+/** The desktop encode, unless the link cannot stream it (or has stalled). */
+const desktopOk = (mbps?: number) => !linkStalled() && (mbps === undefined || linkCanStream(mbps));
 
 /** Auto-scroll (Cedric, landing v5 round two): when the clip cycle comes back
  * to the IV FPV clip (the last clip) and the visitor is still at the top,
@@ -313,7 +319,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     const wide = window.matchMedia(WIDE_QUERY).matches;
     // Chosen per clip at load time, so a link that slows down mid-cycle
     // drops to the 960 encodes for the clips after.
-    const srcOf = (c: HeroClip) => (wide && (c.mbps === undefined || linkCanStream(c.mbps)) ? c.mp4_1920 : c.mp4_960);
+    const srcOf = (c: HeroClip) => (wide && desktopOk(c.mbps) ? c.mp4_1920 : c.mp4_960);
     const after = (i: number) => (i + 1 < clips.length ? i + 1 : loopFrom);
     const els = [a, b] as const;
     let cur = 0;
@@ -420,7 +426,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       keep.style.opacity = "1";
       keep.style.zIndex = "1";
       keep.loop = true;
-      keep.src = wide && (video.mbps === undefined || linkCanStream(video.mbps)) ? video.mp4_1920 : video.mp4_960;
+      keep.src = wide && desktopOk(video.mbps) ? video.mp4_1920 : video.mp4_960;
       keep.load();
       activeRef.current = [keep];
       if (!pausedRef.current) void keep.play().catch(() => {});
@@ -431,6 +437,33 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       const d = v.duration;
       if (v.ended || (Number.isFinite(d) && d > 0 && v.currentTime >= d - CROSSFADE_S)) advance();
     };
+    // Stall watch: a clip that waits for data over STALL_MS switches the rest
+    // of the session to the 960 encodes, including the clip already queued
+    // next if it has not started. Any sign of flow (or a pause) disarms it.
+    const stallTimers = new Map<HTMLVideoElement, number>();
+    const onWaiting = (e: Event) => {
+      const el = e.currentTarget as HTMLVideoElement;
+      if (!wide || linkStalled() || pausedRef.current) return;
+      window.clearTimeout(stallTimers.get(el));
+      stallTimers.set(
+        el,
+        window.setTimeout(() => {
+          if (disposed || el.paused) return;
+          markLinkStalled();
+          const n = els[1 - cur];
+          if (queued && !fading && n.paused) {
+            const next = srcOf(clips[after(clip)]);
+            if (n.src !== new URL(next, window.location.href).href) setClip(n, after(clip));
+          }
+        }, STALL_MS),
+      );
+    };
+    const onFlowing = (e: Event) => window.clearTimeout(stallTimers.get(e.currentTarget as HTMLVideoElement));
+    const FLOW_EVENTS = ["playing", "pause", "ended", "emptied"] as const;
+    for (const el of els) {
+      el.addEventListener("waiting", onWaiting);
+      for (const ev of FLOW_EVENTS) el.addEventListener(ev, onFlowing);
+    }
     a.addEventListener("ended", onEnded);
     b.addEventListener("ended", onEnded);
     a.addEventListener("error", onError);
@@ -448,6 +481,11 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       window.clearTimeout(timer);
       window.clearTimeout(autoTimer);
       cancelGlide?.();
+      for (const t of stallTimers.values()) window.clearTimeout(t);
+      for (const el of els) {
+        el.removeEventListener("waiting", onWaiting);
+        for (const ev of FLOW_EVENTS) el.removeEventListener(ev, onFlowing);
+      }
       a.removeEventListener("ended", onEnded);
       b.removeEventListener("ended", onEnded);
       a.removeEventListener("error", onError);
