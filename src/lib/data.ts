@@ -36,6 +36,9 @@ export type UpcomingEvent = {
   image?: string;
   image_alt?: string;
   rules_url?: string;
+  /** The race's own site. After the registration deadline it replaces
+   * "Register your team" as the spotlight's primary button. */
+  site_url?: string;
 };
 
 export type PastRace = {

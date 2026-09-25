@@ -17,6 +17,9 @@ type NextRaceSpotlightProps = {
   rulesHref?: string;
   /** Race page: the rules live on this site, so the button stays internal. */
   rulesInternal?: boolean;
+  /** The race's own site. Once the deadline has passed it takes the primary
+   * button ("See the race site"); without it the rules do. */
+  siteHref?: string;
   startsAt: string;
   on?: "paper" | "ink";
   /** The panel sits under an h2 on the landing and directly under the page's
@@ -25,6 +28,20 @@ type NextRaceSpotlightProps = {
 };
 
 type Remaining = { days: number; hours: number; minutes: number };
+
+type Cta = { href: string; label: string; internal: boolean };
+
+function CtaButton({ cta, on, variant }: { cta: Cta; on: "paper" | "ink"; variant: "primary" | "secondary" }) {
+  return cta.internal ? (
+    <Button href={cta.href} on={on} variant={variant}>
+      {cta.label}
+    </Button>
+  ) : (
+    <Button href={cta.href} on={on} variant={variant} target="_blank" rel="noopener noreferrer">
+      {cta.label}
+    </Button>
+  );
+}
 
 function remainingUntil(iso: string): Remaining | null {
   const ms = new Date(iso).getTime() - Date.now();
@@ -52,6 +69,7 @@ export default function NextRaceSpotlight({
   deadlineAt,
   rulesHref,
   rulesInternal = false,
+  siteHref,
   startsAt,
   on = "paper",
   headingAs: Heading = "h3",
@@ -72,9 +90,20 @@ export default function NextRaceSpotlight({
     return () => window.clearInterval(id);
   }, [startsAt, deadlineAt, reduced]);
 
-  // Once the deadline is behind us the row says so rather than counting
-  // negative or vanishing without explanation.
+  // Once the deadline is behind us the panel says so once ("registration
+  // closed", no "closes <date>" beside it) rather than counting negative, and
+  // stops asking teams to register: the primary button leads to the race's
+  // own site, or to the rules when there is no site link (QA polish-2).
   const deadlinePassed = Boolean(deadlineAt) && toDeadline === null;
+  const rules: Cta | undefined = rulesHref
+    ? { href: rulesHref, label: "Read the rules", internal: rulesInternal }
+    : undefined;
+  const primary: Cta | undefined = !deadlinePassed
+    ? { href: registerHref, label: "Register your team", internal: false }
+    : siteHref
+      ? { href: siteHref, label: "See the race site", internal: false }
+      : rules;
+  const secondary = rules && rules.href !== primary?.href ? rules : undefined;
 
   const strong = ink ? "text-text-on-ink" : "text-text-strong";
   const muted = ink ? "text-text-on-ink-muted" : "text-text-muted";
@@ -103,7 +132,7 @@ export default function NextRaceSpotlight({
             </dd>
           </div>
         )}
-        {registerNote && (
+        {registerNote && !deadlinePassed && (
           <div className="flex flex-wrap justify-between gap-x-4 gap-y-0.5">
             <dt>registration closes</dt>
             <dd className={`tabular-nums ${strong}`}>{registerNote}</dd>
@@ -127,19 +156,8 @@ export default function NextRaceSpotlight({
         </div>
       </dl>
       <div className="flex flex-wrap items-center gap-4">
-        <Button href={registerHref} on={on} variant="primary" target="_blank" rel="noopener noreferrer">
-          Register your team
-        </Button>
-        {rulesHref &&
-          (rulesInternal ? (
-            <Button href={rulesHref} on={on} variant="secondary">
-              Read the rules
-            </Button>
-          ) : (
-            <Button href={rulesHref} on={on} variant="secondary" target="_blank" rel="noopener noreferrer">
-              Read the rules
-            </Button>
-          ))}
+        {primary && <CtaButton cta={primary} on={on} variant="primary" />}
+        {secondary && <CtaButton cta={secondary} on={on} variant="secondary" />}
       </div>
       <p className={`mt-auto max-w-[55ch] text-small ${muted}`}>{title}</p>
     </article>

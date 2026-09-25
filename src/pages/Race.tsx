@@ -16,6 +16,7 @@ import Reveal from "../components/ui/Reveal";
 import RaceTimeline from "../components/race/RaceTimeline";
 import SeasonChain from "../components/race/SeasonChain";
 import Leaderboard from "../components/race/Leaderboard";
+import { useNow } from "../components/race/useNow";
 import type { SeasonEvent } from "../components/race/eventState";
 
 // Same clip and the same credit as the landing's next-race section
@@ -117,7 +118,12 @@ export default function RacePage() {
     };
   }, []);
 
+  const now = useNow();
   const race = upcoming.find((e) => e.spotlight) ?? upcoming[upcoming.length - 1];
+  // The same rule as the spotlight: after the deadline this section stops
+  // offering the registration form and says "registration closed" instead.
+  const deadline = race?.registration_deadline_at ? Date.parse(race.registration_deadline_at) : NaN;
+  const registrationClosed = deadline <= now;
   const past = mapEvents.filter((e) => e.status !== "upcoming");
   const city = race?.location.split(",")[0].trim();
 
@@ -196,6 +202,7 @@ export default function RacePage() {
                   deadlineAt={race.registration_deadline_at}
                   rulesHref="/rules"
                   rulesInternal
+                  siteHref={race.site_url}
                   startsAt={race.starts_at ?? ""}
                 />
               )}
@@ -233,18 +240,28 @@ export default function RacePage() {
           </ol>
         </Reveal>
         <div className="mt-10 flex flex-wrap gap-4">
-          <Button href={race?.register_url ?? "#"} variant="primary" target="_blank" rel="noopener noreferrer">
-            Register your team
-          </Button>
-          <Button href="/rules" variant="secondary">
+          {!registrationClosed ? (
+            <Button href={race?.register_url ?? "#"} variant="primary" target="_blank" rel="noopener noreferrer">
+              Register your team
+            </Button>
+          ) : (
+            race?.site_url && (
+              <Button href={race.site_url} variant="primary" target="_blank" rel="noopener noreferrer">
+                See the race site
+              </Button>
+            )
+          )}
+          <Button href="/rules" variant={registrationClosed && !race?.site_url ? "primary" : "secondary"}>
             Read the rules
           </Button>
         </div>
         <dl className="mt-10 flex flex-col gap-2 border-t border-ink-950/10 pt-6 font-mono text-small text-text-muted">
           {race?.registration_deadline && (
             <div className="flex flex-wrap justify-between gap-x-4">
-              <dt>registration closes</dt>
-              <dd className="tabular-nums text-text-strong">{race.registration_deadline}</dd>
+              <dt>{registrationClosed ? "registration" : "registration closes"}</dt>
+              <dd className="tabular-nums text-text-strong">
+                {registrationClosed ? "closed" : race.registration_deadline}
+              </dd>
             </div>
           )}
           {race?.qualification_video_due && (

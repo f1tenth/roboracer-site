@@ -246,6 +246,20 @@ iv2026, iros2026. korea-race23.f1tenth.org still serves.
 1. Make the race-site repos public again (and `f1tenth.github.io` before it
    stops too), or keep the captures?
 
+**IROS 2026 registration deadline: four dates in play.** Nothing was changed;
+since every one of them is past, the spotlight (landing and /race) and the
+/race Enter block now read "registration closed" and lead to the race site.
+
+| Where | Registration closes | Video due |
+|---|---|---|
+| Content skill (Cedric, 2026-08-21) | Sep 5, 2026 | Sep 12, 2026 |
+| `news.json`, item of Aug 23 ("Register your team by September 5") | Sep 5 | |
+| `upcoming_events.json` (`registration_deadline`, `_at`, `qualification_video_due`; set in 58c6a8c, while its `registration_deadline_note` still says "display the Sep 5 date plainly") | Sep 9 | Sep 9 |
+| iros2026-race.roboracer.ai/timeline.html, read 2026-09-25 | ~~Sep 12~~ Sep 18 (struck and replaced on the page) | Sep 18, with the hardware list |
+
+2. Which date is the record? The handbook and the live site outrank the skill,
+   so Sep 18 looks right for the JSON; the Aug 23 news item stays as published.
+
 ## Questions for Rahul
 
 1. Can you reconfirm the "90+ universities" and "20+ countries" stats on the landing page, or give updated numbers?

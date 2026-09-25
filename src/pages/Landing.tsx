@@ -376,7 +376,9 @@ export default function Landing() {
                   datesSecondary={race.dates_secondary}
                   registerHref={race.register_url ?? race.url}
                   registerNote={race.registration_deadline}
+                  deadlineAt={race.registration_deadline_at}
                   rulesHref={race.rules_url}
+                  siteHref={race.site_url}
                   startsAt={race.starts_at ?? ""}
                 />
               </div>
