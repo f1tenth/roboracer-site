@@ -1,0 +1,1318 @@
+{
+ "_about": "RoboRacer_Teams_DB Google Sheet (Cedric, shared 2026-09-25; docs.google.com/spreadsheets/d/1S3z6JNIocjKu-L7UoAkyk_jfkyMJUI4Q0FDpGcoCi1A). Contact emails deliberately omitted. Source of truth for team names, affiliations and countries. Columns per event: Attended / No-show / Registered.",
+ "exported": "2026-09-25",
+ "events": [
+  "IFAC 2026",
+  "ICRA 2026",
+  "IV 2026",
+  "CDC 2025 (Canceled)",
+  "ICRA 2025",
+  "IV 2025",
+  "CDC 2024",
+  "IROS 2024",
+  "ICRA 2024",
+  "IV 2024"
+ ],
+ "teams": [
+  {
+   "team": "ForzaETH",
+   "affiliation": "ETH Zürich",
+   "country": "Switzerland",
+   "competitions": "6",
+   "attendance": {
+    "ICRA 2026": "Attended",
+    "CDC 2025 (Canceled)": "Registered",
+    "ICRA 2025": "Attended",
+    "IV 2025": "Attended",
+    "CDC 2024": "Attended",
+    "IROS 2024": "Attended",
+    "ICRA 2024": "Attended"
+   }
+  },
+  {
+   "team": "Scuderia Segfault",
+   "affiliation": "TU Wien",
+   "country": "Austria",
+   "competitions": "6",
+   "attendance": {
+    "ICRA 2026": "Attended",
+    "ICRA 2025": "Attended",
+    "IV 2025": "Attended",
+    "CDC 2024": "Attended",
+    "IROS 2024": "Attended",
+    "ICRA 2024": "Attended"
+   }
+  },
+  {
+   "team": "UNIMORE Racing",
+   "affiliation": "University of Modena and Reggio Emilia",
+   "country": "Italy",
+   "competitions": "5",
+   "attendance": {
+    "ICRA 2026": "Attended",
+    "ICRA 2025": "Attended",
+    "IV 2025": "Attended",
+    "CDC 2024": "Attended",
+    "ICRA 2024": "Attended"
+   }
+  },
+  {
+   "team": "Dzik One",
+   "affiliation": "Independent",
+   "country": "Poland",
+   "competitions": "4",
+   "attendance": {
+    "ICRA 2026": "No-show",
+    "ICRA 2025": "Attended",
+    "IV 2025": "Attended",
+    "IROS 2024": "Attended",
+    "ICRA 2024": "Attended"
+   }
+  },
+  {
+   "team": "LAMAR Racing",
+   "affiliation": "University of Bonn",
+   "country": "Germany",
+   "competitions": "4",
+   "attendance": {
+    "ICRA 2026": "Attended",
+    "ICRA 2025": "Attended",
+    "IV 2025": "Attended",
+    "CDC 2024": "Attended"
+   }
+  },
+  {
+   "team": "VAUL",
+   "affiliation": "Laval University",
+   "country": "Canada",
+   "competitions": "4",
+   "attendance": {
+    "ICRA 2026": "Attended",
+    "ICRA 2025": "Attended",
+    "IV 2025": "Attended",
+    "ICRA 2024": "Attended"
+   }
+  },
+  {
+   "team": "Embedded Machine Learning Club",
+   "affiliation": "Embedded Machine Learning Club at NCSU",
+   "country": "United States",
+   "competitions": "3",
+   "attendance": {
+    "ICRA 2025": "Attended",
+    "IV 2025": "Attended",
+    "ICRA 2024": "Attended"
+   }
+  },
+  {
+   "team": "UCF-CAVREL",
+   "affiliation": "University of Central Florida",
+   "country": "United States",
+   "competitions": "3",
+   "attendance": {
+    "IV 2026": "Attended",
+    "ICRA 2025": "Attended",
+    "IV 2025": "Attended"
+   }
+  },
+  {
+   "team": "Unibo Motorsport",
+   "affiliation": "University of Bologna",
+   "country": "Italy",
+   "competitions": "3",
+   "attendance": {
+    "ICRA 2025": "Attended",
+    "IV 2025": "Attended",
+    "CDC 2024": "Attended"
+   }
+  },
+  {
+   "team": "WVU Mountaineer",
+   "affiliation": "West Virginia University",
+   "country": "United States",
+   "competitions": "3",
+   "attendance": {
+    "ICRA 2026": "No-show",
+    "IV 2026": "Attended",
+    "ICRA 2025": "Attended",
+    "IV 2025": "Attended"
+   }
+  },
+  {
+   "team": "UNICORN",
+   "affiliation": "Ulsan National Institute of Science & Technology(UNIST)",
+   "country": "South Korea",
+   "competitions": "3",
+   "attendance": {
+    "ICRA 2026": "Attended",
+    "ICRA 2025": "Attended",
+    "IV 2025": "Attended"
+   }
+  },
+  {
+   "team": "Riverside Racers",
+   "affiliation": "University of California, Riverside",
+   "country": "United States",
+   "competitions": "2",
+   "attendance": {
+    "IV 2026": "Attended",
+    "ICRA 2025": "Attended",
+    "IV 2025": "No-show"
+   }
+  },
+  {
+   "team": "AutoFlux",
+   "affiliation": "Mount Hebron High School",
+   "country": "United States",
+   "competitions": "2",
+   "attendance": {
+    "ICRA 2025": "Attended",
+    "IV 2025": "Attended"
+   }
+  },
+  {
+   "team": "HUN-REN SZTAKI",
+   "affiliation": "Institute for Computer Science and Control - SZTAKI",
+   "country": "Hungary",
+   "competitions": "2",
+   "attendance": {
+    "CDC 2024": "Attended",
+    "ICRA 2024": "Attended"
+   }
+  },
+  {
+   "team": "Lobo Racers",
+   "affiliation": "University of New Mexico",
+   "country": "United States",
+   "competitions": "2",
+   "attendance": {
+    "ICRA 2025": "Attended",
+    "IV 2025": "Attended"
+   }
+  },
+  {
+   "team": "Yellow Jacket Racers",
+   "affiliation": "Georgia Tech",
+   "country": "United States",
+   "competitions": "2",
+   "attendance": {
+    "ICRA 2025": "Attended",
+    "IV 2025": "Attended"
+   }
+  },
+  {
+   "team": "RCV-FORMULA",
+   "affiliation": "INHA University from South Korea",
+   "country": "South Korea",
+   "competitions": "2",
+   "attendance": {
+    "ICRA 2026": "Attended",
+    "ICRA 2025": "Attended",
+    "IV 2025": "No-show"
+   }
+  },
+  {
+   "team": "SAGOL",
+   "affiliation": "N/A",
+   "country": "South Korea",
+   "competitions": "2",
+   "attendance": {
+    "ICRA 2026": "Attended",
+    "IROS 2024": "Attended"
+   }
+  },
+  {
+   "team": "UPenn Autonomous Racing",
+   "affiliation": "University of Pennsylvania",
+   "country": "United States",
+   "competitions": "2",
+   "attendance": {
+    "ICRA 2026": "Attended",
+    "IV 2026": "Attended"
+   }
+  },
+  {
+   "team": "A^2RT",
+   "affiliation": "San Diego State University",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2025": "Attended",
+    "IV 2025": "No-show"
+   }
+  },
+  {
+   "team": "Binblur",
+   "affiliation": "Binblur Inc",
+   "country": "",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2025": "Attended",
+    "IV 2025": "No-show"
+   }
+  },
+  {
+   "team": "JRacer",
+   "affiliation": "Independent",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2025": "Attended",
+    "IV 2025": "No-show"
+   }
+  },
+  {
+   "team": "KUF1Tenth",
+   "affiliation": "University of Kansas",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2025": "No-show",
+    "IV 2025": "Attended"
+   }
+  },
+  {
+   "team": "404 Racers",
+   "affiliation": "University of Pennsylvania",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2026": "Attended"
+   }
+  },
+  {
+   "team": "AIR UOP",
+   "affiliation": "University of the Pacifc",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2026": "Attended"
+   }
+  },
+  {
+   "team": "Atlas Autoware",
+   "affiliation": "Thomas Jefferson High School for Science and Technology",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2026": "Attended"
+   }
+  },
+  {
+   "team": "AutoZots",
+   "affiliation": "UC Irvine",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2026": "Attended"
+   }
+  },
+  {
+   "team": "Boiler Autonomy",
+   "affiliation": "Purdue University",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2026": "Attended"
+   }
+  },
+  {
+   "team": "Dallas Formula Racing",
+   "affiliation": "The University of Texas at Dallas",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2026": "Attended"
+   }
+  },
+  {
+   "team": "DEOXSYS UPenn",
+   "affiliation": "",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2025": "Attended"
+   }
+  },
+  {
+   "team": "F1NESSE - Formula 1 Neuro-Enhanced System for Smart Execution",
+   "affiliation": "Radboud University",
+   "country": "Netherlands",
+   "competitions": "1",
+   "attendance": {
+    "CDC 2024": "Attended"
+   }
+  },
+  {
+   "team": "iASL-Gifu",
+   "affiliation": "Gifu University",
+   "country": "Japan",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2024": "Attended"
+   }
+  },
+  {
+   "team": "IDEA LAB",
+   "affiliation": "Gyeongsang National University",
+   "country": "South Korea",
+   "competitions": "2",
+   "attendance": {
+    "ICRA 2024": "Attended",
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "INIvincible",
+   "affiliation": "UZH / ETHZ",
+   "country": "Switzerland",
+   "competitions": "1",
+   "attendance": {
+    "CDC 2024": "Attended"
+   }
+  },
+  {
+   "team": "JUS10",
+   "affiliation": "N/A",
+   "country": "",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2025": "Attended"
+   }
+  },
+  {
+   "team": "KU F1tenth Team",
+   "affiliation": "Khalifa University",
+   "country": "United Arab Emirates",
+   "competitions": "1",
+   "attendance": {
+    "IROS 2024": "Attended"
+   }
+  },
+  {
+   "team": "KU-CSL",
+   "affiliation": "University of Kansas",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IROS 2024": "Attended"
+   }
+  },
+  {
+   "team": "Lyapunov FC",
+   "affiliation": "University of Pennsylvania",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2024": "Attended"
+   }
+  },
+  {
+   "team": "Mi3 - UC Merced",
+   "affiliation": "University of California, Merced",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2026": "Attended"
+   }
+  },
+  {
+   "team": "Penn McQueen",
+   "affiliation": "",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2025": "Attended"
+   }
+  },
+  {
+   "team": "PUT IDEAS LUTUTUTU",
+   "affiliation": "Poznan University of Technology / IDEAS",
+   "country": "Poland",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2024": "Attended"
+   }
+  },
+  {
+   "team": "RacingJags",
+   "affiliation": "Purdue University Indianapolis",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2026": "Attended"
+   }
+  },
+  {
+   "team": "RILy Fast",
+   "affiliation": "Singapore University of Technology and Design",
+   "country": "Singapore",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2024": "Attended"
+   }
+  },
+  {
+   "team": "SeDriCa-UMIC",
+   "affiliation": "Indian Institute of Technology Bombay",
+   "country": "India",
+   "competitions": "1",
+   "attendance": {
+    "CDC 2024": "Attended"
+   }
+  },
+  {
+   "team": "SpreeSpeed",
+   "affiliation": "Just representing myself",
+   "country": "",
+   "competitions": "1",
+   "attendance": {
+    "CDC 2024": "Attended"
+   }
+  },
+  {
+   "team": "Suzlab",
+   "affiliation": "Nagoya University",
+   "country": "Japan",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2024": "Attended"
+   }
+  },
+  {
+   "team": "Tartan Racing",
+   "affiliation": "Carnegie Mellon University",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2026": "Attended"
+   }
+  },
+  {
+   "team": "Thunderbolt UPenn",
+   "affiliation": "University Of Pennsylvania",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2026": "Attended"
+   }
+  },
+  {
+   "team": "Turtleship",
+   "affiliation": "University of Seoul (South Korea)",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "CDC 2024": "Attended"
+   }
+  },
+  {
+   "team": "UPenn Bit Shifters",
+   "affiliation": "",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2025": "Attended"
+   }
+  },
+  {
+   "team": "Upenn Team 1",
+   "affiliation": "",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2025": "Attended"
+   }
+  },
+  {
+   "team": "Upenn Team 2",
+   "affiliation": "",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2025": "Attended"
+   }
+  },
+  {
+   "team": "Upenn Team 3",
+   "affiliation": "",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2025": "Attended"
+   }
+  },
+  {
+   "team": "Upenn Team 4",
+   "affiliation": "",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2025": "Attended"
+   }
+  },
+  {
+   "team": "Watchmybutt",
+   "affiliation": "Huzhou Institute, Zhejiang University, Huzhou 313000, China. and Xi'an Jiaotong University",
+   "country": "China",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2024": "Attended"
+   }
+  },
+  {
+   "team": "Zancle E-Drive",
+   "affiliation": "University of Messina",
+   "country": "Italy",
+   "competitions": "1",
+   "attendance": {
+    "CDC 2024": "Attended"
+   }
+  },
+  {
+   "team": "Celeritas",
+   "affiliation": "German International University in Berlin (GIU Berlin)",
+   "country": "Germany",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended",
+    "IV 2026": "No-show",
+    "ICRA 2025": "No-show"
+   }
+  },
+  {
+   "team": "404_DriverNotFound",
+   "affiliation": "TU Wien",
+   "country": "Austria",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "ARC RIDERS",
+   "affiliation": "TU Wien",
+   "country": "Austria",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "Arcus",
+   "affiliation": "Université de Sherbrooke",
+   "country": "Canada",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "Brake Check Buddies",
+   "affiliation": "TU Wien",
+   "country": "Austria",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "DeepSpeed",
+   "affiliation": "Nanyang Technological University",
+   "country": "Singapore",
+   "competitions": "2",
+   "attendance": {
+    "ICRA 2026": "Attended",
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "flyby",
+   "affiliation": "robo4you / TU Wien / Flyby Racing GesbR",
+   "country": "Austria",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "Ingenuity Labs Racing",
+   "affiliation": "Queen's University - Ingenuity Labs",
+   "country": "Canada",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "JKU-ITS",
+   "affiliation": "Department Intelligent Transport Systems, JKU",
+   "country": "Austria",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "Min Verstappen",
+   "affiliation": "TU Wien",
+   "country": "Austria",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "NPU-TianRacer",
+   "affiliation": "Northwestern Polytechnical University",
+   "country": "China",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "Phoenix Racing",
+   "affiliation": "TU Dortmund University",
+   "country": "Germany",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended",
+    "CDC 2025 (Canceled)": "Registered"
+   }
+  },
+  {
+   "team": "Quick-Witted",
+   "affiliation": "Individual",
+   "country": "Netherlands",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "Quicksilver",
+   "affiliation": "TU Wien",
+   "country": "Austria",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "Same Mess Again",
+   "affiliation": "Individual",
+   "country": "India",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "SummerArcBoys",
+   "affiliation": "TU Wien",
+   "country": "Austria",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "tron racing",
+   "affiliation": "RobotX Workshops",
+   "country": "Germany",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "UBM-Atlas",
+   "affiliation": "University of Bologna",
+   "country": "Italy",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "UBM-Tom",
+   "affiliation": "University of Bologna",
+   "country": "Italy",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "VAUL 2",
+   "affiliation": "Université Laval",
+   "country": "Canada",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2026": "Attended"
+   }
+  },
+  {
+   "team": "Akashcahri",
+   "affiliation": "Brac University",
+   "country": "Bangladesh",
+   "competitions": "0",
+   "attendance": {
+    "CDC 2024": "No-show"
+   }
+  },
+  {
+   "team": "Alpha Space autonomous",
+   "affiliation": "Alpha Space Robotics",
+   "country": "",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2025": "No-show"
+   }
+  },
+  {
+   "team": "Autopilots",
+   "affiliation": "United Arab Emirates University",
+   "country": "United Arab Emirates",
+   "competitions": "0",
+   "attendance": {
+    "IROS 2024": "No-show"
+   }
+  },
+  {
+   "team": "Bed Rull IISc",
+   "affiliation": "Indian Institute of Science",
+   "country": "India",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2024": "No-show"
+   }
+  },
+  {
+   "team": "Beryllium",
+   "affiliation": "None",
+   "country": "",
+   "competitions": "0",
+   "attendance": {
+    "IROS 2024": "Registered"
+   }
+  },
+  {
+   "team": "Bizbot Technology",
+   "affiliation": "Bizbot Technology",
+   "country": "",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2025": "No-show"
+   }
+  },
+  {
+   "team": "C.A.I.R. Racers",
+   "affiliation": "Proliant Infotech",
+   "country": "",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2025": "No-show"
+   }
+  },
+  {
+   "team": "CDSL_UOS",
+   "affiliation": "University of Seoul",
+   "country": "South Korea",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2024": "No-show"
+   }
+  },
+  {
+   "team": "Circuit Breakers",
+   "affiliation": "University of Colorado, Boulder",
+   "country": "United States",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2025": "No-show"
+   }
+  },
+  {
+   "team": "DEVRIM",
+   "affiliation": "Middle East Technical University",
+   "country": "Turkey",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2024": "No-show"
+   }
+  },
+  {
+   "team": "Dexter Dynamics",
+   "affiliation": "IIT DELHI",
+   "country": "India",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2026": "No-show",
+    "IV 2026": "No-show"
+   }
+  },
+  {
+   "team": "Drift Drivers",
+   "affiliation": "Indian Institute of Science, Bangalore",
+   "country": "India",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2025": "No-show"
+   }
+  },
+  {
+   "team": "Elderflame",
+   "affiliation": "KTH Royal Institute of Technology, Sweden",
+   "country": "Sweden",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2025": "No-show"
+   }
+  },
+  {
+   "team": "Escuderia Brasileira de Veículos Autônomos",
+   "affiliation": "Polytechnic School of the University of São Paulo",
+   "country": "Brazil",
+   "competitions": "0",
+   "attendance": {
+    "CDC 2024": "No-show"
+   }
+  },
+  {
+   "team": "Fiery Racers",
+   "affiliation": "Khalifa University",
+   "country": "United Arab Emirates",
+   "competitions": "0",
+   "attendance": {
+    "IROS 2024": "No-show"
+   }
+  },
+  {
+   "team": "FuzzyGreenBlurs",
+   "affiliation": "Rutgers University (New Brunswick)",
+   "country": "United States",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2025": "No-show"
+   }
+  },
+  {
+   "team": "Golgappa'",
+   "affiliation": "Carnegie Mellon University",
+   "country": "United States",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2024": "No-show"
+   }
+  },
+  {
+   "team": "H2M",
+   "affiliation": "University ibn Tofayl",
+   "country": "Morocco",
+   "competitions": "0",
+   "attendance": {
+    "IROS 2024": "No-show"
+   }
+  },
+  {
+   "team": "Huskies",
+   "affiliation": "Northeastern University",
+   "country": "United States",
+   "competitions": "0",
+   "attendance": {
+    "IV 2026": "No-show"
+   }
+  },
+  {
+   "team": "Inferencery",
+   "affiliation": "F Inverse LLC",
+   "country": "",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2025": "No-show"
+   }
+  },
+  {
+   "team": "KGXepRacing",
+   "affiliation": "KGiSL Institute of Technology",
+   "country": "India",
+   "competitions": "1",
+   "attendance": {
+    "ICRA 2024": "No-show",
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "Labrynth",
+   "affiliation": "New York University (Tandon)",
+   "country": "United States",
+   "competitions": "0",
+   "attendance": {
+    "IV 2026": "No-show"
+   }
+  },
+  {
+   "team": "MAHM",
+   "affiliation": "UAE university",
+   "country": "United Arab Emirates",
+   "competitions": "0",
+   "attendance": {
+    "IROS 2024": "Registered"
+   }
+  },
+  {
+   "team": "PITT",
+   "affiliation": "University of Pittsburgh",
+   "country": "United States",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2025": "No-show"
+   }
+  },
+  {
+   "team": "PoleCar",
+   "affiliation": "Volvo Trucks",
+   "country": "",
+   "competitions": "0",
+   "attendance": {
+    "IV 2026": "No-show"
+   }
+  },
+  {
+   "team": "Q-silv",
+   "affiliation": "United Arab Emirates university",
+   "country": "United Arab Emirates",
+   "competitions": "0",
+   "attendance": {
+    "IROS 2024": "No-show"
+   }
+  },
+  {
+   "team": "RAM",
+   "affiliation": "University of Illinois Chicago",
+   "country": "United States",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2026": "No-show",
+    "IV 2026": "No-show"
+   }
+  },
+  {
+   "team": "Reveille Robotics",
+   "affiliation": "Texas A&M University",
+   "country": "United States",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2025": "No-show"
+   }
+  },
+  {
+   "team": "RobuRacers",
+   "affiliation": "IIT Kharagpur",
+   "country": "India",
+   "competitions": "0",
+   "attendance": {
+    "IROS 2024": "No-show"
+   }
+  },
+  {
+   "team": "Sulaiman",
+   "affiliation": "Khalifa University",
+   "country": "United Arab Emirates",
+   "competitions": "0",
+   "attendance": {
+    "IROS 2024": "Registered"
+   }
+  },
+  {
+   "team": "Tarzan.",
+   "affiliation": "Manipal academy of higher education,Dubai",
+   "country": "United Arab Emirates",
+   "competitions": "0",
+   "attendance": {
+    "IROS 2024": "Registered"
+   }
+  },
+  {
+   "team": "Team Innova",
+   "affiliation": "Effat University - Saudi Arabia",
+   "country": "Saudi Arabia",
+   "competitions": "0",
+   "attendance": {
+    "IV 2026": "No-show"
+   }
+  },
+  {
+   "team": "TMU Velocity",
+   "affiliation": "Toronto Metropolitan University",
+   "country": "Canada",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2025": "No-show"
+   }
+  },
+  {
+   "team": "UCSD Triton-AI Team",
+   "affiliation": "University of California San Diego",
+   "country": "United States",
+   "competitions": "0",
+   "attendance": {
+    "IV 2026": "No-show"
+   }
+  },
+  {
+   "team": "UJI",
+   "affiliation": "Universitat Jaume I",
+   "country": "Spain",
+   "competitions": "0",
+   "attendance": {
+    "IROS 2024": "Registered"
+   }
+  },
+  {
+   "team": "UPenn MEAMers",
+   "affiliation": "University of Pennsylvania",
+   "country": "United States",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2024": "No-show"
+   }
+  },
+  {
+   "team": "Vortex",
+   "affiliation": "NYU",
+   "country": "United States",
+   "competitions": "0",
+   "attendance": {
+    "IV 2026": "No-show"
+   }
+  },
+  {
+   "team": "We ain't slippin",
+   "affiliation": "N/A",
+   "country": "",
+   "competitions": "0",
+   "attendance": {
+    "IV 2026": "No-show"
+   }
+  },
+  {
+   "team": "ZERNN",
+   "affiliation": "Gaziantep Üniversity",
+   "country": "Turkey",
+   "competitions": "0",
+   "attendance": {
+    "CDC 2024": "No-show"
+   }
+  },
+  {
+   "team": "ASU F1TENTH",
+   "affiliation": "Ain Shams University",
+   "country": "Egypt",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2026": "No-show"
+   }
+  },
+  {
+   "team": "E-yantra",
+   "affiliation": "Indian Institute of Technology Bombay",
+   "country": "India",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2026": "No-show"
+   }
+  },
+  {
+   "team": "NOVA",
+   "affiliation": "BITS Pilani, Wilp",
+   "country": "India",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2026": "No-show"
+   }
+  },
+  {
+   "team": "SAR",
+   "affiliation": "Schmalkalden Applied Science University",
+   "country": "Germany",
+   "competitions": "0",
+   "attendance": {
+    "ICRA 2026": "No-show"
+   }
+  },
+  {
+   "team": "Escuderia POLIposition",
+   "affiliation": "Universidade de São Paulo - USP",
+   "country": "Brazil",
+   "competitions": "0",
+   "attendance": {
+    "CDC 2025 (Canceled)": "Registered"
+   }
+  },
+  {
+   "team": "Tayo Eagles",
+   "affiliation": "Chungbuk National University",
+   "country": "South Korea",
+   "competitions": "",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "F1T_Lab",
+   "affiliation": "Inje University",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "338",
+   "affiliation": "Inje University",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "DDRX",
+   "affiliation": "Zhejiang University",
+   "country": "China",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "Blue Rabbit",
+   "affiliation": "California State University of Long Beach (CSULB)",
+   "country": "United States",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "BREATH",
+   "affiliation": "Handong Global University",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "Buffalo Wheel",
+   "affiliation": "Korea Maritime & Ocean University (KMOU)",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "CIRL",
+   "affiliation": "Seoul National University of Science and Technology",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "CSLab",
+   "affiliation": "Gyeongsang National University",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "Drunken Driving",
+   "affiliation": "Incheon National University",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "GROMIT",
+   "affiliation": "Sookmyung Women's University",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "SAI",
+   "affiliation": "Kangwon National University",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "Success-aMAP",
+   "affiliation": "Halla University",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "UNITA",
+   "affiliation": "Incheon National University",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "VILAB",
+   "affiliation": "Kookmin University",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "머스탱 (Mustang)",
+   "affiliation": "Yonam Institute of Technology",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "빐른놈들 (Fast guys)",
+   "affiliation": "Kangwon National University",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  },
+  {
+   "team": "역대급 에이스 (Legendary Ace)",
+   "affiliation": "Yonam Institute of Technology",
+   "country": "South Korea",
+   "competitions": "1",
+   "attendance": {
+    "IV 2024": "Attended"
+   }
+  }
+ ]
+}
