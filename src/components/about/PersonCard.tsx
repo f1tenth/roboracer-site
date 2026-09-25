@@ -65,7 +65,8 @@ export default function PersonCard({ person, compact = false }: PersonCardProps)
             className={`${nameClass} w-fit underline decoration-ink-950/25 underline-offset-4 [overflow-wrap:anywhere] hover:decoration-rr-violet hover:decoration-2`}
           >
             {name}
-            <span aria-hidden="true"> &#8599;</span>
+            {/* A no-break space: the arrow never wraps onto a line alone. */}
+            <span aria-hidden="true">&nbsp;&#8599;</span>
           </a>
         ) : (
           <p className={`${nameClass} [overflow-wrap:anywhere]`}>{name}</p>

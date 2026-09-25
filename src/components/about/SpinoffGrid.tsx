@@ -59,9 +59,9 @@ function SpinoffCard({ spinoff }: { spinoff: Spinoff }) {
           ) : (
             name
           )}
+          {/* A no-break space: the arrow never wraps onto a line alone. */}
           <span aria-hidden="true" className="text-body text-text-muted">
-            {" "}
-            &#8599;
+            &nbsp;&#8599;
           </span>
         </a>
       </h3>

@@ -187,7 +187,7 @@ export default function About() {
               <p className="mt-8 border-t border-text-on-ink/15 pt-6 font-mono text-small text-text-on-ink-muted">
                 founded 2016, University of Pennsylvania ·{" "}
                 <a href={SCHOLAR_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_INK}>
-                  the Google Scholar search &#8599;
+                  the Google Scholar search&nbsp;&#8599;
                 </a>
               </p>
             </div>
