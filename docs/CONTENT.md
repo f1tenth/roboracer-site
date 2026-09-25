@@ -202,6 +202,50 @@ are ours, not theirs. Neobotics and Quanser also carry `named_by: "Cedric,
    LAMARRacing (or the Lamarr Institute), and any candidate you keep would each
    need a logo file plus written permission before `logo` is set.
 
+### From the polish-2 QA fixes (added 2026-09-25, branch `revamp/p2-qafix`)
+
+**Race sites that went dark.** On 2026-09-24/25 these competition sites answer
+404 or fail TLS (`curl -sIL` with a browser user agent). Every one has its repo
+in the f1tenth GitHub org set to **private** with Pages still enabled
+(`gh api orgs/f1tenth/repos`), and private-repo Pages stopped serving. /race now
+links each one to a Wayback capture (`archive` field in
+`data/events_map.source.json`, `public/data/events_map.json` and
+`public/data/past_races.json`, tagged "archived page"). Make a repo public again
+and its row can go back to `url_status: "live"`.
+
+| Site | Repo (private) | Wayback capture linked |
+|---|---|---|
+| vtc2026-race.roboracer.ai | `f1tenth/vtc2026-race` | 2026-07-23 (before the race: no results) |
+| cdc2025-race.roboracer.ai | `f1tenth/cdc2025_race` | 2026-03-05 |
+| iv2025-race.roboracer.ai | `f1tenth/iv2025_race` | 2026-01-21 |
+| icra2025-race.roboracer.ai | `f1tenth/icra2025_race` | 2026-03-13 |
+| cdc2024-race.f1tenth.org | `f1tenth/cdc2024_race` | 2025-07-14 |
+| bu2024-race.f1tenth.org | `f1tenth/bu2024_race` | 2025-06-23 |
+| itsc2024-race.f1tenth.org | `f1tenth/itsc2024_race` | 2025-06-23 |
+| sm2024-race.f1tenth.org | `f1tenth/sm2024_race` | 2025-08-23 |
+| iv2024-race.f1tenth.org | `f1tenth/iv2024_race` | 2026-03-09 |
+| cpsweek2024-race.f1tenth.org | `f1tenth/cpsweek2024-race_website` | 2024-12-19 |
+| icra2024-madgames.f1tenth.org | `f1tenth/icra2024_madgames_website` | 2025-08-29 |
+| iros2023-race.f1tenth.org | `f1tenth/iros2023-race_website` | 2025-08-23 |
+| iros2023-madgames.f1tenth.org | `f1tenth/iros2023_madgames_website` | 2025-07-13 |
+| icra2023-race.f1tenth.org | `f1tenth/icra2023-race_website` | 2025-10-04 |
+| iv2023-race.f1tenth.org | `f1tenth/iv2023_race` | 2025-03-06 |
+| cps2023-race.f1tenth.org | `f1tenth/cps2023-race_website` | 2025-02-27 |
+| esweek2022-race.f1tenth.org | `f1tenth/esweek2022-race` | 2025-03-08 |
+| icra2022-race.f1tenth.org | `f1tenth/icra2022-race_website` | 2025-08-24 |
+| korea-race.f1tenth.org | `f1tenth/korea-race` | 2025-12-06 |
+
+Already on captures before this round (domains dead or resold): iros2021.org,
+germany-race2022, icra2024-race, iros2024-race, korea-race24. Also private with
+Pages on, not linked from the site: `icra2025_madgames_website`,
+`iros2020_website`, `iros2021_website`, `icra2022_website`, `icra2023_website`,
+`f1tenth_eval_network`, and `f1tenth.github.io` (which still serves today; the
+2016 to 2020 race pages on /race depend on it). Public and serving: icra2026,
+iv2026, iros2026. korea-race23.f1tenth.org still serves.
+
+1. Make the race-site repos public again (and `f1tenth.github.io` before it
+   stops too), or keep the captures?
+
 ## Questions for Rahul
 
 1. Can you reconfirm the "90+ universities" and "20+ countries" stats on the landing page, or give updated numbers?
