@@ -45,15 +45,23 @@ right now". It does not push the season or the entry steps down.
 ## Fetch and fallback
 
 1. On mount: `public/data/leaderboard.json` (same origin), then
-   `<url>data/index.json`, then the featured board's file. Each cross-origin
-   read gives up after 8 s and uses `cache: "no-cache"` (revalidates by ETag;
-   GitHub Pages would otherwise let a browser keep a copy for 10 minutes).
+   `<url>data/index.json`, then the featured board's file. Every read gives
+   up after 8 s; the cross-origin ones use `cache: "no-cache"` (revalidates by
+   ETag; GitHub Pages would otherwise let a browser keep a copy for 10
+   minutes). If the config fails or does not validate, a bundled copy of it
+   (`FALLBACK_CONFIG`, same url and label) is used, so the board still loads
+   and the link still works. Every field read from the board is validated
+   first (`readBoardIndex`, `readBoardFile`): a malformed board entry or row is
+   dropped, malformed `extras` are ignored, and anything that still throws at
+   render lands in an error boundary that shows the error line and the link.
+   When the tab becomes visible again more than a minute after the last good
+   read, the board is read again; a failed refresh keeps the laps on screen.
 2. **Loading:** the table is drawn with the real row count, cell sizes and
    hairlines, grey bars in place of values, `aria-busy="true"`. Measured at
    1536x730: the section is 865 px tall loading and 865 px tall loaded, so
-   nothing below moves. (On a phone a two-chip switch wraps to two lines, so
-   the loaded block can be one chip row taller; it is the last section, and
-   the data lands long before anyone scrolls there.)
+   nothing below moves. On a phone the chips carry short labels ("Clean lap",
+   "Clean obstacle lap"; `shortBoardLabel`) so a two-board switch stays one
+   row: 1126 px loading and loaded at 390.
 3. **Error or offline** (network error, timeout, HTTP error, unexpected
    shape): one line, "The lap times did not load here.", and the link to the
    full board. Never an empty table.
