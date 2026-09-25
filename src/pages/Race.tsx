@@ -129,8 +129,7 @@ export default function RacePage() {
 
   // The series ordinal of the last competition already run, read off the map
   // rather than typed into the copy, so the sentence cannot go stale on its
-  // own. Four continents: Asia, Europe, North and South America, from the
-  // host countries in events_map.json.
+  // own.
   const held = past.reduce((max, e) => Math.max(max, e.number ?? 0), 0);
 
   return (
@@ -147,7 +146,7 @@ export default function RacePage() {
               Come race with us
             </h1>
             <p className="mt-4 max-w-[60ch] text-lead text-text-on-ink-muted">
-              {held > 0 ? `${held} competitions` : "Competitions"} since 2016, on four continents.
+              {held > 0 ? `${held} competitions` : "Competitions"} since 2016.
               Any team with a car that drives itself can enter.
             </p>
           </div>

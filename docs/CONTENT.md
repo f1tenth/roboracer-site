@@ -260,6 +260,25 @@ since every one of them is past, the spotlight (landing and /race) and the
 2. Which date is the record? The handbook and the live site outrank the skill,
    so Sep 18 looks right for the JSON; the Aug 23 news item stays as published.
 
+**Fact conflicts settled on the page, one question left.**
+
+- LAMARRacing's spinoff origin now reads "At ICRA 2026 in Vienna it was fastest
+  in the time trials and fourth overall.", the wording of the results page
+  (1st Time Trial, 4th Master Cup) and of /news. The Lamarr Institute post does
+  literally say the team won "Best Performance Overall" (the award for the
+  fastest time trial); it was dropped only because "fourth overall" beside
+  "Best Performance Overall" read as a contradiction. Say if you want it back.
+- "Cédric Hollande" in the author and credit of your ICRA 2026 post (news and
+  the community strip) is now "Cedric Hollande", as everywhere else. The
+  LinkedIn URLs are unchanged.
+- /race's lead drops "on four continents" (not in the content skill).
+
+3. 404 Racers' team card still says "institution tbc": the content skill's IV
+   2026 podium names the drivers but no institution. Your IV 2026 result post on
+   /news ("404 Racers, also from UPenn") and Milan Manoj's post both say
+   University of Pennsylvania. Confirm, and teams.json can carry it with you as
+   the source.
+
 ## Questions for Rahul
 
 1. Can you reconfirm the "90+ universities" and "20+ countries" stats on the landing page, or give updated numbers?
