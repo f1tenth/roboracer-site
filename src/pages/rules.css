@@ -10,7 +10,9 @@
      stylesheet quietly defeats `list-none`, `pl-0` and friends. In
      @layer components the utilities win, base still loses. */
 @layer components {
-  .rules-source {
+  /* Scoped under .rules so it outranks `.rules p` below: the note was
+     meant to be 14px and rendered at 16 (mobile audit RULES-03). */
+  .rules .rules-source {
     max-width: 68ch;
     font-size: 0.875rem;
     color: var(--color-text-muted);
@@ -170,6 +172,69 @@
     border: 1px solid rgb(11 12 20 / 0.15);
     padding: 0.375rem 0.75rem;
     text-align: left;
+  }
+
+  /* Hardening (RULES-07): the file is copied from upstream byte for byte and
+     html/body clip overflow-x, so a future table, code block or long URL
+     would be cut at the screen edge. They scroll in their own box instead,
+     and a long token breaks rather than pushing the column wide. */
+  .rules-body {
+    overflow-wrap: break-word;
+  }
+
+  .rules-body table,
+  .rules-body pre {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .rules-body img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* The document's contents list (Rules.tsx marks it): a touch-sized row per
+     link on a coarse pointer (RULES-05). Running-text links stay inline. */
+  @media (pointer: coarse) {
+    .rules .rules-contents li {
+      margin-bottom: 0;
+    }
+
+    .rules-contents a {
+      display: inline-block;
+      padding-block: 0.625rem;
+    }
+  }
+
+  /* Below lg a line ran to 95-100 characters on a landscape phone and a
+     portrait tablet (RULES-06); the source note's 68ch is the measure. */
+  @media (max-width: 63.99rem) {
+    .rules-body p,
+    .rules-body li {
+      max-width: 68ch;
+    }
+  }
+
+  /* Phones (the `compact:` query): the legacy heading sizes left the h1 at
+     32px over 28px h2s. The type scale's steps instead, h1 > h2 > h3 > h4;
+     sizes only, the page's colours wait for its migration (RULES-02). */
+  @media not all and (min-width: 48rem) and (min-height: 34rem) {
+    .rules h1 {
+      font-size: var(--text-display-l);
+    }
+
+    .rules h2 {
+      font-size: var(--text-display-m);
+    }
+
+    .rules h3 {
+      font-size: var(--text-display-s);
+    }
+
+    .rules h4 {
+      font-size: 1.125rem;
+    }
   }
 
   /* Site-wide link contract: ink text, hairline underline, violet on hover. */
