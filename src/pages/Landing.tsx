@@ -43,12 +43,16 @@ const HERO_VIDEO: HeroVideoSources = {
   // resolves to the local public/ copy while VITE_MEDIA_BASE is unset.
   // `mbps` is each desktop encode's average bitrate (ffprobe); on a link
   // that cannot stream it the 960 encode plays (docs/media/HERO_PERF.md).
+  // The IV clips are the v2 cut (2026-09-24): encoded straight from
+  // FPV_IV.mp4 (frames 90-239 and 270-1080) at crf 25 / crf 26 for the 960,
+  // VMAF 99.8-99.9 against the source where v1 scored 91.6-93.1, at fewer
+  // bytes (docs/media/HERO_PERF.md).
   clips: [
-    { mp4_1920: mediaUrl("/media/hero/hero-iv-start-1280.mp4"), mp4_960: mediaUrl("/media/hero/hero-iv-start-960.mp4"), mbps: 2.94 },
+    { mp4_1920: mediaUrl("/media/hero/hero-iv-start-v2-1280.mp4"), mp4_960: mediaUrl("/media/hero/hero-iv-start-v2-960.mp4"), mbps: 2.8 },
     { mp4_1920: mediaUrl("/media/hero/hero-race-01-1920.mp4"), mp4_960: mediaUrl("/media/hero/hero-race-01-960.mp4"), mbps: 6.56 },
     { mp4_1920: mediaUrl("/media/hero/hero-race-02-1920.mp4"), mp4_960: mediaUrl("/media/hero/hero-race-02-960.mp4"), mbps: 7.32 },
     { mp4_1920: mediaUrl("/media/hero/hero-race-03-1920.mp4"), mp4_960: mediaUrl("/media/hero/hero-race-03-960.mp4"), mbps: 5.67 },
-    { mp4_1920: mediaUrl("/media/hero/hero-iv-rest-1280.mp4"), mp4_960: mediaUrl("/media/hero/hero-iv-rest-960.mp4"), mbps: 2.99 },
+    { mp4_1920: mediaUrl("/media/hero/hero-iv-rest-v2-1280.mp4"), mp4_960: mediaUrl("/media/hero/hero-iv-rest-v2-960.mp4"), mbps: 2.92 },
   ],
   loopFrom: 1,
   poster: "/media/hero/hero-fpv-poster.webp",

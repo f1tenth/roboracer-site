@@ -21,21 +21,29 @@ The hero plays these in order with crossfades (`HERO_VIDEO.clips` in
 `public/media/**/*.mp4` except the committed loop); the local copies live only
 in the main checkout's `public/media/hero/` for localhost.
 
+Since 2026-09-24 this branch plays the v2 IV clips (re-encoded from the
+source, docs/media/HERO_PERF.md); the v1 files stay on the bucket because the
+live site plays them until the branch merges.
+
 | Path | Size | Served from | On R2 |
 |---|---|---|---|
-| `/media/hero/hero-iv-start-1280.mp4` | 1,837,828 B (5.0 s, 2.94 Mbit/s) | R2 via `mediaUrl` | yes, 200, same size |
-| `/media/hero/hero-iv-start-960.mp4` | 1,157,235 B | R2 via `mediaUrl` | yes |
+| `/media/hero/hero-iv-start-v2-1280.mp4` | 1,753,434 B (5.0 s, 2.80 Mbit/s) | R2 via `mediaUrl` | yes, 200, checksum matches |
+| `/media/hero/hero-iv-start-v2-960.mp4` | 980,959 B | R2 via `mediaUrl` | yes |
+| `/media/hero/hero-iv-rest-v2-1280.mp4` | 9,881,466 B (27.1 s, 2.92 Mbit/s) | R2 via `mediaUrl` | yes |
+| `/media/hero/hero-iv-rest-v2-960.mp4` | 5,521,840 B | R2 via `mediaUrl` | yes |
+| `/media/hero/hero-iv-start-1280.mp4` (v1, live site) | 1,837,828 B (5.0 s, 2.94 Mbit/s) | R2 via `mediaUrl` | yes, 200, same size |
+| `/media/hero/hero-iv-start-960.mp4` (v1) | 1,157,235 B | R2 via `mediaUrl` | yes |
 | `/media/hero/hero-race-01-1920.mp4` | 9,082,061 B (11.1 s, 6.56 Mbit/s) | R2 via `mediaUrl` | yes |
 | `/media/hero/hero-race-01-960.mp4` | 2,687,154 B | R2 via `mediaUrl` | yes |
 | `/media/hero/hero-race-02-1920.mp4` | 11,952,683 B (13.1 s, 7.32 Mbit/s) | R2 via `mediaUrl` | yes |
 | `/media/hero/hero-race-02-960.mp4` | 3,384,069 B | R2 via `mediaUrl` | yes |
 | `/media/hero/hero-race-03-1920.mp4` | 4,305,272 B (6.1 s, 5.67 Mbit/s) | R2 via `mediaUrl` | yes |
 | `/media/hero/hero-race-03-960.mp4` | 1,182,659 B | R2 via `mediaUrl` | yes |
-| `/media/hero/hero-iv-rest-1280.mp4` | 10,104,517 B (27.0 s, 2.99 Mbit/s) | R2 via `mediaUrl` | yes |
-| `/media/hero/hero-iv-rest-960.mp4` | 6,496,629 B | R2 via `mediaUrl` | yes |
+| `/media/hero/hero-iv-rest-1280.mp4` (v1) | 10,104,517 B (27.0 s, 2.99 Mbit/s) | R2 via `mediaUrl` | yes |
+| `/media/hero/hero-iv-rest-960.mp4` (v1) | 6,496,629 B | R2 via `mediaUrl` | yes |
 
 The opening clip is `hero-iv-start`, not the committed FPV loop: the loop
-below only plays if a cycle clip fails to load.
+below only plays if a cycle clip fails to load. The race clips are unchanged.
 
 ## Committed files served by the site
 

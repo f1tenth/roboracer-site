@@ -160,6 +160,8 @@ Use the outreach template at `.claude/skills/roboracer-media/templates/permissio
 
 Gap: the master is 720p - ask the videographer for a higher-resolution original; re-encode is one command.
 
+**2026-09-24, IV clips v2 (landing clip cycle).** `hero-iv-start-v2-{1280,960}.mp4` (FPV_IV.mp4 frames 90-239) and `hero-iv-rest-v2-{1280,960}.mp4` (frames 270-1080), libx264 preset slow, crf 25 (1280, native size) / crf 26 (960, lanczos), 29.97 fps, faststart, no audio. On R2 only (`media/hero/`), not in git. Same provenance as the loop (organizer footage, granted). VMAF 99.8-99.9 against the source where the v1 cuts scored 91.6-93.1; numbers in `docs/media/HERO_PERF.md`.
+
 <details><summary>2026-08-20 encode of the older roboracer_fpv.mp4 (superseded)</summary>
 
 
