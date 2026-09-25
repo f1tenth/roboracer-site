@@ -41,13 +41,13 @@ const ENTRY_STEPS = [
   {
     n: "01",
     title: "Read the rules",
-    body: "Vehicle specification, track, time trial, and the head-to-head format. IROS 2026 adds multi-agent racing with up to four cars on track.",
+    body: "Car spec, track, time trials and head-to-head races. IROS 2026 adds races with up to four cars on track.",
     slack: false,
   },
   {
     n: "02",
     title: "Register your team",
-    body: "One form per team. Teams may have any number of members, but at most ten are at the race space during the event.",
+    body: "One form per team. Any team size, but no more than ten people in the race area during the event.",
     slack: false,
   },
   {
@@ -77,7 +77,7 @@ const LINK_ON_PAPER =
 function SlackLine() {
   return (
     <p className="mt-2 text-body text-text-body">
-      Feel free to reach out on{" "}
+      Ask us on{" "}
       <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
         Slack
       </a>
@@ -142,8 +142,7 @@ export default function RacePage() {
             </h1>
             <p className="mt-4 max-w-[60ch] text-lead text-text-on-ink-muted">
               {held > 0 ? `${held} competitions` : "Competitions"} since 2016, on four continents.
-              Every one of them is open to any team that can build a car and drive it autonomously -
-              undergraduates, research labs and companies race the same track under the same rules.
+              Any team with a car that drives itself can enter.
             </p>
           </div>
 
@@ -211,7 +210,7 @@ export default function RacePage() {
           id="race-enter"
           title="Enter"
           subtitle="How to enter"
-          lead="All the information for each competition is on that competition's own site. In short:"
+          lead="Each competition's own site has the details. In short:"
         />
         {/* The four steps, the buttons and the deadlines are all short, so they
             share the left half and the bridge shot takes the right rather than
@@ -281,7 +280,7 @@ export default function RacePage() {
           id="race-season"
           title="This season"
           subtitle="The rest of 2026"
-          lead="Each competition has its own site, its own registration and its own organizing committee."
+          lead="Each race has its own site, registration and organizers."
         />
         <SeasonChain events={upcoming} map={mapEvents} />
       </Section>
@@ -292,7 +291,7 @@ export default function RacePage() {
           id="race-history"
           title="Every race so far"
           subtitle="From Pittsburgh 2016 to Pittsburgh 2026"
-          lead="Every competition so far, with a link to its site. If a site has gone offline, the link goes to an archived copy."
+          lead="Each one links to its site, or to an archived copy if the site is gone."
         />
         <RaceTimeline events={past} />
       </Section>
@@ -303,7 +302,7 @@ export default function RacePage() {
           id="race-teams"
           title="Who competes"
           subtitle="Teams racing in 2026"
-          lead="Undergraduate teams, research labs and companies, all racing the same car spec. An unverified tag means we are still confirming the details."
+          lead="Students, labs and companies race the same car spec. An unverified tag means we're still checking the details."
         />
         <TeamGrid teams={teams} />
       </Section>
