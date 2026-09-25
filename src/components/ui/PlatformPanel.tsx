@@ -46,6 +46,17 @@ const DIAL_SCALE = [1, 0.66, 0.52, 0.44];
  * 4.4 steps of travel plus one row, instead of the whitespace of a linear
  * stack. */
 const DIAL_OFFSET = [0, 1, 1.65, 2.2];
+/**
+ * The mono index ("01") hangs in its own column left of its word, top on the
+ * word's cap height: stacked above the word it needed a line the compressed
+ * steps do not have, and printed across the neighbouring words at 1536x730
+ * (final QA). Each row scales about its word's left edge, so the words keep
+ * one left edge and each index keeps a gap in proportion to its row. The cap
+ * offset is Space Grotesk's (0.136 of the title at line-height 0.98) less
+ * JetBrains Mono's (0.13 of the index at line-height 1).
+ */
+const DIAL_INDEX =
+  "absolute left-0 top-[calc(0.136*var(--text-display-l)-0.13*var(--text-small))] font-mono text-small leading-none";
 const dialTone = (d: number) => (d === 0 ? "text-text-strong" : d === 1 ? "text-text-body" : "text-text-muted");
 
 const clamp01 = (x: number) => Math.min(1, Math.max(0, x));
@@ -196,7 +207,7 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
       >
         {/* Toward the edges (Cedric): the panel runs on the same 1,800 px bleed
             as the map; the Section itself is `bleed`. */}
-        <div className="mx-auto grid w-full max-w-page gap-6 px-6 desktop:gap-10 [--dial-row:3.5rem] [--dial-step:2.9rem] desktop:my-auto desktop:grid-cols-12 desktop:gap-x-12 desktop:gap-y-8 desktop:[@media(max-height:820px)]:gap-y-5 desktop:[--dial-row:min(5.5rem,8svh)] desktop:[--dial-step:min(4.75rem,6.4svh)]">
+        <div className="mx-auto grid w-full max-w-page gap-6 px-6 desktop:gap-10 [--dial-row:3.5rem] [--dial-step:2.9rem] [--dial-index:2rem] desktop:my-auto desktop:grid-cols-12 desktop:gap-x-12 desktop:gap-y-8 desktop:[@media(max-height:820px)]:gap-y-5 desktop:[--dial-row:min(5.5rem,8svh)] desktop:[--dial-step:min(4.75rem,6.4svh)]">
           {/* Row 1 of the left column (the tiles span both rows). */}
           {header && <div className="desktop:col-span-12">{header}</div>}
           {/* The media frame under the header (below `desktop:` each pillar
@@ -273,13 +284,13 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
                         data-row={row.id}
                         data-active={lit ? "true" : undefined}
                         role="listitem"
-                        className="absolute inset-x-0 top-1/2 origin-left transition-[transform,color] duration-[var(--duration-base)] ease-[var(--ease-out-expo)]"
+                        className="absolute inset-x-0 top-1/2 origin-[var(--dial-index)_50%] pl-[var(--dial-index)] transition-[transform,color] duration-[var(--duration-base)] ease-[var(--ease-out-expo)]"
                         style={{
                           transform: `translateY(calc(-50% + ${(i < active ? -1 : 1) * DIAL_OFFSET[Math.min(d, 3)]} * var(--dial-step))) scale(${DIAL_SCALE[Math.min(d, 3)]})`,
                           ...CLOUD_VARS,
                         }}
                       >
-                        <p className={`relative font-mono text-small ${FADE_COLORS} text-text-muted`}>{row.n}</p>
+                        <p className={`${DIAL_INDEX} ${FADE_COLORS} text-text-muted`}>{row.n}</p>
                         <h3 className={`font-display text-display-l font-semibold ${FADE_COLORS} ${dialTone(d)}`}>
                           <span className="relative inline-block">
                             <span aria-hidden="true" className={`${CLOUD} ${lit ? "opacity-100" : "opacity-0"}`} />
@@ -290,8 +301,9 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
                     );
                   })}
                 </div>
-                {/* One body and link at a time, in a block that never resizes. */}
-                <div className="mt-6 min-h-[8.5rem] border-t border-ink-950/10 pt-5 [@media(max-height:820px)]:mt-4 [@media(max-height:820px)]:min-h-[7rem] [@media(max-height:820px)]:pt-4">
+                {/* One body and link at a time, in a block that never resizes,
+                    its text on the words' edge, right of the index column. */}
+                <div className="mt-6 min-h-[8.5rem] border-t border-ink-950/10 pl-[var(--dial-index)] pt-5 [@media(max-height:820px)]:mt-4 [@media(max-height:820px)]:min-h-[7rem] [@media(max-height:820px)]:pt-4">
                   <p className={`max-w-[46ch] text-body text-text-body ${FADE_COLORS}`}>{current.body}</p>
                   <Link to={current.href} className={ROW_LINK}>
                     {current.linkText}
