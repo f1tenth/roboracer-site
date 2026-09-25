@@ -26,6 +26,9 @@ const SLACK_URL = "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50
  */
 const HERO_ROUTES = new Set(["/", "/styleguide"]);
 
+/** From lg the full link bar replaces the toggle (index.css .nav-links). */
+const LINK_BAR_QUERY = "(min-width: 64rem)";
+
 /**
  * The chapter publishes its ramp on the wrapper as `data-nav-fill="from to"`
  * in its own scroll progress (start "top top", end "bottom bottom"); the
@@ -111,6 +114,8 @@ export default function Navbar() {
   const location = useLocation();
   const navRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const scrimRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   // Mount tracks `menuOpen` on the way in and lags it on the way out, so the
   // panel is still in the DOM while its close tween runs.
@@ -123,6 +128,52 @@ export default function Navbar() {
   useEffect(() => {
     setMenuOpen(false);
   }, [location.key]);
+
+  // The open menu behaves as a dialog on a phone (mobile audit CHROME-02):
+  // the page under it neither scrolls nor takes focus (`inert` on everything
+  // beside the nav, so Tab stays in the bar and the menu), Escape closes it
+  // and hands focus back to the toggle, and so does a tap on the scrim.
+  // Widening the window past the toggle closes it too, so the lock can never
+  // outlive a menu that is no longer shown.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const nav = navRef.current;
+    const root = document.documentElement;
+    const previousOverflow = root.style.overflow;
+    const previousGutter = root.style.scrollbarGutter;
+    // A narrow window with a classic scrollbar keeps its gutter, so the page
+    // behind the scrim does not jump sideways when the scrollbar goes.
+    if (window.innerWidth > root.clientWidth) root.style.scrollbarGutter = "stable";
+    root.style.overflow = "hidden";
+    const inerted = Array.from(nav?.parentElement?.children ?? []).filter(
+      (el): el is HTMLElement => el instanceof HTMLElement && el !== nav && !el.inert,
+    );
+    for (const el of inerted) el.inert = true;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setMenuOpen(false);
+      toggleRef.current?.focus();
+    };
+    const linkBar = window.matchMedia(LINK_BAR_QUERY);
+    const onLinkBar = () => {
+      if (linkBar.matches) setMenuOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    linkBar.addEventListener("change", onLinkBar);
+    return () => {
+      root.style.overflow = previousOverflow;
+      root.style.scrollbarGutter = previousGutter;
+      for (const el of inerted) el.inert = false;
+      document.removeEventListener("keydown", onKeyDown);
+      linkBar.removeEventListener("change", onLinkBar);
+    };
+  }, [menuOpen]);
+
+  const closeFromScrim = () => {
+    setMenuOpen(false);
+    toggleRef.current?.focus();
+  };
 
   // --nav-alpha = clamp((p - from) / (to - from), 0, 1) where p is the hero
   // chapter's scroll progress, written by a ScrollTrigger on the chapter's
@@ -142,21 +193,22 @@ export default function Navbar() {
   useEffect(() => {
     if (!menuMounted) return;
     const el = menuRef.current;
-    if (!el) return;
+    const scrim = scrimRef.current;
+    if (!el || !scrim) return;
     const reduce = window.matchMedia(REDUCED_MOTION_QUERY).matches;
 
     if (menuOpen) {
       if (reduce) {
         gsap.set(el, { opacity: 1, y: 0 });
+        gsap.set(scrim, { opacity: 1 });
         return;
       }
-      const tween = gsap.fromTo(
-        el,
-        { opacity: 0, y: -10 },
-        { opacity: 1, y: 0, duration: DURATION.fast, ease: "power2.out" },
-      );
+      const tl = gsap
+        .timeline()
+        .fromTo(el, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: DURATION.fast, ease: "power2.out" }, 0)
+        .fromTo(scrim, { opacity: 0 }, { opacity: 1, duration: DURATION.fast, ease: "power2.out" }, 0);
       return () => {
-        tween.kill();
+        tl.kill();
       };
     }
 
@@ -164,15 +216,12 @@ export default function Navbar() {
       setMenuMounted(false);
       return;
     }
-    const tween = gsap.to(el, {
-      opacity: 0,
-      y: -10,
-      duration: DURATION.fast,
-      ease: "power2.in",
-      onComplete: () => setMenuMounted(false),
-    });
+    const tl = gsap
+      .timeline({ onComplete: () => setMenuMounted(false) })
+      .to(el, { opacity: 0, y: -10, duration: DURATION.fast, ease: "power2.in" }, 0)
+      .to(scrim, { opacity: 0, duration: DURATION.fast, ease: "power2.in" }, 0);
     return () => {
-      tween.kill();
+      tl.kill();
     };
   }, [menuOpen, menuMounted]);
 
@@ -232,7 +281,9 @@ export default function Navbar() {
   }, [transparent, location.pathname]);
 
   return (
-    <nav ref={navRef} className="navbar" aria-label="Main">
+    // data-lenis-prevent while open: on a narrow window with a mouse the
+    // landing's Lenis would otherwise keep scrolling the locked page on wheel.
+    <nav ref={navRef} className="navbar" aria-label="Main" data-lenis-prevent={menuOpen ? "" : undefined}>
       <Link to="/" className="nav-logo" aria-label="RoboRacer home">
         <BrandLogo />
       </Link>
@@ -277,17 +328,15 @@ export default function Navbar() {
       </div>
 
       {/* Under lg: the same button beside the menu toggle, no taller than
-          the wordmark (2rem on a phone, 2.5rem from sm) so the bar keeps its
-          4.5rem. Under 390px wide (an iPhone SE, a 360 Android) it would crowd
-          the wordmark, so it moves into the menu instead. */}
+          the wordmark (index.css .nav-primary-bar) so the bar keeps its
+          height. Under 390px wide (an iPhone SE, a 360 Android) it would crowd
+          the wordmark, so it moves to the top of the menu instead. */}
       <div className="flex items-center gap-4 lg:hidden">
-        <Link
-          to={START_HREF}
-          className="nav-primary hidden px-3.5 py-1.5 text-small leading-5 min-[24.375rem]:inline-flex sm:px-5 sm:py-2 sm:text-body sm:leading-6"
-        >
+        <Link to={START_HREF} className="nav-primary nav-primary-bar hidden min-[24.375rem]:inline-flex">
           Start here
         </Link>
         <button
+          ref={toggleRef}
           type="button"
           className="nav-menu-button"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -309,12 +358,26 @@ export default function Navbar() {
           what AnimatePresence used to do; unmounting on the state flip alone
           would cut the close animation off at frame one. */}
       {menuMounted && (
+        <div ref={scrimRef} className="mobile-menu-scrim lg:hidden" aria-hidden="true" onClick={closeFromScrim} />
+      )}
+      {menuMounted && (
         <div id="nav-mobile-menu" ref={menuRef} className="mobile-menu lg:hidden">
-          {links.map((link) => (
-            <Link key={link.href} to={link.href} className="mobile-menu-link">
-              {link.text}
-            </Link>
-          ))}
+          <Link to={START_HREF} className="nav-primary mobile-menu-primary min-[24.375rem]:hidden">
+            Start here
+          </Link>
+          {links.map((link) => {
+            const active = location.pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="mobile-menu-link"
+                aria-current={active ? "page" : undefined}
+              >
+                {link.text}
+              </Link>
+            );
+          })}
           <a
             href={SIMULATOR_URL}
             target="_blank"
@@ -327,9 +390,6 @@ export default function Navbar() {
           <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className="mobile-menu-link">
             Join the Slack
           </a>
-          <Link to={START_HREF} className="nav-primary mobile-menu-primary min-[24.375rem]:hidden">
-            Start here
-          </Link>
         </div>
       )}
     </nav>

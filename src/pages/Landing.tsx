@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useMemo } from "react";
+import { useCallback, useEffect, useState, useMemo, useSyncExternalStore } from "react";
 import {
   loadHighlights,
   loadPartners,
@@ -32,6 +32,8 @@ import { countWord } from "../lib/countWord";
 import CommunityJoin from "../components/ui/CommunityJoin";
 import MediaFrame from "../components/ui/MediaFrame";
 import EntryPaths from "../components/ui/EntryPaths";
+import PauseToggle from "../components/ui/PauseToggle";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import { useScrollToHash } from "../hooks/useScrollToHash";
 import { MediaHoldContext, mediaUrl } from "../lib/media";
 const HERO_VIDEO: HeroVideoSources = {
@@ -126,6 +128,92 @@ const MARQUEE_BASE_MD_S = 178;
  * (docs/media/HERO_PERF.md). */
 const HOLD_MEDIA_MAX_MS = 4000;
 
+function useMediaQuery(query: string): boolean {
+  const subscribe = useCallback(
+    (onChange: () => void) => {
+      const mql = window.matchMedia(query);
+      mql.addEventListener("change", onChange);
+      return () => mql.removeEventListener("change", onChange);
+    },
+    [query],
+  );
+  return useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(query).matches,
+    () => false,
+  );
+}
+
+type PartnerLinkProps = {
+  p: Partner;
+  /** False until the hero's opening clip has loaded (MediaHoldContext). */
+  load: boolean;
+  /** The colour logo shows on hover only: never requested where nothing
+   * hovers (a touch screen), which saved ~1.6 MB there (LANDING-13). */
+  canHover: boolean;
+  clone?: boolean;
+  /** A cell of the static reduced-motion grid rather than a ribbon item. */
+  cell?: boolean;
+};
+
+/** One partner: the grey logo, the colour one on hover, and the name pill. */
+function PartnerLink({ p, load, canHover, clone = false, cell = false }: PartnerLinkProps) {
+  const size = cell ? "max-w-full" : "max-w-28 md:max-w-[12.625rem]";
+  return (
+    <a
+      href={p.website}
+      target="_blank"
+      rel="noopener noreferrer"
+      tabIndex={clone ? -1 : undefined}
+      className={`group relative flex flex-col items-center justify-start ${cell ? "h-[2.125rem] w-full min-w-0 md:h-[4.5rem]" : "h-[3.75rem] w-auto shrink-0 md:h-[6.5rem]"}`}
+    >
+      <span className={`relative flex h-[2.125rem] items-center md:h-[4.5rem] ${cell ? "w-full justify-center" : ""}`}>
+        <img
+          src={load ? (p.image_rest ?? p.image) : undefined}
+          alt={p.name}
+          height={72}
+          width="auto"
+          /* Marquee children are never lazy (CommunityJoin note). */
+          loading="eager"
+          fetchPriority="low"
+          decoding="async"
+          className={`max-h-[2.125rem] w-auto object-contain md:max-h-[4.5rem] ${size}`}
+        />
+        {canHover && p.image_hover && (
+          <img
+            src={load ? p.image_hover : undefined}
+            alt=""
+            aria-hidden="true"
+            height={80}
+            width="auto"
+            loading="eager"
+            fetchPriority="low"
+            decoding="async"
+            className={`absolute inset-0 m-auto max-h-[2.125rem] w-auto object-contain opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100 md:max-h-[4.5rem] ${size}`}
+          />
+        )}
+      </span>
+      {/* Absolute, so the name never contributes to the item's
+          width: a long institution name used to stretch its own
+          cell and shove its neighbours apart. The logo alone sets
+          the width now, and the name wraps to two lines.
+          Anchored to the bottom rather than below the logo: the
+          marquee clips at the row height, so a second line used
+          to push the pill's bottom border outside the box and
+          the frame lost its lower edge. Growing upward keeps
+          that edge on screen at any line count. In the static grid there
+          is no clipping row, so the pill hangs below the logo instead of
+          reserving a band under every cell. */}
+      <span
+        aria-hidden="true"
+        className={`pointer-events-none absolute ${cell ? "top-full z-10 mt-1" : "bottom-0"} left-1/2 line-clamp-2 w-max max-w-[9rem] -translate-x-1/2 border border-ink-950/15 bg-paper-50 px-2 py-0.5 text-center font-mono text-eyebrow leading-tight tracking-normal text-text-strong opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100 md:max-w-[14rem]`}
+      >
+        {p.name} ↗
+      </span>
+    </a>
+  );
+}
+
 export default function Landing() {
   useLenis();
   // The nav's "Start here" links to /#start from every route.
@@ -138,6 +226,13 @@ export default function Landing() {
   const [platform, setPlatform] = useState<PlatformRow[]>([]);
   const [heroLoaded, setHeroLoaded] = useState(false);
   const releaseMedia = useCallback(() => setHeroLoaded(true), []);
+  const reduced = usePrefersReducedMotion();
+  const canHover = useMediaQuery("(hover: hover)");
+  // Touch screens get a Pause toggle per moving strip (they never hover);
+  // under reduced motion nothing moves, so there is nothing to pause.
+  const showPause = useMediaQuery("(pointer: coarse)") && !reduced;
+  const [highlightsPaused, setHighlightsPaused] = useState(false);
+  const [partnersPaused, setPartnersPaused] = useState(false);
 
   useEffect(() => {
     const t = window.setTimeout(releaseMedia, HOLD_MEDIA_MAX_MS);
@@ -207,9 +302,18 @@ export default function Landing() {
             id="highlights"
             title="Highlights"
             lead="Moments from 30+ competitions since 2016."
+            action={
+              showPause && highlights.length > 0 ? (
+                <PauseToggle
+                  paused={highlightsPaused}
+                  onToggle={() => setHighlightsPaused((v) => !v)}
+                  controls="highlight-strips"
+                />
+              ) : undefined
+            }
           />
         </div>
-        <HighlightReel items={highlights} />
+        <HighlightReel items={highlights} paused={highlightsPaused} id="highlight-strips" />
       </Section>
 
       {/* 3 · 02 The car (ink chapter) - builder, newbie. Carries its own
@@ -251,85 +355,61 @@ export default function Landing() {
             index="05"
             id="partners"
             title="Our partners"
-            className="mb-0"
+            className="compact:mb-0"
             action={
-              <p className="font-mono text-eyebrow tracking-normal text-text-muted">
-                {partners.length} institutions · alphabetical
-              </p>
+              <div className="flex items-center justify-between gap-4">
+                <p className="font-mono text-eyebrow tracking-normal text-text-muted">
+                  {partners.length} institutions · alphabetical
+                </p>
+                {showPause && partners.length > 0 && (
+                  <PauseToggle
+                    paused={partnersPaused}
+                    onToggle={() => setPartnersPaused((v) => !v)}
+                    controls="partner-ribbons"
+                  />
+                )}
+              </div>
             }
           />
         </div>
-        {/* Three ribbons: rows 1 and 3 run one way, row 2 the other. Under
-            reduced motion each row wraps into its own static grid, so every
-            institution still renders exactly once. */}
-        <div className="mt-8 flex flex-col gap-2 md:gap-6">
-          {partnerRows.map((row, rowIndex) => (
-            <Marquee
-              key={rowIndex}
-              label={`Partner institutions, row ${rowIndex + 1}`}
-              duration={Math.round(MARQUEE_BASE_S * (row.length / MARQUEE_REF_ITEMS))}
-              durationMd={Math.round(MARQUEE_BASE_MD_S * (row.length / MARQUEE_REF_ITEMS))}
-              // Rows 1 and 3 travel together, row 2 against them.
-              direction={rowIndex === 1 ? "reverse" : "normal"}
-              gap="gap-16 pr-16 md:gap-24 md:pr-24"
-            >
-              {({ clone }) =>
-                row.map((p) => (
-                  <a
-                    key={p.name}
-                    href={p.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    tabIndex={clone ? -1 : undefined}
-                    className="group relative flex h-[3.75rem] w-auto shrink-0 flex-col items-center justify-start md:h-[6.5rem]"
-                  >
-                    <span className="relative flex h-[2.125rem] items-center md:h-[4.5rem]">
-                      <img
-                        src={heroLoaded ? (p.image_rest ?? p.image) : undefined}
-                        alt={p.name}
-                        height={72}
-                        width="auto"
-                        /* Marquee children are never lazy (CommunityJoin note). */
-                        loading="eager"
-                        fetchPriority="low"
-                        decoding="async"
-                        className="max-h-[2.125rem] w-auto max-w-28 object-contain md:max-h-[4.5rem] md:max-w-[12.625rem]"
-                      />
-                      {p.image_hover && (
-                        <img
-                          src={heroLoaded ? p.image_hover : undefined}
-                          alt=""
-                          aria-hidden="true"
-                          height={80}
-                          width="auto"
-                          loading="eager"
-                          fetchPriority="low"
-                          decoding="async"
-                          className="absolute inset-0 m-auto max-h-[2.125rem] w-auto max-w-28 object-contain opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100 md:max-h-[4.5rem] md:max-w-[12.625rem]"
-                        />
-                      )}
-                    </span>
-                    {/* Absolute, so the name never contributes to the item's
-                        width: a long institution name used to stretch its own
-                        cell and shove its neighbours apart. The logo alone sets
-                        the width now, and the name wraps to two lines.
-                        Anchored to the bottom rather than below the logo: the
-                        marquee clips at the row height, so a second line used
-                        to push the pill's bottom border outside the box and
-                        the frame lost its lower edge. Growing upward keeps
-                        that edge on screen at any line count. */}
-                    <span
-                      aria-hidden="true"
-                      className="pointer-events-none absolute bottom-0 left-1/2 line-clamp-2 w-max max-w-[9rem] -translate-x-1/2 border border-ink-950/15 bg-paper-50 px-2 py-0.5 text-center font-mono text-eyebrow leading-tight tracking-normal text-text-strong opacity-0 transition-opacity duration-[var(--duration-fast)] group-hover:opacity-100 group-focus-visible:opacity-100 md:max-w-[14rem]"
-                    >
-                      {p.name} ↗
-                    </span>
-                  </a>
-                ))
-              }
-            </Marquee>
-          ))}
-        </div>
+        {reduced ? (
+          /* Reduced motion: every institution once, alphabetical, in one
+             dense grid (the three wrapped ribbons kept their 4rem gaps and
+             ran five phone screens, LANDING-10). */
+          <ul
+            aria-labelledby="partners"
+            className="mx-auto mt-8 grid max-w-page grid-cols-4 gap-x-3 gap-y-5 px-6 sm:grid-cols-6 md:gap-x-8 md:gap-y-8 lg:grid-cols-8 xl:grid-cols-10"
+          >
+            {partners.map((p) => (
+              <li key={p.name} className="flex min-w-0 justify-center">
+                <PartnerLink p={p} load={heroLoaded} canHover={canHover} cell />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          /* Three ribbons: rows 1 and 3 run one way, row 2 the other. */
+          <div
+            id="partner-ribbons"
+            data-marquee-paused={partnersPaused || undefined}
+            className="mt-8 flex flex-col gap-2 md:gap-6"
+          >
+            {partnerRows.map((row, rowIndex) => (
+              <Marquee
+                key={rowIndex}
+                label={`Partner institutions, row ${rowIndex + 1}`}
+                duration={Math.round(MARQUEE_BASE_S * (row.length / MARQUEE_REF_ITEMS))}
+                durationMd={Math.round(MARQUEE_BASE_MD_S * (row.length / MARQUEE_REF_ITEMS))}
+                // Rows 1 and 3 travel together, row 2 against them.
+                direction={rowIndex === 1 ? "reverse" : "normal"}
+                gap="gap-16 pr-16 md:gap-24 md:pr-24"
+              >
+                {({ clone }) =>
+                  row.map((p) => <PartnerLink key={p.name} p={p} load={heroLoaded} canHover={canHover} clone={clone} />)
+                }
+              </Marquee>
+            ))}
+          </div>
+        )}
       </Section>
 
       {/* 7 · 06 Next race (paper, 1800 wide) - competitor. After the map
@@ -341,8 +421,14 @@ export default function Landing() {
         <Section width="bleed" aria-labelledby="next-race">
           <div className="mx-auto max-w-page px-6">
             <SectionHeader index="06" id="next-race" title="Next race" subtitle="Come to our next race" />
-            <div className="grid gap-8 md:grid-cols-12 md:items-stretch md:gap-10">
-              <figure className="md:col-span-7">
+            {/* Splits at lg, not md: at 768 the panel's 5 columns wrapped
+                "Register your team" (mobile pass, LANDING-24a). Stacked on a
+                landscape phone the full-width clip was 451 px tall under a
+                334 px window, so on compact: its width follows the window's
+                height (the /race hero's cap) and it sits centred; a portrait
+                phone never reaches the cap. */}
+            <div className="grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10">
+              <figure className="lg:col-span-7 compact:mx-auto compact:w-full compact:max-w-[min(100%,calc((100svh-var(--spacing-nav)-3rem)*1272/720))]">
                 <div
                   className="overflow-hidden rounded-media border border-ink-950/10 bg-paper-100"
                   style={{ aspectRatio: `${RACE_HERO.width} / ${RACE_HERO.height}` }}
@@ -363,13 +449,13 @@ export default function Landing() {
                     href={RACE_HERO.creditHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-text-muted underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2"
+                    className="text-text-muted underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2 coarse:-my-3 coarse:py-3"
                   >
                     {RACE_HERO.creditLabel}
                   </a>
                 </figcaption>
               </figure>
-              <div className="md:col-span-5">
+              <div className="lg:col-span-5">
                 <NextRaceSpotlight
                   title={race.title}
                   headline={`${race.short_name ?? race.title}, ${race.location.split(",")[0].trim()}`}

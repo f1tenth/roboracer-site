@@ -95,8 +95,11 @@ function eventHref(e: MapEvent): string | undefined {
 const OPEN_FROM_YEAR = 2025;
 
 function YearRow({ year, list }: { year: number; list: MapEvent[] }) {
+  // One column that may shrink below its content's min-content width: an
+  // implicit `auto` track grew to fit the widest row and ran 2-9 px past a
+  // 320 px column once the earlier years were open.
   return (
-    <li className="grid gap-x-8 gap-y-4 border-t border-ink-950/10 py-8 md:grid-cols-12">
+    <li className="grid grid-cols-[minmax(0,1fr)] gap-x-8 gap-y-4 border-t border-ink-950/10 py-8 md:grid-cols-12">
           <h3 className="font-mono text-small text-text-muted md:col-span-2">{year}</h3>
           <ul className="flex flex-col gap-6 md:col-span-10">
             {list.map((e) => {
@@ -121,7 +124,9 @@ function YearRow({ year, list }: { year: number; list: MapEvent[] }) {
                           href={href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-display text-lead font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
+                          // Inline, so the touch padding (coarse:) grows the
+                          // hit area to 2.75rem without moving the line.
+                          className="font-display text-lead font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2 coarse:py-3"
                         >
                           {e.label}
                           <span className="sr-only">
@@ -131,7 +136,16 @@ function YearRow({ year, list }: { year: number; list: MapEvent[] }) {
                       ) : (
                         <span className="font-display text-lead font-semibold text-text-strong">{e.label}</span>
                       )}
-                      <span className="ml-3 font-mono text-small text-text-muted">{meta}</span>
+                      {/* JSX drops the whitespace here, so the label's last
+                          word and the city were one unbreakable run ("2022" +
+                          "Philadelphia,") that ran past a 320 px column. Below
+                          sm an em space takes the margin's place: the line may
+                          break after it, and it hangs at the end of the line
+                          instead of indenting the city on the next. */}
+                      <span aria-hidden="true" className="font-mono text-small sm:hidden">
+                        {"\u2003"}
+                      </span>
+                      <span className="font-mono text-small text-text-muted sm:ml-3">{meta}</span>
                     </span>
                     {tags.length > 0 && (
                       <span className="flex flex-wrap items-center gap-2">

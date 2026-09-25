@@ -31,6 +31,10 @@ import { useMediaHold } from "../../lib/media";
  * Under md: a horizontal scroll-snap row of stacked cards at 86vw, strip as
  * static indicators, no timer. Reduced motion: no timer, no transforms,
  * the current card alone with a 180 ms opacity swap; arrows still work.
+ * A landscape phone (wide but not desktop) gets the two-pane card at the
+ * window's height under the bar, so a card is never taller than the screen
+ * and nothing is read by scrolling inside a sideways row (mobile pass,
+ * LANDING-08). The strip and the arrows are 2.75rem tall on touch screens.
  */
 const INTERVAL_MS = 6000;
 /** Expanding strip (Cedric, v5 round two: "one image grows wider when we
@@ -69,6 +73,8 @@ const CREDIT = "mt-2 font-mono text-eyebrow tracking-normal text-text-muted";
 // Site-wide link contract: ink text, underline, violet underline on hover.
 const LINK =
   "text-small font-semibold text-text-strong underline decoration-1 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
+/** A 2.75rem hit area on touch screens that leaves the line box alone. */
+const TAP = "coarse:inline-block coarse:-my-3 coarse:py-3";
 const CHIP = "rounded-pill border border-ink-950/10 px-2.5 py-1 font-mono text-eyebrow tracking-normal text-text-muted";
 /** Credit line and strip run the full row width, 24 px side padding. */
 const RAIL = "px-6";
@@ -120,11 +126,11 @@ function lowerFirst(s: string): string {
   return s.length > 1 && s[1] === s[1].toLowerCase() ? s[0].toLowerCase() + s.slice(1) : s;
 }
 
-type FigureProps = { p: Publication; eager?: boolean };
+type FigureProps = { p: Publication; eager?: boolean; className?: string };
 
 /** Never a broken image: figure, then thumbnail, then a paper-100 block
  * with the venue initials. */
-function Figure({ p, eager = false }: FigureProps) {
+function Figure({ p, eager = false, className = "" }: FigureProps) {
   const chain = useMemo(() => figureChain(p), [p]);
   // The landing holds its figures until the hero's opening clip has loaded
   // (MediaHoldContext): 100 to 300 KB each.
@@ -148,7 +154,7 @@ function Figure({ p, eager = false }: FigureProps) {
       loading={eager ? "eager" : "lazy"}
       decoding="async"
       onError={() => setFailed((f) => f + 1)}
-      className="block h-full w-full object-contain"
+      className={`block h-full w-full object-contain ${className}`}
     />
   );
 }
@@ -193,7 +199,10 @@ type SlideProps = {
   position: number;
   count: number;
   tagLabels: Record<string, string>;
-  /** Under md: figure 16/10 on top, text below, abstract clamp 5. */
+  /** The row under desktop: in portrait the figure 16/10 on top, text below,
+   * abstract clamp 5; in landscape the two panes side by side at the card's
+   * fixed height, with a shorter title, abstract and no chip row (the meta
+   * line carries the topics). */
   stacked?: boolean;
   eager?: boolean;
   /** False for side cards: the link leaves the tab order. */
@@ -216,36 +225,60 @@ function Slide({ p, position, count, tagLabels, stacked = false, eager = false, 
     ...p.tags.map((t) => lowerFirst(tagLabels[t] ?? t)),
   ].join(" · ");
   return (
-    <div className={stacked ? "flex h-full flex-col" : "grid h-full grid-cols-[2fr_3fr] xl:grid-cols-[5fr_4fr]"}>
-      <div className={stacked ? "aspect-[16/10] bg-paper-100 p-4" : "min-w-0 bg-paper-100 p-5 xl:p-6"}>
-        <Figure p={p} eager={eager} />
+    <div
+      className={
+        stacked
+          ? "flex h-full flex-col landscape:grid landscape:grid-cols-[2fr_3fr]"
+          : "grid h-full grid-cols-[2fr_3fr] xl:grid-cols-[5fr_4fr]"
+      }
+    >
+      <div
+        className={
+          stacked
+            ? "aspect-[16/10] bg-paper-100 p-4 landscape:aspect-auto landscape:min-h-0 landscape:min-w-0"
+            : "min-w-0 bg-paper-100 p-5 xl:p-6"
+        }
+      >
+        {/* A two-pane card narrower than lg has a tall, thin figure pane: the
+            figure sits at its top, beside the title, not mid-pane. */}
+        <Figure p={p} eager={eager} className={stacked ? "landscape:object-top" : "max-lg:object-top"} />
       </div>
-      <div className={`flex min-w-0 flex-1 flex-col ${stacked ? "p-5" : "p-6"}`}>
-        <p className={`font-mono text-eyebrow tracking-normal text-text-muted ${stacked ? "" : "truncate"}`}>{meta}</p>
-        <h3 className="mt-3 line-clamp-3 font-display text-[1.375rem] leading-[1.625rem] font-semibold tracking-[-0.01em] text-text-strong">
+      <div
+        className={`flex min-w-0 flex-1 flex-col ${stacked ? "p-5 landscape:min-h-0 landscape:overflow-hidden landscape:p-4" : "p-6"}`}
+      >
+        <p
+          className={`font-mono text-eyebrow tracking-normal text-text-muted ${stacked ? "landscape:line-clamp-2" : "truncate"}`}
+        >
+          {meta}
+        </p>
+        <h3
+          className={`mt-3 line-clamp-3 font-display text-[1.375rem] leading-[1.625rem] font-semibold tracking-[-0.01em] text-text-strong ${stacked ? "landscape:mt-2 landscape:line-clamp-2" : ""}`}
+        >
           {p.title}
         </h3>
-        <p className="mt-2 line-clamp-2 text-small text-text-body">{authorLine(p.authors)}</p>
+        <p className={`mt-2 line-clamp-2 text-small text-text-body ${stacked ? "landscape:mt-1.5 landscape:line-clamp-1" : ""}`}>
+          {authorLine(p.authors)}
+        </p>
         {/* The abstract field verbatim; an empty area when it is missing. */}
         <p
-          className={`mt-2 text-[0.9375rem] leading-[1.4375rem] text-text-body ${stacked ? "line-clamp-5" : "line-clamp-5 xl:line-clamp-6"}`}
+          className={`mt-2 text-[0.9375rem] leading-[1.4375rem] text-text-body ${stacked ? "line-clamp-5 landscape:line-clamp-3" : "line-clamp-5 xl:line-clamp-6"}`}
         >
           {abstractOf(p) ?? ""}
         </p>
-        <div className="mt-auto pt-4">
+        <div className={`mt-auto pt-4 ${stacked ? "landscape:pt-3" : ""}`}>
           {href && (
             <a
               href={href}
               target="_blank"
               rel="noopener noreferrer"
               tabIndex={interactive ? undefined : -1}
-              className={LINK}
+              className={`${TAP} ${LINK}`}
             >
               Read the paper ↗
             </a>
           )}
           {p.tags.length > 0 && (
-            <ul className="mt-3 flex flex-wrap gap-2">
+            <ul className={`mt-3 flex flex-wrap gap-2 ${stacked ? "landscape:hidden" : ""}`}>
               {p.tags.map((t) => (
                 <li key={t} className={CHIP}>
                   {tagLabels[t] ?? t}
@@ -261,14 +294,15 @@ function Slide({ p, position, count, tagLabels, stacked = false, eager = false, 
 
 type ArrowProps = { direction: -1 | 1; onClick: () => void };
 
-/** 32 px hairline arrow; icons are ink strokes, never glyphs. */
+/** 32 px hairline arrow (44 on touch screens); icons are ink strokes, never
+ * glyphs. */
 function Arrow({ direction, onClick }: ArrowProps) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-label={direction < 0 ? "Previous paper" : "Next paper"}
-      className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-card border border-ink-950/15 text-text-strong transition-colors duration-[var(--duration-fast)] hover:border-ink-950/30"
+      className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-card border border-ink-950/15 text-text-strong transition-colors duration-[var(--duration-fast)] hover:border-ink-950/30 coarse:h-11 coarse:w-11"
     >
       <svg
         width="16"
@@ -522,8 +556,12 @@ export default function ResearchCarousel({
   useEffect(() => () => cancelAnimationFrame(scrollRaf.current), []);
 
   const strip = (
-    <div className={`mt-2.5 flex items-center gap-6 ${RAIL}`}>
-      <div className="flex min-w-0 flex-1 gap-2">
+    <div className={`mt-2.5 flex items-center gap-6 coarse:mt-1 ${RAIL}`}>
+      {/* On touch screens the segments are 2.75rem tall and touch each other
+          (no dead gap between targets); the drawn lines keep their 0.5rem
+          gaps through the inset. Eleven papers in a 342 px row still leaves
+          each target about 31 px wide. */}
+      <div className="flex min-w-0 flex-1 gap-2 coarse:gap-0">
         {items.map((p, i) => (
           <button
             key={p.id}
@@ -531,14 +569,14 @@ export default function ResearchCarousel({
             aria-label={`Go to paper ${i + 1}: ${p.title}`}
             aria-current={i === index ? "true" : undefined}
             onClick={() => select(i)}
-            className="relative h-8 min-w-0 flex-1 cursor-pointer"
+            className="relative h-8 min-w-0 flex-1 cursor-pointer coarse:h-11"
           >
-            <span className="absolute inset-x-0 top-[0.9375rem] h-0.5 bg-ink-950/10" />
+            <span className="absolute inset-x-0 top-[0.9375rem] h-0.5 bg-ink-950/10 coarse:inset-x-1 coarse:top-[calc(50%-1px)]" />
             <span
               ref={(el) => {
                 fillRefs.current[i] = el;
               }}
-              className="absolute inset-x-0 top-[0.9375rem] h-0.5 origin-left bg-ink-950/90"
+              className="absolute inset-x-0 top-[0.9375rem] h-0.5 origin-left bg-ink-950/90 coarse:inset-x-1 coarse:top-[calc(50%-1px)]"
             />
           </button>
         ))}
@@ -687,7 +725,7 @@ export default function ResearchCarousel({
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`${i + 1} of ${n}`}
-                className={`w-[86vw] shrink-0 snap-start overflow-hidden ${CARD}`}
+                className={`w-[86vw] shrink-0 snap-start overflow-hidden landscape:h-[min(calc(100svh-var(--spacing-nav)-2rem),30rem)] ${CARD}`}
               >
                 <Slide p={p} position={i + 1} count={n} tagLabels={tagLabels} stacked eager={i === 0} />
               </div>

@@ -32,10 +32,13 @@ around it — if a task seems to need one of those, say so and ask.
 
 The landing is a **v1.0 draft**, not finished. In priority order:
 
-1. **Mobile design pass.** Nothing overflows or breaks any more (see the
-   `desktop:` variant in section 4), but the small-screen *reading experience*
-   was never designed: type scale, section rhythm, how the pinned chapters read
-   when they are not pinned. This is a design job, not a bug hunt.
+1. **Mobile design pass: done on `revamp/p2-mobile` (2026-09-25).** Audit of
+   every route on five phone and tablet sizes (`docs/mobile/AUDIT.md`), the plan
+   (`docs/mobile/PLAN.md`), and the verification (`docs/mobile/VERIFY.md`). The
+   pinned chapters read unpinned on `compact:` (below `desktop:`), the menu is
+   bounded and modal, section rhythm and headings follow the window on phones,
+   tap targets are 44 px on `coarse:`. Open items and Cedric's questions are at
+   the end of VERIFY.md.
 2. **Copy pass.** Only the hero has had real text written. Every other section
    carries working copy: section leads, captions, the `TODO(content)` markers,
    and the ten team entries still tagged `status: verify`. Facts come from
@@ -92,6 +95,14 @@ that are easy to get wrong:
   not `md:`, for anything pinned or viewport-height — a landscape phone is wide
   but has no vertical room. `DESKTOP_QUERY` in `src/lib/motion.ts` is the same
   query for JS.
+- **`compact:` and `coarse:` variants, `--spacing-nav`** (mobile pass,
+  2026-09-25). `compact:` is the exact complement of `desktop:` (a phone in
+  either orientation); `coarse:` is `(pointer: coarse)`, for 44 px touch
+  targets that leave the mouse layout alone. `pt-nav` / `top-nav` /
+  `calc(var(--spacing-nav) + 1rem)` place anything under the fixed bar: 4.5rem
+  below 1024, 3.5rem on a short landscape screen, 5.3125rem from 1024. Never
+  hard-code the bar height again. Below `desktop:` the section padding follows
+  the window height and h1-h3 use `text-wrap: balance`.
 - **Section headers.** The section's *name* is the `title` ("Platform"), the
   old headline is the `subtitle`, the description is the `lead`.
   `SectionHeader` takes `index`, `title`, `subtitle`, `lead`, `action`.

@@ -4,6 +4,10 @@ import type { Highlight } from "../../lib/data";
 
 type HighlightReelProps = {
   items: Highlight[];
+  /** Held still by the section's touch Pause toggle (ui/PauseToggle). */
+  paused?: boolean;
+  /** Id for the toggle's aria-controls. */
+  id?: string;
 };
 
 // Shared tile geometry: row height clamp per the landing-v2 spec; width
@@ -29,8 +33,10 @@ const DIMS: Record<Highlight["aspect"], { w: number; h: number }> = {
  * viewports. "live" tiles render real media with a mono caption below;
  * "placeholder" tiles are honest neutral frames with the caption inside.
  * Reduced motion: no translation - a static wrapped grid of the first 6.
+ * On touch screens the section header carries a Pause toggle, which holds
+ * both rows through `data-marquee-paused` (index.css).
  */
-export default function HighlightReel({ items }: HighlightReelProps) {
+export default function HighlightReel({ items, paused = false, id }: HighlightReelProps) {
   const reduced = usePrefersReducedMotion();
   // JSON is untyped at runtime: drop entries whose status/aspect we cannot
   // render instead of crashing mid-strip.
@@ -52,7 +58,11 @@ export default function HighlightReel({ items }: HighlightReelProps) {
 
   const mid = Math.ceil(valid.length / 2);
   return (
-    <div className="flex flex-col gap-6 [&:focus-within_.rr-marquee-track]:[animation-play-state:paused]">
+    <div
+      id={id}
+      data-marquee-paused={paused || undefined}
+      className="flex flex-col gap-6 [&:focus-within_.rr-marquee-track]:[animation-play-state:paused]"
+    >
       <Row items={valid.slice(0, mid)} duration={52} />
       <Row items={valid.slice(mid)} duration={60} reverse />
     </div>

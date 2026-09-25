@@ -58,3 +58,7 @@ dist-*/
 
 # stray probe files from build agents
 *.probe.tmp
+
+# mobile pass (2026-09-24): audit and verify captures stay local
+docs/mobile/audit/
+docs/mobile/verify/

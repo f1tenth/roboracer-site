@@ -22,6 +22,7 @@ import PeopleGroup from "../components/about/PeopleGroup";
 import ContributorStrip from "../components/about/ContributorStrip";
 import PartnerWall from "../components/about/PartnerWall";
 import SpinoffGrid from "../components/about/SpinoffGrid";
+import PhoneFold from "../components/about/PhoneFold";
 import YouTubeFacade, { YouTubeFacadeSkeleton } from "../components/ui/YouTubeFacade";
 import NearViewport from "../components/about/NearViewport";
 import { countWord } from "../lib/countWord";
@@ -148,8 +149,14 @@ export default function About() {
       {/* Hero (ink): the thesis and the ledger. The old page opened on an
           undefined bg-brand-radial panel whose text sat straight on the page
           background and only became legible on hover; this is a real ink
-          surface with the AA text roles. */}
-      <Section variant="ink" width="bleed" className="pt-[5.5rem] md:pt-[6.5625rem]">
+          surface with the AA text roles. It starts a rem under the bar at
+          every size, the bar's height being the nav token (4.5rem, 3.5rem on a
+          short landscape window, 5.3125rem from lg), like the /race hero. */}
+      <Section
+        variant="ink"
+        width="bleed"
+        className="pt-[calc(var(--spacing-nav)+1rem)] lg:pt-[calc(var(--spacing-nav)+1.25rem)]"
+      >
         <div className="mx-auto max-w-page px-6">
           <div className="grid gap-10 md:grid-cols-12 md:gap-x-10">
             <div className="md:col-span-7">
@@ -187,7 +194,7 @@ export default function About() {
               <p className="mt-8 border-t border-text-on-ink/15 pt-6 font-mono text-small text-text-on-ink-muted">
                 founded 2016, University of Pennsylvania ·{" "}
                 <a href={SCHOLAR_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_INK}>
-                  the Google Scholar search &#8599;
+                  the Google Scholar search&nbsp;&#8599;
                 </a>
               </p>
             </div>
@@ -200,7 +207,13 @@ export default function About() {
             copy is switched off below so the page never plays it twice. */}
         {youtube !== null && (
           <div className="mx-auto mt-12 max-w-page px-6">
-            {youtube ? <YouTubeFacade yt={youtube} /> : <YouTubeFacadeSkeleton />}
+            {/* On a landscape phone the full-width 16:9 frame was taller than
+                the window; there the width follows the window's height so the
+                whole frame fits under the bar, centred (ABOUT-05). A portrait
+                phone never reaches the cap. */}
+            <div className="mx-auto compact:max-w-[min(100%,calc((100svh-6rem)*16/9))]">
+              {youtube ? <YouTubeFacade yt={youtube} /> : <YouTubeFacadeSkeleton />}
+            </div>
           </div>
         )}
       </Section>
@@ -307,12 +320,20 @@ export default function About() {
                 emptyLabel="The contributor list didn't load."
               />
             </div>
-            <div className="mt-10">
+            {/* On a phone the earlier contributors fold behind their own
+                label, like the Past crew (ABOUT-02): 35 chips were about
+                1,100 px at 390. */}
+            <div className="mt-10 max-sm:hidden">
               <p className="font-mono text-small text-text-muted">
                 earlier{pastContributors.length ? ` · ${pastContributors.length}` : ""}
               </p>
               <ContributorStrip contributors={pastContributors} emptyLabel="" />
             </div>
+            {pastContributors.length > 0 && (
+              <PhoneFold className="mt-4" label={`earlier · ${pastContributors.length}`}>
+                <ContributorStrip contributors={pastContributors} emptyLabel="" reveal={false} />
+              </PhoneFold>
+            )}
           </div>
           <PeopleGroup
             id="about-past-crew"
@@ -320,6 +341,7 @@ export default function About() {
             lead="Earlier team members, from the old F1TENTH about page. Their roles aren't confirmed yet."
             people={PAST_CREW}
             compact
+            fold={12}
           />
         </div>
       </Section>

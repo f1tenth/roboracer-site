@@ -23,6 +23,8 @@ type SectionHeaderProps = {
 /**
  * Section top: numbered mono eyebrow ("01 / Next race") with a 4px ink
  * index marker, tight display title, optional lead and right-aligned action.
+ * Below desktop the gap under it is 2rem, not 3rem, and the action takes the
+ * full row under md (the /research search box fills the column).
  */
 export default function SectionHeader({
   index,
@@ -39,7 +41,7 @@ export default function SectionHeader({
   const ink = on === "ink";
   const titleSize = size === "s" ? "text-lead font-semibold" : "text-display-m font-semibold";
   return (
-    <header className={`${size === "s" ? "mb-8" : "mb-12"} flex flex-wrap items-end justify-between gap-6 ${className}`}>
+    <header className={`${size === "s" ? "mb-8" : "mb-8 desktop:mb-12"} flex flex-wrap items-end justify-between gap-6 ${className}`}>
       <div className="max-w-2xl">
         {(index || eyebrow) && (
           <p
@@ -70,7 +72,7 @@ export default function SectionHeader({
           </p>
         )}
       </div>
-      {action && <div className="min-w-0 max-w-full">{action}</div>}
+      {action && <div className="min-w-0 max-w-full max-md:w-full">{action}</div>}
     </header>
   );
 }

@@ -29,6 +29,10 @@ type NextRaceSpotlightProps = {
 
 type Remaining = { days: number; hours: number; minutes: number };
 
+/** The panel's headline steps down to display-m below desktop, so on a phone
+ * the page's h1 (and the landing's section titles) still outrank it. */
+const HEADLINE = "text-display-m desktop:text-display-l";
+
 type Cta = { href: string; label: string; internal: boolean };
 
 function CtaButton({ cta, on, variant }: { cta: Cta; on: "paper" | "ink"; variant: "primary" | "secondary" }) {
@@ -109,16 +113,16 @@ export default function NextRaceSpotlight({
   const muted = ink ? "text-text-on-ink-muted" : "text-text-muted";
   return (
     <article
-      className={`flex h-full flex-col gap-8 rounded-card border p-8 md:p-10 ${ink ? "border-text-on-ink/15" : "border-ink-950/10 bg-paper-50"}`}
+      className={`flex h-full flex-col gap-8 rounded-card border p-6 sm:p-8 lg:p-10 ${ink ? "border-text-on-ink/15" : "border-ink-950/10 bg-paper-50"}`}
     >
       <div>
         {headline ? (
           <>
-            <Heading className={`font-display text-display-l font-semibold ${strong}`}>{headline}</Heading>
+            <Heading className={`font-display ${HEADLINE} font-semibold ${strong}`}>{headline}</Heading>
             <p className={`mt-3 font-display text-display-s font-semibold ${strong}`}>{datesHeadline}</p>
           </>
         ) : (
-          <Heading className={`font-display text-display-l font-semibold ${strong}`}>{datesHeadline}</Heading>
+          <Heading className={`font-display ${HEADLINE} font-semibold ${strong}`}>{datesHeadline}</Heading>
         )}
         {datesSecondary && <p className={`mt-3 text-lead ${ink ? "text-text-on-ink-muted" : "text-text-body"}`}>{datesSecondary}</p>}
       </div>

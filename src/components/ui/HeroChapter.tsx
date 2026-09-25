@@ -1,11 +1,12 @@
 import { Fragment, useEffect, useId, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
-import { EASE_IN_OUT_QUART, MOTION_OK_QUERY, gsap, useGSAP } from "../../lib/motion";
+import { DESKTOP_QUERY, EASE_IN_OUT_QUART, MOTION_OK_QUERY, gsap, useGSAP } from "../../lib/motion";
 import { linkCanStream, linkStalled, markLinkStalled } from "../../lib/media";
 
 export type HeroClip = {
-  /** Desktop encode (served from 768px up); the key keeps the media-skill
-   * name whatever the file's native width. */
+  /** Desktop encode (served where DESKTOP_QUERY matches: 768px wide and
+   * 544px tall; a landscape phone gets the 960); the key keeps the
+   * media-skill name whatever the file's native width. */
   mp4_1920: string;
   mp4_960: string;
   /** Average bitrate of the desktop encode in Mbit/s. On a link that cannot
@@ -15,7 +16,7 @@ export type HeroClip = {
 };
 
 export type HeroVideoSources = {
-  /** Desktop encode (served from 768px up). The committed file is the
+  /** Desktop encode (served where DESKTOP_QUERY matches). The committed file is the
    * source's native 1280 width; the key keeps the media-skill name. */
   mp4_1920: string;
   mp4_960: string;
@@ -62,7 +63,7 @@ type HeroChapterProps = {
  *   p 0.10-0.42  headline assembles: 7 units (line 1, then 6 words), each
  *                yPercent 110 -> 0 + opacity 0 -> 1 over 0.11 of the pin,
  *                ease in-out quart, unit starts 0.035 apart, last lands at 0.42;
- *                AND the block scales 1 -> 1.30 (1.20 under 768px) over the
+ *                AND the block scales 1 -> 1.30 (1.12 below `desktop:`) over the
  *                same window, power1.inOut, so the scale is at its max exactly
  *                as the last unit lands
  *   p 0.42-1.00  hold: full text, no transforms, to the release of the pin
@@ -133,12 +134,13 @@ const SCHEDULE = {
 
 /** Pin length. v3 shipped 320vh; kept in v4 (the fade now runs to the
  * release, so there is no dead scroll at the end; section 12 of
- * docs/plans/landing-v4.md). */
-const HEIGHT_CLASS = "h-[320vh]";
+ * docs/plans/landing-v4.md). Below `desktop:` (phones, mobile pass L-2) the
+ * pin is 200vh: one screen of travel, so the headline is complete about 0.4
+ * of a screen in and the schedule's quiet stretch (the hold before the nav
+ * fill) is a quarter of a screen instead of a whole one. */
+const HEIGHT_CLASS = "h-[200vh] desktop:h-[320vh]";
 
 const navFill = (r: { fillStart: number; fillEnd: number }) => `${r.fillStart} ${r.fillEnd}`;
-
-const WIDE_QUERY = "(min-width: 768px)";
 
 /** Crossfade between clips (seconds); the incoming clip starts this long
  * before the current one ends and fades in over it. */
@@ -206,11 +208,14 @@ const DISPLAY_TYPE =
   // Phones: 8.5vw (33 px at 390). At 9.5vw the longest line reached the
   // viewport edge once the 1.2 zoom peaked (Cedric, v1.0: "too close to the
   // edges on mobile"); 8.5vw with the 1.12 narrow ceiling leaves the px-6
-  // gutter clear on 390 and 430.
-  "block text-center font-display text-[8.5vw] font-semibold leading-[0.95] tracking-[-0.03em] md:text-[7.4vw] lg:text-[clamp(2rem,8.5vw,8.5rem)]";
+  // gutter clear on 390 and 430. Capped by the height (10svh, 39 px at
+  // 844x390) so a landscape phone fits the three lines and the description
+  // between the bar and the bottom edge. The two desktop sizes are split at
+  // lg so neither depends on stylesheet order.
+  "block text-center font-display text-[min(8.5vw,10svh)] font-semibold leading-[0.95] tracking-[-0.03em] desktop:max-lg:text-[7.4vw] desktop:lg:text-[clamp(2rem,8.5vw,8.5rem)]";
 
 /**
- * The landing's first 320vh: the FPV loop under the transparent nav, the
+ * The landing's first 320vh (200vh on phones): the FPV loop under the transparent nav, the
  * headline assembling in front of it while it zooms, a hold, then the whole
  * block fading in place before the paper Highlights strip slides over the
  * darkened hero. CSS sticky does the pinning (works without JS); one scrubbed
@@ -316,7 +321,11 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       activeRef.current = a ? [a] : [];
       return;
     }
-    const wide = window.matchMedia(WIDE_QUERY).matches;
+    // The desktop zoom, the 1280/1920 encodes and the desktop type all key on
+    // DESKTOP_QUERY (wide AND tall), never on width alone: a landscape phone
+    // is 844 wide but 390 tall, and the width rule put the first headline
+    // line under the nav and streamed it the desktop files (LANDING-03, -25).
+    const wide = window.matchMedia(DESKTOP_QUERY).matches;
     // Chosen per clip at load time, so a link that slows down mid-cycle
     // drops to the 960 encodes for the clips after.
     const srcOf = (c: HeroClip) => (wide && desktopOk(c.mbps) ? c.mp4_1920 : c.mp4_960);
@@ -500,7 +509,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       const vid = layerRef.current;
       if (!root || !vid) return;
       const mm = gsap.matchMedia();
-      mm.add({ ok: MOTION_OK_QUERY, wide: WIDE_QUERY }, (ctx) => {
+      mm.add({ ok: MOTION_OK_QUERY, wide: DESKTOP_QUERY }, (ctx) => {
         const { ok, wide } = ctx.conditions as { ok: boolean; wide: boolean };
         if (!ok) return;
         const block = root.querySelector<HTMLElement>(".rr-hero-block");
@@ -745,8 +754,8 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
               height={video.height}
               aria-hidden="true"
             >
-              {video.webm_1920 && <source src={video.webm_1920} type="video/webm" media={WIDE_QUERY} />}
-              <source src={video.mp4_1920} type="video/mp4" media={WIDE_QUERY} />
+              {video.webm_1920 && <source src={video.webm_1920} type="video/webm" media={DESKTOP_QUERY} />}
+              <source src={video.mp4_1920} type="video/mp4" media={DESKTOP_QUERY} />
               <source src={video.mp4_960} type="video/mp4" />
             </video>
           )}
@@ -767,25 +776,30 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
         />
 
         {/* The headline sits in front of the video and lets pointer events
-            through so hovering anywhere still reveals the pause control. */}
-        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 md:px-10">
+            through so hovering anywhere still reveals the pause control. On
+            a short window (a landscape phone) it centres in the space under
+            the bar, so no line ever sits behind the nav. */}
+        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 desktop:px-10 [@media(max-height:33.99rem)]:pt-nav">
           {headline(true)}
           {/* The description's top margin clears the block's zoom overflow
-              (scale 1.3 adds ~15% of its height below its layout box). */}
+              (scale 1.3 adds ~15% of its height below its layout box; 1.12
+              about 6% below `desktop:`, so a short window takes 8svh). */}
           {description && (
-            <p className="rr-hero-desc mt-16 max-w-[62ch] text-center text-lead text-text-on-ink/90 opacity-0 md:mt-24">
+            <p className="rr-hero-desc mt-[min(4rem,8svh)] max-w-[62ch] text-center text-lead text-text-on-ink/90 opacity-0 desktop:mt-24">
               {description}
             </p>
           )}
         </div>
 
+        {/* Revealed by hover or focus with a mouse; always shown where there
+            is no hover (touch), at 44px (WCAG 2.2.2, R-4). */}
         <button
           type="button"
           onClick={togglePlayback}
           aria-pressed={paused}
           aria-label={paused ? "Play footage" : "Pause footage"}
-          className={`absolute right-6 bottom-6 z-10 flex h-10 w-10 items-center justify-center rounded-btn border border-text-on-ink/30 bg-ink-950/40 text-text-on-ink transition-opacity duration-[var(--duration-fast)] focus-visible:opacity-100 focus-visible:outline-text-on-ink ${
-            paused ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+          className={`absolute right-6 bottom-6 z-10 flex h-10 w-10 items-center justify-center rounded-btn border border-text-on-ink/30 bg-ink-950/40 text-text-on-ink transition-opacity duration-[var(--duration-fast)] focus-visible:opacity-100 focus-visible:outline-text-on-ink coarse:h-11 coarse:w-11 ${
+            paused ? "opacity-100" : "opacity-0 group-hover:opacity-100 [@media(hover:none)]:opacity-100"
           }`}
         >
           {paused ? (

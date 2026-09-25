@@ -7,6 +7,10 @@ import { rowThumb } from "./figures";
 const LINK =
   "underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2";
 const MONO = "font-mono text-eyebrow tracking-normal text-text-muted";
+// The row's own paper links are 2.75rem hit areas on touch screens; the list
+// around them takes the growth back with a matching negative margin, so the
+// rows keep their rhythm (mobile pass, 2026-09-25: they were 40x18 and 24x18).
+const TAP = "coarse:inline-flex coarse:min-h-11 coarse:min-w-11 coarse:items-center";
 
 /**
  * The picture beside a row (Cedric, pages v2: every curated paper carries one,
@@ -22,13 +26,16 @@ const MONO = "font-mono text-eyebrow tracking-normal text-text-muted";
  *
  * Decorative in both states: the title, venue and year sit next to it in text,
  * so an alt would only make the list read twice.
+ *
+ * 5rem below sm: at 7.5rem a 390 phone had 206px left for the title, which
+ * ran five to eight lines.
  */
 function RowThumb({ publication }: { publication: Publication }) {
   const figure = useMemo(() => rowThumb(publication), [publication]);
   const [failed, setFailed] = useState(false);
   const show = figure && !failed;
   return (
-    <div className="w-[7.5rem] shrink-0 overflow-hidden rounded-media border border-ink-950/10 bg-paper-100 sm:w-[10.5rem] md:w-[14rem] lg:w-[20rem]">
+    <div className="w-20 shrink-0 overflow-hidden rounded-media border border-ink-950/10 bg-paper-100 sm:w-[10.5rem] md:w-[14rem] lg:w-[20rem]">
       <div className="relative aspect-[16/10]">
         {show ? (
           <img
@@ -80,7 +87,7 @@ export default function PaperRow({
       <div className="flex items-start gap-4 md:gap-5">
         <RowThumb publication={p} />
         <div className="min-w-0">
-          <h4 className="font-display text-lead font-semibold leading-snug text-text-strong">
+          <h4 className="font-display text-lead font-semibold leading-snug text-text-strong max-sm:text-body">
             {href ? (
               <a href={href} target="_blank" rel="noopener noreferrer" className={LINK}>
                 {p.title}
@@ -98,7 +105,7 @@ export default function PaperRow({
       </div>
       {href ? (
         extras.length > 0 && (
-          <ul className="flex gap-4 font-mono text-small md:justify-end" aria-label="Links">
+          <ul className="flex gap-4 font-mono text-small coarse:-my-3 md:justify-end" aria-label="Links">
             {extras.map((x) => (
               <li key={x.label}>
                 <a
@@ -106,7 +113,7 @@ export default function PaperRow({
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${x.label}: ${p.title}`}
-                  className={`text-text-strong ${LINK}`}
+                  className={`text-text-strong ${LINK} ${TAP}`}
                 >
                   {x.label}
                 </a>
@@ -115,14 +122,14 @@ export default function PaperRow({
           </ul>
         )
       ) : (
-        <p className={`flex flex-wrap items-center gap-x-3 gap-y-1 md:justify-end ${MONO}`}>
+        <p className={`flex flex-wrap items-center gap-x-3 gap-y-1 coarse:-my-3 md:justify-end ${MONO}`}>
           <span>no link on file</span>
           <a
             href={scholarSearchUrl(p.title)}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Find on Google Scholar: ${p.title}`}
-            className={`text-text-strong ${LINK}`}
+            className={`text-text-strong ${LINK} ${TAP}`}
           >
             find on Scholar
           </a>

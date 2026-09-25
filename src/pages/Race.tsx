@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { preload } from "react-dom";
 import {
   loadEventsMap,
   loadTeams,
@@ -18,6 +19,7 @@ import SeasonChain from "../components/race/SeasonChain";
 import Leaderboard from "../components/race/Leaderboard";
 import { useNow } from "../components/race/useNow";
 import type { SeasonEvent } from "../components/race/eventState";
+import { DESKTOP_QUERY } from "../lib/motion";
 
 // Same clip and the same credit as the landing's next-race section
 // (docs/ASSET_MANIFEST.md V4-11); the frame links to RoboRacer's own post,
@@ -71,6 +73,23 @@ const SLACK_URL =
 const LINK_ON_PAPER =
   "text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
 
+/** A standalone link (not one inside a sentence) is 2.75rem tall on touch
+ * screens, with a matching negative margin so its line does not move. */
+const TAP = "coarse:-my-3 coarse:inline-flex coarse:min-h-11 coarse:items-center";
+
+/**
+ * Whether the window was desktop-sized when the page opened. Only there does
+ * the hero clip load with the page (`priority`). On a phone the poster leads:
+ * it is preloaded at high priority and the clip follows once the frame is
+ * on screen, instead of the 1272 px encode competing with the poster for the
+ * first paint in a 342 px box (RACE-06). Read once: this is a load-time
+ * choice, and re-reading it on a rotate would swap the playing video out.
+ */
+function useDesktopAtLoad(): boolean {
+  const [desktop] = useState(() => window.matchMedia(DESKTOP_QUERY).matches);
+  return desktop;
+}
+
 /**
  * Slack is never named without a way to reach it in the same breath, so the
  * invite is always the word itself.
@@ -118,6 +137,8 @@ export default function RacePage() {
     };
   }, []);
 
+  const heroFirst = useDesktopAtLoad();
+  if (!heroFirst) preload(HERO.poster, { as: "image", fetchPriority: "high" });
   const now = useNow();
   const race = upcoming.find((e) => e.spotlight) ?? upcoming[upcoming.length - 1];
   // The same rule as the spotlight: after the deadline this section stops
@@ -134,8 +155,14 @@ export default function RacePage() {
 
   return (
     <>
-      {/* Hero: the next race, not a page title over an empty band. */}
-      <Section variant="ink" width="bleed" className="pt-[5.5rem] md:pt-[6.5625rem]">
+      {/* Hero: the next race, not a page title over an empty band. The top
+          padding follows the nav bar's height token, so the short landscape
+          bar (3.5rem) does not leave a 3rem ink band above the eyebrow. */}
+      <Section
+        variant="ink"
+        width="bleed"
+        className="pt-[calc(var(--spacing-nav)+1rem)] lg:pt-[calc(var(--spacing-nav)+1.25rem)]"
+      >
         <div className="mx-auto max-w-page px-6">
           <div className="max-w-3xl">
             <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-on-ink-muted">
@@ -155,8 +182,14 @@ export default function RacePage() {
             </p>
           </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-12 md:items-stretch md:gap-10">
-            <figure className="md:col-span-7">
+          {/* Video and panel sit side by side from lg only. At 768 the 7/5
+              split left the panel 276px (the CTA wrapped, the dates took three
+              lines) and at 844x390 the panel ran two screens beside a short
+              video (RACE-01), so tablets and landscape phones stack like the
+              portrait phone. Stacked, the clip is never taller than the screen
+              below the bar: a landscape phone gets it at the width that fits. */}
+          <div className="mt-12 grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10">
+            <figure className="max-lg:max-w-[calc((100svh-var(--spacing-nav)-3rem)*1272/720)] lg:col-span-7">
               <div
                 className="overflow-hidden rounded-media border border-text-on-ink/10 bg-ink-800"
                 style={{ aspectRatio: `${HERO.width} / ${HERO.height}` }}
@@ -167,7 +200,7 @@ export default function RacePage() {
                   alt={HERO.alt}
                   width={HERO.width}
                   height={HERO.height}
-                  priority
+                  priority={heroFirst}
                   radius="none"
                   className="h-full"
                 />
@@ -178,7 +211,7 @@ export default function RacePage() {
                   href={HERO.creditHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-text-on-ink-muted underline decoration-text-on-ink/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
+                  className={`text-text-on-ink-muted underline decoration-text-on-ink/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2 ${TAP}`}
                 >
                   {HERO.creditLabel}
                 </a>
@@ -190,8 +223,12 @@ export default function RacePage() {
                 fetch resolves (CLS 0.25 at 390). The reserve is deliberately
                 a little under the panel's real height at every width we
                 render, so it shrinks the jump without leaving a gap once the
-                panel is in. */}
-            <div className={`md:col-span-5${race ? "" : " min-h-[40rem]"}`}>
+                panel is in. Stacked from sm to lg the panel runs full width and
+                is about 29rem tall (768, 844x390); in the phone column, 38rem
+                and up. */}
+            <div
+              className={`lg:col-span-5${race ? "" : " min-h-[36rem] sm:min-h-[28rem] lg:min-h-[40rem]"}`}
+            >
               {race && (
                 <NextRaceSpotlight
                   on="ink"
@@ -276,7 +313,7 @@ export default function RacePage() {
           <div className="flex flex-wrap justify-between gap-x-4">
             <dt>questions</dt>
             <dd>
-              <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
+              <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={`${LINK_ON_PAPER} ${TAP}`}>
                 RoboRacer teams Slack
               </a>
             </dd>
