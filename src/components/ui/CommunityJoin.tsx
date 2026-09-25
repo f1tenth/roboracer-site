@@ -5,11 +5,10 @@ import Section from "./Section";
 import Marquee from "./Marquee";
 import YouTubeFacade from "./YouTubeFacade";
 import SectionHeader from "./SectionHeader";
-import SocialButton from "./SocialButton";
+import SocialButton, { SocialGlyph, type SocialNetwork } from "./SocialButton";
 import MediaFrame from "./MediaFrame";
 import PauseToggle from "./PauseToggle";
 import { useMediaHold } from "../../lib/media";
-import VerifyTag from "../about/VerifyTag";
 
 // Links from the content skill (Slack invite confirmed by Cedric, 2026-08-20;
 // GitHub org). LinkedIn: the content skill still says VERIFY; the page at this
@@ -31,6 +30,17 @@ const LINK =
  * padding is taken back by the negative margin). */
 const TAP = "coarse:inline-block coarse:-my-3 coarse:py-3";
 
+/** Mono small-caps label over each block of the section. */
+const EYEBROW = "font-mono text-eyebrow uppercase tracking-[0.14em] text-text-muted";
+
+/** The three channels under the Slack card: name and the handle a reader
+ * would search for (no claims about what is posted there). */
+const CHANNELS: { network: SocialNetwork; name: string; handle: string; href: string }[] = [
+  { network: "linkedin", name: "LinkedIn", handle: "The Roboracer Foundation", href: LINKEDIN_URL },
+  { network: "instagram", name: "Instagram", handle: "@roboracer.ai", href: INSTAGRAM_URL },
+  { network: "github", name: "GitHub", handle: "github.com/f1tenth", href: GITHUB_URL },
+];
+
 // Same paper surface and hairline system as the publications.
 const CARD =
   "rounded-card border border-ink-950/10 bg-paper-50 transition-colors duration-[var(--duration-fast)] hover:border-ink-950/30";
@@ -46,13 +56,17 @@ type CommunityJoinProps = {
 };
 
 /**
- * Landing section 08 / Join (serves everyone, audiences skill): the live
- * Slack numbers from community.json, Cedric's Korea photo, the four channels
- * (Slack is the one solid violet CTA of the viewport; LinkedIn, Instagram and
- * GitHub carry the logo gradient in their glyphs), and two "from the
- * community" cards: a LinkedIn post re-hosted as a native video and the
- * ICRA 2025 reel behind a click-to-load YouTube facade. All media paths come
- * from community.json (written by the media curator, landing v4 section 9).
+ * Landing section 09 / Join (serves everyone, audiences skill). The copy
+ * column leads (Cedric, 2026-09-25: "the image is too big with respect to
+ * the text, which is basically empty"): who is there in the header lead,
+ * then the Slack card with the live numbers from community.json and the one
+ * solid violet CTA of the viewport, then the other three channels as a
+ * ruled list (glyphs in the logo gradient), then the contact address. The
+ * Korea photo is the supporting column beside it with its caption. Below:
+ * the "from the community" strip (the Open Robotics clip and the community
+ * LinkedIn posts) and the ICRA 2025 reel behind a click-to-load YouTube
+ * facade. All media paths come from community.json (media curator, landing
+ * v4 section 9).
  */
 export default function CommunityJoin({ className = "", index = "09", showYouTube = true }: CommunityJoinProps) {
   const [community, setCommunity] = useState<Community | null>(null);
@@ -83,39 +97,59 @@ export default function CommunityJoin({ className = "", index = "09", showYouTub
 
   return (
     <Section edge rule width="page" id="join" aria-labelledby="join-title" className={className}>
-      <SectionHeader index={index} id="join-title" title="Join" subtitle={title} />
-      <div className="grid gap-10 md:grid-cols-12 md:gap-x-6">
-        <div className="md:col-span-5">
-          {community && (
-            <>
-              <dl className="flex flex-wrap gap-x-10 gap-y-6 border-y border-ink-950/10 py-6">
-                <Stat value={community.members_display} label="members" />
-                <Stat value={community.timezones.toLocaleString("en-US")} label="time zones" />
-              </dl>
-              <p className="mt-3 font-mono text-small text-text-muted">updated {community.updated}</p>
-            </>
-          )}
-          <div className="mt-10 flex flex-wrap items-center gap-3">
-            <SocialButton network="slack" variant="primary" href={SLACK_URL}>
-              Join the Slack
-            </SocialButton>
-            <SocialButton network="linkedin" href={LINKEDIN_URL}>
-              LinkedIn
-            </SocialButton>
-            <SocialButton network="instagram" href={INSTAGRAM_URL} soon={!INSTAGRAM_URL}>
-              Instagram
-            </SocialButton>
-            <SocialButton network="github" href={GITHUB_URL}>
-              GitHub
-            </SocialButton>
+      <SectionHeader
+        index={index}
+        id="join-title"
+        title="Join"
+        subtitle={title}
+        lead="Students, researchers and engineers at more than 90 universities in over 20 countries build the car, race it and publish on it."
+      />
+      {/* grid-cols-1 is minmax(0, 1fr): a long handle truncates instead of
+          widening the phone column past the screen. */}
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-start md:gap-x-8 lg:gap-x-12">
+        <div className="min-w-0 md:col-span-7">
+          {/* Slack first: it is where the numbers are and the one solid CTA. */}
+          <div className="rounded-card border border-ink-950/10 bg-paper-50 p-6 lg:p-8">
+            <p className={`flex items-center gap-2.5 ${EYEBROW}`}>
+              <SocialGlyph network="slack" size="1rem" />
+              <span>Slack · where the community talks</span>
+            </p>
+            <div className="mt-6 flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
+              {community && (
+                <div>
+                  <dl className="flex flex-wrap gap-x-10 gap-y-6">
+                    <Stat value={community.members_display} label="members" />
+                    <Stat value={community.timezones.toLocaleString("en-US")} label="time zones" />
+                  </dl>
+                  <p className="mt-4 font-mono text-eyebrow tracking-normal text-text-muted">updated {community.updated}</p>
+                </div>
+              )}
+              <SocialButton network="slack" variant="primary" href={SLACK_URL}>
+                Join the Slack
+              </SocialButton>
+            </div>
           </div>
-          <p className="mt-6 font-mono text-small text-text-muted">
-            <a className={`inline-block py-2 coarse:-my-1 coarse:py-3 ${LINK}`} href={`mailto:${CONTACT_EMAIL}`}>
+
+          <h3 className={`mt-10 ${EYEBROW}`}>Also on</h3>
+          <ul className="mt-3 border-t border-ink-950/10">
+            {CHANNELS.map((c) => (
+              <li key={c.network} className="border-b border-ink-950/10">
+                <ChannelRow {...c} />
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-8 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <span className={EYEBROW}>Write to us</span>
+            <a
+              className={`inline-block py-2 font-mono text-small coarse:-my-1 coarse:py-3 ${LINK}`}
+              href={`mailto:${CONTACT_EMAIL}`}
+            >
               {CONTACT_EMAIL}
             </a>
           </p>
         </div>
-        <figure className="order-first md:order-none md:col-span-7">
+        <figure className="md:col-span-5">
           {photo ? (
             <MediaFrame
               src={photo.src}
@@ -131,9 +165,8 @@ export default function CommunityJoin({ className = "", index = "09", showYouTub
               style={{ aspectRatio: "4 / 3" }}
             />
           )}
-          <figcaption className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-small text-text-muted">
-            <span>{photo ? photo.caption : "photo pending"}</span>
-            {photo?.caption_verify && <VerifyTag />}
+          <figcaption className="mt-3 font-mono text-small text-text-muted">
+            {photo ? photo.caption : "photo pending"}
           </figcaption>
         </figure>
       </div>
@@ -329,11 +362,45 @@ function PostCard({ post, clone = false }: { post: JoinPost; clone?: boolean }) 
   );
 }
 
-/** Our poster and a play glyph until the card is mostly in view; then the
- * privacy-enhanced embed loads and plays muted on its own (Cedric,
- * 2026-08-22: "automatically play ... start it with volume muted"). Under
- * reduced motion it stays a click-to-play facade, and nothing from YouTube
- * loads before that click. */
+/** One channel of the ruled list, name left, handle right (an index row):
+ * the whole row is the link (a 2.75rem-plus target everywhere) and its name
+ * takes the site's link underline. A channel without an address yet shows a
+ * mono "soon" tag and no link. */
+function ChannelRow({ network, name, handle, href }: (typeof CHANNELS)[number]) {
+  const body = (
+    <>
+      <SocialGlyph network={network} size="1.25rem" />
+      <span
+        className={`shrink-0 font-display text-body font-semibold text-text-strong ${
+          href ? "underline decoration-ink-950/25 underline-offset-4 group-hover:decoration-rr-violet group-hover:decoration-2" : ""
+        }`}
+      >
+        {name}
+      </span>
+      <span className="min-w-0 flex-1 truncate text-right font-mono text-small text-text-muted">{handle}</span>
+    </>
+  );
+  if (!href) {
+    return (
+      <div className="flex items-center gap-4 py-4">
+        {body}
+        <span className="rounded-pill border border-ink-950/10 px-2 py-0.5 font-mono text-eyebrow tracking-normal text-text-muted">
+          soon
+        </span>
+      </div>
+    );
+  }
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 py-4 coarse:py-5">
+      {body}
+      <span aria-hidden="true" className="text-small text-text-strong">
+        ↗
+      </span>
+    </a>
+  );
+}
+
+/** A live number over its mono label. */
 function Stat({ value, label }: { value: string; label: string }) {
   return (
     // dt precedes dd in the DOM (valid dl grouping); the value renders on top.
