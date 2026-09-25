@@ -63,7 +63,19 @@ export default function Rules() {
     const target = arrivalHash.current;
     if (html === null || !target) return;
     arrivalHash.current = "";
-    document.getElementById(decodeURIComponent(target.slice(1)))?.scrollIntoView({ block: "start" });
+    const jump = () => document.getElementById(decodeURIComponent(target.slice(1)))?.scrollIntoView({ block: "start" });
+    jump();
+    // Web fonts that arrive after the jump reflow the thousands of pixels
+    // above the target (Safari has no scroll anchoring to absorb it), so
+    // jump once more when they are in, unless the reader has moved since.
+    const landed = window.scrollY;
+    let live = true;
+    void document.fonts?.ready.then(() => {
+      if (live && Math.abs(window.scrollY - landed) < 2) jump();
+    });
+    return () => {
+      live = false;
+    };
   }, [html]);
 
   useEffect(() => {
