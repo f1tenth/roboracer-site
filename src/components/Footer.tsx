@@ -24,7 +24,7 @@ export default function Footer() {
               className="h-10 w-auto"
             />
             <p className="text-gray-400 text-sm leading-relaxed">
-              Advancing autonomous racing through innovation, education, and competition.
+              Open-source autonomous racing since 2016.
             </p>
             <a 
               href="mailto:contact@roboracer.ai" 
@@ -36,7 +36,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Quick Links</h3>
+            <h3 className="font-semibold text-white mb-4">Quick links</h3>
             <ul className="space-y-3">
               {/* Client-side links: a plain href reloaded the whole app. */}
               <li><Link to="/about" className={LINK}>About</Link></li>
@@ -95,7 +95,7 @@ export default function Footer() {
               Join Slack
             </a>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Connect with our community to get started and ask questions.
+              Ask questions and get race news first.
             </p>
             {/* Sponsors read the footer for a contact; same mailto as the
                 landing's "Sponsor a race" path (public/data/paths.json). */}
