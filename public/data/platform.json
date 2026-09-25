@@ -3,7 +3,7 @@
     "id": "build",
     "n": "01",
     "title": "Build",
-    "body": "An open-source vehicle system: hardware designs and software anyone can build and race.",
+    "body": "Open-source hardware and software. Anyone can build the car and race it.",
     "href": "/build",
     "linkText": "Build the car",
     "media": {
@@ -18,7 +18,7 @@
     "id": "learn",
     "n": "02",
     "title": "Learn",
-    "body": "Course materials on perception, localization, planning, and safe control.",
+    "body": "Lectures and labs on perception, localization, planning and safe control.",
     "href": "/learn",
     "linkText": "Start the course",
     "media": {
@@ -33,7 +33,7 @@
     "id": "race",
     "n": "03",
     "title": "Race",
-    "body": "An international competition series at the major robotics conferences.",
+    "body": "Races at the major robotics conferences. Any team can enter.",
     "href": "/race",
     "linkText": "See the races",
     "media": {
@@ -48,14 +48,14 @@
     "id": "research",
     "n": "04",
     "title": "Research",
-    "body": "A common, citable platform for autonomy research.",
+    "body": "A shared car for autonomy research. More than a thousand papers reference it.",
     "href": "/research",
     "linkText": "Browse the research",
     "media": {
       "type": "video",
       "src": "/media/platform/platform-research-mppi-960.mp4",
       "poster": "/media/platform/platform-research-mppi-poster.webp",
-      "caption": "MPPI overtaking in the gym · UPenn",
+      "caption": "MPPI overtaking in the simulator · UPenn",
       "credit": "Video: Cedric Hollande"
     }
   }
