@@ -141,6 +141,66 @@ Legend: **KEEP** true and on-voice, leave alone. **CHANGE** true but weak/stale/
 7. IV 2026 (Detroit) results page (`iv2026-race.roboracer.ai/results.html`) still says "Results will be posted after the competition" as of 2026-08-21, two months after the event. You supplied the podium directly (1st Thunderbolt/UPenn/Cedric Hollande, 2nd 404 Racers/Milan Manoj and Manasi Shrekhar, 3rd West Virginia University, exact team name TBD) and it's used in `teams.proposed.json` sourced to you, but there's still no public URL to cite — can you get the results page updated, or confirm West Virginia University's exact competition team-name alias?
 8. Should `/rules`, `/chat` get nav or footer entries, or stay reachable only by direct link/route?
 
+### Spinoffs on /about (added 2026-09-24, branch `revamp/p2-spinoffs`)
+
+Data: `public/data/spinoffs.json`. `entries` render on /about as section 05
+"Spinoffs" (after Our Partners, before Videos); `candidates` do not render until
+you move them into `entries`. Nothing about spinoffs is in the content skill, so
+every entry is `status: "verify"` and shows the mono verify tag. Each record
+carries its `source` and an `evidence` list of the first-party pages it was
+drafted from; the sentences are ours, not theirs.
+
+**Facts to confirm**
+
+1. **Neobotics.** Public pages give: Massachusetts nonprofit, incorporated
+   Feb 26, 2025; builds the NeoRacer; the NeoRacer paper says it is built to
+   F1TENTH/RoboRacer race rules; Neobotics co-organized the 30th competition at
+   VTC 2026 in Boston (Koneshka Bandyopadhyay is on the organizer list in
+   `f1tenth/vtc2026-race`). Nothing public says it *grew out of* RoboRacer. Its
+   founders and advisors are Boston University people, and BU hosted the BU
+   F1TENTH Grand Prix on Nov 22, 2024 (organizers included Renato Mancuso, now
+   a Neobotics advisor, and Rahul). Did the founders come out of that race or
+   the BU F1TENTH club? If yes, the origin line can say so; today it only says
+   what is sourced.
+2. **Quanser.** No public source links Quanser or the QCar to F1TENTH/RoboRacer
+   (searched quanser.com, the f1tenth GitHub org and the web), and Quanser is
+   older than F1TENTH (its site says 35+ years). What is the connection: a
+   shared hardware lineage, a course, a race partnership? Until you say, the
+   card shows what Quanser is plus a verify tag and no origin line. If Quanser
+   is a partner rather than a spinoff, it belongs in `partners.json` instead.
+3. **LAMARRacing.** Sourced to the Lamarr Institute news post (Jun 8, 2026:
+   Best Performance Overall at ICRA 2026, fastest in the time trials, fourth in
+   the one-on-one races) and the team's arXiv paper 2603.07126 (all authors at
+   the University of Bonn, tested on a self-built RoboRacer car). OK to frame
+   a team as a spinoff? Side finding: that paper settles the open institution
+   question for LAMARRacing in `teams.json` (University of Bonn; not edited on
+   this branch).
+4. **Founding years.** Only Neobotics has one (2025). LAMARRacing and Quanser's
+   QCar have none on a public page, so `since` is null.
+
+**Candidates: keep or drop?** (each sourced, none rendered yet)
+
+5. **ForzaETH Race Stack** (product): ETH Zurich's open-source head-to-head
+   race stack, written by the ForzaETH team for RoboRacer races and released in
+   2024. Sources: arXiv 2403.11784 and github.com/ForzaETH/race_stack.
+6. **RoboRacer Sim Racing League** (initiative): the online digital-twin league
+   on Clemson's AutoDRIVE, first run at IROS 2024, since at CDC, ICRA and IROS.
+   Source: autodrive-ecosystem.github.io/competitions. It is co-run with
+   RoboRacer, so it may belong on /race rather than here.
+7. **Cavalier Autonomous Racing** (team): UVA's Indy Autonomous Challenge team,
+   founded by F1TENTH co-founder Madhur Behl; most first members had worked on
+   F1TENTH for five years. Sources: madhurbehl.com and the IAC team profile.
+   The clearest "grew out of F1TENTH" story in the public record.
+
+**Logo permissions to request**
+
+8. No spinoff has a logo with a provenance row in `docs/ASSET_MANIFEST.md`, so
+   every card is a wordmark. The Neobotics icon is already in
+   `public/partners/neobotics.webp` (partner wall, commit 13513e9) with no
+   manifest row; add the row and confirm it may be reused here. Quanser,
+   LAMARRacing (or the Lamarr Institute), and any candidate you keep would each
+   need a logo file plus written permission before `logo` is set.
+
 ## Questions for Rahul
 
 1. Can you reconfirm the "90+ universities" and "20+ countries" stats on the landing page, or give updated numbers?

@@ -1,19 +1,11 @@
 import { monogram, type Person } from "./people";
+import VerifyTag from "./VerifyTag";
 
 type PersonCardProps = {
   person: Person;
   /** Past crew: the tile shrinks and the type steps down one size. */
   compact?: boolean;
 };
-
-/** The mono tag that marks anything a public page has not confirmed. */
-function VerifyTag() {
-  return (
-    <span className="border border-ink-950/15 px-1.5 py-0.5 font-mono text-eyebrow tracking-normal text-text-muted">
-      verify
-    </span>
-  );
-}
 
 /**
  * One person as a hairline cell: a square photo or a mono monogram tile, the
