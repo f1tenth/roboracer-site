@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { gsap, ScrollTrigger, DURATION, REDUCED_MOTION_QUERY } from "../lib/motion";
+import { gsap, ScrollTrigger, DURATION, REDUCED_MOTION_QUERY, lockScroll } from "../lib/motion";
 import { START_HREF } from "../lib/wayfinding";
 
 const links = [
@@ -134,7 +134,8 @@ export default function Navbar() {
   // beside the nav, so Tab stays in the bar and the menu), Escape closes it
   // and hands focus back to the toggle, and so does a tap on the scrim.
   // Widening the window past the toggle closes it too, so the lock can never
-  // outlive a menu that is no longer shown.
+  // outlive a menu that is no longer shown. The shared scroll lock stops the
+  // page's own scrolling as well (lib/motion: Lenis, the hero's glide).
   useEffect(() => {
     if (!menuOpen) return;
     const nav = navRef.current;
@@ -145,6 +146,7 @@ export default function Navbar() {
     // behind the scrim does not jump sideways when the scrollbar goes.
     if (window.innerWidth > root.clientWidth) root.style.scrollbarGutter = "stable";
     root.style.overflow = "hidden";
+    const unlockScroll = lockScroll();
     const inerted = Array.from(nav?.parentElement?.children ?? []).filter(
       (el): el is HTMLElement => el instanceof HTMLElement && el !== nav && !el.inert,
     );
@@ -162,6 +164,7 @@ export default function Navbar() {
     document.addEventListener("keydown", onKeyDown);
     linkBar.addEventListener("change", onLinkBar);
     return () => {
+      unlockScroll();
       root.style.overflow = previousOverflow;
       root.style.scrollbarGutter = previousGutter;
       for (const el of inerted) el.inert = false;

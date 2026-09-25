@@ -47,7 +47,44 @@ export function useDesktop(): boolean {
 }
 
 /**
+ * Scroll lock, held by the open mobile menu. `overflow: hidden` on the root
+ * stops the reader's scrolling but not the page's own: a running Lenis
+ * animation carried on under the menu and the landing hero's auto-scroll
+ * glide still fired, so closing the menu could land somewhere else. While
+ * the lock is held, Lenis stops (useLenis) and the glide stands down
+ * (HeroChapter). A count, so two holders never release each other.
+ */
+let scrollLocks = 0;
+const scrollLockListeners = new Set<(locked: boolean) => void>();
+
+export function isScrollLocked(): boolean {
+  return scrollLocks > 0;
+}
+
+/** Take the lock; call the returned function once to release it. */
+export function lockScroll(): () => void {
+  scrollLocks += 1;
+  if (scrollLocks === 1) for (const fn of scrollLockListeners) fn(true);
+  let held = true;
+  return () => {
+    if (!held) return;
+    held = false;
+    scrollLocks -= 1;
+    if (scrollLocks === 0) for (const fn of scrollLockListeners) fn(false);
+  };
+}
+
+/** Called with true when the lock is first taken, false when it is freed. */
+export function onScrollLock(fn: (locked: boolean) => void): () => void {
+  scrollLockListeners.add(fn);
+  return () => {
+    scrollLockListeners.delete(fn);
+  };
+}
+
+/**
  * Lenis smooth scroll, desktop pointers only, never under reduced motion.
+ * Stopped (its animation cancelled) while the scroll lock is held.
  * Opt-in per page (the styleguide calls it); not mounted globally until the
  * landing page ships.
  */
@@ -62,7 +99,10 @@ export function useLenis(enabled = true) {
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add(update);
     gsap.ticker.lagSmoothing(0);
+    if (isScrollLocked()) lenis.stop();
+    const offLock = onScrollLock((locked) => (locked ? lenis.stop() : lenis.start()));
     return () => {
+      offLock();
       gsap.ticker.remove(update);
       lenis.destroy();
       ScrollTrigger.refresh();

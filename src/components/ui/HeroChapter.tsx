@@ -1,6 +1,6 @@
 import { Fragment, useCallback, useEffect, useId, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
-import { DESKTOP_QUERY, EASE_IN_OUT_QUART, MOTION_OK_QUERY, gsap, useGSAP } from "../../lib/motion";
+import { DESKTOP_QUERY, EASE_IN_OUT_QUART, MOTION_OK_QUERY, gsap, isScrollLocked, useGSAP } from "../../lib/motion";
 import { linkCanStream, linkStalled, markLinkStalled } from "../../lib/media";
 
 export type HeroClip = {
@@ -168,8 +168,9 @@ const AUTOSCROLL_DELAY_S = 1; // v5 round two: 3 s, then Cedric: "2 s earlier"
 const AUTOSCROLL_TARGET_P = 0.46;
 const AUTOSCROLL_DURATION_MS = 2600;
 
-/** Smooth scroll to `top` over `ms` (power2.inOut) with a rAF tween; resolves
- * to false if the user took over. */
+/** Smooth scroll to `top` over `ms` (power2.inOut) with a rAF tween; the
+ * returned function cancels it. It also stops, for good, if the scroll lock
+ * is taken (the mobile menu opened) while it runs. */
 function glideTo(top: number, ms: number): () => void {
   const from = window.scrollY;
   const start = performance.now();
@@ -183,6 +184,7 @@ function glideTo(top: number, ms: number): () => void {
   for (const ev of ["wheel", "touchstart", "keydown", "pointerdown"]) window.addEventListener(ev, cancel, { passive: true });
   const step = (now: number) => {
     if (cancelled) return;
+    if (isScrollLocked()) return cancel();
     const t = Math.min(1, (now - start) / ms);
     const e = t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
     window.scrollTo(0, from + (top - from) * e);
@@ -364,7 +366,9 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       if (autoDone || !root) return;
       window.clearTimeout(autoTimer);
       autoTimer = window.setTimeout(() => {
-        if (disposed || autoDone || window.scrollY > 8) return;
+        // The mobile menu is open (scroll lock): not now. The next time the
+        // cycle comes back to this clip schedules it again.
+        if (disposed || autoDone || window.scrollY > 8 || isScrollLocked()) return;
         autoDone = true;
         const target = root.getBoundingClientRect().top + window.scrollY + AUTOSCROLL_TARGET_P * (root.offsetHeight - window.innerHeight);
         cancelGlide = glideTo(target, AUTOSCROLL_DURATION_MS);
