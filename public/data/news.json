@@ -491,6 +491,8 @@
       "kind": "article",
       "event": null,
       "link": "https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+      "archive": "https://web.archive.org/web/20260515201552/https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+      "archive_note": "endeavors.unc.edu refuses connections (ERR_CONNECTION_REFUSED on 2026-09-24 and 2026-09-25, final QA); Wayback capture of 2026-05-15, HTTP 200 on 2026-09-25.",
       "author": null,
       "author_url": null,
       "affiliation": "University of North Carolina",

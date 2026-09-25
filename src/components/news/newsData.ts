@@ -33,6 +33,10 @@ export type NewsItem = {
   event?: string | null;
   /** Where the card sends the reader. Always external. */
   link: string;
+  /** Wayback capture of `link`, which the card links instead when the source
+   * no longer answers (the race timeline's rule). */
+  archive?: string | null;
+  archive_note?: string | null;
   author?: string | null;
   author_url?: string | null;
   affiliation?: string | null;
