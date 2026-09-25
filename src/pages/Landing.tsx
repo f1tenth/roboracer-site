@@ -62,7 +62,7 @@ const HEADLINE_LINES = ["Autonomous racing", "built and raced", "in the open"];
 // comprehensive learning resources powering the next generation of robotics
 // innovators", improved).
 const HERO_DESCRIPTION =
-  "RoboRacer is the open-source platform for learning robotics on a real one-tenth-scale car: perception, planning and control, a worldwide community that shares its work, and an international competition series at the largest robotics conferences, growing every year.";
+  "RoboRacer is an open-source race car at one-tenth scale. Program it to drive itself, then race it at the largest robotics conferences.";
 
 const SCHOLAR_URL =
   "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=";
@@ -182,7 +182,7 @@ export default function Landing() {
             index="01"
             id="highlights"
             title="Highlights"
-            lead="30+ competitions since 2016. Podiums, overtakes, packed exhibition halls."
+            lead="Moments from 30+ competitions since 2016."
           />
         </div>
         <HighlightReel items={highlights} />
@@ -206,7 +206,7 @@ export default function Landing() {
               id="pillars"
               title="Platform"
               subtitle="Build. Learn. Race. Research."
-              lead="A car anyone can build, courses that teach autonomy, races that test it, and research that grows on top."
+              lead="All four start with the same open-source car."
             />
           }
         />
@@ -226,7 +226,7 @@ export default function Landing() {
           <SectionHeader
             index="05"
             id="partners"
-            title="Our Partners"
+            title="Our partners"
             className="mb-0"
             action={
               <p className="font-mono text-eyebrow tracking-normal text-text-muted">
@@ -371,7 +371,7 @@ export default function Landing() {
           id="teams"
           title="Teams"
           subtitle="Who competes"
-          lead="Physical AI, raced: RL policies, MPPI and MPC controllers, multi-agent overtaking strategies, all on the same car. Seeded from the results pages of recent competitions; entries are tagged until verified."
+          lead="Teams from recent races, with their best result. An unverified tag means we're still checking the details."
         />
         <TeamGrid teams={teams} />
       </Section>
@@ -387,14 +387,14 @@ export default function Landing() {
             id="research"
             title="Research"
             subtitle="1,000+ publications build on this platform"
-            lead="This is physical AI at one-tenth scale: the teams you see racing run reinforcement learning policies, MPPI and model predictive controllers on real cars, and multi-agent strategy decides the overtakes. A Google Scholar search for the platform returns more than a thousand results; eight of the papers we feature:"
+            lead="Teams race reinforcement learning policies and model predictive controllers on real cars. Eight papers to start with."
             action={
               <div className="flex flex-wrap items-center gap-4">
                 <Button href={SCHOLAR_URL} variant="secondary" target="_blank" rel="noopener noreferrer">
-                  See the Scholar query
+                  Search Google Scholar
                 </Button>
                 <Button href="/research" variant="ghost" className="px-0!">
-                  All curated publications
+                  See every paper
                 </Button>
               </div>
             }
