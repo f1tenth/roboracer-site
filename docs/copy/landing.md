@@ -19,6 +19,8 @@ clip configuration were not touched; only the strings below changed.
 | Landing.tsx, 08 Research lead | This is physical AI at one-tenth scale: the teams you see racing run reinforcement learning policies, MPPI and model predictive controllers on real cars, and multi-agent strategy decides the overtakes. A Google Scholar search for the platform returns more than a thousand results; eight of the papers we feature: | Teams race reinforcement learning policies and model predictive controllers on real cars. Eight papers to start with. | 1 (50 words), 4. The thousand results stay in the subtitle ("1,000+ publications build on this platform") and the Scholar button |
 | Landing.tsx, 08 button | See the Scholar query | Search Google Scholar | 2 ("query"); same wording as /research |
 | Landing.tsx, 08 link | All curated publications | See every paper | 2 ("curated"), 6 (verb + object). The one the brief named |
+| Landing.tsx, car photo 2 alt (`CAR_PHOTOS[1]`) | Portrait view of a RoboRacer car at ICRA 2026 | Rendered image of a RoboRacer car, portrait view | fact: the image is AI-generated (code comment, landing v5 A9), so it must not read as a photo from an event. Lead's instruction |
+| Landing.tsx, car photo 2 caption | portrait view · ICRA 2026 | rendered view | same |
 | ExplodedModel.tsx, state 1 body ("Race-ready") | One car, assembled. Chassis, plate, LiDAR and wheels sit where the open-source URDF puts them. | Every part sits where the open-source design puts it. | 2 ("URDF" is jargon for a newcomer), 5 (the model shows the assembled car) |
 | ExplodedModel.tsx, state 2 body ("What is inside") | Eleven parts: the chassis, the accent plate, the LiDAR, the Jetson Orin, the power board, the VESC, the steering servo, and four wheels. | Eleven parts: chassis, platform deck, LiDAR, Jetson Orin, power board, VESC, steering servo and four wheels. | 1 (26 words), 7 ("accent plate" is our file name; /assembly calls it the platform deck). Same eleven parts |
 | ExplodedModel.tsx, state 3 body ("Build your own") | The whole assembly is open source. Pull it apart frame by frame in the interactive viewer. | The whole car is open source. Take it apart in the 3D viewer. | 2 ("frame by frame" no longer describes /assembly, which goes part by part) |
@@ -55,17 +57,16 @@ Left alone on purpose:
 - Carousel controls and states ("Read the paper ↗", "Previous paper", "Next
   paper", "No featured papers yet."), "Team site", "institution tbc",
   "unverified", "Start here", "scroll", "Play footage" / "Pause footage".
-- Media captions and alt text ("the hall · ICRA 2026, Vienna", "start line ·
-  ICRA 2026", "our post on LinkedIn ↗").
+- The other media captions and alt text ("the hall · ICRA 2026, Vienna",
+  "start line · ICRA 2026", "our post on LinkedIn ↗").
 
-Flagged for Cedric, not changed: `CAR_PHOTOS[1]` is marked in the code as an
-AI-generated image, but its alt text and caption say "Portrait view of a
-RoboRacer car at ICRA 2026" / "portrait view · ICRA 2026". That reads as a
-photo taken at ICRA 2026. It's a fact question, not a copy one, so it's his call.
+Question for Cedric: `CAR_PHOTOS[1]` is an AI-generated image. Its alt and
+caption now say so ("rendered view"). Keep it, or swap it for a real photo of
+the car?
 
 Count: 111 strings reviewed. Landing.tsx 29; components 82: HeroChapter 3,
 EntryPaths 1, ExplodedModel 13 plus 7 callout labels, WorldMapChapter 13,
 NextRaceSpotlight 10, TeamGrid 4, PlatformPanel 2 (its row text is
 platform.json), ResearchCarousel 9, CommunityJoin 17, YouTubeFacade 2,
-SocialButton 1. 15 changed (8 in Landing.tsx, 5 in ExplodedModel, 1 each in
-WorldMapChapter and NextRaceSpotlight), 96 left.
+SocialButton 1. 17 changed (10 in Landing.tsx, 5 in ExplodedModel, 1 each in
+WorldMapChapter and NextRaceSpotlight), 94 left.

@@ -92,7 +92,7 @@ const CAR_PHOTOS: readonly CarPhoto[] = [
   { src: "/media/car/car-photo-01-1200.webp", alt: "Two RoboRacer cars on the start line at ICRA 2026, the ForzaETH car in front", caption: "start line · ICRA 2026" },
   // Photo 2 is an AI-generated image supplied by Cedric (landing v5 A9): no credit line.
   // The car sits in the right 45% of the 16/9 frame: the 4/3 crop anchors right.
-  { src: "/media/car/car-photo-02-1200.webp", alt: "Portrait view of a RoboRacer car at ICRA 2026", caption: "portrait view · ICRA 2026", position: "100% 50%" },
+  { src: "/media/car/car-photo-02-1200.webp", alt: "Rendered image of a RoboRacer car, portrait view", caption: "rendered view", position: "100% 50%" },
 ];
 
 /**
