@@ -13,12 +13,39 @@ type PeopleGroupProps = {
   compact?: boolean;
 };
 
-/** Cards per row at base / sm / lg, matching the grid classes below.
+/** The grid classes and, for each column count they produce, the classes that
+ * show that count's filler cells only where it is in force (the tiers never
+ * overlap, so their order in the stylesheet does not matter).
+ *
+ * Wide groups (faculty, developers): on a phone, in either orientation
+ * (`compact:`), a person is a row - the portrait at 5rem beside the text - one
+ * to a line below sm, two from sm, three from lg on a short wide window; with
+ * the photo on top they were 13 phone screens of portraits, and at 844x390
+ * every card was taller than the window (mobile pass, ABOUT-02). The desktop
+ * grid (3 from 768, 4 from lg) is unchanged.
+ *
  * Past crew doubles up at lg (Cedric, 2026-08-23: half the tile, so a reader
- * reaches the partners without scrolling through fifty portraits). */
-const COLUMNS = {
-  wide: [2, 3, 4],
-  compact: [4, 7, 12],
+ * reaches the partners without scrolling through fifty portraits). Three
+ * across on a phone: at four, a 78-91 px tile clipped the longer names
+ * (ABOUT-01). */
+const GRID = {
+  wide: {
+    cols: "grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 compact:sm:grid-cols-2 compact:lg:grid-cols-3",
+    tiers: [
+      { cols: 2, show: "hidden compact:sm:max-lg:block" },
+      { cols: 3, show: "hidden compact:lg:block" },
+      { cols: 3, show: "hidden desktop:max-lg:block" },
+      { cols: 4, show: "hidden desktop:lg:block" },
+    ],
+  },
+  compact: {
+    cols: "grid-cols-3 sm:grid-cols-7 lg:grid-cols-12",
+    tiers: [
+      { cols: 3, show: "sm:hidden" },
+      { cols: 7, show: "hidden sm:max-lg:block" },
+      { cols: 12, show: "hidden lg:block" },
+    ],
+  },
 } as const;
 
 /** How many empty cells complete the last row at a given column count. */
@@ -33,24 +60,13 @@ const fillCount = (n: number, perRow: number) => (perRow - (n % perRow)) % perRo
  */
 export default function PeopleGroup({ id, title, lead, people, compact = false }: PeopleGroupProps) {
   if (people.length === 0) return null;
-  const cols = compact
-    ? "grid-cols-4 sm:grid-cols-7 lg:grid-cols-12"
-    : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4";
-  const [base, sm, lg] = compact ? COLUMNS.compact : COLUMNS.wide;
-  const fillers: { key: string; visibility: string }[] = [
-    ...Array.from({ length: fillCount(people.length, base) }, (_, i) => ({
-      key: `b${i}`,
-      visibility: "sm:hidden",
+  const { cols, tiers } = compact ? GRID.compact : GRID.wide;
+  const fillers: { key: string; visibility: string }[] = tiers.flatMap((tier, t) =>
+    Array.from({ length: fillCount(people.length, tier.cols) }, (_, i) => ({
+      key: `${t}-${i}`,
+      visibility: tier.show,
     })),
-    ...Array.from({ length: fillCount(people.length, sm) }, (_, i) => ({
-      key: `s${i}`,
-      visibility: "hidden sm:block lg:hidden",
-    })),
-    ...Array.from({ length: fillCount(people.length, lg) }, (_, i) => ({
-      key: `l${i}`,
-      visibility: "hidden lg:block",
-    })),
-  ];
+  );
 
   return (
     <div>

@@ -185,9 +185,11 @@ export default function PlatformList({ rows }: PlatformListProps) {
             </h3>
             <p className="mt-3 max-w-[60ch] text-lead text-text-body">{row.body}</p>
             <p className="mt-5">
+              {/* 2.75rem to tap on a touch screen; the negative margin keeps
+                  the line where it was (ABOUT-07). */}
               <Link
                 to={row.href}
-                className="text-body font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
+                className="text-body font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2 coarse:inline-block coarse:-my-3 coarse:py-3"
               >
                 {row.linkText}
               </Link>

@@ -187,7 +187,7 @@ export default function About() {
               <p className="mt-8 border-t border-text-on-ink/15 pt-6 font-mono text-small text-text-on-ink-muted">
                 founded 2016, University of Pennsylvania ·{" "}
                 <a href={SCHOLAR_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_INK}>
-                  the Google Scholar search &#8599;
+                  the Google Scholar search&nbsp;&#8599;
                 </a>
               </p>
             </div>
@@ -200,7 +200,13 @@ export default function About() {
             copy is switched off below so the page never plays it twice. */}
         {youtube !== null && (
           <div className="mx-auto mt-12 max-w-page px-6">
-            {youtube ? <YouTubeFacade yt={youtube} /> : <YouTubeFacadeSkeleton />}
+            {/* On a landscape phone the full-width 16:9 frame was taller than
+                the window; there the width follows the window's height so the
+                whole frame fits under the bar, centred (ABOUT-05). A portrait
+                phone never reaches the cap. */}
+            <div className="mx-auto compact:max-w-[min(100%,calc((100svh-6rem)*16/9))]">
+              {youtube ? <YouTubeFacade yt={youtube} /> : <YouTubeFacadeSkeleton />}
+            </div>
           </div>
         )}
       </Section>
