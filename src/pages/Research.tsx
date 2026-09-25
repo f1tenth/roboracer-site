@@ -220,7 +220,7 @@ export default function Research() {
                   href={scholarTagUrl(selectedTag)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`text-text-strong ${LINK}`}
+                  className={`text-text-strong ${LINK} coarse:-my-3 coarse:inline-flex coarse:min-h-11 coarse:items-center`}
                 >
                   Scholar: {selectedTag.label} ↗
                 </a>
