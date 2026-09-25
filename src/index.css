@@ -27,6 +27,13 @@
    research card was taller than the viewport (Cedric, v1.0). Chapters gate
    their pinned layout on this and fall back to their mobile layout. */
 @custom-variant desktop (@media (min-width: 48rem) and (min-height: 34rem));
+/* "compact" is the exact complement of desktop: a phone in either orientation,
+   or any window too narrow or too short for the pinned chapters. Chapters show
+   their unpinned, stacked layout here (mobile pass, 2026-09-25). */
+@custom-variant compact (@media not all and (min-width: 48rem) and (min-height: 34rem));
+/* Touch-sized hit areas (2.75rem) without touching the mouse layout; the same
+   query /assembly already writes as [@media(pointer:coarse)]. */
+@custom-variant coarse (@media (pointer: coarse));
 
 @theme {
   /* ---- Brand accent (the only accent family) ---- */
@@ -92,6 +99,11 @@
   --spacing-section: clamp(5rem, 12vw, 10rem);
   --spacing-section-tight: clamp(3rem, 7vw, 6rem);
   --spacing-gutter: 1.5rem;
+  /* The fixed nav bar's height, for anything that starts under it (pt-nav,
+     top-nav): 4.5rem below lg, where the bar is the wordmark plus the menu
+     toggle at every width (index.css .navbar). From lg it is the value the
+     pages already used for the full bar. Overridden in @layer base below. */
+  --spacing-nav: 4.5rem;
 
   /* ---- Containers ---- */
   --container-content: 72rem;
@@ -156,6 +168,36 @@ body {
   :focus-visible {
     outline: 2px solid var(--color-rr-violet);
     outline-offset: 2px;
+  }
+
+  @media (min-width: 64rem) {
+    :root {
+      --spacing-nav: 5.3125rem;
+    }
+  }
+
+  /* Phone rhythm (mobile pass, 2026-09-25). The desktop section padding
+     (clamp(5rem, 12vw, 10rem)) left a 160px blank band at every section
+     boundary on a 390 phone and 202px, half the screen, on a landscape one.
+     Below desktop the padding follows the window height instead: 3 to 4rem
+     (48 to 64px), 2.5 to 3rem when tight. Desktop and 768x1024 keep theirs. */
+  @media not all and (min-width: 48rem) and (min-height: 34rem) {
+    :root {
+      --spacing-section: clamp(3rem, 7svh, 4rem);
+      --spacing-section-tight: clamp(2.5rem, 5svh, 3rem);
+    }
+
+    /* A narrow column breaks headings early; balance them so no line holds
+       one orphan word, and keep a lone last word off running text. */
+    h1,
+    h2,
+    h3 {
+      text-wrap: balance;
+    }
+
+    p {
+      text-wrap: pretty;
+    }
   }
 }
 
