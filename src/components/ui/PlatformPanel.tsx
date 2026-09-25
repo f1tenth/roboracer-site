@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
-import { gsap, useGSAP, DESKTOP_QUERY, ScrollTrigger } from "../../lib/motion";
+import { gsap, useGSAP, useDesktop, DESKTOP_QUERY, ScrollTrigger } from "../../lib/motion";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import type { PlatformRow } from "../../lib/data";
 
@@ -9,7 +9,8 @@ type PlatformPanelProps = {
   /** The section header (eyebrow, title, lead). It renders inside the pinned
    * composition, above the media frame, so the chapter never shows a blank
    * band between a header outside the pin and the content centred inside it
-   * (Cedric, 2026-08-22: "big white gap"). Under md it sits above the list. */
+   * (Cedric, 2026-08-22: "big white gap"). Below `desktop:` it sits above
+   * the stacked pillars. */
   header?: ReactNode;
 };
 
@@ -19,21 +20,19 @@ const MEDIA_W = 1200;
 const MEDIA_H = 750;
 
 /**
- * Desktop pin length: the wrapper is 300vh tall (the `md:motion-safe:min-h-[300vh]`
+ * Desktop pin length: the wrapper is 300vh tall (the `desktop:motion-safe:min-h-[300vh]`
  * class below) and the sticky viewport is 100vh, so the panel travels 200vh
  * of scroll. Progress 0-1 over that travel is the only input to the panel.
  */
 /** Width of each opacity crossfade in pin progress, centred on a boundary. */
 const FADE = 0.04;
 /**
- * The pin runs only where the sticky layout applies: Tailwind's `md` (48rem)
- * and motion-safe. Under md the rows carry inline posters; under reduced
- * motion the posters stack in a static grid.
+ * The pin runs only where the sticky layout applies: `desktop:` (wide and
+ * tall) and motion-safe. Below `desktop:` the four pillars stack, each with
+ * its own poster (CompactPillars); under reduced motion on desktop the
+ * posters sit in a static grid.
  */
 const PIN_QUERY = `(prefers-reduced-motion: no-preference) and ${DESKTOP_QUERY}`;
-/** Motion is fine but there is no pin: phones and landscape phones. The dial
- * turns with the section's own scroll instead. */
-const ROLL_QUERY = "(prefers-reduced-motion: no-preference) and (max-width: 47.99rem), (prefers-reduced-motion: no-preference) and (max-height: 33.99rem)";
 
 /** The pillar dial (Cedric, v1.0: "only one of Build / Learn ... next to the
  * media, and it scrolls like the seconds on an alarm clock, same as the
@@ -92,8 +91,10 @@ const CLOUD_VARS = { "--cloud": "color-mix(in oklab, var(--color-rr-violet) 7%, 
 
 /** Colour-only transition shared by the tile and the text inside it. */
 const FADE_COLORS = "transition-colors duration-[var(--duration-base)] ease-[var(--ease-out-expo)]";
+// Touch: a 44px hit area (py-3); the margins give the 16px back so the text
+// sits where it does with a mouse.
 const ROW_LINK =
-  "mt-4 inline-block w-fit py-1 text-small font-semibold text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2";
+  "mt-4 inline-block w-fit py-1 coarse:-mb-2 coarse:mt-2 coarse:py-3 text-small font-semibold text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2";
 
 /**
  * Platform panel (landing-v4 section 5): one media frame beside the four
@@ -107,12 +108,16 @@ const ROW_LINK =
  * in reading order; one column between md and lg where the 5/12 column is
  * too narrow for two) and stretch to the pinned height, so the chapter fills
  * tall viewports with tiles instead of a band of air below a list.
- * Under md: posters inline per tile, hairline rows, no pin, no video.
- * Reduced motion: the four posters as a static 2x2 grid beside the tiles, all
- * tiles at full emphasis, no pin, no crossfade, no video.
+ * Below `desktop:` (phones in either orientation, mobile pass L-4): the four
+ * pillars as stacked rows, each with its poster, number, title, body and
+ * link; no pin, no dial, no video. The dial used to turn with the section's
+ * scroll there, and lit "Research" after its media had scrolled away.
+ * Reduced motion on desktop: the four posters as a static 2x2 grid beside
+ * the tiles, all tiles at full emphasis, no pin, no crossfade, no video.
  */
 export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
   const reduced = usePrefersReducedMotion();
+  const desktop = useDesktop();
   const wrapRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [mounted, setMounted] = useState(false);
@@ -149,28 +154,8 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
           setActive(0);
         };
       });
-      // No pin (phone, landscape phone): the dial turns as the section
-      // passes through the viewport.
-      mm.add(ROLL_QUERY, () => {
-        const layers = gsap.utils.toArray<HTMLElement>("[data-platform-layer]", wrap);
-        if (layers.length < 2) return;
-        const apply = (progress: number) => {
-          layers.forEach((layer, i) => {
-            layer.style.opacity = String(layerOpacityAt(i, progress, layers.length));
-          });
-          setActive(activeRowAt(progress, layers.length));
-        };
-        ScrollTrigger.create({
-          trigger: wrap,
-          start: "top 75%",
-          end: "bottom 25%",
-          onUpdate: (self) => apply(self.progress),
-          onRefresh: (self) => apply(self.progress),
-        });
-        return () => setActive(0);
-      });
     },
-    { scope: wrapRef, dependencies: [count], revertOnUpdate: true },
+    { scope: wrapRef, dependencies: [count, desktop], revertOnUpdate: true },
   );
 
   // Mount the clips once the panel approaches the viewport. Keyed on the row
@@ -178,7 +163,7 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
   // observer created then would have nothing to watch.
   useEffect(() => {
     const wrap = wrapRef.current;
-    if (!wrap || count === 0) return;
+    if (!wrap || count === 0 || !desktop) return;
     const io = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
@@ -190,9 +175,11 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
     );
     io.observe(wrap);
     return () => io.disconnect();
-  }, [count]);
+  }, [count, desktop]);
 
   if (count === 0) return null;
+
+  if (!desktop) return <CompactPillars rows={rows} header={header} />;
 
   const current = rows[active] ?? rows[0];
   const next = Math.min(count - 1, active + 1);
@@ -204,19 +191,16 @@ export default function PlatformPanel({ rows, header }: PlatformPanelProps) {
         className={
           reduced
             ? undefined
-            : "desktop:motion-safe:sticky desktop:motion-safe:top-0 desktop:motion-safe:flex desktop:motion-safe:flex-col desktop:motion-safe:min-h-svh desktop:motion-safe:pt-[calc(5.3125rem+2.5rem)] desktop:motion-safe:pb-10 desktop:motion-safe:[@media(max-height:940px)]:pt-[calc(5.3125rem+1.5rem)] desktop:motion-safe:[@media(max-height:940px)]:pb-6 desktop:motion-safe:[@media(max-height:820px)]:pt-[calc(5.3125rem+0.5rem)] desktop:motion-safe:[@media(max-height:820px)]:pb-4"
+            : "desktop:motion-safe:sticky desktop:motion-safe:top-0 desktop:motion-safe:flex desktop:motion-safe:flex-col desktop:motion-safe:min-h-svh desktop:motion-safe:pt-[calc(var(--spacing-nav)+2.5rem)] desktop:motion-safe:pb-10 desktop:motion-safe:[@media(max-height:940px)]:pt-[calc(var(--spacing-nav)+1.5rem)] desktop:motion-safe:[@media(max-height:940px)]:pb-6 desktop:motion-safe:[@media(max-height:820px)]:pt-[calc(var(--spacing-nav)+0.5rem)] desktop:motion-safe:[@media(max-height:820px)]:pb-4"
         }
       >
         {/* Toward the edges (Cedric): the panel runs on the same 1,800 px bleed
             as the map; the Section itself is `bleed`. */}
-        <div className="mx-auto grid w-full max-w-page gap-10 px-6 [--dial-row:3.5rem] [--dial-step:2.9rem] desktop:my-auto desktop:grid-cols-12 desktop:gap-x-12 desktop:gap-y-8 desktop:[@media(max-height:820px)]:gap-y-5 desktop:[--dial-row:min(5.5rem,8svh)] desktop:[--dial-step:min(4.75rem,6.4svh)]">
-          {/* One header element for every layout: row 1 of the left column on
-              desktop (the tiles span both rows), the top of the stack under md. */}
+        <div className="mx-auto grid w-full max-w-page gap-6 px-6 desktop:gap-10 [--dial-row:3.5rem] [--dial-step:2.9rem] desktop:my-auto desktop:grid-cols-12 desktop:gap-x-12 desktop:gap-y-8 desktop:[@media(max-height:820px)]:gap-y-5 desktop:[--dial-row:min(5.5rem,8svh)] desktop:[--dial-step:min(4.75rem,6.4svh)]">
+          {/* Row 1 of the left column (the tiles span both rows). */}
           {header && <div className="desktop:col-span-12">{header}</div>}
-          {/* Desktop: the media frame under the header. Under md the list has
-              no frame; each tile carries its own poster instead. The split is
-              7/5 from lg; between md and lg it is 6/6 so two tiles fit side
-              by side (a one-column stack of four tiles outgrows a tablet). */}
+          {/* The media frame under the header (below `desktop:` each pillar
+              carries its own poster instead, CompactPillars). */}
           <div className="desktop:col-span-7 desktop:self-start">
             <figure>
               {reduced ? (
@@ -409,13 +393,45 @@ function MediaLayer({ row, state, mount }: { row: PlatformRow; state: LayerState
   );
 }
 
+/**
+ * Phones (below `desktop:`, motion or not): the four pillars in reading
+ * order, each a row with its poster (16/10, never taller than 55svh), number,
+ * title, body and link; poster beside the text from `sm` (a landscape phone),
+ * above it on a portrait one. Posters only: no video on phones.
+ */
+function CompactPillars({ rows, header }: { rows: PlatformRow[]; header?: ReactNode }) {
+  return (
+    <div data-platform-pin className="mx-auto grid w-full max-w-page gap-6 px-6">
+      {header && <div>{header}</div>}
+      <ol className="flex flex-col">
+        {rows.map((row) => (
+          <li
+            key={row.id}
+            data-row={row.id}
+            className="grid gap-4 border-t border-ink-950/10 py-6 last:border-b sm:grid-cols-2 sm:items-center sm:gap-8"
+          >
+            <StaticPoster row={row} className="max-h-[55svh]" />
+            <div>
+              <span className="font-mono text-small text-text-muted">{row.n}</span>
+              <h3 className="mt-2 font-display text-display-m font-semibold text-text-strong">{row.title}</h3>
+              <p className="mt-2 max-w-[46ch] text-body text-text-body">{row.body}</p>
+              <Link to={row.href} className={ROW_LINK}>
+                {row.linkText}
+              </Link>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
 
-function StaticPoster({ row }: { row: PlatformRow }) {
+function StaticPoster({ row, className = "" }: { row: PlatformRow; className?: string }) {
   const [failed, setFailed] = useState(false);
   const src = row.media.type === "video" ? row.media.poster : row.media.src;
   return (
     <figure>
-      <div className="aspect-[16/10] overflow-hidden rounded-media border border-ink-950/10 bg-paper-100">
+      <div className={`aspect-[16/10] overflow-hidden rounded-media border border-ink-950/10 bg-paper-100 ${className}`}>
         {!failed && (
           <img
             src={src}
