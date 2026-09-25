@@ -22,6 +22,27 @@ const LINK =
   "text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2";
 
 /**
+ * The card's box while the data naming the video loads: the same border, the
+ * same 16:9 frame and the two footer lines, drawn empty, so what sits below
+ * does not move when the facade arrives (QA polish-2: the About hero grew
+ * 912 px under the reader).
+ */
+export function YouTubeFacadeSkeleton({ className = "" }: { className?: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={`flex h-full flex-col overflow-hidden rounded-card border border-ink-950/10 bg-paper-50 ${className}`}
+    >
+      <div className="aspect-video border-b border-ink-950/10 bg-ink-950" />
+      <div className="invisible flex flex-1 flex-col gap-3 p-6">
+        <p className="font-mono text-small">&nbsp;</p>
+        <p className="mt-auto pt-1 text-small">&nbsp;</p>
+      </div>
+    </div>
+  );
+}
+
+/**
  * A YouTube video behind a click-to-load facade: the poster and a play button
  * ship, the iframe only mounts once the reader is looking at it, so no page
  * pays for YouTube's script until then. Under reduced motion it never

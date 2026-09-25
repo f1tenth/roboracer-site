@@ -74,6 +74,11 @@ export default function News() {
   const newest = dates.length > 0 ? dates[dates.length - 1] : null;
   const oldest = dates.length > 0 ? dates[0].slice(0, 4) : null;
   const selected = events.find((e) => e.id === tag);
+  // Until news.json answers, the page is the masthead plus a screen of empty
+  // paper: the lead, the archive and "Contribute" mount together once the
+  // feed is in, so nothing that was already on screen moves (QA polish-2:
+  // CLS 0.48 to 0.69 when Contribute and the footer were pushed down).
+  const loading = feed === null && !failed;
 
   return (
     <div className="pt-[4.25rem] md:pt-[5.3125rem]">
@@ -104,7 +109,6 @@ export default function News() {
                 as="dl"
                 size="l"
                 tone="accent"
-                duration={2.5}
                 value={items.length}
                 label="Posts"
               />
@@ -113,7 +117,6 @@ export default function News() {
                 as="dl"
                 size="l"
                 tone="accent"
-                duration={2.5}
                 delay={0.12}
                 value={events.length}
                 label="Competitions"
@@ -128,7 +131,35 @@ export default function News() {
               </div>
             </dl>
           )}
+          {/* The ledger's box, held while the feed loads so the masthead does
+              not grow (on phones) or re-align (md:items-end) when it arrives. */}
+          {loading && (
+            <div
+              aria-hidden="true"
+              className="invisible grid grid-cols-2 gap-x-6 gap-y-7 border-t border-ink-950/10 pt-6 font-mono text-small md:col-span-4"
+            >
+              {/* Same words and widths as the real ledger, so a label or a
+                  date that wraps in the narrow md column wraps here too. */}
+              {["Posts", "Competitions"].map((label) => (
+                <div key={label}>
+                  <p>{label}</p>
+                  <p className="mt-1 text-display-l font-semibold tabular-nums">00</p>
+                </div>
+              ))}
+              {[
+                ["Latest", "Sep 00, 2026"],
+                ["Oldest", "2000"],
+              ].map(([label, value]) => (
+                <div key={label}>
+                  <p>{label}</p>
+                  <p className="mt-1">{value}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
+
+        {loading && <div aria-hidden="true" className="min-h-[100svh]" />}
 
         {lead && (
           <div className="mt-14 border-t border-ink-950/10 pt-10">
@@ -203,37 +234,39 @@ export default function News() {
       )}
 
       {/* Send us your news: the one solid CTA on the page */}
-      <Section width="page" rule aria-labelledby="contribute">
-        <div className="grid gap-10 md:grid-cols-12 md:items-end">
-          <div className="md:col-span-7">
-            <SectionHeader
-              eyebrow="Contribute"
-              id="contribute"
-              title="Send us your news"
-              lead={
-                <>
-                  Tag us at{" "}
-                  <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={LINK}>
-                    @roboracer.ai
-                  </a>{" "}
-                  in your post and send us the link. We'll post it here and credit you.
-                </>
-              }
-            />
+      {!loading && (
+        <Section width="page" rule aria-labelledby="contribute">
+          <div className="grid gap-10 md:grid-cols-12 md:items-end">
+            <div className="md:col-span-7">
+              <SectionHeader
+                eyebrow="Contribute"
+                id="contribute"
+                title="Send us your news"
+                lead={
+                  <>
+                    Tag us at{" "}
+                    <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={LINK}>
+                      @roboracer.ai
+                    </a>{" "}
+                    in your post and send us the link. We'll post it here and credit you.
+                  </>
+                }
+              />
+            </div>
+            <div className="flex flex-col items-start gap-4 md:col-span-5 md:items-end">
+              <Button href={MAILTO}>Send us a link</Button>
+              <p className="font-mono text-small text-text-muted">contact@roboracer.ai</p>
+              <p className="text-small text-text-body">
+                Or message us on{" "}
+                <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={LINK}>
+                  Slack
+                </a>
+                .
+              </p>
+            </div>
           </div>
-          <div className="flex flex-col items-start gap-4 md:col-span-5 md:items-end">
-            <Button href={MAILTO}>Send us a link</Button>
-            <p className="font-mono text-small text-text-muted">contact@roboracer.ai</p>
-            <p className="text-small text-text-body">
-              Or message us on{" "}
-              <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={LINK}>
-                Slack
-              </a>
-              .
-            </p>
-          </div>
-        </div>
-      </Section>
+        </Section>
+      )}
     </div>
   );
 }

@@ -41,6 +41,7 @@
     "schedule_note": "IROS Competitions Handbook via the roboracer-content skill: competition Mon Sep 28 to Wed Sep 30, opening and mapping from 9:30 on the Monday, award ceremony Wed Sep 30 16:00 to 18:00, Room 301. Sep 27 is check-in and practice and is never presented as a competition day.",
     "register_url": "https://iros2026-race.roboracer.ai/registration.html",
     "rules_url": "https://iros2026-race.roboracer.ai/",
+    "site_url": "https://iros2026-race.roboracer.ai/",
     "registration_deadline_at": "2026-09-09T23:59:00-04:00",
     "registration_deadline_note": "Cedric, 2026-08-21: display the Sep 5 date plainly. The instant is end of day Eastern, the conference's own time zone; the race page counts down to it.",
     "timeline_url": "https://iros2026-race.roboracer.ai/timeline.html",

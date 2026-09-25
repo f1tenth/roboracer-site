@@ -16,14 +16,14 @@ type StatTickerProps = {
   label: string;
   on?: "paper" | "ink";
   /**
-   * time (default): counts up once the tile is FULLY in view, 3.2 s,
+   * time (default): counts up once the tile is FULLY in view, 1.2 s,
    * power2.out, once. progress: the owner drives it through the handle
    * (landing-v3 map chapter); no ScrollTrigger of its own.
    */
   mode?: "time" | "progress";
   /** Time mode: seconds before the count starts (0.15 s stagger per tile). */
   delay?: number;
-  /** Count-up length in seconds. Defaults to the landing's 3.2 s. */
+  /** Count-up length in seconds, at most (and by default) 1.2 s. */
   duration?: number;
   /** "l" promotes the number to display-l for a masthead ledger. */
   size?: "m" | "l";
@@ -37,12 +37,17 @@ type StatTickerProps = {
   ref?: Ref<StatTickerHandle>;
 };
 
-// Landing-v3 timing (section 6): 3.2 s, power2.out, wherever a counter runs.
-const DURATION = 3.2;
+// The design system's counter: 1.2 s, the per-element motion cap. It was the
+// landing-v3 3.2 s, and pages asked for 2.5 s; /about's ledger then ran 2.4 s
+// after arrival (QA polish-2 item 14). A longer `duration` is clamped to this.
+const DURATION = 1.2;
 const EASE = "power2.out";
 const ease = gsap.parseEase(EASE);
 
-const format = (n: number) => Math.round(n).toLocaleString("en-US");
+// Rounded up, not to nearest: an ease-out tail spends its last frames just
+// under the target, so "1,000+" used to sit on "999+" for a beat. Rounding up
+// puts that dwell on the target string itself. Integers format as themselves.
+const format = (n: number) => Math.ceil(n).toLocaleString("en-US");
 
 /**
  * Data-strip stat: mono tabular value over a small mono label - a spec-sheet
@@ -100,7 +105,7 @@ export default function StatTicker({
         const proxy = { n: 0 };
         gsap.to(proxy, {
           n: value,
-          duration,
+          duration: Math.min(duration, DURATION),
           delay,
           ease: EASE,
           scrollTrigger: {

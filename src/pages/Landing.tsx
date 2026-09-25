@@ -28,6 +28,7 @@ import HeroChapter, { type HeroVideoSources } from "../components/ui/HeroChapter
 import WorldMapChapter from "../components/ui/WorldMapChapter";
 import ResearchCarousel from "../components/ui/ResearchCarousel";
 import { featuredForLanding } from "../lib/publications";
+import { countWord } from "../lib/countWord";
 import CommunityJoin from "../components/ui/CommunityJoin";
 import MediaFrame from "../components/ui/MediaFrame";
 import EntryPaths from "../components/ui/EntryPaths";
@@ -97,9 +98,10 @@ const RACE_HERO = {
 // Car close-ups beside the 3D model (media curator, docs/media/SELECTION.md).
 const CAR_PHOTOS: readonly CarPhoto[] = [
   { src: "/media/car/car-photo-01-1200.webp", alt: "Two RoboRacer cars on the start line at ICRA 2026, the ForzaETH car in front", caption: "start line · ICRA 2026" },
-  // Photo 2 is an AI-generated image supplied by Cedric (landing v5 A9): no credit line.
+  // Photo 2 is an AI-generated image supplied by Cedric (landing v5 A9): no credit
+  // line, and the caption and alt say what it is rather than "rendered view".
   // The car sits in the right 45% of the 16/9 frame: the 4/3 crop anchors right.
-  { src: "/media/car/car-photo-02-1200.webp", alt: "Rendered image of a RoboRacer car, portrait view", caption: "rendered view", position: "100% 50%" },
+  { src: "/media/car/car-photo-02-1200.webp", alt: "AI-generated illustration of a RoboRacer car, portrait view", caption: "AI-generated illustration", position: "100% 50%" },
 ];
 
 /**
@@ -375,7 +377,9 @@ export default function Landing() {
                   datesSecondary={race.dates_secondary}
                   registerHref={race.register_url ?? race.url}
                   registerNote={race.registration_deadline}
+                  deadlineAt={race.registration_deadline_at}
                   rulesHref={race.rules_url}
+                  siteHref={race.site_url}
                   startsAt={race.starts_at ?? ""}
                 />
               </div>
@@ -398,7 +402,7 @@ export default function Landing() {
         <TeamGrid teams={teams} />
       </Section>
 
-      {/* 9 · 08 Research (paper): eight featured papers in a rotating
+      {/* 9 · 08 Research (paper): the featured papers in a rotating
           carousel, one figure and its abstract at a time (landing v5 section
           5; ui/ResearchCarousel) - learner, faculty. Never hidden: with no
           featured_order items it renders the header and an empty stage. */}
@@ -409,14 +413,18 @@ export default function Landing() {
             id="research"
             title="Research"
             subtitle="1,000+ publications build on this platform"
-            lead="Teams race reinforcement learning policies and model predictive controllers on real cars. Eight papers to start with."
+            lead={`Teams race reinforcement learning policies and model predictive controllers on real cars.${
+              featured.length > 0
+                ? ` ${countWord(featured.length)} ${featured.length === 1 ? "paper" : "papers"} to start with.`
+                : ""
+            }`}
             action={
               <div className="flex flex-wrap items-center gap-4">
                 <Button href={SCHOLAR_URL} variant="secondary" target="_blank" rel="noopener noreferrer">
                   Search Google Scholar
                 </Button>
                 <Button href="/research" variant="ghost" className="px-0!">
-                  See every paper
+                  Browse the papers
                 </Button>
               </div>
             }

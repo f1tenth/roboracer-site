@@ -76,8 +76,8 @@ export default function Research() {
               1,000+ publications reference the platform
             </h1>
             <p className="mt-6 max-w-[60ch] text-lead text-text-body">
-              Google Scholar returns more than a thousand papers on F1TENTH and RoboRacer. This is a
-              selection, by topic.
+              A Google Scholar search for F1TENTH or RoboRacer returns more than a thousand results.
+              This is a selection, by topic.
             </p>
             <div className="mt-8">
               <Button href={scholarUrl} variant="secondary" target="_blank" rel="noopener noreferrer">
@@ -86,8 +86,9 @@ export default function Research() {
             </div>
           </div>
           {/* The counts are the argument this page makes, so they run big and
-              in violet and tick up over two and a half seconds (Cedric,
-              2026-08-23: five felt slow).
+              in violet and tick up (Cedric, 2026-08-23: five seconds felt
+              slow; StatTicker now caps every count at the design system's
+              1.2 s).
               Violet, not the logo gradient: gradient text is ink-only, its
               cyan stop being 1.9:1 on paper. Keyed on the fetch so the tween
               starts from the real number rather than from the "…" placeholder. */}
@@ -99,7 +100,6 @@ export default function Research() {
                   as="dl"
                   size="l"
                   tone="accent"
-                  duration={2.5}
                   value={published.length}
                   label="Papers listed"
                 />
@@ -108,7 +108,6 @@ export default function Research() {
                   as="dl"
                   size="l"
                   tone="accent"
-                  duration={2.5}
                   value={featuredAll.length}
                   label="Featured"
                 />
@@ -117,7 +116,6 @@ export default function Research() {
                   as="dl"
                   size="l"
                   tone="accent"
-                  duration={2.5}
                   delay={0.15}
                   value={pubs.tags.length}
                   label="Topics"

@@ -170,8 +170,14 @@ type CarCalloutsProps = {
  * no pointer events. Each anchor follows its part's group, so it rides the
  * explosion and the turntable. A label flips to the left of its leader when
  * its anchor sits in the right part of the frame, so the text always runs
- * toward the canvas center and never clips.
+ * toward the canvas center and never clips. When neither side holds it on one
+ * line (a long label near the middle of the 768 px canvas) it wraps inside the
+ * roomier side: it used to run 35 px out of the canvas and touch the step
+ * copy in the next column (QA polish-2 item 8).
  */
+/** Room a label keeps from the canvas edge, px. */
+const LABEL_EDGE = 12;
+
 function CarCallouts({ shown, animate, portal }: CarCalloutsProps) {
   const scene = useThree((s) => s.scene);
   const camera = useThree((s) => s.camera);
@@ -180,6 +186,8 @@ function CarCallouts({ shown, animate, portal }: CarCalloutsProps) {
   const anchors = useRef<(Group | null)[]>([]);
   const labels = useRef<(HTMLDivElement | null)[]>([]);
   const labelWidths = useRef<number[]>([]);
+  /** Max width applied to each label's text, 0 for none (one line). */
+  const labelWraps = useRef<number[]>([]);
   const partObjects = useRef(new Map<string, Object3D>());
   const world = useMemo(() => new Vector3(), []);
   const ndc = useMemo(() => new Vector3(), []);
@@ -212,19 +220,32 @@ function CarCallouts({ shown, animate, portal }: CarCalloutsProps) {
         moved = true;
       }
       const label = labels.current[i];
-      if (label) {
+      const text = label?.querySelector<HTMLElement>("[data-callout-text]");
+      if (label && text) {
         // Run the text toward the canvas center whenever it would not fit on
-        // the anchor's right; the label width is measured once per element.
+        // the anchor's right; the one-line width is measured once per element.
         let width = labelWidths.current[i] ?? 0;
         if (!width) {
-          width = label.querySelector<HTMLElement>("[data-callout-text]")?.offsetWidth ?? 0;
+          width = text.offsetWidth;
           labelWidths.current[i] = width;
         }
         ndc.copy(world).project(camera);
         const screenX = ((ndc.x + 1) / 2) * size.width;
-        const fitsRight = screenX + width + 12 <= size.width;
-        const fitsLeft = screenX - width - 12 >= 0;
-        label.dataset.flip = !fitsRight && fitsLeft ? "true" : "false";
+        const roomRight = size.width - screenX - LABEL_EDGE;
+        const roomLeft = screenX - LABEL_EDGE;
+        const fitsRight = width <= roomRight;
+        const fitsLeft = width <= roomLeft;
+        label.dataset.flip = !fitsRight && (fitsLeft || roomLeft > roomRight) ? "true" : "false";
+        const wrap = fitsRight || fitsLeft ? 0 : Math.max(0, Math.floor(Math.max(roomLeft, roomRight)));
+        if ((labelWraps.current[i] ?? 0) !== wrap) {
+          labelWraps.current[i] = wrap;
+          // max-content under a cap: the label box has no width of its own
+          // (the anchor is 0x0), so a plain max-width would collapse the
+          // text to its longest word.
+          text.style.width = wrap ? "max-content" : "";
+          text.style.maxWidth = wrap ? `${wrap}px` : "";
+          text.style.whiteSpace = wrap ? "normal" : "";
+        }
       }
     });
     // Demand-mode canvases (reduced motion) need one more frame for the
@@ -269,7 +290,7 @@ function CarCallouts({ shown, animate, portal }: CarCalloutsProps) {
               />
               <span
                 data-callout-text=""
-                className={`absolute left-0 flex items-center gap-2 whitespace-nowrap font-mono text-eyebrow uppercase text-text-on-ink/80 group-data-[flip=true]:left-auto group-data-[flip=true]:right-0 group-data-[flip=true]:flex-row-reverse ${
+                className={`absolute left-0 flex items-center gap-2 whitespace-nowrap font-mono text-eyebrow uppercase text-text-on-ink/80 group-data-[flip=true]:left-auto group-data-[flip=true]:right-0 group-data-[flip=true]:flex-row-reverse group-data-[flip=true]:text-right ${
                   // Center the text line on the leader's far end.
                   callout.side === "above" ? "translate-y-1/2" : "-translate-y-1/2"
                 }`}

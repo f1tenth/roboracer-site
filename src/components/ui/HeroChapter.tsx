@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useId, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { EASE_IN_OUT_QUART, MOTION_OK_QUERY, gsap, useGSAP } from "../../lib/motion";
-import { linkCanStream } from "../../lib/media";
+import { linkCanStream, linkStalled, markLinkStalled } from "../../lib/media";
 
 export type HeroClip = {
   /** Desktop encode (served from 768px up); the key keeps the media-skill
@@ -148,6 +148,12 @@ const CROSSFADE_S = 0.9;
  * until then the playing clip has the whole connection (docs/media/HERO_PERF.md). */
 const PRELOAD_LEAD_S = 3;
 const CROSSFADE_CLASS = "transition-opacity duration-[900ms] ease-linear";
+/** A clip that sits in `waiting` this long marks the link as stalled: the
+ * clips loaded after it use the 960 encode (lib/media markLinkStalled). */
+const STALL_MS = 1500;
+
+/** The desktop encode, unless the link cannot stream it (or has stalled). */
+const desktopOk = (mbps?: number) => !linkStalled() && (mbps === undefined || linkCanStream(mbps));
 
 /** Auto-scroll (Cedric, landing v5 round two): when the clip cycle comes back
  * to the IV FPV clip (the last clip) and the visitor is still at the top,
@@ -236,6 +242,13 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
   const Tag = as;
   const sentence = lines.join(" ");
   const [paused, setPaused] = useState(false);
+  // The reader's pause, read by the clip sequencer before every play and
+  // advance: a pause while the next clip was still buffering used to be
+  // undone by that clip's canplay handler, which crossfaded and played it.
+  const pausedRef = useRef(false);
+  // Set by the sequencer: after a resume, move on if the current clip is at
+  // (or past) its crossfade point, since the rAF cue only fires while playing.
+  const resumeRef = useRef<(() => void) | null>(null);
   // Idle cue: "idle" until the 10 s timer fires; any scroll before that
   // cancels it forever; the first scroll after it shows hides it for good.
   const [cue, setCue] = useState<"idle" | "visible" | "hidden">("idle");
@@ -306,7 +319,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     const wide = window.matchMedia(WIDE_QUERY).matches;
     // Chosen per clip at load time, so a link that slows down mid-cycle
     // drops to the 960 encodes for the clips after.
-    const srcOf = (c: HeroClip) => (wide && (c.mbps === undefined || linkCanStream(c.mbps)) ? c.mp4_1920 : c.mp4_960);
+    const srcOf = (c: HeroClip) => (wide && desktopOk(c.mbps) ? c.mp4_1920 : c.mp4_960);
     const after = (i: number) => (i + 1 < clips.length ? i + 1 : loopFrom);
     const els = [a, b] as const;
     let cur = 0;
@@ -320,6 +333,8 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     let autoTimer = 0;
     let autoDone = false;
     let cancelGlide: (() => void) | null = null;
+    // The next clip's pending canplay listener, removed on cleanup.
+    let pending: { el: HTMLVideoElement; fn: () => void } | null = null;
     const root = scope.current;
     const scheduleAutoScroll = () => {
       if (autoDone || !root) return;
@@ -346,20 +361,21 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       return r.length > 0 && r.end(r.length - 1) >= v.duration - 0.25;
     };
     const advance = () => {
-      if (fading || waiting || disposed) return;
+      if (fading || waiting || disposed || pausedRef.current) return;
       const v = els[cur];
       const n = els[1 - cur];
       queueNext();
       if (n.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) {
         waiting = true;
-        n.addEventListener(
-          "canplay",
-          () => {
-            waiting = false;
-            advance();
-          },
-          { once: true },
-        );
+        const fn = () => {
+          pending = null;
+          waiting = false;
+          // advance() checks the pause: a clip that became playable while
+          // the reader had paused waits for the resume (resumeRef).
+          advance();
+        };
+        pending = { el: n, fn };
+        n.addEventListener("canplay", fn, { once: true });
         return;
       }
       fading = true;
@@ -410,11 +426,44 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       keep.style.opacity = "1";
       keep.style.zIndex = "1";
       keep.loop = true;
-      keep.src = wide && (video.mbps === undefined || linkCanStream(video.mbps)) ? video.mp4_1920 : video.mp4_960;
+      keep.src = wide && desktopOk(video.mbps) ? video.mp4_1920 : video.mp4_960;
       keep.load();
       activeRef.current = [keep];
-      void keep.play().catch(() => {});
+      if (!pausedRef.current) void keep.play().catch(() => {});
     };
+    resumeRef.current = () => {
+      if (disposed || fading) return;
+      const v = els[cur];
+      const d = v.duration;
+      if (v.ended || (Number.isFinite(d) && d > 0 && v.currentTime >= d - CROSSFADE_S)) advance();
+    };
+    // Stall watch: a clip that waits for data over STALL_MS switches the rest
+    // of the session to the 960 encodes, including the clip already queued
+    // next if it has not started. Any sign of flow (or a pause) disarms it.
+    const stallTimers = new Map<HTMLVideoElement, number>();
+    const onWaiting = (e: Event) => {
+      const el = e.currentTarget as HTMLVideoElement;
+      if (!wide || linkStalled() || pausedRef.current) return;
+      window.clearTimeout(stallTimers.get(el));
+      stallTimers.set(
+        el,
+        window.setTimeout(() => {
+          if (disposed || el.paused) return;
+          markLinkStalled();
+          const n = els[1 - cur];
+          if (queued && !fading && n.paused) {
+            const next = srcOf(clips[after(clip)]);
+            if (n.src !== new URL(next, window.location.href).href) setClip(n, after(clip));
+          }
+        }, STALL_MS),
+      );
+    };
+    const onFlowing = (e: Event) => window.clearTimeout(stallTimers.get(e.currentTarget as HTMLVideoElement));
+    const FLOW_EVENTS = ["playing", "pause", "ended", "emptied"] as const;
+    for (const el of els) {
+      el.addEventListener("waiting", onWaiting);
+      for (const ev of FLOW_EVENTS) el.addEventListener(ev, onFlowing);
+    }
     a.addEventListener("ended", onEnded);
     b.addEventListener("ended", onEnded);
     a.addEventListener("error", onError);
@@ -425,10 +474,18 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     raf = requestAnimationFrame(tick);
     return () => {
       disposed = true;
+      resumeRef.current = null;
+      if (pending) pending.el.removeEventListener("canplay", pending.fn);
+      pending = null;
       cancelAnimationFrame(raf);
       window.clearTimeout(timer);
       window.clearTimeout(autoTimer);
       cancelGlide?.();
+      for (const t of stallTimers.values()) window.clearTimeout(t);
+      for (const el of els) {
+        el.removeEventListener("waiting", onWaiting);
+        for (const ev of FLOW_EVENTS) el.removeEventListener(ev, onFlowing);
+      }
       a.removeEventListener("ended", onEnded);
       b.removeEventListener("ended", onEnded);
       a.removeEventListener("error", onError);
@@ -566,9 +623,14 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     const els = activeRef.current;
     if (els.length === 0) return;
     if (paused) {
-      for (const el of els) void el.play().catch(() => {});
+      pausedRef.current = false;
+      // An ended clip would restart from 0 on play(); the sequencer moves on
+      // from it instead.
+      for (const el of els) if (!el.ended) void el.play().catch(() => {});
       setPaused(false);
+      resumeRef.current?.();
     } else {
+      pausedRef.current = true;
       for (const el of els) el.pause();
       setPaused(true);
     }

@@ -96,7 +96,7 @@ const STATES = [
   },
   {
     caption: "Build your own",
-    body: "The whole car is open source. Take it apart in the 3D viewer.",
+    body: "The hardware, software and simulator are open source. Take it apart in the 3D viewer.",
   },
 ] as const;
 

@@ -22,15 +22,47 @@ const DOWNLINK_CAP_MBPS = 10;
  * average bitrate (the next clip preloads while the current one plays). */
 const STREAM_HEADROOM = 1.3;
 
+const STALL_KEY = "rr-link-stalled";
+let stalled: boolean | null = null;
+
+/** True once a hero clip has stalled on this tab (see markLinkStalled). */
+export function linkStalled(): boolean {
+  if (stalled === null) {
+    try {
+      stalled = sessionStorage.getItem(STALL_KEY) === "1";
+    } catch {
+      stalled = false;
+    }
+  }
+  return stalled;
+}
+
+/**
+ * An observed stall (HeroChapter: a clip `waiting` for over 1.5 s): the link
+ * cannot stream the desktop encodes, whatever the browser estimated or failed
+ * to report, so every clip picked from now on is the 960 one, for the rest of
+ * the tab's session (sessionStorage; this page only if storage is blocked).
+ */
+export function markLinkStalled(): void {
+  stalled = true;
+  try {
+    sessionStorage.setItem(STALL_KEY, "1");
+  } catch {
+    // Storage blocked: the flag lives as long as this page.
+  }
+}
+
 /**
  * Can this connection stream a clip of `mbps` average bitrate while the next
- * one preloads? False on Save-Data, on anything slower than "4g", and when the
- * browser's downlink estimate is under the clip's bitrate plus headroom.
- * Measured 2026-09-24 (docs/media/HERO_PERF.md): at 5 Mbit/s the 1920 race
- * clips (5.7 to 7.3 Mbit/s) froze the hero for 17 s of its first 55. With no
- * signal (Safari, Firefox) the answer is yes and the width rule decides.
+ * one preloads? False after an observed stall, on Save-Data, on anything
+ * slower than "4g", and when the browser's downlink estimate is under the
+ * clip's bitrate plus headroom. Measured 2026-09-24 (docs/media/HERO_PERF.md):
+ * at 5 Mbit/s the 1920 race clips (5.7 to 7.3 Mbit/s) froze the hero for 17 s
+ * of its first 55. With no signal (Safari, Firefox) the answer is yes and the
+ * width rule decides, until a stall says otherwise.
  */
 export function linkCanStream(mbps: number): boolean {
+  if (linkStalled()) return false;
   if (typeof navigator === "undefined") return true;
   const c = (navigator as Navigator & { connection?: NetInfo }).connection;
   if (!c) return true;

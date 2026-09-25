@@ -246,7 +246,9 @@ export const CAR_PARTS: readonly CarPartEntry[] = [
     name: "Computer",
     product: "NVIDIA Jetson Orin",
     role: "Runs your driving code.",
-    note: "It reads the LiDAR and commands the VESC, both over USB.",
+    // The guide's section is still written for the Xavier NX (see above), so
+    // the entry says which one the reader is looking at.
+    note: "It reads the LiDAR and commands the VESC, both over USB. The build guide shows a Jetson Xavier NX; this model shows the Orin.",
     parts: ["jetson"],
     guide: {
       label: "Mounting the Jetson",

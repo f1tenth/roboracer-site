@@ -9,6 +9,44 @@ import SectionHeader from "./SectionHeader";
 const MAX_PATHS = 4;
 
 /**
+ * The four paths as public/data/paths.json has them, bundled: the row holds
+ * its final height with them while the file loads, and shows them when the
+ * file fails or does not validate, so "Start here" never lands on an empty
+ * row. Keep in step with the JSON: a label or line that wraps differently
+ * here shifts the row when the file arrives.
+ */
+const BUNDLED_PATHS: EntryPath[] = [
+  {
+    id: "build",
+    n: "01",
+    label: "Build a car",
+    line: "Parts list, build guide and software. All open source.",
+    href: "/build",
+  },
+  {
+    id: "learn",
+    n: "02",
+    label: "Learn autonomy",
+    line: "Lectures and labs on perception, localization, planning and control.",
+    href: "/learn",
+  },
+  {
+    id: "race",
+    n: "03",
+    label: "Race with us",
+    line: "Dates, registration and rules for the next competition.",
+    href: "/race",
+  },
+  {
+    id: "sponsor",
+    n: "04",
+    label: "Sponsor a race",
+    line: "Teams at 90+ universities. Write to contact@roboracer.ai.",
+    href: "mailto:contact@roboracer.ai?subject=RoboRacer%20sponsorship",
+  },
+];
+
+/**
  * Hairlines and gutters per position, so the first column's text sits on the
  * page edge like every section header above it: one column under md, a 2x2
  * grid from md, one row of four from xl. Literal strings for Tailwind.
@@ -19,6 +57,14 @@ const CELL = [
   { rule: "md:border-r", pad: "md:pr-6 xl:pl-6" },
   { rule: "", pad: "md:pl-6" },
 ] as const;
+
+/** A path with every field the row renders, or null. */
+function readPath(v: unknown): EntryPath | null {
+  if (typeof v !== "object" || v === null) return null;
+  const p = v as Record<string, unknown>;
+  const ok = [p.id, p.n, p.label, p.line, p.href].every((f) => typeof f === "string" && f.length > 0);
+  return ok ? { id: p.id as string, n: p.n as string, label: p.label as string, line: p.line as string, href: p.href as string } : null;
+}
 
 const isExternal = (href: string) => /^(https?:)?\/\//.test(href) || href.startsWith("mailto:");
 
@@ -108,10 +154,13 @@ export default function EntryPaths() {
     let live = true;
     loadPaths()
       .then((f) => {
-        if (live) setPaths(f.paths.slice(0, MAX_PATHS));
+        const valid = Array.isArray(f?.paths)
+          ? f.paths.map(readPath).filter((p): p is EntryPath => p !== null)
+          : [];
+        if (live) setPaths(valid.length > 0 ? valid.slice(0, MAX_PATHS) : BUNDLED_PATHS);
       })
       .catch(() => {
-        if (live) setPaths([]);
+        if (live) setPaths(BUNDLED_PATHS);
       })
       .finally(() => {
         if (live) setLoading(false);
@@ -134,11 +183,18 @@ export default function EntryPaths() {
     >
       <SectionHeader index="00" id="start-title" title="Start here" size="s" />
       {/* aria-busy until the paths arrive: the "Start here" jump waits for it
-          (hooks/useScrollToHash), so nothing below shifts under the reader. */}
+          (hooks/useScrollToHash). Meanwhile the bundled four stand in,
+          invisible and out of the accessibility tree, so the row already has
+          its final height and a reader who is here when the file lands does
+          not see the section below jump (QA polish-2: CLS 0.28 at 390). */}
       <ul aria-busy={loading} className="grid border-t border-ink-950/10 md:grid-cols-2 xl:grid-cols-4">
-        {paths.map((path, i) => {
+        {(loading ? BUNDLED_PATHS : paths).map((path, i) => {
           const cell = CELL[i] ?? CELL[CELL.length - 1];
-          return (
+          return loading ? (
+            <li key={path.id} aria-hidden="true" className={`invisible border-b border-ink-950/10 ${cell.rule}`}>
+              <PathLink path={path} pad={cell.pad} />
+            </li>
+          ) : (
             <li key={path.id} data-path={path.id} className={`border-b border-ink-950/10 ${cell.rule}`}>
               <PathLink path={path} pad={cell.pad} />
             </li>

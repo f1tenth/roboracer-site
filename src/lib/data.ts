@@ -36,11 +36,16 @@ export type UpcomingEvent = {
   image?: string;
   image_alt?: string;
   rules_url?: string;
+  /** The race's own site. After the registration deadline it replaces
+   * "Register your team" as the spotlight's primary button. */
+  site_url?: string;
 };
 
 export type PastRace = {
   name: string;
   url: string;
+  /** Wayback capture, set when the original site no longer answers. */
+  archive?: string;
 };
 
 export type Partner = {
@@ -161,6 +166,15 @@ export type Spinoff = {
   note?: string;
 };
 
+/**
+ * Only an entry that says how it connects to RoboRacer renders: one whose
+ * origin is missing or still a TODO(content) question (Quanser, until Cedric
+ * answers) stays in the JSON and off the page, so the section never shows a
+ * company with no stated link to the car.
+ */
+export const spinoffShown = (s: Spinoff): boolean =>
+  typeof s.origin === "string" && s.origin.length > 0 && !s.origin.startsWith("TODO(content)");
+
 export type SpinoffsFile = {
   note: string;
   updated: string;
@@ -206,8 +220,10 @@ export type MapEvent = {
   labelDy?: number;
   /** The event's own page. Absent when none ever existed. */
   url?: string;
-  /** live = answered 200 when last checked; archive = a Wayback capture
-   * because the original domain is dead; none = no page to link. */
+  /** Wayback capture of `url`, linked instead of it when url_status is archive. */
+  archive?: string;
+  /** live = answered 200 when last checked; archive = the original site is
+   * gone and the timeline links `archive`; none = no page to link. */
   url_status?: "live" | "archive" | "none";
   url_note?: string;
 };
