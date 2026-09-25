@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { preload } from "react-dom";
 import {
   loadEventsMap,
   loadTeams,
@@ -18,6 +19,7 @@ import SeasonChain from "../components/race/SeasonChain";
 import Leaderboard from "../components/race/Leaderboard";
 import { useNow } from "../components/race/useNow";
 import type { SeasonEvent } from "../components/race/eventState";
+import { DESKTOP_QUERY } from "../lib/motion";
 
 // Same clip and the same credit as the landing's next-race section
 // (docs/ASSET_MANIFEST.md V4-11); the frame links to RoboRacer's own post,
@@ -71,6 +73,23 @@ const SLACK_URL =
 const LINK_ON_PAPER =
   "text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
 
+/** A standalone link (not one inside a sentence) is 2.75rem tall on touch
+ * screens, with a matching negative margin so its line does not move. */
+const TAP = "coarse:-my-3 coarse:inline-flex coarse:min-h-11 coarse:items-center";
+
+/**
+ * Whether the window was desktop-sized when the page opened. Only there does
+ * the hero clip load with the page (`priority`). On a phone the poster leads:
+ * it is preloaded at high priority and the clip follows once the frame is
+ * on screen, instead of the 1272 px encode competing with the poster for the
+ * first paint in a 342 px box (RACE-06). Read once: this is a load-time
+ * choice, and re-reading it on a rotate would swap the playing video out.
+ */
+function useDesktopAtLoad(): boolean {
+  const [desktop] = useState(() => window.matchMedia(DESKTOP_QUERY).matches);
+  return desktop;
+}
+
 /**
  * Slack is never named without a way to reach it in the same breath, so the
  * invite is always the word itself.
@@ -118,6 +137,8 @@ export default function RacePage() {
     };
   }, []);
 
+  const heroFirst = useDesktopAtLoad();
+  if (!heroFirst) preload(HERO.poster, { as: "image", fetchPriority: "high" });
   const now = useNow();
   const race = upcoming.find((e) => e.spotlight) ?? upcoming[upcoming.length - 1];
   // The same rule as the spotlight: after the deadline this section stops
@@ -175,7 +196,7 @@ export default function RacePage() {
                   alt={HERO.alt}
                   width={HERO.width}
                   height={HERO.height}
-                  priority
+                  priority={heroFirst}
                   radius="none"
                   className="h-full"
                 />
@@ -186,7 +207,7 @@ export default function RacePage() {
                   href={HERO.creditHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-text-on-ink-muted underline decoration-text-on-ink/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
+                  className={`text-text-on-ink-muted underline decoration-text-on-ink/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2 ${TAP}`}
                 >
                   {HERO.creditLabel}
                 </a>
@@ -288,7 +309,7 @@ export default function RacePage() {
           <div className="flex flex-wrap justify-between gap-x-4">
             <dt>questions</dt>
             <dd>
-              <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
+              <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={`${LINK_ON_PAPER} ${TAP}`}>
                 RoboRacer teams Slack
               </a>
             </dd>
