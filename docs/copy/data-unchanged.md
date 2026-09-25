@@ -8,4 +8,4 @@
 | `public/data/past_races.json` | Nothing: `loadPastRaces` is never called | 34 names | Names only (`name`, `url`) |
 | `public/data/events_map.json` | World map and race timeline: event labels, cities, countries | 40 labels, 40 cities | Names and places. `source`, `url_note` and the countries' `why` are working notes, not rendered |
 
-Count: 160 strings reviewed across the five files, 0 changed.
+Count: 162 strings reviewed across the five files, 0 changed.
