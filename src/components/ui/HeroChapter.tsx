@@ -320,8 +320,13 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
   useEffect(() => {
     const a = vidA.current;
     const b = vidB.current;
+    // The reader's pause outlives a restart of this effect (reduced motion
+    // switched on and off again remounts the videos): the control still says
+    // "Play footage", so nothing starts on its own. pause() also cancels the
+    // single loop's autoplay.
     if (isStatic || !clips || !a || !b) {
       activeRef.current = a ? [a] : [];
+      if (a && pausedRef.current) a.pause();
       return;
     }
     // The desktop zoom, the 1280/1920 encodes and the desktop type all key on
@@ -512,7 +517,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     b.addEventListener("error", onError);
     activeRef.current = [a];
     setClip(a, 0);
-    void a.play().catch(() => {});
+    if (!pausedRef.current) void a.play().catch(() => {});
     raf = requestAnimationFrame(tick);
     return () => {
       disposed = true;
