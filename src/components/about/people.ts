@@ -1,3 +1,4 @@
+import { fetchJson } from "../../lib/data";
 import file from "./people.json";
 
 /**
@@ -80,11 +81,9 @@ export type ContributorsFile = {
   contributors: Contributor[];
 };
 
-export async function loadContributors(): Promise<ContributorsFile> {
-  const res = await fetch(`${import.meta.env.BASE_URL}data/contributors.json`);
-  if (!res.ok) throw new Error(`contributors.json: ${res.status}`);
-  return (await res.json()) as ContributorsFile;
-}
+/** Bounded like every data read (lib/data READ_TIMEOUT_MS). */
+export const loadContributors = () =>
+  fetchJson<ContributorsFile>(`${import.meta.env.BASE_URL}data/contributors.json`);
 
 /** GitHub serves any avatar size from the same URL; 80px is twice the 40px
  * the strip draws them at, and cuts each request to a few kB. */

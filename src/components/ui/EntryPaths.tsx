@@ -152,6 +152,9 @@ export default function EntryPaths() {
 
   useEffect(() => {
     let live = true;
+    // The read gives up after eight seconds (lib/data READ_TIMEOUT_MS), so a
+    // request that never answers ends on the bundled four, not on a row that
+    // stays invisible.
     loadPaths()
       .then((f) => {
         const valid = Array.isArray(f?.paths)

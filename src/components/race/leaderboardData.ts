@@ -5,6 +5,8 @@
 // which board to feature come from public/data/leaderboard.json, not from here.
 // The shape relied on is written down in docs/LEADERBOARD.md.
 
+import { fetchJson } from "../../lib/data";
+
 export type LeaderboardConfig = {
   label: string;
   /** The board's own site; the data sits under `<url>data/`. */
@@ -61,8 +63,6 @@ export type BoardRow = {
 /** A board's own file: the same header fields, and the ranked rows. */
 export type BoardFile = Omit<BoardSummary, "rows" | "file"> & { rows: BoardRow[] };
 
-const TIMEOUT_MS = 8000;
-
 /**
  * public/data/leaderboard.json as shipped, bundled: when the file fails to
  * load or does not validate, the section still reads the board and, at worst,
@@ -81,7 +81,7 @@ export const FALLBACK_CONFIG: LeaderboardConfig = {
  * the eight-second timeout, a malformed field). Never throws but on abort. */
 export async function loadLeaderboardConfig(signal: AbortSignal): Promise<LeaderboardConfig> {
   try {
-    const raw = await fetchJson<unknown>(`${import.meta.env.BASE_URL}data/leaderboard.json`, signal);
+    const raw = await fetchJson<unknown>(`${import.meta.env.BASE_URL}data/leaderboard.json`, { signal });
     return readConfig(raw) ?? FALLBACK_CONFIG;
   } catch (err) {
     if (signal.aborted) throw err;
@@ -96,30 +96,15 @@ export function dataBase(cfg: LeaderboardConfig): string {
   return cfg.term ? `${root}data/archive/${encodeURIComponent(cfg.term)}/` : `${root}data/`;
 }
 
-/** A JSON read that gives up after eight seconds, so a slow or unreachable
- * file ends in a fallback rather than an endless skeleton. */
-async function fetchJson<T>(url: string, signal: AbortSignal, cache?: RequestCache): Promise<T> {
-  const timeout = new AbortController();
-  const timer = window.setTimeout(() => timeout.abort(), TIMEOUT_MS);
-  const onAbort = () => timeout.abort();
-  signal.addEventListener("abort", onAbort);
-  try {
-    const res = await fetch(url, { signal: timeout.signal, cache });
-    if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
-    return (await res.json()) as T;
-  } finally {
-    window.clearTimeout(timer);
-    signal.removeEventListener("abort", onAbort);
-  }
-}
-
 /**
- * A cross-origin read of the board, with the same timeout. `no-cache`
+ * A cross-origin read of the board, with the site's eight-second read
+ * timeout (lib/data fetchJson), so a slow or unreachable file ends in a
+ * fallback rather than an endless skeleton. `no-cache`
  * revalidates against the ETag: the board changes every few minutes and
  * GitHub Pages would otherwise let a browser keep a copy for ten.
  */
 export function fetchBoardJson<T>(url: string, signal: AbortSignal): Promise<T> {
-  return fetchJson<T>(url, signal, "no-cache");
+  return fetchJson<T>(url, { signal, cache: "no-cache" });
 }
 
 // Validation. The board is someone else's site: every field the section
