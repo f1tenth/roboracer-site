@@ -23,9 +23,9 @@ export default function Footer() {
 
   if (isAltFooter) return null;
 
-  // Below md the footer sits on the 24px page edge like every section above
-  // it; from md it keeps its desktop container.
-  const edge = "mx-auto max-w-7xl px-6 md:px-8 lg:px-16 xl:px-24 2xl:px-32";
+  // Below lg the footer sits on the 24px page edge, the nav's and every
+  // section's above it; from lg it keeps its desktop container.
+  const edge = "mx-auto max-w-7xl px-6 lg:px-16 xl:px-24 2xl:px-32";
 
   return (
     <footer className="bg-ink-950 text-text-on-ink">
