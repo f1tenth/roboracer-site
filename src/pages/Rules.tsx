@@ -63,7 +63,16 @@ export default function Rules() {
     const target = arrivalHash.current;
     if (html === null || !target) return;
     arrivalHash.current = "";
-    const jump = () => document.getElementById(decodeURIComponent(target.slice(1)))?.scrollIntoView({ block: "start" });
+    // A malformed fragment (/rules#%) is ignored, never thrown:
+    // decodeURIComponent raises URIError on it, and the route's error
+    // fallback used to replace the whole rulebook (as in useScrollToHash).
+    let id: string;
+    try {
+      id = decodeURIComponent(target.slice(1));
+    } catch {
+      return;
+    }
+    const jump = () => document.getElementById(id)?.scrollIntoView({ block: "start" });
     jump();
     // Web fonts that arrive after the jump reflow the thousands of pixels
     // above the target (Safari has no scroll anchoring to absorb it), so
