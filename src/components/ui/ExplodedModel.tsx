@@ -183,7 +183,7 @@ type ExplodedModelProps = {
  * fully in view. Reuses the /assembly scene graph; /assembly stays the full
  * viewer.
  * Layout (landing-v3, widened in v5): header above, 8/4 grid in the 1800
- * container, canvas 72svh on desktop so the car owns the viewport; two
+ * container, canvas 60svh on desktop; two
  * photo slots under the captions. Below `desktop:` (mobile pass, R-1) nothing
  * pins: canvas at 56svh with the callout list under it, then the captions,
  * the viewer link and the photos, all in normal flow; the parts fly out as
@@ -422,10 +422,10 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
               the canvas, so both are on screen together. */}
           <div className="mt-6 flex flex-col gap-8 compact:sm:grid compact:sm:grid-cols-[7fr_5fr] compact:sm:items-start desktop:grid desktop:grid-cols-[8fr_4fr] desktop:items-center desktop:gap-10">
             <div>
-              <div
-                ref={labelBoxRef}
-                className="relative h-[56svh] compact:sm:h-[75svh] desktop:max-lg:h-[60svh] desktop:lg:h-[72svh]"
-              >
+              {/* Desktop is 60svh at every width: the old `lg:h-[72svh]`
+                  never won over `desktop:h-[60svh]` (the custom variant sorts
+                  later), so 60svh is what desktop has always shown. */}
+              <div ref={labelBoxRef} className="relative h-[56svh] compact:sm:h-[75svh] desktop:h-[60svh]">
                 {inView && (
                   <Suspense fallback={null}>
                     <ExplodedModelScene
