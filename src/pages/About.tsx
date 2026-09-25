@@ -10,6 +10,7 @@ import {
   type PlatformRow,
   type SiteVideo,
   type Spinoff,
+  spinoffShown,
 } from "../lib/data";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
@@ -124,7 +125,7 @@ export default function About() {
       .then((d) => live && setVideos(d))
       .catch(() => undefined);
     loadSpinoffs()
-      .then((d) => live && setSpinoffs(d.entries))
+      .then((d) => live && setSpinoffs(d.entries.filter(spinoffShown)))
       .catch(() => live && setSpinoffs([]));
     return () => {
       live = false;
@@ -356,7 +357,7 @@ export default function About() {
                 {/* "Three so far": the count follows spinoffs.json as Cedric
                     accepts candidates, and is the one word that waits for it. */}
                 <span className={spinoffs ? undefined : "invisible"}>
-                  {spinoffs ? countWord(spinoffs.length) : "Three"}
+                  {spinoffs ? countWord(spinoffs.length) : "Two"}
                 </span>{" "}
                 so far. A verify tag means the people involved have not confirmed our wording yet.
               </>
@@ -365,12 +366,12 @@ export default function About() {
           {spinoffs ? (
             <SpinoffGrid spinoffs={spinoffs} />
           ) : (
-            // The grid's measured height for the current entries (three
-            // cards: stacked, two across from sm, one row from lg), so a reader
+            // The grid's measured height for the entries that render today
+            // (two cards: stacked on phones, one row from sm), so a reader
             // arriving at #about-spinoffs does not watch Videos jump.
             <div
               aria-busy="true"
-              className="min-h-[60rem] rounded-card border border-ink-950/10 sm:min-h-[46rem] lg:min-h-[23.75rem]"
+              className="min-h-[45rem] rounded-card border border-ink-950/10 sm:min-h-[23.25rem] lg:min-h-[23.75rem]"
             />
           )}
         </Section>

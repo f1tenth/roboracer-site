@@ -273,6 +273,12 @@ since every one of them is past, the spotlight (landing and /race) and the
   LinkedIn URLs are unchanged.
 - /race's lead drops "on four continents" (not in the content skill).
 
+**Spinoffs: Quanser is off the page until its origin is known.** An entry
+whose `origin` is missing or still `TODO(content)` no longer renders (the
+JSON keeps it), so /about shows "Two so far": Neobotics and LAMARRacing.
+Quanser returns as soon as its origin line says how it connects to RoboRacer
+(see Spinoffs question 2 above).
+
 3. 404 Racers' team card still says "institution tbc": the content skill's IV
    2026 podium names the drivers but no institution. Your IV 2026 result post on
    /news ("404 Racers, also from UPenn") and Milan Manoj's post both say
