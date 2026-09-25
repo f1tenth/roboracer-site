@@ -37,11 +37,6 @@ export default function NewsLead({ item }: { item: NewsItem }) {
           {tag}
         </span>
       )}
-      {item.status === "verify" && (
-        <span className="rounded-pill border border-ink-950/15 px-2 py-0.5 text-eyebrow tracking-normal">
-          unverified
-        </span>
-      )}
     </p>
   );
 

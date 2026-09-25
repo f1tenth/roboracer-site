@@ -136,6 +136,7 @@ export type Team = {
   logo?: string;
   since_year?: number;
   highlights?: TeamHighlight[];
+  /** Review bookkeeping only; nothing renders it (Cedric, 2026-09-25). */
   status: "verify" | "published";
   source?: string;
   /** Square team photo under public/media/team/ (media curator). */

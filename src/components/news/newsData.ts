@@ -51,6 +51,7 @@ export type NewsItem = {
   /** A second link beside the source, e.g. the results page. */
   more?: { label: string; href: string } | null;
   featured?: boolean;
+  /** Review bookkeeping only; nothing renders it (Cedric, 2026-09-25). */
   status?: "published" | "verify";
 };
 

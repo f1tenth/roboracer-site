@@ -96,7 +96,7 @@ export default function News() {
               id="news-title"
               className="max-w-[18ch] font-display text-display-xl font-semibold text-text-strong"
             >
-              News from the races
+              News from the Community
             </h1>
             <p className="mt-6 max-w-[60ch] text-lead text-text-body">
               Results and posts from the teams who build and race the cars.

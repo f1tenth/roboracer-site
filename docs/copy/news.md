@@ -22,11 +22,13 @@ that row. The @roboracer.ai Instagram handle itself was not touched.
 
 The NewsEmpty strings only show when news.json fails to load or is empty.
 
-Left alone on purpose: h1 "News from the races", "All news, by year" and
-"Newest first." (Cedric's wording from 2026-09-21), the ledger labels
-"Competitions / Latest / Oldest", the lead-story links ("Read the post on
-LinkedIn", "Watch the video on …", "Listen to the episode on …"), the
-"unverified" pill, "Send us a link", "Open the RoboRacer Slack".
+Left alone on purpose: "All news, by year" and "Newest first." (Cedric's
+wording from 2026-09-21), the ledger labels "Competitions / Latest / Oldest",
+the lead-story links ("Read the post on LinkedIn", "Watch the video on …",
+"Listen to the episode on …"), "Send us a link", "Open the RoboRacer Slack".
+Changed by Cedric 2026-09-25: the h1 "News from the races" is now "News from
+the Community" (his capital C), and the "unverified" pill is gone (no verify
+tags anywhere on the site).
 
 Count: 33 strings reviewed (20 in News.tsx, 13 in the news components),
 8 changed, 25 left.

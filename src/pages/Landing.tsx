@@ -487,7 +487,7 @@ export default function Landing() {
           id="teams"
           title="Teams"
           subtitle="Who competes"
-          lead="Teams from recent races, with their best result. An unverified tag means we're still checking the details."
+          lead="Teams from recent races, with their best result."
         />
         <TeamGrid teams={teams} />
       </Section>

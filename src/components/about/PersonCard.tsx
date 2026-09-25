@@ -1,5 +1,4 @@
 import { monogram, type Person } from "./people";
-import VerifyTag from "./VerifyTag";
 
 type PersonCardProps = {
   person: Person;
@@ -43,9 +42,10 @@ function LinkedName({ name }: { name: string }) {
 /**
  * One person as a hairline cell: a square photo or a mono monogram tile, the
  * name (which is the link to that person's source page, Cedric 2026-08-23),
- * the role and affiliation when a public page gives them, the role inside the
- * project when the archive gives one, and a mono `verify` tag wherever nothing
- * public confirms it. A card with neither photo nor role still fills its cell:
+ * the role and affiliation when a public page gives them, and the role inside
+ * the project when the archive gives one. No card carries a verify tag any
+ * more (Cedric, 2026-09-25: the page is public and credit is fine). A card
+ * with neither photo nor role still fills its cell:
  * the monogram is the picture and the name is the content, so nothing reads as
  * missing.
  *
@@ -54,8 +54,7 @@ function LinkedName({ name }: { name: string }) {
  * same hairline cell (ABOUT-02). Past crew tiles keep the photo on top.
  */
 export default function PersonCard({ person, compact = false }: PersonCardProps) {
-  const { name, role, project_role, project_role_verify, affiliation, photo, link, note, status } =
-    person;
+  const { name, role, project_role, affiliation, photo, link, note } = person;
   const nameClass = `font-display font-semibold text-text-strong ${compact ? `text-small ${TILE_NAME}` : "text-body"}`;
   const row = !compact;
 
@@ -110,14 +109,8 @@ export default function PersonCard({ person, compact = false }: PersonCardProps)
         )}
         {note && <p className="text-small text-text-body">{note}</p>}
         {project_role && (
-          <p className="flex flex-wrap items-center gap-1.5 font-mono text-eyebrow tracking-normal text-text-strong">
-            <span className="min-w-0 [overflow-wrap:anywhere]">{project_role}</span>
-            {project_role_verify && <VerifyTag />}
-          </p>
-        )}
-        {status === "verify" && !project_role && (
-          <p className="mt-auto pt-2">
-            <VerifyTag />
+          <p className="font-mono text-eyebrow tracking-normal text-text-strong [overflow-wrap:anywhere]">
+            {project_role}
           </p>
         )}
       </div>

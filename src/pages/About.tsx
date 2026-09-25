@@ -276,7 +276,7 @@ export default function About() {
           id="about-people"
           title="People"
           subtitle="Who runs RoboRacer"
-          lead="Each name links to the page its title comes from. A verify tag means we haven't confirmed the role yet."
+          lead="Each name links to the page its title comes from."
         />
         <div className="flex flex-col gap-16">
           <PeopleGroup
