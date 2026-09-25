@@ -7,17 +7,17 @@ Rules are numbered as in `docs/copy/BRIEF.md`.
 
 | Location | Before | After | Rule broken |
 |---|---|---|---|
-| Research.tsx, header lead | A Google Scholar search for F1TENTH or RoboRacer returns more than a thousand results. Here is a selection by topic, and every paper we track. The rest are one search away. | One Google Scholar search for F1TENTH or RoboRacer finds them. We list a selection by topic. | 1 (3 sentences, 31 words), 5 ("Here is") |
+| Research.tsx, header lead | A Google Scholar search for F1TENTH or RoboRacer returns more than a thousand results. Here is a selection by topic, and every paper we track. The rest are one search away. | Google Scholar returns more than a thousand papers on F1TENTH and RoboRacer. This is a selection, by topic. | 1 (3 sentences, 31 words), 5 ("Here is"); wording per lead review, keeps the thousand |
 | Research.tsx, header button | See the Scholar query | Search Google Scholar | 2 ("query") |
 | Research.tsx, ledger label (live + loading) | Curated papers | Papers listed | 2 ("curated") |
 | Research.tsx, Featured lead | Recent work on the platform, newest first. Filter by topic; each topic also links to its own Scholar search. | Papers that build on RoboRacer. Filter by topic, and each topic links to its own Scholar search. | 3 ("the platform"), fact: the featured grid is not newest first (xLAB papers lead, AV4EV 2024 is second) |
-| Research.tsx, load error | The publication list could not load. The Scholar query above covers everything. | The list did not load. Try the Google Scholar search above. | 2 ("query"), 8 |
+| Research.tsx, load error | The publication list could not load. The Scholar query above covers everything. | The list didn't load. Try the Google Scholar search above. | 2 ("query"), 8 |
 | Research.tsx, empty topic | No featured paper is tagged {topic} yet. The full list below and the Scholar search cover it. | No featured paper on {topic} yet. Try the full list or the Scholar search. | 5 ("below"), 8 |
 | Research.tsx, list eyebrow | All curated | All papers | 2 ("curated") |
 | Research.tsx, list title | All curated publications | Every paper we track | 2 ("curated") |
 | Research.tsx, list lead | Every paper we track, grouped by year. The topic filter above applies here too. | By year, newest first. The topic filter above works here too. | title now says "every paper we track"; kept the one fact the lead adds (order) |
 | Research.tsx, no search match | No curated paper matches. Try a shorter term, or search Scholar for "…". | No paper matches. Try a shorter word, or search Scholar for "…". | 2 ("curated") |
-| Research.tsx, Submit lead | Published something that builds on the platform? Send the DOI or arXiv link and we add it to the curated list. | Send us the DOI or arXiv link for your RoboRacer paper. We add it to the list. | 2 (question, "curated"), 3 ("the platform") |
+| Research.tsx, Submit lead | Published something that builds on the platform? Send the DOI or arXiv link and we add it to the curated list. | Send us the DOI or arXiv link for your RoboRacer paper. We'll add it to the list. | 2 (question, "curated"), 3 ("the platform") |
 
 Layout note: the header lead drops from two lines to about one at desktop. The
 header grid aligns to the bottom (`md:items-end`), so the ledger on the right

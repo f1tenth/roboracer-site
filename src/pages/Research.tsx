@@ -76,8 +76,8 @@ export default function Research() {
               1,000+ publications reference the platform
             </h1>
             <p className="mt-6 max-w-[60ch] text-lead text-text-body">
-              One Google Scholar search for F1TENTH or RoboRacer finds them. We list a selection by
-              topic.
+              Google Scholar returns more than a thousand papers on F1TENTH and RoboRacer. This is a
+              selection, by topic.
             </p>
             <div className="mt-8">
               <Button href={scholarUrl} variant="secondary" target="_blank" rel="noopener noreferrer">
@@ -157,7 +157,7 @@ export default function Research() {
         />
         {failed && (
           <p className="max-w-[60ch] text-body text-text-body">
-            The list did not load. Try the Google Scholar search above.
+            The list didn't load. Try the Google Scholar search above.
           </p>
         )}
         {pubs && (
@@ -273,7 +273,7 @@ export default function Research() {
               eyebrow="Contribute"
               id="submit"
               title="Submit your paper"
-              lead="Send us the DOI or arXiv link for your RoboRacer paper. We add it to the list."
+              lead="Send us the DOI or arXiv link for your RoboRacer paper. We'll add it to the list."
             />
           </div>
           <div className="flex flex-col items-start gap-4 md:col-span-5 md:items-end">
