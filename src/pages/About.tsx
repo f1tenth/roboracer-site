@@ -23,6 +23,7 @@ import PartnerWall from "../components/about/PartnerWall";
 import SpinoffGrid from "../components/about/SpinoffGrid";
 import YouTubeFacade, { YouTubeFacadeSkeleton } from "../components/ui/YouTubeFacade";
 import NearViewport from "../components/about/NearViewport";
+import { countWord } from "../lib/countWord";
 import {
   DEVELOPERS,
   FACULTY,
@@ -48,10 +49,6 @@ const ICRA_GROUP_PHOTO = {
   caption: "group pic ICRA 2026",
 };
 
-/** "Three so far": the spinoff lead spells its count, which follows
- * spinoffs.json as Cedric accepts candidates. */
-const COUNT_WORDS = ["None", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
-const countWord = (n: number) => COUNT_WORDS[n] ?? String(n);
 
 const LINK_ON_PAPER =
   "text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
@@ -357,7 +354,8 @@ export default function About() {
             subtitle="Teams and companies that grew out of the car"
             lead={
               <>
-                {/* The count is the one word that waits for the data. */}
+                {/* "Three so far": the count follows spinoffs.json as Cedric
+                    accepts candidates, and is the one word that waits for it. */}
                 <span className={spinoffs ? undefined : "invisible"}>
                   {spinoffs ? countWord(spinoffs.length) : "Three"}
                 </span>{" "}
