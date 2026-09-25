@@ -15,6 +15,11 @@ type MediaFrameProps = {
   /** An mp4: the frame becomes a muted, looping, inline video with `src` as
    * its poster; under prefers-reduced-motion the poster image renders instead. */
   video?: string;
+  /** Poster only, never the clip: the aria-hidden copies of a marquee card.
+   * Each copy mounted its own autoplaying <video> as the loop carried it into
+   * view, another download of a clip the reader is already watching (QA
+   * polish-2 item 11). Loads eagerly at low priority, as marquee media must. */
+  still?: boolean;
   /** "none" for media flush inside a card that carries its own radius. */
   radius?: "media" | "none";
   className?: string;
@@ -40,11 +45,13 @@ export default function MediaFrame({
   height,
   aspect,
   priority = false,
-  video,
+  video: clip,
+  still = false,
   radius = "media",
   className = "",
 }: MediaFrameProps) {
   const reduced = usePrefersReducedMotion();
+  const video = still ? undefined : clip;
   // While the page holds media (MediaHoldContext) nothing loads; the box
   // keeps its size.
   const hold = useMediaHold() && !priority;
@@ -105,8 +112,8 @@ export default function MediaFrame({
       height={height}
       // A video's poster stands in for the frame and loads like the poster
       // attribute did (a lazy image inside a marquee never loads).
-      loading={priority || gated ? "eager" : "lazy"}
-      fetchPriority={gated ? "low" : undefined}
+      loading={priority || gated || still ? "eager" : "lazy"}
+      fetchPriority={gated || still ? "low" : undefined}
       decoding="async"
       className={cls}
       style={style}

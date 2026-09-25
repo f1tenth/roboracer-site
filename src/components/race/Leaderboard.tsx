@@ -1,17 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { Component, useEffect, useRef, useState, type ReactNode } from "react";
 import Button from "../ui/Button";
 import { useNow } from "./useNow";
 import {
+  FALLBACK_CONFIG,
   boardHref,
   dataBase,
   fetchBoardJson,
   formatAgo,
   formatDay,
   formatValue,
-  isBoardFile,
-  isBoardIndex,
   loadLeaderboardConfig,
   pickFeatured,
+  readBoardFile,
+  readBoardIndex,
   shortBoardLabel,
   siblingBoards,
   topRows,
@@ -24,6 +25,10 @@ type Phase = "loading" | "ready" | "empty" | "error";
 
 const DEFAULT_LIMIT = 5;
 
+/** A tab that comes back after this long re-reads the board (the board
+ * rebuilds every five minutes). */
+const REFRESH_AFTER_MS = 60_000;
+
 const CHIP_BASE =
   "rounded-pill px-4 py-2 text-small font-semibold transition-colors duration-[var(--duration-fast)]";
 const CHIP_IDLE = "border border-paper-200 text-text-body hover:border-text-muted";
@@ -35,6 +40,57 @@ const pad = (n: number) => String(n).padStart(2, "0");
  * inside the same cell as the real value, so the row keeps its height. */
 function Bar({ w }: { w: string }) {
   return <span aria-hidden="true" className={`inline-block h-[0.7em] ${w} rounded-sm bg-paper-200 align-middle`} />;
+}
+
+function BoardLink({ href }: { href?: string }) {
+  return (
+    <div className="mt-8 min-h-[3.1rem]">
+      {href && (
+        <Button href={href} variant="secondary" target="_blank" rel="noopener noreferrer">
+          See the full leaderboard <span aria-hidden="true">↗</span>
+          <span className="sr-only"> (opens in a new tab)</span>
+        </Button>
+      )}
+    </div>
+  );
+}
+
+/** The one-line state (error or empty) with the way out to the full board. */
+function Notice({ text, href }: { text: string; href?: string }) {
+  return (
+    <div className="max-w-2xl border-t border-ink-950/10 pt-5">
+      <p className="text-body text-text-body">{text}</p>
+      <BoardLink href={href} />
+    </div>
+  );
+}
+
+const ERROR_TEXT = "The lap times did not load here.";
+
+/** Anything the validation missed and throws at render shows the error line
+ * and the link to the board, not a /race without its last section. */
+class LeaderboardBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  componentDidCatch(error: unknown) {
+    console.warn("Leaderboard failed to render", error);
+  }
+
+  render() {
+    return this.state.failed ? <Notice text={ERROR_TEXT} href={boardHref(FALLBACK_CONFIG)} /> : this.props.children;
+  }
+}
+
+export default function Leaderboard() {
+  return (
+    <LeaderboardBoundary>
+      <LeaderboardBlock />
+    </LeaderboardBoundary>
+  );
 }
 
 /**
@@ -50,43 +106,79 @@ function Bar({ w }: { w: string }) {
  * with the same rows and cell sizes, so nothing below moves when the laps
  * arrive; when the board cannot be reached, or has no lap yet, one line says
  * so and the link to the full board stays. Nothing here animates.
+ *
+ * Every field is validated before it reaches state (./leaderboardData), the
+ * config falls back to a bundled copy, and a tab that comes back after a
+ * minute re-reads the board, keeping the last good laps if that read fails.
  */
-export default function Leaderboard() {
+function LeaderboardBlock() {
   const [cfg, setCfg] = useState<LeaderboardConfig | null>(null);
   const [phase, setPhase] = useState<Phase>("loading");
   const [boards, setBoards] = useState<BoardSummary[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
   const [files, setFiles] = useState<Record<string, BoardFile | "error">>({});
   const life = useRef<AbortController | null>(null);
+  // The board the reader is on, for a refresh that runs in the effect below.
+  const selectedRef = useRef<string | null>(null);
   const now = useNow(60_000);
+
+  useEffect(() => {
+    selectedRef.current = selected;
+  }, [selected]);
 
   useEffect(() => {
     const ctrl = new AbortController();
     life.current = ctrl;
-    const fail = () => {
-      if (!ctrl.signal.aborted) setPhase("error");
-    };
-    (async () => {
-      const config = await loadLeaderboardConfig(ctrl.signal);
-      if (ctrl.signal.aborted) return;
-      setCfg(config);
-      const index = await fetchBoardJson<unknown>(`${dataBase(config)}index.json`, ctrl.signal);
-      if (ctrl.signal.aborted) return;
-      if (!isBoardIndex(index)) throw new Error("index.json: unexpected shape");
-      const featured = pickFeatured(index, config, Date.now());
-      if (!featured) {
-        setPhase("empty");
-        return;
+    const { signal } = ctrl;
+    let config: LeaderboardConfig | null = null;
+    let loadedAt = 0;
+    let busy = false;
+    // The first read ends in the error state on failure; a refresh keeps the
+    // last good board instead.
+    const read = async (first: boolean) => {
+      if (busy) return;
+      busy = true;
+      try {
+        if (!config) {
+          config = await loadLeaderboardConfig(signal);
+          if (signal.aborted) return;
+          setCfg(config);
+        }
+        const index = readBoardIndex(await fetchBoardJson<unknown>(`${dataBase(config)}index.json`, signal));
+        if (signal.aborted) return;
+        if (!index) throw new Error("index.json: unexpected shape");
+        const featured = pickFeatured(index, config, Date.now());
+        if (!featured) {
+          if (first) setPhase("empty");
+          loadedAt = Date.now();
+          return;
+        }
+        const siblings = siblingBoards(index, featured);
+        // A refresh stays on the board the reader switched to, while it has laps.
+        const shown = (!first && siblings.find((b) => b.slug === selectedRef.current)) || featured;
+        const file = readBoardFile(await fetchBoardJson<unknown>(`${dataBase(config)}${shown.file}`, signal));
+        if (signal.aborted) return;
+        if (!file) throw new Error(`${shown.file}: unexpected shape`);
+        setBoards(siblings);
+        setSelected(shown.slug);
+        setFiles({ [shown.slug]: file });
+        setPhase(topRows(file, config.limit).length > 0 ? "ready" : "empty");
+        loadedAt = Date.now();
+      } catch {
+        if (first && !signal.aborted) setPhase("error");
+      } finally {
+        busy = false;
       }
-      const file = await fetchBoardJson<unknown>(`${dataBase(config)}${featured.file}`, ctrl.signal);
-      if (ctrl.signal.aborted) return;
-      if (!isBoardFile(file)) throw new Error(`${featured.file}: unexpected shape`);
-      setBoards(siblingBoards(index, featured));
-      setSelected(featured.slug);
-      setFiles({ [featured.slug]: file });
-      setPhase(topRows(file, config.limit ?? DEFAULT_LIMIT).length > 0 ? "ready" : "empty");
-    })().catch(fail);
-    return () => ctrl.abort();
+    };
+    void read(true);
+    const onVisible = () => {
+      if (document.visibilityState === "visible" && Date.now() - loadedAt > REFRESH_AFTER_MS) void read(false);
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      ctrl.abort();
+      document.removeEventListener("visibilitychange", onVisible);
+    };
   }, []);
 
   const choose = (slug: string) => {
@@ -95,7 +187,7 @@ export default function Leaderboard() {
     const signal = life.current?.signal;
     if (!cfg || !summary || !signal || files[slug]) return;
     fetchBoardJson<unknown>(`${dataBase(cfg)}${summary.file}`, signal)
-      .then((f) => setFiles((prev) => ({ ...prev, [slug]: isBoardFile(f) ? f : "error" })))
+      .then((f) => setFiles((prev) => ({ ...prev, [slug]: readBoardFile(f) ?? "error" })))
       .catch(() => {
         if (!signal.aborted) setFiles((prev) => ({ ...prev, [slug]: "error" }));
       });
@@ -108,24 +200,14 @@ export default function Leaderboard() {
   const board = loaded && loaded !== "error" ? loaded : undefined;
   const switchFailed = loaded === "error";
 
-  const link = (
-    <div className="mt-8 min-h-[3.1rem]">
-      {href && (
-        <Button href={href} variant="secondary" target="_blank" rel="noopener noreferrer">
-          See the full leaderboard <span aria-hidden="true">↗</span>
-        </Button>
-      )}
-    </div>
-  );
+  const link = <BoardLink href={href} />;
 
   if (phase === "error" || phase === "empty") {
     return (
-      <div className="max-w-2xl border-t border-ink-950/10 pt-5">
-        <p className="text-body text-text-body">
-          {phase === "error" ? "The lap times did not load here." : "No clean laps on the board yet this term."}
-        </p>
-        {link}
-      </div>
+      <Notice
+        text={phase === "error" ? ERROR_TEXT : "No clean laps on the board yet this term."}
+        href={boardHref(cfg ?? FALLBACK_CONFIG, selected ?? undefined)}
+      />
     );
   }
 

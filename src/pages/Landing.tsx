@@ -100,9 +100,10 @@ const RACE_HERO = {
 // Car close-ups beside the 3D model (media curator, docs/media/SELECTION.md).
 const CAR_PHOTOS: readonly CarPhoto[] = [
   { src: "/media/car/car-photo-01-1200.webp", alt: "Two RoboRacer cars on the start line at ICRA 2026, the ForzaETH car in front", caption: "start line · ICRA 2026" },
-  // Photo 2 is an AI-generated image supplied by Cedric (landing v5 A9): no credit line.
+  // Photo 2 is an AI-generated image supplied by Cedric (landing v5 A9): no credit
+  // line, and the caption and alt say what it is rather than "rendered view".
   // The car sits in the right 45% of the 16/9 frame: the 4/3 crop anchors right.
-  { src: "/media/car/car-photo-02-1200.webp", alt: "Rendered image of a RoboRacer car, portrait view", caption: "rendered view", position: "100% 50%" },
+  { src: "/media/car/car-photo-02-1200.webp", alt: "AI-generated illustration of a RoboRacer car, portrait view", caption: "AI-generated illustration", position: "100% 50%" },
 ];
 
 /**
@@ -505,7 +506,7 @@ export default function Landing() {
                   Search Google Scholar
                 </Button>
                 <Button href="/research" variant="ghost" className="px-0!">
-                  See every paper
+                  Browse the papers
                 </Button>
               </div>
             }

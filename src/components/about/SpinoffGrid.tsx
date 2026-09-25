@@ -63,6 +63,7 @@ function SpinoffCard({ spinoff }: { spinoff: Spinoff }) {
             {" "}
             &#8599;
           </span>
+          <span className="sr-only"> (opens in a new tab)</span>
         </a>
       </h3>
       <p className="mt-3 max-w-[48ch] text-body text-text-body">{what}</p>

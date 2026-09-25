@@ -166,6 +166,15 @@ export type Spinoff = {
   note?: string;
 };
 
+/**
+ * Only an entry that says how it connects to RoboRacer renders: one whose
+ * origin is missing or still a TODO(content) question (Quanser, until Cedric
+ * answers) stays in the JSON and off the page, so the section never shows a
+ * company with no stated link to the car.
+ */
+export const spinoffShown = (s: Spinoff): boolean =>
+  typeof s.origin === "string" && s.origin.length > 0 && !s.origin.startsWith("TODO(content)");
+
 export type SpinoffsFile = {
   note: string;
   updated: string;

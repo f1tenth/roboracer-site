@@ -103,7 +103,7 @@ export default function Footer() {
               href="https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g"
               target="_blank"
               rel="noopener noreferrer"
-              className="mb-4 inline-flex items-center gap-2 rounded-md bg-white/10 px-4 py-2 text-sm font-medium transition-colors duration-200 hover:bg-white/20 coarse:min-h-11"
+              className="mb-4 inline-flex items-center gap-2 rounded-md border border-ink-700 bg-ink-800 px-4 py-2 text-sm font-medium transition-colors duration-200 hover:bg-ink-700 coarse:min-h-11"
             >
               <img
                 src="/logos/slack-logo.svg"
@@ -127,7 +127,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright Bar */}
-      <div className="border-t border-ink-800">
+      <div className="border-t border-text-on-ink/15">
         <div className={`${edge} py-6`}>
           <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
             <p className="text-sm text-text-on-ink-muted">

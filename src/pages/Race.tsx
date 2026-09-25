@@ -48,7 +48,7 @@ const ENTRY_STEPS = [
   {
     n: "02",
     title: "Register your team",
-    body: "One form per team. Any team size, but no more than ten people in the race area during the event.",
+    body: "One form per team. Any team size, but at most ten people per team in the race area during the event.",
     slack: false,
   },
   {
@@ -145,7 +145,11 @@ export default function RacePage() {
             <h1 className="font-display text-display-l font-semibold text-text-on-ink">
               Come race with us
             </h1>
-            <p className="mt-4 max-w-[60ch] text-lead text-text-on-ink-muted">
+            {/* 44ch, not 60: without "on four continents" the lead fit one
+                line in Manrope but two in the fallback face, and the font
+                swap moved the hero 27 px (CLS 0.023 at 1536). Two lines in
+                either face. */}
+            <p className="mt-4 max-w-[44ch] text-lead text-text-on-ink-muted">
               {held > 0 ? `${held} competitions` : "Competitions"} since 2016.
               Any team with a car that drives itself can enter.
             </p>

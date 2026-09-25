@@ -111,7 +111,6 @@ export default function News() {
                 as="dl"
                 size="l"
                 tone="accent"
-                duration={2.5}
                 value={items.length}
                 label="Posts"
               />
@@ -120,7 +119,6 @@ export default function News() {
                 as="dl"
                 size="l"
                 tone="accent"
-                duration={2.5}
                 delay={0.12}
                 value={events.length}
                 label="Competitions"
