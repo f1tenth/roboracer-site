@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
+import { useNow } from "../race/useNow";
 
 type NextRaceSpotlightProps = {
   title: string;
@@ -61,7 +62,9 @@ function remainingUntil(iso: string): Remaining | null {
  * headline in tight display type, the dates as the lead, logistics as mono
  * data lines with a single-line countdown (no big digit blocks) and the
  * section's one solid CTA. The official long title closes the panel in
- * small type. Reduced motion: the countdown renders once, without ticking.
+ * small type. Reduced motion: the countdown renders once, without ticking;
+ * the panel's states (registration open or closed, race started) still follow
+ * a clock that reads the time once a minute.
  */
 export default function NextRaceSpotlight({
   title,
@@ -84,6 +87,10 @@ export default function NextRaceSpotlight({
   const [toDeadline, setToDeadline] = useState<Remaining | null>(() =>
     deadlineAt ? remainingUntil(deadlineAt) : null,
   );
+  // Not the countdown: this clock ticks under reduced motion too, where the
+  // countdown holds still, so the deadline passing still closes registration
+  // (it used to leave "Register your team" live until a reload).
+  const now = useNow(60_000);
 
   useEffect(() => {
     if (reduced) return;
@@ -98,7 +105,9 @@ export default function NextRaceSpotlight({
   // closed", no "closes <date>" beside it) rather than counting negative, and
   // stops asking teams to register: the primary button leads to the race's
   // own site, or to the rules when there is no site link (QA polish-2).
-  const deadlinePassed = Boolean(deadlineAt) && toDeadline === null;
+  const deadlinePassed = Boolean(deadlineAt) && (toDeadline === null || !(Date.parse(deadlineAt ?? "") > now));
+  // A held countdown must not read "starts in" once the race is on.
+  const started = !(Date.parse(startsAt) > now);
   const rules: Cta | undefined = rulesHref
     ? { href: rulesHref, label: "Read the rules", internal: rulesInternal }
     : undefined;
@@ -127,7 +136,7 @@ export default function NextRaceSpotlight({
         {datesSecondary && <p className={`mt-3 text-lead ${ink ? "text-text-on-ink-muted" : "text-text-body"}`}>{datesSecondary}</p>}
       </div>
       <dl className={`flex max-w-[44ch] flex-col gap-2 border-t pt-6 font-mono text-small ${muted} ${ink ? "border-text-on-ink/15" : "border-ink-950/10"}`}>
-        {remaining && (
+        {remaining && !started && (
           <div className="flex flex-wrap justify-between gap-x-4 gap-y-0.5">
             <dt>starts in</dt>
             <dd className={`tabular-nums ${strong}`}>
