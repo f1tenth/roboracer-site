@@ -9,9 +9,11 @@ import SectionHeader from "./SectionHeader";
 const MAX_PATHS = 4;
 
 /**
- * The four paths as public/data/paths.json has them, bundled so the row can
- * hold its final height while the file loads. Keep in step with the JSON: a
- * label or line that wraps differently here shifts the row when it arrives.
+ * The four paths as public/data/paths.json has them, bundled: the row holds
+ * its final height with them while the file loads, and shows them when the
+ * file fails or does not validate, so "Start here" never lands on an empty
+ * row. Keep in step with the JSON: a label or line that wraps differently
+ * here shifts the row when the file arrives.
  */
 const BUNDLED_PATHS: EntryPath[] = [
   {
@@ -55,6 +57,14 @@ const CELL = [
   { rule: "md:border-r", pad: "md:pr-6 xl:pl-6" },
   { rule: "", pad: "md:pl-6" },
 ] as const;
+
+/** A path with every field the row renders, or null. */
+function readPath(v: unknown): EntryPath | null {
+  if (typeof v !== "object" || v === null) return null;
+  const p = v as Record<string, unknown>;
+  const ok = [p.id, p.n, p.label, p.line, p.href].every((f) => typeof f === "string" && f.length > 0);
+  return ok ? { id: p.id as string, n: p.n as string, label: p.label as string, line: p.line as string, href: p.href as string } : null;
+}
 
 const isExternal = (href: string) => /^(https?:)?\/\//.test(href) || href.startsWith("mailto:");
 
@@ -144,10 +154,13 @@ export default function EntryPaths() {
     let live = true;
     loadPaths()
       .then((f) => {
-        if (live) setPaths(f.paths.slice(0, MAX_PATHS));
+        const valid = Array.isArray(f?.paths)
+          ? f.paths.map(readPath).filter((p): p is EntryPath => p !== null)
+          : [];
+        if (live) setPaths(valid.length > 0 ? valid.slice(0, MAX_PATHS) : BUNDLED_PATHS);
       })
       .catch(() => {
-        if (live) setPaths([]);
+        if (live) setPaths(BUNDLED_PATHS);
       })
       .finally(() => {
         if (live) setLoading(false);
