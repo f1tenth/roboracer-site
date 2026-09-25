@@ -3,11 +3,13 @@ import {
   loadCommunity,
   loadPartners,
   loadPlatform,
+  loadSpinoffs,
   loadVideos,
   type JoinYouTube,
   type Partner,
   type PlatformRow,
   type SiteVideo,
+  type Spinoff,
 } from "../lib/data";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
@@ -18,6 +20,7 @@ import PlatformList from "../components/about/PlatformList";
 import PeopleGroup from "../components/about/PeopleGroup";
 import ContributorStrip from "../components/about/ContributorStrip";
 import PartnerWall from "../components/about/PartnerWall";
+import SpinoffGrid from "../components/about/SpinoffGrid";
 import YouTubeFacade from "../components/ui/YouTubeFacade";
 import NearViewport from "../components/about/NearViewport";
 import {
@@ -44,6 +47,11 @@ const ICRA_GROUP_PHOTO = {
   alt: "Everyone at ICRA 2026 in a group photo inside the orange-barrier track, arms raised",
   caption: "group pic ICRA 2026",
 };
+
+/** "Three so far": the spinoff lead spells its count, which follows
+ * spinoffs.json as Cedric accepts candidates. */
+const COUNT_WORDS = ["None", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+const countWord = (n: number) => COUNT_WORDS[n] ?? String(n);
 
 const LINK_ON_PAPER =
   "text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
@@ -96,6 +104,7 @@ export default function About() {
   const [youtube, setYoutube] = useState<JoinYouTube | null>(null);
   const [contributors, setContributors] = useState<ContributorsFile | null>(null);
   const [videos, setVideos] = useState<SiteVideo[]>([]);
+  const [spinoffs, setSpinoffs] = useState<Spinoff[]>([]);
 
   useEffect(() => {
     let live = true;
@@ -113,6 +122,9 @@ export default function About() {
       .catch(() => undefined);
     loadVideos()
       .then((d) => live && setVideos(d))
+      .catch(() => undefined);
+    loadSpinoffs()
+      .then((d) => live && setSpinoffs(d.entries))
       .catch(() => undefined);
     return () => {
       live = false;
@@ -332,13 +344,30 @@ export default function About() {
         <PartnerWall partners={partners} />
       </Section>
 
-      {/* 05 Videos - from public/data/videos.json. Click-to-load, never
+      {/* 05 Spinoffs - from public/data/spinoffs.json. Only `entries` render;
+          the `candidates` there wait for Cedric. Every entry is still
+          status "verify" (nothing on it is in the content skill yet), so
+          each card carries the same verify tag as the people cards. */}
+      {spinoffs.length > 0 && (
+        <Section width="page" aria-labelledby="about-spinoffs" rule>
+          <SectionHeader
+            index="05"
+            id="about-spinoffs"
+            title="Spinoffs"
+            subtitle="Teams and companies that grew out of the car"
+            lead={`${countWord(spinoffs.length)} so far. A verify tag means the people involved have not confirmed our wording yet.`}
+          />
+          <SpinoffGrid spinoffs={spinoffs} />
+        </Section>
+      )}
+
+      {/* 06 Videos - from public/data/videos.json. Click-to-load, never
           self-starting: six players in a grid would otherwise all start as the
           reader scrolls past. */}
       {videos.length > 0 && (
         <Section width="page" aria-labelledby="about-videos" rule>
           <SectionHeader
-            index="05"
+            index="06"
             id="about-videos"
             title="Videos"
             subtitle="Races, teams and the course"
@@ -354,12 +383,12 @@ export default function About() {
         </Section>
       )}
 
-      {/* 06 Join - the shared community block, same as the landing's. Gated
+      {/* 07 Join - the shared community block, same as the landing's. Gated
           on the reader coming near it: its marquee mounts four copies of an
           autoplaying 1.05 MB clip, which is 4.1 MB at first paint otherwise
           (see NearViewport). */}
       <NearViewport>
-        <CommunityJoin index="06" showYouTube={false} />
+        <CommunityJoin index="07" showYouTube={false} />
       </NearViewport>
     </>
   );

@@ -137,6 +137,39 @@ export type Team = {
   photo?: string;
 };
 
+/** One thing that grew out of the car: a company, a product, a team or an
+ * initiative (public/data/spinoffs.json, About section "Spinoffs"). `what`
+ * and `origin` are our own sentences drafted from the first-party pages in
+ * `source` / `evidence`; an `origin` starting with TODO(content) is a question
+ * for Cedric and is not rendered. `logo` is null unless the file has a
+ * provenance row in docs/ASSET_MANIFEST.md; the card then shows a wordmark. */
+export type Spinoff = {
+  name: string;
+  kind: "company" | "product" | "team" | "initiative";
+  /** Shown instead of `kind` when the plain kind would mislead ("nonprofit"). */
+  label?: string;
+  what: string;
+  origin: string | null;
+  since: number | null;
+  url: string;
+  logo: string | null;
+  status: "verify" | "published";
+  source: string;
+  /** Who named it a spinoff, when that is a person rather than a page. */
+  named_by?: string;
+  evidence?: { url: string; says: string }[];
+  note?: string;
+};
+
+export type SpinoffsFile = {
+  note: string;
+  updated: string;
+  /** Rendered on /about. */
+  entries: Spinoff[];
+  /** Proposed, not rendered, until Cedric moves one into `entries`. */
+  candidates: Spinoff[];
+};
+
 export type Highlight = {
   id: string;
   type: "image" | "video";
@@ -346,4 +379,5 @@ export const loadEventsMap = async (): Promise<EventsMap> => {
 };
 export const loadCommunity = () => loadJson<Community>("community.json");
 export const loadPlatform = () => loadJson<PlatformRow[]>("platform.json");
+export const loadSpinoffs = () => loadJson<SpinoffsFile>("spinoffs.json");
 
