@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CustomEase } from "gsap/CustomEase";
 import { useGSAP } from "@gsap/react";
 import Lenis from "lenis";
-import { useEffect } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 
 gsap.registerPlugin(ScrollTrigger, CustomEase, useGSAP);
 
@@ -22,6 +22,29 @@ export const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
  * need vertical room, so a landscape phone keeps the mobile layout. */
 export const DESKTOP_QUERY = "(min-width: 48rem) and (min-height: 34rem)";
 export const MOTION_OK_QUERY = "(prefers-reduced-motion: no-preference)";
+
+/**
+ * Live `matchMedia(query).matches`. `true` before hydration (there is no
+ * SSR; the value is read on the first client render).
+ */
+export function useMediaQuery(query: string): boolean {
+  return useSyncExternalStore(
+    (onChange) => {
+      const mql = window.matchMedia(query);
+      mql.addEventListener("change", onChange);
+      return () => mql.removeEventListener("change", onChange);
+    },
+    () => window.matchMedia(query).matches,
+    () => true,
+  );
+}
+
+/** True where the `desktop:` variant applies (wide and tall enough to pin).
+ * Below it (`compact:`: phones in either orientation, short windows) the
+ * landing chapters render unpinned (docs/mobile/PLAN.md R-1). */
+export function useDesktop(): boolean {
+  return useMediaQuery(DESKTOP_QUERY);
+}
 
 /**
  * Lenis smooth scroll, desktop pointers only, never under reduced motion.
