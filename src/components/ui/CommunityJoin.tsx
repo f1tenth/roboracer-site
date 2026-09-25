@@ -9,7 +9,6 @@ import SocialButton from "./SocialButton";
 import MediaFrame from "./MediaFrame";
 import PauseToggle from "./PauseToggle";
 import { useMediaHold } from "../../lib/media";
-import VerifyTag from "../about/VerifyTag";
 
 // Links from the content skill (Slack invite confirmed by Cedric, 2026-08-20;
 // GitHub org). LinkedIn: the content skill still says VERIFY; the page at this
@@ -133,7 +132,6 @@ export default function CommunityJoin({ className = "", index = "09", showYouTub
           )}
           <figcaption className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-small text-text-muted">
             <span>{photo ? photo.caption : "photo pending"}</span>
-            {photo?.caption_verify && <VerifyTag />}
           </figcaption>
         </figure>
       </div>

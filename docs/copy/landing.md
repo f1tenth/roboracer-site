@@ -45,9 +45,9 @@ Left alone on purpose:
 - "The car" / "One tenth the size, the full problem", the three state captions
   ("Race-ready", "What is inside", "Build your own"), "Studio photo · RoboRacer".
 - The callout labels on the 3D car ("Hokuyo UTM-30LX · 2D LiDAR", "NVIDIA
-  Jetson Orin · compute", "Steering servo · verify", ...). Product names; the
-  "verify" on the servo is a status mark that stays until the servo model is
-  confirmed.
+  Jetson Orin · compute", "Steering servo", ...). Product names; the servo
+  model is still unknown, so it names only the part (the " · verify" mark went
+  2026-09-25: Cedric dropped every verify tag).
 - Community chapter: "Community", "Teams from around the world", the four
   counter labels, the ticker, the map key, and the map's `<desc>` (a screen
   reader description, allowed to be long).

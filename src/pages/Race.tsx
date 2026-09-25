@@ -359,7 +359,7 @@ export default function RacePage() {
           id="race-teams"
           title="Who competes"
           subtitle="Teams racing in 2026"
-          lead="Students, labs and companies race the same car spec. An unverified tag means we're still checking the details."
+          lead="Students, labs and companies race the same car spec."
         />
         <TeamGrid teams={teams} />
       </Section>

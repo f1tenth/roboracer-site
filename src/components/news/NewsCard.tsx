@@ -20,11 +20,6 @@ function Meta({ item }: { item: NewsItem }) {
       <time dateTime={item.date}>{item.date_display}</time>
       <span aria-hidden="true">·</span>
       <span>{item.publisher}</span>
-      {item.status === "verify" && (
-        <span className="rounded-pill border border-ink-950/15 px-2 py-0.5 text-eyebrow tracking-normal">
-          unverified
-        </span>
-      )}
     </p>
   );
 }

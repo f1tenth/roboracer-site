@@ -206,7 +206,7 @@ whenever it would not fit on the anchor's right (measured label width + 12 px).
 | compute | NVIDIA Jetson Orin · compute | jetson, heatsink top (0.005, 0, 0.106) | above / 44 | Cedric ("Make sure it says NVIDIA Jetson Orin"); build page had TX1/TX2 |
 | pcb | Power board · PCB | pcb, board top (-0.105, -0.005, 0.097) | above / 84 | build page ("power board ... designed at Penn") |
 | motor | Brushless DC motor | chassis, motor can top (-0.0925, -0.0345, 0.063) | below / 84 | rules ("Only brushless DC motors", Velineon 3500) |
-| servo | Steering servo · verify | servo, horn (0.11, 0.012, 0.069) | below / 40 | no model in the docs (the Slash 4x4 ships with Traxxas's own servo); TODO(content) |
+| servo | Steering servo | servo, horn (0.11, 0.012, 0.069) | below / 40 | no model in the docs (the Slash 4x4 ships with Traxxas's own servo); TODO(content). The " · verify" suffix went 2026-09-25 (Cedric: no verify tags) |
 | esc | VESC · motor controller | vesc, case top (-0.134, 0, 0.051) | below / 128 | build page ("FOCbox or VESC 4.12") |
 | chassis | Traxxas Slash 4x4 · 1/10 chassis | chassis, lower deck front-right corner (0.14, -0.1, 0.07) | below / 204 | rules (1:10 Traxxas, TRA6804R / TRA68086 Slash 4x4) |
 

@@ -1,5 +1,4 @@
 import Reveal from "../ui/Reveal";
-import VerifyTag from "./VerifyTag";
 import type { Spinoff } from "../../lib/data";
 
 type SpinoffGridProps = {
@@ -81,7 +80,6 @@ function SpinoffCard({ spinoff }: { spinoff: Spinoff }) {
           the JSON for review. */}
       {status === "verify" && (
         <p className="mt-auto pt-6">
-          <VerifyTag />
         </p>
       )}
     </article>

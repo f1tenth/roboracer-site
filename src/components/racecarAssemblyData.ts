@@ -216,7 +216,7 @@ export const CAR_PARTS: readonly CarPartEntry[] = [
     id: "servo",
     name: "Steering servo",
     // TODO(content): the exact servo model; the guide only says the stock
-    // Traxxas servo stays, and the landing callout keeps its "verify" mark.
+    // Traxxas servo stays, so the landing callout names only the part.
     product: "Traxxas, from the kit",
     role: "Turns the front wheels.",
     note: "The PPM cable connects it to the VESC.",
@@ -306,8 +306,9 @@ export type RacecarCallout = {
 // build-old.html); "Only brushless DC motors" and the Traxxas Slash 4x4
 // chassis (TRA6804R / TRA68086) from the competition rules. The UTM-30LX and
 // the Jetson Orin are Cedric's (landing v4 review). The steering servo's model
-// is not in the docs (the Slash 4x4 ships with Traxxas's own servo), hence
-// " · verify". Anchors sit on the parts themselves (each site-modeled part
+// is not in the docs (the Slash 4x4 ships with Traxxas's own servo), so its
+// callout names only the part (the " · verify" suffix went, Cedric
+// 2026-09-25). Anchors sit on the parts themselves (each site-modeled part
 // carries its own anchor), except the motor can (`motor_blue`, 33 mm, rear
 // right of the tub) and the lower deck's front-right corner on the chassis.
 // Leader lengths: "above" 44 / 84 / 100; "below" 40 (servo, whose anchor
@@ -354,7 +355,7 @@ export const RACECAR_CALLOUTS: readonly RacecarCallout[] = [
   },
   {
     id: "servo",
-    label: "Steering servo · verify",
+    label: "Steering servo",
     part: "servo",
     anchor: [0.11, 0.012, 0.069],
     side: "below",
