@@ -112,9 +112,9 @@ export default function Leaderboard() {
  *
  * Every field is validated before it reaches state (./leaderboardData), the
  * config falls back to a bundled copy, and a tab that comes back after a
- * minute re-reads the board, keeping the last good laps if that read fails.
- * A board switch made while that read runs stands: the read only refreshes
- * the cache.
+ * minute re-reads the board, keeping the last good laps only if that read
+ * fails: a board that answers with no ranked lab is empty now. A board
+ * switch made while that read runs stands: the read only refreshes the cache.
  */
 function LeaderboardBlock() {
   const [cfg, setCfg] = useState<LeaderboardConfig | null>(null);
@@ -141,8 +141,8 @@ function LeaderboardBlock() {
     let config: LeaderboardConfig | null = null;
     let loadedAt = 0;
     let busy = false;
-    // The first read ends in the error state on failure; a refresh keeps the
-    // last good board instead.
+    // The first read ends in the error state on failure; a refresh that
+    // fails keeps the last good board instead.
     const read = async (first: boolean) => {
       if (busy) return;
       busy = true;
@@ -162,7 +162,13 @@ function LeaderboardBlock() {
         if (!index) throw new Error("index.json: unexpected shape");
         const featured = pickFeatured(index, config, Date.now());
         if (!featured) {
-          if (first) setPhase("empty");
+          // A valid answer with no ranked lab (a new term, a board reset):
+          // last read's laps are not on the board any more, so they go.
+          fetchedAt.current = {};
+          setBoards([]);
+          setSelected(null);
+          setFiles({});
+          setPhase("empty");
           loadedAt = Date.now();
           return;
         }
