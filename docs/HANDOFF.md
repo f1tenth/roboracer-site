@@ -12,7 +12,7 @@ a page, update the table in section 3 and the open items in section 2.
 
 | | |
 |---|---|
-| Working branch | `revamp/polish-2` (iteration 2, 2026-09-24/25): the plain-English copy pass, a faster hero, the rebuilt `/assembly`, the class leaderboard on `/race`, the "Start here" paths, the spinoffs on `/about`, the mobile pass, and three QA and review rounds. The topic branches `revamp/p2-*` are merged into it and kept. One PR takes it to `main`. |
+| Working branch | `revamp/polish-2` (iteration 2, 2026-09-24/25): the plain-English copy pass, a faster hero, the rebuilt `/assembly`, the class leaderboard on `/race`, the "Start here" paths, the spinoffs on `/about`, the mobile pass, and three QA and review rounds. The topic branches `revamp/p2-*` are merged into it and kept. **PR #20** takes it to `main`. |
 | `main` | at `e82e747` (PR #19, the post-launch fixes, merged 2026-09-24) = the live roboracer.ai. **Never commit or push to it.** Cedric merges; the merge deploys. |
 | Preview (safe to share) | <https://roboracer-preview.pages.dev> — Cloudflare Pages, project `roboracer-preview`, redeploy with `npx wrangler pages deploy dist --project-name roboracer-preview --branch v1-preview --commit-dirty=true`. Cedric reviews iterations here, not on roboracer.ai. |
 | Live site | roboracer.ai = Porkbun DNS -> **GitHub Pages** from `gh-pages`. The preview above cannot affect it. |
