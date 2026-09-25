@@ -134,8 +134,14 @@ export default function RacePage() {
 
   return (
     <>
-      {/* Hero: the next race, not a page title over an empty band. */}
-      <Section variant="ink" width="bleed" className="pt-[5.5rem] md:pt-[6.5625rem]">
+      {/* Hero: the next race, not a page title over an empty band. The top
+          padding follows the nav bar's height token, so the short landscape
+          bar (3.5rem) does not leave a 3rem ink band above the eyebrow. */}
+      <Section
+        variant="ink"
+        width="bleed"
+        className="pt-[calc(var(--spacing-nav)+1rem)] lg:pt-[calc(var(--spacing-nav)+1.25rem)]"
+      >
         <div className="mx-auto max-w-page px-6">
           <div className="max-w-3xl">
             <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-on-ink-muted">
@@ -151,8 +157,14 @@ export default function RacePage() {
             </p>
           </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-12 md:items-stretch md:gap-10">
-            <figure className="md:col-span-7">
+          {/* Video and panel sit side by side from lg only. At 768 the 7/5
+              split left the panel 276px (the CTA wrapped, the dates took three
+              lines) and at 844x390 the panel ran two screens beside a short
+              video (RACE-01), so tablets and landscape phones stack like the
+              portrait phone. Stacked, the clip is never taller than the screen
+              below the bar: a landscape phone gets it at the width that fits. */}
+          <div className="mt-12 grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10">
+            <figure className="max-lg:max-w-[calc((100svh-var(--spacing-nav)-3rem)*1272/720)] lg:col-span-7">
               <div
                 className="overflow-hidden rounded-media border border-text-on-ink/10 bg-ink-800"
                 style={{ aspectRatio: `${HERO.width} / ${HERO.height}` }}
@@ -186,8 +198,12 @@ export default function RacePage() {
                 fetch resolves (CLS 0.25 at 390). The reserve is deliberately
                 a little under the panel's real height at every width we
                 render, so it shrinks the jump without leaving a gap once the
-                panel is in. */}
-            <div className={`md:col-span-5${race ? "" : " min-h-[40rem]"}`}>
+                panel is in. Stacked from sm to lg the panel runs full width and
+                is about 29rem tall (768, 844x390); in the phone column, 38rem
+                and up. */}
+            <div
+              className={`lg:col-span-5${race ? "" : " min-h-[36rem] sm:min-h-[28rem] lg:min-h-[40rem]"}`}
+            >
               {race && (
                 <NextRaceSpotlight
                   on="ink"
