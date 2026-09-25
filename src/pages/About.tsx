@@ -21,7 +21,7 @@ import PeopleGroup from "../components/about/PeopleGroup";
 import ContributorStrip from "../components/about/ContributorStrip";
 import PartnerWall from "../components/about/PartnerWall";
 import SpinoffGrid from "../components/about/SpinoffGrid";
-import YouTubeFacade from "../components/ui/YouTubeFacade";
+import YouTubeFacade, { YouTubeFacadeSkeleton } from "../components/ui/YouTubeFacade";
 import NearViewport from "../components/about/NearViewport";
 import {
   DEVELOPERS,
@@ -101,10 +101,13 @@ function Figure({
 export default function About() {
   const [platform, setPlatform] = useState<PlatformRow[]>([]);
   const [partners, setPartners] = useState<Partner[]>([]);
-  const [youtube, setYoutube] = useState<JoinYouTube | null>(null);
+  // undefined while community.json loads (the hero holds the facade's box),
+  // null when it names no video.
+  const [youtube, setYoutube] = useState<JoinYouTube | null | undefined>(undefined);
   const [contributors, setContributors] = useState<ContributorsFile | null>(null);
   const [videos, setVideos] = useState<SiteVideo[]>([]);
-  const [spinoffs, setSpinoffs] = useState<Spinoff[]>([]);
+  // null while spinoffs.json loads: the section keeps its grid's height.
+  const [spinoffs, setSpinoffs] = useState<Spinoff[] | null>(null);
 
   useEffect(() => {
     let live = true;
@@ -113,7 +116,7 @@ export default function About() {
       .catch(() => undefined);
     loadCommunity()
       .then((c) => live && setYoutube(c?.join?.youtube ?? null))
-      .catch(() => {});
+      .catch(() => live && setYoutube(null));
     loadPartners()
       .then((d) => live && setPartners(d))
       .catch(() => undefined);
@@ -125,7 +128,7 @@ export default function About() {
       .catch(() => undefined);
     loadSpinoffs()
       .then((d) => live && setSpinoffs(d.entries))
-      .catch(() => undefined);
+      .catch(() => live && setSpinoffs([]));
     return () => {
       live = false;
     };
@@ -198,9 +201,9 @@ export default function About() {
             RoboRacer competition" is to show one, and the hero had a column of
             dead space under the text (Cedric, 2026-08-23). CommunityJoin's own
             copy is switched off below so the page never plays it twice. */}
-        {youtube && (
+        {youtube !== null && (
           <div className="mx-auto mt-12 max-w-page px-6">
-            <YouTubeFacade yt={youtube} />
+            {youtube ? <YouTubeFacade yt={youtube} /> : <YouTubeFacadeSkeleton />}
           </div>
         )}
       </Section>
@@ -345,16 +348,34 @@ export default function About() {
           the `candidates` there wait for Cedric. Every entry is still
           status "verify" (nothing on it is in the content skill yet), so
           each card carries the same verify tag as the people cards. */}
-      {spinoffs.length > 0 && (
+      {(spinoffs === null || spinoffs.length > 0) && (
         <Section width="page" aria-labelledby="about-spinoffs" rule>
           <SectionHeader
             index="05"
             id="about-spinoffs"
             title="Spinoffs"
             subtitle="Teams and companies that grew out of the car"
-            lead={`${countWord(spinoffs.length)} so far. A verify tag means the people involved have not confirmed our wording yet.`}
+            lead={
+              <>
+                {/* The count is the one word that waits for the data. */}
+                <span className={spinoffs ? undefined : "invisible"}>
+                  {spinoffs ? countWord(spinoffs.length) : "Three"}
+                </span>{" "}
+                so far. A verify tag means the people involved have not confirmed our wording yet.
+              </>
+            }
           />
-          <SpinoffGrid spinoffs={spinoffs} />
+          {spinoffs ? (
+            <SpinoffGrid spinoffs={spinoffs} />
+          ) : (
+            // The grid's measured height for the current entries (three
+            // cards: stacked, two across from sm, one row from lg), so a reader
+            // arriving at #about-spinoffs does not watch Videos jump.
+            <div
+              aria-busy="true"
+              className="min-h-[60rem] rounded-card border border-ink-950/10 sm:min-h-[46rem] lg:min-h-[23.75rem]"
+            />
+          )}
         </Section>
       )}
 
