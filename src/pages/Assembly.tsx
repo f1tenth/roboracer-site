@@ -156,10 +156,12 @@ export default function Assembly() {
     <div className="flex h-[100svh] flex-col pt-[4.25rem] md:pt-[5.3125rem]">
       <div className="mx-auto flex min-h-0 w-full max-w-page flex-1 flex-col gap-4 px-6 pb-4 pt-4 md:landscape:flex-row md:landscape:gap-6 lg:flex-row lg:gap-8 lg:pb-6">
         {/* The panel comes first in the document (heading, then the list),
-            and sits right of the view, or under it on a portrait screen. */}
+            and sits right of the view, or under it on a portrait screen.
+            `relative`: it is the containing block of the links' sr-only
+            spans, which otherwise hang off the body and scroll the page. */}
         <section
           aria-labelledby="assembly-title"
-          className="order-2 -mx-1.5 flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-1.5 md:landscape:w-[24rem] md:landscape:flex-none lg:w-[30rem] lg:flex-none"
+          className="relative order-2 -mx-1.5 flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-1.5 md:landscape:w-[24rem] md:landscape:flex-none lg:w-[30rem] lg:flex-none"
         >
           <header className="pr-2">
             <p className="mb-3 flex items-center gap-2 font-mono text-small text-text-muted">
@@ -181,7 +183,7 @@ export default function Assembly() {
                 size="sm"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="[@media(pointer:coarse)]:min-h-11"
+                className="relative scroll-my-2 [@media(pointer:coarse)]:min-h-11"
               >
                 Open the build guide
                 <ExternalMark />
@@ -218,7 +220,7 @@ export default function Assembly() {
                     onPointerLeave={() => setHoveredId((current) => (current === entry.id ? null : current))}
                     onFocus={() => setHoveredId(entry.id)}
                     onBlur={() => setHoveredId((current) => (current === entry.id ? null : current))}
-                    className={`grid w-full grid-cols-[2.25rem_1fr] items-baseline px-2 py-2 text-left transition-colors duration-[var(--duration-fast)] ${
+                    className={`grid w-full scroll-my-2 grid-cols-[2.25rem_1fr] items-baseline px-2 py-2 text-left transition-colors duration-[var(--duration-fast)] ${
                       lit && !selected ? "bg-paper-100" : ""
                     }`}
                   >
@@ -246,7 +248,7 @@ export default function Assembly() {
                           href={entry.guide.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 py-1 text-small font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
+                          className="relative inline-flex scroll-my-2 items-center gap-1 py-1 text-small font-semibold [@media(pointer:coarse)]:-my-2 [@media(pointer:coarse)]:py-3 text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
                         >
                           Build guide: {entry.guide.label}
                           <ExternalMark />
@@ -259,13 +261,15 @@ export default function Assembly() {
             })}
           </ol>
 
-          <p className="mt-3 px-2 pb-1 text-small text-text-body">
+          {/* pb-3: room below the last link for its focus ring and, on touch,
+              for its 44 px tap area; scroll margin cannot scroll past the end. */}
+          <p className="mt-3 px-2 pb-3 text-small text-text-body">
             Last step:{" "}
             <a
               href={WIRING_GUIDE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
+              className="relative inline-flex scroll-my-2 items-center gap-1 font-semibold [@media(pointer:coarse)]:-my-3 [@media(pointer:coarse)]:py-3 text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
             >
               wire it all together
               <ExternalMark />
