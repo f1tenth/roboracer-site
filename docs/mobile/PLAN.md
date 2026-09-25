@@ -60,7 +60,8 @@ Standing rules for every fixer (not code, contracts):
 
 | Fixer | Branch / worktree | Port | Owns (edits only these) |
 |---|---|---|---|
-| landing | `revamp/p2-mobile-landing` | 4301 | `src/pages/Landing.tsx`, **all of `src/components/ui/*`**, `src/lib/motion.ts`, `src/lib/media.ts`, `src/index.css` except the nav block |
+| landing chapters | `revamp/p2-mobile-chapters` | 4301 | the pinned chapters: `src/components/ui/HeroChapter.tsx`, `ExplodedModel.tsx`, `ExplodedModelScene.tsx`, `WorldMapChapter.tsx`, `PlatformPanel.tsx`, `PinnedChapter.tsx`, `src/lib/motion.ts`, `src/lib/media.ts` (L-1 to L-4) |
+| landing components | `revamp/p2-mobile-landing` | 4306 | `src/pages/Landing.tsx`, **every other file in `src/components/ui/*`**, `src/index.css` except the nav block (L-5 to L-9) |
 | chrome | `revamp/p2-mobile-chrome` | 4302 | `src/components/NavBar.tsx`, `Footer.tsx`, `Layout.tsx`, `src/pages/Rules.tsx`, `rules.css`, `Build.tsx`, `Learn.tsx`, `Assembly.tsx` (+ `RacecarAssembly.tsx` only for ASM-02), `index.html`, and the nav block of `src/index.css` (`@layer components` `.navbar` through `.mobile-menu-primary` and the nav media queries) |
 | news-research | `revamp/p2-mobile-news` | 4303 | `src/pages/News.tsx`, `Research.tsx`, `src/components/news/*`, `src/components/research/*` |
 | about | `revamp/p2-mobile-about` | 4304 | `src/pages/About.tsx`, `src/components/about/*` |
@@ -68,12 +69,13 @@ Standing rules for every fixer (not code, contracts):
 
 Shared primitives used by other pages (`TagFilter`, `SectionHeader`,
 `NextRaceSpotlight`, `TeamGrid`, `YouTubeFacade`, `CommunityJoin`, `buttonStyles`)
-are fixed once, by the landing fixer; the page fixers verify against them after
-the merge.
+are fixed once, by the landing components fixer; the page fixers verify
+against them after the merge. The landing has two fixers because it is half the
+work: the chapters and the components never share a file.
 
 ## 4. Per page
 
-### 4.1 `/` landing (landing fixer)
+### 4.1 `/` landing (chapters fixer: L-1 to L-4; components fixer: L-5 to L-9)
 
 The landing's phone story, top to bottom: the hero (a short pin, then the
 headline), the four ways in, highlights, the car turning into its parts as it
@@ -147,9 +149,9 @@ Rebuilt and QA'd on 2026-09-24. Only ASM-01..03 and the nav offset (C-6).
 ## 5. Merge order and verification
 
 1. The fixers branch from `revamp/p2-mobile` at the system commit and commit only
-   their own files. The lead checks each branch's log, then merges landing
-   first (shared primitives), chrome, news-research, about, race; lint and build
-   after the last merge.
+   their own files. The lead checks each branch's log, then merges the landing
+   components first (shared primitives), then the chapters, chrome,
+   news-research, about, race; lint and build after the last merge.
 2. Before verification the lead merges `revamp/polish-2` (the parallel QA-fix
    branch) and re-runs lint and build.
 3. Verification (read-only agent, `docs/mobile/VERIFY.md`): the audit walk on
