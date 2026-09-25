@@ -339,10 +339,15 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     // DESKTOP_QUERY (wide AND tall), never on width alone: a landscape phone
     // is 844 wide but 390 tall, and the width rule put the first headline
     // line under the nav and streamed it the desktop files (LANDING-03, -25).
-    const wide = window.matchMedia(DESKTOP_QUERY).matches;
-    // Chosen per clip at load time, so a link that slows down mid-cycle
-    // drops to the 960 encodes for the clips after.
-    const srcOf = (c: HeroClip) => (wide && desktopOk(c.mbps) ? c.mp4_1920 : c.mp4_960);
+    // Read live, never captured: after a resize or a rotation from desktop
+    // to compact the clips after the current one still asked for the desktop
+    // files. Playback does not restart; the next pick follows the window.
+    const desktopMql = window.matchMedia(DESKTOP_QUERY);
+    const wide = () => desktopMql.matches;
+    // Chosen per clip at load time, so a link that slows down mid-cycle (or
+    // a window that leaves the desktop size) gets the 960 encodes for the
+    // clips after.
+    const srcOf = (c: HeroClip) => (wide() && desktopOk(c.mbps) ? c.mp4_1920 : c.mp4_960);
     const after = (i: number) => (i + 1 < clips.length ? i + 1 : loopFrom);
     const els = [a, b] as const;
     const held = () => pausedRef.current || hiddenRef.current;
@@ -388,9 +393,9 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       const r = v.buffered;
       return r.length > 0 && r.end(r.length - 1) >= v.duration - 0.25;
     };
-    // After a stall, the clip queued next reloads as its 960 encode if it
-    // has not started.
-    const downgradeQueued = () => {
+    // After a stall or a size change, the clip queued next reloads in the
+    // encode srcOf picks now, if it has not started.
+    const reselectQueued = () => {
       const n = els[1 - cur];
       if (!queued || fading || !n.paused) return;
       const next = srcOf(clips[after(clip)]);
@@ -405,13 +410,13 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     // the error fallback and cleanup each stop the clock.
     const armGap = () => {
       window.clearTimeout(gapTimer);
-      if (!wide || linkStalled() || held()) return;
+      if (!wide() || linkStalled() || held()) return;
       const v = els[cur];
       const left = Number.isFinite(v.duration) ? Math.max(0, v.duration - v.currentTime) : 0;
       gapTimer = window.setTimeout(() => {
         if (disposed || !waiting || held()) return;
         markLinkStalled();
-        downgradeQueued();
+        reselectQueued();
       }, left * 1000 + STALL_MS);
     };
     const advance = () => {
@@ -483,7 +488,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       keep.style.opacity = "1";
       keep.style.zIndex = "1";
       keep.loop = true;
-      keep.src = wide && desktopOk(video.mbps) ? video.mp4_1920 : video.mp4_960;
+      keep.src = wide() && desktopOk(video.mbps) ? video.mp4_1920 : video.mp4_960;
       keep.load();
       activeRef.current = [keep];
       if (!held()) void keep.play().catch(() => {});
@@ -517,14 +522,14 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     const stallTimers = new Map<HTMLVideoElement, number>();
     const onWaiting = (e: Event) => {
       const el = e.currentTarget as HTMLVideoElement;
-      if (!wide || linkStalled() || held()) return;
+      if (!wide() || linkStalled() || held()) return;
       window.clearTimeout(stallTimers.get(el));
       stallTimers.set(
         el,
         window.setTimeout(() => {
           if (disposed || el.paused) return;
           markLinkStalled();
-          downgradeQueued();
+          reselectQueued();
         }, STALL_MS),
       );
     };
@@ -538,6 +543,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     b.addEventListener("ended", onEnded);
     a.addEventListener("error", onError);
     b.addEventListener("error", onError);
+    desktopMql.addEventListener("change", reselectQueued);
     activeRef.current = [a];
     setClip(a, 0);
     if (!held()) void a.play().catch(() => {});
@@ -562,6 +568,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       b.removeEventListener("ended", onEnded);
       a.removeEventListener("error", onError);
       b.removeEventListener("error", onError);
+      desktopMql.removeEventListener("change", reselectQueued);
     };
   }, [isStatic, clips, loopFrom, video.mp4_1920, video.mp4_960, video.mbps]);
 
