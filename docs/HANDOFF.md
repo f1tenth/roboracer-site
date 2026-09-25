@@ -12,11 +12,11 @@ a page, update the table in section 3 and the open items in section 2.
 
 | | |
 |---|---|
-| Working branch | `revamp/pages-v1` (local and origin). PR #17 takes it to `main`: the landing and every rebuilt page in one merge (Cedric, 2026-09-21: deploy rather than keep it in dev). `revamp/v1.0` is an ancestor of it. |
-| `main` | at `4ea2e09` until Cedric merges PR #17. **Never commit or push to it.** Cedric merges; the merge deploys roboracer.ai. |
-| Preview (safe to share) | <https://roboracer-preview.pages.dev> — Cloudflare Pages, project `roboracer-preview`, redeploy with `npx wrangler pages deploy dist --project-name roboracer-preview --branch v1-preview --commit-dirty=true` |
+| Working branch | `revamp/polish-2` (iteration 2, 2026-09-24/25): the plain-English copy pass, a faster hero, the rebuilt `/assembly`, the class leaderboard on `/race`, the "Start here" paths, the spinoffs on `/about`, the mobile pass, and three QA and review rounds. The topic branches `revamp/p2-*` are merged into it and kept. One PR takes it to `main`. |
+| `main` | at `e82e747` (PR #19, the post-launch fixes, merged 2026-09-24) = the live roboracer.ai. **Never commit or push to it.** Cedric merges; the merge deploys. |
+| Preview (safe to share) | <https://roboracer-preview.pages.dev> — Cloudflare Pages, project `roboracer-preview`, redeploy with `npx wrangler pages deploy dist --project-name roboracer-preview --branch v1-preview --commit-dirty=true`. Cedric reviews iterations here, not on roboracer.ai. |
 | Live site | roboracer.ai = Porkbun DNS -> **GitHub Pages** from `gh-pages`. The preview above cannot affect it. |
-| Large media | Cloudflare R2 bucket `roboracer-media`, public base `https://pub-1174c726236842f08529a0a5cc0c68fb.r2.dev`. `.env.production` sets `VITE_MEDIA_BASE`; `src/lib/media.ts` resolves `/media/...` paths through it in production and to the local file on localhost. |
+| Large media | Cloudflare R2 bucket `roboracer-media`, public base `https://pub-1174c726236842f08529a0a5cc0c68fb.r2.dev`. `.env.production` sets `VITE_MEDIA_BASE`; `src/lib/media.ts` resolves `/media/...` paths through it in production and to the local file on localhost. The IV hero clips are the `-v2` encodes (from the source, 2026-09-24); localhost needs them copied into `public/media/hero/` (curl lines in `docs/media/HERO_PERF.md`), and a dev server started before that copy 404s them until restarted. `docs/media/HOSTING.md` lists where every video is served from. |
 | Old history | local branch `revamp/integration` holds the previous 212-commit history as a safety net. Same tree, deletable on request. |
 
 Commits: plain messages, **no `Co-Authored-By`, no AI attribution anywhere**
@@ -28,29 +28,39 @@ around it — if a task seems to need one of those, say so and ask.
 
 ---
 
-## 2. What is still open on the landing
+## 2. What is still open
 
-The landing is a **v1.0 draft**, not finished. In priority order:
-
-1. **Mobile design pass: done on `revamp/p2-mobile` (2026-09-25).** Audit of
-   every route on five phone and tablet sizes (`docs/mobile/AUDIT.md`), the plan
-   (`docs/mobile/PLAN.md`), and the verification (`docs/mobile/VERIFY.md`). The
-   pinned chapters read unpinned on `compact:` (below `desktop:`), the menu is
-   bounded and modal, section rhythm and headings follow the window on phones,
-   tap targets are 44 px on `coarse:`. Open items and Cedric's questions are at
-   the end of VERIFY.md.
-2. **Copy pass.** Only the hero has had real text written. Every other section
-   carries working copy: section leads, captions, the `TODO(content)` markers,
-   and the ten team entries still tagged `status: verify`. Facts come from
-   `.claude/skills/roboracer-content` or from Cedric — never invent one.
-3. Smaller, known:
-   - `/media/hero/car-studio.webp` and `car-studio-cutout.webp` were never
-     produced; the car chapter falls back to the 3D render by design.
-   - The account has no `workers.dev` subdomain, so the R2 files come from the
-     rate-limited `r2.dev` URL. `infra/media-worker` is written and ready to
-     deploy once a subdomain is claimed.
-   - Team institutions marked `TODO(content)`; UNICORN_Racing's institution
-     needs verifying (its own post says UNIST, `teams.json` says Bonn).
+1. **Cedric's decisions from iteration 2**, each written where the work is:
+   - `docs/CONTENT.md`: the registration deadline (Sep 5 in the skill, Sep 9 in
+     the JSON, Sep 18 on the live race site); 404 Racers' institution (two posts
+     say UPenn); LAMARRacing's ICRA 2026 wording; what connects Quanser to
+     RoboRacer (its spinoff card stays hidden until an origin is filled in);
+     the three spinoff candidates; the 19 race-site repos that went private
+     (their links now go to Wayback captures).
+   - `docs/LEADERBOARD.md`: a `leaderboard.roboracer.ai` CNAME to GitHub Pages;
+     wording for the future public board and prizes (the site says nothing yet).
+   - `docs/qa/polish-2-review.md` item 9: the nav's violet "Start here" plus one
+     in-page primary button breaks the one-solid-button-per-viewport rule.
+   - `docs/mobile/VERIFY.md`, end: `viewport-fit=cover` for the notch, the new
+     strings ("Pause"/"Play", "39 more"), partner names on touch, a portrait
+     hero encode, the mono footer headings.
+   - `docs/media/HERO_PERF.md`: the Cloudflare account is Rahul's and has no
+     `workers.dev` subdomain, so R2 still serves from the rate-limited `r2.dev`
+     URL; `infra/media-worker` deploys once someone opens Workers & Pages in
+     that dashboard.
+   - The AI-generated car image in the landing's car chapter (`CAR_PHOTOS[1]`,
+     now captioned "AI-generated illustration"): keep, or swap for a photo.
+2. **Copy** is done: `docs/copy/BRIEF.md` is the standard, `docs/copy/*.md` the
+   before/after tables. New text follows the brief. Facts still come only from
+   `.claude/skills/roboracer-content` or from Cedric.
+3. **Mobile** is done (`docs/mobile/`); Safari was not testable here (WebKit
+   would not launch), so check a real iPhone once, portrait and landscape.
+4. **Learn and build rebuild** (next iteration): the two tracks are data in
+   `public/data/paths.json` and the state of play is `docs/LEARN_TERRAIN.md`.
+   `/build` and `/learn` stay iframes until Cedric says otherwise.
+5. Smaller, known: `/media/hero/car-studio.webp` was never produced (the car
+   chapter falls back to the 3D render); the team institutions still marked
+   `TODO(content)`; `/about` People is 42% shorter on phones, the target was half.
 
 ---
 
@@ -58,10 +68,10 @@ The landing is a **v1.0 draft**, not finished. In priority order:
 
 | Route | File | State | Notes |
 |---|---|---|---|
-| `/` | `src/pages/Landing.tsx` | **v1.0 draft** | Nine sections, the reference for the visual system |
+| `/` | `src/pages/Landing.tsx` | **v1.1** | The reference for the visual system. Hero clip cycle loads one clip at a time and drops to 960 on slow links (`HeroChapter.tsx`, `lib/media.ts`); "00 Start here" paths row after the hero from `paths.json` (`ui/EntryPaths.tsx`); chapters unpinned on `compact:` |
 | `/assembly` | `Assembly.tsx` | **revamped** (`revamp/p2-assembly`) | "The car, part by part": site nav, 3D frame plus a list of 8 parts in build order, each linked to its build-guide section (`CAR_PARTS` in `racecarAssemblyData.ts`). Focus mode kept. `docs/assembly/` |
 | `/styleguide` | `Styleguide.tsx` | live | Every primitive; check changes here first |
-| `/about` | `About.tsx` | **revamped** | Ends on section 05 Videos (`videos.json`, click-to-load `YouTubeFacade`) and the shared Join block |
+| `/about` | `About.tsx` | **revamped** | 05 Spinoffs from `spinoffs.json` (`about/SpinoffGrid.tsx`; entries without an origin are not rendered), 06 Videos (`videos.json`, click-to-load `YouTubeFacade`), 07 the shared Join block |
 | `/news` | `News.tsx` | **revamped** | Reads `news.json`; a lead item with an `embed` shows the LinkedIn post itself (`news/LinkedInEmbed.tsx`) |
 | `/research` | `Research.tsx` | **revamped** | Rebuilt in `6d566b0`; reads `publications.json`; `/add-paper` and `/discover-papers` feed it. Fix list in `docs/NON_LANDING_AUDIT.md` |
 | `/rules` | `Rules.tsx` | **old design, new text** | A `marked` viewer over `public/rules.md`, which is `rules_v3.md` from `f1tenth/roboracer_rules` `dev-2026`, byte for byte. `scripts/check-rules-drift.mjs` compares the two; `--write` refreshes the copy. Typography is still the legacy `rules.css`, not the design system. |
