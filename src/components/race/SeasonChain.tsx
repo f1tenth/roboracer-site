@@ -63,6 +63,9 @@ function LiveTag({ children }: { children: string }) {
  * competitor is deciding about, so they get the space (Cedric, 2026-08-23).
  * A race with no picture yet shows the RoboRacer mark on paper in the same
  * 16:9 box, so the chain keeps one rhythm whether or not a photo exists.
+ * Below md that box is the timeline's thumbnail beside the name instead
+ * (see SeasonChain): at full width it was a 342 x 192 hole in the chain
+ * (RACE-04), and the mark sits at the timeline's size in it.
  */
 function SeasonPhoto({ event }: { event: SeasonEvent }) {
   return (
@@ -87,7 +90,7 @@ function SeasonPhoto({ event }: { event: SeasonEvent }) {
             height={64}
             loading="lazy"
             decoding="async"
-            className="absolute left-1/2 top-1/2 h-[34%] w-auto -translate-x-1/2 -translate-y-1/2 opacity-25"
+            className="absolute left-1/2 top-1/2 h-[34%] w-auto -translate-x-1/2 -translate-y-1/2 opacity-25 max-md:h-[42%]"
           />
         )}
       </div>
@@ -116,15 +119,25 @@ export default function SeasonChain({ events, map }: SeasonChainProps) {
       {rows.map(({ event: e, state, isNext, watch }) => {
         const n = ordinalFor(e, map);
         const stateTag = STATE_TAG[state];
+        // Below md a race without a photo sets its placeholder as a thumbnail
+        // to the left of the name and dates, at the timeline's sizes (8rem,
+        // 12rem from sm), under the ordinal; a real photo keeps the column.
+        const thumb = !e.image;
         return (
           <li
             key={e.url}
-            className="grid gap-x-8 gap-y-4 border-t border-ink-950/10 py-8 md:grid-cols-12"
+            className={`grid gap-x-8 gap-y-4 border-t border-ink-950/10 py-8 md:grid-cols-12${
+              thumb
+                ? " max-md:grid-cols-[8rem_minmax(0,1fr)] max-md:gap-x-4 sm:max-md:grid-cols-[12rem_minmax(0,1fr)] sm:max-md:gap-x-5"
+                : ""
+            }`}
           >
-            <span className="font-mono text-small tabular-nums text-text-muted md:col-span-1">
+            <span
+              className={`font-mono text-small tabular-nums text-text-muted md:col-span-1${thumb ? " max-md:col-span-2" : ""}`}
+            >
               {n ? String(n).padStart(2, "0") : "--"}
             </span>
-            <div className="md:col-span-4">
+            <div className={`md:col-span-4${thumb ? " max-md:row-span-2 max-md:self-start" : ""}`}>
               <SeasonPhoto event={e} />
             </div>
             <div className="min-w-0 md:col-span-4">
@@ -153,7 +166,7 @@ export default function SeasonChain({ events, map }: SeasonChainProps) {
                     href={watch.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
+                    className="text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2 coarse:-my-3 coarse:inline-flex coarse:min-h-11 coarse:items-center"
                   >
                     watch &#8599;
                   </a>
