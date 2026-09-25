@@ -340,8 +340,10 @@ export default function Landing() {
         <Section width="bleed" aria-labelledby="next-race">
           <div className="mx-auto max-w-page px-6">
             <SectionHeader index="06" id="next-race" title="Next race" subtitle="Come to our next race" />
-            <div className="grid gap-8 md:grid-cols-12 md:items-stretch md:gap-10">
-              <figure className="md:col-span-7">
+            {/* Splits at lg, not md: at 768 the panel's 5 columns wrapped
+                "Register your team" (mobile pass, LANDING-24a). */}
+            <div className="grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10">
+              <figure className="lg:col-span-7">
                 <div
                   className="overflow-hidden rounded-media border border-ink-950/10 bg-paper-100"
                   style={{ aspectRatio: `${RACE_HERO.width} / ${RACE_HERO.height}` }}
@@ -362,13 +364,13 @@ export default function Landing() {
                     href={RACE_HERO.creditHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-text-muted underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2"
+                    className="text-text-muted underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2 coarse:-my-3 coarse:py-3"
                   >
                     {RACE_HERO.creditLabel}
                   </a>
                 </figcaption>
               </figure>
-              <div className="md:col-span-5">
+              <div className="lg:col-span-5">
                 <NextRaceSpotlight
                   title={race.title}
                   headline={`${race.short_name ?? race.title}, ${race.location.split(",")[0].trim()}`}
