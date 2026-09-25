@@ -6,6 +6,22 @@ import "./rules.css";
 
 const SOURCE_URL = "https://github.com/f1tenth/roboracer_rules/blob/dev-2026/rules_v3.md";
 
+/**
+ * How long the rulebook waits for the web fonts once the file is in. The
+ * source line above it wraps differently in the fallback face (three lines
+ * against two at 1536), so a rulebook painted before the swap was pushed
+ * 16px down the page when Manrope arrived (CLS 0.027). Holding it until the
+ * fonts are in lets that reflow happen over the placeholder; on a font host
+ * slower than this the rulebook shows anyway and takes the small jump.
+ */
+const FONT_WAIT_MS = 1000;
+
+function fontsIn(): Promise<unknown> {
+  const ready = document.fonts?.ready;
+  if (!ready) return Promise.resolve();
+  return Promise.race([ready, new Promise((resolve) => window.setTimeout(resolve, FONT_WAIT_MS))]);
+}
+
 const slug = (text: string) =>
   text
     .toLowerCase()
@@ -94,6 +110,7 @@ export default function Rules() {
         if (!res.ok) throw new Error(`rules.md: ${res.status}`);
         return res.text();
       })
+      .then((md) => fontsIn().then(() => md))
       .then((md) => live && setHtml(render(md)))
       .catch(() => live && setFailed(true));
     return () => {
@@ -103,7 +120,8 @@ export default function Rules() {
 
   return (
     // The 24px page edge (the nav's own) below lg; from lg the long-form
-    // steps the page has always had.
+    // steps the page has always had. At least one window tall (rules.css),
+    // so the footer never paints in the first window while rules.md loads.
     <div className="rules flex flex-col gap-5 px-6 py-20 pt-[calc(var(--spacing-nav)+1rem)] lg:px-16 lg:pt-[calc(var(--spacing-nav)+1.25rem)] xl:px-24 2xl:px-32">
       <p className="rules-source">
         The general rules for in-person competitions, from the{" "}

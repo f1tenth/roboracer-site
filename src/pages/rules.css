@@ -18,6 +18,17 @@
     color: var(--color-text-muted);
   }
 
+  /* While rules.md is fetched the page holds at least one window of height,
+     so the footer is never painted in the first window and then pushed off
+     it by the rulebook (CLS 0.47 at 1536x730). On the page, not on the
+     placeholder: the source line above the placeholder rewraps when the web
+     font arrives, and a window-tall placeholder moving 16px counted its
+     whole area. vh first, svh where the unit exists. */
+  .rules {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
   /* Section numbers, as the ruleset's own stylesheet draws them: "3." on a
      section, "3.2." on a subsection, "a." on a sub-subsection. Subsection
      counters restart with counter-set, not counter-reset: Chrome keeps
