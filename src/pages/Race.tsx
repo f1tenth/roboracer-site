@@ -15,6 +15,7 @@ import TeamGrid from "../components/ui/TeamGrid";
 import Reveal from "../components/ui/Reveal";
 import RaceTimeline from "../components/race/RaceTimeline";
 import SeasonChain from "../components/race/SeasonChain";
+import Leaderboard from "../components/race/Leaderboard";
 import type { SeasonEvent } from "../components/race/eventState";
 
 // Same clip and the same credit as the landing's next-race section
@@ -92,7 +93,8 @@ function SlackLine() {
  * cards, and the countdown runs to the registration deadline, which is the
  * date that actually costs a team its entry. Everything below it answers the
  * next question in order: how do I enter, what else is running this year, has
- * this been going long, and who would I be racing.
+ * this been going long, who would I be racing, and who is fastest in class
+ * right now.
  */
 export default function RacePage() {
   const [upcoming, setUpcoming] = useState<SeasonEvent[]>([]);
@@ -304,6 +306,21 @@ export default function RacePage() {
           lead="Undergraduate teams, research labs and companies, all racing the same car spec. An unverified tag means we are still confirming the details."
         />
         <TeamGrid teams={teams} />
+      </Section>
+
+      {/* The class leaderboard closes the page: after who races in the
+          series, where the fastest laps are being set this week. It is a
+          side door (simulator laps from one course, not a competition), so
+          it sits below everything a team needs to enter. */}
+      <Section id="leaderboard" width="page" aria-labelledby="race-leaderboard" rule>
+        <SectionHeader
+          index="05"
+          id="race-leaderboard"
+          title="Leaderboard"
+          subtitle="The fastest laps in class at Penn"
+          lead="Students in ESE 6150 race each lab in the grading simulator. These are their best clean laps."
+        />
+        <Leaderboard />
       </Section>
     </>
   );

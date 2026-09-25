@@ -1,0 +1,9 @@
+{
+  "label": "ESE 6150 leaderboard",
+  "url": "https://roboracer-class.github.io/leaderboard/",
+  "term": null,
+  "featured": null,
+  "extra": "top_mps",
+  "limit": 5,
+  "notes": "url: the class leaderboard site; its data is read from <url>data/. term: null reads the current term; an archived term's label (see <url>data/archive/index.json) pins that term instead. featured: null picks the most recently opened lab that has ranked laps; a board slug from <url>data/index.json pins that board. extra: the one extra column (a metric.extras key), null for none. limit: rows shown. See docs/LEADERBOARD.md."
+}
