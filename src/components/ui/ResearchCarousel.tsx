@@ -15,6 +15,7 @@ import type { Publication } from "../../lib/data";
 import { abstractOf, authorLine, figureCredit, paperHref, shortTitle, venueInitials } from "../../lib/publications";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { DESKTOP_QUERY } from "../../lib/motion";
+import { useMediaHold } from "../../lib/media";
 
 /*
  * Landing research carousel (landing v5 section 5, round two: coverflow).
@@ -125,6 +126,10 @@ type FigureProps = { p: Publication; eager?: boolean };
  * with the venue initials. */
 function Figure({ p, eager = false }: FigureProps) {
   const chain = useMemo(() => figureChain(p), [p]);
+  // The landing holds its figures until the hero's opening clip has loaded
+  // (MediaHoldContext): 100 to 300 KB each, and Chrome fetched even the lazy
+  // ones in the first seconds.
+  const hold = useMediaHold();
   const [failed, setFailed] = useState(0);
   const img = chain[failed];
   if (!img) {
@@ -137,7 +142,7 @@ function Figure({ p, eager = false }: FigureProps) {
   return (
     <img
       key={img.src}
-      src={img.src}
+      src={hold ? undefined : img.src}
       alt={`Figure from ${shortTitle(p.title)}`}
       width={img.width}
       height={img.height}

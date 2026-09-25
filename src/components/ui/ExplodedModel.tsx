@@ -2,17 +2,20 @@ import { lazy, Suspense, useCallback, useEffect, useRef, useState, useSyncExtern
 import { Link } from "react-router-dom";
 import { gsap, useGSAP, DESKTOP_QUERY, MOTION_OK_QUERY, ScrollTrigger } from "../../lib/motion";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
+import { useMediaHold } from "../../lib/media";
 import { RACECAR_CALLOUTS } from "../racecarAssemblyData";
 
 const loadScene = () => import("./ExplodedModelScene");
 const ExplodedModelScene = lazy(loadScene);
 
 // Warm the chapter before anyone scrolls to it (Cedric, landing v5: "the CAD
-// takes a while to load when we first bring up the page"): once the page is
-// idle (or 2.5 s after mount at the latest, so the hero's first clip wins the
-// bandwidth), fetch the three.js chunk, which in turn preloads the eleven
-// part files and the studio environment map (RacecarAssembly.tsx module
-// scope). Skipped on weak devices, which never mount the scene.
+// takes a while to load when we first bring up the page"): once the landing
+// stops holding media for the hero's opening clip (MediaHoldContext) and the
+// page is idle (or 2.5 s after that at the latest), fetch the three.js chunk,
+// which in turn preloads the eleven part files and the studio environment
+// map (RacecarAssembly.tsx module scope). An idle main thread alone came too
+// early: at 5 Mbit/s the chunk starved the opening clip (docs/media/HERO_PERF.md).
+// Skipped on weak devices, which never mount the scene.
 function warmScene() {
   const run = () => void loadScene().catch(() => {});
   const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
@@ -227,10 +230,14 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
   // load result when the layout switches (e.g. reduced-motion toggled live).
   useEffect(() => setPhotoStatus("loading"), [staticLayout]);
 
+  const holdMedia = useMediaHold();
+  useEffect(() => {
+    if (!holdMedia && !weakDevice) warmScene();
+  }, [holdMedia, weakDevice]);
+
   useEffect(() => {
     const el = wrapRef.current;
     if (!el || weakDevice) return;
-    warmScene();
     // Mount the scene 1200px ahead (v4: 600); render only while on screen.
     const mount = new IntersectionObserver(
       (entries) => {
