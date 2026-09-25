@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { marked, type Tokens } from "marked";
 
 import "./rules.css";
@@ -22,6 +23,10 @@ const slug = (text: string) =>
  * has not already declared, and a repeated heading ("Evaluation") gets a
  * numeric suffix, so no id appears twice. Section numbers come from CSS
  * counters in rules.css, the way the ruleset's own stylesheet does it.
+ *
+ * The document's own contents list (a list made only of in-page links) gets
+ * a class, so rules.css can give its links a touch-sized row; if the upstream
+ * file ever changes shape the list simply keeps the plain style.
  */
 function render(markdown: string): string {
   const used = new Set([...markdown.matchAll(/<a id="([^"]+)"><\/a>/g)].map((m) => m[1]));
@@ -36,12 +41,42 @@ function render(markdown: string): string {
     used.add(id);
     return `<h${depth} id="${id}">${inner}</h${depth}>`;
   };
-  return marked.parse(markdown, { renderer, async: false });
+  const html = marked.parse(markdown, { renderer, async: false });
+  return html.replace(
+    /<ul>\n((?:<li><a href="#[^"]+">[^<]*<\/a><\/li>\n)+)<\/ul>/,
+    '<ul class="rules-contents">\n$1</ul>',
+  );
 }
 
 export default function Rules() {
   const [html, setHtml] = useState<string | null>(null);
   const [failed, setFailed] = useState(false);
+  // A deep link (/rules#kill-switch) arrives before the document does. Once
+  // it has rendered, bring the target in with scrollIntoView, which honours
+  // the anchors' scroll-margin in rules.css (Safari does not retry the
+  // fragment after async content; Chromium does). Arrival only: later jumps
+  // inside the document are the browser's own.
+  const { hash } = useLocation();
+  const arrivalHash = useRef(hash);
+
+  useEffect(() => {
+    const target = arrivalHash.current;
+    if (html === null || !target) return;
+    arrivalHash.current = "";
+    const jump = () => document.getElementById(decodeURIComponent(target.slice(1)))?.scrollIntoView({ block: "start" });
+    jump();
+    // Web fonts that arrive after the jump reflow the thousands of pixels
+    // above the target (Safari has no scroll anchoring to absorb it), so
+    // jump once more when they are in, unless the reader has moved since.
+    const landed = window.scrollY;
+    let live = true;
+    void document.fonts?.ready.then(() => {
+      if (live && Math.abs(window.scrollY - landed) < 2) jump();
+    });
+    return () => {
+      live = false;
+    };
+  }, [html]);
 
   useEffect(() => {
     let live = true;
@@ -58,7 +93,9 @@ export default function Rules() {
   }, []);
 
   return (
-    <div className="rules responsive-padding flex flex-col gap-5 py-20 pt-[5.5rem] md:pt-[6.5625rem]">
+    // The 24px page edge (the nav's own) below lg; from lg the long-form
+    // steps the page has always had.
+    <div className="rules flex flex-col gap-5 px-6 py-20 pt-[calc(var(--spacing-nav)+1rem)] lg:px-16 lg:pt-[calc(var(--spacing-nav)+1.25rem)] xl:px-24 2xl:px-32">
       <p className="rules-source">
         The general rules for in-person competitions, from the{" "}
         <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">
