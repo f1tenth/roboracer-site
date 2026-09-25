@@ -7,6 +7,11 @@ type PersonCardProps = {
   compact?: boolean;
 };
 
+/** A 2.75rem hit area on touch screens for the name link, taken back by the
+ * negative margin so the text does not move (mobile pass, ABOUT-07); `relative`
+ * keeps the padding above the next line for the tap. */
+const TAP = "relative coarse:-my-3 coarse:py-3";
+
 /**
  * One person as a hairline cell: a square photo or a mono monogram tile, the
  * name (which is the link to that person's source page, Cedric 2026-08-23),
@@ -62,7 +67,7 @@ export default function PersonCard({ person, compact = false }: PersonCardProps)
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${nameClass} w-fit underline decoration-ink-950/25 underline-offset-4 [overflow-wrap:anywhere] hover:decoration-rr-violet hover:decoration-2`}
+            className={`${nameClass} ${TAP} w-fit underline decoration-ink-950/25 underline-offset-4 [overflow-wrap:anywhere] hover:decoration-rr-violet hover:decoration-2`}
           >
             {name}
             {/* A no-break space: the arrow never wraps onto a line alone. */}
