@@ -113,6 +113,7 @@ export default function Leaderboard() {
       {href && (
         <Button href={href} variant="secondary" target="_blank" rel="noopener noreferrer">
           See the full leaderboard <span aria-hidden="true">↗</span>
+          <span className="sr-only"> (opens in a new tab)</span>
         </Button>
       )}
     </div>
