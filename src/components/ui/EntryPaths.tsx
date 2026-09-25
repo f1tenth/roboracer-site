@@ -41,7 +41,7 @@ const BUNDLED_PATHS: EntryPath[] = [
     id: "sponsor",
     n: "04",
     label: "Sponsor a race",
-    line: "Reach students at 90+ universities. Write to contact@roboracer.ai.",
+    line: "Teams at 90+ universities. Write to contact@roboracer.ai.",
     href: "mailto:contact@roboracer.ai?subject=RoboRacer%20sponsorship",
   },
 ];

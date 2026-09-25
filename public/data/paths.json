@@ -32,7 +32,7 @@
       "id": "sponsor",
       "n": "04",
       "label": "Sponsor a race",
-      "line": "Reach students at 90+ universities. Write to contact@roboracer.ai.",
+      "line": "Teams at 90+ universities. Write to contact@roboracer.ai.",
       "href": "mailto:contact@roboracer.ai?subject=RoboRacer%20sponsorship",
       "for": ["sponsor", "press"],
       "todo": "TODO(content): there is no sponsor page or sponsor block on the site. The content skill's fallback is contact@roboracer.ai (same mailto and subject as ui/SponsorCTA). Point this at the Sponsorship Flyer (Drive 1t3aNWomqUpKMcDWbTofqmpHYkW1QAWEg, exported to public/docs/) or at a sponsor section once Cedric approves one."
