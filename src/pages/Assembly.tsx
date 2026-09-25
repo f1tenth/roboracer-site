@@ -253,7 +253,7 @@ export default function Assembly() {
                           {/* Text flow, not flex: a wrapped label keeps the
                               arrow on its last word (no-break space). */}
                           Build guide: {entry.guide.label}
-                          {" "}
+                          {"\u00a0"}
                           <ExternalMark />
                         </a>
                       )}
