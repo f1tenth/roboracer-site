@@ -233,6 +233,7 @@ function PostCard({ post, clone = false }: { post: JoinPost; clone?: boolean }) 
         <MediaFrame
           src={post.poster}
           video={post.video}
+          still={clone}
           alt={`Video from ${post.author}'s LinkedIn post`}
           width={post.width}
           height={post.height}
