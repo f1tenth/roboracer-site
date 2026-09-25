@@ -76,12 +76,12 @@ export default function Research() {
               1,000+ publications reference the platform
             </h1>
             <p className="mt-6 max-w-[60ch] text-lead text-text-body">
-              A Google Scholar search for F1TENTH or RoboRacer returns more than a thousand results.
-              Here is a selection by topic, and every paper we track. The rest are one search away.
+              One Google Scholar search for F1TENTH or RoboRacer finds them. We list a selection by
+              topic.
             </p>
             <div className="mt-8">
               <Button href={scholarUrl} variant="secondary" target="_blank" rel="noopener noreferrer">
-                See the Scholar query
+                Search Google Scholar
               </Button>
             </div>
           </div>
@@ -101,7 +101,7 @@ export default function Research() {
                   tone="accent"
                   duration={2.5}
                   value={published.length}
-                  label="Curated papers"
+                  label="Papers listed"
                 />
                 <StatTicker
                   key={`featured-${featuredAll.length}`}
@@ -126,7 +126,7 @@ export default function Research() {
             ) : (
               <>
                 <div>
-                  <dt className="font-mono text-small text-text-muted">Curated papers</dt>
+                  <dt className="font-mono text-small text-text-muted">Papers listed</dt>
                   <dd className="mt-1 font-mono text-display-l font-semibold text-text-muted">…</dd>
                 </div>
                 <div>
@@ -153,11 +153,11 @@ export default function Research() {
           eyebrow="Featured"
           id="featured"
           title="Selected papers"
-          lead="Recent work on the platform, newest first. Filter by topic; each topic also links to its own Scholar search."
+          lead="Papers that build on RoboRacer. Filter by topic, and each topic links to its own Scholar search."
         />
         {failed && (
           <p className="max-w-[60ch] text-body text-text-body">
-            The publication list could not load. The Scholar query above covers everything.
+            The list did not load. Try the Google Scholar search above.
           </p>
         )}
         {pubs && (
@@ -186,8 +186,8 @@ export default function Research() {
               </Reveal>
             ) : (
               <p className="mt-6 max-w-[60ch] text-body text-text-body">
-                No featured paper is tagged {selectedTag?.label ?? "this topic"} yet. The full list
-                below and the Scholar search cover it.
+                No featured paper on {selectedTag?.label ?? "this topic"} yet. Try the full list or the
+                Scholar search.
               </p>
             )}
           </>
@@ -197,10 +197,10 @@ export default function Research() {
       {/* Every curated paper, grouped by year, with search */}
       <Section width="page" edge rule aria-labelledby="all-curated">
         <SectionHeader
-          eyebrow="All curated"
+          eyebrow="All papers"
           id="all-curated"
-          title="All curated publications"
-          lead="Every paper we track, grouped by year. The topic filter above applies here too."
+          title="Every paper we track"
+          lead="By year, newest first. The topic filter above works here too."
           action={
             <form role="search" onSubmit={(e) => e.preventDefault()} className="w-full md:w-80">
               <label htmlFor="publication-search" className="eyebrow mb-2 block text-text-muted">
@@ -227,7 +227,7 @@ export default function Research() {
             </p>
             {byYear.length === 0 ? (
               <p className="max-w-[60ch] border-t border-ink-950/10 py-8 text-body text-text-body">
-                No curated paper matches. Try a shorter term, or{" "}
+                No paper matches. Try a shorter word, or{" "}
                 <a
                   href={scholarSearchUrl(trimmed)}
                   target="_blank"
@@ -273,7 +273,7 @@ export default function Research() {
               eyebrow="Contribute"
               id="submit"
               title="Submit your paper"
-              lead="Published something that builds on the platform? Send the DOI or arXiv link and we add it to the curated list."
+              lead="Send us the DOI or arXiv link for your RoboRacer paper. We add it to the list."
             />
           </div>
           <div className="flex flex-col items-start gap-4 md:col-span-5 md:items-end">
