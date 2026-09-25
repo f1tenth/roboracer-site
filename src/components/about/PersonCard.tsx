@@ -12,6 +12,32 @@ type PersonCardProps = {
  * keeps the padding above the next line for the tap. */
 const TAP = "relative coarse:-my-3 coarse:py-3";
 
+/** Past crew tiles below lg are size containers: a tile under 7.75rem steps
+ * its name down to the eyebrow size and its side padding to 0.375rem, so the
+ * longest surname and its arrow ("Pennypacker ↗") fit on one line at every
+ * phone width and at 768 (ABOUT-01). The grid keeps tiles at 6.25rem or more
+ * (PeopleGroup). From lg the tile is untouched. */
+const TILE_NAME = "max-lg:@max-[7.75rem]:text-eyebrow max-lg:@max-[7.75rem]:leading-snug max-lg:@max-[7.75rem]:tracking-normal";
+
+/** The name with its arrow glued to the last word in one no-wrap span: the
+ * arrow never starts a line alone (ABOUT-03). A no-break space alone did not
+ * hold under `overflow-wrap: anywhere`. `glue` is where the span holds: a
+ * Past crew tile only below lg, since the 12-column lg grid can be narrower
+ * than a surname and there a break reads better than a name running into the
+ * next tile. */
+function LinkedName({ name, glue }: { name: string; glue: string }) {
+  const cut = name.lastIndexOf(" ");
+  return (
+    <>
+      {cut > 0 && name.slice(0, cut + 1)}
+      <span className={glue}>
+        {name.slice(cut + 1)}
+        <span aria-hidden="true">&nbsp;&#8599;</span>
+      </span>
+    </>
+  );
+}
+
 /**
  * One person as a hairline cell: a square photo or a mono monogram tile, the
  * name (which is the link to that person's source page, Cedric 2026-08-23),
@@ -28,13 +54,13 @@ const TAP = "relative coarse:-my-3 coarse:py-3";
 export default function PersonCard({ person, compact = false }: PersonCardProps) {
   const { name, role, project_role, project_role_verify, affiliation, photo, link, note, status } =
     person;
-  const nameClass = `font-display font-semibold text-text-strong ${compact ? "text-small" : "text-body"}`;
+  const nameClass = `font-display font-semibold text-text-strong ${compact ? `text-small ${TILE_NAME}` : "text-body"}`;
   const row = !compact;
 
   return (
     <article
       className={`flex h-full min-w-0 flex-col bg-paper-50 ${
-        row ? "compact:flex-row compact:items-start compact:gap-4 compact:p-4" : ""
+        row ? "compact:flex-row compact:items-start compact:gap-4 compact:p-4" : "@container"
       }`}
     >
       <div className={`relative aspect-square bg-paper-100 ${row ? "compact:w-20 compact:shrink-0" : ""}`}>
@@ -60,21 +86,21 @@ export default function PersonCard({ person, compact = false }: PersonCardProps)
         )}
       </div>
       <div
-        className={`flex min-w-0 grow flex-col gap-1.5 ${compact ? "px-2 py-3 sm:py-4 lg:p-4" : "p-4 sm:p-5 compact:p-0"}`}
+        className={`flex min-w-0 grow flex-col gap-1.5 ${
+          compact ? "px-2 py-3 max-lg:@max-[7.75rem]:px-1.5 sm:py-4 lg:p-4" : "p-4 sm:p-5 compact:p-0"
+        }`}
       >
         {link ? (
           <a
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${nameClass} ${TAP} w-fit underline decoration-ink-950/25 underline-offset-4 [overflow-wrap:anywhere] hover:decoration-rr-violet hover:decoration-2`}
+            className={`${nameClass} ${TAP} w-fit max-w-full underline decoration-ink-950/25 underline-offset-4 [overflow-wrap:break-word] hover:decoration-rr-violet hover:decoration-2`}
           >
-            {name}
-            {/* A no-break space: the arrow never wraps onto a line alone. */}
-            <span aria-hidden="true">&nbsp;&#8599;</span>
+            <LinkedName name={name} glue={compact ? "max-lg:whitespace-nowrap" : "whitespace-nowrap"} />
           </a>
         ) : (
-          <p className={`${nameClass} [overflow-wrap:anywhere]`}>{name}</p>
+          <p className={`${nameClass} [overflow-wrap:break-word]`}>{name}</p>
         )}
         {role && <p className="text-small text-text-body">{role}</p>}
         {affiliation && (

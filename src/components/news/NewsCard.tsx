@@ -2,6 +2,9 @@ import { eventLabel, type NewsItem } from "./newsData";
 
 // Site-wide link contract (landing-v2): ink text, underline, violet on hover.
 const TITLE_LINK = "underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
+/** A 2.75rem hit area on touch screens for the headline link: padding on an
+ * inline box grows the target without moving a line (mobile pass). */
+const TITLE_TAP = "relative coarse:py-3";
 const FRAME =
   "group flex h-full flex-col overflow-hidden rounded-card border border-ink-950/10 transition-colors duration-[var(--duration-fast)] hover:border-ink-950/30";
 
@@ -49,6 +52,21 @@ function Byline({ item }: { item: NewsItem }) {
   );
 }
 
+/** The headline with its arrow glued to the last word in one no-wrap span, so
+ * the arrow never starts a line alone. */
+function ArrowTitle({ title }: { title: string }) {
+  const cut = title.lastIndexOf(" ");
+  return (
+    <>
+      {cut > 0 && title.slice(0, cut + 1)}
+      <span className="whitespace-nowrap">
+        {title.slice(cut + 1)}
+        <span aria-hidden="true">&nbsp;↗</span>
+      </span>
+    </>
+  );
+}
+
 /**
  * One item in the feed. With a site-hosted image it is a picture card; with
  * none it is a text card on the paper tint, which is the shape most LinkedIn
@@ -69,10 +87,9 @@ export default function NewsCard({ item, titleAs = "h3" }: NewsCardProps) {
         href={item.link}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${TITLE_LINK} group-hover:underline`}
+        className={`${TITLE_LINK} ${TITLE_TAP} group-hover:underline`}
       >
-        {item.title}
-        <span aria-hidden="true"> ↗</span>
+        <ArrowTitle title={item.title} />
       </a>
     </Title>
   );
