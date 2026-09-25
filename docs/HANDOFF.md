@@ -48,6 +48,8 @@ around it — if a task seems to need one of those, say so and ask.
      `workers.dev` subdomain, so R2 still serves from the rate-limited `r2.dev`
      URL; `infra/media-worker` deploys once someone opens Workers & Pages in
      that dashboard.
+   - `docs/qa/polish-2-final.md` (steps 8 and 9): copy and fact nits left open on
+     purpose, and `docs/qa/polish-2-round4.md` for what the last round changed.
    - The AI-generated car image in the landing's car chapter (`CAR_PHOTOS[1]`,
      now captioned "AI-generated illustration"): keep, or swap for a photo.
 2. **Copy** is done: `docs/copy/BRIEF.md` is the standard, `docs/copy/*.md` the
