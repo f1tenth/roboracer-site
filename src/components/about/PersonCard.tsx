@@ -9,8 +9,11 @@ type PersonCardProps = {
 
 /** A 2.75rem hit area on touch screens for the name link, taken back by the
  * negative margin so the text does not move (mobile pass, ABOUT-07); `relative`
- * keeps the padding above the next line for the tap. */
+ * keeps the padding above the next line for the tap. A Past crew name can be
+ * one eyebrow-size line (16.5 px), which 0.75rem either side left at 41 px;
+ * the tiles take 0.875rem. */
 const TAP = "relative coarse:-my-3 coarse:py-3";
+const TILE_TAP = "relative coarse:-my-3.5 coarse:py-3.5";
 
 /** Past crew tiles below lg are size containers: a tile under 7.75rem steps
  * its name down to the eyebrow size and its side padding to 0.375rem, so the
@@ -94,7 +97,7 @@ export default function PersonCard({ person, compact = false }: PersonCardProps)
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${nameClass} ${TAP} w-fit max-w-full underline decoration-ink-950/25 underline-offset-4 [overflow-wrap:break-word] hover:decoration-rr-violet hover:decoration-2`}
+            className={`${nameClass} ${compact ? TILE_TAP : TAP} w-fit max-w-full underline decoration-ink-950/25 underline-offset-4 [overflow-wrap:break-word] hover:decoration-rr-violet hover:decoration-2`}
           >
             <LinkedName name={name} />
           </a>
