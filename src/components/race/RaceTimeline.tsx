@@ -121,7 +121,9 @@ function YearRow({ year, list }: { year: number; list: MapEvent[] }) {
                           href={href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-display text-lead font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
+                          // Inline, so the touch padding (coarse:) grows the
+                          // hit area to 2.75rem without moving the line.
+                          className="font-display text-lead font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2 coarse:py-3"
                         >
                           {e.label}
                           <span className="sr-only">

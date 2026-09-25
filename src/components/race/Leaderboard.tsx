@@ -29,8 +29,11 @@ const DEFAULT_LIMIT = 5;
  * rebuilds every five minutes). */
 const REFRESH_AFTER_MS = 60_000;
 
+// Chips are 2.75rem tall on touch screens only (coarse:), the same size as
+// TagFilter's, so the two chip rows stay one component and the mouse layout
+// never moves (RACE-02).
 const CHIP_BASE =
-  "rounded-pill px-4 py-2 text-small font-semibold transition-colors duration-[var(--duration-fast)]";
+  "rounded-pill px-4 py-2 text-small font-semibold transition-colors duration-[var(--duration-fast)] coarse:min-h-11";
 const CHIP_IDLE = "border border-paper-200 text-text-body hover:border-text-muted";
 const CHIP_ON = "border border-ink-950 bg-ink-950 text-text-on-ink";
 
@@ -236,7 +239,7 @@ function LeaderboardBlock() {
           {/* The board line and the switch share one minimum height (a chip's),
               so the skeleton, a one-board lab and a two-board lab line up. */}
           {boards.length > 1 ? (
-            <div role="group" aria-label="Board" className="mt-3 flex min-h-10 flex-wrap items-center gap-2">
+            <div role="group" aria-label="Board" className="mt-3 flex min-h-10 flex-wrap items-center gap-2 coarse:min-h-11">
               {boards.map((b) => (
                 <button
                   key={b.slug}
@@ -252,7 +255,7 @@ function LeaderboardBlock() {
               ))}
             </div>
           ) : (
-            <p className="mt-3 flex min-h-10 items-center font-mono text-small text-text-muted">
+            <p className="mt-3 flex min-h-10 items-center font-mono text-small text-text-muted coarse:min-h-11">
               {boardTitle ?? <Bar w="w-40" />}
             </p>
           )}
@@ -305,9 +308,13 @@ function LeaderboardBlock() {
                 : rows.map((r) => (
                     <tr key={r.alias} className="border-b border-ink-950/10">
                       <td className="py-4 pr-4 font-mono text-small tabular-nums text-text-muted">{pad(r.rank)}</td>
+                      {/* A long team name wraps inside its column instead of
+                          widening the table past a phone's width, where the
+                          page's overflow clip would cut the lap times off
+                          (RACE-03). */}
                       <th
                         scope="row"
-                        className="py-4 pr-4 text-left font-display text-lead font-semibold text-text-strong"
+                        className="py-4 pr-4 text-left font-display text-lead font-semibold text-text-strong [overflow-wrap:anywhere]"
                       >
                         {r.alias}
                       </th>
