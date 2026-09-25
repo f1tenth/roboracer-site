@@ -10,6 +10,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="/fonts/space-grotesk-latin-500-600.woff2" as="font" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+      // Landing only: fetch the hero poster and open the connection to the
+      // media host while the app is still loading, so the poster paints as
+      // soon as the hero renders and the first clip's request skips the
+      // handshake (docs/media/HERO_PERF.md). Vite fills in the media base at
+      // build time; unset (localhost) it stays a %-placeholder and is skipped.
+      (function () {
+        if (location.pathname !== "/") return;
+        var head = document.head;
+        var poster = document.createElement("link");
+        poster.rel = "preload";
+        poster.as = "image";
+        poster.href = "/media/hero/hero-fpv-poster.webp";
+        poster.setAttribute("fetchpriority", "high");
+        head.appendChild(poster);
+        var base = "%VITE_MEDIA_BASE%";
+        if (base.charAt(0) === "%") return;
+        var pc = document.createElement("link");
+        pc.rel = "preconnect";
+        pc.href = base;
+        head.appendChild(pc);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

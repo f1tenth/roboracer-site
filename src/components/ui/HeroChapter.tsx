@@ -1,12 +1,17 @@
 import { Fragment, useEffect, useId, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { EASE_IN_OUT_QUART, MOTION_OK_QUERY, gsap, useGSAP } from "../../lib/motion";
+import { linkCanStream } from "../../lib/media";
 
 export type HeroClip = {
   /** Desktop encode (served from 768px up); the key keeps the media-skill
    * name whatever the file's native width. */
   mp4_1920: string;
   mp4_960: string;
+  /** Average bitrate of the desktop encode in Mbit/s. On a link that cannot
+   * stream it (Save-Data, slower than 4g, downlink under 1.3x this) the 960
+   * encode plays instead, so the cycle never freezes mid-clip. */
+  mbps?: number;
 };
 
 export type HeroVideoSources = {
@@ -15,6 +20,8 @@ export type HeroVideoSources = {
   mp4_1920: string;
   mp4_960: string;
   webm_1920?: string;
+  /** Average bitrate of `mp4_1920` in Mbit/s (see HeroClip.mbps). */
+  mbps?: number;
   poster: string;
   width: number;
   height: number;
@@ -37,6 +44,12 @@ type HeroChapterProps = {
   /** h1 on the landing (the page's one h1); h2 on /styleguide. */
   as?: "h1" | "h2";
   className?: string;
+  /** Called once when the opening clip has fully downloaded (or failed; at
+   * once for the static poster layout), so the page can release media it
+   * held back to give that clip the connection (docs/media/HERO_PERF.md).
+   * Not on `canplaythrough`: Chrome fired it with 1.2 s of a 5 s clip
+   * buffered at 5 Mbit/s, and the released images froze the clip. */
+  onOpeningLoaded?: () => void;
 };
 
 /**
@@ -130,6 +143,10 @@ const WIDE_QUERY = "(min-width: 768px)";
 /** Crossfade between clips (seconds); the incoming clip starts this long
  * before the current one ends and fades in over it. */
 const CROSSFADE_S = 0.9;
+/** The next clip starts downloading once the current one is fully buffered,
+ * or this many seconds before the current one ends, whichever comes first:
+ * until then the playing clip has the whole connection (docs/media/HERO_PERF.md). */
+const PRELOAD_LEAD_S = 3;
 const CROSSFADE_CLASS = "transition-opacity duration-[900ms] ease-linear";
 
 /** Auto-scroll (Cedric, landing v5 round two): when the clip cycle comes back
@@ -200,7 +217,7 @@ const DISPLAY_TYPE =
  * Accessibility: one heading (`as`) carrying the full sentence in aria-label;
  * the animated word spans are aria-hidden.
  */
-export default function HeroChapter({ video, lines, description, as = "h1", className = "" }: HeroChapterProps) {
+export default function HeroChapter({ video, lines, description, as = "h1", className = "", onOpeningLoaded }: HeroChapterProps) {
   const reduced = usePrefersReducedMotion();
   const [weak] = useState(isWeakDevice);
   const isStatic = reduced || weak;
@@ -240,10 +257,43 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     };
   }, [isStatic]);
 
-  // Clip sequencer (landing v5): A plays clip i while B preloads clip i+1;
+  const onOpeningLoadedRef = useRef(onOpeningLoaded);
+  useEffect(() => {
+    onOpeningLoadedRef.current = onOpeningLoaded;
+  }, [onOpeningLoaded]);
+  useEffect(() => {
+    let done = false;
+    const a = vidA.current;
+    const fire = () => {
+      if (done) return;
+      done = true;
+      onOpeningLoadedRef.current?.();
+    };
+    if (isStatic || !a) {
+      fire();
+      return;
+    }
+    // `progress` fires while bytes arrive, `suspend` when the download
+    // stops (the last bytes can land after the last `progress`).
+    const handler = (e: Event) => {
+      if (e.type === "error") return fire();
+      const r = a.buffered;
+      if (r.length > 0 && Number.isFinite(a.duration) && r.end(r.length - 1) >= a.duration - 0.25) fire();
+    };
+    const events = ["progress", "suspend", "error"] as const;
+    for (const ev of events) a.addEventListener(ev, handler);
+    return () => {
+      for (const ev of events) a.removeEventListener(ev, handler);
+    };
+  }, [isStatic]);
+
+  // Clip sequencer (landing v5): A plays clip i; B loads clip i+1 once A is
+  // fully buffered or PRELOAD_LEAD_S from its end (until then A has the whole
+  // connection, so the opening clip starts fast and does not freeze).
   // CROSSFADE_S before A ends, B starts and fades in over A (CSS opacity
-  // transition, B lifted above A); once the fade is through, A stops and
-  // loads the clip after that. `ended` is the safety net when a throttled
+  // transition, B lifted above A); if B cannot play yet, A holds (at worst on
+  // its last frame) until B can. Once the fade is through, A stops and waits
+  // to load the clip after that. `ended` is the safety net when a throttled
   // rAF misses the cue (hidden tab). Only the visible element(s) answer the
   // pause control (activeRef).
   useEffect(() => {
@@ -254,12 +304,16 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       return;
     }
     const wide = window.matchMedia(WIDE_QUERY).matches;
-    const srcOf = (c: HeroClip) => (wide ? c.mp4_1920 : c.mp4_960);
+    // Chosen per clip at load time, so a link that slows down mid-cycle
+    // drops to the 960 encodes for the clips after.
+    const srcOf = (c: HeroClip) => (wide && (c.mbps === undefined || linkCanStream(c.mbps)) ? c.mp4_1920 : c.mp4_960);
     const after = (i: number) => (i + 1 < clips.length ? i + 1 : loopFrom);
     const els = [a, b] as const;
     let cur = 0;
     let clip = 0;
     let fading = false;
+    let queued = false;
+    let waiting = false;
     let disposed = false;
     let raf = 0;
     let timer = 0;
@@ -278,14 +332,37 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       }, AUTOSCROLL_DELAY_S * 1000);
     };
     const setClip = (el: HTMLVideoElement, i: number) => {
+      el.preload = "auto";
       el.src = srcOf(clips[i]);
       el.load();
     };
+    const queueNext = () => {
+      if (queued) return;
+      queued = true;
+      setClip(els[1 - cur], after(clip));
+    };
+    const fullyBuffered = (v: HTMLVideoElement) => {
+      const r = v.buffered;
+      return r.length > 0 && r.end(r.length - 1) >= v.duration - 0.25;
+    };
     const advance = () => {
-      if (fading || disposed) return;
-      fading = true;
+      if (fading || waiting || disposed) return;
       const v = els[cur];
       const n = els[1 - cur];
+      queueNext();
+      if (n.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) {
+        waiting = true;
+        n.addEventListener(
+          "canplay",
+          () => {
+            waiting = false;
+            advance();
+          },
+          { once: true },
+        );
+        return;
+      }
+      fading = true;
       const next = after(clip);
       n.style.zIndex = "1";
       v.style.zIndex = "0";
@@ -299,7 +376,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
         clip = next;
         cur = 1 - cur;
         activeRef.current = [n];
-        setClip(v, after(clip));
+        queued = false;
         fading = false;
         if (clip === clips.length - 1) scheduleAutoScroll();
       }, CROSSFADE_S * 1000);
@@ -308,7 +385,10 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       if (disposed) return;
       const v = els[cur];
       const d = v.duration;
-      if (!v.paused && Number.isFinite(d) && d > 0 && v.currentTime >= d - CROSSFADE_S) advance();
+      if (!fading && Number.isFinite(d) && d > 0) {
+        if (!queued && (fullyBuffered(v) || v.currentTime >= d - PRELOAD_LEAD_S)) queueNext();
+        if (!v.paused && v.currentTime >= d - CROSSFADE_S) advance();
+      }
       raf = requestAnimationFrame(tick);
     };
     const onEnded = () => advance();
@@ -330,7 +410,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       keep.style.opacity = "1";
       keep.style.zIndex = "1";
       keep.loop = true;
-      keep.src = wide ? video.mp4_1920 : video.mp4_960;
+      keep.src = wide && (video.mbps === undefined || linkCanStream(video.mbps)) ? video.mp4_1920 : video.mp4_960;
       keep.load();
       activeRef.current = [keep];
       void keep.play().catch(() => {});
@@ -342,7 +422,6 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     activeRef.current = [a];
     setClip(a, 0);
     void a.play().catch(() => {});
-    setClip(b, after(0));
     raf = requestAnimationFrame(tick);
     return () => {
       disposed = true;
@@ -355,7 +434,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       a.removeEventListener("error", onError);
       b.removeEventListener("error", onError);
     };
-  }, [isStatic, clips, loopFrom, video.mp4_1920, video.mp4_960]);
+  }, [isStatic, clips, loopFrom, video.mp4_1920, video.mp4_960, video.mbps]);
 
   useGSAP(
     () => {
@@ -584,7 +663,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
                 className={`absolute inset-0 h-full w-full object-cover opacity-0 ${CROSSFADE_CLASS}`}
                 muted
                 playsInline
-                preload="auto"
+                preload="none"
                 width={video.width}
                 height={video.height}
                 aria-hidden="true"

@@ -6,6 +6,7 @@ import YouTubeFacade from "./YouTubeFacade";
 import SectionHeader from "./SectionHeader";
 import SocialButton from "./SocialButton";
 import MediaFrame from "./MediaFrame";
+import { useMediaHold } from "../../lib/media";
 
 // Links from the content skill (Slack invite confirmed by Cedric, 2026-08-20;
 // GitHub org). LinkedIn: the content skill still says VERIFY; the page at this
@@ -176,13 +177,15 @@ function postDate(iso?: string): string {
 /** One community LinkedIn post: its poster (no re-hosted media), the author,
  * affiliation and month, Cedric's one-liner, and the link to the post. */
 function CommunityPostCard({ post, clone = false }: { post: CommunityPost; clone?: boolean }) {
+  // The landing holds these until its hero clip has loaded (MediaHoldContext).
+  const hold = useMediaHold();
   const tab = clone ? -1 : undefined;
   const meta = [post.affiliation, postDate(post.date)].filter(Boolean).join(" · ");
   return (
     <article className={`flex h-full flex-col overflow-hidden ${CARD} ${STRIP_CARD}`}>
       <a href={post.post_url} target="_blank" rel="noopener noreferrer" tabIndex={tab} className="block aspect-[4/3] overflow-hidden border-b border-ink-950/10 bg-paper-100">
         <img
-          src={post.poster}
+          src={hold ? undefined : post.poster}
           alt={post.alt}
           width={post.width}
           height={post.height}

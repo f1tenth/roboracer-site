@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useCallback, useEffect, useState, useMemo } from "react";
 import {
   loadHighlights,
   loadPartners,
@@ -32,22 +32,29 @@ import CommunityJoin from "../components/ui/CommunityJoin";
 import MediaFrame from "../components/ui/MediaFrame";
 import EntryPaths from "../components/ui/EntryPaths";
 import { useScrollToHash } from "../hooks/useScrollToHash";
-import { mediaUrl } from "../lib/media";
+import { MediaHoldContext, mediaUrl } from "../lib/media";
 const HERO_VIDEO: HeroVideoSources = {
   mp4_1920: "/media/hero/hero-fpv-loop-1280.mp4",
   mp4_960: "/media/hero/hero-fpv-loop-960.mp4",
+  mbps: 1.84,
   // Landing v5 (Cedric, 2026-08-22): a clip cycle with crossfades. The IV
   // FPV clip opens once (its first 5 s), then three cuts from the Robotics
   // Club race highlights video (2:29-2:40, 1:04-1:17, 1:21-1:27), then the
   // IV clip from 6 s to its end; the cycle restarts at the first race cut.
   // The clip files live on Cloudflare R2 (infra/media-worker); mediaUrl
   // resolves to the local public/ copy while VITE_MEDIA_BASE is unset.
+  // `mbps` is each desktop encode's average bitrate (ffprobe); on a link
+  // that cannot stream it the 960 encode plays (docs/media/HERO_PERF.md).
+  // The IV clips are the v2 cut (2026-09-24): encoded straight from
+  // FPV_IV.mp4 (frames 90-239 and 270-1080) at crf 25 / crf 26 for the 960,
+  // VMAF 99.8-99.9 against the source where v1 scored 91.6-93.1, at fewer
+  // bytes (docs/media/HERO_PERF.md).
   clips: [
-    { mp4_1920: mediaUrl("/media/hero/hero-iv-start-1280.mp4"), mp4_960: mediaUrl("/media/hero/hero-iv-start-960.mp4") },
-    { mp4_1920: mediaUrl("/media/hero/hero-race-01-1920.mp4"), mp4_960: mediaUrl("/media/hero/hero-race-01-960.mp4") },
-    { mp4_1920: mediaUrl("/media/hero/hero-race-02-1920.mp4"), mp4_960: mediaUrl("/media/hero/hero-race-02-960.mp4") },
-    { mp4_1920: mediaUrl("/media/hero/hero-race-03-1920.mp4"), mp4_960: mediaUrl("/media/hero/hero-race-03-960.mp4") },
-    { mp4_1920: mediaUrl("/media/hero/hero-iv-rest-1280.mp4"), mp4_960: mediaUrl("/media/hero/hero-iv-rest-960.mp4") },
+    { mp4_1920: mediaUrl("/media/hero/hero-iv-start-v2-1280.mp4"), mp4_960: mediaUrl("/media/hero/hero-iv-start-v2-960.mp4"), mbps: 2.8 },
+    { mp4_1920: mediaUrl("/media/hero/hero-race-01-1920.mp4"), mp4_960: mediaUrl("/media/hero/hero-race-01-960.mp4"), mbps: 6.56 },
+    { mp4_1920: mediaUrl("/media/hero/hero-race-02-1920.mp4"), mp4_960: mediaUrl("/media/hero/hero-race-02-960.mp4"), mbps: 7.32 },
+    { mp4_1920: mediaUrl("/media/hero/hero-race-03-1920.mp4"), mp4_960: mediaUrl("/media/hero/hero-race-03-960.mp4"), mbps: 5.67 },
+    { mp4_1920: mediaUrl("/media/hero/hero-iv-rest-v2-1280.mp4"), mp4_960: mediaUrl("/media/hero/hero-iv-rest-v2-960.mp4"), mbps: 2.92 },
   ],
   loopFrom: 1,
   poster: "/media/hero/hero-fpv-poster.webp",
@@ -109,6 +116,13 @@ const MARQUEE_REF_ITEMS = 20;
  * is a slower ribbon, so these are the tuned pair divided by 0.65. */
 const MARQUEE_BASE_S = 120;
 const MARQUEE_BASE_MD_S = 178;
+/** Off-screen media that loads eagerly (the partner and community marquees:
+ * a lazy image in a marquee never loads; the research figure; the next-race
+ * poster), a hundred-odd requests thousands of pixels below the hero, waits
+ * until the hero's opening clip has downloaded, or this long at most. At
+ * 5 Mbit/s they held its first frame back by ~0.5 s and froze it right after
+ * (docs/media/HERO_PERF.md). */
+const HOLD_MEDIA_MAX_MS = 4000;
 
 export default function Landing() {
   useLenis();
@@ -120,6 +134,13 @@ export default function Landing() {
   const [pubs, setPubs] = useState<PublicationsFile | null>(null);
   const [highlights, setHighlights] = useState<Highlight[]>([]);
   const [platform, setPlatform] = useState<PlatformRow[]>([]);
+  const [heroLoaded, setHeroLoaded] = useState(false);
+  const releaseMedia = useCallback(() => setHeroLoaded(true), []);
+
+  useEffect(() => {
+    const t = window.setTimeout(releaseMedia, HOLD_MEDIA_MAX_MS);
+    return () => window.clearTimeout(t);
+  }, [releaseMedia]);
 
   useEffect(() => {
     loadUpcomingEvents().then(setEvents).catch(() => setEvents([]));
@@ -164,10 +185,11 @@ export default function Landing() {
   const featured = pubs ? featuredForLanding(pubs.items) : [];
 
   return (
+    <MediaHoldContext.Provider value={!heroLoaded}>
     <div>
       {/* 1 · Hero + headline chapter (ink, pinned 320vh) - newbie. The video
           runs under the transparent nav: no page top padding on this route. */}
-      <HeroChapter video={HERO_VIDEO} lines={HEADLINE_LINES} description={HERO_DESCRIPTION} />
+      <HeroChapter video={HERO_VIDEO} lines={HEADLINE_LINES} description={HERO_DESCRIPTION} onOpeningLoaded={releaseMedia} />
 
       {/* 00 Start here (paper) - newbie, beginner, learner, competitor,
           sponsor: four ways in, the first thing under the hero. The platform
@@ -261,7 +283,7 @@ export default function Landing() {
                   >
                     <span className="relative flex h-[2.125rem] items-center md:h-[4.5rem]">
                       <img
-                        src={p.image_rest ?? p.image}
+                        src={heroLoaded ? (p.image_rest ?? p.image) : undefined}
                         alt={p.name}
                         height={72}
                         width="auto"
@@ -273,7 +295,7 @@ export default function Landing() {
                       />
                       {p.image_hover && (
                         <img
-                          src={p.image_hover}
+                          src={heroLoaded ? p.image_hover : undefined}
                           alt=""
                           aria-hidden="true"
                           height={80}
@@ -409,5 +431,6 @@ export default function Landing() {
           four channels, two community cards (landing v4 section 8). */}
       <CommunityJoin />
     </div>
+    </MediaHoldContext.Provider>
   );
 }
