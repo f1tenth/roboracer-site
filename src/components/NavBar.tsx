@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { gsap, ScrollTrigger, DURATION, REDUCED_MOTION_QUERY } from "../lib/motion";
+import { START_HREF } from "../lib/wayfinding";
 
 const links = [
   { href: "/about", text: "About" },
@@ -117,10 +118,11 @@ export default function Navbar() {
   // The open mobile menu needs a solid bar behind it whatever the scroll.
   const transparent = HERO_ROUTES.has(location.pathname) && !menuOpen;
 
-  // Close mobile menu on route change
+  // Close the mobile menu on every navigation, including "Start here" on the
+  // landing itself, which changes only the hash.
   useEffect(() => {
     setMenuOpen(false);
-  }, [location.pathname]);
+  }, [location.key]);
 
   // --nav-alpha = clamp((p - from) / (to - from), 0, 1) where p is the hero
   // chapter's scroll progress, written by a ScrollTrigger on the chapter's
@@ -261,28 +263,47 @@ export default function Navbar() {
           <ExternalIcon />
         </a>
 
-        <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className="nav-cta">
-          Join Community
-        </a>
+        {/* The two actions sit together, closer than the links. "Start here"
+            is the bar's one solid violet button: the four ways in under the
+            landing hero (ui/EntryPaths), from any route. */}
+        <div className="nav-actions">
+          <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className="nav-cta">
+            Join Community
+          </a>
+          <Link to={START_HREF} className="nav-primary">
+            Start here
+          </Link>
+        </div>
       </div>
 
-      {/* Mobile Menu Button */}
-      <button
-        type="button"
-        className="nav-menu-button lg:hidden"
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label={menuOpen ? "Close menu" : "Open menu"}
-        aria-expanded={menuOpen}
-        aria-controls="nav-mobile-menu"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          {menuOpen ? (
-            <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          ) : (
-            <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          )}
-        </svg>
-      </button>
+      {/* Under lg: the same button beside the menu toggle, no taller than
+          the wordmark (2rem on a phone, 2.5rem from sm) so the bar keeps its
+          4.5rem. Under 390px wide (an iPhone SE, a 360 Android) it would crowd
+          the wordmark, so it moves into the menu instead. */}
+      <div className="flex items-center gap-4 lg:hidden">
+        <Link
+          to={START_HREF}
+          className="nav-primary hidden px-3.5 py-1.5 text-small leading-5 min-[24.375rem]:inline-flex sm:px-5 sm:py-2 sm:text-body sm:leading-6"
+        >
+          Start here
+        </Link>
+        <button
+          type="button"
+          className="nav-menu-button"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          aria-controls="nav-mobile-menu"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            {menuOpen ? (
+              <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            ) : (
+              <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            )}
+          </svg>
+        </button>
+      </div>
 
       {/* Mobile Menu. Kept mounted for the length of its exit tween, which is
           what AnimatePresence used to do; unmounting on the state flip alone
@@ -306,6 +327,9 @@ export default function Navbar() {
           <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className="mobile-menu-link">
             Join Community
           </a>
+          <Link to={START_HREF} className="nav-primary mobile-menu-primary min-[24.375rem]:hidden">
+            Start here
+          </Link>
         </div>
       )}
     </nav>

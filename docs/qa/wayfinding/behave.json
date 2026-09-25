@@ -1,0 +1,114 @@
+{
+ "desktop_from_race": {
+  "url": "/#start",
+  "scrollY": 2080,
+  "startTop": 2080,
+  "delta": 0,
+  "active": "start",
+  "menuOpen": false
+ },
+ "desktop_tab_after_jump": "01Build a carParts list, build guide and",
+ "desktop_same_page_glide": {
+  "mid": {
+   "url": "/#start",
+   "scrollY": 51,
+   "startTop": 2080,
+   "delta": -2029,
+   "active": "start",
+   "menuOpen": false
+  },
+  "end": {
+   "url": "/#start",
+   "scrollY": 2080,
+   "startTop": 2080,
+   "delta": 0,
+   "active": "start",
+   "menuOpen": false
+  }
+ },
+ "desktop_tabs_to_start_here": 11,
+ "desktop_keyboard_enter": {
+  "url": "/#start",
+  "scrollY": 2080,
+  "startTop": 2080,
+  "delta": 0,
+  "active": "start",
+  "menuOpen": false
+ },
+ "desktop_errors": [],
+ "desktop_bad": [],
+ "phone390_buttons": [
+  {
+   "cls": "bar",
+   "shown": false,
+   "w": 0
+  },
+  {
+   "cls": "bar",
+   "shown": true,
+   "w": 95
+  }
+ ],
+ "phone390_fit": {
+  "logoR": 210,
+  "btnL": 231,
+  "navH": 72
+ },
+ "phone390_tap": {
+  "url": "/#start",
+  "scrollY": 2701,
+  "startTop": 2701,
+  "delta": 0,
+  "active": "start",
+  "menuOpen": false
+ },
+ "phone390_menu_has_button": false,
+ "phone390_errors": [],
+ "phone390_bad": [],
+ "phone360_bar_button_shown": false,
+ "phone360_menu_tap": {
+  "url": "/#start",
+  "scrollY": 2368,
+  "startTop": 2368,
+  "delta": 0,
+  "active": "start",
+  "menuOpen": false
+ },
+ "phone360_errors": [],
+ "phone360_bad": [],
+ "rm_hero_static": 1301,
+ "rm_jump_after_250ms": {
+  "url": "/#start",
+  "scrollY": 1301,
+  "startTop": 1301,
+  "delta": 0,
+  "active": "start",
+  "menuOpen": false
+ },
+ "rm_arrow_transition": "none",
+ "rm_arrow_on_hover": "none",
+ "rm_errors": [],
+ "rm_bad": [],
+ "rm_phone_direct_hash": {
+  "url": "/#start",
+  "scrollY": 1346,
+  "startTop": 1346,
+  "delta": 0,
+  "active": "start",
+  "menuOpen": false
+ },
+ "axe_1366": [],
+ "axe_1366_band_nav": {
+  "violations": [],
+  "incomplete": []
+ },
+ "axe_1366_errors": [],
+ "axe_1366_bad": [],
+ "axe_390": [],
+ "axe_390_band_nav": {
+  "violations": [],
+  "incomplete": []
+ },
+ "axe_390_errors": [],
+ "axe_390_bad": []
+}
