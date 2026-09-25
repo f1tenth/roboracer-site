@@ -9,3 +9,12 @@
 | `public/data/events_map.json` | World map and race timeline: event labels, cities, countries | 40 labels, 40 cities | Names and places. `source`, `url_note` and the countries' `why` are working notes, not rendered |
 
 Count: 162 strings reviewed across the five files, 0 changed.
+
+## Phase 2 (2026-09-24)
+
+| File | What is visible | Strings reviewed | Why nothing changed |
+|---|---|---|---|
+| `public/data/paths.json` | The four "Start here" rows under the landing hero (`ui/EntryPaths`): `label` and `line` | 8 visible (4 labels, 4 lines), plus 62 in `tracks` | Written on 2026-09-24 in the brief's voice: verb-first labels ("Build a car", "Learn autonomy", "Race with us", "Sponsor a race") and one short line each, every one a fact ("Reach students at 90+ universities. Write to contact@roboracer.ai."). `tracks` (step titles, bodies, link labels, plan outcomes) render nowhere yet; they read as plain as the rows and name real modules and labs, so they were left for the Build and Learn rebuild. `todo`, `note`, `source` and `status` fields untouched |
+| `public/data/leaderboard.json` | `label`, shown as the "source" row beside the /race leaderboard | 1 | "ESE 6150 leaderboard" is the board's name. `notes` is a config comment, not rendered |
+
+Count, phase 2: 71 strings reviewed across the two files (9 visible), 0 changed.
