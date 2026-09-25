@@ -176,7 +176,6 @@ export default function About() {
                     on="ink"
                     size="l"
                     tone="accent"
-                    duration={2.5}
                     delay={i * 0.12}
                     value={row.value}
                     suffix={row.suffix}

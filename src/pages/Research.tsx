@@ -99,7 +99,6 @@ export default function Research() {
                   as="dl"
                   size="l"
                   tone="accent"
-                  duration={2.5}
                   value={published.length}
                   label="Papers listed"
                 />
@@ -108,7 +107,6 @@ export default function Research() {
                   as="dl"
                   size="l"
                   tone="accent"
-                  duration={2.5}
                   value={featuredAll.length}
                   label="Featured"
                 />
@@ -117,7 +115,6 @@ export default function Research() {
                   as="dl"
                   size="l"
                   tone="accent"
-                  duration={2.5}
                   delay={0.15}
                   value={pubs.tags.length}
                   label="Topics"
