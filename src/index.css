@@ -351,9 +351,6 @@ body {
     --nav-flip: clamp(0, (var(--nav-alpha) - 0.45) * 1000, 1);
     --nav-flip-mix: calc((1 - var(--nav-flip)) * 100%);
     --nav-fg: color-mix(in oklab, var(--color-text-on-ink) var(--nav-flip-mix), var(--color-text-strong));
-    --nav-cta-bg: color-mix(in oklab, var(--color-paper-50) var(--nav-flip-mix), var(--color-text-strong));
-    --nav-cta-bg-hover: color-mix(in oklab, var(--color-paper-200) var(--nav-flip-mix), var(--color-ink-700));
-    --nav-cta-fg: color-mix(in oklab, var(--color-text-strong) var(--nav-flip-mix), var(--color-paper-50));
     --nav-ring: color-mix(in oklab, var(--color-text-on-ink) var(--nav-flip-mix), var(--color-rr-violet));
     position: fixed;
     inset: 0 0 auto 0;
@@ -433,22 +430,53 @@ body {
     transform: scaleX(1);
   }
 
-  /* Ink pill on paper; inverts to a paper pill over the video. */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  /* The community link: a hairline pill in the bar's own ink/paper colour,
+     so the violet "Start here" beside it stays the bar's one solid fill
+     (wayfinding, 2026-09-24). The first border is the fallback where
+     color-mix is missing. */
   .nav-cta {
-    padding: 0.625rem 1.5rem;
-    background: var(--nav-cta-bg);
-    color: var(--nav-cta-fg);
+    padding: calc(0.625rem - 1px) 1.25rem;
+    border: 1px solid currentColor;
+    border: 1px solid color-mix(in oklab, var(--nav-fg) 40%, transparent);
+    color: var(--nav-fg);
     border-radius: var(--radius-btn);
     font-weight: 600;
+    white-space: nowrap;
     text-decoration: none;
     transition:
-      background-color var(--duration-fast) ease,
-      transform var(--duration-fast) ease;
+      border-color var(--duration-fast) ease,
+      color var(--duration-fast) ease;
   }
 
   .nav-cta:hover {
-    background: var(--nav-cta-bg-hover);
-    transform: translateY(-1px);
+    border-color: var(--nav-fg);
+  }
+
+  /* THE solid violet button of the bar (accent rule: buttons violet), the
+     same fill over the video and on paper; hover only darkens it, like
+     ui/Button primary. */
+  .nav-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1.25rem;
+    background: var(--color-rr-violet);
+    color: var(--color-white);
+    border-radius: var(--radius-btn);
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background-color var(--duration-fast) ease;
+  }
+
+  .nav-primary:hover {
+    background: var(--color-rr-violet-deep);
   }
 
   .nav-menu-button {
@@ -498,6 +526,14 @@ body {
     text-decoration-color: var(--color-rr-violet);
   }
 
+  /* "Start here" closes the menu as a full-width button on the narrowest
+     phones, where it cannot sit in the bar (NavBar). */
+  .mobile-menu-primary {
+    display: flex;
+    margin-top: 1rem;
+    padding: 0.875rem 1.25rem;
+  }
+
   /* Below lg (1024px): the hamburger (lg:hidden) takes over. The eight
      links plus the CTA need ~1,110 px at the 2rem gap, so between 768 and
      1048 px the button sat off-screen (landing v5 QA). At lg the gap drops
@@ -523,6 +559,18 @@ body {
 
     .nav-links {
       display: none;
+    }
+  }
+  /* Phones: the wordmark steps down from 2.5 to 2rem so the compact "Start
+     here" fits beside the menu toggle; the extra padding keeps the bar at
+     the same 4.5rem, so no page offset under it moves. */
+  @media (max-width: 39.98rem) {
+    .navbar {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .nav-logo {
+      height: 2rem;
     }
   }
 }

@@ -1,4 +1,7 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
+const SPONSOR_MAILTO = "mailto:contact@roboracer.ai?subject=RoboRacer%20sponsorship";
+const LINK = "text-gray-400 hover:text-white text-sm transition-colors";
 
 export default function Footer() {
   const location = useLocation();
@@ -35,10 +38,12 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold text-white mb-4">Quick Links</h3>
             <ul className="space-y-3">
-              <li><a href="/about" className="text-gray-400 hover:text-white text-sm transition-colors">About</a></li>
-              <li><a href="/race" className="text-gray-400 hover:text-white text-sm transition-colors">Race</a></li>
-              <li><a href="/news" className="text-gray-400 hover:text-white text-sm transition-colors">News</a></li>
-              <li><a href="/research" className="text-gray-400 hover:text-white text-sm transition-colors">Research</a></li>
+              {/* Client-side links: a plain href reloaded the whole app. */}
+              <li><Link to="/about" className={LINK}>About</Link></li>
+              <li><Link to="/race" className={LINK}>Race</Link></li>
+              <li><Link to="/rules" className={LINK}>Rules</Link></li>
+              <li><Link to="/news" className={LINK}>News</Link></li>
+              <li><Link to="/research" className={LINK}>Research</Link></li>
             </ul>
           </div>
 
@@ -46,8 +51,8 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold text-white mb-4">Resources</h3>
             <ul className="space-y-3">
-              <li><a href="/learn" className="text-gray-400 hover:text-white text-sm transition-colors">Learn</a></li>
-              <li><a href="/build" className="text-gray-400 hover:text-white text-sm transition-colors">Build</a></li>
+              <li><Link to="/learn" className={LINK}>Learn</Link></li>
+              <li><Link to="/build" className={LINK}>Build</Link></li>
               <li>
                 <a 
                   href="https://autodrive-ecosystem.github.io/" 
@@ -56,6 +61,16 @@ export default function Footer() {
                   className="text-gray-400 hover:text-white text-sm transition-colors"
                 >
                   Simulator
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://roboracer-class.github.io/leaderboard/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={LINK}
+                >
+                  Class leaderboard
                 </a>
               </li>
             </ul>
@@ -82,6 +97,11 @@ export default function Footer() {
             <p className="text-gray-400 text-sm leading-relaxed">
               Connect with our community to get started and ask questions.
             </p>
+            {/* Sponsors read the footer for a contact; same mailto as the
+                landing's "Sponsor a race" path (public/data/paths.json). */}
+            <a href={SPONSOR_MAILTO} className={`mt-4 inline-block ${LINK} underline underline-offset-4`}>
+              Sponsor a race
+            </a>
           </div>
         </div>
       </div>

@@ -30,6 +30,8 @@ import ResearchCarousel from "../components/ui/ResearchCarousel";
 import { featuredForLanding } from "../lib/publications";
 import CommunityJoin from "../components/ui/CommunityJoin";
 import MediaFrame from "../components/ui/MediaFrame";
+import EntryPaths from "../components/ui/EntryPaths";
+import { useScrollToHash } from "../hooks/useScrollToHash";
 import { mediaUrl } from "../lib/media";
 const HERO_VIDEO: HeroVideoSources = {
   mp4_1920: "/media/hero/hero-fpv-loop-1280.mp4",
@@ -94,8 +96,9 @@ const CAR_PHOTOS: readonly CarPhoto[] = [
 ];
 
 /**
- * Landing composition: hero chapter, highlights, the car, platform panel,
- * community map, partner ribbons, next race, teams, research, join.
+ * Landing composition: hero chapter, entry paths, highlights, the car,
+ * platform panel, community map, partner ribbons, next race, teams, research,
+ * join.
  */
 const PARTNER_ROW_COUNT = 3;
 /** The loop was tuned against a row of this many logos; duration scales with
@@ -109,6 +112,8 @@ const MARQUEE_BASE_MD_S = 178;
 
 export default function Landing() {
   useLenis();
+  // The nav's "Start here" links to /#start from every route.
+  useScrollToHash();
   const [events, setEvents] = useState<UpcomingEvent[]>([]);
   const [partners, setPartners] = useState<Partner[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
@@ -163,6 +168,12 @@ export default function Landing() {
       {/* 1 · Hero + headline chapter (ink, pinned 320vh) - newbie. The video
           runs under the transparent nav: no page top padding on this route. */}
       <HeroChapter video={HERO_VIDEO} lines={HEADLINE_LINES} description={HERO_DESCRIPTION} />
+
+      {/* 00 Start here (paper) - newbie, beginner, learner, competitor,
+          sponsor: four ways in, the first thing under the hero. The platform
+          chapter (03) stays: it explains the pillars with media, this row
+          only routes (public/data/paths.json). */}
+      <EntryPaths />
 
       {/* 2 · 01 Highlights (paper, full-bleed) - newbie, press */}
       <Section edge rule width="bleed" aria-labelledby="highlights" className="pt-section-tight!">

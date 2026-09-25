@@ -347,3 +347,63 @@ export const loadEventsMap = async (): Promise<EventsMap> => {
 export const loadCommunity = () => loadJson<Community>("community.json");
 export const loadPlatform = () => loadJson<PlatformRow[]>("platform.json");
 
+
+/** public/data/paths.json: the landing's entry paths, plus the two learning
+ * tracks the Build and Learn rebuild will render (docs/LEARN_TERRAIN.md). */
+export type EntryPath = {
+  id: string;
+  /** Two-digit index shown in mono above the label. */
+  n: string;
+  /** Verb first: "Build a car". */
+  label: string;
+  /** One plain line under the label. */
+  line: string;
+  /** Internal route, `/#anchor`, external URL or mailto. */
+  href: string;
+  /** Personas from the roboracer-audiences skill this path serves. */
+  for?: string[];
+  /** The track (below) that the path's destination starts. */
+  track?: string;
+  todo?: string;
+};
+
+export type TrackLink = { label: string; href: string };
+
+export type TrackStep = {
+  n: string;
+  /** Stage id within the track (get-running: sim, build, system). */
+  stage?: string;
+  title: string;
+  body: string;
+  href: string;
+  links?: TrackLink[];
+  note?: string;
+};
+
+export type LearningTrack = {
+  id: string;
+  title: string;
+  summary: string;
+  /** The site route that hosts the track today. */
+  home: string;
+  stages?: { id: string; title: string }[];
+  /** A figure quoted from the docs; `status: "verify"` until Cedric confirms
+   * it may appear on the site. */
+  estimate?: { text: string; source: string; status: "verify" | "published" };
+  /** Course plans by length, quoted from the course's Start Here page. */
+  plans?: {
+    source: string;
+    options: { weeks: number; modules: string[]; labs: number[]; outcome: string }[];
+  };
+  steps: TrackStep[];
+  help?: TrackLink[];
+  materials?: TrackLink[];
+};
+
+export type PathsFile = {
+  checked: string;
+  paths: EntryPath[];
+  tracks: LearningTrack[];
+};
+
+export const loadPaths = () => loadJson<PathsFile>("paths.json");
