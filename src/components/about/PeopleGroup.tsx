@@ -25,9 +25,11 @@ type PeopleGroupProps = {
  * grid (3 from 768, 4 from lg) is unchanged.
  *
  * Past crew doubles up at lg (Cedric, 2026-08-23: half the tile, so a reader
- * reaches the partners without scrolling through fifty portraits). Three
- * across on a phone: at four, a 78-91 px tile clipped the longer names
- * (ABOUT-01). */
+ * reaches the partners without scrolling through fifty portraits). Below lg
+ * no tile is narrower than 6.25rem, the width at which the longest surname
+ * and its arrow still fit whole at the eyebrow size (PersonCard, ABOUT-01):
+ * three across on a phone, two under 360 px, five from sm and seven from md
+ * (seven at 640-767 made 84-100 px tiles and broke seven names mid-word). */
 const GRID = {
   wide: {
     cols: "grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 compact:sm:grid-cols-2 compact:lg:grid-cols-3",
@@ -39,10 +41,12 @@ const GRID = {
     ],
   },
   compact: {
-    cols: "grid-cols-3 sm:grid-cols-7 lg:grid-cols-12",
+    cols: "grid-cols-3 max-[22.5rem]:grid-cols-2 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-12",
     tiers: [
-      { cols: 3, show: "sm:hidden" },
-      { cols: 7, show: "hidden sm:max-lg:block" },
+      { cols: 2, show: "hidden max-[22.5rem]:block" },
+      { cols: 3, show: "hidden min-[22.5rem]:max-sm:block" },
+      { cols: 5, show: "hidden sm:max-md:block" },
+      { cols: 7, show: "hidden md:max-lg:block" },
       { cols: 12, show: "hidden lg:block" },
     ],
   },
