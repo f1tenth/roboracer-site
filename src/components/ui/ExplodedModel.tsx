@@ -275,6 +275,24 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
           calloutsShownRef.current = n;
           setCalloutsShown(n);
         };
+        // Everything this trigger writes by hand (not through the timeline,
+        // which the context reverts on its own), set from one progress
+        // value. Called on creation, refresh and update: a breakpoint change
+        // (resize, rotation) builds a new trigger, and one that starts below
+        // the window used to inherit the old one's exploded car, hidden
+        // photo and open callouts until the first scroll.
+        const syncProgress = (progress: number) => {
+          // 0 -> ceiling over the first 55% of the pin, then hold.
+          explosionRef.current = CHAPTER_MAX_EXPLOSION * Math.min(progress / EXPLODED_AT, 1);
+          // Studio photo hands off to the model over the first 15%.
+          const photoOpacity = Math.max(0, 1 - progress / PHOTO_FADE_END);
+          for (const el of [photoLayerRef.current, creditRef.current]) {
+            if (!el) continue;
+            el.style.opacity = String(photoOpacity);
+            el.style.visibility = photoOpacity <= 0.001 ? "hidden" : "visible";
+          }
+          syncCallouts(progress);
+        };
         // Desktop: the pin. Compact: a pass-through over the canvas box.
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -282,25 +300,28 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
             start: desktop ? "top top" : COMPACT_START,
             end: desktop ? "bottom bottom" : COMPACT_END,
             scrub: 0.7,
-            onUpdate: (self) => {
-              // 0 -> ceiling over the first 55% of the pin, then hold.
-              explosionRef.current =
-                CHAPTER_MAX_EXPLOSION * Math.min(self.progress / EXPLODED_AT, 1);
-              // Studio photo hands off to the model over the first 15%.
-              const photoOpacity = Math.max(0, 1 - self.progress / PHOTO_FADE_END);
-              for (const el of [photoLayerRef.current, creditRef.current]) {
-                if (!el) continue;
-                el.style.opacity = String(photoOpacity);
-                el.style.visibility = photoOpacity <= 0.001 ? "hidden" : "visible";
-              }
-              syncCallouts(self.progress);
-            },
+            onUpdate: (self) => syncProgress(self.progress),
+            onRefresh: (self) => syncProgress(self.progress),
           },
         });
         captions.forEach((cap, i) => {
           tl.to(cap, { opacity: 1, duration: 0.3 }, i);
           if (i > 0) tl.to(captions[i - 1], { opacity: 0.62, duration: 0.3 }, i);
         });
+        syncProgress(tl.scrollTrigger?.progress ?? 0);
+        // Hand the state back at rest (assembled, photo shown, no callouts)
+        // for whatever comes next: another breakpoint's trigger, the static
+        // layout, or nothing.
+        return () => {
+          explosionRef.current = 0;
+          for (const el of [photoLayerRef.current, creditRef.current]) {
+            if (!el) continue;
+            el.style.removeProperty("opacity");
+            el.style.removeProperty("visibility");
+          }
+          calloutsShownRef.current = 0;
+          setCalloutsShown(0);
+        };
       });
       // Webfonts (Manrope/JetBrains Mono) finish after GSAP's load-time
       // refresh and can shift everything above this chapter, leaving the
