@@ -2,6 +2,9 @@ import { eventLabel, type NewsItem } from "./newsData";
 import LinkedInEmbed from "./LinkedInEmbed";
 
 const TITLE_LINK = "underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
+// Standalone action links are 2.75rem hit areas on touch screens (the text
+// stays centred in them; the rows around them take the growth back).
+const TAP = "coarse:inline-flex coarse:min-h-11 coarse:items-center";
 
 const ACTION: Record<string, string> = {
   post: "Read the post",
@@ -59,7 +62,7 @@ export default function NewsLead({ item }: { item: NewsItem }) {
       href={item.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-small font-semibold text-text-strong underline underline-offset-4 decoration-rr-magenta hover:decoration-2"
+      className={`text-small font-semibold text-text-strong underline underline-offset-4 decoration-rr-magenta hover:decoration-2 ${TAP}`}
     >
       {ACTION[item.kind] ?? "Read the source"} on {item.publisher} ↗
     </a>
@@ -87,14 +90,14 @@ export default function NewsLead({ item }: { item: NewsItem }) {
             </dl>
           )}
           {who && <p className="mt-8 font-mono text-small text-text-muted">{who}</p>}
-          <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+          <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2 coarse:mt-1 coarse:gap-y-0">
             {action}
             {item.more && (
               <a
                 href={item.more.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-small font-semibold text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2"
+                className={`text-small font-semibold text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2 ${TAP}`}
               >
                 {item.more.label} ↗
               </a>
@@ -119,7 +122,7 @@ export default function NewsLead({ item }: { item: NewsItem }) {
           <div className="flex flex-col gap-4 md:col-span-5 md:justify-end">
             {item.excerpt && <p className="max-w-[52ch] text-lead text-text-body">{item.excerpt}</p>}
             {who && <p className="font-mono text-small text-text-muted">{who}</p>}
-            <p>{action}</p>
+            <p className="coarse:-my-3">{action}</p>
           </div>
         </div>
       </article>
@@ -149,7 +152,7 @@ export default function NewsLead({ item }: { item: NewsItem }) {
         {heading}
         {item.excerpt && <p className="mt-4 max-w-[52ch] text-lead text-text-body">{item.excerpt}</p>}
         {who && <p className="mt-4 font-mono text-small text-text-muted">{who}</p>}
-        <p className="mt-6">{action}</p>
+        <p className="mt-6 coarse:mt-3">{action}</p>
       </div>
     </article>
   );

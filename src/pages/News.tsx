@@ -81,9 +81,11 @@ export default function News() {
   const loading = feed === null && !failed;
 
   return (
-    <div className="pt-[4.25rem] md:pt-[5.3125rem]">
-      {/* Masthead: what the page is, the ledger, and the lead story */}
-      <Section width="page" aria-labelledby="news-title">
+    <div className="pt-nav">
+      {/* Masthead: what the page is, the ledger, and the lead story. On a
+          phone it starts a rem under the bar, like the About and Race heroes,
+          instead of a full section's padding down. */}
+      <Section width="page" className="compact:pt-4" aria-labelledby="news-title">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
             <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-muted">
@@ -210,12 +212,15 @@ export default function News() {
             <div className="mt-6 divide-y divide-ink-950/10 border-t border-ink-950/10">
               {/* The year was a sticky two-column rail; it cost every card a
                   sixth of the page and the pictures were the part that paid
-                  (Cedric, 2026-08-23). Heading now, cards full width. */}
+                  (Cedric, 2026-08-23). Heading now, cards full width. It
+                  sticks only where the window is tall enough to spare the
+                  band (a landscape phone lost 38% of its height to bar plus
+                  year), flush under the bar so no card text shows between. */}
               {byYear.map(([year, group]) => (
                 <section key={year} aria-labelledby={`news-year-${year}`} className="py-10">
                   <h3
                     id={`news-year-${year}`}
-                    className="mb-6 font-display text-display-m font-semibold tabular-nums text-text-strong md:sticky md:top-24 md:z-10 md:bg-paper-100/95 md:py-2 md:backdrop-blur-sm"
+                    className="mb-6 font-display text-display-m font-semibold tabular-nums text-text-strong desktop:sticky desktop:top-nav desktop:z-10 desktop:bg-paper-100/95 desktop:py-2 desktop:backdrop-blur-sm"
                   >
                     {year}
                   </h3>
@@ -238,11 +243,12 @@ export default function News() {
       {/* Send us your news: the one solid CTA on the page */}
       {!loading && (
         <Section width="page" rule aria-labelledby="contribute">
-          <div className="grid gap-10 md:grid-cols-12 md:items-end">
+          <div className="grid gap-6 desktop:gap-10 md:grid-cols-12 md:items-end">
             <div className="md:col-span-7">
               <SectionHeader
                 eyebrow="Contribute"
                 id="contribute"
+                className="max-md:mb-2"
                 title="Send us your news"
                 lead={
                   <>
