@@ -150,7 +150,8 @@ const CROSSFADE_S = 0.9;
  * until then the playing clip has the whole connection (docs/media/HERO_PERF.md). */
 const PRELOAD_LEAD_S = 3;
 const CROSSFADE_CLASS = "transition-opacity duration-[900ms] ease-linear";
-/** A clip that sits in `waiting` this long marks the link as stalled: the
+/** A clip that sits in `waiting` this long, or a finished clip that holds
+ * its last frame this long for the next one, marks the link as stalled: the
  * clips loaded after it use the 960 encode (lib/media markLinkStalled). */
 const STALL_MS = 1500;
 
@@ -254,6 +255,8 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
   // Set by the sequencer: after a resume, move on if the current clip is at
   // (or past) its crossfade point, since the rAF cue only fires while playing.
   const resumeRef = useRef<(() => void) | null>(null);
+  // Set by the sequencer: a pause stops its stall clock between clips.
+  const holdRef = useRef<(() => void) | null>(null);
   // Idle cue: "idle" until the 10 s timer fires; any scroll before that
   // cancels it forever; the first scroll after it shows hides it for good.
   const [cue, setCue] = useState<"idle" | "visible" | "hidden">("idle");
@@ -344,6 +347,8 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     let cancelGlide: (() => void) | null = null;
     // The next clip's pending canplay listener, removed on cleanup.
     let pending: { el: HTMLVideoElement; fn: () => void } | null = null;
+    // Times that wait (armGap below).
+    let gapTimer = 0;
     const root = scope.current;
     const scheduleAutoScroll = () => {
       if (autoDone || !root) return;
@@ -369,6 +374,32 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       const r = v.buffered;
       return r.length > 0 && r.end(r.length - 1) >= v.duration - 0.25;
     };
+    // After a stall, the clip queued next reloads as its 960 encode if it
+    // has not started.
+    const downgradeQueued = () => {
+      const n = els[1 - cur];
+      if (!queued || fading || !n.paused) return;
+      const next = srcOf(clips[after(clip)]);
+      if (n.src !== new URL(next, window.location.href).href) setClip(n, after(clip));
+    };
+    // Stall between clips: the current clip reaches its end before the next
+    // can play, so the picture holds on its last frame and neither element
+    // fires `waiting` (the stall watch below never saw it). The hold is timed
+    // from the current clip's end (the wait for canplay starts CROSSFADE_S
+    // before it); past STALL_MS the link counts as stalled and the queued
+    // clip drops to its 960 encode. A pause, the next clip becoming playable,
+    // the error fallback and cleanup each stop the clock.
+    const armGap = () => {
+      window.clearTimeout(gapTimer);
+      if (!wide || linkStalled() || pausedRef.current) return;
+      const v = els[cur];
+      const left = Number.isFinite(v.duration) ? Math.max(0, v.duration - v.currentTime) : 0;
+      gapTimer = window.setTimeout(() => {
+        if (disposed || !waiting || pausedRef.current) return;
+        markLinkStalled();
+        downgradeQueued();
+      }, left * 1000 + STALL_MS);
+    };
     const advance = () => {
       if (fading || waiting || disposed || pausedRef.current) return;
       const v = els[cur];
@@ -377,6 +408,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       if (n.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) {
         waiting = true;
         const fn = () => {
+          window.clearTimeout(gapTimer);
           pending = null;
           waiting = false;
           // advance() checks the pause: a clip that became playable while
@@ -385,6 +417,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
         };
         pending = { el: n, fn };
         n.addEventListener("canplay", fn, { once: true });
+        armGap();
         return;
       }
       fading = true;
@@ -425,6 +458,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       disposed = true;
       cancelAnimationFrame(raf);
       window.clearTimeout(timer);
+      window.clearTimeout(gapTimer);
       const el = e.currentTarget as HTMLVideoElement;
       const keep = el === els[cur] || fading ? els[cur] : el;
       const other = keep === a ? b : a;
@@ -442,10 +476,13 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     };
     resumeRef.current = () => {
       if (disposed || fading) return;
+      // Still waiting for the next clip: restart the stall clock.
+      if (waiting) return armGap();
       const v = els[cur];
       const d = v.duration;
       if (v.ended || (Number.isFinite(d) && d > 0 && v.currentTime >= d - CROSSFADE_S)) advance();
     };
+    holdRef.current = () => window.clearTimeout(gapTimer);
     // Stall watch: a clip that waits for data over STALL_MS switches the rest
     // of the session to the 960 encodes, including the clip already queued
     // next if it has not started. Any sign of flow (or a pause) disarms it.
@@ -459,11 +496,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
         window.setTimeout(() => {
           if (disposed || el.paused) return;
           markLinkStalled();
-          const n = els[1 - cur];
-          if (queued && !fading && n.paused) {
-            const next = srcOf(clips[after(clip)]);
-            if (n.src !== new URL(next, window.location.href).href) setClip(n, after(clip));
-          }
+          downgradeQueued();
         }, STALL_MS),
       );
     };
@@ -484,10 +517,12 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     return () => {
       disposed = true;
       resumeRef.current = null;
+      holdRef.current = null;
       if (pending) pending.el.removeEventListener("canplay", pending.fn);
       pending = null;
       cancelAnimationFrame(raf);
       window.clearTimeout(timer);
+      window.clearTimeout(gapTimer);
       window.clearTimeout(autoTimer);
       cancelGlide?.();
       for (const t of stallTimers.values()) window.clearTimeout(t);
@@ -641,6 +676,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     } else {
       pausedRef.current = true;
       for (const el of els) el.pause();
+      holdRef.current?.();
       setPaused(true);
     }
   };
