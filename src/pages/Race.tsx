@@ -48,7 +48,7 @@ const ENTRY_STEPS = [
   {
     n: "02",
     title: "Register your team",
-    body: "One form per team. Any team size, but no more than ten people in the race area during the event.",
+    body: "One form per team. Any team size, but at most ten people per team in the race area during the event.",
     slack: false,
   },
   {
