@@ -809,7 +809,7 @@
       "name": "Germany",
       "lat": 51.2,
       "lng": 10.4,
-      "why": "UNICORN_Racing (teams.json)",
+      "why": "LAMARRacing, University of Bonn (teams.json)",
       "verified": true,
       "x": 840.3,
       "y": 148.9
@@ -859,7 +859,7 @@
       "name": "Republic of Korea",
       "lat": 36.5,
       "lng": 127.9,
-      "why": "KAIST (partners.json)",
+      "why": "KAIST (partners.json); UNICORN_Racing, UNIST (teams.json)",
       "verified": true,
       "x": 1333.1,
       "y": 223.7
