@@ -62,7 +62,7 @@ The landing is a **v1.0 draft**, not finished. In priority order:
 | `/news` | `News.tsx` | **revamped** | Reads `news.json`; a lead item with an `embed` shows the LinkedIn post itself (`news/LinkedInEmbed.tsx`) |
 | `/research` | `Research.tsx` | **revamped** | Rebuilt in `6d566b0`; reads `publications.json`; `/add-paper` and `/discover-papers` feed it. Fix list in `docs/NON_LANDING_AUDIT.md` |
 | `/rules` | `Rules.tsx` | **old design, new text** | A `marked` viewer over `public/rules.md`, which is `rules_v3.md` from `f1tenth/roboracer_rules` `dev-2026`, byte for byte. `scripts/check-rules-drift.mjs` compares the two; `--write` refreshes the copy. Typography is still the legacy `rules.css`, not the design system. |
-| `/race` | `Race.tsx` | **revamped** | Reads `upcoming_events.json`, `past_races.json` and `events_map.json`; "N competitions since 2016" is the highest held `number` in the map, and an upcoming event past its `ends` date counts as held |
+| `/race` | `Race.tsx` | **revamped** | Reads `upcoming_events.json`, `past_races.json` and `events_map.json`; "N competitions since 2016" is the highest held `number` in the map, and an upcoming event past its `ends` date counts as held. Section 05 reads the ESE 6150 class leaderboard live from its public JSON (`public/data/leaderboard.json`, `docs/LEADERBOARD.md`) |
 | `/build` `/learn` `/course` | `Build.tsx`, `Learn.tsx` | see the files | `/course` redirects to `/learn` |
 | `/chat` | `Chat.tsx` | old | Unchanged this revamp |
 
