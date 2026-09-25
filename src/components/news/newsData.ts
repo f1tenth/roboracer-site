@@ -3,6 +3,8 @@
 // the affiliation and the credit. Items arrive sorted newest first and are
 // rendered in the order the file gives them.
 
+import { fetchJson } from "../../lib/data";
+
 export type NewsImage = { src: string; width: number; height: number; alt: string };
 
 /** A third-party post shown in place: the frame URL the publisher gives for
@@ -84,9 +86,9 @@ function siteHosted(image: NewsImage | null | undefined): NewsImage | null {
 export async function loadNewsFeed(): Promise<NewsFeed | null> {
   let data: unknown;
   try {
-    const res = await fetch(`${import.meta.env.BASE_URL}data/news.json`);
-    if (!res.ok) return null;
-    data = await res.json();
+    // Bounded (lib/data READ_TIMEOUT_MS): a request that never answers ends
+    // in the page's failure line, not an endless empty page.
+    data = await fetchJson<unknown>(`${import.meta.env.BASE_URL}data/news.json`);
   } catch {
     return null;
   }

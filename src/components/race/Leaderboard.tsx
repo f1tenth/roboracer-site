@@ -112,7 +112,9 @@ export default function Leaderboard() {
  *
  * Every field is validated before it reaches state (./leaderboardData), the
  * config falls back to a bundled copy, and a tab that comes back after a
- * minute re-reads the board, keeping the last good laps if that read fails.
+ * minute re-reads the board, keeping the last good laps only if that read
+ * fails: a board that answers with no ranked lab is empty now. A board
+ * switch made while that read runs stands: the read only refreshes the cache.
  */
 function LeaderboardBlock() {
   const [cfg, setCfg] = useState<LeaderboardConfig | null>(null);
@@ -123,6 +125,9 @@ function LeaderboardBlock() {
   const life = useRef<AbortController | null>(null);
   // The board the reader is on, for a refresh that runs in the effect below.
   const selectedRef = useRef<string | null>(null);
+  // When each cached board file arrived, so a refresh can keep the files
+  // fetched while it ran and drop the older ones (fetched again when chosen).
+  const fetchedAt = useRef<Record<string, number>>({});
   const now = useNow(60_000);
 
   useEffect(() => {
@@ -136,11 +141,16 @@ function LeaderboardBlock() {
     let config: LeaderboardConfig | null = null;
     let loadedAt = 0;
     let busy = false;
-    // The first read ends in the error state on failure; a refresh keeps the
-    // last good board instead.
+    // The first read ends in the error state on failure; a refresh that
+    // fails keeps the last good board instead.
     const read = async (first: boolean) => {
       if (busy) return;
       busy = true;
+      // The board on screen as the read starts. A switch made while it runs
+      // wins over what the read would restore (a refresh used to put the old
+      // board back and replace the cache, dropping the chosen board's file).
+      const asked = selectedRef.current;
+      const started = Date.now();
       try {
         if (!config) {
           config = await loadLeaderboardConfig(signal);
@@ -152,19 +162,41 @@ function LeaderboardBlock() {
         if (!index) throw new Error("index.json: unexpected shape");
         const featured = pickFeatured(index, config, Date.now());
         if (!featured) {
-          if (first) setPhase("empty");
+          // A valid answer with no ranked lab (a new term, a board reset):
+          // last read's laps are not on the board any more, so they go.
+          fetchedAt.current = {};
+          setBoards([]);
+          setSelected(null);
+          setFiles({});
+          setPhase("empty");
           loadedAt = Date.now();
           return;
         }
         const siblings = siblingBoards(index, featured);
         // A refresh stays on the board the reader switched to, while it has laps.
-        const shown = (!first && siblings.find((b) => b.slug === selectedRef.current)) || featured;
+        const shown = (!first && siblings.find((b) => b.slug === asked)) || featured;
         const file = readBoardFile(await fetchBoardJson<unknown>(`${dataBase(config)}${shown.file}`, signal));
         if (signal.aborted) return;
         if (!file) throw new Error(`${shown.file}: unexpected shape`);
+        fetchedAt.current[shown.slug] = Date.now();
+        const current = selectedRef.current;
+        const moved = !first && current !== asked && siblings.some((b) => b.slug === current);
+        // Merged into the cache: the board on screen and any file fetched
+        // while this read ran stay; older files of the lab are dropped, so a
+        // later switch fetches them fresh.
+        const keep = new Set(
+          siblings
+            .filter((b) => b.slug === current || (fetchedAt.current[b.slug] ?? 0) >= started)
+            .map((b) => b.slug),
+        );
         setBoards(siblings);
-        setSelected(shown.slug);
-        setFiles({ [shown.slug]: file });
+        if (!moved) setSelected(shown.slug);
+        setFiles((prev) => {
+          const next: Record<string, BoardFile | "error"> = {};
+          for (const slug of keep) if (prev[slug]) next[slug] = prev[slug];
+          next[shown.slug] = file;
+          return next;
+        });
         setPhase(topRows(file, config.limit).length > 0 ? "ready" : "empty");
         loadedAt = Date.now();
       } catch {
@@ -185,12 +217,18 @@ function LeaderboardBlock() {
   }, []);
 
   const choose = (slug: string) => {
+    // The ref too, at once: a refresh finishing before the next render must
+    // see the switch.
+    selectedRef.current = slug;
     setSelected(slug);
     const summary = boards.find((b) => b.slug === slug);
     const signal = life.current?.signal;
     if (!cfg || !summary || !signal || files[slug]) return;
     fetchBoardJson<unknown>(`${dataBase(cfg)}${summary.file}`, signal)
-      .then((f) => setFiles((prev) => ({ ...prev, [slug]: readBoardFile(f) ?? "error" })))
+      .then((f) => {
+        fetchedAt.current[slug] = Date.now();
+        setFiles((prev) => ({ ...prev, [slug]: readBoardFile(f) ?? "error" }));
+      })
       .catch(() => {
         if (!signal.aborted) setFiles((prev) => ({ ...prev, [slug]: "error" }));
       });

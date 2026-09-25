@@ -9,8 +9,11 @@ type PersonCardProps = {
 
 /** A 2.75rem hit area on touch screens for the name link, taken back by the
  * negative margin so the text does not move (mobile pass, ABOUT-07); `relative`
- * keeps the padding above the next line for the tap. */
+ * keeps the padding above the next line for the tap. A Past crew name can be
+ * one eyebrow-size line (16.5 px), which 0.75rem either side left at 41 px;
+ * the tiles take 0.875rem. */
 const TAP = "relative coarse:-my-3 coarse:py-3";
+const TILE_TAP = "relative coarse:-my-3.5 coarse:py-3.5";
 
 /** Past crew tiles below lg are size containers: a tile under 7.75rem steps
  * its name down to the eyebrow size and its side padding to 0.375rem, so the
@@ -21,16 +24,15 @@ const TILE_NAME = "max-lg:@max-[7.75rem]:text-eyebrow max-lg:@max-[7.75rem]:lead
 
 /** The name with its arrow glued to the last word in one no-wrap span: the
  * arrow never starts a line alone (ABOUT-03). A no-break space alone did not
- * hold under `overflow-wrap: anywhere`. `glue` is where the span holds: a
- * Past crew tile only below lg, since the 12-column lg grid can be narrower
- * than a surname and there a break reads better than a name running into the
- * next tile. */
-function LinkedName({ name, glue }: { name: string; glue: string }) {
+ * hold under `overflow-wrap: anywhere`. Every Past crew tile is wide enough
+ * for the longest surname and its arrow, from 320 to 1920 (PeopleGroup: the
+ * lg column count follows the grid's width), so the span holds everywhere. */
+function LinkedName({ name }: { name: string }) {
   const cut = name.lastIndexOf(" ");
   return (
     <>
       {cut > 0 && name.slice(0, cut + 1)}
-      <span className={glue}>
+      <span className="whitespace-nowrap">
         {name.slice(cut + 1)}
         <span aria-hidden="true">&nbsp;&#8599;</span>
       </span>
@@ -95,9 +97,9 @@ export default function PersonCard({ person, compact = false }: PersonCardProps)
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${nameClass} ${TAP} w-fit max-w-full underline decoration-ink-950/25 underline-offset-4 [overflow-wrap:break-word] hover:decoration-rr-violet hover:decoration-2`}
+            className={`${nameClass} ${compact ? TILE_TAP : TAP} w-fit max-w-full underline decoration-ink-950/25 underline-offset-4 [overflow-wrap:break-word] hover:decoration-rr-violet hover:decoration-2`}
           >
-            <LinkedName name={name} glue={compact ? "max-lg:whitespace-nowrap" : "whitespace-nowrap"} />
+            <LinkedName name={name} />
           </a>
         ) : (
           <p className={`${nameClass} [overflow-wrap:break-word]`}>{name}</p>

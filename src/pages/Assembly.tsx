@@ -280,20 +280,29 @@ export default function Assembly() {
           </p>
         </section>
 
-        <div className="relative order-1 h-[44svh] flex-none overflow-hidden rounded-media border border-ink-950/10 bg-paper-100 md:landscape:h-auto md:landscape:flex-1 lg:h-auto lg:flex-1">
-          <ViewerBoundary>
-            <Suspense fallback={<FrameMessage>Loading the 3D model</FrameMessage>}>
-              <AssemblyCanvas
-                explosion={exploded ? 1 : 0}
-                focusParts={focusParts}
-                highlightParts={highlightParts}
-                resetKey={resetKey}
-                instant={reduced}
-                onSelect={selectPart}
-                onHover={hoverPart}
-              />
-            </Suspense>
-          </ViewerBoundary>
+        {/* On a short window (a landscape phone) the view controls leave the
+            picture, so no part sits behind a button (ASM-02: at 844x390 the
+            row covered the front wheel). Beside the list (from 768 wide) the
+            frame is narrow and the row goes under the model; above the list
+            (a smaller phone) the frame is wide and short and the controls
+            stack at its right. Elsewhere the row floats over the frame's
+            bottom-left corner. */}
+        <div className="relative order-1 h-[44svh] flex-none overflow-hidden rounded-media border border-ink-950/10 bg-paper-100 md:landscape:h-auto md:landscape:flex-1 lg:h-auto lg:flex-1 [@media(max-height:33.99rem)]:flex [@media(max-height:33.99rem)_and_(min-width:48rem)]:flex-col">
+          <div className="absolute inset-0 [@media(max-height:33.99rem)]:relative [@media(max-height:33.99rem)]:min-h-0 [@media(max-height:33.99rem)]:min-w-0 [@media(max-height:33.99rem)]:flex-1">
+            <ViewerBoundary>
+              <Suspense fallback={<FrameMessage>Loading the 3D model</FrameMessage>}>
+                <AssemblyCanvas
+                  explosion={exploded ? 1 : 0}
+                  focusParts={focusParts}
+                  highlightParts={highlightParts}
+                  resetKey={resetKey}
+                  instant={reduced}
+                  onSelect={selectPart}
+                  onHover={hoverPart}
+                />
+              </Suspense>
+            </ViewerBoundary>
+          </div>
 
           <p className="pointer-events-none absolute left-3 top-3 font-mono text-eyebrow text-text-muted">
             <span className="[@media(pointer:coarse)]:hidden">Drag to turn · Scroll to zoom</span>
@@ -301,7 +310,7 @@ export default function Assembly() {
           </p>
 
           {/* One row at 360: the buttons tighten below 390 (ASM-01). */}
-          <div className="absolute bottom-3 left-3 flex flex-wrap items-center gap-2 max-[24.375rem]:gap-1.5">
+          <div className="absolute bottom-3 left-3 flex flex-wrap items-center gap-2 max-[24.375rem]:gap-1.5 [@media(max-height:33.99rem)]:static [@media(max-height:33.99rem)]:flex-none [@media(max-height:33.99rem)_and_(min-width:48rem)]:px-3 [@media(max-height:33.99rem)_and_(min-width:48rem)]:pb-3 [@media(max-height:33.99rem)_and_(min-width:48rem)]:pt-1 [@media(max-height:33.99rem)_and_(max-width:47.99rem)]:flex-col [@media(max-height:33.99rem)_and_(max-width:47.99rem)]:items-stretch [@media(max-height:33.99rem)_and_(max-width:47.99rem)]:justify-end [@media(max-height:33.99rem)_and_(max-width:47.99rem)]:p-3 [@media(max-height:33.99rem)_and_(max-width:47.99rem)]:pl-0">
             <div
               role="group"
               aria-label="View"

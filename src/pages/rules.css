@@ -195,7 +195,8 @@
   }
 
   /* The document's contents list (Rules.tsx marks it): a touch-sized row per
-     link on a coarse pointer (RULES-05). Running-text links stay inline. */
+     link on a coarse pointer (RULES-05), at least as wide as it is tall
+     ("Track" was 38 px). Running-text links stay inline. */
   @media (pointer: coarse) {
     .rules .rules-contents li {
       margin-bottom: 0;
@@ -203,6 +204,7 @@
 
     .rules-contents a {
       display: inline-block;
+      min-width: 2.75rem;
       padding-block: 0.625rem;
     }
   }

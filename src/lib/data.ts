@@ -365,11 +365,37 @@ export type Community = {
   };
 };
 
-async function loadJson<T>(name: string): Promise<T> {
-  const res = await fetch(`${import.meta.env.BASE_URL}data/${name}`);
-  if (!res.ok) throw new Error(`Failed to load ${name}: ${res.status}`);
-  return res.json() as Promise<T>;
+/** How long a JSON read may take, headers and body, before it counts as
+ * failed. A request that never answered used to leave a block on its
+ * placeholder for good (the Start here row invisible, /news and /about on
+ * their skeletons); after this the caller's failure path runs instead. */
+export const READ_TIMEOUT_MS = 8000;
+
+/**
+ * fetch + JSON, given up after READ_TIMEOUT_MS through an AbortController.
+ * An HTTP error, a malformed body and the timeout all reject. `signal`
+ * aborts it early (a section unmounting); `cache` goes through to fetch.
+ */
+export async function fetchJson<T>(
+  url: string,
+  { signal, cache }: { signal?: AbortSignal; cache?: RequestCache } = {},
+): Promise<T> {
+  const ctrl = new AbortController();
+  const timer = window.setTimeout(() => ctrl.abort(), READ_TIMEOUT_MS);
+  const onAbort = () => ctrl.abort();
+  if (signal?.aborted) ctrl.abort();
+  signal?.addEventListener("abort", onAbort);
+  try {
+    const res = await fetch(url, { signal: ctrl.signal, cache });
+    if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
+    return (await res.json()) as T;
+  } finally {
+    window.clearTimeout(timer);
+    signal?.removeEventListener("abort", onAbort);
+  }
 }
+
+const loadJson = <T>(name: string): Promise<T> => fetchJson<T>(`${import.meta.env.BASE_URL}data/${name}`);
 
 export const loadUpcomingEvents = () => loadJson<UpcomingEvent[]>("upcoming_events.json");
 export const loadPastRaces = () => loadJson<PastRace[]>("past_races.json");

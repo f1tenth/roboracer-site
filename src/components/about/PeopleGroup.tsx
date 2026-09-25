@@ -33,7 +33,16 @@ type PeopleGroupProps = {
  * no tile is narrower than 6.25rem, the width at which the longest surname
  * and its arrow still fit whole at the eyebrow size (PersonCard, ABOUT-01):
  * three across on a phone, two under 360 px, five from sm and seven from md
- * (seven at 640-767 made 84-100 px tiles and broke seven names mid-word). */
+ * (seven at 640-767 made 84-100 px tiles and broke seven names mid-word).
+ *
+ * From lg the count follows the grid's own width in rem (the group is a
+ * size container): as many columns as fit 8.5rem tiles, seven to twelve.
+ * "Pennypacker ↗" is 6.3rem at the tile's name size plus 2rem of padding.
+ * Twelve fixed columns broke names mid-word at 1024 (four with a mouse,
+ * where the root size is 12 px; 33 on a touch screen, where it stays 16 px):
+ * rem-based container widths give a mouse at 1024 nine columns, a landscape
+ * iPad seven, and twelve from about 1260 with a mouse. The ranges are exact
+ * complements, like the breakpoint tiers, so no two column rules overlap. */
 const GRID = {
   wide: {
     cols: "grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 compact:sm:grid-cols-2 compact:lg:grid-cols-3",
@@ -45,13 +54,22 @@ const GRID = {
     ],
   },
   compact: {
-    cols: "grid-cols-3 max-[22.5rem]:grid-cols-2 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-12",
+    cols:
+      "grid-cols-3 max-[22.5rem]:grid-cols-2 sm:max-md:grid-cols-5 md:max-lg:grid-cols-7 " +
+      "lg:@max-[68rem]:grid-cols-7 lg:@min-[68rem]:@max-[76.5rem]:grid-cols-8 " +
+      "lg:@min-[76.5rem]:@max-[85rem]:grid-cols-9 lg:@min-[85rem]:@max-[93.5rem]:grid-cols-10 " +
+      "lg:@min-[93.5rem]:@max-[102rem]:grid-cols-11 lg:@min-[102rem]:grid-cols-12",
     tiers: [
       { cols: 2, show: "hidden max-[22.5rem]:block", phone: true },
       { cols: 3, show: "hidden min-[22.5rem]:max-sm:block", phone: true },
       { cols: 5, show: "hidden sm:max-md:block" },
       { cols: 7, show: "hidden md:max-lg:block" },
-      { cols: 12, show: "hidden lg:block" },
+      { cols: 7, show: "hidden lg:@max-[68rem]:block" },
+      { cols: 8, show: "hidden lg:@min-[68rem]:@max-[76.5rem]:block" },
+      { cols: 9, show: "hidden lg:@min-[76.5rem]:@max-[85rem]:block" },
+      { cols: 10, show: "hidden lg:@min-[85rem]:@max-[93.5rem]:block" },
+      { cols: 11, show: "hidden lg:@min-[93.5rem]:@max-[102rem]:block" },
+      { cols: 12, show: "hidden lg:@min-[102rem]:block" },
     ],
   },
 } as const;
@@ -107,7 +125,8 @@ export default function PeopleGroup({ id, title, lead, people, compact = false, 
   );
 
   return (
-    <div>
+    // A size container for the Past crew's lg column count (GRID.compact).
+    <div className={compact ? "@container" : undefined}>
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-ink-950/10 pb-3">
         <h3 id={id} className="font-display text-lead font-semibold text-text-strong">
           {title}

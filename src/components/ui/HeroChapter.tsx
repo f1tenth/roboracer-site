@@ -1,6 +1,6 @@
-import { Fragment, useEffect, useId, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useId, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
-import { DESKTOP_QUERY, EASE_IN_OUT_QUART, MOTION_OK_QUERY, gsap, useGSAP } from "../../lib/motion";
+import { DESKTOP_QUERY, EASE_IN_OUT_QUART, MOTION_OK_QUERY, gsap, isScrollLocked, useGSAP } from "../../lib/motion";
 import { linkCanStream, linkStalled, markLinkStalled } from "../../lib/media";
 
 export type HeroClip = {
@@ -150,7 +150,8 @@ const CROSSFADE_S = 0.9;
  * until then the playing clip has the whole connection (docs/media/HERO_PERF.md). */
 const PRELOAD_LEAD_S = 3;
 const CROSSFADE_CLASS = "transition-opacity duration-[900ms] ease-linear";
-/** A clip that sits in `waiting` this long marks the link as stalled: the
+/** A clip that sits in `waiting` this long, or a finished clip that holds
+ * its last frame this long for the next one, marks the link as stalled: the
  * clips loaded after it use the 960 encode (lib/media markLinkStalled). */
 const STALL_MS = 1500;
 
@@ -167,8 +168,9 @@ const AUTOSCROLL_DELAY_S = 1; // v5 round two: 3 s, then Cedric: "2 s earlier"
 const AUTOSCROLL_TARGET_P = 0.46;
 const AUTOSCROLL_DURATION_MS = 2600;
 
-/** Smooth scroll to `top` over `ms` (power2.inOut) with a rAF tween; resolves
- * to false if the user took over. */
+/** Smooth scroll to `top` over `ms` (power2.inOut) with a rAF tween; the
+ * returned function cancels it. It also stops, for good, if the scroll lock
+ * is taken (the mobile menu opened) while it runs. */
 function glideTo(top: number, ms: number): () => void {
   const from = window.scrollY;
   const start = performance.now();
@@ -182,6 +184,7 @@ function glideTo(top: number, ms: number): () => void {
   for (const ev of ["wheel", "touchstart", "keydown", "pointerdown"]) window.addEventListener(ev, cancel, { passive: true });
   const step = (now: number) => {
     if (cancelled) return;
+    if (isScrollLocked()) return cancel();
     const t = Math.min(1, (now - start) / ms);
     const e = t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
     window.scrollTo(0, from + (top - from) * e);
@@ -251,9 +254,15 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
   // advance: a pause while the next clip was still buffering used to be
   // undone by that clip's canplay handler, which crossfaded and played it.
   const pausedRef = useRef(false);
+  // The hero is out of view (the reader is further down the page): the
+  // sequencer holds as it does for a pause, and loads no clip.
+  const hiddenRef = useRef(false);
   // Set by the sequencer: after a resume, move on if the current clip is at
   // (or past) its crossfade point, since the rAF cue only fires while playing.
   const resumeRef = useRef<(() => void) | null>(null);
+  // Set by the sequencer: a pause stops its stall clock between clips, and
+  // leaving the view also drops the next clip's download.
+  const holdRef = useRef<(() => void) | null>(null);
   // Idle cue: "idle" until the 10 s timer fires; any scroll before that
   // cancels it forever; the first scroll after it shows hides it for good.
   const [cue, setCue] = useState<"idle" | "visible" | "hidden">("idle");
@@ -317,20 +326,31 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
   useEffect(() => {
     const a = vidA.current;
     const b = vidB.current;
+    // The reader's pause outlives a restart of this effect (reduced motion
+    // switched on and off again remounts the videos): the control still says
+    // "Play footage", so nothing starts on its own. pause() also cancels the
+    // single loop's autoplay.
     if (isStatic || !clips || !a || !b) {
       activeRef.current = a ? [a] : [];
+      if (a && pausedRef.current) a.pause();
       return;
     }
     // The desktop zoom, the 1280/1920 encodes and the desktop type all key on
     // DESKTOP_QUERY (wide AND tall), never on width alone: a landscape phone
     // is 844 wide but 390 tall, and the width rule put the first headline
     // line under the nav and streamed it the desktop files (LANDING-03, -25).
-    const wide = window.matchMedia(DESKTOP_QUERY).matches;
-    // Chosen per clip at load time, so a link that slows down mid-cycle
-    // drops to the 960 encodes for the clips after.
-    const srcOf = (c: HeroClip) => (wide && desktopOk(c.mbps) ? c.mp4_1920 : c.mp4_960);
+    // Read live, never captured: after a resize or a rotation from desktop
+    // to compact the clips after the current one still asked for the desktop
+    // files. Playback does not restart; the next pick follows the window.
+    const desktopMql = window.matchMedia(DESKTOP_QUERY);
+    const wide = () => desktopMql.matches;
+    // Chosen per clip at load time, so a link that slows down mid-cycle (or
+    // a window that leaves the desktop size) gets the 960 encodes for the
+    // clips after.
+    const srcOf = (c: HeroClip) => (wide() && desktopOk(c.mbps) ? c.mp4_1920 : c.mp4_960);
     const after = (i: number) => (i + 1 < clips.length ? i + 1 : loopFrom);
     const els = [a, b] as const;
+    const held = () => pausedRef.current || hiddenRef.current;
     let cur = 0;
     let clip = 0;
     let fading = false;
@@ -344,12 +364,16 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     let cancelGlide: (() => void) | null = null;
     // The next clip's pending canplay listener, removed on cleanup.
     let pending: { el: HTMLVideoElement; fn: () => void } | null = null;
+    // Times that wait (armGap below).
+    let gapTimer = 0;
     const root = scope.current;
     const scheduleAutoScroll = () => {
       if (autoDone || !root) return;
       window.clearTimeout(autoTimer);
       autoTimer = window.setTimeout(() => {
-        if (disposed || autoDone || window.scrollY > 8) return;
+        // The mobile menu is open (scroll lock): not now. The next time the
+        // cycle comes back to this clip schedules it again.
+        if (disposed || autoDone || window.scrollY > 8 || isScrollLocked()) return;
         autoDone = true;
         const target = root.getBoundingClientRect().top + window.scrollY + AUTOSCROLL_TARGET_P * (root.offsetHeight - window.innerHeight);
         cancelGlide = glideTo(target, AUTOSCROLL_DURATION_MS);
@@ -361,7 +385,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       el.load();
     };
     const queueNext = () => {
-      if (queued) return;
+      if (queued || hiddenRef.current) return;
       queued = true;
       setClip(els[1 - cur], after(clip));
     };
@@ -369,14 +393,41 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       const r = v.buffered;
       return r.length > 0 && r.end(r.length - 1) >= v.duration - 0.25;
     };
+    // After a stall or a size change, the clip queued next reloads in the
+    // encode srcOf picks now, if it has not started.
+    const reselectQueued = () => {
+      const n = els[1 - cur];
+      if (!queued || fading || !n.paused) return;
+      const next = srcOf(clips[after(clip)]);
+      if (n.src !== new URL(next, window.location.href).href) setClip(n, after(clip));
+    };
+    // Stall between clips: the current clip reaches its end before the next
+    // can play, so the picture holds on its last frame and neither element
+    // fires `waiting` (the stall watch below never saw it). The hold is timed
+    // from the current clip's end (the wait for canplay starts CROSSFADE_S
+    // before it); past STALL_MS the link counts as stalled and the queued
+    // clip drops to its 960 encode. A pause, the next clip becoming playable,
+    // the error fallback and cleanup each stop the clock.
+    const armGap = () => {
+      window.clearTimeout(gapTimer);
+      if (!wide() || linkStalled() || held()) return;
+      const v = els[cur];
+      const left = Number.isFinite(v.duration) ? Math.max(0, v.duration - v.currentTime) : 0;
+      gapTimer = window.setTimeout(() => {
+        if (disposed || !waiting || held()) return;
+        markLinkStalled();
+        reselectQueued();
+      }, left * 1000 + STALL_MS);
+    };
     const advance = () => {
-      if (fading || waiting || disposed || pausedRef.current) return;
+      if (fading || waiting || disposed || held()) return;
       const v = els[cur];
       const n = els[1 - cur];
       queueNext();
       if (n.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) {
         waiting = true;
         const fn = () => {
+          window.clearTimeout(gapTimer);
           pending = null;
           waiting = false;
           // advance() checks the pause: a clip that became playable while
@@ -385,6 +436,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
         };
         pending = { el: n, fn };
         n.addEventListener("canplay", fn, { once: true });
+        armGap();
         return;
       }
       fading = true;
@@ -425,6 +477,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       disposed = true;
       cancelAnimationFrame(raf);
       window.clearTimeout(timer);
+      window.clearTimeout(gapTimer);
       const el = e.currentTarget as HTMLVideoElement;
       const keep = el === els[cur] || fading ? els[cur] : el;
       const other = keep === a ? b : a;
@@ -435,16 +488,33 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       keep.style.opacity = "1";
       keep.style.zIndex = "1";
       keep.loop = true;
-      keep.src = wide && desktopOk(video.mbps) ? video.mp4_1920 : video.mp4_960;
+      keep.src = wide() && desktopOk(video.mbps) ? video.mp4_1920 : video.mp4_960;
       keep.load();
       activeRef.current = [keep];
-      if (!pausedRef.current) void keep.play().catch(() => {});
+      if (!held()) void keep.play().catch(() => {});
     };
     resumeRef.current = () => {
       if (disposed || fading) return;
+      // Still waiting for the next clip: restart the stall clock.
+      if (waiting) return armGap();
       const v = els[cur];
       const d = v.duration;
       if (v.ended || (Number.isFinite(d) && d > 0 && v.currentTime >= d - CROSSFADE_S)) advance();
+    };
+    holdRef.current = () => {
+      window.clearTimeout(gapTimer);
+      // Out of view, a next clip that is still downloading and has not
+      // started lets go of the connection: its load is dropped and queued
+      // again on the way back (a fully buffered one stays).
+      if (!hiddenRef.current || fading || !queued) return;
+      const n = els[1 - cur];
+      if (!n.paused || fullyBuffered(n)) return;
+      if (pending) pending.el.removeEventListener("canplay", pending.fn);
+      pending = null;
+      waiting = false;
+      queued = false;
+      n.removeAttribute("src");
+      n.load();
     };
     // Stall watch: a clip that waits for data over STALL_MS switches the rest
     // of the session to the 960 encodes, including the clip already queued
@@ -452,18 +522,14 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     const stallTimers = new Map<HTMLVideoElement, number>();
     const onWaiting = (e: Event) => {
       const el = e.currentTarget as HTMLVideoElement;
-      if (!wide || linkStalled() || pausedRef.current) return;
+      if (!wide() || linkStalled() || held()) return;
       window.clearTimeout(stallTimers.get(el));
       stallTimers.set(
         el,
         window.setTimeout(() => {
           if (disposed || el.paused) return;
           markLinkStalled();
-          const n = els[1 - cur];
-          if (queued && !fading && n.paused) {
-            const next = srcOf(clips[after(clip)]);
-            if (n.src !== new URL(next, window.location.href).href) setClip(n, after(clip));
-          }
+          reselectQueued();
         }, STALL_MS),
       );
     };
@@ -477,17 +543,20 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     b.addEventListener("ended", onEnded);
     a.addEventListener("error", onError);
     b.addEventListener("error", onError);
+    desktopMql.addEventListener("change", reselectQueued);
     activeRef.current = [a];
     setClip(a, 0);
-    void a.play().catch(() => {});
+    if (!held()) void a.play().catch(() => {});
     raf = requestAnimationFrame(tick);
     return () => {
       disposed = true;
       resumeRef.current = null;
+      holdRef.current = null;
       if (pending) pending.el.removeEventListener("canplay", pending.fn);
       pending = null;
       cancelAnimationFrame(raf);
       window.clearTimeout(timer);
+      window.clearTimeout(gapTimer);
       window.clearTimeout(autoTimer);
       cancelGlide?.();
       for (const t of stallTimers.values()) window.clearTimeout(t);
@@ -499,8 +568,44 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       b.removeEventListener("ended", onEnded);
       a.removeEventListener("error", onError);
       b.removeEventListener("error", onError);
+      desktopMql.removeEventListener("change", reselectQueued);
     };
   }, [isStatic, clips, loopFrom, video.mp4_1920, video.mp4_960, video.mbps]);
+
+  // Plays or stops the footage on screen to match the reader's pause and the
+  // hero's visibility; the sequencer follows through holdRef and resumeRef.
+  const syncPlayback = useCallback(() => {
+    const els = activeRef.current;
+    if (pausedRef.current || hiddenRef.current) {
+      for (const el of els) el.pause();
+      holdRef.current?.();
+    } else {
+      // An ended clip would restart from 0 on play(); the sequencer moves on
+      // from it instead.
+      for (const el of els) if (!el.ended) void el.play().catch(() => {});
+      resumeRef.current?.();
+    }
+  }, []);
+
+  // Bandwidth: with the reader further down the landing the clip cycle used
+  // to keep playing and loading clips out of sight. Out of view it pauses
+  // and queues nothing; back in view it picks up where it stopped. The
+  // static layout (reduced motion, weak device) has no video to watch.
+  useEffect(() => {
+    const root = scope.current;
+    if (isStatic || !root || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(([entry]) => {
+      const hidden = !entry.isIntersecting;
+      if (hidden === hiddenRef.current) return;
+      hiddenRef.current = hidden;
+      syncPlayback();
+    });
+    io.observe(root);
+    return () => {
+      io.disconnect();
+      hiddenRef.current = false;
+    };
+  }, [isStatic, syncPlayback]);
 
   useGSAP(
     () => {
@@ -629,20 +734,10 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
   );
 
   const togglePlayback = () => {
-    const els = activeRef.current;
-    if (els.length === 0) return;
-    if (paused) {
-      pausedRef.current = false;
-      // An ended clip would restart from 0 on play(); the sequencer moves on
-      // from it instead.
-      for (const el of els) if (!el.ended) void el.play().catch(() => {});
-      setPaused(false);
-      resumeRef.current?.();
-    } else {
-      pausedRef.current = true;
-      for (const el of els) el.pause();
-      setPaused(true);
-    }
+    if (activeRef.current.length === 0) return;
+    pausedRef.current = !paused;
+    setPaused(!paused);
+    syncPlayback();
   };
 
   const headline = (onInk: boolean) => (

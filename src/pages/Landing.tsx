@@ -156,7 +156,9 @@ type PartnerLinkProps = {
   cell?: boolean;
 };
 
-/** One partner: the grey logo, the colour one on hover, and the name pill. */
+/** One partner: the grey logo, the colour one on hover, and the name pill.
+ * On touch the link is never under 2.75rem: a narrow logo in a ribbon gets a
+ * 2.75rem-wide box (square marks were 27 px), a grid cell a 2.75rem-tall one. */
 function PartnerLink({ p, load, canHover, clone = false, cell = false }: PartnerLinkProps) {
   const size = cell ? "max-w-full" : "max-w-28 md:max-w-[12.625rem]";
   return (
@@ -165,7 +167,7 @@ function PartnerLink({ p, load, canHover, clone = false, cell = false }: Partner
       target="_blank"
       rel="noopener noreferrer"
       tabIndex={clone ? -1 : undefined}
-      className={`group relative flex flex-col items-center justify-start ${cell ? "h-[2.125rem] w-full min-w-0 md:h-[4.5rem]" : "h-[3.75rem] w-auto shrink-0 md:h-[6.5rem]"}`}
+      className={`group relative flex flex-col items-center justify-start ${cell ? "h-[2.125rem] w-full min-w-0 coarse:min-h-11 coarse:justify-center md:h-[4.5rem]" : "h-[3.75rem] w-auto shrink-0 coarse:min-w-11 md:h-[6.5rem]"}`}
     >
       <span className={`relative flex h-[2.125rem] items-center md:h-[4.5rem] ${cell ? "w-full justify-center" : ""}`}>
         <img
@@ -375,10 +377,12 @@ export default function Landing() {
         {reduced ? (
           /* Reduced motion: every institution once, alphabetical, in one
              dense grid (the three wrapped ribbons kept their 4rem gaps and
-             ran five phone screens, LANDING-10). */
+             ran five phone screens, LANDING-10). On a touch phone the cells
+             grow to 2.75rem and the row gap gives the 10 px back, so the
+             grid keeps its height. */
           <ul
             aria-labelledby="partners"
-            className="mx-auto mt-8 grid max-w-page grid-cols-4 gap-x-3 gap-y-5 px-6 sm:grid-cols-6 md:gap-x-8 md:gap-y-8 lg:grid-cols-8 xl:grid-cols-10"
+            className="mx-auto mt-8 grid max-w-page grid-cols-4 gap-x-3 gap-y-5 px-6 max-md:coarse:gap-y-2.5 sm:grid-cols-6 md:gap-x-8 md:gap-y-8 lg:grid-cols-8 xl:grid-cols-10"
           >
             {partners.map((p) => (
               <li key={p.name} className="flex min-w-0 justify-center">
