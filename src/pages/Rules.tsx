@@ -81,7 +81,9 @@ export default function Rules() {
   }, []);
 
   return (
-    <div className="rules flex flex-col gap-5 px-6 py-20 pt-[calc(var(--spacing-nav)+1rem)] md:px-8 lg:px-16 lg:pt-[calc(var(--spacing-nav)+1.25rem)] xl:px-24 2xl:px-32">
+    // The 24px page edge (the nav's own) below lg; from lg the long-form
+    // steps the page has always had.
+    <div className="rules flex flex-col gap-5 px-6 py-20 pt-[calc(var(--spacing-nav)+1rem)] lg:px-16 lg:pt-[calc(var(--spacing-nav)+1.25rem)] xl:px-24 2xl:px-32">
       <p className="rules-source">
         The general rules for in-person competitions, from the{" "}
         <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">
