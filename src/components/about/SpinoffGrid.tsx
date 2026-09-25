@@ -9,6 +9,10 @@ type SpinoffGridProps = {
 const LINK =
   "underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
 
+/** A 2.75rem hit area on touch screens, taken back by the negative margin so
+ * the heading does not move (mobile pass, ABOUT-07). */
+const TAP = "coarse:-my-3 coarse:py-3";
+
 /** Logo box height when an entry has a manifest-cleared logo (none do yet). */
 const LOGO_H = 40;
 
@@ -45,7 +49,7 @@ function SpinoffCard({ spinoff }: { spinoff: Spinoff }) {
           the asset manifest yet, so every entry is a wordmark in the display
           face; a logo, once cleared, takes the same slot. */}
       <h3 className="mt-6 font-display text-display-s font-semibold text-text-strong">
-        <a href={url} target="_blank" rel="noopener noreferrer" className={`inline-block max-w-full ${LINK}`}>
+        <a href={url} target="_blank" rel="noopener noreferrer" className={`inline-block max-w-full ${TAP} ${LINK}`}>
           {logo ? (
             <img
               src={`${import.meta.env.BASE_URL}${logo.replace(/^\//, "")}`}
