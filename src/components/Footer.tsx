@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 
 const SPONSOR_MAILTO = "mailto:contact@roboracer.ai?subject=RoboRacer%20sponsorship";
-const LINK = "text-gray-400 hover:text-white text-sm transition-colors";
+const LINK = "text-text-on-ink-muted hover:text-text-on-ink text-sm transition-colors";
 
 export default function Footer() {
   const location = useLocation();
@@ -10,7 +10,7 @@ export default function Footer() {
   if (isAltFooter) return null;
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-ink-950 text-text-on-ink">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto responsive-padding py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -23,12 +23,12 @@ export default function Footer() {
               height={26}
               className="h-10 w-auto"
             />
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <p className="text-text-on-ink-muted text-sm leading-relaxed">
               Open-source autonomous racing since 2016.
             </p>
             <a 
               href="mailto:contact@roboracer.ai" 
-              className="text-gray-400 hover:text-white hover:underline underline-offset-2 text-sm transition-colors duration-200 inline-block"
+              className="text-text-on-ink-muted hover:text-text-on-ink hover:underline underline-offset-2 text-sm transition-colors duration-200 inline-block"
             >
               contact@roboracer.ai
             </a>
@@ -36,7 +36,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Quick links</h3>
+            <h3 className="font-semibold text-text-on-ink mb-4">Quick links</h3>
             <ul className="space-y-3">
               {/* Client-side links: a plain href reloaded the whole app. */}
               <li><Link to="/about" className={LINK}>About</Link></li>
@@ -49,7 +49,7 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Resources</h3>
+            <h3 className="font-semibold text-text-on-ink mb-4">Resources</h3>
             <ul className="space-y-3">
               <li><Link to="/learn" className={LINK}>Learn</Link></li>
               <li><Link to="/build" className={LINK}>Build</Link></li>
@@ -58,7 +58,7 @@ export default function Footer() {
                   href="https://autodrive-ecosystem.github.io/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                  className={LINK}
                 >
                   Simulator
                 </a>
@@ -78,12 +78,12 @@ export default function Footer() {
 
           {/* Community */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Community</h3>
+            <h3 className="font-semibold text-text-on-ink mb-4">Community</h3>
             <a
               href="https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-md transition-colors duration-200 text-sm font-medium mb-4"
+              className="inline-flex items-center gap-2 px-4 py-2 border border-ink-700 bg-ink-800 hover:bg-ink-700 rounded-md transition-colors duration-200 text-sm font-medium mb-4"
             >
               <img
                 src="/logos/slack-logo.svg"
@@ -94,7 +94,7 @@ export default function Footer() {
               />
               Join Slack
             </a>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <p className="text-text-on-ink-muted text-sm leading-relaxed">
               Ask questions and get race news first.
             </p>
             {/* Sponsors read the footer for a contact; same mailto as the
@@ -107,13 +107,13 @@ export default function Footer() {
       </div>
 
       {/* Copyright Bar */}
-      <div className="border-t border-gray-800">
+      <div className="border-t border-text-on-ink/15">
         <div className="max-w-7xl mx-auto responsive-padding py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm">
+            <p className="text-text-on-ink-muted text-sm">
               © 2026 RoboRacer Foundation. All rights reserved.
             </p>
-            <p className="text-gray-400 text-sm">
+            <p className="text-text-on-ink-muted text-sm">
               Creative Commons License
             </p>
           </div>
