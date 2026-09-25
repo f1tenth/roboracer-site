@@ -153,7 +153,7 @@ export default function Assembly() {
 
   return (
     // A workspace like /build: one window tall under the fixed nav, no footer.
-    <div className="flex h-[100svh] flex-col pt-[4.25rem] md:pt-[5.3125rem]">
+    <div className="flex h-[100svh] flex-col pt-nav">
       <div className="mx-auto flex min-h-0 w-full max-w-page flex-1 flex-col gap-4 px-6 pb-4 pt-4 md:landscape:flex-row md:landscape:gap-6 lg:flex-row lg:gap-8 lg:pb-6">
         {/* The panel comes first in the document (heading, then the list),
             and sits right of the view, or under it on a portrait screen.
@@ -248,9 +248,12 @@ export default function Assembly() {
                           href={entry.guide.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="relative inline-flex scroll-my-2 items-center gap-1 py-1 text-small font-semibold [@media(pointer:coarse)]:-my-2 [@media(pointer:coarse)]:py-3 text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
+                          className="relative block scroll-my-2 py-1 text-small font-semibold [@media(pointer:coarse)]:-my-2 [@media(pointer:coarse)]:py-3 text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
                         >
+                          {/* Text flow, not flex: a wrapped label keeps the
+                              arrow on its last word (no-break space). */}
                           Build guide: {entry.guide.label}
+                          {" "}
                           <ExternalMark />
                         </a>
                       )}
@@ -297,7 +300,8 @@ export default function Assembly() {
             <span className="hidden [@media(pointer:coarse)]:inline">Drag to turn · Pinch to zoom</span>
           </p>
 
-          <div className="absolute bottom-3 left-3 flex flex-wrap items-center gap-2">
+          {/* One row at 360: the buttons tighten below 390 (ASM-01). */}
+          <div className="absolute bottom-3 left-3 flex flex-wrap items-center gap-2 max-[24.375rem]:gap-1.5">
             <div
               role="group"
               aria-label="View"
@@ -311,7 +315,7 @@ export default function Assembly() {
                     type="button"
                     aria-pressed={pressed}
                     onClick={() => setExploded(view.value)}
-                    className={`min-h-11 rounded-btn px-3 text-small font-semibold transition-colors duration-[var(--duration-fast)] [@media(pointer:fine)]:min-h-8 ${
+                    className={`min-h-11 rounded-btn px-3 text-small font-semibold transition-colors duration-[var(--duration-fast)] max-[24.375rem]:px-2.5 [@media(pointer:fine)]:min-h-8 ${
                       pressed ? "bg-ink-950 text-text-on-ink" : "text-text-body hover:text-text-strong"
                     }`}
                   >
@@ -323,7 +327,7 @@ export default function Assembly() {
             <button
               type="button"
               onClick={resetView}
-              className="min-h-11 rounded-btn border border-ink-950/15 bg-paper-50 px-3 text-small font-semibold text-text-strong transition-colors duration-[var(--duration-fast)] hover:border-ink-950/40 [@media(pointer:fine)]:min-h-9"
+              className="min-h-11 rounded-btn border border-ink-950/15 bg-paper-50 px-3 text-small font-semibold text-text-strong transition-colors duration-[var(--duration-fast)] hover:border-ink-950/40 max-[24.375rem]:px-2.5 [@media(pointer:fine)]:min-h-9"
             >
               Reset view
             </button>
