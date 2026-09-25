@@ -196,8 +196,17 @@ export default function CommunityJoin({ className = "", index = "09", showYouTub
             </div>
           )}
           {/* The ICRA 2025 reel as its own full-screen highlight (Cedric, v5
-              round two: "separate, large, the whole screen"). */}
-          {showYouTube && youtube && <YouTubeFacade yt={youtube} full className="mt-10" />}
+              round two: "separate, large, the whole screen"). On a landscape
+              phone the full-width 16:9 band was 474 px tall under a 334 px
+              window, so on compact: its width follows the window's height and
+              it stays centred; a portrait phone never reaches the cap. */}
+          {showYouTube && youtube && (
+            <YouTubeFacade
+              yt={youtube}
+              full
+              className="mt-10 compact:w-[min(100vw,calc((100svh-var(--spacing-nav)-3rem)*16/9))]"
+            />
+          )}
         </div>
       )}
     </Section>
