@@ -1,5 +1,5 @@
 import { useRef, type ReactNode } from "react";
-import { gsap, useGSAP, MOTION_OK_QUERY, EASE_IN_OUT_QUART } from "../../lib/motion";
+import { gsap, useGSAP, useDesktop, DESKTOP_QUERY, MOTION_OK_QUERY, EASE_IN_OUT_QUART } from "../../lib/motion";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 
 export type ChapterState = {
@@ -21,7 +21,8 @@ type PinnedChapterProps = {
  * Pin pattern via position:sticky (no layout hijack): the wrapper provides
  * the scroll distance, the sticky viewport crossfades the states, scrubbed
  * by ScrollTrigger. Reduced motion / no JS: states render stacked vertically
- * with captions, fully readable.
+ * with captions, fully readable. Below `desktop:` (phones, short windows) the
+ * same stacked layout: nothing pins there (docs/mobile/PLAN.md R-1).
  */
 export default function PinnedChapter({
   eyebrow,
@@ -32,13 +33,15 @@ export default function PinnedChapter({
 }: PinnedChapterProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const reduced = usePrefersReducedMotion();
+  const desktop = useDesktop();
+  const stacked = reduced || !desktop;
 
   useGSAP(
     () => {
       const wrap = wrapRef.current;
-      if (!wrap || states.length < 2) return;
+      if (!wrap || stacked || states.length < 2) return;
       const mm = gsap.matchMedia();
-      mm.add(MOTION_OK_QUERY, () => {
+      mm.add(`${MOTION_OK_QUERY} and ${DESKTOP_QUERY}`, () => {
         const panels = gsap.utils.toArray<HTMLElement>("[data-chapter-state]", wrap);
         const captions = gsap.utils.toArray<HTMLElement>("[data-chapter-caption]", wrap);
         const tl = gsap.timeline({
@@ -55,10 +58,10 @@ export default function PinnedChapter({
         });
       });
     },
-    { scope: wrapRef, dependencies: [states.length] },
+    { scope: wrapRef, dependencies: [states.length, stacked], revertOnUpdate: true },
   );
 
-  if (reduced) {
+  if (stacked) {
     return (
       <div id={id}>
         <ChapterHeader eyebrow={eyebrow} title={title} />
@@ -78,7 +81,7 @@ export default function PinnedChapter({
     <div id={id} ref={wrapRef} style={{ minHeight: `${heightVh}vh` }}>
       <div className="sticky top-0 flex min-h-svh flex-col justify-center py-12">
         <ChapterHeader eyebrow={eyebrow} title={title} />
-        <div className="mt-10 grid items-center gap-10 md:grid-cols-[1fr_18rem]">
+        <div className="mt-10 grid items-center gap-10 desktop:grid-cols-[1fr_18rem]">
           <div className="relative min-h-[50svh]">
             {states.map((s, i) => (
               <div
