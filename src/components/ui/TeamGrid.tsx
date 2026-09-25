@@ -21,24 +21,29 @@ function initials(name: string): string {
  * the team logo (object-contain), else mono initials. Every entry renders (Cedric, 2026-08-21: nothing hidden on
  * localhost); entries not yet "published" carry a mono "unverified" tag.
  * Results and TODO-marked institutions render as data, in mono. 10 teams =
- * two clean rows of five on desktop. Below sm each team is one row (a 5rem
- * photo left, name and result right) so ten teams are not ten screens of
- * square photos; from sm the grid runs 3, 4, then 5 across, with 4/3 photos
- * until lg (mobile pass, LANDING-09).
+ * two clean rows of five on desktop.
+ *
+ * On compact: below lg (a phone in either orientation) each team is one row,
+ * a 5rem photo left, name and result right, so ten teams are not ten screens
+ * of square photos: one column on a portrait phone, two from sm. On a
+ * landscape phone the stacked cards were 414 px tall under a 334 px window
+ * (LANDING-09); a row fits. Everywhere else (desktop:, or lg and up) the
+ * cards stack their photo over the text, 4 across with 4/3 photos until lg,
+ * then 5 with square ones.
  */
 export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
   const ink = on === "ink";
   if (teams.length === 0) return null;
   return (
-    <ul className="grid overflow-hidden rounded-card border border-ink-950/10 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+    <ul className="grid overflow-hidden rounded-card border border-ink-950/10 compact:sm:max-lg:grid-cols-2 desktop:max-lg:grid-cols-4 lg:grid-cols-5">
       {teams.map((team) => {
         const best = team.highlights?.[0];
         const institution = team.institution?.startsWith("TODO(content)") ? undefined : team.institution;
         return (
           <li key={team.name} className={`min-w-0 -mt-px -ml-px border-t border-l border-ink-950/10 ${ink ? "bg-ink-900" : "bg-paper-50"}`}>
-            <article className="flex h-full min-w-0 flex-col max-sm:flex-row max-sm:gap-4 max-sm:p-4">
+            <article className="flex h-full min-w-0 flex-col compact:max-lg:flex-row compact:max-lg:gap-4 compact:max-lg:p-4">
               <div
-                className={`relative aspect-square max-sm:w-20 max-sm:shrink-0 max-sm:self-start sm:max-lg:aspect-[4/3] ${ink ? "bg-ink-800" : "bg-paper-200"}`}
+                className={`relative aspect-square compact:max-lg:w-20 compact:max-lg:shrink-0 compact:max-lg:self-start desktop:max-lg:aspect-[4/3] ${ink ? "bg-ink-800" : "bg-paper-200"}`}
               >
                 {team.photo ? (
                   <img
@@ -58,7 +63,7 @@ export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
                     height={320}
                     loading="lazy"
                     decoding="async"
-                    className="absolute inset-0 h-full w-full object-contain p-3 sm:p-6"
+                    className="absolute inset-0 h-full w-full object-contain p-6 compact:max-lg:p-3"
                   />
                 ) : (
                   <span
@@ -69,7 +74,7 @@ export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
                   </span>
                 )}
               </div>
-              <div className="flex min-w-0 grow flex-col gap-1.5 sm:p-5">
+              <div className="flex min-w-0 grow flex-col gap-1.5 p-5 compact:max-lg:p-0">
                 <h3 className={`font-display text-body font-semibold ${ink ? "text-text-on-ink" : "text-text-strong"}`}>
                   {team.name}
                 </h3>

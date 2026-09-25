@@ -422,9 +422,13 @@ export default function Landing() {
           <div className="mx-auto max-w-page px-6">
             <SectionHeader index="06" id="next-race" title="Next race" subtitle="Come to our next race" />
             {/* Splits at lg, not md: at 768 the panel's 5 columns wrapped
-                "Register your team" (mobile pass, LANDING-24a). */}
+                "Register your team" (mobile pass, LANDING-24a). Stacked on a
+                landscape phone the full-width clip was 451 px tall under a
+                334 px window, so on compact: its width follows the window's
+                height (the /race hero's cap) and it sits centred; a portrait
+                phone never reaches the cap. */}
             <div className="grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10">
-              <figure className="lg:col-span-7">
+              <figure className="lg:col-span-7 compact:mx-auto compact:w-full compact:max-w-[min(100%,calc((100svh-var(--spacing-nav)-3rem)*1272/720))]">
                 <div
                   className="overflow-hidden rounded-media border border-ink-950/10 bg-paper-100"
                   style={{ aspectRatio: `${RACE_HERO.width} / ${RACE_HERO.height}` }}
