@@ -182,7 +182,9 @@
     },
     {
       "name": "Ayagoz Smagulova",
-      "status": "verify"
+      "project_role": "Design, roboracer.ai",
+      "source": "CLAUDE.md, 2026-08 (Cedric: Ayagoz Smagulova co-owns the site's design). The content skill lists her in the active roster with no role yet.",
+      "status": "sourced"
     },
     {
       "name": "Johnny Tian",

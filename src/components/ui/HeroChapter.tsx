@@ -450,6 +450,13 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
         if (disposed) return;
         v.pause();
         v.style.opacity = "0";
+        // A clip left before it finished loading (the stall watch below cuts
+        // one short) lets go of its download instead of competing with the
+        // clip now on screen.
+        if (!fullyBuffered(v)) {
+          v.removeAttribute("src");
+          v.load();
+        }
         clip = next;
         cur = 1 - cur;
         activeRef.current = [n];
@@ -518,7 +525,12 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     };
     // Stall watch: a clip that waits for data over STALL_MS switches the rest
     // of the session to the 960 encodes, including the clip already queued
-    // next if it has not started. Any sign of flow (or a pause) disarms it.
+    // next if it has not started. The clip that stalled moves on at once: it
+    // used to play its desktop file to the end, about 13.6 s frozen over an
+    // 11 s clip at 5 Mbit/s where the browser reports no connection speed
+    // (Safari, Firefox; final QA step 6). The next clip, in its 960 encode,
+    // crossfades in as soon as it can play; until then the current frame
+    // holds, as it did before. Any sign of flow (or a pause) disarms it.
     const stallTimers = new Map<HTMLVideoElement, number>();
     const onWaiting = (e: Event) => {
       const el = e.currentTarget as HTMLVideoElement;
@@ -530,6 +542,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
           if (disposed || el.paused) return;
           markLinkStalled();
           reselectQueued();
+          if (el === els[cur] && !fading) advance();
         }, STALL_MS),
       );
     };

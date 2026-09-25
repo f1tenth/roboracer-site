@@ -285,6 +285,9 @@ export type JoinPhoto = {
   height: number;
   alt: string;
   caption: string;
+  /** The caption is not confirmed yet: the shared verify tag follows it
+   * (the status word never goes in the caption text). */
+  caption_verify?: boolean;
   credit?: string;
 };
 
@@ -352,7 +355,6 @@ export type Community = {
   members: number;
   members_display: string;
   timezones: number;
-  continents: number;
   updated: string;
   source: string;
   /** Written by the media curator (landing v4 section 9). */

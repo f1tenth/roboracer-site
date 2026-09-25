@@ -177,6 +177,50 @@ type CarCalloutsProps = {
  */
 /** Room a label keeps from the canvas edge, px. */
 const LABEL_EDGE = 12;
+/** Two labels closer than this sideways count as sharing a column, px. */
+const LABEL_SIDE_GAP = 8;
+/** Slack on the stacking gap, px: drei's Html places a label from the
+ * anchor's previous frame, so on the turntable a pair drifts about a pixel
+ * against the positions it was stacked from. */
+const LABEL_STACK_SLACK = 2;
+
+type LabelBox = { i: number; above: boolean; x0: number; x1: number; y: number; h: number };
+
+/**
+ * Label collision avoidance (final QA: at 1536, 1366 and 768 "Power board"
+ * printed over "Jetson Orin" in the race-ready state, and at 768 "VESC" sat
+ * on "Traxxas Slash" exploded). Labels that share a column are stacked with
+ * at least one label height of air between them, each moving away from its
+ * anchor (an "above" label up, a "below" label down) by lengthening its
+ * leader, never across it. Below labels are placed first, nearest the car
+ * first, then above labels the same way, so an above label also clears the
+ * below labels. Every label takes part whether or not it is open yet, so a
+ * label fading in never pushes one that is already up. Returns each label's
+ * extra leader length, px.
+ */
+function stackLabels(boxes: LabelBox[]): number[] {
+  const extra = boxes.map(() => 0);
+  const placed: LabelBox[] = [];
+  const below = boxes.filter((b) => !b.above).sort((a, b) => a.y - b.y);
+  const above = boxes.filter((b) => b.above).sort((a, b) => b.y - a.y);
+  for (const box of [...below, ...above]) {
+    let y = box.y;
+    for (let guard = 0; guard <= placed.length; guard += 1) {
+      const hit = placed.find(
+        (p) =>
+          p.x0 < box.x1 + LABEL_SIDE_GAP &&
+          box.x0 < p.x1 + LABEL_SIDE_GAP &&
+          Math.abs(p.y - y) < (p.h + box.h) / 2 + Math.max(p.h, box.h) + LABEL_STACK_SLACK,
+      );
+      if (!hit) break;
+      const clear = (hit.h + box.h) / 2 + Math.max(hit.h, box.h) + LABEL_STACK_SLACK;
+      y = box.above ? hit.y - clear : hit.y + clear;
+    }
+    extra[box.i] = Math.abs(y - box.y);
+    placed.push({ ...box, y });
+  }
+  return extra;
+}
 
 function CarCallouts({ shown, animate, portal }: CarCalloutsProps) {
   const scene = useThree((s) => s.scene);
@@ -188,6 +232,10 @@ function CarCallouts({ shown, animate, portal }: CarCalloutsProps) {
   const labelWidths = useRef<number[]>([]);
   /** Max width applied to each label's text, 0 for none (one line). */
   const labelWraps = useRef<number[]>([]);
+  /** One-line (or wrapped) text height per label, px. */
+  const labelHeights = useRef<number[]>([]);
+  /** Extra leader length currently applied per label, px. */
+  const labelExtra = useRef<number[]>([]);
   const partObjects = useRef(new Map<string, Object3D>());
   const world = useMemo(() => new Vector3(), []);
   const ndc = useMemo(() => new Vector3(), []);
@@ -195,6 +243,7 @@ function CarCallouts({ shown, animate, portal }: CarCalloutsProps) {
 
   useFrame(() => {
     let moved = false;
+    const boxes: LabelBox[] = [];
     RACECAR_CALLOUTS.forEach((callout, i) => {
       const anchor = anchors.current[i];
       const part = partById.get(callout.part);
@@ -231,11 +280,13 @@ function CarCallouts({ shown, animate, portal }: CarCalloutsProps) {
         }
         ndc.copy(world).project(camera);
         const screenX = ((ndc.x + 1) / 2) * size.width;
+        const screenY = ((1 - ndc.y) / 2) * size.height;
         const roomRight = size.width - screenX - LABEL_EDGE;
         const roomLeft = screenX - LABEL_EDGE;
         const fitsRight = width <= roomRight;
         const fitsLeft = width <= roomLeft;
-        label.dataset.flip = !fitsRight && (fitsLeft || roomLeft > roomRight) ? "true" : "false";
+        const flip = !fitsRight && (fitsLeft || roomLeft > roomRight);
+        label.dataset.flip = flip ? "true" : "false";
         const wrap = fitsRight || fitsLeft ? 0 : Math.max(0, Math.floor(Math.max(roomLeft, roomRight)));
         if ((labelWraps.current[i] ?? 0) !== wrap) {
           labelWraps.current[i] = wrap;
@@ -245,8 +296,40 @@ function CarCallouts({ shown, animate, portal }: CarCalloutsProps) {
           text.style.width = wrap ? "max-content" : "";
           text.style.maxWidth = wrap ? `${wrap}px` : "";
           text.style.whiteSpace = wrap ? "normal" : "";
+          labelHeights.current[i] = 0;
         }
+        // Measured once per wrap state, like the width.
+        let height = labelHeights.current[i] ?? 0;
+        if (!height) {
+          // Fractional (offsetHeight rounds 14.4 down to 14).
+          height = text.getBoundingClientRect().height;
+          labelHeights.current[i] = height;
+        }
+        const span = wrap || width;
+        const above = callout.side === "above";
+        boxes.push({
+          i,
+          above,
+          x0: flip ? screenX - span : screenX,
+          x1: flip ? screenX : screenX + span,
+          y: above ? screenY - callout.reach : screenY + callout.reach,
+          h: height,
+        });
       }
+    });
+    // Stack the labels that would print over each other, then lengthen those
+    // leaders; a label is only written when its offset changes.
+    const extra = stackLabels(boxes);
+    boxes.forEach(({ i }) => {
+      const add = Math.ceil(extra[i] ?? 0);
+      if ((labelExtra.current[i] ?? 0) === add) return;
+      labelExtra.current[i] = add;
+      const label = labels.current[i];
+      const reach = RACECAR_CALLOUTS[i].reach + add;
+      const leader = label?.querySelector<HTMLElement>("[data-callout-leader]");
+      const text = label?.querySelector<HTMLElement>("[data-callout-text]");
+      if (leader) leader.style.height = `${reach}px`;
+      if (text) text.style[RACECAR_CALLOUTS[i].side === "above" ? "bottom" : "top"] = `${reach}px`;
     });
     // Demand-mode canvases (reduced motion) need one more frame for the
     // labels to settle on their anchors.
@@ -283,6 +366,7 @@ function CarCallouts({ shown, animate, portal }: CarCalloutsProps) {
               />
               <span
                 aria-hidden="true"
+                data-callout-leader=""
                 className={`absolute left-0 w-px bg-text-on-ink/35 ${
                   callout.side === "above" ? "bottom-0" : "top-0"
                 }`}

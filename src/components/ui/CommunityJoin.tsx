@@ -9,6 +9,7 @@ import SocialButton from "./SocialButton";
 import MediaFrame from "./MediaFrame";
 import PauseToggle from "./PauseToggle";
 import { useMediaHold } from "../../lib/media";
+import VerifyTag from "../about/VerifyTag";
 
 // Links from the content skill (Slack invite confirmed by Cedric, 2026-08-20;
 // GitHub org). LinkedIn: the content skill still says VERIFY; the page at this
@@ -90,7 +91,6 @@ export default function CommunityJoin({ className = "", index = "09", showYouTub
               <dl className="flex flex-wrap gap-x-10 gap-y-6 border-y border-ink-950/10 py-6">
                 <Stat value={community.members_display} label="members" />
                 <Stat value={community.timezones.toLocaleString("en-US")} label="time zones" />
-                <Stat value={community.continents.toLocaleString("en-US")} label="continents" />
               </dl>
               <p className="mt-3 font-mono text-small text-text-muted">updated {community.updated}</p>
             </>
@@ -131,8 +131,9 @@ export default function CommunityJoin({ className = "", index = "09", showYouTub
               style={{ aspectRatio: "4 / 3" }}
             />
           )}
-          <figcaption className="mt-3 font-mono text-small text-text-muted">
-            {photo ? photo.caption : "photo pending"}
+          <figcaption className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-small text-text-muted">
+            <span>{photo ? photo.caption : "photo pending"}</span>
+            {photo?.caption_verify && <VerifyTag />}
           </figcaption>
         </figure>
       </div>

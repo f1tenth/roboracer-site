@@ -52,12 +52,14 @@ const CALLOUT_COUNT = RACECAR_CALLOUTS.length;
 const calloutsShownAt = (progress: number) =>
   progress <= 0.005 ? 0 : Math.min(CALLOUT_COUNT, Math.ceil((progress / EXPLODED_AT) * CALLOUT_COUNT));
 
-// Studio photography (Cedric is producing it; files do not exist yet - the
-// layers hide themselves onError until the assets land):
+// Studio photography (Cedric is producing it):
 // - full shot overlays the canvas at rest and crossfades out as the pin starts
 // - transparent cutout serves the reduced-motion / weak-device static layout
-const CAR_STUDIO_PHOTO = "/media/hero/car-studio.webp";
-const CAR_STUDIO_CUTOUT = "/media/hero/car-studio-cutout.webp";
+// Neither file exists yet, so both are null: the chapter goes straight to its
+// fallback (the 3D render) without requesting a file that 404s on every
+// landing load (final QA). Set the path once the file is in public/media/hero/.
+const CAR_STUDIO_PHOTO: string | null = null;
+const CAR_STUDIO_CUTOUT: string | null = null;
 
 export type CarPhoto = {
   src: string;
@@ -212,14 +214,16 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
   const [sceneReady, setSceneReady] = useState(false);
   const onSceneReady = useCallback(() => setSceneReady(true), []);
   const calloutsShownRef = useRef(0);
-  const [photoStatus, setPhotoStatus] = useState<PhotoStatus>("loading");
   const weakDevice =
     typeof navigator !== "undefined" && (navigator.hardwareConcurrency ?? 8) < 4;
   const staticLayout = reduced || weakDevice;
+  // No file for this layout counts as a failed load: the fallback, at once.
+  const studioSrc = staticLayout ? CAR_STUDIO_CUTOUT : CAR_STUDIO_PHOTO;
+  const [photoStatus, setPhotoStatus] = useState<PhotoStatus>(studioSrc ? "loading" : "failed");
 
   // The static and pinned layouts load different files; forget the previous
   // load result when the layout switches (e.g. reduced-motion toggled live).
-  useEffect(() => setPhotoStatus("loading"), [staticLayout]);
+  useEffect(() => setPhotoStatus(studioSrc ? "loading" : "failed"), [studioSrc]);
 
   const holdMedia = useMediaHold();
   useEffect(() => {
@@ -397,10 +401,10 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
                   />
                 </Suspense>
               )}
-              {photoStatus !== "failed" && (
+              {studioSrc && photoStatus !== "failed" && (
                 // Nominal dimensions until the asset ships (TODO(content)).
                 <img
-                  src={CAR_STUDIO_CUTOUT}
+                  src={studioSrc}
                   alt="The assembled RoboRacer car, studio photo"
                   width={1920}
                   height={1280}
@@ -468,11 +472,11 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
                 >
                   {sceneReady ? "" : "Loading the 3D model…"}
                 </p>
-                {photoStatus !== "failed" && (
+                {studioSrc && photoStatus !== "failed" && (
                   <div ref={photoLayerRef} className="pointer-events-none absolute inset-0">
                     {/* Nominal dimensions until the asset ships (TODO(content)). */}
                     <img
-                      src={CAR_STUDIO_PHOTO}
+                      src={studioSrc}
                       alt="The assembled RoboRacer car, studio photo"
                       width={1920}
                       height={1280}

@@ -78,18 +78,21 @@ export default function NewsCard({ item, titleAs = "h3" }: NewsCardProps) {
   const Title = titleAs;
   const image = item.image;
   const tag = item.event ? eventLabel(item.event) : null;
+  // A source that no longer answers is linked through its Wayback capture.
+  const href = item.archive ?? item.link;
 
   const heading = (
     <Title
       className={`font-display font-semibold leading-snug text-text-strong ${image ? "" : "text-lead"}`}
     >
       <a
-        href={item.link}
+        href={href}
         target="_blank"
         rel="noopener noreferrer"
         className={`${TITLE_LINK} ${TITLE_TAP} group-hover:underline`}
       >
         <ArrowTitle title={item.title} />
+        {item.archive && <span className="sr-only"> (archived copy)</span>}
       </a>
     </Title>
   );
@@ -122,7 +125,7 @@ export default function NewsCard({ item, titleAs = "h3" }: NewsCardProps) {
             {/* Same target as the headline, hidden from assistive tech so the
                 card announces one link, not two. */}
             <a
-              href={item.link}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
               tabIndex={-1}

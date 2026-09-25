@@ -285,6 +285,29 @@ Quanser returns as soon as its origin line says how it connects to RoboRacer
    University of Pennsylvania. Confirm, and teams.json can carry it with you as
    the source.
 
+### From the final QA (added 2026-09-25, branch `revamp/p2-round4`)
+
+Nothing below changed the site; each needs your answer first.
+
+1. **UNICORN Racing or UNICORN_Racing?** The team card (`public/data/teams.json`)
+   says "UNICORN_Racing"; the /news post and the community card say "UNICORN
+   Racing". Which does the team use? One spelling goes everywhere.
+2. **Footer licence line.** The footer reads "© 2026 RoboRacer Foundation. All
+   rights reserved." next to a plain "Creative Commons License" line that names
+   no licence and links nowhere. Which licence (for example CC BY 4.0), and for
+   what (site text, photos, both)? Or drop one of the two lines.
+3. **Qualification video date.** /race shows "qualification video due
+   September 9, 2026" (`upcoming_events.json`); the content skill says the video
+   demo is due Sep 12; the live race site says Sep 18. Which is right?
+4. **ICRA 2026 size.** The site quotes the Foundation's LinkedIn post: "about
+   200 people and 30 teams from more than 12 countries" (/news, community card,
+   UPenn card "out of about 30 teams"). The skill says 180+ competitors and 35
+   registered teams, both VERIFY; LAMARRacing's post says 35 teams. Which
+   numbers go on the site?
+5. **Yon Vanommeslaeghe's title.** /about shows "Postdoc, University of
+   Pennsylvania (xLAB)" from xlab.upenn.edu/members; the content skill says
+   "Visiting Researcher, UPenn, co-organizer". Which one?
+
 ## Questions for Rahul
 
 1. Can you reconfirm the "90+ universities" and "20+ countries" stats on the landing page, or give updated numbers?

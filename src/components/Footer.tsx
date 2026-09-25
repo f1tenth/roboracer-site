@@ -23,9 +23,11 @@ export default function Footer() {
 
   if (isAltFooter) return null;
 
-  // Below lg the footer sits on the 24px page edge, the nav's and every
-  // section's above it; from lg it keeps its desktop container.
-  const edge = "mx-auto max-w-7xl px-6 lg:px-16 xl:px-24 2xl:px-32";
+  // The shared page edge (Section width="page", HANDOFF section 4): the
+  // 1800px container with the 24px gutter, so the footer starts where every
+  // section above it starts. Its old 80rem box with stepped padding began at
+  // x=358 at 1536 against the sections' 66 (final QA).
+  const edge = "mx-auto max-w-page px-6";
 
   return (
     <footer className="bg-ink-950 text-text-on-ink">
@@ -112,7 +114,7 @@ export default function Footer() {
                 height={20}
                 className="h-5 w-5"
               />
-              Join Slack
+              Join the Slack
             </a>
             <p className="text-sm leading-relaxed text-text-on-ink-muted">
               Ask questions and get race news first.

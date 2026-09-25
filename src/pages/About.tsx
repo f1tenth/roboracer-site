@@ -264,7 +264,7 @@ export default function About() {
           id="about-platform"
           title="The platform"
           subtitle="Build, Learn, Race, Research"
-          lead="The four parts of RoboRacer. Each has its own page."
+          lead="Each has its own page."
         />
         <PlatformList rows={platform} />
       </Section>
@@ -308,7 +308,7 @@ export default function About() {
               <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
                 f1tenth GitHub organization
               </a>
-              . The car, the simulator, the ROS stack and the course labs are all built in the open.
+              , where the car, the simulator, the ROS stack and the labs are built.
             </p>
             <div className="mt-8">
               <p className="font-mono text-small text-text-muted">
