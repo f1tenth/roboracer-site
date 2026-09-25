@@ -55,13 +55,14 @@ lead is now 44ch wide: normal-load CLS on /race 0.0006 / 0.0007 / 0.0015 at
   the site root, and its page title read (for example "Roboracer VTC2026-Fall",
   "F1TENTH ICRA 2024"). The latest Korea 2024 capture was a redirect page, so
   that entry keeps its earlier capture.
-- Final re-check, 2026-09-25: the 35 live and archive links outside the four
-  below answer 200. The four newest captures (ICRA 2025, IV 2025, CDC 2025,
-  VTC 2026) and then every web.archive.org URL stopped connecting from this
-  machine after the CDX queries (connection refused, including the captures
-  that were already on the page before this branch), which is the archive
-  rate-limiting this host. All four answered 200 with the right page title
-  earlier the same day. Worth one click each in a browser.
+- Final re-check, 2026-09-25: every live link on the timeline answers 200.
+  web.archive.org rate-limits this machine after a burst of requests
+  (connection refused, the long-standing captures included), so the captures
+  were checked one by one: 19 of 24 answered 200 before the refusals came
+  back; the other five (CDC 2024, ICRA 2025, IV 2025, CDC 2025, VTC 2026) had
+  answered 200 with the right page title earlier the same day, and VTC 2026
+  answered 200 again a minute before the last pass. Worth one click each in a
+  browser.
 
 ### Left alone, as decided
 
