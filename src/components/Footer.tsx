@@ -114,7 +114,7 @@ export default function Footer() {
                 height={20}
                 className="h-5 w-5"
               />
-              Join Slack
+              Join the Slack
             </a>
             <p className="text-sm leading-relaxed text-text-on-ink-muted">
               Ask questions and get race news first.
