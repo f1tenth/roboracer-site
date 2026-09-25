@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { loadPublications, tagLabelMap, type Publication, type PublicationsFile } from "../lib/data";
 import { fold, scholarSearchUrl, scholarTagUrl } from "../lib/publications";
+import { DESKTOP_QUERY } from "../lib/motion";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
@@ -16,6 +17,38 @@ const SUBMIT_MAILTO = "mailto:contact@roboracer.ai?subject=RoboRacer%20publicati
 // Site-wide link contract (landing-v2): ink text, hairline underline, violet on hover.
 const LINK =
   "underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2";
+
+/** True on a phone in either orientation (the `compact:` variant): the one
+ * place the list folds its earlier years away. */
+function useCompact(): boolean {
+  return useSyncExternalStore(
+    (onChange) => {
+      const mql = window.matchMedia(DESKTOP_QUERY);
+      mql.addEventListener("change", onChange);
+      return () => mql.removeEventListener("change", onChange);
+    },
+    () => !window.matchMedia(DESKTOP_QUERY).matches,
+    () => false,
+  );
+}
+
+function YearGroup({ year, items, labels }: { year: number; items: Publication[]; labels: Record<string, string> }) {
+  return (
+    <section aria-labelledby={`year-${year}`} className="py-8">
+      <h3
+        id={`year-${year}`}
+        className="mb-4 font-display text-display-m font-semibold tabular-nums text-text-strong"
+      >
+        {year}
+      </h3>
+      <ul className="divide-y divide-ink-950/10 border-t border-ink-950/10">
+        {items.map((p) => (
+          <PaperRow key={p.id} publication={p} tagLabels={labels} />
+        ))}
+      </ul>
+    </section>
+  );
+}
 
 function matches(p: Publication, needle: string, labels: Record<string, string>): boolean {
   if (!needle) return true;
@@ -36,6 +69,8 @@ export default function Research() {
   const [failed, setFailed] = useState(false);
   const [tag, setTag] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const [earlierOpen, setEarlierOpen] = useState(false);
+  const compact = useCompact();
 
   useEffect(() => {
     loadPublications().then(setPubs).catch(() => setFailed(true));
@@ -59,10 +94,23 @@ export default function Research() {
   const scholarUrl = pubs?.scholar_query_url ?? SCHOLAR_URL;
   const trimmed = query.trim();
 
+  // On a phone the list was 39,000px of rows (47 screens at 390), so every
+  // year before the newest one folds into one native <details>, the race
+  // timeline's pattern: it opens without React, from the keyboard, and to
+  // find-in-page. A topic or a search shows every year open, so no match is
+  // ever behind the fold. Desktop and tablets keep every year open.
+  const newestYear = published.reduce((y, p) => Math.max(y, p.year), 0);
+  const folded = compact && !tag && !needle;
+  const recent = folded ? byYear.filter(([year]) => year >= newestYear) : byYear;
+  const earlier = folded ? byYear.filter(([year]) => year < newestYear) : [];
+  const earlierCount = earlier.reduce((n, [, items]) => n + items.length, 0);
+
   return (
-    <div className="pt-[4.25rem] md:pt-[5.3125rem]">
-      {/* Header: the Scholar message, one secondary CTA, a mono data ledger */}
-      <Section width="page" aria-labelledby="research-title">
+    <div className="pt-nav">
+      {/* Header: the Scholar message, one secondary CTA, a mono data ledger.
+          On a phone it starts a rem under the bar, like the About and Race
+          heroes. */}
+      <Section width="page" className="compact:pt-4" aria-labelledby="research-title">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
             <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-muted">
@@ -172,14 +220,14 @@ export default function Research() {
                   href={scholarTagUrl(selectedTag)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`text-text-strong ${LINK}`}
+                  className={`text-text-strong ${LINK} coarse:-my-3 coarse:inline-flex coarse:min-h-11 coarse:items-center`}
                 >
                   Scholar: {selectedTag.label} ↗
                 </a>
               )}
             </div>
             {featured.length > 0 ? (
-              <Reveal key={tag ?? "all"} stagger className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <Reveal key={tag ?? "all"} stagger className="mt-6 grid gap-6 compact:gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {featured.map((p) => (
                   <PaperCard key={p.id} publication={p} tagLabels={labels} />
                 ))}
@@ -244,21 +292,39 @@ export default function Research() {
                     figure a sixth of the page in from the left and kept the
                     pictures small (Cedric, 2026-08-23). It is a heading now,
                     and the rows run the full width. */}
-                {byYear.map(([year, items]) => (
-                  <section key={year} aria-labelledby={`year-${year}`} className="py-8">
-                    <h3
-                      id={`year-${year}`}
-                      className="mb-4 font-display text-display-m font-semibold tabular-nums text-text-strong"
-                    >
-                      {year}
-                    </h3>
-                    <ul className="divide-y divide-ink-950/10 border-t border-ink-950/10">
-                      {items.map((p) => (
-                        <PaperRow key={p.id} publication={p} tagLabels={labels} />
-                      ))}
-                    </ul>
-                  </section>
+                {recent.map(([year, items]) => (
+                  <YearGroup key={year} year={year} items={items} labels={labels} />
                 ))}
+                {earlier.length > 0 && (
+                  <details
+                    open={earlierOpen}
+                    onToggle={(e) => setEarlierOpen(e.currentTarget.open)}
+                    className="group"
+                  >
+                    {/* Built from the data: the folded years and how many
+                        papers they hold, in the year headings' own type. */}
+                    <summary className="flex cursor-pointer list-none flex-wrap items-baseline gap-x-3 gap-y-1 py-8 text-text-strong transition-colors hover:text-rr-violet [&::-webkit-details-marker]:hidden">
+                      <span
+                        aria-hidden="true"
+                        className="inline-block font-display text-display-m leading-none transition-transform duration-[var(--duration-fast)] group-open:rotate-90 motion-reduce:transition-none"
+                      >
+                        &#8250;
+                      </span>
+                      <span className="font-display text-display-m font-semibold tabular-nums">
+                        {earlier[earlier.length - 1][0]} to {earlier[0][0]}
+                      </span>
+                      <span className="sr-only">,</span>
+                      <span className="font-mono text-small text-text-muted">
+                        {earlierCount} {earlierCount === 1 ? "paper" : "papers"}
+                      </span>
+                    </summary>
+                    <div className="divide-y divide-ink-950/10 border-t border-ink-950/10">
+                      {earlier.map(([year, items]) => (
+                        <YearGroup key={year} year={year} items={items} labels={labels} />
+                      ))}
+                    </div>
+                  </details>
+                )}
               </div>
             )}
           </>
@@ -267,11 +333,12 @@ export default function Research() {
 
       {/* Submit: the one solid CTA on the page */}
       <Section width="page" rule aria-labelledby="submit">
-        <div className="grid gap-10 md:grid-cols-12 md:items-end">
+        <div className="grid gap-6 desktop:gap-10 md:grid-cols-12 md:items-end">
           <div className="md:col-span-7">
             <SectionHeader
               eyebrow="Contribute"
               id="submit"
+              className="max-md:mb-2"
               title="Submit your paper"
               lead="Send us the DOI or arXiv link for your RoboRacer paper. We'll add it to the list."
             />
