@@ -28,7 +28,8 @@ const STREAM_HEADROOM = 1.3;
  * browser's downlink estimate is under the clip's bitrate plus headroom.
  * Measured 2026-09-24 (docs/media/HERO_PERF.md): at 5 Mbit/s the 1920 race
  * clips (5.7 to 7.3 Mbit/s) froze the hero for 17 s of its first 55. With no
- * signal (Safari, Firefox) the answer is yes and the width rule decides.
+ * signal (Safari, Firefox) the answer is yes and the desktop rule decides
+ * (DESKTOP_QUERY: a phone in either orientation always gets the 960).
  */
 export function linkCanStream(mbps: number): boolean {
   if (typeof navigator === "undefined") return true;
