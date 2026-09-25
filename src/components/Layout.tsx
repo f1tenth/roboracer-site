@@ -20,7 +20,7 @@ const TITLES: Record<string, string> = {
   "/research": "Research - RoboRacer",
   "/rules": "Competition rules - RoboRacer",
   "/chat": "Chat - RoboRacer",
-  "/assembly": "Car assembly - RoboRacer",
+  "/assembly": "The car, part by part - RoboRacer",
   "/styleguide": "Style guide - RoboRacer",
 };
 
@@ -32,7 +32,10 @@ export default function Layout() {
     currentPath === "/build" ||
     currentPath === "/chat" ||
     currentPath === "/assembly";
-  const isHiddenRoute = currentPath === "/chat" || currentPath === "/assembly";
+  const isHiddenRoute = currentPath === "/chat";
+  // /assembly keeps the site nav (it used to cover it with its own bar) and,
+  // being one window tall like /build, has no footer to reach.
+  const hideFooter = isHiddenRoute || currentPath === "/assembly";
 
   // A client-side navigation keeps the window's scroll position and the
   // ScrollTrigger starts measured against the page that just left. Put the
@@ -56,7 +59,7 @@ export default function Layout() {
           <Outlet />
         </RouteBoundary>
       </main>
-      {!isHiddenRoute && <Footer />}
+      {!hideFooter && <Footer />}
     </div>
   );
 }

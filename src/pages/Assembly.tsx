@@ -1,339 +1,331 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { useProgress } from "@react-three/drei";
-import type { Group } from "three";
 import {
-  RacecarAssemblyCanvas,
-} from "../components/RacecarAssembly";
+  Component,
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type ReactNode,
+} from "react";
+import Button from "../components/ui/Button";
 import {
-  RACECAR_PARTS,
+  BUILD_GUIDE_URL,
+  CAR_PARTS,
+  WIRING_GUIDE_URL,
+  type CarPartEntry,
   type RacecarPartId,
 } from "../components/racecarAssemblyData";
-import "./assembly.css";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import { lazyWithRetry } from "../lib/lazyWithRetry";
 
-type IconProps = { children: ReactNode };
+// three.js, R3F and the part meshes load in their own chunk, so the heading
+// and the part list paint first (design system: three.js never in the
+// critical path).
+const AssemblyCanvas = lazyWithRetry("AssemblyViewer", () =>
+  import("../components/RacecarAssembly").then((module) => ({ default: module.RacecarAssemblyCanvas })),
+);
 
-function Icon({ children }: IconProps) {
+const ENTRY_BY_PART = new Map<RacecarPartId, CarPartEntry>(
+  CAR_PARTS.flatMap((entry) => entry.parts.map((part) => [part, entry] as const)),
+);
+const PARTS_BY_ENTRY = new Map<string, ReadonlySet<RacecarPartId>>(
+  CAR_PARTS.map((entry) => [entry.id, new Set(entry.parts)]),
+);
+const NO_PARTS: ReadonlySet<RacecarPartId> = new Set();
+
+/** One line centred in the 3D frame: loading, or why the view is missing. */
+function FrameMessage({ children }: { children: ReactNode }) {
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      {children}
-    </svg>
-  );
-}
-
-function ToggleButton({
-  active,
-  label,
-  onClick,
-  children,
-}: {
-  active?: boolean;
-  label: string;
-  onClick: () => void;
-  children: ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      className={`viewer-tool ${active ? "is-active" : ""}`}
-      aria-label={label}
-      title={label}
-      aria-pressed={active}
-      onClick={onClick}
+    <p
+      role="status"
+      className="absolute inset-0 flex items-center justify-center p-6 text-center font-mono text-small text-text-muted"
     >
       {children}
-    </button>
+    </p>
   );
 }
 
-function formatPosition(position: readonly number[]) {
-  return position.map((value) => `${value.toFixed(3)} m`).join("  /  ");
+/** No WebGL, or the 3D chunk would not load: the frame says so and the part
+ * list keeps working on its own. */
+class ViewerBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  componentDidCatch(error: unknown) {
+    console.warn("3D viewer unavailable", error);
+  }
+
+  render() {
+    return this.state.failed ? (
+      <FrameMessage>The 3D view did not start in this browser. The part list works without it.</FrameMessage>
+    ) : (
+      this.props.children
+    );
+  }
 }
 
-const NO_HIDDEN: ReadonlySet<RacecarPartId> = new Set();
+function ExternalMark() {
+  return (
+    <>
+      <span aria-hidden="true">↗</span>
+      <span className="sr-only"> (opens in a new tab)</span>
+    </>
+  );
+}
 
+const pad = (n: number) => String(n).padStart(2, "0");
+
+/**
+ * /assembly: the car, part by part. A newcomer sees what is in a RoboRacer,
+ * what each part does, and which section of the build guide covers it
+ * (docs/assembly/PLAN.md). The list is the page: it is ordered like the build,
+ * carries every fact the 3D view shows, and works from the keyboard and
+ * without WebGL. The 3D view mirrors it both ways: a row lights its part, a
+ * part lights its row, and either one selects (focus mode: the rest goes grey
+ * and the camera glides in). Reduced motion keeps every pose and camera move,
+ * without the glide.
+ */
 export default function Assembly() {
-  const [explosion, setExplosion] = useState(0);
-  const [autoRotate, setAutoRotate] = useState(false);
-  const [wireframe, setWireframe] = useState(false);
-  const [labelsVisible, setLabelsVisible] = useState(true);
-  const [selectedPart, setSelectedPart] = useState<RacecarPartId | null>(null);
+  const reduced = usePrefersReducedMotion();
+  const [exploded, setExploded] = useState(true);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [resetKey, setResetKey] = useState(0);
-  const [sceneReady, setSceneReady] = useState(false);
-  const [exportStatus, setExportStatus] = useState<"idle" | "exporting" | "done" | "error">("idle");
-  const assemblyRef = useRef<Group>(null);
-  const { progress } = useProgress();
+  const listRef = useRef<HTMLOListElement>(null);
 
-  const selected = useMemo(
-    () => RACECAR_PARTS.find((part) => part.id === selectedPart) ?? null,
-    [selectedPart],
-  );
+  const focusParts = (selectedId && PARTS_BY_ENTRY.get(selectedId)) || NO_PARTS;
+  const highlightParts = (hoveredId && PARTS_BY_ENTRY.get(hoveredId)) || NO_PARTS;
 
-  const handleReady = useCallback(() => setSceneReady(true), []);
+  const toggleEntry = (id: string) => setSelectedId((current) => (current === id ? null : id));
 
-  const exportForCad = async () => {
-    if (!assemblyRef.current || exportStatus === "exporting") return;
-    setExportStatus("exporting");
-
-    try {
-      const { GLTFExporter } = await import("three/examples/jsm/exporters/GLTFExporter.js");
-      const exportScene = assemblyRef.current.clone(true);
-
-      // CAD receives the canonical Xacro assembly, regardless of the current
-      // exploded/visibility UI state.
-      exportScene.traverse((object) => {
-        object.visible = true;
-      });
-      RACECAR_PARTS.forEach((part) => {
-        exportScene.getObjectByName(part.id)?.position.fromArray(part.position);
-      });
-
-      const result = await new GLTFExporter().parseAsync(exportScene, {
-        binary: false,
-        onlyVisible: false,
-        trs: true,
-        maxTextureSize: 2048,
-      });
-      const blob = new Blob([JSON.stringify(result)], { type: "model/gltf+json" });
-      const url = URL.createObjectURL(blob);
-      const anchor = document.createElement("a");
-      anchor.href = url;
-      anchor.download = "f1tenth-xacro-assembly.gltf";
-      anchor.click();
-      URL.revokeObjectURL(url);
-      setExportStatus("done");
-    } catch (error) {
-      console.error("Unable to export racecar glTF", error);
-      setExportStatus("error");
-    }
-  };
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.target instanceof HTMLInputElement) return;
-      if (event.key.toLowerCase() === "e") {
-        setExplosion((current) => (current > 0.5 ? 0 : 1));
-      }
-      if (event.key.toLowerCase() === "r") setResetKey((current) => current + 1);
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+  const selectPart = useCallback((part: RacecarPartId | null) => {
+    const id = part ? (ENTRY_BY_PART.get(part)?.id ?? null) : null;
+    setSelectedId((current) => (id !== null && current !== id ? id : null));
   }, []);
 
-  const sliderStyle = {
-    "--explode-progress": `${explosion * 100}%`,
-  } as CSSProperties;
+  const hoverPart = useCallback((part: RacecarPartId, over: boolean) => {
+    const id = ENTRY_BY_PART.get(part)?.id ?? null;
+    setHoveredId((current) => (over ? id : current === id ? null : current));
+  }, []);
+
+  const resetView = () => {
+    setSelectedId(null);
+    setResetKey((key) => key + 1);
+  };
+
+  // A part picked on the canvas brings its row into view (the list scrolls
+  // on its own under the canvas on a phone).
+  useEffect(() => {
+    if (!selectedId) return;
+    listRef.current
+      ?.querySelector(`[data-row="${selectedId}"]`)
+      ?.scrollIntoView({ block: "nearest", behavior: reduced ? "auto" : "smooth" });
+  }, [reduced, selectedId]);
+
+  useEffect(() => {
+    if (!selectedId) return;
+    const onKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedId(null);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [selectedId]);
+
+  // Up and down arrows move between rows; Tab still visits every one.
+  const onListKeyDown = (event: KeyboardEvent<HTMLOListElement>) => {
+    if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+    const rows = Array.from(listRef.current?.querySelectorAll<HTMLButtonElement>("button[data-entry]") ?? []);
+    const index = rows.indexOf(document.activeElement as HTMLButtonElement);
+    if (index < 0) return;
+    event.preventDefault();
+    const step = event.key === "ArrowDown" ? 1 : -1;
+    rows[(index + step + rows.length) % rows.length]?.focus();
+  };
+
+  const views = [
+    { label: "Assembled", value: false },
+    { label: "Exploded", value: true },
+  ] as const;
 
   return (
-    <div className="assembly-viewer">
-      <RacecarAssemblyCanvas
-        explosion={explosion}
-        hiddenParts={NO_HIDDEN}
-        labelsVisible={labelsVisible}
-        selectedPart={selectedPart}
-        wireframe={wireframe}
-        autoRotate={autoRotate}
-        resetKey={resetKey}
-        assemblyRef={assemblyRef}
-        onReady={handleReady}
-        onSelect={setSelectedPart}
-      />
-
-      <div className="assembly-vignette" aria-hidden="true" />
-
-      <header className="viewer-header">
-        <div className="viewer-nav">
-          <a className="viewer-brand" href="/" aria-label="Back to RoboRacer home">
-            <img src="/logo-square.svg" alt="" />
-            <span>
-              RoboRacer
-              <small>Assembly workspace</small>
-            </span>
-          </a>
-          {/* A plain way back to the site (Cedric, 2026-08-22: the viewer hides
-              the main nav, so the brand mark alone was not read as an exit). */}
-          <a className="viewer-back" href="/build">
-            <span aria-hidden="true">←</span> Back to Build
-          </a>
-        </div>
-
-        <div className="viewer-tools" aria-label="Viewer tools">
-          <ToggleButton
-            label="Reset camera (R)"
-            onClick={() => setResetKey((current) => current + 1)}
-          >
-            <Icon>
-              <path d="M4.9 7A8 8 0 1 1 4 14" />
-              <path d="M4 3v4h4" />
-            </Icon>
-          </ToggleButton>
-          <ToggleButton
-            active={autoRotate}
-            label="Auto rotate"
-            onClick={() => setAutoRotate((current) => !current)}
-          >
-            <Icon>
-              <path d="M8 5.1A8 8 0 0 1 20 12" />
-              <path d="m20 7 .1 5-5 .1" />
-              <path d="M16 18.9A8 8 0 0 1 4 12" />
-              <path d="m4 17-.1-5 5-.1" />
-            </Icon>
-          </ToggleButton>
-          <ToggleButton
-            active={labelsVisible}
-            label="Part labels"
-            onClick={() => setLabelsVisible((current) => !current)}
-          >
-            <Icon>
-              <path d="M4 5h16v11H9l-5 4V5Z" />
-              <path d="M8 9h8M8 12h5" />
-            </Icon>
-          </ToggleButton>
-          <ToggleButton
-            active={wireframe}
-            label="Wireframe"
-            onClick={() => setWireframe((current) => !current)}
-          >
-            <Icon>
-              <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z" />
-              <path d="m4.3 7.7 7.7 4.4 7.7-4.4M12 12.1V21" />
-            </Icon>
-          </ToggleButton>
-          <ToggleButton
-            label="Download assembled glTF for CAD"
-            onClick={() => void exportForCad()}
-          >
-            <Icon>
-              <path d="M12 3v12" />
-              <path d="m7 10 5 5 5-5" />
-              <path d="M5 20h14" />
-            </Icon>
-          </ToggleButton>
-        </div>
-      </header>
-
-      <section className="viewer-intro" aria-labelledby="assembly-title">
-        <div className="viewer-kicker"><span /> Xacro visual assembly</div>
-        {/* Content skill: write "RoboRacer" everywhere (2026-08-21). */}
-        <h1 id="assembly-title">
-          RoboRacer
-          <span>Assembly lab</span>
-        </h1>
-        <p>
-          Inspect the racecar visual tree, isolate parts, and pull the assembly apart along its
-          real component frames.
-        </p>
-        <dl className="viewer-stats">
-          <div><dt>Scale</dt><dd>1:1</dd></div>
-          <div><dt>Parts</dt><dd>{String(RACECAR_PARTS.length).padStart(2, "0")}</dd></div>
-          <div><dt>Wheelbase</dt><dd>0.322 m</dd></div>
-        </dl>
-      </section>
-
-      <aside className="parts-panel" aria-label="Assembly parts">
-        <div className="parts-panel-heading">
-          <div>
-            <span>Scene tree</span>
-            <strong>Visual components</strong>
-          </div>
-          <button type="button" onClick={() => setSelectedPart(null)} disabled={selectedPart === null}>
-            Show all
-          </button>
-        </div>
-
-        <div className="parts-list">
-          {RACECAR_PARTS.map((part, index) => (
-            <div className={`part-row ${selectedPart === part.id ? "is-selected" : ""}`} key={part.id}>
-              {/* Focus mode (Cedric, 2026-08-22): selecting a part keeps it in
-                  colour and greys out the rest; clicking it again releases. No
-                  hide toggle. */}
-              <button
-                type="button"
-                className="part-select"
-                aria-pressed={selectedPart === part.id}
-                onClick={() => setSelectedPart((current) => (current === part.id ? null : part.id))}
+    // A workspace like /build: one window tall under the fixed nav, no footer.
+    <div className="flex h-[100svh] flex-col pt-[4.25rem] md:pt-[5.3125rem]">
+      <div className="mx-auto flex min-h-0 w-full max-w-page flex-1 flex-col gap-4 px-6 pb-4 pt-4 md:landscape:flex-row md:landscape:gap-6 lg:flex-row lg:gap-8 lg:pb-6">
+        {/* The panel comes first in the document (heading, then the list),
+            and sits right of the view, or under it on a portrait screen. */}
+        <section
+          aria-labelledby="assembly-title"
+          className="order-2 -mx-1.5 flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-1.5 md:landscape:w-[24rem] md:landscape:flex-none lg:w-[30rem] lg:flex-none"
+        >
+          <header className="pr-2">
+            <p className="mb-3 flex items-center gap-2 font-mono text-small text-text-muted">
+              <span aria-hidden="true" className="h-1 w-1 bg-ink-950" />
+              <span>Build</span>
+            </p>
+            <h1
+              id="assembly-title"
+              className="text-balance font-display text-display-m font-semibold text-text-strong"
+            >
+              The car, part by part
+            </h1>
+            <p className="mt-3 max-w-[44ch] text-pretty text-body text-text-body">
+              Select a part to see what it does and how to build it.
+            </p>
+            <div className="mt-4">
+              <Button
+                href={BUILD_GUIDE_URL}
+                size="sm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="[@media(pointer:coarse)]:min-h-11"
               >
-                <span className="part-index">{String(index + 1).padStart(2, "0")}</span>
-                <span className="part-color" style={{ backgroundColor: part.color }} />
-                <span>{part.name}</span>
-              </button>
+                Open the build guide
+                <ExternalMark />
+              </Button>
             </div>
-          ))}
-        </div>
+          </header>
 
-        <div className="part-inspector" aria-live="polite">
-          {selected ? (
-            <>
-              <div className="inspector-heading">
-                <span style={{ backgroundColor: selected.color }} />
-                <strong>{selected.name}</strong>
-              </div>
-              <p>{selected.description}</p>
-              <dl>
-                <div><dt>Frame</dt><dd>{selected.frame}</dd></div>
-                <div><dt>Joint</dt><dd>{selected.joint}</dd></div>
-                <div><dt>XYZ</dt><dd>{formatPosition(selected.position)}</dd></div>
-              </dl>
-            </>
-          ) : (
-            <div className="inspector-empty">
-              <Icon>
-                <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z" />
-                <path d="m4.3 7.7 7.7 4.4 7.7-4.4M12 12.1V21" />
-              </Icon>
-              <span>Select a part to inspect its Xacro frame.</span>
+          <ol
+            ref={listRef}
+            aria-label="Parts, in build order"
+            onKeyDown={onListKeyDown}
+            className="mt-5 border-t border-ink-950/10"
+          >
+            {CAR_PARTS.map((entry, index) => {
+              const selected = selectedId === entry.id;
+              const lit = hoveredId === entry.id;
+              const detail = selected && (entry.note || entry.guide);
+              return (
+                <li
+                  key={entry.id}
+                  data-row={entry.id}
+                  className={`border-b border-ink-950/10 ${
+                    selected ? "bg-paper-100 shadow-[inset_0.125rem_0_0_var(--color-ink-950)]" : ""
+                  }`}
+                >
+                  <button
+                    type="button"
+                    data-entry={entry.id}
+                    aria-pressed={selected}
+                    aria-labelledby={`part-${entry.id}-name`}
+                    aria-describedby={`part-${entry.id}-role`}
+                    onClick={() => toggleEntry(entry.id)}
+                    onPointerEnter={() => setHoveredId(entry.id)}
+                    onPointerLeave={() => setHoveredId((current) => (current === entry.id ? null : current))}
+                    onFocus={() => setHoveredId(entry.id)}
+                    onBlur={() => setHoveredId((current) => (current === entry.id ? null : current))}
+                    className={`grid w-full grid-cols-[2.25rem_1fr] items-baseline px-2 py-2 text-left transition-colors duration-[var(--duration-fast)] ${
+                      lit && !selected ? "bg-paper-100" : ""
+                    }`}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={`font-mono text-small ${selected ? "text-text-strong" : "text-text-muted"}`}
+                    >
+                      {pad(index + 1)}
+                    </span>
+                    <span id={`part-${entry.id}-name`} className="flex flex-wrap items-baseline gap-x-2">
+                      <span className="font-display font-semibold text-text-strong">{entry.name}</span>
+                      {entry.product && (
+                        <span className="font-mono text-small text-text-muted">{entry.product}</span>
+                      )}
+                    </span>
+                    <span id={`part-${entry.id}-role`} className="col-start-2 text-small text-text-body">
+                      {entry.role}
+                    </span>
+                  </button>
+                  {detail && (
+                    <div className="flex flex-col items-start gap-1 pb-3 pl-[2.75rem] pr-2">
+                      {entry.note && <p className="text-small text-text-muted">{entry.note}</p>}
+                      {entry.guide && (
+                        <a
+                          href={entry.guide.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 py-1 text-small font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
+                        >
+                          Build guide: {entry.guide.label}
+                          <ExternalMark />
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+
+          <p className="mt-3 px-2 pb-1 text-small text-text-body">
+            Last step:{" "}
+            <a
+              href={WIRING_GUIDE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
+            >
+              wire it all together
+              <ExternalMark />
+            </a>
+          </p>
+        </section>
+
+        <div className="relative order-1 h-[44svh] flex-none overflow-hidden rounded-media border border-ink-950/10 bg-paper-100 md:landscape:h-auto md:landscape:flex-1 lg:h-auto lg:flex-1">
+          <ViewerBoundary>
+            <Suspense fallback={<FrameMessage>Loading the 3D model</FrameMessage>}>
+              <AssemblyCanvas
+                explosion={exploded ? 1 : 0}
+                focusParts={focusParts}
+                highlightParts={highlightParts}
+                resetKey={resetKey}
+                instant={reduced}
+                onSelect={selectPart}
+                onHover={hoverPart}
+              />
+            </Suspense>
+          </ViewerBoundary>
+
+          <p className="pointer-events-none absolute left-3 top-3 font-mono text-eyebrow text-text-muted">
+            <span className="[@media(pointer:coarse)]:hidden">Drag to turn · Scroll to zoom</span>
+            <span className="hidden [@media(pointer:coarse)]:inline">Drag to turn · Pinch to zoom</span>
+          </p>
+
+          <div className="absolute bottom-3 left-3 flex flex-wrap items-center gap-2">
+            <div
+              role="group"
+              aria-label="View"
+              className="inline-flex rounded-btn border border-ink-950/15 bg-paper-50 p-0.5"
+            >
+              {views.map((view) => {
+                const pressed = exploded === view.value;
+                return (
+                  <button
+                    key={view.label}
+                    type="button"
+                    aria-pressed={pressed}
+                    onClick={() => setExploded(view.value)}
+                    className={`min-h-11 rounded-btn px-3 text-small font-semibold transition-colors duration-[var(--duration-fast)] [@media(pointer:fine)]:min-h-8 ${
+                      pressed ? "bg-ink-950 text-text-on-ink" : "text-text-body hover:text-text-strong"
+                    }`}
+                  >
+                    {view.label}
+                  </button>
+                );
+              })}
             </div>
-          )}
-        </div>
-      </aside>
-
-      <section className="explode-control" aria-label="Exploded view control">
-        <div className="explode-heading">
-          <span>Exploded view</span>
-          <output>{Math.round(explosion * 100)}%</output>
-        </div>
-        <div className="explode-slider-row">
-          <button type="button" onClick={() => setExplosion(0)}>Assembled</button>
-          <input
-            type="range"
-            min="0"
-            max="100"
-            step="1"
-            value={Math.round(explosion * 100)}
-            style={sliderStyle}
-            aria-label="Explosion amount"
-            onChange={(event) => setExplosion(Number(event.target.value) / 100)}
-          />
-          <button type="button" onClick={() => setExplosion(1)}>Exploded</button>
-        </div>
-        <div className="explode-hint">
-          <span>Drag to orbit · Scroll to zoom</span>
-          <span><kbd>E</kbd> Toggle <kbd>R</kbd> Reset</span>
-        </div>
-      </section>
-
-      {!sceneReady && (
-        <div className="assembly-loader" role="status" aria-live="polite">
-          <div className="loader-mark">
-            <img src="/logo-square.svg" alt="" />
-            <span />
+            <button
+              type="button"
+              onClick={resetView}
+              className="min-h-11 rounded-btn border border-ink-950/15 bg-paper-50 px-3 text-small font-semibold text-text-strong transition-colors duration-[var(--duration-fast)] hover:border-ink-950/40 [@media(pointer:fine)]:min-h-9"
+            >
+              Reset view
+            </button>
           </div>
-          <strong>Building visual assembly</strong>
-          <div className="loader-track"><span style={{ width: `${Math.max(progress, 6)}%` }} /></div>
-          <small>{Math.round(progress)}% · loading local meshes</small>
         </div>
-      )}
-
-      {exportStatus !== "idle" && (
-        <div className={`export-toast is-${exportStatus}`} role="status" aria-live="polite">
-          <span />
-          {exportStatus === "exporting" && "Packaging the assembled model…"}
-          {exportStatus === "done" && "f1tenth-xacro-assembly.gltf downloaded"}
-          {exportStatus === "error" && "The model could not be exported"}
-          {exportStatus !== "exporting" && (
-            <button type="button" aria-label="Dismiss export status" onClick={() => setExportStatus("idle")}>×</button>
-          )}
-        </div>
-      )}
+      </div>
     </div>
   );
 }
