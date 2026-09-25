@@ -56,7 +56,7 @@ The landing is a **v1.0 draft**, not finished. In priority order:
 | Route | File | State | Notes |
 |---|---|---|---|
 | `/` | `src/pages/Landing.tsx` | **v1.0 draft** | Nine sections, the reference for the visual system |
-| `/assembly` | `Assembly.tsx` | v1.0 | Part focus mode: click a part, the rest goes grey, camera flies in |
+| `/assembly` | `Assembly.tsx` | **revamped** (`revamp/p2-assembly`) | "The car, part by part": site nav, 3D frame plus a list of 8 parts in build order, each linked to its build-guide section (`CAR_PARTS` in `racecarAssemblyData.ts`). Focus mode kept. `docs/assembly/` |
 | `/styleguide` | `Styleguide.tsx` | live | Every primitive; check changes here first |
 | `/about` | `About.tsx` | **revamped** | Ends on section 05 Videos (`videos.json`, click-to-load `YouTubeFacade`) and the shared Join block |
 | `/news` | `News.tsx` | **revamped** | Reads `news.json`; a lead item with an `embed` shows the LinkedIn post itself (`news/LinkedInEmbed.tsx`) |

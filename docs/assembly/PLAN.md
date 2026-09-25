@@ -58,7 +58,7 @@ in `racecarAssemblyData.ts` (`CAR_PARTS`); the landing callouts are untouched.
   row; clicking either selects. A drag never counts as a click.
 - Controls, in the frame's bottom-left: "Assembled / Exploded" (two pressed
   buttons, opens exploded) and "Reset view" (also clears the selection).
-  Hint text, bottom-right: "Drag to turn · Scroll to zoom" (pinch on touch).
+  Hint text, top-left: "Drag to turn · Scroll to zoom" (pinch on touch).
 - Removed: wireframe, auto-rotate, per-part floating labels, the glTF
   export, the 0-100 slider, the E/R single-key shortcuts (WCAG 2.1.4), the
   floor grid, the Xacro frame/joint/XYZ inspector, the "Scale / Parts /
