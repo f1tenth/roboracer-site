@@ -236,6 +236,13 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
   const Tag = as;
   const sentence = lines.join(" ");
   const [paused, setPaused] = useState(false);
+  // The reader's pause, read by the clip sequencer before every play and
+  // advance: a pause while the next clip was still buffering used to be
+  // undone by that clip's canplay handler, which crossfaded and played it.
+  const pausedRef = useRef(false);
+  // Set by the sequencer: after a resume, move on if the current clip is at
+  // (or past) its crossfade point, since the rAF cue only fires while playing.
+  const resumeRef = useRef<(() => void) | null>(null);
   // Idle cue: "idle" until the 10 s timer fires; any scroll before that
   // cancels it forever; the first scroll after it shows hides it for good.
   const [cue, setCue] = useState<"idle" | "visible" | "hidden">("idle");
@@ -320,6 +327,8 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     let autoTimer = 0;
     let autoDone = false;
     let cancelGlide: (() => void) | null = null;
+    // The next clip's pending canplay listener, removed on cleanup.
+    let pending: { el: HTMLVideoElement; fn: () => void } | null = null;
     const root = scope.current;
     const scheduleAutoScroll = () => {
       if (autoDone || !root) return;
@@ -346,20 +355,21 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       return r.length > 0 && r.end(r.length - 1) >= v.duration - 0.25;
     };
     const advance = () => {
-      if (fading || waiting || disposed) return;
+      if (fading || waiting || disposed || pausedRef.current) return;
       const v = els[cur];
       const n = els[1 - cur];
       queueNext();
       if (n.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) {
         waiting = true;
-        n.addEventListener(
-          "canplay",
-          () => {
-            waiting = false;
-            advance();
-          },
-          { once: true },
-        );
+        const fn = () => {
+          pending = null;
+          waiting = false;
+          // advance() checks the pause: a clip that became playable while
+          // the reader had paused waits for the resume (resumeRef).
+          advance();
+        };
+        pending = { el: n, fn };
+        n.addEventListener("canplay", fn, { once: true });
         return;
       }
       fading = true;
@@ -413,7 +423,13 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       keep.src = wide && (video.mbps === undefined || linkCanStream(video.mbps)) ? video.mp4_1920 : video.mp4_960;
       keep.load();
       activeRef.current = [keep];
-      void keep.play().catch(() => {});
+      if (!pausedRef.current) void keep.play().catch(() => {});
+    };
+    resumeRef.current = () => {
+      if (disposed || fading) return;
+      const v = els[cur];
+      const d = v.duration;
+      if (v.ended || (Number.isFinite(d) && d > 0 && v.currentTime >= d - CROSSFADE_S)) advance();
     };
     a.addEventListener("ended", onEnded);
     b.addEventListener("ended", onEnded);
@@ -425,6 +441,9 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     raf = requestAnimationFrame(tick);
     return () => {
       disposed = true;
+      resumeRef.current = null;
+      if (pending) pending.el.removeEventListener("canplay", pending.fn);
+      pending = null;
       cancelAnimationFrame(raf);
       window.clearTimeout(timer);
       window.clearTimeout(autoTimer);
@@ -566,9 +585,14 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
     const els = activeRef.current;
     if (els.length === 0) return;
     if (paused) {
-      for (const el of els) void el.play().catch(() => {});
+      pausedRef.current = false;
+      // An ended clip would restart from 0 on play(); the sequencer moves on
+      // from it instead.
+      for (const el of els) if (!el.ended) void el.play().catch(() => {});
       setPaused(false);
+      resumeRef.current?.();
     } else {
+      pausedRef.current = true;
       for (const el of els) el.pause();
       setPaused(true);
     }
