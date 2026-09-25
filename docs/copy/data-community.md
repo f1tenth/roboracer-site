@@ -11,6 +11,7 @@ copy.
 | join.posts, post-knapp-538432, excerpt | On the parallels between autonomous motorsport and intralogistics. | What autonomous racing has in common with warehouse logistics. | 2 ("intralogistics", "motorsport") |
 | join.posts, post-meghaj-kabra-054784, excerpt | Roboracer @ Purdue placed P10 at IV 2026, its first competition. | Roboracer @ Purdue placed 10th at IV 2026, its first competition. | 2 ("P10") |
 | join.posts, post-mateus-karvat-541826, excerpt | A first RoboRacer competition with Ingenuity Labs Racing at ICRA 2026 in Vienna. | Ingenuity Labs Racing's first RoboRacer competition, at ICRA 2026 in Vienna. | 8 (awkward word order) |
+| join.posts, post-cedric-hollande-699200, alt | Cédric Hollande and Dhyey Shah hold their car … | Cedric Hollande and Dhyey Shah hold their car … | 7 (the site spells the name Cedric, per the content skill; `author` and `credit` keep the LinkedIn account name) |
 
 Kept as they are:
 
@@ -29,4 +30,4 @@ Kept as they are:
 
 Count: 49 strings reviewed (Join photo alt and caption, the Open Robotics
 excerpt and credit, the YouTube caption, and alt, excerpt, affiliation and
-credit on each of the 11 posts), 4 changed, 45 left.
+credit on each of the 11 posts), 5 changed, 44 left.
