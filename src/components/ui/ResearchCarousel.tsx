@@ -127,8 +127,7 @@ type FigureProps = { p: Publication; eager?: boolean };
 function Figure({ p, eager = false }: FigureProps) {
   const chain = useMemo(() => figureChain(p), [p]);
   // The landing holds its figures until the hero's opening clip has loaded
-  // (MediaHoldContext): 100 to 300 KB each, and Chrome fetched even the lazy
-  // ones in the first seconds.
+  // (MediaHoldContext): 100 to 300 KB each.
   const hold = useMediaHold();
   const [failed, setFailed] = useState(0);
   const img = chain[failed];
@@ -458,14 +457,16 @@ export default function ResearchCarousel({
     return () => document.removeEventListener("visibilitychange", onVisibility);
   }, []);
 
-  // Warm the figures two slots out so a card never slides in blank.
+  // Warm the figures two slots out so a card never slides in blank (not
+  // while the landing holds media for its hero clip).
+  const holdMedia = useMediaHold();
   useEffect(() => {
-    if (n < 3) return;
+    if (n < 3 || holdMedia) return;
     [2, -2].forEach((d) => {
       const src = figureChain(items[(index + d + n) % n])[0];
       if (src) new Image().src = src.src;
     });
-  }, [index, items, n]);
+  }, [index, items, n, holdMedia]);
 
   // Keyboard focus inside pauses; a mouse click on an arrow must not (the
   // button keeps focus after the click and would freeze the carousel).
