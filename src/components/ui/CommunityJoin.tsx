@@ -91,7 +91,6 @@ export default function CommunityJoin({ className = "", index = "09", showYouTub
               <dl className="flex flex-wrap gap-x-10 gap-y-6 border-y border-ink-950/10 py-6">
                 <Stat value={community.members_display} label="members" />
                 <Stat value={community.timezones.toLocaleString("en-US")} label="time zones" />
-                <Stat value={community.continents.toLocaleString("en-US")} label="continents" />
               </dl>
               <p className="mt-3 font-mono text-small text-text-muted">updated {community.updated}</p>
             </>

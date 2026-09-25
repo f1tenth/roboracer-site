@@ -355,7 +355,6 @@ export type Community = {
   members: number;
   members_display: string;
   timezones: number;
-  continents: number;
   updated: string;
   source: string;
   /** Written by the media curator (landing v4 section 9). */
