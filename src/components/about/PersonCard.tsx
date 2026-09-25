@@ -60,7 +60,7 @@ export default function PersonCard({ person, compact = false }: PersonCardProps)
         )}
       </div>
       <div
-        className={`flex min-w-0 grow flex-col gap-1.5 ${compact ? "p-3 sm:p-4" : "p-4 sm:p-5 compact:p-0"}`}
+        className={`flex min-w-0 grow flex-col gap-1.5 ${compact ? "px-2 py-3 sm:py-4 lg:p-4" : "p-4 sm:p-5 compact:p-0"}`}
       >
         {link ? (
           <a
