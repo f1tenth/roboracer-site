@@ -202,6 +202,83 @@ are ours, not theirs. Neobotics and Quanser also carry `named_by: "Cedric,
    LAMARRacing (or the Lamarr Institute), and any candidate you keep would each
    need a logo file plus written permission before `logo` is set.
 
+### From the polish-2 QA fixes (added 2026-09-25, branch `revamp/p2-qafix`)
+
+**Race sites that went dark.** On 2026-09-24/25 these competition sites answer
+404 or fail TLS (`curl -sIL` with a browser user agent). Every one has its repo
+in the f1tenth GitHub org set to **private** with Pages still enabled
+(`gh api orgs/f1tenth/repos`), and private-repo Pages stopped serving. /race now
+links each one to a Wayback capture (`archive` field in
+`data/events_map.source.json`, `public/data/events_map.json` and
+`public/data/past_races.json`, tagged "archived page"). Make a repo public again
+and its row can go back to `url_status: "live"`.
+
+| Site | Repo (private) | Wayback capture linked |
+|---|---|---|
+| vtc2026-race.roboracer.ai | `f1tenth/vtc2026-race` | 2026-07-23 (before the race: no results) |
+| cdc2025-race.roboracer.ai | `f1tenth/cdc2025_race` | 2026-03-05 |
+| iv2025-race.roboracer.ai | `f1tenth/iv2025_race` | 2026-01-21 |
+| icra2025-race.roboracer.ai | `f1tenth/icra2025_race` | 2026-03-13 |
+| cdc2024-race.f1tenth.org | `f1tenth/cdc2024_race` | 2025-07-14 |
+| bu2024-race.f1tenth.org | `f1tenth/bu2024_race` | 2025-06-23 |
+| itsc2024-race.f1tenth.org | `f1tenth/itsc2024_race` | 2025-06-23 |
+| sm2024-race.f1tenth.org | `f1tenth/sm2024_race` | 2025-08-23 |
+| iv2024-race.f1tenth.org | `f1tenth/iv2024_race` | 2026-03-09 |
+| cpsweek2024-race.f1tenth.org | `f1tenth/cpsweek2024-race_website` | 2024-12-19 |
+| icra2024-madgames.f1tenth.org | `f1tenth/icra2024_madgames_website` | 2025-08-29 |
+| iros2023-race.f1tenth.org | `f1tenth/iros2023-race_website` | 2025-08-23 |
+| iros2023-madgames.f1tenth.org | `f1tenth/iros2023_madgames_website` | 2025-07-13 |
+| icra2023-race.f1tenth.org | `f1tenth/icra2023-race_website` | 2025-10-04 |
+| iv2023-race.f1tenth.org | `f1tenth/iv2023_race` | 2025-03-06 |
+| cps2023-race.f1tenth.org | `f1tenth/cps2023-race_website` | 2025-02-27 |
+| esweek2022-race.f1tenth.org | `f1tenth/esweek2022-race` | 2025-03-08 |
+| icra2022-race.f1tenth.org | `f1tenth/icra2022-race_website` | 2025-08-24 |
+| korea-race.f1tenth.org | `f1tenth/korea-race` | 2025-12-06 |
+
+Already on captures before this round (domains dead or resold): iros2021.org,
+germany-race2022, icra2024-race, iros2024-race, korea-race24. Also private with
+Pages on, not linked from the site: `icra2025_madgames_website`,
+`iros2020_website`, `iros2021_website`, `icra2022_website`, `icra2023_website`,
+`f1tenth_eval_network`, and `f1tenth.github.io` (which still serves today; the
+2016 to 2020 race pages on /race depend on it). Public and serving: icra2026,
+iv2026, iros2026. korea-race23.f1tenth.org still serves.
+
+1. Make the race-site repos public again (and `f1tenth.github.io` before it
+   stops too), or keep the captures?
+
+**IROS 2026 registration deadline: four dates in play.** Nothing was changed;
+since every one of them is past, the spotlight (landing and /race) and the
+/race Enter block now read "registration closed" and lead to the race site.
+
+| Where | Registration closes | Video due |
+|---|---|---|
+| Content skill (Cedric, 2026-08-21) | Sep 5, 2026 | Sep 12, 2026 |
+| `news.json`, item of Aug 23 ("Register your team by September 5") | Sep 5 | |
+| `upcoming_events.json` (`registration_deadline`, `_at`, `qualification_video_due`; set in 58c6a8c, while its `registration_deadline_note` still says "display the Sep 5 date plainly") | Sep 9 | Sep 9 |
+| iros2026-race.roboracer.ai/timeline.html, read 2026-09-25 | ~~Sep 12~~ Sep 18 (struck and replaced on the page) | Sep 18, with the hardware list |
+
+2. Which date is the record? The handbook and the live site outrank the skill,
+   so Sep 18 looks right for the JSON; the Aug 23 news item stays as published.
+
+**Fact conflicts settled on the page, one question left.**
+
+- LAMARRacing's spinoff origin now reads "At ICRA 2026 in Vienna it was fastest
+  in the time trials and fourth overall.", the wording of the results page
+  (1st Time Trial, 4th Master Cup) and of /news. The Lamarr Institute post does
+  literally say the team won "Best Performance Overall" (the award for the
+  fastest time trial); it was dropped only because "fourth overall" beside
+  "Best Performance Overall" read as a contradiction. Say if you want it back.
+- "Cédric Hollande" in the author and credit of your ICRA 2026 post (news and
+  the community strip) is now "Cedric Hollande", as everywhere else. The
+  LinkedIn URLs are unchanged.
+- /race's lead drops "on four continents" (not in the content skill).
+
+3. 404 Racers' team card still says "institution tbc": the content skill's IV
+   2026 podium names the drivers but no institution. Your IV 2026 result post on
+   /news ("404 Racers, also from UPenn") and Milan Manoj's post both say
+   University of Pennsylvania. Confirm, and teams.json can carry it with you as
+   the source.
+
 ## Questions for Rahul
 
 1. Can you reconfirm the "90+ universities" and "20+ countries" stats on the landing page, or give updated numbers?

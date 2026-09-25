@@ -12,6 +12,7 @@ import {
   isBoardIndex,
   loadLeaderboardConfig,
   pickFeatured,
+  shortBoardLabel,
   siblingBoards,
   topRows,
   type BoardFile,
@@ -162,7 +163,9 @@ export default function Leaderboard() {
                   onClick={() => choose(b.slug)}
                   className={`${CHIP_BASE} ${b.slug === selected ? CHIP_ON : CHIP_IDLE}`}
                 >
-                  {b.board_title ?? b.title}
+                  {/* Phones get the short label, so the switch stays one row. */}
+                  <span className="sm:hidden">{shortBoardLabel(b.board_title ?? b.title)}</span>
+                  <span className="hidden sm:inline">{b.board_title ?? b.title}</span>
                 </button>
               ))}
             </div>

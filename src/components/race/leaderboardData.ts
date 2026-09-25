@@ -146,6 +146,18 @@ export function topRows(board: BoardFile, limit: number): BoardRow[] {
     .slice(0, Math.max(1, limit));
 }
 
+/**
+ * A chip label short enough that a lab's two boards share one row on a phone
+ * (the skeleton reserves one row; lab 4's "Fastest clean lap" and "Fastest
+ * clean obstacle lap" wrapped to two at 390 and pushed the table down 46 px).
+ * "Levine, fastest clean lap" -> "Levine"; "Fastest clean obstacle lap" ->
+ * "Clean obstacle lap". Anything else is returned as it is.
+ */
+export function shortBoardLabel(title: string): string {
+  const short = title.includes(",") ? title.split(",")[0].trim() : title.replace(/^fastest\s+/i, "");
+  return short ? short.charAt(0).toUpperCase() + short.slice(1) : title;
+}
+
 /** Link to the full board, opened on the board shown here. */
 export function boardHref(cfg: LeaderboardConfig, slug?: string): string {
   const url = new URL(cfg.url);

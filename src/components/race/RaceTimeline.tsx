@@ -78,11 +78,19 @@ function PhotoTile({ event }: { event: MapEvent }) {
  *
  * Link rule (pages v1): no anchor on this page leads nowhere. `url_status`
  * comes from `events_map.json` and was checked by hand — `live` links
- * straight out, `archive` links to a Wayback capture and says so, and `none`
- * renders as plain text with a tag rather than a dead anchor. The eleven
- * broken links the audit found were relative `*.html` paths that resolved
- * against /race into the SPA's 404, one empty href, and three dead domains.
+ * straight out, `archive` links to the Wayback capture in `archive` and says
+ * so, and `none` renders as plain text with a tag rather than a dead anchor.
+ * The eleven broken links the audit found were relative `*.html` paths that
+ * resolved against /race into the SPA's 404, one empty href, and three dead
+ * domains; in September 2026 the race sites whose f1tenth-org repos are
+ * private stopped serving too, and moved to their captures.
  */
+function eventHref(e: MapEvent): string | undefined {
+  if (e.url_status === "none") return undefined;
+  if (e.url_status === "archive") return e.archive ?? e.url;
+  return e.url;
+}
+
 /** Years from this one on stay open; everything earlier folds away. */
 const OPEN_FROM_YEAR = 2025;
 
@@ -93,6 +101,7 @@ function YearRow({ year, list }: { year: number; list: MapEvent[] }) {
           <ul className="flex flex-col gap-6 md:col-span-10">
             {list.map((e) => {
               const meta = [e.city, e.country].filter(Boolean).join(", ");
+              const href = eventHref(e);
               const tags = [
                 KIND_TAG[e.kind],
                 e.status === "virtual" ? "online" : undefined,
@@ -107,14 +116,17 @@ function YearRow({ year, list }: { year: number; list: MapEvent[] }) {
                       {e.number ? String(e.number).padStart(2, "0") : "--"}
                     </span>
                     <span className="min-w-0 grow">
-                      {e.url ? (
+                      {href ? (
                         <a
-                          href={e.url}
+                          href={href}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="font-display text-lead font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
                         >
                           {e.label}
+                          <span className="sr-only">
+                            {e.url_status === "archive" ? " (archived copy, opens in a new tab)" : " (opens in a new tab)"}
+                          </span>
                         </a>
                       ) : (
                         <span className="font-display text-lead font-semibold text-text-strong">{e.label}</span>
