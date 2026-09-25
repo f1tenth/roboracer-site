@@ -29,7 +29,8 @@ because it only repeated the headline; the card renders without it.
 | post-lukas-kutsch-701952, excerpt | Two years with LAMARRacing, from CDC Milan 2024 to 1st in time trials at ICRA 2026. | From CDC Milan 2024 to first in time trials at ICRA 2026. | 5 (the first half is now the headline); "from X to Y" is literal here, a two-year span |
 | post-roboracer-foundation-197760, excerpt | About 200 people and 30 teams from more than 12 countries, the largest competition yet. | About 200 people and 30 teams from more than 12 countries. | 5 ("largest" is already in the headline) |
 | post-cedric-hollande-699200, title | UPenn take 2nd in time trials and 5th head to head at ICRA 2026 | UPenn takes 2nd in time trials and 5th head to head at ICRA 2026 | American grammar |
-| post-cedric-hollande-699200, excerpt | 2nd in time trials and 5th in head-to-head at ICRA 2026, out of about 30 teams. | Cédric Hollande and Dhyey Shah raced against about 30 teams. | 5 (repeated the headline); the two names are from the content skill and this item's own alt text |
+| post-cedric-hollande-699200, excerpt | 2nd in time trials and 5th in head-to-head at ICRA 2026, out of about 30 teams. | Cedric Hollande and Dhyey Shah raced against about 30 teams. | 5 (repeated the headline); the two names are from the content skill and this item's own alt text |
+| post-cedric-hollande-699200, `image.alt` | Cédric Hollande and Dhyey Shah hold their car … | Cedric Hollande and Dhyey Shah hold their car … | 7 (the site spells the name Cedric, per the content skill) |
 | icra2026-vienna-results, excerpt | LAMARRacing set the fastest lap of the time trial at 14.590 s, ahead of UPenn Autonomous Racing and ForzaETH. Time trial, classic cup and master cup brackets are all published. | LAMARRacing set the fastest time-trial lap at 14.590 s, ahead of UPenn Autonomous Racing and ForzaETH. Classic Cup and Master Cup results are online too. | 1 (30 words), 2 ("brackets"); cup names capitalized as the results page and teams.json write them |
 | f1tenth-korea-delegation-upenn, excerpt | The F1TENTH Global Camp is a government-funded university support project involving 76 universities in South Korea. Eight of them ran the F1TENTH education and competition program. | The F1TENTH Global Camp is a government-funded project that supports 76 universities in South Korea. Eight of them ran the F1TENTH education and competition program. | 4 (noun pile "university support project") |
 | autodrive-f1tenth-autoware-integration, excerpt | Autonomy-oriented digital twins of vehicles across scales and configurations, supporting development and deployment of the Autoware Core/Universe stack. | Digital twins of cars at different scales and setups, used to develop and deploy the Autoware Core/Universe stack. | 2 ("autonomy-oriented", "configurations"), 4 |
@@ -63,4 +64,6 @@ Unsure, left alone:
 
 Count: 104 strings reviewed (titles, excerpts, credits, affiliations, alt text,
 embed title and poster alt, stat labels, the results link; author and publisher
-names not counted), 30 changed, 74 left.
+names not counted), 31 changed, 73 left. The `author` and `credit` fields
+of post-cedric-hollande-699200 still read "Cédric Hollande": that is the
+LinkedIn account name the credit points to, so it was left as a name.
