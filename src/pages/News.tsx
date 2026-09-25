@@ -92,7 +92,7 @@ export default function News() {
               News from the races
             </h1>
             <p className="mt-6 max-w-[60ch] text-lead text-text-body">
-              Race reports, results and posts from the teams who build and run the cars.
+              Results and posts from the teams who build and race the cars.
             </p>
           </div>
           {/* The ledger counts what is on the page; with no feed there is
@@ -106,7 +106,7 @@ export default function News() {
                 tone="accent"
                 duration={2.5}
                 value={items.length}
-                label="Items"
+                label="Posts"
               />
               <StatTicker
                 key={`events-${events.length}`}
@@ -167,7 +167,7 @@ export default function News() {
             />
           )}
           <p className="mt-8 font-mono text-small text-text-muted" aria-live="polite">
-            {tag ? `${filtered.length} of ${rest.length} items · ${selected?.label}` : `${rest.length} items`}
+            {tag ? `${filtered.length} of ${rest.length} posts · ${selected?.label}` : `${rest.length} posts`}
           </p>
           {filtered.length === 0 ? (
             <p className="mt-6 max-w-[60ch] text-body text-text-body">
@@ -212,11 +212,11 @@ export default function News() {
               title="Send us your news"
               lead={
                 <>
-                  Posted about your team, your car or a race you ran? Tag us at{" "}
+                  Tag us at{" "}
                   <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={LINK}>
                     @roboracer.ai
                   </a>{" "}
-                  and send us the link. It will go here, with your name and your credit on it!
+                  in your post and send us the link. We'll post it here and credit you.
                 </>
               }
             />
@@ -225,7 +225,7 @@ export default function News() {
             <Button href={MAILTO}>Send us a link</Button>
             <p className="font-mono text-small text-text-muted">contact@roboracer.ai</p>
             <p className="text-small text-text-body">
-              Feel free to reach out on{" "}
+              Or message us on{" "}
               <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={LINK}>
                 Slack
               </a>

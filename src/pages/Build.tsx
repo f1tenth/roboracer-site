@@ -4,7 +4,7 @@ export default function Build() {
         <iframe
           className="w-full h-full border-none"
           src="https://f1tenth.readthedocs.io/en/main/"
-          title="F1Tenth Documentation"
+          title="RoboRacer build documentation"
         />
       </div>
     );

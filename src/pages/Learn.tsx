@@ -4,7 +4,7 @@ export default function Learn() {
         <iframe
           className="w-full h-full border-none"
           src="https://f1tenth-coursekit.readthedocs.io/en/latest/"
-          title="F1Tenth Course Kit Documentation"
+          title="RoboRacer course material"
         />
       </div>
     );

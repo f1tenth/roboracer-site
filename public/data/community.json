@@ -24,7 +24,7 @@
       "author_logo": "/media/join/openrobotics-logo.svg",
       "post_url": "https://www.linkedin.com/posts/it-is-wild-to-see-just-how-far-the-roboracer-ugcPost-7467510093027205120-hCNe/",
       "credit": "Video: Open Robotics · LinkedIn",
-      "excerpt": "Featured by Open Robotics: how far the community has come in a few short years.",
+      "excerpt": "Open Robotics on how far the community has come.",
       "excerpt_note": "TODO(content): one sentence in Cedric's words; this draft is ours, not the post text"
     },
     "youtube": {
@@ -50,7 +50,7 @@
         "width": 800,
         "height": 531,
         "alt": "Spectators line the rail above the wooden KNAPP bridge of the ICRA 2026 track while a car crosses it.",
-        "excerpt": "On the parallels between autonomous motorsport and intralogistics.",
+        "excerpt": "What autonomous racing has in common with warehouse logistics.",
         "credit": "Post: KNAPP · LinkedIn"
       },
       {
@@ -110,7 +110,7 @@
         "width": 800,
         "height": 600,
         "alt": "Six members of Roboracer @ Purdue stand beside the orange-duct track at IV 2026 in Detroit holding their car and a certificate.",
-        "excerpt": "Roboracer @ Purdue placed P10 at IV 2026, its first competition.",
+        "excerpt": "Roboracer @ Purdue placed 10th at IV 2026, its first competition.",
         "credit": "Post: Meghaj Kabra · LinkedIn"
       },
       {
@@ -140,7 +140,7 @@
         "width": 800,
         "height": 800,
         "alt": "Six members of Ingenuity Labs Racing with their blue car in the ICRA 2026 competition hall.",
-        "excerpt": "A first RoboRacer competition with Ingenuity Labs Racing at ICRA 2026 in Vienna.",
+        "excerpt": "Ingenuity Labs Racing's first RoboRacer competition, at ICRA 2026 in Vienna.",
         "credit": "Post: Mateus Karvat Camara · LinkedIn"
       },
       {
@@ -199,7 +199,7 @@
         "poster": "/media/join/posts/post-cedric-hollande-699200-800.webp",
         "width": 800,
         "height": 600,
-        "alt": "Cédric Hollande and Dhyey Shah hold their car on the ICRA 2026 track in Vienna, orange ducts and the competition area sign behind.",
+        "alt": "Cedric Hollande and Dhyey Shah hold their car on the ICRA 2026 track in Vienna, orange ducts and the competition area sign behind.",
         "excerpt": "2nd in time trials and 5th in head-to-head at ICRA 2026, out of about 30 teams.",
         "credit": "Post: Cédric Hollande · LinkedIn"
       }
