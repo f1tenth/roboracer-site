@@ -200,7 +200,13 @@ export default function About() {
             copy is switched off below so the page never plays it twice. */}
         {youtube !== null && (
           <div className="mx-auto mt-12 max-w-page px-6">
-            {youtube ? <YouTubeFacade yt={youtube} /> : <YouTubeFacadeSkeleton />}
+            {/* On a landscape phone the full-width 16:9 frame was taller than
+                the window; there the width follows the window's height so the
+                whole frame fits under the bar, centred (ABOUT-05). A portrait
+                phone never reaches the cap. */}
+            <div className="mx-auto compact:max-w-[min(100%,calc((100svh-6rem)*16/9))]">
+              {youtube ? <YouTubeFacade yt={youtube} /> : <YouTubeFacadeSkeleton />}
+            </div>
           </div>
         )}
       </Section>
