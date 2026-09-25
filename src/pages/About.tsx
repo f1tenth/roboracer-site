@@ -149,8 +149,14 @@ export default function About() {
       {/* Hero (ink): the thesis and the ledger. The old page opened on an
           undefined bg-brand-radial panel whose text sat straight on the page
           background and only became legible on hover; this is a real ink
-          surface with the AA text roles. */}
-      <Section variant="ink" width="bleed" className="pt-[5.5rem] md:pt-[6.5625rem]">
+          surface with the AA text roles. It starts a rem under the bar at
+          every size, the bar's height being the nav token (4.5rem, 3.5rem on a
+          short landscape window, 5.3125rem from lg), like the /race hero. */}
+      <Section
+        variant="ink"
+        width="bleed"
+        className="pt-[calc(var(--spacing-nav)+1rem)] lg:pt-[calc(var(--spacing-nav)+1.25rem)]"
+      >
         <div className="mx-auto max-w-page px-6">
           <div className="grid gap-10 md:grid-cols-12 md:gap-x-10">
             <div className="md:col-span-7">
