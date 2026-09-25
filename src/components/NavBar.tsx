@@ -140,6 +140,10 @@ export default function Navbar() {
     const nav = navRef.current;
     const root = document.documentElement;
     const previousOverflow = root.style.overflow;
+    const previousGutter = root.style.scrollbarGutter;
+    // A narrow window with a classic scrollbar keeps its gutter, so the page
+    // behind the scrim does not jump sideways when the scrollbar goes.
+    if (window.innerWidth > root.clientWidth) root.style.scrollbarGutter = "stable";
     root.style.overflow = "hidden";
     const inerted = Array.from(nav?.parentElement?.children ?? []).filter(
       (el): el is HTMLElement => el instanceof HTMLElement && el !== nav && !el.inert,
@@ -159,6 +163,7 @@ export default function Navbar() {
     linkBar.addEventListener("change", onLinkBar);
     return () => {
       root.style.overflow = previousOverflow;
+      root.style.scrollbarGutter = previousGutter;
       for (const el of inerted) el.inert = false;
       document.removeEventListener("keydown", onKeyDown);
       linkBar.removeEventListener("change", onLinkBar);

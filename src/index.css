@@ -586,13 +586,15 @@ body {
     padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
   }
 
-  /* Under the open menu: the page dims and a tap on it closes the menu. */
+  /* Under the open menu: the page dims and a tap on it closes the menu.
+     The large viewport, so it still reaches the bottom once a phone's
+     toolbar has collapsed (the page is locked, so it cannot change). */
   .mobile-menu-scrim {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    height: 100svh;
+    height: 100lvh;
     background: color-mix(in oklab, var(--color-ink-950) 40%, transparent);
     touch-action: none;
   }
