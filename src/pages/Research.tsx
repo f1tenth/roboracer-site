@@ -17,6 +17,25 @@ const SUBMIT_MAILTO = "mailto:contact@roboracer.ai?subject=RoboRacer%20publicati
 // Site-wide link contract (landing-v2): ink text, hairline underline, violet on hover.
 const LINK =
   "underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2";
+/** Featured papers a phone shows before the rest fold away. */
+const FEATURED_ON_PHONE = 4;
+const FEATURED_GRID = "grid gap-6 compact:gap-4 md:grid-cols-2 lg:grid-cols-3";
+
+/** The chevron summary both folds share, the year headings' type (the
+ * race timeline's pattern). */
+const FOLD_SUMMARY =
+  "flex cursor-pointer list-none flex-wrap items-baseline gap-x-3 gap-y-1 py-8 text-text-strong transition-colors hover:text-rr-violet [&::-webkit-details-marker]:hidden";
+
+function FoldChevron() {
+  return (
+    <span
+      aria-hidden="true"
+      className="inline-block font-display text-display-m leading-none transition-transform duration-[var(--duration-fast)] group-open:rotate-90 motion-reduce:transition-none"
+    >
+      &#8250;
+    </span>
+  );
+}
 
 /** True on a phone in either orientation (the `compact:` variant): the one
  * place the list folds its earlier years away. */
@@ -70,6 +89,7 @@ export default function Research() {
   const [tag, setTag] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [earlierOpen, setEarlierOpen] = useState(false);
+  const [featuredOpen, setFeaturedOpen] = useState(false);
   const compact = useCompact();
 
   useEffect(() => {
@@ -104,6 +124,16 @@ export default function Research() {
   const recent = folded ? byYear.filter(([year]) => year >= newestYear) : byYear;
   const earlier = folded ? byYear.filter(([year]) => year < newestYear) : [];
   const earlierCount = earlier.reduce((n, [, items]) => n + items.length, 0);
+
+  // The featured cards were 17 rows ahead of the search, which sat 7 screens
+  // down at 390 (RESEARCH-01). On a phone the first four show and the rest
+  // fold the same way. A topic shows all of its featured papers, as today. A
+  // search leaves this fold alone: it does not filter the featured cards, and
+  // unfolding thirteen of them above the box would push it off the screen
+  // while the reader types.
+  const featuredFolded = compact && !tag && featured.length > FEATURED_ON_PHONE;
+  const featuredFirst = featuredFolded ? featured.slice(0, FEATURED_ON_PHONE) : featured;
+  const featuredRest = featuredFolded ? featured.slice(FEATURED_ON_PHONE) : [];
 
   return (
     <div className="pt-nav">
@@ -225,11 +255,31 @@ export default function Research() {
               )}
             </div>
             {featured.length > 0 ? (
-              <Reveal key={tag ?? "all"} stagger className="mt-6 grid gap-6 compact:gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {featured.map((p) => (
-                  <PaperCard key={p.id} publication={p} tagLabels={labels} />
-                ))}
-              </Reveal>
+              <>
+                <Reveal key={tag ?? "all"} stagger className={`mt-6 ${FEATURED_GRID}`}>
+                  {featuredFirst.map((p) => (
+                    <PaperCard key={p.id} publication={p} tagLabels={labels} />
+                  ))}
+                </Reveal>
+                {featuredRest.length > 0 && (
+                  <details
+                    open={featuredOpen}
+                    onToggle={(e) => setFeaturedOpen(e.currentTarget.open)}
+                    className="group"
+                  >
+                    {/* Built from the data: how many featured papers wait. */}
+                    <summary className={FOLD_SUMMARY}>
+                      <FoldChevron />
+                      <span className="font-mono text-small">{featuredRest.length} more featured</span>
+                    </summary>
+                    <div className={FEATURED_GRID}>
+                      {featuredRest.map((p) => (
+                        <PaperCard key={p.id} publication={p} tagLabels={labels} />
+                      ))}
+                    </div>
+                  </details>
+                )}
+              </>
             ) : (
               <p className="mt-6 max-w-[60ch] text-body text-text-body">
                 No featured paper on {selectedTag?.label ?? "this topic"} yet. Try the full list or the
@@ -301,13 +351,8 @@ export default function Research() {
                   >
                     {/* Built from the data: the folded years and how many
                         papers they hold, in the year headings' own type. */}
-                    <summary className="flex cursor-pointer list-none flex-wrap items-baseline gap-x-3 gap-y-1 py-8 text-text-strong transition-colors hover:text-rr-violet [&::-webkit-details-marker]:hidden">
-                      <span
-                        aria-hidden="true"
-                        className="inline-block font-display text-display-m leading-none transition-transform duration-[var(--duration-fast)] group-open:rotate-90 motion-reduce:transition-none"
-                      >
-                        &#8250;
-                      </span>
+                    <summary className={FOLD_SUMMARY}>
+                      <FoldChevron />
                       <span className="font-display text-display-m font-semibold tabular-nums">
                         {earlier[earlier.length - 1][0]} to {earlier[0][0]}
                       </span>
