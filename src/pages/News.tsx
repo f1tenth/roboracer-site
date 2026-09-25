@@ -106,7 +106,7 @@ export default function News() {
                 tone="accent"
                 duration={2.5}
                 value={items.length}
-                label="Stories"
+                label="Posts"
               />
               <StatTicker
                 key={`events-${events.length}`}
@@ -167,7 +167,7 @@ export default function News() {
             />
           )}
           <p className="mt-8 font-mono text-small text-text-muted" aria-live="polite">
-            {tag ? `${filtered.length} of ${rest.length} stories · ${selected?.label}` : `${rest.length} stories`}
+            {tag ? `${filtered.length} of ${rest.length} posts · ${selected?.label}` : `${rest.length} posts`}
           </p>
           {filtered.length === 0 ? (
             <p className="mt-6 max-w-[60ch] text-body text-text-body">
@@ -216,7 +216,7 @@ export default function News() {
                   <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={LINK}>
                     @roboracer.ai
                   </a>{" "}
-                  in your post and send us the link. We add it here with your name and credit.
+                  in your post and send us the link. We'll post it here and credit you.
                 </>
               }
             />

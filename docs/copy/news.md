@@ -7,9 +7,9 @@ NewsEmpty, LinkedInEmbed, newsData). The feed items themselves are in
 | Location | Before | After | Rule broken |
 |---|---|---|---|
 | News.tsx, header lead | Race reports, results and posts from the teams who build and run the cars. | Results and posts from the teams who build and race the cars. | 2 (three nouns for rhythm; "race reports" and "posts" overlap) |
-| News.tsx, ledger label | Items | Stories | 2 ("items" is CMS language) |
-| News.tsx, archive count | {n} of {m} items · {event} / {m} items | {n} of {m} stories · {event} / {m} stories | 2, matches the ledger |
-| News.tsx, Contribute lead | Posted about your team, your car or a race you ran? Tag us at @roboracer.ai and send us the link. It will go here, with your name and your credit on it! | Tag us at @roboracer.ai in your post and send us the link. We add it here with your name and credit. | 1 (34 words), 2 (question, three nouns), voice (exclamation mark) |
+| News.tsx, ledger label | Items | Posts | 2 ("items" is CMS language); "posts" per lead review |
+| News.tsx, archive count | {n} of {m} items · {event} / {m} items | {n} of {m} posts · {event} / {m} posts | 2, matches the ledger |
+| News.tsx, Contribute lead | Posted about your team, your car or a race you ran? Tag us at @roboracer.ai and send us the link. It will go here, with your name and your credit on it! | Tag us at @roboracer.ai in your post and send us the link. We'll post it here and credit you. | 1 (34 words), 2 (question, three nouns), voice (exclamation mark) |
 | News.tsx, Slack line | Feel free to reach out on Slack. | Or message us on Slack. | 2 ("feel free to reach out" is filler) |
 | NewsEmpty.tsx, empty title | The feed is quiet | No news yet | 8 (cute; say it plainly) |
 | NewsEmpty.tsx, empty body | Nothing is in the feed right now. Race news lands in the RoboRacer Slack first. | Race news is posted in the RoboRacer Slack first. | 5 (first sentence repeats the title) |
