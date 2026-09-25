@@ -6,37 +6,60 @@
       "name": "Neobotics",
       "kind": "company",
       "label": "nonprofit",
-      "what": "A Massachusetts nonprofit that builds the NeoRacer, an open, ready-built autonomous race car for high schools and colleges.",
+      "what": "A Massachusetts nonprofit that builds the NeoRacer, an open autonomous race car, sold ready to run, for high schools and colleges.",
       "origin": "The NeoRacer is built to RoboRacer race rules, and Neobotics co-organized the 30th RoboRacer competition, at VTC 2026 in Boston.",
       "since": 2025,
       "url": "https://neobotics.org/",
       "logo": null,
       "status": "verify",
       "source": "https://neobotics.org/about",
+      "named_by": "Cedric, 2026-09-24",
       "evidence": [
-        { "url": "https://neobotics.org/about", "says": "Neobotics Foundation incorporated Feb 26, 2025 as a Massachusetts nonprofit; 501(c)(3) in June 2025; first NeoRacer kits shipped Aug 2026; hosting an autonomous racing event with RoboRacer at IEEE VTC2026-Fall. Founders and several advisors are Boston University people." },
-        { "url": "https://neobotics.org/kits", "says": "NeoRacer product page: aimed at high schools and colleges; lists 'Compatible with Roboracer AI'." },
-        { "url": "https://arxiv.org/abs/2607.26855", "says": "NeoRacer paper (Bandyopadhyay, Mehta, El Mabsout, Mancuso; Jul 29, 2026): open hardware (CERN-OHL-S v2) and software (GPLv3); 'fully compatible with the F1Tenth autonomous racing ecosystem and competition rules'; the VTC 2026 event is co-organised with the RoboRacer Foundation; a school-to-college pathway is co-designed with the RoboRacer Foundation." },
-        { "url": "https://github.com/f1tenth/vtc2026-race", "says": "30th Roboracer Autonomous Racing Competition, VTC2026-Fall, Boston, Sep 6-9, 2026. Organizers: Rahul Mangharam, Ahmad Amine, Koneshka Bandyopadhyay (Founder & CEO, Neobotics Foundation Inc.)." },
-        { "url": "https://github.com/f1tenth/bu2024_race", "says": "Context only, not used in the copy: the BU F1TENTH Autonomous Grand Prix, Nov 22, 2024, was organized by Boston University faculty incl. Renato Mancuso (now a Neobotics advisor and NeoRacer co-author) with Rahul Mangharam." }
+        {
+          "url": "https://neobotics.org/about",
+          "says": "Neobotics Foundation incorporated Feb 26, 2025 as a Massachusetts nonprofit; 501(c)(3) in June 2025; first NeoRacer kits shipped Aug 2026; hosting an autonomous racing event with RoboRacer at IEEE VTC2026-Fall. Founders and several advisors are Boston University people."
+        },
+        {
+          "url": "https://neobotics.org/kits",
+          "says": "NeoRacer product page: aimed at high schools and colleges; lists 'Compatible with Roboracer AI'."
+        },
+        {
+          "url": "https://arxiv.org/abs/2607.26855",
+          "says": "NeoRacer paper (Bandyopadhyay, Mehta, El Mabsout, Mancuso; Jul 29, 2026): open hardware (CERN-OHL-S v2) and software (GPLv3); 'fully compatible with the F1Tenth autonomous racing ecosystem and competition rules'; the VTC 2026 event is co-organised with the RoboRacer Foundation; a school-to-college pathway is co-designed with the RoboRacer Foundation."
+        },
+        {
+          "url": "https://github.com/f1tenth/vtc2026-race",
+          "says": "30th Roboracer Autonomous Racing Competition, VTC2026-Fall, Boston, Sep 6-9, 2026. Organizers: Rahul Mangharam, Ahmad Amine, Koneshka Bandyopadhyay (Founder & CEO, Neobotics Foundation Inc.)."
+        },
+        {
+          "url": "https://github.com/f1tenth/bu2024_race",
+          "says": "Context only, not used in the copy: the BU F1TENTH Autonomous Grand Prix, Nov 22, 2024, was organized by Boston University faculty incl. Renato Mancuso (now a Neobotics advisor and NeoRacer co-author) with Rahul Mangharam."
+        }
       ],
-      "note": "Cedric asked for Neobotics as a successful spinoff. No public page says Neobotics grew out of RoboRacer; the sourced link is the rules compatibility and the VTC 2026 co-organization. If the founders came out of the BU F1TENTH Grand Prix (Nov 2024) or the BU F1TENTH student club, say so and the origin line can carry it. A Neobotics icon is already in public/partners/neobotics.webp (commit 13513e9, partner wall) but has no ASSET_MANIFEST row, so it is not used here."
+      "note": "Source: Cedric, 2026-09-24 (named Neobotics as a spinoff), alongside the first-party pages in evidence. No public page says Neobotics grew out of RoboRacer; the sourced link is the rules compatibility and the VTC 2026 co-organization. If the founders came out of the BU F1TENTH Grand Prix (Nov 2024) or the BU F1TENTH student club, say so and the origin line can carry it. A Neobotics icon is already in public/partners/neobotics.webp (commit 13513e9, partner wall) but has no ASSET_MANIFEST row, so it is not used here."
     },
     {
       "name": "Quanser",
       "kind": "company",
       "what": "An engineering-education company whose Self-Driving Car Studio is built around the QCar 2, a 1/10-scale research car.",
-      "origin": "TODO(content): no public source links Quanser or the QCar to F1TENTH/RoboRacer. Quanser predates F1TENTH (its site says 35+ years of academic partnership). Cedric to say how they are connected.",
+      "origin": "TODO(content): Cedric named Quanser as a spinoff (2026-09-24), but no public page says how Quanser or the QCar connects to F1TENTH/RoboRacer. Ask him what the connection is.",
       "since": null,
       "url": "https://www.quanser.com/products/qcar-2/",
       "logo": null,
       "status": "verify",
       "source": "https://www.quanser.com/products/qcar-2/",
+      "named_by": "Cedric, 2026-09-24",
       "evidence": [
-        { "url": "https://www.quanser.com/products/qcar-2/", "says": "QCar 2: open-architecture, 1/10th scale vehicle for academic self-driving work; the feature vehicle of the Self-Driving Car Studio. No mention of F1TENTH or RoboRacer." },
-        { "url": "https://www.quanser.com/about/", "says": "Founded by an engineering professor, Dr. Jacob Apkarian, to improve his teaching; '35+ years of academic partnership'. No mention of F1TENTH or RoboRacer." }
+        {
+          "url": "https://www.quanser.com/products/qcar-2/",
+          "says": "QCar 2: open-architecture, 1/10th scale vehicle for academic self-driving work; the feature vehicle of the Self-Driving Car Studio. No mention of F1TENTH or RoboRacer."
+        },
+        {
+          "url": "https://www.quanser.com/about/",
+          "says": "Founded by an engineering professor, Dr. Jacob Apkarian, to improve his teaching; '35+ years of academic partnership'. No mention of F1TENTH or RoboRacer."
+        }
       ],
-      "note": "Named by Cedric. The card renders what Quanser is and a verify tag, but no origin line, because nothing public connects the QCar to F1TENTH (searched quanser.com, the f1tenth GitHub org and the web). Is it a hardware lineage, a shared course, a race partnership? If Quanser is really a partner rather than a spinoff, it belongs in partners.json instead."
+      "note": "Source: Cedric, 2026-09-24 (named Quanser as a spinoff), alongside the first-party pages in evidence. The open question is what the connection is (hardware lineage, a course, a race partnership?), not whether it counts. The card keeps what Quanser is plus a verify tag, and no origin line, until he answers."
     },
     {
       "name": "LAMARRacing",
@@ -49,8 +72,14 @@
       "status": "verify",
       "source": "https://lamarr-institute.org/news/lamarracer-wins-roboracer-competition/",
       "evidence": [
-        { "url": "https://lamarr-institute.org/news/lamarracer-wins-roboracer-competition/", "says": "Jun 8, 2026: LamarRacing won the 'Best Performance Overall' award at the RoboRacer Competition at ICRA 2026 in Vienna against 35 international teams; fastest in the time trials, fourth in the one-on-one races. Students Lukas Kutsch, Samir Shehadeh, Aftab Akhtar, Lavinia Kong; supervised by Nils Dengler and Prof. Dr. Maren Bennewitz." },
-        { "url": "https://arxiv.org/abs/2603.07126", "says": "Shehadeh, Kutsch, Dengler, Pan, Bennewitz (Mar 2026): all authors with the University of Bonn, several also with the Lamarr Institute; hardware validation on a 'self-built RoboRacer 1:10 autonomous racing platform'." }
+        {
+          "url": "https://lamarr-institute.org/news/lamarracer-wins-roboracer-competition/",
+          "says": "Jun 8, 2026: LamarRacing won the 'Best Performance Overall' award at the RoboRacer Competition at ICRA 2026 in Vienna against 35 international teams; fastest in the time trials, fourth in the one-on-one races. Students Lukas Kutsch, Samir Shehadeh, Aftab Akhtar, Lavinia Kong; supervised by Nils Dengler and Prof. Dr. Maren Bennewitz."
+        },
+        {
+          "url": "https://arxiv.org/abs/2603.07126",
+          "says": "Shehadeh, Kutsch, Dengler, Pan, Bennewitz (Mar 2026): all authors with the University of Bonn, several also with the Lamarr Institute; hardware validation on a 'self-built RoboRacer 1:10 autonomous racing platform'."
+        }
       ],
       "note": "Framed as a team that grew from the platform, as asked. The team's founding year is not public, so 'since' is null. This also answers the open teams.json question: the paper puts LAMARRacing at the University of Bonn (teams.json still has institution TODO; not edited here)."
     }
@@ -67,8 +96,14 @@
       "status": "verify",
       "source": "https://arxiv.org/abs/2403.11784",
       "evidence": [
-        { "url": "https://arxiv.org/abs/2403.11784", "says": "ForzaETH Race Stack paper (Mar 2024, Journal of Field Robotics): an autonomous racing software platform designed for F1TENTH on commercial off-the-shelf hardware; it won the official F1TENTH international competition multiple times." },
-        { "url": "https://github.com/ForzaETH/race_stack", "says": "Repo by ETH Zurich's D-ITET Center for Project Based Learning; builds on f1tenth_system, the F1TENTH simulator and the f1tenth vesc driver." }
+        {
+          "url": "https://arxiv.org/abs/2403.11784",
+          "says": "ForzaETH Race Stack paper (Mar 2024, Journal of Field Robotics): an autonomous racing software platform designed for F1TENTH on commercial off-the-shelf hardware; it won the official F1TENTH international competition multiple times."
+        },
+        {
+          "url": "https://github.com/ForzaETH/race_stack",
+          "says": "Repo by ETH Zurich's D-ITET Center for Project Based Learning; builds on f1tenth_system, the F1TENTH simulator and the f1tenth vesc driver."
+        }
       ],
       "note": "A product that came out of racing the car. Keep, or is ForzaETH better shown as a team?"
     },
@@ -83,9 +118,18 @@
       "status": "verify",
       "source": "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-iros-2024/",
       "evidence": [
-        { "url": "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-iros-2024/", "says": "The first RoboRacer Sim Racing League, at IROS 2024, on AutoDRIVE digital twins; organizers include Rahul Mangharam, Venkat Krovi, Johannes Betz, Chinmay and Tanmay Samak, Ahmad Amine, Hongrui Zheng." },
-        { "url": "https://autodrive-ecosystem.github.io/competitions/", "says": "Editions listed: IROS 2024, CDC 2024, ICRA 2025, CDC-TF 2025, ICRA 2026, IROS 2026." },
-        { "url": "https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-RoboRacer-Sim-Racing", "says": "RoboRacer Digital Twin Autonomous Sim-Racing League using AutoDRIVE Ecosystem (successor of the 2024 F1TENTH Sim Racing repo)." }
+        {
+          "url": "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-iros-2024/",
+          "says": "The first RoboRacer Sim Racing League, at IROS 2024, on AutoDRIVE digital twins; organizers include Rahul Mangharam, Venkat Krovi, Johannes Betz, Chinmay and Tanmay Samak, Ahmad Amine, Hongrui Zheng."
+        },
+        {
+          "url": "https://autodrive-ecosystem.github.io/competitions/",
+          "says": "Editions listed: IROS 2024, CDC 2024, ICRA 2025, CDC-TF 2025, ICRA 2026, IROS 2026."
+        },
+        {
+          "url": "https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-RoboRacer-Sim-Racing",
+          "says": "RoboRacer Digital Twin Autonomous Sim-Racing League using AutoDRIVE Ecosystem (successor of the 2024 F1TENTH Sim Racing repo)."
+        }
       ],
       "note": "Co-run with RoboRacer, so arguably part of RoboRacer rather than a spinoff. Keep it here, or move it to Race?"
     },
@@ -100,8 +144,14 @@
       "status": "verify",
       "source": "https://www.madhurbehl.com/",
       "evidence": [
-        { "url": "https://www.madhurbehl.com/", "says": "Behl is founder and team principal of UVA's Cavalier Autonomous Racing, the first American team to win the Indy Autonomous Challenge; he co-founded the F1Tenth platform and its Grand Prix competitions." },
-        { "url": "https://www.indyautonomouschallenge.com/cavalier-autonomous-racing", "says": "IAC team profile: the majority of team members had been involved in F1/10 autonomous racing development for the past 5 years." }
+        {
+          "url": "https://www.madhurbehl.com/",
+          "says": "Behl is founder and team principal of UVA's Cavalier Autonomous Racing, the first American team to win the Indy Autonomous Challenge; he co-founded the F1Tenth platform and its Grand Prix competitions."
+        },
+        {
+          "url": "https://www.indyautonomouschallenge.com/cavalier-autonomous-racing",
+          "says": "IAC team profile: the majority of team members had been involved in F1/10 autonomous racing development for the past 5 years."
+        }
       ],
       "note": "The clearest 'grew out of F1TENTH' story in the public record. The team's founding year is not on either page."
     }

@@ -155,6 +155,8 @@ export type Spinoff = {
   logo: string | null;
   status: "verify" | "published";
   source: string;
+  /** Who named it a spinoff, when that is a person rather than a page. */
+  named_by?: string;
   evidence?: { url: string; says: string }[];
   note?: string;
 };

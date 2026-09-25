@@ -33,7 +33,7 @@ function fillers(n: number) {
 }
 
 function SpinoffCard({ spinoff }: { spinoff: Spinoff }) {
-  const { name, kind, label, what, since, url, logo, status, source } = spinoff;
+  const { name, kind, label, what, since, url, logo, status } = spinoff;
   const origin = shown(spinoff.origin);
   return (
     <article className="flex h-full min-w-0 flex-col bg-paper-50 p-5 sm:p-6">
@@ -72,21 +72,11 @@ function SpinoffCard({ spinoff }: { spinoff: Spinoff }) {
           <p className="mt-1.5 max-w-[48ch] text-small text-text-body">{origin}</p>
         </div>
       )}
-      {/* The source link only when it is a different page from the name's:
-          a second tab stop to the same URL is noise for keyboard readers. */}
-      {(status === "verify" || source !== url) && (
-        <p className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-6">
-          {status === "verify" && <VerifyTag />}
-          {source !== url && (
-            <a
-              href={source}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`font-mono text-eyebrow tracking-normal text-text-muted ${LINK}`}
-            >
-              the source<span aria-hidden="true"> &#8599;</span>
-            </a>
-          )}
+      {/* The verify tag alone, as on the team cards; the sources stay in
+          the JSON for review. */}
+      {status === "verify" && (
+        <p className="mt-auto pt-6">
+          <VerifyTag />
         </p>
       )}
     </article>
@@ -98,8 +88,7 @@ function SpinoffCard({ spinoff }: { spinoff: Spinoff }) {
  * public/data/spinoffs.json `entries` (the `candidates` there wait for
  * Cedric). One hairline grid in the people-card language: kind and year in
  * mono, the name as a display wordmark and link, one sentence on what it is,
- * one on where it came from, then the verify tag and, when it is a different
- * page, the source link.
+ * one on where it came from, then the verify tag.
  */
 export default function SpinoffGrid({ spinoffs }: SpinoffGridProps) {
   if (spinoffs.length === 0) return null;

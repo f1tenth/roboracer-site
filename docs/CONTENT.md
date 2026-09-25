@@ -146,13 +146,15 @@ Legend: **KEEP** true and on-voice, leave alone. **CHANGE** true but weak/stale/
 Data: `public/data/spinoffs.json`. `entries` render on /about as section 05
 "Spinoffs" (after Our Partners, before Videos); `candidates` do not render until
 you move them into `entries`. Nothing about spinoffs is in the content skill, so
-every entry is `status: "verify"` and shows the mono verify tag. Each record
-carries its `source` and an `evidence` list of the first-party pages it was
-drafted from; the sentences are ours, not theirs.
+every entry is `status: "verify"` and shows the mono verify tag (no source
+link on the card, as on the team cards). Each record carries its `source` and
+an `evidence` list of the first-party pages it was drafted from; the sentences
+are ours, not theirs. Neobotics and Quanser also carry `named_by: "Cedric,
+2026-09-24"`: you named both as spinoffs.
 
 **Facts to confirm**
 
-1. **Neobotics.** Public pages give: Massachusetts nonprofit, incorporated
+1. **Neobotics** (named by you, 2026-09-24). Public pages give: Massachusetts nonprofit, incorporated
    Feb 26, 2025; builds the NeoRacer; the NeoRacer paper says it is built to
    F1TENTH/RoboRacer race rules; Neobotics co-organized the 30th competition at
    VTC 2026 in Boston (Koneshka Bandyopadhyay is on the organizer list in
@@ -162,12 +164,11 @@ drafted from; the sentences are ours, not theirs.
    a Neobotics advisor, and Rahul). Did the founders come out of that race or
    the BU F1TENTH club? If yes, the origin line can say so; today it only says
    what is sourced.
-2. **Quanser.** No public source links Quanser or the QCar to F1TENTH/RoboRacer
-   (searched quanser.com, the f1tenth GitHub org and the web), and Quanser is
-   older than F1TENTH (its site says 35+ years). What is the connection: a
-   shared hardware lineage, a course, a race partnership? Until you say, the
-   card shows what Quanser is plus a verify tag and no origin line. If Quanser
-   is a partner rather than a spinoff, it belongs in `partners.json` instead.
+2. **Quanser** (named by you, 2026-09-24). What is the connection: a shared
+   hardware lineage, a course, a race partnership? No public source says
+   (searched quanser.com, the f1tenth GitHub org and the web; Quanser's site
+   gives 35+ years of history, so it predates F1TENTH). Until you say, the card
+   shows what Quanser is plus a verify tag and no origin line.
 3. **LAMARRacing.** Sourced to the Lamarr Institute news post (Jun 8, 2026:
    Best Performance Overall at ICRA 2026, fastest in the time trials, fourth in
    the one-on-one races) and the team's arXiv paper 2603.07126 (all authors at

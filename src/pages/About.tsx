@@ -48,6 +48,11 @@ const ICRA_GROUP_PHOTO = {
   caption: "group pic ICRA 2026",
 };
 
+/** "Three so far": the spinoff lead spells its count, which follows
+ * spinoffs.json as Cedric accepts candidates. */
+const COUNT_WORDS = ["None", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+const countWord = (n: number) => COUNT_WORDS[n] ?? String(n);
+
 const LINK_ON_PAPER =
   "text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
 const LINK_ON_INK =
@@ -350,7 +355,7 @@ export default function About() {
             id="about-spinoffs"
             title="Spinoffs"
             subtitle="Teams and companies that grew out of the car"
-            lead="A verify tag means we have not yet confirmed the story with the people who built it."
+            lead={`${countWord(spinoffs.length)} so far. A verify tag means the people involved have not confirmed our wording yet.`}
           />
           <SpinoffGrid spinoffs={spinoffs} />
         </Section>
