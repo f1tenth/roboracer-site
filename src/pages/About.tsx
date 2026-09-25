@@ -160,10 +160,8 @@ export default function About() {
                 Open-source autonomous racing since 2016
               </h1>
               <p className="mt-6 max-w-[60ch] text-lead text-text-on-ink-muted">
-                RoboRacer, formerly F1TENTH, is an international community of researchers, engineers
-                and students around a one-tenth-scale open-source autonomous race car. It started at
-                the University of Pennsylvania in 2016 and now runs a competition series at the
-                major robotics conferences.
+                RoboRacer, formerly F1TENTH, is an autonomous race car at one-tenth scale, and the
+                community that builds and races it.
               </p>
             </div>
             <div className="md:col-span-5 md:col-start-8">
@@ -189,7 +187,7 @@ export default function About() {
               <p className="mt-8 border-t border-text-on-ink/15 pt-6 font-mono text-small text-text-on-ink-muted">
                 founded 2016, University of Pennsylvania ·{" "}
                 <a href={SCHOLAR_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_INK}>
-                  the Scholar query &#8599;
+                  the Google Scholar search &#8599;
                 </a>
               </p>
             </div>
@@ -213,12 +211,12 @@ export default function About() {
           index="01"
           id="about-what"
           title="What RoboRacer is"
-          subtitle="One open car design, used for teaching, research and racing"
+          subtitle="One open car for teaching, research and racing"
         />
         <div className="grid gap-10 md:grid-cols-12 md:gap-x-10">
           <Reveal className="flex flex-col gap-5 md:col-span-6">
             <p className="max-w-[62ch] text-lead text-text-body">
-              RoboRacer started at the University of Pennsylvania in 2016 under the name F1TENTH.
+              RoboRacer started at the University of Pennsylvania in 2016.
               Rahul Mangharam leads it from Penn&apos;s xLAB. Madhur Behl, now at the University of
               Virginia,{" "}
               <a href={BEHL_SOURCE} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
@@ -227,13 +225,12 @@ export default function About() {
               .
             </p>
             <p className="max-w-[62ch] text-body text-text-body">
-              The car is a one-tenth-scale autonomous race car. Its hardware design, its software
-              stack and its simulator are open source, so a lab builds one rather than buys one.
+              The car's hardware, software and simulator are open source, so a lab builds its own
+              instead of buying one.
             </p>
             <p className="max-w-[62ch] text-body text-text-body">
-              The courses built around it teach the foundations of autonomy and the analytical
-              skills to recognize and reason about situations with moral content in the design of
-              autonomous systems.
+              The course built around it teaches perception, localization, planning and control.
+              It also covers moral decision making in autonomous systems.
             </p>
             <p className="max-w-[62ch] text-body text-text-body">
               More than 90 universities in over 20 countries use the platform, and more than a
@@ -266,13 +263,13 @@ export default function About() {
           id="about-people"
           title="People"
           subtitle="Who runs RoboRacer"
-          lead="Titles come from each person's own university page, or from the organizing committee of the race they run. Click a name to go there. A verify tag means we still need to confirm the role."
+          lead="Each name links to the page its title comes from. A verify tag means we haven't confirmed the role yet."
         />
         <div className="flex flex-col gap-16">
           <PeopleGroup
             id="about-faculty"
             title="Faculty and advisors"
-            lead="Faculty who lead the platform and sit on the competitions' organizing committees."
+            lead="They lead the platform and sit on the organizing committees of the races."
             people={FACULTY}
           />
           <PeopleGroup
@@ -307,7 +304,7 @@ export default function About() {
               </p>
               <ContributorStrip
                 contributors={activeContributors}
-                emptyLabel="contributors.json did not load"
+                emptyLabel="The contributor list didn't load."
               />
             </div>
             <div className="mt-10">
@@ -320,7 +317,7 @@ export default function About() {
           <PeopleGroup
             id="about-past-crew"
             title="Past crew"
-            lead="Everyone from earlier team rosters, taken from the old F1TENTH about page. Their roles still need confirming, hence the verify tags."
+            lead="Earlier team members, from the old F1TENTH about page. Their roles aren't confirmed yet."
             people={PAST_CREW}
             compact
           />
@@ -332,9 +329,9 @@ export default function About() {
         <SectionHeader
           index="04"
           id="about-partners"
-          title="Our Partners"
-          subtitle="The institutions that run the platform"
-          lead="Universities, companies and organizations that teach and do research with RoboRacer. Alphabetical within each group."
+          title="Our partners"
+          subtitle="Institutions that use the car"
+          lead="They teach and do research with it. Alphabetical in each group."
           action={
             partners.length > 0 ? (
               <StatTicker value={partners.length} label="institutions" />
@@ -371,7 +368,7 @@ export default function About() {
             id="about-videos"
             title="Videos"
             subtitle="Races, teams and the course"
-            lead="A freshman's first year with the car, one-minute interviews with the ICRA 2026 teams, race highlights, the course lectures and the build guide."
+            lead="Start with a freshman's first year with the car."
           />
           <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {videos.map((v) => (
