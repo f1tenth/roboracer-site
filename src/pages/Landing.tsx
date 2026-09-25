@@ -423,7 +423,7 @@ export default function Landing() {
                   Search Google Scholar
                 </Button>
                 <Button href="/research" variant="ghost" className="px-0!">
-                  See every paper
+                  Browse the papers
                 </Button>
               </div>
             }
