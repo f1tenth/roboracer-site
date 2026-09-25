@@ -129,3 +129,49 @@ On the other 7 routes checked at 844x390 and 320x568 (plus `/` and `/rules` at a
 | S3 pre-existing | `/race` earlier events 2-9 px overflow | 320 | `race/V-320x568-timeline-open.png` | `RaceTimeline.tsx:99` |
 | S3 | News archive title links 23 px, lone arrow | phones | `news/390x844-15.png` | `NewsCard.tsx:67-75` |
 | S3 optional | ASM-02, RULES-04 | 844x390; all | `chrome/V-844x390-assembly.png` | `RacecarAssembly.tsx`; `Rules.tsx` |
+
+## Round 2 (after this verification)
+
+Two more fixer branches, merged at `c3a08b9` (`revamp/p2-mobile-r2-landing`,
+`revamp/p2-mobile-r2-about`), then a lead sweep of the final build: every route
+at 390x844, 360x740 and 844x390 with zero overflow offenders, no console errors
+from site code (LinkedIn's frame still logs `getInstalledRelatedApps` on /news),
+and axe (wcag2a/2aa/21a/21aa/22aa) with **zero violations on all 9 routes** at
+390x844. Captures: `docs/mobile/verify/round2/`.
+
+| Item | Result |
+|---|---|
+| ABOUT-01/03 | Fixed: no mid-word surname break and no lone arrow at 320, 340, 360, 375, 390, 414, 430, 640, 667, 768, 844x390 (narrow Past crew tiles drop the name to eyebrow size; two across under 360; five across 640-767). |
+| ABOUT-02 | Partly: People 6,541 px at 390 (was 11,268 before the pass, 10,724 after round 1), 5,666 at 844x390. Past crew shows 12 on phones and folds the rest (`39 more`); earlier contributors fold behind their existing `earlier · 35` label. Faculty and developer rows unchanged (their height is text). |
+| About hero offset | Fixed: 16 px under the bar at 844x390 and 768, from the nav token. |
+| RESEARCH-01 | Fixed at 390: the page is 9,712 px (was 53,065), search at y 2,632 (3.1 screens); 1,738 at 844x390 (4.5 screens). The first four featured papers show on phones, the rest fold (`13 more featured`). A topic opens the fold; a search does not (it does not filter featured papers). |
+| NewsCard | Fixed: 21 headline links 44 px on touch, arrow glued to the last word. |
+| Next race video, Join YouTube (844x390) | Fixed: 505x286 and 508x286, centred, under the bar (the Join caption row still ends about 36 px below the window). |
+| Team cards (844x390) | Fixed: phones in either orientation get the row layout, two columns in landscape; tallest card 196 px (was 414). Also on /race. |
+| /race earlier events at 320 | Fixed: no overflow at 320, 360, 390. |
+
+Final page heights at 390 (before the pass): `/` 15,539 (17,927), `/about`
+20,539 (26,001), `/race` 10,236 (11,157), `/news` 13,455 (13,795), `/research`
+9,712 (53,065), `/rules` 31,576 (30,756).
+
+## Still open
+
+| Sev | Item | Why it is open |
+|---|---|---|
+| S3 | Past crew names break at 1024 wide (12 columns; 4 names with a mouse, 33 on a landscape iPad) | Desktop grid, outside the phone pass; needs fewer columns at `lg:` (Cedric's call) |
+| S3 | Small targets left: Past crew name links 41 px, a few research DOI links 43 px, /rules list items that hold only a link 22 px, partner logos in the moving ribbons 27-44 px wide | Near misses or legacy content; all pass WCAG 2.5.8 (24 px) except the /rules items, which sit in running lists |
+| S3 | TagFilter chips wrap to 148 px at 844x390 | The one-row scroller is below `sm:` only |
+| S3 | ASM-02: the /assembly frame controls cover the front wheel at 844x390 | About five height-aware lines in `RacecarAssembly.tsx`; the page was QA'd the day before |
+| S3 | RULES-04: no way back to the contents on a 36-screen document | Needs a new label |
+| Deferred | LANDING-12 portrait hero encode, RACE-06 phone encode for the race hero | Media work |
+| Deferred | LANDING-13 partner names on touch, LANDING-22 panel before video in 06 Next race | Design calls |
+| Deferred | LANDING-25: the landing's 4 s image-hold release | Out of the mobile scope |
+| Question | `viewport-fit=cover` with safe-area padding | Cedric |
+| Untested | iOS Safari (WebKit would not launch here): safe areas, hero autoplay, Safari deep links, LinkedIn and YouTube embeds | Check on a real iPhone |
+
+## New strings for Cedric
+
+`Pause` / `Play` (touch toggles on the three moving strips), `Open the docs ↗`
+(/build and /learn on phones), `39 more` (About Past crew fold), `13 more featured`
+(/research fold), `2017 to 2025 · 114 papers` (/research year fold, built from the
+data). The existing `earlier · 35` label now also works as a fold on phones.
