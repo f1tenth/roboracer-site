@@ -268,7 +268,7 @@ export default function Navbar() {
             landing hero (ui/EntryPaths), from any route. */}
         <div className="nav-actions">
           <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className="nav-cta">
-            Join Community
+            Join the Slack
           </a>
           <Link to={START_HREF} className="nav-primary">
             Start here
@@ -325,7 +325,7 @@ export default function Navbar() {
             <ExternalIcon />
           </a>
           <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className="mobile-menu-link">
-            Join Community
+            Join the Slack
           </a>
           <Link to={START_HREF} className="nav-primary mobile-menu-primary min-[24.375rem]:hidden">
             Start here

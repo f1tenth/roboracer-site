@@ -6,8 +6,8 @@
       "name": "Neobotics",
       "kind": "company",
       "label": "nonprofit",
-      "what": "A Massachusetts nonprofit that builds the NeoRacer, an open autonomous race car, sold ready to run, for high schools and colleges.",
-      "origin": "The NeoRacer is built to RoboRacer race rules, and Neobotics co-organized the 30th RoboRacer competition, at VTC 2026 in Boston.",
+      "what": "A Massachusetts nonprofit. Its NeoRacer is an open autonomous race car for high schools and colleges, sold ready to run.",
+      "origin": "The NeoRacer is built to RoboRacer race rules. Neobotics co-organized the 30th RoboRacer competition, at VTC 2026 in Boston.",
       "since": 2025,
       "url": "https://neobotics.org/",
       "logo": null,
@@ -41,7 +41,7 @@
     {
       "name": "Quanser",
       "kind": "company",
-      "what": "An engineering-education company whose Self-Driving Car Studio is built around the QCar 2, a 1/10-scale research car.",
+      "what": "An engineering education company. Its Self-Driving Car Studio is built around the QCar 2, a 1/10-scale research car.",
       "origin": "TODO(content): Cedric named Quanser as a spinoff (2026-09-24), but no public page says how Quanser or the QCar connects to F1TENTH/RoboRacer. Ask him what the connection is.",
       "since": null,
       "url": "https://www.quanser.com/products/qcar-2/",
@@ -64,7 +64,7 @@
     {
       "name": "LAMARRacing",
       "kind": "team",
-      "what": "A University of Bonn student team, with the Lamarr Institute, that races a RoboRacer car it built itself.",
+      "what": "A University of Bonn student team, with the Lamarr Institute. It races a RoboRacer car it built itself.",
       "origin": "It tested its raceline research on its own RoboRacer car, then won Best Performance Overall at ICRA 2026 in Vienna.",
       "since": null,
       "url": "https://lamarr-institute.org/news/lamarracer-wins-roboracer-competition/",

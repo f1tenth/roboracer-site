@@ -137,7 +137,7 @@ export default function NextRaceSpotlight({
             </Button>
           ) : (
             <Button href={rulesHref} on={on} variant="secondary" target="_blank" rel="noopener noreferrer">
-              Rules
+              Read the rules
             </Button>
           ))}
       </div>

@@ -85,15 +85,15 @@ const DEFAULT_PHOTOS: readonly CarPhoto[] = [
 const STATES = [
   {
     caption: "Race-ready",
-    body: "One car, assembled. Chassis, plate, LiDAR and wheels sit where the open-source URDF puts them.",
+    body: "Every part sits where the open-source design puts it.",
   },
   {
     caption: "What is inside",
-    body: "Eleven parts: the chassis, the accent plate, the LiDAR, the Jetson Orin, the power board, the VESC, the steering servo, and four wheels.",
+    body: "Eleven parts: chassis, platform deck, LiDAR, Jetson Orin, power board, VESC, steering servo and four wheels.",
   },
   {
     caption: "Build your own",
-    body: "The whole assembly is open source. Pull it apart frame by frame in the interactive viewer.",
+    body: "The whole car is open source. Take it apart in the 3D viewer.",
   },
 ] as const;
 
@@ -213,7 +213,7 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
   const [inView, setInView] = useState(false);
   const [active, setActive] = useState(false);
   const [calloutsShown, setCalloutsShown] = useState(0);
-  // "Loading CAD model…" sits in the canvas cell until the scene's parts have
+  // "Loading the 3D model…" sits in the canvas cell until the scene's parts have
   // resolved (Cedric, v5 round two: show that the model is loading).
   const [sceneReady, setSceneReady] = useState(false);
   const onSceneReady = useCallback(() => setSceneReady(true), []);
@@ -330,7 +330,7 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
       to="/assembly"
       className="inline-block self-start py-1 text-small font-semibold text-text-on-ink underline underline-offset-4 decoration-text-on-ink/30 hover:decoration-rr-violet hover:decoration-2"
     >
-      Explore the car in the interactive viewer
+      Open the 3D viewer
     </Link>
   );
 
@@ -433,7 +433,7 @@ export default function ExplodedModel({ photos = DEFAULT_PHOTOS }: ExplodedModel
                     sceneReady ? "opacity-0" : "opacity-100"
                   }`}
                 >
-                  {sceneReady ? "" : "Loading CAD model…"}
+                  {sceneReady ? "" : "Loading the 3D model…"}
                 </p>
                 {photoStatus !== "failed" && (
                   <div ref={photoLayerRef} className="pointer-events-none absolute inset-0">

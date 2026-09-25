@@ -581,7 +581,7 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
       </div>
       <div className="md:col-span-5 md:col-start-8">
         <p className="max-w-[38ch] text-lead text-text-body">
-          From Pittsburgh to Busan, students build and race the same open-source car.
+          Every team builds and races the same open-source car.
         </p>
         {/* Below xl the ticker lives here as one mono line; at xl the column
             right of the map takes over. */}
