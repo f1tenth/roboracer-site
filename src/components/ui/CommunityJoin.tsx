@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { loadCommunity, type Community, type CommunityPost, type JoinPost } from "../../lib/data";
 import Section from "./Section";
 import Marquee from "./Marquee";
@@ -6,6 +7,7 @@ import YouTubeFacade from "./YouTubeFacade";
 import SectionHeader from "./SectionHeader";
 import SocialButton from "./SocialButton";
 import MediaFrame from "./MediaFrame";
+import PauseToggle from "./PauseToggle";
 import { useMediaHold } from "../../lib/media";
 
 // Links from the content skill (Slack invite confirmed by Cedric, 2026-08-20;
@@ -23,6 +25,10 @@ const CONTACT_EMAIL = "contact@roboracer.ai";
 // Site-wide text-link contract (landing v2): hairline underline, violet on hover.
 const LINK =
   "text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2";
+
+/** A 2.75rem hit area on touch screens that leaves the line box alone (the
+ * padding is taken back by the negative margin). */
+const TAP = "coarse:inline-block coarse:-my-3 coarse:py-3";
 
 // Same paper surface and hairline system as the publications.
 const CARD =
@@ -49,6 +55,8 @@ type CommunityJoinProps = {
  */
 export default function CommunityJoin({ className = "", index = "09", showYouTube = true }: CommunityJoinProps) {
   const [community, setCommunity] = useState<Community | null>(null);
+  const reduced = usePrefersReducedMotion();
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     let live = true;
@@ -102,7 +110,7 @@ export default function CommunityJoin({ className = "", index = "09", showYouTub
             </SocialButton>
           </div>
           <p className="mt-6 font-mono text-small text-text-muted">
-            <a className={`inline-block py-2 ${LINK}`} href={`mailto:${CONTACT_EMAIL}`}>
+            <a className={`inline-block py-2 coarse:-my-1 coarse:py-3 ${LINK}`} href={`mailto:${CONTACT_EMAIL}`}>
               {CONTACT_EMAIL}
             </a>
           </p>
@@ -131,9 +139,16 @@ export default function CommunityJoin({ className = "", index = "09", showYouTub
 
       {(post || youtube) && (
         <div className="mt-14 border-t border-ink-950/10 pt-8">
-          <h3 className="font-mono text-eyebrow uppercase tracking-[0.14em] text-text-muted">
-            From the community
-          </h3>
+          <div className="flex items-center justify-between gap-4">
+            <h3 className="font-mono text-eyebrow uppercase tracking-[0.14em] text-text-muted">
+              From the community
+            </h3>
+            {/* Touch screens only (it hides itself elsewhere); nothing moves
+                under reduced motion. */}
+            {!reduced && (post || posts.length > 0) && (
+              <PauseToggle paused={paused} onToggle={() => setPaused((v) => !v)} controls="community-strip" />
+            )}
+          </div>
           {/* Landing v5 round two (Cedric): "way more posts from the
               community, the entire width, looping at constant speed". A
               full-bleed marquee of the featured post (with its author's mark)
@@ -141,8 +156,33 @@ export default function CommunityJoin({ className = "", index = "09", showYouTub
               hover and on keyboard focus, wraps into a static grid under
               reduced motion (Marquee). The ICRA 2025 reel keeps its own
               card below. */}
-          {(post || posts.length > 0) && (
-            <div className="relative left-1/2 mt-6 w-screen -translate-x-1/2">
+          {(post || posts.length > 0) && reduced && (
+            /* Reduced motion: the same cards as a row the reader swipes (or
+               scrolls, or tabs through) by hand, from the page edge to the
+               screen edge, instead of twelve cards stacked into a column
+               (LANDING-10). */
+            <ul
+              aria-label="Posts from the community"
+              className="relative left-1/2 mt-6 flex w-screen -translate-x-1/2 snap-x snap-mandatory gap-5 overflow-x-auto px-[max(1.5rem,calc((100vw-var(--container-page))/2+1.5rem))] pb-4 [scroll-padding-inline:max(1.5rem,calc((100vw-var(--container-page))/2+1.5rem))] md:gap-6"
+            >
+              {post && (
+                <li className="flex shrink-0 snap-start">
+                  <PostCard post={post} />
+                </li>
+              )}
+              {posts.map((p) => (
+                <li key={p.id} className="flex shrink-0 snap-start">
+                  <CommunityPostCard post={p} />
+                </li>
+              ))}
+            </ul>
+          )}
+          {(post || posts.length > 0) && !reduced && (
+            <div
+              id="community-strip"
+              data-marquee-paused={paused || undefined}
+              className="relative left-1/2 mt-6 w-screen -translate-x-1/2"
+            >
               <Marquee label="Posts from the community" duration={70} durationMd={110} gap="gap-5 pr-5 md:gap-6 md:pr-6">
                 {({ clone }) => (
                   <>
@@ -213,7 +253,7 @@ function CommunityPostCard({ post, clone = false }: { post: CommunityPost; clone
         {meta && <p className="font-mono text-eyebrow tracking-normal text-text-muted">{meta}</p>}
         {post.excerpt && <p className="text-small text-text-body">{post.excerpt}</p>}
         <p className="mt-auto pt-1 text-small">
-          <a href={post.post_url} target="_blank" rel="noopener noreferrer" tabIndex={tab} className={LINK}>
+          <a href={post.post_url} target="_blank" rel="noopener noreferrer" tabIndex={tab} className={`${TAP} ${LINK}`}>
             View on LinkedIn ↗
           </a>
         </p>
@@ -269,7 +309,7 @@ function PostCard({ post, clone = false }: { post: JoinPost; clone?: boolean }) 
         </p>
         {post.excerpt && <p className="text-small text-text-body">{post.excerpt}</p>}
         <p className="mt-auto pt-1 text-small">
-          <a href={post.post_url} target="_blank" rel="noopener noreferrer" tabIndex={tab} className={LINK}>
+          <a href={post.post_url} target="_blank" rel="noopener noreferrer" tabIndex={tab} className={`${TAP} ${LINK}`}>
             View on LinkedIn ↗
           </a>
         </p>

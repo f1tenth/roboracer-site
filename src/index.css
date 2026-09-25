@@ -256,6 +256,12 @@ body {
 .rr-marquee:has(a:focus-visible) .rr-marquee-track {
   animation-play-state: paused;
 }
+/* A touch screen never hovers: each strip group (partners, highlights,
+   community) has a Pause toggle (ui/PauseToggle) that sets this attribute on
+   the group. Unlayered for the same reason as the rule above. */
+[data-marquee-paused="true"] .rr-marquee-track {
+  animation-play-state: paused;
+}
 @media (prefers-reduced-motion: reduce) {
   .rr-marquee-track {
     animation: none;

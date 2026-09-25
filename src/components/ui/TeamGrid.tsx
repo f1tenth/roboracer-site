@@ -21,20 +21,25 @@ function initials(name: string): string {
  * the team logo (object-contain), else mono initials. Every entry renders (Cedric, 2026-08-21: nothing hidden on
  * localhost); entries not yet "published" carry a mono "unverified" tag.
  * Results and TODO-marked institutions render as data, in mono. 10 teams =
- * two clean rows of five on desktop, five rows of two on mobile.
+ * two clean rows of five on desktop. Below sm each team is one row (a 5rem
+ * photo left, name and result right) so ten teams are not ten screens of
+ * square photos; from sm the grid runs 3, 4, then 5 across, with 4/3 photos
+ * until lg (mobile pass, LANDING-09).
  */
 export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
   const ink = on === "ink";
   if (teams.length === 0) return null;
   return (
-    <ul className="grid grid-cols-2 overflow-hidden rounded-card border border-ink-950/10 lg:grid-cols-5">
+    <ul className="grid overflow-hidden rounded-card border border-ink-950/10 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
       {teams.map((team) => {
         const best = team.highlights?.[0];
         const institution = team.institution?.startsWith("TODO(content)") ? undefined : team.institution;
         return (
           <li key={team.name} className={`min-w-0 -mt-px -ml-px border-t border-l border-ink-950/10 ${ink ? "bg-ink-900" : "bg-paper-50"}`}>
-            <article className="flex h-full min-w-0 flex-col">
-              <div className={`relative aspect-square ${ink ? "bg-ink-800" : "bg-paper-200"}`}>
+            <article className="flex h-full min-w-0 flex-col max-sm:flex-row max-sm:gap-4 max-sm:p-4">
+              <div
+                className={`relative aspect-square max-sm:w-20 max-sm:shrink-0 max-sm:self-start sm:max-lg:aspect-[4/3] ${ink ? "bg-ink-800" : "bg-paper-200"}`}
+              >
                 {team.photo ? (
                   <img
                     src={`${import.meta.env.BASE_URL}${team.photo.replace(/^\//, "")}`}
@@ -53,7 +58,7 @@ export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
                     height={320}
                     loading="lazy"
                     decoding="async"
-                    className="absolute inset-0 h-full w-full object-contain p-6"
+                    className="absolute inset-0 h-full w-full object-contain p-3 sm:p-6"
                   />
                 ) : (
                   <span
@@ -64,7 +69,7 @@ export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
                   </span>
                 )}
               </div>
-              <div className="flex min-w-0 grow flex-col gap-1.5 p-4 sm:p-5">
+              <div className="flex min-w-0 grow flex-col gap-1.5 sm:p-5">
                 <h3 className={`font-display text-body font-semibold ${ink ? "text-text-on-ink" : "text-text-strong"}`}>
                   {team.name}
                 </h3>
@@ -86,7 +91,7 @@ export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
                     href={team.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-block w-fit py-1 text-small font-semibold ${
+                    className={`inline-block w-fit py-1 text-small font-semibold coarse:-my-2 coarse:py-3 ${
                       ink
                         ? "text-text-on-ink underline underline-offset-4 decoration-text-on-ink/30 hover:decoration-rr-violet hover:decoration-2"
                         : "text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2"

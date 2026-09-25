@@ -11,8 +11,11 @@ export const SIZE: Record<ButtonSize, string> = {
 };
 
 export function classesFor(variant: ButtonVariant, on: "paper" | "ink"): string {
+  // A label never breaks across two lines (RACE-01: "Register your team"
+  // wrapped in the 768 panel). Every button on the site measured at 320 px
+  // wide still fits its column on one line (mobile pass, 2026-09-25).
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-btn font-sans font-semibold transition-colors duration-[var(--duration-fast)]";
+    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-btn font-sans font-semibold transition-colors duration-[var(--duration-fast)]";
   if (variant === "primary") {
     // Solid violet, identical on ink and paper; hover only darkens the fill.
     // No glow, no shadow, no translate (accent decision 2026-08-21).
