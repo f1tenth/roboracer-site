@@ -64,10 +64,10 @@ Also: [all labs](https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/
   `ahmadamine998.github.io/ESE6150-Website/`, still answers.
 - **The nav's "Simulator"** goes to AutoDRIVE, where the Sim Racing League
   runs, not to the simulator the course teaches with.
-- **On this site:** the landing's Platform chapter (`platform.json`: Build,
-  Learn, Race, Research, with media) explains the pillars; the new Start here
-  row routes. They stay separate: Platform has Research and media, the paths
-  have Sponsor and no media. `/assembly` is the 3D car.
+- **On this site:** "Start here" (`ui/StartHere`, `paths.json`) lists Build,
+  Learn, Race, Research and Sponsor with a picture each, under the landing
+  hero and as /about's opening; it replaced the Platform chapter and its
+  `platform.json` on 2026-09-25. `/assembly` is the 3D car.
 
 Gaps found while mapping:
 

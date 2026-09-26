@@ -2,14 +2,12 @@ import { useCallback, useEffect, useState, useMemo, useSyncExternalStore } from 
 import {
   loadHighlights,
   loadPartners,
-  loadPlatform,
   loadPublications,
   loadTeams,
   loadUpcomingEvents,
   tagLabelMap,
   type Highlight,
   type Partner,
-  type PlatformRow,
   type PublicationsFile,
   type Team,
   type UpcomingEvent,
@@ -22,7 +20,6 @@ import Marquee from "../components/ui/Marquee";
 import NextRaceSpotlight from "../components/ui/NextRaceSpotlight";
 import TeamGrid from "../components/ui/TeamGrid";
 import HighlightReel from "../components/ui/HighlightReel";
-import PlatformPanel from "../components/ui/PlatformPanel";
 import ExplodedModel, { type CarPhoto } from "../components/ui/ExplodedModel";
 import HeroChapter, { type HeroVideoSources } from "../components/ui/HeroChapter";
 import WorldMapChapter from "../components/ui/WorldMapChapter";
@@ -31,7 +28,8 @@ import { featuredForLanding } from "../lib/publications";
 import { countWord } from "../lib/countWord";
 import CommunityJoin from "../components/ui/CommunityJoin";
 import MediaFrame from "../components/ui/MediaFrame";
-import EntryPaths from "../components/ui/EntryPaths";
+import StartHere from "../components/ui/StartHere";
+import { START_ID } from "../lib/wayfinding";
 import PauseToggle from "../components/ui/PauseToggle";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import { useScrollToHash } from "../hooks/useScrollToHash";
@@ -73,6 +71,10 @@ const HEADLINE_LINES = ["Autonomous racing", "built and raced", "in the open"];
 // innovators", improved).
 const HERO_DESCRIPTION =
   "RoboRacer is an open-source race car at one-tenth scale. Program it to drive itself, then race it at the largest robotics conferences.";
+// "Start here" opens on what RoboRacer is in one line: the nav's "Start here"
+// lands a first-time visitor on it from any route, past the hero.
+const START_LEAD =
+  "RoboRacer is a self-driving race car at one-tenth scale that 90+ universities use for teaching, research and racing.";
 
 const SCHOLAR_URL =
   "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=";
@@ -107,9 +109,8 @@ const CAR_PHOTOS: readonly CarPhoto[] = [
 ];
 
 /**
- * Landing composition: hero chapter, entry paths, highlights, the car,
- * platform panel, community map, partner ribbons, next race, teams, research,
- * join.
+ * Landing composition: hero chapter, start here, highlights, the car,
+ * community map, partner ribbons, next race, teams, research, join.
  */
 const PARTNER_ROW_COUNT = 3;
 /** The loop was tuned against a row of this many logos; duration scales with
@@ -225,7 +226,6 @@ export default function Landing() {
   const [teams, setTeams] = useState<Team[]>([]);
   const [pubs, setPubs] = useState<PublicationsFile | null>(null);
   const [highlights, setHighlights] = useState<Highlight[]>([]);
-  const [platform, setPlatform] = useState<PlatformRow[]>([]);
   const [heroLoaded, setHeroLoaded] = useState(false);
   const releaseMedia = useCallback(() => setHeroLoaded(true), []);
   const reduced = usePrefersReducedMotion();
@@ -247,7 +247,6 @@ export default function Landing() {
     loadTeams().then(setTeams).catch(() => setTeams([]));
     loadPublications().then(setPubs).catch(() => setPubs(null));
     loadHighlights().then(setHighlights).catch(() => setHighlights([]));
-    loadPlatform().then(setPlatform).catch(() => setPlatform([]));
   }, []);
 
   // Three ribbons, dealt round-robin rather than sliced into thirds, so each row
@@ -264,7 +263,7 @@ export default function Landing() {
   // everything below them; recompute the cached ScrollTrigger starts.
   useEffect(() => {
     ScrollTrigger.refresh();
-  }, [events, partners, teams, pubs, highlights, platform]);
+  }, [events, partners, teams, pubs, highlights]);
 
   // Webfonts finish after GSAP's own load-time refresh and change layout
   // heights, leaving stale trigger starts.
@@ -290,11 +289,13 @@ export default function Landing() {
           runs under the transparent nav: no page top padding on this route. */}
       <HeroChapter video={HERO_VIDEO} lines={HEADLINE_LINES} description={HERO_DESCRIPTION} onOpeningLoaded={releaseMedia} />
 
-      {/* 00 Start here (paper) - newbie, beginner, learner, competitor,
-          sponsor: four ways in, the first thing under the hero. The platform
-          chapter (03) stays: it explains the pillars with media, this row
-          only routes (public/data/paths.json). */}
-      <EntryPaths />
+      {/* 00 Start here (paper) - newbie, beginner, student, faculty
+          (indirectly), competitor, sponsor: what RoboRacer is in one line,
+          then the five ways in with a small picture each, the first thing
+          under the hero. It replaced the entry-path row and the pinned
+          Platform chapter (Cedric, 2026-09-25); /about opens on the same
+          component, fuller (public/data/paths.json). */}
+      <StartHere index="00" id={START_ID} headingId="start-title" lead={START_LEAD} />
 
       {/* 2 · 01 Highlights (paper, full-bleed) - newbie, press */}
       <Section edge rule width="bleed" aria-labelledby="highlights" className="pt-section-tight!">
@@ -325,28 +326,11 @@ export default function Landing() {
         <ExplodedModel photos={CAR_PHOTOS} />
       </div>
 
-      {/* 4 · 03 Platform (paper): pinned 300vh chapter, scroll walks the four
-          rows with the media crossfading beside them - learner, faculty */}
-      <Section rule width="bleed" aria-labelledby="pillars">
-        <PlatformPanel
-          rows={platform}
-          header={
-            <SectionHeader
-              index="03"
-              id="pillars"
-              title="Platform"
-              subtitle="Build. Learn. Race. Research."
-              lead="All four start with the same open-source car."
-            />
-          }
-        />
-      </Section>
-
-      {/* 5 · 04 Community map (ink, pinned 260vh) - sponsor, press. Owns its
-          header, the four counters (progress-bound) and its data. */}
+      {/* 4 · 03 Community map (paper, pinned 260vh) - sponsor, press. Owns
+          its header, the four counters (progress-bound) and its data. */}
       <WorldMapChapter />
 
-      {/* 6 · 05 Our Partners (paper) - sponsor, faculty. Keeps the map's own
+      {/* 5 · 04 Our Partners (paper) - sponsor, faculty. Keeps the map's own
           1,800 px bleed and pt-0, so the ribbon still sits right under the
           chapter's counters (Cedric, 2026-08-22: it read as detached from the
           geography). The header goes inside that tight rhythm, not in a fresh
@@ -354,7 +338,7 @@ export default function Landing() {
       <Section tight width="bleed" aria-labelledby="partners" className="pt-0! pb-10">
         <div className="mx-auto max-w-page border-b border-ink-950/10 px-6 pb-6">
           <SectionHeader
-            index="05"
+            index="04"
             id="partners"
             title="Our partners"
             className="compact:mb-0"
@@ -416,7 +400,7 @@ export default function Landing() {
         )}
       </Section>
 
-      {/* 7 · 06 Next race (paper, 1800 wide) - competitor. After the map
+      {/* 6 · 05 Next race (paper, 1800 wide) - competitor. After the map
           (Cedric, landing v5 round two: "say when the next race is once we've
           described it"): the section title, then Ezio's race-day video on
           the left and the registration panel on the right (headline "IROS
@@ -424,7 +408,7 @@ export default function Landing() {
       {race && (
         <Section width="bleed" aria-labelledby="next-race">
           <div className="mx-auto max-w-page px-6">
-            <SectionHeader index="06" id="next-race" title="Next race" subtitle="Come to our next race" />
+            <SectionHeader index="05" id="next-race" title="Next race" subtitle="Come to our next race" />
             {/* Splits at lg, not md: at 768 the panel's 5 columns wrapped
                 "Register your team" (mobile pass, LANDING-24a). Stacked on a
                 landscape phone the full-width clip was 451 px tall under a
@@ -480,10 +464,10 @@ export default function Landing() {
 
       {/* SponsorCTA removed from landing 2026-08-21 (Cedric): zero-sponsor state lives on /about and /race for now */}
 
-      {/* 8 · 07 Teams (paper) - competitor */}
+      {/* 7 · 06 Teams (paper) - competitor */}
       <Section edge rule width="page" aria-labelledby="teams">
         <SectionHeader
-          index="07"
+          index="06"
           id="teams"
           title="Teams"
           subtitle="Who competes"
@@ -492,14 +476,14 @@ export default function Landing() {
         <TeamGrid teams={teams} />
       </Section>
 
-      {/* 9 · 08 Research (paper): the featured papers in a rotating
+      {/* 8 · 07 Research (paper): the featured papers in a rotating
           carousel, one figure and its abstract at a time (landing v5 section
           5; ui/ResearchCarousel) - learner, faculty. Never hidden: with no
           featured_order items it renders the header and an empty stage. */}
       <Section rule width="bleed" aria-labelledby="research">
         <div className="mx-auto max-w-page px-6">
           <SectionHeader
-            index="08"
+            index="07"
             id="research"
             title="Research"
             subtitle="1,000+ publications build on this platform"
@@ -525,9 +509,9 @@ export default function Landing() {
         <ResearchCarousel items={featured} tagLabels={pubs ? tagLabelMap(pubs.tags) : {}} />
       </Section>
 
-      {/* 10 · 09 Join (paper) - everyone: live Slack numbers, the Korea photo,
+      {/* 9 · 08 Join (paper) - everyone: live Slack numbers, the Korea photo,
           four channels, two community cards (landing v4 section 8). */}
-      <CommunityJoin />
+      <CommunityJoin index="08" />
     </div>
     </MediaHoldContext.Provider>
   );

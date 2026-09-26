@@ -2,12 +2,10 @@ import { useEffect, useState } from "react";
 import {
   loadCommunity,
   loadPartners,
-  loadPlatform,
   loadSpinoffs,
   loadVideos,
   type JoinYouTube,
   type Partner,
-  type PlatformRow,
   type SiteVideo,
   type Spinoff,
 } from "../lib/data";
@@ -16,7 +14,7 @@ import SectionHeader from "../components/ui/SectionHeader";
 import Reveal from "../components/ui/Reveal";
 import StatTicker from "../components/ui/StatTicker";
 import CommunityJoin from "../components/ui/CommunityJoin";
-import PlatformList from "../components/about/PlatformList";
+import StartHere from "../components/ui/StartHere";
 import PeopleGroup from "../components/about/PeopleGroup";
 import ContributorStrip from "../components/about/ContributorStrip";
 import PartnerWall from "../components/about/PartnerWall";
@@ -92,12 +90,12 @@ function Figure({
 }
 
 /**
- * /about - the long-form page: what RoboRacer is, what it makes, who runs it,
- * which institutions use it, and how to reach them. Paper base with the one
- * ink hero, the same section rhythm and primitives as the landing and /race.
+ * /about - the long-form page: where to start (what RoboRacer is and the ways
+ * in), who runs it, which institutions use it, and how to reach them. Paper
+ * base with the one ink hero, the same section rhythm and primitives as the
+ * landing and /race.
  */
 export default function About() {
-  const [platform, setPlatform] = useState<PlatformRow[]>([]);
   const [partners, setPartners] = useState<Partner[]>([]);
   // undefined while community.json loads (the hero holds the facade's box),
   // null when it names no video.
@@ -109,9 +107,6 @@ export default function About() {
 
   useEffect(() => {
     let live = true;
-    loadPlatform()
-      .then((d) => live && setPlatform(d))
-      .catch(() => undefined);
     loadCommunity()
       .then((c) => live && setYoutube(c?.join?.youtube ?? null))
       .catch(() => live && setYoutube(null));
@@ -217,61 +212,45 @@ export default function About() {
         )}
       </Section>
 
-      {/* 01 What RoboRacer is */}
-      <Section width="page" aria-labelledby="about-what" rule>
-        <SectionHeader
-          index="01"
-          id="about-what"
-          title="What RoboRacer is"
-          subtitle="One open car for teaching, research and racing"
-        />
-        <div className="grid gap-10 md:grid-cols-12 md:gap-x-10">
-          <Reveal className="flex flex-col gap-5 md:col-span-6">
-            <p className="max-w-[62ch] text-lead text-text-body">
-              RoboRacer started at the University of Pennsylvania in 2016.
-              Rahul Mangharam leads it from Penn&apos;s xLAB. Madhur Behl, now at the University of
-              Virginia,{" "}
-              <a href={BEHL_SOURCE} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
-                co-founded the platform and the competition series
-              </a>
-              .
-            </p>
-            <p className="max-w-[62ch] text-body text-text-body">
-              The car's hardware, software and simulator are open source, so a lab builds its own
-              instead of buying one.
-            </p>
-            <p className="max-w-[62ch] text-body text-text-body">
-              The course built around it teaches perception, localization, planning and control.
-              It also covers moral decision making in autonomous systems.
-            </p>
-            <p className="max-w-[62ch] text-body text-text-body">
-              More than 90 universities in over 20 countries use the platform, and more than a
-              thousand publications reference it. There have been 30 competitions since 2016. The
-              next one is at IROS 2026 in Pittsburgh, September 28 to 30.
-            </p>
-          </Reveal>
-          <div className="md:col-span-6">
-            <Figure photo={ICRA_GROUP_PHOTO} />
+      {/* 01 Start here - the landing's section, fuller (ui/StartHere,
+          public/data/paths.json): the story and the scale beside the ICRA
+          group photo, then the five ways in, each with its clip, one sentence
+          for everyone and one more for whoever reads on. Merges the old "What
+          RoboRacer is" and "The platform" (Cedric, 2026-09-25). Newbie,
+          student, faculty (indirectly), competitor, sponsor. */}
+      <StartHere
+        density="full"
+        index="01"
+        headingId="about-start"
+        subtitle="One open car for teaching, research and racing"
+        intro={
+          <div className="grid gap-10 md:grid-cols-12 md:gap-x-10">
+            <Reveal className="flex flex-col gap-5 md:col-span-6">
+              <p className="max-w-[62ch] text-lead text-text-body">
+                RoboRacer started at the University of Pennsylvania in 2016.
+                Rahul Mangharam leads it from Penn&apos;s xLAB. Madhur Behl, now at the University of
+                Virginia,{" "}
+                <a href={BEHL_SOURCE} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
+                  co-founded the platform and the competition series
+                </a>
+                .
+              </p>
+              <p className="max-w-[62ch] text-body text-text-body">
+                More than 90 universities in over 20 countries use the platform, and more than a
+                thousand publications reference it. There have been 30 competitions since 2016.
+              </p>
+            </Reveal>
+            <div className="md:col-span-6">
+              <Figure photo={ICRA_GROUP_PHOTO} />
+            </div>
           </div>
-        </div>
-      </Section>
+        }
+      />
 
-      {/* 02 The platform - from public/data/platform.json */}
-      <Section width="page" edge aria-labelledby="about-platform" rule>
-        <SectionHeader
-          index="02"
-          id="about-platform"
-          title="The platform"
-          subtitle="Build, Learn, Race, Research"
-          lead="Each has its own page."
-        />
-        <PlatformList rows={platform} />
-      </Section>
-
-      {/* 03 People - four groups: faculty, developers, contributors, past crew */}
+      {/* 02 People - four groups: faculty, developers, contributors, past crew */}
       <Section width="page" aria-labelledby="about-people" rule>
         <SectionHeader
-          index="03"
+          index="02"
           id="about-people"
           title="People"
           subtitle="Who runs RoboRacer"
@@ -345,10 +324,10 @@ export default function About() {
         </div>
       </Section>
 
-      {/* 04 Our Partners - the static grouped wall, from partners.json */}
+      {/* 03 Our Partners - the static grouped wall, from partners.json */}
       <Section width="page" edge aria-labelledby="about-partners" rule>
         <SectionHeader
-          index="04"
+          index="03"
           id="about-partners"
           title="Our partners"
           subtitle="Institutions that use the car"
@@ -362,14 +341,14 @@ export default function About() {
         <PartnerWall partners={partners} />
       </Section>
 
-      {/* 05 Spinoffs - from public/data/spinoffs.json. Only `entries` render;
+      {/* 04 Spinoffs - from public/data/spinoffs.json. Only `entries` render;
           the `candidates` there wait for Cedric. Each entry is a feature
           built from the company's own site at his request (2026-09-25):
           its car, its mark, and a framed window onto its homepage. */}
       {(spinoffs === null || spinoffs.length > 0) && (
         <Section width="page" aria-labelledby="about-spinoffs" rule>
           <SectionHeader
-            index="05"
+            index="04"
             id="about-spinoffs"
             title="Spinoffs"
             subtitle="Companies that grew out of the car"
@@ -399,13 +378,13 @@ export default function About() {
         </Section>
       )}
 
-      {/* 06 Videos - from public/data/videos.json. Click-to-load, never
+      {/* 05 Videos - from public/data/videos.json. Click-to-load, never
           self-starting: six players in a grid would otherwise all start as the
           reader scrolls past. */}
       {videos.length > 0 && (
         <Section width="page" aria-labelledby="about-videos" rule>
           <SectionHeader
-            index="06"
+            index="05"
             id="about-videos"
             title="Videos"
             subtitle="Races, teams and the course"
@@ -421,12 +400,12 @@ export default function About() {
         </Section>
       )}
 
-      {/* 07 Join - the shared community block, same as the landing's. Gated
+      {/* 06 Join - the shared community block, same as the landing's. Gated
           on the reader coming near it: its marquee mounts four copies of an
           autoplaying 1.05 MB clip, which is 4.1 MB at first paint otherwise
           (see NearViewport). */}
       <NearViewport>
-        <CommunityJoin index="07" showYouTube={false} />
+        <CommunityJoin index="06" showYouTube={false} />
       </NearViewport>
     </>
   );

@@ -337,8 +337,8 @@ export default function Navbar() {
         </a>
 
         {/* The two actions sit together, closer than the links. "Start here"
-            is the bar's one solid violet button: the four ways in under the
-            landing hero (ui/EntryPaths), from any route. */}
+            is the bar's one solid violet button: the five ways in under the
+            landing hero (ui/StartHere), from any route. */}
         <div className="nav-actions">
           <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className="nav-cta">
             Join the Slack
