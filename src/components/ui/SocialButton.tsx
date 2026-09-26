@@ -37,19 +37,29 @@ type SocialButtonProps = {
 
 const stop = (e: MouseEvent<HTMLAnchorElement>) => e.preventDefault();
 
-export default function SocialButton({
-  network,
-  href,
-  children,
-  variant = "secondary",
-  soon = false,
-  className = "",
-}: SocialButtonProps) {
+type SocialGlyphProps = {
+  network: SocialNetwork;
+  /** The logo gradient (secondary buttons, the Join channel list) or the
+   * text colour (the solid violet Slack button). */
+  gradient?: boolean;
+  /** Drawn size; rem so it follows the fluid root. */
+  size?: string;
+};
+
+/** A network's mark, decorative (the label beside it names the channel). */
+export function SocialGlyph({ network, gradient = true, size = "1.125rem" }: SocialGlyphProps) {
   // useId's delimiters are not safe inside url(#...); keep the id plain.
   const gradientId = `rr-social-${useId().replace(/[^A-Za-z0-9_-]/g, "")}`;
-  const gradient = variant === "secondary";
-  const glyph = (
-    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" className="shrink-0">
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      className="shrink-0"
+      style={{ width: size, height: size }}
+    >
       {gradient && (
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="0">
@@ -61,6 +71,17 @@ export default function SocialButton({
       <path d={GLYPH[network]} fill={gradient ? `url(#${gradientId})` : "currentColor"} />
     </svg>
   );
+}
+
+export default function SocialButton({
+  network,
+  href,
+  children,
+  variant = "secondary",
+  soon = false,
+  className = "",
+}: SocialButtonProps) {
+  const glyph = <SocialGlyph network={network} gradient={variant === "secondary"} />;
 
   if (soon) {
     return (
