@@ -6,8 +6,10 @@ import { REDUCED_MOTION_QUERY, ScrollTrigger } from "../lib/motion";
  * 450 ms, capped so a jump over the whole pinned hero stays short. */
 const GLIDE_MS_PER_VIEWPORT = 450;
 const GLIDE_MAX_MS = 1400;
-/** How long a jump is defended against ScrollTrigger refreshes. */
-const HOLD_MS = 4000;
+/** How long a jump is defended against whatever moves its target (see
+ * holdAt). Long enough for a slow network's data files, which can land after
+ * a quiet spell of several seconds; any input from the reader ends it. */
+const HOLD_MS = 10000;
 
 const INPUT_EVENTS = ["wheel", "touchstart", "keydown", "pointerdown"] as const;
 
@@ -31,6 +33,9 @@ const topOf = (el: HTMLElement) =>
  *   strips on /about, the team grid on /race) pushes it down. Chromium's
  *   scroll anchoring hides that; a browser without it (Safari) left the reader
  *   a screen or two above. Any change of the document's height re-applies.
+ *
+ * Re-applying only ever puts the target back where the jump put it, which is
+ * what scroll anchoring does for the reader's own spot.
  */
 function holdAt(el: HTMLElement): () => void {
   let released = false;
