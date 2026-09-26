@@ -1,0 +1,1032 @@
+[
+ {
+  "url": "https://2026ifac-roboracer.com/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://2026ifac-roboracer.com/",
+  "used_by": [
+   "ifac2026-busan-opens.link"
+  ]
+ },
+ {
+  "url": "https://2026ifac-roboracer.com/en/results.html",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://2026ifac-roboracer.com/en/results.html",
+  "used_by": [
+   "ifac2026-busan-largest-race.more"
+  ]
+ },
+ {
+  "url": "https://autodrive-ecosystem.github.io",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://autodrive-ecosystem.github.io/",
+  "used_by": [
+   "autodrive-f1tenth-autoware-integration.link",
+   "autodrive-digital-twin-first-look.link"
+  ]
+ },
+ {
+  "url": "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-cdc-2024/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-cdc-2024/",
+  "used_by": [
+   "cdc2024-sim-league-vaul-wins.link"
+  ]
+ },
+ {
+  "url": "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-cdc-tf-2025/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-cdc-tf-2025/",
+  "used_by": [
+   "cdc-techfest-2025-sim-league-vaul-wins.link"
+  ]
+ },
+ {
+  "url": "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-icra-2025/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-icra-2025/",
+  "used_by": [
+   "icra2025-sim-league-vaul-wins.link"
+  ]
+ },
+ {
+  "url": "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-iros-2024/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-iros-2024/",
+  "used_by": [
+   "iros2024-sim-league-first.link"
+  ]
+ },
+ {
+  "url": "https://autoware.org/f1tenth-korea-delegation-at-upenn/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://autoware.org/f1tenth-korea-delegation-at-upenn/",
+  "used_by": [
+   "f1tenth-korea-delegation-upenn.link"
+  ]
+ },
+ {
+  "url": "https://daily.hankooki.com/news/articleView.html?idxno=1144287",
+  "head": "404",
+  "head_exit": 0,
+  "get": "200",
+  "get_exit": 0,
+  "effective": "https://daily.hankooki.com/news/articleView.html?idxno=1144287",
+  "used_by": [
+   "korea2024-dong-a-wins.link"
+  ]
+ },
+ {
+  "url": "https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+  "head": "000",
+  "head_exit": 7,
+  "get": "000",
+  "get_exit": 7,
+  "effective": "https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+  "used_by": [
+   "unc-the-fast-and-the-autonomous.link"
+  ]
+ },
+ {
+  "url": "https://f1tenth.github.io/columbia2019.html",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://f1tenth.github.io/columbia2019.html",
+  "used_by": [
+   "columbia2019-fifth-competition.link"
+  ]
+ },
+ {
+  "url": "https://f1tenth.github.io/ifac2020.html",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://f1tenth.github.io/ifac2020.html",
+  "used_by": [
+   "ifac2020-virtual-tufast-wins.link"
+  ]
+ },
+ {
+  "url": "https://f1tenth.github.io/iros2020.html",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://f1tenth.github.io/iros2020.html",
+  "used_by": [
+   "iros2020-virtual-hipert-wins.link"
+  ]
+ },
+ {
+  "url": "https://f1tenth.github.io/pittsburgh2016.html",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://f1tenth.github.io/pittsburgh2016.html",
+  "used_by": [
+   "esweek2016-precise-racing-wins.link"
+  ]
+ },
+ {
+  "url": "https://f1tenth.github.io/porto2018.html",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://f1tenth.github.io/porto2018.html",
+  "used_by": [
+   "cpsweek2018-porto-ctu-wins.link"
+  ]
+ },
+ {
+  "url": "https://f1tenth.github.io/torino2018.html",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://f1tenth.github.io/torino2018.html",
+  "used_by": [
+   "esweek2018-torino-calvin-wins.link"
+  ]
+ },
+ {
+  "url": "https://faculty.unist.ac.kr/hmc/gallery-59/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://hmc.unist.ac.kr/gallery-59/",
+  "used_by": [
+   "iccas2025-unist-wins.link"
+  ]
+ },
+ {
+  "url": "https://foxglove.dev/blog/spotlight-building-a-championship-autonomous-f1-racecar-for-f1tenth",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://foxglove.dev/blog/spotlight-building-a-championship-autonomous-f1-racecar-for-f1tenth",
+  "used_by": [
+   "icra2024-yokohama-vaul-wins.link"
+  ]
+ },
+ {
+  "url": "https://github.com/ETH-PBL/MAP-Controller",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://github.com/ETH-PBL/MAP-Controller",
+  "used_by": [
+   "eth-pbl-map-controller.link"
+  ]
+ },
+ {
+  "url": "https://github.com/f1tenth/roboracer_rules",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://github.com/f1tenth/roboracer_rules",
+  "used_by": [
+   "roboracer-rules-repository-2025.link"
+  ]
+ },
+ {
+  "url": "https://icra2026-race.roboracer.ai/results.html",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://icra2026-race.roboracer.ai/results.html",
+  "used_by": [
+   "icra2026-vienna-results.link"
+  ]
+ },
+ {
+  "url": "https://iros2026-race.roboracer.ai/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://iros2026-race.roboracer.ai/",
+  "used_by": [
+   "iros2026-registration-closes-sep-5.link"
+  ]
+ },
+ {
+  "url": "https://iv2026-race.roboracer.ai/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://iv2026-race.roboracer.ai/",
+  "used_by": [
+   "iv2026-detroit-thunderbolt-wins.link"
+  ]
+ },
+ {
+  "url": "https://korea-race23.f1tenth.org/results.html",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://korea-race23.f1tenth.org/results.html",
+  "used_by": [
+   "korea2023-hmcar-wins.link"
+  ]
+ },
+ {
+  "url": "https://linklab-uva.github.io/icra-autonomous-racing/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://linklab-uva.github.io/icra-autonomous-racing/",
+  "used_by": [
+   "icra2021-racing-workshop.link"
+  ]
+ },
+ {
+  "url": "https://mailchi.mp/20e93a8ea541/f1tenth-summer-newsletter-6742752",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://mailchi.mp/20e93a8ea541/f1tenth-summer-newsletter-6742752",
+  "used_by": [
+   "iros2024-abudhabi-dzik-ultimate-wins.link"
+  ]
+ },
+ {
+  "url": "https://mailchi.mp/b7136669240c/f1tenth-summer-newsletter",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://mailchi.mp/b7136669240c/f1tenth-summer-newsletter",
+  "used_by": [
+   "cpsweek2024-hongkong-fsm-speed-wins.link",
+   "course2024-three-university-race.link"
+  ]
+ },
+ {
+  "url": "https://mailchi.mp/cf1734d5a686/f1tenth-summer-newsletter-6743291",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://mailchi.mp/cf1734d5a686/f1tenth-summer-newsletter-6743291",
+  "used_by": [
+   "f1tenth-to-roboracer-announced.link"
+  ]
+ },
+ {
+  "url": "https://medium.com/adventures-in-autonomous-vehicles",
+  "head": "403",
+  "head_exit": 0,
+  "get": "403",
+  "get_exit": 0,
+  "effective": "https://medium.com/adventures-in-autonomous-vehicles",
+  "used_by": [
+   "medium-adventures-in-autonomous-vehicles.link"
+  ]
+ },
+ {
+  "url": "https://news.virginia.edu/content/racing-students-unique-course-put-self-driving-cars-final-test",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://archive.news.virginia.edu/content/racing-students-unique-course-put-self-driving-cars-final-test/",
+  "used_by": [
+   "uva-today-2018-final-exam-race.link"
+  ]
+ },
+ {
+  "url": "https://web.archive.org/web/20200509220330/http://f1tenth.org/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://web.archive.org/web/20200509220330/http://f1tenth.org/",
+  "used_by": [
+   "f1tenth-foundation-2020.link",
+   "f1tenth-foundation-2020.archive"
+  ]
+ },
+ {
+  "url": "https://web.archive.org/web/20240524233746/https://korea-race.f1tenth.org/results.html",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://web.archive.org/web/20230927152036/https://korea-race.f1tenth.org/results.html",
+  "used_by": [
+   "korea2022-first-korea-championship.link",
+   "korea2022-first-korea-championship.archive"
+  ]
+ },
+ {
+  "url": "https://web.archive.org/web/20250126061349/https://iros2021.f1tenth.org/results.html",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://web.archive.org/web/20250126061349/https://iros2021.f1tenth.org/results.html",
+  "used_by": [
+   "iros2021-prague-scuderia-segfault-wins.link",
+   "iros2021-prague-scuderia-segfault-wins.archive"
+  ]
+ },
+ {
+  "url": "https://web.archive.org/web/20250315141512/https://icra2022-race.f1tenth.org/results.html",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://web.archive.org/web/20250315141512/https://icra2022-race.f1tenth.org/results.html",
+  "used_by": [
+   "icra2022-philadelphia-scatterbrain-wins.link",
+   "icra2022-philadelphia-scatterbrain-wins.archive"
+  ]
+ },
+ {
+  "url": "https://web.archive.org/web/20251212034035/https://iros2023-race.f1tenth.org/results.html",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://web.archive.org/web/20251212034035/https://iros2023-race.f1tenth.org/results.html",
+  "used_by": [
+   "iros2023-detroit-vaul-wins.link",
+   "iros2023-detroit-vaul-wins.archive"
+  ]
+ },
+ {
+  "url": "https://web.archive.org/web/20260515201552/https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+  "head": "000",
+  "head_exit": 28,
+  "get": "000",
+  "get_exit": 28,
+  "effective": "https://web.archive.org/web/20260515201552/https://endeavors.unc.edu/the-fast-and-the-autonomous/",
+  "used_by": [
+   "unc-the-fast-and-the-autonomous.archive"
+  ]
+ },
+ {
+  "url": "https://www.bu.edu/cise/cise-hosts-learning-to-trust-autonomy-workshop-to-foster-collaboration-in-autonomous-systems",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.bu.edu/cise/cise-hosts-learning-to-trust-autonomy-workshop-to-foster-collaboration-in-autonomous-systems/",
+  "used_by": [
+   "bu2024-lehigh-wins.link"
+  ]
+ },
+ {
+  "url": "https://www.forzaeth.ch/blog/icra_25/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.forzaeth.ch/blog/icra_25/",
+  "used_by": [
+   "icra2025-atlanta-unibo-wins.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:share:6968168514989789184",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:share:6968168514989789184",
+  "used_by": [
+   "germany2022-forzaeth-wins.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:share:6985040584725905408",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:share:6985040584725905408",
+  "used_by": [
+   "getting-started-2022.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:share:7074191618345443328",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:share:7074191618345443328",
+  "used_by": [
+   "icra2023-london-forzaeth-wins.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:share:7163339429900718080",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:share:7163339429900718080",
+  "used_by": [
+   "power-board-2024.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:share:7201984267638161408",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:share:7201984267638161408",
+  "used_by": [
+   "iv2024-18th-announced.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:share:7297948637324541953",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:share:7297948637324541953",
+  "used_by": [
+   "icra2025-registration-opens.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:share:7305504819941658625",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:share:7305504819941658625",
+  "used_by": [
+   "tum-3d-lidar-kit-2025.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:share:7315783737772826627",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:share:7315783737772826627",
+  "used_by": [
+   "iv2025-regular-event.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:share:7379907882953224192",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:share:7379907882953224192",
+  "used_by": [
+   "season-2025-26.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:share:7380971171753922560",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:share:7380971171753922560",
+  "used_by": [
+   "techfest2025-26th-announced.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:share:7508752921769992192",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:share:7508752921769992192",
+  "used_by": [
+   "iros2026-sim-league-siga-siga-wins.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6507312117417340928",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6507312117417340928",
+  "used_by": [
+   "f110-simulator-open-source-2019.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7114071771569418240",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7114071771569418240",
+  "used_by": [
+   "iros2023-madgames-workshop.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7121155856179617792",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7121155856179617792",
+  "used_by": [
+   "tum-course-2023.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7242287722860621825",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7242287722860621825",
+  "used_by": [
+   "sm2024-niagara-vaul-wins.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7284385706234249216",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7284385706234249216",
+  "used_by": [
+   "dot-secretary-2025.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7504332938503741441",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7504332938503741441",
+  "used_by": [
+   "ifac2026-busan-largest-race.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7507891142504521730",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7507891142504521730",
+  "used_by": [
+   "vtc2026-boston-neobotics.embed"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/feed/update/urn:li:activity:7488518791371538432/",
+  "used_by": [
+   "post-knapp-538432.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/autodrive-ecosystem_iros2026-autodrive-roboracer-activity-7508752923695194113-2hxc",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/autodrive-ecosystem_iros2026-autodrive-roboracer-activity-7508752923695194113-2hxc",
+  "used_by": [
+   "iros2026-sim-league-siga-siga-wins.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/bassam-alrifaee-5b592aa6_call-for-f1tenth-teams-ieee-iv-2025-activity-7315783741040201728-mYlf",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/bassam-alrifaee-5b592aa6_call-for-f1tenth-teams-ieee-iv-2025-activity-7315783741040201728-mYlf",
+  "used_by": [
+   "iv2025-regular-event.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
+  "used_by": [
+   "post-cedric-hollande-699200.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/dhruvjaiswal412_f1tenth-autonomousracing-robotics-ugcPost-7477463480791498753-Hoqj/",
+  "used_by": [
+   "post-dhruv-jaiswal-498753.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/eth-zurich-department-of-information-technology-and-electrical-engineering_team-racingcars-winners-activity-6968168515782459393-FZSx",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/eth-zurich-department-of-information-technology-and-electrical-engineering_team-racingcars-winners-activity-6968168515782459393-FZSx",
+  "used_by": [
+   "germany2022-forzaeth-wins.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/felix-jahncke_ever-dreamed-of-a-3d-lidar-for-your-roboracer-activity-7305504821309001729-dUUT",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/felix-jahncke_ever-dreamed-of-a-3d-lidar-for-your-roboracer-activity-7305504821309001729-dUUT",
+  "used_by": [
+   "tum-3d-lidar-kit-2025.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/fpomerleau_racing-results-for-the-f1tenth-foundation-activity-7242288003233062912-FVy2",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/fpomerleau_racing-results-for-the-f1tenth-foundation-activity-7242288003233062912-FVy2",
+  "used_by": [
+   "sm2024-niagara-vaul-wins.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/johannes-betz-254049107_my-next-ride-is-a-robot-together-with-activity-7121155857114968064-ocCj",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/johannes-betz-254049107_my-next-ride-is-a-robot-together-with-activity-7121155857114968064-ocCj",
+  "used_by": [
+   "tum-course-2023.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/kutsch_roboracer-lamarracing-lamarr-ugcPost-7472342602856701952-ksc-/",
+  "used_by": [
+   "post-lukas-kutsch-701952.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/madhurbehl_f1tenth-linklab-autonomousdriving-activity-6507312215958310912-8ZO_",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/madhurbehl_f1tenth-linklab-autonomousdriving-activity-6507312215958310912-8ZO_",
+  "used_by": [
+   "f110-simulator-open-source-2019.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/manasishrekhar_every-little-win-counts-proud-to-have-secured-ugcPost-7476303552663990273-dgm2/",
+  "used_by": [
+   "post-manasi-shrekhar-990273.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/mangharam_f1tenth-autonomousvehicles-autonomousracing-activity-7163339430689239041-V0Ss",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/mangharam_f1tenth-autonomousvehicles-autonomousracing-activity-7163339430689239041-V0Ss",
+  "used_by": [
+   "power-board-2024.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/mangharam_f1tenth-autonomousvehicles-autoware-activity-6985040585644507136-t2m1",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/mangharam_f1tenth-autonomousvehicles-autoware-activity-6985040585644507136-t2m1",
+  "used_by": [
+   "getting-started-2022.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/mangharam_great-to-see-the-roboracer-foundation-autonomous-activity-7284385707119239168-RGQO",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/mangharam_great-to-see-the-roboracer-foundation-autonomous-activity-7284385707119239168-RGQO",
+  "used_by": [
+   "dot-secretary-2025.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/mangharam_mad-games-workshop-oct-1-2023-activity-7114071772483780608-S69D",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/mangharam_mad-games-workshop-oct-1-2023-activity-7114071772483780608-S69D",
+  "used_by": [
+   "iros2023-madgames-workshop.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/mangharam_model-and-acceleration-based-pursuit-controller-activity-7074191619058462720-Cebb",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/mangharam_model-and-acceleration-based-pursuit-controller-activity-7074191619058462720-Cebb",
+  "used_by": [
+   "icra2023-london-forzaeth-wins.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/mateus-karvat_its-been-a-week-since-i-got-back-to-canada-ugcPost-7472426017278541826-QlcX/",
+  "used_by": [
+   "post-mateus-karvat-541826.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/meghajkabra_autonomousvehicles-tesla-ai-ugcPost-7475975073192054784-bWH9/",
+  "used_by": [
+   "post-meghaj-kabra-054784.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/milan-manoj-7a2805279_robotics-autonomousvehicles-roboracer-ugcPost-7476033272746110976-1p7N/",
+  "used_by": [
+   "post-milan-manoj-110976.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/neobotics-foundation-inc_roboracer-neobotics-f1tenth-activity-7507891143662145538-xHdb",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/neobotics-foundation-inc_roboracer-neobotics-f1tenth-activity-7507891143662145538-xHdb",
+  "used_by": [
+   "vtc2026-boston-neobotics.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/roboracer-foundation_2025icra-autonomousracing-icra2025-activity-7297948638578692096-_Kzv",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/roboracer-foundation_2025icra-autonomousracing-icra2025-activity-7297948638578692096-_Kzv",
+  "used_by": [
+   "icra2025-registration-opens.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/roboracer-foundation_f1tenth-autonomousracing-autonomousmobility-activity-7201984268267372544-vxh3",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/roboracer-foundation_f1tenth-autonomousracing-autonomousmobility-activity-7201984268267372544-vxh3",
+  "used_by": [
+   "iv2024-18th-announced.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/roboracer-foundation_ifac2026-roboracer-autonomousracing-activity-7504332939330048000-EW0F",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/roboracer-foundation_ifac2026-roboracer-autonomousracing-activity-7504332939330048000-EW0F",
+  "used_by": [
+   "ifac2026-busan-largest-race.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/roboracer-foundation_roboracer-autonomousracing-ai-activity-7379907884333031424-er5M",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/roboracer-foundation_roboracer-autonomousracing-ai-activity-7379907884333031424-er5M",
+  "used_by": [
+   "season-2025-26.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/roboracer-foundation_roboracer-autonomousracing-ai-activity-7380971173129453568-dr7S",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/roboracer-foundation_roboracer-autonomousracing-ai-activity-7380971173129453568-dr7S",
+  "used_by": [
+   "techfest2025-26th-announced.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/samir-shehadeh-2820761b4_roboracer-lamarracing-lamarr-ugcPost-7473307428244344832-PGAE/",
+  "used_by": [
+   "post-samir-shehadeh-344832.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
+  "used_by": [
+   "post-roboracer-foundation-197760.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
+  "used_by": [
+   "post-unicorn-racing-344833.link"
+  ]
+ },
+ {
+  "url": "https://www.linkedin.com/pulse/f110-autonomous-racing-community-platforms-safe-agile-rahul-mangharam",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.linkedin.com/pulse/f110-autonomous-racing-community-platforms-safe-agile-rahul-mangharam",
+  "used_by": [
+   "nsf-community-platform-award-2019.link"
+  ]
+ },
+ {
+  "url": "https://www.seas.upenn.edu/stories/penn-engineering-students-win-the-12th-annual-f1tenth-autonomous-grand-prix/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.engineering.upenn.edu/stories/penn-engineering-students-win-the-12th-annual-f1tenth-autonomous-grand-prix/",
+  "used_by": [
+   "cps2023-san-antonio-penn-wins.link"
+  ]
+ },
+ {
+  "url": "https://www.stiripesurse.ro/most-advanced-technologies-for-autonomous-vehicles-at-international-roboracer-autonomous-racing-competition-in-cluj_3732112.html",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.stiripesurse.ro/most-advanced-technologies-for-autonomous-vehicles-at-international-roboracer-autonomous-racing-competition-in-cluj_3732112.html",
+  "used_by": [
+   "iv2025-cluj-forzaeth-wins.link"
+  ]
+ },
+ {
+  "url": "https://www.thedp.com/article/2018/11/autonomous-racing-self-driving-car-automobile-competition-penn-engineering-upenn-philadelphia",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.thedp.com/article/2018/11/autonomous-racing-self-driving-car-automobile-competition-penn-engineering-upenn-philadelphia",
+  "used_by": [
+   "daily-pennsylvanian-2018-dining-hall.link"
+  ]
+ },
+ {
+  "url": "https://www.tuwien.at/inf/scuderia-segfault/news-detail/victory-at-roboracer-autonomous-grand-prix-in-milano/",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.tuwien.at/inf/scuderia-segfault/news-detail/victory-at-roboracer-autonomous-grand-prix-in-milano/",
+  "used_by": [
+   "cdc2024-milan-scuderia-segfault-wins.link"
+  ]
+ },
+ {
+  "url": "https://www.youtube.com/watch?v=Dw_Fg_JLcNg",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.youtube.com/watch?v=Dw_Fg_JLcNg",
+  "used_by": [
+   "cpsiot2019-montreal-unc-wins.link"
+  ]
+ },
+ {
+  "url": "https://www.youtube.com/watch?v=hXmGTKom4O8",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.youtube.com/watch?v=hXmGTKom4O8",
+  "used_by": [
+   "course-2020-recorded-online.link"
+  ]
+ },
+ {
+  "url": "https://www.youtube.com/watch?v=zkMelEB3-PY",
+  "head": "200",
+  "head_exit": 0,
+  "get": null,
+  "get_exit": null,
+  "effective": "https://www.youtube.com/watch?v=zkMelEB3-PY",
+  "used_by": [
+   "course-2016-first-lecture.link"
+  ]
+ }
+]

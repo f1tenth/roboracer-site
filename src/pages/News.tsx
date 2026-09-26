@@ -46,8 +46,11 @@ function posts(n: number): string {
 function YearGroup({ year, items, open }: { year: string; items: NewsItem[]; open: number }) {
   const shown = items.slice(0, open);
   const rest = items.slice(open);
+  // A year that is only its fold (older years on a phone) closes up under
+  // the summary: the full py-10 left 64px of paper below "Show 15 from 2024"
+  // and 24px above it, so the line read as floating off its own year.
   return (
-    <section aria-labelledby={`news-year-${year}`} className="py-10">
+    <section aria-labelledby={`news-year-${year}`} className={shown.length > 0 ? "py-10" : "pt-10 pb-4"}>
       <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 desktop:sticky desktop:top-nav desktop:z-10 desktop:bg-paper-100/95 desktop:py-2 desktop:backdrop-blur-sm">
         <h3
           id={`news-year-${year}`}
