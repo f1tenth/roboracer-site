@@ -18,6 +18,17 @@ export type LeaderboardConfig = {
   /** The one extra column, a key of `metric.extras`, or null for none. */
   extra: string | null;
   limit: number;
+  /** The board's own replay player beside the table, or null for none. */
+  replay: ReplayConfig | null;
+};
+
+/** The board's player racing a board's top cars (`?compare=top5`). */
+export type ReplayConfig = {
+  /** Its heading, e.g. "Top 5, follow the gap". */
+  label: string;
+  /** One line under the heading. */
+  note: string;
+  compare: "top3" | "top5";
 };
 
 type MetricInfo = { key: string; label: string; unit: string };
@@ -58,6 +69,8 @@ export type BoardRow = {
   /** The ranked value, in `metric.unit` (seconds for a lap). */
   metric: number;
   extras?: Record<string, number | null | undefined>;
+  /** The grader recorded the run, so the board's player can replay it. */
+  replay?: boolean;
 };
 
 /** A board's own file: the same header fields, and the ranked rows. */
@@ -72,9 +85,15 @@ export const FALLBACK_CONFIG: LeaderboardConfig = {
   label: "ESE 6150 leaderboard",
   url: "https://roboracer-class.github.io/leaderboard/",
   term: null,
-  featured: null,
+  // Cedric, 2026-09-25: the section stays on lab 4, follow the gap.
+  featured: "lab-4-follow-the-gap-lap",
   extra: "top_mps",
   limit: 5,
+  replay: {
+    label: "Top 5, follow the gap",
+    note: "The best clean laps in the grading simulator, replayed.",
+    compare: "top5",
+  },
 };
 
 /** The config file, validated; the bundled copy on any failure (HTTP error,
@@ -137,7 +156,15 @@ export function readConfig(v: unknown): LeaderboardConfig | null {
   const extra = strOrNull(v.extra);
   if (term === undefined || featured === undefined || extra === undefined) return null;
   const limit = isNum(v.limit) && v.limit >= 1 ? Math.min(Math.floor(v.limit), 20) : FALLBACK_CONFIG.limit;
-  return { label: v.label, url: v.url, term, featured, extra, limit };
+  return { label: v.label, url: v.url, term, featured, extra, limit, replay: readReplay(v.replay) };
+}
+
+/** The replay block; absent, null or malformed means no replay (the table
+ * stands on its own). */
+function readReplay(v: unknown): ReplayConfig | null {
+  if (!isObj(v) || !isStr(v.label) || !isStr(v.note)) return null;
+  const compare = v.compare === "top3" ? "top3" : v.compare === "top5" || v.compare === undefined ? "top5" : null;
+  return compare ? { label: v.label, note: v.note, compare } : null;
 }
 
 function readInfo(v: unknown): MetricInfo | null {
@@ -196,7 +223,7 @@ function readRow(v: unknown): BoardRow | null {
   if (isObj(v.extras)) {
     for (const [key, value] of Object.entries(v.extras)) if (isNum(value)) extras[key] = value;
   }
-  return { alias: v.alias, rank: v.rank, metric: v.metric, extras };
+  return { alias: v.alias, rank: v.rank, metric: v.metric, extras, replay: isStr(v.replay) && v.replay.length > 0 };
 }
 
 /** A board's file with its malformed rows dropped, or null if its header is. */
@@ -265,6 +292,24 @@ export function boardHref(cfg: LeaderboardConfig, slug?: string): string {
   if (cfg.term) url.searchParams.set("term", cfg.term);
   if (slug) url.searchParams.set("lab", slug);
   return url.toString();
+}
+
+/**
+ * The board's page with its player open on a board's top cars:
+ * `?lab=<slug>&compare=top5` (the board's own deep link, what its Copy link
+ * shares). The player opens by itself once the board has rendered, as a
+ * dialog over the board; see docs/LEADERBOARD.md, "The replay".
+ */
+export function replayHref(cfg: LeaderboardConfig, slug: string | undefined, compare: ReplayConfig["compare"]): string {
+  const url = new URL(boardHref(cfg, slug));
+  url.searchParams.set("compare", compare);
+  return url.toString();
+}
+
+/** The player races a board's ranked rows that have a recording; a
+ * comparison needs two. False when the board has fewer. */
+export function canReplay(board: BoardFile): boolean {
+  return board.rows.filter((r) => r.replay).length >= 2;
 }
 
 export function formatValue(v: number | null | undefined, unit: string): string {
