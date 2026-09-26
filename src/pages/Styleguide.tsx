@@ -143,7 +143,7 @@ export default function Styleguide() {
           stays the nav's one target. */}
       <div className="bg-paper-50">
         <div className="mx-auto max-w-content px-6 pt-16">
-          <Spec name="StartHere · landing 00 · header full width, tiles with clips from desktop (2 / 3+2 / 5 across), thumb rows on phones, one link per tile" />
+          <Spec name="StartHere · landing 00 · tablets: header full width, then 2+2+1 tiles with clips; laptops: two columns, the header in the first cell, the five as landscape tiles, one link per tile" />
         </div>
       </div>
       <StartHere

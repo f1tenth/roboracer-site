@@ -366,7 +366,9 @@ function PathTile({ path }: { path: EntryPath }) {
       <div className="desktop:hidden">
         <Thumb media={path.media} />
       </div>
-      <div className="compact:hidden desktop:lg:[&>div]:aspect-video">
+      {/* The 16:9 crop shows the build clip's encode edge (a 16px dark band on
+          the right, 8px at the foot) that 16:10 cut off: a 4% zoom hides it. */}
+      <div className="compact:hidden desktop:lg:[&>div]:aspect-video desktop:lg:[&_img]:scale-[1.04] desktop:lg:[&_video]:scale-[1.04]">
         <ClipFrame media={path.media} label={path.id} />
       </div>
       <div className="flex min-w-0 flex-col desktop:flex-1 desktop:pt-5">
