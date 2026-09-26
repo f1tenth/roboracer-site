@@ -4,6 +4,8 @@ Generated 2026-09-26 on `revamp/p3-news-media` (taskmap n337) for Cedric's note:
 
 ## Counts
 
+Update 2026-09-26: Cedric removed `iros2026-registration-closes-sep-5` and `ifac2026-busan-opens` from `news.json`. Their rows below, their mention among the `poster` items, and approval items 3 and 4 no longer apply. news.json now holds 74 items, 73 with a picture or video.
+
 - Items: 75. With an image or embed today: 38. Without: 37.
 - The 37 without media: **youtube 20**, **photo 11**, **poster 4**, **none 2**.
 - Of the 38 with media: 7 would lead better with a video (`upgrade`), 6 gain a secondary video under today's lead (`secondary`), the rest keep what they have (`keep`).

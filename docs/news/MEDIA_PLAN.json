@@ -81,7 +81,7 @@
     "permission": "organisation-owned (Drive), photographer credited"
    },
    "alt": "Flyer for the 31st RoboRacer Autonomous Racing Competition at IROS 2026 in Pittsburgh: an orange race car on a swirling background under the RoboRacer wordmark and a registration QR code.",
-   "notes": "No race photo exists yet (the race is September 28 to 30). The flyer prints 'Sep 27 - Oct 1, 2026' (the IROS week) while the card says September 28 to 30 with check-in on the 27th; the card text is right, the flyer is the conference span. Crop the QR code out or keep it: it points at registration, which has closed. Swap for a race photo after the event.",
+   "notes": "Removed from news.json 2026-09-26 (Cedric); this row no longer applies. No race photo exists yet (the race is September 28 to 30). The flyer prints 'Sep 27 - Oct 1, 2026' (the IROS week) while the card says September 28 to 30 with check-in on the 27th; the card text is right, the flyer is the conference span. Crop the QR code out or keep it: it points at registration, which has closed. Swap for a race photo after the event.",
    "checked": {
     "rr:/2026 IROS/Flyers/Vertical-Flyer-IROS2026-Roboracer.png": "rclone lsl 2395387 bytes"
    }
@@ -105,7 +105,7 @@
     "permission": "organisation-owned (Drive), photographer credited"
    },
    "alt": "The BEXCO hall in Busan during the 29th competition: hundreds of participants seated before the event screen, a track of grey tube barriers, and a checkered sponsor banner in the foreground.",
-   "notes": "Captured 2026-08-25 13:36 (camera time), the second day. Viewed through the EXIF thumbnail only; open the full file before cropping. The sibling item ifac2026-busan-largest-race already uses the Foundation's group photo, so this is a different frame. Alternative lead: the host's live stream of race day one, YouTube vGqDLhgokSY (Pusan National University, Mechanical Engineering, 7 h 10 min, 2026-08-26).",
+   "notes": "Removed from news.json 2026-09-26 (Cedric); this row no longer applies. Captured 2026-08-25 13:36 (camera time), the second day. Viewed through the EXIF thumbnail only; open the full file before cropping. The sibling item ifac2026-busan-largest-race already uses the Foundation's group photo, so this is a different frame. Alternative lead: the host's live stream of race day one, YouTube vGqDLhgokSY (Pusan National University, Mechanical Engineering, 7 h 10 min, 2026-08-26).",
    "checked": {
     "rr:/2026 IFAC/Media - POST MEDIA!/29th ROBORACER AUTONOMOUS RACING COMPETITION/[사진]29th ROBORACER AUTONOMOUS RACING COMPETITION 보정사진 (3).jpg": "rclone lsl 5850984 bytes"
    }
