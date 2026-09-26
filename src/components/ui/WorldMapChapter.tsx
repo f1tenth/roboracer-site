@@ -25,13 +25,20 @@ const ASPECT = VB_W / VB_H;
 const CHROME_REM = 22.25;
 
 // Scale statements from the content skill (kept until Rahul answers).
-// Competitions carry a "+" (Cedric, 2026-08-22: "it's 30+ competitions").
-const STATS = [
-  { value: 90, suffix: "+", label: "universities" },
-  { value: 20, suffix: "+", label: "countries" },
-  { value: 1000, suffix: "+", label: "publications" },
-  { value: 30, suffix: "+", label: "competitions held" },
-] as const;
+// "Competitions held" is the series number of the last race held, no "+"
+// (content skill: "30 competitions held" until IROS 2026, the 31st, has
+// run; /about and /race say 30 too). It follows events_map.json, where
+// loadEventsMap marks a race held once its end date has passed, so the
+// counter reads 31 after IROS without an edit; 30 until the file arrives.
+const HELD_FALLBACK = 30;
+const statsFor = (held: number) =>
+  [
+    { value: 90, suffix: "+", label: "universities" },
+    { value: 20, suffix: "+", label: "countries" },
+    { value: 1000, suffix: "+", label: "publications" },
+    { value: held, suffix: undefined, label: "competitions held" },
+  ] as const;
+const STAT_COUNT = statsFor(HELD_FALLBACK).length;
 
 // Reveal schedule in chapter progress (0..1 over the 260vh wrapper), landing
 // v5 (docs/design/map-ticker-spec.svg, values copied literally): the pins pop
@@ -252,7 +259,7 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
   const wrapRef = useRef<HTMLDivElement>(null);
   const flashRef = useRef<HTMLParagraphElement>(null);
   const wheelRef = useRef<HTMLDivElement>(null);
-  const statRefs = useRef<RefObject<StatTickerHandle | null>[]>(STATS.map(() => createRef<StatTickerHandle>()));
+  const statRefs = useRef<RefObject<StatTickerHandle | null>[]>(Array.from({ length: STAT_COUNT }, () => createRef<StatTickerHandle>()));
   const glowId = useId();
   const reduced = usePrefersReducedMotion();
   const desktop = useDesktop();
@@ -285,6 +292,12 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
   const regions = useMemo(() => data?.regions ?? [], [data]);
   const origin = useMemo(() => pins.find((e) => e.id === ORIGIN_ID), [pins]);
   const series = useMemo(() => pins.filter(isNumbered), [pins]);
+  const stats = useMemo(() => {
+    const held = (data?.events ?? [])
+      .filter((e) => isNumbered(e) && e.status !== "upcoming")
+      .reduce((max, e) => Math.max(max, e.number ?? 0), 0);
+    return statsFor(held || HELD_FALLBACK);
+  }, [data]);
   const last: MapEvent | undefined = series[series.length - 1];
   const timing = useMemo(() => arrayTiming(pins, regions), [pins, regions]);
   const labels = useMemo(() => placeLabels(pins, rPin, FONT.label), [pins, rPin]);
@@ -628,7 +641,7 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
   const counterMode = desktop ? "progress" : "time";
   const counters = (
     <div className="grid grid-cols-2 gap-x-8 gap-y-6 sm:flex sm:items-end sm:gap-x-10">
-      {STATS.map((s, j) => (
+      {stats.map((s, j) => (
         <StatTicker
           key={`${s.label}-${counterMode}`}
           ref={statRefs.current[j]}

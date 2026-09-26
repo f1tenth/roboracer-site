@@ -305,7 +305,7 @@ export default function Landing() {
             index="01"
             id="highlights"
             title="Highlights"
-            lead="Moments from 30+ competitions since 2016."
+            lead="Moments from 30 competitions since 2016."
             action={
               showPause && highlights.length > 0 ? (
                 <PauseToggle
