@@ -31,6 +31,7 @@ import {
   type Contributor,
   type ContributorsFile,
 } from "../components/about/people";
+import { useScrollToHash } from "../hooks/useScrollToHash";
 
 const GITHUB_URL = "https://github.com/f1tenth";
 const SCHOLAR_URL =
@@ -96,6 +97,10 @@ function Figure({
  * landing and /race.
  */
 export default function About() {
+  // /race#leaderboard and /about#about-spinoffs are linked from docs and
+  // the nav; the route reset (useRouteScroll) would otherwise leave the
+  // reader at the top.
+  useScrollToHash();
   const [partners, setPartners] = useState<Partner[]>([]);
   // undefined while community.json loads (the hero holds the facade's box),
   // null when it names no video.

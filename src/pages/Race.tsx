@@ -20,6 +20,7 @@ import Leaderboard from "../components/race/Leaderboard";
 import { useNow } from "../components/race/useNow";
 import type { SeasonEvent } from "../components/race/eventState";
 import { DESKTOP_QUERY } from "../lib/motion";
+import { useScrollToHash } from "../hooks/useScrollToHash";
 
 // Same clip and the same credit as the landing's next-race section
 // (docs/ASSET_MANIFEST.md V4-11); the frame links to RoboRacer's own post,
@@ -117,6 +118,10 @@ function SlackLine() {
  * right now.
  */
 export default function RacePage() {
+  // /race#leaderboard and /about#about-spinoffs are linked from docs and
+  // the nav; the route reset (useRouteScroll) would otherwise leave the
+  // reader at the top.
+  useScrollToHash();
   const [upcoming, setUpcoming] = useState<SeasonEvent[]>([]);
   const [mapEvents, setMapEvents] = useState<MapEvent[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
