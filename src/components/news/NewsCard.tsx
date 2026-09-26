@@ -124,6 +124,9 @@ export default function NewsCard({ item, titleAs = "h3" }: NewsCardProps) {
   const [playing, setPlaying] = useState(false);
   const frame = useId();
   const pictured = Boolean(image || video);
+  // A banner far wider than the 16:10 frame (a 3:1 title graphic) is shown
+  // whole on the ink ground rather than cropped through its lettering.
+  const banner = image ? image.width / image.height > 2.5 : false;
   const tag = item.event ? eventLabel(item.event) : null;
   // A source that no longer answers is linked through its Wayback capture.
   const href = item.archive ?? item.link;
@@ -183,7 +186,9 @@ export default function NewsCard({ item, titleAs = "h3" }: NewsCardProps) {
             />
           </div>
         ) : image && (
-          <div className="aspect-[16/10] overflow-hidden border-b border-ink-950/10 bg-paper-100">
+          <div
+            className={`aspect-[16/10] overflow-hidden border-b border-ink-950/10 ${banner ? "bg-ink-950" : "bg-paper-100"}`}
+          >
             {/* Same target as the headline, hidden from assistive tech so the
                 card announces one link, not two. */}
             <a
@@ -201,7 +206,7 @@ export default function NewsCard({ item, titleAs = "h3" }: NewsCardProps) {
                 height={image.height}
                 loading="lazy"
                 decoding="async"
-                className="block h-full w-full object-cover"
+                className={`block h-full w-full ${banner ? "object-contain" : "object-cover"}`}
               />
             </a>
           </div>
