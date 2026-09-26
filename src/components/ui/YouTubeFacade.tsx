@@ -96,6 +96,9 @@ export function YouTubePlayer({
   aspect = "16 / 9",
   posterIsDuplicate = false,
 }: YouTubePlayerProps) {
+  // YouTube's 4:3 thumbnails (sddefault, hqdefault) letterbox a 16:9 video in
+  // black bars; zoomed just enough, a 16:10 or 16:9 box shows the picture only.
+  const letterboxed = poster.src.includes("i.ytimg.com") && poster.width / poster.height < 1.5;
   if (playing) {
     return (
       // `allow` (not the legacy allowfullscreen attribute) grants fullscreen.
@@ -124,7 +127,7 @@ export function YouTubePlayer({
         height={poster.height}
         aspect={aspect}
         radius="none"
-        className="h-full"
+        className={letterboxed ? "h-full scale-[1.12]" : "h-full"}
       />
       <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center">
         <span className="flex h-14 w-14 items-center justify-center rounded-full border border-ink-950/10 bg-paper-50/90 text-ink-950 transition-colors duration-[var(--duration-fast)] group-hover/play:bg-paper-50 group-focus-visible/play:bg-paper-50">
