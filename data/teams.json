@@ -1,7 +1,8 @@
 [
   {
     "name": "404 Racers",
-    "institution": "TODO(content): unknown. Not named in skill or task facts beyond driver names.",
+    "institution": "University of Pennsylvania",
+    "country": "United States",
     "highlights": [
       {
         "event": "IV 2026 (Detroit)",
@@ -9,11 +10,11 @@
       }
     ],
     "status": "verify",
-    "source": "Cedric, 2026-08-20 (direct fact, overrides stale results page; see note on Thunderbolt entry re: iv2026-race.roboracer.ai still being stale as of 2026-08-21).",
+    "source": "Name, institution, country: RoboRacer_Teams_DB sheet, 2026-09-25. Result: Cedric, 2026-08-20.",
     "photo": "media/team/team-404-racers-800.webp"
   },
   {
-    "name": "West Virginia University",
+    "name": "WVU Mountaineer",
     "institution": "West Virginia University",
     "country": "United States",
     "highlights": [
@@ -23,12 +24,13 @@
       }
     ],
     "status": "verify",
-    "source": "Cedric, 2026-08-20 (direct fact, overrides stale results page; see note on Thunderbolt entry). Skill 'Featured teams section' corrects an earlier note that mistakenly placed this at ICRA 2026 -- it was IV 2026. Do not confuse with ICRA 2026 Vienna teams 'UBM-Tom' / 'UBM-Atlas' below; no confirmed link between those aliases and WVU. Team name/alias at IV 2026: TODO(content); group led by Amr El-Wakeel per the content skill.",
+    "source": "Name, institution, country: RoboRacer_Teams_DB sheet, 2026-09-25. Result (IV 2026, not ICRA 2026): Cedric, 2026-08-20. Not UBM-Tom/Atlas, which is University of Bologna.",
     "photo": "media/team/team-west-virginia-university-800.webp"
   },
   {
     "name": "LAMARRacing",
-    "institution": "TODO(content): unknown. Skill lists 'LaMar Racing (Cedric's example; confirm exact name and institution)' -- exact team name confirmed as 'LAMARRacing' from the results page, institution still unconfirmed.",
+    "institution": "University of Bonn",
+    "country": "Germany",
     "highlights": [
       {
         "event": "ICRA 2026 (Vienna)",
@@ -40,7 +42,7 @@
       }
     ],
     "status": "verify",
-    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-21 (re-confirmed; unchanged from 2026-08-20 fetch).",
+    "source": "Name, institution, country: RoboRacer_Teams_DB sheet, 2026-09-25. The sheet spells it 'LAMAR Racing'; the site keeps 'LAMARRacing', the team's own spelling used across news, highlights and spinoffs. Results: ICRA 2026 results page, fetched 2026-08-21.",
     "photo": "media/team/team-lamarracing-800.webp",
     "website": "https://lamarr-institute.org/news/lamarracer-wins-roboracer-competition/"
   },
@@ -64,12 +66,12 @@
       }
     ],
     "status": "verify",
-    "source": "IV 2026 result: Cedric, 2026-08-20 (direct fact; https://iv2026-race.roboracer.ai/results.html still reads 'Results will be posted after the competition' as of 2026-08-22). ICRA 2026 results: ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-21; corroborates skill statement 'Penn placed 2nd in time trials, 5th head-to-head'. Cedric, 2026-08-22: 'Thunderbolt' (the IV 2026 alias) and 'UPenn Autonomous Racing' are the same team; the former Thunderbolt entry was merged into this one. Photo supplied by Cedric, 2026-08-22 (UPennAutonomousRacingTeam.jpeg).",
+    "source": "Name, institution, country: RoboRacer_Teams_DB sheet, 2026-09-25. IV 2026 result: Cedric, 2026-08-20 ('Thunderbolt' was this team's IV 2026 alias, Cedric 2026-08-22). ICRA 2026 results: results page, fetched 2026-08-21. Photo: Cedric, 2026-08-22.",
     "photo": "media/team/team-upenn-autonomous-racing-800.webp"
   },
   {
     "name": "ForzaETH",
-    "institution": "ETH Zurich",
+    "institution": "ETH Zürich",
     "country": "Switzerland",
     "website": "https://www.forzaeth.ch/",
     "logo": "partners/ethzurich.png",
@@ -84,13 +86,13 @@
       }
     ],
     "status": "verify",
-    "source": "Institution from skill 'Featured teams section' candidate list ('ForzaETH (ETH Zurich)'); placements from ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-21. Corroborated by publications.json entry 'baumann-2024-forzaeth' (ForzaETH Race Stack, ETH Zurich authors). Website and team photo supplied by Cedric, 2026-08-22 (forzaethteam.jpg replaces the earlier file of the same name).",
+    "source": "Name, institution, country: RoboRacer_Teams_DB sheet, 2026-09-25. Results: ICRA 2026 results page, fetched 2026-08-21. Website and photo: Cedric, 2026-08-22.",
     "photo": "media/team/team-forzaeth-800.webp"
   },
   {
     "name": "UNICORN_Racing",
-    "institution": "University of Bonn",
-    "country": "Germany",
+    "institution": "Ulsan National Institute of Science and Technology (UNIST)",
+    "country": "South Korea",
     "highlights": [
       {
         "event": "ICRA 2026 (Vienna)",
@@ -102,12 +104,13 @@
       }
     ],
     "status": "verify",
-    "source": "Institution from skill 'Featured teams section' candidate list ('Team Unicorn (University of Bonn)'); competition alias 'UNICORN_Racing' and placements from ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-21.",
+    "source": "Name, institution, country: RoboRacer_Teams_DB sheet, 2026-09-25. The sheet lists 'UNICORN' at UNIST, South Korea; the earlier 'University of Bonn' came from a skill candidate list and was wrong. 'UNICORN_Racing' is the ICRA 2026 results-page alias. Results: that page, fetched 2026-08-21.",
     "photo": "media/team/team-unicorn-racing-800.webp"
   },
   {
     "name": "VAUL",
-    "institution": "TODO(content): unknown.",
+    "institution": "Laval University",
+    "country": "Canada",
     "highlights": [
       {
         "event": "ICRA 2026 (Vienna)",
@@ -115,13 +118,14 @@
       }
     ],
     "status": "verify",
-    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-21 (listed there as 'VAUL 2', 1st Classic Cup; 'VAUL 1' placed 7th in Master Cup on the same page). Cedric, 2026-08-22: VAUL is one lab that split into two cars, so VAUL 1 is the same lab; shown here as 'VAUL'. Institution unconfirmed (a Felix Jahncke pit photo, P1022968, shows a car with Universite Laval / NORLab signage; verify before publishing).",
+    "source": "Name, institution, country: RoboRacer_Teams_DB sheet, 2026-09-25. Results: ICRA 2026 results page, fetched 2026-08-21 ('VAUL 2' 1st Classic Cup; 'VAUL 1' 7th Master Cup). One lab, two cars (Cedric, 2026-08-22).",
     "photo": "media/team/team-vaul-2-800.webp",
     "website": "https://vaul.fsg.ulaval.ca/en"
   },
   {
     "name": "UBM-Tom/Atlas",
-    "institution": "TODO(content): unknown. Not confirmed to be West Virginia University; do not publish that mapping without Cedric/Rahul confirmation (WVU's 3rd place was at IV 2026, not ICRA 2026).",
+    "institution": "University of Bologna",
+    "country": "Italy",
     "highlights": [
       {
         "event": "ICRA 2026 (Vienna)",
@@ -141,12 +145,13 @@
       }
     ],
     "status": "verify",
-    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html (fetched 2026-08-21, re-read 2026-08-22: Master Cup 2nd UBM-Atlas, 3rd UBM-Tom; Time Trial table rows 5 and 6: UBM-Tom 17.780 s / 13 laps / 48 pts, UBM-Atlas 18.520 s / 12 laps / 44 pts). Cedric, 2026-08-22: UBM-Tom and UBM-Atlas are the same team (two cars); the two entries were merged. Photo is the former UBM-Atlas photo.",
+    "source": "Name, institution, country: RoboRacer_Teams_DB sheet, 2026-09-25. The sheet lists 'UBM-Atlas' and 'UBM-Tom', both University of Bologna, Italy; the earlier guess that this was West Virginia University was wrong. One team, two cars (Cedric, 2026-08-22). Results: ICRA 2026 results page, fetched 2026-08-21.",
     "photo": "media/team/team-ubm-atlas-800.webp"
   },
   {
     "name": "Brake Check Buddies",
-    "institution": "TODO(content): unknown. Not named on the results page.",
+    "institution": "TU Wien",
+    "country": "Austria",
     "highlights": [
       {
         "event": "ICRA 2026 (Vienna)",
@@ -154,7 +159,7 @@
       }
     ],
     "status": "verify",
-    "source": "ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-22 (Classic Cup table: 1st VAUL 2, 2nd Brake Check Buddies, 3rd tron racing). Photo: frame from the organizer team-intro video Drive 'Teams Intro/brake_check_buddies_edited.mov' (lower-third reads 'Team Brake Check Buddies').",
+    "source": "Name, institution, country: RoboRacer_Teams_DB sheet, 2026-09-25. Result: ICRA 2026 results page, fetched 2026-08-22. Photo: organizer team-intro video frame.",
     "photo": "media/team/team-brake-check-buddies-800.webp"
   },
   {
@@ -173,7 +178,7 @@
       }
     ],
     "status": "verify",
-    "source": "Cedric, 2026-08-22 (team, institution TU Wien, website). Placements from the ICRA 2026 Vienna results page, https://icra2026-race.roboracer.ai/results.html, fetched 2026-08-22, which lists the team as 'Scuderia Segfault': Master Cup '11th Scuderia Segfault'; Time Trial table row 11 'Scuderia Segfault 19.308 s 11 34' (best lap, consecutive laps, points). Community posts by LAMARRacing members (Samir Shehadeh, Lukas Kutsch, June 2026) thank 'Technische Universität Wien and Scuderia Segfault' for organizing the ICRA 2026 competition. Photo supplied by Cedric, 2026-08-22 (scuderia-segfault.jpg).",
+    "source": "Name, institution, country: RoboRacer_Teams_DB sheet, 2026-09-25. Results: ICRA 2026 results page, fetched 2026-08-22. Website and photo: Cedric, 2026-08-22.",
     "photo": "media/team/team-scuderia-segfault-800.webp"
   }
 ]
