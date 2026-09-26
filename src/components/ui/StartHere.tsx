@@ -354,7 +354,9 @@ function ClipFrame({ media, label }: { media?: PathMedia; label: string }) {
  * `desktop:` it is a tile in the section's grid: the clip frame on top
  * (still first, the muted loop only near and on screen, the still under
  * reduced motion), then the label, the sentence and the link, pinned to the
- * tile's foot so the links of a row line up. The copy hidden at a size is
+ * tile's foot so the links of a row line up. From 1024 up the tile is
+ * landscape: the frame, cropped to 16:9, on the left and the text beside it,
+ * its link level with the frame's foot. The copy hidden at a size is
  * display: none, so its lazy image and observed clip are never requested. */
 function PathTile({ path }: { path: EntryPath }) {
   // Per instance, not per path, so two lists on one page never share an id.
@@ -364,7 +366,9 @@ function PathTile({ path }: { path: EntryPath }) {
       <div className="desktop:hidden">
         <Thumb media={path.media} />
       </div>
-      <div className="compact:hidden">
+      {/* The 16:9 crop shows the build clip's encode edge (a 16px dark band on
+          the right, 8px at the foot) that 16:10 cut off: a 4% zoom hides it. */}
+      <div className="compact:hidden desktop:lg:[&>div]:aspect-video desktop:lg:[&_img]:scale-[1.04] desktop:lg:[&_video]:scale-[1.04]">
         <ClipFrame media={path.media} label={path.id} />
       </div>
       <div className="flex min-w-0 flex-col desktop:flex-1 desktop:pt-5">
@@ -438,14 +442,17 @@ export default function StartHere({ index, id, headingId, lead }: StartHereProps
   }, []);
 
   // The grid, from desktop:: tablets 2 + 2 with the fifth across both
-  // columns (picture beside its text), 1024 to 1279 3 + 2 on six columns (the
-  // second row's two a little wider, no hole), 1280 up all five in one row
-  // (about 22rem each at 1366 and 1536: the root size follows the window, so
-  // the tiles keep their width in rem). Phones keep the thumb rows.
+  // columns (picture beside its text). From 1024 up (laptops) two columns of
+  // landscape tiles, the header in the first cell and the five in the other
+  // cells, each a 16:9 clip frame (43%) beside its label, sentence and link:
+  // three rows, so the whole section fits one screen under the nav at
+  // 1366x650 and 1536x730 (Cedric, 2026-09-26; docs/qa/p3-start-fit.md). The
+  // root size follows the window, so the tiles keep their size in rem.
+  // Phones keep the thumb rows.
   const listClass =
-    "border-t border-ink-950/10 desktop:grid desktop:grid-cols-2 desktop:gap-x-6 desktop:gap-y-10 desktop:border-t-0 desktop:lg:grid-cols-6 desktop:xl:grid-cols-5";
+    "border-t border-ink-950/10 desktop:grid desktop:grid-cols-2 desktop:gap-x-6 desktop:gap-y-10 desktop:border-t-0 desktop:lg:gap-y-5";
   const rowClass =
-    "relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-4 border-b border-ink-950/10 py-4 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-6 desktop:flex desktop:flex-col desktop:border-b-0 desktop:py-0 desktop:max-lg:last:col-span-2 desktop:max-lg:last:grid desktop:max-lg:last:grid-cols-2 desktop:max-lg:last:items-center desktop:max-lg:last:gap-x-6 desktop:max-lg:last:[&>div:last-child]:pt-0 desktop:lg:max-xl:col-span-2 desktop:lg:max-xl:nth-[n+4]:col-span-3";
+    "relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-4 border-b border-ink-950/10 py-4 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-6 desktop:flex desktop:flex-col desktop:border-b-0 desktop:py-0 desktop:max-lg:last:col-span-2 desktop:max-lg:last:grid desktop:max-lg:last:grid-cols-2 desktop:max-lg:last:items-center desktop:max-lg:last:gap-x-6 desktop:max-lg:last:[&>div:last-child]:pt-0 desktop:lg:grid desktop:lg:grid-cols-[3fr_4fr] desktop:lg:items-stretch desktop:lg:gap-x-5 desktop:lg:first:col-start-2 desktop:lg:[&>div:last-child]:pt-0";
 
   // The header and its one line full width, as every landing section has it,
   // then the grid across the page (Cedric, 2026-09-26: "super empty on the
@@ -459,28 +466,40 @@ export default function StartHere({ index, id, headingId, lead }: StartHereProps
       width="page"
       id={id}
       aria-labelledby={headingId}
-      className="pt-[calc(var(--spacing-nav)+2rem)]! focus:outline-none"
+      className="pt-[calc(var(--spacing-nav)+2rem)]! focus:outline-none desktop:lg:pb-16!"
     >
-      <SectionHeader index={index} id={headingId} title="Start here" lead={lead} />
-      {/* aria-busy until the paths arrive: the "Start here" jump waits for it
-          (hooks/useScrollToHash). Meanwhile the bundled five stand in,
-          invisible and out of the accessibility tree, so the list already
-          has its final height and nothing below it jumps when the file
-          lands. */}
-      <div aria-busy={loading}>
-        <Reveal stagger as="ul" className={listClass}>
-          {(loading ? BUNDLED_PATHS : paths).map((path) =>
-            loading ? (
-              <li key={path.id} aria-hidden="true" className={`invisible ${rowClass}`}>
-                <PathTile path={path} />
-              </li>
-            ) : (
-              <li key={path.id} data-path={path.id} className={rowClass}>
-                <PathTile path={path} />
-              </li>
-            ),
-          )}
-        </Reveal>
+      {/* Laptops: the header sits in the grid's first cell. The header and
+          the list share the wrapper's one cell; the list's first tile starts
+          in its second column, so the header shows through the empty first
+          one (a ul holds only li, so the header cannot be one of its cells). */}
+      <div className="desktop:lg:grid">
+        <SectionHeader
+          index={index}
+          id={headingId}
+          title="Start here"
+          lead={lead}
+          className="relative z-10 desktop:lg:mb-0! desktop:lg:w-[calc((100%-1.5rem)/2)] desktop:lg:self-start desktop:lg:[grid-area:1/1]"
+        />
+        {/* aria-busy until the paths arrive: the "Start here" jump waits for it
+            (hooks/useScrollToHash). Meanwhile the bundled five stand in,
+            invisible and out of the accessibility tree, so the list already
+            has its final height and nothing below it jumps when the file
+            lands. */}
+        <div aria-busy={loading} className="desktop:lg:[grid-area:1/1]">
+          <Reveal stagger as="ul" className={listClass}>
+            {(loading ? BUNDLED_PATHS : paths).map((path) =>
+              loading ? (
+                <li key={path.id} aria-hidden="true" className={`invisible ${rowClass}`}>
+                  <PathTile path={path} />
+                </li>
+              ) : (
+                <li key={path.id} data-path={path.id} className={rowClass}>
+                  <PathTile path={path} />
+                </li>
+              ),
+            )}
+          </Reveal>
+        </div>
       </div>
     </Section>
   );
