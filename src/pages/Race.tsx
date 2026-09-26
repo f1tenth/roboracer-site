@@ -373,7 +373,15 @@ export default function RacePage() {
           series, where the fastest laps are being set this week. It is a
           side door (simulator laps from one course, not a competition), so
           it sits below everything a team needs to enter. */}
-      <Section id="leaderboard" width="page" aria-labelledby="race-leaderboard" rule>
+      {/* /race#leaderboard lands with the "05" eyebrow clear of the fixed
+          nav: on a phone the section's top padding is shorter than the bar. */}
+      <Section
+        id="leaderboard"
+        width="page"
+        aria-labelledby="race-leaderboard"
+        rule
+        className="scroll-mt-[calc(var(--spacing-nav)+1rem)]"
+      >
         <SectionHeader
           index="05"
           id="race-leaderboard"

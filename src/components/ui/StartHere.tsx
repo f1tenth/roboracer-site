@@ -518,7 +518,13 @@ export default function StartHere({
 
   if (full) {
     return (
-      <Section width="page" id={id} rule aria-labelledby={headingId} className="focus:outline-none">
+      <Section
+        width="page"
+        id={id}
+        rule
+        aria-labelledby={headingId}
+        className="scroll-mt-[calc(var(--spacing-nav)+1rem)] focus:outline-none"
+      >
         <SectionHeader index={index} id={headingId} title="Start here" subtitle={subtitle} lead={lead} />
         {intro}
         <div className={intro ? "mt-16" : undefined}>{list}</div>
@@ -529,7 +535,8 @@ export default function StartHere({
   // Landing: the header and its one line beside the list from lg (a 5/7
   // split), stacked above it below. The top padding clears the fixed nav
   // when the nav's "Start here" scrolls this section to the top of the
-  // window (the bar is --spacing-nav tall at every size).
+  // window (the bar is --spacing-nav tall at every size), so this section
+  // takes no scroll margin: one would add a second nav's height of gap.
   return (
     <Section
       tight

@@ -11,17 +11,26 @@ const HOLD_MS = 4000;
 
 const INPUT_EVENTS = ["wheel", "touchstart", "keydown", "pointerdown"] as const;
 
-/** Top of `el` in page coordinates. */
-const topOf = (el: HTMLElement) => el.getBoundingClientRect().top + window.scrollY;
+/** Where the window's top goes to show `el`: its top in page coordinates,
+ * less its `scroll-margin-top`, which is how a target keeps its eyebrow and
+ * heading clear of the fixed nav bar (SectionHeader's h2, /race#leaderboard),
+ * the same room a native #anchor jump or scrollIntoView gives it. */
+const topOf = (el: HTMLElement) =>
+  el.getBoundingClientRect().top + window.scrollY - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
 
 /**
- * A ScrollTrigger refresh scrolls to 0 to measure and then restores the
- * position it recorded when the page's matchMedia contexts were created. On a
- * freshly mounted landing that record is 0, so a refresh that lands just after
- * the jump (the landing refreshes as each data file arrives, and again when
- * the webfonts are in) put the reader back at the top of the hero. For a few
- * seconds after a jump, every refresh re-applies it, unless the reader has
- * scrolled on their own by then.
+ * Two things move a target after the jump, and for a few seconds each one
+ * re-applies it, unless the reader has scrolled on their own by then:
+ *
+ * - A ScrollTrigger refresh scrolls to 0 to measure and then restores the
+ *   position it recorded when the page's matchMedia contexts were created. On
+ *   a freshly mounted landing that record is 0, so a refresh just after the
+ *   jump (the landing refreshes as each data file arrives, and again when the
+ *   webfonts are in) put the reader back at the top of the hero.
+ * - Content that lands above the target (the partner wall and contributor
+ *   strips on /about, the team grid on /race) pushes it down. Chromium's
+ *   scroll anchoring hides that; a browser without it (Safari) left the reader
+ *   a screen or two above. Any change of the document's height re-applies.
  */
 function holdAt(el: HTMLElement): () => void {
   let released = false;
