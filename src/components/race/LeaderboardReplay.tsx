@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import type { ReplayConfig } from "./leaderboardData";
 
 /**
@@ -62,13 +63,15 @@ const REVEAL_AFTER_MS = 900;
  * in the table (docs/LEADERBOARD.md, "The replay").
  *
  * It is heavy (a canvas redrawn every frame, five recordings) and animated,
- * so it loads only on a click: until then a poster captured from it holds
- * the exact box the player will fill, so nothing moves when it arrives. The
- * poster leaves the player's buttons out (Full screen, Close, the play bar:
- * hidden in the board's page before the capture, manifest RACE-LB-01/02), so
- * nothing drawn on it looks clickable but the play disc. Under
- * reduced motion the board's player opens paused by itself. The link under it
- * opens the same view on the board's site, in every state.
+ * so it loads when the section comes near the viewport, not on page load
+ * (Cedric, 2026-09-26: the replay plays by itself, no button to press). Until
+ * the player is up, a poster captured from it holds the exact box the player
+ * will fill, so nothing moves when it arrives. The poster leaves the player's
+ * buttons out (Full screen, Close, the play bar: hidden in the board's page
+ * before the capture, manifest RACE-LB-01/02). Under reduced motion nothing
+ * loads by itself: the poster stays, with a play disc, until a click (rule 6),
+ * and the board's player then opens paused. The link under it opens the same
+ * view on the board's site, in every state.
  */
 export default function LeaderboardReplay({ replay, href }: { replay: ReplayConfig; href: string }) {
   const measureRef = useRef<HTMLDivElement>(null);
@@ -80,6 +83,30 @@ export default function LeaderboardReplay({ replay, href }: { replay: ReplayConf
   // Bumped by "Restart the replay": a fresh frame, the player open again.
   const [run, setRun] = useState(0);
   const revealTimer = useRef<number | undefined>(undefined);
+  const reduced = usePrefersReducedMotion();
+
+  // Autoplay: the frame mounts once the box is within 200 px of the viewport
+  // (the poster covers its load), never under reduced motion.
+  useEffect(() => {
+    if (on || reduced) return;
+    const el = measureRef.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setOn(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setOn(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "200px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [on, reduced]);
 
   useLayoutEffect(() => {
     const el = measureRef.current;

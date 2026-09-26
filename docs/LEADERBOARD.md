@@ -16,7 +16,7 @@ replay" below).
 | Section 05 "Leaderboard", the last section of `/race`, anchor `/race#leaderboard` | `src/pages/Race.tsx` |
 | The section body: fetch, board choice, table, states | `src/components/race/Leaderboard.tsx` |
 | Types, fetch with timeout, board choice, formatting | `src/components/race/leaderboardData.ts` |
-| The replay beside the table: poster, click to load, clipped frame | `src/components/race/LeaderboardReplay.tsx` |
+| The replay beside the table: poster, loads itself near the viewport (click under reduced motion), clipped frame | `src/components/race/LeaderboardReplay.tsx` |
 | Its two posters | `public/media/race/race-leaderboard-replay-{wide,narrow}.webp` |
 | Where the board lives, what to feature, the replay's copy (data, not code) | `public/data/leaderboard.json` |
 
@@ -83,7 +83,7 @@ right now". It does not push the season or the entry steps down.
    once the config has loaded.
 
 The table does not animate. The only motion in the section is the board's
-replay, which loads only on a click (below).
+replay, which loads by itself once its box is near the viewport (below; Cedric, 2026-09-26).
 The table has a screen-reader caption ("Lab 4: Follow the Gap, Fastest clean
 lap: the top 5 of 7 teams"), column headers with `scope="col"`, and the team or
 alias as the row header.
@@ -222,7 +222,7 @@ have it stay on follow the gap:
   follow the gap", one line "The best clean laps in the grading simulator,
   replayed.", the player, then "Open the replay ↗" (new tab, same URL) and,
   once loaded, "Restart the replay".
-- **Click to load.** Until a click (or Enter/Space) only a poster ships: a
+- **Loads near the viewport** (Cedric, 2026-09-26: no button to press). The frame mounts when its box comes within 200 px of the viewport; under reduced motion only a click (or Enter/Space) loads it. Until then only a poster ships: a
   capture of the player itself, its buttons hidden before the capture (so
   the poster draws no control that does nothing), paused mid-race (Team 10 on lap 2, Team 8
   0.19 s behind, the other three out of the first corner), in the exact box the player will fill, with
