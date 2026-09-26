@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { gsap, ScrollTrigger, DURATION, REDUCED_MOTION_QUERY, lockScroll } from "../lib/motion";
-import { startHrefFor } from "../lib/wayfinding";
+import { START_HREF } from "../lib/wayfinding";
 
 const links = [
   { href: "/about", text: "About" },
@@ -122,8 +122,6 @@ export default function Navbar() {
   const [menuMounted, setMenuMounted] = useState(false);
   // The open mobile menu needs a solid bar behind it whatever the scroll.
   const transparent = HERO_ROUTES.has(location.pathname) && !menuOpen;
-  // /about's own Start here section on /about, the landing's everywhere else.
-  const startHref = startHrefFor(location.pathname);
 
   // Close the mobile menu on every navigation, including "Start here" on the
   // landing itself, which changes only the hash.
@@ -340,12 +338,12 @@ export default function Navbar() {
 
         {/* The two actions sit together, closer than the links. "Start here"
             is the bar's one solid violet button: the five ways in under the
-            landing hero (ui/StartHere), or /about's own section on /about. */}
+            landing hero (ui/StartHere), from every route. */}
         <div className="nav-actions">
           <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className="nav-cta">
             Join the Slack
           </a>
-          <Link to={startHref} className="nav-primary">
+          <Link to={START_HREF} className="nav-primary">
             Start here
           </Link>
         </div>
@@ -356,7 +354,7 @@ export default function Navbar() {
           height. Under 390px wide (an iPhone SE, a 360 Android) it would crowd
           the wordmark, so it moves to the top of the menu instead. */}
       <div className="flex items-center gap-4 lg:hidden">
-        <Link to={startHref} className="nav-primary nav-primary-bar hidden min-[24.375rem]:inline-flex">
+        <Link to={START_HREF} className="nav-primary nav-primary-bar hidden min-[24.375rem]:inline-flex">
           Start here
         </Link>
         <button
@@ -393,7 +391,7 @@ export default function Navbar() {
           aria-label="Menu"
           className="mobile-menu lg:hidden"
         >
-          <Link to={startHref} className="nav-primary mobile-menu-primary min-[24.375rem]:hidden">
+          <Link to={START_HREF} className="nav-primary mobile-menu-primary min-[24.375rem]:hidden">
             Start here
           </Link>
           {links.map((link) => {
