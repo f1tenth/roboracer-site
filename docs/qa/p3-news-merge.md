@@ -114,3 +114,7 @@ Not 2xx:
 - JavaScript disabled: the page is a client-rendered SPA fed by news.json, so it renders nothing
   without JS, like every route on the site.
 - Real phones and Safari: headless Chromium only.
+
+## Audit fixes and trim pass (2026-09-26)
+
+The 17 FIX rows of docs/news/AUDIT.md are applied word for word (fc546da). Then the 53 merged items were cut to the card rules in docs/copy/BRIEF.md: excerpts went from 19 to 50 words (median 36) to 17 to 25 (median 24), and titles from 6 to 12 words to 5 to 9. The audit's corrected wording and attributions stayed, and no fact was added. Each changed item keeps its pre-trim title and excerpt at the end of `sources`, and the table is in docs/news/TRIM.md (92041ad). `unc-the-fast-and-the-autonomous` is now `published`, with no dispute in AUDIT.md or MERGE.md (a0535f9), so all 75 items are published. Checks: news.json parses and every item has the fields newsData.ts reads (id, dates, precision, title, kind, link, publisher, image, and a complete image object where set). Lint and build are green. On `vite preview` (port 4188) /news at 1536x730 and 390x844, with every year opened: zero console errors, one h1, no horizontal scroll, and none of the 75 cards or their text boxes has scrollHeight or scrollWidth above its client box. The only flags are the year and section h2s, 3 to 4 px taller than their line box because of the tight display line-height; they are not clipped and were there before this pass. Captures: docs/qa/p3-news-merge/trim-1536x730-mid.jpg and trim-390x844-mid.jpg.
