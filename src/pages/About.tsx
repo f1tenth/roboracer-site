@@ -355,8 +355,10 @@ export default function About() {
         <PartnerWall partners={partners} />
       </Section>
 
-      {/* 04 Spinoffs - from public/data/spinoffs.json. Only `entries` render;
-          the `candidates` there wait for Cedric. Each entry is a feature
+      {/* 04 Related platforms - from public/data/spinoffs.json. Only `entries`
+          render; the `candidates` there wait for Cedric. Cedric, 2026-09-26:
+          Quanser is not affiliated and is not a spinoff, so the section names
+          related platforms and says how each relates. Each entry is a feature
           built from the company's own site at his request (2026-09-25):
           its car, its mark, and a framed window onto its homepage. */}
       {(spinoffs === null || spinoffs.length > 0) && (
@@ -364,8 +366,8 @@ export default function About() {
           <SectionHeader
             index="04"
             id="about-spinoffs"
-            title="Spinoffs"
-            subtitle="Companies that grew out of the car"
+            title="Related platforms"
+            subtitle="Other one-tenth-scale cars, and how they relate to RoboRacer"
             lead={
               <>
                 {/* "Two so far": the count follows spinoffs.json as Cedric

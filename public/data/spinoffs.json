@@ -1,6 +1,6 @@
 {
-  "note": "About page, section 'Spinoffs'. Nothing here is in the roboracer-content skill yet; 'status' records that and is not rendered (verify tags left the site, Cedric 2026-09-25). 'what' and 'origin' are our own words, drafted from the first-party pages in 'source' and 'evidence'; never paste their copy. An 'origin' that starts with TODO(content) is not rendered, but the entry is. 'entries' render on /about; 'candidates' do not render until Cedric moves them into 'entries'. Each entry's feature shows three images from public/media/spinoffs: 'logo' (the company's mark beside the name), 'car' (its car, the main visual, linking to the car's page) and 'preview' (our own 1280x800 capture of its homepage, framed as a browser window that links to 'url'). Rule 8 exception: Cedric, 2026-09-25, asked to feature Neobotics and Quanser with their logo, car and a preview of their website ('embed their website, summarized'), so these images come from neobotics.org and quanser.com; permission status 'Cedric-directed; company not yet asked'. Every image has a provenance row in docs/ASSET_MANIFEST.md (section 'About: spinoff features'). An image field left null or absent drops that slot.",
-  "updated": "2026-09-25",
+  "note": "About page, section 'Related platforms' (was 'Spinoffs'; Cedric, 2026-09-26: Quanser is not a spinoff, so the section names how each platform relates to RoboRacer). Nothing here is in the roboracer-content skill yet; 'status' records that and is not rendered (verify tags left the site, Cedric 2026-09-25). 'what' and 'origin' are our own words, drafted from the first-party pages in 'source' and 'evidence'; never paste their copy. An 'origin' that starts with TODO(content) is not rendered, but the entry is. 'entries' render on /about; 'candidates' do not render until Cedric moves them into 'entries'. Each entry's feature shows three images from public/media/spinoffs: 'logo' (the company's mark beside the name), 'car' (its car, the main visual, linking to the car's page) and 'preview' (our own 1280x800 capture of its homepage, framed as a browser window that links to 'url'). Rule 8 exception: Cedric, 2026-09-25, asked to feature Neobotics and Quanser with their logo, car and a preview of their website ('embed their website, summarized'), so these images come from neobotics.org and quanser.com; permission status 'Cedric-directed; company not yet asked'. Every image has a provenance row in docs/ASSET_MANIFEST.md (section 'About: spinoff features'). An image field left null or absent drops that slot.",
+  "updated": "2026-09-26",
   "entries": [
     {
       "name": "Neobotics",
@@ -64,7 +64,7 @@
       "name": "Quanser",
       "kind": "company",
       "what": "An engineering education company. Its Self-Driving Car Studio is built around the QCar 2, a 1/10-scale research car.",
-      "origin": "TODO(content): Cedric named Quanser as a spinoff (2026-09-24), but no public page says how Quanser or the QCar connects to F1TENTH/RoboRacer. Ask him what the connection is.",
+      "origin": "A commercial research car in the same class. Not affiliated with RoboRacer.",
       "since": null,
       "url": "https://www.quanser.com/",
       "logo": {
@@ -103,7 +103,7 @@
           "says": "Founded by an engineering professor, Dr. Jacob Apkarian, to improve his teaching; '35+ years of academic partnership'. No mention of F1TENTH or RoboRacer."
         }
       ],
-      "note": "Cedric, 2026-09-25: feature as a spinoff; origin still to be filled in. He named Quanser on 2026-09-24; the first-party pages in evidence do not say how Quanser or the QCar connects to F1TENTH/RoboRacer, so the card shows what Quanser makes and no origin line until he answers. The section subtitle carries his claim. The logo, QCar 2 photo and homepage capture come from quanser.com at his direction (permission: Cedric-directed; Quanser not yet asked)."
+      "note": "Cedric, 2026-09-26: Quanser is not affiliated with RoboRacer and is not a spinoff; it is mentioned here as a related platform, with the relation stated plainly. Nothing on the site claims lineage either way. Earlier note: Cedric named Quanser on 2026-09-24; its pages (evidence) do not mention F1TENTH or RoboRacer."
     }
   ],
   "candidates": [

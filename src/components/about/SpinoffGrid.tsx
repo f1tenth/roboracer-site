@@ -105,7 +105,7 @@ function SpinoffFeature({ spinoff }: { spinoff: Spinoff }) {
             <p className="mt-4 max-w-[48ch] text-body text-text-body">{what}</p>
             {origin && (
               <div className="mt-5 border-t border-ink-950/10 pt-4">
-                <p className="font-mono text-eyebrow tracking-normal text-text-muted">with RoboRacer</p>
+                <p className="font-mono text-eyebrow tracking-normal text-text-muted">and RoboRacer</p>
                 <p className="mt-1.5 max-w-[48ch] text-small text-text-body">{origin}</p>
               </div>
             )}
