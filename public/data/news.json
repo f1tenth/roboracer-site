@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-25",
+  "updated": "2026-09-26",
   "items": [
     {
       "id": "iros2026-sim-league-siga-siga-wins",
@@ -108,44 +108,6 @@
       },
       "sources": "LinkedIn candidate vtc2026-boston-recap (Neobotics' own post, 2026-09-21; the Foundation reposted it: https://www.linkedin.com/posts/roboracer-foundation_activity-7507935046394376192-Bbo1) merged with drive candidate vtc2026-boston-30th. WINNER held: only a competitor's post (Connor McGovern, LinkedIn candidate vtc2026-firebird-wins) names Firebird from George Mason University; vtc2026-race.roboracer.ai answers 404 (see MERGE.md). Neobotics' photos stay in the embedded post. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Neobotics and RoboRacer run the 30th competition, in Boston'; excerpt 'The 30th competition ran on September 6, 2026 at the Hilton Boston Park Plaza, during IEEE VTC 2026-Fall. Neobotics Foundation organized it with the Roboracer Foundation. The event poster shows teams from Buffalo, Boston University, Florida, Northeastern, Victoria, Wisconsin-Madison and GIU.'",
       "featured": false,
-      "status": "published"
-    },
-    {
-      "id": "iros2026-registration-closes-sep-5",
-      "date": "2026-08-23",
-      "date_display": "Aug 23, 2026",
-      "date_precision": "day",
-      "title": "Registration for the 31st competition at IROS 2026 closes September 5",
-      "excerpt": "The competition runs September 28 to 30, 2026 at the David L. Lawrence Convention Center in Pittsburgh. Check-in and practice are on September 27. Up to four cars race at once. Register your team by September 5.",
-      "kind": "announcement",
-      "event": "iros2026",
-      "link": "https://iros2026-race.roboracer.ai/",
-      "author": null,
-      "author_url": null,
-      "affiliation": null,
-      "publisher": "RoboRacer",
-      "credit": "Source: iros2026-race.roboracer.ai",
-      "image": null,
-      "featured": true,
-      "status": "published"
-    },
-    {
-      "id": "ifac2026-busan-opens",
-      "date": "2026-08-23",
-      "date_display": "Aug 23, 2026",
-      "date_precision": "day",
-      "title": "The 29th competition opens in Busan on August 24",
-      "excerpt": "The competition runs August 24 to 27, 2026 at BEXCO in Busan, Republic of Korea. Teams bring their own 1/10-scale car and software.",
-      "kind": "announcement",
-      "event": "ifac2026",
-      "link": "https://2026ifac-roboracer.com/",
-      "author": null,
-      "author_url": null,
-      "affiliation": null,
-      "publisher": "RoboRacer",
-      "credit": "Source: 2026ifac-roboracer.com",
-      "image": null,
-      "featured": true,
       "status": "published"
     },
     {
