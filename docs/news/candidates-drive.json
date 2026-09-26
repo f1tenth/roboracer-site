@@ -1,0 +1,944 @@
+{
+  "_about": "News candidates harvested from the RoboRacer Events shared Drive (rclone remote rr:, read-only) on 2026-09-25 for the /news page. Not published data: nothing here is rendered. Each candidate cites the Drive files that state its facts; see docs/news/candidates-drive.md for coverage, contradictions and permission-sensitive files. rr:[2026 ICRA, folder id ...] marks the 2026 ICRA folder, reachable by id but not listed at the Drive root today.",
+  "generated": "2026-09-25",
+  "source": "rr: (RoboRacer Events shared drive, root 0AGa1gzpAFb_kUk9PVA)",
+  "count": 31,
+  "candidates": [
+    {
+      "id": "iros2026-orientation-2",
+      "date": "2026-09-16",
+      "title": "What teams heard at the second IROS 2026 orientation",
+      "excerpt": "Up to four cars race at once at the 31st competition, on a track inspired by the Indianapolis Motor Speedway and laid on the smooth concrete floor of the exhibition hall. Practice runs Monday, time trials Tuesday afternoon and the races Wednesday. Fourteen teams had signed up by the orientation, not all of them confirmed.",
+      "kind": "announcement",
+      "event": "iros2026",
+      "link": "https://iros2026-race.roboracer.ai/",
+      "source_paths": [
+        "rr:/2026 IROS/Orientation/Orientation 2/IROS2026_Orientation2.pptx",
+        "rr:/2026 IROS/Example Timeline/IROS 2026 RoboRacer Competition Schedule.xlsx",
+        "rr:/2026 IROS/Registration/IROS2026-Roboracer-Registration (Responses).xlsx",
+        "rr:/2026 IROS/Flyers/"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/2026 IROS/Flyers/Vertical-Flyer-IROS2026-Roboracer.png",
+          "bytes": 2395387,
+          "why": "official IROS 2026 flyer (1414x2000); shows Sep 27 - Oct 1, see notes"
+        },
+        {
+          "path": "rr:/2026 IROS/Flyers/img/good for multiagent race.jpeg",
+          "bytes": 3615807,
+          "why": "photo the organizers set aside for the multi-agent race flyer; source event not recorded"
+        },
+        {
+          "path": "rr:/2026 IROS/Flyers/old/Multi Race Website Banner.png",
+          "bytes": 1404562,
+          "why": "1200x500 web banner for the 31st competition"
+        }
+      ],
+      "facts": [
+        "31st Roboracer Autonomous Racing Competition, In-Person, September 27-30 2026, Pittsburgh: IROS2026_Orientation2.pptx slide 7",
+        "Mon Sep 28 practice 9:30-5:00; Tue Sep 29 practice 9-12, time trials 12-3, obstacle avoidance 3-5; Wed Sep 30 race parts 1 and 2 9-3, final race and teardown 3-4, awards ceremony 6-9 PM at CMU: slide 9 and IROS 2026 RoboRacer Competition Schedule.xlsx",
+        "David L. Lawrence Convention Center; exhibition hall, smooth concrete, not carpeted; track 'inspired by the Indianapolis Motor Speedway': slides 11 and 13",
+        "Races: 2 to 4 cars at the same time, tentatively 10 laps, staggered start: slides 27-29",
+        "Top 3 teams receive certificates and large trophies, 'TIER IV and AWF Trophies': slide 17",
+        "Registration period Aug 11 - Sep 18; IROS registration $300 per person: slides 8, 20, 21",
+        "Team subsidy: $500 for the first 10 teams registered and present; 'Currently 14 teams are signed up but not all are confirmed': slide 22",
+        "Registration form: 15 responses by 2026-09-23 (10 teams, 5 individuals): IROS2026-Roboracer-Registration (Responses).xlsx (count only)"
+      ],
+      "confidence": "medium",
+      "notes": "Several points contradict the content skill: ceremony (skill: Wed 16:00-18:00, Room 301; deck: 6-9 PM at CMU), registration close (skill: Sep 5; deck: Sep 18), flyer dates (flyer: Sep 27 - Oct 1; skill public copy: September 28 to 30), sponsors (deck names TIER IV and AWF trophies; skill: no confirmed sponsor, never list one without written confirmation). Fee and subsidy amounts must not go public (skill: no dollar amounts). Cedric decides which version is current."
+    },
+    {
+      "id": "vtc2026-boston-30th",
+      "date": "2026-09-06",
+      "title": "The 30th competition at VTC 2026 Fall in Boston",
+      "excerpt": "The 30th RoboRacer Autonomous Racing Competition was scheduled with the IEEE Vehicular Technology Conference, VTC 2026 Fall, in Boston from September 6 to 9, 2026. Local organizers came from Neobotics and Boston University.",
+      "kind": "announcement",
+      "event": "vtc2026",
+      "link": "https://vtc2026-race.roboracer.ai/",
+      "source_paths": [
+        "rr:/Roboracer Competition Status 2026.xlsx",
+        "rr:/IMG_1473.PNG",
+        "rr:/2026 VTC/"
+      ],
+      "image_candidates": [],
+      "facts": [
+        "30th Roboracer Autonomous Racing Competition at VTC 2026, Sep 6-9, 2026, Boston, MA, USA: Roboracer Competition Status 2026.xlsx, row 30th",
+        "Organizer contacts at neobotics.org and bu.edu: same row, column Race Organizers",
+        "Flyer 'Drafted - on Roboracer Internal Slack'; guide sent Yes; Slack channel Yes: same row",
+        "SEP 6-9, 2026 IEEE VTC 2026 in Boston / USA: IMG_1473.PNG (2025-26 season poster)",
+        "2026 VTC folder holds only templates (applications, certificates, checklist, startup guide); no results, photos or registration data: rclone listing"
+      ],
+      "confidence": "medium",
+      "notes": "The Drive does not say whether the race ran or who won. vtc2026-race.roboracer.ai returned HTTP 404 on 2026-09-25 (it was 200 on 2026-08-22 per docs/EVENTS_VERIFICATION.md). Ask Cedric for the outcome before publishing; news.json has no VTC item yet. Venue (Hilton Boston Park Plaza) is in EVENTS_VERIFICATION.md from the race site, not in the Drive."
+    },
+    {
+      "id": "icra2027-proposal-3d-racing",
+      "date": "2026-08-28",
+      "title": "A 32nd competition proposed for ICRA 2027, with 3D racing",
+      "excerpt": "The organizers have proposed the 32nd RoboRacer Autonomous Racing Competition for ICRA 2027. Its new format is 3D racing: a non-planar track with ramps, banks and dips, driven with 3D visual SLAM instead of a 2D lidar.",
+      "kind": "announcement",
+      "event": "icra2027",
+      "link": null,
+      "source_paths": [
+        "rr:/2026 IROS/RoboRacer ICRA 2027 Competition Proposal.docx",
+        "rr:/2027 ICRA/ICRA_2027_Competition_Application_DRAFT no used.docx"
+      ],
+      "image_candidates": [],
+      "facts": [
+        "'we propose the 32nd RoboRacer Autonomous Racing Competition for ICRA 2027 ... introducing 3D Racing ... non-planar terrain with ramps, banks and dips ... replaces the previous 2D racing which used a 2D lidar, and uses 3D visual slam sensing instead': RoboRacer ICRA 2027 Competition Proposal.docx, intro",
+        "Proposed schedule: registration opens Dec 1; video due May 7; setup May 22; competition days May 26-27 (2027): same file, section 3",
+        "RoboRacer-Max reference platform (1:10, 'more agile') developed at Penn, released months before the race: same file, section 4",
+        "The 2027 ICRA folder holds a different draft titled '... DRAFT no used': file name"
+      ],
+      "confidence": "low",
+      "notes": "Proposal only. Nothing in the Drive says ICRA 2027 accepted it; the draft still carries 'IICRA 2027' and 'TODO' placeholders. Do not publish until acceptance is confirmed by Cedric or Rahul."
+    },
+    {
+      "id": "ifac2026-busan-knockout",
+      "date": "2026-08-27",
+      "title": "From a round of 32 to the final: the full knockout of the 29th competition in Busan",
+      "excerpt": "The 29th competition at IFAC 2026 in Busan ran a full knockout, from a round of 32 through the round of 16 to the final on August 27. InTheEND beat DDRX in the final. SMOC and 4D-REPUBLIC reached the semi-finals, and HY-Ru, Raptor, RCV-FORMULA and APEX the quarter-finals.",
+      "kind": "result",
+      "event": "ifac2026",
+      "link": "https://2026ifac-roboracer.com/en/results.html",
+      "source_paths": [
+        "rr:/2026 IFAC/Media - POST MEDIA!/[사진]2026.8.27. 29th ROBORACER AUTONOMOUS RACING COMPETITION/06.결승 InTheEND VS DDRX/",
+        "rr:/2026 IFAC/Media - POST MEDIA!/[사진]2026.8.27. 29th ROBORACER AUTONOMOUS RACING COMPETITION/07.시상식/ (subfolders 04 to 07: Quarter-Finalist, Semi-Finalist, 2nd place, 1st place)",
+        "rr:/2026 IFAC/Media - POST MEDIA!/[사진]2026.8.27. 29th ROBORACER AUTONOMOUS RACING COMPETITION/02.32강 경기/ and /03.16강 경기/ and /04.8강 경기/ and /05.4강 경기/",
+        "rr:/2026 IFAC/Media - POST MEDIA!/[사진]2026.8.26. 29th ROBORACER AUTONOMOUS RACING COMPETITION/03.HEAD TO HEAD/",
+        "rr:/Roboracer Competition Status 2026.xlsx",
+        "rr:/2026 IROS/RoboRacer ICRA 2027 Competition Proposal.docx"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/2026 IFAC/Media - POST MEDIA!/29th ROBORACER AUTONOMOUS RACING COMPETITION/[사진]29th ROBORACER AUTONOMOUS RACING COMPETITION 보정사진 (66).jpg",
+          "bytes": 14017805,
+          "why": "largest file in the 85-photo retouched select set (보정사진 = retouched photos) delivered by the host; pick the frame by eye before encoding"
+        },
+        {
+          "path": "rr:/2026 IFAC/Media - POST MEDIA!/[사진]2026.8.27. 29th ROBORACER AUTONOMOUS RACING COMPETITION/06.결승 InTheEND VS DDRX/06.결승 InTheEND VS DDRX (263).JPG",
+          "bytes": 9724497,
+          "why": "the final, InTheEND against DDRX (440 frames in this folder)"
+        },
+        {
+          "path": "rr:/2026 IFAC/Media - POST MEDIA!/[사진]2026.8.27. 29th ROBORACER AUTONOMOUS RACING COMPETITION/07.시상식/07.1st place 부산대학교 총장상 - InTheEND/07.1st place 부산대학교 총장상 - InTheEND (131).JPG",
+          "bytes": 8913430,
+          "why": "InTheEND receiving first place (180 frames in this folder)"
+        }
+      ],
+      "facts": [
+        "Final: InTheEND vs DDRX: folder name 06.결승 InTheEND VS DDRX (결승 = final) in the 2026.8.27 set",
+        "1st place InTheEND, award named 부산대학교 총장상 (Pusan National University President's Award): folder 07.시상식/07.1st place 부산대학교 총장상 - InTheEND",
+        "2nd place DDRX, award named 부산대학교 앵커사업단장상: folder 07.시상식/06.2nd place ...",
+        "Semi-finalists SMOC and 4D-REPUBLIC (부산대학교 공과대학장상, PNU College of Engineering Dean's award): folder 07.시상식/05.Semi-Finalist ...",
+        "Quarter-finalists HY-Ru, Raptor, RCV-FORMULA, APEX (부산대학교 기계공학부장상): folder 07.시상식/04.Quarter-Finalist ...",
+        "Knockout rounds named 32강 (round of 32), 16강, 8강, 4강: folder names in the 2026.8.27 set",
+        "Quarter-final pairings: RCV-FORMULA vs SMOC, Raptor vs DDRX, APEX vs InTheEND, HY-Ru vs 4D-REPUBLIC; semi-finals SMOC vs DDRX and 4D-REPUBLIC vs InTheEND: folders 04.8강 경기 and 05.4강 경기",
+        "At least 53 distinct team names appear in the 80 head-to-head match folders (after merging spelling variants): folder names under both day sets",
+        "A children's viewing session (05.어린이관람) and interviews (10.인터뷰) were photographed: folder names in the 2026.8.26 and 2026.8.27 sets",
+        "11,204 JPG files (90.7 GB) in Media - POST MEDIA!, uploaded 2026-08-24 to 2026-09-13; a 1.05 GB video at 2026 IFAC/Photo & Video/Roboracer.mp4: rclone listing",
+        "Dates Aug 24-27, 2026, Busan, Republic of Korea; registration at 2026ifac-roboracer.com: Roboracer Competition Status 2026.xlsx, row 29th",
+        "IFAC 2026 had 270 participants: RoboRacer ICRA 2027 Competition Proposal.docx, section 1 (news.json says 274 racers)"
+      ],
+      "confidence": "medium",
+      "notes": "Placings come from photographer folder names, not a results sheet; they agree with news.json item ifac2026-busan-largest-race (InTheEND, DDRX, SMOC, 4D-REPUBLIC). Best used to enrich that item (quarter-finalists, bracket size) rather than as a second post. Korean host photographers are not credited in the folder; record credit and permission before using a photo. Organizer contacts in the status sheet are email addresses only; do not derive names from them."
+    },
+    {
+      "id": "iv2026-time-trials",
+      "date": "2026-06-23",
+      "title": "Thunderbolt sets the fastest lap of the 28th competition in Detroit",
+      "excerpt": "Fifteen teams ran time trials at IV 2026 on June 23, 2026. Thunderbolt UPenn set the fastest lap, 15.784 s, and the longest clean run, 16 consecutive laps. 404 Racers and UPenn Autonomous Racing followed, with WVU Mountaineer fourth.",
+      "kind": "result",
+      "event": "iv2026",
+      "link": "https://iv2026-race.roboracer.ai/",
+      "source_paths": [
+        "rr:/2026 IEEE IV/Roboracer IV 2026 - Timeline.xlsx",
+        "rr:/2026 IEEE IV/Orientation/Orientation 1/IV2026_Orientation1.pptx",
+        "rr:/2026 IEEE IV/Orientation/Orientation 2/IV2026_Orientation2.pptx",
+        "rr:/2026 IEEE IV/Registration/IV2026-Roboracer-VideoSubmission (Responses).xlsx"
+      ],
+      "image_candidates": [],
+      "facts": [
+        "Time trials 23/06/2026, 15 teams listed; combined ranking 1 Thunderbolt UPenn 30 pts, 2 404 Racers 27, 3 UPenn Autonomous Racing 27, 4 WVU Mountaineer 22, 5 UCF-CAVREL BLAZE RACER 20, 6 Tartan Racing 19: Roboracer IV 2026 - Timeline.xlsx, sheet Time Trials",
+        "Fastest laps: Thunderbolt UPenn 15.784 s, UPenn Autonomous Racing 18.64 s, 404 Racers 19.407 s, WVU Mountaineer 21.155 s: same sheet",
+        "Most consecutive laps: Thunderbolt UPenn 16, 404 Racers 15, UPenn Autonomous Racing 14: same sheet",
+        "Schedule: Sun Jun 21 track setup; Mon Jun 22 registration, regulated practice and mapping, 17:00-18:00 'RoboRacer OffRoad Demo'; Tue Jun 23 time trials 8:00-11:00, head-to-head 12:00-18:00 on Challonge (challonge.com/y6a9s1vl), final four 19:00-20:00, award ceremony 20:00-20:30: same file, sheet Timeline",
+        "28th Roboracer Autonomous Racing Competition, June 22nd - 23rd 2026, Detroit Marriott at the Renaissance Center, Ontario Exhibit Hall, carpet; 'Fewer days than usual (1.5 days vs 3-4 days)': IV2026_Orientation1.pptx slides 7, 11, 13, 15",
+        "Cash awards for the top 3: $600, $300, $100: IV2026_Orientation2.pptx slide 19",
+        "Registration period extended from May 15 to June 1: IV2026_Orientation2.pptx slide 22",
+        "WVU's team entered as 'WVU Mountaineer' (sign-up slots spell 'WVU Mountaineers'): Timeline.xlsx sheets Sign-in and Time Trials Sign Up"
+      ],
+      "confidence": "high",
+      "notes": "Time-trial numbers only; the Drive holds no head-to-head results (the Challonge page answered 403 to a script). Enrich news.json item iv2026-detroit-thunderbolt-wins rather than add a new post. Team count differs by source: 15 in the time-trial sheet, 17 distinct team names in video submissions, 'fifth of 17 teams' in news.json (Dhruv Jaiswal's post), 14 attended in docs/content/teams.sheet.json. The WVU team name can fill the content skill's TODO(content) for the 3rd-place team only if Cedric confirms WVU entered one team. Prize amounts: ask Cedric before publishing."
+    },
+    {
+      "id": "iv2026-offroad-demo",
+      "date": "2026-06-22",
+      "title": "The off-road RoboRacer race gets its first demo in Detroit",
+      "excerpt": "The IV 2026 schedule cleared the track on June 22 for a one-hour RoboRacer off-road demo, open to everyone. The organizers had proposed this off-road format, on a non-planar track, as the new challenge for IROS 2026.",
+      "kind": "milestone",
+      "event": "iv2026",
+      "link": "https://iv2026-race.roboracer.ai/",
+      "source_paths": [
+        "rr:/2026 IEEE IV/Roboracer IV 2026 - Timeline.xlsx",
+        "rr:/2026 IROS/RoboRacer IROS 2026 Competition Proposal.docx",
+        "rr:/2026 IEEE IV/Tentative Map/IV_2026_SIM.png"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/2026 IEEE IV/Tentative Map/IV_2026_SIM.png",
+          "bytes": 8502,
+          "why": "occupancy-grid map of the IV 2026 track; tiny, usable only as a diagram"
+        }
+      ],
+      "facts": [
+        "Mon 22/06/2026 17:00-18:00 'RoboRacer OffRoad Demo - No Practice', 'No Access to Track. Everyone invited to watch': Roboracer IV 2026 - Timeline.xlsx, sheet Timeline",
+        "'this layout is the tentative track layout at IEEE IV 2026 in Detroit, which will be used to demonstrate the off-road RoboRacer Race for the first time': RoboRacer IROS 2026 Competition Proposal.docx, section 6"
+      ],
+      "confidence": "low",
+      "notes": "Scheduled, not shown to have happened; no photo or video of it in the Drive. The IROS 2026 off-road (Master Series, 1:5 RoboRacer-Max) plan was later replaced by the 4-car classic format per the content skill. Ask Cedric whether the demo ran before using this."
+    },
+    {
+      "id": "community-slack-2700",
+      "date": "2026-03",
+      "title": "The RoboRacer Slack passes 2,700 members",
+      "excerpt": "The community Slack grew from more than 2,300 members, the figure in the ICRA 2025 proposal, to more than 2,700 in the 2026 proposals. The same proposals count more than 80 universities in the community.",
+      "kind": "milestone",
+      "event": null,
+      "link": "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g",
+      "source_paths": [
+        "rr:/2026 IROS/Application Examples/ICRA_2025_Competition_Application.docx",
+        "rr:/2026 IROS/RoboRacer IROS 2026 Competition Proposal.docx",
+        "rr:/2026 IROS/RoboRacer ICRA 2027 Competition Proposal.docx"
+      ],
+      "image_candidates": [],
+      "facts": [
+        "'We also actively maintain a 2300+ member Slack group': ICRA_2025_Competition_Application.docx, appendix",
+        "'a global community of over 80 universities and a 2,700+ member Slack group': RoboRacer IROS 2026 Competition Proposal.docx and RoboRacer ICRA 2027 Competition Proposal.docx, intro",
+        "'F1TENTH is used in over 89 universities': ICRA_2025_Competition_Application.docx, section 1"
+      ],
+      "confidence": "low",
+      "notes": "Proposal marketing figures; the date is the month of the first 2026 proposal version (an 'OLD IROS_2026_Competition_Application_v2026-03-13' exists in the 2026 ICRA folder). University counts disagree with the content skill ('90+ universities', keep until Rahul answers). The Slack link is the one the content skill confirms. Probably better as a stat on the About page than a news post."
+    },
+    {
+      "id": "techfest2025-iit-bombay-26th",
+      "date": "2025-12-22",
+      "title": "India's first RoboRacer competition, at Techfest IIT Bombay",
+      "excerpt": "The 26th RoboRacer Autonomous Racing Competition was set for December 22 to 24, 2025 on the IIT Bombay campus in Mumbai, as part of Techfest 2025. The organizers billed it as India's first RoboRacer competition.",
+      "kind": "announcement",
+      "event": "techfest2025",
+      "link": "https://techfest.org/competitions/RoboRacer",
+      "source_paths": [
+        "rr:/IIT Bombay Dec 22-24/Race Flyer/Roboracer IIT Final Flyer.pdf",
+        "rr:/Posters 2026/Draft 1 (5).png",
+        "rr:/Posters 2026/Draft 1 (4).png",
+        "rr:/Roboracer Competition Status 2026.xlsx",
+        "rr:/IMG_1473.PNG"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/Draft 1 (5).png",
+          "bytes": 3728169,
+          "why": "poster 'India's first ever RoboRacer Autonomous Racing Competition', Dec 22-24, 2025"
+        },
+        {
+          "path": "rr:/IIT Bombay Dec 22-24/Race Flyer/Roboracer IIT Final Flyer.png",
+          "bytes": 4603424,
+          "why": "final flyer: 26th competition, Techfest IIT Bombay 2025, IIT Bombay Campus"
+        },
+        {
+          "path": "rr:/IIT Bombay Dec 22-24/Race Flyer/Roboracer IIT Final Banner.png",
+          "bytes": 1215766,
+          "why": "final web banner"
+        }
+      ],
+      "facts": [
+        "26TH ROBORACER AUTONOMOUS RACING COMPETITION, DEC 22-24, 2025, Techfest IIT Bombay 2025, IIT Bombay Campus, Mumbai, India: Roboracer IIT Final Flyer.pdf",
+        "'India's first ever RoboRacer Autonomous Racing Competition': Posters 2026/Draft 1 (5).png",
+        "'IIT-Bombay December 22-24, 2025. RoboRacer @ IIT-Bombay TechFest': Roboracer Competition Status 2026.xlsx",
+        "Techfest's sponsor deck promises '10k+ floating audience' and '20+ teams': IIT Bombay Dec 22-24/Race Flyer/Roboracer India Competition.pdf (pre-event marketing)"
+      ],
+      "confidence": "medium",
+      "notes": "Fills the 26th ordinal that docs/EVENTS_VERIFICATION.md question 7 left open. The Drive holds no results, photos or attendance for this race, and the Teams DB export does not list it; ask Cedric whether it ran and who won. The Autoware Foundation title-sponsor document is a Techfest proposal, not a confirmed sponsorship: do not name a sponsor."
+    },
+    {
+      "id": "icra2026-one-of-ten-competitions",
+      "date": "2025-12-16",
+      "title": "RoboRacer is one of ten competitions at ICRA 2026",
+      "excerpt": "ICRA 2026 received 20 competition proposals and accepted 10. The 27th RoboRacer competition was one of them, with its track in Hall B next to the exhibition and an award session on the Thursday afternoon.",
+      "kind": "milestone",
+      "event": "icra2026",
+      "link": "https://icra2026-race.roboracer.ai/",
+      "source_paths": [
+        "rr:[2026 ICRA, folder id 1LTFuOuW9374vg4iv-HSlxyll7o5qiKxk]/ICRA General Flyer/ICRA 2026 Status 20251216.pdf",
+        "rr:[2026 ICRA, folder id 1LTFuOuW9374vg4iv-HSlxyll7o5qiKxk]/Advertising Flyer/ICRA2026 Flyer.pdf",
+        "rr:[2026 ICRA, folder id 1LTFuOuW9374vg4iv-HSlxyll7o5qiKxk]/Orientation/Orientation 1/ICRA2026_Orientation1.pptx"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:[2026 ICRA, folder id 1LTFuOuW9374vg4iv-HSlxyll7o5qiKxk]/Advertising Flyer/ICRA2026 Flyer.png",
+          "bytes": 4349378,
+          "why": "official 27th competition flyer (June 1-5, 2026, VIECON Vienna)"
+        }
+      ],
+      "facts": [
+        "'Competitions: 20 submissons -> 10 accepted; In Hall B with exhibition; Award session Thursday afternoon': ICRA 2026 Status 20251216.pdf (ICRA 2026 organizers' status deck)",
+        "27th Roboracer Autonomous Racing Competition, June 1-5, 2026, VIECON - Vienna Congress & Convention Center: ICRA2026 Flyer.pdf",
+        "Orientation 1 organizers: Radu Grosu, Rahul Mangharam, Venkat Krovi, Johannes Betz, Ezio Bartocci: ICRA2026_Orientation1.pptx slide 2"
+      ],
+      "confidence": "medium",
+      "notes": "The status deck is ICRA's internal planning document (it also lists ICRA sponsor package prices); quote only the competition count and ask Cedric before citing it. It does not name RoboRacer among the ten; that RoboRacer was accepted follows from the race itself. news.json already covers the ICRA 2026 results; this is an optional backstory item."
+    },
+    {
+      "id": "cdc2025-rio-planned",
+      "date": "2025-12-09",
+      "title": "The 25th competition planned for CDC 2025 in Rio de Janeiro",
+      "excerpt": "RoboRacer planned an in-person race with the IEEE Conference on Decision and Control, CDC 2025, at the Windsor Convention Center in Rio de Janeiro. The call for teams asked for six to eight teams.",
+      "kind": "announcement",
+      "event": "cdc2025",
+      "link": "https://web.archive.org/web/20260305115547/https://cdc2025-race.roboracer.ai/",
+      "source_paths": [
+        "rr:/IEEE CDC Brazil 2025/Race Flyer and Banner/CDC Flyer_14Nov2025.pdf",
+        "rr:/IEEE CDC Brazil 2025/Landing Page Content/CDC Landing Page Content Draft.docx",
+        "rr:/IEEE CDC Brazil 2025/Orientation/Orientation 1/CDC2025_Orientation1.pptx",
+        "rr:/IEEE CDC Brazil 2025/Orientation/CDC2025_Orientation2.pptx",
+        "rr:/IEEE CDC Brazil 2025/CDC Floor Plan/PDF Reader – PDF Scanner_IEEE CDC 2025-CREACTEVE - WINDSOR OCEÂNICO 2025-OP 2 (2).pdf",
+        "rr:/IEEE CDC Brazil 2025/Registration/Roboracer-Registration Confirmations.xlsx"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/Draft 1.png",
+          "bytes": 3733415,
+          "why": "poster: 25th competition, Dec 9-12, 2025, CDC 2025, Rio de Janeiro"
+        },
+        {
+          "path": "rr:/IEEE CDC Brazil 2025/Race Flyer and Banner/New CDC Roboracer Flyer_14Nov2025.png",
+          "bytes": 3738164,
+          "why": "final flyer, 14 Nov 2025"
+        }
+      ],
+      "facts": [
+        "25TH ROBORACER AUTONOMOUS RACING COMPETITION, DEC 9-11, 2025, CDC 2025, Rio de Janeiro: CDC Flyer_14Nov2025.pdf",
+        "'Call for Teams ... 25th Roboracer Autonomous Racing Competition ... CDC 2025, Dec 9-12, 2025'; team size 3-4; 'Limited to 6-8 teams'; 'Symbolic 10 EUR per team member': CDC Landing Page Content Draft.docx",
+        "Windsor Convention Center, Rio de Janeiro; in-person; registration fee $20 if not registered for CDC: CDC2025_Orientation1.pptx slides 5, 7, 8",
+        "Floor plan: 'ROBORACER AREA 207m2 (23mx9m)', IEEE CDC 2025, December 9-12, 2025: CDC floor plan PDF",
+        "9 registration responses; 4 marked 'Registration Confirmed with Demo Video? Yes' by mid-November 2025: CDC registration sheets (counts only)"
+      ],
+      "confidence": "low",
+      "notes": "Status unclear. docs/content/teams.sheet.json (Teams DB, exported 2026-09-25) names the event 'CDC 2025 (Canceled)'; docs/media/RACE_PHOTOS.drive.md calls it virtual; past_races.json and docs/EVENTS_VERIFICATION.md treat it as held. The Drive shows planning only (no results, no photos). Do not publish until Cedric says whether it ran. Dates differ: flyer Dec 9-11, landing text Dec 9-12, race site Dec 10-12."
+    },
+    {
+      "id": "iccas2025-korea-championship",
+      "date": "2025-11-04",
+      "title": "The Korea championship races at ICCAS 2025 in Incheon",
+      "excerpt": "RoboRacer's Korea championship ran with the International Conference on Control, Automation and Systems, ICCAS 2025, in Incheon from November 4 to 6, 2025. The Korean organizers ran their own registration and orientation.",
+      "kind": "announcement",
+      "event": "iccas2025",
+      "link": "https://2025.iccas.org/",
+      "source_paths": [
+        "rr:/2025 ICCAS November/2025 RoboRacer ICCAS pics/",
+        "rr:/Roboracer Competition Status 2026.xlsx",
+        "rr:/IMG_1473.PNG"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/2025 ICCAS November/2025 RoboRacer ICCAS pics/이우진_20251104_095328.jpg",
+          "bytes": 3655382,
+          "why": "first morning (Nov 4, 09:53), largest of the opening-day burst"
+        },
+        {
+          "path": "rr:/2025 ICCAS November/2025 RoboRacer ICCAS pics/배동성_20251105_132652.jpg",
+          "bytes": 3047226,
+          "why": "only frame from Nov 5, the middle day"
+        },
+        {
+          "path": "rr:/2025 ICCAS November/2025 RoboRacer ICCAS pics/이우진_20251106_090908.jpg",
+          "bytes": 3972714,
+          "why": "largest file overall, final day (Nov 6) morning"
+        }
+      ],
+      "facts": [
+        "'IEEE ICCAS, South Korea November 4-6, 2025'; orientation and registration page: 'They have their own': Roboracer Competition Status 2026.xlsx",
+        "'NOV 4-6, 2025 IEEE ICCAS 2025 in Incheon / Korea': IMG_1473.PNG",
+        "21 photos dated 2025-11-04 to 2025-11-06 by filename, uploaded 2025-11-09: rclone listing of 2025 ICCAS November/2025 RoboRacer ICCAS pics"
+      ],
+      "confidence": "medium",
+      "notes": "The Drive does not give the ordinal; docs/EVENTS_VERIFICATION.md cites the ICCAS program ('2025 The 4th F1Tenth Korea Championship') and docs/media/RACE_PHOTOS.drive.md already picked a group photo (_harvest/pick/race/iccas2025.jpg). No results in the Drive. Photo filenames carry the photographers' names (이우진, 배동성, 임태민): credit and permission needed. ICCAS 2025 itself ran Nov 4-7."
+    },
+    {
+      "id": "season-2025-26-six-stages",
+      "date": "2025-10",
+      "title": "Six stages for the 2025-26 RoboRacer season",
+      "excerpt": "RoboRacer announced six competitions for its 2025-26 season: ICCAS 2025 in Incheon, CDC 2025 in Rio de Janeiro, Techfest at IIT Bombay, ICRA 2026 in Vienna, IV 2026 in Detroit and VTC 2026 in Boston. The 2026 calendar later added IFAC 2026 in Busan and IROS 2026 in Pittsburgh.",
+      "kind": "announcement",
+      "event": null,
+      "link": null,
+      "source_paths": [
+        "rr:/IMG_1473.PNG",
+        "rr:/Roboracer Competition Status 2026.xlsx"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/IMG_1473.PNG",
+          "bytes": 2424647,
+          "why": "the season poster itself (2500x1307): six dated stages, three photos, event logos"
+        }
+      ],
+      "facts": [
+        "'Roboracer Competitions 2025-2026. Roboracer is set to light up 6 global stages': NOV 4-6, 2025 ICCAS Incheon; DEC 9-12, 2025 CDC Rio De Janeiro; DEC 22-24, 2025 Techfest IIT Bombay; JUN 1-5, 2026 ICRA Vienna; JUN 22-25, 2026 IEEE IV Detroit; SEP 6-9, 2026 IEEE VTC Boston: IMG_1473.PNG (uploaded 2025-10-09)",
+        "IFAC 2026 (Busan, Aug 24-27) and IROS 2026 (Pittsburgh) rows: Roboracer Competition Status 2026.xlsx"
+      ],
+      "confidence": "medium",
+      "notes": "Date is the Drive upload date of the poster (2025-10-09), month precision. The poster's group photo is the same as Old Banners/Media to Use/IMG_1731.jpg (event not recorded). CDC 2025 may have been canceled (see cdc2025-rio-planned)."
+    },
+    {
+      "id": "iv2025-cluj-25th",
+      "date": "2025-06-22",
+      "title": "RoboRacer becomes a regular event at IEEE IV, starting in Cluj-Napoca",
+      "excerpt": "The 25th RoboRacer Autonomous Racing Competition was held with IEEE IV 2025 in Cluj-Napoca, Romania, at the Technical University of Cluj-Napoca. The IV call for teams announced RoboRacer as a regular IV event from 2025 on.",
+      "kind": "announcement",
+      "event": "iv2025",
+      "link": "https://ieee-iv.org/2025/roboracer/",
+      "source_paths": [
+        "rr:/2026 IROS/Example Landing Page Text/Example Roboracer Competition Landing Pages.docx",
+        "rr:/2026 IROS/Editable Certificates/Roboracer Certificate 1st.docx",
+        "rr:/Posters 2026/Draft 1 (6).png"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/Draft 1 (6).png",
+          "bytes": 4448961,
+          "why": "poster: 25th competition, June 22-25, 2025, IV 2025, Cluj-Napoca, iv2025-race.roboracer.ai"
+        }
+      ],
+      "facts": [
+        "'The 25th RoboRacer AUTONOMOUS Racing Competition, The IEEE Intelligent Vehicles Symposium (IV 2025), June 22nd - 25th, 2025, Cluj-Napoca, Romania' (ieee-iv.org/2025/roboracer): Example Roboracer Competition Landing Pages.docx, Example 1",
+        "'the RoboRacer Autonomous Grand Prix (previously known as F1TENTH) is becoming a regular event at the IEEE Intelligent Vehicles Symposium, beginning with IV 2025'; location Technical University of Cluj-Napoca, Strada Memorandumului 28; date June 21-23, 2025; team size 3-4; limited to 6-8 teams; 10 EUR per team member (ieee-iv.org/2025/call-for-roboracer-teams): same file, Example 3",
+        "Organizers listed: Julius Beerwerth, Felix Jahncke, Borja Perez, Mircea Muresan, Omar M. Shehata, Abdulla Al-Kaff, Johannes Betz, Bassam Alrifaee, Ahmad Amine, Rahul Mangharam: same file, Example 3",
+        "First-prize certificate: '25th Roboracer International Autonomous Racing Competition at the 2025 IEEE Intelligent Vehicles Symposium (IV 2025), Cluj-Napoca, Romania', signed Rahul Mangharam, Director, Roboracer Foundation, USA and Paolo Burgio, Local Chair, University of Modena and Reggio Emilia: Roboracer Certificate 1st.docx (same template in 6 folders)"
+      ],
+      "confidence": "high",
+      "notes": "Event facts are solid; the Drive has no IV 2025 results or photos. Dates vary: conference June 22-25, call for teams June 21-23, race site June 22-23 (EVENTS_VERIFICATION). 25th collides with CDC 2025, also called the 25th. Publish organizer names only with Cedric's approval. Teams DB lists 19 IV 2025 attendees, but that list matches the ICRA 2025 timing sheet (see icra2025-atlanta-results)."
+    },
+    {
+      "id": "icra2025-atlanta-results",
+      "date": "2025-05-22",
+      "title": "Unibo Motorsport wins the 24th competition at ICRA 2025 in Atlanta",
+      "excerpt": "The 24th competition ran at the Georgia World Congress Center in Atlanta during ICRA 2025. Seventeen teams raced a double-elimination bracket on May 22, 2025. Unibo Motorsport won ahead of UNICORN, ForzaETH and Scuderia Segfault.",
+      "kind": "result",
+      "event": "icra2025",
+      "link": "https://www.youtube.com/watch?v=wPHYLAnpMOU",
+      "source_paths": [
+        "rr:/2026 IROS/Example Timeline/Roboracer IV2025 - Timeline (1).xlsx",
+        "rr:/Posters 2026/7.png",
+        "rr:[2026 ICRA, folder id 1LTFuOuW9374vg4iv-HSlxyll7o5qiKxk]/Orientation/2025 Orientations/ICRA2025_Orientation1.pptx",
+        "rr:/2026 IROS/Application Examples/ICRA_2025_Competition_Application.docx",
+        "rr:/2026 IROS/Big Award Checks/Big Checks for Race.pdf"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/7.png",
+          "bytes": 3939857,
+          "why": "poster: 24th competition, May 19-23, 2025, Georgia World Congress Center, Atlanta, icra2025-race.roboracer.ai"
+        }
+      ],
+      "facts": [
+        "Race Bracket sheet, 22/05/2025 (Thursday), double elimination; final ranking 1 UniBo Motorsport, 2 UNICORN, 3 ForzaETH, 4 Scuderia Segfault, 5= VAUL and UPenn Bit Shifters, 7= Dzik One and LAMARRacing: Roboracer IV2025 - Timeline (1).xlsx, sheet Race Bracket",
+        "Time trials 21/05/2025: 18 teams; fastest lap UNICORN 19.05 s; most consecutive laps Scuderia Segfault 30; UNICORN and Scuderia Segfault tied on 35 points; Lobo Racers DNF: same file, sheet Time Trials",
+        "Timeline: Sun 18/05/2025 track setup; Mon 19 regulated practice and mapping; Tue 20 open practice and inspections; Wed 21 time trials; Thu 22 head-to-head, final four 16:15, award ceremony 17:00: same file, sheet Timeline",
+        "24TH ROBORACER AUTONOMOUS RACING COMPETITION, MAY 19-23, 2025, 2025 IEEE ICRA, Georgia World Congress Center, Atlanta: Posters 2026/7.png",
+        "24th Roboracer Competition; Georgia World Congress Center; competitor registration $400; top 3 tentatively crowned 'World Roboracer Champion 2025', 'Vice Champion', 'Bronze Champion': ICRA2025_Orientation1.pptx slides 6, 8, 9, 15",
+        "Three 48x22 inch big checks printed in Atlanta, order dated 05-19-2025: Big Checks for Race.pdf (an invoice; do not publish)",
+        "ICRA'25 race highlights video https://www.youtube.com/watch?v=wPHYLAnpMOU: RoboRacer IROS 2026 Competition Proposal.docx, section 1"
+      ],
+      "confidence": "medium",
+      "notes": "The results sheet is named 'Roboracer IV2025 - Timeline' but every date in it (Sun May 18 to Thu May 22, 2025) falls in the ICRA 2025 week (poster May 19-23) and Yellow Jacket Racers (Georgia Tech) raced at home; IV 2025 ran June 21-25 in Romania. docs/content/teams.sheet.json lists these same teams under both ICRA 2025 and IV 2025. Cedric must confirm which race the sheet records before any podium goes live. Affiliation of UNICORN differs: Teams DB says UNIST, the content skill says Team Unicorn (University of Bonn). icra2025-race.roboracer.ai answered 404 on 2026-09-25, so the link is the public highlights reel."
+    },
+    {
+      "id": "rebrand-f1tenth-roboracer",
+      "date": "2025-02",
+      "title": "F1TENTH becomes RoboRacer",
+      "excerpt": "In 2025 the F1TENTH competition was rebranded as RoboRacer, a wider competition run by the same community. The new logo set dates from January and February 2025, and ICRA 2025 in Atlanta was the first race run from a roboracer.ai site.",
+      "kind": "milestone",
+      "event": null,
+      "link": "https://roboracer.ai/",
+      "source_paths": [
+        "rr:/2026 Competition Startup Guide, Checklist, and Schedule/RoboRacer Competition Startup Guide 2025-26.docx",
+        "rr:/Logo/",
+        "rr:/2026 IROS/Example Landing Page Text/Example Roboracer Competition Landing Pages.docx",
+        "rr:[2026 ICRA, folder id 1LTFuOuW9374vg4iv-HSlxyll7o5qiKxk]/Orientation/2025 Orientations/ICRA2025_Orientation1.pptx",
+        "rr:/2026 IROS/Example SIM Racing Event/Copy of F1TENTH Sim Racing League - Compressed (1).pptx"
+      ],
+      "image_candidates": [],
+      "facts": [
+        "'Autonomous Racing Competition, which has been rebranded in 2025 into a wider competition called RoboRacer': RoboRacer Competition Startup Guide 2025-26.docx, overview",
+        "'the RoboRacer Autonomous Grand Prix (previously known as F1TENTH)': Example Roboracer Competition Landing Pages.docx, Example 3 (IV 2025 call for teams)",
+        "Logo files: eps and ai 2025-01-12, png/svg/small-png 2025-02-04, 'outdated logos' 2024-11: rclone listing of rr:/Logo",
+        "ICRA 2025 orientation points to https://icra2025-race.roboracer.ai/ and the robo-racer Slack: ICRA2025_Orientation1.pptx slide 3",
+        "In December 2024 the CDC 2024 events were still branded F1TENTH (22nd F1TENTH Autonomous Grand Prix, 2nd F1TENTH Sim Racing League): Sim Racing League deck slides 1 and 8"
+      ],
+      "confidence": "medium",
+      "notes": "No single file dates the rename; February 2025 is the month the new logo set was exported. The ICRA 2025 proposal (written before) still says '24th F1TENTH Autonomous Grand Prix'. Useful as the pivot item between the F1TENTH and RoboRacer eras on the news page."
+    },
+    {
+      "id": "sim-racing-league-cdc2024-results",
+      "date": "2024-12-19",
+      "title": "VAUL wins the 2nd F1TENTH Sim Racing League at CDC 2024",
+      "excerpt": "The 2nd F1TENTH Sim Racing League ran online ahead of CDC 2024, on digital twins of the car in the AutoDRIVE simulator, in a time-attack format. VAUL won, Baby Driver came second and TURTLEBOT third. The results were celebrated at CDC 2024 on December 19, 2024.",
+      "kind": "result",
+      "event": "cdc2024",
+      "link": "https://autodrive-ecosystem.github.io/competitions",
+      "source_paths": [
+        "rr:/2026 IROS/Example SIM Racing Event/Copy of F1TENTH Sim Racing League - Compressed (1).pptx",
+        "rr:/2026 IROS/Application Examples/ICRA_2025_Competition_Application.docx"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/2026 IROS/Example SIM Racing Event/Copy of VAUL Presentation Virtual F1Tenth CDC Competiton (1).mp4",
+          "bytes": 11880821,
+          "why": "VAUL's own presentation video from the virtual CDC competition; poster frame only, or a cut under 1.5 MB, and ask VAUL first"
+        }
+      ],
+      "facts": [
+        "'2nd F1TENTH SIM RACING LEAGUE Celebration Event, 19 December 2024, 2024 IEEE Conference on Decision and Control': deck slide 1",
+        "Competition Results: 1st VAUL, 2nd Baby Driver, 3rd TURTLEBOT: deck slide 13",
+        "Sim Racing League: virtual competition ahead of CDC 2024, time-attack format (1+10+1 laps); Physical Racing League: 22nd F1TENTH Autonomous Grand Prix in person: deck slide 8",
+        "Organizers: AutoDRIVE, Tanmay Samak and Chinmay Samak: deck speaker notes",
+        "F1TENTH supported by NSF CNS 1925500 (CCRI: F1/10 RACECAR: Community Platforms for Safe, Secure and Coordinated Autonomy): deck slide 3",
+        "Collision penalty 10 s each, disqualification after 10 collisions; digital twin of the Porto racetrack: ICRA_2025_Competition_Application.docx, part B"
+      ],
+      "confidence": "high",
+      "notes": "VAUL is Laval University's team per the Teams DB. The same deck appears in 6 event folders as 'Example SIM Racing Event'; the uncompressed 268 MB copy was not opened. news.json already has two AutoDRIVE items (2023, 2024); this adds the first sim-league result."
+    },
+    {
+      "id": "cdc2024-milan-results",
+      "date": "2024-12-19",
+      "title": "Scuderia Segfault wins the 22nd competition at CDC 2024 in Milan",
+      "excerpt": "Twelve teams raced at CDC 2024 in Milan from December 16 to 19, 2024. Scuderia Segfault topped the time trials with a 7.126 s lap and 42 consecutive laps, then beat HiPeRT UNIMORE Racing in the final. Unibo Motorsport took third place from ForzaETH.",
+      "kind": "result",
+      "event": "cdc2024",
+      "link": "https://web.archive.org/web/20250714000527/http://cdc2024-race.f1tenth.org/",
+      "source_paths": [
+        "rr:/2026 IROS/Racing Competition Applications/Copy of Racing Brackets F1Tenth @CDC24 - Timeline (1).xlsx",
+        "rr:/Posters 2026/17.png"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/17.png",
+          "bytes": 5279692,
+          "why": "poster: 22nd competition, Dec 16-19, 2024, CDC 2024, Milan"
+        }
+      ],
+      "facts": [
+        "Streaming sheet: Final Scuderia Segfault 1st, HiPeRT UNIMORE Racing 2nd; third-place match Unibo Motorsport 3rd, ForzaETH 4th: Copy of Racing Brackets F1Tenth @CDC24 - Timeline (1).xlsx, sheet Streaming",
+        "Time trials: fastest lap Scuderia Segfault 7.126 s; most consecutive laps Scuderia Segfault 42; combined points 1 Scuderia Segfault 24, 2 Unibo Motorsport 21, 3 HiPeRT UNIMORE Racing 21, 4 LamarRacing 18; 12 teams: same file, sheet Time Trials",
+        "Teams: LamarRacing, HiPeRT UNIMORE Racing, Unibo Motorsport, Scuderia Segfault, Turtleship, F1NESSE, SeDriCa-UMIC, SpreeSpeed, ForzaETH, Zancle E-Drive, INIvincible, HUN-REN SZTAKI: same file, sheet Timeline",
+        "Timeline: Sun 15/12/2024 track setup; Mon-Tue practice and mapping; Wed 18/12 time trials; Thu 19/12 head-to-head (two brackets and a final four, single races with standing start) and award ceremony at 17:00: same file",
+        "22ND ROBORACER AUTONOMOUS RACING COMPETITION, DEC 16-19, 2024, CDC 2024, Milan, Italy: Posters 2026/17.png",
+        "Teams DB: 12 attended, 3 no-shows at CDC 2024: docs/content/teams.sheet.json (repo, not Drive)"
+      ],
+      "confidence": "high",
+      "notes": "The sheet is a live race-operations workbook later copied into six folders as a template (the IIT Bombay copy shows #VALUE! in formula cells; raw data is identical). Team names differ slightly from the Teams DB (HiPeRT UNIMORE Racing vs UNIMORE Racing; LamarRacing vs LAMAR Racing). Verify the podium against the archived cdc2024 site if it has a results page. Posters in rr:/Posters 2026 were uploaded 2026-01-20 and apply the RoboRacer name retroactively; at the time the race was an F1TENTH event."
+    },
+    {
+      "id": "bu2024-23rd",
+      "date": "2024-11-22",
+      "title": "The 23rd competition races at Boston University",
+      "excerpt": "The 23rd competition was a one-day race at Boston University on November 22, 2024, held with the Learning to Trust Autonomy Workshop.",
+      "kind": "announcement",
+      "event": "bu2024",
+      "link": "https://web.archive.org/web/20250623043629/http://bu2024-race.f1tenth.org/",
+      "source_paths": [
+        "rr:/Posters 2026/18.png",
+        "rr:/Posters 2026/19.png"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/18.png",
+          "bytes": 6555534,
+          "why": "poster: 23rd competition, Nov 22, 2024, Learning to Trust Autonomy Workshop, Boston University"
+        },
+        {
+          "path": "rr:/Posters 2026/19.png",
+          "bytes": 6349215,
+          "why": "same poster with workshop and registration QR codes"
+        }
+      ],
+      "facts": [
+        "23RD ROBORACER AUTONOMOUS RACING COMPETITION, NOV 22, 2024, Learning to Trust Autonomy Workshop, Boston University, USA: Posters 2026/18.png and 19.png"
+      ],
+      "confidence": "high",
+      "notes": "No results in the Drive. Posters in rr:/Posters 2026 were uploaded 2026-01-20 and apply the RoboRacer name retroactively; at the time the race was an F1TENTH event."
+    },
+    {
+      "id": "korea2024-3rd-championship",
+      "date": "2024-10-29",
+      "title": "The 3rd Korea Championship at ICCAS 2024 on Jeju",
+      "excerpt": "The 3rd Korea Championship ran with the International Conference on Control, Automation and Systems, ICCAS 2024, at Jeju Shinhwa World from October 29 to November 1, 2024.",
+      "kind": "announcement",
+      "event": "korea2024",
+      "link": "https://web.archive.org/web/20240720182003/https://korea-race24f1tenth.org/",
+      "source_paths": [
+        "rr:/Posters 2026/20.png"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/20.png",
+          "bytes": 3777106,
+          "why": "poster: The 3rd RoboRacer Korea Championship, Oct 29 - Nov 1, 2024, ICCAS 2024, Jeju Shinhwa World"
+        }
+      ],
+      "facts": [
+        "THE 3RD ROBORACER KOREA CHAMPIONSHIP, OCT 29-NOV 1, 2024, ICCAS 2024, Jeju Shinhwa World at Jeju, Korea: Posters 2026/20.png"
+      ],
+      "confidence": "high",
+      "notes": "No results in the Drive. The archive link is a July 2024 capture (pre-event). Posters in rr:/Posters 2026 were uploaded 2026-01-20 and apply the RoboRacer name retroactively; at the time the race was an F1TENTH event."
+    },
+    {
+      "id": "iros2024-abu-dhabi-21st",
+      "date": "2024-10-14",
+      "title": "The 21st competition at IROS 2024 in Abu Dhabi",
+      "excerpt": "The 21st competition ran with IROS 2024 in Abu Dhabi from October 14 to 18, 2024. The same conference hosted the first F1TENTH Sim Racing League.",
+      "kind": "announcement",
+      "event": "iros2024",
+      "link": "https://web.archive.org/web/20241107140818/https://iros2024-race.f1tenth.org/",
+      "source_paths": [
+        "rr:/Posters 2026/16.png",
+        "rr:/2026 IROS/Application Examples/F1TENTH Autonomous Racing - IROS_2024_Competition_Application.pdf",
+        "rr:/2026 IROS/Application Examples/ICRA_2025_Competition_Application.docx"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/16.png",
+          "bytes": 1734380,
+          "why": "poster: 21st competition, Oct 14-18, 2024, IROS 2024, Abu Dhabi"
+        }
+      ],
+      "facts": [
+        "21ST ROBORACER AUTONOMOUS RACING COMPETITION, OCT 14-18, 2024, IROS 2024, Abu Dhabi, UAE: Posters 2026/16.png",
+        "Proposal title 'The 18th F1TENTH Autonomous Grand Prix', theme MAD-GAMES; planned schedule: set up Oct 14, practice Oct 15, qualification Oct 16, head-to-head Oct 17; proposed Reproducibility track with an R-F1TENTH dataset: IROS_2024_Competition_Application.pdf",
+        "Sim Racing League first deployment at IROS 2024: 58 teams, 160+ participants registered: ICRA_2025_Competition_Application.docx, part B"
+      ],
+      "confidence": "medium",
+      "notes": "Ordinal conflict: the proposal (manuscript received April 15, 2024) calls it the 18th; the posters and the old-site flyer call it the 21st and give 18th to IV 2024. Whether the Reproducibility track ran is not in the Drive. The proposal lists industry supporters (Locomation.ai, AWS, Autoware Foundation, ADLINK, SICK); do not publish them as sponsors without confirmation. Teams DB: 6 attended, 5 no-shows, 5 registered. Posters in rr:/Posters 2026 were uploaded 2026-01-20 and apply the RoboRacer name retroactively; at the time the race was an F1TENTH event."
+    },
+    {
+      "id": "sim-racing-league-launch-iros2024",
+      "date": "2024-10",
+      "title": "The F1TENTH Sim Racing League debuts with 58 teams",
+      "excerpt": "The first F1TENTH Sim Racing League ran with IROS 2024. It drew 58 registered teams and more than 160 participants, all racing the same digital twin of the car in the AutoDRIVE simulator.",
+      "kind": "milestone",
+      "event": "iros2024",
+      "link": "https://autodrive-ecosystem.github.io/competitions",
+      "source_paths": [
+        "rr:/2026 IROS/Application Examples/ICRA_2025_Competition_Application.docx",
+        "rr:/2026 IROS/RoboRacer IROS 2026 Competition Proposal.docx"
+      ],
+      "image_candidates": [],
+      "facts": [
+        "'ICRA 2025 would be the 3rd deployment of the F1TENTH Sim Racing League, which has been previously successfully deployed at IROS 2024 and CDC 2024 ... an overwhelming 58 teams with over 160 participants ... registering for the very first deployment (IROS 2024), and 15 teams with over 50 participants have already registered for the second iteration (CDC 2024) so far': ICRA_2025_Competition_Application.docx, part B",
+        "Chinmay and Tanmay Samak (Clemson, CU-ICAR, AutoDRIVE) organized the Sim Racing League at IROS 2024 and CDC 2024: same file, organizers",
+        "Po-Jen Wang won 'the RoboRacer Sim Racing League at ICRA 2025': RoboRacer IROS 2026 Competition Proposal.docx, organizer bio"
+      ],
+      "confidence": "medium",
+      "notes": "Registration counts from a proposal, not a results record. Pair with sim-racing-league-cdc2024-results. No IROS 2024 sim-league winner in the Drive."
+    },
+    {
+      "id": "itsc2024-edmonton-20th",
+      "date": "2024-09-24",
+      "title": "The 20th competition at ITSC 2024 in Edmonton",
+      "excerpt": "The 20th competition ran with the IEEE Intelligent Transportation Systems Conference, ITSC 2024, in Edmonton, Canada, from September 24 to 27, 2024.",
+      "kind": "announcement",
+      "event": "itsc2024",
+      "link": "https://web.archive.org/web/20250623063025/https://itsc2024-race.f1tenth.org/",
+      "source_paths": [
+        "rr:/Posters 2026/15.png"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/15.png",
+          "bytes": 4120868,
+          "why": "poster: 20th competition, Sept 24-27, 2024, ITSC 2024, Edmonton"
+        }
+      ],
+      "facts": [
+        "20TH ROBORACER AUTONOMOUS RACING COMPETITION, SEPT 24-27, 2024, 2024 IEEE ITSC, Edmonton, Canada: Posters 2026/15.png"
+      ],
+      "confidence": "high",
+      "notes": "No results in the Drive. Posters in rr:/Posters 2026 were uploaded 2026-01-20 and apply the RoboRacer name retroactively; at the time the race was an F1TENTH event."
+    },
+    {
+      "id": "sm2024-19th",
+      "date": "2024-09-16",
+      "title": "The 19th competition at IEEE Smart Mobility 2024 in Ontario",
+      "excerpt": "The 19th competition ran with the IEEE International Conference on Smart Mobility, SM 2024, in Ontario, Canada, from September 16 to 18, 2024.",
+      "kind": "announcement",
+      "event": "sm2024",
+      "link": "https://web.archive.org/web/20250823080045/https://sm2024-race.f1tenth.org/",
+      "source_paths": [
+        "rr:/Posters 2026/14.png"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/14.png",
+          "bytes": 4458661,
+          "why": "poster: 19th competition, Sept 16-18, 2024, SM 2024, Ontario"
+        }
+      ],
+      "facts": [
+        "19TH ROBORACER AUTONOMOUS RACING COMPETITION, SEPT 16-18, 2024, 2024 IEEE International Conference on Smart Mobility (SM), Ontario, Canada: Posters 2026/14.png"
+      ],
+      "confidence": "high",
+      "notes": "The poster says Ontario; docs/EVENTS_VERIFICATION.md (race site) gives Niagara Falls, Ontario. The ICRA 2025 proposal links the SM 2024 rules as its reference ruleset. No results in the Drive. Posters in rr:/Posters 2026 were uploaded 2026-01-20 and apply the RoboRacer name retroactively; at the time the race was an F1TENTH event."
+    },
+    {
+      "id": "iv2024-jeju-18th",
+      "date": "2024-06-02",
+      "title": "The 18th competition at IEEE IV 2024 on Jeju",
+      "excerpt": "The 18th competition ran with IEEE IV 2024 at Jeju Shinhwa World, Korea, from June 2 to 5, 2024. Teams drew lots for their mapping and time-trial slots, and head-to-head races went to the first car to finish 8 laps.",
+      "kind": "announcement",
+      "event": "iv2024",
+      "link": "https://web.archive.org/web/20260309090853/http://iv2024-race.f1tenth.org/",
+      "source_paths": [
+        "rr:/Posters 2026/13.png",
+        "rr:/Posters 2026/21.png",
+        "rr:/2026 IEEE IV/Race Guide and Checklists/Copy of Copy of ICRA 2025 Competition - Time Table & Check List.xlsx"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/13.png",
+          "bytes": 4211178,
+          "why": "poster: 18th competition, June 2-5, 2024, IEEE IV 2024, Jeju Island"
+        },
+        {
+          "path": "rr:/Posters 2026/21.png",
+          "bytes": 4265732,
+          "why": "variant poster: 18th Autonomous Grand Prix"
+        }
+      ],
+      "facts": [
+        "18TH ROBORACER AUTONOMOUS RACING COMPETITION, JUNE 2-5, 2024, IEEE IV 2024, 35th IEEE Intelligent Vehicles Symposium, Jeju Island, Korea: Posters 2026/13.png",
+        "Run of show: opening remarks by Rahul, 3-minute team introductions, drawing lots for mapping and time-trial order, 10-minute time-trial slots with other routers off, head-to-head first to 8 laps, best of 3 until the semi-finals and best of 5 in the final, awards from 4th to 1st: 'Copy of Copy of ICRA 2025 Competition - Time Table & Check List.xlsx', sheet Check List",
+        "Teams DB: 21 attended at IV 2024: docs/content/teams.sheet.json (repo, not Drive)"
+      ],
+      "confidence": "medium",
+      "notes": "The run-of-show sheet is titled ICRA 2025 and its dates were shifted to May 2025, but its content is IV 2024 Jeju (its venue WiFi name and name tags say IV 2024 and '18th grand prix'); the Claude Context doc also calls it 'the IV 2024 example tab'. Do not publish the WiFi details. Posters in rr:/Posters 2026 were uploaded 2026-01-20 and apply the RoboRacer name retroactively; at the time the race was an F1TENTH event."
+    },
+    {
+      "id": "cpsweek2024-hong-kong-17th",
+      "date": "2024-05-14",
+      "title": "The 17th competition at CPS-IoT Week 2024 in Hong Kong",
+      "excerpt": "The 17th competition ran with Cyber-Physical Systems and Internet of Things Week 2024 in Hong Kong from May 14 to 16, 2024.",
+      "kind": "announcement",
+      "event": "cpsweek2024",
+      "link": "https://web.archive.org/web/20241219060528/https://cpsweek2024-race.f1tenth.org/index.html",
+      "source_paths": [
+        "rr:/Posters 2026/10.png"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/10.png",
+          "bytes": 5464366,
+          "why": "poster: 17th competition, May 14-16, 2024, CPS-IoT Week, Hong Kong"
+        }
+      ],
+      "facts": [
+        "17TH ROBORACER AUTONOMOUS RACING COMPETITION, MAY 14-16, 2024, 2024 Cyber-Physical Systems and Internet of Things Week (CPS-IoT Week), Hong Kong: Posters 2026/10.png"
+      ],
+      "confidence": "high",
+      "notes": "No results in the Drive; the poster's venue line is blacked out (EVENTS_VERIFICATION: Hong Kong Science and Technology Park). Posters in rr:/Posters 2026 were uploaded 2026-01-20 and apply the RoboRacer name retroactively; at the time the race was an F1TENTH event."
+    },
+    {
+      "id": "icra2024-yokohama-15th",
+      "date": "2024-05-13",
+      "title": "The 15th competition at ICRA 2024 in Yokohama",
+      "excerpt": "The 15th competition ran with ICRA 2024 at PACIFICO Yokohama, Japan, from May 13 to 17, 2024. The second workshop on Multi-Agent Dynamic Games, MAD Games, ran at the same ICRA.",
+      "kind": "announcement",
+      "event": "icra2024",
+      "link": "https://web.archive.org/web/20250908153518/https://icra2024-race.f1tenth.org/",
+      "source_paths": [
+        "rr:/Posters 2026/12.png",
+        "rr:/Posters 2026/22.png",
+        "rr:/Posters 2026/23.png",
+        "rr:/Posters 2026/9.png",
+        "rr:/Posters 2026/27.png",
+        "rr:/2026 IROS/Application Examples/ICRA_2025_Competition_Application.docx"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/12.png",
+          "bytes": 4607035,
+          "why": "poster: 15th competition, May 13-17, 2024, ICRA 2024, Yokohama"
+        },
+        {
+          "path": "rr:/Posters 2026/23.png",
+          "bytes": 4695160,
+          "why": "variant: 15th Autonomous Grand Prix, PACIFICO Yokohama"
+        },
+        {
+          "path": "rr:/Posters 2026/27.png",
+          "bytes": 2653276,
+          "why": "participation poster with country list and university logos; see notes on counts"
+        }
+      ],
+      "facts": [
+        "15TH ROBORACER AUTONOMOUS RACING COMPETITION, MAY 13-17, 2024, ICRA 2024, Yokohama, Japan: Posters 2026/12.png (also 22.png, 23.png, 9.png: PACIFICO Yokohama)",
+        "'ICRA'24 Japan (135+ participants, 19 teams)': ICRA_2025_Competition_Application.docx, section 1",
+        "'150+ PARTICIPANTS FROM 37 UNIVERSITIES WORLDWIDE' and a list of 25 countries: Posters 2026/27.png (identical text to the ICRA 2023 poster 26.png)",
+        "Rahul organized the '2nd Workshop on Multi-Agent Dynamic Games (MAD Games) at ICRA'24': ICRA_2025_Competition_Application.docx, organizers",
+        "Teams DB: 14 attended, 6 no-shows: docs/content/teams.sheet.json (repo, not Drive)"
+      ],
+      "confidence": "medium",
+      "notes": "Dates and venue are solid. Counts conflict three ways (19 teams and 135+ participants; 150+ from 37 universities; 14 attended), so keep counts out of the post until Cedric picks one. Posters in rr:/Posters 2026 were uploaded 2026-01-20 and apply the RoboRacer name retroactively; at the time the race was an F1TENTH event."
+    },
+    {
+      "id": "course2024-spring-race",
+      "date": "2024-04-29",
+      "title": "Penn, CMU and Lehigh race the Spring 2024 course race in Philadelphia",
+      "excerpt": "The Spring 2024 course race ran on April 29, 2024 from noon to 3 pm outside Skirkanich Hall at Penn in Philadelphia. Teams from Penn, Carnegie Mellon and Lehigh took part.",
+      "kind": "announcement",
+      "event": "course2024",
+      "link": null,
+      "source_paths": [
+        "rr:/Posters 2026/11.png"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/11.png",
+          "bytes": 5232633,
+          "why": "poster: Spring 2024 Course race, April 29, 12-3 PM, outside Skirkanich Hall; Penn, CMU and Lehigh logos"
+        }
+      ],
+      "facts": [
+        "'ROBORACER AUTONOMOUS RACING COMPETITION - SPRING 2024 COURSE, APRIL 29, 12-3PM, Venue: Outside Skirkanich Hall, Philadelphia, TEAMS: UPENN, CMU, AND LEHIGH': Posters 2026/11.png",
+        "John Dolan 'launched the RoboRacer autonomous racing course at CMU and hosted the 2024 Multi-University Race Day': RoboRacer IROS 2026 Competition Proposal.docx, organizer bio"
+      ],
+      "confidence": "medium",
+      "notes": "Answers docs/EVENTS_VERIFICATION.md question 8 (course2024 venue): outside Skirkanich Hall, Penn campus. The year comes from the poster title. Whether this is the same event as the 'Multi-University Race Day' John Dolan hosted is not stated; do not merge them without Cedric. Posters in rr:/Posters 2026 were uploaded 2026-01-20 and apply the RoboRacer name retroactively; at the time the race was an F1TENTH event."
+    },
+    {
+      "id": "iros2023-detroit-14th",
+      "date": "2023-10-01",
+      "title": "The 14th Grand Prix at IROS 2023 in Detroit",
+      "excerpt": "The 14th Autonomous Grand Prix ran with IROS 2023 in Detroit from October 1 to 5, 2023. The first workshop on Multi-Agent Dynamic Games, MAD Games, ran at the same conference.",
+      "kind": "announcement",
+      "event": "iros2023",
+      "link": "https://web.archive.org/web/20250823041450/https://iros2023-race.f1tenth.org/",
+      "source_paths": [
+        "rr:/Posters 2026/8.png",
+        "rr:/Old Banners, Flyers, Shirts, Stickers/Media to Use/IMG_3196.JPG",
+        "rr:/2026 IEEE IV/Roll Up Banners/Copy of AWF Roll Up Banner NEW Used at IROS 2023.pdf",
+        "rr:/2026 IROS/RoboRacer IROS 2026 Competition Proposal.docx"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/8.png",
+          "bytes": 3181318,
+          "why": "poster: 14th Autonomous Grand Prix, Oct 1-5, 2023, IROS 2023, Detroit"
+        },
+        {
+          "path": "rr:/Old Banners, Flyers, Shirts, Stickers/Media to Use/IMG_3196.JPG",
+          "bytes": 1963009,
+          "why": "EXIF 2023-10-04 13:58 (iPhone 11 Pro Max): cars on a yellow-duct track in a convention hall during IROS 2023 week; event match by date only"
+        }
+      ],
+      "facts": [
+        "14TH ROBORACER AUTONOMOUS GRAND PRIX, OCT 1-5, 2023, IROS 2023, Detroit, MI USA: Posters 2026/8.png",
+        "Po-Jen Wang 'has previously won ... the F1TENTH Autonomous Grand Prix at IROS 2023': RoboRacer IROS 2026 Competition Proposal.docx, organizer bio",
+        "An Autoware Foundation roll-up banner was 'Used at IROS 2023': file name in 2026 IEEE IV/Roll Up Banners",
+        "Rahul organized the 'Workshop on Multi-Agent Dynamic Games (MAD Games) at IROS'23': ICRA_2025_Competition_Application.docx, organizers",
+        "IMG_3196.JPG EXIF DateTimeOriginal 2023:10:04 13:58:42: read from the local mirror _harvest/drive/old-banners"
+      ],
+      "confidence": "medium",
+      "notes": "The winner claim comes from an organizer bio, with no team name; confirm against the archived iros2023 results before saying who won. docs/media/INVENTORY.md marked IMG_3196 'event/date unknown'; the EXIF date places it in the IROS 2023 week. Posters in rr:/Posters 2026 were uploaded 2026-01-20 and apply the RoboRacer name retroactively; at the time the race was an F1TENTH event."
+    },
+    {
+      "id": "iv2023-anchorage",
+      "date": "2023-06-04",
+      "title": "The RoboRacer IV 2023 Championship in Anchorage",
+      "excerpt": "The IV 2023 Championship ran with the IEEE Intelligent Vehicles Symposium in Anchorage, Alaska, from June 4 to 7, 2023, with a qualification round and a final race. Teams came from universities including Clemson, Virginia Tech, NC State, UC San Diego, Auburn, IUPUI, Nagoya University and Ganpat University.",
+      "kind": "announcement",
+      "event": "iv2023",
+      "link": "https://web.archive.org/web/20250306022824/https://iv2023-race.f1tenth.org/",
+      "source_paths": [
+        "rr:/Posters 2026/25.png"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/25.png",
+          "bytes": 3508542,
+          "why": "poster: IV 2023 Championship, June 4-7, 2023, Anchorage, with participant university logos"
+        }
+      ],
+      "facts": [
+        "'ROBORACER IV 2023 CHAMPIONSHIP, THE IEEE INTELLIGENT VEHICLES SYMPOSIUM (IV 2023), JUNE 4-7, 2023, Anchorage, Alaska USA; Monday June 06 from 1 to 5 pm - Qualification Round; Tuesday June 07 from 3 to 5 pm - Final Race': Posters 2026/25.png",
+        "University logos on the poster: Ganpat University, NC State University, Nagoya University, Clemson, Virginia Tech, IUPUI, Auburn, UC San Diego, plus one unlabeled logo: same poster"
+      ],
+      "confidence": "medium",
+      "notes": "The poster's weekdays do not match its dates (June 6, 2023 was a Tuesday); check the archived site before quoting the schedule. Logos show participating universities, not verified entrants. Posters in rr:/Posters 2026 were uploaded 2026-01-20 and apply the RoboRacer name retroactively; at the time the race was an F1TENTH event."
+    },
+    {
+      "id": "icra2023-london-11th",
+      "date": "2023-05-29",
+      "title": "The 11th Grand Prix at ICRA 2023 in London",
+      "excerpt": "The 11th Autonomous Grand Prix ran with ICRA 2023 at ExCeL London from May 29 to June 1, 2023. The track layout first used at ICRA 2022 in Philadelphia was reused, and it became the reference layout in later proposals.",
+      "kind": "announcement",
+      "event": "icra2023",
+      "link": "https://web.archive.org/web/20251004060537/https://icra2023-race.f1tenth.org/",
+      "source_paths": [
+        "rr:/Posters 2026/28.png",
+        "rr:/Posters 2026/26.png",
+        "rr:/2026 IROS/Application Examples/ICRA_2025_Competition_Application.docx",
+        "rr:/IEEE CDC Brazil 2025/Roll Up Banner/Roll Up Banner Order ICRA2023 Draft  21May.pdf"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/28.png",
+          "bytes": 4349204,
+          "why": "poster: 11th Autonomous Grand Prix, May 29 - June 1, 2023, ExCeL London"
+        },
+        {
+          "path": "rr:/Posters 2026/26.png",
+          "bytes": 2854407,
+          "why": "participation poster: 150+ participants from 37 universities, 25 countries, university logos"
+        }
+      ],
+      "facts": [
+        "11TH ROBORACER AUTONOMOUS GRAND PRIX, MAY 29-JUNE 1, 2023, IEEE ICRA 2023, Excel London, UK: Posters 2026/28.png",
+        "'11TH ROBORACER AUTONOMOUS RACING COMPETITION AT ICRA 2023, 150+ PARTICIPANTS FROM 37 UNIVERSITIES WORLDWIDE', countries: Argentina, Austria, Canada, China, Colombia, Czech Republic, Germany, Greece, Hong Kong, Hungary, India, Israel, Italy, Japan, Jordan, Poland, South Africa, Singapore, South Korea, Spain, Switzerland, Taiwan, UK, USA: Posters 2026/26.png",
+        "'ICRA'23 London (130+ participants and 24 teams)': ICRA_2025_Competition_Application.docx, section 1",
+        "'this layout was used at ICRA 2022 in Philadelphia and in ICRA 2023 in London': ICRA_2025_Competition_Application.docx, logistics",
+        "A roll-up banner was ordered for ICRA 2023 (draft dated 21 May 2023): Roll Up Banner Order ICRA2023 Draft 21May.pdf (vendor order, do not publish)"
+      ],
+      "confidence": "medium",
+      "notes": "Participant counts conflict (150+ from 37 universities vs 130+ and 24 teams); the 2024 participation poster repeats the 2023 numbers word for word, which suggests a reused design. Keep counts out until Cedric picks one. Posters in rr:/Posters 2026 were uploaded 2026-01-20 and apply the RoboRacer name retroactively; at the time the race was an F1TENTH event."
+    },
+    {
+      "id": "cps2023-san-antonio-12th",
+      "date": "2023-05-08",
+      "title": "The 12th Grand Prix at CPS-IoT Week 2023 in San Antonio",
+      "excerpt": "The 12th Autonomous Grand Prix ran with Cyber-Physical Systems and Internet of Things Week, CPS-IoT Week 2023, in San Antonio, Texas, on May 8 and 9, 2023.",
+      "kind": "announcement",
+      "event": "cps2023",
+      "link": "https://web.archive.org/web/20250227164734/https://cps2023-race.f1tenth.org/",
+      "source_paths": [
+        "rr:/Posters 2026/24.png",
+        "rr:/2026 IROS/RoboRacer IROS 2026 Competition Proposal.docx"
+      ],
+      "image_candidates": [
+        {
+          "path": "rr:/Posters 2026/24.png",
+          "bytes": 4483657,
+          "why": "poster: 12th Autonomous Grand Prix, May 8-9, 2023, CPS-IoT Week 2023, San Antonio"
+        }
+      ],
+      "facts": [
+        "12TH ROBORACER AUTONOMOUS GRAND PRIX, MAY 8-9, 2023, CPS-IoT Week 2023, San Antonio, Texas USA: Posters 2026/24.png",
+        "Xuesu Xiao (George Mason University) 'served as a primary organizer for the 12th F1TENTH Autonomous Grand Prix at CPS-IoT Week 2023': RoboRacer IROS 2026 Competition Proposal.docx, organizer bio"
+      ],
+      "confidence": "high",
+      "notes": "The 12th (May 8-9) predates the 11th at ICRA 2023 (May 29); ordinals were assigned when events were planned. No results in the Drive. Posters in rr:/Posters 2026 were uploaded 2026-01-20 and apply the RoboRacer name retroactively; at the time the race was an F1TENTH event."
+    }
+  ]
+}
