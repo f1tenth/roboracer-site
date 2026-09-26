@@ -109,8 +109,11 @@ function SpinoffFeature({ spinoff }: { spinoff: Spinoff }) {
                 <p className="mt-1.5 max-w-[48ch] text-small text-text-body">{origin}</p>
               </div>
             )}
+            {/* Under the text at one rhythm on every card, not pushed to the
+                card's foot: a card without the origin line left 7rem of
+                blank above its link. */}
             {car && (
-              <p className="mt-auto pt-6 text-small">
+              <p className="pt-6 text-small">
                 <a
                   href={car.url}
                   target="_blank"
