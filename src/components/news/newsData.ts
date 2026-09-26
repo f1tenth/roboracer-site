@@ -11,12 +11,28 @@ export type NewsImage = { src: string; width: number; height: number; alt: strin
  * embedding, and, for our own organisation's posts only, our copy of its
  * first slide, which holds the space until the frame loads. A post by
  * anyone else has no poster: its media is never re-hosted. */
-export type NewsEmbed = {
+export type NewsLinkedInEmbed = {
   provider: "linkedin";
   src: string;
   title: string;
   poster?: NewsImage | null;
 };
+
+/** A YouTube video behind a click-to-load facade (Cedric approved YouTube
+ * embeds, 2026-09-26). `title` is the video's own title, the iframe's name.
+ * The poster is the item's own `image` when it has one, else `poster`, else
+ * the video's thumbnail from i.ytimg.com (maxresdefault). Nothing from
+ * YouTube but that thumbnail loads before a click; the player is the
+ * privacy-enhanced youtube-nocookie.com one. */
+export type NewsYouTubeEmbed = {
+  provider: "youtube";
+  id: string;
+  title: string;
+  /** A thumbnail other than maxresdefault (a video without one), or our own cut. */
+  poster?: NewsImage | null;
+};
+
+export type NewsEmbed = NewsLinkedInEmbed | NewsYouTubeEmbed;
 
 export type NewsKind = "post" | "article" | "video" | "podcast" | "announcement";
 
@@ -46,8 +62,11 @@ export type NewsItem = {
   publisher: string;
   credit?: string | null;
   image: NewsImage | null;
-  /** Lead story only: the post itself, embedded beside the text. */
+  /** The post or the video itself: beside the text on the lead, behind a
+   * button on a card (nothing loads from LinkedIn or YouTube before a click). */
   embed?: NewsEmbed | null;
+  /** A recap video for an item whose `embed` is already its LinkedIn post. */
+  video?: NewsYouTubeEmbed | null;
   /** Lead story only: the two or three numbers the story turns on. */
   stats?: { value: string; label: string }[];
   /** A second link beside the source, e.g. the results page. */
@@ -96,7 +115,8 @@ export function eventLabel(id: string): string {
   return `${SERIES[m[1].toLowerCase()] ?? m[1].toUpperCase()} ${m[2]}`;
 }
 
-/** Only site-hosted media renders: a remote thumbnail is never hotlinked, and
+/** Only site-hosted media renders as `image`: a remote image is never hotlinked
+ * (a YouTube embed's thumbnail is the one exception, see NewsYouTubeEmbed), and
  * media from a post is never re-hosted without recorded permission. An item
  * whose image fails this test becomes a text card. */
 function siteHosted(image: NewsImage | null | undefined): NewsImage | null {
@@ -124,5 +144,21 @@ export async function loadNewsFeed(): Promise<NewsFeed | null> {
     items: feed.items
       .filter((item) => item && item.id && item.date && item.link && item.title)
       .map((item) => ({ ...item, image: siteHosted(item.image) })),
+  };
+}
+
+/** The poster a YouTube embed shows before a click. */
+export function youTubePoster(embed: NewsYouTubeEmbed, image: NewsImage | null): NewsImage {
+  if (image) return image;
+  const own = embed.poster;
+  if (own?.src) {
+    if (own.src.startsWith("/") || /^[a-z]+:/i.test(own.src)) return own;
+    return { ...own, src: `${import.meta.env.BASE_URL}${own.src}` };
+  }
+  return {
+    src: `https://i.ytimg.com/vi/${embed.id}/maxresdefault.jpg`,
+    width: 1280,
+    height: 720,
+    alt: "",
   };
 }

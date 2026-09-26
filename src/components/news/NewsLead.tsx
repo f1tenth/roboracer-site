@@ -1,5 +1,7 @@
-import { eventLabel, type NewsItem } from "./newsData";
+import { useState } from "react";
+import { eventLabel, youTubePoster, type NewsImage, type NewsItem, type NewsYouTubeEmbed } from "./newsData";
 import LinkedInEmbed from "./LinkedInEmbed";
+import { YouTubePlayer } from "../ui/YouTubeFacade";
 
 const TITLE_LINK = "underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
 // Standalone action links are 2.75rem hit areas on touch screens (the text
@@ -14,13 +16,32 @@ const ACTION: Record<string, string> = {
   announcement: "Read the announcement",
 };
 
+/** The lead's video: the poster with its play disc is the one control, and
+ * the player only mounts on a click (the lead never starts a video itself). */
+function LeadVideo({ video, image }: { video: NewsYouTubeEmbed; image: NewsImage | null }) {
+  const [playing, setPlaying] = useState(false);
+  return (
+    <div className="relative aspect-video overflow-hidden rounded-media border border-ink-950/10 bg-ink-950">
+      <YouTubePlayer
+        videoId={video.id}
+        title={video.title}
+        poster={youTubePoster(video, image)}
+        playing={playing ? "click" : false}
+        onPlay={() => setPlaying(true)}
+      />
+    </div>
+  );
+}
+
 /**
  * The lead story, given the room a lead gets in print: a 7/5 split with the
  * picture on the left. An announcement with no picture keeps the same weight
  * as a ruled panel, headline left and the detail beside it, so the top of the
  * page never depends on whether a source gave us an image. An item that
  * carries an `embed` shows the post itself in the narrow column instead, with
- * the headline, the numbers and the links in the wide one.
+ * the headline, the numbers and the links in the wide one (and a recap video,
+ * when the item has one, under them). A YouTube embed takes the picture's
+ * place in the picture layout, the item's picture as its poster.
  */
 export default function NewsLead({ item }: { item: NewsItem }) {
   const image = item.image;
@@ -43,7 +64,7 @@ export default function NewsLead({ item }: { item: NewsItem }) {
   const heading = (
     <h2
       className={`font-display font-semibold leading-tight text-text-strong ${
-        image ? "mt-4 text-display-m" : "mt-5 text-display-m"
+        image || item.embed?.provider === "youtube" ? "mt-4 text-display-m" : "mt-5 text-display-m"
       }`}
     >
       <a href={item.link} target="_blank" rel="noopener noreferrer" className={TITLE_LINK}>
@@ -63,7 +84,7 @@ export default function NewsLead({ item }: { item: NewsItem }) {
     </a>
   );
 
-  if (item.embed) {
+  if (item.embed?.provider === "linkedin") {
     return (
       // Splits at lg, not md: LinkedIn's frame is unreadable below about 340px
       // and five columns of a tablet are 270.
@@ -98,6 +119,14 @@ export default function NewsLead({ item }: { item: NewsItem }) {
               </a>
             )}
           </p>
+          {item.video && (
+            <div className="mt-10 max-w-[36rem]">
+              <LeadVideo video={item.video} image={null} />
+              <p className="mt-2 font-mono text-small text-text-muted">
+                {item.video.title}
+              </p>
+            </div>
+          )}
         </div>
         <div className="lg:col-span-5">
           <LinkedInEmbed embed={item.embed} href={item.link} />
@@ -106,7 +135,9 @@ export default function NewsLead({ item }: { item: NewsItem }) {
     );
   }
 
-  if (!image) {
+  const video = item.embed?.provider === "youtube" ? item.embed : null;
+
+  if (!image && !video) {
     return (
       <article className="rounded-card border border-ink-950/10 bg-paper-100 p-8 md:p-12">
         <div className="grid gap-8 md:grid-cols-12 md:gap-12">
@@ -127,17 +158,23 @@ export default function NewsLead({ item }: { item: NewsItem }) {
   return (
     <article className="grid gap-8 md:grid-cols-12 md:items-center md:gap-12">
       <figure className="md:col-span-7">
-        <div className="overflow-hidden rounded-media border border-ink-950/10 bg-paper-100">
-          <img
-            src={image.src}
-            alt={image.alt}
-            width={image.width}
-            height={image.height}
-            loading="lazy"
-            decoding="async"
-            className="block aspect-[3/2] w-full object-cover"
-          />
-        </div>
+        {video ? (
+          <LeadVideo video={video} image={image} />
+        ) : (
+          image && (
+            <div className="overflow-hidden rounded-media border border-ink-950/10 bg-paper-100">
+              <img
+                src={image.src}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
+                loading="lazy"
+                decoding="async"
+                className="block aspect-[3/2] w-full object-cover"
+              />
+            </div>
+          )
+        )}
         {item.credit && (
           <figcaption className="mt-2 font-mono text-small text-text-muted">{item.credit}</figcaption>
         )}

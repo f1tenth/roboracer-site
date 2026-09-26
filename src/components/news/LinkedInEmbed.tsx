@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { NewsEmbed } from "./newsData";
+import type { NewsLinkedInEmbed } from "./newsData";
 
 /**
  * A LinkedIn post embedded in the page. The poster (our own copy of the post's
@@ -32,7 +32,7 @@ export default function LinkedInEmbed({
   href,
   load = "near",
 }: {
-  embed: NewsEmbed;
+  embed: NewsLinkedInEmbed;
   href: string;
   load?: "near" | "now";
 }) {

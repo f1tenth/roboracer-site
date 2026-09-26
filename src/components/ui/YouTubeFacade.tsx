@@ -53,6 +53,90 @@ export function YouTubeFacadeSkeleton({ className = "" }: { className?: string }
   );
 }
 
+/** The privacy-enhanced player URL. It is only ever built once the reader
+ * asked for the video (a click) or, on the About page, once a desktop reader
+ * without reduced motion is looking at it; a self-started player is muted. */
+function youTubeEmbedUrl(videoId: string, { mute = false, playlistId }: { mute?: boolean; playlistId?: string } = {}) {
+  // `origin` keeps the player's postMessage handshake quiet in the console.
+  const origin = typeof window === "undefined" ? "" : `&origin=${encodeURIComponent(window.location.origin)}`;
+  const list = playlistId ? `&list=${playlistId}` : "";
+  return `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1${mute ? "&mute=1" : ""}&playsinline=1&rel=0${list}${origin}`;
+}
+
+type YouTubePlayerProps = {
+  videoId: string;
+  playlistId?: string;
+  /** The video's own title: the iframe's accessible name. */
+  title: string;
+  poster: { src: string; width: number; height: number };
+  /** false: the poster and its play disc; "auto" plays muted; "click" with sound. */
+  playing: false | "auto" | "click";
+  onPlay: () => void;
+  /** CSS aspect ratio of the poster box (the parent sizes the frame). */
+  aspect?: string;
+  /** The news card also has a text button that starts the video; the poster is
+   * then a second mouse target only, out of the tab order and hidden from
+   * assistive tech so the card announces one control, not two. */
+  posterIsDuplicate?: boolean;
+};
+
+/**
+ * The frame alone: a poster with a play disc until `playing`, then the
+ * player. It fills its positioned parent. Used by the facade below and by the
+ * news cards, which own the state because a text button beside the frame
+ * starts it too.
+ */
+export function YouTubePlayer({
+  videoId,
+  playlistId,
+  title,
+  poster,
+  playing,
+  onPlay,
+  aspect = "16 / 9",
+  posterIsDuplicate = false,
+}: YouTubePlayerProps) {
+  if (playing) {
+    return (
+      // `allow` (not the legacy allowfullscreen attribute) grants fullscreen.
+      <iframe
+        className="absolute inset-0 h-full w-full"
+        src={youTubeEmbedUrl(videoId, { mute: playing === "auto", playlistId })}
+        title={title}
+        allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+        referrerPolicy="strict-origin-when-cross-origin"
+      />
+    );
+  }
+  return (
+    <button
+      type="button"
+      onClick={onPlay}
+      aria-label={posterIsDuplicate ? undefined : `Play "${title}" on YouTube`}
+      aria-hidden={posterIsDuplicate || undefined}
+      tabIndex={posterIsDuplicate ? -1 : undefined}
+      className="group/play absolute inset-0 block h-full w-full cursor-pointer text-left"
+    >
+      <MediaFrame
+        src={poster.src}
+        alt=""
+        width={poster.width}
+        height={poster.height}
+        aspect={aspect}
+        radius="none"
+        className="h-full"
+      />
+      <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center">
+        <span className="flex h-14 w-14 items-center justify-center rounded-full border border-ink-950/10 bg-paper-50/90 text-ink-950 transition-colors duration-[var(--duration-fast)] group-hover/play:bg-paper-50 group-focus-visible/play:bg-paper-50">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+            <path d="M5.5 3.2v11.6L15 9 5.5 3.2Z" />
+          </svg>
+        </span>
+      </span>
+    </button>
+  );
+}
+
 /**
  * A YouTube video behind a click-to-load facade: the poster and a play button
  * ship, the iframe only mounts once the reader is looking at it, so no page
@@ -73,13 +157,6 @@ export default function YouTubeFacade({
   const reduced = usePrefersReducedMotion();
   const ref = useRef<HTMLElement>(null);
   const [playing, setPlaying] = useState<false | "auto" | "click">(false);
-  // `origin` keeps the player's postMessage handshake quiet in the console;
-  // `allow` (not the legacy allowfullscreen attribute) grants fullscreen.
-  const origin = typeof window === "undefined" ? "" : `&origin=${encodeURIComponent(window.location.origin)}`;
-  const list = yt.playlist_id ? `&list=${yt.playlist_id}` : "";
-  const mute = playing === "auto" ? "&mute=1" : "";
-  const embed = `https://www.youtube-nocookie.com/embed/${yt.video_id}?autoplay=1${mute}&playsinline=1&rel=0${list}${origin}`;
-
   useEffect(() => {
     const el = ref.current;
     if (!el || !autoStart || reduced || playing) return;
@@ -107,39 +184,14 @@ export default function YouTubeFacade({
       } ${className}`}
     >
       <div className="relative aspect-video border-b border-ink-950/10 bg-ink-950">
-        {playing ? (
-          <iframe
-            className="absolute inset-0 h-full w-full"
-            src={embed}
-            title={yt.title}
-            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-            referrerPolicy="strict-origin-when-cross-origin"
-          />
-        ) : (
-          <button
-            type="button"
-            onClick={() => setPlaying("click")}
-            aria-label={`Play "${yt.title}" on YouTube`}
-            className="group/play absolute inset-0 block h-full w-full cursor-pointer text-left"
-          >
-            <MediaFrame
-              src={yt.poster}
-              alt=""
-              width={yt.width}
-              height={yt.height}
-              aspect="16 / 9"
-              radius="none"
-              className="h-full"
-            />
-            <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center">
-              <span className="flex h-14 w-14 items-center justify-center rounded-full border border-ink-950/10 bg-paper-50/90 text-ink-950 transition-colors duration-[var(--duration-fast)] group-hover/play:bg-paper-50 group-focus-visible/play:bg-paper-50">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
-                  <path d="M5.5 3.2v11.6L15 9 5.5 3.2Z" />
-                </svg>
-              </span>
-            </span>
-          </button>
-        )}
+        <YouTubePlayer
+          videoId={yt.video_id}
+          playlistId={yt.playlist_id}
+          title={yt.title}
+          poster={{ src: yt.poster, width: yt.width, height: yt.height }}
+          playing={playing}
+          onPlay={() => setPlaying("click")}
+        />
       </div>
       <div
         className={
