@@ -10,7 +10,6 @@ import {
   type PlatformRow,
   type SiteVideo,
   type Spinoff,
-  spinoffShown,
 } from "../lib/data";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
@@ -126,7 +125,7 @@ export default function About() {
       .then((d) => live && setVideos(d))
       .catch(() => undefined);
     loadSpinoffs()
-      .then((d) => live && setSpinoffs(d.entries.filter(spinoffShown)))
+      .then((d) => live && setSpinoffs(d.entries))
       .catch(() => live && setSpinoffs([]));
     return () => {
       live = false;
@@ -364,36 +363,37 @@ export default function About() {
       </Section>
 
       {/* 05 Spinoffs - from public/data/spinoffs.json. Only `entries` render;
-          the `candidates` there wait for Cedric. Every entry is still
-          status "verify" (nothing on it is in the content skill yet), so
-          each card carries the same verify tag as the people cards. */}
+          the `candidates` there wait for Cedric. Each entry is a feature
+          built from the company's own site at his request (2026-09-25):
+          its car, its mark, and a framed window onto its homepage. */}
       {(spinoffs === null || spinoffs.length > 0) && (
         <Section width="page" aria-labelledby="about-spinoffs" rule>
           <SectionHeader
             index="05"
             id="about-spinoffs"
             title="Spinoffs"
-            subtitle="Teams and companies that grew out of the car"
+            subtitle="Companies that grew out of the car"
             lead={
               <>
-                {/* "Three so far": the count follows spinoffs.json as Cedric
+                {/* "Two so far": the count follows spinoffs.json as Cedric
                     accepts candidates, and is the one word that waits for it. */}
                 <span className={spinoffs ? undefined : "invisible"}>
                   {spinoffs ? countWord(spinoffs.length) : "Two"}
                 </span>{" "}
-                so far. A verify tag means the people involved have not confirmed our wording yet.
+                so far.
               </>
             }
           />
           {spinoffs ? (
             <SpinoffGrid spinoffs={spinoffs} />
           ) : (
-            // The grid's measured height for the entries that render today
-            // (two cards: stacked on phones, one row from sm), so a reader
-            // arriving at #about-spinoffs does not watch Videos jump.
+            // The grid's measured height for the two features that render
+            // today (stacked on compact, one row from desktop; 2026-09-25),
+            // so a reader arriving at #about-spinoffs does not watch Videos
+            // jump. compact: is emitted after the breakpoints, so it wins.
             <div
               aria-busy="true"
-              className="min-h-[45rem] rounded-card border border-ink-950/10 sm:min-h-[23.25rem] lg:min-h-[23.75rem]"
+              className="min-h-[52.75rem] rounded-card border border-ink-950/10 lg:min-h-[47rem] xl:min-h-[51.25rem] 2xl:min-h-[53rem] compact:min-h-[95.5rem]"
             />
           )}
         </Section>

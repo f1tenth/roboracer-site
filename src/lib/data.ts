@@ -143,12 +143,23 @@ export type Team = {
   photo?: string;
 };
 
+/** An image in a spinoff feature (public/media/spinoffs). Every one has a
+ * provenance row in docs/ASSET_MANIFEST.md; `source` repeats it for review
+ * and is not rendered. */
+export type SpinoffImage = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  source?: string;
+};
+
 /** One thing that grew out of the car: a company, a product, a team or an
  * initiative (public/data/spinoffs.json, About section "Spinoffs"). `what`
  * and `origin` are our own sentences drafted from the first-party pages in
  * `source` / `evidence`; an `origin` starting with TODO(content) is a question
- * for Cedric and is not rendered. `logo` is null unless the file has a
- * provenance row in docs/ASSET_MANIFEST.md; the card then shows a wordmark. */
+ * for Cedric and is not rendered (the entry still is). A missing `logo`,
+ * `car` or `preview` drops that slot from the feature. */
 export type Spinoff = {
   name: string;
   kind: "company" | "product" | "team" | "initiative";
@@ -157,8 +168,15 @@ export type Spinoff = {
   what: string;
   origin: string | null;
   since: number | null;
+  /** The homepage: the preview window links here. */
   url: string;
-  logo: string | null;
+  /** The company's own mark, shown beside the name. */
+  logo?: SpinoffImage | null;
+  /** The company's car: the feature's main visual, linking to its page. */
+  car?: (SpinoffImage & { name: string; url: string }) | null;
+  /** Our own 1280x800 capture of the homepage, framed as a browser window. */
+  preview?: SpinoffImage | null;
+  /** Review state in the JSON only; nothing on the page shows it. */
   status: "verify" | "published";
   source: string;
   /** Who named it a spinoff, when that is a person rather than a page. */
@@ -166,15 +184,6 @@ export type Spinoff = {
   evidence?: { url: string; says: string }[];
   note?: string;
 };
-
-/**
- * Only an entry that says how it connects to RoboRacer renders: one whose
- * origin is missing or still a TODO(content) question (Quanser, until Cedric
- * answers) stays in the JSON and off the page, so the section never shows a
- * company with no stated link to the car.
- */
-export const spinoffShown = (s: Spinoff): boolean =>
-  typeof s.origin === "string" && s.origin.length > 0 && !s.origin.startsWith("TODO(content)");
 
 export type SpinoffsFile = {
   note: string;
