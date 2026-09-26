@@ -321,7 +321,7 @@ export default function About() {
           <PeopleGroup
             id="about-past-crew"
             title="Past crew"
-            lead="Earlier team members, from the old F1TENTH about page. Their roles aren't confirmed yet."
+            lead="Earlier team members, from the old F1TENTH about page."
             people={PAST_CREW}
             compact
             fold={12}
