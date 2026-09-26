@@ -391,7 +391,14 @@ function ChannelRow({ network, name, handle, href }: (typeof CHANNELS)[number]) 
     );
   }
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 py-4 coarse:py-5">
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      // The spans are flex items: without this the name reads "LinkedInThe Roboracer Foundation".
+      aria-label={`${name}: ${handle}`}
+      className="group flex items-center gap-4 py-4 coarse:py-5"
+    >
       {body}
       <span aria-hidden="true" className="text-small text-text-strong">
         ↗
