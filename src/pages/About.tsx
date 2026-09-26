@@ -22,7 +22,6 @@ import SpinoffGrid from "../components/about/SpinoffGrid";
 import PhoneFold from "../components/about/PhoneFold";
 import YouTubeFacade, { YouTubeFacadeSkeleton } from "../components/ui/YouTubeFacade";
 import NearViewport from "../components/about/NearViewport";
-import { countWord } from "../lib/countWord";
 import {
   DEVELOPERS,
   FACULTY,
@@ -368,16 +367,6 @@ export default function About() {
             id="about-spinoffs"
             title="Related platforms"
             subtitle="Other one-tenth-scale cars, and how they relate to RoboRacer"
-            lead={
-              <>
-                {/* "Two so far": the count follows spinoffs.json as Cedric
-                    accepts candidates, and is the one word that waits for it. */}
-                <span className={spinoffs ? undefined : "invisible"}>
-                  {spinoffs ? countWord(spinoffs.length) : "Two"}
-                </span>{" "}
-                so far.
-              </>
-            }
           />
           {spinoffs ? (
             <SpinoffGrid spinoffs={spinoffs} />
