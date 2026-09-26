@@ -273,7 +273,11 @@ function LeaderboardBlock() {
   const total = board?.rows.length ?? summary?.rows;
   const noun = anonymous ? (total === 1 ? "driver" : "drivers") : total === 1 ? "team" : "teams";
   const dueAt = board?.due ?? summary?.due;
-  const closed = dueAt ? Date.parse(dueAt) < now : false;
+  // The closing date only while it is ahead: once the board's own due date
+  // has passed (checked against the clock every minute) the row goes, rather
+  // than state a past date. It is also left out while the date is unknown,
+  // so a closed board does not draw a row that then disappears.
+  const due = dueAt && Date.parse(dueAt) >= now ? formatDay(dueAt) : null;
   const updated = formatAgo(board?.generated_at, now);
 
   // The bundled config's replay while the real one loads, so the layout does
@@ -291,10 +295,12 @@ function LeaderboardBlock() {
             {typeof total === "number" ? `${total} ${noun}` : <Bar w="w-20" />}
           </dd>
         </div>
-        <div className="flex flex-wrap justify-between gap-x-4">
-          <dt>{closed ? "lab closed" : "lab closes"}</dt>
-          <dd className="tabular-nums text-text-strong">{formatDay(dueAt) ?? <Bar w="w-16" />}</dd>
-        </div>
+        {due && (
+          <div className="flex flex-wrap justify-between gap-x-4">
+            <dt>lab closes</dt>
+            <dd className="tabular-nums text-text-strong">{due}</dd>
+          </div>
+        )}
         <div className="flex flex-wrap justify-between gap-x-4">
           <dt>updated</dt>
           <dd className="tabular-nums text-text-strong">{updated ?? <Bar w="w-20" />}</dd>
