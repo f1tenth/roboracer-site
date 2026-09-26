@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { preload } from "react-dom";
 import {
   loadEventsMap,
   loadTeams,
@@ -15,7 +16,11 @@ import TeamGrid from "../components/ui/TeamGrid";
 import Reveal from "../components/ui/Reveal";
 import RaceTimeline from "../components/race/RaceTimeline";
 import SeasonChain from "../components/race/SeasonChain";
+import Leaderboard from "../components/race/Leaderboard";
+import { useNow } from "../components/race/useNow";
 import type { SeasonEvent } from "../components/race/eventState";
+import { DESKTOP_QUERY } from "../lib/motion";
+import { useScrollToHash } from "../hooks/useScrollToHash";
 
 // Same clip and the same credit as the landing's next-race section
 // (docs/ASSET_MANIFEST.md V4-11); the frame links to RoboRacer's own post,
@@ -40,13 +45,13 @@ const ENTRY_STEPS = [
   {
     n: "01",
     title: "Read the rules",
-    body: "Vehicle specification, track, time trial, and the head-to-head format. IROS 2026 adds multi-agent racing with up to four cars on track.",
+    body: "Car spec, track, time trials and head-to-head races. IROS 2026 adds races with up to four cars on track.",
     slack: false,
   },
   {
     n: "02",
     title: "Register your team",
-    body: "One form per team. Teams may have any number of members, but at most ten are at the race space during the event.",
+    body: "One form per team. Any team size, but at most ten people per team in the race area during the event.",
     slack: false,
   },
   {
@@ -64,10 +69,27 @@ const ENTRY_STEPS = [
 ] as const;
 
 const SLACK_URL =
-  "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g";
+  "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q";
 
 const LINK_ON_PAPER =
   "text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
+
+/** A standalone link (not one inside a sentence) is 2.75rem tall on touch
+ * screens, with a matching negative margin so its line does not move. */
+const TAP = "coarse:-my-3 coarse:inline-flex coarse:min-h-11 coarse:items-center";
+
+/**
+ * Whether the window was desktop-sized when the page opened. Only there does
+ * the hero clip load with the page (`priority`). On a phone the poster leads:
+ * it is preloaded at high priority and the clip follows once the frame is
+ * on screen, instead of the 1272 px encode competing with the poster for the
+ * first paint in a 342 px box (RACE-06). Read once: this is a load-time
+ * choice, and re-reading it on a rotate would swap the playing video out.
+ */
+function useDesktopAtLoad(): boolean {
+  const [desktop] = useState(() => window.matchMedia(DESKTOP_QUERY).matches);
+  return desktop;
+}
 
 /**
  * Slack is never named without a way to reach it in the same breath, so the
@@ -76,7 +98,7 @@ const LINK_ON_PAPER =
 function SlackLine() {
   return (
     <p className="mt-2 text-body text-text-body">
-      Feel free to reach out on{" "}
+      Ask us on{" "}
       <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
         Slack
       </a>
@@ -92,9 +114,14 @@ function SlackLine() {
  * cards, and the countdown runs to the registration deadline, which is the
  * date that actually costs a team its entry. Everything below it answers the
  * next question in order: how do I enter, what else is running this year, has
- * this been going long, and who would I be racing.
+ * this been going long, who would I be racing, and who is fastest in class
+ * right now.
  */
 export default function RacePage() {
+  // /race#leaderboard and /about#about-spinoffs are linked from docs and
+  // the nav; the route reset (useRouteScroll) would otherwise leave the
+  // reader at the top.
+  useScrollToHash();
   const [upcoming, setUpcoming] = useState<SeasonEvent[]>([]);
   const [mapEvents, setMapEvents] = useState<MapEvent[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
@@ -115,20 +142,32 @@ export default function RacePage() {
     };
   }, []);
 
+  const heroFirst = useDesktopAtLoad();
+  if (!heroFirst) preload(HERO.poster, { as: "image", fetchPriority: "high" });
+  const now = useNow();
   const race = upcoming.find((e) => e.spotlight) ?? upcoming[upcoming.length - 1];
+  // The same rule as the spotlight: after the deadline this section stops
+  // offering the registration form and says "registration closed" instead.
+  const deadline = race?.registration_deadline_at ? Date.parse(race.registration_deadline_at) : NaN;
+  const registrationClosed = deadline <= now;
   const past = mapEvents.filter((e) => e.status !== "upcoming");
   const city = race?.location.split(",")[0].trim();
 
   // The series ordinal of the last competition already run, read off the map
   // rather than typed into the copy, so the sentence cannot go stale on its
-  // own. Four continents: Asia, Europe, North and South America, from the
-  // host countries in events_map.json.
+  // own.
   const held = past.reduce((max, e) => Math.max(max, e.number ?? 0), 0);
 
   return (
     <>
-      {/* Hero: the next race, not a page title over an empty band. */}
-      <Section variant="ink" width="bleed" className="pt-[5.5rem] md:pt-[6.5625rem]">
+      {/* Hero: the next race, not a page title over an empty band. The top
+          padding follows the nav bar's height token, so the short landscape
+          bar (3.5rem) does not leave a 3rem ink band above the eyebrow. */}
+      <Section
+        variant="ink"
+        width="bleed"
+        className="pt-[calc(var(--spacing-nav)+1rem)] lg:pt-[calc(var(--spacing-nav)+1.25rem)]"
+      >
         <div className="mx-auto max-w-page px-6">
           <div className="max-w-3xl">
             <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-on-ink-muted">
@@ -138,15 +177,24 @@ export default function RacePage() {
             <h1 className="font-display text-display-l font-semibold text-text-on-ink">
               Come race with us
             </h1>
-            <p className="mt-4 max-w-[60ch] text-lead text-text-on-ink-muted">
-              {held > 0 ? `${held} competitions` : "Competitions"} since 2016, on four continents.
-              Every one of them is open to any team that can build a car and drive it autonomously -
-              undergraduates, research labs and companies race the same track under the same rules.
+            {/* 44ch, not 60: without "on four continents" the lead fit one
+                line in Manrope but two in the fallback face, and the font
+                swap moved the hero 27 px (CLS 0.023 at 1536). Two lines in
+                either face. */}
+            <p className="mt-4 max-w-[44ch] text-lead text-text-on-ink-muted">
+              {held > 0 ? `${held} competitions` : "Competitions"} since 2016.
+              Any team with a car that drives itself can enter.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-12 md:items-stretch md:gap-10">
-            <figure className="md:col-span-7">
+          {/* Video and panel sit side by side from lg only. At 768 the 7/5
+              split left the panel 276px (the CTA wrapped, the dates took three
+              lines) and at 844x390 the panel ran two screens beside a short
+              video (RACE-01), so tablets and landscape phones stack like the
+              portrait phone. Stacked, the clip is never taller than the screen
+              below the bar: a landscape phone gets it at the width that fits. */}
+          <div className="mt-12 grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10">
+            <figure className="max-lg:max-w-[calc((100svh-var(--spacing-nav)-3rem)*1272/720)] lg:col-span-7">
               <div
                 className="overflow-hidden rounded-media border border-text-on-ink/10 bg-ink-800"
                 style={{ aspectRatio: `${HERO.width} / ${HERO.height}` }}
@@ -157,7 +205,7 @@ export default function RacePage() {
                   alt={HERO.alt}
                   width={HERO.width}
                   height={HERO.height}
-                  priority
+                  priority={heroFirst}
                   radius="none"
                   className="h-full"
                 />
@@ -168,7 +216,7 @@ export default function RacePage() {
                   href={HERO.creditHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-text-on-ink-muted underline decoration-text-on-ink/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
+                  className={`text-text-on-ink-muted underline decoration-text-on-ink/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2 ${TAP}`}
                 >
                   {HERO.creditLabel}
                 </a>
@@ -180,8 +228,12 @@ export default function RacePage() {
                 fetch resolves (CLS 0.25 at 390). The reserve is deliberately
                 a little under the panel's real height at every width we
                 render, so it shrinks the jump without leaving a gap once the
-                panel is in. */}
-            <div className={`md:col-span-5${race ? "" : " min-h-[40rem]"}`}>
+                panel is in. Stacked from sm to lg the panel runs full width and
+                is about 29rem tall (768, 844x390); in the phone column, 38rem
+                and up. */}
+            <div
+              className={`lg:col-span-5${race ? "" : " min-h-[36rem] sm:min-h-[28rem] lg:min-h-[40rem]"}`}
+            >
               {race && (
                 <NextRaceSpotlight
                   on="ink"
@@ -195,6 +247,7 @@ export default function RacePage() {
                   deadlineAt={race.registration_deadline_at}
                   rulesHref="/rules"
                   rulesInternal
+                  siteHref={race.site_url}
                   startsAt={race.starts_at ?? ""}
                 />
               )}
@@ -209,7 +262,7 @@ export default function RacePage() {
           id="race-enter"
           title="Enter"
           subtitle="How to enter"
-          lead="All the information for each competition is on that competition's own site. In short:"
+          lead="Each competition's own site has the details. In short:"
         />
         {/* The four steps, the buttons and the deadlines are all short, so they
             share the left half and the bridge shot takes the right rather than
@@ -232,18 +285,28 @@ export default function RacePage() {
           </ol>
         </Reveal>
         <div className="mt-10 flex flex-wrap gap-4">
-          <Button href={race?.register_url ?? "#"} variant="primary" target="_blank" rel="noopener noreferrer">
-            Register your team
-          </Button>
-          <Button href="/rules" variant="secondary">
+          {!registrationClosed ? (
+            <Button href={race?.register_url ?? "#"} variant="primary" target="_blank" rel="noopener noreferrer">
+              Register your team
+            </Button>
+          ) : (
+            race?.site_url && (
+              <Button href={race.site_url} variant="primary" target="_blank" rel="noopener noreferrer">
+                See the race site
+              </Button>
+            )
+          )}
+          <Button href="/rules" variant={registrationClosed && !race?.site_url ? "primary" : "secondary"}>
             Read the rules
           </Button>
         </div>
         <dl className="mt-10 flex flex-col gap-2 border-t border-ink-950/10 pt-6 font-mono text-small text-text-muted">
           {race?.registration_deadline && (
             <div className="flex flex-wrap justify-between gap-x-4">
-              <dt>registration closes</dt>
-              <dd className="tabular-nums text-text-strong">{race.registration_deadline}</dd>
+              <dt>{registrationClosed ? "registration" : "registration closes"}</dt>
+              <dd className="tabular-nums text-text-strong">
+                {registrationClosed ? "closed" : race.registration_deadline}
+              </dd>
             </div>
           )}
           {race?.qualification_video_due && (
@@ -255,7 +318,7 @@ export default function RacePage() {
           <div className="flex flex-wrap justify-between gap-x-4">
             <dt>questions</dt>
             <dd>
-              <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
+              <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={`${LINK_ON_PAPER} ${TAP}`}>
                 RoboRacer teams Slack
               </a>
             </dd>
@@ -279,7 +342,7 @@ export default function RacePage() {
           id="race-season"
           title="This season"
           subtitle="The rest of 2026"
-          lead="Each competition has its own site, its own registration and its own organizing committee."
+          lead="Each race has its own site, registration and organizers."
         />
         <SeasonChain events={upcoming} map={mapEvents} />
       </Section>
@@ -290,7 +353,7 @@ export default function RacePage() {
           id="race-history"
           title="Every race so far"
           subtitle="From Pittsburgh 2016 to Pittsburgh 2026"
-          lead="Every competition so far, with a link to its site. If a site has gone offline, the link goes to an archived copy."
+          lead="Each one links to its site, or to an archived copy if the site is gone."
         />
         <RaceTimeline events={past} />
       </Section>
@@ -301,9 +364,32 @@ export default function RacePage() {
           id="race-teams"
           title="Who competes"
           subtitle="Teams racing in 2026"
-          lead="Undergraduate teams, research labs and companies, all racing the same car spec. An unverified tag means we are still confirming the details."
+          lead="Students, labs and companies race the same car spec."
         />
         <TeamGrid teams={teams} />
+      </Section>
+
+      {/* The class leaderboard closes the page: after who races in the
+          series, where the fastest laps are being set this week. It is a
+          side door (simulator laps from one course, not a competition), so
+          it sits below everything a team needs to enter. */}
+      {/* /race#leaderboard lands with the "05" eyebrow clear of the fixed
+          nav: on a phone the section's top padding is shorter than the bar. */}
+      <Section
+        id="leaderboard"
+        width="page"
+        aria-labelledby="race-leaderboard"
+        rule
+        className="scroll-mt-[calc(var(--spacing-nav)+1rem)]"
+      >
+        <SectionHeader
+          index="05"
+          id="race-leaderboard"
+          title="Leaderboard"
+          subtitle="The fastest laps in class at Penn"
+          lead="Students in ESE 6150 race each lab in the grading simulator. These are their best clean laps."
+        />
+        <Leaderboard />
       </Section>
     </>
   );

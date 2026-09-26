@@ -1,3 +1,4 @@
+import { fetchJson } from "../../lib/data";
 import file from "./people.json";
 
 /**
@@ -5,20 +6,21 @@ import file from "./people.json";
  * public professional page or a RoboRacer race site uses; `source` names that
  * page and `link` is where the person's name points. When no public page gives
  * a role the record carries no `role` and `status: "verify"`, and the card
- * renders a mono verify tag - never a guessed title (CLAUDE.md rule 4).
+ * shows no title at all - never a guessed one (CLAUDE.md rule 4).
  *
  * `project_role` is the role inside RoboRacer. Where it comes from the
  * archived f1tenth.org about page it was authored by the team but never
- * displayed, so it renders with its own verify tag (`project_role_verify`,
- * director's ruling 2026-08-23). The generator is documented in
- * docs/content/about.sources.md.
+ * displayed (`project_role_verify`, director's ruling 2026-08-23). `status`
+ * and `project_role_verify` are review bookkeeping only: nothing renders
+ * them since Cedric dropped the verify tags (2026-09-25). The generator is
+ * documented in docs/content/about.sources.md.
  */
 export type Person = {
   name: string;
   role?: string;
   /** Role inside the project, e.g. "Race Director, IROS 2026". */
   project_role?: string;
-  /** True when that project role is unconfirmed (archived page markup). */
+  /** Bookkeeping: the project role came from archived page markup. Not rendered. */
   project_role_verify?: boolean;
   affiliation?: string;
   /** Square WebP under public/crew/, 400x400 unless the source was smaller. */
@@ -80,11 +82,9 @@ export type ContributorsFile = {
   contributors: Contributor[];
 };
 
-export async function loadContributors(): Promise<ContributorsFile> {
-  const res = await fetch(`${import.meta.env.BASE_URL}data/contributors.json`);
-  if (!res.ok) throw new Error(`contributors.json: ${res.status}`);
-  return (await res.json()) as ContributorsFile;
-}
+/** Bounded like every data read (lib/data READ_TIMEOUT_MS). */
+export const loadContributors = () =>
+  fetchJson<ContributorsFile>(`${import.meta.env.BASE_URL}data/contributors.json`);
 
 /** GitHub serves any avatar size from the same URL; 80px is twice the 40px
  * the strip draws them at, and cuts each request to a few kB. */

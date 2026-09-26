@@ -137,9 +137,180 @@ Legend: **KEEP** true and on-voice, leave alone. **CHANGE** true but weak/stale/
 3. Is the Slack invite link (`https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-...`) still valid? I could not confirm programmatically (destination returned 403 to an automated fetch); please test manually and send a fresh invite link if it's expired.
 4. Is "RoboRacer Foundation" the correct legal/entity name for the footer copyright line, or should it just say "RoboRacer" / a different name?
 5. A first-pass featured-papers shortlist is drafted at `docs/content/featured-papers.md` (16 papers, 2023+, ranked by citation count via OpenAlex + the 2020 O'Kelly et al. paper pinned as "the original paper"). Can you and/or Billy review it and confirm before we set `featured: true` in `publications.json`? Three 2023-2024 papers could not be matched to a citation count at all (`zou-2023-constrained`, `tanmay-vilas-samak-2024-ea`, `moualhi-2024-experimental`) — flagged, not guessed.
-6. For the featured-teams block (`docs/content/teams.proposed.json`, refreshed 2026-08-21): can you confirm the institution for "LAMARRacing" (1st, ICRA 2026 Vienna time trials), "VAUL 2" (1st, Classic Cup), "UBM-Tom" and "UBM-Atlas" (3rd/2nd, Master Cup — possibly the same lab, possibly linked to West Virginia University, unconfirmed either way), and the institution behind IV 2026's 2nd-place "404 Racers" (drivers Milan Manoj and Manasi Shrekhar)? Also: is "Thunderbolt" (IV 2026 1st, UPenn, Cedric Hollande) the same team as "UPenn Autonomous Racing" (ICRA 2026 2nd in Time Trials), just under a different per-event alias, or two distinct UPenn squads?
-7. IV 2026 (Detroit) results page (`iv2026-race.roboracer.ai/results.html`) still says "Results will be posted after the competition" as of 2026-08-21, two months after the event. You supplied the podium directly (1st Thunderbolt/UPenn/Cedric Hollande, 2nd 404 Racers/Milan Manoj and Manasi Shrekhar, 3rd West Virginia University, exact team name TBD) and it's used in `teams.proposed.json` sourced to you, but there's still no public URL to cite — can you get the results page updated, or confirm West Virginia University's exact competition team-name alias?
+6. For the featured-teams block (`docs/content/teams.proposed.json`, refreshed 2026-08-21): can you confirm the institution for "LAMARRacing" (1st, ICRA 2026 Vienna time trials), "VAUL 2" (1st, Classic Cup), "UBM-Tom" and "UBM-Atlas" (3rd/2nd, Master Cup — possibly the same lab, possibly linked to West Virginia University, unconfirmed either way), and the institution behind IV 2026's 2nd-place "404 Racers" (drivers Milan Manoj and Manasi Shrekhar)? Also: is "Thunderbolt" (IV 2026 1st, UPenn, Cedric Hollande) the same team as "UPenn Autonomous Racing" (ICRA 2026 2nd in Time Trials), just under a different per-event alias, or two distinct UPenn squads? **Resolved 2026-09-25** by Cedric's RoboRacer_Teams_DB sheet (`docs/content/teams.sheet.json`): LAMARRacing is University of Bonn; VAUL is Laval University; UBM-Tom and UBM-Atlas are University of Bologna (not WVU); 404 Racers is University of Pennsylvania. The sheet lists Thunderbolt UPenn and UPenn Autonomous Racing as separate IV 2026 entries; the site keeps your 2026-08-22 ruling that they are one team.
+7. IV 2026 (Detroit) results page (`iv2026-race.roboracer.ai/results.html`) still says "Results will be posted after the competition" as of 2026-08-21, two months after the event. You supplied the podium directly (1st Thunderbolt/UPenn/Cedric Hollande, 2nd 404 Racers/Milan Manoj and Manasi Shrekhar, 3rd West Virginia University, exact team name TBD) and it's used in `teams.proposed.json` sourced to you, but there's still no public URL to cite — can you get the results page updated, or confirm West Virginia University's exact competition team-name alias? **Resolved 2026-09-25** by Cedric's RoboRacer_Teams_DB sheet (`docs/content/teams.sheet.json`): WVU raced as "WVU Mountaineer" (West Virginia University). The results page itself is still a separate ask.
 8. Should `/rules`, `/chat` get nav or footer entries, or stay reachable only by direct link/route?
+
+### Spinoffs on /about (added 2026-09-24, branch `revamp/p2-spinoffs`)
+
+Data: `public/data/spinoffs.json`. `entries` render on /about as section 05
+"Spinoffs" (after Our Partners, before Videos); `candidates` do not render until
+you move them into `entries`. Nothing about spinoffs is in the content skill, so
+every entry is `status: "verify"` and shows the mono verify tag (no source
+link on the card, as on the team cards). Each record carries its `source` and
+an `evidence` list of the first-party pages it was drafted from; the sentences
+are ours, not theirs. Neobotics and Quanser also carry `named_by: "Cedric,
+2026-09-24"`: you named both as spinoffs.
+
+**Facts to confirm**
+
+1. **Neobotics** (named by you, 2026-09-24). Public pages give: Massachusetts nonprofit, incorporated
+   Feb 26, 2025; builds the NeoRacer; the NeoRacer paper says it is built to
+   F1TENTH/RoboRacer race rules; Neobotics co-organized the 30th competition at
+   VTC 2026 in Boston (Koneshka Bandyopadhyay is on the organizer list in
+   `f1tenth/vtc2026-race`). Nothing public says it *grew out of* RoboRacer. Its
+   founders and advisors are Boston University people, and BU hosted the BU
+   F1TENTH Grand Prix on Nov 22, 2024 (organizers included Renato Mancuso, now
+   a Neobotics advisor, and Rahul). Did the founders come out of that race or
+   the BU F1TENTH club? If yes, the origin line can say so; today it only says
+   what is sourced.
+2. **Quanser** (named by you, 2026-09-24). What is the connection: a shared
+   hardware lineage, a course, a race partnership? No public source says
+   (searched quanser.com, the f1tenth GitHub org and the web; Quanser's site
+   gives 35+ years of history, so it predates F1TENTH). Until you say, the card
+   shows what Quanser is plus a verify tag and no origin line.
+3. **LAMARRacing.** Sourced to the Lamarr Institute news post (Jun 8, 2026:
+   Best Performance Overall at ICRA 2026, fastest in the time trials, fourth in
+   the one-on-one races) and the team's arXiv paper 2603.07126 (all authors at
+   the University of Bonn, tested on a self-built RoboRacer car). OK to frame
+   a team as a spinoff? Side finding: that paper settles the open institution
+   question for LAMARRacing in `teams.json` (University of Bonn; not edited on
+   this branch).
+4. **Founding years.** Only Neobotics has one (2025). LAMARRacing and Quanser's
+   QCar have none on a public page, so `since` is null.
+
+**Candidates: keep or drop?** (each sourced, none rendered yet)
+
+5. **ForzaETH Race Stack** (product): ETH Zurich's open-source head-to-head
+   race stack, written by the ForzaETH team for RoboRacer races and released in
+   2024. Sources: arXiv 2403.11784 and github.com/ForzaETH/race_stack.
+6. **RoboRacer Sim Racing League** (initiative): the online digital-twin league
+   on Clemson's AutoDRIVE, first run at IROS 2024, since at CDC, ICRA and IROS.
+   Source: autodrive-ecosystem.github.io/competitions. It is co-run with
+   RoboRacer, so it may belong on /race rather than here.
+7. **Cavalier Autonomous Racing** (team): UVA's Indy Autonomous Challenge team,
+   founded by F1TENTH co-founder Madhur Behl; most first members had worked on
+   F1TENTH for five years. Sources: madhurbehl.com and the IAC team profile.
+   The clearest "grew out of F1TENTH" story in the public record.
+
+**Logo permissions to request**
+
+8. No spinoff has a logo with a provenance row in `docs/ASSET_MANIFEST.md`, so
+   every card is a wordmark. The Neobotics icon is already in
+   `public/partners/neobotics.webp` (partner wall, commit 13513e9) with no
+   manifest row; add the row and confirm it may be reused here. Quanser,
+   LAMARRacing (or the Lamarr Institute), and any candidate you keep would each
+   need a logo file plus written permission before `logo` is set.
+
+### From the polish-2 QA fixes (added 2026-09-25, branch `revamp/p2-qafix`)
+
+**Race sites that went dark.** On 2026-09-24/25 these competition sites answer
+404 or fail TLS (`curl -sIL` with a browser user agent). Every one has its repo
+in the f1tenth GitHub org set to **private** with Pages still enabled
+(`gh api orgs/f1tenth/repos`), and private-repo Pages stopped serving. /race now
+links each one to a Wayback capture (`archive` field in
+`data/events_map.source.json`, `public/data/events_map.json` and
+`public/data/past_races.json`, tagged "archived page"). Make a repo public again
+and its row can go back to `url_status: "live"`.
+
+| Site | Repo (private) | Wayback capture linked |
+|---|---|---|
+| vtc2026-race.roboracer.ai | `f1tenth/vtc2026-race` | 2026-07-23 (before the race: no results) |
+| cdc2025-race.roboracer.ai | `f1tenth/cdc2025_race` | 2026-03-05 |
+| iv2025-race.roboracer.ai | `f1tenth/iv2025_race` | 2026-01-21 |
+| icra2025-race.roboracer.ai | `f1tenth/icra2025_race` | 2026-03-13 |
+| cdc2024-race.f1tenth.org | `f1tenth/cdc2024_race` | 2025-07-14 |
+| bu2024-race.f1tenth.org | `f1tenth/bu2024_race` | 2025-06-23 |
+| itsc2024-race.f1tenth.org | `f1tenth/itsc2024_race` | 2025-06-23 |
+| sm2024-race.f1tenth.org | `f1tenth/sm2024_race` | 2025-08-23 |
+| iv2024-race.f1tenth.org | `f1tenth/iv2024_race` | 2026-03-09 |
+| cpsweek2024-race.f1tenth.org | `f1tenth/cpsweek2024-race_website` | 2024-12-19 |
+| icra2024-madgames.f1tenth.org | `f1tenth/icra2024_madgames_website` | 2025-08-29 |
+| iros2023-race.f1tenth.org | `f1tenth/iros2023-race_website` | 2025-08-23 |
+| iros2023-madgames.f1tenth.org | `f1tenth/iros2023_madgames_website` | 2025-07-13 |
+| icra2023-race.f1tenth.org | `f1tenth/icra2023-race_website` | 2025-10-04 |
+| iv2023-race.f1tenth.org | `f1tenth/iv2023_race` | 2025-03-06 |
+| cps2023-race.f1tenth.org | `f1tenth/cps2023-race_website` | 2025-02-27 |
+| esweek2022-race.f1tenth.org | `f1tenth/esweek2022-race` | 2025-03-08 |
+| icra2022-race.f1tenth.org | `f1tenth/icra2022-race_website` | 2025-08-24 |
+| korea-race.f1tenth.org | `f1tenth/korea-race` | 2025-12-06 |
+
+Already on captures before this round (domains dead or resold): iros2021.org,
+germany-race2022, icra2024-race, iros2024-race, korea-race24. Also private with
+Pages on, not linked from the site: `icra2025_madgames_website`,
+`iros2020_website`, `iros2021_website`, `icra2022_website`, `icra2023_website`,
+`f1tenth_eval_network`, and `f1tenth.github.io` (which still serves today; the
+2016 to 2020 race pages on /race depend on it). Public and serving: icra2026,
+iv2026, iros2026. korea-race23.f1tenth.org still serves.
+
+1. Make the race-site repos public again (and `f1tenth.github.io` before it
+   stops too), or keep the captures?
+
+**IROS 2026 registration deadline: four dates in play.** Nothing was changed;
+since every one of them is past, the spotlight (landing and /race) and the
+/race Enter block now read "registration closed" and lead to the race site.
+
+| Where | Registration closes | Video due |
+|---|---|---|
+| Content skill (Cedric, 2026-08-21) | Sep 5, 2026 | Sep 12, 2026 |
+| `news.json`, item of Aug 23 ("Register your team by September 5") | Sep 5 | |
+| `upcoming_events.json` (`registration_deadline`, `_at`, `qualification_video_due`; set in 58c6a8c, while its `registration_deadline_note` still says "display the Sep 5 date plainly") | Sep 9 | Sep 9 |
+| iros2026-race.roboracer.ai/timeline.html, read 2026-09-25 | ~~Sep 12~~ Sep 18 (struck and replaced on the page) | Sep 18, with the hardware list |
+
+2. Which date is the record? The handbook and the live site outrank the skill,
+   so Sep 18 looks right for the JSON; the Aug 23 news item stays as published.
+
+**Fact conflicts settled on the page, one question left.**
+
+- LAMARRacing's spinoff origin now reads "At ICRA 2026 in Vienna it was fastest
+  in the time trials and fourth overall.", the wording of the results page
+  (1st Time Trial, 4th Master Cup) and of /news. The Lamarr Institute post does
+  literally say the team won "Best Performance Overall" (the award for the
+  fastest time trial); it was dropped only because "fourth overall" beside
+  "Best Performance Overall" read as a contradiction. Say if you want it back.
+- "Cédric Hollande" in the author and credit of your ICRA 2026 post (news and
+  the community strip) is now "Cedric Hollande", as everywhere else. The
+  LinkedIn URLs are unchanged.
+- /race's lead drops "on four continents" (not in the content skill).
+
+**Spinoffs: Quanser is off the page until its origin is known.** An entry
+whose `origin` is missing or still `TODO(content)` no longer renders (the
+JSON keeps it), so /about shows "Two so far": Neobotics and LAMARRacing.
+Quanser returns as soon as its origin line says how it connects to RoboRacer
+(see Spinoffs question 2 above).
+
+3. 404 Racers' team card still says "institution tbc": the content skill's IV
+   2026 podium names the drivers but no institution. Your IV 2026 result post on
+   /news ("404 Racers, also from UPenn") and Milan Manoj's post both say
+   University of Pennsylvania. Confirm, and teams.json can carry it with you as
+   the source.
+   **Resolved 2026-09-25** by Cedric's RoboRacer_Teams_DB sheet (`docs/content/teams.sheet.json`): University of Pennsylvania, United States.
+
+### From the final QA (added 2026-09-25, branch `revamp/p2-round4`)
+
+Nothing below changed the site; each needs your answer first.
+
+1. **UNICORN Racing or UNICORN_Racing?** The team card (`public/data/teams.json`)
+   says "UNICORN_Racing"; the /news post and the community card say "UNICORN
+   Racing". Which does the team use? One spelling goes everywhere.
+   (2026-09-25: the sheet calls the team "UNICORN", at UNIST, South Korea, not
+   the University of Bonn; teams.json now says UNIST. The spelling question is
+   still open; the card keeps "UNICORN_Racing".)
+2. **Footer licence line.** The footer reads "© 2026 RoboRacer Foundation. All
+   rights reserved." next to a plain "Creative Commons License" line that names
+   no licence and links nowhere. Which licence (for example CC BY 4.0), and for
+   what (site text, photos, both)? Or drop one of the two lines.
+3. **Qualification video date.** /race shows "qualification video due
+   September 9, 2026" (`upcoming_events.json`); the content skill says the video
+   demo is due Sep 12; the live race site says Sep 18. Which is right?
+4. **ICRA 2026 size.** The site quotes the Foundation's LinkedIn post: "about
+   200 people and 30 teams from more than 12 countries" (/news, community card,
+   UPenn card "out of about 30 teams"). The skill says 180+ competitors and 35
+   registered teams, both VERIFY; LAMARRacing's post says 35 teams. Which
+   numbers go on the site?
+5. **Yon Vanommeslaeghe's title.** /about shows "Postdoc, University of
+   Pennsylvania (xLAB)" from xlab.upenn.edu/members; the content skill says
+   "Visiting Researcher, UPenn, co-organizer". Which one?
 
 ## Questions for Rahul
 
@@ -148,7 +319,7 @@ Legend: **KEEP** true and on-voice, leave alone. **CHANGE** true but weak/stale/
 3. Do you have historical or prospective sponsor names we can list (even as "past sponsor, not currently renewed")? The site currently has zero sponsors listed anywhere.
 4. Can you or Billy review the draft 16-paper featured shortlist at `docs/content/featured-papers.md` (`publications.json` has 67 entries, 0 currently marked `featured: true`)? It's ranked by citation count (OpenAlex) and venue priority; three papers had no confident citation match and are flagged, not guessed.
 5. Is `f1tenth-coursekit.readthedocs.io` (Learn) and the Spring 2024 ESE6150 site (Course) still the right destinations, or has the course material moved for the current semester?
-6. West Virginia University's 3rd place has been corrected (per Cedric, 2026-08-20) to IV 2026 (Detroit), not ICRA 2026 — the exact competition team-name alias WVU raced under is still unconfirmed (see Cedric's questions). Separately: do you know whether ICRA 2026 Vienna's "UBM-Tom" and "UBM-Atlas" (3rd and 2nd in Master Cup) are a different institution entirely, or does "UBM" stand for something you recognize? I don't want to guess the mapping.
+6. West Virginia University's 3rd place has been corrected (per Cedric, 2026-08-20) to IV 2026 (Detroit), not ICRA 2026 — the exact competition team-name alias WVU raced under is still unconfirmed (see Cedric's questions). Separately: do you know whether ICRA 2026 Vienna's "UBM-Tom" and "UBM-Atlas" (3rd and 2nd in Master Cup) are a different institution entirely, or does "UBM" stand for something you recognize? I don't want to guess the mapping. **Resolved 2026-09-25** by Cedric's RoboRacer_Teams_DB sheet (`docs/content/teams.sheet.json`): WVU's team is "WVU Mountaineer"; UBM-Tom and UBM-Atlas are University of Bologna, Italy. Nothing left to ask Rahul here.
 
 ## New sections — proposed copy
 

@@ -2,23 +2,25 @@ import { useEffect, useState } from "react";
 import {
   loadCommunity,
   loadPartners,
-  loadPlatform,
+  loadSpinoffs,
   loadVideos,
   type JoinYouTube,
   type Partner,
-  type PlatformRow,
   type SiteVideo,
+  type Spinoff,
 } from "../lib/data";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Reveal from "../components/ui/Reveal";
 import StatTicker from "../components/ui/StatTicker";
 import CommunityJoin from "../components/ui/CommunityJoin";
-import PlatformList from "../components/about/PlatformList";
+import Button from "../components/ui/Button";
 import PeopleGroup from "../components/about/PeopleGroup";
 import ContributorStrip from "../components/about/ContributorStrip";
 import PartnerWall from "../components/about/PartnerWall";
-import YouTubeFacade from "../components/ui/YouTubeFacade";
+import SpinoffGrid from "../components/about/SpinoffGrid";
+import PhoneFold from "../components/about/PhoneFold";
+import YouTubeFacade, { YouTubeFacadeSkeleton } from "../components/ui/YouTubeFacade";
 import NearViewport from "../components/about/NearViewport";
 import {
   DEVELOPERS,
@@ -28,6 +30,8 @@ import {
   type Contributor,
   type ContributorsFile,
 } from "../components/about/people";
+import { useScrollToHash } from "../hooks/useScrollToHash";
+import { START_HREF } from "../lib/wayfinding";
 
 const GITHUB_URL = "https://github.com/f1tenth";
 const SCHOLAR_URL =
@@ -44,6 +48,7 @@ const ICRA_GROUP_PHOTO = {
   alt: "Everyone at ICRA 2026 in a group photo inside the orange-barrier track, arms raised",
   caption: "group pic ICRA 2026",
 };
+
 
 const LINK_ON_PAPER =
   "text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
@@ -63,9 +68,12 @@ const LEDGER_STATS: { label: string; value: number; suffix?: string; href?: stri
 
 function Figure({
   photo,
+  aspect,
   className = "",
 }: {
   photo: { src: string; width: number; height: number; alt: string; caption: string };
+  /** Crop to this shape (CSS aspect-ratio) instead of the file's own. */
+  aspect?: string;
   className?: string;
 }) {
   return (
@@ -78,7 +86,7 @@ function Figure({
         loading="lazy"
         decoding="async"
         className="w-full rounded-media border border-ink-950/10 object-cover"
-        style={{ aspectRatio: `${photo.width} / ${photo.height}` }}
+        style={{ aspectRatio: aspect ?? `${photo.width} / ${photo.height}`, objectPosition: "50% 70%" }}
       />
       <figcaption className="mt-2 font-mono text-small text-text-muted">{photo.caption}</figcaption>
     </figure>
@@ -86,25 +94,29 @@ function Figure({
 }
 
 /**
- * /about - the long-form page: what RoboRacer is, what it makes, who runs it,
- * which institutions use it, and how to reach them. Paper base with the one
- * ink hero, the same section rhythm and primitives as the landing and /race.
+ * /about - the long-form page: what RoboRacer is (the ways in are the
+ * landing's "Start here", linked once), who runs it, which institutions use
+ * it, and how to reach them. Paper base with the one ink hero, the same
+ * section rhythm and primitives as the landing and /race.
  */
 export default function About() {
-  const [platform, setPlatform] = useState<PlatformRow[]>([]);
+  // /about#about-spinoffs is linked from docs; the route reset
+  // (useRouteScroll) would otherwise leave the reader at the top.
+  useScrollToHash();
   const [partners, setPartners] = useState<Partner[]>([]);
-  const [youtube, setYoutube] = useState<JoinYouTube | null>(null);
+  // undefined while community.json loads (the hero holds the facade's box),
+  // null when it names no video.
+  const [youtube, setYoutube] = useState<JoinYouTube | null | undefined>(undefined);
   const [contributors, setContributors] = useState<ContributorsFile | null>(null);
   const [videos, setVideos] = useState<SiteVideo[]>([]);
+  // null while spinoffs.json loads: the section keeps its grid's height.
+  const [spinoffs, setSpinoffs] = useState<Spinoff[] | null>(null);
 
   useEffect(() => {
     let live = true;
-    loadPlatform()
-      .then((d) => live && setPlatform(d))
-      .catch(() => undefined);
     loadCommunity()
       .then((c) => live && setYoutube(c?.join?.youtube ?? null))
-      .catch(() => {});
+      .catch(() => live && setYoutube(null));
     loadPartners()
       .then((d) => live && setPartners(d))
       .catch(() => undefined);
@@ -114,6 +126,9 @@ export default function About() {
     loadVideos()
       .then((d) => live && setVideos(d))
       .catch(() => undefined);
+    loadSpinoffs()
+      .then((d) => live && setSpinoffs(d.entries))
+      .catch(() => live && setSpinoffs([]));
     return () => {
       live = false;
     };
@@ -135,8 +150,14 @@ export default function About() {
       {/* Hero (ink): the thesis and the ledger. The old page opened on an
           undefined bg-brand-radial panel whose text sat straight on the page
           background and only became legible on hover; this is a real ink
-          surface with the AA text roles. */}
-      <Section variant="ink" width="bleed" className="pt-[5.5rem] md:pt-[6.5625rem]">
+          surface with the AA text roles. It starts a rem under the bar at
+          every size, the bar's height being the nav token (4.5rem, 3.5rem on a
+          short landscape window, 5.3125rem from lg), like the /race hero. */}
+      <Section
+        variant="ink"
+        width="bleed"
+        className="pt-[calc(var(--spacing-nav)+1rem)] lg:pt-[calc(var(--spacing-nav)+1.25rem)]"
+      >
         <div className="mx-auto max-w-page px-6">
           <div className="grid gap-10 md:grid-cols-12 md:gap-x-10">
             <div className="md:col-span-7">
@@ -148,10 +169,8 @@ export default function About() {
                 Open-source autonomous racing since 2016
               </h1>
               <p className="mt-6 max-w-[60ch] text-lead text-text-on-ink-muted">
-                RoboRacer, formerly F1TENTH, is an international community of researchers, engineers
-                and students around a one-tenth-scale open-source autonomous race car. It started at
-                the University of Pennsylvania in 2016 and now runs a competition series at the
-                major robotics conferences.
+                RoboRacer, formerly F1TENTH, is an autonomous race car at one-tenth scale, and the
+                community that builds and races it.
               </p>
             </div>
             <div className="md:col-span-5 md:col-start-8">
@@ -166,7 +185,6 @@ export default function About() {
                     on="ink"
                     size="l"
                     tone="accent"
-                    duration={2.5}
                     delay={i * 0.12}
                     value={row.value}
                     suffix={row.suffix}
@@ -177,7 +195,7 @@ export default function About() {
               <p className="mt-8 border-t border-text-on-ink/15 pt-6 font-mono text-small text-text-on-ink-muted">
                 founded 2016, University of Pennsylvania ·{" "}
                 <a href={SCHOLAR_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_INK}>
-                  the Scholar query &#8599;
+                  the Google Scholar search&nbsp;&#8599;
                 </a>
               </p>
             </div>
@@ -188,25 +206,38 @@ export default function About() {
             RoboRacer competition" is to show one, and the hero had a column of
             dead space under the text (Cedric, 2026-08-23). CommunityJoin's own
             copy is switched off below so the page never plays it twice. */}
-        {youtube && (
+        {youtube !== null && (
           <div className="mx-auto mt-12 max-w-page px-6">
-            <YouTubeFacade yt={youtube} />
+            {/* On a landscape phone the full-width 16:9 frame was taller than
+                the window; there the width follows the window's height so the
+                whole frame fits under the bar, centred (ABOUT-05). A portrait
+                phone never reaches the cap. */}
+            <div className="mx-auto compact:max-w-[min(100%,calc((100svh-6rem)*16/9))]">
+              {youtube ? <YouTubeFacade yt={youtube} /> : <YouTubeFacadeSkeleton />}
+            </div>
           </div>
         )}
       </Section>
 
-      {/* 01 What RoboRacer is */}
+      {/* 01 What RoboRacer is: the story and the scale beside the ICRA group
+          photo, then one line to the landing's ways in. The five ways in live
+          only on the landing (Cedric, 2026-09-26: "only have this once"). The
+          copy leads (7 of 12) and the photo, cropped to 2:1 (the hall's roof
+          goes, the group stays), takes 5. Both start at the top of the row:
+          centred beside the photo, the two paragraphs sat 7 to 10rem under
+          the header instead of the header's own margin (Cedric, 2026-09-26:
+          "a massive gap between the title and the longer description"). */}
       <Section width="page" aria-labelledby="about-what" rule>
         <SectionHeader
           index="01"
           id="about-what"
           title="What RoboRacer is"
-          subtitle="One open car design, used for teaching, research and racing"
+          subtitle="One open car for teaching, research and racing"
         />
-        <div className="grid gap-10 md:grid-cols-12 md:gap-x-10">
-          <Reveal className="flex flex-col gap-5 md:col-span-6">
+        <div className="grid gap-10 md:grid-cols-12 md:grid-rows-[auto_1fr] md:items-start md:gap-x-10 md:gap-y-5">
+          <Reveal className="flex flex-col gap-5 md:col-span-7">
             <p className="max-w-[62ch] text-lead text-text-body">
-              RoboRacer started at the University of Pennsylvania in 2016 under the name F1TENTH.
+              RoboRacer started at the University of Pennsylvania in 2016.
               Rahul Mangharam leads it from Penn&apos;s xLAB. Madhur Behl, now at the University of
               Virginia,{" "}
               <a href={BEHL_SOURCE} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
@@ -215,52 +246,57 @@ export default function About() {
               .
             </p>
             <p className="max-w-[62ch] text-body text-text-body">
-              The car is a one-tenth-scale autonomous race car. Its hardware design, its software
-              stack and its simulator are open source, so a lab builds one rather than buys one.
-            </p>
-            <p className="max-w-[62ch] text-body text-text-body">
-              The courses built around it teach the foundations of autonomy and the analytical
-              skills to recognize and reason about situations with moral content in the design of
-              autonomous systems.
-            </p>
-            <p className="max-w-[62ch] text-body text-text-body">
               More than 90 universities in over 20 countries use the platform, and more than a
-              thousand publications reference it. There have been 30 competitions since 2016. The
-              next one is at IROS 2026 in Pittsburgh, September 28 to 30.
+              thousand publications reference it. There have been 30 competitions since 2016.
             </p>
           </Reveal>
-          <div className="md:col-span-6">
-            <Figure photo={ICRA_GROUP_PHOTO} />
+          <div className="md:col-span-5 md:row-span-2">
+            <Figure photo={ICRA_GROUP_PHOTO} aspect="2 / 1" />
           </div>
+          {/* The ways in (Build, Learn, Race, Research, Sponsor) are the
+              landing's "Start here"; this page points there once. From md
+              the line sits under the copy, beside the photo (the photo spans
+              both rows and the second one, 1fr, takes its extra height); on
+              a phone it ends the section, under the photo. */}
+          <p className="md:col-span-7 md:col-start-1 md:row-start-2">
+            <Button href={START_HREF} variant="ghost" className="px-0!">
+              Start here on the home page
+              <svg
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                fill="none"
+                aria-hidden="true"
+                focusable="false"
+                className="h-[0.8em] w-[0.8em]"
+              >
+                <path
+                  d="M2.5 8h11M9 3.5 13.5 8 9 12.5"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Button>
+          </p>
         </div>
       </Section>
 
-      {/* 02 The platform - from public/data/platform.json */}
-      <Section width="page" edge aria-labelledby="about-platform" rule>
-        <SectionHeader
-          index="02"
-          id="about-platform"
-          title="The platform"
-          subtitle="Build, Learn, Race, Research"
-          lead="The four parts of RoboRacer. Each has its own page."
-        />
-        <PlatformList rows={platform} />
-      </Section>
-
-      {/* 03 People - four groups: faculty, developers, contributors, past crew */}
+      {/* 02 People - four groups: faculty, developers, contributors, past crew */}
       <Section width="page" aria-labelledby="about-people" rule>
         <SectionHeader
-          index="03"
+          index="02"
           id="about-people"
           title="People"
           subtitle="Who runs RoboRacer"
-          lead="Titles come from each person's own university page, or from the organizing committee of the race they run. Click a name to go there. A verify tag means we still need to confirm the role."
+          lead="Each name links to the page its title comes from."
         />
         <div className="flex flex-col gap-16">
           <PeopleGroup
             id="about-faculty"
             title="Faculty and advisors"
-            lead="Faculty who lead the platform and sit on the competitions' organizing committees."
+            lead="They lead the platform and sit on the organizing committees of the races."
             people={FACULTY}
           />
           <PeopleGroup
@@ -286,7 +322,7 @@ export default function About() {
               <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
                 f1tenth GitHub organization
               </a>
-              . The car, the simulator, the ROS stack and the course labs are all built in the open.
+              , where the car, the simulator, the ROS stack and the labs are built.
             </p>
             <div className="mt-8">
               <p className="font-mono text-small text-text-muted">
@@ -295,34 +331,43 @@ export default function About() {
               </p>
               <ContributorStrip
                 contributors={activeContributors}
-                emptyLabel="contributors.json did not load"
+                emptyLabel="The contributor list didn't load."
               />
             </div>
-            <div className="mt-10">
+            {/* On a phone the earlier contributors fold behind their own
+                label, like the Past crew (ABOUT-02): 35 chips were about
+                1,100 px at 390. */}
+            <div className="mt-10 max-sm:hidden">
               <p className="font-mono text-small text-text-muted">
                 earlier{pastContributors.length ? ` · ${pastContributors.length}` : ""}
               </p>
               <ContributorStrip contributors={pastContributors} emptyLabel="" />
             </div>
+            {pastContributors.length > 0 && (
+              <PhoneFold className="mt-4" label={`earlier · ${pastContributors.length}`}>
+                <ContributorStrip contributors={pastContributors} emptyLabel="" reveal={false} />
+              </PhoneFold>
+            )}
           </div>
           <PeopleGroup
             id="about-past-crew"
             title="Past crew"
-            lead="Everyone from earlier team rosters, taken from the old F1TENTH about page. Their roles still need confirming, hence the verify tags."
+            lead="Earlier team members, from the old F1TENTH about page."
             people={PAST_CREW}
             compact
+            fold={12}
           />
         </div>
       </Section>
 
-      {/* 04 Our Partners - the static grouped wall, from partners.json */}
+      {/* 03 Our Partners - the static grouped wall, from partners.json */}
       <Section width="page" edge aria-labelledby="about-partners" rule>
         <SectionHeader
-          index="04"
+          index="03"
           id="about-partners"
-          title="Our Partners"
-          subtitle="The institutions that run the platform"
-          lead="Universities, companies and organizations that teach and do research with RoboRacer. Alphabetical within each group."
+          title="Our partners"
+          subtitle="Institutions that use the car"
+          lead="They teach and do research with it. Alphabetical in each group."
           action={
             partners.length > 0 ? (
               <StatTicker value={partners.length} label="institutions" />
@@ -331,6 +376,35 @@ export default function About() {
         />
         <PartnerWall partners={partners} />
       </Section>
+
+      {/* 04 Related platforms - from public/data/spinoffs.json. Only `entries`
+          render; the `candidates` there wait for Cedric. Cedric, 2026-09-26:
+          Quanser is not affiliated and is not a spinoff, so the section names
+          related platforms and says how each relates. Each entry is a feature
+          built from the company's own site at his request (2026-09-25):
+          its car, its mark, and a framed window onto its homepage. */}
+      {(spinoffs === null || spinoffs.length > 0) && (
+        <Section width="page" aria-labelledby="about-spinoffs" rule>
+          <SectionHeader
+            index="04"
+            id="about-spinoffs"
+            title="Related platforms"
+            subtitle="Other one-tenth-scale cars, and how they relate to RoboRacer"
+          />
+          {spinoffs ? (
+            <SpinoffGrid spinoffs={spinoffs} />
+          ) : (
+            // The grid's measured height for the two features that render
+            // today (stacked on compact, one row from desktop; 2026-09-25),
+            // so a reader arriving at #about-spinoffs does not watch Videos
+            // jump. compact: is emitted after the breakpoints, so it wins.
+            <div
+              aria-busy="true"
+              className="min-h-[52.75rem] rounded-card border border-ink-950/10 lg:min-h-[47rem] xl:min-h-[51.25rem] 2xl:min-h-[53rem] compact:min-h-[95.5rem]"
+            />
+          )}
+        </Section>
+      )}
 
       {/* 05 Videos - from public/data/videos.json. Click-to-load, never
           self-starting: six players in a grid would otherwise all start as the
@@ -342,7 +416,7 @@ export default function About() {
             id="about-videos"
             title="Videos"
             subtitle="Races, teams and the course"
-            lead="A freshman's first year with the car, one-minute interviews with the ICRA 2026 teams, race highlights, the course lectures and the build guide."
+            lead="Start with a freshman's first year with the car."
           />
           <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {videos.map((v) => (

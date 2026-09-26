@@ -1,0 +1,114 @@
+{
+  "iv2025-cluj-forzaeth-wins": {
+    "src": "/media/news/news-iv2025-poster-1080.webp",
+    "width": 764,
+    "height": 1080,
+    "alt": "Poster for the 25th RoboRacer Autonomous Racing Competition, June 22 to 25, 2025, at IEEE IV 2025 in Cluj-Napoca: the RoboRacer wordmark over a city street with light trails.",
+    "credit": "Poster: RoboRacer Foundation"
+  },
+  "cdc2024-milan-scuderia-segfault-wins": {
+    "src": "/media/news/news-cdc2024-poster-1080.webp",
+    "width": 764,
+    "height": 1080,
+    "alt": "Poster for the 22nd competition, December 16 to 19, 2024, at IEEE CDC 2024 in Milan.",
+    "credit": "Poster: RoboRacer Foundation"
+  },
+  "bu2024-lehigh-wins": {
+    "src": "/media/news/news-bu2024-poster-1080.webp",
+    "width": 764,
+    "height": 1080,
+    "alt": "Poster for the 23rd competition, November 22, 2024, at the Learning to Trust Autonomy Workshop at Boston University.",
+    "credit": "Poster: RoboRacer Foundation"
+  },
+  "f1tenth-korea-delegation-upenn": {
+    "src": "/media/news/news-korea-delegation-poster-1080.webp",
+    "width": 764,
+    "height": 1080,
+    "alt": "Poster for the 15th RoboRacer Autonomous Racing Competition, May 13 to 17, 2024, at ICRA 2024 in Yokohama, Japan: a race car drifting through smoke.",
+    "credit": "Poster: RoboRacer Foundation"
+  },
+  "roboracer-rules-repository-2025": {
+    "src": "/media/news/news-rules-repo-poster-1080.webp",
+    "width": 764,
+    "height": 1080,
+    "alt": "Poster for the 26th RoboRacer Autonomous Racing Competition, December 22 to 24, 2025, at Techfest IIT Bombay in Mumbai: an orange race car numbered 31 on a blurred street under the RoboRacer wordmark.",
+    "credit": "Poster: RoboRacer Foundation"
+  },
+  "f1tenth-to-roboracer-announced": {
+    "src": "/media/news/news-roboracer-rename-1080.webp",
+    "width": 1080,
+    "height": 540,
+    "alt": "An 'Under construction' banner: a city skyline with cranes above yellow and black hazard stripes and the address www.RoboRacer.ai.",
+    "credit": "Graphic: F1TENTH newsletter, November 13, 2024"
+  },
+  "iros2024-abudhabi-dzik-ultimate-wins": {
+    "src": "/media/news/news-iros2024-abudhabi-1080.webp",
+    "width": 1080,
+    "height": 810,
+    "alt": "Two rows of competitors and organizers pose behind a line of cars and trophies at the edge of the track in the exhibition hall at IROS 2024 in Abu Dhabi.",
+    "credit": "Photo: F1TENTH newsletter, October 21, 2024"
+  },
+  "icra2024-yokohama-vaul-wins": {
+    "src": "/media/news/news-icra2024-yokohama-1080.webp",
+    "width": 578,
+    "height": 1080,
+    "alt": "Lukasz Sztyber gives a thumbs-up beside his car and an F1TENTH banner at ICRA 2024 in Yokohama.",
+    "credit": "Photo: The Roboracer Foundation (then F1Tenth Foundation), LinkedIn, May 16, 2024"
+  },
+  "course2024-three-university-race": {
+    "src": "/media/news/news-course2024-race-1080.webp",
+    "width": 1080,
+    "height": 810,
+    "alt": "Students line a track of yellow ducting on a paved plaza on 33rd Street as a car races past, at the Penn, CMU and Lehigh race on April 29, 2024.",
+    "credit": "Photo: F1TENTH newsletter, July 25, 2024"
+  },
+  "iros2020-virtual-hipert-wins": {
+    "src": "/media/news/news-iros2020-bracket-1080.webp",
+    "width": 1080,
+    "height": 1063,
+    "alt": "The final rounds of the head-to-head bracket of the virtual eighth F1TENTH Grand Prix at IROS 2020, from round 3 to the final between HiPeRT Modena and C.A.T.",
+    "credit": "Graphic: F1TENTH (old f1tenth.org site)"
+  },
+  "f1tenth-foundation-2020": {
+    "src": "/media/news/news-foundation2020-car-1080.webp",
+    "width": 477,
+    "height": 800,
+    "alt": "Top view of the 1/10-scale F1/10 car, the image on the f1tenth.org homepage in May 2020.",
+    "credit": "Photo: F1TENTH (f1tenth.org homepage, May 2020)"
+  },
+  "medium-adventures-in-autonomous-vehicles": {
+    "src": "/media/news/news-medium2020-levine-1080.webp",
+    "width": 1080,
+    "height": 607,
+    "alt": "A car runs between white tube barriers on a polished floor during track testing at Penn's Levine Hall, December 4, 2018.",
+    "credit": "Photo: Christopher Kao, Penn ESE 680, fall 2018"
+  },
+  "nsf-community-platform-award-2019": {
+    "src": "/media/news/news-nsf2019-final-race-1080.webp",
+    "width": 1080,
+    "height": 607,
+    "alt": "A car drives between white tube barriers and cardboard boxes on a stone floor at the Penn course's final race, December 10, 2018.",
+    "credit": "Photo: Christopher Kao, Penn ESE 680, fall 2018"
+  },
+  "daily-pennsylvanian-2018-dining-hall": {
+    "src": "/media/news/news-dp2018-midsemester-1080.webp",
+    "width": 1080,
+    "height": 720,
+    "alt": "A car with green wheels drives down a corridor past an AprilTag marker at Penn's mid-semester race, November 6, 2018.",
+    "credit": "Photo: Christopher Kao, Penn ESE 680, fall 2018 (mid-semester race)"
+  },
+  "skipped": [
+    {
+      "id": "iros2026-registration-closes-sep-5",
+      "reason": "Cedric 2026-09-26: skip the IROS 2026 flyer (prints Sep 27 - Oct 1, the IROS week, not the race days); the plan names no fallback poster. No media."
+    },
+    {
+      "id": "ifac2026-busan-opens",
+      "reason": "Cedric 2026-09-26: skip the IFAC 2026 host photo (photographer unknown, permission not asked); the plan names no fallback poster (its alternative is the host's YouTube stream vGqDLhgokSY, for the video pass). No media."
+    },
+    {
+      "id": "cpsweek2024-hongkong-fsm-speed-wins",
+      "reason": "Cedric 2026-09-26: skip the CPS-IoT Week 2024 newsletter photo (the section was contributed by CityU; the photo may be theirs); the plan names no fallback poster. No media."
+    }
+  ]
+}

@@ -1,0 +1,506 @@
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { Link } from "react-router-dom";
+import { loadPaths, type EntryPath, type PathMedia } from "../../lib/data";
+import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
+import Section from "./Section";
+import SectionHeader from "./SectionHeader";
+import Reveal from "./Reveal";
+
+/** The section lists five ways in (Build, Learn, Race, Research, Sponsor). */
+const MAX_PATHS = 5;
+
+/** Intrinsic size of every thumb (public/media/start, 16/10). */
+const THUMB_W = 480;
+const THUMB_H = 300;
+
+/** HTMLMediaElement.HAVE_FUTURE_DATA */
+const HAVE_FUTURE_DATA = 3;
+
+/**
+ * The five ways in as public/data/paths.json has them, bundled: the list holds
+ * its final height with them while the file loads, and shows them when the
+ * file fails or does not validate, so "Start here" never lands on an empty
+ * section. Keep in step with the JSON: a sentence that wraps differently here
+ * shifts the section below when the file arrives (QA polish-2: CLS 0.28 at
+ * 390 before this copy existed).
+ */
+const BUNDLED_PATHS: EntryPath[] = [
+  {
+    id: "build",
+    n: "01",
+    label: "Build",
+    line: "Order the parts, build the car from the open-source guide and install its software.",
+    href: "/build",
+    linkText: "Build the car",
+    media: {
+      thumb: "/media/start/start-build-480.webp",
+      src: "/media/platform/platform-build-poster.webp",
+      width: 960,
+      height: 540,
+      video: "/media/platform/platform-build-960.mp4",
+      alt: "Hands assembling a RoboRacer car on a workbench, tools beside it",
+    },
+  },
+  {
+    id: "learn",
+    n: "02",
+    label: "Learn",
+    line: "Lectures and labs on perception, planning and control: 15 weeks for a full semester, or 4 weeks to get a car race ready.",
+    href: "/learn",
+    linkText: "Start the course",
+    media: {
+      thumb: "/media/start/start-learn-480.webp",
+      src: "/media/platform/platform-learn-1200.webp",
+      width: 1200,
+      height: 750,
+      alt: "Two students working on a RoboRacer car on the floor of the pit area at ICRA 2026",
+    },
+  },
+  {
+    id: "race",
+    n: "03",
+    label: "Race",
+    line: "Any team can register for our races at the major robotics conferences.",
+    href: "/race",
+    linkText: "Find the next race",
+    media: {
+      thumb: "/media/start/start-race-480.webp",
+      src: "/media/platform/platform-race-poster.webp",
+      width: 960,
+      height: 540,
+      video: "/media/platform/platform-race-960.mp4",
+      alt: "A RoboRacer car with blue lights taking a corner between yellow track barriers at ICRA 2025",
+    },
+  },
+  {
+    id: "research",
+    n: "04",
+    label: "Research",
+    line: "A shared car for autonomy research, referenced by more than 1,000 publications.",
+    href: "/research",
+    linkText: "Browse the research",
+    media: {
+      thumb: "/media/start/start-research-480.webp",
+      src: "/media/platform/platform-research-mppi-poster.webp",
+      width: 960,
+      height: 600,
+      video: "/media/platform/platform-research-mppi-960.mp4",
+      alt: "Simulator view of a car overtaking with MPPI, its sampled paths fanning out ahead of it",
+    },
+  },
+  {
+    id: "sponsor",
+    n: "05",
+    label: "Sponsor",
+    line: "Reach the students and researchers who use the car at 90+ universities in 20+ countries.",
+    href: "mailto:contact@roboracer.ai?subject=RoboRacer%20sponsorship",
+    linkText: "Write to contact@roboracer.ai",
+    media: {
+      thumb: "/media/start/start-ifac2026-field-480.webp",
+      src: "/media/news/news-ifac2026-group-1080.webp",
+      width: 1080,
+      height: 531,
+      alt: "The IFAC 2026 field in Busan, arms raised in front of the 29th RoboRacer competition screen",
+    },
+  },
+];
+
+const str = (v: unknown): v is string => typeof v === "string" && v.length > 0;
+const num = (v: unknown): v is number => typeof v === "number" && v > 0;
+
+function readMedia(v: unknown): PathMedia | undefined {
+  if (typeof v !== "object" || v === null) return undefined;
+  const m = v as Record<string, unknown>;
+  if (![m.thumb, m.src, m.alt].every(str) || !num(m.width) || !num(m.height)) return undefined;
+  return {
+    thumb: m.thumb as string,
+    src: m.src as string,
+    width: m.width as number,
+    height: m.height as number,
+    video: str(m.video) ? m.video : undefined,
+    alt: m.alt as string,
+  };
+}
+
+/** A path with every field the list renders, or null. The media is optional:
+ * a path without it keeps its frame as a neutral surface. */
+function readPath(v: unknown): EntryPath | null {
+  if (typeof v !== "object" || v === null) return null;
+  const p = v as Record<string, unknown>;
+  if (![p.id, p.n, p.label, p.line, p.href, p.linkText].every(str)) return null;
+  return {
+    id: p.id as string,
+    n: p.n as string,
+    label: p.label as string,
+    line: p.line as string,
+    href: p.href as string,
+    linkText: p.linkText as string,
+    media: readMedia(p.media),
+  };
+}
+
+const isExternal = (href: string) => /^(https?:)?\/\//.test(href) || href.startsWith("mailto:");
+
+/** Stroke arrow in the link's colour: right for a page on this site, up and
+ * out for anything that leaves it (a mail client, another site). */
+function Arrow({ out }: { out: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      width="16"
+      height="16"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+      className="ml-2 inline-block h-[0.8em] w-[0.8em] align-[-0.05em] transition-transform duration-[var(--duration-fast)] ease-[var(--ease-out-expo)] motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1"
+    >
+      <path
+        d={out ? "M4.5 11.5l7-7M6 4.5h5.5V10" : "M2.5 8h11M9 3.5 13.5 8 9 12.5"}
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/**
+ * The row's one link, stretched over the whole row by its ::after, so the
+ * picture, the label and the sentence all click through while keyboard and
+ * screen reader users meet a single link named by its verb ("Build the car"),
+ * described by the sentence. The row is the touch target, so the link needs
+ * no padding of its own. Focus draws the ring around the row, not the words.
+ * The site's link contract: a hairline underline at rest that turns violet
+ * and 2px on hover or focus, anywhere on the row. Inline, not flex: a link
+ * that wraps on a phone ("Write to / contact@roboracer.ai") keeps its arrow
+ * after the last word.
+ */
+function PathAction({ path, describedBy }: { path: EntryPath; describedBy: string }) {
+  const out = isExternal(path.href);
+  const cls = `group font-semibold text-text-strong underline decoration-ink-950/25 decoration-1 underline-offset-4 after:absolute after:inset-0 after:rounded-card after:content-[''] hover:decoration-rr-violet hover:decoration-2 focus-visible:decoration-rr-violet focus-visible:decoration-2 focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-rr-violet`;
+  // The last word and the arrow never part: a wrapped link keeps its arrow
+  // after the word rather than alone on a line.
+  const cut = path.linkText.lastIndexOf(" ");
+  const body = (
+    <>
+      {cut > 0 ? `${path.linkText.slice(0, cut)} ` : ""}
+      <span className="whitespace-nowrap">
+        {path.linkText.slice(cut + 1)}
+        <Arrow out={out} />
+      </span>
+    </>
+  );
+  if (out) {
+    const web = !path.href.startsWith("mailto:");
+    return (
+      <a
+        href={path.href}
+        aria-describedby={describedBy}
+        className={cls}
+        {...(web ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >
+        {body}
+      </a>
+    );
+  }
+  return (
+    <Link to={path.href} aria-describedby={describedBy} className={cls}>
+      {body}
+    </Link>
+  );
+}
+
+/** The small inline picture of a phone row: the 480x300 thumb in a 16/10
+ * frame, so the row's height never waits for the file. */
+function Thumb({ media }: { media?: PathMedia }) {
+  const [failed, setFailed] = useState(false);
+  return (
+    <div className="aspect-[16/10] overflow-hidden rounded-media border border-ink-950/10 bg-paper-100">
+      {media && !failed && (
+        <img
+          src={media.thumb}
+          alt={media.alt}
+          width={THUMB_W}
+          height={THUMB_H}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover"
+          onError={() => setFailed(true)}
+        />
+      )}
+    </div>
+  );
+}
+
+/**
+ * A tile's frame: the still, with the path's clip over it. The clip mounts
+ * after the first paint, loads only once the frame is within 200px of the
+ * viewport and plays only while it is on screen (four clips are 2.6 MB).
+ * Under reduced motion no video is created: the still is the media
+ * (CLAUDE.md rule 6). A clip that errors falls back to its still; a still
+ * that errors leaves the neutral frame.
+ */
+function ClipFrame({ media, label }: { media?: PathMedia; label: string }) {
+  const holderRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const reduced = usePrefersReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  const [near, setNear] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [videoFailed, setVideoFailed] = useState(false);
+  const [imgFailed, setImgFailed] = useState(false);
+  const hasVideo = Boolean(media?.video);
+
+  useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    const el = holderRef.current;
+    if (!el || reduced || !hasVideo) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setNear(true);
+      setInView(true);
+      return;
+    }
+    // Two observers: a wide one decides when the clip may load, a tight one
+    // whether it plays.
+    const load = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setNear(true);
+          load.disconnect();
+        }
+      },
+      { rootMargin: "200px 0px" },
+    );
+    const play = new IntersectionObserver((entries) => setInView(entries.some((e) => e.isIntersecting)), {
+      threshold: 0.15,
+    });
+    load.observe(el);
+    play.observe(el);
+    return () => {
+      load.disconnect();
+      play.disconnect();
+    };
+  }, [reduced, hasVideo]);
+
+  const isVideo = hasVideo && mounted && near && !reduced && !videoFailed;
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v || !isVideo) return;
+    if (!inView) {
+      v.pause();
+      return;
+    }
+    const start = () => {
+      v.play()?.catch((err: unknown) => {
+        // AbortError is the normal "paused before it started" case.
+        if (import.meta.env.DEV && !(err instanceof DOMException && err.name === "AbortError")) {
+          console.warn(`[StartHere] ${label}: play() rejected`, err);
+        }
+      });
+    };
+    if (v.readyState >= HAVE_FUTURE_DATA) {
+      start();
+      return;
+    }
+    v.addEventListener("canplay", start, { once: true });
+    return () => v.removeEventListener("canplay", start);
+  }, [isVideo, inView, label]);
+
+  return (
+    <div
+      ref={holderRef}
+      className="aspect-[16/10] overflow-hidden rounded-media border border-ink-950/10 bg-paper-100"
+    >
+      {media && isVideo ? (
+        <video
+          ref={videoRef}
+          className="h-full w-full object-cover"
+          src={media.video}
+          poster={media.src}
+          width={media.width}
+          height={media.height}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-label={media.alt}
+          onError={() => setVideoFailed(true)}
+        />
+      ) : (
+        media &&
+        !imgFailed && (
+          <img
+            src={media.src}
+            alt={media.alt}
+            width={media.width}
+            height={media.height}
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover"
+            onError={() => setImgFailed(true)}
+          />
+        )
+      )}
+    </div>
+  );
+}
+
+/** Landing entry. Phones (either orientation) keep the row: the small picture
+ * beside the label, the sentence and the link, a table of contents. From
+ * `desktop:` it is a tile in the section's grid: the clip frame on top
+ * (still first, the muted loop only near and on screen, the still under
+ * reduced motion), then the label, the sentence and the link, pinned to the
+ * tile's foot so the links of a row line up. From 1024 up the tile is
+ * landscape: the frame, cropped to 16:9, on the left and the text beside it,
+ * its link level with the frame's foot. The copy hidden at a size is
+ * display: none, so its lazy image and observed clip are never requested. */
+function PathTile({ path }: { path: EntryPath }) {
+  // Per instance, not per path, so two lists on one page never share an id.
+  const lineId = `${useId()}-line`;
+  return (
+    <>
+      <div className="desktop:hidden">
+        <Thumb media={path.media} />
+      </div>
+      {/* The 16:9 crop shows the build clip's encode edge (a 16px dark band on
+          the right, 8px at the foot) that 16:10 cut off: a 4% zoom hides it. */}
+      <div className="compact:hidden desktop:lg:[&>div]:aspect-video desktop:lg:[&_img]:scale-[1.04] desktop:lg:[&_video]:scale-[1.04]">
+        <ClipFrame media={path.media} label={path.id} />
+      </div>
+      <div className="flex min-w-0 flex-col desktop:flex-1 desktop:pt-5">
+        <h3 className="flex items-baseline gap-3 font-display text-display-s font-semibold text-text-strong">
+          <span aria-hidden="true" className="font-mono text-small font-normal tracking-normal text-text-muted">
+            {path.n}
+          </span>
+          {path.label}
+        </h3>
+        <p id={lineId} className="mt-1.5 max-w-[52ch] text-body text-text-body desktop:mt-2">
+          {path.line}
+        </p>
+        <p className="mt-2 text-small desktop:mt-auto desktop:pt-4 desktop:text-body">
+          <PathAction path={path} describedBy={lineId} />
+        </p>
+      </div>
+    </>
+  );
+}
+
+type StartHereProps = {
+  /** Two-digit section index ("00" on the landing). */
+  index: string;
+  /** The section's own id; the landing's is START_ID, the nav's target. */
+  id?: string;
+  /** The h2's id, which labels the section. */
+  headingId: string;
+  /** One line on what RoboRacer is, for a first-time visitor. */
+  lead?: ReactNode;
+};
+
+/**
+ * The landing's "Start here": one line on what RoboRacer is, then the ways in
+ * (Build, Learn, Race, Research, Sponsor), each with its picture, one plain
+ * sentence and one link. It replaced the landing's entry-path row and its
+ * pinned Platform chapter (Cedric, 2026-09-25: "they're both repetitive
+ * together right now"), and it is the one place the five appear: /about
+ * opens on "What RoboRacer is" and links here (Cedric, 2026-09-26: "only
+ * have this once"). Serves the newbie and interested beginner (build,
+ * learn), the student and, without addressing them, faculty (a semester
+ * course with labs, teams register for races, research), the competitor
+ * (race) and the sponsor (who they reach, where to write). Motion is one
+ * stagger reveal of the tiles, which reduced motion drops; the content is
+ * public/data/paths.json.
+ */
+export default function StartHere({ index, id, headingId, lead }: StartHereProps) {
+  const [paths, setPaths] = useState<EntryPath[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let live = true;
+    // The read gives up after eight seconds (lib/data READ_TIMEOUT_MS), so a
+    // request that never answers ends on the bundled five, not on a list that
+    // stays invisible.
+    loadPaths()
+      .then((f) => {
+        const valid = Array.isArray(f?.paths)
+          ? f.paths.map(readPath).filter((p): p is EntryPath => p !== null)
+          : [];
+        if (live) setPaths(valid.length > 0 ? valid.slice(0, MAX_PATHS) : BUNDLED_PATHS);
+      })
+      .catch(() => {
+        if (live) setPaths(BUNDLED_PATHS);
+      })
+      .finally(() => {
+        if (live) setLoading(false);
+      });
+    return () => {
+      live = false;
+    };
+  }, []);
+
+  // The grid, from desktop:: tablets 2 + 2 with the fifth across both
+  // columns (picture beside its text). From 1024 up (laptops) two columns of
+  // landscape tiles, the header in the first cell and the five in the other
+  // cells, each a 16:9 clip frame (43%) beside its label, sentence and link:
+  // three rows, so the whole section fits one screen under the nav at
+  // 1366x650 and 1536x730 (Cedric, 2026-09-26; docs/qa/p3-start-fit.md). The
+  // root size follows the window, so the tiles keep their size in rem.
+  // Phones keep the thumb rows.
+  const listClass =
+    "border-t border-ink-950/10 desktop:grid desktop:grid-cols-2 desktop:gap-x-6 desktop:gap-y-10 desktop:border-t-0 desktop:lg:gap-y-5";
+  const rowClass =
+    "relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-4 border-b border-ink-950/10 py-4 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-6 desktop:flex desktop:flex-col desktop:border-b-0 desktop:py-0 desktop:max-lg:last:col-span-2 desktop:max-lg:last:grid desktop:max-lg:last:grid-cols-2 desktop:max-lg:last:items-center desktop:max-lg:last:gap-x-6 desktop:max-lg:last:[&>div:last-child]:pt-0 desktop:lg:grid desktop:lg:grid-cols-[3fr_4fr] desktop:lg:items-stretch desktop:lg:gap-x-5 desktop:lg:first:col-start-2 desktop:lg:[&>div:last-child]:pt-0";
+
+  // The header and its one line full width, as every landing section has it,
+  // then the grid across the page (Cedric, 2026-09-26: "super empty on the
+  // left"). The top padding clears the fixed nav when the nav's "Start here"
+  // scrolls this section to the top of the window (the bar is --spacing-nav
+  // tall at every size), so this section takes no scroll margin: one would
+  // add a second nav's height of gap.
+  return (
+    <Section
+      tight
+      width="page"
+      id={id}
+      aria-labelledby={headingId}
+      className="pt-[calc(var(--spacing-nav)+2rem)]! focus:outline-none desktop:lg:pb-16!"
+    >
+      {/* Laptops: the header sits in the grid's first cell. The header and
+          the list share the wrapper's one cell; the list's first tile starts
+          in its second column, so the header shows through the empty first
+          one (a ul holds only li, so the header cannot be one of its cells). */}
+      <div className="desktop:lg:grid">
+        <SectionHeader
+          index={index}
+          id={headingId}
+          title="Start here"
+          lead={lead}
+          className="relative z-10 desktop:lg:mb-0! desktop:lg:w-[calc((100%-1.5rem)/2)] desktop:lg:self-start desktop:lg:[grid-area:1/1]"
+        />
+        {/* aria-busy until the paths arrive: the "Start here" jump waits for it
+            (hooks/useScrollToHash). Meanwhile the bundled five stand in,
+            invisible and out of the accessibility tree, so the list already
+            has its final height and nothing below it jumps when the file
+            lands. */}
+        <div aria-busy={loading} className="desktop:lg:[grid-area:1/1]">
+          <Reveal stagger as="ul" className={listClass}>
+            {(loading ? BUNDLED_PATHS : paths).map((path) =>
+              loading ? (
+                <li key={path.id} aria-hidden="true" className={`invisible ${rowClass}`}>
+                  <PathTile path={path} />
+                </li>
+              ) : (
+                <li key={path.id} data-path={path.id} className={rowClass}>
+                  <PathTile path={path} />
+                </li>
+              ),
+            )}
+          </Reveal>
+        </div>
+      </div>
+    </Section>
+  );
+}

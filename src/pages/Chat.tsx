@@ -34,7 +34,7 @@ export default function Chat() {
       <iframe
         className="w-full h-full border-none"
         src={BUILD_IFRAME_SRC}
-        title="Build"
+        title="RoboRacer build documentation"
       />
     </div>
   );

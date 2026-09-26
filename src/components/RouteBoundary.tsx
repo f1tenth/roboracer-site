@@ -54,12 +54,12 @@ export default class RouteBoundary extends Component<RouteBoundaryProps, RouteBo
         </h1>
         <p className="max-w-prose text-body text-text-body">
           {stale
-            ? "This usually means the site was updated while the tab was open, so part of the page is no longer available — reloading fetches the current version. If reloading does not help, a content or ad blocker may be blocking one of the page's files; allowing roboracer.ai will fix it."
-            : "The rest of the site still works — use the navigation above, or reload to try this page again."}
+            ? "The site was updated while this tab was open. If reloading doesn't help, allow roboracer.ai in your ad or content blocker."
+            : "The rest of the site still works. Use the menu above, or reload to try again."}
         </p>
         {stale && (
           <Button variant="primary" size="md" onClick={() => window.location.reload()}>
-            Reload
+            Reload the page
           </Button>
         )}
         <p className="font-mono text-small text-text-muted">{error.message}</p>

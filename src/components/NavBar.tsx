@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { gsap, ScrollTrigger, DURATION, REDUCED_MOTION_QUERY } from "../lib/motion";
+import { gsap, ScrollTrigger, DURATION, REDUCED_MOTION_QUERY, lockScroll } from "../lib/motion";
+import { START_HREF } from "../lib/wayfinding";
 
 const links = [
   { href: "/about", text: "About" },
@@ -15,7 +16,7 @@ const links = [
 ];
 
 const SIMULATOR_URL = "https://autodrive-ecosystem.github.io/";
-const SLACK_URL = "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g";
+const SLACK_URL = "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q";
 
 /**
  * Routes whose first viewport is the HeroChapter: the nav starts transparent
@@ -24,6 +25,9 @@ const SLACK_URL = "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50
  * HeroChapter demo under the same rule so the demo matches the landing.
  */
 const HERO_ROUTES = new Set(["/", "/styleguide"]);
+
+/** From lg the full link bar replaces the toggle (index.css .nav-links). */
+const LINK_BAR_QUERY = "(min-width: 64rem)";
 
 /**
  * The chapter publishes its ramp on the wrapper as `data-nav-fill="from to"`
@@ -110,6 +114,8 @@ export default function Navbar() {
   const location = useLocation();
   const navRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const scrimRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   // Mount tracks `menuOpen` on the way in and lags it on the way out, so the
   // panel is still in the DOM while its close tween runs.
@@ -117,10 +123,79 @@ export default function Navbar() {
   // The open mobile menu needs a solid bar behind it whatever the scroll.
   const transparent = HERO_ROUTES.has(location.pathname) && !menuOpen;
 
-  // Close mobile menu on route change
+  // Close the mobile menu on every navigation, including "Start here" on the
+  // landing itself, which changes only the hash.
   useEffect(() => {
     setMenuOpen(false);
-  }, [location.pathname]);
+  }, [location.key]);
+
+  // The open menu behaves as a dialog on a phone (mobile audit CHROME-02):
+  // the page under it neither scrolls nor takes focus (`inert` on everything
+  // beside the nav), Tab and Shift+Tab loop over the bar and the menu (inert
+  // alone let Tab leave the last link for the browser's own controls),
+  // Escape closes it and hands focus back to the toggle, and so does a tap
+  // on the scrim.
+  // Widening the window past the toggle closes it too, so the lock can never
+  // outlive a menu that is no longer shown. The shared scroll lock stops the
+  // page's own scrolling as well (lib/motion: Lenis, the hero's glide).
+  useEffect(() => {
+    if (!menuOpen) return;
+    const nav = navRef.current;
+    const root = document.documentElement;
+    const previousOverflow = root.style.overflow;
+    const previousGutter = root.style.scrollbarGutter;
+    // A narrow window with a classic scrollbar keeps its gutter, so the page
+    // behind the scrim does not jump sideways when the scrollbar goes.
+    if (window.innerWidth > root.clientWidth) root.style.scrollbarGutter = "stable";
+    root.style.overflow = "hidden";
+    const unlockScroll = lockScroll();
+    const inerted = Array.from(nav?.parentElement?.children ?? []).filter(
+      (el): el is HTMLElement => el instanceof HTMLElement && el !== nav && !el.inert,
+    );
+    for (const el of inerted) el.inert = true;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        toggleRef.current?.focus();
+        return;
+      }
+      if (event.key !== "Tab" || !nav) return;
+      // Every stop that is shown: the desktop link bar and the menu's own
+      // "Start here" are display: none at the sizes that do not use them.
+      const stops = Array.from(nav.querySelectorAll<HTMLElement>("a[href], button:not([disabled])")).filter(
+        (el) => el.getClientRects().length > 0,
+      );
+      if (stops.length === 0) return;
+      const first = stops[0];
+      const last = stops[stops.length - 1];
+      const current = document.activeElement;
+      const inside = current instanceof HTMLElement && nav.contains(current);
+      if (!inside || current === (event.shiftKey ? first : last)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      }
+    };
+    const linkBar = window.matchMedia(LINK_BAR_QUERY);
+    const onLinkBar = () => {
+      if (linkBar.matches) setMenuOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    linkBar.addEventListener("change", onLinkBar);
+    return () => {
+      unlockScroll();
+      root.style.overflow = previousOverflow;
+      root.style.scrollbarGutter = previousGutter;
+      for (const el of inerted) el.inert = false;
+      document.removeEventListener("keydown", onKeyDown);
+      linkBar.removeEventListener("change", onLinkBar);
+    };
+  }, [menuOpen]);
+
+  const closeFromScrim = () => {
+    setMenuOpen(false);
+    toggleRef.current?.focus();
+  };
 
   // --nav-alpha = clamp((p - from) / (to - from), 0, 1) where p is the hero
   // chapter's scroll progress, written by a ScrollTrigger on the chapter's
@@ -140,21 +215,22 @@ export default function Navbar() {
   useEffect(() => {
     if (!menuMounted) return;
     const el = menuRef.current;
-    if (!el) return;
+    const scrim = scrimRef.current;
+    if (!el || !scrim) return;
     const reduce = window.matchMedia(REDUCED_MOTION_QUERY).matches;
 
     if (menuOpen) {
       if (reduce) {
         gsap.set(el, { opacity: 1, y: 0 });
+        gsap.set(scrim, { opacity: 1 });
         return;
       }
-      const tween = gsap.fromTo(
-        el,
-        { opacity: 0, y: -10 },
-        { opacity: 1, y: 0, duration: DURATION.fast, ease: "power2.out" },
-      );
+      const tl = gsap
+        .timeline()
+        .fromTo(el, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: DURATION.fast, ease: "power2.out" }, 0)
+        .fromTo(scrim, { opacity: 0 }, { opacity: 1, duration: DURATION.fast, ease: "power2.out" }, 0);
       return () => {
-        tween.kill();
+        tl.kill();
       };
     }
 
@@ -162,15 +238,12 @@ export default function Navbar() {
       setMenuMounted(false);
       return;
     }
-    const tween = gsap.to(el, {
-      opacity: 0,
-      y: -10,
-      duration: DURATION.fast,
-      ease: "power2.in",
-      onComplete: () => setMenuMounted(false),
-    });
+    const tl = gsap
+      .timeline({ onComplete: () => setMenuMounted(false) })
+      .to(el, { opacity: 0, y: -10, duration: DURATION.fast, ease: "power2.in" }, 0)
+      .to(scrim, { opacity: 0, duration: DURATION.fast, ease: "power2.in" }, 0);
     return () => {
-      tween.kill();
+      tl.kill();
     };
   }, [menuOpen, menuMounted]);
 
@@ -230,7 +303,9 @@ export default function Navbar() {
   }, [transparent, location.pathname]);
 
   return (
-    <nav ref={navRef} className="navbar" aria-label="Main">
+    // data-lenis-prevent while open: on a narrow window with a mouse the
+    // landing's Lenis would otherwise keep scrolling the locked page on wheel.
+    <nav ref={navRef} className="navbar" aria-label="Main" data-lenis-prevent={menuOpen ? "" : undefined}>
       <Link to="/" className="nav-logo" aria-label="RoboRacer home">
         <BrandLogo />
       </Link>
@@ -261,39 +336,77 @@ export default function Navbar() {
           <ExternalIcon />
         </a>
 
-        <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className="nav-cta">
-          Join Community
-        </a>
+        {/* The two actions sit together, closer than the links. "Start here"
+            is the bar's one solid violet button: the five ways in under the
+            landing hero (ui/StartHere), from every route. */}
+        <div className="nav-actions">
+          <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className="nav-cta">
+            Join the Slack
+          </a>
+          <Link to={START_HREF} className="nav-primary">
+            Start here
+          </Link>
+        </div>
       </div>
 
-      {/* Mobile Menu Button */}
-      <button
-        type="button"
-        className="nav-menu-button lg:hidden"
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label={menuOpen ? "Close menu" : "Open menu"}
-        aria-expanded={menuOpen}
-        aria-controls="nav-mobile-menu"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          {menuOpen ? (
-            <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          ) : (
-            <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          )}
-        </svg>
-      </button>
+      {/* Under lg: the same button beside the menu toggle, no taller than
+          the wordmark (index.css .nav-primary-bar) so the bar keeps its
+          height. Under 390px wide (an iPhone SE, a 360 Android) it would crowd
+          the wordmark, so it moves to the top of the menu instead. */}
+      <div className="flex items-center gap-4 lg:hidden">
+        <Link to={START_HREF} className="nav-primary nav-primary-bar hidden min-[24.375rem]:inline-flex">
+          Start here
+        </Link>
+        <button
+          ref={toggleRef}
+          type="button"
+          className="nav-menu-button"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          aria-controls="nav-mobile-menu"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            {menuOpen ? (
+              <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            ) : (
+              <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            )}
+          </svg>
+        </button>
+      </div>
 
       {/* Mobile Menu. Kept mounted for the length of its exit tween, which is
           what AnimatePresence used to do; unmounting on the state flip alone
           would cut the close animation off at frame one. */}
       {menuMounted && (
-        <div id="nav-mobile-menu" ref={menuRef} className="mobile-menu lg:hidden">
-          {links.map((link) => (
-            <Link key={link.href} to={link.href} className="mobile-menu-link">
-              {link.text}
-            </Link>
-          ))}
+        <div ref={scrimRef} className="mobile-menu-scrim lg:hidden" aria-hidden="true" onClick={closeFromScrim} />
+      )}
+      {menuMounted && (
+        <div
+          id="nav-mobile-menu"
+          ref={menuRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu"
+          className="mobile-menu lg:hidden"
+        >
+          <Link to={START_HREF} className="nav-primary mobile-menu-primary min-[24.375rem]:hidden">
+            Start here
+          </Link>
+          {links.map((link) => {
+            const active = location.pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="mobile-menu-link"
+                aria-current={active ? "page" : undefined}
+              >
+                {link.text}
+              </Link>
+            );
+          })}
           <a
             href={SIMULATOR_URL}
             target="_blank"
@@ -304,7 +417,7 @@ export default function Navbar() {
             <ExternalIcon />
           </a>
           <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className="mobile-menu-link">
-            Join Community
+            Join the Slack
           </a>
         </div>
       )}

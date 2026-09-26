@@ -1,7 +1,7 @@
 import Button from "../ui/Button";
 
 const SLACK_URL =
-  "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g";
+  "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q";
 
 type NewsEmptyProps = {
   /** "empty" = the file holds no item; "error" = the file did not load. */
@@ -15,11 +15,11 @@ type NewsEmptyProps = {
  * file never leaves a blank column.
  */
 export default function NewsEmpty({ variant = "empty", id }: NewsEmptyProps) {
-  const title = variant === "error" ? "The feed did not load" : "The feed is quiet";
+  const title = variant === "error" ? "The feed did not load" : "No news yet";
   const body =
     variant === "error"
-      ? "Reload the page to try again. Race news lands in the RoboRacer Slack first."
-      : "Nothing is in the feed right now. Race news lands in the RoboRacer Slack first.";
+      ? "Reload the page to try again. Race news is posted in the RoboRacer Slack first."
+      : "Race news is posted in the RoboRacer Slack first.";
   return (
     <div className="rounded-card border border-ink-950/10 bg-paper-100 p-8 md:p-12">
       <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-muted">

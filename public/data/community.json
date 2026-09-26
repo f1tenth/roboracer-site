@@ -2,16 +2,15 @@
   "members": 3000,
   "members_display": "3,000+",
   "timezones": 25,
-  "continents": 6,
   "updated": "2026-08-21",
-  "source": "manual (Cedric, 2026-08-21: above 3,000 members, 25 time zones; continents estimated, verify with scripts/slack_stats.py)",
+  "source": "manual (Cedric, 2026-08-21: above 3,000 members, 25 time zones). The continent count (6) was an estimate, not in the content skill, and is no longer shown (final QA, 2026-09-25); scripts/slack_stats.py still writes a continents field, which the site ignores.",
   "join": {
     "photo": {
       "src": "/media/join/join-korea2025-group-1200.webp",
       "width": 1200,
       "height": 900,
       "alt": "Participants of the 4th F1TENTH Korea Championship pose under the event banner in a conference hall in Incheon, Nov 2025.",
-      "caption": "4th F1TENTH Korea Championship · Incheon, Nov 2025 · verify",
+      "caption": "4th F1TENTH Korea Championship · Incheon, Nov 2025",
       "credit": "Photo: Cedric Hollande"
     },
     "post": {
@@ -24,7 +23,7 @@
       "author_logo": "/media/join/openrobotics-logo.svg",
       "post_url": "https://www.linkedin.com/posts/it-is-wild-to-see-just-how-far-the-roboracer-ugcPost-7467510093027205120-hCNe/",
       "credit": "Video: Open Robotics · LinkedIn",
-      "excerpt": "Featured by Open Robotics: how far the community has come in a few short years.",
+      "excerpt": "Open Robotics on how far the community has come.",
       "excerpt_note": "TODO(content): one sentence in Cedric's words; this draft is ours, not the post text"
     },
     "youtube": {
@@ -50,7 +49,7 @@
         "width": 800,
         "height": 531,
         "alt": "Spectators line the rail above the wooden KNAPP bridge of the ICRA 2026 track while a car crosses it.",
-        "excerpt": "On the parallels between autonomous motorsport and intralogistics.",
+        "excerpt": "What autonomous racing has in common with warehouse logistics.",
         "credit": "Post: KNAPP · LinkedIn"
       },
       {
@@ -110,7 +109,7 @@
         "width": 800,
         "height": 600,
         "alt": "Six members of Roboracer @ Purdue stand beside the orange-duct track at IV 2026 in Detroit holding their car and a certificate.",
-        "excerpt": "Roboracer @ Purdue placed P10 at IV 2026, its first competition.",
+        "excerpt": "Roboracer @ Purdue placed 10th at IV 2026, its first competition.",
         "credit": "Post: Meghaj Kabra · LinkedIn"
       },
       {
@@ -140,7 +139,7 @@
         "width": 800,
         "height": 800,
         "alt": "Six members of Ingenuity Labs Racing with their blue car in the ICRA 2026 competition hall.",
-        "excerpt": "A first RoboRacer competition with Ingenuity Labs Racing at ICRA 2026 in Vienna.",
+        "excerpt": "Ingenuity Labs Racing's first RoboRacer competition, at ICRA 2026 in Vienna.",
         "credit": "Post: Mateus Karvat Camara · LinkedIn"
       },
       {
@@ -163,7 +162,7 @@
         "post_url": "https://www.linkedin.com/posts/unicorn-racing_icra2026-robotics-roboracer-activity-7472188728212344833-FFLb",
         "author": "UNICORN Racing",
         "author_url": "https://www.linkedin.com/company/unicorn-racing",
-        "affiliation": "Team, 1st place ICRA 2026",
+        "affiliation": "1st place, ICRA 2026",
         "date": "2026-06-15",
         "event": "icra2026",
         "poster": "/media/join/posts/post-unicorn-racing-344833-960.webp",
@@ -176,7 +175,7 @@
       {
         "id": "post-roboracer-foundation-197760",
         "post_url": "https://www.linkedin.com/posts/thrilling-races-vivid-discussions-and-ugcPost-7471115152382197760-CG2I/",
-        "author": "The Roboracer Foundation",
+        "author": "RoboRacer Foundation",
         "author_url": "https://www.linkedin.com/company/roboracer-foundation",
         "affiliation": "Organizer",
         "date": "2026-06-12",
@@ -186,12 +185,12 @@
         "height": 531,
         "alt": "Two cars approach the KNAPP bridge on the ICRA 2026 track while marshals and spectators watch from the side.",
         "excerpt": "About 200 people and 30 teams from more than 12 countries, the largest competition yet.",
-        "credit": "Post: The Roboracer Foundation · LinkedIn"
+        "credit": "Post: RoboRacer Foundation · LinkedIn"
       },
       {
         "id": "post-cedric-hollande-699200",
         "post_url": "https://www.linkedin.com/posts/cedric-hollande_icra2026-iv2026-ugcPost-7470593321019699200-1Kje/",
-        "author": "Cédric Hollande",
+        "author": "Cedric Hollande",
         "author_url": "https://www.linkedin.com/in/cedric-hollande",
         "affiliation": "UPenn Autonomous Racing, University of Pennsylvania",
         "date": "2026-06-10",
@@ -199,9 +198,9 @@
         "poster": "/media/join/posts/post-cedric-hollande-699200-800.webp",
         "width": 800,
         "height": 600,
-        "alt": "Cédric Hollande and Dhyey Shah hold their car on the ICRA 2026 track in Vienna, orange ducts and the competition area sign behind.",
-        "excerpt": "2nd in time trials and 5th in head-to-head at ICRA 2026, out of about 30 teams.",
-        "credit": "Post: Cédric Hollande · LinkedIn"
+        "alt": "Cedric Hollande and Dhyey Shah hold their car on the ICRA 2026 track in Vienna, orange ducts and the competition area sign behind.",
+        "excerpt": "2nd in time trials and 5th overall at ICRA 2026, out of about 30 teams.",
+        "credit": "Post: Cedric Hollande · LinkedIn"
       }
     ]
   }

@@ -9,14 +9,91 @@ import NewsCard from "../components/news/NewsCard";
 import NewsLead from "../components/news/NewsLead";
 import NewsEmpty from "../components/news/NewsEmpty";
 import { eventLabel, formatIsoDate, loadNewsFeed, type NewsFeed, type NewsItem } from "../components/news/newsData";
+import { useDesktop } from "../lib/motion";
 
 const SLACK_URL =
-  "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g";
+  "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q";
 const MAILTO = "mailto:contact@roboracer.ai?subject=RoboRacer%20news";
 const INSTAGRAM_URL = "https://www.instagram.com/roboracer.ai/";
 // Site-wide link contract (landing-v2): ink text, hairline underline, violet on hover.
 const LINK =
   "underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2";
+
+/** Items each year shows before the rest fold away, at every size (the
+ * /research pattern: four fills two rows of the two-column grid). */
+const PER_YEAR = 4;
+/** On a phone only the newest years open with their four; every older year
+ * is its heading, its count and a closed fold. With the history back to 2016
+ * (75 items) the phone page was far past 12,000 px with every year open. */
+const OPEN_YEARS_ON_PHONE = 2;
+/** The chevron summary every fold shares (/research, /race). */
+const FOLD_SUMMARY =
+  "flex cursor-pointer list-none flex-wrap items-baseline gap-x-3 gap-y-1 py-6 text-text-strong transition-colors hover:text-rr-violet [&::-webkit-details-marker]:hidden";
+
+function posts(n: number): string {
+  return `${n} ${n === 1 ? "post" : "posts"}`;
+}
+
+/**
+ * One year of the archive: its first `open` items, then the rest behind a
+ * native <details> (keyboard and screen-reader ready without React, opened by
+ * find-in-page, nothing above it moves as it opens). `open` is PER_YEAR, none
+ * for an older year on a phone, and every item while a competition filter is
+ * set, so nothing a filter found is ever folded away. The folded cards sit
+ * outside Reveal: a scroll trigger measured inside a closed <details> would
+ * leave them hidden when it opens.
+ */
+function YearGroup({ year, items, open }: { year: string; items: NewsItem[]; open: number }) {
+  const shown = items.slice(0, open);
+  const rest = items.slice(open);
+  // A year that is only its fold (older years on a phone) closes up under
+  // the summary: the full py-10 left 64px of paper below "Show 15 from 2024"
+  // and 24px above it, so the line read as floating off its own year.
+  return (
+    <section aria-labelledby={`news-year-${year}`} className={shown.length > 0 ? "py-10" : "pt-10 pb-4"}>
+      <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 desktop:sticky desktop:top-nav desktop:z-10 desktop:bg-paper-100/95 desktop:py-2 desktop:backdrop-blur-sm">
+        <h3
+          id={`news-year-${year}`}
+          className="font-display text-display-m font-semibold tabular-nums text-text-strong"
+        >
+          {year}
+        </h3>
+        <p className="font-mono text-small text-text-muted">{posts(items.length)}</p>
+      </div>
+      {shown.length > 0 && (
+        <Reveal stagger className="grid gap-6 md:grid-cols-2">
+          {shown.map((item) => (
+            <NewsCard key={item.id} item={item} titleAs="h4" />
+          ))}
+        </Reveal>
+      )}
+      {rest.length > 0 && (
+        <details className={`group ${shown.length > 0 ? "mt-6" : ""}`}>
+          <summary className={`${FOLD_SUMMARY} border-t border-ink-950/10`}>
+            <span
+              aria-hidden="true"
+              className="inline-block font-display text-display-m leading-none transition-transform duration-[var(--duration-fast)] group-open:rotate-90 motion-reduce:transition-none"
+            >
+              &#8250;
+            </span>
+            <span className="font-mono text-small group-open:hidden">
+              Show {rest.length}
+              {shown.length > 0 ? " more" : ""} from {year}
+            </span>
+            <span className="hidden font-mono text-small group-open:inline">
+              Hide {posts(rest.length)} from {year}
+            </span>
+          </summary>
+          <div className="grid gap-6 pb-2 md:grid-cols-2">
+            {rest.map((item) => (
+              <NewsCard key={item.id} item={item} titleAs="h4" />
+            ))}
+          </div>
+        </details>
+      )}
+    </section>
+  );
+}
 
 /**
  * /news on the paper surface: the newest item as a lead story, then every item
@@ -56,6 +133,15 @@ export default function News() {
     for (const item of items) if (item.event && !ids.includes(item.event)) ids.push(item.event);
     return ids.map((id) => ({ id, label: eventLabel(id) }));
   }, [items]);
+  // A chip for every competition since 2016 was a wall of 34; a chip that
+  // finds one card is a detour the year list already covers. The filter keeps
+  // the competitions with two or more items (newest first).
+  const chips = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const item of items) if (item.event) counts.set(item.event, (counts.get(item.event) ?? 0) + 1);
+    return events.filter((e) => (counts.get(e.id) ?? 0) >= 2);
+  }, [items, events]);
+  const compact = !useDesktop();
 
   const filtered = useMemo(() => (tag ? rest.filter((i) => i.event === tag) : rest), [rest, tag]);
 
@@ -74,11 +160,18 @@ export default function News() {
   const newest = dates.length > 0 ? dates[dates.length - 1] : null;
   const oldest = dates.length > 0 ? dates[0].slice(0, 4) : null;
   const selected = events.find((e) => e.id === tag);
+  // Until news.json answers, the page is the masthead plus a screen of empty
+  // paper: the lead, the archive and "Contribute" mount together once the
+  // feed is in, so nothing that was already on screen moves (QA polish-2:
+  // CLS 0.48 to 0.69 when Contribute and the footer were pushed down).
+  const loading = feed === null && !failed;
 
   return (
-    <div className="pt-[4.25rem] md:pt-[5.3125rem]">
-      {/* Masthead: what the page is, the ledger, and the lead story */}
-      <Section width="page" aria-labelledby="news-title">
+    <div className="pt-nav">
+      {/* Masthead: what the page is, the ledger, and the lead story. On a
+          phone it starts a rem under the bar, like the About and Race heroes,
+          instead of a full section's padding down. */}
+      <Section width="page" className="compact:pt-4" aria-labelledby="news-title">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
             <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-muted">
@@ -89,10 +182,10 @@ export default function News() {
               id="news-title"
               className="max-w-[18ch] font-display text-display-xl font-semibold text-text-strong"
             >
-              News from the races
+              News from the Community
             </h1>
             <p className="mt-6 max-w-[60ch] text-lead text-text-body">
-              Race reports, results and posts from the teams who build and run the cars.
+              Results and posts from the teams who build and race the cars.
             </p>
           </div>
           {/* The ledger counts what is on the page; with no feed there is
@@ -104,19 +197,20 @@ export default function News() {
                 as="dl"
                 size="l"
                 tone="accent"
-                duration={2.5}
                 value={items.length}
-                label="Items"
+                label="Posts"
               />
+              {/* "Races": the tagged events include the Korea championships,
+                  the Germany race and a course race, which the numbered
+                  series (/race: "30 competitions") does not count. */}
               <StatTicker
                 key={`events-${events.length}`}
                 as="dl"
                 size="l"
                 tone="accent"
-                duration={2.5}
                 delay={0.12}
                 value={events.length}
-                label="Competitions"
+                label="Races"
               />
               <div>
                 <dt>Latest</dt>
@@ -128,7 +222,35 @@ export default function News() {
               </div>
             </dl>
           )}
+          {/* The ledger's box, held while the feed loads so the masthead does
+              not grow (on phones) or re-align (md:items-end) when it arrives. */}
+          {loading && (
+            <div
+              aria-hidden="true"
+              className="invisible grid grid-cols-2 gap-x-6 gap-y-7 border-t border-ink-950/10 pt-6 font-mono text-small md:col-span-4"
+            >
+              {/* Same words and widths as the real ledger, so a label or a
+                  date that wraps in the narrow md column wraps here too. */}
+              {["Posts", "Races"].map((label) => (
+                <div key={label}>
+                  <p>{label}</p>
+                  <p className="mt-1 text-display-l font-semibold tabular-nums">00</p>
+                </div>
+              ))}
+              {[
+                ["Latest", "Sep 00, 2026"],
+                ["Oldest", "2000"],
+              ].map(([label, value]) => (
+                <div key={label}>
+                  <p>{label}</p>
+                  <p className="mt-1">{value}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
+
+        {loading && <div aria-hidden="true" className="min-h-[100svh]" />}
 
         {lead && (
           <div className="mt-14 border-t border-ink-950/10 pt-10">
@@ -158,16 +280,16 @@ export default function News() {
             title="All news, by year"
             lead="Newest first."
           />
-          {events.length > 1 && (
+          {chips.length > 1 && (
             <TagFilter
-              tags={events}
+              tags={chips}
               selected={tag}
               onChange={setTag}
               label="Filter news by competition"
             />
           )}
           <p className="mt-8 font-mono text-small text-text-muted" aria-live="polite">
-            {tag ? `${filtered.length} of ${rest.length} items · ${selected?.label}` : `${rest.length} items`}
+            {tag ? `${filtered.length} of ${rest.length} posts · ${selected?.label}` : `${rest.length} posts`}
           </p>
           {filtered.length === 0 ? (
             <p className="mt-6 max-w-[60ch] text-body text-text-body">
@@ -177,25 +299,20 @@ export default function News() {
             <div className="mt-6 divide-y divide-ink-950/10 border-t border-ink-950/10">
               {/* The year was a sticky two-column rail; it cost every card a
                   sixth of the page and the pictures were the part that paid
-                  (Cedric, 2026-08-23). Heading now, cards full width. */}
-              {byYear.map(([year, group]) => (
-                <section key={year} aria-labelledby={`news-year-${year}`} className="py-10">
-                  <h3
-                    id={`news-year-${year}`}
-                    className="mb-6 font-display text-display-m font-semibold tabular-nums text-text-strong md:sticky md:top-24 md:z-10 md:bg-paper-100/95 md:py-2 md:backdrop-blur-sm"
-                  >
-                    {year}
-                  </h3>
-                  <Reveal
-                    key={`${year}-${tag ?? "all"}`}
-                    stagger
-                    className="grid gap-6 md:grid-cols-2"
-                  >
-                    {group.map((item) => (
-                      <NewsCard key={item.id} item={item} titleAs="h4" />
-                    ))}
-                  </Reveal>
-                </section>
+                  (Cedric, 2026-08-23). Heading now, cards full width. It
+                  sticks only where the window is tall enough to spare the
+                  band (a landscape phone lost 38% of its height to bar plus
+                  year), flush under the bar so no card text shows between.
+                  Each year opens with four and folds the rest; on a phone the
+                  years before the newest two are closed folds. A filter
+                  shows every match. */}
+              {byYear.map(([year, group], index) => (
+                <YearGroup
+                  key={`${year}-${tag ?? "all"}`}
+                  year={year}
+                  items={group}
+                  open={tag ? group.length : compact && index >= OPEN_YEARS_ON_PHONE ? 0 : PER_YEAR}
+                />
               ))}
             </div>
           )}
@@ -203,37 +320,40 @@ export default function News() {
       )}
 
       {/* Send us your news: the one solid CTA on the page */}
-      <Section width="page" rule aria-labelledby="contribute">
-        <div className="grid gap-10 md:grid-cols-12 md:items-end">
-          <div className="md:col-span-7">
-            <SectionHeader
-              eyebrow="Contribute"
-              id="contribute"
-              title="Send us your news"
-              lead={
-                <>
-                  Posted about your team, your car or a race you ran? Tag us at{" "}
-                  <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={LINK}>
-                    @roboracer.ai
-                  </a>{" "}
-                  and send us the link. It will go here, with your name and your credit on it!
-                </>
-              }
-            />
+      {!loading && (
+        <Section width="page" rule aria-labelledby="contribute">
+          <div className="grid gap-6 desktop:gap-10 md:grid-cols-12 md:items-end">
+            <div className="md:col-span-7">
+              <SectionHeader
+                eyebrow="Contribute"
+                id="contribute"
+                className="max-md:mb-2"
+                title="Send us your news"
+                lead={
+                  <>
+                    Tag us at{" "}
+                    <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={LINK}>
+                      @roboracer.ai
+                    </a>{" "}
+                    in your post and send us the link. We'll post it here and credit you.
+                  </>
+                }
+              />
+            </div>
+            <div className="flex flex-col items-start gap-4 md:col-span-5 md:items-end">
+              <Button href={MAILTO}>Send us a link</Button>
+              <p className="font-mono text-small text-text-muted">contact@roboracer.ai</p>
+              <p className="text-small text-text-body">
+                Or message us on{" "}
+                <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={LINK}>
+                  Slack
+                </a>
+                .
+              </p>
+            </div>
           </div>
-          <div className="flex flex-col items-start gap-4 md:col-span-5 md:items-end">
-            <Button href={MAILTO}>Send us a link</Button>
-            <p className="font-mono text-small text-text-muted">contact@roboracer.ai</p>
-            <p className="text-small text-text-body">
-              Feel free to reach out on{" "}
-              <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={LINK}>
-                Slack
-              </a>
-              .
-            </p>
-          </div>
-        </div>
-      </Section>
+        </Section>
+      )}
     </div>
   );
 }

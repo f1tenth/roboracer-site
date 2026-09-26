@@ -27,6 +27,13 @@
    research card was taller than the viewport (Cedric, v1.0). Chapters gate
    their pinned layout on this and fall back to their mobile layout. */
 @custom-variant desktop (@media (min-width: 48rem) and (min-height: 34rem));
+/* "compact" is the exact complement of desktop: a phone in either orientation,
+   or any window too narrow or too short for the pinned chapters. Chapters show
+   their unpinned, stacked layout here (mobile pass, 2026-09-25). */
+@custom-variant compact (@media not all and (min-width: 48rem) and (min-height: 34rem));
+/* Touch-sized hit areas (2.75rem) without touching the mouse layout; the same
+   query /assembly already writes as [@media(pointer:coarse)]. */
+@custom-variant coarse (@media (pointer: coarse));
 
 @theme {
   /* ---- Brand accent (the only accent family) ---- */
@@ -92,6 +99,11 @@
   --spacing-section: clamp(5rem, 12vw, 10rem);
   --spacing-section-tight: clamp(3rem, 7vw, 6rem);
   --spacing-gutter: 1.5rem;
+  /* The fixed nav bar's height, for anything that starts under it (pt-nav,
+     top-nav): 4.5rem below lg, where the bar is the wordmark plus the menu
+     toggle at every width (index.css .navbar). From lg it is the value the
+     pages already used for the full bar. Overridden in @layer base below. */
+  --spacing-nav: 4.5rem;
 
   /* ---- Containers ---- */
   --container-content: 72rem;
@@ -123,13 +135,24 @@
 html,
 body {
   width: 100%;
-  min-height: 100svh;
+  min-height: 100vh;
   background: var(--color-paper-50);
   color: var(--color-text-body);
   /* clip, not hidden: hidden would make html/body scroll containers and
      stop content below the 100svh Layout root from painting */
   overflow-x: clip;
   font-family: var(--font-sans);
+}
+
+/* Viewport-unit fallbacks: the vh value is declared plainly and the svh/lvh
+   one inside @supports. Two declarations in one rule do not survive the
+   build: the CSS minifier keeps only the last, and a browser without the
+   unit then drops the property altogether. */
+@supports (height: 1svh) {
+  html,
+  body {
+    min-height: 100svh;
+  }
 }
 
 /* Visible focus everywhere; Button overrides color on ink surfaces. */
@@ -156,6 +179,46 @@ body {
   :focus-visible {
     outline: 2px solid var(--color-rr-violet);
     outline-offset: 2px;
+  }
+
+  @media (min-width: 64rem) {
+    :root {
+      --spacing-nav: 5.3125rem;
+    }
+  }
+
+  /* Phone rhythm (mobile pass, 2026-09-25). The desktop section padding
+     (clamp(5rem, 12vw, 10rem)) left a 160px blank band at every section
+     boundary on a 390 phone and 202px, half the screen, on a landscape one.
+     Below desktop the padding follows the window height instead: 3 to 4rem
+     (48 to 64px), 2.5 to 3rem when tight. Desktop and 768x1024 keep theirs. */
+  @media not all and (min-width: 48rem) and (min-height: 34rem) {
+    /* vh values first, svh only where the unit exists: a custom property is
+       not checked when it is declared, so an svh value in a browser without
+       svh would make every padding that reads it invalid, which is zero. */
+    :root {
+      --spacing-section: clamp(3rem, 7vh, 4rem);
+      --spacing-section-tight: clamp(2.5rem, 5vh, 3rem);
+    }
+
+    @supports (height: 1svh) {
+      :root {
+        --spacing-section: clamp(3rem, 7svh, 4rem);
+        --spacing-section-tight: clamp(2.5rem, 5svh, 3rem);
+      }
+    }
+
+    /* A narrow column breaks headings early; balance them so no line holds
+       one orphan word, and keep a lone last word off running text. */
+    h1,
+    h2,
+    h3 {
+      text-wrap: balance;
+    }
+
+    p {
+      text-wrap: pretty;
+    }
   }
 }
 
@@ -212,6 +275,12 @@ body {
    utility. */
 .rr-marquee:hover .rr-marquee-track,
 .rr-marquee:has(a:focus-visible) .rr-marquee-track {
+  animation-play-state: paused;
+}
+/* A touch screen never hovers: each strip group (partners, highlights,
+   community) has a Pause toggle (ui/PauseToggle) that sets this attribute on
+   the group. Unlayered for the same reason as the rule above. */
+[data-marquee-paused="true"] .rr-marquee-track {
   animation-play-state: paused;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -351,9 +420,6 @@ body {
     --nav-flip: clamp(0, (var(--nav-alpha) - 0.45) * 1000, 1);
     --nav-flip-mix: calc((1 - var(--nav-flip)) * 100%);
     --nav-fg: color-mix(in oklab, var(--color-text-on-ink) var(--nav-flip-mix), var(--color-text-strong));
-    --nav-cta-bg: color-mix(in oklab, var(--color-paper-50) var(--nav-flip-mix), var(--color-text-strong));
-    --nav-cta-bg-hover: color-mix(in oklab, var(--color-paper-200) var(--nav-flip-mix), var(--color-ink-700));
-    --nav-cta-fg: color-mix(in oklab, var(--color-text-strong) var(--nav-flip-mix), var(--color-paper-50));
     --nav-ring: color-mix(in oklab, var(--color-text-on-ink) var(--nav-flip-mix), var(--color-rr-violet));
     position: fixed;
     inset: 0 0 auto 0;
@@ -383,11 +449,21 @@ body {
      laid out; its letters follow --nav-fg via currentColor, so there is no
      second image and nothing to cross-fade. */
   .nav-logo {
+    position: relative;
     display: block;
     flex: none;
     height: 2.5rem;
     color: var(--nav-fg);
     transition: color var(--duration-fast) ease;
+  }
+
+  /* Hit area: 2.75rem tall, centred on the wordmark, whatever its drawn
+     height (2rem on a phone). Nothing moves; only the tap target grows. */
+  .nav-logo::after,
+  .nav-primary-bar::after {
+    content: "";
+    position: absolute;
+    inset: calc(50% - 1.375rem) 0;
   }
 
   .nav-logo svg {
@@ -433,28 +509,79 @@ body {
     transform: scaleX(1);
   }
 
-  /* Ink pill on paper; inverts to a paper pill over the video. */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  /* The community link: a hairline pill in the bar's own ink/paper colour,
+     so the violet "Start here" beside it stays the bar's one solid fill
+     (wayfinding, 2026-09-24). The first border is the fallback where
+     color-mix is missing. */
   .nav-cta {
-    padding: 0.625rem 1.5rem;
-    background: var(--nav-cta-bg);
-    color: var(--nav-cta-fg);
+    padding: calc(0.625rem - 1px) 1.25rem;
+    border: 1px solid currentColor;
+    border: 1px solid color-mix(in oklab, var(--nav-fg) 40%, transparent);
+    color: var(--nav-fg);
     border-radius: var(--radius-btn);
     font-weight: 600;
+    white-space: nowrap;
     text-decoration: none;
     transition:
-      background-color var(--duration-fast) ease,
-      transform var(--duration-fast) ease;
+      border-color var(--duration-fast) ease,
+      color var(--duration-fast) ease;
   }
 
   .nav-cta:hover {
-    background: var(--nav-cta-bg-hover);
-    transform: translateY(-1px);
+    border-color: var(--nav-fg);
   }
 
+  /* THE solid violet button of the bar (accent rule: buttons violet), the
+     same fill over the video and on paper; hover only darkens it, like
+     ui/Button primary. */
+  .nav-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1.25rem;
+    background: var(--color-rr-violet);
+    color: var(--color-white);
+    border-radius: var(--radius-btn);
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background-color var(--duration-fast) ease;
+  }
+
+  .nav-primary:hover {
+    background: var(--color-rr-violet-deep);
+  }
+
+  /* Under lg: the same button beside the menu toggle, no taller than the
+     wordmark (2rem on a phone, 2.5rem from sm) so the bar keeps its height;
+     the ::after above gives it a 2.75rem hit area without growing the look. */
+  .nav-primary-bar {
+    position: relative;
+    padding: 0.375rem 0.875rem;
+    font-size: var(--text-small);
+    line-height: 1.25rem;
+  }
+
+  @media (min-width: 40rem) {
+    .nav-primary-bar {
+      padding: 0.5rem 1.25rem;
+      font-size: var(--text-body);
+      line-height: 1.5rem;
+    }
+  }
+
+  /* 2.75rem square hit area around the 1.5rem icon; the negative margin keeps
+     its layout box at the icon's size, so the bar's height does not move. */
   .nav-menu-button {
     display: inline-flex;
-    padding: 0.5rem;
-    margin: -0.5rem;
+    padding: 0.625rem;
+    margin: -0.625rem;
     color: inherit;
     background: none;
     border: 0;
@@ -467,15 +594,48 @@ body {
     outline-color: var(--nav-ring);
   }
 
-  /* The open menu always sits on a solid bar (NavBar forces alpha 1). */
+  /* The open menu always sits on a solid bar (NavBar forces alpha 1). It is
+     never taller than the window under the bar: on a landscape phone the
+     lower links were out of reach and a swipe scrolled the page behind
+     (mobile audit CHROME-01). The page is locked while it is open, so the
+     menu scrolls on its own and never hands the gesture on. */
   .mobile-menu {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
+    /* vh here, svh below under @supports: without svh the menu would
+       otherwise lose its only height bound. */
+    max-height: calc(100vh - var(--spacing-nav));
+    overflow-y: auto;
+    overscroll-behavior: contain;
     background: var(--color-paper-50);
     box-shadow: 0 8px 16px rgb(11 12 20 / 0.1);
     padding: 1.5rem;
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Under the open menu: the page dims and a tap on it closes the menu.
+     The large viewport, so it still reaches the bottom once a phone's
+     toolbar has collapsed (the page is locked, so it cannot change). */
+  .mobile-menu-scrim {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background: color-mix(in oklab, var(--color-ink-950) 40%, transparent);
+    touch-action: none;
+  }
+
+  @supports (height: 1svh) {
+    .mobile-menu {
+      max-height: calc(100svh - var(--spacing-nav));
+    }
+
+    .mobile-menu-scrim {
+      height: 100lvh;
+    }
   }
 
   .mobile-menu-link {
@@ -485,17 +645,36 @@ body {
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
-    border-bottom: 1px solid var(--color-paper-200);
   }
 
-  .mobile-menu-link:last-child {
-    border-bottom: none;
+  /* Rules between links only: nothing above the first, nothing under the
+     last (the old bottom border left a hairline under "Join the Slack"). */
+  .mobile-menu-link + .mobile-menu-link {
+    border-top: 1px solid var(--color-paper-200);
   }
 
   .mobile-menu-link:hover {
     text-decoration: underline;
     text-underline-offset: 4px;
     text-decoration-color: var(--color-rr-violet);
+  }
+
+  /* The current page: the desktop link's 2px bar, as an underline. */
+  .mobile-menu-link[aria-current="page"] {
+    font-weight: 600;
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: currentColor;
+    text-underline-offset: 0.375rem;
+  }
+
+  /* "Start here" opens the menu as a full-width button on the narrowest
+     phones, where it cannot sit in the bar (NavBar). First, so a short
+     screen never pushes it below the fold. */
+  .mobile-menu-primary {
+    display: flex;
+    margin-bottom: 1rem;
+    padding: 0.875rem 1.25rem;
   }
 
   /* Below lg (1024px): the hamburger (lg:hidden) takes over. The eight
@@ -523,6 +702,65 @@ body {
 
     .nav-links {
       display: none;
+    }
+  }
+  /* Phones: the wordmark steps down from 2.5 to 2rem so the compact "Start
+     here" fits beside the menu toggle; the extra padding keeps the bar at
+     the same 4.5rem, so no page offset under it moves. */
+  @media (max-width: 39.98rem) {
+    .navbar {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .nav-logo {
+      height: 2rem;
+    }
+  }
+
+  /* Short landscape (a phone on its side, any window under 34rem tall) below
+     lg: a 3.5rem bar with the phone wordmark and the phone "Start here". The
+     4.5rem bar took 18.5% of an 844x390 screen on every route (CHROME-07).
+     --spacing-nav follows, so every pt-nav / top-nav offset moves with it. */
+  @media (max-height: 33.99rem) and (max-width: 63.99rem) {
+    :root {
+      --spacing-nav: 3.5rem;
+    }
+
+    .navbar {
+      padding-block: 0.75rem;
+    }
+
+    .nav-logo {
+      height: 2rem;
+    }
+
+    .nav-primary-bar {
+      padding: 0.375rem 0.875rem;
+      font-size: var(--text-small);
+      line-height: 1.25rem;
+    }
+  }
+
+  /* On a phone on its side the menu goes two-up, so all nine links fit under
+     the bar without scrolling. */
+  @media (max-height: 33.99rem) and (min-width: 30rem) and (max-width: 63.99rem) {
+    .mobile-menu {
+      display: grid;
+      grid-template-rows: repeat(5, auto);
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
+      column-gap: 1.5rem;
+      padding-block: 1rem;
+      padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    }
+
+    .mobile-menu-link {
+      padding-block: 0.75rem;
+    }
+
+    /* The first link of the second column starts it without a rule. */
+    .mobile-menu-link:nth-child(6 of .mobile-menu-link) {
+      border-top: 0;
     }
   }
 }

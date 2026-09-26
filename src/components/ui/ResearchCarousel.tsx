@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
   useSyncExternalStore,
+  type CSSProperties,
   type FocusEvent,
   type KeyboardEvent as ReactKeyboardEvent,
   type MouseEvent as ReactMouseEvent,
@@ -15,21 +16,29 @@ import type { Publication } from "../../lib/data";
 import { abstractOf, authorLine, figureCredit, paperHref, shortTitle, venueInitials } from "../../lib/publications";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { DESKTOP_QUERY } from "../../lib/motion";
+import { useMediaHold } from "../../lib/media";
 
 /*
  * Landing research carousel (landing v5 section 5, round two: coverflow).
  *
- * md and up: a full-width stage with every card in one track. The current
- * paper sits in the centre at min(880px, 64vw) x 440 px; its neighbours
- * peek at the sides at 0.82 scale and 0.55 opacity with a 32 px visual gap;
- * the cards beyond them stay in the track, off stage, and slide in as the
- * track moves. A change is a 420 ms ease-out-expo transition on transform
- * and opacity. A 6 s rAF timer fills the strip under the stage and pauses
+ * Desktop (wide and tall enough): a full-width stage with every card in one
+ * track. The current paper is a two-pane card 35rem tall whose figure pane
+ * is 16:10, the shape of every figure canvas, so the figure fills it; the
+ * text pane takes the rest, never under 26rem. Its neighbours are narrow
+ * cover strips; the strips the row cannot fit beside that card are dropped
+ * from the edges inward. A row too narrow for the two panes (a portrait
+ * tablet) stacks the figure over the text instead, when the window is tall
+ * enough to show that card whole. Width and height changes animate over
+ * STRIP_MS. A 6 s rAF timer fills the strip under the stage and pauses
  * only while the pointer is over the current card, keyboard focus is
  * inside, the tab is hidden, or the carousel is fully out of view.
  * Under md: a horizontal scroll-snap row of stacked cards at 86vw, strip as
  * static indicators, no timer. Reduced motion: no timer, no transforms,
  * the current card alone with a 180 ms opacity swap; arrows still work.
+ * A landscape phone (wide but not desktop) gets the two-pane card at the
+ * window's height under the bar, so a card is never taller than the screen
+ * and nothing is read by scrolling inside a sideways row (mobile pass,
+ * LANDING-08). The strip and the arrows are 2.75rem tall on touch screens.
  */
 const INTERVAL_MS = 6000;
 /** Expanding strip (Cedric, v5 round two: "one image grows wider when we
@@ -37,28 +46,37 @@ const INTERVAL_MS = 6000;
  * active card takes the row minus the side strips; a side strip is
  * --rc-i wide (clamp(72px, 6vw, 120px)); every width and height change
  * animates over STRIP_MS with an in-out curve so the whole row visibly
- * moves on each change. Heights: active 560, side 440 (the active paper is
- * taller as well as wider). */
-/** The article on the stage never goes below this width: the two-pane card
- * stops reading well under it (Cedric, v1.0: "always a certain min aspect
- * ratio on the article of interest, if not the ones on the edges get cut
- * out"). Whatever the row cannot fit is dropped from the edges inward. */
-const MIN_ACTIVE_PX = 620;
-/** ...and never narrower than this ratio of the card's height, so the two
- * panes keep a landscape shape instead of going square. */
-const MIN_ACTIVE_ASPECT = 1.12;
-/** Ceiling: on a very narrow row the active card may take this share of it. */
-const MIN_ACTIVE_RATIO = 0.86;
+ * moves on each change. A side strip is SIDE_RATIO of the active card's
+ * height (the active paper is taller as well as wider). */
 const STRIP_MS = 700;
 const STRIP_EASE = "cubic-bezier(0.76, 0, 0.24, 1)";
+/** The design numbers below are px at a 16px root; the stage is drawn in rem
+ * so it follows the fluid root size (index.css), and the fit measurement
+ * scales them by the live root. Full stage height: 35rem. */
 const ACTIVE_H = 560;
-const SIDE_H = 440;
-/** The stage is drawn in rem so it follows the fluid root size (index.css):
- * these turn the design's 16px-root pixel numbers into rem, and into real
- * pixels for the fit measurement. */
+const SIDE_RATIO = 440 / 560;
+/** Every figure is a 16:10 canvas (scripts/paper_thumbs.py letterboxes the
+ * paper's figure on paper-50), so the pane that holds it is 16:10 too and
+ * object-contain fills it edge to edge. The pane used to be a share of a
+ * card barely wider than tall, and a 16:10 figure drawn at that pane's width
+ * filled a third of its height, grey above and below (Cedric, 2026-09-25). */
+const FIG_ASPECT = 1.6;
+/** Side by side, the text pane never goes under 26rem: title, authors, seven
+ * abstract lines, the link and two chip rows fit in it at the full height.
+ * The strips the row cannot fit beside the figure pane and this are dropped
+ * from the edges inward (Cedric, v1.0: "always a certain min aspect ratio
+ * on the article of interest, if not the ones on the edges get cut out"). */
+const TEXT_MIN = 416;
+/** A row too narrow for the two panes stacks the figure over a 25rem text
+ * block, keeps STACK_RATIO of the row and gives the rest to strips... */
+const STACK_TEXT = 400;
+const STACK_RATIO = 0.86;
+/** ...when the window has room for that card, its credit line and its strip
+ * (STAGE_CHROME, 6rem) under the bar. Otherwise the two panes stay side by
+ * side and the card gets shorter, never under 22rem. */
+const STAGE_CHROME = 96;
+const MIN_H = 352;
 const rem = (px: number) => `${px / 16}rem`;
-const rootScale = () =>
-  (parseFloat(getComputedStyle(document.documentElement).fontSize) || 16) / 16;
 const STAGE_QUERY = DESKTOP_QUERY; // wide AND tall enough for the 560px stage
 /** A frame gap longer than this (throttled or frozen tab) counts as a pause. */
 const MAX_FRAME_MS = 1000;
@@ -68,6 +86,8 @@ const CREDIT = "mt-2 font-mono text-eyebrow tracking-normal text-text-muted";
 // Site-wide link contract: ink text, underline, violet underline on hover.
 const LINK =
   "text-small font-semibold text-text-strong underline decoration-1 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
+/** A 2.75rem hit area on touch screens that leaves the line box alone. */
+const TAP = "coarse:inline-block coarse:-my-3 coarse:py-3";
 const CHIP = "rounded-pill border border-ink-950/10 px-2.5 py-1 font-mono text-eyebrow tracking-normal text-text-muted";
 /** Credit line and strip run the full row width, 24 px side padding. */
 const RAIL = "px-6";
@@ -125,6 +145,9 @@ type FigureProps = { p: Publication; eager?: boolean };
  * with the venue initials. */
 function Figure({ p, eager = false }: FigureProps) {
   const chain = useMemo(() => figureChain(p), [p]);
+  // The landing holds its figures until the hero's opening clip has loaded
+  // (MediaHoldContext): 100 to 300 KB each.
+  const hold = useMediaHold();
   const [failed, setFailed] = useState(0);
   const img = chain[failed];
   if (!img) {
@@ -137,7 +160,7 @@ function Figure({ p, eager = false }: FigureProps) {
   return (
     <img
       key={img.src}
-      src={img.src}
+      src={hold ? undefined : img.src}
       alt={`Figure from ${shortTitle(p.title)}`}
       width={img.width}
       height={img.height}
@@ -149,12 +172,17 @@ function Figure({ p, eager = false }: FigureProps) {
   );
 }
 
-/** Distance rank of card i from the active one: 1 for the closest
- * neighbours, 2 for the next pair, and so on (circular, so the strip stays
- * balanced around the active card). */
+/** Distance rank of card i from the active one, circular: 1 and 2 for the
+ * papers just before and after it, 3 and 4 for the next pair, and so on.
+ * Every card gets its own rank, so keeping the ranks up to `strips` shows
+ * exactly that many strips (the old |i - current| version gave the first
+ * and last cards the same rank, one strip too many or too few at the ends).
+ * With an even count the card opposite the active one is as far before as
+ * after; it takes the odd rank, so the ranks run 1 to n - 1 with no gap. */
 function rankOf(i: number, current: number, n: number): number {
-  const d = Math.abs(i - current);
-  return Math.min(d, n - d) * 2 - (i < current ? 1 : 0);
+  const after = (i - current + n) % n;
+  const before = n - after;
+  return before <= after ? before * 2 - 1 : after * 2;
 }
 
 /** Side-strip figure: object-cover so the strip reads as an image band. */
@@ -189,21 +217,31 @@ type SlideProps = {
   position: number;
   count: number;
   tagLabels: Record<string, string>;
-  /** Under md: figure 16/10 on top, text below, abstract clamp 5. */
-  stacked?: boolean;
+  /** row: the stage card, the 16:10 figure pane at the card's full height
+   * (--rc-h) and the text beside it. stack: the stage on a narrow row, the
+   * figure full width on top and a 25rem text block under it. compact: the
+   * scroll row under desktop, stacked in portrait; in landscape the two
+   * panes side by side at the card's height, the figure pane 16:10 up to 58%
+   * of the card (on paper-50, the canvas's own margin colour, so the thin
+   * band a capped pane leaves above and below the figure does not read as a
+   * grey frame), with a shorter title, abstract and no chip row (the meta
+   * line carries the topics). */
+  layout?: "row" | "stack" | "compact";
+  /** A row card below the full height: a shorter abstract, no chip row. */
+  short?: boolean;
   eager?: boolean;
   /** False for side cards: the link leaves the tab order. */
   interactive?: boolean;
 };
 
-/** The card's inner layout: figure pane left (object-contain on paper-100),
- * text pane right, 5/4 from xl and 2/3 below it (at 64vw the card is too
- * narrow for 5/4). The 440 px height is a budget: a one-line mono meta
- * (truncated, the chips repeat the tags), a three-line title, two author
- * lines, five abstract lines (four under xl, five stacked), the link and
- * two rows of chips fit in it at p-6; the spec's p-8 and six lines spill
- * the chips past the card's edge at 880 px. */
-function Slide({ p, position, count, tagLabels, stacked = false, eager = false, interactive = true }: SlideProps) {
+/** The card's inner layout. The figure pane is always the figure's own 16:10
+ * shape, so the figure fills it; a hairline parts it from the text. The
+ * 35rem height is the text pane's budget: a one-line mono meta (truncated,
+ * the chips repeat the tags), a three-line title, two author lines, seven
+ * abstract lines, the link and two rows of chips at p-6 (the text pane is
+ * never under 26rem, so the lines stay long). */
+function Slide({ p, position, count, tagLabels, layout = "row", short = false, eager = false, interactive = true }: SlideProps) {
+  const stacked = layout === "compact";
   const href = paperHref(p);
   const venue = p.venue_short?.trim() || p.venue;
   const meta = [
@@ -212,36 +250,77 @@ function Slide({ p, position, count, tagLabels, stacked = false, eager = false, 
     ...p.tags.map((t) => lowerFirst(tagLabels[t] ?? t)),
   ].join(" · ");
   return (
-    <div className={stacked ? "flex h-full flex-col" : "grid h-full grid-cols-[2fr_3fr] xl:grid-cols-[5fr_4fr]"}>
-      <div className={stacked ? "aspect-[16/10] bg-paper-100 p-4" : "min-w-0 bg-paper-100 p-5 xl:p-6"}>
+    <div
+      className={
+        layout === "row" ? "flex h-full" : `flex h-full flex-col ${stacked ? "landscape:flex-row" : ""}`
+      }
+    >
+      <div
+        className={
+          layout === "row"
+            ? "h-full flex-none border-r border-ink-950/10 bg-paper-100"
+            : `aspect-[16/10] flex-none border-b border-ink-950/10 bg-paper-100 ${stacked ? "landscape:h-full landscape:max-w-[58%] landscape:border-r landscape:border-b-0 landscape:bg-paper-50" : ""}`
+        }
+        style={
+          layout === "row"
+            ? // 16:10 of the card's inner height (the border takes 2px), but
+              // never so wide that the text pane drops under TEXT_MIN.
+              { width: `min(calc((var(--rc-h) - 2px) * ${FIG_ASPECT}), calc(100% - ${rem(TEXT_MIN)}))` }
+            : undefined
+        }
+      >
         <Figure p={p} eager={eager} />
       </div>
-      <div className={`flex min-w-0 flex-1 flex-col ${stacked ? "p-5" : "p-6"}`}>
-        <p className={`font-mono text-eyebrow tracking-normal text-text-muted ${stacked ? "" : "truncate"}`}>{meta}</p>
-        <h3 className="mt-3 line-clamp-3 font-display text-[1.375rem] leading-[1.625rem] font-semibold tracking-[-0.01em] text-text-strong">
+      <div
+        className={`flex min-w-0 flex-1 flex-col ${
+          layout === "row"
+            ? "min-h-0 overflow-hidden p-6"
+            : layout === "stack"
+              ? "min-h-0 overflow-hidden p-5"
+              : "p-5 landscape:min-h-0 landscape:overflow-hidden landscape:p-4"
+        }`}
+      >
+        <p
+          className={`font-mono text-eyebrow tracking-normal text-text-muted ${stacked ? "landscape:line-clamp-2" : "truncate"}`}
+        >
+          {meta}
+        </p>
+        <h3
+          className={`mt-3 line-clamp-3 font-display text-display-s font-semibold text-text-strong ${stacked ? "landscape:mt-2 landscape:line-clamp-2" : ""}`}
+        >
           {p.title}
         </h3>
-        <p className="mt-2 line-clamp-2 text-small text-text-body">{authorLine(p.authors)}</p>
+        <p className={`mt-2 line-clamp-2 text-small text-text-body ${stacked ? "landscape:mt-1.5 landscape:line-clamp-1" : ""}`}>
+          {authorLine(p.authors)}
+        </p>
         {/* The abstract field verbatim; an empty area when it is missing. */}
         <p
-          className={`mt-2 text-[0.9375rem] leading-[1.4375rem] text-text-body ${stacked ? "line-clamp-5" : "line-clamp-5 xl:line-clamp-6"}`}
+          className={`mt-2 text-small text-text-body ${
+            stacked
+              ? "line-clamp-5 landscape:line-clamp-3"
+              : layout === "stack"
+                ? "line-clamp-4"
+                : short
+                  ? "line-clamp-3"
+                  : "line-clamp-7"
+          }`}
         >
           {abstractOf(p) ?? ""}
         </p>
-        <div className="mt-auto pt-4">
+        <div className={`mt-auto pt-4 ${stacked ? "landscape:pt-3" : ""}`}>
           {href && (
             <a
               href={href}
               target="_blank"
               rel="noopener noreferrer"
               tabIndex={interactive ? undefined : -1}
-              className={LINK}
+              className={`${TAP} ${LINK}`}
             >
               Read the paper ↗
             </a>
           )}
           {p.tags.length > 0 && (
-            <ul className="mt-3 flex flex-wrap gap-2">
+            <ul className={`mt-3 flex flex-wrap gap-2 ${stacked ? "landscape:hidden" : short ? "hidden" : ""}`}>
               {p.tags.map((t) => (
                 <li key={t} className={CHIP}>
                   {tagLabels[t] ?? t}
@@ -257,14 +336,15 @@ function Slide({ p, position, count, tagLabels, stacked = false, eager = false, 
 
 type ArrowProps = { direction: -1 | 1; onClick: () => void };
 
-/** 32 px hairline arrow; icons are ink strokes, never glyphs. */
+/** 32 px hairline arrow (44 on touch screens); icons are ink strokes, never
+ * glyphs. */
 function Arrow({ direction, onClick }: ArrowProps) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-label={direction < 0 ? "Previous paper" : "Next paper"}
-      className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-card border border-ink-950/15 text-text-strong transition-colors duration-[var(--duration-fast)] hover:border-ink-950/30"
+      className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-card border border-ink-950/15 text-text-strong transition-colors duration-[var(--duration-fast)] hover:border-ink-950/30 coarse:h-11 coarse:w-11"
     >
       <svg
         width="16"
@@ -284,6 +364,8 @@ function Arrow({ direction, onClick }: ArrowProps) {
 }
 
 type Move = { dir: -1 | 1; steps: number };
+/** The stage's shape (see the fit effect); h is the active card's height in rem. */
+type Fit = { layout: "row" | "stack"; strips: number; h: number };
 
 export default function ResearchCarousel({
   items,
@@ -311,9 +393,9 @@ export default function ResearchCarousel({
   const pointerRef = useRef<{ x: number; y: number } | null>(null);
   const scrollRaf = useRef(0);
   const rowRef2 = useRef<HTMLDivElement>(null);
-  /** How many side strips the row can show while the active card keeps
-   * MIN_ACTIVE; recomputed on resize. n - 1 means "all of them". */
-  const [maxStrips, setMaxStrips] = useState(() => Math.max(0, items.length - 1));
+  /** The stage's shape, recomputed on resize: the card layout, how many side
+   * strips the row shows beside it, and the active card's height in rem. */
+  const [fit, setFit] = useState<Fit>(() => ({ layout: "row", strips: 0, h: ACTIVE_H / 16 }));
 
   const index = n > 0 ? Math.min(rawIndex, n - 1) : 0;
   const autoplay = stage && !reduced && n > 1;
@@ -413,28 +495,55 @@ export default function ResearchCarousel({
     return () => cancelAnimationFrame(raf);
   }, [running, n, intervalMs]);
 
-  // Fit: measure the row and the strip width, then keep only as many side
-  // strips as leave the active card its minimum width.
+  // Fit: measure the row, then pick the card layout and keep only as many
+  // side strips as leave the active card its figure pane and text pane.
   useLayoutEffect(() => {
     const row = rowRef2.current;
     if (!row || !stage) return;
     const measure = () => {
-      const rowW = row.clientWidth;
-      const k = rootScale();
+      const html = getComputedStyle(document.documentElement);
+      const rootPx = parseFloat(html.fontSize) || 16;
+      const k = rootPx / 16;
+      const cs = getComputedStyle(row);
+      // The content box: clientWidth counts the row's px-6 padding too (it
+      // used to, which let every strip fit and left the card at its minimum).
+      const rowW = row.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
       // --rc-i is clamp(4.5rem, 6vw, 7.5rem) and --rc-gap 0.75rem (rootClass).
-      const strip = Math.min(120 * k, Math.max(72 * k, window.innerWidth * 0.06));
-      const gap = 12 * k;
-      const minActive = Math.min(
-        rowW * MIN_ACTIVE_RATIO,
-        Math.max(MIN_ACTIVE_PX, ACTIVE_H * MIN_ACTIVE_ASPECT) * k,
+      const step = Math.min(120 * k, Math.max(72 * k, window.innerWidth * 0.06)) + 12 * k;
+      const stripsFor = (spare: number) => Math.max(0, Math.min(n - 1, Math.floor(spare / step)));
+      const fullH = ACTIVE_H * k;
+      const textMin = TEXT_MIN * k;
+      const beside = fullH * FIG_ASPECT + textMin;
+      let next: Fit;
+      if (rowW >= beside) {
+        next = { layout: "row", strips: stripsFor(rowW - beside), h: ACTIVE_H / 16 };
+      } else {
+        const strips = stripsFor(rowW * (1 - STACK_RATIO));
+        const stackH = (rowW - strips * step) / FIG_ASPECT + STACK_TEXT * k;
+        // --spacing-nav is in rem (index.css).
+        const nav = (parseFloat(html.getPropertyValue("--spacing-nav")) || 0) * rootPx;
+        next =
+          stackH <= window.innerHeight - nav - STAGE_CHROME * k
+            ? { layout: "stack", strips, h: stackH / rootPx }
+            : {
+                layout: "row",
+                strips: 0,
+                h: Math.max(MIN_H * k, Math.min(fullH, (rowW - textMin) / FIG_ASPECT)) / rootPx,
+              };
+      }
+      setFit((f) =>
+        f.layout === next.layout && f.strips === next.strips && Math.abs(f.h - next.h) < 0.01 ? f : next,
       );
-      const fits = Math.floor((rowW - minActive) / (strip + gap));
-      setMaxStrips(Math.max(0, Math.min(n - 1, fits)));
     };
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(row);
-    return () => ro.disconnect();
+    // A height change alone can switch the layout (the stacked card's room).
+    window.addEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
   }, [stage, n]);
 
   // Only a carousel with no pixel in the viewport pauses.
@@ -453,14 +562,16 @@ export default function ResearchCarousel({
     return () => document.removeEventListener("visibilitychange", onVisibility);
   }, []);
 
-  // Warm the figures two slots out so a card never slides in blank.
+  // Warm the figures two slots out so a card never slides in blank (not
+  // while the landing holds media for its hero clip).
+  const holdMedia = useMediaHold();
   useEffect(() => {
-    if (n < 3) return;
+    if (n < 3 || holdMedia) return;
     [2, -2].forEach((d) => {
       const src = figureChain(items[(index + d + n) % n])[0];
       if (src) new Image().src = src.src;
     });
-  }, [index, items, n]);
+  }, [index, items, n, holdMedia]);
 
   // Keyboard focus inside pauses; a mouse click on an arrow must not (the
   // button keeps focus after the click and would freeze the carousel).
@@ -516,8 +627,12 @@ export default function ResearchCarousel({
   useEffect(() => () => cancelAnimationFrame(scrollRaf.current), []);
 
   const strip = (
-    <div className={`mt-2.5 flex items-center gap-6 ${RAIL}`}>
-      <div className="flex min-w-0 flex-1 gap-2">
+    <div className={`mt-2.5 flex items-center gap-6 coarse:mt-1 ${RAIL}`}>
+      {/* On touch screens the segments are 2.75rem tall and touch each other
+          (no dead gap between targets); the drawn lines keep their 0.5rem
+          gaps through the inset. Eleven papers in a 342 px row still leaves
+          each target about 31 px wide. */}
+      <div className="flex min-w-0 flex-1 gap-2 coarse:gap-0">
         {items.map((p, i) => (
           <button
             key={p.id}
@@ -525,14 +640,14 @@ export default function ResearchCarousel({
             aria-label={`Go to paper ${i + 1}: ${p.title}`}
             aria-current={i === index ? "true" : undefined}
             onClick={() => select(i)}
-            className="relative h-8 min-w-0 flex-1 cursor-pointer"
+            className="relative h-8 min-w-0 flex-1 cursor-pointer coarse:h-11"
           >
-            <span className="absolute inset-x-0 top-[0.9375rem] h-0.5 bg-ink-950/10" />
+            <span className="absolute inset-x-0 top-[0.9375rem] h-0.5 bg-ink-950/10 coarse:inset-x-1 coarse:top-[calc(50%-1px)]" />
             <span
               ref={(el) => {
                 fillRefs.current[i] = el;
               }}
-              className="absolute inset-x-0 top-[0.9375rem] h-0.5 origin-left bg-ink-950/90"
+              className="absolute inset-x-0 top-[0.9375rem] h-0.5 origin-left bg-ink-950/90 coarse:inset-x-1 coarse:top-[calc(50%-1px)]"
             />
           </button>
         ))}
@@ -594,7 +709,7 @@ export default function ResearchCarousel({
           <div
             ref={rowRef2}
             className="flex w-full items-center gap-[var(--rc-gap)] px-6"
-            style={{ height: rem(ACTIVE_H) }}
+            style={{ ["--rc-h" as string]: `${fit.h}rem`, height: "var(--rc-h)" } as CSSProperties}
             onPointerMove={onPointerMove}
             onPointerDown={onPointerMove}
             onPointerLeave={onPointerLeave}
@@ -605,7 +720,7 @@ export default function ResearchCarousel({
               // Strips nearest the active card survive; the outermost are
               // dropped (width 0) until the active card has its minimum.
               const rank = rankOf(i, index, n);
-              const shown = isCurrent || rank <= maxStrips;
+              const shown = isCurrent || rank <= fit.strips;
               const motion = reduced ? "none" : `width ${STRIP_MS}ms ${STRIP_EASE}, height ${STRIP_MS}ms ${STRIP_EASE}, opacity ${STRIP_MS}ms ${STRIP_EASE}, border-color var(--duration-fast)`;
               return (
                 <div
@@ -621,11 +736,11 @@ export default function ResearchCarousel({
                   className={`relative shrink-0 overflow-hidden hover:border-ink-950/30 ${CARD} ${isCurrent ? "" : "cursor-pointer"} ${shown ? "" : "pointer-events-none border-0"}`}
                   style={{
                     width: isCurrent
-                      ? `calc(100% - ${maxStrips} * (var(--rc-i) + var(--rc-gap)))`
+                      ? `calc(100% - ${fit.strips} * (var(--rc-i) + var(--rc-gap)))`
                       : shown
                         ? "var(--rc-i)"
                         : 0,
-                    height: rem(isCurrent ? ACTIVE_H : SIDE_H),
+                    height: isCurrent ? "var(--rc-h)" : `calc(var(--rc-h) * ${SIDE_RATIO})`,
                     opacity: shown ? 1 : 0,
                     marginRight: shown ? undefined : `calc(-1 * var(--rc-gap))`,
                     transition: motion,
@@ -658,6 +773,8 @@ export default function ResearchCarousel({
                       position={i + 1}
                       count={n}
                       tagLabels={tagLabels}
+                      layout={fit.layout}
+                      short={fit.layout === "row" && fit.h < (ACTIVE_H / 16) * 0.9}
                       eager={isCurrent}
                       interactive={isCurrent}
                     />
@@ -681,9 +798,9 @@ export default function ResearchCarousel({
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`${i + 1} of ${n}`}
-                className={`w-[86vw] shrink-0 snap-start overflow-hidden ${CARD}`}
+                className={`w-[86vw] shrink-0 snap-start overflow-hidden landscape:h-[min(calc(100svh-var(--spacing-nav)-2rem),30rem)] ${CARD}`}
               >
-                <Slide p={p} position={i + 1} count={n} tagLabels={tagLabels} stacked eager={i === 0} />
+                <Slide p={p} position={i + 1} count={n} tagLabels={tagLabels} layout="compact" eager={i === 0} />
               </div>
             ))}
           </div>

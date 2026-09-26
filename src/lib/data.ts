@@ -36,11 +36,16 @@ export type UpcomingEvent = {
   image?: string;
   image_alt?: string;
   rules_url?: string;
+  /** The race's own site. After the registration deadline it replaces
+   * "Register your team" as the spotlight's primary button. */
+  site_url?: string;
 };
 
 export type PastRace = {
   name: string;
   url: string;
+  /** Wayback capture, set when the original site no longer answers. */
+  archive?: string;
 };
 
 export type Partner = {
@@ -51,10 +56,23 @@ export type Partner = {
   image_rest?: string;
   /** Ribbon hover / focus state: the colour logo at the same size. */
   image_hover?: string;
+  /** Pixel size of image_rest and image_hover (the trimmed WebPs; `image`,
+   * the untrimmed original, has its own). Every <img> of the logo takes its
+   * width from this aspect at its fixed height (logoAttrs). Re-read after
+   * scripts/partner-tint.py or scripts/partner-trim.py rewrites the files. */
+  width: number;
+  height: number;
   /** Kind of institution, for the About wall's groups. Absent on older
    * records, which fall back to one ungrouped wall. */
   category?: "university" | "industry" | "organization" | "other";
 };
+
+/** Numeric width and height for a partner logo drawn at a fixed height, so
+ * the box is right before the file arrives (and "width" is never "auto"). */
+export const logoAttrs = (p: Partner, height: number) => ({
+  width: p.width > 0 && p.height > 0 ? Math.round((height * p.width) / p.height) : height,
+  height,
+});
 
 export type NewsItem = {
   title: string;
@@ -131,10 +149,62 @@ export type Team = {
   logo?: string;
   since_year?: number;
   highlights?: TeamHighlight[];
+  /** Review bookkeeping only; nothing renders it (Cedric, 2026-09-25). */
   status: "verify" | "published";
   source?: string;
   /** Square team photo under public/media/team/ (media curator). */
   photo?: string;
+};
+
+/** An image in a spinoff feature (public/media/spinoffs). Every one has a
+ * provenance row in docs/ASSET_MANIFEST.md; `source` repeats it for review
+ * and is not rendered. */
+export type SpinoffImage = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  source?: string;
+};
+
+/** One thing that grew out of the car: a company, a product, a team or an
+ * initiative (public/data/spinoffs.json, About section "Spinoffs"). `what`
+ * and `origin` are our own sentences drafted from the first-party pages in
+ * `source` / `evidence`; an `origin` starting with TODO(content) is a question
+ * for Cedric and is not rendered (the entry still is). A missing `logo`,
+ * `car` or `preview` drops that slot from the feature. */
+export type Spinoff = {
+  name: string;
+  kind: "company" | "product" | "team" | "initiative";
+  /** Shown instead of `kind` when the plain kind would mislead ("nonprofit"). */
+  label?: string;
+  what: string;
+  origin: string | null;
+  since: number | null;
+  /** The homepage: the preview window links here. */
+  url: string;
+  /** The company's own mark, shown beside the name. */
+  logo?: SpinoffImage | null;
+  /** The company's car: the feature's main visual, linking to its page. */
+  car?: (SpinoffImage & { name: string; url: string }) | null;
+  /** Our own 1280x800 capture of the homepage, framed as a browser window. */
+  preview?: SpinoffImage | null;
+  /** Review state in the JSON only; nothing on the page shows it. */
+  status: "verify" | "published";
+  source: string;
+  /** Who named it a spinoff, when that is a person rather than a page. */
+  named_by?: string;
+  evidence?: { url: string; says: string }[];
+  note?: string;
+};
+
+export type SpinoffsFile = {
+  note: string;
+  updated: string;
+  /** Rendered on /about. */
+  entries: Spinoff[];
+  /** Proposed, not rendered, until Cedric moves one into `entries`. */
+  candidates: Spinoff[];
 };
 
 export type Highlight = {
@@ -173,8 +243,10 @@ export type MapEvent = {
   labelDy?: number;
   /** The event's own page. Absent when none ever existed. */
   url?: string;
-  /** live = answered 200 when last checked; archive = a Wayback capture
-   * because the original domain is dead; none = no page to link. */
+  /** Wayback capture of `url`, linked instead of it when url_status is archive. */
+  archive?: string;
+  /** live = answered 200 when last checked; archive = the original site is
+   * gone and the timeline links `archive`; none = no page to link. */
   url_status?: "live" | "archive" | "none";
   url_note?: string;
 };
@@ -208,25 +280,6 @@ export type EventsMap = {
   events: MapEvent[];
   countries: MapCountry[];
   regions: MapRegion[];
-};
-
-/** public/data/platform.json: the four pillars with their media panel slot. */
-export type PlatformMedia = {
-  type: "image" | "video";
-  src: string;
-  poster: string;
-  caption: string;
-  credit?: string;
-};
-
-export type PlatformRow = {
-  id: string;
-  n: string;
-  title: string;
-  body: string;
-  href: string;
-  linkText: string;
-  media: PlatformMedia;
 };
 
 /** public/data/community.json (seed values; refreshed by scripts/slack_stats.py). */
@@ -303,7 +356,6 @@ export type Community = {
   members: number;
   members_display: string;
   timezones: number;
-  continents: number;
   updated: string;
   source: string;
   /** Written by the media curator (landing v4 section 9). */
@@ -316,11 +368,37 @@ export type Community = {
   };
 };
 
-async function loadJson<T>(name: string): Promise<T> {
-  const res = await fetch(`${import.meta.env.BASE_URL}data/${name}`);
-  if (!res.ok) throw new Error(`Failed to load ${name}: ${res.status}`);
-  return res.json() as Promise<T>;
+/** How long a JSON read may take, headers and body, before it counts as
+ * failed. A request that never answered used to leave a block on its
+ * placeholder for good (the Start here row invisible, /news and /about on
+ * their skeletons); after this the caller's failure path runs instead. */
+export const READ_TIMEOUT_MS = 8000;
+
+/**
+ * fetch + JSON, given up after READ_TIMEOUT_MS through an AbortController.
+ * An HTTP error, a malformed body and the timeout all reject. `signal`
+ * aborts it early (a section unmounting); `cache` goes through to fetch.
+ */
+export async function fetchJson<T>(
+  url: string,
+  { signal, cache }: { signal?: AbortSignal; cache?: RequestCache } = {},
+): Promise<T> {
+  const ctrl = new AbortController();
+  const timer = window.setTimeout(() => ctrl.abort(), READ_TIMEOUT_MS);
+  const onAbort = () => ctrl.abort();
+  if (signal?.aborted) ctrl.abort();
+  signal?.addEventListener("abort", onAbort);
+  try {
+    const res = await fetch(url, { signal: ctrl.signal, cache });
+    if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
+    return (await res.json()) as T;
+  } finally {
+    window.clearTimeout(timer);
+    signal?.removeEventListener("abort", onAbort);
+  }
 }
+
+const loadJson = <T>(name: string): Promise<T> => fetchJson<T>(`${import.meta.env.BASE_URL}data/${name}`);
 
 export const loadUpcomingEvents = () => loadJson<UpcomingEvent[]>("upcoming_events.json");
 export const loadPastRaces = () => loadJson<PastRace[]>("past_races.json");
@@ -345,5 +423,88 @@ export const loadEventsMap = async (): Promise<EventsMap> => {
   };
 };
 export const loadCommunity = () => loadJson<Community>("community.json");
-export const loadPlatform = () => loadJson<PlatformRow[]>("platform.json");
+export const loadSpinoffs = () => loadJson<SpinoffsFile>("spinoffs.json");
 
+
+/** One way in's picture. The landing's phone rows show `thumb`; its tiles
+ * (from `desktop:`) show `src` in a 16/10 frame and play `video` over it. */
+export type PathMedia = {
+  /** 480x300 (16/10) still for the phone rows' small inline image. */
+  thumb: string;
+  /** Full-size still: the clip's poster, or the photo itself. */
+  src: string;
+  width: number;
+  height: number;
+  /** Muted loop for the tile, played only in view and never under reduced
+   * motion. */
+  video?: string;
+  alt: string;
+  /** What the picture shows and where it was taken, and `credit`: kept for
+   * the record; never rendered (docs/HANDOFF.md section 6). */
+  caption?: string;
+  credit?: string;
+};
+
+/** public/data/paths.json: the ways in that the landing's "Start here" lists
+ * (ui/StartHere), plus the two learning tracks the Build and
+ * Learn rebuild will render (docs/LEARN_TERRAIN.md). */
+export type EntryPath = {
+  id: string;
+  /** Two-digit index shown in mono beside the label. */
+  n: string;
+  /** The section's name: "Build". */
+  label: string;
+  /** One plain sentence under the label. */
+  line: string;
+  /** Internal route, `/#anchor`, external URL or mailto. */
+  href: string;
+  /** Verb + object: "Build the car". */
+  linkText: string;
+  media?: PathMedia;
+  /** Personas from the roboracer-audiences skill this path serves. */
+  for?: string[];
+  /** The track (below) that the path's destination starts. */
+  track?: string;
+  todo?: string;
+};
+
+export type TrackLink = { label: string; href: string };
+
+export type TrackStep = {
+  n: string;
+  /** Stage id within the track (get-running: sim, build, system). */
+  stage?: string;
+  title: string;
+  body: string;
+  href: string;
+  links?: TrackLink[];
+  note?: string;
+};
+
+export type LearningTrack = {
+  id: string;
+  title: string;
+  summary: string;
+  /** The site route that hosts the track today. */
+  home: string;
+  stages?: { id: string; title: string }[];
+  /** A figure quoted from the docs; `status: "verify"` until Cedric confirms
+   * it may appear on the site. */
+  estimate?: { text: string; source: string; status: "verify" | "published" };
+  /** Course plans by length, quoted from the course's Start Here page. */
+  plans?: {
+    source: string;
+    options: { weeks: number; modules: string[]; labs: number[]; outcome: string }[];
+  };
+  steps: TrackStep[];
+  help?: TrackLink[];
+  materials?: TrackLink[];
+};
+
+export type PathsFile = {
+  checked: string;
+  paths: EntryPath[];
+  tracks: LearningTrack[];
+};
+
+export const loadPaths = () => loadJson<PathsFile>("paths.json");

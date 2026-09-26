@@ -18,23 +18,36 @@ function initials(name: string): string {
 /**
  * Featured teams as hairline cells, each with a square neutral image slot on
  * top: the team photo (object-cover) when the media curator found one, else
- * the team logo (object-contain), else mono initials. Every entry renders (Cedric, 2026-08-21: nothing hidden on
- * localhost); entries not yet "published" carry a mono "unverified" tag.
- * Results and TODO-marked institutions render as data, in mono. 10 teams =
- * two clean rows of five on desktop, five rows of two on mobile.
+ * the team logo (object-contain), else mono initials. Every entry renders
+ * (Cedric, 2026-08-21), with no verify tag (Cedric, 2026-09-25: the page is
+ * public and credit is fine). Institution and country come from the
+ * RoboRacer_Teams_DB sheet (docs/content/teams.sheet.json); a TODO-marked
+ * institution is left out rather than shown. 10 teams = two clean rows of
+ * five on desktop.
+ *
+ * On compact: below lg (a phone in either orientation) each team is one row,
+ * a 5rem photo left, name and result right, so ten teams are not ten screens
+ * of square photos: one column on a portrait phone, two from sm. On a
+ * landscape phone the stacked cards were 414 px tall under a 334 px window
+ * (LANDING-09); a row fits. Everywhere else (desktop:, or lg and up) the
+ * cards stack their photo over the text, 4 across with 4/3 photos until lg,
+ * then 5 with square ones.
  */
 export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
   const ink = on === "ink";
   if (teams.length === 0) return null;
   return (
-    <ul className="grid grid-cols-2 overflow-hidden rounded-card border border-ink-950/10 lg:grid-cols-5">
+    <ul className="grid overflow-hidden rounded-card border border-ink-950/10 compact:sm:max-lg:grid-cols-2 desktop:max-lg:grid-cols-4 lg:grid-cols-5">
       {teams.map((team) => {
         const best = team.highlights?.[0];
         const institution = team.institution?.startsWith("TODO(content)") ? undefined : team.institution;
+        const place = [institution, team.country].filter(Boolean).join(" · ");
         return (
           <li key={team.name} className={`min-w-0 -mt-px -ml-px border-t border-l border-ink-950/10 ${ink ? "bg-ink-900" : "bg-paper-50"}`}>
-            <article className="flex h-full min-w-0 flex-col">
-              <div className={`relative aspect-square ${ink ? "bg-ink-800" : "bg-paper-200"}`}>
+            <article className="flex h-full min-w-0 flex-col compact:max-lg:flex-row compact:max-lg:gap-4 compact:max-lg:p-4">
+              <div
+                className={`relative aspect-square compact:max-lg:w-20 compact:max-lg:shrink-0 compact:max-lg:self-start desktop:max-lg:aspect-[4/3] ${ink ? "bg-ink-800" : "bg-paper-200"}`}
+              >
                 {team.photo ? (
                   <img
                     src={`${import.meta.env.BASE_URL}${team.photo.replace(/^\//, "")}`}
@@ -53,7 +66,7 @@ export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
                     height={320}
                     loading="lazy"
                     decoding="async"
-                    className="absolute inset-0 h-full w-full object-contain p-6"
+                    className="absolute inset-0 h-full w-full object-contain p-6 compact:max-lg:p-3"
                   />
                 ) : (
                   <span
@@ -64,16 +77,13 @@ export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
                   </span>
                 )}
               </div>
-              <div className="flex min-w-0 grow flex-col gap-1.5 p-4 sm:p-5">
+              <div className="flex min-w-0 grow flex-col gap-1.5 p-5 compact:max-lg:p-0">
                 <h3 className={`font-display text-body font-semibold ${ink ? "text-text-on-ink" : "text-text-strong"}`}>
                   {team.name}
                 </h3>
-                <p className={`font-mono text-eyebrow tracking-normal ${ink ? "text-text-on-ink-muted" : "text-text-muted"}`}>
-                  {[institution, team.country].filter(Boolean).join(" · ") || "institution tbc"}
-                </p>
-                {team.status !== "published" && (
+                {place && (
                   <p className={`font-mono text-eyebrow tracking-normal ${ink ? "text-text-on-ink-muted" : "text-text-muted"}`}>
-                    unverified
+                    {place}
                   </p>
                 )}
                 {best && (
@@ -86,7 +96,7 @@ export default function TeamGrid({ teams, on = "paper" }: TeamGridProps) {
                     href={team.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-block w-fit py-1 text-small font-semibold ${
+                    className={`inline-block w-fit py-1 text-small font-semibold coarse:-my-2 coarse:py-3 ${
                       ink
                         ? "text-text-on-ink underline underline-offset-4 decoration-text-on-ink/30 hover:decoration-rr-violet hover:decoration-2"
                         : "text-text-strong underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2"

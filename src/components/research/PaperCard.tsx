@@ -16,7 +16,7 @@ const FRAME =
 const TITLE_LINK = "underline-offset-4 hover:underline hover:decoration-rr-violet hover:decoration-2";
 const MONO = "font-mono text-eyebrow tracking-normal text-text-muted";
 const MONO_LINK =
-  "text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
+  "text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2 coarse:inline-flex coarse:min-h-11 coarse:items-center";
 
 /**
  * Featured publication card, paper only. Every card carries a picture: the
@@ -25,6 +25,14 @@ const MONO_LINK =
  * by them, it can be small" - never an empty frame). A paper with no
  * resolvable link renders as plain text with a mono tag and a Scholar
  * search, so the card is still an entry point.
+ *
+ * One shape at every size: the figure across the top at the card's full
+ * width, the text under it. The mobile pass (2026-09-25) had turned the card
+ * into a row with a 5rem thumb on phones; Cedric asked the same day for the
+ * larger picture with the paper info below it. The page keeps the length
+ * down instead by showing four featured cards on a phone and folding the
+ * rest. On a phone (`compact:`) the topics join the mono venue line rather
+ * than stacking as pills.
  */
 export default function PaperCard({
   publication,
@@ -75,8 +83,8 @@ export default function PaperCard({
             figure
           )}
         </div>
-        <div className="flex flex-1 flex-col gap-3 p-6">
-          <h3 className="font-display font-semibold leading-snug text-text-strong">
+        <div className="flex flex-1 flex-col gap-3 p-6 compact:gap-2 compact:p-5">
+          <h3 className="font-display font-semibold leading-snug text-text-strong compact:text-lead">
             {href ? (
               <a href={href} target="_blank" rel="noopener noreferrer" className={TITLE_LINK}>
                 {publication.title}
@@ -86,12 +94,17 @@ export default function PaperCard({
             )}
           </h3>
           <p className="text-small text-text-body">{authorLine(publication.authors)}</p>
-          <p className="font-mono text-small text-text-muted">
+          {/* On a phone the topics join this line, in the list rows' mono:
+              three pills wrap to three lines there. */}
+          <p className="font-mono text-small text-text-muted compact:text-eyebrow compact:tracking-normal">
             {publication.venue_short?.trim() || publication.venue}
             {publication.year ? ` · ${publication.year}` : ""}
+            {publication.tags.length > 0 && (
+              <span className="desktop:hidden"> · {publication.tags.map((t) => tagLabels[t] ?? t).join(", ")}</span>
+            )}
           </p>
           {!href && (
-            <p className={`flex flex-wrap items-center gap-x-3 gap-y-1 ${MONO}`}>
+            <p className={`flex flex-wrap items-center gap-x-3 gap-y-1 coarse:-my-3 ${MONO}`}>
               <span>no link on file</span>
               <a
                 href={scholarSearchUrl(publication.title)}
@@ -104,7 +117,7 @@ export default function PaperCard({
             </p>
           )}
           {publication.tags.length > 0 && (
-            <ul className="mt-auto flex flex-wrap gap-2 pt-2">
+            <ul className="mt-auto flex flex-wrap gap-2 pt-2 compact:hidden">
               {publication.tags.map((t) => (
                 <li key={t} className={`rounded-pill border border-ink-950/10 px-2.5 py-1 ${MONO}`}>
                   {tagLabels[t] ?? t}
@@ -116,7 +129,7 @@ export default function PaperCard({
       </div>
       {/* A generated tile has nobody to credit; the row keeps its height so
           every card in a grid row ends on the same line. */}
-      <p className={MONO} aria-hidden={img ? undefined : true}>
+      <p className={`${MONO} ${img ? "" : "compact:hidden"}`} aria-hidden={img ? undefined : true}>
         {img ? figureCredit(publication.authors) : "\u00a0"}
       </p>
     </article>

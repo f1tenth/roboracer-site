@@ -21,8 +21,7 @@ export type RacecarPartId =
 
 export type RacecarPart = {
   id: RacecarPartId;
-  name: string;
-  description: string;
+  /** xacro link and joint the part mirrors (documentation for mesh syncs). */
   frame: string;
   joint: string;
   asset: string;
@@ -30,7 +29,6 @@ export type RacecarPart = {
   position: VectorTuple;
   rotation?: VectorTuple;
   explosion: VectorTuple;
-  color: string;
 };
 
 const ASSET_ROOT = `${import.meta.env.BASE_URL}models/racecar`;
@@ -42,7 +40,7 @@ const ASSET_ROOT = `${import.meta.env.BASE_URL}models/racecar`;
 // order "ZYX" (= URDF fixed-axis rpy) by RacecarAssembly.tsx. The LiDAR has
 // no rotation on purpose: its mesh is authored upright, centered on its
 // bounding box, and verified at yaw 0/90/180/270 (docs/design/CAR_CHAPTER.md).
-// `explosion` is the full offset at explosion 1 (/assembly's slider end); the
+// `explosion` is the full offset at explosion 1 (/assembly's exploded view); the
 // landing chapter holds at half of it (CHAPTER_MAX_EXPLOSION). Ceilings from
 // landing-v4 section 4 (Cedric: "wheels stick out too far"): wheels 0.11 m
 // lateral (the hold pose moves them 0.055 m, one 40 mm tire width beyond the
@@ -54,38 +52,28 @@ const ASSET_ROOT = `${import.meta.env.BASE_URL}models/racecar`;
 // and tub floor (z 0.029) where the ROS mesh only had abstract blocks (removed
 // from the chassis re-export, CAR_CHAPTER.md section 7). Their explosions are
 // small lifts, so they stay under the plate at every explosion value.
-// `color` drives the part label dots and panel swatches only; the values are
-// the part tones from racecarMaterials.ts (the accent plate shows the
-// committed ACCENT_VARIANT).
+// What each part is called and does on the page lives in CAR_PARTS below.
 export const RACECAR_PARTS: readonly RacecarPart[] = [
   {
     id: "chassis",
-    name: "Chassis",
-    description: "The complete sprung mass and base_link visual.",
     frame: "base_link",
     joint: "Visual origin",
     asset: `${ASSET_ROOT}/roboracer_chassis.glb`,
     format: "glb",
     position: [-0.17145, 0, 0],
     explosion: [0, 0, 0],
-    color: "#2c2f35",
   },
   {
     id: "accent",
-    name: "Accent plate",
-    description: "Tintable upper deck used to distinguish race agents.",
     frame: "base_link",
     joint: "Visual origin",
     asset: `${ASSET_ROOT}/roboracer_accent.stl`,
     format: "stl",
     position: [-0.17145, 0, 0],
     explosion: [0, 0, 0.11],
-    color: "#00d1da",
   },
   {
     id: "lidar",
-    name: "LiDAR",
-    description: "Top-mounted laser scanner and its fixed sensor frame.",
     frame: "laser_model",
     joint: "base_to_laser_model",
     asset: `${ASSET_ROOT}/roboracer_lidar.glb`,
@@ -93,64 +81,45 @@ export const RACECAR_PARTS: readonly RacecarPart[] = [
     position: [0.095512, 0.000249, 0.121636],
     // Landing v5 round two (Cedric): "a tinge higher, maybe 15%"; 0.14 -> 0.16.
     explosion: [0.02, 0, 0.16],
-    color: "#e8641b",
   },
   {
     id: "jetson",
-    name: "Jetson Orin",
-    description:
-      "NVIDIA Jetson Orin developer kit on the upper deck: carrier board, module and finned heatsink. Site model, not a racecar_mesh.xacro link.",
     frame: "base_link",
     joint: "Fixed (site model)",
     asset: `${ASSET_ROOT}/roboracer_jetson.glb`,
     format: "glb",
     position: [0.005, 0, 0.0764],
     explosion: [0, 0, 0.01],
-    color: "#8c9198",
   },
   {
     id: "pcb",
-    name: "Power board",
-    description:
-      "The power board PCB at the rear of the upper deck: screw terminals, DC-DC module, switch. Site model, not a racecar_mesh.xacro link.",
     frame: "base_link",
     joint: "Fixed (site model)",
     asset: `${ASSET_ROOT}/roboracer_pcb.glb`,
     format: "glb",
     position: [-0.105, -0.005, 0.0764],
     explosion: [-0.02, 0, 0.03],
-    color: "#2e4a34",
   },
   {
     id: "vesc",
-    name: "VESC",
-    description:
-      "VESC motor controller in the rear of the tub, beside the motor. Site model, not a racecar_mesh.xacro link.",
     frame: "base_link",
     joint: "Fixed (site model)",
     asset: `${ASSET_ROOT}/roboracer_vesc.glb`,
     format: "glb",
     position: [-0.134, 0, 0.03],
     explosion: [0, 0, 0.04],
-    color: "#23262c",
   },
   {
     id: "servo",
-    name: "Steering servo",
-    description:
-      "Standard-size steering servo in the front of the tub, ahead of the battery. Site model, not a racecar_mesh.xacro link. TODO(content): the exact servo model.",
     frame: "base_link",
     joint: "Fixed (site model)",
     asset: `${ASSET_ROOT}/roboracer_servo.glb`,
     format: "glb",
     position: [0.11, 0, 0.029],
     explosion: [0.01, 0, 0.05],
-    color: "#15171c",
   },
   {
     id: "front-left-wheel",
-    name: "Front left wheel",
-    description: "Steering wheel mesh with its measured camber and toe correction.",
     frame: "front_left_wheel",
     joint: "front_left_hinge_to_wheel",
     asset: `${ASSET_ROOT}/roboracer_wheel_front_left.glb`,
@@ -158,12 +127,9 @@ export const RACECAR_PARTS: readonly RacecarPart[] = [
     position: [0.150283, 0.132904, 0.051058],
     rotation: [-3.574, 0.068, 2.177].map(degToRad) as VectorTuple,
     explosion: [0.05, 0.11, 0.03],
-    color: "#b4b9c1",
   },
   {
     id: "front-right-wheel",
-    name: "Front right wheel",
-    description: "Steering wheel mesh with its measured camber and toe correction.",
     frame: "front_right_wheel",
     joint: "front_right_hinge_to_wheel",
     asset: `${ASSET_ROOT}/roboracer_wheel_front_right.glb`,
@@ -171,12 +137,9 @@ export const RACECAR_PARTS: readonly RacecarPart[] = [
     position: [0.149152, -0.1316, 0.050883],
     rotation: [1.899, -0.046, 2.803].map(degToRad) as VectorTuple,
     explosion: [0.05, -0.11, 0.03],
-    color: "#b4b9c1",
   },
   {
     id: "rear-left-wheel",
-    name: "Rear left wheel",
-    description: "Driven rear wheel attached through a fixed hinge frame.",
     frame: "back_left_wheel",
     joint: "back_left_hinge_to_wheel",
     asset: `${ASSET_ROOT}/roboracer_wheel_rear_left.glb`,
@@ -184,12 +147,9 @@ export const RACECAR_PARTS: readonly RacecarPart[] = [
     position: [-0.172283, 0.130772, 0.051076],
     rotation: [-2.543, -0.005, -0.246].map(degToRad) as VectorTuple,
     explosion: [-0.04, 0.11, 0.03],
-    color: "#26282d",
   },
   {
     id: "rear-right-wheel",
-    name: "Rear right wheel",
-    description: "Driven rear wheel attached through a fixed hinge frame.",
     frame: "back_right_wheel",
     joint: "back_right_hinge_to_wheel",
     asset: `${ASSET_ROOT}/roboracer_wheel_rear_right.glb`,
@@ -197,7 +157,123 @@ export const RACECAR_PARTS: readonly RacecarPart[] = [
     position: [-0.170617, -0.132075, 0.050856],
     rotation: [2.932, 0.007, -0.29].map(degToRad) as VectorTuple,
     explosion: [-0.04, -0.11, 0.03],
-    color: "#26282d",
+  },
+] as const;
+
+/** The build section of the docs that /build embeds (Traxxas Slash 4x4 car). */
+export const BUILD_GUIDE_URL =
+  "https://f1tenth.readthedocs.io/en/main/getting_started/build_car/index.html";
+const GUIDE = "https://f1tenth.readthedocs.io/en/main/getting_started/build_car";
+
+/** The step that joins the two levels and wires everything (not one part). */
+export const WIRING_GUIDE_URL = `${GUIDE}/all_together.html`;
+
+export type CarPartEntry = {
+  /** Stable key; also the part id when the entry is a single part. */
+  id: string;
+  /** Plain name a newcomer would use. */
+  name: string;
+  /** Product, only where the build guide or Cedric names it. */
+  product?: string;
+  /** One line: what the part does. */
+  role: string;
+  /** One more line, shown once the entry is selected. */
+  note?: string;
+  /** The meshes this entry selects in the 3D view. */
+  parts: readonly RacecarPartId[];
+  /** The build-guide section that covers it. Every URL here answered 200 with
+   * the anchor present (checked 2026-09-24). */
+  guide?: { label: string; href: string };
+};
+
+// /assembly's part list, in the order the build guide assembles the car: the
+// lower level chassis first, then the platform deck and what the guide mounts
+// on it, in its mounting order (VESC, Jetson, power board, LiDAR). Roles follow
+// what the guide connects to what (motor and servo to the VESC, 12 V from the
+// power board to the Jetson and the LiDAR); the servo is the one stock
+// electronic part the guide keeps. Products: Traxxas Slash 4x4 and Hokuyo UTM-30LX from the guide,
+// Jetson Orin from Cedric (the guide itself still describes the Xavier NX).
+// The platform deck is the accent STL (docs/design/CAR_CHAPTER.md: "the upper
+// platform deck is the accent STL"); the simulator tints it per car.
+export const CAR_PARTS: readonly CarPartEntry[] = [
+  {
+    id: "chassis",
+    name: "Chassis",
+    product: "Traxxas Slash 4x4",
+    role: "The base. Its stock electronics come out.",
+    note: "Only the steering servo stays in.",
+    parts: ["chassis"],
+    guide: { label: "Lower level chassis", href: `${GUIDE}/lower_level_chassis.html` },
+  },
+  {
+    id: "wheels",
+    name: "Wheels",
+    role: "From the kit. The front pair steers.",
+    note: "Nothing to build here.",
+    parts: ["front-left-wheel", "front-right-wheel", "rear-left-wheel", "rear-right-wheel"],
+  },
+  {
+    id: "servo",
+    name: "Steering servo",
+    // TODO(content): the exact servo model; the guide only says the stock
+    // Traxxas servo stays, so the landing callout names only the part.
+    product: "Traxxas, from the kit",
+    role: "Turns the front wheels.",
+    note: "The PPM cable connects it to the VESC.",
+    parts: ["servo"],
+    guide: { label: "Attaching the PPM cable", href: `${GUIDE}/all_together.html#attaching-the-ppm-cable` },
+  },
+  {
+    id: "accent",
+    name: "Platform deck",
+    product: "laser-cut",
+    role: "The plate the electronics mount on.",
+    note: "Cyan here: the simulator colors each car's deck.",
+    parts: ["accent"],
+    guide: { label: "Upper level chassis", href: `${GUIDE}/upper_level_chassis.html` },
+  },
+  {
+    id: "vesc",
+    name: "Motor controller",
+    product: "VESC",
+    role: "Drives the motor and the steering servo.",
+    note: "The Jetson sends it commands over USB.",
+    parts: ["vesc"],
+    guide: { label: "Mounting the VESC", href: `${GUIDE}/upper_level_chassis.html#mounting-the-vesc` },
+  },
+  {
+    id: "jetson",
+    name: "Computer",
+    product: "NVIDIA Jetson Orin",
+    role: "Runs your driving code.",
+    // The guide's section is still written for the Xavier NX (see above), so
+    // the entry says which one the reader is looking at.
+    note: "It reads the LiDAR and commands the VESC, both over USB. The build guide shows a Jetson Xavier NX; this model shows the Orin.",
+    parts: ["jetson"],
+    guide: {
+      label: "Mounting the Jetson",
+      href: `${GUIDE}/upper_level_chassis.html#mounting-the-nvidia-jetson-nx`,
+    },
+  },
+  {
+    id: "pcb",
+    name: "Power board",
+    role: "Feeds battery power to the Jetson and LiDAR.",
+    note: "Both take 12 V from its terminals.",
+    parts: ["pcb"],
+    guide: {
+      label: "Mounting the power board",
+      href: `${GUIDE}/upper_level_chassis.html#mounting-the-powerboard`,
+    },
+  },
+  {
+    id: "lidar",
+    name: "LiDAR",
+    product: "Hokuyo UTM-30LX",
+    role: "Measures the distance to the walls.",
+    note: "A 2D laser scanner. The UTM-30LX plugs into the Jetson by USB.",
+    parts: ["lidar"],
+    guide: { label: "Mounting the LiDAR", href: `${GUIDE}/upper_level_chassis.html#mounting-the-lidar` },
   },
 ] as const;
 
@@ -230,8 +306,9 @@ export type RacecarCallout = {
 // build-old.html); "Only brushless DC motors" and the Traxxas Slash 4x4
 // chassis (TRA6804R / TRA68086) from the competition rules. The UTM-30LX and
 // the Jetson Orin are Cedric's (landing v4 review). The steering servo's model
-// is not in the docs (the Slash 4x4 ships with Traxxas's own servo), hence
-// " · verify". Anchors sit on the parts themselves (each site-modeled part
+// is not in the docs (the Slash 4x4 ships with Traxxas's own servo), so its
+// callout names only the part (the " · verify" suffix went, Cedric
+// 2026-09-25). Anchors sit on the parts themselves (each site-modeled part
 // carries its own anchor), except the motor can (`motor_blue`, 33 mm, rear
 // right of the tub) and the lower deck's front-right corner on the chassis.
 // Leader lengths: "above" 44 / 84 / 100; "below" 40 (servo, whose anchor
@@ -278,7 +355,7 @@ export const RACECAR_CALLOUTS: readonly RacecarCallout[] = [
   },
   {
     id: "servo",
-    label: "Steering servo · verify",
+    label: "Steering servo",
     part: "servo",
     anchor: [0.11, 0.012, 0.069],
     side: "below",

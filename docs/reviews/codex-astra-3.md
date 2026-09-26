@@ -1,0 +1,11 @@
+# Codex review 3 (gpt-6-astra), 2026-09-25, commits f2028b4..5c0f31c (the mobile pass)
+
+Read-only review of the mobile pass. Triage by the lead: all six accepted and
+fixed in round 3 (branch revamp/p2-round3, docs/qa/polish-2-round3.md).
+
+1. **[P2] src/pages/Rules.tsx:66** — An arrival URL such as `/rules#%` throws `URIError` in the new effect, replacing the rulebook with the route error fallback. Decode the fragment inside try/catch and ignore malformed fragments, as `useScrollToHash` already does.
+2. **[P2] src/components/NavBar.tsx:147** — The scroll lock leaves programmatic scrolling active: an existing Lenis animation continues, and opening the menu at the landing's top does not prevent the hero's delayed `window.scrollTo` glide, so closing the menu can reveal a different scroll position. Share the menu's lock state with both scroll drivers; stop/resume Lenis and cancel or defer the hero glide while locked.
+3. **[P2] src/components/ui/ExplodedModel.tsx:285** — Breakpoint changes recreate the trigger without resetting its manually written explosion, callout and photo state; a new desktop trigger starting below the viewport leaves the exploded car and hidden photo in place. Extract a progress synchroniser, invoke it on initialisation, refresh and update, and restore the owned state during cleanup.
+4. **[P2] src/components/NavBar.tsx:153** — The modal handles Escape but never wraps Tab or Shift+Tab; `inert` removes background targets without keeping focus inside the navigation, and the panel lacks dialog semantics. Add a focus loop over the bar and panel and expose the boundary as a labelled modal dialog.
+5. **[P2] src/index.css:586** — Browsers without `svh`/`lvh` discard the menu's sole height bound and the scrim's sole height declaration; with the page lock an overflowing menu leaves its lower links unreachable. Declare `vh` fallbacks first and guard the `svh` spacing-token overrides with `@supports`.
+6. **[P2] src/components/ui/HeroChapter.tsx:328** — The sequencer captures `DESKTOP_QUERY` once, so after a desktop-to-compact resize later clips still request the desktop encode. Evaluate the query when selecting each upcoming clip, or keep a live media-query ref, without restarting playback.

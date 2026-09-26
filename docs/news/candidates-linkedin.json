@@ -1,0 +1,1805 @@
+{
+  "generated": "2026-09-25",
+  "branch": "revamp/p3-news-linkedin",
+  "source": "LinkedIn public pages (no login), read with curl and a desktop browser User-Agent; discovery via web search restricted to linkedin.com",
+  "schema_notes": {
+    "date": "Event date for results and race recaps (post date kept in post_date); post date for announcements, milestones and other posts. Event dates not stated in a post come from docs/EVENTS_VERIFICATION.md and are named in notes.",
+    "embed_urn": "The post's own share or ugcPost URN read from the page's main article (data-attributed-urn). embed_src is the matching LinkedInEmbed frame URL. Pulse articles cannot be embedded (null).",
+    "image_urls": "Public media.licdn.com URLs from the post's structured data (video posts: the video cover). Nothing is downloaded; permission is needed before any image is copied into the repo.",
+    "priority": "A = lead item for the period, B = good supporting item, C = filler or context.",
+    "facts": "Each fact with where it appears (text, poster, image card, photo n)."
+  },
+  "counts": {
+    "total": 49,
+    "by_period": {
+      "2016-2019": 3,
+      "2020-2023": 14,
+      "2024": 15,
+      "2025": 11,
+      "2026": 6
+    },
+    "by_kind": {
+      "milestone": 8,
+      "post": 14,
+      "announcement": 15,
+      "result": 12
+    },
+    "by_priority": {
+      "A": 25,
+      "B": 13,
+      "C": 11
+    }
+  },
+  "candidates": [
+    {
+      "id": "f110-simulator-open-source-2019",
+      "date": "2019-03-01",
+      "date_precision": "day",
+      "post_date": "2019-03-01",
+      "title": "The F1/10 racing simulator goes open source",
+      "excerpt": "Madhur Behl announced that the F1/10 autonomous racing simulator was open source and packaged as a Docker image. It ships with perception, planning and control algorithms so a team can start racing before it owns the hardware.",
+      "kind": "milestone",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/madhurbehl_f1tenth-linklab-autonomousdriving-activity-6507312215958310912-8ZO_",
+      "author": "Madhur Behl",
+      "author_url": "https://www.linkedin.com/in/madhurbehl",
+      "affiliation": "Organizer, University of Virginia (Link Lab)",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:ugcPost:6507312117417340928",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6507312117417340928",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/C4E05AQFzwh0_FM8RLA/videocover-high/videocover-high/0/1673502474402?e=2147483647&v=beta&t=A_hnq19nq1r5onY2j6tBviXX_ajo0Ywz1EUp3PD6wA8"
+      ],
+      "facts": [
+        "The F1/10 Autonomous Racing simulator is open source and available as a Docker image (text)",
+        "It provides several perception, planning and control algorithms to start racing without the F1/10 hardware (text)"
+      ],
+      "confidence": "high",
+      "priority": "B",
+      "period": "2016-2019",
+      "notes": "Video post; the image URL is the video cover. Earliest organizer post about the platform found on LinkedIn."
+    },
+    {
+      "id": "venture-cafe-talk-writeup-2019",
+      "date": "2019-05-05",
+      "date_precision": "day",
+      "post_date": "2019-05-05",
+      "title": "A Philadelphia audience meets the 1/10-scale autonomous race cars",
+      "excerpt": "Michael Coraluzzi wrote up Rahul Mangharam's late-April 2019 talk at Venture Cafe Philadelphia on safe self-driving cars and F1/10 racing. He explains the series as a fully autonomous race where students learn perception, planning and control, and notes that Matthew O'Kelly of Penn demonstrated a car.",
+      "kind": "post",
+      "event": null,
+      "link": "https://www.linkedin.com/pulse/how-1-tenth-size-f1-autonomous-car-racing-rapidly-michael-coraluzzi",
+      "author": "Michael Coraluzzi",
+      "author_url": "https://www.linkedin.com/in/michael-coraluzzi",
+      "affiliation": "Community",
+      "publisher": "LinkedIn",
+      "embed_urn": null,
+      "embed_src": null,
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/C4E12AQGh72EE9p7vBw/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1556971845940?e=2147483647&v=beta&t=0-7_tPTt_5mvdyoIeilR7p1fXTV7_Tdk9xzIlZ1nXSU"
+      ],
+      "facts": [
+        "Rahul Mangharam presented 'Safe Self-Driving Cars and F1/10 Autonomous Racing' at Venture Cafe Philadelphia in late April (article text)",
+        "Matthew O'Kelly, University of Pennsylvania, demonstrated an autonomous F1-tenth car (article text)"
+      ],
+      "confidence": "medium",
+      "priority": "C",
+      "period": "2016-2019",
+      "notes": "LinkedIn Pulse article, not a feed post: there is no feed embed, link out instead. Third-party write-up; the talk month is 'late April', year from the article date (2019-05-05)."
+    },
+    {
+      "id": "nsf-community-platform-award-2019",
+      "date": "2019-08-15",
+      "date_precision": "day",
+      "post_date": "2019-08-15",
+      "title": "NSF funds F1/10 as a community platform for safe autonomy",
+      "excerpt": "Rahul Mangharam announced a $1.5M National Science Foundation award to grow F1/10 into shared infrastructure for autonomy research and teaching. Penn, Oregon State and Clemson lead the effort, with more than 35 partner universities in the community.",
+      "kind": "milestone",
+      "event": null,
+      "link": "https://www.linkedin.com/pulse/f110-autonomous-racing-community-platforms-safe-agile-rahul-mangharam",
+      "author": "Rahul Mangharam",
+      "author_url": "https://www.linkedin.com/in/mangharam",
+      "affiliation": "Organizer, University of Pennsylvania",
+      "publisher": "LinkedIn",
+      "embed_urn": null,
+      "embed_src": null,
+      "image_urls": [],
+      "facts": [
+        "NSF funded $1.5MM to develop community platforms for Safe, Agile and Coordinated Autonomy (article text)",
+        "Collaboration of the University of Pennsylvania, Oregon State University and Clemson University (article text)",
+        "Over 35 partner universities in the F1/10 community (article text)",
+        "Cars are 1/10th the size of a Formula 1 car and can reach 50 mph (article text)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2016-2019",
+      "notes": "LinkedIn Pulse article (no feed embed). The '50 mph' top speed conflicts with the 2024 Penn video ('up to 40 miles per hour'); do not publish a top speed without Cedric. '35 partner universities' is a 2019 count, not today's '90+'."
+    },
+    {
+      "id": "learn-to-drive-tutorial-2022",
+      "date": "2022-03-22",
+      "date_precision": "day",
+      "post_date": "2022-03-22",
+      "title": "Online tutorial: learn to drive and race scaled autonomous cars",
+      "excerpt": "Venkat Krovi shared a free online tutorial on driving and racing scaled autonomous vehicles, held on Zoom on March 25, 2022, from 10 am to 2 pm EDT. The post linked the registration page and the agenda.",
+      "kind": "announcement",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/venkatnkrovi_f1tenth-activity-6911826048028430336-97CT",
+      "author": "Venkat N. Krovi",
+      "author_url": "https://www.linkedin.com/in/venkatnkrovi",
+      "affiliation": "Organizer, Clemson University",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:6911826047353147392",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:6911826047353147392",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/C4E22AQEmrucpr1lc5g/feedshare-shrink_800/feedshare-shrink_800/0/1647907744847?e=2147483647&v=beta&t=rAMyeVr1AvAmslE3kx7ESp1ieGjlSEmctKDguE2A-VU"
+      ],
+      "facts": [
+        "Tutorial 'Learn to Drive (and Race!) Scaled Autonomous Vehicles', Friday March 25, 2022, 10 am to 2 pm EDT, on Zoom (text)"
+      ],
+      "confidence": "high",
+      "priority": "C",
+      "period": "2020-2023",
+      "notes": "Thin news value; one of very few 2022 organizer posts. Tagged #F1tenth only."
+    },
+    {
+      "id": "icra2022-racing-workshop",
+      "date": "2022-05-16",
+      "date_precision": "day",
+      "post_date": "2022-05-16",
+      "title": "ICRA 2022 workshop on autonomous racing comes to Philadelphia",
+      "excerpt": "Johannes Betz announced a full-day ICRA 2022 workshop in Philadelphia on the opportunities and challenges of autonomous racing. The program had nine invited speakers and 14 contributed papers, co-organized with Madhur Behl and Venkat Krovi.",
+      "kind": "announcement",
+      "event": "icra2022",
+      "link": "https://www.linkedin.com/posts/johannes-betz-254049107_autonomousdriving-autonomousracing-motorsports-activity-6932031511042908160-mteV",
+      "author": "Johannes Betz",
+      "author_url": "https://www.linkedin.com/in/johannes-betz-254049107",
+      "affiliation": "Organizer",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:6932031507356106752",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:6932031507356106752",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/C4E22AQFnFJpxYGnIWg/feedshare-shrink_800/feedshare-shrink_800/0/1652725100055?e=2147483647&v=beta&t=EJSr7SBV5RUiM6WjzFKwlImQ9cCyHs9aNwtjU5fFj5I",
+        "https://media.licdn.com/dms/image/v2/C4E22AQHpVoow7az0vg/feedshare-image-high-res/feedshare-image-high-res/0/1652725099630?e=2147483647&v=beta&t=8OmLYRqgPeM6V1OpwklDC-aFrrRFG5Bjta8RiqhwtMc",
+        "https://media.licdn.com/dms/image/v2/C4E22AQExHc2AigmgJA/feedshare-shrink_800/feedshare-shrink_800/0/1652725101473?e=2147483647&v=beta&t=sec_onj98SE8FV0gy91AhJMCkkc9ywQIlmfdQVMTeHU"
+      ],
+      "facts": [
+        "Full-day IEEE ICRA 2022 workshop 'Opportunities and Challenges with Autonomous Racing' in Philadelphia, one week after the post (text)",
+        "9 speakers and 14 contributed papers (text)",
+        "Co-organized with Madhur Behl (UVA) and Venkat N. Krovi (Clemson) (text)"
+      ],
+      "confidence": "high",
+      "priority": "B",
+      "period": "2020-2023",
+      "notes": "Workshop, not the race itself. Three images attached (speaker cards, not reviewed in detail)."
+    },
+    {
+      "id": "icra2022-fpv-drone-view",
+      "date": "2022-05-25",
+      "date_precision": "day",
+      "post_date": "2022-05-31",
+      "title": "An FPV drone's view of the ICRA 2022 track",
+      "excerpt": "Between practice sessions at ICRA 2022, Davide Lanzoni of the University of Bologna's UNIBO Racing F1Tenth team flew an FPV racing drone over the track. Madhur Behl shared the footage.",
+      "kind": "post",
+      "event": "icra2022",
+      "link": "https://www.linkedin.com/posts/madhurbehl_f1tenth-autonomousracing-drones-activity-6937393624192098304-0oh-",
+      "author": "Madhur Behl",
+      "author_url": "https://www.linkedin.com/in/madhurbehl",
+      "affiliation": "Organizer, University of Virginia",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:ugcPost:6937393534496894977",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6937393534496894977",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/C5605AQHtCylwnOkPdA/videocover-high/videocover-high/0/1654003516708?e=2147483647&v=beta&t=2vwBKWCEgkumRCf04NfdQIe6Q3tt0k6MqCg48dicrzQ"
+      ],
+      "facts": [
+        "FPV drone footage of the F1Tenth track between practice sessions (text)",
+        "Pilot Davide Lanzoni (LanzoFPV) from the University of Bologna's UNIBO Racing F1Tenth team (text)",
+        "Tagged #icra2022 (text)"
+      ],
+      "confidence": "high",
+      "priority": "C",
+      "period": "2020-2023",
+      "notes": "Video post. Date is the ICRA 2022 race end date (May 23 to 25, per docs/EVENTS_VERIFICATION.md, icra2022-race.f1tenth.org); the post is dated 2022-05-31."
+    },
+    {
+      "id": "icra2022-scuderia-segfault-third",
+      "date": "2022-05-25",
+      "date_precision": "day",
+      "post_date": "2022-06-02",
+      "title": "Scuderia Segfault takes third of 38 teams at ICRA 2022",
+      "excerpt": "TU Wien's Scuderia Segfault finished third at the 10th F1TENTH Autonomous Grand Prix in Philadelphia. Thirty-eight teams from around the world took part.",
+      "kind": "result",
+      "event": "icra2022",
+      "link": "https://www.linkedin.com/posts/tu-wien-informatics_3rd-place-at-the-f1tenth-autonomous-grand-activity-6938036574127345664-73fb",
+      "author": "TU Wien Informatics",
+      "author_url": "https://www.linkedin.com/company/tu-wien-informatics",
+      "affiliation": "Team: Scuderia Segfault, TU Wien",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:6938036572999073792",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:6938036572999073792",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/C5634AQF_vkb42u2AiQ/ugc-proxy-shrink_1280_800/ugc-proxy-shrink_1280_800/0/1660674383018?e=2147483647&v=beta&t=5B2kG4HGlgzN5Kf4ZfO8a-AJWxmN43TDyVc47PKO_ew"
+      ],
+      "facts": [
+        "Scuderia Segfault placed 3rd of 38 teams (text)",
+        "10th F1TENTH Autonomous Grand Prix in Philadelphia (text)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2020-2023",
+      "notes": "Post dated 2022-06-02; event date from docs/EVENTS_VERIFICATION.md (ICRA 2022, May 23 to 25). Winner of ICRA 2022 is not in any LinkedIn post found."
+    },
+    {
+      "id": "penn-course-race-semester-2022",
+      "date": "2022-06-24",
+      "date_precision": "day",
+      "post_date": "2022-06-24",
+      "title": "A semester of autonomous racing in Penn's course",
+      "excerpt": "Rahul Mangharam closed out a semester of course races at Penn that pushed student cars on perception, planning and control. He thanked Johannes Betz, Hongrui Zheng and Zirui Zang.",
+      "kind": "post",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/mangharam_teaching-autonomous-racing-is-fun-we-had-activity-6946109948502167552-xnBK",
+      "author": "Rahul Mangharam",
+      "author_url": "https://www.linkedin.com/in/mangharam",
+      "affiliation": "Organizer, University of Pennsylvania",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:ugcPost:6946109859117359104",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6946109859117359104",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/C5605AQHG85M9wFaDHg/videocover-high/videocover-high/0/1656081649583?e=2147483647&v=beta&t=Y6xIncleYOqW6vLfkHXwy46oeCns7URGLzRAz-mWX7g"
+      ],
+      "facts": [
+        "A semester of races in the autonomous racing course (text)",
+        "Team thanked: Johannes Betz, Hongrui Zheng, Zirui Zang (text)"
+      ],
+      "confidence": "high",
+      "priority": "C",
+      "period": "2020-2023",
+      "notes": "Video post. Course race, not a numbered competition."
+    },
+    {
+      "id": "germany2022-forzaeth-gold",
+      "date": "2022-08-21",
+      "date_precision": "day",
+      "post_date": "2022-08-24",
+      "title": "ForzaETH wins the 2022 F1TENTH Grand Prix Germany",
+      "excerpt": "ETH Zurich's ForzaETH, a student team from the Center for Project-Based Learning and the Institute of Neuroinformatics, won the Germany 2022 Grand Prix. The team raced at two F1TENTH events that season.",
+      "kind": "result",
+      "event": "germany2022",
+      "link": "https://www.linkedin.com/posts/eth-zurich-department-of-information-technology-and-electrical-engineering_team-racingcars-winners-activity-6968168515782459393-FZSx",
+      "author": "ETH Zurich, Department of Information Technology and Electrical Engineering",
+      "author_url": "https://www.linkedin.com/company/eth-zurich-department-of-information-technology-and-electrical-engineering",
+      "affiliation": "Team: ForzaETH, ETH Zurich",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:6968168514989789184",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:6968168514989789184",
+      "image_urls": [],
+      "facts": [
+        "ForzaETH finished first at the 2022 F1TENTH Autonomous Grand Prix Germany (text)",
+        "Team from the Center for Project-Based Learning at D-ITET (PBL) and the Institute of Neuroinformatics (INI), ETH Zurich and University of Zurich (text)",
+        "Competed at two F1TENTH autonomous racing challenges (text)",
+        "Team: Edoardo Ghignone, Nicolas Baumann, Jonas Kühne, Nadine Imholz, Luca Schwarzenbach, Florian Bolli, Jonathan Becker, Daniel Pfister, Xiang Deng, Marcin Paluch (text)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2020-2023",
+      "notes": "Post dated 2022-08-24; event date from docs/EVENTS_VERIFICATION.md (Lausitzring, August 20 to 21, 2022). Embed URN read from the reshare card on Tommaso Polonelli's post (the ETH page itself did not expose it). Text-only post."
+    },
+    {
+      "id": "getting-started-kit-2022",
+      "date": "2022-10-10",
+      "date_precision": "day",
+      "post_date": "2022-10-10",
+      "title": "Where to start: free lectures, labs and a simulator",
+      "excerpt": "Rahul Mangharam pointed newcomers to a free starting path: a tutorial to take before building a car, the 2022 course lectures, labs 1 to 4 and 6, and the simulator and track files on GitHub. He named f1tenth.org as the home for courses, competitions and the community.",
+      "kind": "post",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/mangharam_f1tenth-autonomousvehicles-autoware-activity-6985040585644507136-t2m1",
+      "author": "Rahul Mangharam",
+      "author_url": "https://www.linkedin.com/in/mangharam",
+      "affiliation": "Organizer, University of Pennsylvania",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:6985040584725905408",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:6985040584725905408",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/C4E22AQGAOPdqWjydYA/feedshare-shrink_800/feedshare-shrink_800/0/1665363449914?e=2147483647&v=beta&t=dKvO-8vO7ykYvKvmTbIOgyQ2GdGpSW9EH073aXIgYE8"
+      ],
+      "facts": [
+        "Start with a tutorial before building the car (text)",
+        "2022 Autonomous Racing Course lectures online (text)",
+        "Do labs 1-4 and 6 to get ready to race (text)",
+        "Simulator, racetrack files and a reading list on github.com/f1tenth (text)",
+        "f1tenth.org is the main source for courses, competitions and the community (text)"
+      ],
+      "confidence": "high",
+      "priority": "B",
+      "period": "2020-2023",
+      "notes": "Good 'Learn' history item. Links in the post are lnkd.in short links (not resolved)."
+    },
+    {
+      "id": "cps2023-12th-winners",
+      "date": "2023-05-09",
+      "date_precision": "day",
+      "post_date": "2023-05-27",
+      "title": "Winners crowned at the 12th competition, CPS-IoT Week 2023",
+      "excerpt": "Rahul Mangharam congratulated the winners of the 12th F1TENTH Autonomous Racing Competition at CPS-IoT Week in Texas: Jason Xie, Chandravaran Kunjeti, Rohit Bhikule and Zheming Zhang. He thanked organizers Joydeep Biswas and Xuesu Xiao.",
+      "kind": "result",
+      "event": "cps2023",
+      "link": "https://www.linkedin.com/posts/mangharam_f1tenth-cpsweek-autonomousdriving-activity-7068234768298987520-Xbad",
+      "author": "Rahul Mangharam",
+      "author_url": "https://www.linkedin.com/in/mangharam",
+      "affiliation": "Organizer, University of Pennsylvania",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7068234767267192832",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7068234767267192832",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQGhGn4V-VuMhA/feedshare-image-high-res/feedshare-image-high-res/0/1685198488926?e=2147483647&v=beta&t=bzk2_3SxsOvglVUHsKbxKoz6HBBus9hWFdpJaJOm8qA"
+      ],
+      "facts": [
+        "Winners of the 12th F1TENTH Autonomous Racing Competition at Cyber-Physical Systems IoT Week in Texas (text)",
+        "Winners named: Jason Xie, Chandravaran Kunjeti, Rohit Bhikule, Zheming Zhang (text)",
+        "Organizers thanked: Joydeep Biswas, Xuesu Xiao and their teams (text)",
+        "Photo: four team members with a car carrying a Penn sticker (image 1)"
+      ],
+      "confidence": "medium",
+      "priority": "A",
+      "period": "2020-2023",
+      "notes": "Post dated 2023-05-27; event date from docs/EVENTS_VERIFICATION.md (San Antonio, May 8 to 9, 2023). The post names people, not a team or institution; tagged #upenn. TODO(content): team name and institution. A related post (2023-05-11, https://www.linkedin.com/posts/mangharam_f1tenth-autonomousracing-autonomousvehicles-activity-7062420311786315776-Gq5g) mentions NC State teams."
+    },
+    {
+      "id": "icra2023-forzaeth-wins",
+      "date": "2023-06-01",
+      "date_precision": "day",
+      "post_date": "2023-06-13",
+      "title": "ForzaETH wins the ICRA 2023 competition in London",
+      "excerpt": "ETH Zurich's ForzaETH won the F1TENTH Autonomous Racing Competition at ICRA 2023. Rahul Mangharam shared the result alongside the team's paper on its model- and acceleration-based pursuit controller.",
+      "kind": "result",
+      "event": "icra2023",
+      "link": "https://www.linkedin.com/posts/mangharam_model-and-acceleration-based-pursuit-controller-activity-7074191619058462720-Cebb",
+      "author": "Rahul Mangharam",
+      "author_url": "https://www.linkedin.com/in/mangharam",
+      "affiliation": "Organizer, University of Pennsylvania",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7074191618345443328",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7074191618345443328",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/sync/v2/D4E27AQFQB1BabYauTA/articleshare-shrink_800/articleshare-shrink_800/0/1712016210139?e=2147483647&v=beta&t=LngFd7SnUzf2953ZSu0O3iX36W8FEHoRVndEHMsfqKM"
+      ],
+      "facts": [
+        "ETHz's ForzaETH team won the ICRA 2023 F1TENTH Autonomous Racing Competition (text)",
+        "Post reshares the 'Model- and Acceleration-based Pursuit Controller' paper (link card title)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2020-2023",
+      "notes": "Post dated 2023-06-13; event date from docs/EVENTS_VERIFICATION.md (ExCeL London, May 29 to June 1, 2023). news.json already has 'eth-pbl-map-controller' (the controller video), which is a different story."
+    },
+    {
+      "id": "icra2023-scuderia-segfault-silver",
+      "date": "2023-06-01",
+      "date_precision": "day",
+      "post_date": "2023-06-13",
+      "title": "Scuderia Segfault takes silver at ICRA 2023, a fourth straight podium",
+      "excerpt": "TU Wien's Scuderia Segfault won silver at the 11th F1TENTH Autonomous Grand Prix at ICRA 2023 in London. Team sponsor TTTech Auto noted it was the team's fourth podium in a row.",
+      "kind": "result",
+      "event": "icra2023",
+      "link": "https://www.linkedin.com/posts/tttech-auto_tttech-auto-celebrates-tu-wiens-scuderia-activity-7074311454002143232-_wo2",
+      "author": "TTTech Auto",
+      "author_url": "https://www.linkedin.com/company/tttech-auto",
+      "affiliation": "Partner (Scuderia Segfault sponsor)",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7074311453184286720",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7074311453184286720",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/sync/v2/D4E27AQEpToYAWYfD8g/articleshare-shrink_800/articleshare-shrink_800/0/1712144354633?e=2147483647&v=beta&t=Xu2Lv-NvniJ3gaBFZp3I1eLyWJ8nn31R3QXXQeGekMs"
+      ],
+      "facts": [
+        "Scuderia Segfault (TU Wien Informatics) won silver at the 11th F1TENTH Autonomous Grand Prix (text)",
+        "At IEEE ICRA 2023 in London (text)",
+        "Fourth consecutive podium placement (text)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2020-2023",
+      "notes": "Post dated 2023-06-13. Numbering: ICRA 2023 is the 11th and CPS-IoT 2023 the 12th although CPS ran first; this matches the race sites. 'Fourth consecutive podium' implies podiums at the three races before (IROS 2021 win and ICRA 2022 third are consistent), not verified here."
+    },
+    {
+      "id": "iros2023-madgames-workshop",
+      "date": "2023-10-01",
+      "date_precision": "day",
+      "post_date": "2023-10-01",
+      "title": "MAD-Games workshop on multi-agent racing opens IROS 2023",
+      "excerpt": "The first MAD-Games workshop on multi-agent dynamic games ran on Sunday, October 1, 2023 at IROS, with a Zoom link for remote attendees. Rahul Mangharam listed a speaker line-up that included Peter Stone and Panagiotis Tsiotras.",
+      "kind": "announcement",
+      "event": "iros2023-madgames",
+      "link": "https://www.linkedin.com/posts/mangharam_mad-games-workshop-oct-1-2023-activity-7114071772483780608-S69D",
+      "author": "Rahul Mangharam",
+      "author_url": "https://www.linkedin.com/in/mangharam",
+      "affiliation": "Organizer, University of Pennsylvania",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:ugcPost:7114071771569418240",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7114071771569418240",
+      "image_urls": [],
+      "facts": [
+        "MAD Games, Multi-Agent Dynamic Games Workshop at IROS'23, Sunday Oct 1, 8:30 am US ET, on Zoom (text)",
+        "Tagged people include Hongrui Zheng, Johannes Betz, Venkat N. Krovi, Peter Stone, Panagiotis Tsiotras (text)"
+      ],
+      "confidence": "high",
+      "priority": "C",
+      "period": "2020-2023",
+      "notes": "The post lists names without roles; 'speaker line-up' is our reading, confirm before using. past_races.json has 'IROS 2023 Mad Games'."
+    },
+    {
+      "id": "iros2023-14th-grand-prix-livestream",
+      "date": "2023-10-05",
+      "date_precision": "day",
+      "post_date": "2023-10-04",
+      "title": "The 14th Grand Prix at IROS 2023 streams live",
+      "excerpt": "Venkat Krovi shared the live Twitch stream of the 14th F1TENTH Autonomous Grand Prix at IROS 2023 in Detroit. The post carries no result.",
+      "kind": "post",
+      "event": "iros2023",
+      "link": "https://www.linkedin.com/posts/venkatnkrovi_14th-f1tenth-autonomous-grand-prix-activity-7115357729652707328-8Ck0",
+      "author": "Venkat N. Krovi",
+      "author_url": "https://www.linkedin.com/in/venkatnkrovi",
+      "affiliation": "Organizer, Clemson University",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7115357729069666304",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7115357729069666304",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/sync/v2/D4D27AQGPTsR6R_xXag/articleshare-shrink_800/articleshare-shrink_800/0/1711365606700?e=2147483647&v=beta&t=6BfFcfyto2_d6wxLkErJttECQiV05Cf-IUkUwyvV5ag"
+      ],
+      "facts": [
+        "'The twitch stream is live now' (text)",
+        "Link card titled '14th F1TENTH Autonomous Grand Prix' (card title)"
+      ],
+      "confidence": "medium",
+      "priority": "B",
+      "period": "2020-2023",
+      "notes": "Post dated 2023-10-04, during IROS 2023 (Oct 1 to 5, Huntington Place, Detroit, per docs/EVENTS_VERIFICATION.md). No result in the post. Search snippets and autoware.org say VAUL won with Autoware entrants Po-Jen Wang 2nd and Tejas Agarwal 3rd; no LinkedIn post with that result could be read, so leave the result to the web agent."
+    },
+    {
+      "id": "tum-f1tenth-course-2023",
+      "date": "2023-10-20",
+      "date_precision": "day",
+      "post_date": "2023-10-20",
+      "title": "TUM launches a hands-on F1TENTH course",
+      "excerpt": "Johannes Betz and Felix Jahncke started a practical course at TUM called F1TENTH: Autonomous Driving Hands-on, where students code and tune software for a small-scale autonomous car. The first cohort had 15 students from six countries.",
+      "kind": "milestone",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/johannes-betz-254049107_my-next-ride-is-a-robot-together-with-activity-7121155857114968064-ocCj",
+      "author": "Johannes Betz",
+      "author_url": "https://www.linkedin.com/in/johannes-betz-254049107",
+      "affiliation": "Organizer, Technical University of Munich",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:ugcPost:7121155856179617792",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7121155856179617792",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4D22AQGH6lQBhOhW4g/feedshare-image-high-res/feedshare-image-high-res/0/1697815858341?e=2147483647&v=beta&t=_sSTVtJ456shnOTt8VrH-vdS98UZaU92vSmvUa0M-_g",
+        "https://media.licdn.com/dms/image/v2/D4D22AQHIiZzw5WBw7g/feedshare-shrink_800/feedshare-shrink_800/0/1697815855000?e=2147483647&v=beta&t=dIpbIvkjufudMmBEV7SmRtj3oBRQQLdsVKIjtWceKk4",
+        "https://media.licdn.com/dms/image/v2/D4D22AQGsLwgh3D78JQ/feedshare-image-high-res/feedshare-image-high-res/0/1697815858022?e=2147483647&v=beta&t=_FPO6LZY488MkNWAvleAZG9pir-BwZEWN_eb2Jo8Qsk"
+      ],
+      "facts": [
+        "New practical course 'F1TENTH: Autonomous Driving Hands-on' at TUM, winter semester (text)",
+        "15 students from six nations (text)",
+        "Betz credits Rahul Mangharam for introducing him to F1TENTH (text)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2020-2023",
+      "notes": "Three classroom photos attached."
+    },
+    {
+      "id": "uva-course-first-autonomous-laps-2023",
+      "date": "2023-11-01",
+      "date_precision": "day",
+      "post_date": "2023-11-01",
+      "title": "UVA students program their first autonomous car",
+      "excerpt": "Madhur Behl shared assignment demos from his F1Tenth course at UVA, where students use ROS, LIDAR data and a PID controller to lap the track on their own. Later assignments build up to cars racing each other for the final exam.",
+      "kind": "post",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/madhurbehl_f1tenth-ros-autonomousracing-activity-7125480966826913792-O9SM",
+      "author": "Madhur Behl",
+      "author_url": "https://www.linkedin.com/in/madhurbehl",
+      "affiliation": "Organizer, University of Virginia",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:ugcPost:7125480895242743808",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7125480895242743808",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E05AQHBBoM8n6SwIg/videocover-high/videocover-high/0/1698847041669?e=2147483647&v=beta&t=zlx8nVqnsV6cN6MFKxlCiszZ9bsHAaE1MvKsVRIQ2jQ"
+      ],
+      "facts": [
+        "Students program an autonomous vehicle with ROS, a PID controller and LIDAR data (text)",
+        "Course ends with multiple cars racing for the final exam (text)",
+        "Behl: 'Since its inception in 2015, I've had the pleasure of teaching F1Tenth' (text)"
+      ],
+      "confidence": "high",
+      "priority": "C",
+      "period": "2020-2023",
+      "notes": "Video post. The '2015' in the post conflicts with the site's 'founded 2016'; do not repeat the year without Cedric."
+    },
+    {
+      "id": "power-distribution-board-2024",
+      "date": "2024-02-14",
+      "date_precision": "day",
+      "post_date": "2024-02-14",
+      "title": "A new crowd-sourced power board for the car",
+      "excerpt": "The community pooled an order for a new power distribution board designed and built by Ambimat Electronics. Past 120 boards the price would fall below $100 each, and five international competitions were planned for 2024.",
+      "kind": "milestone",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/mangharam_f1tenth-autonomousvehicles-autonomousracing-activity-7163339430689239041-V0Ss",
+      "author": "Rahul Mangharam",
+      "author_url": "https://www.linkedin.com/in/mangharam",
+      "affiliation": "Organizer, University of Pennsylvania",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7163339429900718080",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7163339429900718080",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQFKMM6jMn4AEw/feedshare-image-high-res/feedshare-image-high-res/0/1707873208033?e=2147483647&v=beta&t=z05f8F828TAIoYx7b6Y41RA5TJWhit_jqLIsEwMIq88"
+      ],
+      "facts": [
+        "Crowd-sourcing the new power distribution board; sign-up for a ready-made PCB (text)",
+        "Crossing 120 boards gives a price break below $100 per board; order finalized Feb 23 (text)",
+        "5 international competitions in 2024 (text)",
+        "Design and production by Ambimat Electronics (text)",
+        "Photo of the board, silkscreen 'AE170_PDU_01.01 JAN-24' (image 1)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2024",
+      "notes": "The same author wrote '7 International Competitions this year' on 2024-05-11; the count grew during the year."
+    },
+    {
+      "id": "icra2024-15th-announced",
+      "date": "2024-04-16",
+      "date_precision": "day",
+      "post_date": "2024-04-16",
+      "title": "The 15th competition heads to ICRA 2024 in Yokohama",
+      "excerpt": "The F1Tenth Foundation posted the poster for the 15th F1TENTH Autonomous Racing Competition at ICRA 2024 in Yokohama, Japan, May 13 to 17, 2024. The poster pointed teams to icra2024-race.f1tenth.org.",
+      "kind": "announcement",
+      "event": "icra2024",
+      "link": "https://www.linkedin.com/posts/roboracer-foundation_f1tenth-autonomous-autonomousracing-activity-7185950717939994625-MhQH",
+      "author": "The Roboracer Foundation (then F1Tenth Foundation)",
+      "author_url": "https://www.linkedin.com/company/roboracer-foundation",
+      "affiliation": "Organizer",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7185950717151444992",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7185950717151444992",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQHT744iDVZ6Dg/feedshare-image-high-res/feedshare-image-high-res/0/1713264158428?e=2147483647&v=beta&t=2DglvJKJwjsvv1qeLQFOBQUBv9tEual6mkNcg8VnAwE"
+      ],
+      "facts": [
+        "15th F1TENTH Autonomous Racing Competition, May 13-17, 2024 (poster)",
+        "ICRA 2024, Yokohama, Japan (poster)",
+        "Site icra2024-race.f1tenth.org (poster)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2024",
+      "notes": "Post text is hashtags only; facts are on the poster. Alternative with more text: Rahul Mangharam 2024-02-25 (https://www.linkedin.com/posts/mangharam_f1tenth-autonomous-racing-competition-at-activity-7167654499124240384-cByi), which gives May 14-16 race days and hosts UPenn, Clemson and TUM. The ICRA 2024 winner (VAUL per search snippets) has no readable LinkedIn post."
+    },
+    {
+      "id": "penn-cmu-lehigh-grand-prix-2024",
+      "date": "2024-04-27",
+      "date_precision": "day",
+      "post_date": "2024-04-27",
+      "title": "Penn, CMU and Lehigh students race in Philadelphia",
+      "excerpt": "Three universities that teach the same 1/10-scale racing course, Penn, Carnegie Mellon and Lehigh, set up a friendly Grand Prix in Philadelphia. Rahul Mangharam announced it for the following Monday.",
+      "kind": "announcement",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/mangharam_penn-cmu-lehigh-autonomous-racing-grand-activity-7189971586496520192-UeN2",
+      "author": "Rahul Mangharam",
+      "author_url": "https://www.linkedin.com/in/mangharam",
+      "affiliation": "Organizer, University of Pennsylvania",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7189800656742883328",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7189800656742883328",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQFeDfgXiTHB_g/feedshare-image-high-res/feedshare-image-high-res/0/1714182055456?e=2147483647&v=beta&t=LZQBwFQDCLGW-_1M3IZ2g09GSzLPzIubvnnQPLMaRGM"
+      ],
+      "facts": [
+        "Penn + CMU + Lehigh Autonomous Racing Grand Prix on Monday in Philly (text)",
+        "All three teach the same course with 1/10th scale cars (text)"
+      ],
+      "confidence": "high",
+      "priority": "C",
+      "period": "2024",
+      "notes": "Course race, not numbered. The post says 'on Monday' only."
+    },
+    {
+      "id": "icra2024-tier-iv-sponsor",
+      "date": "2024-04-29",
+      "date_precision": "day",
+      "post_date": "2024-04-29",
+      "title": "TIER IV sponsors the ICRA 2024 Grand Prix",
+      "excerpt": "TIER IV announced its sponsorship of the F1TENTH Autonomous Grand Prix at ICRA 2024 at PACIFICO Yokohama. The company invited visitors to watch engineers race autonomous cars there.",
+      "kind": "announcement",
+      "event": "icra2024",
+      "link": "https://www.linkedin.com/posts/tier-iv-inc_15th-f1tenth-autonomous-grand-prix-activity-7190590790182604801-GGS4",
+      "author": "TIER IV",
+      "author_url": "https://www.linkedin.com/company/tier-iv-inc",
+      "affiliation": "Partner (sponsor)",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7190590789511458816",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7190590789511458816",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D5610AQHD19oGIUdpOw/image-shrink_1280/image-shrink_1280/0/1714370441102?e=2147483647&v=beta&t=CMsehFt3bGMhYpAxIu_tuCtrxosWv7HOsF0wRyJAGGY"
+      ],
+      "facts": [
+        "TIER IV sponsors the F1TENTH Autonomous Grand Prix at ICRA 2024 (text)",
+        "Venue PACIFICO Yokohama (text)"
+      ],
+      "confidence": "high",
+      "priority": "B",
+      "period": "2024",
+      "notes": "Historical sponsor, stated by the sponsor itself. Content skill: historical sponsors are TODO(content); Cedric decides before the site names TIER IV as a past sponsor. TIER IV's race-week post (2024-05-15) adds: race day and award ceremony May 16, Exhibition Hall C."
+    },
+    {
+      "id": "icra2024-19-teams",
+      "date": "2024-05-15",
+      "date_precision": "day",
+      "post_date": "2024-05-15",
+      "title": "More than 100 racers from 19 teams at ICRA 2024",
+      "excerpt": "On the eve of the ICRA 2024 Grand Prix in Yokohama, Rahul Mangharam counted more than 100 participants from 19 teams ready to race head to head. He called it a battle of perception, planning and control algorithms.",
+      "kind": "post",
+      "event": "icra2024",
+      "link": "https://www.linkedin.com/posts/mangharam_f1tenth-at-icra-is-rocking-the-grand-prix-activity-7196512343537713153-CBT6",
+      "author": "Rahul Mangharam",
+      "author_url": "https://www.linkedin.com/in/mangharam",
+      "affiliation": "Organizer, University of Pennsylvania",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7196512342694576128",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7196512342694576128",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4D10AQG-Pjx4yEhQug/image-shrink_800/image-shrink_800/0/1715763664192?e=2147483647&v=beta&t=emIUCw3f7T5iuygnKrklwDrxEm3Ex9teacnuP-uEaSs"
+      ],
+      "facts": [
+        ">100 participants from 19 teams will race head-to-head (text)",
+        "The Grand Prix is on Thursday (text)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2024",
+      "notes": "Reshares TIER IV's race-week post. Related: 2024-05-11 post 'Join over 100 participants ... 7 International Competitions this year' (https://www.linkedin.com/posts/mangharam_f1tenth-autonomous-racing-competitions-2024-activity-7195044996926898176-r0Go)."
+    },
+    {
+      "id": "icra2024-lukasz-sztyber-trophy",
+      "date": "2024-05-16",
+      "date_precision": "day",
+      "post_date": "2024-05-16",
+      "title": "A trophy for Lukasz Sztyber at ICRA 2024",
+      "excerpt": "The F1Tenth Foundation posted a photo of Lukasz Sztyber with a trophy and his car beside the F1TENTH banner at ICRA 2024. The post does not state his placing.",
+      "kind": "post",
+      "event": "icra2024",
+      "link": "https://www.linkedin.com/posts/roboracer-foundation_icra2024-engineering-activity-7196811928927621122-9cMs",
+      "author": "The Roboracer Foundation (then F1Tenth Foundation)",
+      "author_url": "https://www.linkedin.com/company/roboracer-foundation",
+      "affiliation": "Organizer",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7196811928092966914",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7196811928092966914",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4D22AQHad6q5qJZxcQ/feedshare-image-high-res/feedshare-image-high-res/0/1715848016384?e=2147483647&v=beta&t=yNbS7XOqmhHeIitPlIXzEfTGY3tmPpRF7BXwtnsdlt0"
+      ],
+      "facts": [
+        "Text: 'Lukasz Sztyber #ICRA2024 #Engineering' (text)",
+        "Photo: Sztyber with a trophy, his car and the F1TENTH banner (image 1)"
+      ],
+      "confidence": "medium",
+      "priority": "C",
+      "period": "2024",
+      "notes": "Placing unknown; confirm on the ICRA 2024 results before writing one. ForzaETH's IROS 2024 post names Lukasz Sztyber ahead of Scuderia Segfault."
+    },
+    {
+      "id": "iv2024-18th-announced",
+      "date": "2024-05-30",
+      "date_precision": "day",
+      "post_date": "2024-05-30",
+      "title": "The 18th Grand Prix goes to IEEE IV 2024 on Jeju Island",
+      "excerpt": "The F1Tenth Foundation announced the 18th F1Tenth Grand Prix at IEEE IV 2024, the 35th Intelligent Vehicles Symposium, June 2 to 5 at Jeju Shinhwa World in Korea. The card sent teams to iv2024-race.f1tenth.org.",
+      "kind": "announcement",
+      "event": "iv2024",
+      "link": "https://www.linkedin.com/posts/roboracer-foundation_f1tenth-autonomousracing-autonomousmobility-activity-7201984268267372544-vxh3",
+      "author": "The Roboracer Foundation (then F1Tenth Foundation)",
+      "author_url": "https://www.linkedin.com/company/roboracer-foundation",
+      "affiliation": "Organizer",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7201984267638161408",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7201984267638161408",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQE7FtxXHIQFkA/feedshare-shrink_800/feedshare-shrink_800/0/1717086855397?e=2147483647&v=beta&t=Helui_YlLHWPzVV-uWo0Yq8ydYunyhd63KG6PthAMr0"
+      ],
+      "facts": [
+        "The 18th F1Tenth Grand Prix (image card)",
+        "IEEE IV 2024, 35th IEEE Intelligent Vehicles Symposium (image card)",
+        "June 2-5, 2024, Jeju Shinhwa World, Jeju Island, Korea (image card)",
+        "Site iv2024-race.f1tenth.org (image card)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2024",
+      "notes": "Card is Autoware Foundation branded. The race site says June 3 to 5 (docs/EVENTS_VERIFICATION.md); the card gives the conference span. No IV 2024 result post found."
+    },
+    {
+      "id": "penn-students-race-video-2024",
+      "date": "2024-08-06",
+      "date_precision": "day",
+      "post_date": "2024-08-06",
+      "title": "Penn Engineering students race the cars they program",
+      "excerpt": "A University of Pennsylvania video follows students who design, build and race self-driving cars in the F1TENTH and AV4EV projects. Rahul Mangharam describes the jump from textbook theory to watching your own code drive.",
+      "kind": "post",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/university-of-pennsylvania_f1tenth-activity-7226622408026132481-_DEs",
+      "author": "University of Pennsylvania",
+      "author_url": "https://www.linkedin.com/school/university-of-pennsylvania",
+      "affiliation": "Institution",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:ugcPost:7226622407195697152",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7226622407195697152",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E10AQGVfdJl3bfFSA/videocover-high/videocover-high/0/1722960988284?e=2147483647&v=beta&t=iGHW1dcetbCdTF8FQXLcnDapdUABzmRXg8H3baG-Agg"
+      ],
+      "facts": [
+        "Students design, build and compete with self-driving cars through the F1TENTH and AV4EV projects (text)",
+        "Quote from Professor Rahul Mangharam on seeing code come to life (text)",
+        "Cars are about a tenth the size of a Formula 1 car and navigate at up to 40 miles per hour (text)"
+      ],
+      "confidence": "high",
+      "priority": "B",
+      "period": "2024",
+      "notes": "Video post by the university's main page. '40 mph' conflicts with the 2019 article's 50 mph; skip speeds unless Cedric confirms."
+    },
+    {
+      "id": "iros2024-first-sim-league",
+      "date": "2024-08-21",
+      "date_precision": "day",
+      "post_date": "2024-08-21",
+      "title": "IROS 2024 adds the first simulated racing league",
+      "excerpt": "From IROS 2024 the competition added a first Simulated Racing and Digital Twin League next to the 21st Autonomous Racing Grand Prix held at the conference. Venkat Krovi invited the community to help grow the ecosystem.",
+      "kind": "milestone",
+      "event": "iros2024",
+      "link": "https://www.linkedin.com/posts/venkatnkrovi_starting-iros2024-the-f1tenth-racing-will-activity-7232141737446547456-5QM7",
+      "author": "Venkat N. Krovi",
+      "author_url": "https://www.linkedin.com/in/venkatnkrovi",
+      "affiliation": "Organizer, Clemson University",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7232141736595091457",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7232141736595091457",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQG70mthRAyytw/feedshare-shrink_800/feedshare-shrink_800/0/1722713304165?e=2147483647&v=beta&t=LOy7wEsw23ThjBQMnn7DUWGCoDBPh2yKS7DCwxbD00Y"
+      ],
+      "facts": [
+        "Starting IROS2024, F1tenth Racing includes the 1st Simulated Racing/Digital Twin League (text)",
+        "In addition to the 21st Autonomous Racing Grand Prix, in-conference racing (text)",
+        "Organizers tagged: Rahul Mangharam, Johannes Betz, Madhur Behl, Hongrui Zheng, Ahmad Amine, Chinmay Samak, Tanmay Samak, Venkat N. Krovi (text)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2024",
+      "notes": "Start of the Sim Racing League, which reached its 6th edition at IROS 2026 (see iros2026-sim-league-results)."
+    },
+    {
+      "id": "sm2024-vaul-keeps-title",
+      "date": "2024-09-18",
+      "date_precision": "day",
+      "post_date": "2024-09-18",
+      "title": "VAUL keeps its title at IEEE Smart Mobility 2024 in Niagara Falls",
+      "excerpt": "Université Laval's VAUL won the race at IEEE Smart Mobility 2024, averaging an estimated 25 km/h with about 40 km/h on the straight. West Virginia University's WV Mountaineers placed second and The Roaring Phenix, from St. Stephen's Episcopal School in Austin, third.",
+      "kind": "result",
+      "event": "sm2024",
+      "link": "https://www.linkedin.com/posts/fpomerleau_racing-results-for-the-f1tenth-foundation-activity-7242288003233062912-FVy2",
+      "author": "François Pomerleau",
+      "author_url": "https://www.linkedin.com/in/fpomerleau",
+      "affiliation": "Organizer, Université Laval",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:ugcPost:7242287722860621825",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7242287722860621825",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E05AQE537BF-EQH8A/videocover-high/videocover-high/0/1726695973174?e=2147483647&v=beta&t=lPO1CO4ACjp-ub27XMeL_Gyy0NrY3hTCSbJ8vv_CUok"
+      ],
+      "facts": [
+        "1st Laval University Autonomous Vehicle (VAUL), keeps its international title; estimated 25 km/h average and 40 km/h top speed on the straight (text)",
+        "2nd WV Mountaineers, West Virginia University (Amr El-Wakeel) (text)",
+        "3rd The Roaring Phenix, St. Stephen's Episcopal School, Austin, Texas (text)",
+        "Honorable mention: Justin Barrada, first participation (text)",
+        "Video: VAUL overtaking in the final round (video)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2024",
+      "notes": "Post dated 2024-09-18, the last race day (SM 2024, Niagara Falls, September 16 to 18 per docs/EVENTS_VERIFICATION.md; the 19th competition per the race site, the post gives no number). Rahul Mangharam's reshare (2024-09-27) names organizers François Pomerleau, Zeinab El-Sayegh, Ahmad Amine, Khalid Elgazzar and Ammar Elmoghazy: https://www.linkedin.com/posts/mangharam_amazing-f1tenth-autonomous-racing-competition-activity-7245455430498271233-iZ_U"
+    },
+    {
+      "id": "cdc2024-22nd-announced",
+      "date": "2024-09-19",
+      "date_precision": "day",
+      "post_date": "2024-09-19",
+      "title": "The 22nd Grand Prix is set for CDC 2024",
+      "excerpt": "IEEE CDC announced the 22nd F1TENTH Autonomous Grand Prix for December 16 to 19, 2024, with time-trial seeding followed by a head-to-head knockout. Cars and hardware are standardized, so the race is decided by perception, planning and control software.",
+      "kind": "announcement",
+      "event": "cdc2024",
+      "link": "https://www.linkedin.com/posts/ieee-cdc-social_22nd-f1tenth-autonomous-grand-prix-activity-7242563142902329345--0R-",
+      "author": "IEEE CDC",
+      "author_url": "https://www.linkedin.com/company/ieee-cdc-social",
+      "affiliation": "Partner (host conference)",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7242563142264717312",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7242563142264717312",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/sync/v2/D5627AQGG79K9avve1g/articleshare-shrink_800/articleshare-shrink_800/0/1724277206812?e=2147483647&v=beta&t=-BaInD6lmqRxvRo63Da4o85sQjZr1yGsN8nClVS2Kcw"
+      ],
+      "facts": [
+        "22nd F1TENTH Autonomous Grand Prix at #CDC2024, December 16-19, 2024 (text)",
+        "Qualification by time trials, then a head-to-head knockout (text)",
+        "Vehicles and hardware are standardized (text)"
+      ],
+      "confidence": "high",
+      "priority": "B",
+      "period": "2024",
+      "notes": "The post does not name Milan; Rahul Mangharam's 2024-10-22 post says 'CDC'24 Milan'. Results of CDC 2024 not found on LinkedIn beyond one team post (cdc2024-team-fifth-fastest)."
+    },
+    {
+      "id": "iros2024-scuderia-segfault-second",
+      "date": "2024-10-18",
+      "date_precision": "day",
+      "post_date": "2024-10-25",
+      "title": "Scuderia Segfault second at IROS 2024 in Abu Dhabi",
+      "excerpt": "TU Wien's Scuderia Segfault finished second at the F1Tenth Foundation Autonomous Grand Prix at IROS 2024 in Abu Dhabi. The university credited its students for racing well in challenging conditions.",
+      "kind": "result",
+      "event": "iros2024",
+      "link": "https://www.linkedin.com/posts/tu-wien-informatics_scuderiasegfault-f1tenth-autonomousracing-activity-7255597729664434176-mBu-",
+      "author": "TU Wien Informatics",
+      "author_url": "https://www.linkedin.com/company/tu-wien-informatics",
+      "affiliation": "Team: Scuderia Segfault, TU Wien",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7255550448982495232",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7255550448982495232",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4D22AQFJq5abkEmpKQ/feedshare-shrink_800/feedshare-shrink_800/0/1729858028199?e=2147483647&v=beta&t=YRaMQUayJ5KrLpWhGnYWXd4jVbZzL_MUuILRJVa-JaQ"
+      ],
+      "facts": [
+        "Scuderia Segfault 2nd at the F1Tenth Foundation Autonomous Grand Prix at IROS 2024 in Abu Dhabi (text)",
+        "Photo credit © TU Wien, Moritz Christamentl (text)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2024",
+      "notes": "Post dated 2024-10-25; event date from docs/EVENTS_VERIFICATION.md (IROS 2024, October 14 to 18, the 21st competition). Scuderia Segfault's own 2024-11-13 post shows the TU Wien rector celebrating the result."
+    },
+    {
+      "id": "iros2024-forzaeth-third",
+      "date": "2024-10-18",
+      "date_precision": "day",
+      "post_date": "2024-10-30",
+      "title": "ForzaETH third at the 21st Grand Prix, IROS 2024",
+      "excerpt": "ForzaETH qualified second at IROS 2024 with a 7.14 s lap of a roughly 35 m carpet track, about 18 km/h on average. A crash in the head-to-head rounds left the team third, behind Lukasz Sztyber and Scuderia Segfault.",
+      "kind": "result",
+      "event": "iros2024",
+      "link": "https://www.linkedin.com/posts/forzaeth-arzh_last-week-the-forzaeth-race-team-participated-activity-7257415887622672384-4BJw",
+      "author": "ForzaETH by Autonomous Racing Zürich",
+      "author_url": "https://www.linkedin.com/company/forzaeth-arzh",
+      "affiliation": "Team: ForzaETH, ETH Zurich",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:ugcPost:7257415884846043136",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7257415884846043136",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQEKKJqE0w48SQ/feedshare-shrink_800/feedshare-shrink_800/0/1730302782125?e=2147483647&v=beta&t=kzBfTgEhWegNr6WuyAE3M_yHRhuB1_-khMQbu_9ksOU",
+        "https://media.licdn.com/dms/image/v2/D4E22AQHssMqiEQhuIA/feedshare-shrink_800/feedshare-shrink_800/0/1730302780004?e=2147483647&v=beta&t=1q8AyiB-EIUXKainLI1_IZbMZTjEsavBHJxSNCkM-Lk",
+        "https://media.licdn.com/dms/image/v2/D4E22AQEKxlRu921wVA/feedshare-shrink_800/feedshare-shrink_800/0/1730302781260?e=2147483647&v=beta&t=LSFEicx9SJPDpyRyMP052F3c_4NrTDtpY0uOam1Z8hk"
+      ],
+      "facts": [
+        "21st F1TENTH Autonomous Grand Prix at IROS (text)",
+        "Very grippy carpet floor (text)",
+        "7.14 s lap over a roughly 35 m track, about 5 m/s (18 km/h) average; qualified 2nd (text)",
+        "Crashed out in head-to-head, finished 3rd behind Lukasz Sztyber and Scuderia Segfault (text)",
+        "Organizers thanked: Rahul Mangharam, François Pomerleau, Chinmay Samak, Tanmay Samak (text)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2024",
+      "notes": "Post dated 2024-10-30 ('last week'). Read with the TU Wien post, the IROS 2024 podium is Lukasz Sztyber 1st, Scuderia Segfault 2nd, ForzaETH 3rd; the post does not say 'won', so confirm with the results page before stating a winner."
+    },
+    {
+      "id": "cdc2024-sim-league-qualifiers",
+      "date": "2024-12-02",
+      "date_precision": "day",
+      "post_date": "2024-12-02",
+      "title": "20 teams qualify for the 2nd Sim Racing League at CDC 2024",
+      "excerpt": "AutoDRIVE published the qualifying results of the second F1TENTH Sim Racing League at CDC 2024. Twenty teams from around the world moved on to the competition round.",
+      "kind": "announcement",
+      "event": "cdc2024",
+      "link": "https://www.linkedin.com/posts/autodrive-ecosystem_cdc2024-autodrive-f1tenth-activity-7269403467759108096-Lawp",
+      "author": "AutoDRIVE Ecosystem",
+      "author_url": "https://www.linkedin.com/company/autodrive-ecosystem",
+      "affiliation": "Partner (Sim Racing League organizer)",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7269403466291101696",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7269403466291101696",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQFm9lWwv_1iVQ/feedshare-shrink_800/feedshare-shrink_800/0/1733160845021?e=2147483647&v=beta&t=oU-GDL8Tb-YQF4_qkwPmi1raUuCJjbcNTxBeGvizimw"
+      ],
+      "facts": [
+        "Qualification round results of the 2nd F1TENTH Sim Racing League @ CDC 2024 (text)",
+        "20 teams qualified for the competition round (text)"
+      ],
+      "confidence": "high",
+      "priority": "B",
+      "period": "2024",
+      "notes": "IEEE CDC (2024-10-29) reported 37 registered teams before the deadline: https://www.linkedin.com/posts/ieee-cdc-social_cdc2024-f1tenth-perception-activity-7256959957219078144-dlcV . AutoDRIVE held a winners' celebration at CDC on December 16, 2024: https://www.linkedin.com/posts/autodrive-ecosystem_cdc2024-autodrive-f1tenth-activity-7274413681344483328-euAK . Sim league winners not found."
+    },
+    {
+      "id": "cdc2024-team-fifth-fastest",
+      "date": "2024-12-19",
+      "date_precision": "day",
+      "post_date": "2024-12-20",
+      "title": "Fifth-fastest of 12 at the 22nd Grand Prix in Milan",
+      "excerpt": "Anthony Garcia's team set an 8.46 s best lap in time trials at CDC 2024, fifth of 12 teams, before going out midway through the head-to-head bracket. The team raced an MPPI controller on an Intel NUC.",
+      "kind": "post",
+      "event": "cdc2024",
+      "link": "https://www.linkedin.com/posts/wontothree_cdc-f1tenth-activity-7275996075893604355-uPQk",
+      "author": "Anthony Garcia",
+      "author_url": "https://www.linkedin.com/in/wontothree",
+      "affiliation": "Team (name not given)",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:ugcPost:7275996021258665984",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7275996021258665984",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D5605AQEZEqgqIIAhZg/videocover-high/B56ZPmEf_aHIB0-/0/1734732634835?e=2147483647&v=beta&t=WqTrT3jnPq9JAnbxN1xpwC5eYWC34KaFak9Mm4HC3H8"
+      ],
+      "facts": [
+        "22nd F1TENTH Autonomous Grand Prix at CDC Milan 2024 (text)",
+        "Fastest lap 8.46 s, 5th of 12 teams in the time trial (text)",
+        "Knocked out midway through the head-to-head tournament (text)",
+        "MPPI controller on an Intel NUC (text)"
+      ],
+      "confidence": "high",
+      "priority": "C",
+      "period": "2024",
+      "notes": "Post dated 2024-12-20. Useful mainly for the field size (12 teams). Team and institution not named in the post."
+    },
+    {
+      "id": "dot-secretary-meets-roboracer-2025",
+      "date": "2025-01-13",
+      "date_precision": "day",
+      "post_date": "2025-01-13",
+      "title": "US Transportation Secretary meets the RoboRacer cars",
+      "excerpt": "Rahul Mangharam showed RoboRacer autonomous race cars to US Transportation Secretary Pete Buttigieg and DOT Chief Science Officer Robert C. Hampshire. He called racing an effective way to train the next generation of transportation engineers.",
+      "kind": "milestone",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/mangharam_great-to-see-the-roboracer-foundation-autonomous-activity-7284385707119239168-RGQO",
+      "author": "Rahul Mangharam",
+      "author_url": "https://www.linkedin.com/in/mangharam",
+      "affiliation": "Organizer, University of Pennsylvania",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:ugcPost:7284385706234249216",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7284385706234249216",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQGuabsMDWLNhw/feedshare-image-high-res/B4EZRbNrd_GYA0-/0/1736697101690?e=2147483647&v=beta&t=acNA180aQuyUa6nwqow3YVsG_k__yiK30T0kkRAu298",
+        "https://media.licdn.com/dms/image/v2/D4E22AQGuTuOMO9F75w/feedshare-shrink_1280/B4EZRbNrd1GwAo-/0/1736697101734?e=2147483647&v=beta&t=0yZ_mThfQxgi8FIg5cZsRzJQ_uLTtj4H5EVZgkWoHP0",
+        "https://media.licdn.com/dms/image/v2/D4E22AQHmhyKytjIHjA/feedshare-shrink_1280/B4EZRbNreHGcAk-/0/1736697101506?e=2147483647&v=beta&t=1zh691V1r0fTyz3FBZMY3h0ja2H81cnIGlVXp8ETsCo"
+      ],
+      "facts": [
+        "RoboRacer autonomous racecars shown to DoT Secretary Pete Buttigieg and DoT Chief Science Officer Robert C. Hampshire (text)",
+        "RoboRacer is an effective way to train the next generation of transportation engineers (text)",
+        "Three photos (images 1-3)"
+      ],
+      "confidence": "high",
+      "priority": "B",
+      "period": "2025",
+      "notes": "Photos show public officials; ask Rahul before using the photos on the site."
+    },
+    {
+      "id": "f1tenth-is-now-roboracer",
+      "date": "2025-02-19",
+      "date_precision": "day",
+      "post_date": "2025-02-19",
+      "title": "F1TENTH is now RoboRacer",
+      "excerpt": "Opening the 2025 season at ICRA, Rahul Mangharam wrote that F1Tenth is now RoboRacer.AI. The post tagged the wider organizing group, including Johannes Betz, Madhur Behl, Venkat Krovi, Joydeep Biswas, Hyungpil Moon, Xuesu Xiao and Marko Bertogna.",
+      "kind": "milestone",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/mangharam_icra2025-activity-7297995364735856640-TT6l",
+      "author": "Rahul Mangharam",
+      "author_url": "https://www.linkedin.com/in/mangharam",
+      "affiliation": "Organizer, University of Pennsylvania",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7297995363527897089",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7297995363527897089",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQFIz3d1bc0QAA/feedshare-image-high-res/B4EZUeFm6FGwA0-/0/1739966543537?e=2147483647&v=beta&t=Zhz8eG-zYxkG7GXhihv1Ib1LYcb6wUn3UWYCXK-Dvp8"
+      ],
+      "facts": [
+        "'F1Tenth is now RoboRacer.AI' (text)",
+        "Launch of the 2025 competition at ICRA (text)",
+        "Tagged: Johannes Betz, Madhur Behl, Venkat N. Krovi, Joydeep Biswas, Hyungpil Moon, Xuesu Xiao, Marko Bertogna (text)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2025",
+      "notes": "Clearest public statement of the rename found. Two weeks earlier (2025-02-03) he posted 'Join us at RoboRacer.AI' with the Autoware Foundation and a plan to scale from 1/10 to 1/5, 1/2 and full-size vehicles: https://www.linkedin.com/posts/mangharam_join-us-at-roboracerai-the-roboracer-foundation-activity-7292127209262071808-KL78 . The company page itself was renamed: https://www.linkedin.com/company/f1tenth-foundation now redirects to /company/roboracer-foundation. Exact rename date: TODO(content), ask Cedric or Rahul."
+    },
+    {
+      "id": "icra2025-24th-registration-open",
+      "date": "2025-02-19",
+      "date_precision": "day",
+      "post_date": "2025-02-19",
+      "title": "Registration opens for the 24th competition at ICRA 2025 in Atlanta",
+      "excerpt": "The Roboracer Foundation opened registration for the 24th Roboracer Autonomous Racing Competition at ICRA 2025, May 19 to 23 at the Georgia World Congress Center in Atlanta. The season brought new rule adjustments and a first orientation session on March 18.",
+      "kind": "announcement",
+      "event": "icra2025",
+      "link": "https://www.linkedin.com/posts/roboracer-foundation_2025icra-autonomousracing-icra2025-activity-7297948638578692096-_Kzv",
+      "author": "The Roboracer Foundation",
+      "author_url": "https://www.linkedin.com/company/roboracer-foundation",
+      "affiliation": "Organizer",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7297948637324541953",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7297948637324541953",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQFIz3d1bc0QAA/feedshare-image-high-res/B4EZUeFm6FGwA0-/0/1739966543537?e=2147483647&v=beta&t=Zhz8eG-zYxkG7GXhihv1Ib1LYcb6wUn3UWYCXK-Dvp8"
+      ],
+      "facts": [
+        "24th edition of the Roboracer Autonomous Racing Competition at ICRA 2025, Georgia World Congress Center (text)",
+        "New rule adjustments; first orientation session March 18 (text)",
+        "May 19-23, 2025; site icra2025-race.roboracer.ai (poster)",
+        "First poster with the RoboRacer wordmark and 'Simple / Fast / Open Source' (poster)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2025",
+      "notes": "First Foundation post found under the RoboRacer name."
+    },
+    {
+      "id": "tum-3d-lidar-kit-2025",
+      "date": "2025-03-12",
+      "date_precision": "day",
+      "post_date": "2025-03-12",
+      "title": "TUM releases a 3D LiDAR kit for the car",
+      "excerpt": "Felix Jahncke, Moritz Wagner and Johannes Betz at TUM published an open repository that adds a Livox MID-360 3D LiDAR and a working SLAM pipeline to the car with a single install command. It includes drivers, a mount CAD file, demo videos and ROS bags.",
+      "kind": "post",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/felix-jahncke_ever-dreamed-of-a-3d-lidar-for-your-roboracer-activity-7305504821309001729-dUUT",
+      "author": "Felix Jahncke",
+      "author_url": "https://www.linkedin.com/in/felix-jahncke",
+      "affiliation": "Research lab, TUM Autonomous Vehicle Systems Lab",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7305504819941658625",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7305504819941658625",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQEKOBsdxX0cjA/feedshare-shrink_800/B4EZWJd6GAHMAg-/0/1741768078282?e=2147483647&v=beta&t=nQnzbPDtIUU_C4ZU73K_mhimEzqlRdmEyHTfVhmeBu4"
+      ],
+      "facts": [
+        "Repository integrating the Livox MID-360 3D LiDAR into the F1Tenth platform (text)",
+        "Drivers, a proven SLAM algorithm, CAD files for a mounting adapter, videos and ROSbags (text)",
+        "By Felix Jahncke, Moritz Wagner and Johannes Betz, TUM AVS Lab (text)",
+        "Plans with Ahmad Amine and Rahul Mangharam to bring it into the native RoboRacer stack (text)"
+      ],
+      "confidence": "high",
+      "priority": "B",
+      "period": "2025",
+      "notes": "Build-page material too."
+    },
+    {
+      "id": "neobotics-foundation-founded-2025",
+      "date": "2025-03-18",
+      "date_precision": "day",
+      "post_date": "2025-03-18",
+      "title": "A new non-profit for autonomous vehicle education: Neobotics Foundation",
+      "excerpt": "Koneshka Dey, who led Boston University's F1TenthBU racing club, announced the Neobotics Foundation, a non-profit to standardize autonomous vehicle education. Its stated mission is to make robotics and autonomy accessible to students of all backgrounds.",
+      "kind": "milestone",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/koneshka-dey-90437311b_im-very-excited-to-announce-a-new-chapter-activity-7307572444368658434-DwTU",
+      "author": "Koneshka Dey",
+      "author_url": "https://www.linkedin.com/in/koneshka-dey-90437311b",
+      "affiliation": "Partner (Neobotics Foundation)",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7307572441663336448",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7307572441663336448",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4D22AQFx44vbPQ-RWw/feedshare-image-high-res/B4DZWm2abgGcAw-/0/1742261037074?e=2147483647&v=beta&t=z11Uc3Jkr3Ss3Bo43A3Ee9i1_qgvCK0gV6_VDh0qlsM"
+      ],
+      "facts": [
+        "Founding of Neobotics Foundation Inc., a non-profit for standardizing autonomous vehicle education (text)",
+        "Dey previously led the F1TenthBU Autonomous Racing Organization (text)",
+        "Mentor Renato Mancuso; co-founders named (text)"
+      ],
+      "confidence": "high",
+      "priority": "C",
+      "period": "2025",
+      "notes": "Context for VTC 2026, which Neobotics co-organized. CLAUDE.md: neobotics.org is a pattern reference only; this item is about the organization as a partner, and no assets from it may be copied. Low priority."
+    },
+    {
+      "id": "iv2025-call-for-teams",
+      "date": "2025-04-09",
+      "date_precision": "day",
+      "post_date": "2025-04-09",
+      "title": "Call for teams: the Grand Prix comes to IEEE IV 2025 in Cluj-Napoca",
+      "excerpt": "Bassam Alrifaee announced the F1TENTH Autonomous Grand Prix at IEEE IV 2025 in Cluj-Napoca, Romania, with solo time trials followed by a head-to-head knockout. Teams of up to four paid 10 EUR per participant and brought their own car.",
+      "kind": "announcement",
+      "event": "iv2025",
+      "link": "https://www.linkedin.com/posts/bassam-alrifaee-5b592aa6_call-for-f1tenth-teams-ieee-iv-2025-activity-7315783741040201728-mYlf",
+      "author": "Bassam Alrifaee",
+      "author_url": "https://www.linkedin.com/in/bassam-alrifaee-5b592aa6",
+      "affiliation": "Organizer",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7315783737772826627",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7315783737772826627",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/sync/v2/D4D27AQFPpr8bfeINqQ/articleshare-shrink_800/B4DZYWen5vH4Ag-/0/1752127737120?e=2147483647&v=beta&t=ihrUvO1NvzGDZwfW3dvnYX16TdFCzCGmSlR3ROTcXTs"
+      ],
+      "facts": [
+        "F1TENTH Autonomous Grand Prix at IEEE IV 2025, Cluj-Napoca, Romania, June 22-25, 2025 (text)",
+        "Two challenges: collision avoidance and lap time minimization; qualification time trials then knockout (text)",
+        "Up to 4 members per team, 10 EUR per participant; teams bring their own car (text)",
+        "Organized with Julius Beerwerth, Ahmad Amine, Mircea Paul Muresan, Ahmed Hussein, Johannes Betz, Rahul Mangharam (text)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2025",
+      "notes": "The post gives the conference span; the race site says June 22 to 23 (25th competition). The post mentions monetary prizes without amounts; the content skill bans prize amounts anyway. ForzaETH won IV 2025 per forzaeth.ch and search snippets; no LinkedIn result post could be read."
+    },
+    {
+      "id": "icra2025-sim-league-58-teams",
+      "date": "2025-05",
+      "date_precision": "month",
+      "post_date": "2025-07-21",
+      "title": "58 teams in the 3rd Sim Racing League at ICRA 2025",
+      "excerpt": "An Autoware Foundation blog by Tanmay and Chinmay Samak looked back on the third RoboRacer Sim Racing League at ICRA 2025, run on the AutoDRIVE simulator. The league drew 58 teams and several zero-collision runs.",
+      "kind": "post",
+      "event": "icra2025",
+      "link": "https://www.linkedin.com/posts/the-autoware-foundation_autoware-opensource-coeblog-activity-7353118395388649474-i4au",
+      "author": "Autoware Foundation",
+      "author_url": "https://www.linkedin.com/company/the-autoware-foundation",
+      "affiliation": "Partner",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7353118393668984832",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7353118393668984832",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4D22AQHGZ-pzl9mN-g/feedshare-shrink_800/B4DZguGNIoHsAg-/0/1753120038366?e=2147483647&v=beta&t=CKWpc4mamlTDDzrugjUfv7tyYiw-5liCp3DN64nuSqM"
+      ],
+      "facts": [
+        "3rd Sim Racing League @ ICRA 2025: 58 teams, zero-collision runs (text)",
+        "Powered by the AutoDRIVE Ecosystem (text)",
+        "Blog authored by Tanmay Samak and Chinmay Samak (text)"
+      ],
+      "confidence": "high",
+      "priority": "B",
+      "period": "2025",
+      "notes": "Post dated 2025-07-21. The sim league winner (VAUL, 111.46 s per search snippets) was not readable in any fetched post."
+    },
+    {
+      "id": "icra2025-ucf-ninth-of-25",
+      "date": "2025-05-23",
+      "date_precision": "day",
+      "post_date": "2026-02-24",
+      "title": "UCF's senior design team finishes 9th of 25 at ICRA 2025",
+      "excerpt": "A University of Central Florida team that began as a senior design project placed ninth of 25 teams at the ICRA 2025 competition, racing against graduate teams. Team member Israel Charles went on to found F1Tenth@UCF.",
+      "kind": "result",
+      "event": "icra2025",
+      "link": "https://www.linkedin.com/posts/mangharam_roboracer-autonomousracing-robotics-activity-7432122168936919040-dans",
+      "author": "Rahul Mangharam",
+      "author_url": "https://www.linkedin.com/in/mangharam",
+      "affiliation": "Organizer, University of Pennsylvania",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7431863295663382529",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7431863295663382529",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQHZsVBURyW1bg/feedshare-shrink_800/B4EZyNISajHoAg-/0/1771894286480?e=2147483647&v=beta&t=2Arhfx737qAHbqA5qrFVNQqNMquVTOt7D9REnXwGT-I"
+      ],
+      "facts": [
+        "UCF team (Israel Charles, Devin R. Hunter and team) finished 9th out of 25 teams at ICRA'25 (text)",
+        "Started as a senior design project; undergraduates (text)",
+        "Israel Charles founded F1Tenth@UCF (text)"
+      ],
+      "confidence": "high",
+      "priority": "B",
+      "period": "2025",
+      "notes": "Post dated 2026-02-24; event date from docs/EVENTS_VERIFICATION.md (ICRA 2025, May 19 to 23). Gives the ICRA 2025 field size: 25 teams. The ICRA 2025 podium is not in any LinkedIn post read (ForzaETH 3rd per forzaeth.ch, not LinkedIn)."
+    },
+    {
+      "id": "season-2025-26-six-competitions",
+      "date": "2025-10-03",
+      "date_precision": "day",
+      "post_date": "2025-10-03",
+      "title": "Six competitions on three continents for 2025-26",
+      "excerpt": "The Roboracer Foundation published its 2025-26 calendar: ICCAS 2025 in Incheon, CDC 2025 in Rio de Janeiro, Techfest at IIT Bombay, ICRA 2026 in Vienna, IV 2026 in Detroit and VTC 2026 in Boston. It billed the season as racing across Asia, Europe and the Americas.",
+      "kind": "announcement",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/roboracer-foundation_roboracer-autonomousracing-ai-activity-7379907884333031424-er5M",
+      "author": "The Roboracer Foundation",
+      "author_url": "https://www.linkedin.com/company/roboracer-foundation",
+      "affiliation": "Organizer",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7379907882953224192",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7379907882953224192",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQEkAPmDqfGpJQ/feedshare-shrink_800/B4EZmqzHBkKgAg-/0/1759507150204?e=2147483647&v=beta&t=tVKS414dpAkfkiqNP3_9uLz4sWT256aUnUIfVmSknyU"
+      ],
+      "facts": [
+        "6 global competitions (text and image)",
+        "Nov 4-6, 2025 IEEE ICCAS 2025, Incheon (text)",
+        "Dec 9-12, 2025 IEEE CDC 2025, Rio de Janeiro (text)",
+        "Dec 22-24, 2025 Techfest, IIT Bombay (text)",
+        "Jun 1-5, 2026 ICRA 2026, Vienna (text)",
+        "Jun 22-25, 2026 IEEE IV 2026, Detroit (text)",
+        "Sep 6-9, 2026 IEEE VTC 2026, Boston (text)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2025",
+      "notes": "Dates are conference spans; the CDC 2025 race site says December 10 to 12. IFAC 2026 and IROS 2026 were added later (see season-2026-four-competitions and the IROS items). The image has a group photo from an earlier race."
+    },
+    {
+      "id": "techfest2025-26th-announced",
+      "date": "2025-10-06",
+      "date_precision": "day",
+      "post_date": "2025-10-06",
+      "title": "The 26th competition heads to Techfest at IIT Bombay",
+      "excerpt": "The Roboracer Foundation announced the 26th Roboracer Autonomous Racing Competition at Techfest, IIT Bombay, December 22 to 24, 2025, on the IIT Bombay campus in Mumbai. Registration opened with the announcement.",
+      "kind": "announcement",
+      "event": "techfest2025",
+      "link": "https://www.linkedin.com/posts/roboracer-foundation_roboracer-autonomousracing-ai-activity-7380971173129453568-dr7S",
+      "author": "The Roboracer Foundation",
+      "author_url": "https://www.linkedin.com/company/roboracer-foundation",
+      "affiliation": "Organizer",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7380971171753922560",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7380971171753922560",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQFcwSHYEZzxEw/feedshare-image-high-res/B4EZm56KLjKoAo-/0/1759760658004?e=2147483647&v=beta&t=5wJhoAPT6dnwyRBFKy5Hd2axFpkFT7WbKT_grJ1jn_U"
+      ],
+      "facts": [
+        "December 22-24, 2025, TechFest, IIT Bombay, India (text)",
+        "26th Roboracer Autonomous Racing Competition (poster)",
+        "IIT Bombay Campus, Mumbai (poster)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2025",
+      "notes": "The only number for Techfest 2025 found anywhere (26th). Autoware Foundation (2025-12-16) confirms the 26th at Techfest and a parallel 4th RoboRacer Sim Racing League with IEEE CDC 2025: https://www.linkedin.com/posts/the-autoware-foundation_autoware-at-techfest-iit-bombay-2025-activity-7406483205341462528-4ebA . Results (Peaky Path Finders 1st, PulpFriction 2nd, both BITS Pilani Hyderabad; Sedrica-IITB 3rd) appear only in search snippets of a BITS Pilani faculty post that could not be opened; TODO(content) until the Techfest results are confirmed."
+    },
+    {
+      "id": "cdc2025-virtual-vaul-wins",
+      "date": "2025-12",
+      "date_precision": "month",
+      "post_date": "2025-12-16",
+      "title": "VAUL wins the virtual CDC 2025 race",
+      "excerpt": "Université Laval's veteran VAUL team won the virtual competition held for CDC 2025, with a 7.74 s best lap and 78.19 s total time. The club's rookie team finished tenth.",
+      "kind": "result",
+      "event": "cdc2025",
+      "link": "https://www.linkedin.com/posts/vaul_vaul-wins-autodrive-fastest-lap-774s-activity-7406716530094190592-29zl",
+      "author": "Laval University Autonomous Vehicle (VAUL)",
+      "author_url": "https://www.linkedin.com/company/vaul",
+      "affiliation": "Team: VAUL, Université Laval",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7406716528802336768",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7406716528802336768",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/sync/v2/D4E27AQGTwxld9KOzKg/articleshare-shrink_800/B4EZsnvwdbKMAM-/0/1765898389730?e=2147483647&v=beta&t=bO2mxS5LDS5maMGNOyP4usXi4tViD3eGjtw5C3WDPDY"
+      ],
+      "facts": [
+        "First place in the virtual CDC 2025 competition (text, French and English)",
+        "Best lap 7.74 s, total 78.19 s (text)",
+        "Rookie team finished 10th (text)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2025",
+      "notes": "Post dated 2025-12-16. This is the simulation league (the 4th RoboRacer Sim Racing League per the Autoware post), not the 25th physical race in Rio. Link given as fr.linkedin.com by LinkedIn; www form used here."
+    },
+    {
+      "id": "season-2026-four-competitions",
+      "date": "2026-03-05",
+      "date_precision": "day",
+      "post_date": "2026-03-05",
+      "title": "RoboRacer's 2026 season: Vienna, Detroit, Busan and Boston",
+      "excerpt": "The Roboracer Foundation posted its 2026 calendar of four competitions: ICRA 2026 in Vienna, IV 2026 in Detroit, IFAC 2026 in Busan and VTC 2026 in Boston. The post framed each race as a real-world test bed for AI.",
+      "kind": "announcement",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/roboracer-foundation_ai-robotics-autonomoussystems-activity-7435174596582150144-Ybmq",
+      "author": "The Roboracer Foundation",
+      "author_url": "https://www.linkedin.com/company/roboracer-foundation",
+      "affiliation": "Organizer",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7435174595575324672",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7435174595575324672",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQFuZNhEU8m-3g/feedshare-shrink_1280/B4EZy8L5eOGYAc-/0/1772683761929?e=2147483647&v=beta&t=NsqYilD0_jCCpIV5ETtGj-e9_x_ltYzhnNy1rR3HfLc"
+      ],
+      "facts": [
+        "ICRA 2026 Vienna June 1-5; IV 2026 Detroit June 22-25; IFAC 2026 Busan Aug 24-27; VTC 2026 Boston Sep 6-9 (image)",
+        "Competitions across Europe, North America and Asia (text)",
+        "Link roboracer.ai/race (text and image)"
+      ],
+      "confidence": "high",
+      "priority": "B",
+      "period": "2026",
+      "notes": "IROS 2026 is not on this calendar; it was added later. Rahul Mangharam posted the same image the same day: https://www.linkedin.com/posts/mangharam_2026-is-an-exciting-year-for-the-roboracer-activity-7435290477278531584-LVYx . Low priority because every 2026 race already has its own news item."
+    },
+    {
+      "id": "roboracer-research-germany-2026",
+      "date": "2026-04-06",
+      "date_precision": "day",
+      "post_date": "2026-04-06",
+      "title": "RoboRacer research in Germany",
+      "excerpt": "Rahul Mangharam highlighted RoboRacer-based research in Germany, pointing to work on extreme autonomy by Johannes Betz and Mattia Piccinini. He counted more than 50 papers using RoboRacer/F1Tenth in four years.",
+      "kind": "post",
+      "event": null,
+      "link": "https://www.linkedin.com/posts/mangharam_great-to-see-the-roboracer-foundation-based-activity-7446737955701809152-kOd9",
+      "author": "Rahul Mangharam",
+      "author_url": "https://www.linkedin.com/in/mangharam",
+      "affiliation": "Organizer, University of Pennsylvania",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7446737954779172864",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7446737954779172864",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4D22AQF-m30wO_zlQg/feedshare-shrink_800/B4DZ0HISQ2KgAc-/0/1773941106004?e=2147483647&v=beta&t=V5PxE7qfc2z1q-G8ZwEGROUCdyBzcBd7xaCPUE4usiM"
+      ],
+      "facts": [
+        "'In 4 years there have been 50+ research papers using RoboRacer/F1Tenth' (text)",
+        "Johannes Betz and Mattia Piccinini, extreme autonomy (text)"
+      ],
+      "confidence": "medium",
+      "priority": "C",
+      "period": "2026",
+      "notes": "The 50+ count is ambiguous (Germany only or overall) and far below the site's '1,000+ publications reference the platform'. Do not use the number."
+    },
+    {
+      "id": "vtc2026-firebird-wins",
+      "date": "2026-09-06",
+      "date_precision": "day",
+      "post_date": "2026-09-10",
+      "title": "Firebird from George Mason wins the 30th competition at VTC 2026",
+      "excerpt": "Competitor Connor McGovern congratulated Firebird from George Mason University on first place at the RoboRacer competition at IEEE VTC 2026 in Boston. His own team raced a map-free stack and thanked Neobotics Foundation and MIT Beaver Works Summer Institute for getting them on the grid.",
+      "kind": "result",
+      "event": "vtc2026",
+      "link": "https://www.linkedin.com/posts/connor-mcgovern-215153431_just-wrapped-up-a-great-weekend-at-ieee-vtc-activity-7503610769708756992-xdIy",
+      "author": "Connor McGovern",
+      "author_url": "https://www.linkedin.com/in/connor-mcgovern-215153431",
+      "affiliation": "Team (name not given)",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:ugcPost:7503610768341532673",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7503610768341532673",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQF6YSeWvadApQ/feedshare-shrink_800/B4EaCIuOZ7JMAc-/0/1789000215278?e=2147483647&v=beta&t=lhZU2syrw_UNfkU13TBWdfOLu4EdQGsDAUuQhL1vKuI",
+        "https://media.licdn.com/dms/image/v2/D4E22AQEojeEagx3P2g/feedshare-shrink_800/B4EaCIuOtAI0Ac-/0/1789000216211?e=2147483647&v=beta&t=-YAa4lFk4Cmdi0QxoUGopkt4SrmMXM-YP1J_pzoi9h0"
+      ],
+      "facts": [
+        "'Big congratulations to Firebird from George Mason University on first place' (text)",
+        "RoboRacer competition at IEEE VTC, hosted by IEEE Vehicular Technology Society, The Roboracer Foundation and Neobotics Foundation (text)",
+        "His team ran map-free algorithms (text)"
+      ],
+      "confidence": "medium",
+      "priority": "A",
+      "period": "2026",
+      "notes": "Original post dated 2026-09-10; the Foundation reposted it (https://www.linkedin.com/posts/roboracer-foundation_activity-7503625295988523008-PAsr). Race date from the event poster in the Neobotics post (Sunday 6 September 2026). A Neobotics award photo shows a 'P1 ... Trials' slide with 'Firebi...' on it. Winner comes from a competitor, not an organizer: confirm on https://vtc2026-race.roboracer.ai before publishing. news.json has no VTC 2026 item."
+    },
+    {
+      "id": "vtc2026-boston-recap",
+      "date": "2026-09-06",
+      "date_precision": "day",
+      "post_date": "2026-09-21",
+      "title": "Looking back at the 30th competition in Boston",
+      "excerpt": "Neobotics Foundation, which organized the race with the Roboracer Foundation, shared photos from the 30th RoboRacer Autonomous Racing Competition at IEEE VTC 2026-Fall, held at the Hilton Boston Park Plaza on September 6, 2026. The event poster lists teams from Buffalo, Boston University, Florida, Northeastern, Victoria, Wisconsin-Madison and GIU, among others.",
+      "kind": "post",
+      "event": "vtc2026",
+      "link": "https://www.linkedin.com/posts/neobotics-foundation-inc_roboracer-neobotics-f1tenth-activity-7507891143662145538-xHdb",
+      "author": "Neobotics Foundation Inc.",
+      "author_url": "https://www.linkedin.com/company/neobotics-foundation-inc",
+      "affiliation": "Organizer (co-host)",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:ugcPost:7507891142504521730",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7507891142504521730",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4D22AQF_vsiyR3Gfdw/feedshare-shrink_800/B4DaDFjNdAIoAc-/0/1790020737158?e=2147483647&v=beta&t=UdZeefbn3ttRAm0YG3Uqpqz3Ta-iVTHJdr8eZEmYNik",
+        "https://media.licdn.com/dms/image/v2/D4D22AQHZcOWmMIIAEw/feedshare-shrink_800/B4DaDFjNcaIkAg-/0/1790020737304?e=2147483647&v=beta&t=K8awxmBr2aC4hoFv1qMsBDOGpT2xyPVpR4a0AnxFOw8",
+        "https://media.licdn.com/dms/image/v2/D4D22AQGWBt3tCMcusQ/feedshare-shrink_800/B4DaDFjNYIKYAc-/0/1790020736837?e=2147483647&v=beta&t=uykbH_cWQ4FMRzjcH8Rx4nZnX7ge_4nGIuvKhxuPxZ4",
+        "https://media.licdn.com/dms/image/v2/D4D22AQE6D7TDbz4QlQ/feedshare-shrink_1280/B4DaDFjNUMJEAM-/0/1790020736628?e=2147483647&v=beta&t=rCKY3HTBLi6fHoqEcK_iyY41g6xmC6FdaVDsJvEWj8E",
+        "https://media.licdn.com/dms/image/v2/D4D22AQEgFUfiL41L1g/feedshare-shrink_800/B4DaDFjNM3HMAk-/0/1790020736173?e=2147483647&v=beta&t=r3g10T5mn2N_MsQXt95VlbOcy7OLJsGEkDGLMWek6gM",
+        "https://media.licdn.com/dms/image/v2/D4D22AQGflzXLR3_JHA/feedshare-shrink_800/B4DaDFjNbiJgAg-/0/1790020737083?e=2147483647&v=beta&t=pAnM0eyXYESMh_IW8xtIsl2P0pRXV62cBpw0lzHDWIE",
+        "https://media.licdn.com/dms/image/v2/D4D22AQF7T5deS6TJkg/feedshare-shrink_800/B4DaDFjNTTIoAg-/0/1790020736698?e=2147483647&v=beta&t=piX8xmAz9U652sZnTH3rWKKiPtJ8HiQAWTJk5l0W4aA",
+        "https://media.licdn.com/dms/image/v2/D4D22AQF-bpf32DtiDQ/feedshare-shrink_800/B4DaDFjNP8JUAg-/0/1790020736292?e=2147483647&v=beta&t=T0rQa5jB7s6R8E00uAb2tyFtk_2TX4zE0Z9HIfQpTUw",
+        "https://media.licdn.com/dms/image/v2/D4D22AQEaTQfzU9NQHg/feedshare-shrink_1280/B4DaDFjM6iIAAM-/0/1790020734873?e=2147483647&v=beta&t=PW2lSmBlLX67HkcIa4UhGEUn31rYJELqlRMyRGRXA0Y"
+      ],
+      "facts": [
+        "Roboracer Competition at IEEE VTC2026-Fall Boston at Hilton Park Plaza; Neobotics organized it with The Roboracer Foundation (text)",
+        "'30th Autonomous Racing Competition' on the screen (photo 6); '30th Autonomous Grand Prix' shirt (photo 9)",
+        "Poster: Sunday 6 September 2026, Hilton Boston Park Plaza, 8:00 am to 5:00 pm (photo 8)",
+        "Participating team logos: University at Buffalo, Boston University, University of Florida, Northeastern, University of Victoria, University of Wisconsin-Madison, GIU, one unidentified (photo 8)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2026",
+      "notes": "Original post dated 2026-09-21; Foundation repost: https://www.linkedin.com/posts/roboracer-foundation_activity-7507935046394376192-Bbo1 . Nine photos (group shots, award, cars, poster). Photos need permission from Neobotics before any download. Pair with vtc2026-firebird-wins for the result."
+    },
+    {
+      "id": "iros2026-sim-league-results",
+      "date": "2026-09-24",
+      "date_precision": "day",
+      "post_date": "2026-09-24",
+      "title": "Siga Siga Racing wins the 6th Sim Racing League at IROS 2026",
+      "excerpt": "Siga Siga Racing Team from K. Smirnov Robotics in Cyprus won the sixth RoboRacer Sim Racing League in 71.82 s with no collisions, after qualifying 28th of 32. NTU DeepSpeed from Singapore finished second in 72.26 s and rulim from MIPT third in 73.97 s.",
+      "kind": "result",
+      "event": "iros2026",
+      "link": "https://www.linkedin.com/posts/autodrive-ecosystem_iros2026-autodrive-roboracer-activity-7508752923695194113-2hxc",
+      "author": "AutoDRIVE Ecosystem",
+      "author_url": "https://www.linkedin.com/company/autodrive-ecosystem",
+      "affiliation": "Partner (Sim Racing League organizer)",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7508752921769992192",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7508752921769992192",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQFxj-rLcvoplQ/feedshare-shrink_800/B4EaDRy_lzHoAc-/0/1790226201509?e=2147483647&v=beta&t=fJgwwt_X0f7WwztyDkFIjM5XJn1JWDcUPwhzdc6aRiE"
+      ],
+      "facts": [
+        "1st Siga Siga Racing Team (K. Smirnov Robotics LTD, Cyprus), 71.82 s, zero collisions, fastest lap 7.16 s, top speed above 11 m/s, 28th of 32 in qualifying (text)",
+        "2nd NTU DeepSpeed (Nanyang Technological University Singapore), 72.26 s, best lap 7.19 s, 1st in qualifying (text)",
+        "3rd rulim (MIPT, Russia), 73.97 s, best lap 7.33 s (text)",
+        "Special mention: Light Year, a solo high-school team from Panther Creek High School (text)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2026",
+      "notes": "Results announced 2026-09-24; the sim final date is not stated. Registration post (2026-09-11): 55 teams, 132 participants, 28 organizations, 23 countries: https://www.linkedin.com/posts/autodrive-ecosystem_iros2026-autodrive-roboracer-activity-7504214063921487874-5zIG . The Foundation's sponsor post links the same final results. Distinct from the physical 31st race (September 28 to 30)."
+    },
+    {
+      "id": "iros2026-autoware-tier-iv-sponsors",
+      "date": "2026-09-24",
+      "date_precision": "day",
+      "post_date": "2026-09-24",
+      "title": "Autoware Foundation and TIER IV sponsor the 31st competition at IROS 2026",
+      "excerpt": "The Roboracer Foundation thanked the Autoware Foundation and TIER IV for sponsoring the 31st competition at IROS 2026 in Pittsburgh, support that keeps entry affordable and helps teams travel. New this year, four cars race at once in the knockout stages.",
+      "kind": "announcement",
+      "event": "iros2026",
+      "link": "https://www.linkedin.com/posts/roboracer-foundation_autoware-opensource-tieriv-activity-7508923533272510464-eCUX",
+      "author": "The Roboracer Foundation",
+      "author_url": "https://www.linkedin.com/company/roboracer-foundation",
+      "affiliation": "Organizer",
+      "publisher": "LinkedIn",
+      "embed_urn": "urn:li:share:7508923532169584641",
+      "embed_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7508923532169584641",
+      "image_urls": [
+        "https://media.licdn.com/dms/image/v2/D4E22AQHcDfS75qD7Ew/feedshare-shrink_800/B4EaDUOKnCHQAg-/0/1790266878958?e=2147483647&v=beta&t=lOL9UC2-_az2WXLm6-ZQDpyhUi4p0epVg9JIr2IJVxY"
+      ],
+      "facts": [
+        "Autoware Foundation and TIER IV sponsor the 31st RoboRacer Autonomous Racing Competition at IROS 2026 in Pittsburgh (text and image)",
+        "Support goes to the teams: affordable entry and travel help (text)",
+        "New: 4 cars race at once in knockout stages (text)",
+        "Image: 'Race at IROS 2026', 'Pittsburgh, PA / 27-30 Sept 2026', 'Sponsored by The Autoware Foundation, TIER IV' (image)"
+      ],
+      "confidence": "high",
+      "priority": "A",
+      "period": "2026",
+      "notes": "SPONSOR RULE: the content skill says no IROS 2026 sponsor was confirmed as of Aug 18 and never list one without written confirmation. This is the Foundation's own public post (2026-09-24), but Cedric must approve before the site names sponsors. Do not reuse the post's '27 to 30 September' range; public copy is September 28 to 30 with check-in September 27. news.json already has an iros2026 registration item; this is a separate story."
+    }
+  ],
+  "enrichments_for_existing_items": [
+    {
+      "news_id": "iv2026-detroit-thunderbolt-wins",
+      "link": "https://www.linkedin.com/posts/cedric-hollande_speed-came-in-1st-at-the-ieee-iv-2026-the-activity-7475947301207891968-x9TB",
+      "author": "Cedric Hollande",
+      "post_date": "2026-06-25",
+      "embed_urn": "urn:li:ugcPost:7475947238351941632",
+      "use": "The winner's own LinkedIn post; can serve as the item's embed (the news item links only to the race site).",
+      "facts": [
+        "High-friction carpet surface, 30+ km/h, cars on two wheels in fast turns (text)",
+        "MPPI controller sampling 1.3M trajectories per second at 40 Hz on the Jetson GPU (text)"
+      ]
+    },
+    {
+      "news_id": "post-roboracer-foundation-197760",
+      "link": "https://www.linkedin.com/posts/roboracer-foundation_thrilling-races-vivid-discussions-and-activity-7471115155716841472-fPAj",
+      "author": "The Roboracer Foundation",
+      "post_date": "2026-06-12",
+      "embed_urn": "urn:li:ugcPost:7471115152382197760",
+      "use": "Same post as the news item (same ugcPost); this is its canonical company-slug URL. The text adds details the excerpt could use.",
+      "facts": [
+        "New: a bridge on the track, open track borders, Classic Cup and Master Cup, a Friday community workshop (text)",
+        "Award ceremony at TU Wien; organizers thanked: Felix Resch, Andreas Brandstätter, Jaroslav Klapálek, Moritz Christamentl (text)"
+      ]
+    },
+    {
+      "news_id": "icra2026 items",
+      "link": "https://www.linkedin.com/posts/roboracer-foundation_we-are-thrilled-to-kick-off-the-27th-activity-7466949775771230208-gJfg",
+      "author": "The Roboracer Foundation",
+      "post_date": "2026-05-31",
+      "embed_urn": "urn:li:ugcPost:7466949740635709440",
+      "use": "Race-eve kickoff post for ICRA 2026 (video).",
+      "facts": [
+        "Partners thanked: KNAPP, TU Wien, TU Wien Informatics, HTU Wien, Qualisys, Magna International, FFG, Bundesministerium für Innovation, Mobilität und Infrastruktur (text)"
+      ]
+    },
+    {
+      "news_id": "icra2026 items",
+      "link": "https://www.linkedin.com/posts/forzaeth-arzh_autonomousracing-icra2026-roboracer-activity-7469738117688619008-xBGr",
+      "author": "ForzaETH by Autonomous Racing Zürich",
+      "post_date": "2026-06-08",
+      "embed_urn": "urn:li:ugcPost:7469738115558125569",
+      "use": "Team post; possible extra ICRA 2026 team story.",
+      "facts": [
+        "3rd in time trials, 9th overall of 36 teams (text)",
+        "40 x 20 m track with different grip and a 3D bridge (text)"
+      ],
+      "conflict": "36 teams here vs 'about 30 teams' in the Foundation post and '35 registered teams' (VERIFY) in the content skill."
+    },
+    {
+      "news_id": "ifac2026-busan-largest-race",
+      "link": "https://www.linkedin.com/posts/roboracer-foundation_activity-7508551761700282368-6Ztz",
+      "author": "Mingguang Zhou (reposted by The Roboracer Foundation)",
+      "post_date": "2026-09-23",
+      "embed_urn": "urn:li:ugcPost:7508530134199574528",
+      "use": "Candid team retrospective from IFAC 2026.",
+      "facts": [
+        "'Competing alongside 54 other teams', one of only two institution-independent entries (text)"
+      ],
+      "conflict": "54 other teams = 55 in total, vs 56 teams on the Foundation's slide 1."
+    },
+    {
+      "news_id": "iv2026 items",
+      "link": "https://www.linkedin.com/posts/roboracer-foundation_iv2026-ieeeiv-roboracer-activity-7437441572218224640-3Nvc",
+      "author": "The Roboracer Foundation",
+      "post_date": "2026-03-11",
+      "embed_urn": "urn:li:share:7437441569131048960",
+      "use": "The IV 2026 call for teams, if the page wants the announcement next to the result.",
+      "facts": [
+        "28th Roboracer Autonomous Grand Prix at IEEE IV 2026, June 22-25, 2026, Detroit Marriott at the Renaissance Center (text)"
+      ]
+    },
+    {
+      "news_id": "autodrive-digital-twin-first-look",
+      "link": "https://www.linkedin.com/posts/open-source-robotics-foundation_digital-twin-of-f1tenth-in-autodrive-simulator-activity-7128160732004679680-UZjJ",
+      "author": "Open Robotics",
+      "post_date": "2023-11-08",
+      "embed_urn": "urn:li:share:7128160731069349888",
+      "use": "LinkedIn copy of the same video; the news item is dated 2023-10-13, this repost is 2023-11-08 (it reshares an activity from early November).",
+      "facts": [
+        "Title 'Digital Twin of F1TENTH in AutoDRIVE Simulator - A First Look' (text)"
+      ]
+    }
+  ],
+  "leads_not_selected": [
+    {
+      "post_date": "2018-10-12",
+      "author": "Luca Bartoli",
+      "link": "https://www.linkedin.com/posts/lucabart97_mfr18-f1tenth-hipert-activity-6456468606527119360-kSg7",
+      "why_not_selected": "Video with no caption, tags #mfr18 #f1tenth #hipert (likely a Maker Faire Rome 2018 demo by HiPeRT Modena). Only pre-2019 post found; not a race."
+    },
+    {
+      "post_date": "2023-04-25",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_upenn-activity-7056438050184200192-TcBX",
+      "why_not_selected": "Penn course final races video; the 2022 course post was kept instead."
+    },
+    {
+      "post_date": "2023-05-11",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_f1tenth-autonomousracing-autonomousvehicles-activity-7062420311786315776-Gq5g",
+      "why_not_selected": "CPS-IoT Week 2023 photos, NC State teams; folded into cps2023-12th-winners."
+    },
+    {
+      "post_date": "2023-05-30",
+      "author": "François Pomerleau",
+      "link": "https://www.linkedin.com/posts/fpomerleau_icra2023-activity-7069432079746224128-3gTd",
+      "why_not_selected": "VAUL 4th in qualifying at ICRA 2023; minor."
+    },
+    {
+      "post_date": "2023-06-09",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_iros-robotics-autonomoussystems-activity-7072954461417037824-0D4h",
+      "why_not_selected": "MAD-Games IROS 2023 call for papers; the event-day post was kept."
+    },
+    {
+      "post_date": "2023-09-25",
+      "author": "Venkat N. Krovi",
+      "link": "https://www.linkedin.com/posts/venkatnkrovi_looking-forward-to-seeing-everyone-at-1st-activity-7111864481487454208-Zezk",
+      "why_not_selected": "MAD-Games reminder; duplicate topic."
+    },
+    {
+      "post_date": "2023-12-15",
+      "author": "Madhur Behl",
+      "link": "https://www.linkedin.com/posts/madhurbehl_autonomousracing-robotics-autonomousvehicles-activity-7141456897244614657-4BD9",
+      "why_not_selected": "UVA class race day photos; course item already kept."
+    },
+    {
+      "post_date": "2024-02-25",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_f1tenth-autonomous-racing-competition-at-activity-7167654499124240384-cByi",
+      "why_not_selected": "ICRA 2024 announcement with hosts; the Foundation poster post was preferred."
+    },
+    {
+      "post_date": "2024-05-11",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_f1tenth-autonomous-racing-competitions-2024-activity-7195044996926898176-r0Go",
+      "why_not_selected": "'Over 100 participants ... 7 International Competitions this year'; folded into icra2024-19-teams."
+    },
+    {
+      "post_date": "2024-05-12",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_join-us-in-the-2nd-mad-games-multi-agent-activity-7195407420716711936-gK23",
+      "why_not_selected": "2nd MAD-Games workshop, ICRA 2024, May 13."
+    },
+    {
+      "post_date": "2024-05-15",
+      "author": "TIER IV",
+      "link": "https://www.linkedin.com/posts/tier-iv-inc_tieriv-icra2024-f1tenth-activity-7196434400274714624-S1Dt",
+      "why_not_selected": "Race-week post: race day and award ceremony May 16, Exhibition Hall C."
+    },
+    {
+      "post_date": "2024-05-15",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_icra2024-activity-7196308422739263488-uUvq",
+      "why_not_selected": "ICRA 2024 race start: time trials Wednesday for seeding, head-to-head bracket Thursday, in the competition and exhibition zone (embed urn:li:share:7196308422256979968). ICRA 2024 already has four candidates; use if the race-week story needs a format line."
+    },
+    {
+      "post_date": "2024-05-17",
+      "author": "TU Wien Informatics",
+      "link": "https://www.linkedin.com/posts/tu-wien-informatics_andreas-brandst%C3%A4tter-scuderia-segfault-activity-7197279720902668288-PLVb",
+      "why_not_selected": "Team profile of Scuderia Segfault; no result."
+    },
+    {
+      "post_date": "2024-09-27",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_amazing-f1tenth-autonomous-racing-competition-activity-7245455430498271233-iZ_U",
+      "why_not_selected": "Reshare of the SM 2024 results with organizer names; alternative link for sm2024-vaul-keeps-title."
+    },
+    {
+      "post_date": "2024-10-16",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_f1tenth-autonomous-racing-competition-at-activity-7252107239212101633-Ule_",
+      "why_not_selected": "IROS 2024 race video, one-line caption."
+    },
+    {
+      "post_date": "2024-10-22",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_f1tenth-autonomous-racing-competition-at-activity-7254334638398042112-hSAw",
+      "why_not_selected": "CDC 2024 Milan sign-up, virtual and physical, plus the racing workshop."
+    },
+    {
+      "post_date": "2024-10-29",
+      "author": "IEEE CDC",
+      "link": "https://www.linkedin.com/posts/ieee-cdc-social_cdc2024-f1tenth-perception-activity-7256959957219078144-dlcV",
+      "why_not_selected": "Sim Racing League at CDC 2024: 37 teams registered, deadline October 31."
+    },
+    {
+      "post_date": "2024-11-08",
+      "author": "ForzaETH",
+      "link": "https://www.linkedin.com/posts/forzaeth-arzh_overtaking-demo-video-forzaeth-f1tenth-activity-7260656638565519360-Kb12",
+      "why_not_selected": "Overtaking demo video (Predictive Spliner); research, not news."
+    },
+    {
+      "post_date": "2024-11-13",
+      "author": "Scuderia Segfault",
+      "link": "https://www.linkedin.com/posts/scuderia-segfault_scuderiasegfault-autonomousdriving-activity-7262443348987203584-ihNn",
+      "why_not_selected": "TU Wien rector celebrates the IROS 2024 second place."
+    },
+    {
+      "post_date": "2024-12-16",
+      "author": "AutoDRIVE Ecosystem",
+      "link": "https://www.linkedin.com/posts/autodrive-ecosystem_cdc2024-autodrive-f1tenth-activity-7274413681344483328-euAK",
+      "why_not_selected": "Sim Racing League celebration event at CDC 2024, December 16."
+    },
+    {
+      "post_date": "2025-01-26",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_roboracer-welcomes-iit-bombay-to-the-exciting-activity-7289340372562964480-4GlQ",
+      "why_not_selected": "'IIT-B did a fantastic job in their very first competition'; which competition is not said. 63 images."
+    },
+    {
+      "post_date": "2025-02-03",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_join-us-at-roboracerai-the-roboracer-foundation-activity-7292127209262071808-KL78",
+      "why_not_selected": "'Join us at RoboRacer.AI' with the Autoware Foundation; folded into f1tenth-is-now-roboracer."
+    },
+    {
+      "post_date": "2025-02-25",
+      "author": "AutoDRIVE Ecosystem",
+      "link": "https://www.linkedin.com/posts/autodrive-ecosystem_ai-racing-robotics-activity-7299994278745784320-PNqw",
+      "why_not_selected": "Announces the 3rd RoboRacer Sim Racing League at ICRA 2025."
+    },
+    {
+      "post_date": "2025-04-07",
+      "author": "Foxglove",
+      "link": "https://www.linkedin.com/posts/foxglovedev_ros-activity-7314987407483850753-z3po",
+      "why_not_selected": "Vendor article on the sim league."
+    },
+    {
+      "post_date": "2025-04-09",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_sign-up-for-the-roboracer-sim-racing-league-activity-7315554051717300224-ct2_",
+      "why_not_selected": "Sim league sign-up, one line."
+    },
+    {
+      "post_date": "2025-04-27",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_reinforcement-learning-for-roboracer-racing-activity-7322321583090384897-8lP8",
+      "why_not_selected": "ForzaETH lecture on RL for racing; Learn material."
+    },
+    {
+      "post_date": "2025-06-17",
+      "author": "Koneshka Dey",
+      "link": "https://www.linkedin.com/posts/koneshka-dey-90437311b_support-neobotics-foundation-activity-7340805920785862657-Hn6O",
+      "why_not_selected": "Neobotics fundraising."
+    },
+    {
+      "post_date": "2025-12-16",
+      "author": "Autoware Foundation",
+      "link": "https://www.linkedin.com/posts/the-autoware-foundation_autoware-at-techfest-iit-bombay-2025-activity-7406483205341462528-4ebA",
+      "why_not_selected": "Confirms the 26th at Techfest and the 4th Sim Racing League with CDC 2025; cited in notes."
+    },
+    {
+      "post_date": "2026-01-24",
+      "author": "Scuderia Segfault",
+      "link": "https://www.linkedin.com/posts/scuderia-segfault_icr2026-activity-7420815613536780288-Tovu",
+      "why_not_selected": "Co-organizing ICRA 2026; event already covered."
+    },
+    {
+      "post_date": "2026-03-05",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_2026-is-an-exciting-year-for-the-roboracer-activity-7435290477278531584-LVYx",
+      "why_not_selected": "Same 2026 calendar image as the Foundation post."
+    },
+    {
+      "post_date": "2026-03-20",
+      "author": "Piotr Kicki",
+      "link": "https://www.linkedin.com/posts/piotrkicki_icra2026-icra-mppi-activity-7440688515098636288-TPVk",
+      "why_not_selected": "LP-MPPI paper at ICRA 2026, tested on F1/10 racing; a research-page candidate."
+    },
+    {
+      "post_date": "2026-04-08",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_great-to-see-the-roboracer-foundation-in-activity-7447467004308938752-313G",
+      "why_not_selected": "RoboRacer at IIT Bombay; 'hoping to host ICRA 2030 in Hyderabad'. Speculative."
+    },
+    {
+      "post_date": "2026-05-03",
+      "author": "Scuderia Segfault",
+      "link": "https://www.linkedin.com/posts/scuderia-segfault_scideria-roboracer-autonomousracing-activity-7456741669418287104-qtW9",
+      "why_not_selected": "Penn Engineering course race day, 2026."
+    },
+    {
+      "post_date": "2026-05-25",
+      "author": "flyby racing",
+      "link": "https://www.linkedin.com/posts/flyby-racing_roboracer-f1tenth-icra2026-activity-7464571111234486272-rqyZ",
+      "why_not_selected": "TU Wien team's RL agent before ICRA 2026; covered event."
+    },
+    {
+      "post_date": "2026-09-08",
+      "author": "The Roboracer Foundation",
+      "link": "https://www.linkedin.com/posts/roboracer-foundation_iros2026-roboracer-racing-activity-7502906705052307457--kon",
+      "why_not_selected": "IROS 2026 teaser video 'No driver. No controller. Just code.' Possible embed for the IROS spotlight."
+    },
+    {
+      "post_date": "2026-09-11",
+      "author": "AutoDRIVE Ecosystem",
+      "link": "https://www.linkedin.com/posts/autodrive-ecosystem_iros2026-autodrive-roboracer-activity-7504214063921487874-5zIG",
+      "why_not_selected": "6th Sim Racing League registrations: 55 teams, 132 participants, 28 organizations, 23 countries; cited in notes."
+    },
+    {
+      "post_date": "2026-09-22",
+      "author": "Cedric Hollande (reposted by the Foundation)",
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7508243147387490304",
+      "why_not_selected": "Pointer to RoboRacer work in the GRASP Summer Review."
+    },
+    {
+      "post_date": "2026-09-24",
+      "author": "Abdullah Bin Naeem (reposted by the Foundation)",
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7508928876723494912",
+      "why_not_selected": "Barq Racing, the only team from Pakistan, 5th in the IROS 2026 sim league (4th of 55 in qualifying). Read on the Foundation page; the post page returned no structured data."
+    }
+  ],
+  "unreachable": [
+    "https://www.linkedin.com/company/roboracer-foundation/posts/ and /company/f1tenth/posts/ redirect to the login page. The public page /company/roboracer-foundation shows only the ten most recent activities (September 2026), so older Foundation posts were found through search.",
+    "/company/f1tenth answers 404; /company/f1tenth-foundation redirects to /company/roboracer-foundation (same page, renamed). /company/lamarracing answers 404 (real slug unknown). /company/bu-f1tenth shows no public posts.",
+    "DuckDuckGo HTML search returns a bot challenge; Bing via curl returns unrelated, bot-filtered results. Discovery ran through the WebSearch tool restricted to linkedin.com (about 70 queries, including a second pass after the reboot on ITSC 2024, IV 2024, ICRA 2025, CDC 2025 and the Korea championships, which found nothing new); many hits were profile pages whose Experience text mentions results but are not posts.",
+    "Posts that search snippets describe but whose URL could not be found or opened: VAUL's IROS 2023 and ICRA 2024 wins (only in team members' profiles), the Techfest 2025 podium (a BITS Pilani faculty post), ForzaETH's IV 2025 win (team members' posts), UNICORN's ICRA 2025 second place, NTU DeepSpeed at ICCAS 2025, MechaByte (GIU Berlin) third at IV 2025, BU F1Tenth P5 at VTC 2026, an ICRA 2024 'solo hobbyist' second place (Pawel Nazarewski, profile text), Johannes Betz's ICRA 2021 workshop recordings post, Scuderia Segfault's IROS 2021 win (profile text).",
+    "Profile activity feeds (/in/<name>/recent-activity/) need a login; they were not tried with browser cookies. lnkd.in short links inside posts were not resolved. No media was downloaded to the repo (slide images were read in the scratchpad only, all under 2 MB); yt-dlp was not needed."
+  ],
+  "gaps": [
+    "2016 to 2018: nothing on LinkedIn. The first races (ESWeek 2016 Pittsburgh, CPS Week 2018 Porto, ESWeek 2018 Torino) predate the community's LinkedIn use; use the old f1tenth.github.io race pages instead.",
+    "2019: no race post (CPS-IoT Week 2019 Montreal, Columbia 2019); only the simulator release and two Pulse articles.",
+    "2020 to 2021: nothing found for IFAC 2020 and IROS 2020 (virtual), the ICRA 2021 workshop, or IROS 2021 Prague (Scuderia Segfault won per iros2021.f1tenth.org).",
+    "2022: ESWeek 2022 Shanghai and the 1st Korea Championship (Jeju); the ICRA 2022 winner.",
+    "2023: IV 2023 Anchorage, the 2nd Korea Championship (ICCAS 2023), and a readable IROS 2023 result post (VAUL won per autoware.org).",
+    "2024: winner posts for ICRA 2024 (VAUL per snippets) and IV 2024; CPS-IoT 2024 Hong Kong (17th), ITSC 2024 Edmonton (20th), 3rd Korea Championship, BU 2024, the CDC 2024 podium.",
+    "2025: podium posts for ICRA 2025, IV 2025 (ForzaETH per forzaeth.ch), ICCAS 2025 (4th Korea Championship), CDC 2025 Rio (25th, physical) and Techfest 2025 (26th).",
+    "2026: all races covered; the VTC 2026 winner (Firebird, George Mason) comes from a competitor's post and needs the race site's results page."
+  ]
+}

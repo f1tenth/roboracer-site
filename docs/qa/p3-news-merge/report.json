@@ -1,0 +1,1664 @@
+{
+ "1536x730": {
+  "h1": [
+   "News from the Community"
+  ],
+  "overflow_default": {
+   "scrollWidth": 1536,
+   "clientWidth": 1536,
+   "offenders": []
+  },
+  "lead": {
+   "title": "274 racers and 56 teams in Busan: the largest race in RoboRacer history",
+   "iframe_title": "RoboRacer Foundation on LinkedIn: IFAC 2026 in Busan",
+   "iframe_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7504332938503741441",
+   "live": "1",
+   "inert": false
+  },
+  "height": 10438,
+  "cards_iframes_before_click": 0,
+  "linkedin_embed_requests_before_click": [
+   "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7504332938503741441"
+  ],
+  "years": [
+   "2026: 4 shown, fold \"\u203a\nShow 13 more from 2026\"",
+   "2025: 4 shown, fold \"\u203a\nShow 8 more from 2025\"",
+   "2024: 4 shown, fold \"\u203a\nShow 11 more from 2024\"",
+   "2023: 4 shown, fold \"\u203a\nShow 4 more from 2023\"",
+   "2022: 4 shown",
+   "2021: 2 shown",
+   "2020: 4 shown, fold \"\u203a\nShow 2 more from 2020\"",
+   "2019: 4 shown",
+   "2018: 4 shown",
+   "2016: 2 shown"
+  ],
+  "chips": [
+   "All",
+   "IROS 2026",
+   "IFAC 2026",
+   "ICRA 2026",
+   "IV 2026",
+   "IV 2025",
+   "ICRA 2025",
+   "CDC 2024",
+   "IROS 2024"
+  ],
+  "fold_2026_open": true,
+  "fold_2026_closed_again": true,
+  "card_embed": {
+   "card": "Siga Siga Racing wins the sixth Sim Racing League, for IROS 2026\u00a0\u2197",
+   "expanded": "true",
+   "label": "Hide the LinkedIn post\n\u203a",
+   "iframe_title": "AutoDRIVE on LinkedIn: results of the sixth Sim Racing League",
+   "iframe_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7508752921769992192",
+   "live": "1",
+   "embed_requests_before": 1,
+   "embed_requests_after": 2
+  },
+  "overflow_expanded": {
+   "scrollWidth": 1536,
+   "clientWidth": 1536,
+   "offenders": []
+  },
+  "images": [
+   {
+    "src": "/media/news/news-ifac2026-post-1080.webp",
+    "alt": "First slide of the post: the IFAC 2026 group photo under the line 274 racers, zero steering wheels, 56 teams, four days, BEXCO Busan.",
+    "width": "1080",
+    "height": "1350",
+    "loading": null,
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-knapp-538432-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "531",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-dhruv-jaiswal-498753-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "516",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-manasi-shrekhar-990273-960.webp",
+    "alt": "",
+    "width": "768",
+    "height": "960",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 768,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/highlights/highlight-iv2026-group-01-1200.webp",
+    "alt": "",
+    "width": "1200",
+    "height": "800",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1200,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-milan-manoj-110976-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-meghaj-kabra-054784-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-samir-shehadeh-344832-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-unicorn-racing-344833-960.webp",
+    "alt": "",
+    "width": "768",
+    "height": "960",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 768,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-mateus-karvat-541826-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "800",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-lukas-kutsch-701952-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "800",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-roboracer-foundation-197760-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "531",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-cedric-hollande-699200-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/highlights/highlight-icra2026-awards-01-1200.webp",
+    "alt": "",
+    "width": "1200",
+    "height": "800",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/iccas2025.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/icra2025.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-iros2023-race-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "608",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-columbia2019-cars-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "810",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-montreal2019-car-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "810",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/esweek2018.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-porto2018-track-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "720",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/logos/logo-white-gradient.svg",
+    "alt": "RoboRacer",
+    "width": "151",
+    "height": "26",
+    "loading": null,
+    "complete": true,
+    "natural": 151,
+    "decorative_in_hidden_link": false
+   },
+   {
+    "src": "/logos/slack-logo.svg",
+    "alt": "Slack",
+    "width": "20",
+    "height": "20",
+    "loading": null,
+    "complete": true,
+    "natural": 127,
+    "decorative_in_hidden_link": false
+   }
+  ],
+  "axe_expanded": [],
+  "console_errors": [],
+  "failed_local_requests": [],
+  "axe_default": [],
+  "keyboard": {
+   "tabs": 96,
+   "reached_footer": true,
+   "summaries_reached": [
+    "\u203a\nShow 13 more from 2026",
+    "\u203a\nShow 8 more from 2025",
+    "\u203a\nShow 11 more from 2024",
+    "\u203a\nShow 4 more from 2023",
+    "\u203a\nShow 2 more from 2020"
+   ],
+   "summaries_in_dom": 5,
+   "post_toggles_reached": 7,
+   "post_toggles_focusable_in_dom": 7,
+   "no_visible_ring": [],
+   "offscreen_focus": [],
+   "summary_enter_opens": true,
+   "summary_space_closes": true,
+   "toggle_enter": [
+    "true",
+    true
+   ],
+   "toggle_space_again": [
+    "false",
+    false,
+    true
+   ]
+  },
+  "keyboard_console_errors": [
+   "requestStorageAccess: Permission denied.",
+   "requestStorageAccess: Permission denied."
+  ]
+ },
+ "1366x650": {
+  "h1": [
+   "News from the Community"
+  ],
+  "overflow_default": {
+   "scrollWidth": 1366,
+   "clientWidth": 1366,
+   "offenders": []
+  },
+  "lead": {
+   "title": "274 racers and 56 teams in Busan: the largest race in RoboRacer history",
+   "iframe_title": "RoboRacer Foundation on LinkedIn: IFAC 2026 in Busan",
+   "iframe_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7504332938503741441",
+   "live": "1",
+   "inert": false
+  },
+  "height": 9778,
+  "cards_iframes_before_click": 0,
+  "linkedin_embed_requests_before_click": [
+   "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7504332938503741441"
+  ],
+  "years": [
+   "2026: 4 shown, fold \"\u203a\nShow 13 more from 2026\"",
+   "2025: 4 shown, fold \"\u203a\nShow 8 more from 2025\"",
+   "2024: 4 shown, fold \"\u203a\nShow 11 more from 2024\"",
+   "2023: 4 shown, fold \"\u203a\nShow 4 more from 2023\"",
+   "2022: 4 shown",
+   "2021: 2 shown",
+   "2020: 4 shown, fold \"\u203a\nShow 2 more from 2020\"",
+   "2019: 4 shown",
+   "2018: 4 shown",
+   "2016: 2 shown"
+  ],
+  "chips": [
+   "All",
+   "IROS 2026",
+   "IFAC 2026",
+   "ICRA 2026",
+   "IV 2026",
+   "IV 2025",
+   "ICRA 2025",
+   "CDC 2024",
+   "IROS 2024"
+  ],
+  "fold_2026_open": true,
+  "fold_2026_closed_again": true,
+  "card_embed": {
+   "card": "Siga Siga Racing wins the sixth Sim Racing League, for IROS 2026\u00a0\u2197",
+   "expanded": "true",
+   "label": "Hide the LinkedIn post\n\u203a",
+   "iframe_title": "AutoDRIVE on LinkedIn: results of the sixth Sim Racing League",
+   "iframe_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7508752921769992192",
+   "live": "1",
+   "embed_requests_before": 1,
+   "embed_requests_after": 2
+  },
+  "overflow_expanded": {
+   "scrollWidth": 1366,
+   "clientWidth": 1366,
+   "offenders": []
+  },
+  "images": [
+   {
+    "src": "/media/news/news-ifac2026-post-1080.webp",
+    "alt": "First slide of the post: the IFAC 2026 group photo under the line 274 racers, zero steering wheels, 56 teams, four days, BEXCO Busan.",
+    "width": "1080",
+    "height": "1350",
+    "loading": null,
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-knapp-538432-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "531",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-dhruv-jaiswal-498753-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "516",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-manasi-shrekhar-990273-960.webp",
+    "alt": "",
+    "width": "768",
+    "height": "960",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 768,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/highlights/highlight-iv2026-group-01-1200.webp",
+    "alt": "",
+    "width": "1200",
+    "height": "800",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1200,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-milan-manoj-110976-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-meghaj-kabra-054784-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-samir-shehadeh-344832-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-unicorn-racing-344833-960.webp",
+    "alt": "",
+    "width": "768",
+    "height": "960",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 768,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-mateus-karvat-541826-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "800",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-lukas-kutsch-701952-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "800",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-roboracer-foundation-197760-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "531",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-cedric-hollande-699200-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/highlights/highlight-icra2026-awards-01-1200.webp",
+    "alt": "",
+    "width": "1200",
+    "height": "800",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/iccas2025.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/icra2025.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-iros2023-race-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "608",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-columbia2019-cars-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "810",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-montreal2019-car-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "810",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/esweek2018.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-porto2018-track-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "720",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/logos/logo-white-gradient.svg",
+    "alt": "RoboRacer",
+    "width": "151",
+    "height": "26",
+    "loading": null,
+    "complete": true,
+    "natural": 151,
+    "decorative_in_hidden_link": false
+   },
+   {
+    "src": "/logos/slack-logo.svg",
+    "alt": "Slack",
+    "width": "20",
+    "height": "20",
+    "loading": null,
+    "complete": true,
+    "natural": 127,
+    "decorative_in_hidden_link": false
+   }
+  ],
+  "console_errors": [],
+  "failed_local_requests": [],
+  "keyboard": {
+   "tabs": 96,
+   "reached_footer": true,
+   "summaries_reached": [
+    "\u203a\nShow 13 more from 2026",
+    "\u203a\nShow 8 more from 2025",
+    "\u203a\nShow 11 more from 2024",
+    "\u203a\nShow 4 more from 2023",
+    "\u203a\nShow 2 more from 2020"
+   ],
+   "summaries_in_dom": 5,
+   "post_toggles_reached": 7,
+   "post_toggles_focusable_in_dom": 7,
+   "no_visible_ring": [],
+   "offscreen_focus": [],
+   "summary_enter_opens": true,
+   "summary_space_closes": true,
+   "toggle_enter": [
+    "true",
+    true
+   ],
+   "toggle_space_again": [
+    "false",
+    false,
+    true
+   ]
+  },
+  "keyboard_console_errors": []
+ },
+ "768x1024": {
+  "h1": [
+   "News from the Community"
+  ],
+  "overflow_default": {
+   "scrollWidth": 768,
+   "clientWidth": 768,
+   "offenders": []
+  },
+  "lead": {
+   "title": "274 racers and 56 teams in Busan: the largest race in RoboRacer history",
+   "iframe_title": "RoboRacer Foundation on LinkedIn: IFAC 2026 in Busan",
+   "iframe_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7504332938503741441",
+   "live": "1",
+   "inert": false
+  },
+  "height": 13729,
+  "cards_iframes_before_click": 0,
+  "linkedin_embed_requests_before_click": [
+   "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7504332938503741441"
+  ],
+  "years": [
+   "2026: 4 shown, fold \"\u203a\nShow 13 more from 2026\"",
+   "2025: 4 shown, fold \"\u203a\nShow 8 more from 2025\"",
+   "2024: 4 shown, fold \"\u203a\nShow 11 more from 2024\"",
+   "2023: 4 shown, fold \"\u203a\nShow 4 more from 2023\"",
+   "2022: 4 shown",
+   "2021: 2 shown",
+   "2020: 4 shown, fold \"\u203a\nShow 2 more from 2020\"",
+   "2019: 4 shown",
+   "2018: 4 shown",
+   "2016: 2 shown"
+  ],
+  "chips": [
+   "All",
+   "IROS 2026",
+   "IFAC 2026",
+   "ICRA 2026",
+   "IV 2026",
+   "IV 2025",
+   "ICRA 2025",
+   "CDC 2024",
+   "IROS 2024"
+  ],
+  "fold_2026_open": true,
+  "fold_2026_closed_again": true,
+  "card_embed": {
+   "card": "Siga Siga Racing wins the sixth Sim Racing League, for IROS 2026\u00a0\u2197",
+   "expanded": "true",
+   "label": "Hide the LinkedIn post\n\u203a",
+   "iframe_title": "AutoDRIVE on LinkedIn: results of the sixth Sim Racing League",
+   "iframe_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7508752921769992192",
+   "live": "1",
+   "embed_requests_before": 1,
+   "embed_requests_after": 2
+  },
+  "overflow_expanded": {
+   "scrollWidth": 768,
+   "clientWidth": 768,
+   "offenders": []
+  },
+  "images": [
+   {
+    "src": "/media/news/news-ifac2026-post-1080.webp",
+    "alt": "First slide of the post: the IFAC 2026 group photo under the line 274 racers, zero steering wheels, 56 teams, four days, BEXCO Busan.",
+    "width": "1080",
+    "height": "1350",
+    "loading": null,
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-knapp-538432-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "531",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-dhruv-jaiswal-498753-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "516",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-manasi-shrekhar-990273-960.webp",
+    "alt": "",
+    "width": "768",
+    "height": "960",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 768,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/highlights/highlight-iv2026-group-01-1200.webp",
+    "alt": "",
+    "width": "1200",
+    "height": "800",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1200,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-milan-manoj-110976-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-meghaj-kabra-054784-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-samir-shehadeh-344832-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-unicorn-racing-344833-960.webp",
+    "alt": "",
+    "width": "768",
+    "height": "960",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 768,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-mateus-karvat-541826-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "800",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-lukas-kutsch-701952-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "800",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-roboracer-foundation-197760-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "531",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-cedric-hollande-699200-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/highlights/highlight-icra2026-awards-01-1200.webp",
+    "alt": "",
+    "width": "1200",
+    "height": "800",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1200,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/iccas2025.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/icra2025.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-iros2023-race-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "608",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-columbia2019-cars-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "810",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-montreal2019-car-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "810",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/esweek2018.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-porto2018-track-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "720",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/logos/logo-white-gradient.svg",
+    "alt": "RoboRacer",
+    "width": "151",
+    "height": "26",
+    "loading": null,
+    "complete": true,
+    "natural": 151,
+    "decorative_in_hidden_link": false
+   },
+   {
+    "src": "/logos/slack-logo.svg",
+    "alt": "Slack",
+    "width": "20",
+    "height": "20",
+    "loading": null,
+    "complete": true,
+    "natural": 127,
+    "decorative_in_hidden_link": false
+   }
+  ],
+  "console_errors": [],
+  "failed_local_requests": [],
+  "keyboard": {
+   "tabs": 88,
+   "reached_footer": true,
+   "summaries_reached": [
+    "\u203a\nShow 13 more from 2026",
+    "\u203a\nShow 8 more from 2025",
+    "\u203a\nShow 11 more from 2024",
+    "\u203a\nShow 4 more from 2023",
+    "\u203a\nShow 2 more from 2020"
+   ],
+   "summaries_in_dom": 5,
+   "post_toggles_reached": 7,
+   "post_toggles_focusable_in_dom": 8,
+   "no_visible_ring": [],
+   "offscreen_focus": [],
+   "summary_enter_opens": true,
+   "summary_space_closes": true,
+   "toggle_enter": [
+    "true",
+    true
+   ],
+   "toggle_space_again": [
+    "false",
+    false,
+    true
+   ]
+  },
+  "keyboard_console_errors": []
+ },
+ "390x844": {
+  "h1": [
+   "News from the Community"
+  ],
+  "overflow_default": {
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "offenders": []
+  },
+  "lead": {
+   "title": "274 racers and 56 teams in Busan: the largest race in RoboRacer history",
+   "iframe_title": "RoboRacer Foundation on LinkedIn: IFAC 2026 in Busan",
+   "iframe_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7504332938503741441",
+   "live": "1",
+   "inert": false
+  },
+  "height": 9027,
+  "cards_iframes_before_click": 0,
+  "linkedin_embed_requests_before_click": [
+   "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7504332938503741441"
+  ],
+  "years": [
+   "2026: 4 shown, fold \"\u203a\nShow 13 more from 2026\"",
+   "2025: 4 shown, fold \"\u203a\nShow 8 more from 2025\"",
+   "2024: 0 shown, fold \"\u203a\nShow 15 from 2024\"",
+   "2023: 0 shown, fold \"\u203a\nShow 8 from 2023\"",
+   "2022: 0 shown, fold \"\u203a\nShow 4 from 2022\"",
+   "2021: 0 shown, fold \"\u203a\nShow 2 from 2021\"",
+   "2020: 0 shown, fold \"\u203a\nShow 6 from 2020\"",
+   "2019: 0 shown, fold \"\u203a\nShow 4 from 2019\"",
+   "2018: 0 shown, fold \"\u203a\nShow 4 from 2018\"",
+   "2016: 0 shown, fold \"\u203a\nShow 2 from 2016\""
+  ],
+  "chips": [
+   "All",
+   "IROS 2026",
+   "IFAC 2026",
+   "ICRA 2026",
+   "IV 2026",
+   "IV 2025",
+   "ICRA 2025",
+   "CDC 2024",
+   "IROS 2024"
+  ],
+  "fold_2026_open": true,
+  "fold_2026_closed_again": true,
+  "card_embed": {
+   "card": "Siga Siga Racing wins the sixth Sim Racing League, for IROS 2026\u00a0\u2197",
+   "expanded": "true",
+   "label": "Hide the LinkedIn post\n\u203a",
+   "iframe_title": "AutoDRIVE on LinkedIn: results of the sixth Sim Racing League",
+   "iframe_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7508752921769992192",
+   "live": "1",
+   "embed_requests_before": 1,
+   "embed_requests_after": 2
+  },
+  "overflow_expanded": {
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "offenders": []
+  },
+  "images": [
+   {
+    "src": "/media/news/news-ifac2026-post-1080.webp",
+    "alt": "First slide of the post: the IFAC 2026 group photo under the line 274 racers, zero steering wheels, 56 teams, four days, BEXCO Busan.",
+    "width": "1080",
+    "height": "1350",
+    "loading": null,
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-knapp-538432-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "531",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-dhruv-jaiswal-498753-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "516",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-manasi-shrekhar-990273-960.webp",
+    "alt": "",
+    "width": "768",
+    "height": "960",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 768,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/highlights/highlight-iv2026-group-01-1200.webp",
+    "alt": "",
+    "width": "1200",
+    "height": "800",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1200,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-milan-manoj-110976-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-meghaj-kabra-054784-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-samir-shehadeh-344832-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-unicorn-racing-344833-960.webp",
+    "alt": "",
+    "width": "768",
+    "height": "960",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-mateus-karvat-541826-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "800",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-lukas-kutsch-701952-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "800",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-roboracer-foundation-197760-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "531",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-cedric-hollande-699200-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/highlights/highlight-icra2026-awards-01-1200.webp",
+    "alt": "",
+    "width": "1200",
+    "height": "800",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/iccas2025.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/icra2025.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-iros2023-race-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "608",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-columbia2019-cars-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "810",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-montreal2019-car-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "810",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/esweek2018.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-porto2018-track-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "720",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/logos/logo-white-gradient.svg",
+    "alt": "RoboRacer",
+    "width": "151",
+    "height": "26",
+    "loading": null,
+    "complete": true,
+    "natural": 151,
+    "decorative_in_hidden_link": false
+   },
+   {
+    "src": "/logos/slack-logo.svg",
+    "alt": "Slack",
+    "width": "20",
+    "height": "20",
+    "loading": null,
+    "complete": true,
+    "natural": 127,
+    "decorative_in_hidden_link": false
+   }
+  ],
+  "axe_expanded": [],
+  "console_errors": [],
+  "failed_local_requests": [],
+  "axe_default": [],
+  "keyboard": {
+   "tabs": 44,
+   "reached_footer": true,
+   "summaries_reached": [
+    "\u203a\nShow 13 more from 2026",
+    "\u203a\nShow 8 more from 2025",
+    "\u203a\nShow 15 from 2024",
+    "\u203a\nShow 8 from 2023",
+    "\u203a\nShow 4 from 2022",
+    "\u203a\nShow 2 from 2021",
+    "\u203a\nShow 6 from 2020",
+    "\u203a\nShow 4 from 2019",
+    "\u203a\nShow 4 from 2018",
+    "\u203a\nShow 2 from 2016"
+   ],
+   "summaries_in_dom": 10,
+   "post_toggles_reached": 3,
+   "post_toggles_focusable_in_dom": 4,
+   "no_visible_ring": [],
+   "offscreen_focus": [],
+   "summary_enter_opens": true,
+   "summary_space_closes": true,
+   "toggle_enter": [
+    "true",
+    true
+   ],
+   "toggle_space_again": [
+    "false",
+    false,
+    true
+   ]
+  },
+  "keyboard_console_errors": [
+   "requestStorageAccess: Permission denied.",
+   "requestStorageAccess: Permission denied."
+  ]
+ },
+ "844x390": {
+  "h1": [
+   "News from the Community"
+  ],
+  "overflow_default": {
+   "scrollWidth": 844,
+   "clientWidth": 844,
+   "offenders": []
+  },
+  "lead": {
+   "title": "274 racers and 56 teams in Busan: the largest race in RoboRacer history",
+   "iframe_title": "RoboRacer Foundation on LinkedIn: IFAC 2026 in Busan",
+   "iframe_src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7504332938503741441",
+   "live": "1",
+   "inert": false
+  },
+  "height": 6711,
+  "cards_iframes_before_click": 0,
+  "linkedin_embed_requests_before_click": [
+   "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7504332938503741441"
+  ],
+  "years": [
+   "2026: 4 shown, fold \"\u203a\nShow 13 more from 2026\"",
+   "2025: 4 shown, fold \"\u203a\nShow 8 more from 2025\"",
+   "2024: 0 shown, fold \"\u203a\nShow 15 from 2024\"",
+   "2023: 0 shown, fold \"\u203a\nShow 8 from 2023\"",
+   "2022: 0 shown, fold \"\u203a\nShow 4 from 2022\"",
+   "2021: 0 shown, fold \"\u203a\nShow 2 from 2021\"",
+   "2020: 0 shown, fold \"\u203a\nShow 6 from 2020\"",
+   "2019: 0 shown, fold \"\u203a\nShow 4 from 2019\"",
+   "2018: 0 shown, fold \"\u203a\nShow 4 from 2018\"",
+   "2016: 0 shown, fold \"\u203a\nShow 2 from 2016\""
+  ],
+  "chips": [
+   "All",
+   "IROS 2026",
+   "IFAC 2026",
+   "ICRA 2026",
+   "IV 2026",
+   "IV 2025",
+   "ICRA 2025",
+   "CDC 2024",
+   "IROS 2024"
+  ],
+  "fold_2026_open": true,
+  "fold_2026_closed_again": true,
+  "card_embed": {
+   "card": "Siga Siga Racing wins the sixth Sim Racing League, for IROS 2026\u00a0\u2197",
+   "expanded": "true",
+   "label": "Hide the LinkedIn post\n\u203a",
+   "iframe_title": "AutoDRIVE on LinkedIn: results of the sixth Sim Racing League",
+   "iframe_src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7508752921769992192",
+   "live": "1",
+   "embed_requests_before": 1,
+   "embed_requests_after": 2
+  },
+  "overflow_expanded": {
+   "scrollWidth": 844,
+   "clientWidth": 844,
+   "offenders": []
+  },
+  "images": [
+   {
+    "src": "/media/news/news-ifac2026-post-1080.webp",
+    "alt": "First slide of the post: the IFAC 2026 group photo under the line 274 racers, zero steering wheels, 56 teams, four days, BEXCO Busan.",
+    "width": "1080",
+    "height": "1350",
+    "loading": null,
+    "complete": true,
+    "natural": 1080,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-knapp-538432-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "531",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-dhruv-jaiswal-498753-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "516",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-manasi-shrekhar-990273-960.webp",
+    "alt": "",
+    "width": "768",
+    "height": "960",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 768,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/highlights/highlight-iv2026-group-01-1200.webp",
+    "alt": "",
+    "width": "1200",
+    "height": "800",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 1200,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-milan-manoj-110976-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-meghaj-kabra-054784-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-samir-shehadeh-344832-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-unicorn-racing-344833-960.webp",
+    "alt": "",
+    "width": "768",
+    "height": "960",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 768,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-mateus-karvat-541826-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "800",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-lukas-kutsch-701952-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "800",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-roboracer-foundation-197760-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "531",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/join/posts/post-cedric-hollande-699200-800.webp",
+    "alt": "",
+    "width": "800",
+    "height": "600",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/highlights/highlight-icra2026-awards-01-1200.webp",
+    "alt": "",
+    "width": "1200",
+    "height": "800",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/iccas2025.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": true,
+    "natural": 800,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/icra2025.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-iros2023-race-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "608",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-columbia2019-cars-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "810",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-montreal2019-car-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "810",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/race/esweek2018.webp",
+    "alt": "",
+    "width": "800",
+    "height": "450",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/media/news/news-porto2018-track-1080.webp",
+    "alt": "",
+    "width": "1080",
+    "height": "720",
+    "loading": "lazy",
+    "complete": false,
+    "natural": 0,
+    "decorative_in_hidden_link": true
+   },
+   {
+    "src": "/logos/logo-white-gradient.svg",
+    "alt": "RoboRacer",
+    "width": "151",
+    "height": "26",
+    "loading": null,
+    "complete": true,
+    "natural": 151,
+    "decorative_in_hidden_link": false
+   },
+   {
+    "src": "/logos/slack-logo.svg",
+    "alt": "Slack",
+    "width": "20",
+    "height": "20",
+    "loading": null,
+    "complete": true,
+    "natural": 127,
+    "decorative_in_hidden_link": false
+   }
+  ],
+  "console_errors": [],
+  "failed_local_requests": [],
+  "keyboard": {
+   "tabs": 44,
+   "reached_footer": true,
+   "summaries_reached": [
+    "\u203a\nShow 13 more from 2026",
+    "\u203a\nShow 8 more from 2025",
+    "\u203a\nShow 15 from 2024",
+    "\u203a\nShow 8 from 2023",
+    "\u203a\nShow 4 from 2022",
+    "\u203a\nShow 2 from 2021",
+    "\u203a\nShow 6 from 2020",
+    "\u203a\nShow 4 from 2019",
+    "\u203a\nShow 4 from 2018",
+    "\u203a\nShow 2 from 2016"
+   ],
+   "summaries_in_dom": 10,
+   "post_toggles_reached": 3,
+   "post_toggles_focusable_in_dom": 4,
+   "no_visible_ring": [],
+   "offscreen_focus": [],
+   "summary_enter_opens": true,
+   "summary_space_closes": true,
+   "toggle_enter": [
+    "true",
+    true
+   ],
+   "toggle_space_again": [
+    "false",
+    false,
+    true
+   ]
+  },
+  "keyboard_console_errors": []
+ },
+ "reduced_390x844": {
+  "articles_faded_or_moved_before_scroll": 0,
+  "transitions": {
+   "chevron": "0.18s",
+   "iframe": "0.42s",
+   "fold_chevron": "0.18s",
+   "html_scroll_behavior": "auto",
+   "lenis": ""
+  },
+  "console_errors": []
+ },
+ "reduced_1536x730": {
+  "articles_faded_or_moved_before_scroll": 0,
+  "transitions": {
+   "chevron": "0.18s",
+   "iframe": "0.42s",
+   "fold_chevron": "0.18s",
+   "html_scroll_behavior": "auto",
+   "lenis": ""
+  },
+  "console_errors": []
+ }
+}

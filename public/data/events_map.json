@@ -171,7 +171,8 @@
       "verified": true,
       "number": 9,
       "source": "https://iros2021.f1tenth.org/ and https://iros2021.f1tenth.org/results.html read 2026-08-22 (repo github.com/f1tenth/iros2021_website, private; its GitHub Pages redirect confirms the name): '9th F1TENTH Autonomous Grand Prix / September 27th - October 1st 2021 / Location: Prague, Czech Republic'; results.html publishes 'In-person Competition – Race Results' (1. Scuderia Segfault, TU Wien; 2. Ředkvičky, ČVUT; 3. HiPeRT Modena, UNIMORE; 4. Formula Trinity Autonomous, Trinity College Dublin) with a live-stream recording next to the virtual (Riders.ai) results, so the Prague race ran; status changed virtual -> held 2026-08-22, Cedric to confirm",
-      "url": "https://web.archive.org/web/20220817154341/https://www.iros2021.org",
+      "url": "https://www.iros2021.org/",
+      "archive": "https://web.archive.org/web/20220817154341/https://www.iros2021.org",
       "url_status": "archive",
       "url_note": "iros2021.org was resold and now serves a proton-therapy conference; linked to the Wayback capture of 2022-08-17. Checked 2026-08-23.",
       "x": 856.3,
@@ -193,9 +194,11 @@
       "labelDx": 16,
       "labelDy": 6,
       "url": "https://icra2022-race.f1tenth.org/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20250824120237/https://icra2022-race.f1tenth.org/",
+      "url_status": "archive",
       "x": 491.1,
-      "y": 205.9
+      "y": 205.9,
+      "url_note": "icra2022-race.f1tenth.org fails TLS (GitHub Pages no longer serves a certificate for it) as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2025-08-24 (page title \"F1TENTH ICRA 2022\"). Checked 2026-09-24."
     },
     {
       "id": "germany2022",
@@ -209,7 +212,8 @@
       "status": "held",
       "verified": true,
       "source": "https://f1tenth.github.io/race/GermanRace2022.png (banner on the old f1tenth.org race page, still served from the org's GitHub Pages) read 2026-08-22: 'F1TENTH Autonomous Grand Prix Germany 2022 / August 20st - August 21st 2022 / Lausitzring, Germany' (TUM logo); germany-race2022.f1tenth.org returns 404 from GitHub Pages and no f1tenth repo was found",
-      "url": "https://web.archive.org/web/20221002153150/https://germany-race2022.f1tenth.org/",
+      "url": "https://germany-race2022.f1tenth.org/",
+      "archive": "https://web.archive.org/web/20221002153150/https://germany-race2022.f1tenth.org/",
       "url_status": "archive",
       "url_note": "germany-race2022.f1tenth.org answers 404 (GitHub Pages with no repo behind it); Wayback capture of 2022-10-02. Checked 2026-08-23.",
       "x": 853.8,
@@ -228,9 +232,11 @@
       "verified": true,
       "source": "https://esweek2022-race.f1tenth.org/ read 2026-08-22 (repo github.com/f1tenth/esweek2022-race, private; its GitHub Pages redirect confirms the name): 'ESWEEK 2022 F1-TENTH CAR RACE / October 10th - October 12th 2022 / Location: Shanghai, China'; 'will be an in-person competition. The virtual competition is cancelled.'; not in past_races.json (added 2026-08-21 on the director's call)",
       "url": "https://esweek2022-race.f1tenth.org/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20250308053750/https://esweek2022-race.f1tenth.org/",
+      "url_status": "archive",
       "x": 1315.9,
-      "y": 251
+      "y": 251,
+      "url_note": "esweek2022-race.f1tenth.org fails TLS (GitHub Pages no longer serves a certificate for it) as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2025-03-08 (page title \"ESWEEK 2022 F1-TENTH CAR RACE\"). Checked 2026-09-24."
     },
     {
       "id": "korea2022",
@@ -245,9 +251,11 @@
       "verified": true,
       "source": "https://korea-race.f1tenth.org/ read 2026-08-22 (repo github.com/f1tenth/korea-race, private; its GitHub Pages redirect confirms the name): 'The 1st F1TENTH Korea Championship / KSMTE 2022 / 2022, Dec 12th - Dec 13th / Location: 66 Tapdong-ro, Ramada Plaza by Wyndham Jeju, Jeju island, Republic of Korea'",
       "url": "https://korea-race.f1tenth.org/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20251206063348/http://korea-race.f1tenth.org/",
+      "url_status": "archive",
       "x": 1333.1,
-      "y": 239.1
+      "y": 239.1,
+      "url_note": "korea-race.f1tenth.org fails TLS (GitHub Pages no longer serves a certificate for it) as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2025-12-06 (page title \"The 1st F1TENTH Korea Championship\"). Checked 2026-09-24."
     },
     {
       "id": "cps2023",
@@ -263,9 +271,11 @@
       "number": 11,
       "source": "https://cps2023-race.f1tenth.org/ read 2026-08-22 (repo github.com/f1tenth/cps2023-race_website, private; its GitHub Pages redirect confirms the name): '12th F1TENTH Autonomous Grand Prix / May 8th - 9th 2023 / Location: San Antonio, Texas USA' — CORRECTED by Cedric 2026-08-23: the two race sites number these the other way round, but San Antonio ran May 8-9 and London May 29-June 1, so the site labels are inverted against their own calendar and the earlier race is the 11th.",
       "url": "https://cps2023-race.f1tenth.org/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20250227164734/https://cps2023-race.f1tenth.org/",
+      "url_status": "archive",
       "x": 379.4,
-      "y": 260.3
+      "y": 260.3,
+      "url_note": "cps2023-race.f1tenth.org fails TLS (GitHub Pages no longer serves a certificate for it) as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2025-02-27 (page title \"F1TENTH CPS-IoT 2023\"). Checked 2026-09-24."
     },
     {
       "id": "icra2023",
@@ -281,9 +291,11 @@
       "number": 12,
       "source": "https://icra2023-race.f1tenth.org/ read 2026-08-22 (repo github.com/f1tenth/icra2023-race_website, private; its GitHub Pages redirect confirms the name): '11th F1TENTH Autonomous Grand Prix / May 29th - June 1st 2023 / Location: Excel London, UK' — CORRECTED by Cedric 2026-08-23: the two race sites number these the other way round, but San Antonio ran May 8-9 and London May 29-June 1, so the site labels are inverted against their own calendar and the earlier race is the 11th.",
       "url": "https://icra2023-race.f1tenth.org/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20251004060537/https://icra2023-race.f1tenth.org/",
+      "url_status": "archive",
       "x": 799.5,
-      "y": 147.3
+      "y": 147.3,
+      "url_note": "icra2023-race.f1tenth.org fails TLS (GitHub Pages no longer serves a certificate for it) as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2025-10-04 (page title \"F1TENTH ICRA 2023\"). Checked 2026-09-24."
     },
     {
       "id": "iv2023",
@@ -298,9 +310,11 @@
       "verified": true,
       "source": "https://iv2023-race.f1tenth.org/ read 2026-08-22 (repo github.com/f1tenth/iv2023_race, private; its GitHub Pages redirect confirms the name): 'F1Tenth IV2023 Championship / June 04 - June 07 2023 / Location: Anchorage Alaska, USA'",
       "url": "https://iv2023-race.f1tenth.org/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20250306022824/https://iv2023-race.f1tenth.org/",
+      "url_status": "archive",
       "x": 258.4,
-      "y": 100.6
+      "y": 100.6,
+      "url_note": "iv2023-race.f1tenth.org fails TLS (GitHub Pages no longer serves a certificate for it) as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2025-03-06 (page title \"F1TENTH IV 2023\"). Checked 2026-09-24."
     },
     {
       "id": "iros2023",
@@ -316,9 +330,11 @@
       "number": 14,
       "source": "https://iros2023-race.f1tenth.org/ read 2026-08-22 (repo github.com/f1tenth/iros2023-race_website, private; its GitHub Pages redirect confirms the name): '14th F1TENTH Autonomous Grand Prix / Oct 1st - 5th 2023 / Location: Huntington Place, Detroit, MI, USA'",
       "url": "https://iros2023-race.f1tenth.org/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20250823041450/https://iros2023-race.f1tenth.org/",
+      "url_status": "archive",
       "x": 462.4,
-      "y": 193.6
+      "y": 193.6,
+      "url_note": "iros2023-race.f1tenth.org fails TLS (GitHub Pages no longer serves a certificate for it) as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2025-08-23 (page title \"F1TENTH IROS 2023\"). Checked 2026-09-24."
     },
     {
       "id": "iros2023-madgames",
@@ -333,9 +349,11 @@
       "verified": true,
       "source": "https://iros2023-madgames.f1tenth.org/ read 2026-08-22 (repo github.com/f1tenth/iros2023_madgames_website, private; its GitHub Pages redirect confirms the name): '1st Workshop on MAD-Games / October 1, 2023 / Location: Detroit, Michigan, USA, Huntington Place, Room 252A' (in-person only)",
       "url": "https://iros2023-madgames.f1tenth.org/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20250713222618/https://iros2023-madgames.f1tenth.org/",
+      "url_status": "archive",
       "x": 462.4,
-      "y": 193.6
+      "y": 193.6,
+      "url_note": "iros2023-madgames.f1tenth.org fails TLS (GitHub Pages no longer serves a certificate for it) as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2025-07-13 (page title \"MADGames-IROS 2023\"). Checked 2026-09-24."
     },
     {
       "id": "korea2023",
@@ -384,7 +402,8 @@
       "verified": true,
       "number": 15,
       "source": "https://f1tenth.github.io/race/ICRA%202024%20May%2013-17.png (flyer on the old f1tenth.org race page, still served from the org's GitHub Pages) read 2026-08-22: '15th F1TENTH Autonomous Racing Competition / May 13-17, 2024 / ICRA 2024 / Yokohama, Japan / https://icra2024-race.f1tenth.org/'; that race site no longer resolves (NXDOMAIN 2026-08-22) although repo github.com/f1tenth/icra2024-race_website still exists (private; its Pages redirect confirms the name); its harvested copy read 2026-08-21: 'Location: PACIFICO Yokohama, Yokohama, Kanagawa, Japan'",
-      "url": "https://web.archive.org/web/20250908153518/https://icra2024-race.f1tenth.org/",
+      "url": "https://icra2024-race.f1tenth.org/",
+      "archive": "https://web.archive.org/web/20250908153518/https://icra2024-race.f1tenth.org/",
       "url_status": "archive",
       "url_note": "icra2024-race.f1tenth.org is NXDOMAIN; Wayback capture of 2025-09-08. Checked 2026-08-23.",
       "x": 1384.4,
@@ -403,9 +422,11 @@
       "verified": true,
       "source": "https://icra2024-madgames.f1tenth.org/ read 2026-08-22 (repo github.com/f1tenth/icra2024_madgames_website, private; its GitHub Pages redirect confirms the name): '2nd Workshop on MAD-Games / May 13th 2024 / Location: F201, Annex Hall, PACIFICO Yokohama, Japan'",
       "url": "https://icra2024-madgames.f1tenth.org/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20250829053226/https://icra2024-madgames.f1tenth.org/",
+      "url_status": "archive",
       "x": 1384.4,
-      "y": 229.1
+      "y": 229.1,
+      "url_note": "icra2024-madgames.f1tenth.org fails TLS (GitHub Pages no longer serves a certificate for it) as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2025-08-29 (page title \"MADGames-ICRA 2024\"). Checked 2026-09-24."
     },
     {
       "id": "cpsweek2024",
@@ -421,9 +442,11 @@
       "number": 17,
       "source": "https://cpsweek2024-race.f1tenth.org/ read 2026-08-22 (repo github.com/f1tenth/cpsweek2024-race_website, private; its GitHub Pages redirect confirms the name): '17th F1TENTH Autonomous Grand Prix / May 14th - 16th 2024 / Location: Hong Kong Science and Technology Park, Hong Kong SAR'",
       "url": "https://cpsweek2024-race.f1tenth.org/index.html",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20241219060528/https://cpsweek2024-race.f1tenth.org/index.html",
+      "url_status": "archive",
       "x": 1296.6,
-      "y": 297.2
+      "y": 297.2,
+      "url_note": "cpsweek2024-race.f1tenth.org fails TLS (GitHub Pages no longer serves a certificate for it) as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2024-12-19 (page title \"F1TENTH CPS-IoT Week 2024\"). Checked 2026-09-24."
     },
     {
       "id": "iv2024",
@@ -441,9 +464,11 @@
       "labelDx": 12,
       "labelDy": 11,
       "url": "https://iv2024-race.f1tenth.org/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20260309090853/http://iv2024-race.f1tenth.org/",
+      "url_status": "archive",
       "x": 1332.7,
-      "y": 240.2
+      "y": 240.2,
+      "url_note": "iv2024-race.f1tenth.org fails TLS (GitHub Pages no longer serves a certificate for it) as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2026-03-09 (page title \"RoboRacer Autonomous Racing Competition IV 2024\"). Checked 2026-09-24."
     },
     {
       "id": "sm2024",
@@ -459,9 +484,11 @@
       "number": 19,
       "source": "https://sm2024-race.f1tenth.org/ read 2026-08-22 (repo github.com/f1tenth/sm2024_race, private; its GitHub Pages redirect confirms the name): '19th F1TENTH Autonomous Grand Prix / 2024 IEEE International Conference on Smart Mobility (SM 2024) / September 16th - 18th 2024 / Location: Niagara Falls, Ontario, Canada' (Ontario Tech University organizers)",
       "url": "https://sm2024-race.f1tenth.org/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20250823080045/https://sm2024-race.f1tenth.org/",
+      "url_status": "archive",
       "x": 479.7,
-      "y": 189.8
+      "y": 189.8,
+      "url_note": "sm2024-race.f1tenth.org fails TLS (GitHub Pages no longer serves a certificate for it) as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2025-08-23 (page title \"F1TENTH SM 2024\"). Checked 2026-09-24."
     },
     {
       "id": "itsc2024",
@@ -477,9 +504,11 @@
       "number": 20,
       "source": "https://itsc2024-race.f1tenth.org/ read 2026-08-22 (repo github.com/f1tenth/itsc2024_race, private; its GitHub Pages redirect confirms the name): '20th F1TENTH Autonomous Grand Prix / September 24th - 27th 2024 / Location: Edmonton Convention Centre, Edmonton, Canada'",
       "url": "https://itsc2024-race.f1tenth.org/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20250623063025/https://itsc2024-race.f1tenth.org/",
+      "url_status": "archive",
       "x": 366.8,
-      "y": 137.3
+      "y": 137.3,
+      "url_note": "itsc2024-race.f1tenth.org answers 404 as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2025-06-23 (page title \"F1TENTH ITSC 2024\"). Checked 2026-09-24."
     },
     {
       "id": "iros2024",
@@ -494,7 +523,8 @@
       "verified": true,
       "number": 21,
       "source": "https://f1tenth.github.io/race/Abu%20Dhabi%20OCT%2014-18.png (flyer on the old f1tenth.org race page, still served from the org's GitHub Pages) read 2026-08-22: '21st F1TENTH Autonomous Racing Competition / Oct 14-18, 2024 / IROS 2024 / Abu Dhabi, UAE'; iros2024-race.f1tenth.org no longer resolves (NXDOMAIN 2026-08-22) although repo github.com/f1tenth/iros2024_race still exists (private; its Pages redirect confirms the name); its harvested copy read 2026-08-21: 'Location: Abu Dhabi National Exhibition Centre (ADNEC), Abu Dhabi, UAE'",
-      "url": "https://web.archive.org/web/20241107140818/https://iros2024-race.f1tenth.org/",
+      "url": "https://iros2024-race.f1tenth.org/",
+      "archive": "https://web.archive.org/web/20241107140818/https://iros2024-race.f1tenth.org/",
       "url_status": "archive",
       "url_note": "iros2024-race.f1tenth.org is NXDOMAIN; Wayback capture of 2024-11-07. Checked 2026-08-23.",
       "x": 1035.4,
@@ -512,7 +542,8 @@
       "status": "held",
       "verified": true,
       "source": "https://f1tenth.github.io/race/3rd%20Korea%20F1tenth%20Race%20Flyer.png (flyer on the old f1tenth.org race page, still served from the org's GitHub Pages) read 2026-08-22: 'The 3rd F1TENTH Korea Championship / Oct 29 - Nov 1, 2024 / ICCAS 2024 / Jeju Shinhwa World at Jeju, Korea / https://korea-race24f1tenth.org/en/index.html'; that domain no longer resolves (2026-08-22) and no f1tenth repo was found",
-      "url": "https://web.archive.org/web/20240720182003/https://korea-race24f1tenth.org/",
+      "url": "https://korea-race24f1tenth.org/",
+      "archive": "https://web.archive.org/web/20240720182003/https://korea-race24f1tenth.org/",
       "url_status": "archive",
       "url_note": "korea-race24f1tenth.org is NXDOMAIN with no live replacement; Wayback capture of 2024-07-20. Checked 2026-08-23.",
       "x": 1332.7,
@@ -532,9 +563,11 @@
       "number": 23,
       "source": "https://bu2024-race.f1tenth.org/ read 2026-08-22 (repo github.com/f1tenth/bu2024_race, private; its GitHub Pages redirect confirms the name): 'BU F1TENTH Autonomous Grand Prix / November 22nd, 2024 / Location: Boston University, Boston, USA'; the site carries no ordinal, 23rd comes from the old-site race flyer '23rd F1tenth Race Flyer - Boston U'",
       "url": "https://bu2024-race.f1tenth.org/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20250623043629/http://bu2024-race.f1tenth.org/",
+      "url_status": "archive",
       "x": 511,
-      "y": 193.5
+      "y": 193.5,
+      "url_note": "bu2024-race.f1tenth.org answers 404 as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2025-06-23 (page title \"F1TENTH BU 2024\"). Checked 2026-09-24."
     },
     {
       "id": "cdc2024",
@@ -550,9 +583,11 @@
       "number": 22,
       "source": "https://cdc2024-race.f1tenth.org/ read 2026-08-22 (repo github.com/f1tenth/cdc2024_race, private; its GitHub Pages redirect confirms the name): '22nd F1TENTH Autonomous Grand Prix / December 16th - 19th 2024 / Location: Allianz MiCo, Milan Convention Centre, Italy'",
       "url": "https://cdc2024-race.f1tenth.org/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20250714000527/http://cdc2024-race.f1tenth.org/",
+      "url_status": "archive",
       "x": 836.8,
-      "y": 177.7
+      "y": 177.7,
+      "url_note": "cdc2024-race.f1tenth.org fails TLS (GitHub Pages no longer serves a certificate for it) as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2025-07-14 (page title \"F1TENTH CDC 2024\"). Checked 2026-09-24."
     },
     {
       "id": "icra2025",
@@ -568,9 +603,11 @@
       "number": 24,
       "source": "https://icra2025-race.roboracer.ai/ read 2026-08-22 (repo github.com/f1tenth/icra2025_race, private; its GitHub Pages redirect confirms the name): '24th Roboracer Autonomous Racing Competition / May 19th - 23rd 2025 / Location: Georgia World Congress Center, Atlanta, GA, United States'; not in past_races.json (added 2026-08-21 on the director's call)",
       "url": "https://icra2025-race.roboracer.ai/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20260313000800/https://icra2025-race.roboracer.ai/",
+      "url_status": "archive",
       "x": 444.6,
-      "y": 237.9
+      "y": 237.9,
+      "url_note": "icra2025-race.roboracer.ai answers 404 as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2026-03-13 (page title \"Roboracer ICRA 2025\"). Checked 2026-09-24."
     },
     {
       "id": "iv2025",
@@ -586,9 +623,11 @@
       "number": 25,
       "source": "https://iv2025-race.roboracer.ai/ read 2026-08-22 (repo github.com/f1tenth/iv2025_race, private; its GitHub Pages redirect confirms the name): '25th Roboracer Autonomous Racing Competition / June 22nd - 23rd 2025 / Location: UTCN HUB, Cluj-Napoca, Romania' (the CDC 2025 site also claims 25th); not in past_races.json (added 2026-08-21 on the director's call)",
       "url": "https://iv2025-race.roboracer.ai/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20260121200545/http://iv2025-race.roboracer.ai/",
+      "url_status": "archive",
       "x": 893.9,
-      "y": 171
+      "y": 171,
+      "url_note": "iv2025-race.roboracer.ai answers 404 as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2026-01-21 (page title \"Roboracer IV 2025\"). Checked 2026-09-24."
     },
     {
       "id": "techfest2025",
@@ -638,9 +677,11 @@
       "verified": true,
       "source": "https://cdc2025-race.roboracer.ai/ read 2026-08-22 (repo github.com/f1tenth/cdc2025_race, private; its GitHub Pages redirect confirms the name): '25th RoboRacer Autonomous Racing Competition / December 10th - 12th 2025 / Location: Windsor Convention Center, Rio de Janeiro, Brazil' (the IV 2025 site also says 25th; numbering collision on the race sites); https://cdc2025.ieeecss.org/events/competitions read 2026-08-22: 'Due to the low number of registrations, the Roboracer event will unfortunately not be held at CDC 2025.' (the in-person race was cancelled; the 4th RoboRacer Sim Racing League ran online for CDC 2025 and Techfest 2025 with results on autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-cdc-tf-2025, hence status virtual); its '25th' duplicates IV 2025's, so it carries no number. TODO(content): Cedric to confirm the cancelled race and, if so, drop 'CDC 2025 Race' from past_races.json",
       "url": "https://cdc2025-race.roboracer.ai/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20260305115547/https://cdc2025-race.roboracer.ai/",
+      "url_status": "archive",
       "x": 612.5,
-      "y": 530.7
+      "y": 530.7,
+      "url_note": "cdc2025-race.roboracer.ai answers 404 as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2026-03-05 (page title \"RoboRacer CDC 2025\"). Checked 2026-09-24."
     },
     {
       "id": "icra2026",
@@ -714,9 +755,11 @@
       "source": "https://vtc2026-race.roboracer.ai/ read 2026-08-22 (repo github.com/f1tenth/vtc2026-race, private; its GitHub Pages redirect confirms the name): '30th Roboracer Autonomous Racing Competition / IEEE 104th Vehicular Technology Conference (VTC2026-Fall) / September 6th - 9th 2026 / Location: The Hilton Boston Park Plaza, Boston, MA, United States'",
       "ends": "2026-09-09",
       "url": "https://vtc2026-race.roboracer.ai/",
-      "url_status": "live",
+      "archive": "https://web.archive.org/web/20260723191307/https://vtc2026-race.roboracer.ai/",
+      "url_status": "archive",
       "x": 511.2,
-      "y": 193.5
+      "y": 193.5,
+      "url_note": "vtc2026-race.roboracer.ai answers 404 as of 2026-09-24; its repo in the f1tenth GitHub org is private, so GitHub Pages stopped serving it. Links to the Wayback capture of 2026-07-23 (page title \"Roboracer VTC2026-Fall\"). Checked 2026-09-24."
     },
     {
       "id": "iros2026",
@@ -766,7 +809,7 @@
       "name": "Germany",
       "lat": 51.2,
       "lng": 10.4,
-      "why": "UNICORN_Racing (teams.json)",
+      "why": "LAMARRacing, University of Bonn (teams.json)",
       "verified": true,
       "x": 840.3,
       "y": 148.9
@@ -816,7 +859,7 @@
       "name": "Republic of Korea",
       "lat": 36.5,
       "lng": 127.9,
-      "why": "KAIST (partners.json)",
+      "why": "KAIST (partners.json); UNICORN_Racing, UNIST (teams.json)",
       "verified": true,
       "x": 1333.1,
       "y": 223.7

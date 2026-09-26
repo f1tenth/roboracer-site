@@ -3,16 +3,36 @@
 // the affiliation and the credit. Items arrive sorted newest first and are
 // rendered in the order the file gives them.
 
+import { fetchJson } from "../../lib/data";
+
 export type NewsImage = { src: string; width: number; height: number; alt: string };
 
 /** A third-party post shown in place: the frame URL the publisher gives for
- * embedding, and our own poster that holds the space until it loads. */
-export type NewsEmbed = {
+ * embedding, and, for our own organisation's posts only, our copy of its
+ * first slide, which holds the space until the frame loads. A post by
+ * anyone else has no poster: its media is never re-hosted. */
+export type NewsLinkedInEmbed = {
   provider: "linkedin";
   src: string;
   title: string;
-  poster: NewsImage;
+  poster?: NewsImage | null;
 };
+
+/** A YouTube video behind a click-to-load facade (Cedric approved YouTube
+ * embeds, 2026-09-26). `title` is the video's own title, the iframe's name.
+ * The poster is the item's own `image` when it has one, else `poster`, else
+ * the video's thumbnail from i.ytimg.com (maxresdefault). Nothing from
+ * YouTube but that thumbnail loads before a click; the player is the
+ * privacy-enhanced youtube-nocookie.com one. */
+export type NewsYouTubeEmbed = {
+  provider: "youtube";
+  id: string;
+  title: string;
+  /** A thumbnail other than maxresdefault (a video without one), or our own cut. */
+  poster?: NewsImage | null;
+};
+
+export type NewsEmbed = NewsLinkedInEmbed | NewsYouTubeEmbed;
 
 export type NewsKind = "post" | "article" | "video" | "podcast" | "announcement";
 
@@ -31,6 +51,10 @@ export type NewsItem = {
   event?: string | null;
   /** Where the card sends the reader. Always external. */
   link: string;
+  /** Wayback capture of `link`, which the card links instead when the source
+   * no longer answers (the race timeline's rule). */
+  archive?: string | null;
+  archive_note?: string | null;
   author?: string | null;
   author_url?: string | null;
   affiliation?: string | null;
@@ -38,14 +62,20 @@ export type NewsItem = {
   publisher: string;
   credit?: string | null;
   image: NewsImage | null;
-  /** Lead story only: the post itself, embedded beside the text. */
+  /** The post or the video itself: beside the text on the lead, behind a
+   * button on a card (nothing loads from LinkedIn or YouTube before a click). */
   embed?: NewsEmbed | null;
+  /** A recap video for an item whose `embed` is already its LinkedIn post. */
+  video?: NewsYouTubeEmbed | null;
   /** Lead story only: the two or three numbers the story turns on. */
   stats?: { value: string; label: string }[];
   /** A second link beside the source, e.g. the results page. */
   more?: { label: string; href: string } | null;
   featured?: boolean;
+  /** Review bookkeeping only; nothing renders it (Cedric, 2026-09-25). */
   status?: "published" | "verify";
+  /** Where every fact in the item comes from; never rendered. */
+  sources?: string | null;
 };
 
 export type NewsFeed = {
@@ -64,13 +94,29 @@ export function formatIsoDate(iso: string, precision: "day" | "month" = "day"): 
   return `${month} ${Number(m[3])}, ${m[1]}`;
 }
 
-/** "icra2026" -> "ICRA 2026". An unknown id degrades to its own text. */
+/** Series whose name is not an acronym, as the race pages write them. */
+const SERIES: Record<string, string> = {
+  esweek: "ESWeek",
+  cpsweek: "CPS Week",
+  cpsiot: "CPS-IoT Week",
+  cps: "CPS-IoT Week",
+  columbia: "Columbia",
+  germany: "Germany",
+  korea: "Korea",
+  techfest: "Techfest",
+  course: "Course race",
+};
+
+/** "icra2026" -> "ICRA 2026", "korea2023" -> "Korea 2023". An unknown id
+ * degrades to its own text. */
 export function eventLabel(id: string): string {
   const m = id.match(/^([a-z]+)[-_]?(\d{4})$/i);
-  return m ? `${m[1].toUpperCase()} ${m[2]}` : id;
+  if (!m) return id;
+  return `${SERIES[m[1].toLowerCase()] ?? m[1].toUpperCase()} ${m[2]}`;
 }
 
-/** Only site-hosted media renders: a remote thumbnail is never hotlinked, and
+/** Only site-hosted media renders as `image`: a remote image is never hotlinked
+ * (a YouTube embed's thumbnail is the one exception, see NewsYouTubeEmbed), and
  * media from a post is never re-hosted without recorded permission. An item
  * whose image fails this test becomes a text card. */
 function siteHosted(image: NewsImage | null | undefined): NewsImage | null {
@@ -84,9 +130,9 @@ function siteHosted(image: NewsImage | null | undefined): NewsImage | null {
 export async function loadNewsFeed(): Promise<NewsFeed | null> {
   let data: unknown;
   try {
-    const res = await fetch(`${import.meta.env.BASE_URL}data/news.json`);
-    if (!res.ok) return null;
-    data = await res.json();
+    // Bounded (lib/data READ_TIMEOUT_MS): a request that never answers ends
+    // in the page's failure line, not an endless empty page.
+    data = await fetchJson<unknown>(`${import.meta.env.BASE_URL}data/news.json`);
   } catch {
     return null;
   }
@@ -98,5 +144,21 @@ export async function loadNewsFeed(): Promise<NewsFeed | null> {
     items: feed.items
       .filter((item) => item && item.id && item.date && item.link && item.title)
       .map((item) => ({ ...item, image: siteHosted(item.image) })),
+  };
+}
+
+/** The poster a YouTube embed shows before a click. */
+export function youTubePoster(embed: NewsYouTubeEmbed, image: NewsImage | null): NewsImage {
+  if (image) return image;
+  const own = embed.poster;
+  if (own?.src) {
+    if (own.src.startsWith("/") || /^[a-z]+:/i.test(own.src)) return own;
+    return { ...own, src: `${import.meta.env.BASE_URL}${own.src}` };
+  }
+  return {
+    src: `https://i.ytimg.com/vi/${embed.id}/maxresdefault.jpg`,
+    width: 1280,
+    height: 720,
+    alt: "",
   };
 }
