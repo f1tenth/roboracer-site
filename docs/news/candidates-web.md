@@ -919,4 +919,5 @@ Events in `events_map.json` with no result found (winner unknown):
 - **No IEEE Spectrum coverage** of F1TENTH/RoboRacer was found for any year.
 - **1,000 publications**: no dated public source states it; only the Scholar query the content skill cites. arXiv 2506.15899 (June 2025, a survey of the platform) gives no count. No candidate written.
 - **Techfest** (JS app), **f1tenthkorea.com** (does not resolve), **icra2024-race / iros2024-race / korea-race24** domains (NXDOMAIN; Wayback captures used).
+- **Link check (2026-09-25, browser user agent)**: 63 of the 67 unique `link`/`archive` URLs answer 200. The UNC CS article is 404 (its item carries the Wayback capture as `archive`). The Wayback captures of icra2025-race, iv2025-race and cdc2025-race.roboracer.ai (the ones /race already links, from docs/CONTENT.md) timed out twice; the CDX index lists them as 200 captures, so this looks like a slow replay, not a missing capture. Recheck before publishing.
 - **Penn Today** (`penntoday.upenn.edu/news/penn-engineering-racing-cars-f1tenth`) answers 403 to scripts; not read. Worth a browser look: it may cover a Penn race.
