@@ -1,0 +1,1522 @@
+{
+ "generated": "2026-09-26",
+ "branch": "revamp/p3-news-media",
+ "taskmap": "n337",
+ "about": "Media plan for public/data/news.json: a picture or video for every item. action add = the item has no image or embed today; upgrade = it has one, and a video would lead better; secondary = a video worth adding under today's lead; keep = nothing better found. choice youtube|photo|poster|none (keep/upgrade rows also use embed for items that keep a LinkedIn embed). Nothing here is applied to the site yet. YouTube 'published' is the watch page's uploadDate (Pacific time). 'checked' holds the HTTP status of every URL recorded (thumbnails and source pages included) on 2026-09-26, or the rclone size for Drive paths.",
+ "permission_vocabulary": [
+  "own archive",
+  "Foundation post",
+  "organisation-owned (Drive), photographer credited",
+  "licence: <text>",
+  "needs permission"
+ ],
+ "items": [
+  {
+   "id": "iros2026-sim-league-siga-siga-wins",
+   "date": "2026-09-24",
+   "title": "Siga Siga Racing wins the sixth Sim Racing League",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "The sixth league's recap is not on the AutoDRIVE channel yet (checked 2026-09-26; the fifth came 25 days after its final). Swap the LinkedIn embed for it when it appears; it will be the lead.",
+   "checked": {}
+  },
+  {
+   "id": "ifac2026-busan-largest-race",
+   "date": "2026-09-12",
+   "title": "274 racers and 56 teams in Busan: the largest race in RoboRacer history",
+   "has_media_today": true,
+   "current": "image+embed:linkedin",
+   "action": "secondary",
+   "choice": "youtube",
+   "youtube": {
+    "id": "vGqDLhgokSY",
+    "title": "29th Roboracer Autonomous Racing Competition(20260826)",
+    "channel": "부산대학교기계공학부",
+    "published": "2026-08-26",
+    "thumb_url": "https://i.ytimg.com/vi/vGqDLhgokSY/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: 29th Roboracer Autonomous Racing Competition(20260826)",
+   "notes": "Secondary only: the host's 7-hour stream of race day one (day two: TbJKPkBp7L4). Keep the Foundation group photo as the lead.",
+   "checked": {
+    "https://i.ytimg.com/vi/vGqDLhgokSY/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=vGqDLhgokSY&format=json": 200
+   }
+  },
+  {
+   "id": "vtc2026-boston-neobotics",
+   "date": "2026-09-06",
+   "title": "The 30th competition, in Boston",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "iros2026-registration-closes-sep-5",
+   "date": "2026-08-23",
+   "title": "Registration for the 31st competition at IROS 2026 closes September 5",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "poster",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "rr:/2026 IROS/Flyers/Vertical-Flyer-IROS2026-Roboracer.png",
+    "bytes": 2395387,
+    "width": 1414,
+    "height": 2000,
+    "source_page": "rr:/2026 IROS/Flyers/ (Roboracer Events shared Drive); a second version Vertical-Flyer2-IROS2026-Roboracer.png, 2170936 bytes",
+    "credit": "RoboRacer Foundation",
+    "permission": "organisation-owned (Drive), photographer credited"
+   },
+   "alt": "Flyer for the 31st RoboRacer Autonomous Racing Competition at IROS 2026 in Pittsburgh: an orange race car on a swirling background under the RoboRacer wordmark and a registration QR code.",
+   "notes": "No race photo exists yet (the race is September 28 to 30). The flyer prints 'Sep 27 - Oct 1, 2026' (the IROS week) while the card says September 28 to 30 with check-in on the 27th; the card text is right, the flyer is the conference span. Crop the QR code out or keep it: it points at registration, which has closed. Swap for a race photo after the event.",
+   "checked": {
+    "rr:/2026 IROS/Flyers/Vertical-Flyer-IROS2026-Roboracer.png": "rclone lsl 2395387 bytes"
+   }
+  },
+  {
+   "id": "ifac2026-busan-opens",
+   "date": "2026-08-23",
+   "title": "The 29th competition opens in Busan on August 24",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "photo",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "rr:/2026 IFAC/Media - POST MEDIA!/29th ROBORACER AUTONOMOUS RACING COMPETITION/[사진]29th ROBORACER AUTONOMOUS RACING COMPETITION 보정사진 (3).jpg",
+    "bytes": 5850984,
+    "width": 8192,
+    "height": 5464,
+    "source_page": "rr:/2026 IFAC/Media - POST MEDIA!/29th ROBORACER AUTONOMOUS RACING COMPETITION/ (85 retouched photos from the host's photographer, Canon EOS R5 Mark II)",
+    "credit": "TODO(content): photographer of the IFAC 2026 host photo set (not in the file metadata)",
+    "permission": "organisation-owned (Drive), photographer credited"
+   },
+   "alt": "The BEXCO hall in Busan during the 29th competition: hundreds of participants seated before the event screen, a track of grey tube barriers, and a checkered sponsor banner in the foreground.",
+   "notes": "Captured 2026-08-25 13:36 (camera time), the second day. Viewed through the EXIF thumbnail only; open the full file before cropping. The sibling item ifac2026-busan-largest-race already uses the Foundation's group photo, so this is a different frame. Alternative lead: the host's live stream of race day one, YouTube vGqDLhgokSY (Pusan National University, Mechanical Engineering, 7 h 10 min, 2026-08-26).",
+   "checked": {
+    "rr:/2026 IFAC/Media - POST MEDIA!/29th ROBORACER AUTONOMOUS RACING COMPETITION/[사진]29th ROBORACER AUTONOMOUS RACING COMPETITION 보정사진 (3).jpg": "rclone lsl 5850984 bytes"
+   }
+  },
+  {
+   "id": "post-knapp-538432",
+   "date": "2026-07-30",
+   "title": "KNAPP on what autonomous racing shares with warehouse logistics",
+   "has_media_today": true,
+   "current": "image",
+   "action": "keep",
+   "choice": "photo",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "post-dhruv-jaiswal-498753",
+   "date": "2026-06-29",
+   "title": "Carnegie Mellon finishes 5th of 17 teams in Detroit",
+   "has_media_today": true,
+   "current": "image",
+   "action": "keep",
+   "choice": "photo",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "post-manasi-shrekhar-990273",
+   "date": "2026-06-26",
+   "title": "404 Racers take second place in Detroit",
+   "has_media_today": true,
+   "current": "image",
+   "action": "keep",
+   "choice": "photo",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "iv2026-detroit-thunderbolt-wins",
+   "date": "2026-06-25",
+   "title": "Thunderbolt wins the 28th competition at IV 2026 in Detroit",
+   "has_media_today": true,
+   "current": "image",
+   "action": "keep",
+   "choice": "photo",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "post-milan-manoj-110976",
+   "date": "2026-06-25",
+   "title": "How 404 Racers finished second at IV 2026",
+   "has_media_today": true,
+   "current": "image",
+   "action": "keep",
+   "choice": "photo",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "post-meghaj-kabra-054784",
+   "date": "2026-06-25",
+   "title": "Roboracer @ Purdue places 10th in its first competition",
+   "has_media_today": true,
+   "current": "image",
+   "action": "keep",
+   "choice": "photo",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "post-samir-shehadeh-344832",
+   "date": "2026-06-18",
+   "title": "LAMARRacing had the fastest car at ICRA 2026",
+   "has_media_today": true,
+   "current": "image",
+   "action": "keep",
+   "choice": "photo",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "post-unicorn-racing-344833",
+   "date": "2026-06-15",
+   "title": "UNICORN Racing wins the RoboRacer competition at ICRA 2026",
+   "has_media_today": true,
+   "current": "image",
+   "action": "secondary",
+   "choice": "youtube",
+   "youtube": {
+    "id": "lqsQcrROt1g",
+    "title": "UNICORN_Racing — Roboracer ICRA 2026 | Autonomous Racing in Vienna",
+    "channel": "xLAB for Safe Autonomous Systems",
+    "published": "2026-08-14",
+    "thumb_url": "https://i.ytimg.com/vi/lqsQcrROt1g/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: UNICORN_Racing — Roboracer ICRA 2026 | Autonomous Racing in Vienna",
+   "notes": "Optional: xLAB's UNICORN Racing interview from ICRA 2026 (2026-08-14).",
+   "checked": {
+    "https://i.ytimg.com/vi/lqsQcrROt1g/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=lqsQcrROt1g&format=json": 200
+   }
+  },
+  {
+   "id": "post-mateus-karvat-541826",
+   "date": "2026-06-15",
+   "title": "Ingenuity Labs Racing's first RoboRacer competition, in Vienna",
+   "has_media_today": true,
+   "current": "image",
+   "action": "secondary",
+   "choice": "youtube",
+   "youtube": {
+    "id": "e8sWPAveVKA",
+    "title": "Ingenuity Labs Racing — Roboracer ICRA 2026 | Autonomous Racing in Vienna",
+    "channel": "xLAB for Safe Autonomous Systems",
+    "published": "2026-08-14",
+    "thumb_url": "https://i.ytimg.com/vi/e8sWPAveVKA/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: Ingenuity Labs Racing — Roboracer ICRA 2026 | Autonomous Racing in Vienna",
+   "notes": "Optional: xLAB's Ingenuity Labs Racing interview from ICRA 2026 (2026-08-14).",
+   "checked": {
+    "https://i.ytimg.com/vi/e8sWPAveVKA/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=e8sWPAveVKA&format=json": 200
+   }
+  },
+  {
+   "id": "post-lukas-kutsch-701952",
+   "date": "2026-06-15",
+   "title": "Two years with LAMARRacing",
+   "has_media_today": true,
+   "current": "image",
+   "action": "keep",
+   "choice": "photo",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "post-roboracer-foundation-197760",
+   "date": "2026-06-12",
+   "title": "ICRA 2026 Vienna is the largest RoboRacer competition to date",
+   "has_media_today": true,
+   "current": "image",
+   "action": "keep",
+   "choice": "photo",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "post-cedric-hollande-699200",
+   "date": "2026-06-10",
+   "title": "UPenn takes 2nd in time trials and 5th overall at ICRA 2026",
+   "has_media_today": true,
+   "current": "image",
+   "action": "secondary",
+   "choice": "youtube",
+   "youtube": {
+    "id": "ZY7fMINZXqQ",
+    "title": "UPenn Autonomous Racing — Roboracer ICRA 2026 | Autonomous Racing in Vienna",
+    "channel": "xLAB for Safe Autonomous Systems",
+    "published": "2026-08-14",
+    "thumb_url": "https://i.ytimg.com/vi/ZY7fMINZXqQ/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: UPenn Autonomous Racing — Roboracer ICRA 2026 | Autonomous Racing in Vienna",
+   "notes": "Optional: xLAB's UPenn Autonomous Racing interview from ICRA 2026 (2026-08-14).",
+   "checked": {
+    "https://i.ytimg.com/vi/ZY7fMINZXqQ/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=ZY7fMINZXqQ&format=json": 200
+   }
+  },
+  {
+   "id": "icra2026-vienna-results",
+   "date": "2026-06-05",
+   "title": "Full results from the 27th competition at ICRA 2026",
+   "has_media_today": true,
+   "current": "image",
+   "action": "upgrade",
+   "choice": "youtube",
+   "youtube": {
+    "id": "vlt6veE4SJI",
+    "title": "ICRA 2026 RoboRacer Team Interviews",
+    "channel": "xLAB for Safe Autonomous Systems",
+    "published": "2026-08-23",
+    "thumb_url": "https://i.ytimg.com/vi/vlt6veE4SJI/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: ICRA 2026 RoboRacer Team Interviews",
+   "notes": "xLAB's ICRA 2026 team interviews (2026-08-23) as the lead, the awards photo as its poster. The fifth Sim Racing League (ICRA 2026) has a recap, xCp1KB-JGZ4 (Cedric's example), but no news item: add one (Cedric to approve; facts beyond the video description need the content skill).",
+   "checked": {
+    "https://i.ytimg.com/vi/vlt6veE4SJI/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=vlt6veE4SJI&format=json": 200
+   }
+  },
+  {
+   "id": "cdc-techfest-2025-sim-league-vaul-wins",
+   "date": "2025-12-07",
+   "title": "VAUL wins the fourth Sim Racing League",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "7Y2jeoHyvWA",
+    "title": "4th RoboRacer Sim Racing League @ CDC-TF 2025",
+    "channel": "AutoDRIVE Ecosystem",
+    "published": "2026-01-31",
+    "thumb_url": "https://i.ytimg.com/vi/7Y2jeoHyvWA/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: AutoDRIVE's recap of the fourth RoboRacer Sim Racing League, run for CDC 2025 and IIT Bombay Techfest 2025.",
+   "notes": "Tinker Twins' AutoDRIVE Ecosystem channel, the edition's own recap.",
+   "checked": {
+    "https://i.ytimg.com/vi/7Y2jeoHyvWA/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=7Y2jeoHyvWA&format=json": 200
+   }
+  },
+  {
+   "id": "iccas2025-unist-wins",
+   "date": "2025-11-06",
+   "title": "The fourth Korea Championship, at ICCAS 2025",
+   "has_media_today": true,
+   "current": "image",
+   "action": "upgrade",
+   "choice": "youtube",
+   "youtube": {
+    "id": "tnn4isfdUCE",
+    "title": "2025 4th F1tenth Korea Championship (ICCAS, Incheon) - Sketch Video",
+    "channel": "Unicorn Racing",
+    "published": "2026-01-29",
+    "thumb_url": "https://i.ytimg.com/vi/tnn4isfdUCE/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: 2025 4th F1tenth Korea Championship (ICCAS, Incheon) - Sketch Video",
+   "notes": "Unicorn Racing's sketch video of the fourth Korea Championship (2026-01-29). Secondary: Tayo Eagles' highlight 6zJHxksklwE.",
+   "checked": {
+    "https://i.ytimg.com/vi/tnn4isfdUCE/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=tnn4isfdUCE&format=json": 200
+   }
+  },
+  {
+   "id": "roboracer-rules-repository-2025",
+   "date": "2025-10-13",
+   "title": "The rules get a public, versioned home",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "none",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "No photo or video exists for a repository launch. Fallback tile: the Drive poster of the first race after the repo, 'rr:/Posters 2026/Draft 1 (2).png' (26th, Techfest IIT Bombay, 4345354 bytes, 1414x2000), or a plain type tile. A GitHub social card of f1tenth/roboracer_rules is ours but reads as a screenshot; not recommended.",
+   "checked": {}
+  },
+  {
+   "id": "techfest2025-26th-announced",
+   "date": "2025-10-06",
+   "title": "The 26th competition goes to IIT Bombay",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "season-2025-26",
+   "date": "2025-10-03",
+   "title": "Six races for the 2025-26 season",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "iv2025-cluj-forzaeth-wins",
+   "date": "2025-06-23",
+   "title": "ForzaETH wins the 25th competition, in Cluj-Napoca",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "poster",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "rr:/Posters 2026/Draft 1 (6).png",
+    "bytes": 4448961,
+    "width": 1414,
+    "height": 2000,
+    "source_page": "rr:/Posters 2026/ (Roboracer Events shared Drive)",
+    "credit": "RoboRacer Foundation",
+    "permission": "organisation-owned (Drive), photographer credited"
+   },
+   "alt": "Poster for the 25th RoboRacer Autonomous Racing Competition, June 22 to 25, 2025, at IEEE IV 2025 in Cluj-Napoca: the RoboRacer wordmark over a city street with light trails.",
+   "notes": "No event video found (searched YouTube; the Technical University of Cluj-Napoca has a general IV 2025 day-one video, w8GrX6UoTfI, not the race). Best photo is the ForzaETH blog group photo https://www.forzaeth.ch/blog/iv_25/group.jpg (team-owned: needs permission). The Drive holds no IV 2025 photos.",
+   "checked": {
+    "rr:/Posters 2026/Draft 1 (6).png": "rclone lsl 4448961 bytes"
+   }
+  },
+  {
+   "id": "icra2025-atlanta-unibo-wins",
+   "date": "2025-05-22",
+   "title": "Unibo Motorsport wins the 24th competition, in Atlanta",
+   "has_media_today": true,
+   "current": "image",
+   "action": "upgrade",
+   "choice": "youtube",
+   "youtube": {
+    "id": "wPHYLAnpMOU",
+    "title": "Autonomous RC Racing (The RoboRacer Foundation 24th Race Highlights)",
+    "channel": "The Robotics Club",
+    "published": "2025-05-30",
+    "thumb_url": "https://i.ytimg.com/vi/wPHYLAnpMOU/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: Autonomous RC Racing (The RoboRacer Foundation 24th Race Highlights)",
+   "notes": "'The RoboRacer Foundation 24th Race Highlights' by The Robotics Club (2025-05-30): event highlights, better than the static poster-style image. Third-party channel: embed only, no download.",
+   "checked": {
+    "https://i.ytimg.com/vi/wPHYLAnpMOU/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=wPHYLAnpMOU&format=json": 200
+   }
+  },
+  {
+   "id": "icra2025-sim-league-vaul-wins",
+   "date": "2025-05-13",
+   "title": "VAUL wins the third Sim Racing League",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "oObgg_MCU4U",
+    "title": "3rd RoboRacer Sim Racing League @ ICRA 2025",
+    "channel": "AutoDRIVE Ecosystem",
+    "published": "2025-06-02",
+    "thumb_url": "https://i.ytimg.com/vi/oObgg_MCU4U/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: AutoDRIVE's recap of the third RoboRacer Sim Racing League, run for ICRA 2025.",
+   "notes": "Tinker Twins' AutoDRIVE Ecosystem channel.",
+   "checked": {
+    "https://i.ytimg.com/vi/oObgg_MCU4U/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=oObgg_MCU4U&format=json": 200
+   }
+  },
+  {
+   "id": "iv2025-regular-event",
+   "date": "2025-04-09",
+   "title": "RoboRacer becomes a regular event at IEEE IV",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "tum-3d-lidar-kit-2025",
+   "date": "2025-03-12",
+   "title": "TUM releases a 3D lidar kit for the car",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "icra2025-registration-opens",
+   "date": "2025-02-19",
+   "title": "Registration opens for the 24th competition",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "dot-secretary-2025",
+   "date": "2025-01-13",
+   "title": "The US Transportation Secretary meets the cars",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "cdc2024-milan-scuderia-segfault-wins",
+   "date": "2024-12-19",
+   "title": "Scuderia Segfault wins the 22nd competition, in Milan",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "poster",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "rr:/Posters 2026/17.png",
+    "bytes": 5279692,
+    "width": 1414,
+    "height": 2000,
+    "source_page": "rr:/Posters 2026/ (Roboracer Events shared Drive)",
+    "credit": "RoboRacer Foundation",
+    "permission": "organisation-owned (Drive), photographer credited"
+   },
+   "alt": "Poster for the 22nd competition, December 16 to 19, 2024, at IEEE CDC 2024 in Milan.",
+   "notes": "No event video found. Photos exist on TU Wien's page (winner's university; img-20241219-175706-cut.jpg) and the ForzaETH blog (cover2.jpeg): both need permission. The poster carries RoboRacer branding applied in 2026 to a race that ran as F1TENTH.",
+   "checked": {
+    "rr:/Posters 2026/17.png": "rclone lsl 5279692 bytes"
+   }
+  },
+  {
+   "id": "cdc2024-sim-league-vaul-wins",
+   "date": "2024-12-08",
+   "title": "VAUL wins the second Sim Racing League",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "Q-WTcTOld08",
+    "title": "2nd F1TENTH Sim Racing League @ CDC 2024",
+    "channel": "AutoDRIVE Ecosystem",
+    "published": "2024-12-29",
+    "thumb_url": "https://i.ytimg.com/vi/Q-WTcTOld08/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: AutoDRIVE's recap of the second F1TENTH Sim Racing League, run for CDC 2024.",
+   "notes": "Tinker Twins' AutoDRIVE Ecosystem channel. Secondary: the xLAB stream of the league's celebration event at CDC 2024, HtmRKE3Jres (57 min, 2024-12-16).",
+   "checked": {
+    "https://i.ytimg.com/vi/Q-WTcTOld08/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=Q-WTcTOld08&format=json": 200
+   }
+  },
+  {
+   "id": "bu2024-lehigh-wins",
+   "date": "2024-11-22",
+   "title": "Lehigh's Mountain Hawks win the 23rd competition",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "poster",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "rr:/Posters 2026/18.png",
+    "bytes": 6555534,
+    "width": 1414,
+    "height": 2000,
+    "source_page": "rr:/Posters 2026/ (Roboracer Events shared Drive)",
+    "credit": "RoboRacer Foundation",
+    "permission": "organisation-owned (Drive), photographer credited"
+   },
+   "alt": "Poster for the 23rd competition, November 22, 2024, at the Learning to Trust Autonomy Workshop at Boston University.",
+   "notes": "No video found. BU CISE's news screenshot is BU's (needs permission). 19.png is the same poster with the workshop and registration QR codes; 18.png is the clean one.",
+   "checked": {
+    "rr:/Posters 2026/18.png": "rclone lsl 6555534 bytes"
+   }
+  },
+  {
+   "id": "f1tenth-to-roboracer-announced",
+   "date": "2024-11-13",
+   "title": "F1TENTH announces its move to RoboRacer",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "photo",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "https://mcusercontent.com/a91a25f4c1fbc0c9896af9a20/images/007d865c-53de-fae0-e1ad-41db078965fa.png",
+    "bytes": 497772,
+    "width": 6912,
+    "height": 3456,
+    "source_page": "https://mailchi.mp/cf1734d5a686/f1tenth-summer-newsletter-6743291",
+    "credit": "F1TENTH newsletter, November 13, 2024",
+    "permission": "own archive"
+   },
+   "alt": "An 'Under construction' banner: a city skyline with cranes above yellow and black hazard stripes and the address www.RoboRacer.ai.",
+   "notes": "The header graphic of the organizers' own newsletter that announced the move. A graphic, not a photo; at 2:1 it crops well to a card. Alternative: Rahul Mangharam's 'F1TENTH is now RoboRacer' LinkedIn post image (personal post: needs permission), the same image as the Foundation's ICRA 2025 registration post already embedded on icra2025-registration-opens.",
+   "checked": {
+    "https://mcusercontent.com/a91a25f4c1fbc0c9896af9a20/images/007d865c-53de-fae0-e1ad-41db078965fa.png": 200,
+    "https://mailchi.mp/cf1734d5a686/f1tenth-summer-newsletter-6743291": 200
+   }
+  },
+  {
+   "id": "korea2024-dong-a-wins",
+   "date": "2024-10-29",
+   "title": "Dong-A University wins the third Korea Championship",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "LD_JWum5L_I",
+    "title": "2024 3rd F1tenth Korea Championship (28-30 Oct, 2024)",
+    "channel": "AiX",
+    "published": "2024-11-14",
+    "thumb_url": "https://i.ytimg.com/vi/LD_JWum5L_I/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: AiX's recap of the third Korea Championship, held with ICCAS 2024 at Jeju Shinhwa World.",
+   "notes": "Organizer-side recap (AiX, the Korea Championship's host channel). Drive poster 20.png is the fallback.",
+   "checked": {
+    "https://i.ytimg.com/vi/LD_JWum5L_I/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=LD_JWum5L_I&format=json": 200
+   }
+  },
+  {
+   "id": "iros2024-abudhabi-dzik-ultimate-wins",
+   "date": "2024-10-17",
+   "title": "Dzik Ultimate wins the 21st competition, in Abu Dhabi",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "photo",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "https://mcusercontent.com/a91a25f4c1fbc0c9896af9a20/images/ab00e70a-8d47-31d4-df88-e034b33d1062.jpg",
+    "bytes": 652106,
+    "width": 2048,
+    "height": 1536,
+    "source_page": "https://mailchi.mp/20e93a8ea541/f1tenth-summer-newsletter-6742752",
+    "credit": "F1TENTH newsletter, October 21, 2024",
+    "permission": "own archive"
+   },
+   "alt": "Two rows of competitors and organizers pose behind a line of cars and trophies at the edge of the track in the exhibition hall at IROS 2024 in Abu Dhabi.",
+   "notes": "The organizers' own newsletter photo. Other photos (TU Wien group picture by Moritz Christamentl, ForzaETH blog cover) need permission. Secondary video: Dzik Ultimate's free-practice clip, 1gvmPCMo1rc (34 s, the winner's channel).",
+   "checked": {
+    "https://mcusercontent.com/a91a25f4c1fbc0c9896af9a20/images/ab00e70a-8d47-31d4-df88-e034b33d1062.jpg": 200,
+    "https://mailchi.mp/20e93a8ea541/f1tenth-summer-newsletter-6742752": 200
+   }
+  },
+  {
+   "id": "iros2024-sim-league-first",
+   "date": "2024-10-06",
+   "title": "TURTLEBOT wins the first Sim Racing League",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "bctpfSjyjXs",
+    "title": "1st F1TENTH Sim Racing League @ IROS 2024",
+    "channel": "AutoDRIVE Ecosystem",
+    "published": "2024-10-11",
+    "thumb_url": "https://i.ytimg.com/vi/bctpfSjyjXs/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: AutoDRIVE's recap of the first F1TENTH Sim Racing League, run for IROS 2024.",
+   "notes": "Tinker Twins' AutoDRIVE Ecosystem channel.",
+   "checked": {
+    "https://i.ytimg.com/vi/bctpfSjyjXs/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=bctpfSjyjXs&format=json": 200
+   }
+  },
+  {
+   "id": "sm2024-niagara-vaul-wins",
+   "date": "2024-09-18",
+   "title": "VAUL wins again at the 19th competition",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "iv2024-18th-announced",
+   "date": "2024-05-30",
+   "title": "The 18th competition heads to Jeju",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "icra2024-yokohama-vaul-wins",
+   "date": "2024-05-16",
+   "title": "VAUL wins the 15th competition, in Yokohama",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "photo",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "https://media.licdn.com/dms/image/v2/D4D22AQHad6q5qJZxcQ/feedshare-image-high-res/feedshare-image-high-res/0/1715848016384?e=2147483647&v=beta&t=yNbS7XOqmhHeIitPlIXzEfTGY3tmPpRF7BXwtnsdlt0",
+    "bytes": 228669,
+    "width": 822,
+    "height": 1536,
+    "source_page": "https://www.linkedin.com/posts/roboracer-foundation_icra2024-engineering-activity-7196811928927621122-9cMs",
+    "credit": "The Roboracer Foundation (then F1Tenth Foundation), LinkedIn, May 16, 2024",
+    "permission": "Foundation post"
+   },
+   "alt": "Lukasz Sztyber gives a thumbs-up beside his car and an F1TENTH banner at ICRA 2024 in Yokohama.",
+   "notes": "Portrait (822x1536): crop to the card ratio around the person and the car. The Foundation's post (LinkedIn candidate icra2024-lukasz-sztyber-trophy) names him and does not state his placing; the card is about VAUL's win, so the photo shows the event, not the winner. Alternatives: Drive poster 12.png; Foxglove's 40 s visualisation of VAUL's data, QBgdusf7fDU (not event footage).",
+   "checked": {
+    "https://media.licdn.com/dms/image/v2/D4D22AQHad6q5qJZxcQ/feedshare-image-high-res/feedshare-image-high-res/0/1715848016384?e=2147483647&v=beta&t=yNbS7XOqmhHeIitPlIXzEfTGY3tmPpRF7BXwtnsdlt0": 200,
+    "https://www.linkedin.com/posts/roboracer-foundation_icra2024-engineering-activity-7196811928927621122-9cMs": 200
+   }
+  },
+  {
+   "id": "cpsweek2024-hongkong-fsm-speed-wins",
+   "date": "2024-05-16",
+   "title": "CityU's FSM Speed wins the 17th competition",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "photo",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "https://mcusercontent.com/a91a25f4c1fbc0c9896af9a20/images/a85e393f-34ac-a029-ed41-b83806bab76f.jpg",
+    "bytes": 901231,
+    "width": 1908,
+    "height": 1272,
+    "source_page": "https://mailchi.mp/b7136669240c/f1tenth-summer-newsletter",
+    "credit": "F1TENTH newsletter, July 25, 2024 (section contributed by Shuyao Shi)",
+    "permission": "own archive"
+   },
+   "alt": "Competitors watch two cars race between barriers of orange ducting laid on a carpeted hall floor at CPS-IoT Week 2024 in Hong Kong.",
+   "notes": "Second newsletter photo (a group shot behind the track): https://mcusercontent.com/a91a25f4c1fbc0c9896af9a20/images/3df34eba-5b35-1f1b-14f2-7008e7f7f3e0.jpg, 824145 bytes. The section was contributed by the local organizer, so the photographer may be CityU's: confirm before crediting.",
+   "checked": {
+    "https://mcusercontent.com/a91a25f4c1fbc0c9896af9a20/images/a85e393f-34ac-a029-ed41-b83806bab76f.jpg": 200,
+    "https://mailchi.mp/b7136669240c/f1tenth-summer-newsletter": 200
+   }
+  },
+  {
+   "id": "course2024-three-university-race",
+   "date": "2024-04-29",
+   "title": "Penn takes first and second in a three-university race",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "photo",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "https://mcusercontent.com/a91a25f4c1fbc0c9896af9a20/images/a66af0cf-94c0-5c02-f7fc-6a1d2ef9c80f.jpg",
+    "bytes": 1733337,
+    "width": 4032,
+    "height": 3024,
+    "source_page": "https://mailchi.mp/b7136669240c/f1tenth-summer-newsletter",
+    "credit": "F1TENTH newsletter, July 25, 2024",
+    "permission": "own archive"
+   },
+   "alt": "Students line a track of yellow ducting on a paved plaza on 33rd Street as a car races past, at the Penn, CMU and Lehigh race on April 29, 2024.",
+   "notes": "Second newsletter photo (the teams around an F1TENTH banner): https://mcusercontent.com/a91a25f4c1fbc0c9896af9a20/images/de065534-1fc6-3479-624f-dc8477b50649.jpg, 1418015 bytes.",
+   "checked": {
+    "https://mcusercontent.com/a91a25f4c1fbc0c9896af9a20/images/a66af0cf-94c0-5c02-f7fc-6a1d2ef9c80f.jpg": 200,
+    "https://mailchi.mp/b7136669240c/f1tenth-summer-newsletter": 200
+   }
+  },
+  {
+   "id": "f1tenth-korea-delegation-upenn",
+   "date": "2024-02-15",
+   "title": "F1TENTH Korea delegation visits Penn Engineering",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "none",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "No video or photo of our own. The Autoware Foundation article's photo is theirs (needs permission: the cheapest ask, they are a sponsor). Fallback tile: Drive poster of the next race, 'rr:/Posters 2026/12.png' (15th, ICRA 2024 Yokohama, 4607035 bytes), or a plain type tile.",
+   "checked": {}
+  },
+  {
+   "id": "power-board-2024",
+   "date": "2024-02-14",
+   "title": "A shared order for a new power board",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "autodrive-f1tenth-autoware-integration",
+   "date": "2024-02-10",
+   "title": "AutoDRIVE, F1TENTH and Autoware, integrated",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "I-tEjVMtans",
+    "title": "Autoware on F1TENTH for Autonomous Racing | Real World | AutoDRIVE-Autoware Integration",
+    "channel": "AutoDRIVE Ecosystem",
+    "published": "2024-02-10",
+    "thumb_url": "https://i.ytimg.com/vi/I-tEjVMtans/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: Autoware running on the 1/10-scale car in the real world, from AutoDRIVE's Autoware integration series.",
+   "notes": "Same series: the simulator run FsbARE8vwXI and the RViz/gym run YpOUw0Z8ECQ, all 2024-02-10. The real-world one leads.",
+   "checked": {
+    "https://i.ytimg.com/vi/I-tEjVMtans/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=I-tEjVMtans&format=json": 200
+   }
+  },
+  {
+   "id": "tum-course-2023",
+   "date": "2023-10-20",
+   "title": "TUM starts a hands-on course with the car",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "korea2023-hmcar-wins",
+   "date": "2023-10-19",
+   "title": "HMcar wins the second Korea Championship",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "dmZCUUcmzzE",
+    "title": "2023 F1Tenth Korea Championship (Oct 17-19, 2023, Yeosu, Korea)",
+    "channel": "AiX",
+    "published": "2023-10-24",
+    "thumb_url": "https://i.ytimg.com/vi/dmZCUUcmzzE/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: AiX's recap of the 2023 Korea Championship in Yeosu, October 17 to 19.",
+   "notes": "Organizer-side recap (AiX).",
+   "checked": {
+    "https://i.ytimg.com/vi/dmZCUUcmzzE/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=dmZCUUcmzzE&format=json": 200
+   }
+  },
+  {
+   "id": "autodrive-digital-twin-first-look",
+   "date": "2023-10-13",
+   "title": "A digital twin of the car in the AutoDRIVE simulator",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "Rq7Wwcwn1uk",
+    "title": "Digital Twin of F1TENTH in AutoDRIVE Simulator - A First Look",
+    "channel": "AutoDRIVE Ecosystem",
+    "published": "2023-10-12",
+    "thumb_url": "https://i.ytimg.com/vi/Rq7Wwcwn1uk/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: a first look at the digital twin of the 1/10-scale car in the AutoDRIVE simulator.",
+   "notes": "The item's own subject; AutoDRIVE Ecosystem channel, 2023-10-12.",
+   "checked": {
+    "https://i.ytimg.com/vi/Rq7Wwcwn1uk/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=Rq7Wwcwn1uk&format=json": 200
+   }
+  },
+  {
+   "id": "iros2023-detroit-vaul-wins",
+   "date": "2023-10-05",
+   "title": "VAUL wins the 14th competition, in Detroit",
+   "has_media_today": true,
+   "current": "image",
+   "action": "upgrade",
+   "choice": "youtube",
+   "youtube": {
+    "id": "KHUE3kbSOCE",
+    "title": "Recap F1TENTH Detroit 2023",
+    "channel": "Véhicule Autonome UL",
+    "published": "2024-03-01",
+    "thumb_url": "https://i.ytimg.com/vi/KHUE3kbSOCE/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: Recap F1TENTH Detroit 2023",
+   "notes": "The winner VAUL's own recap of Detroit 2023 (2024-03-01). Also Nak Yong Ko's 14th Grand Prix video HRmYaZ_l3KI.",
+   "checked": {
+    "https://i.ytimg.com/vi/KHUE3kbSOCE/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=KHUE3kbSOCE&format=json": 200
+   }
+  },
+  {
+   "id": "iros2023-madgames-workshop",
+   "date": "2023-10-01",
+   "title": "A first MAD-Games workshop, at IROS 2023",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "eth-pbl-map-controller",
+   "date": "2023-07-01",
+   "title": "The MAP controller, a model and acceleration based pursuit",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "lE_Dk1iJHHg",
+    "title": "Model- and Acceleration-based Pursuit Controller for High-Performance Autonomous Racing",
+    "channel": "D-ITET Center for Project-Based Learning",
+    "published": "2023-02-28",
+    "thumb_url": "https://i.ytimg.com/vi/lE_Dk1iJHHg/hqdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: ETH Zurich's Center for Project-Based Learning explains the MAP controller and how it differs from pure pursuit at the limit of traction.",
+   "notes": "The video the MAP-Controller README links. maxresdefault is 404; hqdefault used.",
+   "checked": {
+    "https://i.ytimg.com/vi/lE_Dk1iJHHg/hqdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=lE_Dk1iJHHg&format=json": 200
+   }
+  },
+  {
+   "id": "icra2023-london-forzaeth-wins",
+   "date": "2023-05-31",
+   "title": "ForzaETH wins at ICRA 2023 in London",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "secondary",
+   "choice": "youtube",
+   "youtube": {
+    "id": "GiXn8uKrcSk",
+    "title": "TU Wien Racing Team: F1TENTH Grand Prix autonomer Modellautos 2023",
+    "channel": "TU Wien TV",
+    "published": "2023-06-09",
+    "thumb_url": "https://i.ytimg.com/vi/GiXn8uKrcSk/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: TU Wien Racing Team: F1TENTH Grand Prix autonomer Modellautos 2023",
+   "notes": "Secondary, unverified: TU Wien TV's 'F1TENTH Grand Prix autonomer Modellautos 2023' (2023-06-09) is probably London; confirm before use.",
+   "checked": {
+    "https://i.ytimg.com/vi/GiXn8uKrcSk/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=GiXn8uKrcSk&format=json": 200
+   }
+  },
+  {
+   "id": "cps2023-san-antonio-penn-wins",
+   "date": "2023-05-09",
+   "title": "Penn wins in San Antonio",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "BWRscx68Dl0",
+    "title": "F1Tenth Competition at CPS-IoT Week 2023",
+    "channel": "xLAB for Safe Autonomous Systems",
+    "published": "2023-05-11",
+    "thumb_url": "https://i.ytimg.com/vi/BWRscx68Dl0/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: the F1TENTH competition at CPS-IoT Week 2023 in San Antonio.",
+   "notes": "xLAB channel (ours). Drive poster 24.png is the fallback.",
+   "checked": {
+    "https://i.ytimg.com/vi/BWRscx68Dl0/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=BWRscx68Dl0&format=json": 200
+   }
+  },
+  {
+   "id": "korea2022-first-korea-championship",
+   "date": "2022-12-13",
+   "title": "ACE2 wins the first Korea Championship",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "Iy5M5hh4gFk",
+    "title": "2022' 1st F1TENTH KOREA CHAMPIONSHIP",
+    "channel": "AiX",
+    "published": "2022-12-29",
+    "thumb_url": "https://i.ytimg.com/vi/Iy5M5hh4gFk/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: AiX's recap of the first F1TENTH Korea Championship, December 12 and 13, 2022, in Jeju.",
+   "notes": "xLAB also carries a sketch video of the same event, I99JZdaz3-s (2023-03-02); either works, AiX is the host's.",
+   "checked": {
+    "https://i.ytimg.com/vi/Iy5M5hh4gFk/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=Iy5M5hh4gFk&format=json": 200
+   }
+  },
+  {
+   "id": "getting-started-2022",
+   "date": "2022-10-10",
+   "title": "A free path for newcomers",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "germany2022-forzaeth-wins",
+   "date": "2022-08-21",
+   "title": "ETH Zürich reports a ForzaETH win in Germany",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "keep",
+   "choice": "embed",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "Keeps its current media; no better source found in this pass.",
+   "checked": {}
+  },
+  {
+   "id": "icra2022-philadelphia-scatterbrain-wins",
+   "date": "2022-05-25",
+   "title": "Penn's ScatterBrain wins the tenth competition, in Philadelphia",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "gk_lNKmZX4I",
+    "title": "Scuderia Segfault – TUW- Racing-Team für autonomes Fahren beim F1TENTH Grand PRIX at ICRA",
+    "channel": "TU Wien TV",
+    "published": "2022-06-09",
+    "thumb_url": "https://i.ytimg.com/vi/gk_lNKmZX4I/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: TU Wien's report on Scuderia Segfault at the F1TENTH Grand Prix at ICRA 2022 in Philadelphia, where the team placed third.",
+   "notes": "The only event footage found; it is the third-placed team's university channel, not the winner's. Lehigh's PL400 photo and LinkedIn FPV clip need permission.",
+   "checked": {
+    "https://i.ytimg.com/vi/gk_lNKmZX4I/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=gk_lNKmZX4I&format=json": 200
+   }
+  },
+  {
+   "id": "iros2021-prague-scuderia-segfault-wins",
+   "date": "2021-10-01",
+   "title": "Scuderia Segfault wins the ninth competition, in Prague",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "CmTkiBiMnk4",
+    "title": "F1/10 Highlights",
+    "channel": "industrialinformatics",
+    "published": "2021-10-01",
+    "thumb_url": "https://i.ytimg.com/vi/CmTkiBiMnk4/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: highlights of the F1TENTH Autonomous Grand Prix at IROS 2021 in Prague.",
+   "notes": "Czech Technical University (the local host) channel, 2 min 19 s. Also: the full-day stream KLOceDeegVs (8 h 50 min) and the xLAB stream of the virtual bracket, xUehXiDY3cs.",
+   "checked": {
+    "https://i.ytimg.com/vi/CmTkiBiMnk4/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=CmTkiBiMnk4&format=json": 200
+   }
+  },
+  {
+   "id": "icra2021-racing-workshop",
+   "date": "2021-05-31",
+   "title": "An ICRA workshop series on autonomous racing begins",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "SI0pB6cimoo",
+    "title": "[ICRA21 Autonomous Racing] - Opening Remarks",
+    "channel": "Madhur Behl",
+    "published": "2021-06-10",
+    "thumb_url": "https://i.ytimg.com/vi/SI0pB6cimoo/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: opening remarks of the ICRA 2021 workshop on opportunities and challenges with autonomous racing.",
+   "notes": "Madhur Behl's channel (workshop co-chair).",
+   "checked": {
+    "https://i.ytimg.com/vi/SI0pB6cimoo/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=SI0pB6cimoo&format=json": 200
+   }
+  },
+  {
+   "id": "iros2020-virtual-hipert-wins",
+   "date": "2020-10-27",
+   "title": "HiPeRT Modena wins the eighth competition, online",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "photo",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "https://f1tenth.github.io/Brackets/irosbracket.png",
+    "bytes": 195128,
+    "width": 5692,
+    "height": 3200,
+    "source_page": "https://f1tenth.github.io/iros2020.html",
+    "credit": "F1TENTH (old f1tenth.org site)",
+    "permission": "own archive"
+   },
+   "alt": "The head-to-head bracket of the virtual eighth F1TENTH Grand Prix at IROS 2020.",
+   "notes": "A graphic, not a photo: the race was online and no recap video was found. Crop to the final rounds for the card. Clemson's team demo from the IFAC 2020 virtual race (tMG5udZq7tw) is a different event.",
+   "checked": {
+    "https://f1tenth.github.io/Brackets/irosbracket.png": 200,
+    "https://f1tenth.github.io/iros2020.html": 200
+   }
+  },
+  {
+   "id": "course-2020-recorded-online",
+   "date": "2020-09-29",
+   "title": "The full course, recorded and free online",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "hXmGTKom4O8",
+    "title": "F1TENTH Course Introduction by Rahul Mangharam",
+    "channel": "xLAB for Safe Autonomous Systems",
+    "published": "2020-09-29",
+    "thumb_url": "https://i.ytimg.com/vi/hXmGTKom4O8/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: Rahul Mangharam introduces the recorded F1TENTH course.",
+   "notes": "The item's own link; xLAB channel.",
+   "checked": {
+    "https://i.ytimg.com/vi/hXmGTKom4O8/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=hXmGTKom4O8&format=json": 200
+   }
+  },
+  {
+   "id": "ifac2020-virtual-tufast-wins",
+   "date": "2020-07-16",
+   "title": "TUfast TUfurious wins the seventh competition, online",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "YMzm2oCc_4w",
+    "title": "TU fast TU Furious gewinnt F1/TENTH-Grand Prix in Berlin",
+    "channel": "TU Wien TV",
+    "published": "2020-07-21",
+    "thumb_url": "https://i.ytimg.com/vi/YMzm2oCc_4w/hqdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: TU Wien's short report on TUfast TUfurious winning the F1TENTH Grand Prix at the IFAC 2020 World Congress.",
+   "notes": "Winner's university channel (52 s, German). maxresdefault is 404; hqdefault used. Fallback: the old-site bracket graphic https://f1tenth.github.io/Brackets/bracket-ifac2020.png.",
+   "checked": {
+    "https://i.ytimg.com/vi/YMzm2oCc_4w/hqdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=YMzm2oCc_4w&format=json": 200
+   }
+  },
+  {
+   "id": "unc-the-fast-and-the-autonomous",
+   "date": "2020-05-15",
+   "title": "The fast and the autonomous",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "ctTJHueaTcY",
+    "title": "F1/10 Autonomous Racing - Montreal Grand Prix Winning Team",
+    "channel": "xLAB for Safe Autonomous Systems",
+    "published": "2019-08-25",
+    "thumb_url": "https://i.ytimg.com/vi/ctTJHueaTcY/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: the UNC Chapel Hill team explains its follow-the-gap approach after winning the fourth F1/10 Grand Prix in Montreal.",
+   "notes": "xLAB channel. The same team the UNC article profiles. Do not also lead cpsiot2019-montreal-unc-wins with it.",
+   "checked": {
+    "https://i.ytimg.com/vi/ctTJHueaTcY/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=ctTJHueaTcY&format=json": 200
+   }
+  },
+  {
+   "id": "f1tenth-foundation-2020",
+   "date": "2020-05-08",
+   "title": "f1tenth.org starts signing as the F1TENTH Foundation",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "photo",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "https://f1tenth.github.io/landing/f110-top-transparent.png",
+    "bytes": 611330,
+    "width": 477,
+    "height": 800,
+    "source_page": "https://web.archive.org/web/20200509220330/http://f1tenth.org/",
+    "credit": "F1TENTH (f1tenth.org homepage, May 2020)",
+    "permission": "own archive"
+   },
+   "alt": "Top view of the 1/10-scale F1/10 car, the image on the f1tenth.org homepage in May 2020.",
+   "notes": "Transparent PNG: place it on a surface tone. The footer 'foundationlogo.png' from that capture is not archived (404 on the Wayback and in the repo).",
+   "checked": {
+    "https://f1tenth.github.io/landing/f110-top-transparent.png": 200,
+    "https://web.archive.org/web/20200509220330/http://f1tenth.org/": 200
+   }
+  },
+  {
+   "id": "medium-adventures-in-autonomous-vehicles",
+   "date": "2020-04-21",
+   "title": "Adventures in autonomous vehicles",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "photo",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "https://f1tenth.github.io/gallery/media/large/Levine%20Track%2012-4-18%20Testing/L1100185.jpg",
+    "bytes": 289234,
+    "width": 1778,
+    "height": 1000,
+    "source_page": "https://f1tenth.github.io/gallery/",
+    "credit": "Christopher Kao (old f1tenth.org gallery, Penn ESE 680, fall 2018)",
+    "permission": "own archive"
+   },
+   "alt": "A car runs between white tube barriers on a polished floor during track testing at Penn's Levine Hall, December 4, 2018.",
+   "notes": "Illustrative: the blog has no image of our own. The gallery folder 'F1-10 Course Photos ESE 680 Fall 2018 - Photos by Christopher Kao' names the photographer; the other fall 2018 folders use the same camera series.",
+   "checked": {
+    "https://f1tenth.github.io/gallery/media/large/Levine%20Track%2012-4-18%20Testing/L1100185.jpg": 200,
+    "https://f1tenth.github.io/gallery/": 200
+   }
+  },
+  {
+   "id": "columbia2019-fifth-competition",
+   "date": "2019-10-14",
+   "title": "SeoulTech and Modena share the fastest lap at Columbia",
+   "has_media_today": true,
+   "current": "image",
+   "action": "upgrade",
+   "choice": "youtube",
+   "youtube": {
+    "id": "fevOWV0qbu8",
+    "title": "F1 Tenth Autonomous Racing Competition at Columbia Engineering",
+    "channel": "Columbia Video Network",
+    "published": "2019-10-22",
+    "thumb_url": "https://i.ytimg.com/vi/fevOWV0qbu8/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: F1 Tenth Autonomous Racing Competition at Columbia Engineering",
+   "notes": "Columbia Video Network's report on the competition at Columbia Engineering (2019-10-22). Keep the gallery photo as poster.",
+   "checked": {
+    "https://i.ytimg.com/vi/fevOWV0qbu8/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=fevOWV0qbu8&format=json": 200
+   }
+  },
+  {
+   "id": "nsf-community-platform-award-2019",
+   "date": "2019-08-15",
+   "title": "NSF funds the car for research and teaching",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "photo",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "https://f1tenth.github.io/gallery/media/large/Final%20Race%2012-10-18/L1100823.jpg",
+    "bytes": 361410,
+    "width": 1778,
+    "height": 1000,
+    "source_page": "https://f1tenth.github.io/gallery/",
+    "credit": "Christopher Kao (old f1tenth.org gallery, Penn ESE 680, fall 2018)",
+    "permission": "own archive"
+   },
+   "alt": "A car drives between white tube barriers and cardboard boxes on a stone floor at the Penn course's final race, December 10, 2018.",
+   "notes": "Illustrative. Wired's photo of the NSF fleet is Oregon State's (Hannah O'Leary): needs permission, and it would be the better picture.",
+   "checked": {
+    "https://f1tenth.github.io/gallery/media/large/Final%20Race%2012-10-18/L1100823.jpg": 200,
+    "https://f1tenth.github.io/gallery/": 200
+   }
+  },
+  {
+   "id": "cpsiot2019-montreal-unc-wins",
+   "date": "2019-04-16",
+   "title": "UNC Chapel Hill wins the fourth competition, in Montreal",
+   "has_media_today": true,
+   "current": "image",
+   "action": "keep",
+   "choice": "photo",
+   "youtube": null,
+   "photo": null,
+   "alt": "",
+   "notes": "The xLAB video ctTJHueaTcY (the UNC winning team) now leads unc-the-fast-and-the-autonomous; keep the gallery photo here.",
+   "checked": {}
+  },
+  {
+   "id": "f110-simulator-open-source-2019",
+   "date": "2019-03-01",
+   "title": "The racing simulator goes open source",
+   "has_media_today": true,
+   "current": "embed:linkedin",
+   "action": "secondary",
+   "choice": "youtube",
+   "youtube": {
+    "id": "tZeA7ykIYwA",
+    "title": "ROSCon '19 Talk: ROS F1/10 Autonomous Racing Simulator",
+    "channel": "Madhur Behl",
+    "published": "2019-11-01",
+    "thumb_url": "https://i.ytimg.com/vi/tZeA7ykIYwA/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: ROSCon '19 Talk: ROS F1/10 Autonomous Racing Simulator",
+   "notes": "Secondary: Madhur Behl's ROSCon 2019 talk on the simulator (2019-11-01). The LinkedIn embed stays.",
+   "checked": {
+    "https://i.ytimg.com/vi/tZeA7ykIYwA/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=tZeA7ykIYwA&format=json": 200
+   }
+  },
+  {
+   "id": "daily-pennsylvanian-2018-dining-hall",
+   "date": "2018-11-07",
+   "title": "A self-driving car laps a Penn dining hall",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "photo",
+   "youtube": null,
+   "photo": {
+    "url_or_rr_path": "https://f1tenth.github.io/gallery/media/large/Mid-Semester%20Race%2011-6-18/L1050744.jpg",
+    "bytes": 256820,
+    "width": 1500,
+    "height": 1000,
+    "source_page": "https://f1tenth.github.io/gallery/",
+    "credit": "Christopher Kao (old f1tenth.org gallery, Penn ESE 680, fall 2018)",
+    "permission": "own archive"
+   },
+   "alt": "A car with green wheels drives down a corridor past an AprilTag marker at Penn's mid-semester race, November 6, 2018.",
+   "notes": "The gallery's 'Mid-Semester Race 11-6-18' is the day before the article. The corridor may not be New College House: say 'mid-semester race', not the dining hall, unless Cedric confirms the place. The paper's own photo is not ours.",
+   "checked": {
+    "https://f1tenth.github.io/gallery/media/large/Mid-Semester%20Race%2011-6-18/L1050744.jpg": 200,
+    "https://f1tenth.github.io/gallery/": 200
+   }
+  },
+  {
+   "id": "esweek2018-torino-calvin-wins",
+   "date": "2018-10-01",
+   "title": "Team CALVIN from Warsaw wins the third competition",
+   "has_media_today": true,
+   "current": "image",
+   "action": "upgrade",
+   "choice": "youtube",
+   "youtube": {
+    "id": "VlE2Wb_XhoQ",
+    "title": "3rd F1/10 Autonomous Racing Competition 2018 - Torino, Italy",
+    "channel": "Madhur Behl",
+    "published": "2018-10-07",
+    "thumb_url": "https://i.ytimg.com/vi/VlE2Wb_XhoQ/hqdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: 3rd F1/10 Autonomous Racing Competition 2018 - Torino, Italy",
+   "notes": "Madhur Behl's recap of the Torino race (2018-10-07; maxres 404, hqdefault). Winner's own clip: 8NSKLdjGp7I.",
+   "checked": {
+    "https://i.ytimg.com/vi/VlE2Wb_XhoQ/hqdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=VlE2Wb_XhoQ&format=json": 200
+   }
+  },
+  {
+   "id": "uva-today-2018-final-exam-race",
+   "date": "2018-05-14",
+   "title": "At UVA, the final exam is a race",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "ZQg61UNbr7Q",
+    "title": "F1/10 Undergraduate Course at The University of Virginia [Spring 2018]",
+    "channel": "Madhur Behl",
+    "published": "2018-05-13",
+    "thumb_url": "https://i.ytimg.com/vi/ZQg61UNbr7Q/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: the spring 2018 F1/10 undergraduate course at the University of Virginia.",
+   "notes": "Madhur Behl's channel; uploaded the day before the UVA Today story.",
+   "checked": {
+    "https://i.ytimg.com/vi/ZQg61UNbr7Q/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=ZQg61UNbr7Q&format=json": 200
+   }
+  },
+  {
+   "id": "cpsweek2018-porto-ctu-wins",
+   "date": "2018-04-11",
+   "title": "Czech Technical University wins the second competition, in Porto",
+   "has_media_today": true,
+   "current": "image",
+   "action": "upgrade",
+   "choice": "youtube",
+   "youtube": {
+    "id": "ZwRGtrXYgmI",
+    "title": "2nd F1/10 Autonomous Racing Competition 2018 - Porto, Portugal",
+    "channel": "Madhur Behl",
+    "published": "2018-04-27",
+    "thumb_url": "https://i.ytimg.com/vi/ZwRGtrXYgmI/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: 2nd F1/10 Autonomous Racing Competition 2018 - Porto, Portugal",
+   "notes": "Madhur Behl's recap of the Porto race (2018-04-27). The winner CTU's clip: sPplXMcxFNc.",
+   "checked": {
+    "https://i.ytimg.com/vi/ZwRGtrXYgmI/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=ZwRGtrXYgmI&format=json": 200
+   }
+  },
+  {
+   "id": "esweek2016-precise-racing-wins",
+   "date": "2016-10-02",
+   "title": "Penn's PRECISE Racing wins the first competition, in Pittsburgh",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "fyFycjFaLC4",
+    "title": "The 1st F1/10 Autonomous Racing Competition 2016",
+    "channel": "Madhur Behl",
+    "published": "2016-11-06",
+    "thumb_url": "https://i.ytimg.com/vi/fyFycjFaLC4/maxresdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: Madhur Behl's recap of the first F1/10 autonomous racing competition, October 1 and 2, 2016, at Carnegie Mellon's Wean Hall.",
+   "notes": "Also the fastest-lap clip 3rOCWnScEFw.",
+   "checked": {
+    "https://i.ytimg.com/vi/fyFycjFaLC4/maxresdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=fyFycjFaLC4&format=json": 200
+   }
+  },
+  {
+   "id": "course-2016-first-lecture",
+   "date": "2016-03-11",
+   "title": "The course's first lecture goes online, March 2016",
+   "has_media_today": false,
+   "current": null,
+   "action": "add",
+   "choice": "youtube",
+   "youtube": {
+    "id": "zkMelEB3-PY",
+    "title": "[F1/10] Lecture 1.1 : Course Overview",
+    "channel": "xLAB for Safe Autonomous Systems",
+    "published": "2016-03-11",
+    "thumb_url": "https://i.ytimg.com/vi/zkMelEB3-PY/hqdefault.jpg"
+   },
+   "photo": null,
+   "alt": "Video: lecture 1.1 of the F1/10 course, the course overview, March 2016.",
+   "notes": "The item's own link; xLAB channel. maxresdefault is 404; hqdefault used. The February 2016 trailer vgEyvazwrU8 (Madhur Behl) is livelier if the lecture thumbnail is a slide.",
+   "checked": {
+    "https://i.ytimg.com/vi/zkMelEB3-PY/hqdefault.jpg": 200,
+    "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=zkMelEB3-PY&format=json": 200
+   }
+  }
+ ]
+}
