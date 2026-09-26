@@ -30,7 +30,6 @@ const BUNDLED_PATHS: EntryPath[] = [
     n: "01",
     label: "Build",
     line: "Order the parts, build the car from the open-source guide and install its software.",
-    detail: "The hardware, software and simulator are open source, so a lab builds its own cars instead of buying them.",
     href: "/build",
     linkText: "Build the car",
     media: {
@@ -40,7 +39,6 @@ const BUNDLED_PATHS: EntryPath[] = [
       height: 540,
       video: "/media/platform/platform-build-960.mp4",
       alt: "Hands assembling a RoboRacer car on a workbench, tools beside it",
-      caption: "assembling a car, 2x speed · build tutorial",
     },
   },
   {
@@ -48,7 +46,6 @@ const BUNDLED_PATHS: EntryPath[] = [
     n: "02",
     label: "Learn",
     line: "Lectures and labs on perception, planning and control: 15 weeks for a full semester, or 4 weeks to get a car race ready.",
-    detail: "The slides, labs and grading rubrics are public, and Penn teaches the course as ESE 6150.",
     href: "/learn",
     linkText: "Start the course",
     media: {
@@ -57,7 +54,6 @@ const BUNDLED_PATHS: EntryPath[] = [
       width: 1200,
       height: 750,
       alt: "Two students working on a RoboRacer car on the floor of the pit area at ICRA 2026",
-      caption: "pit work on a car · ICRA 2026, Vienna",
     },
   },
   {
@@ -65,7 +61,6 @@ const BUNDLED_PATHS: EntryPath[] = [
     n: "03",
     label: "Race",
     line: "Any team can register for our races at the major robotics conferences.",
-    detail: "Each race has its own site with its rules and results.",
     href: "/race",
     linkText: "Find the next race",
     media: {
@@ -75,7 +70,6 @@ const BUNDLED_PATHS: EntryPath[] = [
       height: 540,
       video: "/media/platform/platform-race-960.mp4",
       alt: "A RoboRacer car with blue lights taking a corner between yellow track barriers at ICRA 2025",
-      caption: "a car through the corner · ICRA 2025, Atlanta",
     },
   },
   {
@@ -83,7 +77,6 @@ const BUNDLED_PATHS: EntryPath[] = [
     n: "04",
     label: "Research",
     line: "A shared car for autonomy research, referenced by more than 1,000 publications.",
-    detail: "Papers are sorted by topic, such as planning, reinforcement learning and education, and you can submit yours.",
     href: "/research",
     linkText: "Browse the research",
     media: {
@@ -93,7 +86,6 @@ const BUNDLED_PATHS: EntryPath[] = [
       height: 600,
       video: "/media/platform/platform-research-mppi-960.mp4",
       alt: "Simulator view of a car overtaking with MPPI, its sampled paths fanning out ahead of it",
-      caption: "MPPI overtaking in the simulator · UPenn",
     },
   },
   {
@@ -101,7 +93,6 @@ const BUNDLED_PATHS: EntryPath[] = [
     n: "05",
     label: "Sponsor",
     line: "Reach the students and researchers who use the car at 90+ universities in 20+ countries.",
-    detail: "The races run at conferences such as ICRA, IROS and IV.",
     href: "mailto:contact@roboracer.ai?subject=RoboRacer%20sponsorship",
     linkText: "Write to contact@roboracer.ai",
     media: {
@@ -110,7 +101,6 @@ const BUNDLED_PATHS: EntryPath[] = [
       width: 1080,
       height: 531,
       alt: "The IFAC 2026 field in Busan, arms raised in front of the 29th RoboRacer competition screen",
-      caption: "the field · IFAC 2026, Busan",
     },
   },
 ];
@@ -121,7 +111,7 @@ const num = (v: unknown): v is number => typeof v === "number" && v > 0;
 function readMedia(v: unknown): PathMedia | undefined {
   if (typeof v !== "object" || v === null) return undefined;
   const m = v as Record<string, unknown>;
-  if (![m.thumb, m.src, m.alt, m.caption].every(str) || !num(m.width) || !num(m.height)) return undefined;
+  if (![m.thumb, m.src, m.alt].every(str) || !num(m.width) || !num(m.height)) return undefined;
   return {
     thumb: m.thumb as string,
     src: m.src as string,
@@ -129,7 +119,6 @@ function readMedia(v: unknown): PathMedia | undefined {
     height: m.height as number,
     video: str(m.video) ? m.video : undefined,
     alt: m.alt as string,
-    caption: m.caption as string,
   };
 }
 
@@ -144,7 +133,6 @@ function readPath(v: unknown): EntryPath | null {
     n: p.n as string,
     label: p.label as string,
     line: p.line as string,
-    detail: str(p.detail) ? p.detail : undefined,
     href: p.href as string,
     linkText: p.linkText as string,
     media: readMedia(p.media),
@@ -223,7 +211,7 @@ function PathAction({ path, describedBy }: { path: EntryPath; describedBy: strin
   );
 }
 
-/** The small inline picture of a compact row: the 480x300 thumb in a 16/10
+/** The small inline picture of a phone row: the 480x300 thumb in a 16/10
  * frame, so the row's height never waits for the file. */
 function Thumb({ media }: { media?: PathMedia }) {
   const [failed, setFailed] = useState(false);
@@ -246,15 +234,14 @@ function Thumb({ media }: { media?: PathMedia }) {
 }
 
 /**
- * /about's frame: the still, with the path's clip over it. The clip mounts
+ * A tile's frame: the still, with the path's clip over it. The clip mounts
  * after the first paint, loads only once the frame is within 200px of the
- * viewport and plays only while it is on screen (four clips are 2.6 MB; a
- * reader who stops at People never pays for them). Under reduced motion no
- * video is created: the still is the media (CLAUDE.md rule 6). A clip that
- * errors falls back to its still; a still that errors leaves the neutral
- * frame.
+ * viewport and plays only while it is on screen (four clips are 2.6 MB).
+ * Under reduced motion no video is created: the still is the media
+ * (CLAUDE.md rule 6). A clip that errors falls back to its still; a still
+ * that errors leaves the neutral frame.
  */
-function FullMedia({ media, label }: { media?: PathMedia; label: string }) {
+function ClipFrame({ media, label }: { media?: PathMedia; label: string }) {
   const holderRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduced = usePrefersReducedMotion();
@@ -364,14 +351,15 @@ function FullMedia({ media, label }: { media?: PathMedia; label: string }) {
 
 /** Landing entry. Phones (either orientation) keep the row: the small picture
  * beside the label, the sentence and the link, a table of contents. From
- * `desktop:` it is a tile in the section's grid: /about's clip frame on top
+ * `desktop:` it is a tile in the section's grid: the clip frame on top
  * (still first, the muted loop only near and on screen, the still under
  * reduced motion), then the label, the sentence and the link, pinned to the
- * tile's foot so the links of a row line up. Captions stay on /about. The
- * copy hidden at a size is display: none, so its lazy image and observed
- * clip are never requested. */
-function CompactTile({ path }: { path: EntryPath }) {
-  // Per instance, not per path: /styleguide shows both densities at once.
+ * tile's foot so the links of a row line up. From 1024 up the tile is
+ * landscape: the frame, cropped to 16:9, on the left and the text beside it,
+ * its link level with the frame's foot. The copy hidden at a size is
+ * display: none, so its lazy image and observed clip are never requested. */
+function PathTile({ path }: { path: EntryPath }) {
+  // Per instance, not per path, so two lists on one page never share an id.
   const lineId = `${useId()}-line`;
   return (
     <>
@@ -379,7 +367,7 @@ function CompactTile({ path }: { path: EntryPath }) {
         <Thumb media={path.media} />
       </div>
       <div className="compact:hidden desktop:lg:[&>div]:aspect-video">
-        <FullMedia media={path.media} label={path.id} />
+        <ClipFrame media={path.media} label={path.id} />
       </div>
       <div className="flex min-w-0 flex-col desktop:flex-1 desktop:pt-5">
         <h3 className="flex items-baseline gap-3 font-display text-display-s font-semibold text-text-strong">
@@ -399,86 +387,34 @@ function CompactTile({ path }: { path: EntryPath }) {
   );
 }
 
-/** /about row: the frame and its caption on the left, the label, the
- * sentence, the second sentence and the link on the right. Phones get the
- * landing's small picture beside the text instead (five full-width frames
- * ran about 1,100 px of a 390 screen). The copy that is hidden at a size is
- * display: none, and neither a lazy image nor an observed clip is ever
- * requested there. */
-function FullRow({ path }: { path: EntryPath }) {
-  const lineId = `${useId()}-line`;
-  return (
-    <>
-      <div className="md:hidden">
-        <Thumb media={path.media} />
-      </div>
-      <figure className="max-md:hidden md:col-span-4">
-        <FullMedia media={path.media} label={path.id} />
-        {path.media && (
-          <figcaption className="mt-2 font-mono text-small text-text-muted">{path.media.caption}</figcaption>
-        )}
-      </figure>
-      <div className="min-w-0 md:col-span-8">
-        <p aria-hidden="true" className="flex items-center gap-2 font-mono text-small text-text-muted">
-          <span className="h-1 w-1 bg-ink-950" />
-          {path.n}
-        </p>
-        <h3 className="mt-2 font-display text-display-m font-semibold text-text-strong md:mt-3">{path.label}</h3>
-        <p id={lineId} className="mt-3 max-w-[60ch] text-lead text-text-body">
-          {path.line}
-        </p>
-        {path.detail && <p className="mt-3 max-w-[60ch] text-body text-text-body">{path.detail}</p>}
-        <p className="mt-5 text-body">
-          <PathAction path={path} describedBy={lineId} />
-        </p>
-      </div>
-    </>
-  );
-}
-
 type StartHereProps = {
-  /** "compact" (landing): the header full width, then the five as a grid of
-   * tiles with their clips from `desktop:` (small-picture rows on phones).
-   * "full" (/about): the bigger frame with its clip and caption beside the
-   * text, plus the second sentence. */
-  density?: "compact" | "full";
-  /** Two-digit section index ("00" on the landing, "01" on /about). */
+  /** Two-digit section index ("00" on the landing). */
   index: string;
   /** The section's own id; the landing's is START_ID, the nav's target. */
   id?: string;
   /** The h2's id, which labels the section. */
   headingId: string;
-  subtitle?: ReactNode;
   /** One line on what RoboRacer is, for a first-time visitor. */
   lead?: ReactNode;
-  /** Rendered between the header and the list (/about's story and photo). */
-  intro?: ReactNode;
 };
 
 /**
- * "Start here": one line on what RoboRacer is, then the ways in (Build,
- * Learn, Race, Research, Sponsor), each with its picture, one plain sentence
- * and one link. It replaced the landing's entry-path row and its pinned
- * Platform chapter, and /about's "What RoboRacer is" and "The platform"
- * (Cedric, 2026-09-25: "they're both repetitive together right now"). Serves
- * the newbie and interested beginner (build, learn), the student and, without
- * addressing them, faculty (a semester course with labs, teams register for
- * races, research), the competitor (race) and the sponsor (who they reach,
- * where to write). Motion is one stagger reveal of the rows, which reduced
- * motion drops; the content is public/data/paths.json.
+ * The landing's "Start here": one line on what RoboRacer is, then the ways in
+ * (Build, Learn, Race, Research, Sponsor), each with its picture, one plain
+ * sentence and one link. It replaced the landing's entry-path row and its
+ * pinned Platform chapter (Cedric, 2026-09-25: "they're both repetitive
+ * together right now"), and it is the one place the five appear: /about
+ * opens on "What RoboRacer is" and links here (Cedric, 2026-09-26: "only
+ * have this once"). Serves the newbie and interested beginner (build,
+ * learn), the student and, without addressing them, faculty (a semester
+ * course with labs, teams register for races, research), the competitor
+ * (race) and the sponsor (who they reach, where to write). Motion is one
+ * stagger reveal of the tiles, which reduced motion drops; the content is
+ * public/data/paths.json.
  */
-export default function StartHere({
-  density = "compact",
-  index,
-  id,
-  headingId,
-  subtitle,
-  lead,
-  intro,
-}: StartHereProps) {
+export default function StartHere({ index, id, headingId, lead }: StartHereProps) {
   const [paths, setPaths] = useState<EntryPath[]>([]);
   const [loading, setLoading] = useState(true);
-  const full = density === "full";
 
   useEffect(() => {
     let live = true;
@@ -503,65 +439,25 @@ export default function StartHere({
     };
   }, []);
 
-  // The landing's grid (compact, from desktop:): tablets 2 + 2 with the
-  // fifth across both columns (picture beside its text), 1024 to 1279 3 + 2
-  // on six columns (the second row's two a little wider, no hole), 1280 up
-  // all five in one row (about 22rem each at 1366 and 1536: the root size
-  // follows the window, so the tiles keep their width in rem).
-  const listClass = full
-    ? "border-t border-ink-950/10"
-    : "border-t border-ink-950/10 desktop:grid desktop:grid-cols-2 desktop:gap-x-6 desktop:gap-y-10 desktop:border-t-0 desktop:lg:gap-y-5";
-  const rowClass = full
-    ? "relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-4 border-b border-ink-950/10 py-6 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-6 md:grid-cols-12 md:gap-x-10 md:py-10"
-    : "relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-4 border-b border-ink-950/10 py-4 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-6 desktop:flex desktop:flex-col desktop:border-b-0 desktop:py-0 desktop:max-lg:last:col-span-2 desktop:max-lg:last:grid desktop:max-lg:last:grid-cols-2 desktop:max-lg:last:items-center desktop:max-lg:last:gap-x-6 desktop:max-lg:last:[&>div:last-child]:pt-0 desktop:lg:grid desktop:lg:grid-cols-[3fr_4fr] desktop:lg:items-stretch desktop:lg:gap-x-5 desktop:lg:first:col-start-2 desktop:lg:[&>div:last-child]:pt-0";
+  // The grid, from desktop:: tablets 2 + 2 with the fifth across both
+  // columns (picture beside its text). From 1024 up (laptops) two columns of
+  // landscape tiles, the header in the first cell and the five in the other
+  // cells, each a 16:9 clip frame (43%) beside its label, sentence and link:
+  // three rows, so the whole section fits one screen under the nav at
+  // 1366x650 and 1536x730 (Cedric, 2026-09-26; docs/qa/p3-start-fit.md). The
+  // root size follows the window, so the tiles keep their size in rem.
+  // Phones keep the thumb rows.
+  const listClass =
+    "border-t border-ink-950/10 desktop:grid desktop:grid-cols-2 desktop:gap-x-6 desktop:gap-y-10 desktop:border-t-0 desktop:lg:gap-y-5";
+  const rowClass =
+    "relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-4 border-b border-ink-950/10 py-4 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-6 desktop:flex desktop:flex-col desktop:border-b-0 desktop:py-0 desktop:max-lg:last:col-span-2 desktop:max-lg:last:grid desktop:max-lg:last:grid-cols-2 desktop:max-lg:last:items-center desktop:max-lg:last:gap-x-6 desktop:max-lg:last:[&>div:last-child]:pt-0 desktop:lg:grid desktop:lg:grid-cols-[3fr_4fr] desktop:lg:items-stretch desktop:lg:gap-x-5 desktop:lg:first:col-start-2 desktop:lg:[&>div:last-child]:pt-0";
 
-  // aria-busy until the paths arrive: the "Start here" jump waits for it
-  // (hooks/useScrollToHash). Meanwhile the bundled five stand in, invisible
-  // and out of the accessibility tree, so the list already has its final
-  // height and nothing below it jumps when the file lands.
-  const list = (
-    <div aria-busy={loading}>
-      <Reveal stagger as="ul" className={listClass}>
-        {(loading ? BUNDLED_PATHS : paths).map((path) =>
-          loading ? (
-            <li key={path.id} aria-hidden="true" className={`invisible ${rowClass}`}>
-              {full ? <FullRow path={path} /> : <CompactTile path={path} />}
-            </li>
-          ) : (
-            <li key={path.id} data-path={path.id} className={rowClass}>
-              {full ? <FullRow path={path} /> : <CompactTile path={path} />}
-            </li>
-          ),
-        )}
-      </Reveal>
-    </div>
-  );
-
-  if (full) {
-    return (
-      // The scroll margin covers what the section's own top padding does not
-      // (phones: 7vh of padding under a 4.5rem bar), so a jump to the section
-      // (the nav's "Start here" on /about) shows its eyebrow under the bar.
-      <Section
-        width="page"
-        id={id}
-        rule
-        aria-labelledby={headingId}
-        className="scroll-mt-[max(0rem,calc(var(--spacing-nav)+1rem-var(--spacing-section)))] focus:outline-none"
-      >
-        <SectionHeader index={index} id={headingId} title="Start here" subtitle={subtitle} lead={lead} />
-        {intro}
-        <div className={intro ? "mt-16" : undefined}>{list}</div>
-      </Section>
-    );
-  }
-
-  // Landing: the header and its one line full width, as every landing
-  // section has it, then the grid across the page (Cedric, 2026-09-26: "super
-  // empty on the left"). The top padding clears the fixed nav when the nav's
-  // "Start here" scrolls this section to the top of the window (the bar is
-  // --spacing-nav tall at every size), so this section takes no scroll
-  // margin: one would add a second nav's height of gap.
+  // The header and its one line full width, as every landing section has it,
+  // then the grid across the page (Cedric, 2026-09-26: "super empty on the
+  // left"). The top padding clears the fixed nav when the nav's "Start here"
+  // scrolls this section to the top of the window (the bar is --spacing-nav
+  // tall at every size), so this section takes no scroll margin: one would
+  // add a second nav's height of gap.
   return (
     <Section
       tight
@@ -570,16 +466,38 @@ export default function StartHere({
       aria-labelledby={headingId}
       className="pt-[calc(var(--spacing-nav)+2rem)]! focus:outline-none desktop:lg:pb-16!"
     >
+      {/* Laptops: the header sits in the grid's first cell. The header and
+          the list share the wrapper's one cell; the list's first tile starts
+          in its second column, so the header shows through the empty first
+          one (a ul holds only li, so the header cannot be one of its cells). */}
       <div className="desktop:lg:grid">
         <SectionHeader
           index={index}
           id={headingId}
           title="Start here"
-          subtitle={subtitle}
           lead={lead}
           className="relative z-10 desktop:lg:mb-0! desktop:lg:w-[calc((100%-1.5rem)/2)] desktop:lg:self-start desktop:lg:[grid-area:1/1]"
         />
-        <div className="desktop:lg:[grid-area:1/1]">{list}</div>
+        {/* aria-busy until the paths arrive: the "Start here" jump waits for it
+            (hooks/useScrollToHash). Meanwhile the bundled five stand in,
+            invisible and out of the accessibility tree, so the list already
+            has its final height and nothing below it jumps when the file
+            lands. */}
+        <div aria-busy={loading} className="desktop:lg:[grid-area:1/1]">
+          <Reveal stagger as="ul" className={listClass}>
+            {(loading ? BUNDLED_PATHS : paths).map((path) =>
+              loading ? (
+                <li key={path.id} aria-hidden="true" className={`invisible ${rowClass}`}>
+                  <PathTile path={path} />
+                </li>
+              ) : (
+                <li key={path.id} data-path={path.id} className={rowClass}>
+                  <PathTile path={path} />
+                </li>
+              ),
+            )}
+          </Reveal>
+        </div>
       </div>
     </Section>
   );

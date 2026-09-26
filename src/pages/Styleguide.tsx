@@ -136,30 +136,20 @@ export default function Styleguide() {
         />
       </Section>
 
-      {/* StartHere - the ways in from public/data/paths.json, in both
-          densities: compact (the landing's 00, a grid of tiles under the
-          header from desktop:) and full (/about's 01, clip and caption per row). No section id
-          here: the landing's #start stays the nav's one target. */}
+      {/* StartHere - the ways in from public/data/paths.json, as the
+          landing's 00 has them: a grid of tiles under the header from
+          desktop:, thumb rows on phones. The one place the five appear on the
+          site (/about links to it). No section id here: the landing's #start
+          stays the nav's one target. */}
       <div className="bg-paper-50">
         <div className="mx-auto max-w-content px-6 pt-16">
-          <Spec name="StartHere · compact (landing 00) · header full width, tiles with clips from desktop (2 / 3+2 / 5 across), thumb rows on phones, one link per tile" />
+          <Spec name="StartHere · landing 00 · header full width, tiles with clips from desktop (2 / 3+2 / 5 across), thumb rows on phones, one link per tile" />
         </div>
       </div>
       <StartHere
         index="00"
-        headingId="sg-start-compact"
+        headingId="sg-start"
         lead="RoboRacer is a self-driving race car at one-tenth scale that 90+ universities use for teaching, research and racing."
-      />
-      <div className="bg-paper-50">
-        <div className="mx-auto max-w-content px-6 pt-16">
-          <Spec name="StartHere · full (/about 01) · 4/8 rows, clip in view only, caption, second sentence" />
-        </div>
-      </div>
-      <StartHere
-        density="full"
-        index="01"
-        headingId="sg-start-full"
-        subtitle="One open car for teaching, research and racing"
       />
 
       {/* ExplodedModel - ink chapter */}

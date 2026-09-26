@@ -292,10 +292,10 @@ export default function Landing() {
 
       {/* 00 Start here (paper) - newbie, beginner, student, faculty
           (indirectly), competitor, sponsor: what RoboRacer is in one line,
-          then the five ways in with a small picture each, the first thing
-          under the hero. It replaced the entry-path row and the pinned
-          Platform chapter (Cedric, 2026-09-25); /about opens on the same
-          component, fuller (public/data/paths.json). */}
+          then the five ways in with a picture each, the first thing under
+          the hero. It replaced the entry-path row and the pinned Platform
+          chapter (Cedric, 2026-09-25), and it is the one place the five
+          appear: /about links here (public/data/paths.json). */}
       <StartHere index="00" id={START_ID} headingId="start-title" lead={START_LEAD} />
 
       {/* 2 · 01 Highlights (paper, full-bleed) - newbie, press */}

@@ -426,27 +426,27 @@ export const loadCommunity = () => loadJson<Community>("community.json");
 export const loadSpinoffs = () => loadJson<SpinoffsFile>("spinoffs.json");
 
 
-/** One way in's picture. The landing's compact rows show `thumb`; /about's
- * fuller rows show `src` in the same 16/10 frame and play `video` over it. */
+/** One way in's picture. The landing's phone rows show `thumb`; its tiles
+ * (from `desktop:`) show `src` in a 16/10 frame and play `video` over it. */
 export type PathMedia = {
-  /** 480x300 (16/10) still for the landing's small inline image. */
+  /** 480x300 (16/10) still for the phone rows' small inline image. */
   thumb: string;
   /** Full-size still: the clip's poster, or the photo itself. */
   src: string;
   width: number;
   height: number;
-  /** Muted loop for /about, played only in view and never under reduced
+  /** Muted loop for the tile, played only in view and never under reduced
    * motion. */
   video?: string;
   alt: string;
-  /** Mono line under /about's frame. */
-  caption: string;
-  /** Kept for the record; never rendered (docs/HANDOFF.md section 6). */
+  /** What the picture shows and where it was taken, and `credit`: kept for
+   * the record; never rendered (docs/HANDOFF.md section 6). */
+  caption?: string;
   credit?: string;
 };
 
-/** public/data/paths.json: the ways in that "Start here" lists on the landing
- * and on /about (ui/StartHere), plus the two learning tracks the Build and
+/** public/data/paths.json: the ways in that the landing's "Start here" lists
+ * (ui/StartHere), plus the two learning tracks the Build and
  * Learn rebuild will render (docs/LEARN_TERRAIN.md). */
 export type EntryPath = {
   id: string;
@@ -454,10 +454,8 @@ export type EntryPath = {
   n: string;
   /** The section's name: "Build". */
   label: string;
-  /** One plain sentence under the label, shown on both pages. */
+  /** One plain sentence under the label. */
   line: string;
-  /** A second sentence that only /about's fuller rows show. */
-  detail?: string;
   /** Internal route, `/#anchor`, external URL or mailto. */
   href: string;
   /** Verb + object: "Build the car". */
