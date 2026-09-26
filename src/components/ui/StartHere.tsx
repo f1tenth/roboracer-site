@@ -378,7 +378,7 @@ function CompactTile({ path }: { path: EntryPath }) {
       <div className="desktop:hidden">
         <Thumb media={path.media} />
       </div>
-      <div className="compact:hidden">
+      <div className="compact:hidden desktop:lg:[&>div]:aspect-video">
         <FullMedia media={path.media} label={path.id} />
       </div>
       <div className="flex min-w-0 flex-col desktop:flex-1 desktop:pt-5">
@@ -510,10 +510,10 @@ export default function StartHere({
   // follows the window, so the tiles keep their width in rem).
   const listClass = full
     ? "border-t border-ink-950/10"
-    : "border-t border-ink-950/10 desktop:grid desktop:grid-cols-2 desktop:gap-x-6 desktop:gap-y-10 desktop:border-t-0 desktop:lg:grid-cols-6 desktop:xl:grid-cols-5";
+    : "border-t border-ink-950/10 desktop:grid desktop:grid-cols-2 desktop:gap-x-6 desktop:gap-y-10 desktop:border-t-0 desktop:lg:gap-y-5";
   const rowClass = full
     ? "relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-4 border-b border-ink-950/10 py-6 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-6 md:grid-cols-12 md:gap-x-10 md:py-10"
-    : "relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-4 border-b border-ink-950/10 py-4 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-6 desktop:flex desktop:flex-col desktop:border-b-0 desktop:py-0 desktop:max-lg:last:col-span-2 desktop:max-lg:last:grid desktop:max-lg:last:grid-cols-2 desktop:max-lg:last:items-center desktop:max-lg:last:gap-x-6 desktop:max-lg:last:[&>div:last-child]:pt-0 desktop:lg:max-xl:col-span-2 desktop:lg:max-xl:nth-[n+4]:col-span-3";
+    : "relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-4 border-b border-ink-950/10 py-4 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-6 desktop:flex desktop:flex-col desktop:border-b-0 desktop:py-0 desktop:max-lg:last:col-span-2 desktop:max-lg:last:grid desktop:max-lg:last:grid-cols-2 desktop:max-lg:last:items-center desktop:max-lg:last:gap-x-6 desktop:max-lg:last:[&>div:last-child]:pt-0 desktop:lg:grid desktop:lg:grid-cols-[3fr_4fr] desktop:lg:items-stretch desktop:lg:gap-x-5 desktop:lg:first:col-start-2 desktop:lg:[&>div:last-child]:pt-0";
 
   // aria-busy until the paths arrive: the "Start here" jump waits for it
   // (hooks/useScrollToHash). Meanwhile the bundled five stand in, invisible
@@ -568,10 +568,19 @@ export default function StartHere({
       width="page"
       id={id}
       aria-labelledby={headingId}
-      className="pt-[calc(var(--spacing-nav)+2rem)]! focus:outline-none"
+      className="pt-[calc(var(--spacing-nav)+2rem)]! focus:outline-none desktop:lg:pb-16!"
     >
-      <SectionHeader index={index} id={headingId} title="Start here" subtitle={subtitle} lead={lead} />
-      {list}
+      <div className="desktop:lg:grid">
+        <SectionHeader
+          index={index}
+          id={headingId}
+          title="Start here"
+          subtitle={subtitle}
+          lead={lead}
+          className="relative z-10 desktop:lg:mb-0! desktop:lg:w-[calc((100%-1.5rem)/2)] desktop:lg:self-start desktop:lg:[grid-area:1/1]"
+        />
+        <div className="desktop:lg:[grid-area:1/1]">{list}</div>
+      </div>
     </Section>
   );
 }
