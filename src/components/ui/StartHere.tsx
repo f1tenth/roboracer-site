@@ -47,7 +47,7 @@ const BUNDLED_PATHS: EntryPath[] = [
     id: "learn",
     n: "02",
     label: "Learn",
-    line: "Lectures and labs on perception, planning and control, as a 15-week semester or a 4-week plan that gets a car race ready.",
+    line: "Lectures and labs on perception, planning and control: 15 weeks for a full semester, or 4 weeks to get a car race ready.",
     detail: "The slides, labs and grading rubrics are public, and Penn teaches the course as ESE 6150.",
     href: "/learn",
     linkText: "Start the course",
@@ -388,23 +388,30 @@ function CompactRow({ path }: { path: EntryPath }) {
 }
 
 /** /about row: the frame and its caption on the left, the label, the
- * sentence, the second sentence and the link on the right. */
+ * sentence, the second sentence and the link on the right. Phones get the
+ * landing's small picture beside the text instead (five full-width frames
+ * ran about 1,100 px of a 390 screen). The copy that is hidden at a size is
+ * display: none, and neither a lazy image nor an observed clip is ever
+ * requested there. */
 function FullRow({ path }: { path: EntryPath }) {
   const lineId = `start-${path.id}-line`;
   return (
     <>
-      <figure className="md:col-span-4">
+      <div className="md:hidden">
+        <Thumb media={path.media} />
+      </div>
+      <figure className="max-md:hidden md:col-span-4">
         <FullMedia media={path.media} label={path.id} />
         {path.media && (
           <figcaption className="mt-2 font-mono text-small text-text-muted">{path.media.caption}</figcaption>
         )}
       </figure>
-      <div className="md:col-span-8">
+      <div className="min-w-0 md:col-span-8">
         <p aria-hidden="true" className="flex items-center gap-2 font-mono text-small text-text-muted">
           <span className="h-1 w-1 bg-ink-950" />
           {path.n}
         </p>
-        <h3 className="mt-3 font-display text-display-m font-semibold text-text-strong">{path.label}</h3>
+        <h3 className="mt-2 font-display text-display-m font-semibold text-text-strong md:mt-3">{path.label}</h3>
         <p id={lineId} className="mt-3 max-w-[60ch] text-lead text-text-body">
           {path.line}
         </p>
@@ -484,7 +491,7 @@ export default function StartHere({
   }, []);
 
   const rowClass = full
-    ? "relative grid gap-6 border-b border-ink-950/10 py-8 md:grid-cols-12 md:gap-10 md:py-10"
+    ? "relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-4 border-b border-ink-950/10 py-6 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-6 md:grid-cols-12 md:gap-x-10 md:py-10"
     : "relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-4 border-b border-ink-950/10 py-4 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-6 lg:grid-cols-[12rem_minmax(0,1fr)] lg:py-5";
 
   // aria-busy until the paths arrive: the "Start here" jump waits for it
