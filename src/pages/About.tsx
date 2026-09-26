@@ -235,7 +235,7 @@ export default function About() {
           title="What RoboRacer is"
           subtitle="One open car for teaching, research and racing"
         />
-        <div className="grid gap-10 md:grid-cols-12 md:items-start md:gap-x-10">
+        <div className="grid gap-10 md:grid-cols-12 md:grid-rows-[auto_1fr] md:items-start md:gap-x-10 md:gap-y-5">
           <Reveal className="flex flex-col gap-5 md:col-span-7">
             <p className="max-w-[62ch] text-lead text-text-body">
               RoboRacer started at the University of Pennsylvania in 2016.
@@ -251,34 +251,37 @@ export default function About() {
               thousand publications reference it. There have been 30 competitions since 2016.
             </p>
           </Reveal>
-          <div className="md:col-span-5">
+          <div className="md:col-span-5 md:row-span-2">
             <Figure photo={ICRA_GROUP_PHOTO} aspect="2 / 1" />
           </div>
+          {/* The ways in (Build, Learn, Race, Research, Sponsor) are the
+              landing's "Start here"; this page points there once. From md
+              the line sits under the copy, beside the photo (the photo spans
+              both rows and the second one, 1fr, takes its extra height); on
+              a phone it ends the section, under the photo. */}
+          <p className="md:col-span-7 md:col-start-1 md:row-start-2">
+            <Button href={START_HREF} variant="ghost" className="px-0!">
+              Start here on the home page
+              <svg
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                fill="none"
+                aria-hidden="true"
+                focusable="false"
+                className="h-[0.8em] w-[0.8em]"
+              >
+                <path
+                  d="M2.5 8h11M9 3.5 13.5 8 9 12.5"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Button>
+          </p>
         </div>
-        {/* The ways in (Build, Learn, Race, Research, Sponsor) are the
-            landing's "Start here"; this page points there once. */}
-        <p className="mt-10 md:mt-12">
-          <Button href={START_HREF} variant="ghost" className="px-0!">
-            Start here on the home page
-            <svg
-              viewBox="0 0 16 16"
-              width="16"
-              height="16"
-              fill="none"
-              aria-hidden="true"
-              focusable="false"
-              className="h-[0.8em] w-[0.8em]"
-            >
-              <path
-                d="M2.5 8h11M9 3.5 13.5 8 9 12.5"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Button>
-        </p>
       </Section>
 
       {/* 02 People - four groups: faculty, developers, contributors, past crew */}
