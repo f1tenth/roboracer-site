@@ -14,7 +14,7 @@ import SectionHeader from "../components/ui/SectionHeader";
 import Reveal from "../components/ui/Reveal";
 import StatTicker from "../components/ui/StatTicker";
 import CommunityJoin from "../components/ui/CommunityJoin";
-import StartHere from "../components/ui/StartHere";
+import Button from "../components/ui/Button";
 import PeopleGroup from "../components/about/PeopleGroup";
 import ContributorStrip from "../components/about/ContributorStrip";
 import PartnerWall from "../components/about/PartnerWall";
@@ -31,7 +31,7 @@ import {
   type ContributorsFile,
 } from "../components/about/people";
 import { useScrollToHash } from "../hooks/useScrollToHash";
-import { ABOUT_START_ID } from "../lib/wayfinding";
+import { START_HREF } from "../lib/wayfinding";
 
 const GITHUB_URL = "https://github.com/f1tenth";
 const SCHOLAR_URL =
@@ -94,13 +94,12 @@ function Figure({
 }
 
 /**
- * /about - the long-form page: where to start (what RoboRacer is and the ways
- * in), who runs it, which institutions use it, and how to reach them. Paper
- * base with the one ink hero, the same section rhythm and primitives as the
- * landing and /race.
+ * /about - the long-form page: what RoboRacer is (the ways in are the
+ * landing's "Start here", linked once), who runs it, which institutions use
+ * it, and how to reach them. Paper base with the one ink hero, the same
+ * section rhythm and primitives as the landing and /race.
  */
 export default function About() {
-  // /about#about-start is the nav's "Start here" on this page, and
   // /about#about-spinoffs is linked from docs; the route reset
   // (useRouteScroll) would otherwise leave the reader at the top.
   useScrollToHash();
@@ -220,45 +219,69 @@ export default function About() {
         )}
       </Section>
 
-      {/* 01 Start here - the landing's section, fuller (ui/StartHere,
-          public/data/paths.json): the story and the scale beside the ICRA
-          group photo, then the five ways in, each with its clip, one sentence
-          for everyone and one more for whoever reads on. Merges the old "What
-          RoboRacer is" and "The platform" (Cedric, 2026-09-25). Newbie,
-          student, faculty (indirectly), competitor, sponsor. */}
-      <StartHere
-        density="full"
-        index="01"
-        id={ABOUT_START_ID}
-        headingId="about-start-title"
-        subtitle="One open car for teaching, research and racing"
-        intro={
-          // The copy leads (7 of 12) and the photo, cropped to 2:1 (the
-          // hall's roof goes, the group stays), takes 5 with the text
-          // centred beside it: two short paragraphs no longer sit at the top
-          // of a 6-column, 16:9 photo (QA p3-integration, item 7).
-          <div className="grid gap-10 md:grid-cols-12 md:items-center md:gap-x-10">
-            <Reveal className="flex flex-col gap-5 md:col-span-7">
-              <p className="max-w-[62ch] text-lead text-text-body">
-                RoboRacer started at the University of Pennsylvania in 2016.
-                Rahul Mangharam leads it from Penn&apos;s xLAB. Madhur Behl, now at the University of
-                Virginia,{" "}
-                <a href={BEHL_SOURCE} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
-                  co-founded the platform and the competition series
-                </a>
-                .
-              </p>
-              <p className="max-w-[62ch] text-body text-text-body">
-                More than 90 universities in over 20 countries use the platform, and more than a
-                thousand publications reference it. There have been 30 competitions since 2016.
-              </p>
-            </Reveal>
-            <div className="md:col-span-5">
-              <Figure photo={ICRA_GROUP_PHOTO} aspect="2 / 1" />
-            </div>
+      {/* 01 What RoboRacer is: the story and the scale beside the ICRA group
+          photo, then one line to the landing's ways in. The five ways in live
+          only on the landing (Cedric, 2026-09-26: "only have this once"). The
+          copy leads (7 of 12) and the photo, cropped to 2:1 (the hall's roof
+          goes, the group stays), takes 5. Both start at the top of the row:
+          centred beside the photo, the two paragraphs sat 7 to 10rem under
+          the header instead of the header's own margin (Cedric, 2026-09-26:
+          "a massive gap between the title and the longer description"). */}
+      <Section width="page" aria-labelledby="about-what" rule>
+        <SectionHeader
+          index="01"
+          id="about-what"
+          title="What RoboRacer is"
+          subtitle="One open car for teaching, research and racing"
+        />
+        <div className="grid gap-10 md:grid-cols-12 md:grid-rows-[auto_1fr] md:items-start md:gap-x-10 md:gap-y-5">
+          <Reveal className="flex flex-col gap-5 md:col-span-7">
+            <p className="max-w-[62ch] text-lead text-text-body">
+              RoboRacer started at the University of Pennsylvania in 2016.
+              Rahul Mangharam leads it from Penn&apos;s xLAB. Madhur Behl, now at the University of
+              Virginia,{" "}
+              <a href={BEHL_SOURCE} target="_blank" rel="noopener noreferrer" className={LINK_ON_PAPER}>
+                co-founded the platform and the competition series
+              </a>
+              .
+            </p>
+            <p className="max-w-[62ch] text-body text-text-body">
+              More than 90 universities in over 20 countries use the platform, and more than a
+              thousand publications reference it. There have been 30 competitions since 2016.
+            </p>
+          </Reveal>
+          <div className="md:col-span-5 md:row-span-2">
+            <Figure photo={ICRA_GROUP_PHOTO} aspect="2 / 1" />
           </div>
-        }
-      />
+          {/* The ways in (Build, Learn, Race, Research, Sponsor) are the
+              landing's "Start here"; this page points there once. From md
+              the line sits under the copy, beside the photo (the photo spans
+              both rows and the second one, 1fr, takes its extra height); on
+              a phone it ends the section, under the photo. */}
+          <p className="md:col-span-7 md:col-start-1 md:row-start-2">
+            <Button href={START_HREF} variant="ghost" className="px-0!">
+              Start here on the home page
+              <svg
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                fill="none"
+                aria-hidden="true"
+                focusable="false"
+                className="h-[0.8em] w-[0.8em]"
+              >
+                <path
+                  d="M2.5 8h11M9 3.5 13.5 8 9 12.5"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Button>
+          </p>
+        </div>
+      </Section>
 
       {/* 02 People - four groups: faculty, developers, contributors, past crew */}
       <Section width="page" aria-labelledby="about-people" rule>
