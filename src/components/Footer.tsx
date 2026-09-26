@@ -102,7 +102,7 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1">
             <FooterHeading>Community</FooterHeading>
             <a
-              href="https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g"
+              href="https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q"
               target="_blank"
               rel="noopener noreferrer"
               className="mb-4 inline-flex items-center gap-2 rounded-md border border-ink-700 bg-ink-800 px-4 py-2 text-sm font-medium transition-colors duration-200 hover:bg-ink-700 coarse:min-h-11"

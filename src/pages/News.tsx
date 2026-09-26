@@ -12,7 +12,7 @@ import { eventLabel, formatIsoDate, loadNewsFeed, type NewsFeed, type NewsItem }
 import { useDesktop } from "../lib/motion";
 
 const SLACK_URL =
-  "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g";
+  "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q";
 const MAILTO = "mailto:contact@roboracer.ai?subject=RoboRacer%20news";
 const INSTAGRAM_URL = "https://www.instagram.com/roboracer.ai/";
 // Site-wide link contract (landing-v2): ink text, hairline underline, violet on hover.

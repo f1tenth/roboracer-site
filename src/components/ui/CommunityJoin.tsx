@@ -16,7 +16,7 @@ import { useMediaHold } from "../../lib/media";
 // TODO(content): Cedric confirms the LinkedIn page. Instagram: Cedric,
 // 2026-08-22 (share link's tracking parameters dropped).
 const SLACK_URL =
-  "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g";
+  "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q";
 const GITHUB_URL = "https://github.com/f1tenth";
 const LINKEDIN_URL = "https://www.linkedin.com/company/roboracer-foundation";
 const INSTAGRAM_URL = "https://www.instagram.com/roboracer.ai/";

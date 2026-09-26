@@ -16,7 +16,7 @@ const links = [
 ];
 
 const SIMULATOR_URL = "https://autodrive-ecosystem.github.io/";
-const SLACK_URL = "https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g";
+const SLACK_URL = "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q";
 
 /**
  * Routes whose first viewport is the HeroChapter: the nav starts transparent

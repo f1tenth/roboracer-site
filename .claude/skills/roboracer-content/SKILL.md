@@ -12,7 +12,7 @@ Rule: if it is not here and not given by Cedric, it is `TODO(content)` in the JS
 - RoboRacer (formerly F1TENTH) is an international community of researchers, engineers, and students around a 1/10-scale open-source autonomous racing platform. Founded at the University of Pennsylvania in 2016, faculty lead Rahul Mangharam (Penn ESE, xLab). Four pillars used on the current site: Build (open-source vehicle system), Learn (courses and teaching materials), Race (competition series), Research (platform for papers).
 - Write "RoboRacer" everywhere; mention "formerly F1TENTH" once on the About page and in SEO metadata. Both names appear in literature, which matters for the research page query.
 - Docs/courses destination: https://f1tenth-coursekit.readthedocs.io is current for Learn (Cedric, 2026-08-20); restyling it is a later phase. Course stays the Spring 2024 ESE6150 site until Rahul answers.
-- Contact: contact@roboracer.ai. Community: Slack invite https://join.slack.com/t/robo-racer/shared_invite/zt-42lsbf50y-_3YPNLl_d3s~wPylAOMg0g (confirmed valid by Cedric, 2026-08-20). Nav CTA currently points to https://autodrive-ecosystem.github.io/ (VERIFY whether to keep).
+- Contact: contact@roboracer.ai. Community: Slack invite https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q (invite renewed by Cedric, 2026-09-26) (confirmed valid by Cedric, 2026-08-20). Nav CTA currently points to https://autodrive-ecosystem.github.io/ (VERIFY whether to keep).
 
 ## Next race: 31st RoboRacer Autonomous Racing Competition at IROS 2026
 - Conference: IEEE/RSJ IROS 2026, Pittsburgh, PA, USA. Competition site: https://iros2026-race.roboracer.ai (public; must be featured on the roboracer.ai homepage and race page).
