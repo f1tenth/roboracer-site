@@ -1,9 +1,9 @@
 # Handoff: where roboracer.ai stands, and how to work on it
 
 Read this once at the start of a session, then follow `CLAUDE.md` (loaded
-automatically) for the standing rules. Sections 1 and 3 are the state of play as
-of **2026-09-21**, when the whole site went up for merge to `main`; the rest
-dates from 2026-08-22, after the v1.0 landing. Keep it current: when you finish
+automatically) for the standing rules. Sections 1 to 3 are the state of play as
+of **2026-09-26**, the end of iteration 3; the rest dates from 2026-08-22,
+after the v1.0 landing. Keep it current: when you finish
 a page, update the table in section 3 and the open items in section 2.
 
 ---
@@ -12,11 +12,12 @@ a page, update the table in section 3 and the open items in section 2.
 
 | | |
 |---|---|
-| Working branch | `revamp/polish-2` (iteration 2, 2026-09-24/25): the plain-English copy pass, a faster hero, the rebuilt `/assembly`, the class leaderboard on `/race`, the "Start here" paths, the spinoffs on `/about`, the mobile pass, and three QA and review rounds. The topic branches `revamp/p2-*` are merged into it and kept. **PR #20** takes it to `main`. |
-| `main` | at `e82e747` (PR #19, the post-launch fixes, merged 2026-09-24) = the live roboracer.ai. **Never commit or push to it.** Cedric merges; the merge deploys. |
+| Working branch | `revamp/polish-2` (iteration 3, 2026-09-25/26, from Cedric's review notes): verify tags gone, team facts from the `RoboRacer_Teams_DB` sheet (`docs/content/teams.sheet.json`), Neobotics and Quanser as website-preview features under "Related platforms", every route change opens at the top (`hooks/useRouteScroll.ts`, hash landings clear the nav), `/research` with full-width phone figures and per-year folds, `/race` leaderboard on follow the gap with the top-5 replay, one "Start here" section replacing Start here + Platform on `/` and opening `/about` (`ui/StartHere`), the research carousel figure filling its pane, the Join section leading with copy, and the news history 2016 to 2026 (75 items, `docs/news/`). The topic branches `revamp/p3-*` are merged into it and kept, with their worktrees in `../roboracer-site-wt/p3-*` (QA PNGs live there, git-ignored). **PR #20** takes it to `main`. |
+| `main` | at `e82e747` (PR #19, merged 2026-09-24) = the live roboracer.ai. **Never commit or push to it.** Cedric merges; the merge deploys. |
 | Preview (safe to share) | <https://roboracer-preview.pages.dev> — Cloudflare Pages, project `roboracer-preview`, redeploy with `npx wrangler pages deploy dist --project-name roboracer-preview --branch v1-preview --commit-dirty=true`. Cedric reviews iterations here, not on roboracer.ai. |
 | Live site | roboracer.ai = Porkbun DNS -> **GitHub Pages** from `gh-pages`. The preview above cannot affect it. |
 | Large media | Cloudflare R2 bucket `roboracer-media`, public base `https://pub-1174c726236842f08529a0a5cc0c68fb.r2.dev`. `.env.production` sets `VITE_MEDIA_BASE`; `src/lib/media.ts` resolves `/media/...` paths through it in production and to the local file on localhost. The IV hero clips are the `-v2` encodes (from the source, 2026-09-24); localhost needs them copied into `public/media/hero/` (curl lines in `docs/media/HERO_PERF.md`), and a dev server started before that copy 404s them until restarted. `docs/media/HOSTING.md` lists where every video is served from. |
+| Reviews of this iteration | `docs/qa/p3-integration-review.md` (independent QA of the merged pages, 21 items; 15 applied in `docs/qa/p3-fixes.md`), `docs/reviews/p3-code-review.md` (fresh-eyes code review; applied in `docs/qa/p3-fixes-2.md`), `docs/news/AUDIT.md` (fact audit of the 53 new news items; applied) and `docs/news/MERGE.md` (what the news merge added, held, and the contradictions for Cedric). Per-branch QA notes are `docs/qa/p3-*.md`. |
 | Old history | local branch `revamp/integration` holds the previous 212-commit history as a safety net. Same tree, deletable on request. |
 
 Commits: plain messages, **no `Co-Authored-By`, no AI attribution anywhere**
@@ -26,43 +27,57 @@ Commits: plain messages, **no `Co-Authored-By`, no AI attribution anywhere**
 `rebase`, `filter-branch`, `filter-repo` and `reset --hard`. Do not route
 around it — if a task seems to need one of those, say so and ask.
 
+How iteration 3 was run (and the lessons): ten parallel Opus agents in
+worktrees, then fresh agents per stage (research -> checkpoint -> page ->
+audit -> fixes), an independent QA pass and a code review before the merge
+closed. Keep agents under about 400k tokens: split by stage, checkpoint to
+disk, hand rulings to agents in their first prompt (a ruling relayed to a
+running agent was refused as instruction poisoning).
+
 ---
 
 ## 2. What is still open
 
-1. **Cedric's decisions from iteration 2**, each written where the work is:
-   - `docs/CONTENT.md`: the registration deadline (Sep 5 in the skill, Sep 9 in
-     the JSON, Sep 18 on the live race site); 404 Racers' institution (two posts
-     say UPenn); LAMARRacing's ICRA 2026 wording; what connects Quanser to
-     RoboRacer (its spinoff card stays hidden until an origin is filled in);
-     the three spinoff candidates; the 19 race-site repos that went private
-     (their links now go to Wayback captures).
-   - `docs/LEADERBOARD.md`: a `leaderboard.roboracer.ai` CNAME to GitHub Pages;
-     wording for the future public board and prizes (the site says nothing yet).
-   - `docs/qa/polish-2-review.md` item 9: the nav's violet "Start here" plus one
-     in-page primary button breaks the one-solid-button-per-viewport rule.
-   - `docs/mobile/VERIFY.md`, end: `viewport-fit=cover` for the notch, the new
-     strings ("Pause"/"Play", "39 more"), partner names on touch, a portrait
-     hero encode, the mono footer headings.
-   - `docs/media/HERO_PERF.md`: the Cloudflare account is Rahul's and has no
-     `workers.dev` subdomain, so R2 still serves from the rate-limited `r2.dev`
-     URL; `infra/media-worker` deploys once someone opens Workers & Pages in
-     that dashboard.
-   - `docs/qa/polish-2-final.md` (steps 8 and 9): copy and fact nits left open on
-     purpose, and `docs/qa/polish-2-round4.md` for what the last round changed.
+1. **Cedric's decisions from iteration 3:**
+   - The nav's solid violet "Start here" plus one in-page primary gives two
+     solid violet buttons per viewport (`docs/qa/polish-2-review.md` item 9,
+     again in `docs/qa/p3-integration-review.md` item 5). Recommended: keep
+     the nav solid and exempt the fixed bar from the one-button rule.
+   - News (`docs/news/MERGE.md`): the 2023 ordinals (San Antonio vs London as
+     the 11th), the founding year (2015 vs 2016), CDC 2025's status, the VTC
+     2026 winner (Firebird, one competitor's post), sponsor names in the IROS
+     2026 and ICRA 2024 posts, the newsletter photos for the 2024 races,
+     naming Ambimat on the power-board item, and the Germany 2022 result
+     (attributed to ETH Zürich's own post).
+   - Permission notes: Neobotics and Quanser have not been asked about the
+     logos, car photos and homepage captures (manifest rows SP-01 to SP-07);
+     the LinkedIn slides used as embed posters are from the Foundation's own
+     page (NEWS-03 to NEWS-10).
    - The AI-generated car image in the landing's car chapter (`CAR_PHOTOS[1]`,
-     now captioned "AI-generated illustration"): keep, or swap for a photo.
-2. **Copy** is done: `docs/copy/BRIEF.md` is the standard, `docs/copy/*.md` the
-   before/after tables. New text follows the brief. Facts still come only from
+     captioned "AI-generated illustration"): keep, or swap for a photo.
+2. **Left from the reviews, not blocking:** the hero shows for ~200 ms before
+   a `/#start` jump from another route (review item 20); the 268 px paper band
+   under the car chapter at 768x1024 (item 12); `/research` section eyebrows
+   are words where other routes use numbers (16); the landing prefetches a 9 MB
+   clip and tablets get the 1920 encodes (21); 61 of 77 research row thumbs
+   are 320 px files and look soft on 3x phones (a 960 px media pass,
+   `docs/qa/p3-fixes-2.md` L4); a reload always opens at the top (L3).
+3. **Earlier items still open:** `docs/CONTENT.md` (the registration
+   deadline; the 19 race-site repos that went private), `docs/LEADERBOARD.md`
+   (a `leaderboard.roboracer.ai` CNAME; two small fixes proposed for the
+   board repo: an empty `data/archive/index.json` and no autofocus when
+   framed), `docs/mobile/VERIFY.md` (viewport-fit, a portrait hero encode),
+   `docs/media/HERO_PERF.md` (R2 still serves from the rate-limited `r2.dev`
+   URL until someone opens Workers & Pages in Rahul's dashboard).
+4. **Copy** follows `docs/copy/BRIEF.md` (card bodies under 25 words; the
+   news trim pass is in `docs/news/TRIM.md`). Facts still come only from
    `.claude/skills/roboracer-content` or from Cedric.
-3. **Mobile** is done (`docs/mobile/`); Safari was not testable here (WebKit
-   would not launch), so check a real iPhone once, portrait and landscape.
-4. **Learn and build rebuild** (next iteration): the two tracks are data in
+5. **Learn and build rebuild** (next iteration): the two tracks are data in
    `public/data/paths.json` and the state of play is `docs/LEARN_TERRAIN.md`.
    `/build` and `/learn` stay iframes until Cedric says otherwise.
-5. Smaller, known: `/media/hero/car-studio.webp` was never produced (the car
-   chapter falls back to the 3D render); the team institutions still marked
-   `TODO(content)`; `/about` People is 42% shorter on phones, the target was half.
+6. Smaller, known: `/media/hero/car-studio.webp` was never produced (the car
+   chapter falls back to the 3D render); Safari was not testable here (WebKit
+   would not launch), so check a real iPhone once, portrait and landscape.
 
 ---
 
