@@ -1,0 +1,223 @@
+{
+  "390x844": {
+    "clsLoad": 0.0001,
+    "shiftsLoad": [
+      {
+        "v": 7.361748474790635e-05,
+        "t": 895,
+        "src": [
+          "DIV.flex items-center gap-4 lg:hidden"
+        ]
+      }
+    ],
+    "axe": [],
+    "axeOpen": [],
+    "jump-2023": {
+      "top": 88,
+      "bar": 0,
+      "hash": "#year-2023",
+      "scrollY": 9326
+    },
+    "jump-submit": {
+      "top": 88,
+      "bar": 0,
+      "hash": "#contribute",
+      "scrollY": 18021
+    },
+    "summaryFocusOutline": "solid 2px SUMMARY",
+    "errors": []
+  },
+  "390x844-reduced": {
+    "clsLoad": 0.0005,
+    "shiftsLoad": [
+      {
+        "v": 0.0004508964078605372,
+        "t": 925,
+        "src": [
+          "#text.",
+          "#text.",
+          "#text.",
+          "DIV.flex items-center gap-4 lg:hidden"
+        ]
+      }
+    ],
+    "reducedHidden": 0,
+    "reducedHeight": 19309,
+    "errors": []
+  },
+  "844x390": {
+    "clsLoad": 0.0035,
+    "shiftsLoad": [
+      {
+        "v": 0.003509309781209559,
+        "t": 989,
+        "src": [
+          "DL.grid grid-cols-2 gap-x-6 gap-y-7 border-t border-i",
+          "DIV.flex items-center gap-4 lg:hidden"
+        ]
+      }
+    ],
+    "axe": [],
+    "axeOpen": [],
+    "jump-2023": {
+      "top": 72,
+      "bar": 0,
+      "hash": "#year-2023",
+      "scrollY": 5672
+    },
+    "jump-submit": {
+      "top": 72,
+      "bar": 0,
+      "hash": "#contribute",
+      "scrollY": 11475
+    },
+    "summaryFocusOutline": "solid 2px SUMMARY",
+    "errors": []
+  },
+  "844x390-reduced": {
+    "clsLoad": 0.0031,
+    "shiftsLoad": [
+      {
+        "v": 7.361748474790635e-05,
+        "t": 1180,
+        "src": [
+          "DIV.flex items-center gap-4 lg:hidden"
+        ]
+      },
+      {
+        "v": 0.003017061524984752,
+        "t": 1195,
+        "src": [
+          "DL.grid grid-cols-2 gap-x-6 gap-y-7 border-t border-i"
+        ]
+      }
+    ],
+    "reducedHidden": 0,
+    "reducedHeight": 12496,
+    "errors": []
+  },
+  "768x1024": {
+    "clsLoad": 0.0007,
+    "shiftsLoad": [
+      {
+        "v": 0.0006703520775772631,
+        "t": 1035,
+        "src": [
+          "BUTTON.rounded-pill px-4 py-2 text-small font-semibold tr",
+          "BUTTON.rounded-pill px-4 py-2 text-small font-semibold tr",
+          "BUTTON.rounded-pill px-4 py-2 text-small font-semibold tr",
+          "BUTTON.rounded-pill px-4 py-2 text-small font-semibold tr",
+          "BUTTON.rounded-pill px-4 py-2 text-small font-semibold tr"
+        ]
+      },
+      {
+        "v": 7.309516270955403e-05,
+        "t": 1054,
+        "src": [
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    "axe": [],
+    "axeOpen": [],
+    "jump-2023": {
+      "top": 88,
+      "bar": 0,
+      "hash": "#year-2023",
+      "scrollY": 10448
+    },
+    "jump-submit": {
+      "top": 88,
+      "bar": 0,
+      "hash": "#contribute",
+      "scrollY": 15278
+    },
+    "summaryFocusOutline": "solid 2px SUMMARY",
+    "errors": []
+  },
+  "768x1024-reduced": {
+    "clsLoad": 0.0007,
+    "shiftsLoad": [
+      {
+        "v": 0.0006703520775772631,
+        "t": 1162,
+        "src": [
+          "BUTTON.rounded-pill px-4 py-2 text-small font-semibold tr",
+          "BUTTON.rounded-pill px-4 py-2 text-small font-semibold tr",
+          "BUTTON.rounded-pill px-4 py-2 text-small font-semibold tr",
+          "BUTTON.rounded-pill px-4 py-2 text-small font-semibold tr",
+          "BUTTON.rounded-pill px-4 py-2 text-small font-semibold tr"
+        ]
+      },
+      {
+        "v": 7.309516270955403e-05,
+        "t": 1200,
+        "src": [
+          "#text.",
+          "#text.",
+          "#text."
+        ]
+      }
+    ],
+    "reducedHidden": 0,
+    "reducedHeight": 16420,
+    "errors": []
+  },
+  "1536x730": {
+    "clsLoad": 0.0002,
+    "shiftsLoad": [
+      {
+        "v": 9.745332204043593e-05,
+        "t": 1219,
+        "src": [
+          "DIV.nav-links"
+        ]
+      },
+      {
+        "v": 0.00010553415144596651,
+        "t": 1237,
+        "src": [
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    "axe": [],
+    "axeOpen": [],
+    "jump-2023": {
+      "top": 81,
+      "bar": 0,
+      "hash": "#year-2023",
+      "scrollY": 7715
+    },
+    "jump-submit": {
+      "top": 80,
+      "bar": 0,
+      "hash": "#contribute",
+      "scrollY": 12671
+    },
+    "summaryFocusOutline": "solid 2px SUMMARY",
+    "errors": []
+  },
+  "1536x730-reduced": {
+    "clsLoad": 0.0003,
+    "shiftsLoad": [
+      {
+        "v": 0.0002693585609192173,
+        "t": 851,
+        "src": [
+          "DIV.nav-links",
+          "#text.",
+          "#text.",
+          "#text."
+        ]
+      }
+    ],
+    "reducedHidden": 0,
+    "reducedHeight": 13501,
+    "errors": []
+  }
+}

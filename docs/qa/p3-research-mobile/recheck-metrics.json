@@ -1,0 +1,137 @@
+{
+ "390x844": {
+  "height": 19309,
+  "rows": 31,
+  "fig": [
+   340,
+   213
+  ],
+  "submitTop": 18109,
+  "folds": [
+   "Show 19 more papers from 2026",
+   "Show 42 more papers from 2025",
+   "Show 18 more papers from 2024",
+   "Show 14 more papers from 2023",
+   "Show 9 more papers from 2022",
+   "Show 4 more papers from 2020"
+  ],
+  "featuredFold": [
+   "Show 13 more featured papers"
+  ],
+  "counter": [
+   "17 featured",
+   "137 of 137 papers"
+  ],
+  "overflowX": 0,
+  "imgsNoDims": 0,
+  "imgsNotLazy": 0,
+  "axe": [],
+  "expandShift": "5411/4747 -> 5411/4747",
+  "focusAfterEnter": "SUMMARY",
+  "focusAfterTab": "Adaptive Control in Autonomous Driving via Real-Ti",
+  "axeOpen": [],
+  "jumpSubmitTop": 88,
+  "errors": []
+ },
+ "844x390": {
+  "height": 12496,
+  "rows": 31,
+  "fig": [
+   384,
+   240
+  ],
+  "submitTop": 11547,
+  "folds": [
+   "Show 19 more papers from 2026",
+   "Show 42 more papers from 2025",
+   "Show 18 more papers from 2024",
+   "Show 14 more papers from 2023",
+   "Show 9 more papers from 2022",
+   "Show 4 more papers from 2020"
+  ],
+  "featuredFold": [
+   "Show 13 more featured papers"
+  ],
+  "counter": [
+   "17 featured",
+   "137 of 137 papers"
+  ],
+  "overflowX": 0,
+  "imgsNoDims": 0,
+  "imgsNotLazy": 0,
+  "axe": [],
+  "expandShift": "3315/3030 -> 3315/3030",
+  "focusAfterEnter": "SUMMARY",
+  "focusAfterTab": "Adaptive Control in Autonomous Driving via Real-Ti",
+  "axeOpen": [],
+  "jumpSubmitTop": 72,
+  "errors": []
+ },
+ "768x1024": {
+  "height": 16420,
+  "rows": 31,
+  "fig": [
+   222,
+   139
+  ],
+  "submitTop": 15366,
+  "folds": [
+   "Show 19 more papers from 2026",
+   "Show 42 more papers from 2025",
+   "Show 18 more papers from 2024",
+   "Show 14 more papers from 2023",
+   "Show 9 more papers from 2022",
+   "Show 4 more papers from 2020"
+  ],
+  "featuredFold": [],
+  "counter": [
+   "17 featured",
+   "137 of 137 papers"
+  ],
+  "overflowX": 0,
+  "imgsNoDims": 0,
+  "imgsNotLazy": 0,
+  "axe": [],
+  "expandShift": "8365/7551 -> 8365/7551",
+  "focusAfterEnter": "SUMMARY",
+  "focusAfterTab": "Adaptive Control in Autonomous Driving via Real-Ti",
+  "axeOpen": [],
+  "jumpSubmitTop": 88,
+  "errors": []
+ },
+ "1536x730": {
+  "height": 13501,
+  "rows": 31,
+  "fig": [
+   254,
+   159
+  ],
+  "submitTop": 12751,
+  "folds": [
+   "Show 19 more papers from 2026",
+   "Show 42 more papers from 2025",
+   "Show 18 more papers from 2024",
+   "Show 14 more papers from 2023",
+   "Show 9 more papers from 2022",
+   "Show 4 more papers from 2020"
+  ],
+  "featuredFold": [],
+  "counter": [
+   "17 featured",
+   "137 of 137 papers"
+  ],
+  "overflowX": 0,
+  "imgsNoDims": 0,
+  "imgsNotLazy": 0,
+  "axe": [],
+  "expandShift": "5666/5095 -> 5666/5095",
+  "focusAfterEnter": "SUMMARY",
+  "focusAfterTab": "Adaptive Control in Autonomous Driving via Real-Ti",
+  "axeOpen": [],
+  "jumpSubmitTop": 81,
+  "errors": []
+ },
+ "390-reduced": {
+  "belowOpacity1": 0
+ }
+}

@@ -1,0 +1,624 @@
+{
+  "390x844": {
+    "height": 19309,
+    "vw": 390,
+    "vh": 844,
+    "overflowX": 0,
+    "searchTop": 3388,
+    "listTop": 3241,
+    "submitTop": 18207,
+    "visibleRows": 31,
+    "firstRowFigure": {
+      "w": 340,
+      "h": 213
+    },
+    "firstCardFigure": {
+      "w": 340,
+      "h": 213
+    },
+    "controls": [
+      "\u203aShow 19 more papers from 2026Hide 19 papers from 2026",
+      "\u203aShow 42 more papers from 2025Hide 42 papers from 2025",
+      "\u203aShow 18 more papers from 2024Hide 18 papers from 2024",
+      "\u203aShow 14 more papers from 2023Hide 14 papers from 2023",
+      "\u203aShow 9 more papers from 2022Hide 9 papers from 2022",
+      "\u203aShow 4 more papers from 2020Hide 4 papers from 2020"
+    ],
+    "featuredControls": [
+      "All",
+      "Reinforcement learning",
+      "Planning",
+      "Raceline optimization",
+      "Control and MPC",
+      "Perception and state estimation",
+      "Sim-to-real and simulation",
+      "Multi-agent and racing strategy",
+      "Safety and verification",
+      "Systems and platform",
+      "Education",
+      "\u203aShow 13 more featured papersHide 13 featured papers"
+    ],
+    "h1": 1,
+    "noDims": [],
+    "notLazy": [
+      "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+      "http://127.0.0.1:4184/logos/slack-logo.svg"
+    ],
+    "counter": [
+      "17 featured",
+      "137 of 137 papers"
+    ],
+    "expandBefore": {
+      "y": 5387.609375,
+      "vy": 420.609375,
+      "sy": 4967
+    },
+    "expandAfter": {
+      "y": 5387.609375,
+      "vy": 420.609375,
+      "sy": 4967
+    },
+    "focusAfterExpand": "<a href=\"https://arxiv.org/abs/2602.02236\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline underline-offset-4 decoration-ink-950/25 hover:decoration-",
+    "focusAfterTab": "<a href=\"https://arxiv.org/abs/2602.02236\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2\">Adaptive C",
+    "heightExpanded": 27428,
+    "searchMPC": {
+      "height": 17115,
+      "vw": 390,
+      "vh": 844,
+      "overflowX": 0,
+      "searchTop": 3383,
+      "listTop": 3236,
+      "submitTop": 16082,
+      "visibleRows": 28,
+      "firstRowFigure": {
+        "w": 340,
+        "h": 213
+      },
+      "firstCardFigure": {
+        "w": 340,
+        "h": 213
+      },
+      "controls": [],
+      "featuredControls": [
+        "All",
+        "Reinforcement learning",
+        "Planning",
+        "Raceline optimization",
+        "Control and MPC",
+        "Perception and state estimation",
+        "Sim-to-real and simulation",
+        "Multi-agent and racing strategy",
+        "Safety and verification",
+        "Systems and platform",
+        "Education",
+        "\u203aShow 13 more featured papersHide 13 featured papers"
+      ],
+      "h1": 1,
+      "noDims": [],
+      "notLazy": [
+        "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+        "http://127.0.0.1:4184/logos/slack-logo.svg"
+      ],
+      "counter": [
+        "17 featured",
+        "28 of 137 papers \u00b7 \u201cMPC\u201d"
+      ]
+    },
+    "afterClear": {
+      "height": 19228,
+      "vw": 390,
+      "vh": 844,
+      "overflowX": 0,
+      "searchTop": 3383,
+      "listTop": 3236,
+      "submitTop": 18195,
+      "visibleRows": 31,
+      "firstRowFigure": {
+        "w": 340,
+        "h": 213
+      },
+      "firstCardFigure": {
+        "w": 340,
+        "h": 213
+      },
+      "controls": [
+        "\u203aShow 19 more papers from 2026Hide 19 papers from 2026",
+        "\u203aShow 42 more papers from 2025Hide 42 papers from 2025",
+        "\u203aShow 18 more papers from 2024Hide 18 papers from 2024",
+        "\u203aShow 14 more papers from 2023Hide 14 papers from 2023",
+        "\u203aShow 9 more papers from 2022Hide 9 papers from 2022",
+        "\u203aShow 4 more papers from 2020Hide 4 papers from 2020"
+      ],
+      "featuredControls": [
+        "All",
+        "Reinforcement learning",
+        "Planning",
+        "Raceline optimization",
+        "Control and MPC",
+        "Perception and state estimation",
+        "Sim-to-real and simulation",
+        "Multi-agent and racing strategy",
+        "Safety and verification",
+        "Systems and platform",
+        "Education",
+        "\u203aShow 13 more featured papersHide 13 featured papers"
+      ],
+      "h1": 1,
+      "noDims": [],
+      "notLazy": [
+        "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+        "http://127.0.0.1:4184/logos/slack-logo.svg"
+      ],
+      "counter": [
+        "17 featured",
+        "137 of 137 papers"
+      ]
+    },
+    "consoleErrors": []
+  },
+  "844x390": {
+    "height": 12496,
+    "vw": 844,
+    "vh": 390,
+    "overflowX": 0,
+    "searchTop": 2180,
+    "listTop": 2061,
+    "submitTop": 11633,
+    "visibleRows": 31,
+    "firstRowFigure": {
+      "w": 384,
+      "h": 240
+    },
+    "firstCardFigure": {
+      "w": 388,
+      "h": 243
+    },
+    "controls": [
+      "\u203aShow 19 more papers from 2026Hide 19 papers from 2026",
+      "\u203aShow 42 more papers from 2025Hide 42 papers from 2025",
+      "\u203aShow 18 more papers from 2024Hide 18 papers from 2024",
+      "\u203aShow 14 more papers from 2023Hide 14 papers from 2023",
+      "\u203aShow 9 more papers from 2022Hide 9 papers from 2022",
+      "\u203aShow 4 more papers from 2020Hide 4 papers from 2020"
+    ],
+    "featuredControls": [
+      "All",
+      "Reinforcement learning",
+      "Planning",
+      "Raceline optimization",
+      "Control and MPC",
+      "Perception and state estimation",
+      "Sim-to-real and simulation",
+      "Multi-agent and racing strategy",
+      "Safety and verification",
+      "Systems and platform",
+      "Education",
+      "\u203aShow 13 more featured papersHide 13 featured papers"
+    ],
+    "h1": 1,
+    "noDims": [],
+    "notLazy": [
+      "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+      "http://127.0.0.1:4184/logos/slack-logo.svg"
+    ],
+    "counter": [
+      "17 featured",
+      "137 of 137 papers"
+    ],
+    "expandBefore": {
+      "y": 3335.265625,
+      "vy": 194.265625,
+      "sy": 3141
+    },
+    "expandAfter": {
+      "y": 3335.265625,
+      "vy": 194.265625,
+      "sy": 3141
+    },
+    "focusAfterExpand": "<a href=\"https://arxiv.org/abs/2602.02236\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline underline-offset-4 decoration-ink-950/25 hover:decoration-",
+    "focusAfterTab": "<a href=\"https://arxiv.org/abs/2602.02236\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2\">Adaptive C",
+    "heightExpanded": 17148,
+    "searchMPC": {
+      "height": 10724,
+      "vw": 844,
+      "vh": 390,
+      "overflowX": 0,
+      "searchTop": 2165,
+      "listTop": 2046,
+      "submitTop": 9933,
+      "visibleRows": 28,
+      "firstRowFigure": {
+        "w": 384,
+        "h": 240
+      },
+      "firstCardFigure": {
+        "w": 388,
+        "h": 243
+      },
+      "controls": [],
+      "featuredControls": [
+        "All",
+        "Reinforcement learning",
+        "Planning",
+        "Raceline optimization",
+        "Control and MPC",
+        "Perception and state estimation",
+        "Sim-to-real and simulation",
+        "Multi-agent and racing strategy",
+        "Safety and verification",
+        "Systems and platform",
+        "Education",
+        "\u203aShow 13 more featured papersHide 13 featured papers"
+      ],
+      "h1": 1,
+      "noDims": [],
+      "notLazy": [
+        "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+        "http://127.0.0.1:4184/logos/slack-logo.svg"
+      ],
+      "counter": [
+        "17 featured",
+        "28 of 137 papers \u00b7 \u201cMPC\u201d"
+      ]
+    },
+    "afterClear": {
+      "height": 12450,
+      "vw": 844,
+      "vh": 390,
+      "overflowX": 0,
+      "searchTop": 2165,
+      "listTop": 2046,
+      "submitTop": 11659,
+      "visibleRows": 31,
+      "firstRowFigure": {
+        "w": 384,
+        "h": 240
+      },
+      "firstCardFigure": {
+        "w": 388,
+        "h": 243
+      },
+      "controls": [
+        "\u203aShow 19 more papers from 2026Hide 19 papers from 2026",
+        "\u203aShow 42 more papers from 2025Hide 42 papers from 2025",
+        "\u203aShow 18 more papers from 2024Hide 18 papers from 2024",
+        "\u203aShow 14 more papers from 2023Hide 14 papers from 2023",
+        "\u203aShow 9 more papers from 2022Hide 9 papers from 2022",
+        "\u203aShow 4 more papers from 2020Hide 4 papers from 2020"
+      ],
+      "featuredControls": [
+        "All",
+        "Reinforcement learning",
+        "Planning",
+        "Raceline optimization",
+        "Control and MPC",
+        "Perception and state estimation",
+        "Sim-to-real and simulation",
+        "Multi-agent and racing strategy",
+        "Safety and verification",
+        "Systems and platform",
+        "Education",
+        "\u203aShow 13 more featured papersHide 13 featured papers"
+      ],
+      "h1": 1,
+      "noDims": [],
+      "notLazy": [
+        "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+        "http://127.0.0.1:4184/logos/slack-logo.svg"
+      ],
+      "counter": [
+        "17 featured",
+        "137 of 137 papers"
+      ]
+    },
+    "consoleErrors": []
+  },
+  "768x1024": {
+    "height": 16420,
+    "vw": 768,
+    "vh": 1024,
+    "overflowX": 0,
+    "searchTop": 7320,
+    "listTop": 7201,
+    "submitTop": 15497,
+    "visibleRows": 31,
+    "firstRowFigure": {
+      "w": 222,
+      "h": 139
+    },
+    "firstCardFigure": {
+      "w": 346,
+      "h": 216
+    },
+    "controls": [
+      "\u203aShow 19 more papers from 2026Hide 19 papers from 2026",
+      "\u203aShow 42 more papers from 2025Hide 42 papers from 2025",
+      "\u203aShow 18 more papers from 2024Hide 18 papers from 2024",
+      "\u203aShow 14 more papers from 2023Hide 14 papers from 2023",
+      "\u203aShow 9 more papers from 2022Hide 9 papers from 2022",
+      "\u203aShow 4 more papers from 2020Hide 4 papers from 2020"
+    ],
+    "featuredControls": [
+      "All",
+      "Reinforcement learning",
+      "Planning",
+      "Raceline optimization",
+      "Control and MPC",
+      "Perception and state estimation",
+      "Sim-to-real and simulation",
+      "Multi-agent and racing strategy",
+      "Safety and verification",
+      "Systems and platform",
+      "Education"
+    ],
+    "h1": 1,
+    "noDims": [],
+    "notLazy": [
+      "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+      "http://127.0.0.1:4184/logos/slack-logo.svg"
+    ],
+    "counter": [
+      "17 featured",
+      "137 of 137 papers"
+    ],
+    "expandBefore": {
+      "y": 8331.671875,
+      "vy": 510.671875,
+      "sy": 7821
+    },
+    "expandAfter": {
+      "y": 8331.671875,
+      "vy": 510.671875,
+      "sy": 7821
+    },
+    "focusAfterExpand": "<a href=\"https://arxiv.org/abs/2602.02236\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline underline-offset-4 decoration-ink-950/25 hover:decoration-",
+    "focusAfterTab": "<a href=\"https://arxiv.org/abs/2602.02236\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2\">Adaptive C",
+    "heightExpanded": 20060,
+    "searchMPC": {
+      "height": 14705,
+      "vw": 768,
+      "vh": 1024,
+      "overflowX": 0,
+      "searchTop": 7300,
+      "listTop": 7181,
+      "submitTop": 13854,
+      "visibleRows": 28,
+      "firstRowFigure": {
+        "w": 222,
+        "h": 139
+      },
+      "firstCardFigure": {
+        "w": 346,
+        "h": 216
+      },
+      "controls": [],
+      "featuredControls": [
+        "All",
+        "Reinforcement learning",
+        "Planning",
+        "Raceline optimization",
+        "Control and MPC",
+        "Perception and state estimation",
+        "Sim-to-real and simulation",
+        "Multi-agent and racing strategy",
+        "Safety and verification",
+        "Systems and platform",
+        "Education"
+      ],
+      "h1": 1,
+      "noDims": [],
+      "notLazy": [
+        "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+        "http://127.0.0.1:4184/logos/slack-logo.svg"
+      ],
+      "counter": [
+        "17 featured",
+        "28 of 137 papers \u00b7 \u201cMPC\u201d"
+      ]
+    },
+    "afterClear": {
+      "height": 16287,
+      "vw": 768,
+      "vh": 1024,
+      "overflowX": 0,
+      "searchTop": 7300,
+      "listTop": 7181,
+      "submitTop": 15435,
+      "visibleRows": 31,
+      "firstRowFigure": {
+        "w": 222,
+        "h": 139
+      },
+      "firstCardFigure": {
+        "w": 346,
+        "h": 216
+      },
+      "controls": [
+        "\u203aShow 19 more papers from 2026Hide 19 papers from 2026",
+        "\u203aShow 42 more papers from 2025Hide 42 papers from 2025",
+        "\u203aShow 18 more papers from 2024Hide 18 papers from 2024",
+        "\u203aShow 14 more papers from 2023Hide 14 papers from 2023",
+        "\u203aShow 9 more papers from 2022Hide 9 papers from 2022",
+        "\u203aShow 4 more papers from 2020Hide 4 papers from 2020"
+      ],
+      "featuredControls": [
+        "All",
+        "Reinforcement learning",
+        "Planning",
+        "Raceline optimization",
+        "Control and MPC",
+        "Perception and state estimation",
+        "Sim-to-real and simulation",
+        "Multi-agent and racing strategy",
+        "Safety and verification",
+        "Systems and platform",
+        "Education"
+      ],
+      "h1": 1,
+      "noDims": [],
+      "notLazy": [
+        "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+        "http://127.0.0.1:4184/logos/slack-logo.svg"
+      ],
+      "counter": [
+        "17 featured",
+        "137 of 137 papers"
+      ]
+    },
+    "consoleErrors": []
+  },
+  "1536x730": {
+    "height": 13501,
+    "vw": 1536,
+    "vh": 730,
+    "overflowX": 0,
+    "searchTop": 4661,
+    "listTop": 4627,
+    "submitTop": 12910,
+    "visibleRows": 31,
+    "firstRowFigure": {
+      "w": 254,
+      "h": 159
+    },
+    "firstCardFigure": {
+      "w": 452,
+      "h": 283
+    },
+    "controls": [
+      "\u203aShow 19 more papers from 2026Hide 19 papers from 2026",
+      "\u203aShow 42 more papers from 2025Hide 42 papers from 2025",
+      "\u203aShow 18 more papers from 2024Hide 18 papers from 2024",
+      "\u203aShow 14 more papers from 2023Hide 14 papers from 2023",
+      "\u203aShow 9 more papers from 2022Hide 9 papers from 2022",
+      "\u203aShow 4 more papers from 2020Hide 4 papers from 2020"
+    ],
+    "featuredControls": [
+      "All",
+      "Reinforcement learning",
+      "Planning",
+      "Raceline optimization",
+      "Control and MPC",
+      "Perception and state estimation",
+      "Sim-to-real and simulation",
+      "Multi-agent and racing strategy",
+      "Safety and verification",
+      "Systems and platform",
+      "Education"
+    ],
+    "h1": 1,
+    "noDims": [],
+    "notLazy": [
+      "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+      "http://127.0.0.1:4184/logos/slack-logo.svg"
+    ],
+    "counter": [
+      "17 featured",
+      "137 of 137 papers"
+    ],
+    "expandBefore": {
+      "y": 5665.984375,
+      "vy": 363.984375,
+      "sy": 5302
+    },
+    "expandAfter": {
+      "y": 5665.984375,
+      "vy": 363.984375,
+      "sy": 5302
+    },
+    "focusAfterExpand": "<a href=\"https://arxiv.org/abs/2602.02236\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline underline-offset-4 decoration-ink-950/25 hover:decoration-",
+    "focusAfterTab": "<a href=\"https://arxiv.org/abs/2602.02236\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2\">Adaptive C",
+    "heightExpanded": 17425,
+    "searchMPC": {
+      "height": 12031,
+      "vw": 1536,
+      "vh": 730,
+      "overflowX": 0,
+      "searchTop": 4661,
+      "listTop": 4627,
+      "submitTop": 11439,
+      "visibleRows": 28,
+      "firstRowFigure": {
+        "w": 254,
+        "h": 159
+      },
+      "firstCardFigure": {
+        "w": 452,
+        "h": 283
+      },
+      "controls": [],
+      "featuredControls": [
+        "All",
+        "Reinforcement learning",
+        "Planning",
+        "Raceline optimization",
+        "Control and MPC",
+        "Perception and state estimation",
+        "Sim-to-real and simulation",
+        "Multi-agent and racing strategy",
+        "Safety and verification",
+        "Systems and platform",
+        "Education"
+      ],
+      "h1": 1,
+      "noDims": [],
+      "notLazy": [
+        "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+        "http://127.0.0.1:4184/logos/slack-logo.svg"
+      ],
+      "counter": [
+        "17 featured",
+        "28 of 137 papers \u00b7 \u201cMPC\u201d"
+      ]
+    },
+    "afterClear": {
+      "height": 13501,
+      "vw": 1536,
+      "vh": 730,
+      "overflowX": 0,
+      "searchTop": 4661,
+      "listTop": 4627,
+      "submitTop": 12910,
+      "visibleRows": 31,
+      "firstRowFigure": {
+        "w": 254,
+        "h": 159
+      },
+      "firstCardFigure": {
+        "w": 452,
+        "h": 283
+      },
+      "controls": [
+        "\u203aShow 19 more papers from 2026Hide 19 papers from 2026",
+        "\u203aShow 42 more papers from 2025Hide 42 papers from 2025",
+        "\u203aShow 18 more papers from 2024Hide 18 papers from 2024",
+        "\u203aShow 14 more papers from 2023Hide 14 papers from 2023",
+        "\u203aShow 9 more papers from 2022Hide 9 papers from 2022",
+        "\u203aShow 4 more papers from 2020Hide 4 papers from 2020"
+      ],
+      "featuredControls": [
+        "All",
+        "Reinforcement learning",
+        "Planning",
+        "Raceline optimization",
+        "Control and MPC",
+        "Perception and state estimation",
+        "Sim-to-real and simulation",
+        "Multi-agent and racing strategy",
+        "Safety and verification",
+        "Systems and platform",
+        "Education"
+      ],
+      "h1": 1,
+      "noDims": [],
+      "notLazy": [
+        "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+        "http://127.0.0.1:4184/logos/slack-logo.svg"
+      ],
+      "counter": [
+        "17 featured",
+        "137 of 137 papers"
+      ]
+    },
+    "consoleErrors": []
+  }
+}

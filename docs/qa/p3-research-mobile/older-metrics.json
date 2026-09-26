@@ -1,0 +1,274 @@
+{
+ "390x844": {
+  "height": 10234,
+  "rows": 8,
+  "submitTop": 9131,
+  "folds": [
+   "Show 19 more papers from 2026",
+   "Show 42 more papers from 2025",
+   "Show 22 papers from 2024",
+   "Show 18 papers from 2023",
+   "Show 13 papers from 2022",
+   "Show 1 paper from 2021",
+   "Show 8 papers from 2020",
+   "Show 3 papers from 2019",
+   "Show 1 paper from 2018",
+   "Show 2 papers from 2017"
+  ],
+  "counter": "17 featured | 137 of 137 papers",
+  "overflowX": 0,
+  "axe": [],
+  "focusOnSummary": "SUMMARY solid 2px",
+  "open2024": true,
+  "shift2024": "7534/6825 -> 7534/7151",
+  "label2024": "Hide 22 papers from 2024",
+  "focusAfterEnter": "SUMMARY",
+  "focusAfterTab": "AV4EV: Open-Source Modular Autonomous Electric Veh",
+  "firstFig2024": [
+   340,
+   213,
+   "lazy",
+   "320x200"
+  ],
+  "axeOpen": [],
+  "closedAgain": true,
+  "searchMPC": {
+   "height": 17195,
+   "rows": 28,
+   "submitTop": 16093,
+   "folds": [],
+   "counter": "17 featured | 28 of 137 papers \u00b7 \u201cMPC\u201d",
+   "overflowX": 0
+  },
+  "topicPlanning": {
+   "height": 13806,
+   "rows": 21,
+   "submitTop": 12703,
+   "folds": [],
+   "counter": "3 featured \u00b7 Planning | 21 of 137 papers \u00b7 Planning",
+   "overflowX": 0
+  },
+  "cleared": {
+   "height": 10234,
+   "rows": 8,
+   "submitTop": 9131,
+   "folds": [
+    "Show 19 more papers from 2026",
+    "Show 42 more papers from 2025",
+    "Show 22 papers from 2024",
+    "Show 18 papers from 2023",
+    "Show 13 papers from 2022",
+    "Show 1 paper from 2021",
+    "Show 8 papers from 2020",
+    "Show 3 papers from 2019",
+    "Show 1 paper from 2018",
+    "Show 2 papers from 2017"
+   ],
+   "counter": "17 featured | 137 of 137 papers",
+   "overflowX": 0
+  },
+  "jump2019Top": 88,
+  "errors": []
+ },
+ "844x390": {
+  "height": 7092,
+  "rows": 8,
+  "submitTop": 6228,
+  "folds": [
+   "Show 19 more papers from 2026",
+   "Show 42 more papers from 2025",
+   "Show 22 papers from 2024",
+   "Show 18 papers from 2023",
+   "Show 13 papers from 2022",
+   "Show 1 paper from 2021",
+   "Show 8 papers from 2020",
+   "Show 3 papers from 2019",
+   "Show 1 paper from 2018",
+   "Show 2 papers from 2017"
+  ],
+  "counter": "17 featured | 137 of 137 papers",
+  "overflowX": 0,
+  "axe": [],
+  "focusOnSummary": "SUMMARY solid 2px",
+  "open2024": true,
+  "shift2024": "4653/4294 -> 4653/4463",
+  "label2024": "Hide 22 papers from 2024",
+  "focusAfterEnter": "SUMMARY",
+  "focusAfterTab": "AV4EV: Open-Source Modular Autonomous Electric Veh",
+  "firstFig2024": [
+   384,
+   240,
+   "lazy",
+   "320x200"
+  ],
+  "axeOpen": [],
+  "closedAgain": true,
+  "searchMPC": {
+   "height": 10801,
+   "rows": 28,
+   "submitTop": 9938,
+   "folds": [],
+   "counter": "17 featured | 28 of 137 papers \u00b7 \u201cMPC\u201d",
+   "overflowX": 0
+  },
+  "topicPlanning": {
+   "height": 9399,
+   "rows": 21,
+   "submitTop": 8535,
+   "folds": [],
+   "counter": "3 featured \u00b7 Planning | 21 of 137 papers \u00b7 Planning",
+   "overflowX": 0
+  },
+  "cleared": {
+   "height": 7092,
+   "rows": 8,
+   "submitTop": 6228,
+   "folds": [
+    "Show 19 more papers from 2026",
+    "Show 42 more papers from 2025",
+    "Show 22 papers from 2024",
+    "Show 18 papers from 2023",
+    "Show 13 papers from 2022",
+    "Show 1 paper from 2021",
+    "Show 8 papers from 2020",
+    "Show 3 papers from 2019",
+    "Show 1 paper from 2018",
+    "Show 2 papers from 2017"
+   ],
+   "counter": "17 featured | 137 of 137 papers",
+   "overflowX": 0
+  },
+  "jump2019Top": 72,
+  "errors": []
+ },
+ "768x1024": {
+  "height": 16420,
+  "rows": 31,
+  "submitTop": 15497,
+  "folds": [
+   "Show 19 more papers from 2026",
+   "Show 42 more papers from 2025",
+   "Show 18 more papers from 2024",
+   "Show 14 more papers from 2023",
+   "Show 9 more papers from 2022",
+   "Show 4 more papers from 2020"
+  ],
+  "counter": "17 featured | 137 of 137 papers",
+  "overflowX": 0,
+  "axe": [],
+  "focusOnSummary": "SUMMARY solid 2px",
+  "open2024": true,
+  "shift2024": "10392/8729 -> 10392/9919",
+  "label2024": "Hide 18 papers from 2024",
+  "focusAfterEnter": "SUMMARY",
+  "focusAfterTab": "Robustness Evaluation of Localization Techniques f",
+  "firstFig2024": [
+   222,
+   139,
+   "lazy",
+   "320x200"
+  ],
+  "axeOpen": [],
+  "closedAgain": true,
+  "searchMPC": {
+   "height": 14815,
+   "rows": 28,
+   "submitTop": 13891,
+   "folds": [],
+   "counter": "17 featured | 28 of 137 papers \u00b7 \u201cMPC\u201d",
+   "overflowX": 0
+  },
+  "topicPlanning": {
+   "height": 8802,
+   "rows": 21,
+   "submitTop": 7878,
+   "folds": [],
+   "counter": "3 featured \u00b7 Planning | 21 of 137 papers \u00b7 Planning",
+   "overflowX": 0
+  },
+  "cleared": {
+   "height": 16420,
+   "rows": 31,
+   "submitTop": 15497,
+   "folds": [
+    "Show 19 more papers from 2026",
+    "Show 42 more papers from 2025",
+    "Show 18 more papers from 2024",
+    "Show 14 more papers from 2023",
+    "Show 9 more papers from 2022",
+    "Show 4 more papers from 2020"
+   ],
+   "counter": "17 featured | 137 of 137 papers",
+   "overflowX": 0
+  },
+  "jump2019Top": 88,
+  "errors": []
+ },
+ "1536x730": {
+  "height": 13501,
+  "rows": 31,
+  "submitTop": 12910,
+  "folds": [
+   "Show 19 more papers from 2026",
+   "Show 42 more papers from 2025",
+   "Show 18 more papers from 2024",
+   "Show 14 more papers from 2023",
+   "Show 9 more papers from 2022",
+   "Show 4 more papers from 2020"
+  ],
+  "counter": "17 featured | 137 of 137 papers",
+  "overflowX": 0,
+  "axe": [],
+  "focusOnSummary": "SUMMARY solid 2px",
+  "open2024": true,
+  "shift2024": "7669/6225 -> 7669/7341",
+  "label2024": "Hide 18 papers from 2024",
+  "focusAfterEnter": "SUMMARY",
+  "focusAfterTab": "Robustness Evaluation of Localization Techniques f",
+  "firstFig2024": [
+   254,
+   159,
+   "lazy",
+   "320x200"
+  ],
+  "axeOpen": [],
+  "closedAgain": true,
+  "searchMPC": {
+   "height": 12031,
+   "rows": 28,
+   "submitTop": 11439,
+   "folds": [],
+   "counter": "17 featured | 28 of 137 papers \u00b7 \u201cMPC\u201d",
+   "overflowX": 0
+  },
+  "topicPlanning": {
+   "height": 7813,
+   "rows": 21,
+   "submitTop": 7221,
+   "folds": [],
+   "counter": "3 featured \u00b7 Planning | 21 of 137 papers \u00b7 Planning",
+   "overflowX": 0
+  },
+  "cleared": {
+   "height": 13501,
+   "rows": 31,
+   "submitTop": 12910,
+   "folds": [
+    "Show 19 more papers from 2026",
+    "Show 42 more papers from 2025",
+    "Show 18 more papers from 2024",
+    "Show 14 more papers from 2023",
+    "Show 9 more papers from 2022",
+    "Show 4 more papers from 2020"
+   ],
+   "counter": "17 featured | 137 of 137 papers",
+   "overflowX": 0
+  },
+  "jump2019Top": 81,
+  "errors": []
+ },
+ "390-reduced": {
+  "belowOpacity1": 0,
+  "height": 10234
+ }
+}
