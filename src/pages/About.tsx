@@ -32,6 +32,7 @@ import {
   type ContributorsFile,
 } from "../components/about/people";
 import { useScrollToHash } from "../hooks/useScrollToHash";
+import { ABOUT_START_ID } from "../lib/wayfinding";
 
 const GITHUB_URL = "https://github.com/f1tenth";
 const SCHOLAR_URL =
@@ -68,9 +69,12 @@ const LEDGER_STATS: { label: string; value: number; suffix?: string; href?: stri
 
 function Figure({
   photo,
+  aspect,
   className = "",
 }: {
   photo: { src: string; width: number; height: number; alt: string; caption: string };
+  /** Crop to this shape (CSS aspect-ratio) instead of the file's own. */
+  aspect?: string;
   className?: string;
 }) {
   return (
@@ -83,7 +87,7 @@ function Figure({
         loading="lazy"
         decoding="async"
         className="w-full rounded-media border border-ink-950/10 object-cover"
-        style={{ aspectRatio: `${photo.width} / ${photo.height}` }}
+        style={{ aspectRatio: aspect ?? `${photo.width} / ${photo.height}`, objectPosition: "50% 70%" }}
       />
       <figcaption className="mt-2 font-mono text-small text-text-muted">{photo.caption}</figcaption>
     </figure>
@@ -97,9 +101,9 @@ function Figure({
  * landing and /race.
  */
 export default function About() {
-  // /race#leaderboard and /about#about-spinoffs are linked from docs and
-  // the nav; the route reset (useRouteScroll) would otherwise leave the
-  // reader at the top.
+  // /about#about-start is the nav's "Start here" on this page, and
+  // /about#about-spinoffs is linked from docs; the route reset
+  // (useRouteScroll) would otherwise leave the reader at the top.
   useScrollToHash();
   const [partners, setPartners] = useState<Partner[]>([]);
   // undefined while community.json loads (the hero holds the facade's box),
@@ -226,11 +230,16 @@ export default function About() {
       <StartHere
         density="full"
         index="01"
-        headingId="about-start"
+        id={ABOUT_START_ID}
+        headingId="about-start-title"
         subtitle="One open car for teaching, research and racing"
         intro={
-          <div className="grid gap-10 md:grid-cols-12 md:gap-x-10">
-            <Reveal className="flex flex-col gap-5 md:col-span-6">
+          // The copy leads (7 of 12) and the photo, cropped to 2:1 (the
+          // hall's roof goes, the group stays), takes 5 with the text
+          // centred beside it: two short paragraphs no longer sit at the top
+          // of a 6-column, 16:9 photo (QA p3-integration, item 7).
+          <div className="grid gap-10 md:grid-cols-12 md:items-center md:gap-x-10">
+            <Reveal className="flex flex-col gap-5 md:col-span-7">
               <p className="max-w-[62ch] text-lead text-text-body">
                 RoboRacer started at the University of Pennsylvania in 2016.
                 Rahul Mangharam leads it from Penn&apos;s xLAB. Madhur Behl, now at the University of
@@ -245,8 +254,8 @@ export default function About() {
                 thousand publications reference it. There have been 30 competitions since 2016.
               </p>
             </Reveal>
-            <div className="md:col-span-6">
-              <Figure photo={ICRA_GROUP_PHOTO} />
+            <div className="md:col-span-5">
+              <Figure photo={ICRA_GROUP_PHOTO} aspect="2 / 1" />
             </div>
           </div>
         }

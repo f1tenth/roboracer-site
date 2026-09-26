@@ -519,7 +519,16 @@ export default function StartHere({
 
   if (full) {
     return (
-      <Section width="page" id={id} rule aria-labelledby={headingId} className="focus:outline-none">
+      // The scroll margin covers what the section's own top padding does not
+      // (phones: 7vh of padding under a 4.5rem bar), so a jump to the section
+      // (the nav's "Start here" on /about) shows its eyebrow under the bar.
+      <Section
+        width="page"
+        id={id}
+        rule
+        aria-labelledby={headingId}
+        className="scroll-mt-[max(0rem,calc(var(--spacing-nav)+1rem-var(--spacing-section)))] focus:outline-none"
+      >
         <SectionHeader index={index} id={headingId} title="Start here" subtitle={subtitle} lead={lead} />
         {intro}
         <div className={intro ? "mt-16" : undefined}>{list}</div>
