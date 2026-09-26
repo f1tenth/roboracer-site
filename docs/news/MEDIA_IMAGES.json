@@ -97,14 +97,28 @@
     "alt": "A car with green wheels drives down a corridor past an AprilTag marker at Penn's mid-semester race, November 6, 2018.",
     "credit": "Photo: Christopher Kao, Penn ESE 680, fall 2018 (mid-semester race)"
   },
+  "iros2026-sim-league-siga-siga-wins": {
+    "src": "/media/news/news-iros2026-sim-league-800.webp",
+    "width": 800,
+    "height": 266,
+    "alt": "AutoDRIVE's banner for the 6th RoboRacer Sim Racing League: the title over a simulated race car on a grey track, with the IROS 2026 Pittsburgh, AutoDRIVE and RoboRacer marks.",
+    "credit": "Post: AutoDRIVE Ecosystem · LinkedIn"
+  },
+  "vtc2026-boston-neobotics": {
+    "src": "/media/news/news-vtc2026-group-800.webp",
+    "width": 800,
+    "height": 525,
+    "alt": "The teams of the 30th competition, many holding up their cars, gathered behind the orange and yellow duct track at the Hilton Boston Park Plaza.",
+    "credit": "Post: Neobotics Foundation · LinkedIn"
+  },
   "skipped": [
     {
       "id": "iros2026-registration-closes-sep-5",
-      "reason": "Cedric 2026-09-26: skip the IROS 2026 flyer (prints Sep 27 - Oct 1, the IROS week, not the race days); the plan names no fallback poster. No media."
+      "reason": "Cedric 2026-09-26: skip the IROS 2026 flyer (prints Sep 27 - Oct 1, the IROS week, not the race days); the plan names no fallback poster. No media. The item was then removed from news.json (Cedric, 2026-09-26)."
     },
     {
       "id": "ifac2026-busan-opens",
-      "reason": "Cedric 2026-09-26: skip the IFAC 2026 host photo (photographer unknown, permission not asked); the plan names no fallback poster (its alternative is the host's YouTube stream vGqDLhgokSY, for the video pass). No media."
+      "reason": "Cedric 2026-09-26: skip the IFAC 2026 host photo (photographer unknown, permission not asked); the plan names no fallback poster (its alternative is the host's YouTube stream vGqDLhgokSY, for the video pass). No media. The item was then removed from news.json (Cedric, 2026-09-26)."
     },
     {
       "id": "cpsweek2024-hongkong-fsm-speed-wins",

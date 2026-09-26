@@ -19,12 +19,15 @@ const INSTAGRAM_URL = "https://www.instagram.com/roboracer.ai/";
 const LINK =
   "underline underline-offset-4 decoration-ink-950/25 hover:decoration-rr-violet hover:decoration-2";
 
-/** Items each year shows before the rest fold away, at every size (the
+/** Items each older year shows before the rest fold away, at every size (the
  * /research pattern: four fills two rows of the two-column grid). */
 const PER_YEAR = 4;
-/** On a phone only the newest years open with their four; every older year
- * is its heading, its count and a closed fold. With the history back to 2016
- * (75 items) the phone page was far past 12,000 px with every year open. */
+/** The newest year opens with more: Cedric's call (2026-09-26), so its visible
+ * run ends at UPenn's ICRA 2026 post and only the last two 2026 items fold. */
+const NEWEST_YEAR_OPEN = 14;
+/** On a phone only the newest years open; every older year is its heading,
+ * its count and a closed fold. With the history back to 2016 (74 items) the
+ * phone page was far past 12,000 px with every year open. */
 const OPEN_YEARS_ON_PHONE = 2;
 /** The chevron summary every fold shares (/research, /race). */
 const FOLD_SUMMARY =
@@ -37,8 +40,9 @@ function posts(n: number): string {
 /**
  * One year of the archive: its first `open` items, then the rest behind a
  * native <details> (keyboard and screen-reader ready without React, opened by
- * find-in-page, nothing above it moves as it opens). `open` is PER_YEAR, none
- * for an older year on a phone, and every item while a competition filter is
+ * find-in-page, nothing above it moves as it opens). `open` is
+ * NEWEST_YEAR_OPEN for the newest year, PER_YEAR for the others, none for an
+ * older year on a phone, and every item while a competition filter is
  * set, so nothing a filter found is ever folded away. The folded cards sit
  * outside Reveal: a scroll trigger measured inside a closed <details> would
  * leave them hidden when it opens.
@@ -303,15 +307,23 @@ export default function News() {
                   sticks only where the window is tall enough to spare the
                   band (a landscape phone lost 38% of its height to bar plus
                   year), flush under the bar so no card text shows between.
-                  Each year opens with four and folds the rest; on a phone the
-                  years before the newest two are closed folds. A filter
-                  shows every match. */}
+                  The newest year opens with fourteen, every other year with
+                  four, and each folds the rest; on a phone the years before
+                  the newest two are closed folds. A filter shows every match. */}
               {byYear.map(([year, group], index) => (
                 <YearGroup
                   key={`${year}-${tag ?? "all"}`}
                   year={year}
                   items={group}
-                  open={tag ? group.length : compact && index >= OPEN_YEARS_ON_PHONE ? 0 : PER_YEAR}
+                  open={
+                    tag
+                      ? group.length
+                      : index === 0
+                        ? NEWEST_YEAR_OPEN
+                        : compact && index >= OPEN_YEARS_ON_PHONE
+                          ? 0
+                          : PER_YEAR
+                  }
                 />
               ))}
             </div>
