@@ -40,7 +40,7 @@
       "author_url": "https://www.linkedin.com/company/roboracer-foundation",
       "affiliation": "Organizer",
       "publisher": "LinkedIn",
-      "credit": "Post: RoboRacer Foundation · LinkedIn",
+      "credit": "Post: RoboRacer Foundation · LinkedIn. Video: 부산대학교기계공학부 · YouTube",
       "image": {
         "src": "/media/news/news-ifac2026-group-1080.webp",
         "width": 1080,
@@ -78,7 +78,12 @@
       },
       "sources": "Counts (274 racers, 56 teams, four days, the post says \"the largest field in RoboRacer history\"; Cedric, 2026-09-21: say race, not field): the Foundation's own post, slide 1, 2026-09-12. Placings: 2026ifac-roboracer.com/en/results.html, read 2026-09-21. Requested by Cedric 2026-09-21.",
       "featured": true,
-      "status": "published"
+      "status": "published",
+      "video": {
+        "provider": "youtube",
+        "id": "vGqDLhgokSY",
+        "title": "29th Roboracer Autonomous Racing Competition(20260826)"
+      }
     },
     {
       "id": "vtc2026-boston-neobotics",
@@ -326,7 +331,7 @@
       "author_url": "https://www.linkedin.com/company/unicorn-racing",
       "affiliation": "1st place, ICRA 2026",
       "publisher": "LinkedIn",
-      "credit": "Post: UNICORN Racing · LinkedIn",
+      "credit": "Post: UNICORN Racing · LinkedIn. Video: xLAB for Safe Autonomous Systems · YouTube",
       "image": {
         "src": "/media/join/posts/post-unicorn-racing-344833-960.webp",
         "width": 768,
@@ -334,7 +339,12 @@
         "alt": "The UNICORN Racing team poses with its car in front of the I love Robotics ICRA 2026 sign in Vienna."
       },
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "lqsQcrROt1g",
+        "title": "UNICORN_Racing — Roboracer ICRA 2026 | Autonomous Racing in Vienna"
+      }
     },
     {
       "id": "post-mateus-karvat-541826",
@@ -350,7 +360,7 @@
       "author_url": "https://www.linkedin.com/in/mateus-karvat",
       "affiliation": "Ingenuity Labs Racing",
       "publisher": "LinkedIn",
-      "credit": "Post: Mateus Karvat Camara · LinkedIn",
+      "credit": "Post: Mateus Karvat Camara · LinkedIn. Video: xLAB for Safe Autonomous Systems · YouTube",
       "image": {
         "src": "/media/join/posts/post-mateus-karvat-541826-800.webp",
         "width": 800,
@@ -358,7 +368,12 @@
         "alt": "Six members of Ingenuity Labs Racing with their blue car in the ICRA 2026 competition hall."
       },
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "e8sWPAveVKA",
+        "title": "Ingenuity Labs Racing — Roboracer ICRA 2026 | Autonomous Racing in Vienna"
+      }
     },
     {
       "id": "post-lukas-kutsch-701952",
@@ -422,7 +437,7 @@
       "author_url": "https://www.linkedin.com/in/cedric-hollande",
       "affiliation": "UPenn Autonomous Racing, University of Pennsylvania",
       "publisher": "LinkedIn",
-      "credit": "Post: Cedric Hollande · LinkedIn",
+      "credit": "Post: Cedric Hollande · LinkedIn. Video: xLAB for Safe Autonomous Systems · YouTube",
       "image": {
         "src": "/media/join/posts/post-cedric-hollande-699200-800.webp",
         "width": 800,
@@ -430,7 +445,12 @@
         "alt": "Cedric Hollande and Dhyey Shah hold their car on the ICRA 2026 track in Vienna, orange ducts and the competition area sign behind."
       },
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "ZY7fMINZXqQ",
+        "title": "UPenn Autonomous Racing — Roboracer ICRA 2026 | Autonomous Racing in Vienna"
+      }
     },
     {
       "id": "icra2026-vienna-results",
@@ -446,7 +466,7 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "RoboRacer",
-      "credit": "Results: RoboRacer Foundation. Photo: Felix Jahncke",
+      "credit": "Results: RoboRacer Foundation. Photo: Felix Jahncke. Video: xLAB for Safe Autonomous Systems · YouTube",
       "image": {
         "src": "/media/highlights/highlight-icra2026-awards-01-1200.webp",
         "width": 1200,
@@ -454,7 +474,37 @@
         "alt": "The award ceremony of the 27th RoboRacer competition at ICRA 2026 in Vienna."
       },
       "featured": true,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "vlt6veE4SJI",
+        "title": "ICRA 2026 RoboRacer Team Interviews"
+      }
+    },
+    {
+      "id": "icra2026-sim-league-monacof1-wins",
+      "date": "2026-05-18",
+      "date_display": "May 2026",
+      "date_precision": "month",
+      "title": "MonacoF1 wins the fifth Sim Racing League",
+      "excerpt": "Seventy-three teams registered to race online for ICRA 2026, and 28 qualified. MonacoF1, from Ekumen, won the final in 110.27 seconds, ahead of RUN-RUN-ChuraTaro and bracavisionai.",
+      "kind": "announcement",
+      "event": "icra2026",
+      "link": "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-icra-2026/",
+      "author": null,
+      "author_url": null,
+      "affiliation": null,
+      "publisher": "AutoDRIVE",
+      "credit": "Results: AutoDRIVE. Video: AutoDRIVE Ecosystem · YouTube",
+      "image": null,
+      "sources": "Added 2026-09-26 (p3-news-media, Cedric's example video). AutoDRIVE's competition page https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-icra-2026/ (read 2026-09-26): registered-teams table numbered 01-73; Phase 1 standings list 28 qualified teams (1 VAUL 64.80 s); Phase 2 standings list 17 finishers: 1 MonacoF1 110.27 s (members Gerardo Puga, Emiliano Alban Naranjo, Michel Hidalgo; organisation Ekumen; Argentina, Ecuador), 2 RUN-RUN-ChuraTaro 122.76 s (Chura DATA Inc., Japan), 3 bracavisionai 126.71 s (Mexico); the timeline (marked 'subject to change') puts the final race May 16-17 and results May 18, 2026, hence month precision. AutoDRIVE Ecosystem, YouTube, uploaded 2026-06-20, https://www.youtube.com/watch?v=xCp1KB-JGZ4: '5th RoboRacer Sim Racing League ... ICRA 2026 ... a total of 73 teams (200+ participants)'. Not in the content skill or the candidates files: VERIFY with Cedric.",
+      "featured": false,
+      "status": "verify",
+      "embed": {
+        "provider": "youtube",
+        "id": "xCp1KB-JGZ4",
+        "title": "5th RoboRacer Sim Racing League @ ICRA 2026"
+      }
     },
     {
       "id": "cdc-techfest-2025-sim-league-vaul-wins",
@@ -470,11 +520,16 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "AutoDRIVE",
-      "credit": "Results: AutoDRIVE",
+      "credit": "Results: AutoDRIVE. Video: AutoDRIVE Ecosystem · YouTube",
       "image": null,
       "sources": "Web candidate cdc2025-race-cancelled-fourth-sim-league (results table: 1 VAUL 78.19 s, 2 Mamba, 3 Phoenix Racing; final December 6-7; 40 teams per AutoDRIVE's video https://www.youtube.com/watch?v=7Y2jeoHyvWA) merged with LinkedIn candidate cdc2025-virtual-vaul-wins (VAUL: best lap 7.74 s, rookie team tenth, https://www.linkedin.com/posts/vaul_vaul-wins-autodrive-fastest-lap-774s-activity-7406716530094190592-29zl). Phoenix Racing = TU Dortmund University per the Teams DB. CDC 2025's in-person race is not described: the CDC conference page says it was not held, events_map.json marks it virtual with a TODO, the Teams DB says 'Canceled' and past_races.json lists it (Cedric decides, see MERGE.md). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'VAUL wins the fourth Sim Racing League'; excerpt 'The fourth Sim Racing League ran online for CDC 2025 and Techfest 2025, with 40 teams. Université Laval's VAUL won with a 7.74-second best lap, ahead of Mamba and TU Dortmund's Phoenix Racing. VAUL's rookie team finished tenth.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "7Y2jeoHyvWA",
+        "title": "4th RoboRacer Sim Racing League @ CDC-TF 2025"
+      }
     },
     {
       "id": "iccas2025-unist-wins",
@@ -490,7 +545,7 @@
       "author_url": null,
       "affiliation": "UNIST",
       "publisher": "UNIST HMC Lab",
-      "credit": "Result: UNIST High-assurance Mobility Control Lab. Photo: RoboRacer organizers",
+      "credit": "Result: UNIST High-assurance Mobility Control Lab. Photo: RoboRacer organizers. Video: Unicorn Racing · YouTube",
       "image": {
         "src": "/media/race/iccas2025.webp",
         "width": 800,
@@ -499,7 +554,12 @@
       },
       "sources": "Web candidate iccas2025-fourth-korea-championship-unist-wins (UNIST HMC Lab gallery 'November 2025': 1st prize; ICCAS 2025 program https://2025.iccas.org/?page_id=5104: 'The 4th F1tenth Korea Championship', tournament and awards November 6; Tayo Eagles 'Second place' video https://www.youtube.com/watch?v=6zJHxksklwE) merged with drive candidate iccas2025-korea-championship. The UNIST team is UNICORN only by photo file names, so the excerpt says 'a UNIST team'. Photo: public/media/race/iccas2025.webp (already on /race, 'RoboRacer organizers (via Cedric Hollande)'), reused; the same frame is in the Drive under a photographer's name, which the drive report treats as personal data (see MERGE.md). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'The fourth Korea Championship, at ICCAS 2025'; excerpt 'The fourth Korea Championship ran with ICCAS 2025 at Songdo ConvensiA in Incheon, with the head-to-head tournament and awards on November 6. UNIST's High-assurance Mobility Control Lab reports first prize for its team, and Chungbuk National University's Tayo Eagles posted second place.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "tnn4isfdUCE",
+        "title": "2025 4th F1tenth Korea Championship (ICCAS, Incheon) - Sketch Video"
+      }
     },
     {
       "id": "roboracer-rules-repository-2025",
@@ -617,7 +677,7 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "ForzaETH",
-      "credit": "Result: ForzaETH blog. Photo: RoboRacer organizers",
+      "credit": "Result: ForzaETH blog. Photo: RoboRacer organizers. Video: The Robotics Club · YouTube",
       "image": {
         "src": "/media/race/icra2025.webp",
         "width": 800,
@@ -626,7 +686,12 @@
       },
       "sources": "Web candidate icra2025-atlanta-unibo-motorsport-wins (ForzaETH 2025-05-22: podium Unibo Motorsport, UNICORN, ForzaETH; TU Wien: most reliable time trial, fourth after the last race against UNICORN from UNIST; UNICORN's video https://www.youtube.com/watch?v=Ukox0IPqGNA; race highlights https://www.youtube.com/watch?v=wPHYLAnpMOU) merged with drive candidate icra2025-atlanta-results (organizers' timing and bracket sheet, misnamed 'Roboracer IV2025 - Timeline': 1 Unibo Motorsport, 2 UNICORN, 3 ForzaETH, 4 Scuderia Segfault; Scuderia Segfault 30 consecutive laps). UNICORN = UNIST per the content skill's Teams section and the Teams DB. TEAM COUNT left out (25 TU Wien, 26 listed, 19 registrants table, 20 in the pre-race newsletter, 18 timed, 17 in the bracket). Photo: public/media/race/icra2025.webp, added to /race by Cedric (commit 58c6a8c), reused; photographer not recorded. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Unibo Motorsport wins the 24th competition, at ICRA 2025 in Atlanta'; excerpt 'Unibo Motorsport from the University of Bologna won at the Georgia World Congress Center. UNICORN from UNIST in Korea came second and ETH Zürich's ForzaETH third. TU Wien's Scuderia Segfault finished fourth and ran the most consecutive time-trial laps, 30.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "wPHYLAnpMOU",
+        "title": "Autonomous RC Racing (The RoboRacer Foundation 24th Race Highlights)"
+      }
     },
     {
       "id": "icra2025-sim-league-vaul-wins",
@@ -642,11 +707,16 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "AutoDRIVE",
-      "credit": "Results: AutoDRIVE",
+      "credit": "Results: AutoDRIVE. Video: AutoDRIVE Ecosystem · YouTube",
       "image": null,
       "sources": "Web candidate icra2025-third-sim-racing-league (results table: 1 VAUL 111.46 s, 2 Autoware Aces, 3 Kanka; final May 11-13; newsletter 2025-04-21: 58 teams) merged with LinkedIn candidate icra2025-sim-league-58-teams (Autoware Foundation: 58 teams, https://www.linkedin.com/posts/the-autoware-foundation_autoware-opensource-coeblog-activity-7353118395388649474-i4au). COUNTRY COUNT differs (24 newsletter, 25 Autoware blog), left out. CONTRADICTION: Po-Jen Wang's bio in the IROS 2026 proposal says he won this league (see MERGE.md). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'VAUL wins the third Sim Racing League'; excerpt 'The third Sim Racing League ran online for ICRA 2025, and 58 teams registered. Université Laval's VAUL won again, ahead of Autoware Aces and Kanka.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "oObgg_MCU4U",
+        "title": "3rd RoboRacer Sim Racing League @ ICRA 2025"
+      }
     },
     {
       "id": "iv2025-regular-event",
@@ -788,11 +858,16 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "AutoDRIVE",
-      "credit": "Results: AutoDRIVE",
+      "credit": "Results: AutoDRIVE. Video: AutoDRIVE Ecosystem · YouTube",
       "image": null,
       "sources": "Web candidate cdc2024-second-sim-racing-league (results table, final December 7-8, results December 9) merged with drive candidate sim-racing-league-cdc2024-results (deck: 1 VAUL, 2 Baby Driver, 3 TURTLEBOT) and LinkedIn candidate cdc2024-sim-league-qualifiers (AutoDRIVE: 20 teams qualified, https://www.linkedin.com/posts/autodrive-ecosystem_cdc2024-autodrive-f1tenth-activity-7269403467759108096-Lawp). REGISTRATION COUNT left out (51 teams and 170+ per AutoDRIVE's video; 37 registered before the deadline per IEEE CDC; 15 teams per the ICRA 2025 proposal, written earlier). CELEBRATION DATE differs (December 16 on AutoDRIVE's page, December 19 in the deck), left out. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'VAUL wins the second Sim Racing League'; excerpt 'The second Sim Racing League ran online for CDC 2024, on the car's digital twin in AutoDRIVE, and 20 teams qualified for the competition round. Université Laval's VAUL won, ahead of Baby Driver and TURTLEBOT, the first league's winner.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "Q-WTcTOld08",
+        "title": "2nd F1TENTH Sim Racing League @ CDC 2024"
+      }
     },
     {
       "id": "bu2024-lehigh-wins",
@@ -848,11 +923,16 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "Daily Hankooki",
-      "credit": "Article: Daily Hankooki (in Korean)",
+      "credit": "Article: Daily Hankooki (in Korean). Video: AiX · YouTube",
       "image": null,
       "sources": "Web candidate korea2024-third-korea-championship (Daily Hankooki 2024-11-06: 37 teams, winner Dong-A University's team, runner-up Chungbuk National University's Tayo Eagle team; AiX video: 37 teams) merged with drive candidate korea2024-3rd-championship (poster, Oct 29-Nov 1). DATES differ (Oct 29-31 press, Oct 28-30 video, Oct 29-Nov 1 flyer), so the card shows the month. PARTICIPANTS differ (169 press, 160 video), left out. The winning team's name (확불) is not romanized here; Tayo Eagles is the team's own English name (Teams DB, their video titles). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Dong-A University wins the third Korea Championship'; excerpt 'The third Korea Championship ran with ICCAS 2024 at Jeju Shinhwa World, with 37 teams. A Dong-A University team won, and Chungbuk National University's Tayo Eagles came second.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "LD_JWum5L_I",
+        "title": "2024 3rd F1tenth Korea Championship (28-30 Oct, 2024)"
+      }
     },
     {
       "id": "iros2024-abudhabi-dzik-ultimate-wins",
@@ -888,11 +968,16 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "AutoDRIVE",
-      "credit": "Results: AutoDRIVE",
+      "credit": "Results: AutoDRIVE. Video: AutoDRIVE Ecosystem · YouTube",
       "image": null,
       "sources": "Web candidate iros2024-first-sim-racing-league (results table, final October 5-6, results October 7, 2024; 58 teams and 160+ participants per AutoDRIVE's video https://www.youtube.com/watch?v=bctpfSjyjXs and the Autoware Foundation blog) merged with LinkedIn candidate iros2024-first-sim-league (Venkat Krovi, 2024-08-21: 'Starting IROS2024 ... the 1st Simulated Racing/Digital Twin League', https://www.linkedin.com/posts/venkatnkrovi_starting-iros2024-the-f1tenth-racing-will-activity-7232141737446547456-5QM7) and drive candidate sim-racing-league-launch-iros2024 (58 teams, 160+, ICRA 2025 proposal). Team institutions left out (two teams in the Teams DB are called KU F1TENTH). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'TURTLEBOT wins the first Sim Racing League'; excerpt 'Alongside IROS 2024, teams raced a digital twin of the car in the AutoDRIVE simulator, with no hardware needed. Fifty-eight teams with more than 160 people registered. TURTLEBOT won, ahead of IDEA_LAB and KU F1TENTH.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "bctpfSjyjXs",
+        "title": "1st F1TENTH Sim Racing League @ IROS 2024"
+      }
     },
     {
       "id": "sm2024-niagara-vaul-wins",
@@ -1068,10 +1153,15 @@
       "author_url": null,
       "affiliation": "Clemson University ARMLab",
       "publisher": "AutoDRIVE",
-      "credit": "Video: AutoDRIVE",
+      "credit": "Video: AutoDRIVE Ecosystem · YouTube",
       "image": null,
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "I-tEjVMtans",
+        "title": "Autoware on F1TENTH for Autonomous Racing | Real World | AutoDRIVE-Autoware Integration"
+      }
     },
     {
       "id": "tum-course-2023",
@@ -1112,11 +1202,16 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "korea-race23.f1tenth.org",
-      "credit": "Results: Korea Championship race site",
+      "credit": "Results: Korea Championship race site. Video: AiX · YouTube",
       "image": null,
       "sources": "Web candidate korea2023-second-korea-championship-hmcar-wins. Podium table (grand prize HMcar, then Paragon, DSplay, QueenCar): https://korea-race23.f1tenth.org/results.html (live, read 2026-09-25); 31 registered, 29 raced: AiX video https://www.youtube.com/watch?v=dmZCUUcmzzE. Prize amounts left out. The page's bracket images are the 2022 championship's. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'HMcar wins the second Korea Championship, at ICCAS 2023'; excerpt 'The Korea Championship moved to the ICCAS conference for its second edition, at SonoCalm Yeosu. Twenty-nine of the 31 registered teams raced. HMcar took the grand prize, ahead of Paragon, DSplay and QueenCar.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "dmZCUUcmzzE",
+        "title": "2023 F1Tenth Korea Championship (Oct 17-19, 2023, Yeosu, Korea)"
+      }
     },
     {
       "id": "autodrive-digital-twin-first-look",
@@ -1132,10 +1227,15 @@
       "author_url": null,
       "affiliation": "Clemson University ARMLab",
       "publisher": "AutoDRIVE",
-      "credit": "Video: AutoDRIVE",
+      "credit": "Video: AutoDRIVE Ecosystem · YouTube",
       "image": null,
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "Rq7Wwcwn1uk",
+        "title": "Digital Twin of F1TENTH in AutoDRIVE Simulator - A First Look"
+      }
     },
     {
       "id": "iros2023-detroit-vaul-wins",
@@ -1153,7 +1253,7 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "iros2023-race.f1tenth.org",
-      "credit": "Results: IROS 2023 race site (archived). Photo: RoboRacer organizers",
+      "credit": "Results: IROS 2023 race site (archived). Photo: RoboRacer organizers. Video: Véhicule Autonome UL · YouTube",
       "image": {
         "src": "/media/news/news-iros2023-race-1080.webp",
         "width": 1080,
@@ -1162,7 +1262,12 @@
       },
       "sources": "Web candidate iros2023-detroit-vaul-wins (qualification table and Challonge w6qar708 final VAUL beat Autoware Aces 2-0; VAUL's recap video https://www.youtube.com/watch?v=KHUE3kbSOCE) merged with LinkedIn candidate iros2023-14th-grand-prix-livestream (Venkat Krovi) and drive candidate iros2023-detroit-14th (poster, photo). CONTRADICTION: Po-Jen Wang's organizer bio in the IROS 2026 proposal says he won the Grand Prix at IROS 2023; the bracket says VAUL (see MERGE.md). Photo: Drive 'Old Banners, Flyers, Shirts, Stickers/Media to Use/IMG_3196.JPG', EXIF 2023-10-04 13:58 (IROS 2023 week), photographer not recorded. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Université Laval's VAUL wins the 14th competition, in Detroit'; excerpt 'Nine teams qualified at Huntington Place during IROS 2023. VAUL took the top seed with 24 laps and a best lap of 11.82 seconds, then beat Autoware Aces in the final. Autoware Rocket and HUMDA-SZE 2 reached the semi-finals.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "KHUE3kbSOCE",
+        "title": "Recap F1TENTH Detroit 2023"
+      }
     },
     {
       "id": "iros2023-madgames-workshop",
@@ -1203,10 +1308,21 @@
       "author_url": null,
       "affiliation": "ETH Zurich",
       "publisher": "D-ITET Center for Project-Based Learning",
-      "credit": "Video: D-ITET Center for Project-Based Learning, ETH Zurich",
+      "credit": "Video: D-ITET Center for Project-Based Learning, ETH Zurich · YouTube",
       "image": null,
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "lE_Dk1iJHHg",
+        "title": "Model- and Acceleration-based Pursuit Controller for High-Performance Autonomous Racing",
+        "poster": {
+          "src": "https://i.ytimg.com/vi/lE_Dk1iJHHg/sddefault.jpg",
+          "width": 640,
+          "height": 480,
+          "alt": ""
+        }
+      }
     },
     {
       "id": "icra2023-london-forzaeth-wins",
@@ -1222,7 +1338,7 @@
       "author_url": "https://www.linkedin.com/in/mangharam",
       "affiliation": "University of Pennsylvania",
       "publisher": "LinkedIn",
-      "credit": "Post: Rahul Mangharam · LinkedIn",
+      "credit": "Post: Rahul Mangharam · LinkedIn. Video: TU Wien TV · YouTube",
       "image": null,
       "embed": {
         "provider": "linkedin",
@@ -1231,7 +1347,12 @@
       },
       "sources": "LinkedIn candidates icra2023-forzaeth-wins (Rahul Mangharam: ForzaETH won) and icra2023-scuderia-segfault-silver (TTTech Auto: silver, fourth consecutive podium) merged with web candidate icra2023-london-forzaeth-wins (TU Wien Informatics 2023-06-02, https://informatics.tuwien.ac.at/news/2442: final against ForzaETH, May 29-31; Nagoya University Suzlab: fourth of 22) and drive candidate icra2023-london-11th (poster). ORDINAL left out: TUM, TU Wien and the race site call London the 11th; events_map.json (Cedric, 2026-08-23) makes it the 12th. TEAM COUNT left out: 41 registered (TU Wien), 22 raced (Nagoya), 24 teams and 130+ (ICRA 2025 proposal), 150+ from 37 universities (poster).",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "video": {
+        "provider": "youtube",
+        "id": "GiXn8uKrcSk",
+        "title": "TU Wien Racing Team: F1TENTH Grand Prix autonomer Modellautos 2023"
+      }
     },
     {
       "id": "cps2023-san-antonio-penn-wins",
@@ -1247,11 +1368,16 @@
       "author_url": null,
       "affiliation": "University of Pennsylvania",
       "publisher": "Penn Engineering",
-      "credit": "Article: Penn Engineering",
+      "credit": "Article: Penn Engineering. Video: xLAB for Safe Autonomous Systems · YouTube",
       "image": null,
       "sources": "Web candidate cps2023-san-antonio-penn-wins (Penn Engineering 2023-06-16: 'beat out 12 other schools', data-driven strategy; Challonge f1tenth_cps_iot_2023 final Foxglove beat Derek 2-0, results page Wayback https://web.archive.org/web/20250623030417/https://cps2023-race.f1tenth.org/results.html; NC State ECE 2023-05-19, second place) merged with LinkedIn candidate cps2023-12th-winners (Rahul Mangharam, winners Jason Xie, Chandravaran Kunjeti, Rohit Bhikule, Zheming Zhang: https://www.linkedin.com/posts/mangharam_f1tenth-cpsweek-autonomousdriving-activity-7068234768298987520-Xbad) and drive candidate cps2023-san-antonio-12th (poster). ORDINAL left out: the race site, Penn and the poster call San Antonio the 12th; events_map.json (Cedric, 2026-08-23) makes it the 11th. Names differ: Penn Engineering lists Jimmy Zhang where Rahul's post lists Zheming Zhang. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Penn wins at CPS-IoT Week 2023 in San Antonio'; excerpt 'Thirteen schools raced in San Antonio. A Penn team racing as Bercedes Menz Foxglove Racing Team beat NC State's car Derek in the final on May 9. The winners mapped the track with the lidar, planned a race line and tuned from telemetry.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "BWRscx68Dl0",
+        "title": "F1Tenth Competition at CPS-IoT Week 2023"
+      }
     },
     {
       "id": "korea2022-first-korea-championship",
@@ -1269,11 +1395,16 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "korea-race.f1tenth.org",
-      "credit": "Results: Korea Championship race site (archived)",
+      "credit": "Results: Korea Championship race site (archived). Video: AiX · YouTube",
       "image": null,
       "sources": "Web candidate korea2022-first-korea-championship-ace2-wins. Head-to-head results image (7 teams: ACE2, ACE1, F1TENTH AGH, HMD, RTCAR, HMCL, Andaman) and bracket in the championship repo; event page 'The 1st F1TENTH Korea Championship / KSMTE 2022 / Dec 12-13 / Ramada Plaza by Wyndham Jeju'. Award names (KATECH, Sonnet.ai, KEMCTI, GM) are Korean-series award givers, not RoboRacer sponsors, and are left out. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Gyeongsang National University takes first and second at the first Korea Championship'; excerpt 'Seven teams raced head to head at the first Korea Championship, held with KSMTE 2022 in Jeju. Gyeongsang National University's ACE2 beat its sister team ACE1 in the final, and AGH University of Science and Technology from Poland took third.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "Iy5M5hh4gFk",
+        "title": "2022' 1st F1TENTH KOREA CHAMPIONSHIP"
+      }
     },
     {
       "id": "getting-started-2022",
@@ -1341,11 +1472,16 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "icra2022-race.f1tenth.org",
-      "credit": "Results: ICRA 2022 race site (archived)",
+      "credit": "Results: ICRA 2022 race site (archived). Video: TU Wien TV · YouTube",
       "image": null,
       "sources": "Web candidate icra2022-philadelphia-scatterbrain-wins (in-person Challonge bracket jf88sqbk: final ScatterBrain beat Dzik 2-0, 20 teams; virtual bracket i52dzqqr: PL400 beat ACE; Lehigh Engineering 2022-06-09 on PL400 from the ninth seed) merged with LinkedIn candidate icra2022-scuderia-segfault-third (TU Wien Informatics: 3rd of 38 teams, https://www.linkedin.com/posts/tu-wien-informatics_3rd-place-at-the-f1tenth-autonomous-grand-activity-6938036574127345664-73fb) and icra2022-fpv-drone-view (Madhur Behl's FPV drone clip). The bracket had no third-place match; third place is TU Wien's own claim (Forza PBL was the other semi-finalist). Team counts differ (20 in the bracket, 38 per TU Wien, 38 in-person and 40 virtual listed), so the excerpt gives the bracket only. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Penn's ScatterBrain wins the tenth competition, in Philadelphia'; excerpt 'ScatterBrain from Penn beat Dzik from the Polish Academy of Sciences 2-0 in the in-person final at ICRA 2022. ETH Zürich's Forza PBL and TU Wien's Scuderia Segfault reached the semi-finals. Lehigh's PL400 won the virtual race from the ninth seed.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "gk_lNKmZX4I",
+        "title": "Scuderia Segfault – TUW- Racing-Team für autonomes Fahren beim F1TENTH Grand PRIX at ICRA"
+      }
     },
     {
       "id": "iros2021-prague-scuderia-segfault-wins",
@@ -1363,11 +1499,16 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "iros2021.f1tenth.org",
-      "credit": "Results: IROS 2021 race site (archived)",
+      "credit": "Results: IROS 2021 race site (archived). Video: industrialinformatics · YouTube",
       "image": null,
       "sources": "Web candidate iros2021-prague-scuderia-segfault-wins. In-person results (1 Scuderia Segfault 18.70 s, 2 Ředkvičky, 3 HiPeRT Modena, 4 Formula Trinity Autonomous) and 4 in-person teams: iros2021.f1tenth.org results and registration pages (Wayback). Virtual bracket final Tianracer beat AudUBon Racing (Challonge urgyz5kl). CTU stream: https://www.youtube.com/watch?v=KLOceDeegVs. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Scuderia Segfault wins the ninth competition, in Prague'; excerpt 'Four teams raced in person at Czech Technical University during IROS 2021. TU Wien's Scuderia Segfault won with a best lap of 18.70 seconds, ahead of Ředkvičky from Czech Technical University and HiPeRT Modena. Tianracer won the virtual race.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "CmTkiBiMnk4",
+        "title": "F1/10 Highlights"
+      }
     },
     {
       "id": "icra2021-racing-workshop",
@@ -1383,11 +1524,16 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "ICRA 2021 workshop",
-      "credit": "Source: workshop site, linklab-uva.github.io",
+      "credit": "Source: workshop site, linklab-uva.github.io. Video: Madhur Behl · YouTube",
       "image": null,
       "sources": "Web candidate icra2021-workshop-autonomous-racing (workshop site; opening remarks video https://www.youtube.com/watch?v=SI0pB6cimoo; 2022 and 2023 editions from the harvested icra2022_website and icra2023_website) merged with LinkedIn candidate icra2022-racing-workshop (Johannes Betz, 9 speakers and 14 contributed papers: https://www.linkedin.com/posts/johannes-betz-254049107_autonomousdriving-autonomousracing-motorsports-activity-6932031511042908160-mteV). Not a race, so no competition tag. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'An ICRA workshop series on autonomous racing starts in 2021'; excerpt 'ICRA 2021 held a full-day online workshop on the opportunities and challenges of autonomous racing, chaired by Madhur Behl, Johannes Betz, Rahul Mangharam and Venkat Krovi. It returned at ICRA 2022 in Philadelphia, with nine speakers and 14 papers, and at ICRA 2023 in London.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "SI0pB6cimoo",
+        "title": "[ICRA21 Autonomous Racing] - Opening Remarks"
+      }
     },
     {
       "id": "iros2020-virtual-hipert-wins",
@@ -1427,7 +1573,12 @@
       "image": null,
       "sources": "Web candidate course-2020-recorded-course-online. 'F1TENTH Course Introduction by Rahul Mangharam', 2020-09-29: 'over 60 universities, 7 international autonomous racing competitions and hands-on course offerings in over a dozen institutions'. Lecture 1 of the 18-video course: https://www.youtube.com/watch?v=zENhppcxwzY. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'The full course, recorded and free online'; excerpt 'Rahul Mangharam introduced the recorded F1TENTH course, free on YouTube. The community then counted more than 60 universities, seven international competitions and courses at more than a dozen institutions.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "hXmGTKom4O8",
+        "title": "F1TENTH Course Introduction by Rahul Mangharam"
+      }
     },
     {
       "id": "ifac2020-virtual-tufast-wins",
@@ -1443,11 +1594,22 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "f1tenth.org",
-      "credit": "Results: f1tenth.org race page",
+      "credit": "Results: f1tenth.org race page. Video: TU Wien TV · YouTube",
       "image": null,
       "sources": "Web candidate ifac2020-virtual-tufast-wins. Virtual race, '7th ... Autonomous Grand Prix / July 15-16, 2020', results 1 TUfast TUfurious, 2 LU Potential, 3 HiPeRT Modena, 13 teams in qualification: https://f1tenth.github.io/ifac2020.html (Wayback https://web.archive.org/web/20241013000340/https://f1tenth.org/ifac2020.html). TU Wien TV, 2020-07-21: https://www.youtube.com/watch?v=YMzm2oCc_4w. Date differs: a Clemson team video says the online race was in August 2020 (see MERGE.md). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'TU Wien's TUfast TUfurious wins the seventh competition, run online'; excerpt 'COVID-19 moved the IFAC 2020 race online. Thirteen teams ran the qualification in simulation, and TUfast TUfurious from TU Wien won the head-to-head final. Lehigh's LU Potential came second and HiPeRT Modena third.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "YMzm2oCc_4w",
+        "title": "TU fast TU Furious gewinnt F1/TENTH-Grand Prix in Berlin",
+        "poster": {
+          "src": "https://i.ytimg.com/vi/YMzm2oCc_4w/sddefault.jpg",
+          "width": 640,
+          "height": 480,
+          "alt": ""
+        }
+      }
     },
     {
       "id": "unc-the-fast-and-the-autonomous",
@@ -1465,10 +1627,15 @@
       "author_url": null,
       "affiliation": "University of North Carolina",
       "publisher": "UNC Research",
-      "credit": "Article: Endeavors, UNC Research",
+      "credit": "Article: Endeavors, UNC Research. Video: xLAB for Safe Autonomous Systems · YouTube",
       "image": null,
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "ctTJHueaTcY",
+        "title": "F1/10 Autonomous Racing - Montreal Grand Prix Winning Team"
+      }
     },
     {
       "id": "f1tenth-foundation-2020",
@@ -1524,7 +1691,7 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "f1tenth.org",
-      "credit": "Results: f1tenth.org race page. Photo: F1TENTH archive",
+      "credit": "Results: f1tenth.org race page. Photo: F1TENTH archive. Video: Columbia Video Network · YouTube",
       "image": {
         "src": "/media/news/news-columbia2019-cars-1080.webp",
         "width": 1080,
@@ -1533,7 +1700,12 @@
       },
       "sources": "Web candidate columbia2019-fifth-grand-prix. Time-trial tables (Restricted and Open class): https://f1tenth.github.io/columbia2019.html. Race day Monday October 14, 2019: old-site race-old.html. Only time trials were published; no head-to-head result. Photo: old-site gallery https://f1tenth.github.io/gallery/columbia2019/columbia1.jpg (the /race timeline uses columbia5). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'SeoulTech and Modena share the fastest lap at Columbia'; excerpt 'Ten cars ran the Restricted class time trials of the fifth competition, at Columbia University in New York. SeoulTech and the University of Modena and Reggio Emilia tied at 8.4 seconds, ahead of Czech Technical University. In the Open class, Dzik from the Polish Academy of Sciences ran 5.84 seconds.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "fevOWV0qbu8",
+        "title": "F1 Tenth Autonomous Racing Competition at Columbia Engineering"
+      }
     },
     {
       "id": "nsf-community-platform-award-2019",
@@ -1594,7 +1766,7 @@
       "author_url": "https://www.linkedin.com/in/madhurbehl",
       "affiliation": "University of Virginia",
       "publisher": "LinkedIn",
-      "credit": "Post: Madhur Behl · LinkedIn",
+      "credit": "Post: Madhur Behl · LinkedIn. Video: Madhur Behl · YouTube",
       "image": null,
       "embed": {
         "provider": "linkedin",
@@ -1603,7 +1775,12 @@
       },
       "sources": "LinkedIn candidate f110-simulator-open-source-2019 (post text) merged with web candidate roscon2019-f110-simulator-talk ('ROSCon '19 Talk: ROS F1/10 Autonomous Racing Simulator', YouTube, 2019-11-01, https://www.youtube.com/watch?v=tZeA7ykIYwA; speaker not credited until someone watches it). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'The racing simulator goes open source'; excerpt 'Madhur Behl announced an open-source F1/10 racing simulator, packaged as a Docker image. It ships with perception, planning and control code, so a team can race before it owns a car. The simulator was presented at ROSCon 2019 in Macau later that year.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "video": {
+        "provider": "youtube",
+        "id": "tZeA7ykIYwA",
+        "title": "ROSCon '19 Talk: ROS F1/10 Autonomous Racing Simulator"
+      }
     },
     {
       "id": "daily-pennsylvanian-2018-dining-hall",
@@ -1639,7 +1816,7 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "f1tenth.org",
-      "credit": "Result: f1tenth.org race page. Photo: F1TENTH archive",
+      "credit": "Result: f1tenth.org race page. Photo: F1TENTH archive. Video: Madhur Behl · YouTube",
       "image": {
         "src": "/media/race/esweek2018.webp",
         "width": 800,
@@ -1648,7 +1825,18 @@
       },
       "sources": "Web candidate esweek2018-torino-calvin-wins. Winners named: Madhur Behl's recap, YouTube, 2018-10-07, https://www.youtube.com/watch?v=VlE2Wb_XhoQ; team name CALVIN, Warsaw: Karol Majek, YouTube, 2018-10-10, https://www.youtube.com/watch?v=8NSKLdjGp7I; participating teams: https://f1tenth.github.io/torino2018.html (Wayback https://web.archive.org/web/20240619061753/https://f1tenth.org/torino2018.html). Team count differs (8 listed, 9 per Behl), so none is given. Photo: the old site's only Torino image, https://f1tenth.github.io/gallery/torino2018/torino1.png, already encoded for /race (public/media/race/esweek2018.webp), reused. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Team CALVIN from Warsaw wins the third competition, in Torino'; excerpt 'The third competition ran at Torino Incontra during Embedded Systems Week. Maciej Dziubiński, Łukasz Sztyber and Karol Majek won as team CALVIN, against teams from Penn, Virginia, Connecticut, Modena and Reggio Emilia, Prague and Seoul.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "VlE2Wb_XhoQ",
+        "title": "3rd F1/10 Autonomous Racing Competition 2018 - Torino, Italy",
+        "poster": {
+          "src": "https://i.ytimg.com/vi/VlE2Wb_XhoQ/sddefault.jpg",
+          "width": 640,
+          "height": 480,
+          "alt": ""
+        }
+      }
     },
     {
       "id": "uva-today-2018-final-exam-race",
@@ -1664,11 +1852,16 @@
       "author_url": null,
       "affiliation": "University of Virginia",
       "publisher": "UVA Today",
-      "credit": "Article: UVA Today",
+      "credit": "Article: UVA Today. Video: Madhur Behl · YouTube",
       "image": null,
       "sources": "Web candidate press-uva-2018-racing-for-an-a. 'Racing for an A: Students in Unique Course Put Self-Driving Cars to Final Test', UVA Today, Fariss Samarrai, 2018-05-14 (32 students, final exam a race). Listed on the old f1tenth.org news tab. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'At the University of Virginia, the final exam is a race'; excerpt 'UVA Today followed 32 engineering students who spent the last week of the spring 2018 semester tuning 1/10-scale autonomous cars. Their final exam was a race.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "ZQg61UNbr7Q",
+        "title": "F1/10 Undergraduate Course at The University of Virginia [Spring 2018]"
+      }
     },
     {
       "id": "cpsweek2018-porto-ctu-wins",
@@ -1684,7 +1877,7 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "f1tenth.org",
-      "credit": "Results: f1tenth.org race page. Photo: F1TENTH archive",
+      "credit": "Results: f1tenth.org race page. Photo: F1TENTH archive. Video: Madhur Behl · YouTube",
       "image": {
         "src": "/media/news/news-porto2018-track-1080.webp",
         "width": 1080,
@@ -1693,7 +1886,12 @@
       },
       "sources": "Web candidate cpsweek2018-porto-ctu-wins. Ranked results 1 CTU, 2 UConn, 3 UNIMORE (7 ranked): https://f1tenth.github.io/porto2018.html. Race days April 10-11 and the Palacio da Bolsa venue: Madhur Behl's recap, YouTube, 2018-04-27, https://www.youtube.com/watch?v=ZwRGtrXYgmI. Team count differs (7 ranked and 7 qualified per CTU, 8 per Behl), so none is given. Photo: old-site gallery https://f1tenth.github.io/gallery/porto2018/porto2.jpg (the /race timeline uses porto9). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Czech Technical University wins the second competition, in Porto'; excerpt 'The second competition ran in the Palácio da Bolsa in Porto during Cyber-Physical Systems Week. Czech Technical University in Prague won, ahead of the University of Connecticut and the University of Modena and Reggio Emilia.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "ZwRGtrXYgmI",
+        "title": "2nd F1/10 Autonomous Racing Competition 2018 - Porto, Portugal"
+      }
     },
     {
       "id": "esweek2016-precise-racing-wins",
@@ -1709,11 +1907,16 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "f1tenth.org",
-      "credit": "Result: f1tenth.org race page",
+      "credit": "Result: f1tenth.org race page. Video: Madhur Behl · YouTube",
       "image": null,
       "sources": "Web candidate esweek2016-precise-racing-wins-first-race. Result row and team list: https://f1tenth.github.io/pittsburgh2016.html. Race days October 1-2, five teams, 812 ft track at Wean Hall: Madhur Behl's recap, YouTube, 2016-11-06, https://www.youtube.com/watch?v=fyFycjFaLC4; fastest-lap video https://www.youtube.com/watch?v=3rOCWnScEFw. race.html and events_map.json give the conference week (Oct 2-7). Only a winner and a time were published. Behl's recap announced a 2017 race at CPS Week that no later source counts (see MERGE.md). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Penn's PRECISE Racing wins the first competition, in Pittsburgh'; excerpt 'Five teams raced an 812-foot track in Wean Hall at Carnegie Mellon during Embedded Systems Week. PRECISE Racing from the University of Pennsylvania set the fastest time, 63.78 seconds. Arizona State, ETH Zürich, New Mexico and Temple also raced.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "fyFycjFaLC4",
+        "title": "The 1st F1/10 Autonomous Racing Competition 2016"
+      }
     },
     {
       "id": "course-2016-first-lecture",
@@ -1733,7 +1936,18 @@
       "image": null,
       "sources": "Web candidates course-2016-open-source-course-launch and build-2016-the-build-video-series (merged). Course 'starting in March 2016', design, build and test a fully autonomous 1/10-scale car: Madhur Behl's trailer, YouTube, 2016-02-28, https://www.youtube.com/watch?v=vgEyvazwrU8. First lecture '[F1/10] Lecture 1.1: Course Overview', 2016-03-11: https://www.youtube.com/watch?v=zkMelEB3-PY. 'F1/10: The Build Part 1', 2016-06-15: https://www.youtube.com/watch?v=yukt8mVi7sg. No founding claim is made here (content skill: founded at Penn in 2016). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'The course's first lecture goes online, March 2016'; excerpt 'An open-source course taught students to design, build and test a 1/10-scale race car that drives itself. The first lecture went online on March 11, 2016, and a video series on assembling the car followed in June.'",
       "featured": false,
-      "status": "published"
+      "status": "published",
+      "embed": {
+        "provider": "youtube",
+        "id": "zkMelEB3-PY",
+        "title": "[F1/10] Lecture 1.1 : Course Overview",
+        "poster": {
+          "src": "https://i.ytimg.com/vi/zkMelEB3-PY/sddefault.jpg",
+          "width": 640,
+          "height": 480,
+          "alt": ""
+        }
+      }
     }
   ]
 }
