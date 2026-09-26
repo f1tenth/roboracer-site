@@ -1623,6 +1623,12 @@
       "why_not_selected": "Race-week post: race day and award ceremony May 16, Exhibition Hall C."
     },
     {
+      "post_date": "2024-05-15",
+      "author": "Rahul Mangharam",
+      "link": "https://www.linkedin.com/posts/mangharam_icra2024-activity-7196308422739263488-uUvq",
+      "why_not_selected": "ICRA 2024 race start: time trials Wednesday for seeding, head-to-head bracket Thursday, in the competition and exhibition zone (embed urn:li:share:7196308422256979968). ICRA 2024 already has four candidates; use if the race-week story needs a format line."
+    },
+    {
       "post_date": "2024-05-17",
       "author": "TU Wien Informatics",
       "link": "https://www.linkedin.com/posts/tu-wien-informatics_andreas-brandst%C3%A4tter-scuderia-segfault-activity-7197279720902668288-PLVb",
@@ -1767,22 +1773,22 @@
       "why_not_selected": "6th Sim Racing League registrations: 55 teams, 132 participants, 28 organizations, 23 countries; cited in notes."
     },
     {
-      "post_date": "2026-09-24",
-      "author": "Abdullah Bin Naeem (reposted by the Foundation)",
-      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7508928876723494912",
-      "why_not_selected": "Barq Racing, the only team from Pakistan, 5th in the IROS 2026 sim league (4th of 55 in qualifying). Read on the Foundation page; the post page returned no structured data."
-    },
-    {
       "post_date": "2026-09-22",
       "author": "Cedric Hollande (reposted by the Foundation)",
       "link": "https://www.linkedin.com/feed/update/urn:li:activity:7508243147387490304",
       "why_not_selected": "Pointer to RoboRacer work in the GRASP Summer Review."
+    },
+    {
+      "post_date": "2026-09-24",
+      "author": "Abdullah Bin Naeem (reposted by the Foundation)",
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7508928876723494912",
+      "why_not_selected": "Barq Racing, the only team from Pakistan, 5th in the IROS 2026 sim league (4th of 55 in qualifying). Read on the Foundation page; the post page returned no structured data."
     }
   ],
   "unreachable": [
     "https://www.linkedin.com/company/roboracer-foundation/posts/ and /company/f1tenth/posts/ redirect to the login page. The public page /company/roboracer-foundation shows only the ten most recent activities (September 2026), so older Foundation posts were found through search.",
     "/company/f1tenth answers 404; /company/f1tenth-foundation redirects to /company/roboracer-foundation (same page, renamed). /company/lamarracing answers 404 (real slug unknown). /company/bu-f1tenth shows no public posts.",
-    "DuckDuckGo HTML search returns a bot challenge; Bing via curl returns unrelated, bot-filtered results. Discovery ran through the WebSearch tool restricted to linkedin.com (about 60 queries); many hits were profile pages whose Experience text mentions results but are not posts.",
+    "DuckDuckGo HTML search returns a bot challenge; Bing via curl returns unrelated, bot-filtered results. Discovery ran through the WebSearch tool restricted to linkedin.com (about 70 queries, including a second pass after the reboot on ITSC 2024, IV 2024, ICRA 2025, CDC 2025 and the Korea championships, which found nothing new); many hits were profile pages whose Experience text mentions results but are not posts.",
     "Posts that search snippets describe but whose URL could not be found or opened: VAUL's IROS 2023 and ICRA 2024 wins (only in team members' profiles), the Techfest 2025 podium (a BITS Pilani faculty post), ForzaETH's IV 2025 win (team members' posts), UNICORN's ICRA 2025 second place, NTU DeepSpeed at ICCAS 2025, MechaByte (GIU Berlin) third at IV 2025, BU F1Tenth P5 at VTC 2026, an ICRA 2024 'solo hobbyist' second place (Pawel Nazarewski, profile text), Johannes Betz's ICRA 2021 workshop recordings post, Scuderia Segfault's IROS 2021 win (profile text).",
     "Profile activity feeds (/in/<name>/recent-activity/) need a login; they were not tried with browser cookies. lnkd.in short links inside posts were not resolved. No media was downloaded to the repo (slide images were read in the scratchpad only, all under 2 MB); yt-dlp was not needed."
   ],
