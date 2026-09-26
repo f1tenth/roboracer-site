@@ -61,7 +61,7 @@ type CommunityJoinProps = {
  * the text, which is basically empty"): who is there in the header lead,
  * then the Slack card with the live numbers from community.json and the one
  * solid violet CTA of the viewport, then the other three channels as a
- * ruled list (glyphs in the logo gradient), then the contact address. The
+ * ruled list (ink glyphs), then the contact address. The
  * Korea photo is the supporting column beside it with its caption. Below:
  * the "from the community" strip (the Open Robotics clip and the community
  * LinkedIn posts) and the ICRA 2025 reel behind a click-to-load YouTube
@@ -111,7 +111,7 @@ export default function CommunityJoin({ className = "", index = "09", showYouTub
           {/* Slack first: it is where the numbers are and the one solid CTA. */}
           <div className="rounded-card border border-ink-950/10 bg-paper-50 p-6 lg:p-8">
             <p className={`flex items-center gap-2.5 ${EYEBROW}`}>
-              <SocialGlyph network="slack" size="1rem" />
+              <SocialGlyph network="slack" size="1rem" className="text-text-strong" />
               <span>Slack · where the community talks</span>
             </p>
             <div className="mt-6 flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
@@ -369,7 +369,7 @@ function PostCard({ post, clone = false }: { post: JoinPost; clone?: boolean }) 
 function ChannelRow({ network, name, handle, href }: (typeof CHANNELS)[number]) {
   const body = (
     <>
-      <SocialGlyph network={network} size="1.25rem" />
+      <SocialGlyph network={network} size="1.25rem" className="text-text-strong" />
       <span
         className={`shrink-0 font-display text-body font-semibold text-text-strong ${
           href ? "underline decoration-ink-950/25 underline-offset-4 group-hover:decoration-rr-violet group-hover:decoration-2" : ""

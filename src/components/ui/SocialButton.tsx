@@ -1,4 +1,4 @@
-import { useId, type MouseEvent, type ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import Button from "./Button";
 import { buttonClasses } from "./buttonStyles";
 
@@ -26,8 +26,7 @@ type SocialButtonProps = {
   href: string;
   children: ReactNode;
   /** Slack is the viewport's one solid violet button (white glyph); every
-   * other network is a hairline secondary with the glyph in the logo gradient
-   * (the third accent exception, landing v4 section 8). */
+   * other network is a hairline secondary with an ink glyph. */
   variant?: "primary" | "secondary";
   /** No destination yet: a disabled link (href="#", aria-disabled) with a
    * mono `soon` tag, so the row shows the channel without a dead click. */
@@ -39,17 +38,16 @@ const stop = (e: MouseEvent<HTMLAnchorElement>) => e.preventDefault();
 
 type SocialGlyphProps = {
   network: SocialNetwork;
-  /** The logo gradient (secondary buttons, the Join channel list) or the
-   * text colour (the solid violet Slack button). */
-  gradient?: boolean;
   /** Drawn size; rem so it follows the fluid root. */
   size?: string;
+  /** The glyph takes the text colour; pass a text token to set it. */
+  className?: string;
 };
 
-/** A network's mark, decorative (the label beside it names the channel). */
-export function SocialGlyph({ network, gradient = true, size = "1.125rem" }: SocialGlyphProps) {
-  // useId's delimiters are not safe inside url(#...); keep the id plain.
-  const gradientId = `rr-social-${useId().replace(/[^A-Za-z0-9_-]/g, "")}`;
+/** A network's mark in one flat colour, the text colour (design system: icons
+ * are ink; the logo gradient belongs to the logo alone). Decorative: the
+ * label beside it names the channel. */
+export function SocialGlyph({ network, size = "1.125rem", className = "" }: SocialGlyphProps) {
   return (
     <svg
       width="18"
@@ -57,18 +55,10 @@ export function SocialGlyph({ network, gradient = true, size = "1.125rem" }: Soc
       viewBox="0 0 24 24"
       aria-hidden="true"
       focusable="false"
-      className="shrink-0"
+      className={`shrink-0 ${className}`}
       style={{ width: size, height: size }}
     >
-      {gradient && (
-        <defs>
-          <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stopColor="#00D1DA" />
-            <stop offset="1" stopColor="#FC00FF" />
-          </linearGradient>
-        </defs>
-      )}
-      <path d={GLYPH[network]} fill={gradient ? `url(#${gradientId})` : "currentColor"} />
+      <path d={GLYPH[network]} fill="currentColor" />
     </svg>
   );
 }
@@ -81,7 +71,7 @@ export default function SocialButton({
   soon = false,
   className = "",
 }: SocialButtonProps) {
-  const glyph = <SocialGlyph network={network} gradient={variant === "secondary"} />;
+  const glyph = <SocialGlyph network={network} />;
 
   if (soon) {
     return (
