@@ -16,7 +16,12 @@
       "affiliation": "Sim Racing League organizer",
       "publisher": "LinkedIn",
       "credit": "Post: AutoDRIVE Ecosystem · LinkedIn",
-      "image": null,
+      "image": {
+        "src": "/media/news/news-iros2026-sim-league-800.webp",
+        "width": 800,
+        "height": 266,
+        "alt": "AutoDRIVE's banner for the 6th RoboRacer Sim Racing League: the title over a simulated race car on a grey track, with the IROS 2026 Pittsburgh, AutoDRIVE and RoboRacer marks."
+      },
       "embed": {
         "provider": "linkedin",
         "src": "https://www.linkedin.com/embed/feed/update/urn:li:share:7508752921769992192",
@@ -100,7 +105,12 @@
       "affiliation": "Co-organizer, VTC 2026",
       "publisher": "LinkedIn",
       "credit": "Post: Neobotics Foundation · LinkedIn",
-      "image": null,
+      "image": {
+        "src": "/media/news/news-vtc2026-group-800.webp",
+        "width": 800,
+        "height": 525,
+        "alt": "The teams of the 30th competition, many holding up their cars, gathered behind the orange and yellow duct track at the Hilton Boston Park Plaza."
+      },
       "embed": {
         "provider": "linkedin",
         "src": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7507891142504521730",
