@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { loadPaths, type EntryPath, type PathMedia } from "../../lib/data";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
@@ -74,8 +74,8 @@ const BUNDLED_PATHS: EntryPath[] = [
       width: 960,
       height: 540,
       video: "/media/platform/platform-race-960.mp4",
-      alt: "A RoboRacer car with blue lights driving between yellow track barriers at ICRA 2025",
-      caption: "two cars through the corner · ICRA 2025, Atlanta",
+      alt: "A RoboRacer car with blue lights taking a corner between yellow track barriers at ICRA 2025",
+      caption: "a car through the corner · ICRA 2025, Atlanta",
     },
   },
   {
@@ -365,7 +365,8 @@ function FullMedia({ media, label }: { media?: PathMedia; label: string }) {
 /** Landing row: the small picture in line with the label, the sentence and
  * the link. Phones keep the picture beside the text, a table of contents. */
 function CompactRow({ path }: { path: EntryPath }) {
-  const lineId = `start-${path.id}-line`;
+  // Per instance, not per path: /styleguide shows both densities at once.
+  const lineId = `${useId()}-line`;
   return (
     <>
       <Thumb media={path.media} />
@@ -394,7 +395,7 @@ function CompactRow({ path }: { path: EntryPath }) {
  * display: none, and neither a lazy image nor an observed clip is ever
  * requested there. */
 function FullRow({ path }: { path: EntryPath }) {
-  const lineId = `start-${path.id}-line`;
+  const lineId = `${useId()}-line`;
   return (
     <>
       <div className="md:hidden">
