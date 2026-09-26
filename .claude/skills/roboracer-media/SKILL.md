@@ -19,7 +19,7 @@ user-invocable: false
 ## Provenance and permission
 - Allowed without asking: RoboRacer's own media (old f1tenth.org site sources and archive, Drive folders, race sites we run, photos taken by organizers), partner logos already on the site.
 - Ask first: anything from a participant's LinkedIn post, team photos with identifiable students, university photography. Track in the manifest with `permission: not-asked | asked <date> | granted <date, by whom, scope> | declined`. Use only `granted`.
-- Never: neobotics.org assets, stock sites without license records, screenshots of other people's websites.
+- Never: neobotics.org assets, stock sites without license records, screenshots of other people's websites. One exception (Cedric, 2026-09-25): the spinoff features on `/about` use Neobotics' and Quanser's own logos, car photos and a homepage capture, each with a manifest row (SP-01 to SP-07) marked "Cedric-directed; company not yet asked".
 - Credit line convention for community media: `Photo: <Name>, <Team>` in a caption or the page footer credits block.
 
 ## Naming

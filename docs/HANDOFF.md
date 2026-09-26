@@ -169,7 +169,7 @@ that are easy to get wrong:
   poster.
 - Provenance goes in `docs/ASSET_MANIFEST.md` (source, credit, permission) and
   the choice rationale in `docs/media/INTAKE.md`.
-- Never take assets from neobotics.org; it is a pattern reference only.
+- Never take assets from neobotics.org; it is a pattern reference only. Exception (Cedric, 2026-09-25): the `/about` spinoff features for Neobotics and Quanser use their own logos, car photos and homepage captures (manifest rows SP-01 to SP-07, permission not yet asked).
 - Copy on tiles and photos shows **no** "Photo:" / "Video:" credit line — the
   credits stay in the JSON and the manifest.
 
