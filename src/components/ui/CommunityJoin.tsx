@@ -56,7 +56,7 @@ type CommunityJoinProps = {
 };
 
 /**
- * Landing section 09 / Join (serves everyone, audiences skill). The copy
+ * Landing section 08 / Join (06 on /about) (serves everyone, audiences skill). The copy
  * column leads (Cedric, 2026-09-25: "the image is too big with respect to
  * the text, which is basically empty"): who is there in the header lead,
  * then the Slack card with the live numbers from community.json and the one

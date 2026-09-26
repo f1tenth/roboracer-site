@@ -1,5 +1,13 @@
 import type { ReactNode } from "react";
 
+/** Room a hash landing (a #link to the h2's id) leaves above the heading:
+ * the fixed nav bar plus 1rem, as /research's UNDER_NAV, and with an eyebrow
+ * that line and its mb-4 as well, so "04 / Spinoffs" is not cut by the bar.
+ * Read by useScrollToHash and by native anchor jumps alike. */
+const UNDER_NAV = "scroll-mt-[calc(var(--spacing-nav)+1rem)]";
+const UNDER_NAV_EYEBROW =
+  "scroll-mt-[calc(var(--spacing-nav)+2rem+var(--text-small)*var(--text-small--line-height))]";
+
 type SectionHeaderProps = {
   /** Two-digit section index, e.g. "01" - rendered as a mono marker. */
   index?: string;
@@ -55,7 +63,7 @@ export default function SectionHeader({
         )}
         <h2
           id={id}
-          className={`font-display ${titleSize} ${ink ? "text-text-on-ink" : "text-text-strong"}`}
+          className={`font-display ${titleSize} ${ink ? "text-text-on-ink" : "text-text-strong"} ${index || eyebrow ? UNDER_NAV_EYEBROW : UNDER_NAV}`}
         >
           {title}
         </h2>

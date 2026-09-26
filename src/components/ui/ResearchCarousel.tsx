@@ -176,11 +176,13 @@ function Figure({ p, eager = false }: FigureProps) {
  * papers just before and after it, 3 and 4 for the next pair, and so on.
  * Every card gets its own rank, so keeping the ranks up to `strips` shows
  * exactly that many strips (the old |i - current| version gave the first
- * and last cards the same rank, one strip too many or too few at the ends). */
+ * and last cards the same rank, one strip too many or too few at the ends).
+ * With an even count the card opposite the active one is as far before as
+ * after; it takes the odd rank, so the ranks run 1 to n - 1 with no gap. */
 function rankOf(i: number, current: number, n: number): number {
   const after = (i - current + n) % n;
   const before = n - after;
-  return before < after ? before * 2 - 1 : after * 2;
+  return before <= after ? before * 2 - 1 : after * 2;
 }
 
 /** Side-strip figure: object-cover so the strip reads as an image band. */

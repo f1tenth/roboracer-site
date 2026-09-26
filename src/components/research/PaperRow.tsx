@@ -32,6 +32,9 @@ const TAP = "coarse:inline-flex coarse:min-h-11 coarse:min-w-11 coarse:items-cen
  * column width with the text under it (Cedric, 2026-09-25: "make the images
  * larger and the paper info below the image"); it was a 5rem thumb.
  */
+/** The `compact:` variant's query (index.css): a phone in either orientation. */
+const COMPACT_MEDIA = "not all and (min-width: 48rem) and (min-height: 34rem)";
+
 function RowThumb({ publication, href }: { publication: Publication; href?: string }) {
   const figure = useMemo(() => rowThumb(publication), [publication]);
   const [failed, setFailed] = useState(false);
@@ -39,17 +42,30 @@ function RowThumb({ publication, href }: { publication: Publication; href?: stri
   const plate = (
     <div className="relative aspect-[16/10]">
       {show ? (
-        <img
-          src={figure.src}
-          alt=""
-          aria-hidden="true"
-          width={figure.width}
-          height={figure.height}
-          loading="lazy"
-          decoding="async"
-          onError={() => setFailed(true)}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+        // Below `desktop:` (the compact media query) the card-size cut of the
+        // same figure where there is one; the 320 file everywhere else. Lazy
+        // either way, so a phone only fetches the rows it scrolls to.
+        <picture>
+          {figure.large && (
+            <source
+              media={COMPACT_MEDIA}
+              srcSet={figure.large.src}
+              width={figure.large.width}
+              height={figure.large.height}
+            />
+          )}
+          <img
+            src={figure.src}
+            alt=""
+            aria-hidden="true"
+            width={figure.width}
+            height={figure.height}
+            loading="lazy"
+            decoding="async"
+            onError={() => setFailed(true)}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </picture>
       ) : (
         <img
           src="/logo-square.svg"

@@ -1,5 +1,5 @@
 {
-  "note": "Generated from docs/content/people.crew.json (A4) and people.past.json (A5) by the About builder; see docs/content/about.sources.md for the transform. Groups are Faculty and advisors / Developers / Past crew; Contributors render from public/data/contributors.json. role is only ever the wording of the source named in `source`; a person with no sourced role carries status verify and a mono tag rather than a guessed title. project_role with project_role_verify comes from the archived f1tenth.org about page, where it was authored but never rendered.",
+  "note": "Generated from docs/content/people.crew.json (A4) and people.past.json (A5) by the About builder; see docs/content/about.sources.md for the transform. Groups are Faculty and advisors / Developers / Past crew; Contributors render from public/data/contributors.json. role is only ever the wording of the source named in `source`; a person with no sourced role shows no title rather than a guessed one (status is bookkeeping only; no card renders a verify tag since 2026-09-25). project_role with project_role_verify comes from the archived f1tenth.org about page, where it was authored but never rendered.",
   "updated": "2026-08-23",
   "faculty": [
     {

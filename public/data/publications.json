@@ -91,7 +91,8 @@
       "featured_order": 1,
       "thumbnail": "/media/research/research-zang-2026-sit-1200.webp",
       "figure": "/media/research/research-zang-2026-sit-fig-1600.webp",
-      "row_thumbnail": "/media/research/research-zang-2026-sit-row-320.webp"
+      "row_thumbnail": "/media/research/research-zang-2026-sit-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-zang-2026-sit-fig-1600.webp"
     },
     {
       "id": "le-2025-hybrid",
@@ -123,7 +124,8 @@
       "notes": "added 2026-08-23 from the xLAB (Penn, Rahul Mangharam) project page https://xlab.upenn.edu/L2OCA/ at Cedric's request; xLAB is the lab RoboRacer/F1TENTH came out of, so its recent racing work leads the featured set. the L2OCA project page (Learning to Optimize, Control and Adapt) links arXiv 2511.19383 as its mixed-integer MPC result; the same paper has its own /L4DC/ page. Metadata and abstract verbatim from the arXiv abstract page, 2026-08-23.",
       "thumbnail": "/media/research/research-le-2025-hybrid-1200.webp",
       "figure": "/media/research/research-le-2025-hybrid-fig-1600.webp",
-      "row_thumbnail": "/media/research/research-le-2025-hybrid-row-320.webp"
+      "row_thumbnail": "/media/research/research-le-2025-hybrid-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-le-2025-hybrid-fig-1600.webp"
     },
     {
       "id": "qiao-2024-av4ev",
@@ -168,7 +170,8 @@
       "featured_order": 2,
       "thumbnail": "/media/research/research-qiao-2024-av4ev-1200.webp",
       "figure": "/media/research/research-qiao-2024-av4ev-fig-1600.webp",
-      "row_thumbnail": "/media/research/research-qiao-2024-av4ev-row-320.webp"
+      "row_thumbnail": "/media/research/research-qiao-2024-av4ev-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-qiao-2024-av4ev-fig-1600.webp"
     },
     {
       "id": "amine-2026-nonplanar",
@@ -203,7 +206,8 @@
       "featured_order": 3,
       "thumbnail": "/media/research/research-amine-2026-nonplanar-1200.webp",
       "figure": "/media/research/research-amine-2026-nonplanar-fig-1600.webp",
-      "row_thumbnail": "/media/research/research-amine-2026-nonplanar-row-320.webp"
+      "row_thumbnail": "/media/research/research-amine-2026-nonplanar-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-amine-2026-nonplanar-fig-1600.webp"
     },
     {
       "id": "elgouhary-2026-learning",
@@ -236,7 +240,8 @@
       "thumbnail": "/media/research/research-elgouhary-2026-learning-1200.webp",
       "figure": "/media/research/research-elgouhary-2026-learning-fig-1600.webp",
       "featured_order": 8,
-      "row_thumbnail": "/media/research/research-elgouhary-2026-learning-row-320.webp"
+      "row_thumbnail": "/media/research/research-elgouhary-2026-learning-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-elgouhary-2026-learning-fig-1600.webp"
     },
     {
       "id": "nguyen-2026-admpcc",
@@ -792,7 +797,8 @@
       "abstract": "We present a closed-loop framework for autonomous raceline optimization that combines NURBS-based trajectory representation, CMA-ES global trajectory optimization, and controller-guided spatial feedback. Instead of treating tracking errors as transient disturbances, our method exploits them as informative signals of local track characteristics via a Kalman-inspired spatial update. This enables the construction of an adaptive, acceleration-based constraint map that iteratively refines trajectories toward near-optimal performance under spatially varying track and vehicle behavior. In simulation, our approach achieves a 17.38% lap time reduction compared to a controller parametrized with maximum static acceleration. On real hardware, tested with different tire compounds ranging from high to low friction, we obtain a 7.60% lap time improvement without explicitly parametrizing friction. This demonstrates robustness to changing grip conditions in real-world scenarios.",
       "notes": "accepted from the 2026-08-21 discover-papers sweep (Semantic Scholar: cites the F1TENTH platform paper); reviewed by hand",
       "figure": "/media/research/research-wachter-2026-spatially-fig-1200.webp",
-      "row_thumbnail": "/media/research/research-wachter-2026-spatially-row-320.webp"
+      "row_thumbnail": "/media/research/research-wachter-2026-spatially-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-wachter-2026-spatially-fig-1200.webp"
     },
     {
       "id": "piccinini-2026-trajectory",
@@ -827,7 +833,8 @@
       "thumbnail": "/media/research/research-piccinini-2026-trajectory-1200.webp",
       "figure": "/media/research/research-piccinini-2026-trajectory-fig-1600.webp",
       "featured_order": 6,
-      "row_thumbnail": "/media/research/research-piccinini-2026-trajectory-row-320.webp"
+      "row_thumbnail": "/media/research/research-piccinini-2026-trajectory-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-piccinini-2026-trajectory-fig-1600.webp"
     },
     {
       "id": "charles-2025-advancing",
@@ -894,7 +901,8 @@
       ],
       "notes": "accepted from the 2026-08-21 discover-papers sweep (OpenAlex); reviewed by hand",
       "thumbnail": "/media/research/research-chandra-2025-deadlock-1200.webp",
-      "row_thumbnail": "/media/research/research-chandra-2025-deadlock-row-320.webp"
+      "row_thumbnail": "/media/research/research-chandra-2025-deadlock-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-chandra-2025-deadlock-1200.webp"
     },
     {
       "id": "li-2025-data",
@@ -930,7 +938,8 @@
       "thumbnail": "/media/research/research-li-2025-data-1200.webp",
       "figure": "/media/research/research-li-2025-data-fig-1600.webp",
       "featured_order": 7,
-      "row_thumbnail": "/media/research/research-li-2025-data-row-320.webp"
+      "row_thumbnail": "/media/research/research-li-2025-data-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-li-2025-data-fig-1600.webp"
     },
     {
       "id": "wilson-2025-physics",
@@ -1001,7 +1010,8 @@
       "thumbnail": "/media/research/research-ghignone-2025-rlpp-1200.webp",
       "figure": "/media/research/research-ghignone-2025-rlpp-fig-1600.webp",
       "featured_order": 9,
-      "row_thumbnail": "/media/research/research-ghignone-2025-rlpp-row-320.webp"
+      "row_thumbnail": "/media/research/research-ghignone-2025-rlpp-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-ghignone-2025-rlpp-fig-1600.webp"
     },
     {
       "id": "wilson-2025-soteria",
@@ -1165,7 +1175,8 @@
       "figure": "/media/research/research-feng-2025-bridging-fig-1600.webp",
       "featured_order": 11,
       "thumbnail": "/media/research/research-feng-2025-bridging-1200.webp",
-      "row_thumbnail": "/media/research/research-feng-2025-bridging-row-320.webp"
+      "row_thumbnail": "/media/research/research-feng-2025-bridging-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-feng-2025-bridging-fig-1600.webp"
     },
     {
       "id": "chen-2025-from",
@@ -1531,7 +1542,8 @@
       "pdf": "https://arxiv.org/pdf/2506.09629",
       "notes": "accepted from the 2026-08-21 discover-papers sweep (Semantic Scholar: cites the F1TENTH platform paper); reviewed by hand",
       "thumbnail": "/media/research/research-brunner-2025-rcarla-1200.webp",
-      "row_thumbnail": "/media/research/research-brunner-2025-rcarla-row-320.webp"
+      "row_thumbnail": "/media/research/research-brunner-2025-rcarla-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-brunner-2025-rcarla-1200.webp"
     },
     {
       "id": "watson-2025-scenario",
@@ -2296,7 +2308,8 @@
       "abstract": "The interactive decision-making in multi-agent autonomous racing offers insights valuable beyond the domain of self-driving cars. Mapless online path planning is particularly of practical appeal but poses a challenge for safely overtaking opponents due to the limited planning horizon. To address this, we introduce RaceMOP, a novel method for mapless online path planning designed for multi-agent racing of F1TENTH cars. Unlike classical planners that rely on predefined racing lines, RaceMOP operates without a map, utilizing only local observations to execute high-speed overtaking maneuvers. Our approach combines an artificial potential field method as a base policy with residual policy learning to enable long-horizon planning. We advance the field by introducing a novel approach for policy fusion with the residual policy directly in probability space. Extensive experiments on twelve simulated racetracks validate that RaceMOP is capable of long-horizon decision-making with robust collision avoidance during overtaking maneuvers. RaceMOP demonstrates superior handling over existing mapless planners and generalizes to unknown racetracks, affirming its potential for broader applications in robotics. Our code is available at http://github.com/raphajaner/racemop.",
       "doi": "10.1109/iros58592.2024.10801657",
       "pdf": "https://arxiv.org/pdf/2403.07129",
-      "row_thumbnail": "/media/research/research-trumpp-2024-racemop-row-320.webp"
+      "row_thumbnail": "/media/research/research-trumpp-2024-racemop-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-trumpp-2024-racemop-fig-1200.webp"
     },
     {
       "id": "horvath-2024-teaching",
@@ -2723,7 +2736,8 @@
       "doi": "10.1002/rob.22429",
       "pdf": "https://arxiv.org/pdf/2403.11784",
       "thumbnail": "/media/research/research-baumann-2024-forzaeth-1200.webp",
-      "row_thumbnail": "/media/research/research-baumann-2024-forzaeth-row-320.webp"
+      "row_thumbnail": "/media/research/research-baumann-2024-forzaeth-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-baumann-2024-forzaeth-fig-1600.webp"
     },
     {
       "id": "floch-2024-gaussian",
@@ -2901,7 +2915,8 @@
       "url": "https://arxiv.org/abs/2309.10504",
       "citations": 9,
       "figure": "/media/research/research-loetscher-2023-assessing-fig-1200.webp",
-      "row_thumbnail": "/media/research/research-loetscher-2023-assessing-row-320.webp"
+      "row_thumbnail": "/media/research/research-loetscher-2023-assessing-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-loetscher-2023-assessing-fig-1200.webp"
     },
     {
       "id": "heetmeyer-2023-rpgd",
@@ -3685,7 +3700,8 @@
       "figure": "/media/research/research-okelly-2020-f1tenth-fig-1600.webp",
       "featured_order": 4,
       "abstract": "The deployment and evaluation of learning algorithms on autonomous vehicles (AV) is expensive, slow, and potentially unsafe. This paper details the F1TENTH autonomous racing platform, an open-source evaluation framework for training, testing, and evaluating autonomous systems. With 1/10th-scale low-cost hardware and multiple virtual environments, F1TENTH enables safe and rapid experimentation of AV algorithms even in laboratory research settings. We present three benchmark tasks and baselines in the setting of autonomous racing, demonstrating the flexibility and features of our evaluation environment.",
-      "row_thumbnail": "/media/research/research-okelly-2020-f1tenth-row-320.webp"
+      "row_thumbnail": "/media/research/research-okelly-2020-f1tenth-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-okelly-2020-f1tenth-fig-1600.webp"
     },
     {
       "id": "jain-2020-bayesrace",
