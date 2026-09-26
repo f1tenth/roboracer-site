@@ -1,0 +1,170 @@
+{
+  "390x844": {
+    "height": 9642,
+    "vw": 390,
+    "vh": 844,
+    "overflowX": 0,
+    "searchTop": 2632,
+    "listTop": 2485,
+    "submitTop": 8540,
+    "visibleRows": 137,
+    "firstRowFigure": {
+      "w": 78,
+      "h": 49
+    },
+    "controls": [
+      "\u203a2017 to 2025,114 papers"
+    ],
+    "featuredControls": [
+      "All",
+      "Reinforcement learning",
+      "Planning",
+      "Raceline optimization",
+      "Control and MPC",
+      "Perception and state estimation",
+      "Sim-to-real and simulation",
+      "Multi-agent and racing strategy",
+      "Safety and verification",
+      "Systems and platform",
+      "Education",
+      "\u203a13 more featured"
+    ],
+    "h1": 1,
+    "noDims": [],
+    "notLazy": [
+      "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+      "http://127.0.0.1:4184/logos/slack-logo.svg"
+    ],
+    "counter": [
+      "17 featured",
+      "137 of 137 papers"
+    ],
+    "expandShiftPx": -46.0,
+    "focusAfterExpand": "<summary class=\"flex cursor-pointer list-none flex-wrap items-baseline gap-x-3 gap-y-1 py-8 text-text-strong transition-colors hover:text-rr-violet [&amp;::-web",
+    "heightExpanded": 35357,
+    "consoleErrors": []
+  },
+  "844x390": {
+    "height": 7600,
+    "vw": 844,
+    "vh": 390,
+    "overflowX": 0,
+    "searchTop": 1738,
+    "listTop": 1619,
+    "submitTop": 6737,
+    "visibleRows": 137,
+    "firstRowFigure": {
+      "w": 222,
+      "h": 139
+    },
+    "controls": [
+      "\u203a2017 to 2025,114 papers"
+    ],
+    "featuredControls": [
+      "All",
+      "Reinforcement learning",
+      "Planning",
+      "Raceline optimization",
+      "Control and MPC",
+      "Perception and state estimation",
+      "Sim-to-real and simulation",
+      "Multi-agent and racing strategy",
+      "Safety and verification",
+      "Systems and platform",
+      "Education",
+      "\u203a13 more featured"
+    ],
+    "h1": 1,
+    "noDims": [],
+    "notLazy": [
+      "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+      "http://127.0.0.1:4184/logos/slack-logo.svg"
+    ],
+    "counter": [
+      "17 featured",
+      "137 of 137 papers"
+    ],
+    "expandShiftPx": -46.0,
+    "focusAfterExpand": "<summary class=\"flex cursor-pointer list-none flex-wrap items-baseline gap-x-3 gap-y-1 py-8 text-text-strong transition-colors hover:text-rr-violet [&amp;::-web",
+    "heightExpanded": 31119,
+    "consoleErrors": []
+  },
+  "768x1024": {
+    "height": 37082,
+    "vw": 768,
+    "vh": 1024,
+    "overflowX": 0,
+    "searchTop": 7320,
+    "listTop": 7201,
+    "submitTop": 36158,
+    "visibleRows": 137,
+    "firstRowFigure": {
+      "w": 222,
+      "h": 139
+    },
+    "controls": [],
+    "featuredControls": [
+      "All",
+      "Reinforcement learning",
+      "Planning",
+      "Raceline optimization",
+      "Control and MPC",
+      "Perception and state estimation",
+      "Sim-to-real and simulation",
+      "Multi-agent and racing strategy",
+      "Safety and verification",
+      "Systems and platform",
+      "Education"
+    ],
+    "h1": 1,
+    "noDims": [],
+    "notLazy": [
+      "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+      "http://127.0.0.1:4184/logos/slack-logo.svg"
+    ],
+    "counter": [
+      "17 featured",
+      "137 of 137 papers"
+    ],
+    "consoleErrors": []
+  },
+  "1536x730": {
+    "height": 34946,
+    "vw": 1536,
+    "vh": 730,
+    "overflowX": 0,
+    "searchTop": 4661,
+    "listTop": 4627,
+    "submitTop": 34355,
+    "visibleRows": 137,
+    "firstRowFigure": {
+      "w": 254,
+      "h": 159
+    },
+    "controls": [],
+    "featuredControls": [
+      "All",
+      "Reinforcement learning",
+      "Planning",
+      "Raceline optimization",
+      "Control and MPC",
+      "Perception and state estimation",
+      "Sim-to-real and simulation",
+      "Multi-agent and racing strategy",
+      "Safety and verification",
+      "Systems and platform",
+      "Education"
+    ],
+    "h1": 1,
+    "noDims": [],
+    "notLazy": [
+      "http://127.0.0.1:4184/logos/logo-white-gradient.svg",
+      "http://127.0.0.1:4184/logos/slack-logo.svg"
+    ],
+    "counter": [
+      "17 featured",
+      "137 of 137 papers"
+    ],
+    "consoleErrors": []
+  }
+}

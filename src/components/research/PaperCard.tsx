@@ -26,12 +26,13 @@ const MONO_LINK =
  * resolvable link renders as plain text with a mono tag and a Scholar
  * search, so the card is still an entry point.
  *
- * On a phone, in either orientation (`compact:`), the card takes the list
- * row's shape: the figure is a 5rem thumb beside the text (mobile pass,
- * 2026-09-25: seventeen full-width 16:10 cards were 11,400px, thirteen
- * screens, before the search at 390, and each one was taller than a
- * landscape phone). The generated tile cannot be read at that size, so there
- * the thumb shows the mark on paper, as the list rows do.
+ * One shape at every size: the figure across the top at the card's full
+ * width, the text under it. The mobile pass (2026-09-25) had turned the card
+ * into a row with a 5rem thumb on phones; Cedric asked the same day for the
+ * larger picture with the paper info below it. The page keeps the length
+ * down instead by showing four featured cards on a phone and folding the
+ * rest. On a phone (`compact:`) the topics join the mono venue line rather
+ * than stacking as pills.
  */
 export default function PaperCard({
   publication,
@@ -58,30 +59,13 @@ export default function PaperCard({
       className="block h-full w-full object-cover"
     />
   ) : (
-    <>
-      <div className="h-full compact:hidden">
-        <VenueTile publication={publication} />
-      </div>
-      <div aria-hidden="true" className="relative h-full desktop:hidden">
-        <img
-          src="/logo-square.svg"
-          alt=""
-          width={44}
-          height={44}
-          loading="lazy"
-          decoding="async"
-          className="absolute left-1/2 top-1/2 h-[42%] w-auto -translate-x-1/2 -translate-y-1/2 opacity-25"
-        />
-      </div>
-    </>
+    <VenueTile publication={publication} />
   );
 
   return (
     <article className="flex h-full flex-col gap-2">
-      <div
-        className={`flex flex-1 flex-col overflow-hidden ${FRAME} compact:flex-row compact:items-start compact:gap-4 compact:p-4`}
-      >
-        <div className="aspect-[16/10] border-ink-950/10 bg-paper-100 compact:w-20 compact:shrink-0 compact:overflow-hidden compact:rounded-media compact:border desktop:border-b">
+      <div className={`flex flex-1 flex-col overflow-hidden ${FRAME}`}>
+        <div className="aspect-[16/10] border-b border-ink-950/10 bg-paper-100">
           {href ? (
             // Same target as the title link, hidden from assistive tech so the
             // card announces one link, not two.
@@ -99,8 +83,8 @@ export default function PaperCard({
             figure
           )}
         </div>
-        <div className="flex flex-1 flex-col gap-3 p-6 compact:min-w-0 compact:gap-2 compact:p-0">
-          <h3 className="font-display font-semibold leading-snug text-text-strong compact:text-body">
+        <div className="flex flex-1 flex-col gap-3 p-6 compact:gap-2 compact:p-5">
+          <h3 className="font-display font-semibold leading-snug text-text-strong compact:text-lead">
             {href ? (
               <a href={href} target="_blank" rel="noopener noreferrer" className={TITLE_LINK}>
                 {publication.title}
@@ -110,8 +94,8 @@ export default function PaperCard({
             )}
           </h3>
           <p className="text-small text-text-body">{authorLine(publication.authors)}</p>
-          {/* On a phone the topics join this line, in the list rows' mono
-              (the pills stacked one per line in the narrow column). */}
+          {/* On a phone the topics join this line, in the list rows' mono:
+              three pills wrap to three lines there. */}
           <p className="font-mono text-small text-text-muted compact:text-eyebrow compact:tracking-normal">
             {publication.venue_short?.trim() || publication.venue}
             {publication.year ? ` · ${publication.year}` : ""}
