@@ -1,6 +1,5 @@
 import Reveal from "../ui/Reveal";
-import VerifyTag from "./VerifyTag";
-import type { Spinoff } from "../../lib/data";
+import type { Spinoff, SpinoffImage } from "../../lib/data";
 
 type SpinoffGridProps = {
   spinoffs: Spinoff[];
@@ -10,109 +9,157 @@ const LINK =
   "underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
 
 /** A 2.75rem hit area on touch screens, taken back by the negative margin so
- * the heading does not move (mobile pass, ABOUT-07). */
+ * the line does not move (mobile pass, ABOUT-07). */
 const TAP = "coarse:-my-3 coarse:py-3";
 
-/** Logo box height when an entry has a manifest-cleared logo (none do yet). */
-const LOGO_H = 40;
+const asset = (src: string) => `${import.meta.env.BASE_URL}${src.replace(/^\//, "")}`;
 
 /** An origin still waiting on Cedric reads "TODO(content): ..." in the JSON;
- * the card leaves the line out rather than print the question. */
+ * the feature leaves the line out rather than print the question. */
 const shown = (text: string | null) => (text && !text.startsWith("TODO(content)") ? text : null);
 
-/** Empty ruled cells that finish the last row: two across from sm, three from
- * lg (a phone is one column and never needs one). Same trick as PeopleGroup,
- * so the hairline grid always ends on a closed rule. */
-function fillers(n: number) {
-  return [
-    ...Array.from({ length: (2 - (n % 2)) % 2 }, (_, i) => ({
-      key: `s${i}`,
-      visibility: "hidden sm:block lg:hidden",
-    })),
-    ...Array.from({ length: (3 - (n % 3)) % 3 }, (_, i) => ({
-      key: `l${i}`,
-      visibility: "hidden lg:block",
-    })),
-  ];
+/** "https://www.quanser.com/" -> "quanser.com", for the address bar. */
+const domainOf = (url: string) => new URL(url).hostname.replace(/^www\./, "");
+
+/**
+ * The company's homepage as a browser window: our own 1280x800 capture under
+ * a chrome bar with the domain and a Visit affordance. The whole window is
+ * the link to the site. Paper tokens only: the three dots are ink hairline
+ * tints, not traffic-light colours.
+ */
+function SiteWindow({ name, url, preview }: { name: string; url: string; preview: SpinoffImage }) {
+  const domain = domainOf(url);
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Visit ${domain}, the ${name} website (opens in a new tab)`}
+      className="group/site block overflow-hidden rounded-media border border-ink-950/15 bg-paper-50 shadow-card transition-[box-shadow,translate] duration-[var(--duration-fast)] hover:shadow-card-hover motion-safe:hover:-translate-y-0.5"
+    >
+      <span className="flex items-center gap-2.5 border-b border-ink-950/10 bg-paper-100 px-3 py-2">
+        <span aria-hidden="true" className="flex shrink-0 gap-1">
+          <span className="size-1.5 rounded-pill bg-ink-950/20" />
+          <span className="size-1.5 rounded-pill bg-ink-950/20" />
+          <span className="size-1.5 rounded-pill bg-ink-950/20" />
+        </span>
+        <span className="min-w-0 flex-1 truncate rounded-pill border border-ink-950/10 bg-paper-50 px-2.5 py-0.5 font-mono text-eyebrow tracking-normal text-text-muted">
+          {domain}
+        </span>
+        <span className="shrink-0 text-small font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4 group-hover/site:decoration-rr-violet group-hover/site:decoration-2">
+          Visit&nbsp;<span aria-hidden="true">&#8599;</span>
+        </span>
+      </span>
+      <img
+        src={asset(preview.src)}
+        alt={preview.alt}
+        width={preview.width}
+        height={preview.height}
+        loading="lazy"
+        decoding="async"
+        className="block aspect-[16/10] w-full object-cover object-top"
+      />
+    </a>
+  );
 }
 
-function SpinoffCard({ spinoff }: { spinoff: Spinoff }) {
-  const { name, kind, label, what, since, url, logo, status } = spinoff;
+/**
+ * One spinoff as a summarized window onto its website: the company's own car
+ * photo is the stage, its homepage rises out of the stage's lower edge as a
+ * browser window, and the text says what it makes and, when we have it, how
+ * it connects to RoboRacer.
+ *
+ * Layout follows the card's own width (container query), not the viewport:
+ * from 40rem the text and the window sit side by side and the window overlaps
+ * the photo; narrower (phones, and the two-up tablet grid) it is one column
+ * with the window last, so the visual order is the reading order.
+ */
+function SpinoffFeature({ spinoff }: { spinoff: Spinoff }) {
+  const { name, kind, label, what, since, url, logo, car, preview } = spinoff;
   const origin = shown(spinoff.origin);
   return (
-    <article className="flex h-full min-w-0 flex-col bg-paper-50 p-5 sm:p-6">
-      <p className="flex items-baseline justify-between gap-4 font-mono text-eyebrow tracking-normal text-text-muted">
-        <span>{label ?? kind}</span>
-        {since && <span className="tabular-nums">since {since}</span>}
-      </p>
-      {/* The name is the link, as on the people cards. No logo has cleared
-          the asset manifest yet, so every entry is a wordmark in the display
-          face; a logo, once cleared, takes the same slot. */}
-      <h3 className="mt-6 font-display text-display-s font-semibold text-text-strong">
-        <a href={url} target="_blank" rel="noopener noreferrer" className={`inline-block max-w-full ${TAP} ${LINK}`}>
-          {logo ? (
+    <article className="group/feature @container flex h-full min-w-0 flex-col overflow-hidden rounded-card border border-ink-950/10 bg-paper-50">
+      <div className="flex flex-1 flex-col">
+        {/* The heading comes first in the DOM; the photo is moved above it
+            with `order`, so a screen reader meets the name before the car. */}
+        <div className="order-2 flex flex-1 flex-col gap-6 p-5 sm:p-6 @[40rem]:grid @[40rem]:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] @[40rem]:items-start @[40rem]:gap-x-8">
+          <div className="flex h-full min-w-0 flex-col">
+            <p className="font-mono text-eyebrow tracking-normal text-text-muted">
+              {label ?? kind}
+              {since && <span className="tabular-nums"> · since {since}</span>}
+            </p>
+            <div className="mt-3 flex items-center gap-3">
+              {logo && (
+                <img
+                  src={asset(logo.src)}
+                  alt={logo.alt}
+                  width={logo.width}
+                  height={logo.height}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-8 w-auto shrink-0 object-contain"
+                />
+              )}
+              <h3 className="min-w-0 font-display text-display-s font-semibold text-text-strong">{name}</h3>
+            </div>
+            <p className="mt-4 max-w-[48ch] text-body text-text-body">{what}</p>
+            {origin && (
+              <div className="mt-5 border-t border-ink-950/10 pt-4">
+                <p className="font-mono text-eyebrow tracking-normal text-text-muted">with RoboRacer</p>
+                <p className="mt-1.5 max-w-[48ch] text-small text-text-body">{origin}</p>
+              </div>
+            )}
+            {car && (
+              <p className="mt-auto pt-6 text-small">
+                <a
+                  href={car.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-block font-semibold text-text-strong ${TAP} ${LINK}`}
+                >
+                  See the {car.name}
+                  <span aria-hidden="true">&nbsp;&#8599;</span>
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </p>
+            )}
+          </div>
+          {preview && (
+            // From 40rem the window climbs 4.5rem into the photo above it.
+            <Reveal delay={0.15} className="relative z-10 @[40rem]:-mt-24">
+              <SiteWindow name={name} url={url} preview={preview} />
+            </Reveal>
+          )}
+        </div>
+        {car && (
+          <div className="order-1 aspect-[3/2] overflow-hidden @[40rem]:aspect-[16/9] border-b border-ink-950/10 bg-paper-100">
             <img
-              src={`${import.meta.env.BASE_URL}${logo.replace(/^\//, "")}`}
-              alt={name}
-              height={LOGO_H}
-              width="auto"
+              src={asset(car.src)}
+              alt={car.alt}
+              width={car.width}
+              height={car.height}
               loading="lazy"
               decoding="async"
-              className="h-10 w-auto max-w-full object-contain"
+              className="size-full object-cover motion-safe:transition-transform motion-safe:duration-[var(--duration-slow)] motion-safe:ease-[var(--ease-out-expo)] motion-safe:group-hover/feature:scale-[1.03]"
             />
-          ) : (
-            name
-          )}
-          {/* A no-break space: the arrow never wraps onto a line alone. */}
-          <span aria-hidden="true" className="text-body text-text-muted">
-            &nbsp;&#8599;
-          </span>
-          <span className="sr-only"> (opens in a new tab)</span>
-        </a>
-      </h3>
-      <p className="mt-3 max-w-[48ch] text-body text-text-body">{what}</p>
-      {origin && (
-        <div className="mt-5 border-t border-ink-950/10 pt-4">
-          <p className="font-mono text-eyebrow tracking-normal text-text-muted">origin</p>
-          <p className="mt-1.5 max-w-[48ch] text-small text-text-body">{origin}</p>
-        </div>
-      )}
-      {/* The verify tag alone, as on the team cards; the sources stay in
-          the JSON for review. */}
-      {status === "verify" && (
-        <p className="mt-auto pt-6">
-          <VerifyTag />
-        </p>
-      )}
+          </div>
+        )}
+      </div>
     </article>
   );
 }
 
 /**
- * The spinoff cards on /about: what grew out of the car, from
- * public/data/spinoffs.json `entries` (the `candidates` there wait for
- * Cedric). One hairline grid in the people-card language: kind and year in
- * mono, the name as a display wordmark and link, one sentence on what it is,
- * one on where it came from, then the verify tag.
+ * The spinoff features on /about, from public/data/spinoffs.json `entries`
+ * (the `candidates` there wait for Cedric). Two across from `desktop:`,
+ * stacked on `compact:` (a phone either way round).
  */
 export default function SpinoffGrid({ spinoffs }: SpinoffGridProps) {
   if (spinoffs.length === 0) return null;
   return (
-    <Reveal
-      stagger
-      className="grid overflow-hidden rounded-card border border-ink-950/10 sm:grid-cols-2 lg:grid-cols-3"
-    >
+    <Reveal stagger className="grid gap-6 desktop:grid-cols-2">
       {spinoffs.map((s) => (
-        <div key={s.name} className="-mt-px -ml-px min-w-0 border-t border-l border-ink-950/10">
-          <SpinoffCard spinoff={s} />
-        </div>
-      ))}
-      {fillers(spinoffs.length).map((f) => (
-        <div
-          key={f.key}
-          aria-hidden="true"
-          className={`-mt-px -ml-px border-t border-l border-ink-950/10 bg-paper-50 ${f.visibility}`}
-        />
+        <SpinoffFeature key={s.name} spinoff={s} />
       ))}
     </Reveal>
   );

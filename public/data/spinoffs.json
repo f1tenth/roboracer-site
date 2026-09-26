@@ -1,6 +1,6 @@
 {
-  "note": "About page, section 'Spinoffs'. Nothing here is in the roboracer-content skill yet, so every entry is status 'verify' until Cedric confirms it. 'what' and 'origin' are our own words, drafted from the first-party pages in 'source' and 'evidence'; never paste their copy. An 'origin' that starts with TODO(content) is not rendered. 'entries' render on /about; 'candidates' do not render until Cedric moves them into 'entries'. 'logo' stays null unless the file is in public/ with a provenance row in docs/ASSET_MANIFEST.md; otherwise the card shows the name as a wordmark.",
-  "updated": "2026-09-24",
+  "note": "About page, section 'Spinoffs'. Nothing here is in the roboracer-content skill yet; 'status' records that and is not rendered (verify tags left the site, Cedric 2026-09-25). 'what' and 'origin' are our own words, drafted from the first-party pages in 'source' and 'evidence'; never paste their copy. An 'origin' that starts with TODO(content) is not rendered, but the entry is. 'entries' render on /about; 'candidates' do not render until Cedric moves them into 'entries'. Each entry's feature shows three images from public/media/spinoffs: 'logo' (the company's mark beside the name), 'car' (its car, the main visual, linking to the car's page) and 'preview' (our own 1280x800 capture of its homepage, framed as a browser window that links to 'url'). Rule 8 exception: Cedric, 2026-09-25, asked to feature Neobotics and Quanser with their logo, car and a preview of their website ('embed their website, summarized'), so these images come from neobotics.org and quanser.com; permission status 'Cedric-directed; company not yet asked'. Every image has a provenance row in docs/ASSET_MANIFEST.md (section 'About: spinoff features'). An image field left null or absent drops that slot.",
+  "updated": "2026-09-25",
   "entries": [
     {
       "name": "Neobotics",
@@ -10,7 +10,29 @@
       "origin": "The NeoRacer is built to RoboRacer race rules. Neobotics co-organized the 30th RoboRacer competition, at VTC 2026 in Boston.",
       "since": 2025,
       "url": "https://neobotics.org/",
-      "logo": null,
+      "logo": {
+        "src": "/media/spinoffs/spinoff-neobotics-icon-96.webp",
+        "width": 128,
+        "height": 96,
+        "alt": "Neobotics logo",
+        "source": "https://neobotics.org/images/logos/neobotics/neobotics-icon-red.webp (same file as public/partners/neobotics.webp)"
+      },
+      "car": {
+        "src": "/media/spinoffs/spinoff-neobotics-car-1200.webp",
+        "width": 1200,
+        "height": 800,
+        "alt": "The NeoRacer: a black race car with orange wheels, a rear wing and a lidar on top, in a dark studio with smoke",
+        "name": "NeoRacer",
+        "url": "https://neobotics.org/kits",
+        "source": "https://neobotics.org/images/studio/neoracer_studio_angle_dark_smoke.webp (on https://neobotics.org/kits)"
+      },
+      "preview": {
+        "src": "/media/spinoffs/spinoff-neobotics-site-960.webp",
+        "width": 960,
+        "height": 600,
+        "alt": "The neobotics.org homepage: the Neobotics Foundation header and menu over a low shot along an orange track barrier, with the line 'Empowering the future of autonomous racing'",
+        "source": "our capture of https://neobotics.org/ at 1280x800, 2026-09-25"
+      },
       "status": "verify",
       "source": "https://neobotics.org/about",
       "named_by": "Cedric, 2026-09-24",
@@ -36,7 +58,7 @@
           "says": "Context only, not used in the copy: the BU F1TENTH Autonomous Grand Prix, Nov 22, 2024, was organized by Boston University faculty incl. Renato Mancuso (now a Neobotics advisor and NeoRacer co-author) with Rahul Mangharam."
         }
       ],
-      "note": "Source: Cedric, 2026-09-24 (named Neobotics as a spinoff), alongside the first-party pages in evidence. No public page says Neobotics grew out of RoboRacer; the sourced link is the rules compatibility and the VTC 2026 co-organization. If the founders came out of the BU F1TENTH Grand Prix (Nov 2024) or the BU F1TENTH student club, say so and the origin line can carry it. A Neobotics icon is already in public/partners/neobotics.webp (commit 13513e9, partner wall) but has no ASSET_MANIFEST row, so it is not used here."
+      "note": "Source: Cedric, 2026-09-24 (named Neobotics as a spinoff), alongside the first-party pages in evidence. No public page says Neobotics grew out of RoboRacer; the sourced link is the rules compatibility and the VTC 2026 co-organization. If the founders came out of the BU F1TENTH Grand Prix (Nov 2024) or the BU F1TENTH student club, say so and the origin line can carry it. Cedric, 2026-09-25: show their car, logo and a preview of their website; the logo, car photo and homepage capture come from neobotics.org at his direction (permission: Cedric-directed; Neobotics not yet asked). The NeoRacer paper (arXiv 2607.26855) carries arXiv's non-exclusive licence, not CC BY, so no figure is taken from it."
     },
     {
       "name": "Quanser",
@@ -44,8 +66,30 @@
       "what": "An engineering education company. Its Self-Driving Car Studio is built around the QCar 2, a 1/10-scale research car.",
       "origin": "TODO(content): Cedric named Quanser as a spinoff (2026-09-24), but no public page says how Quanser or the QCar connects to F1TENTH/RoboRacer. Ask him what the connection is.",
       "since": null,
-      "url": "https://www.quanser.com/products/qcar-2/",
-      "logo": null,
+      "url": "https://www.quanser.com/",
+      "logo": {
+        "src": "/media/spinoffs/spinoff-quanser-icon-96.webp",
+        "width": 91,
+        "height": 96,
+        "alt": "Quanser logo",
+        "source": "the Q mark of https://www.quanser.com/wp-content/uploads/2023/02/quanser.svg (the site's favicon mark, https://www.quanser.com/wp-content/uploads/2023/01/favicon-1.png)"
+      },
+      "car": {
+        "src": "/media/spinoffs/spinoff-quanser-car-1200.webp",
+        "width": 1200,
+        "height": 800,
+        "alt": "The QCar 2: a black 1/10-scale car with a lidar, a depth camera and a light strip along its side, on white",
+        "name": "QCar 2",
+        "url": "https://www.quanser.com/products/qcar-2/",
+        "source": "https://www.quanser.com/wp-content/uploads/2024/08/QCar2-08.jpg (gallery of https://www.quanser.com/products/qcar-2/)"
+      },
+      "preview": {
+        "src": "/media/spinoffs/spinoff-quanser-site-960.webp",
+        "width": 960,
+        "height": 600,
+        "alt": "The quanser.com homepage: the Quanser header and menu over a dark lab shot, with the headline 'Transforming educational experiences, accelerating innovative research'",
+        "source": "our capture of https://www.quanser.com/ at 1280x800, 2026-09-25, with the site's 'Book a meeting' pop-up closed"
+      },
       "status": "verify",
       "source": "https://www.quanser.com/products/qcar-2/",
       "named_by": "Cedric, 2026-09-24",
@@ -59,29 +103,7 @@
           "says": "Founded by an engineering professor, Dr. Jacob Apkarian, to improve his teaching; '35+ years of academic partnership'. No mention of F1TENTH or RoboRacer."
         }
       ],
-      "note": "Source: Cedric, 2026-09-24 (named Quanser as a spinoff), alongside the first-party pages in evidence. The open question is what the connection is (hardware lineage, a course, a race partnership?), not whether it counts. The card keeps what Quanser is plus a verify tag, and no origin line, until he answers."
-    },
-    {
-      "name": "LAMARRacing",
-      "kind": "team",
-      "what": "A University of Bonn student team, with the Lamarr Institute. It races a RoboRacer car it built itself.",
-      "origin": "It tested its raceline research on its own RoboRacer car. At ICRA 2026 in Vienna it was fastest in the time trials and fourth overall.",
-      "since": null,
-      "url": "https://lamarr-institute.org/news/lamarracer-wins-roboracer-competition/",
-      "logo": null,
-      "status": "verify",
-      "source": "https://lamarr-institute.org/news/lamarracer-wins-roboracer-competition/",
-      "evidence": [
-        {
-          "url": "https://lamarr-institute.org/news/lamarracer-wins-roboracer-competition/",
-          "says": "Jun 8, 2026: LamarRacing won the 'Best Performance Overall' award at the RoboRacer Competition at ICRA 2026 in Vienna against 35 international teams; fastest in the time trials, fourth in the one-on-one races. Students Lukas Kutsch, Samir Shehadeh, Aftab Akhtar, Lavinia Kong; supervised by Nils Dengler and Prof. Dr. Maren Bennewitz."
-        },
-        {
-          "url": "https://arxiv.org/abs/2603.07126",
-          "says": "Shehadeh, Kutsch, Dengler, Pan, Bennewitz (Mar 2026): all authors with the University of Bonn, several also with the Lamarr Institute; hardware validation on a 'self-built RoboRacer 1:10 autonomous racing platform'."
-        }
-      ],
-      "note": "Framed as a team that grew from the platform, as asked. The team's founding year is not public, so 'since' is null. This also answers the open teams.json question: the paper puts LAMARRacing at the University of Bonn (teams.json still has institution TODO; not edited here)."
+      "note": "Cedric, 2026-09-25: feature as a spinoff; origin still to be filled in. He named Quanser on 2026-09-24; the first-party pages in evidence do not say how Quanser or the QCar connects to F1TENTH/RoboRacer, so the card shows what Quanser makes and no origin line until he answers. The section subtitle carries his claim. The logo, QCar 2 photo and homepage capture come from quanser.com at his direction (permission: Cedric-directed; Quanser not yet asked)."
     }
   ],
   "candidates": [
