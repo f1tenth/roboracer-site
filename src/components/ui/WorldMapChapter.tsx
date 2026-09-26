@@ -231,7 +231,7 @@ function arrayTiming(pins: MapEvent[], regions: MapRegion[]): Timing {
 }
 
 /**
- * Landing section 04 / Community (serves the sponsor and the press, audiences
+ * Landing section 03 / Community (serves the sponsor and the press, audiences
  * skill): a pinned paper chapter. The base state is the bare land as hairline
  * slate outlines; as the reader scrolls, the venues pop in chronological
  * order from ESWeek 2016 to IROS 2026, a country tints cyan (deeper with more
@@ -554,7 +554,7 @@ export default function WorldMapChapter({ className = "" }: WorldMapChapterProps
       <div className="md:col-span-6">
         <p className="mb-3 flex items-center gap-2 font-mono text-small text-text-muted">
           <span aria-hidden="true" className="h-1 w-1 bg-ink-950" />
-          <span>04</span>
+          <span>03</span>
         </p>
         <h2 id="community-title" className="font-display text-display-m font-semibold text-text-strong">
           Community

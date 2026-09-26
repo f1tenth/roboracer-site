@@ -1,41 +1,107 @@
 {
-  "_about": "Wayfinding. `paths` are the entry points the landing shows under the hero (src/components/ui/EntryPaths.tsx, four at most, in this order). `tracks` are the ordered steps for the Build and Learn rebuild; nothing renders them yet (docs/LEARN_TERRAIN.md). Every href was opened on the `checked` date and answered 200.",
+  "_about": "Wayfinding. `paths` are the ways in that \"Start here\" lists, in this order: right under the landing hero (compact: `thumb`, `label`, `line`, `linkText`) and as /about's opening (full: `media.src` or `media.video`, `caption`, `line`, `detail`), both rendered by src/components/ui/StartHere.tsx, which bundles a copy of these five to hold the section's height while this file loads: keep the two in step. Thumbs are 480x300 (16/10) cut from the media below (docs/ASSET_MANIFEST.md ST-01 to ST-05); `credit` is never rendered. `tracks` are the ordered steps for the Build and Learn rebuild; nothing renders them yet (docs/LEARN_TERRAIN.md). Every href was opened on the `checked` date and answered 200.",
   "checked": "2026-09-24",
   "paths": [
     {
       "id": "build",
       "n": "01",
-      "label": "Build a car",
-      "line": "Parts list, build guide and software. All open source.",
+      "label": "Build",
+      "line": "Order the parts, build the car from the open-source guide and install its software.",
+      "detail": "The hardware, software and simulator are open source, so a lab builds its own cars instead of buying them.",
       "href": "/build",
-      "for": ["interested beginner", "builder"],
+      "linkText": "Build the car",
+      "media": {
+        "thumb": "/media/start/start-build-480.webp",
+        "src": "/media/platform/platform-build-poster.webp",
+        "width": 960,
+        "height": 540,
+        "video": "/media/platform/platform-build-960.mp4",
+        "alt": "Hands assembling a RoboRacer car on a workbench, tools beside it",
+        "caption": "assembling a car, 2x speed · build tutorial",
+        "credit": "Video: Cedric Hollande"
+      },
+      "for": ["newbie", "interested beginner", "builder", "faculty"],
       "track": "get-running"
     },
     {
       "id": "learn",
       "n": "02",
-      "label": "Learn autonomy",
-      "line": "Lectures and labs on perception, localization, planning and control.",
+      "label": "Learn",
+      "line": "Lectures and labs on perception, planning and control, as a 15-week semester or a 4-week plan that gets a car race ready.",
+      "detail": "The slides, labs and grading rubrics are public, and Penn teaches the course as ESE 6150.",
       "href": "/learn",
+      "linkText": "Start the course",
+      "media": {
+        "thumb": "/media/start/start-learn-480.webp",
+        "src": "/media/platform/platform-learn-1200.webp",
+        "width": 1200,
+        "height": 750,
+        "alt": "Two students working on a RoboRacer car on the floor of the pit area at ICRA 2026",
+        "caption": "pit work on a car · ICRA 2026, Vienna",
+        "credit": "Photo: Felix Jahncke"
+      },
       "for": ["student", "faculty", "newbie"],
       "track": "learn-theory"
     },
     {
       "id": "race",
       "n": "03",
-      "label": "Race with us",
-      "line": "Dates, registration and rules for the next competition.",
+      "label": "Race",
+      "line": "Any team can register for our races at the major robotics conferences.",
+      "detail": "Each race has its own site with its rules and results.",
       "href": "/race",
-      "for": ["competitor"]
+      "linkText": "Find the next race",
+      "media": {
+        "thumb": "/media/start/start-race-480.webp",
+        "src": "/media/platform/platform-race-poster.webp",
+        "width": 960,
+        "height": 540,
+        "video": "/media/platform/platform-race-960.mp4",
+        "alt": "A RoboRacer car with blue lights driving between yellow track barriers at ICRA 2025",
+        "caption": "two cars through the corner · ICRA 2025, Atlanta",
+        "credit": "Video: The Robotics Club"
+      },
+      "for": ["competitor", "faculty", "interested beginner"]
+    },
+    {
+      "id": "research",
+      "n": "04",
+      "label": "Research",
+      "line": "A shared car for autonomy research, referenced by more than 1,000 publications.",
+      "detail": "Papers are sorted by topic, such as planning, reinforcement learning and education, and you can submit yours.",
+      "href": "/research",
+      "linkText": "Browse the research",
+      "media": {
+        "thumb": "/media/start/start-research-480.webp",
+        "src": "/media/platform/platform-research-mppi-poster.webp",
+        "width": 960,
+        "height": 600,
+        "video": "/media/platform/platform-research-mppi-960.mp4",
+        "alt": "Simulator view of a car overtaking with MPPI, its sampled paths fanning out ahead of it",
+        "caption": "MPPI overtaking in the simulator · UPenn",
+        "credit": "Video: Cedric Hollande"
+      },
+      "for": ["faculty", "student", "press"]
     },
     {
       "id": "sponsor",
-      "n": "04",
-      "label": "Sponsor a race",
-      "line": "Teams at 90+ universities. Write to contact@roboracer.ai.",
+      "n": "05",
+      "label": "Sponsor",
+      "line": "Reach the students and researchers who use the car at 90+ universities in 20+ countries.",
+      "detail": "The races run at conferences such as ICRA, IROS and IV.",
       "href": "mailto:contact@roboracer.ai?subject=RoboRacer%20sponsorship",
+      "linkText": "Write to contact@roboracer.ai",
+      "media": {
+        "thumb": "/media/start/start-ifac2026-field-480.webp",
+        "src": "/media/news/news-ifac2026-group-1080.webp",
+        "width": 1080,
+        "height": 531,
+        "alt": "The IFAC 2026 field in Busan, arms raised in front of the 29th RoboRacer competition screen",
+        "caption": "the field · IFAC 2026, Busan",
+        "credit": "Photo: The Roboracer Foundation"
+      },
       "for": ["sponsor", "press"],
-      "todo": "TODO(content): there is no sponsor page or sponsor block on the site. The content skill's fallback is contact@roboracer.ai (same mailto and subject as ui/SponsorCTA). Point this at the Sponsorship Flyer (Drive 1t3aNWomqUpKMcDWbTofqmpHYkW1QAWEg, exported to public/docs/) or at a sponsor section once Cedric approves one."
+      "todo": "TODO(content): there is no sponsor page or sponsor block on the landing. The content skill's fallback is contact@roboracer.ai (same mailto and subject as ui/SponsorCTA). Point this at the Sponsorship Flyer (Drive 1t3aNWomqUpKMcDWbTofqmpHYkW1QAWEg, exported to public/docs/) or at a sponsor section once Cedric approves one."
     }
   ],
   "tracks": [

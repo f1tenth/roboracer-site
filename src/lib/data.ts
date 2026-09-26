@@ -259,25 +259,6 @@ export type EventsMap = {
   regions: MapRegion[];
 };
 
-/** public/data/platform.json: the four pillars with their media panel slot. */
-export type PlatformMedia = {
-  type: "image" | "video";
-  src: string;
-  poster: string;
-  caption: string;
-  credit?: string;
-};
-
-export type PlatformRow = {
-  id: string;
-  n: string;
-  title: string;
-  body: string;
-  href: string;
-  linkText: string;
-  media: PlatformMedia;
-};
-
 /** public/data/community.json (seed values; refreshed by scripts/slack_stats.py). */
 export type JoinPhoto = {
   src: string;
@@ -422,22 +403,46 @@ export const loadEventsMap = async (): Promise<EventsMap> => {
   };
 };
 export const loadCommunity = () => loadJson<Community>("community.json");
-export const loadPlatform = () => loadJson<PlatformRow[]>("platform.json");
 export const loadSpinoffs = () => loadJson<SpinoffsFile>("spinoffs.json");
 
 
-/** public/data/paths.json: the landing's entry paths, plus the two learning
- * tracks the Build and Learn rebuild will render (docs/LEARN_TERRAIN.md). */
+/** One way in's picture. The landing's compact rows show `thumb`; /about's
+ * fuller rows show `src` in the same 16/10 frame and play `video` over it. */
+export type PathMedia = {
+  /** 480x300 (16/10) still for the landing's small inline image. */
+  thumb: string;
+  /** Full-size still: the clip's poster, or the photo itself. */
+  src: string;
+  width: number;
+  height: number;
+  /** Muted loop for /about, played only in view and never under reduced
+   * motion. */
+  video?: string;
+  alt: string;
+  /** Mono line under /about's frame. */
+  caption: string;
+  /** Kept for the record; never rendered (docs/HANDOFF.md section 6). */
+  credit?: string;
+};
+
+/** public/data/paths.json: the ways in that "Start here" lists on the landing
+ * and on /about (ui/StartHere), plus the two learning tracks the Build and
+ * Learn rebuild will render (docs/LEARN_TERRAIN.md). */
 export type EntryPath = {
   id: string;
-  /** Two-digit index shown in mono above the label. */
+  /** Two-digit index shown in mono beside the label. */
   n: string;
-  /** Verb first: "Build a car". */
+  /** The section's name: "Build". */
   label: string;
-  /** One plain line under the label. */
+  /** One plain sentence under the label, shown on both pages. */
   line: string;
+  /** A second sentence that only /about's fuller rows show. */
+  detail?: string;
   /** Internal route, `/#anchor`, external URL or mailto. */
   href: string;
+  /** Verb + object: "Build the car". */
+  linkText: string;
+  media?: PathMedia;
   /** Personas from the roboracer-audiences skill this path serves. */
   for?: string[];
   /** The track (below) that the path's destination starts. */
