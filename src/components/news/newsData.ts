@@ -8,12 +8,14 @@ import { fetchJson } from "../../lib/data";
 export type NewsImage = { src: string; width: number; height: number; alt: string };
 
 /** A third-party post shown in place: the frame URL the publisher gives for
- * embedding, and our own poster that holds the space until it loads. */
+ * embedding, and, for our own organisation's posts only, our copy of its
+ * first slide, which holds the space until the frame loads. A post by
+ * anyone else has no poster: its media is never re-hosted. */
 export type NewsEmbed = {
   provider: "linkedin";
   src: string;
   title: string;
-  poster: NewsImage;
+  poster?: NewsImage | null;
 };
 
 export type NewsKind = "post" | "article" | "video" | "podcast" | "announcement";
@@ -53,6 +55,8 @@ export type NewsItem = {
   featured?: boolean;
   /** Review bookkeeping only; nothing renders it (Cedric, 2026-09-25). */
   status?: "published" | "verify";
+  /** Where every fact in the item comes from; never rendered. */
+  sources?: string | null;
 };
 
 export type NewsFeed = {
@@ -71,10 +75,25 @@ export function formatIsoDate(iso: string, precision: "day" | "month" = "day"): 
   return `${month} ${Number(m[3])}, ${m[1]}`;
 }
 
-/** "icra2026" -> "ICRA 2026". An unknown id degrades to its own text. */
+/** Series whose name is not an acronym, as the race pages write them. */
+const SERIES: Record<string, string> = {
+  esweek: "ESWeek",
+  cpsweek: "CPS Week",
+  cpsiot: "CPS-IoT Week",
+  cps: "CPS-IoT Week",
+  columbia: "Columbia",
+  germany: "Germany",
+  korea: "Korea",
+  techfest: "Techfest",
+  course: "Course race",
+};
+
+/** "icra2026" -> "ICRA 2026", "korea2023" -> "Korea 2023". An unknown id
+ * degrades to its own text. */
 export function eventLabel(id: string): string {
   const m = id.match(/^([a-z]+)[-_]?(\d{4})$/i);
-  return m ? `${m[1].toUpperCase()} ${m[2]}` : id;
+  if (!m) return id;
+  return `${SERIES[m[1].toLowerCase()] ?? m[1].toUpperCase()} ${m[2]}`;
 }
 
 /** Only site-hosted media renders: a remote thumbnail is never hotlinked, and

@@ -1,0 +1,475 @@
+{
+ "1536x730": {
+  "height": 10438,
+  "years": [
+   {
+    "year": "2026",
+    "shown": 4,
+    "folded": "\u203aShow 13 more from 2026Hide 13 posts from 2026"
+   },
+   {
+    "year": "2025",
+    "shown": 4,
+    "folded": "\u203aShow 8 more from 2025Hide 8 posts from 2025"
+   },
+   {
+    "year": "2024",
+    "shown": 4,
+    "folded": "\u203aShow 11 more from 2024Hide 11 posts from 2024"
+   },
+   {
+    "year": "2023",
+    "shown": 4,
+    "folded": "\u203aShow 4 more from 2023Hide 4 posts from 2023"
+   },
+   {
+    "year": "2022",
+    "shown": 4,
+    "folded": null
+   },
+   {
+    "year": "2021",
+    "shown": 2,
+    "folded": null
+   },
+   {
+    "year": "2020",
+    "shown": 4,
+    "folded": "\u203aShow 2 more from 2020Hide 2 posts from 2020"
+   },
+   {
+    "year": "2019",
+    "shown": 4,
+    "folded": null
+   },
+   {
+    "year": "2018",
+    "shown": 4,
+    "folded": null
+   },
+   {
+    "year": "2016",
+    "shown": 2,
+    "folded": null
+   }
+  ],
+  "chips": [
+   "All",
+   "IROS 2026",
+   "IFAC 2026",
+   "ICRA 2026",
+   "IV 2026",
+   "IV 2025",
+   "ICRA 2025",
+   "CDC 2024",
+   "IROS 2024"
+  ],
+  "h1": 1,
+  "imgs_no_alt": [],
+  "imgs_no_dims": [],
+  "embed_requests_before_click": 1,
+  "click": {
+   "expanded": "false",
+   "frames_in_cards": 2,
+   "embed_requests_after": 2
+  },
+  "fold_opened": true,
+  "console_errors": [],
+  "axe": []
+ },
+ "1366x650": {
+  "height": 9778,
+  "years": [
+   {
+    "year": "2026",
+    "shown": 4,
+    "folded": "\u203aShow 13 more from 2026Hide 13 posts from 2026"
+   },
+   {
+    "year": "2025",
+    "shown": 4,
+    "folded": "\u203aShow 8 more from 2025Hide 8 posts from 2025"
+   },
+   {
+    "year": "2024",
+    "shown": 4,
+    "folded": "\u203aShow 11 more from 2024Hide 11 posts from 2024"
+   },
+   {
+    "year": "2023",
+    "shown": 4,
+    "folded": "\u203aShow 4 more from 2023Hide 4 posts from 2023"
+   },
+   {
+    "year": "2022",
+    "shown": 4,
+    "folded": null
+   },
+   {
+    "year": "2021",
+    "shown": 2,
+    "folded": null
+   },
+   {
+    "year": "2020",
+    "shown": 4,
+    "folded": "\u203aShow 2 more from 2020Hide 2 posts from 2020"
+   },
+   {
+    "year": "2019",
+    "shown": 4,
+    "folded": null
+   },
+   {
+    "year": "2018",
+    "shown": 4,
+    "folded": null
+   },
+   {
+    "year": "2016",
+    "shown": 2,
+    "folded": null
+   }
+  ],
+  "chips": [
+   "All",
+   "IROS 2026",
+   "IFAC 2026",
+   "ICRA 2026",
+   "IV 2026",
+   "IV 2025",
+   "ICRA 2025",
+   "CDC 2024",
+   "IROS 2024"
+  ],
+  "h1": 1,
+  "imgs_no_alt": [],
+  "imgs_no_dims": [],
+  "embed_requests_before_click": 1,
+  "click": {
+   "expanded": "false",
+   "frames_in_cards": 2,
+   "embed_requests_after": 2
+  },
+  "fold_opened": true,
+  "console_errors": [],
+  "axe": null
+ },
+ "1920x1080": {
+  "height": 13034,
+  "years": [
+   {
+    "year": "2026",
+    "shown": 4,
+    "folded": "\u203aShow 13 more from 2026Hide 13 posts from 2026"
+   },
+   {
+    "year": "2025",
+    "shown": 4,
+    "folded": "\u203aShow 8 more from 2025Hide 8 posts from 2025"
+   },
+   {
+    "year": "2024",
+    "shown": 4,
+    "folded": "\u203aShow 11 more from 2024Hide 11 posts from 2024"
+   },
+   {
+    "year": "2023",
+    "shown": 4,
+    "folded": "\u203aShow 4 more from 2023Hide 4 posts from 2023"
+   },
+   {
+    "year": "2022",
+    "shown": 4,
+    "folded": null
+   },
+   {
+    "year": "2021",
+    "shown": 2,
+    "folded": null
+   },
+   {
+    "year": "2020",
+    "shown": 4,
+    "folded": "\u203aShow 2 more from 2020Hide 2 posts from 2020"
+   },
+   {
+    "year": "2019",
+    "shown": 4,
+    "folded": null
+   },
+   {
+    "year": "2018",
+    "shown": 4,
+    "folded": null
+   },
+   {
+    "year": "2016",
+    "shown": 2,
+    "folded": null
+   }
+  ],
+  "chips": [
+   "All",
+   "IROS 2026",
+   "IFAC 2026",
+   "ICRA 2026",
+   "IV 2026",
+   "IV 2025",
+   "ICRA 2025",
+   "CDC 2024",
+   "IROS 2024"
+  ],
+  "h1": 1,
+  "imgs_no_alt": [],
+  "imgs_no_dims": [],
+  "embed_requests_before_click": 1,
+  "click": {
+   "expanded": "false",
+   "frames_in_cards": 2,
+   "embed_requests_after": 2
+  },
+  "fold_opened": true,
+  "console_errors": [],
+  "axe": null
+ },
+ "768x1024": {
+  "height": 13729,
+  "years": [
+   {
+    "year": "2026",
+    "shown": 4,
+    "folded": "\u203aShow 13 more from 2026Hide 13 posts from 2026"
+   },
+   {
+    "year": "2025",
+    "shown": 4,
+    "folded": "\u203aShow 8 more from 2025Hide 8 posts from 2025"
+   },
+   {
+    "year": "2024",
+    "shown": 4,
+    "folded": "\u203aShow 11 more from 2024Hide 11 posts from 2024"
+   },
+   {
+    "year": "2023",
+    "shown": 4,
+    "folded": "\u203aShow 4 more from 2023Hide 4 posts from 2023"
+   },
+   {
+    "year": "2022",
+    "shown": 4,
+    "folded": null
+   },
+   {
+    "year": "2021",
+    "shown": 2,
+    "folded": null
+   },
+   {
+    "year": "2020",
+    "shown": 4,
+    "folded": "\u203aShow 2 more from 2020Hide 2 posts from 2020"
+   },
+   {
+    "year": "2019",
+    "shown": 4,
+    "folded": null
+   },
+   {
+    "year": "2018",
+    "shown": 4,
+    "folded": null
+   },
+   {
+    "year": "2016",
+    "shown": 2,
+    "folded": null
+   }
+  ],
+  "chips": [
+   "All",
+   "IROS 2026",
+   "IFAC 2026",
+   "ICRA 2026",
+   "IV 2026",
+   "IV 2025",
+   "ICRA 2025",
+   "CDC 2024",
+   "IROS 2024"
+  ],
+  "h1": 1,
+  "imgs_no_alt": [],
+  "imgs_no_dims": [],
+  "embed_requests_before_click": 1,
+  "click": {
+   "expanded": "false",
+   "frames_in_cards": 2,
+   "embed_requests_after": 2
+  },
+  "fold_opened": true,
+  "console_errors": [],
+  "axe": null
+ },
+ "390x844": {
+  "height": 9219,
+  "years": [
+   {
+    "year": "2026",
+    "shown": 4,
+    "folded": "\u203aShow 13 more from 2026Hide 13 posts from 2026"
+   },
+   {
+    "year": "2025",
+    "shown": 4,
+    "folded": "\u203aShow 8 more from 2025Hide 8 posts from 2025"
+   },
+   {
+    "year": "2024",
+    "shown": 0,
+    "folded": "\u203aShow 15 from 2024Hide 15 posts from 2024"
+   },
+   {
+    "year": "2023",
+    "shown": 0,
+    "folded": "\u203aShow 8 from 2023Hide 8 posts from 2023"
+   },
+   {
+    "year": "2022",
+    "shown": 0,
+    "folded": "\u203aShow 4 from 2022Hide 4 posts from 2022"
+   },
+   {
+    "year": "2021",
+    "shown": 0,
+    "folded": "\u203aShow 2 from 2021Hide 2 posts from 2021"
+   },
+   {
+    "year": "2020",
+    "shown": 0,
+    "folded": "\u203aShow 6 from 2020Hide 6 posts from 2020"
+   },
+   {
+    "year": "2019",
+    "shown": 0,
+    "folded": "\u203aShow 4 from 2019Hide 4 posts from 2019"
+   },
+   {
+    "year": "2018",
+    "shown": 0,
+    "folded": "\u203aShow 4 from 2018Hide 4 posts from 2018"
+   },
+   {
+    "year": "2016",
+    "shown": 0,
+    "folded": "\u203aShow 2 from 2016Hide 2 posts from 2016"
+   }
+  ],
+  "chips": [
+   "All",
+   "IROS 2026",
+   "IFAC 2026",
+   "ICRA 2026",
+   "IV 2026",
+   "IV 2025",
+   "ICRA 2025",
+   "CDC 2024",
+   "IROS 2024"
+  ],
+  "h1": 1,
+  "imgs_no_alt": [],
+  "imgs_no_dims": [],
+  "embed_requests_before_click": 1,
+  "click": {
+   "expanded": "false",
+   "frames_in_cards": 2,
+   "embed_requests_after": 2
+  },
+  "fold_opened": true,
+  "console_errors": [],
+  "axe": []
+ },
+ "844x390": {
+  "height": 6903,
+  "years": [
+   {
+    "year": "2026",
+    "shown": 4,
+    "folded": "\u203aShow 13 more from 2026Hide 13 posts from 2026"
+   },
+   {
+    "year": "2025",
+    "shown": 4,
+    "folded": "\u203aShow 8 more from 2025Hide 8 posts from 2025"
+   },
+   {
+    "year": "2024",
+    "shown": 0,
+    "folded": "\u203aShow 15 from 2024Hide 15 posts from 2024"
+   },
+   {
+    "year": "2023",
+    "shown": 0,
+    "folded": "\u203aShow 8 from 2023Hide 8 posts from 2023"
+   },
+   {
+    "year": "2022",
+    "shown": 0,
+    "folded": "\u203aShow 4 from 2022Hide 4 posts from 2022"
+   },
+   {
+    "year": "2021",
+    "shown": 0,
+    "folded": "\u203aShow 2 from 2021Hide 2 posts from 2021"
+   },
+   {
+    "year": "2020",
+    "shown": 0,
+    "folded": "\u203aShow 6 from 2020Hide 6 posts from 2020"
+   },
+   {
+    "year": "2019",
+    "shown": 0,
+    "folded": "\u203aShow 4 from 2019Hide 4 posts from 2019"
+   },
+   {
+    "year": "2018",
+    "shown": 0,
+    "folded": "\u203aShow 4 from 2018Hide 4 posts from 2018"
+   },
+   {
+    "year": "2016",
+    "shown": 0,
+    "folded": "\u203aShow 2 from 2016Hide 2 posts from 2016"
+   }
+  ],
+  "chips": [
+   "All",
+   "IROS 2026",
+   "IFAC 2026",
+   "ICRA 2026",
+   "IV 2026",
+   "IV 2025",
+   "ICRA 2025",
+   "CDC 2024",
+   "IROS 2024"
+  ],
+  "h1": 1,
+  "imgs_no_alt": [],
+  "imgs_no_dims": [],
+  "embed_requests_before_click": 1,
+  "click": {
+   "expanded": "false",
+   "frames_in_cards": 2,
+   "embed_requests_after": 2
+  },
+  "fold_opened": true,
+  "console_errors": [],
+  "axe": null
+ },
+ "reduced_390": {
+  "console_errors": [],
+  "cards_not_fully_opaque": 0
+ },
+ "js_disabled_text": "RoboRacer needs JavaScript\n\nTurn on JavaScript to see this site. These links work without it.\n\nCourse material and lectures\nBuild the car: bill of materials and assembly\nSource code and simulator on GitHub\nJoin the community on Slack\nRace at IROS 2026: dates, registration and rules\nSponsor a race: c"
+}

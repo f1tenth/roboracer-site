@@ -1,4 +1,6 @@
+import { useId, useState } from "react";
 import { eventLabel, type NewsItem } from "./newsData";
+import LinkedInEmbed from "./LinkedInEmbed";
 
 // Site-wide link contract (landing-v2): ink text, underline, violet on hover.
 const TITLE_LINK = "underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
@@ -58,6 +60,42 @@ function ArrowTitle({ title }: { title: string }) {
         {title.slice(cut + 1)}
         <span aria-hidden="true">&nbsp;↗</span>
       </span>
+    </>
+  );
+}
+
+/**
+ * A card's LinkedIn post, loaded only when the reader asks for it: the button
+ * mounts LinkedIn's frame inside the card, so the archive never loads dozens
+ * of frames (or anything from linkedin.com) on its own. The headline link
+ * still opens the post on LinkedIn for anyone who would rather go there.
+ */
+function PostToggle({ item }: { item: NewsItem }) {
+  const [open, setOpen] = useState(false);
+  const panel = useId();
+  if (!item.embed) return null;
+  return (
+    <>
+      <p className="px-6 pb-5">
+        <button
+          type="button"
+          aria-expanded={open}
+          aria-controls={panel}
+          onClick={() => setOpen((o) => !o)}
+          className="inline-flex items-center gap-2 font-mono text-small text-text-strong underline decoration-ink-950/25 underline-offset-4 transition-colors hover:decoration-rr-violet hover:decoration-2 coarse:min-h-11"
+        >
+          {open ? "Hide the LinkedIn post" : "Show the LinkedIn post"}
+          <span
+            aria-hidden="true"
+            className={`inline-block transition-transform duration-[var(--duration-fast)] motion-reduce:transition-none ${open ? "rotate-90" : ""}`}
+          >
+            &#8250;
+          </span>
+        </button>
+      </p>
+      <div id={panel} hidden={!open} className="border-t border-ink-950/10 bg-paper-100 p-3 sm:p-6">
+        {open && <LinkedInEmbed embed={item.embed} href={item.link} load="now" />}
+      </div>
     </>
   );
 }
@@ -140,6 +178,7 @@ export default function NewsCard({ item, titleAs = "h3" }: NewsCardProps) {
           </div>
         )}
         {body}
+        <PostToggle item={item} />
       </div>
       {item.credit && (
         <p className="font-mono text-eyebrow leading-relaxed tracking-normal text-text-muted">

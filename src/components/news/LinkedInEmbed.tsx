@@ -18,11 +18,27 @@ import type { NewsEmbed } from "./newsData";
  * anti-bot and captcha hosts blocked), an error page adds none. Until then,
  * or for good if the check never passes, the poster is the post: the whole
  * slide, focusable, and a tap opens the post on LinkedIn.
+ *
+ * Only our own organisation's posts carry a poster. A post by anyone else
+ * holds the space with its title and a link to LinkedIn instead, set on the
+ * same paper, so a blocked frame still leaves a way to the post.
+ *
+ * `load`: "near" (the lead story) mounts the frame as the reader approaches;
+ * "now" mounts it at once, for a card that renders this only after the reader
+ * asked for the post (click to load: nothing from linkedin.com before that).
  */
-export default function LinkedInEmbed({ embed, href }: { embed: NewsEmbed; href: string }) {
+export default function LinkedInEmbed({
+  embed,
+  href,
+  load = "near",
+}: {
+  embed: NewsEmbed;
+  href: string;
+  load?: "near" | "now";
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLIFrameElement>(null);
-  const [near, setNear] = useState(false);
+  const [near, setNear] = useState(load === "now");
   const [loaded, setLoaded] = useState(false);
   const [live, setLive] = useState(false);
   const poster = embed.poster;
@@ -75,16 +91,30 @@ export default function LinkedInEmbed({ embed, href }: { embed: NewsEmbed; href:
           rel="noopener noreferrer"
           tabIndex={live ? -1 : undefined}
           aria-hidden={live || undefined}
-          className="absolute inset-0 block focus-visible:-outline-offset-4"
+          className={`absolute inset-0 focus-visible:-outline-offset-4 ${
+            poster ? "block" : "flex flex-col items-center justify-start gap-3 px-8 pt-16 text-center"
+          }`}
         >
-          <img
-            src={`${import.meta.env.BASE_URL}${poster.src.replace(/^\//, "")}`}
-            alt={poster.alt}
-            width={poster.width}
-            height={poster.height}
-            decoding="async"
-            className="h-full w-full object-contain object-top"
-          />
+          {poster ? (
+            <img
+              src={`${import.meta.env.BASE_URL}${poster.src.replace(/^\//, "")}`}
+              alt={poster.alt}
+              width={poster.width}
+              height={poster.height}
+              decoding="async"
+              className="h-full w-full object-contain object-top"
+            />
+          ) : (
+            <>
+              <span className="font-mono text-small text-text-muted">LinkedIn</span>
+              <span className="max-w-[26ch] font-display text-lead font-semibold leading-snug text-text-strong">
+                {embed.title}
+              </span>
+              <span className="text-small font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4">
+                Open the post on LinkedIn ↗
+              </span>
+            </>
+          )}
         </a>
         {near && (
           <iframe
