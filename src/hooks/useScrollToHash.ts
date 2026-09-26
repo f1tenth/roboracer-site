@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigationType } from "react-router-dom";
 import { REDUCED_MOTION_QUERY, ScrollTrigger } from "../lib/motion";
 
 /** Glide speed for an in-page jump: roughly one viewport of travel per
@@ -39,14 +39,21 @@ function holdAt(el: HTMLElement): () => void {
     released = true;
     window.clearTimeout(timer);
     ScrollTrigger.removeEventListener("refresh", reapply);
+    resized?.disconnect();
     for (const ev of INPUT_EVENTS) window.removeEventListener(ev, release);
   };
   const reapply = () => {
+    if (released) return;
     const top = topOf(el);
     if (Math.abs(window.scrollY - top) > 1) window.scrollTo(0, top);
   };
   const timer = window.setTimeout(release, HOLD_MS);
   ScrollTrigger.addEventListener("refresh", reapply);
+  // The body grows as data renders; the root follows it. Its first report
+  // (on observe) finds the jump already in place and does nothing.
+  const resized = typeof ResizeObserver === "undefined" ? undefined : new ResizeObserver(reapply);
+  resized?.observe(document.body);
+  resized?.observe(document.documentElement);
   for (const ev of INPUT_EVENTS) window.addEventListener(ev, release, { passive: true });
   return release;
 }
@@ -89,17 +96,20 @@ function glideTo(top: number): () => void {
  * target. Arriving from another route (or on load) jumps straight there; a
  * link on the same page glides, or jumps under reduced motion. Focus moves to
  * the target afterwards, as a native in-page anchor does, so the next Tab
- * starts from there.
+ * starts from there. Back/Forward onto a hash entry of the page already on
+ * screen is useRouteScroll's: it returns to where that entry was left, and
+ * gliding to the anchor (and moving focus) would undo that.
  */
 export function useScrollToHash() {
   const { hash, key } = useLocation();
+  const navigationType = useNavigationType();
   // The navigation that mounted the page. Keyed rather than a boolean so
   // StrictMode's second effect run still counts as the arrival.
   const arrivalKey = useRef(key);
 
   useEffect(() => {
     const firstVisit = key === arrivalKey.current;
-    if (!hash) return;
+    if (!hash || (navigationType === "POP" && !firstVisit)) return;
     // A malformed fragment (/#%) is ignored, never thrown: decodeURIComponent
     // raises URIError on it, which took the whole page down.
     let id: string;
@@ -144,5 +154,5 @@ export function useScrollToHash() {
       stopGlide?.();
       release?.();
     };
-  }, [hash, key]);
+  }, [hash, key, navigationType]);
 }
