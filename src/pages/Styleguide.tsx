@@ -137,12 +137,12 @@ export default function Styleguide() {
       </Section>
 
       {/* StartHere - the ways in from public/data/paths.json, in both
-          densities: compact (the landing's 00, header beside the rows from
-          lg) and full (/about's 01, clip and caption per row). No section id
+          densities: compact (the landing's 00, a grid of tiles under the
+          header from desktop:) and full (/about's 01, clip and caption per row). No section id
           here: the landing's #start stays the nav's one target. */}
       <div className="bg-paper-50">
         <div className="mx-auto max-w-content px-6 pt-16">
-          <Spec name="StartHere · compact (landing 00) · 5/7 from lg, sticky header, 16/10 thumbs, one link per row" />
+          <Spec name="StartHere · compact (landing 00) · header full width, tiles with clips from desktop (2 / 3+2 / 5 across), thumb rows on phones, one link per tile" />
         </div>
       </div>
       <StartHere

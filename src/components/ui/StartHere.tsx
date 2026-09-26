@@ -362,25 +362,36 @@ function FullMedia({ media, label }: { media?: PathMedia; label: string }) {
   );
 }
 
-/** Landing row: the small picture in line with the label, the sentence and
- * the link. Phones keep the picture beside the text, a table of contents. */
-function CompactRow({ path }: { path: EntryPath }) {
+/** Landing entry. Phones (either orientation) keep the row: the small picture
+ * beside the label, the sentence and the link, a table of contents. From
+ * `desktop:` it is a tile in the section's grid: /about's clip frame on top
+ * (still first, the muted loop only near and on screen, the still under
+ * reduced motion), then the label, the sentence and the link, pinned to the
+ * tile's foot so the links of a row line up. Captions stay on /about. The
+ * copy hidden at a size is display: none, so its lazy image and observed
+ * clip are never requested. */
+function CompactTile({ path }: { path: EntryPath }) {
   // Per instance, not per path: /styleguide shows both densities at once.
   const lineId = `${useId()}-line`;
   return (
     <>
-      <Thumb media={path.media} />
-      <div className="min-w-0">
+      <div className="desktop:hidden">
+        <Thumb media={path.media} />
+      </div>
+      <div className="compact:hidden">
+        <FullMedia media={path.media} label={path.id} />
+      </div>
+      <div className="flex min-w-0 flex-col desktop:flex-1 desktop:pt-5">
         <h3 className="flex items-baseline gap-3 font-display text-display-s font-semibold text-text-strong">
           <span aria-hidden="true" className="font-mono text-small font-normal tracking-normal text-text-muted">
             {path.n}
           </span>
           {path.label}
         </h3>
-        <p id={lineId} className="mt-1.5 max-w-[52ch] text-body text-text-body lg:text-lead">
+        <p id={lineId} className="mt-1.5 max-w-[52ch] text-body text-text-body desktop:mt-2">
           {path.line}
         </p>
-        <p className="mt-2 text-small lg:text-body">
+        <p className="mt-2 text-small desktop:mt-auto desktop:pt-4 desktop:text-body">
           <PathAction path={path} describedBy={lineId} />
         </p>
       </div>
@@ -426,9 +437,10 @@ function FullRow({ path }: { path: EntryPath }) {
 }
 
 type StartHereProps = {
-  /** "compact" (landing): small pictures in line with one sentence, beside
-   * the header from lg. "full" (/about): the bigger frame with its clip and
-   * caption, plus the second sentence. */
+  /** "compact" (landing): the header full width, then the five as a grid of
+   * tiles with their clips from `desktop:` (small-picture rows on phones).
+   * "full" (/about): the bigger frame with its clip and caption beside the
+   * text, plus the second sentence. */
   density?: "compact" | "full";
   /** Two-digit section index ("00" on the landing, "01" on /about). */
   index: string;
@@ -491,9 +503,17 @@ export default function StartHere({
     };
   }, []);
 
+  // The landing's grid (compact, from desktop:): tablets 2 + 2 with the
+  // fifth across both columns (picture beside its text), 1024 to 1279 3 + 2
+  // on six columns (the second row's two a little wider, no hole), 1280 up
+  // all five in one row (about 22rem each at 1366 and 1536: the root size
+  // follows the window, so the tiles keep their width in rem).
+  const listClass = full
+    ? "border-t border-ink-950/10"
+    : "border-t border-ink-950/10 desktop:grid desktop:grid-cols-2 desktop:gap-x-6 desktop:gap-y-10 desktop:border-t-0 desktop:lg:grid-cols-6 desktop:xl:grid-cols-5";
   const rowClass = full
     ? "relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-4 border-b border-ink-950/10 py-6 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-6 md:grid-cols-12 md:gap-x-10 md:py-10"
-    : "relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-4 border-b border-ink-950/10 py-4 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-6 lg:grid-cols-[12rem_minmax(0,1fr)] lg:py-5";
+    : "relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-4 border-b border-ink-950/10 py-4 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-6 desktop:flex desktop:flex-col desktop:border-b-0 desktop:py-0 desktop:max-lg:last:col-span-2 desktop:max-lg:last:grid desktop:max-lg:last:grid-cols-2 desktop:max-lg:last:items-center desktop:max-lg:last:gap-x-6 desktop:max-lg:last:[&>div:last-child]:pt-0 desktop:lg:max-xl:col-span-2 desktop:lg:max-xl:nth-[n+4]:col-span-3";
 
   // aria-busy until the paths arrive: the "Start here" jump waits for it
   // (hooks/useScrollToHash). Meanwhile the bundled five stand in, invisible
@@ -501,15 +521,15 @@ export default function StartHere({
   // height and nothing below it jumps when the file lands.
   const list = (
     <div aria-busy={loading}>
-      <Reveal stagger as="ul" className="border-t border-ink-950/10">
+      <Reveal stagger as="ul" className={listClass}>
         {(loading ? BUNDLED_PATHS : paths).map((path) =>
           loading ? (
             <li key={path.id} aria-hidden="true" className={`invisible ${rowClass}`}>
-              {full ? <FullRow path={path} /> : <CompactRow path={path} />}
+              {full ? <FullRow path={path} /> : <CompactTile path={path} />}
             </li>
           ) : (
             <li key={path.id} data-path={path.id} className={rowClass}>
-              {full ? <FullRow path={path} /> : <CompactRow path={path} />}
+              {full ? <FullRow path={path} /> : <CompactTile path={path} />}
             </li>
           ),
         )}
@@ -536,11 +556,12 @@ export default function StartHere({
     );
   }
 
-  // Landing: the header and its one line beside the list from lg (a 5/7
-  // split), stacked above it below. The top padding clears the fixed nav
-  // when the nav's "Start here" scrolls this section to the top of the
-  // window (the bar is --spacing-nav tall at every size), so this section
-  // takes no scroll margin: one would add a second nav's height of gap.
+  // Landing: the header and its one line full width, as every landing
+  // section has it, then the grid across the page (Cedric, 2026-09-26: "super
+  // empty on the left"). The top padding clears the fixed nav when the nav's
+  // "Start here" scrolls this section to the top of the window (the bar is
+  // --spacing-nav tall at every size), so this section takes no scroll
+  // margin: one would add a second nav's height of gap.
   return (
     <Section
       tight
@@ -549,13 +570,8 @@ export default function StartHere({
       aria-labelledby={headingId}
       className="pt-[calc(var(--spacing-nav)+2rem)]! focus:outline-none"
     >
-      <div className="grid lg:grid-cols-12 lg:gap-x-12">
-        {/* From lg the header stays beside the list while it scrolls by. */}
-        <div className="lg:sticky lg:top-[calc(var(--spacing-nav)+2rem)] lg:col-span-5 lg:self-start">
-          <SectionHeader index={index} id={headingId} title="Start here" subtitle={subtitle} lead={lead} className="lg:mb-0!" />
-        </div>
-        <div className="lg:col-span-7">{list}</div>
-      </div>
+      <SectionHeader index={index} id={headingId} title="Start here" subtitle={subtitle} lead={lead} />
+      {list}
     </Section>
   );
 }
