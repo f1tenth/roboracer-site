@@ -63,7 +63,10 @@ const REVEAL_AFTER_MS = 900;
  *
  * It is heavy (a canvas redrawn every frame, five recordings) and animated,
  * so it loads only on a click: until then a poster captured from it holds
- * the exact box the player will fill, so nothing moves when it arrives. Under
+ * the exact box the player will fill, so nothing moves when it arrives. The
+ * poster leaves the player's buttons out (Full screen, Close, the play bar:
+ * hidden in the board's page before the capture, manifest RACE-LB-01/02), so
+ * nothing drawn on it looks clickable but the play disc. Under
  * reduced motion the board's player opens paused by itself. The link under it
  * opens the same view on the board's site, in every state.
  */
