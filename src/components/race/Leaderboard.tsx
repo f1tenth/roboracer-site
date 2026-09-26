@@ -1,9 +1,11 @@
 import { Component, useEffect, useRef, useState, type ReactNode } from "react";
 import Button from "../ui/Button";
+import LeaderboardReplay from "./LeaderboardReplay";
 import { useNow } from "./useNow";
 import {
   FALLBACK_CONFIG,
   boardHref,
+  canReplay,
   dataBase,
   fetchBoardJson,
   formatAgo,
@@ -13,6 +15,7 @@ import {
   pickFeatured,
   readBoardFile,
   readBoardIndex,
+  replayHref,
   shortBoardLabel,
   siblingBoards,
   topRows,
@@ -100,10 +103,16 @@ export default function Leaderboard() {
  * The top of the ESE 6150 class leaderboard, read live from the board's own
  * public JSON (see ./leaderboardData and docs/LEADERBOARD.md).
  *
- * It features one board: the most recently opened lab with a ranked lap. When
- * that lab has more than one board with laps (lab 4 ranks a plain lap and an
- * obstacle lap) a two-chip switch picks between them; boards of other labs
- * stay on the board's own site, behind the link.
+ * It features one board: the one leaderboard.json pins (lab 4, follow the
+ * gap), or else the most recently opened lab with a ranked lap. When that lab
+ * has more than one board with laps (lab 4 ranks a plain lap and an obstacle
+ * lap) a two-chip switch picks between them; boards of other labs stay on the
+ * board's own site, behind the link.
+ *
+ * Beside the table from lg (under it below), the board's own player races
+ * the top cars of the board shown, loaded on a click (./LeaderboardReplay).
+ * It follows the chips. A board with fewer than two recorded laps has no
+ * race to show, and the table then keeps the row to itself.
  *
  * Every state keeps the way out: while loading, the table's frame is drawn
  * with the same rows and cell sizes, so nothing below moves when the laps
@@ -267,9 +276,41 @@ function LeaderboardBlock() {
   const closed = dueAt ? Date.parse(dueAt) < now : false;
   const updated = formatAgo(board?.generated_at, now);
 
+  // The bundled config's replay while the real one loads, so the layout does
+  // not change when it arrives; the board shown in the chips, else the pinned one.
+  const replayCfg = (cfg ?? FALLBACK_CONFIG).replay;
+  const replayBoard = selected ?? (cfg ?? FALLBACK_CONFIG).featured ?? undefined;
+  const replay = replayCfg && (!board || canReplay(board)) ? replayCfg : null;
+
+  const meta = (
+    <>
+      <dl className="flex flex-col gap-2 border-t border-ink-950/10 pt-5 font-mono text-small text-text-muted">
+        <div className="flex flex-wrap justify-between gap-x-4">
+          <dt>ranked</dt>
+          <dd className="tabular-nums text-text-strong">
+            {typeof total === "number" ? `${total} ${noun}` : <Bar w="w-20" />}
+          </dd>
+        </div>
+        <div className="flex flex-wrap justify-between gap-x-4">
+          <dt>{closed ? "lab closed" : "lab closes"}</dt>
+          <dd className="tabular-nums text-text-strong">{formatDay(dueAt) ?? <Bar w="w-16" />}</dd>
+        </div>
+        <div className="flex flex-wrap justify-between gap-x-4">
+          <dt>updated</dt>
+          <dd className="tabular-nums text-text-strong">{updated ?? <Bar w="w-20" />}</dd>
+        </div>
+        <div className="flex flex-wrap justify-between gap-x-4">
+          <dt>source</dt>
+          <dd className="text-text-strong">{cfg?.label ?? <Bar w="w-32" />}</dd>
+        </div>
+      </dl>
+      {link}
+    </>
+  );
+
   return (
     <div className="grid gap-x-10 gap-y-10 lg:grid-cols-12" aria-busy={skeleton && !switchFailed}>
-      <div className="lg:col-span-8">
+      <div className={replay ? "lg:col-span-5" : "lg:col-span-8"}>
         <div className="border-t border-ink-950/10 pt-5">
           <h3 className="font-display text-display-s font-semibold text-text-strong">
             {labTitle ?? <Bar w="w-64" />}
@@ -369,31 +410,16 @@ function LeaderboardBlock() {
             </tbody>
           </table>
         )}
+        {replay && <div className="mt-10">{meta}</div>}
       </div>
 
-      <div className="lg:col-span-4">
-        <dl className="flex flex-col gap-2 border-t border-ink-950/10 pt-5 font-mono text-small text-text-muted">
-          <div className="flex flex-wrap justify-between gap-x-4">
-            <dt>ranked</dt>
-            <dd className="tabular-nums text-text-strong">
-              {typeof total === "number" ? `${total} ${noun}` : <Bar w="w-20" />}
-            </dd>
-          </div>
-          <div className="flex flex-wrap justify-between gap-x-4">
-            <dt>{closed ? "lab closed" : "lab closes"}</dt>
-            <dd className="tabular-nums text-text-strong">{formatDay(dueAt) ?? <Bar w="w-16" />}</dd>
-          </div>
-          <div className="flex flex-wrap justify-between gap-x-4">
-            <dt>updated</dt>
-            <dd className="tabular-nums text-text-strong">{updated ?? <Bar w="w-20" />}</dd>
-          </div>
-          <div className="flex flex-wrap justify-between gap-x-4">
-            <dt>source</dt>
-            <dd className="text-text-strong">{cfg?.label ?? <Bar w="w-32" />}</dd>
-          </div>
-        </dl>
-        {link}
-      </div>
+      {replay ? (
+        <div className="lg:col-span-7">
+          <LeaderboardReplay replay={replay} href={replayHref(cfg ?? FALLBACK_CONFIG, replayBoard, replay.compare)} />
+        </div>
+      ) : (
+        <div className="lg:col-span-4">{meta}</div>
+      )}
     </div>
   );
 }
