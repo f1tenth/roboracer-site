@@ -452,3 +452,15 @@ Both files come from slide 1 of the Roboracer Foundation's own LinkedIn post of 
 |---|---|---|---|---|---|---|---|---|---|
 | NEWS-01 | `public/media/news/news-ifac2026-group-1080.webp` | webp | 1080x531 | 114 KB | the whole IFAC 2026 field, arms raised, in front of the 29th competition screen at BEXCO | slide 1, crop 1080x531+0+331 (the photograph only, without the slide's type) | The Roboracer Foundation | organization's own post; Cedric, 2026-09-21 | news.json `ifac2026-busan-largest-field` image |
 | NEWS-02 | `public/media/news/news-ifac2026-post-1080.webp` | webp | 1080x1350 | 135 KB | slide 1 whole: "274 racers. Zero steering wheels. 56 teams, four days, BEXCO Busan." | slide 1, uncropped | The Roboracer Foundation | organization's own post; Cedric, 2026-09-21 | poster behind the LinkedIn embed on /news |
+
+## Start here thumbnails (p3-start-here, 2026-09-25)
+
+The landing's "Start here" shows each way in with a small inline picture (Cedric, 2026-09-25: "images would be good, just small and in line with the description"). Each is a 480x300 (16/10) cut of media the site already carries, so permission follows its source row; nothing new was sourced. Encoded with Pillow WebP q80. /about's fuller rows use the source files themselves (`paths.json` `media.src` / `media.video`). The platform clips and posters (V4-12, V4-13, V3-18, V3-21) are now referenced from `public/data/paths.json`; `platform.json` is gone.
+
+| id | file | type | dims | size | content | source | credit | permission | used by |
+|---|---|---|---|---|---|---|---|---|---|
+| ST-01 | `public/media/start/start-build-480.webp` | webp | 480x300 | 13 KB | hands wiring a car standing on its wheels, bench and tools | frame at 3.0 s of `platform/platform-build-960.mp4` (no burned-in caption there), crop 848x530+40+0 | Cedric Hollande | as V4-12 (own media) | paths.json `build` thumb |
+| ST-02 | `public/media/start/start-learn-480.webp` | webp | 480x300 | 24 KB | two students working on a car on the pit floor | `platform/platform-learn-1200.webp`, resized | Felix Jahncke | as V3-18 (granted) | paths.json `learn` thumb |
+| ST-03 | `public/media/start/start-race-480.webp` | webp | 480x300 | 14 KB | the Liquid car with blue lights between yellow barriers, watermark kept | frame at 3.5 s of `platform/platform-race-960.mp4`, crop 864x540+0+0 | The Robotics Club | as V4-13 | paths.json `race` thumb |
+| ST-04 | `public/media/start/start-research-480.webp` | webp | 480x300 | 7 KB | MPPI overtake in the simulator | `platform/platform-research-mppi-poster.webp`, resized | Cedric Hollande | as V3-21 (own work) | paths.json `research` thumb |
+| ST-05 | `public/media/start/start-ifac2026-field-480.webp` | webp | 480x300 | 33 KB | the IFAC 2026 field, arms raised, in front of the 29th competition screen | `news/news-ifac2026-group-1080.webp`, centre crop 850x531+115+0 | The Roboracer Foundation | as NEWS-01 | paths.json `sponsor` thumb (file name avoids "sponsor", which ad blockers match) |
