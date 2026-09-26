@@ -22,6 +22,10 @@ Branch `revamp/p3-research-mobile`. Captures (git-ignored PNGs) and metrics JSON
   the race timeline's pattern: "Show 19 more papers from 2026" / "Hide 19 papers
   from 2026" (race: "Show 30 earlier events, 2016 to 2024" / "Hide the 2016 to 2024
   events"). Each year heading carries its count ("23 papers").
+- **Phones only (`compact:`, follow-up the same day)**: the two newest years open with
+  their four; every older year is its heading, its count and a closed fold ("Show 22
+  papers from 2024" / "Hide 22 papers from 2024"), figures included once opened.
+  Desktop and tablet keep four per year. At 390 the first cut was 19,309 px.
 - A mono jump row under the counter: every year on the list, then "Submit your
   paper ↓". Built from the data (a topic or search lists only its years).
 - Within a year, papers with a figure come first (stable sort; file order otherwise,
@@ -31,8 +35,8 @@ Branch `revamp/p3-research-mobile`. Captures (git-ignored PNGs) and metrics JSON
   The counts ("137 of 137 papers", header ledger) always count every paper.
 - Featured fold wording now matches: "Show 13 more featured papers" / "Hide 13
   featured papers" (was "13 more featured"). Still phone-only, first 4 shown.
-- The phone-only "2017 to 2025 · 114 papers" fold is gone (replaced by the per-year
-  folds; the years stay on the page).
+- The phone-only "2017 to 2025 · 114 papers" fold is gone, replaced by one fold per
+  year; every year heading stays on the page and in the jump row.
 - Row figures link to the paper like the featured card's figure (hidden from AT and
   the tab order, so each row still announces one link).
 
@@ -40,14 +44,16 @@ Branch `revamp/p3-research-mobile`. Captures (git-ignored PNGs) and metrics JSON
 
 | Viewport | Before | After | Rows shown | Figure |
 |---|---|---|---|---|
-| 390x844 | 9,642 / 8,540 | 19,309 / 18,207 | 31 of 137 | 78x49 -> 340x213 |
-| 844x390 | 7,600 / 6,737 | 12,496 / 11,633 | 31 | 222x139 -> 384x240 |
+| 390x844 | 9,642 / 8,540 | 10,234 / 9,131 | 8 of 137 | 78x49 -> 340x213 |
+| 844x390 | 7,600 / 6,737 | 7,092 / 6,228 | 8 | 222x139 -> 384x240 |
 | 768x1024 | 37,082 / 36,158 | 16,420 / 15,497 | 31 | 222x139 (unchanged) |
 | 1536x730 | 34,946 / 34,355 | 13,501 / 12,910 | 31 | 254x159 (unchanged) |
 
-Phones got longer: before, 2017 to 2025 sat in one fold; now every year is on the
-page with four large figures each. The jump row (y about 3,300 at 390) reaches
-Submit in one tap.
+With four per year on phones too, 390 was 19,309 / 18,207 and 844x390 12,496 /
+11,633: the larger figures doubled the phone page. With the older years closed,
+390 is back to about its old length (+592 px for figures four times larger) and a
+landscape phone is shorter than before. The jump row (y about 3,300 at 390) reaches
+any year or Submit in one tap.
 
 ## Checks
 
@@ -71,6 +77,14 @@ Submit in one tap.
 - Re-checked after the laptop reboot on a fresh dev server (`recheck-*` captures,
   `recheck-metrics.json`): same heights, folds, focus order, jump offsets, 0 axe
   violations and 0 console errors at all four viewports.
+- Older years closed on phones (`older-*` captures, `older-metrics.json`): axe 0
+  violations at all four viewports with 2024 closed and open; Tab reaches the 2024
+  summary (2px ring), Enter opens it with focus kept on it and no shift (summary
+  document y, `scrollY` and the heading's position identical before and after at
+  390 and 844x390), the next Tab lands on the first 2024 paper, whose figure is
+  340x213 lazy with 320x200 dimensions; Enter closes it. A search ("MPC", 28 rows)
+  and a topic ("Planning", 21 rows) show every match with no fold at every size;
+  clearing restores the folds. Jump to 2019 lands under the bar. 0 console errors.
 - Search "MPC": 28 rows, no folds, counter "28 of 137 papers"; cleared: folds back.
   Topic "Planning": 3 featured with no fold, 21 rows with no fold, jump row lists
   2026 to 2022.
@@ -81,6 +95,6 @@ Submit in one tap.
   px; on a 3x iPhone that is soft (diagram labels do not read; see
   `after-390x844-dpr3-2025.png`). Crisp needs a 640x400 re-extraction of the 77 row
   figures (sources logged in `docs/media/THUMBS.md`) and a `srcset` in `RowThumb`.
-- The 6 papers in 2021, 2019, 2018 and 2017 have no figure; on a phone their logo
-  placeholder is a 340x213 plate.
+- The 6 papers in 2021, 2019, 2018 and 2017 have no figure; on a phone, once their
+  year is opened, the logo placeholder is a 340x213 plate.
 - Not tested on a real iPhone (WebKit does not launch here).

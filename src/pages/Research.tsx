@@ -24,6 +24,10 @@ const FEATURED_ON_PHONE = 4;
  * opens its recent years with four and five races (2026, 2025) and folds the
  * rest; four also fills two rows where a phone sets the list two across. */
 const PER_YEAR = 4;
+/** On a phone only the newest years open with their four; every older year
+ * is its heading, its count and a closed fold (the page was 19,300px at 390
+ * with every year showing four large figures). */
+const OPEN_YEARS_ON_PHONE = 2;
 // Two across from sm on a phone (a landscape phone, a small tablet held
 // upright): a full-width figure there would be taller than the screen.
 const FEATURED_GRID = "grid gap-6 compact:gap-4 sm:grid-cols-2 lg:grid-cols-3";
@@ -53,8 +57,8 @@ function FoldChevron() {
   );
 }
 
-/** True on a phone in either orientation (the `compact:` variant): the one
- * place the featured grid folds. */
+/** True on a phone in either orientation (the `compact:` variant): where the
+ * featured grid folds and the older years close. */
 function useCompact(): boolean {
   return useSyncExternalStore(
     (onChange) => {
@@ -75,22 +79,24 @@ function useCompact(): boolean {
  * native control: it opens from the keyboard and without React, screen
  * readers announce it expanded or collapsed, focus stays on it and the next
  * Tab lands on the first paper it revealed, and find-in-page opens it. It
- * stays put while the papers open under it, so nothing above moves. `paged`
- * is off while a topic or a search is set: every match shows.
+ * stays put while the papers open under it, so nothing above moves.
+ * `open` is how many papers show before the fold: PER_YEAR, none for an
+ * older year on a phone, every one while a topic or a search is set (every
+ * match shows).
  */
 function YearGroup({
   year,
   items,
   labels,
-  paged,
+  open,
 }: {
   year: number;
   items: Publication[];
   labels: Record<string, string>;
-  paged: boolean;
+  open: number;
 }) {
-  const shown = paged ? items.slice(0, PER_YEAR) : items;
-  const rest = paged ? items.slice(PER_YEAR) : [];
+  const shown = items.slice(0, open);
+  const rest = items.slice(open);
   return (
     <section aria-labelledby={`year-${year}`} className="py-8">
       <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
@@ -102,11 +108,13 @@ function YearGroup({
         </h3>
         <p className="font-mono text-small text-text-muted">{papers(items.length)}</p>
       </div>
-      <ul className={YEAR_LIST}>
-        {shown.map((p) => (
-          <PaperRow key={p.id} publication={p} tagLabels={labels} />
-        ))}
-      </ul>
+      {shown.length > 0 && (
+        <ul className={YEAR_LIST}>
+          {shown.map((p) => (
+            <PaperRow key={p.id} publication={p} tagLabels={labels} />
+          ))}
+        </ul>
+      )}
       {rest.length > 0 && (
         <details className="group">
           {/* Built from the data, in /race's words: "Show 30 earlier events,
@@ -114,7 +122,8 @@ function YearGroup({
           <summary className={`${FOLD_SUMMARY} border-t border-ink-950/10`}>
             <FoldChevron />
             <span className="font-mono text-small group-open:hidden">
-              Show {rest.length} more {rest.length === 1 ? "paper" : "papers"} from {year}
+              Show {rest.length}
+              {shown.length > 0 ? " more" : ""} {rest.length === 1 ? "paper" : "papers"} from {year}
             </span>
             <span className="hidden font-mono text-small group-open:inline">
               Hide {papers(rest.length)} from {year}
@@ -185,9 +194,13 @@ export default function Research() {
   // The list was 35,000px at 1536 and 37,000px at 768 before the submit
   // section, and 39,000px at 390 with every year open. Each year now shows
   // its first four papers and folds the rest (YearGroup); the year headings
-  // all stay on the page. A topic or a search shows every match: nothing it
-  // found is ever behind a fold, and the counts above never change.
+  // all stay on the page. On a phone that was still 19,300px at 390, so
+  // there only the two newest years open and every older year is a closed
+  // fold under its heading. A topic or a search shows every match: nothing
+  // it found is ever behind a fold, and the counts above never change.
   const paged = !tag && !needle;
+  const openCount = (index: number, total: number) =>
+    !paged ? total : compact && index >= OPEN_YEARS_ON_PHONE ? 0 : PER_YEAR;
 
   // The featured cards were 17 rows ahead of the search, which sat 7 screens
   // down at 390 (RESEARCH-01). On a phone the first four show and the rest
@@ -434,8 +447,14 @@ export default function Research() {
                     figure a sixth of the page in from the left and kept the
                     pictures small (Cedric, 2026-08-23). It is a heading now,
                     and the rows run the full width. */}
-                {byYear.map(([year, items]) => (
-                  <YearGroup key={year} year={year} items={items} labels={labels} paged={paged} />
+                {byYear.map(([year, items], i) => (
+                  <YearGroup
+                    key={year}
+                    year={year}
+                    items={items}
+                    labels={labels}
+                    open={openCount(i, items.length)}
+                  />
                 ))}
               </div>
             )}
