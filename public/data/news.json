@@ -575,8 +575,13 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "GitHub",
-      "credit": "Source: github.com/f1tenth/roboracer_rules",
-      "image": null,
+      "credit": "Source: github.com/f1tenth/roboracer_rules · Poster: RoboRacer Foundation",
+      "image": {
+        "src": "/media/news/news-rules-repo-poster-1080.webp",
+        "width": 764,
+        "height": 1080,
+        "alt": "Poster for the 26th RoboRacer Autonomous Racing Competition, December 22 to 24, 2025, at Techfest IIT Bombay in Mumbai: an orange race car numbered 31 on a blurred street under the RoboRacer wordmark."
+      },
       "sources": "Web candidate roboracer-rules-repo-2025 (repo description 'Official ruleset for roboracer competitions, standardized and updated every competition.', created 2025-10-13, gh api). The date is the repository's creation date, not an announcement. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'The race rules get one public, versioned home'; excerpt 'The official rules now sit in a public GitHub repository that the organizers update for each competition. Teams can read the current rules, and every past change, before they race.'",
       "featured": false,
       "status": "published"
@@ -657,8 +662,13 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "Stiripesurse (Agerpres)",
-      "credit": "Article: Stiripesurse, from Agerpres",
-      "image": null,
+      "credit": "Article: Stiripesurse, from Agerpres · Poster: RoboRacer Foundation",
+      "image": {
+        "src": "/media/news/news-iv2025-poster-1080.webp",
+        "width": 764,
+        "height": 1080,
+        "alt": "Poster for the 25th RoboRacer Autonomous Racing Competition, June 22 to 25, 2025, at IEEE IV 2025 in Cluj-Napoca: the RoboRacer wordmark over a city street with light trails."
+      },
       "sources": "Web candidate iv2025-cluj-forzaeth-wins (Agerpres via Stiripesurse 2025-06-24: eight teams, podium; ForzaETH blog 2025-07-22 https://www.forzaeth.ch/blog/iv_25/: 'we secured the first place'; race site Wayback https://web.archive.org/web/20260121200545/http://iv2025-race.roboracer.ai/: 25th, June 22-23, UTCN HUB) merged with drive candidate iv2025-cluj-25th and LinkedIn candidate iv2025-call-for-teams. ORDINAL: CDC 2025's race site also claimed '25th'; events_map.json gives 25 to IV 2025. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'ForzaETH wins the 25th competition, at IEEE IV 2025 in Cluj-Napoca'; excerpt 'Eight teams entered the first race held as a regular IV event, at the UTCN HUB in Cluj-Napoca. ETH Zürich's ForzaETH won. SZEnergy from Széchenyi István University in Győr came second and MechaByte from the German International University third.'",
       "featured": false,
       "status": "published"
@@ -838,8 +848,13 @@
       "author_url": null,
       "affiliation": "TU Wien",
       "publisher": "TU Wien",
-      "credit": "Article: TU Wien, Scuderia Segfault",
-      "image": null,
+      "credit": "Article: TU Wien, Scuderia Segfault · Poster: RoboRacer Foundation",
+      "image": {
+        "src": "/media/news/news-cdc2024-poster-1080.webp",
+        "width": 764,
+        "height": 1080,
+        "alt": "Poster for the 22nd competition, December 16 to 19, 2024, at IEEE CDC 2024 in Milan."
+      },
       "sources": "Web candidate cdc2024-milan-scuderia-segfault-wins (TU Wien 2024-12-19; ForzaETH blog: fourth) merged with drive candidate cdc2024-milan-results (organizers' timing and bracket workbook: final and third-place match, 7.126 s, 42 laps, 12 teams) and LinkedIn candidates cdc2024-22nd-announced (IEEE CDC: format) and cdc2024-team-fifth-fastest (Anthony Garcia: fifth of 12 in time trials). Archived race site: https://web.archive.org/web/20250714000527/http://cdc2024-race.f1tenth.org/. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Scuderia Segfault wins the 22nd competition, at CDC 2024 in Milan'; excerpt 'Twelve teams raced at the Conference on Decision and Control. TU Wien's Scuderia Segfault set the best time trial, 42 laps with a best lap of 7.126 seconds, then beat HiPeRT UNIMORE Racing in a best-of-three final. Unibo Motorsport took third from ForzaETH.'",
       "featured": false,
       "status": "published"
@@ -883,8 +898,13 @@
       "author_url": null,
       "affiliation": "Boston University",
       "publisher": "BU CISE",
-      "credit": "Article: Boston University CISE",
-      "image": null,
+      "credit": "Article: Boston University CISE · Poster: RoboRacer Foundation",
+      "image": {
+        "src": "/media/news/news-bu2024-poster-1080.webp",
+        "width": 764,
+        "height": 1080,
+        "alt": "Poster for the 23rd competition, November 22, 2024, at the Learning to Trust Autonomy Workshop at Boston University."
+      },
       "sources": "Web candidate bu2024-lehigh-mountain-hawks-win (BU CISE news: standings; newsletter 2024-09-24 announcing the 23rd on November 22) merged with drive candidate bu2024-23rd (posters 18.png and 19.png). The 23rd ran before the 22nd (CDC, December). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Lehigh's Mountain Hawks win the 23rd competition, at Boston University'; excerpt 'Boston University hosted a one-day race during its Learning to Trust Autonomy workshop, with teams from BU, Lehigh, Penn and MIT. Lehigh's Mountain Hawks won, ahead of BU's F1TenthBU Acro and Penn's xLAB team.'",
       "featured": false,
       "status": "published"
@@ -903,8 +923,13 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "F1TENTH newsletter",
-      "credit": "Source: F1TENTH newsletter, November 13, 2024",
-      "image": null,
+      "credit": "Source: F1TENTH newsletter, November 13, 2024 · Graphic: F1TENTH newsletter, November 13, 2024",
+      "image": {
+        "src": "/media/news/news-roboracer-rename-1080.webp",
+        "width": 1080,
+        "height": 540,
+        "alt": "An 'Under construction' banner: a city skyline with cranes above yellow and black hazard stripes and the address www.RoboRacer.ai."
+      },
       "sources": "Web candidate migration-f1tenth-to-roboracer (newsletter 2024-11-13; f1tenth.org redirects to roboracer.ai from the capture of 2024-11-09; newsletter 2025-04-21 'fully transitioned', https://mailchi.mp/2c877d5672e9/f1tenth-summer-newsletter-6746426) merged with drive candidate rebrand-f1tenth-roboracer (startup guide: 'rebranded in 2025'; logo files January-February 2025) and LinkedIn candidate f1tenth-is-now-roboracer (see the February 19, 2025 item). The newsletter's 'over the last 5 years' is not repeated (content skill: founded 2016). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'F1TENTH announces its move to RoboRacer'; excerpt 'The organizers wrote that the community was ready to go beyond 1/10-scale cars, with new platform scales and harder competitions, and that f1tenth.org would move to roboracer.ai. By April 2025 the move was complete.'",
       "featured": false,
       "status": "published"
@@ -948,8 +973,13 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "F1TENTH newsletter",
-      "credit": "Results: F1TENTH newsletter, October 2024",
-      "image": null,
+      "credit": "Results: F1TENTH newsletter, October 2024 · Photo: F1TENTH newsletter, October 21, 2024",
+      "image": {
+        "src": "/media/news/news-iros2024-abudhabi-1080.webp",
+        "width": 1080,
+        "height": 810,
+        "alt": "Two rows of competitors and organizers pose behind a line of cars and trophies at the edge of the track in the exhibition hall at IROS 2024 in Abu Dhabi."
+      },
       "sources": "Web candidate iros2024-abudhabi-dzik-ultimate-wins (the organizers' newsletter of 2024-10-21, quoting Chinmay Samak: gold Dzik Ultimate, silver Scuderia Segfault, bronze ForzaETH, special award SAGOL; TU Wien 2024-10-17 second place; ForzaETH blog: second in qualifying behind Dzik Ultimate's 6.6 s) merged with LinkedIn candidates iros2024-scuderia-segfault-second (TU Wien Informatics) and iros2024-forzaeth-third (ForzaETH: 7.14 s lap, crashed out, third behind Lukasz Sztyber and Scuderia Segfault), and drive candidate iros2024-abu-dhabi-21st (poster). The brief expected this winner to rest on one competitor's post; the organizers' own newsletter names it, so it is published (see MERGE.md). The Teams DB calls the team 'Dzik One'. The IROS 2024 proposal calls the race the 18th; posters and events_map.json the 21st. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Dzik Ultimate wins the 21st competition, at IROS 2024 in Abu Dhabi'; excerpt 'Dzik Ultimate, an independent team from Poland, topped both the time trials and the head-to-head races, with no collisions and a lap under seven seconds. TU Wien's Scuderia Segfault finished second and ETH Zürich's ForzaETH third.'",
       "featured": false,
       "status": "published"
@@ -1049,8 +1079,13 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "Foxglove",
-      "credit": "Article: Foxglove",
-      "image": null,
+      "credit": "Article: Foxglove · Photo: The Roboracer Foundation (then F1Tenth Foundation), LinkedIn, May 16, 2024",
+      "image": {
+        "src": "/media/news/news-icra2024-yokohama-1080.webp",
+        "width": 578,
+        "height": 1080,
+        "alt": "Lukasz Sztyber gives a thumbs-up beside his car and an F1TENTH banner at ICRA 2024 in Yokohama."
+      },
       "sources": "Web candidate icra2024-yokohama-vaul-wins (Foxglove 2024-06-27: VAUL first at the 15th Grand Prix; ForzaETH blog 2024-05-19, https://www.forzaeth.ch/blog/icra_24/: lost the semi-final to VAUL Blitz, won the small final; TU Wien https://informatics.tuwien.ac.at/news/2646: lost the other semi-final to Dzik) merged with LinkedIn candidates icra2024-15th-announced (Foundation poster, May 13-17), icra2024-19-teams (Rahul: over 100 participants, 19 teams, race on Thursday), icra2024-tier-iv-sponsor, icra2024-lukasz-sztyber-trophy (placing not stated), and drive candidate icra2024-yokohama-15th. SM 2024 organizer François Pomerleau and WVU both call VAUL the reigning champion. RUNNER-UP not stated anywhere (Dzik won the other semi-final). TEAM COUNT left out (19 per Rahul, 18 in time trials per ForzaETH, over 20 per TU Wien, 14 attended per the Teams DB). TIER IV's sponsorship is not named (content skill: historical sponsors TODO(content)). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'VAUL wins the 15th competition, at ICRA 2024 in Yokohama'; excerpt 'Université Laval's VAUL won at PACIFICO Yokohama, after its win at IROS 2023. ETH Zürich's ForzaETH won the small final for third. The second MAD-Games workshop ran the same week.'",
       "featured": false,
       "status": "published"
@@ -1089,8 +1124,13 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "F1TENTH newsletter",
-      "credit": "Result: F1TENTH newsletter, July 2024",
-      "image": null,
+      "credit": "Result: F1TENTH newsletter, July 2024 · Photo: F1TENTH newsletter, July 25, 2024",
+      "image": {
+        "src": "/media/news/news-course2024-race-1080.webp",
+        "width": 1080,
+        "height": 810,
+        "alt": "Students line a track of yellow ducting on a paved plaza on 33rd Street as a car races past, at the Penn, CMU and Lehigh race on April 29, 2024."
+      },
       "sources": "Web candidate course2024-penn-cmu-lehigh-friendly-race (newsletter 2024-07-25: result; flyer: outside Skirkanich Hall, April 29, 12-3 PM) merged with LinkedIn candidate penn-cmu-lehigh-grand-prix-2024 (Rahul Mangharam's announcement, https://www.linkedin.com/posts/mangharam_penn-cmu-lehigh-autonomous-racing-grand-activity-7189971586496520192-UeN2) and drive candidate course2024-spring-race (poster, Posters 2026/11.png). No ordinal anywhere. Newsletter photos not re-hosted (ask Cedric). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Penn teams take first and second in a three-university race'; excerpt 'Penn, Carnegie Mellon and Lehigh teach the same course with the 1/10-scale car, and their students raced outside Skirkanich Hall in Philadelphia. Penn's Teams 6 and 9 finished first and second, and Carnegie Mellon's Team 3 third.'",
       "featured": false,
       "status": "published"
@@ -1109,8 +1149,13 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "The Autoware Foundation",
-      "credit": "Article: The Autoware Foundation",
-      "image": null,
+      "credit": "Article: The Autoware Foundation · Poster: RoboRacer Foundation",
+      "image": {
+        "src": "/media/news/news-korea-delegation-poster-1080.webp",
+        "width": 764,
+        "height": 1080,
+        "alt": "Poster for the 15th RoboRacer Autonomous Racing Competition, May 13 to 17, 2024, at ICRA 2024 in Yokohama, Japan: a race car drifting through smoke."
+      },
       "featured": false,
       "status": "published"
     },
@@ -1549,8 +1594,13 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "f1tenth.org",
-      "credit": "Results: f1tenth.org race page",
-      "image": null,
+      "credit": "Results: f1tenth.org race page · Graphic: F1TENTH (old f1tenth.org site)",
+      "image": {
+        "src": "/media/news/news-iros2020-bracket-1080.webp",
+        "width": 1080,
+        "height": 1063,
+        "alt": "The final rounds of the head-to-head bracket of the virtual eighth F1TENTH Grand Prix at IROS 2020, from round 3 to the final between HiPeRT Modena and C.A.T."
+      },
       "sources": "Web candidate iros2020-virtual-hipert-wins. 'The 8th ... Autonomous Grand Prix is a virtual race'; results 1 HiPeRT Modena, 2 C.A.T. (Seoul National University), 3 UCSD-Sid; 17 teams in qualification: https://f1tenth.github.io/iros2020.html (Wayback https://web.archive.org/web/20240809080757/https://f1tenth.org/iros2020.html). Race day October 27: iros2020-schedule.png. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'HiPeRT Modena wins the eighth competition, online for IROS 2020'; excerpt 'The IROS 2020 race ran online, and 17 teams set qualifying laps. HiPeRT Modena from the University of Modena and Reggio Emilia won, ahead of C.A.T. from Seoul National University and UCSD's Siddharth Saha.'",
       "featured": false,
       "status": "published"
@@ -1652,8 +1702,13 @@
       "author_url": null,
       "affiliation": null,
       "publisher": "f1tenth.org",
-      "credit": "Source: f1tenth.org, archived May 9, 2020",
-      "image": null,
+      "credit": "Source: f1tenth.org, archived May 9, 2020 · Photo: F1TENTH (f1tenth.org homepage, May 2020)",
+      "image": {
+        "src": "/media/news/news-foundation2020-car-1080.webp",
+        "width": 477,
+        "height": 800,
+        "alt": "Top view of the 1/10-scale F1/10 car, the image on the f1tenth.org homepage in May 2020."
+      },
       "sources": "Web candidate f1tenth-foundation-named-2020. Footer 'Copyright 2019 PRECISE' on the capture of 2020-02-02 (https://web.archive.org/web/20200202140228/http://f1tenth.org/) and 'Copyright 2020 F1TENTH Foundation' on 2020-05-09; old-site repo commit 2020-05-08 'Change Precise to F1tenth Foundation'; LinkedIn company page: 'Nonprofit, Founded 2020'. This dates the name, not a legal entity (TODO(content): incorporation date, ask Rahul). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'f1tenth.org starts signing as the F1TENTH Foundation'; excerpt 'In May 2020 the footer of f1tenth.org changed from PRECISE to the F1TENTH Foundation. The foundation, today the RoboRacer Foundation, gives 2020 as its founding year.'",
       "featured": false,
       "status": "published"
@@ -1672,8 +1727,13 @@
       "author_url": null,
       "affiliation": "University of Pennsylvania",
       "publisher": "Medium",
-      "credit": "Blog: mLab, University of Pennsylvania",
-      "image": null,
+      "credit": "Blog: mLab, University of Pennsylvania · Photo: Christopher Kao, Penn ESE 680, fall 2018",
+      "image": {
+        "src": "/media/news/news-medium2020-levine-1080.webp",
+        "width": 1080,
+        "height": 607,
+        "alt": "A car runs between white tube barriers on a polished floor during track testing at Penn's Levine Hall, December 4, 2018."
+      },
       "featured": false,
       "status": "published"
     },
@@ -1721,8 +1781,13 @@
       "author_url": "https://www.linkedin.com/in/mangharam",
       "affiliation": "University of Pennsylvania",
       "publisher": "LinkedIn",
-      "credit": "Article: Rahul Mangharam · LinkedIn",
-      "image": null,
+      "credit": "Article: Rahul Mangharam · LinkedIn · Photo: Christopher Kao, Penn ESE 680, fall 2018",
+      "image": {
+        "src": "/media/news/news-nsf2019-final-race-1080.webp",
+        "width": 1080,
+        "height": 607,
+        "alt": "A car drives between white tube barriers and cardboard boxes on a stone floor at the Penn course's final race, December 10, 2018."
+      },
       "sources": "LinkedIn candidate nsf-community-platform-award-2019 (Pulse article: $1.5MM NSF award, Penn, Oregon State, Clemson, over 35 partner universities) merged with web candidate press-wired-2019-nsf-fleet ('These Small Cars Can Help Drive the Autonomous Future', Wired, 2019-10-05, https://www.wired.com/story/small-cars-help-drive-autonomous-future/: 80 cars, 33 collaborators, three years). The Pulse article's '50 mph' top speed is left out (a 2024 Penn video says 40 mph). Penn Engineering's 2019 story dates the pilot course to 2015 (see MERGE.md). Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'NSF funds the car as a shared platform for research and teaching'; excerpt 'A $1.5 million National Science Foundation award to Penn, Oregon State and Clemson set out to make F1/10 shared infrastructure for autonomy research. Wired reported that it would send 80 cars to 33 researchers over three years. More than 35 universities were in the community then.'",
       "featured": false,
       "status": "published"
@@ -1796,8 +1861,13 @@
       "author_url": null,
       "affiliation": "University of Pennsylvania",
       "publisher": "The Daily Pennsylvanian",
-      "credit": "Article: The Daily Pennsylvanian",
-      "image": null,
+      "credit": "Article: The Daily Pennsylvanian · Photo: Christopher Kao, Penn ESE 680, fall 2018 (mid-semester race)",
+      "image": {
+        "src": "/media/news/news-dp2018-midsemester-1080.webp",
+        "width": 1080,
+        "height": 720,
+        "alt": "A car with green wheels drives down a corridor past an AprilTag marker at Penn's mid-semester race, November 6, 2018."
+      },
       "sources": "Web candidate press-dp-2018-new-college-house-demo. 'At New College House, small self-driving cars race each other', Daniel Wang, The Daily Pennsylvanian, 2018-11-07. The paper's photo is not re-hosted. Trim pass 2026-09-26 (docs/news/TRIM.md): the card text before the trim, kept here for its facts: title 'Self-driving cars race through a Penn dining hall'; excerpt 'The Daily Pennsylvanian watched a self-driving car lap a track in the New College House dining pavilion. The demo promoted a program that has students learn autonomous driving by building a 1/10-scale race car.'",
       "featured": false,
       "status": "published"
