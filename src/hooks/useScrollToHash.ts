@@ -11,8 +11,10 @@ const HOLD_MS = 4000;
 
 const INPUT_EVENTS = ["wheel", "touchstart", "keydown", "pointerdown"] as const;
 
-/** Top of `el` in page coordinates. */
-const topOf = (el: HTMLElement) => el.getBoundingClientRect().top + window.scrollY;
+/** Where the window scrolls to show `el`: its top in page coordinates, less
+ * its CSS scroll-margin-top, as a native anchor jump would do. */
+const topOf = (el: HTMLElement) =>
+  el.getBoundingClientRect().top + window.scrollY - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
 
 /**
  * A ScrollTrigger refresh scrolls to 0 to measure and then restores the

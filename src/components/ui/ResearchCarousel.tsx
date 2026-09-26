@@ -284,7 +284,7 @@ function Slide({ p, position, count, tagLabels, layout = "row", short = false, e
           {meta}
         </p>
         <h3
-          className={`mt-3 line-clamp-3 font-display text-[1.375rem] leading-[1.625rem] font-semibold tracking-[-0.01em] text-text-strong ${stacked ? "landscape:mt-2 landscape:line-clamp-2" : ""}`}
+          className={`mt-3 line-clamp-3 font-display text-display-s font-semibold text-text-strong ${stacked ? "landscape:mt-2 landscape:line-clamp-2" : ""}`}
         >
           {p.title}
         </h3>
@@ -293,7 +293,7 @@ function Slide({ p, position, count, tagLabels, layout = "row", short = false, e
         </p>
         {/* The abstract field verbatim; an empty area when it is missing. */}
         <p
-          className={`mt-2 text-[0.9375rem] leading-[1.4375rem] text-text-body ${
+          className={`mt-2 text-small text-text-body ${
             stacked
               ? "line-clamp-5 landscape:line-clamp-3"
               : layout === "stack"

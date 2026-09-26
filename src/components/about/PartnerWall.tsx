@@ -1,5 +1,5 @@
 import Reveal from "../ui/Reveal";
-import type { Partner } from "../../lib/data";
+import { logoAttrs, type Partner } from "../../lib/data";
 
 type PartnerWallProps = {
   partners: Partner[];
@@ -47,11 +47,10 @@ function LogoGrid({ partners }: { partners: Partner[] }) {
                    script has not run for that logo. */
                 src={`${import.meta.env.BASE_URL}${(p.image_hover ?? p.image).replace(/^\//, "")}`}
                 alt={p.name}
-                height={LOGO_H}
-                width="auto"
+                {...logoAttrs(p, LOGO_H)}
                 loading="lazy"
                 decoding="async"
-                className="max-h-full max-w-full object-contain"
+                className="max-h-full w-auto max-w-full object-contain"
               />
             </a>
           </li>

@@ -223,7 +223,8 @@ have it stay on follow the gap:
   replayed.", the player, then "Open the replay ↗" (new tab, same URL) and,
   once loaded, "Restart the replay".
 - **Click to load.** Until a click (or Enter/Space) only a poster ships: a
-  capture of the player itself, paused mid-race (Team 10 on lap 2, Team 8
+  capture of the player itself, its buttons hidden before the capture (so
+  the poster draws no control that does nothing), paused mid-race (Team 10 on lap 2, Team 8
   0.19 s behind, the other three out of the first corner), in the exact box the player will fill, with
   a play disc over the track. Nothing loads from the board's site for the
   replay before that, for anyone, and never by itself under reduced motion

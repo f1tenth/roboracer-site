@@ -56,10 +56,23 @@ export type Partner = {
   image_rest?: string;
   /** Ribbon hover / focus state: the colour logo at the same size. */
   image_hover?: string;
+  /** Pixel size of image_rest and image_hover (the trimmed WebPs; `image`,
+   * the untrimmed original, has its own). Every <img> of the logo takes its
+   * width from this aspect at its fixed height (logoAttrs). Re-read after
+   * scripts/partner-tint.py or scripts/partner-trim.py rewrites the files. */
+  width: number;
+  height: number;
   /** Kind of institution, for the About wall's groups. Absent on older
    * records, which fall back to one ungrouped wall. */
   category?: "university" | "industry" | "organization" | "other";
 };
+
+/** Numeric width and height for a partner logo drawn at a fixed height, so
+ * the box is right before the file arrives (and "width" is never "auto"). */
+export const logoAttrs = (p: Partner, height: number) => ({
+  width: p.width > 0 && p.height > 0 ? Math.round((height * p.width) / p.height) : height,
+  height,
+});
 
 export type NewsItem = {
   title: string;
@@ -276,9 +289,6 @@ export type JoinPhoto = {
   height: number;
   alt: string;
   caption: string;
-  /** The caption is not confirmed yet: the shared verify tag follows it
-   * (the status word never goes in the caption text). */
-  caption_verify?: boolean;
   credit?: string;
 };
 

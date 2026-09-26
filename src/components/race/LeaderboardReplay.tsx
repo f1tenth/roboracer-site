@@ -63,7 +63,10 @@ const REVEAL_AFTER_MS = 900;
  *
  * It is heavy (a canvas redrawn every frame, five recordings) and animated,
  * so it loads only on a click: until then a poster captured from it holds
- * the exact box the player will fill, so nothing moves when it arrives. Under
+ * the exact box the player will fill, so nothing moves when it arrives. The
+ * poster leaves the player's buttons out (Full screen, Close, the play bar:
+ * hidden in the board's page before the capture, manifest RACE-LB-01/02), so
+ * nothing drawn on it looks clickable but the play disc. Under
  * reduced motion the board's player opens paused by itself. The link under it
  * opens the same view on the board's site, in every state.
  */
@@ -213,7 +216,7 @@ export default function LeaderboardReplay({ replay, href }: { replay: ReplayConf
                     className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2"
                     style={{ top: fit.trackY }}
                   >
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full border border-ink-950/10 bg-paper-50/90 text-ink-950 shadow-sm transition-colors duration-[var(--duration-fast)] group-hover/play:bg-paper-50 group-focus-visible/play:bg-paper-50">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-pill border border-ink-950/10 bg-paper-50/90 text-ink-950 shadow-card transition-colors duration-[var(--duration-fast)] group-hover/play:bg-paper-50 group-focus-visible/play:bg-paper-50">
                       <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
                         <path d="M5.5 3.2v11.6L15 9 5.5 3.2Z" />
                       </svg>

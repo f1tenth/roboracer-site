@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, useMemo, useSyncExternalStore } from 
 import {
   loadHighlights,
   loadPartners,
+  logoAttrs,
   loadPublications,
   loadTeams,
   loadUpcomingEvents,
@@ -162,6 +163,8 @@ type PartnerLinkProps = {
  * 2.75rem-wide box (square marks were 27 px), a grid cell a 2.75rem-tall one. */
 function PartnerLink({ p, load, canHover, clone = false, cell = false }: PartnerLinkProps) {
   const size = cell ? "max-w-full" : "max-w-28 md:max-w-[12.625rem]";
+  // Both files share one size (partners.json width/height); drawn 72 high.
+  const dims = logoAttrs(p, 72);
   return (
     <a
       href={p.website}
@@ -174,8 +177,7 @@ function PartnerLink({ p, load, canHover, clone = false, cell = false }: Partner
         <img
           src={load ? (p.image_rest ?? p.image) : undefined}
           alt={p.name}
-          height={72}
-          width="auto"
+          {...dims}
           /* Marquee children are never lazy (CommunityJoin note). */
           loading="eager"
           fetchPriority="low"
@@ -187,8 +189,7 @@ function PartnerLink({ p, load, canHover, clone = false, cell = false }: Partner
             src={load ? p.image_hover : undefined}
             alt=""
             aria-hidden="true"
-            height={80}
-            width="auto"
+            {...dims}
             loading="eager"
             fetchPriority="low"
             decoding="async"
@@ -304,7 +305,7 @@ export default function Landing() {
             index="01"
             id="highlights"
             title="Highlights"
-            lead="Moments from 30+ competitions since 2016."
+            lead="Moments from 30 competitions since 2016."
             action={
               showPause && highlights.length > 0 ? (
                 <PauseToggle

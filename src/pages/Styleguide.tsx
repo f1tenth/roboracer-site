@@ -3,6 +3,7 @@ import {
   loadHighlights,
   loadPartners,
   loadPublications,
+  logoAttrs,
   loadTeams,
   loadUpcomingEvents,
   tagLabelMap,
@@ -31,6 +32,7 @@ import PublicationCard from "../components/ui/PublicationCard";
 import SponsorCTA from "../components/ui/SponsorCTA";
 import NextRaceSpotlight from "../components/ui/NextRaceSpotlight";
 import ExplodedModel from "../components/ui/ExplodedModel";
+import StartHere from "../components/ui/StartHere";
 
 const HERO_VIDEO: HeroVideoSources = {
   mp4_1920: "/media/hero/hero-fpv-loop-1280.mp4",
@@ -134,6 +136,32 @@ export default function Styleguide() {
         />
       </Section>
 
+      {/* StartHere - the ways in from public/data/paths.json, in both
+          densities: compact (the landing's 00, header beside the rows from
+          lg) and full (/about's 01, clip and caption per row). No section id
+          here: the landing's #start stays the nav's one target. */}
+      <div className="bg-paper-50">
+        <div className="mx-auto max-w-content px-6 pt-16">
+          <Spec name="StartHere · compact (landing 00) · 5/7 from lg, sticky header, 16/10 thumbs, one link per row" />
+        </div>
+      </div>
+      <StartHere
+        index="00"
+        headingId="sg-start-compact"
+        lead="RoboRacer is a self-driving race car at one-tenth scale that 90+ universities use for teaching, research and racing."
+      />
+      <div className="bg-paper-50">
+        <div className="mx-auto max-w-content px-6 pt-16">
+          <Spec name="StartHere · full (/about 01) · 4/8 rows, clip in view only, caption, second sentence" />
+        </div>
+      </div>
+      <StartHere
+        density="full"
+        index="01"
+        headingId="sg-start-full"
+        subtitle="One open car for teaching, research and racing"
+      />
+
       {/* ExplodedModel - ink chapter */}
       <div className="bg-ink-950">
         <div className="mx-auto max-w-content px-6 pt-16">
@@ -224,11 +252,12 @@ export default function Styleguide() {
           {partners.slice(0, 18).map((p) => (
             <img
               key={p.name}
-              src={`${import.meta.env.BASE_URL}${p.image}`}
+              src={`${import.meta.env.BASE_URL}${(p.image_hover ?? p.image).replace(/^\//, "")}`}
               alt={p.name}
-              height={36}
-              width="auto"
-              loading="lazy"
+              {...logoAttrs(p, 36)}
+              /* Marquee children are never lazy (HANDOFF section 4). */
+              loading="eager"
+              fetchPriority="low"
               decoding="async"
               className="max-h-9 w-auto max-w-32 object-contain grayscale transition-[filter] duration-[var(--duration-fast)] hover:grayscale-0"
             />
