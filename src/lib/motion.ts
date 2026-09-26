@@ -10,6 +10,14 @@ import { useEffect, useSyncExternalStore } from "react";
 
 gsap.registerPlugin(ScrollTrigger, CustomEase, useGSAP);
 
+// The site, not the browser, decides where a page opens on Back and Forward
+// (hooks/useRouteScroll). With "auto", Chrome re-applied the old entry's pixel
+// offset at the first layout after the route rendered, i.e. after the reset to
+// the top, and the landing's pins then carried it further down (Cedric,
+// 2026-09-25). Set through ScrollTrigger: it writes back the value it read at
+// startup on every refresh, so a plain `history.scrollRestoration` would not stick.
+ScrollTrigger.clearScrollMemory("manual");
+
 // Exact CSS beziers from the @theme tokens (--ease-out-expo, --ease-in-out-quart).
 export const EASE_OUT_EXPO = CustomEase.create("rrOutExpo", "0.16, 1, 0.3, 1");
 export const EASE_IN_OUT_QUART = CustomEase.create("rrInOutQuart", "0.76, 0, 0.24, 1");

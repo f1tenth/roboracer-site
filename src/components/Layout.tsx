@@ -3,7 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./NavBar";
 import Footer from "./Footer";
 import RouteBoundary from "./RouteBoundary";
-import { ScrollTrigger } from "../lib/motion";
+import { useRouteScroll } from "../hooks/useRouteScroll";
 
 /**
  * One document title per route. An SPA keeps the index.html title forever
@@ -37,17 +37,13 @@ export default function Layout() {
   // being one window tall like /build, has no footer to reach.
   const hideFooter = isHiddenRoute || currentPath === "/assembly";
 
-  // A client-side navigation keeps the window's scroll position and the
-  // ScrollTrigger starts measured against the page that just left. Put the
-  // reader at the top of the new page, then re-measure once it has painted.
-  // The landing's Lenis instance is created and destroyed with the landing
-  // itself, so plain window scrolling is the right reset here.
   useLayoutEffect(() => {
     document.title = TITLES[currentPath] ?? "RoboRacer";
-    window.scrollTo(0, 0);
-    const frame = requestAnimationFrame(() => ScrollTrigger.refresh());
-    return () => cancelAnimationFrame(frame);
   }, [currentPath]);
+
+  // A client-side navigation keeps the window's scroll position: every route
+  // opens at its top (Back/Forward inside one page restores exactly).
+  useRouteScroll();
 
   return (
     <div className={`flex flex-col ${isAltLayout ? "h-[100svh] overflow-hidden" : "min-h-[100svh]"}`}>
