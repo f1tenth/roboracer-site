@@ -17,11 +17,11 @@ Research for roboracer.ai /news: the community's history from 2016 to 2025, whic
 | 2019 | 5 | 2 | 0 | 1 | 2 |
 | 2020 | 4 | 2 | 0 | 2 | 0 |
 | 2021 | 4 | 1 | 1 | 1 | 1 |
-| 2022 | 4 | 1 | 2 | 0 | 1 |
-| 2023 | 6 | 3 | 3 | 0 | 0 |
+| 2022 | 4 | 2 | 1 | 0 | 1 |
+| 2023 | 7 | 5 | 2 | 0 | 0 |
 | 2024 | 13 | 9 | 2 | 2 | 0 |
 | 2025 | 8 | 5 | 2 | 1 | 0 |
-| **All** | **51** | 26 | 12 | 8 | 5 |
+| **All** | **52** | 29 | 10 | 8 | 5 |
 
 ## The ten strongest
 
@@ -85,7 +85,7 @@ Each entry: id, dates, kind, event id, confidence; the excerpt as drafted; the l
   - 'The inaugural F1/10 autonomous racing competition was held on October 1-2, in Pittsburgh, USA. 5 teams competed to set the fastest time around a 812 feet track on CMU's campus (at Wean Hall).': Madhur Behl, 'The 1st F1/10 Autonomous Racing Competition 2016', YouTube, uploaded 2016-11-06, https://www.youtube.com/watch?v=fyFycjFaLC4
   - 'Jump onboard the fastest car (Team PRECISE) ... completed a 812 ft track in about 64 seconds ... Congratulations to team PRECISE (University of Pennsylvania)!': 'Fastest Lap : 1st F1/10 Autonomous Racing Competition 2016', Madhur Behl, YouTube, 2016-11-14, https://www.youtube.com/watch?v=3rOCWnScEFw
   - Race number 1 by the series' own count (the Columbia 2019 race is the '5th F1/10 Autonomous Racing Grand Prix' with four races before it): events_map.json esweek2016
-- Notes: DATE: the race ran October 1-2 (Behl's video); race.html and events_map.json give the conference week, Oct 2-7. No photo gallery was ever published for 2016 (docs/media/RACE_PHOTOS.web.md); the three videos (recap, fastest lap, crash compilation) are the media. Only a winner and a time are published; no second or third place.
+- Notes: NEXT RACE: Behl's description adds 'The next competition is scheduled to be held during the 2017 Cyber-Physical Systems Week, also in Pittsburgh', and the May 2017 homepage reads 'The Official Home of F1/10 Autonomous Racing Competition 2017', yet Porto 2018 is 'the second' competition and no 2017 race appears anywhere, so the 2017 race apparently did not happen (gap). DATE: the race ran October 1-2 (Behl's video); race.html and events_map.json give the conference week, Oct 2-7. No photo gallery was ever published for 2016 (docs/media/RACE_PHOTOS.web.md); the three videos (recap, fastest lap, crash compilation) are the media. Only a winner and a time are published; no second or third place.
 
 ### 2018
 
@@ -132,6 +132,8 @@ Each entry: id, dates, kind, event id, confidence; the excerpt as drafted; the l
 - Facts:
   - 'The 3rd F1/10 International Autonomous Racing Competition was held on October 1st, 2018 in Torino, Italy. 9 teams competed ... at the Torino Incontra. Congratulations to the winners Maciej Dziubiński, Lukasz Sztyber, and Karol Majek from Poland': Madhur Behl, YouTube, 2018-10-07, https://www.youtube.com/watch?v=VlE2Wb_XhoQ
   - 'At ESWEEK 2018 in Turin, Italy 1st place: CALVIN Team - Warsaw, Poland - Karol Majek, Łukasz Sztyber, Maciej Dziubiński': Karol Majek, 'Calvin F1/10 - 1st at ESWEEK 2018', YouTube, 2018-10-10, https://www.youtube.com/watch?v=8NSKLdjGp7I
+  - f1tenth.org homepage, Wayback capture of 2018-12-06: 'Watch the highlights of the 3rd F1/10 Competition held in Turin, Italy below. Congratulations to the winners Maciej Dziubiński, Lukasz Sztyber, and Karol Majek from Poland'; same page: 'The 4th F1/10 International Autonomous Racing Competition will take place in Montreal, Canada during CPS-IoT Week in April 2019.': https://web.archive.org/web/20181206163827/http://f1tenth.org/
+  - Maciek Dziubiński, 'Experiences and thoughts from the 3rd F1/10th competition', Medium, Oct 28, 2018: 'Our team won the F1/10th competition in Torino!': https://medium.com/asap-report/experiences-and-thoughts-from-the-3rd-f1-10th-competition-2c46508e2719 (Medium blocks scripts; Wayback https://web.archive.org/web/20241208072143/https://medium.com/asap-report/experiences-and-thoughts-from-the-3rd-f1-10th-competition-2c46508e2719)
   - 'Sept. 30 - Oct. 5, 2018 / Torino, Italy / Embedded Systems Week': https://f1tenth.github.io/race.html
   - Results: rank 1, crew 'Maciej Dziubinski, Karol Majek' (the only row): https://f1tenth.github.io/torino2018.html
   - Participating Teams: University of Warsaw, Czech Technical University, Seoul National University of Science and Technology, University of Pennsylvania, University of Virginia, University of Connecticut, Dafcode, University of Modena and Reggio Emilia: https://f1tenth.github.io/torino2018.html
@@ -404,20 +406,23 @@ Each entry: id, dates, kind, event id, confidence; the excerpt as drafted; the l
   - Results were published as two Challonge widgets (time trial nvcuqksv, head-to-head 21927d68); neither is in the Wayback Machine and Challonge answers 403 to scripts
 - Notes: No result found. It becomes a result item if the two Challonge brackets can be read in a normal browser (challonge.com/nvcuqksv, challonge.com/21927d68). No ordinal on the site.
 
-#### The 1st Korea Championship runs in Jeju
+#### Gyeongsang National University takes first and second at the 1st Korea Championship
 
-`korea2022-first-korea-championship` · Dec 12-13, 2022 · announcement · event `korea2022` · confidence **high**
+`korea2022-first-korea-championship-ace2-wins` · Dec 12-13, 2022 · result · event `korea2022` · confidence **high**
 
-> The first national championship in Korea ran with KSMTE 2022 at the Ramada Plaza in Jeju, December 12 and 13, 2022. It started a yearly Korean series that reached its fourth edition at ICCAS 2025.
+> The first national championship in Korea ran with KSMTE 2022 at the Ramada Plaza in Jeju, December 12 and 13, 2022. Seven teams raced head to head. Gyeongsang National University's ACE2 beat its sister team ACE1 in the final, and F1TENTH AGH from Poland's AGH University of Science and Technology won the bronze match.
 
-- Link: <https://web.archive.org/web/20251206063348/http://korea-race.f1tenth.org/>
+- Link: <https://web.archive.org/web/20240524233746/https://korea-race.f1tenth.org/results.html>
+- Image: <https://korea-race23.f1tenth.org/images/result_bracket.png> 1754x974 (2022 tournament bracket graphic (served from the 2023 site, which reused it))
+- Image: <https://korea-race23.f1tenth.org/images/result_hth.png> 590x484 (2022 head-to-head results table graphic)
 - Image: <https://f1tenth.github.io/race/korea-race.png> 1900x844 (event banner graphic)
 - Video: <https://www.youtube.com/watch?v=Iy5M5hh4gFk>
 - Facts:
   - 'The 1st F1TENTH Korea Championship / KSMTE 2022 / 2022, Dec 12th - Dec 13th / Location: 66 Tapdong-ro, Ramada Plaza by Wyndham Jeju': korea-race.f1tenth.org (events_map.json source)
+  - Head to Head - Race Results (image result_hth.png in the championship's repo korea-race, committed 2023-03-28): #1 ACE2 (Gyeongsang National University), Korea Automotive Technology Institute Director Award; #2 ACE1 (Gyeongsang National University), Sonnet.ai Proprietor Award; #3 F1TENTH AGH (AGH University of Science and Technology), Korea Electromechanical Convergence Technology Institute Director Award; #4 HMD (UNIST), GM Dynamic Driving Award; #5 RTCAR (Kyungpook National University); #6 HMCL (UNIST); #7 Andaman (King Mongkut's University of Technology Thonburi), GM Fun Driving Award
+  - Tournament Bracket (image result_bracket.png): Final Match ACE2; Bronze Match AGH beat HMD
   - 'The 1st F1Tenth Korea Championship 2022 Dec 12-13, Ramada Plaza Hotel, Jeju, Korea.': AiX, YouTube, 2022-12-30, https://www.youtube.com/watch?v=Iy5M5hh4gFk
-  - 2025.iccas.org program lists '2025 The 4th F1Tenth Korea Championship' (events_map.json iccas2025 source)
-- Notes: Results not found (repo korea-race has only a deprecated results template).
+- Notes: The race site is dead (repo private); the results page's last Wayback capture is 2024-05-24. The same three result images are still served, unchanged (identical md5), on the 2023 site's results page under the 2023 podium table; they belong to 2022. Sponsors named in the awards (KATECH, Sonnet.ai, KEMCTI, GM) are Korean-series award givers, not RoboRacer sponsors.
 
 ### 2023
 
@@ -457,7 +462,7 @@ Each entry: id, dates, kind, event id, confidence; the excerpt as drafted; the l
 
 `icra2023-london-forzaeth-wins` · May 29-31, 2023 · result · event `icra2023` · confidence **high**
 
-> Forty-one teams registered for the Grand Prix at ICRA 2023 at ExCeL London, organized with TUM and King's College London. ETH Zurich's ForzaETH won the grand final against TU Wien's Scuderia Segfault. Suzlab from Nagoya University reached the semi-finals, and HiPeRT Modena lost to TU Wien by centimeters in a tie-break race.
+> Forty-one teams registered and 22 raced at the Grand Prix at ICRA 2023 at ExCeL London, organized with TUM and King's College London. ETH Zurich's ForzaETH won the grand final against TU Wien's Scuderia Segfault. Nagoya University's Suzlab finished fourth, and HiPeRT Modena lost to TU Wien by centimeters in a tie-break race.
 
 - Link: <https://informatics.tuwien.ac.at/news/2442>
 - Archive: <https://web.archive.org/web/20251004060537/https://icra2023-race.f1tenth.org/>
@@ -469,7 +474,26 @@ Each entry: id, dates, kind, event id, confidence; the excerpt as drafted; the l
   - '11th F1TENTH Autonomous Grand Prix / May 29th - June 1st 2023 / Location: Excel London, UK': icra2023-race.f1tenth.org (events_map.json; Cedric renumbered it 12th)
   - TU Wien TV: 'Ein zweiter Platz beim Grand Prix 2023 in London ist bereits der vierte Podestplatz in Folge' (second place in London, the fourth podium in a row), YouTube, 2023-06-09, https://www.youtube.com/watch?v=GiXn8uKrcSk
   - Same week: '3nd [sic] Workshop on Opportunities and Challenges with Autonomous Racing', ExCeL London, hybrid (harvested repo icra2023_website)
-- Notes: NUMBERING CONFLICT: TUM, TU Wien and the race site call London the 11th; events_map.json calls it the 12th (Cedric, 2026-08-23), so the title carries no ordinal. The race site's results page was never filled in. TU Wien's list of earlier podiums in the same article has two slips ('8th ... IFAC Berlin 2020' is the 7th on the race page; 'Philadelphia 2023' was 2022). Third place not stated (no small final mentioned).
+  - Nagoya University Mobility System Group: Team Suzlab 'performed exceptionally well at the ICRA2023 event in London, securing a fourth-place finish out of 22 teams': https://www.suzlab.mae.nagoya-u.ac.jp/topics_en/f1tenth-foundation-2023-iv3%E4%BD%8D%E3%83%BBicra4%E4%BD%8D/
+- Notes: NUMBERING CONFLICT: TUM, TU Wien and the race site call London the 11th; events_map.json calls it the 12th (Cedric, 2026-08-23), so the title carries no ordinal. TEAM COUNT: 41 registered (TU Wien) vs 22 teams (Nagoya, presumably those that raced). The race site's results page was never filled in. Third place is not named by any source (Suzlab says fourth). TU Wien's list of earlier podiums has two slips ('8th ... IFAC Berlin 2020' is the 7th on the race page; 'Philadelphia 2023' was 2022).
+
+#### Eight teams race at IEEE IV 2023 in Anchorage
+
+`iv2023-anchorage-eight-teams` · Jun 4-7, 2023 · result · event `iv2023` · confidence **medium**
+
+> The championship at the IEEE Intelligent Vehicles Symposium ran June 4 to 7, 2023 in Anchorage, Alaska, with eight teams from Nagoya, NC State, Clemson, Purdue and Indiana, Virginia Tech, Auburn, UC San Diego and BlueRabbit AV. Nagoya University's Suzlab finished third.
+
+- Link: <https://www.suzlab.mae.nagoya-u.ac.jp/topics_en/f1tenth-foundation-2023-iv3%E4%BD%8D%E3%83%BBicra4%E4%BD%8D/>
+- Archive: <https://web.archive.org/web/20250306022824/https://iv2023-race.f1tenth.org/>
+- Image: <https://www.suzlab.mae.nagoya-u.ac.jp/wp-content/uploads/2023/07/image-1024x574.png> 1024x574 (Nagoya lab news image)
+- Image: <https://f1tenth.github.io/race/iv2023.png> 1892x907 (event banner graphic)
+- Video: <https://www.youtube.com/watch?v=yg38HTBk9QU>
+- Facts:
+  - 'F1Tenth IV2023 Championship / June 04 - June 07 2023 / Location: Anchorage Alaska, USA': iv2023-race.f1tenth.org (events_map.json source)
+  - Participants page, 8 teams: Suzlab (Nagoya University), NCSU Embedded Machine Learning Club (North Carolina State University), BlueRabbit (BlueRabbit AV), Clemson Tigers (Clemson University), IUPUI Jaguars (Purdue University and Indiana University), VT ASIM Lab (Virginia Tech), Autonomous Tiger Racing (Auburn University), Triton AI (UC San Diego): https://web.archive.org/web/20231211112435/https://iv2023-race.f1tenth.org/participants.html
+  - 'Team Suzlab ... secured a third-place finish out of eight teams' at IV2023 in Anchorage: Nagoya University Mobility System Group, https://www.suzlab.mae.nagoya-u.ac.jp/topics_en/f1tenth-foundation-2023-iv3%E4%BD%8D%E3%83%BBicra4%E4%BD%8D/
+  - Auburn's Autonomous Tiger Racing clip 'F1n at IV Anchorage Alaska 2023': https://www.youtube.com/watch?v=yg38HTBk9QU
+- Notes: WINNER UNKNOWN: no source found names first or second (results.html is the ICRA 2022 template). Publish only as a partial result, or wait for Cedric. events_map.json has no ordinal for IV 2023; with the 11th/12th in May 2023 and the 14th at IROS 2023, it may be the 13th, but nothing states it.
 
 #### Université Laval's VAUL wins the 14th Grand Prix at IROS 2023 in Detroit
 
@@ -503,19 +527,21 @@ Each entry: id, dates, kind, event id, confidence; the excerpt as drafted; the l
   - '3rd Workshop on MAD-Games / 2025 IEEE ICRA' with date and location TBD: private repo icra2025_madgames_website (never linked from the site)
 - Notes: Whether a 3rd edition ran at ICRA 2025 is not confirmed by any page read.
 
-#### The 2nd Korea Championship runs at ICCAS 2023 in Yeosu
+#### HMcar wins the 2nd Korea Championship at ICCAS 2023 in Yeosu
 
-`korea2023-second-korea-championship` · Oct 17-19, 2023 · announcement · event `korea2023` · confidence **high**
+`korea2023-second-korea-championship-hmcar-wins` · Oct 17-19, 2023 · result · event `korea2023` · confidence **high**
 
-> The Korean championship moved to the ICCAS conference for its second edition, October 17 to 19, 2023, at SonoCalm Yeosu. Thirty-one teams registered and 29 raced.
+> The Korean championship moved to the ICCAS conference for its second edition, October 17 to 19, 2023, at SonoCalm Yeosu. Thirty-one teams registered and 29 raced. HMcar took the grand prize, ahead of Paragon, Korea University's DSplay and QueenCar.
 
-- Link: <https://korea-race23.f1tenth.org/>
+- Link: <https://korea-race23.f1tenth.org/results.html>
 - Image: <https://f1tenth.github.io/race/korea_2.png> 1817x811 (event banner graphic)
 - Video: <https://www.youtube.com/watch?v=dmZCUUcmzzE>
 - Facts:
   - 'The 2nd F1Tenth Korea Championship / ICCAS 2023 / 2023, Oct 17th - Oct 19th / Location: SonoCalm Yeosu at Yeosu, Korea': https://korea-race23.f1tenth.org/ (live, events_map.json source)
   - '2023 F1Tenth Korea Championship Oct 17-19, 2023, Yeosu, Korea 31 Teams registered, and 29 teams were racing actually.': AiX, YouTube, 2023-10-24, https://www.youtube.com/watch?v=dmZCUUcmzzE
-- Notes: Winner not found.
+  - Results, Podium Ceremony table (Ranking / Award / Team / Prize): Grand Prize, KATECH, HMcar, 5,000,000 KRW; 1st Place Prize, UNIST Future Mobility Center, Paragon, 3,000,000 KRW; 2nd Place Prize, ICCAS, DSplay, 1,000,000 KRW; 3rd Place Prize, KEMCTI, QueenCar, 1,000,000 KRW; 4th, Sonnet, Move, an F1Tenth autonomous vehicle (worth 4,000,000 KRW); 5th, GM, DDRX, GM goods: https://korea-race23.f1tenth.org/results.html (live, read 2026-09-25; Korean version /ko/results.html gives 대상 for the grand prize)
+  - Earlier participant lists: HMCar = UNIST (IROS 2021 and ICRA 2022 registration pages); DSplay = Korea University (Lehigh Engineering, 2022-06-09); DDRX = Zhejiang University (IV 2024 registration)
+- Notes: The grand prize (대상) ranks above the '1st Place Prize', so HMcar is the overall winner and Paragon second; the excerpt says 'grand prize' to stay literal. HMcar's UNIST link comes from 2021-2022 lists, not this page. The time-trial and bracket images on this page are the 2022 championship's (identical files), so they are not 2023 evidence.
 
 ### 2024
 
@@ -862,7 +888,9 @@ Each entry: id, dates, kind, event id, confidence; the excerpt as drafted; the l
 11. **The foundation.** The site footer changed from 'Copyright 2019 PRECISE' to '2020 F1TENTH Foundation' in May 2020; LinkedIn says 'Founded 2020' but also that the RoboRacer Foundation 'will be' a 501(c)(3). No public record of incorporation was found.
 12. **Scale figures over time.** Sep 2020: 'over 60 universities, 7 international autonomous racing competitions'; May 2024: '60 universities'; Nov 2025 (ICCAS): 'over 89 universities'; the site today: '90+'. Consistent in direction, but the 2024 figure is lower than the 2020 one.
 13. **ICRA 2022 third place.** The bracket had no third-place match; TU Wien says Scuderia Segfault finished 3rd (the other semi-finalist was Forza PBL).
-14. **Small slips in sources** (do not repeat): UNC puts the University of Modena in Spain; TU Wien calls IFAC 2020 the 8th and dates Philadelphia to 2023; the ICRA 2023 workshop site says '3nd'; the IROS 2023 results page is titled 'F1TENTH ICRA 2023'; the xLAB MAD-Games video from 2023 is titled 'IROS'24'.
+14. **The 2nd Korea Championship page reuses the 1st's graphics.** korea-race23.f1tenth.org/results.html shows its own 2023 podium table, then three images (time trial, bracket, head-to-head) that are byte-identical to the 2022 championship's. The 2023 item cites only the table; the images are listed on the 2022 item.
+15. **A 2017 race was announced, never counted.** Behl's 2016 recap: 'The next competition is scheduled to be held during the 2017 Cyber-Physical Systems Week, also in Pittsburgh'; the May 2017 homepage reads 'Competition 2017'. The old site and every later count make Porto (April 2018) the second competition.
+16. **Small slips in sources** (do not repeat): UNC puts the University of Modena in Spain; TU Wien calls IFAC 2020 the 8th and dates Philadelphia to 2023; the ICRA 2023 workshop site says '3nd'; the IROS 2023 results page is titled 'F1TENTH ICRA 2023'; the xLAB MAD-Games video from 2023 is titled 'IROS'24'.
 
 ## Gaps
 
@@ -871,12 +899,12 @@ Events in `events_map.json` with no result found (winner unknown):
 - **6th competition (2019-2020)**: never named in any source; the numbering jumps from Columbia 2019 (5th) to IFAC 2020 (7th).
 - **Germany 2022, Lausitzring (Aug 20-21, TUM)**: only the old race-page banner; `germany-race2022.f1tenth.org` never had a repo; no TUM news found.
 - **ESWeek 2022, Shanghai (Oct 10-12)**: results were two Challonge widgets (time trial `nvcuqksv`, head-to-head `21927d68`) with no Wayback capture; a person opening challonge.com in a browser could read them in a minute.
-- **1st and 2nd Korea Championships (Dec 2022 Jeju, Oct 2023 Yeosu)**: dates, venues and 2023 counts (31 registered, 29 raced) only; no winner.
-- **IV 2023, Anchorage (Jun 4-7)**: 8 teams on the participants page; no result anywhere (results.html is the ICRA 2022 template).
+- **A 2017 race**: Behl's 2016 recap announced 'the next competition ... during the 2017 Cyber-Physical Systems Week, also in Pittsburgh', and the 2017 homepage says 'Competition 2017', but Porto 2018 is the second competition and nothing shows a 2017 race ran.
+- **IV 2023, Anchorage (Jun 4-7)**: 8 teams; Nagoya's Suzlab third; first and second not found (results.html is the ICRA 2022 template). No ordinal either (possibly the 13th; unstated).
 - **ITSC 2024, Edmonton**: see contradiction 2; possibly not held.
 - **ICRA 2024 second place**: Dzik Team won the other semi-final, but no source states the final; the candidate names no runner-up.
 - **Techfest 2025, IIT Bombay (the 26th)**: only a preview article; techfest.org is a JavaScript app with no readable results and no capture.
-- **Podium places 2-3** missing for Pittsburgh 2016 (single winner published), Torino 2018, Montreal 2019, ICRA 2023 (third), CPS-IoT 2023 (third; bracket semi-finalists KU-CSL and Carnegie Autonomous Racing), IROS 2023 (third).
+- **Podium places 2-3** missing for Pittsburgh 2016 (single winner published), Torino 2018, Montreal 2019, ICRA 2023 (third; Suzlab was fourth), CPS-IoT 2023 (third; bracket semi-finalists KU-CSL and Carnegie Autonomous Racing), IROS 2023 (third), the 2nd Korea Championship (institutions of Paragon and QueenCar).
 - **Team counts** missing for SM 2024, CDC 2024, ICCAS 2025.
 - **ICRA 2021 workshop** and the **ICRA 2025 MAD-Games** (3rd edition): no evidence it ran.
 - **Photos 2020-2023**: virtual races have none; the race sites only ever carried template images (docs/media/RACE_PHOTOS.web.md). Team and university posts (TU Wien, ETH, Lehigh, NC State, InDro) have photos, all third-party.
