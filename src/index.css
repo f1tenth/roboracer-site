@@ -659,8 +659,10 @@ body {
     text-decoration-color: var(--color-rr-violet);
   }
 
-  /* The current page: the desktop link's 2px bar, as an underline. */
-  .mobile-menu-link[aria-current="page"] {
+  /* The current page (or, for Learn, the section: aria-current="true" on the
+     course pages under /learn): the desktop link's 2px bar, as an underline. */
+  .mobile-menu-link[aria-current="page"],
+  .mobile-menu-link[aria-current="true"] {
     font-weight: 600;
     text-decoration-line: underline;
     text-decoration-thickness: 2px;
