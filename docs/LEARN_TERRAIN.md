@@ -41,8 +41,8 @@ the site until Cedric says it may be.
 | B | Reactive methods: PID, follow the gap, vehicle dynamics | [Module B](https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleB/index.html) | 3 wall following, 4 follow the gap |
 | C | Mapping and localization: filtering, particle filter, graph SLAM | [Module C](https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleC/index.html) | 5 SLAM and pure pursuit |
 | D | Planning and control: pure pursuit, RRT, splines | [Module D](https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleD/index.html) | 6 motion planning |
-| E | Vision: classical and learned perception | [Module E](https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleE/index.html) | 7 perception and vision, 8 perception and planning |
-| F | Special topics: detection, raceline optimization, MPC, moral decision making | [Module F](https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/index.html) | 9 robot ethics |
+| E | Vision: classical and learned perception | [Module E](https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleE/index.html) | 7 perception and vision |
+| F | Special topics: detection, raceline optimization, MPC, moral decision making | [Module F](https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/index.html) | 8 perception and planning (assigned in Lecture 18; moved from E on 2026-09-26), 9 robot ethics |
 | G | The Grand Prix: demos, race prep, the final race | [Module G](https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleG/index.html), [races](https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/races/index.html), [final project](https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/final_project.html) | |
 | LB | Check the class leaderboard | [roboracer-class.github.io/leaderboard](https://roboracer-class.github.io/leaderboard/): Penn ESE 6150, best clean lap in the grading simulator, rebuilt from graded submissions | |
 
