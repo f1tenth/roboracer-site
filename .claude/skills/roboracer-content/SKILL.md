@@ -30,6 +30,7 @@ Rule: if it is not here and not given by Cedric, it is `TODO(content)` in the JS
 ## Scale statements
 - Current site: "90+ universities", "20+ countries", "60+ publications", "over 24 events". Publications must become the Google Scholar message: the query `f1tenth | roboracer` returns more than a thousand results (https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=). Say "1,000+ publications reference the platform" with a link to that query, and curate a featured set on the page. "31 competitions" follows from the numbering once IROS happens; until then "30 competitions held".
 - University and country counts: keep "90+ universities" and "20+ countries" until Rahul answers (Cedric, 2026-08-20); VERIFY with Rahul before changing.
+- Community members: 3,500+ (Cedric, 2026-09-26; was "above 3,000" on 2026-08-21), rendered from `public/data/community.json` (`members_display`). Never type the figure into a component.
 
 ## Partners, sponsors, team
 - `partners.json` lists 20 institutions; `public/partners/` holds about 70 logos. Partners are institutions that use the platform, not sponsors. Present them as a marquee or logo cloud, alphabetical, not tiered.

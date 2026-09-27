@@ -1,0 +1,1463 @@
+{
+  "version": 1,
+  "updated": "2026-09-26",
+  "checked": "2026-09-26",
+  "note": "One file for /learn/courses, /learn/courses/:id and /learn/teach. Ported from Dhyey Shah's LMS mock (github.com/dhyeyshah/roboracer-lms); every fact comes from the coursekit, the roboracer-content skill or Cedric, and docs/learn/COURSES_CONTENT.md lists what was kept, rewritten and dropped. Pages render only offerings with status published and features with status available (platform ones once meta.lms_url is set).",
+  "meta": {
+    "lms_url": null,
+    "lms_url_note": "TODO(content): the Open edX portal URL once it is public (Cedric)",
+    "contact": "contact@roboracer.ai",
+    "teach_subject": "Teaching the RoboRacer course",
+    "slack_url": "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q",
+    "coursekit_url": "https://f1tenth-coursekit.readthedocs.io/en/latest/",
+    "start_here_url": "https://f1tenth-coursekit.readthedocs.io/en/latest/getting_started/index.html",
+    "syllabus_url": "https://f1tenth-coursekit.readthedocs.io/en/latest/introduction/syllabus.html",
+    "labs_url": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/index.html",
+    "races_url": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/races/index.html",
+    "grading_url": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/grading.html",
+    "downloads_url": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/index.html",
+    "build_docs_url": "https://f1tenth.readthedocs.io/en/main/",
+    "leaderboard_url": "https://roboracer-class.github.io/leaderboard/",
+    "license": {
+      "name": "CC BY-NC-SA 4.0",
+      "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "summary": "Free to download, use and change with credit to RoboRacer. No commercial use; share changes under the same license.",
+      "source": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/index.html"
+    },
+    "class_time": {
+      "text": "Two 80-minute classes a week: 60 minutes of lecture, 20 of lab work. Labs are done outside class.",
+      "source": "https://f1tenth-coursekit.readthedocs.io/en/latest/introduction/syllabus.html"
+    },
+    "slide_downloads": {
+      "url": "https://forms.gle/4UJigTa36VAMyGheA",
+      "status": "broken",
+      "note": "TODO(content): the coursekit's slide-download request form answers 'Page Not Found' (checked 2026-09-26). Who grants slide downloads now? Do not link it until fixed (Cedric)."
+    }
+  },
+  "catalog": {
+    "hero": {
+      "eyebrow": "Courses",
+      "title": "Learn autonomous racing",
+      "lead": "The course Penn teaches, open to everyone. Take it on your own or teach it at your university.",
+      "primary": {
+        "label": "Pick a course",
+        "href": "#courses"
+      },
+      "secondary": {
+        "label": "Teach the course",
+        "href": "/learn/teach"
+      }
+    },
+    "courses_heading": {
+      "kicker": "Courses",
+      "title": "Pick your length",
+      "lead": "Three plans cut from the same course. Each links to its modules and labs."
+    },
+    "offerings_heading": {
+      "kicker": "At universities",
+      "title": "Taught on campus",
+      "lead": "Universities that run the course for credit, on their own dates."
+    },
+    "features_heading": {
+      "kicker": "What comes with it",
+      "title": "What the course gives you",
+      "lead": "Open on the course site today, free to reuse with credit."
+    }
+  },
+  "course": {
+    "about_heading": "About this course",
+    "about": [
+      "The course is hands-on and built around labs. You run your code in the simulator from the first week, and on the 1/10-scale car once you have one.",
+      "It is written for senior undergraduates and graduate students who want to work on perception, planning, control and applied machine learning."
+    ],
+    "about_source": "Mock course page, second paragraph; audience from the course description linked on the coursekit syllabus page (Rahul Mangharam, 2019).",
+    "learn_heading": "What you'll learn",
+    "prerequisites_heading": "Before you start",
+    "outline_heading": "Course outline",
+    "staff_heading": "Course staff",
+    "faq_heading": "Logistics",
+    "open_material": {
+      "label": "Open the course material",
+      "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/getting_started/index.html"
+    },
+    "ask": {
+      "label": "Ask in Slack",
+      "href": "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q"
+    }
+  },
+  "stats": [
+    {
+      "id": "members",
+      "group": "community",
+      "value": "3,500+",
+      "label": "community members",
+      "source": "Cedric, 2026-09-26; the same figure as public/data/community.json members_display (render that when it is loaded, so the two never drift)"
+    },
+    {
+      "id": "universities",
+      "group": "community",
+      "value": "90+",
+      "label": "universities",
+      "source": "roboracer-content skill, Scale statements (keep until Rahul answers)"
+    },
+    {
+      "id": "countries",
+      "group": "community",
+      "value": "20+",
+      "label": "countries",
+      "source": "roboracer-content skill, Scale statements (keep until Rahul answers)"
+    },
+    {
+      "id": "modules",
+      "group": "course",
+      "value": "7",
+      "label": "modules",
+      "source": "Coursekit sidebar, modules A to G, counted 2026-09-26"
+    },
+    {
+      "id": "lectures",
+      "group": "course",
+      "value": "23",
+      "label": "lectures",
+      "source": "Coursekit module pages, counted 2026-09-26: 23 lecture pages plus 1 optional (Lecture 9, scan matching). Numbering runs 1 to 28: 14 to 16 do not exist and 23 to 25 share one page."
+    },
+    {
+      "id": "labs",
+      "group": "course",
+      "value": "9",
+      "label": "labs",
+      "source": "Coursekit Labs page, counted 2026-09-26: Labs 1 to 9 plus an optional Lab 5 (scan matching). The page's own text says '8 labs total'; its list has 9."
+    },
+    {
+      "id": "races",
+      "group": "course",
+      "value": "3",
+      "label": "course races",
+      "source": "Coursekit Races page"
+    },
+    {
+      "id": "recorded",
+      "group": "course",
+      "value": "12",
+      "label": "recorded lectures",
+      "source": "Coursekit lecture pages with an embedded YouTube recording, counted 2026-09-26 (12 of 24, Modules A to E; Tutorials 1 and 2 also have one)"
+    }
+  ],
+  "plans": [
+    {
+      "id": "4-weeks",
+      "kind": "plan",
+      "weeks": 4,
+      "title": "4-week course",
+      "blurb": "ROS 2, the simulator and reactive driving. Modules A and B, Labs 1 to 4, and your car is race ready.",
+      "outcome": "Enough to get your car race ready.",
+      "modules": [
+        "A",
+        "B"
+      ],
+      "labs": [
+        "lab-1",
+        "lab-2",
+        "lab-3",
+        "lab-4"
+      ],
+      "starts": null,
+      "ends": null,
+      "dates_note": "TODO(content): start and end dates, if this runs as a dated cohort on the course platform. The mock's dates were placeholders (Cedric).",
+      "effort_hours_per_week": null,
+      "effort_note": "TODO(content): student hours per week. The course site gives class time only (two 80-minute classes a week, labs outside class); the mock's 8 h per week has no source (Cedric or Rahul).",
+      "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/getting_started/index.html",
+      "source": "Coursekit Start Here page"
+    },
+    {
+      "id": "10-weeks",
+      "kind": "plan",
+      "weeks": 10,
+      "title": "10-week course",
+      "blurb": "The 4-week plan plus mapping, localization and planning. Modules A to D, Labs 1 to 6. About one quarter.",
+      "outcome": "Teaches you to race efficiently.",
+      "modules": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "labs": [
+        "lab-1",
+        "lab-2",
+        "lab-3",
+        "lab-4",
+        "lab-5",
+        "lab-6"
+      ],
+      "starts": null,
+      "ends": null,
+      "dates_note": "TODO(content): start and end dates, if this runs as a dated cohort on the course platform. The mock's dates were placeholders (Cedric).",
+      "effort_hours_per_week": null,
+      "effort_note": "TODO(content): student hours per week. The course site gives class time only (two 80-minute classes a week, labs outside class); the mock's 12 h per week has no source (Cedric or Rahul).",
+      "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/getting_started/index.html",
+      "source": "Coursekit Start Here page"
+    },
+    {
+      "id": "15-weeks",
+      "kind": "plan",
+      "weeks": 15,
+      "title": "15-week course",
+      "blurb": "The full semester. Vision, special topics and a final head-to-head race on top of the 10-week plan. All seven modules, all nine labs.",
+      "outcome": "The whole course.",
+      "modules": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G"
+      ],
+      "labs": [
+        "lab-1",
+        "lab-2",
+        "lab-3",
+        "lab-4",
+        "lab-5",
+        "lab-6",
+        "lab-7",
+        "lab-8",
+        "lab-9"
+      ],
+      "starts": null,
+      "ends": null,
+      "dates_note": "TODO(content): start and end dates, if this runs as a dated cohort on the course platform. The mock's dates were placeholders (Cedric).",
+      "effort_hours_per_week": null,
+      "effort_note": "TODO(content): student hours per week. The course site gives class time only (two 80-minute classes a week, labs outside class); the mock's 20 h per week has no source (Cedric or Rahul).",
+      "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/getting_started/index.html",
+      "source": "Coursekit Start Here page"
+    }
+  ],
+  "offerings": [
+    {
+      "id": "penn",
+      "kind": "offering",
+      "institution": "University of Pennsylvania",
+      "short_name": "Penn",
+      "title": "RoboRacer at Penn",
+      "blurb": "Where RoboRacer started in 2016. Penn teaches the full course as ESE 6150, and its class leaderboard is public.",
+      "code": "ESE 6150",
+      "code_source": "docs/LEARN_TERRAIN.md and public/data/leaderboard.json ('ESE 6150 leaderboard')",
+      "plan": "15-weeks",
+      "plan_source": "ESE 6150 is a one-semester course; the course description linked from the coursekit syllabus lays out a semester (Rahul Mangharam, 2019, then numbered ESE 615).",
+      "starts": null,
+      "ends": null,
+      "dates_note": "TODO(content): the next ESE 6150 term dates, if the page should show them (the mock's Jan 20 to May 5, 2027 were placeholders) (Cedric or Rahul).",
+      "effort_hours_per_week": null,
+      "effort_note": "TODO(content): hours per week for ESE 6150 students. The 2019 course description gives class time only (two 3-hour lecture and lab sessions a week); the mock's 20 h has no source (Rahul).",
+      "logo": {
+        "src": "/partners/color/upenn.webp",
+        "width": 513,
+        "height": 181,
+        "alt": "University of Pennsylvania"
+      },
+      "website": "https://www.upenn.edu/",
+      "links": [
+        {
+          "label": "Class leaderboard",
+          "href": "https://roboracer-class.github.io/leaderboard/"
+        },
+        {
+          "label": "ESE 6150 course site (Spring 2024)",
+          "href": "https://ahmadamine998.github.io/ESE6150-Website/"
+        }
+      ],
+      "staff": [
+        "rahul-mangharam"
+      ],
+      "status": "published",
+      "source": "roboracer-content skill (founded at Penn in 2016, faculty lead Rahul Mangharam); docs/LEARN_TERRAIN.md (ESE 6150)"
+    },
+    {
+      "id": "tum",
+      "kind": "offering",
+      "institution": "Technical University of Munich",
+      "short_name": "TUM",
+      "title": "RoboRacer at TUM",
+      "blurb": "The RoboRacer course at the Technical University of Munich.",
+      "code": null,
+      "code_source": null,
+      "plan": null,
+      "plan_source": null,
+      "starts": null,
+      "ends": null,
+      "dates_note": "TODO(content): term dates, if TUM teaches the course (the mock's Oct 19 to Dec 28, 2026 were placeholders).",
+      "effort_hours_per_week": null,
+      "effort_note": "TODO(content): hours per week (the mock's 12 h has no source).",
+      "logo": {
+        "src": "/partners/color/munich.webp",
+        "width": 461,
+        "height": 240,
+        "alt": "Technical University of Munich"
+      },
+      "website": "https://www.tum.de/en/",
+      "links": [],
+      "staff": [],
+      "status": "verify",
+      "note": "TODO(content): TUM is a partner institution in partners.json, but nothing confirms that it teaches this course. The mock listed it as a 10-week offering with the code F110 (F110 is the platform's old F1/10 name, not a course code). Does TUM teach it, under which course number and length? (Cedric)",
+      "source": "Mock only; logo from public/data/partners.json"
+    },
+    {
+      "id": "ucsd",
+      "kind": "offering",
+      "institution": "UC San Diego",
+      "short_name": "UC San Diego",
+      "title": "RoboRacer at UC San Diego",
+      "blurb": "The RoboRacer course at UC San Diego.",
+      "code": null,
+      "code_source": null,
+      "plan": null,
+      "plan_source": null,
+      "starts": null,
+      "ends": null,
+      "dates_note": "TODO(content): term dates, if UC San Diego teaches the course (the mock's Jan 4 to Mar 15, 2027 were placeholders).",
+      "effort_hours_per_week": null,
+      "effort_note": "TODO(content): hours per week (the mock's 12 h has no source).",
+      "logo": {
+        "src": "/partners/color/ucdsd.webp",
+        "width": 276,
+        "height": 235,
+        "alt": "University of California, San Diego"
+      },
+      "website": "https://ucsd.edu/",
+      "links": [],
+      "staff": [],
+      "status": "verify",
+      "note": "TODO(content): UC San Diego is a partner institution in partners.json, but nothing confirms that it teaches this course. The mock listed it as a 10-week offering. Does it, under which course number and length? (Cedric)",
+      "source": "Mock only; logo from public/data/partners.json"
+    }
+  ],
+  "outline": {
+    "source": "https://f1tenth-coursekit.readthedocs.io/en/latest/",
+    "links": [
+      {
+        "label": "Start here",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/getting_started/index.html"
+      },
+      {
+        "label": "Introduction",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/introduction/overview.html"
+      },
+      {
+        "label": "Syllabus",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/introduction/syllabus.html"
+      },
+      {
+        "label": "All labs",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/index.html"
+      },
+      {
+        "label": "The three races",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/races/index.html"
+      },
+      {
+        "label": "Final project",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/final_project.html"
+      },
+      {
+        "label": "Grading rubrics",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/grading.html"
+      }
+    ],
+    "modules": [
+      {
+        "id": "A",
+        "title": "Introduction to ROS 2, RoboRacer and the simulator",
+        "summary": "Autonomous driving at a glance, then ROS 2, the simulator, emergency braking and coordinate transforms.",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleA/index.html",
+        "items": [
+          {
+            "kind": "lecture",
+            "number": 1,
+            "label": "Lecture 1",
+            "title": "Introduction to autonomous driving: perception, planning, control",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleA/lecture01.html",
+            "slides": true,
+            "video": true,
+            "labs": [
+              "lab-1"
+            ]
+          },
+          {
+            "kind": "tutorial",
+            "number": 1,
+            "label": "Tutorial 1",
+            "title": "Introduction to ROS 2",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleA/tutorial1.html",
+            "slides": true,
+            "video": true
+          },
+          {
+            "kind": "lecture",
+            "number": 2,
+            "label": "Lecture 2",
+            "title": "Automatic emergency braking",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleA/lecture02.html",
+            "slides": true,
+            "video": true,
+            "labs": [
+              "lab-2"
+            ]
+          },
+          {
+            "kind": "tutorial",
+            "number": 2,
+            "label": "Tutorial 2",
+            "title": "Introduction to the RoboRacer simulator",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleA/tutorial2.html",
+            "slides": false,
+            "video": true
+          },
+          {
+            "kind": "lecture",
+            "number": 3,
+            "label": "Lecture 3",
+            "title": "Rigid body transformations",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleA/lecture03.html",
+            "slides": true,
+            "video": true
+          },
+          {
+            "kind": "tutorial",
+            "number": 3,
+            "label": "Tutorial 3",
+            "title": "ROS 2 and tf2",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleA/tutorial3.html",
+            "slides": true,
+            "video": false
+          }
+        ],
+        "labs": [
+          "lab-1",
+          "lab-2"
+        ],
+        "races": []
+      },
+      {
+        "id": "B",
+        "title": "Reactive methods",
+        "summary": "PID control, follow the gap and vehicle dynamics, plus a first session with the car. Ends with Race 1.",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleB/index.html",
+        "items": [
+          {
+            "kind": "lecture",
+            "number": 4,
+            "label": "Lecture 4",
+            "title": "Laplace domain dynamics and PID",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleB/lecture04.html",
+            "slides": true,
+            "video": true,
+            "labs": [
+              "lab-3"
+            ]
+          },
+          {
+            "kind": "tutorial",
+            "number": 4,
+            "label": "Tutorial 4",
+            "title": "Getting to know the car, battery and safety",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleB/tutorial4.html",
+            "slides": true,
+            "video": false
+          },
+          {
+            "kind": "lecture",
+            "number": 5,
+            "label": "Lecture 5",
+            "title": "Follow the gap: obstacle avoidance",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleB/lecture05.html",
+            "slides": true,
+            "video": true,
+            "labs": [
+              "lab-4"
+            ]
+          },
+          {
+            "kind": "lecture",
+            "number": 6,
+            "label": "Lecture 6",
+            "title": "Vehicle states and vehicle dynamics",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleB/lecture06.html",
+            "slides": true,
+            "video": true
+          }
+        ],
+        "labs": [
+          "lab-3",
+          "lab-4"
+        ],
+        "races": [
+          "race-1"
+        ]
+      },
+      {
+        "id": "C",
+        "title": "Mapping and localization",
+        "summary": "Filtering, particle filter localization and graph-based SLAM, with scan matching as an option.",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleC/index.html",
+        "items": [
+          {
+            "kind": "lecture",
+            "number": 7,
+            "label": "Lecture 7",
+            "title": "Filtering",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleC/lecture07.html",
+            "slides": true,
+            "video": true
+          },
+          {
+            "kind": "lecture",
+            "number": 8,
+            "label": "Lecture 8",
+            "title": "Localization: particle filter",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleC/lecture08.html",
+            "slides": true,
+            "video": true
+          },
+          {
+            "kind": "lecture",
+            "number": 9,
+            "label": "Lecture 9",
+            "title": "Introduction to graph-based SLAM",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleC/lecture09.html",
+            "slides": true,
+            "video": false,
+            "labs": [
+              "lab-5"
+            ]
+          },
+          {
+            "kind": "tutorial",
+            "number": 5,
+            "label": "Tutorial 5",
+            "title": "Running slam_toolbox and the particle filter",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleC/tutorial5.html",
+            "slides": true,
+            "video": false
+          },
+          {
+            "kind": "lecture",
+            "number": 9,
+            "label": "Lecture 9 (optional)",
+            "title": "Scan matching I and II",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleC/lecture09optional.html",
+            "optional": true,
+            "slides": true,
+            "video": true,
+            "labs": [
+              "lab-5-optional"
+            ]
+          }
+        ],
+        "labs": [
+          "lab-5",
+          "lab-5-optional"
+        ],
+        "races": []
+      },
+      {
+        "id": "D",
+        "title": "Planning and control",
+        "summary": "Pure pursuit, then local planning with RRT and splines. Ends with Race 2.",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleD/index.html",
+        "items": [
+          {
+            "kind": "lecture",
+            "number": 10,
+            "label": "Lecture 10",
+            "title": "Pure pursuit",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleD/lecture10.html",
+            "slides": true,
+            "video": true
+          },
+          {
+            "kind": "lecture",
+            "number": 11,
+            "label": "Lecture 11",
+            "title": "Local planning: RRT, spline-based planner",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleD/lecture11.html",
+            "slides": true,
+            "video": false,
+            "labs": [
+              "lab-6"
+            ]
+          }
+        ],
+        "labs": [
+          "lab-6"
+        ],
+        "races": [
+          "race-2"
+        ]
+      },
+      {
+        "id": "E",
+        "title": "Vision",
+        "summary": "Classical and machine learning perception. The basics only, not a full vision course. Introduces the final project.",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleE/index.html",
+        "items": [
+          {
+            "kind": "lecture",
+            "number": 12,
+            "label": "Lecture 12",
+            "title": "Classical perception",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleE/lecture12.html",
+            "slides": true,
+            "video": true
+          },
+          {
+            "kind": "lecture",
+            "number": 13,
+            "label": "Lecture 13",
+            "title": "Machine learning perception",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleE/lecture13.html",
+            "slides": true,
+            "video": true,
+            "labs": [
+              "lab-7"
+            ]
+          }
+        ],
+        "labs": [
+          "lab-7"
+        ],
+        "races": []
+      },
+      {
+        "id": "F",
+        "title": "Special topics",
+        "summary": "Detection and pose estimation, raceline optimization, MPC and moral decision making. Instructors may choose their own topics.",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/index.html",
+        "items": [
+          {
+            "kind": "lecture",
+            "number": 17,
+            "label": "Lecture 17",
+            "title": "Detection and pose estimation",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture17.html",
+            "slides": true,
+            "video": false
+          },
+          {
+            "kind": "lecture",
+            "number": 18,
+            "label": "Lecture 18",
+            "title": "Extending single view and YOLO",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture18.html",
+            "slides": true,
+            "video": false,
+            "labs": [
+              "lab-8"
+            ]
+          },
+          {
+            "kind": "lecture",
+            "number": 19,
+            "label": "Lecture 19",
+            "title": "Project proposal",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture19.html",
+            "slides": true,
+            "video": false,
+            "labs": [
+              "lab-9"
+            ]
+          },
+          {
+            "kind": "lecture",
+            "number": 20,
+            "label": "Lecture 20",
+            "title": "Raceline optimization",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture20.html",
+            "slides": true,
+            "video": false
+          },
+          {
+            "kind": "lecture",
+            "number": 21,
+            "label": "Lecture 21",
+            "title": "Model predictive control",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture21.html",
+            "slides": true,
+            "video": false
+          },
+          {
+            "kind": "lecture",
+            "number": 22,
+            "label": "Lecture 22",
+            "title": "Moral decision making",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture22.html",
+            "slides": true,
+            "video": false,
+            "labs": [
+              "lab-9"
+            ]
+          },
+          {
+            "kind": "lecture",
+            "number": 23,
+            "label": "Lectures 23 to 25",
+            "title": "Special topics",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture23.html",
+            "slides": true,
+            "video": false
+          }
+        ],
+        "labs": [
+          "lab-8",
+          "lab-9"
+        ],
+        "races": []
+      },
+      {
+        "id": "G",
+        "title": "The RoboRacer Grand Prix",
+        "summary": "Project demos, race prep and Race 3, head to head against another team's car.",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleG/index.html",
+        "items": [
+          {
+            "kind": "lecture",
+            "number": 26,
+            "label": "Lecture 26",
+            "title": "Project demos",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleG/lecture26.html",
+            "slides": false,
+            "video": false
+          },
+          {
+            "kind": "lecture",
+            "number": 27,
+            "label": "Lecture 27",
+            "title": "Race prep",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleG/lecture27.html",
+            "slides": false,
+            "video": false
+          },
+          {
+            "kind": "lecture",
+            "number": 28,
+            "label": "Lecture 28",
+            "title": "Race 3: the RoboRacer Grand Prix",
+            "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleG/lecture28.html",
+            "slides": false,
+            "video": false
+          }
+        ],
+        "labs": [],
+        "races": [
+          "race-3"
+        ]
+      }
+    ],
+    "labs": [
+      {
+        "id": "lab-1",
+        "number": 1,
+        "label": "Lab 1",
+        "title": "Introduction to ROS 2",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab1.html",
+        "module": "A"
+      },
+      {
+        "id": "lab-2",
+        "number": 2,
+        "label": "Lab 2",
+        "title": "Automatic emergency braking",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab2.html",
+        "module": "A"
+      },
+      {
+        "id": "lab-3",
+        "number": 3,
+        "label": "Lab 3",
+        "title": "Wall following",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab3.html",
+        "module": "B"
+      },
+      {
+        "id": "lab-4",
+        "number": 4,
+        "label": "Lab 4",
+        "title": "Follow the gap",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab4.html",
+        "module": "B"
+      },
+      {
+        "id": "lab-5",
+        "number": 5,
+        "label": "Lab 5",
+        "title": "SLAM and pure pursuit",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab5.html",
+        "module": "C"
+      },
+      {
+        "id": "lab-5-optional",
+        "number": 5,
+        "label": "Lab 5 (optional)",
+        "title": "Scan matching",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/optional_lab05.html",
+        "module": "C",
+        "optional": true
+      },
+      {
+        "id": "lab-6",
+        "number": 6,
+        "label": "Lab 6",
+        "title": "Motion planning",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab6.html",
+        "module": "D"
+      },
+      {
+        "id": "lab-7",
+        "number": 7,
+        "label": "Lab 7",
+        "title": "Perception and vision",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab7.html",
+        "module": "E"
+      },
+      {
+        "id": "lab-8",
+        "number": 8,
+        "label": "Lab 8",
+        "title": "Perception and planning",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab8.html",
+        "module": "F"
+      },
+      {
+        "id": "lab-9",
+        "number": 9,
+        "label": "Lab 9",
+        "title": "Robot ethics",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab9.html",
+        "module": "F"
+      }
+    ],
+    "races": [
+      {
+        "id": "race-1",
+        "number": 1,
+        "title": "Race 1",
+        "body": "A timed trial of reactive methods.",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/races/race1.html",
+        "module": "B"
+      },
+      {
+        "id": "race-2",
+        "number": 2,
+        "title": "Race 2",
+        "body": "A timed trial with pure pursuit and a map.",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/races/race2.html",
+        "module": "D"
+      },
+      {
+        "id": "race-3",
+        "number": 3,
+        "title": "Race 3",
+        "body": "Head to head against another team's car.",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/races/race3.html",
+        "module": "G"
+      }
+    ],
+    "final_project": {
+      "title": "Final project",
+      "body": "Teams propose a problem and try to solve it with the car. Proposed in Lecture 19, demoed in Lecture 26.",
+      "weeks": 5,
+      "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/final_project.html",
+      "modules": [
+        "E",
+        "F",
+        "G"
+      ]
+    }
+  },
+  "learn": [
+    {
+      "text": "Write ROS 2 nodes, the framework every lab runs on",
+      "module": "A"
+    },
+    {
+      "text": "Test your code in the RoboRacer simulator",
+      "module": "A"
+    },
+    {
+      "text": "Model the car's dynamics and tune a PID controller",
+      "module": "B"
+    },
+    {
+      "text": "Run your software on the 1/10-scale car",
+      "module": "B"
+    },
+    {
+      "text": "Map a track and localize on it with a particle filter",
+      "module": "C"
+    },
+    {
+      "text": "Plan fast, safe paths with pure pursuit, RRT and splines",
+      "module": "D"
+    },
+    {
+      "text": "Detect objects with classical and learned perception",
+      "module": "E"
+    },
+    {
+      "text": "Compute the raceline for a given track",
+      "module": "F"
+    },
+    {
+      "text": "Reason about the moral choices an autonomous car makes",
+      "module": "F"
+    },
+    {
+      "text": "Race head to head against another team's car",
+      "module": "G"
+    }
+  ],
+  "prerequisites": {
+    "lead": "Not a beginner course. It suits graduate students and senior undergraduates.",
+    "items": [
+      "Basic Linux",
+      "Optimization theory",
+      "Programming, preferably in C++ or Python"
+    ],
+    "not_covered": [
+      "Mechatronics",
+      "Deep learning",
+      "A replacement for full graduate courses in these topics"
+    ],
+    "source": "https://f1tenth-coursekit.readthedocs.io/en/latest/introduction/overview.html"
+  },
+  "staff": [
+    {
+      "id": "rahul-mangharam",
+      "name": "Rahul Mangharam",
+      "role": "Professor, Department of Electrical and Systems Engineering",
+      "affiliation": "University of Pennsylvania",
+      "project_role": "Faculty lead, RoboRacer",
+      "photo": {
+        "src": "/crew/rahul-mangharam-400.webp",
+        "width": 400,
+        "height": 400,
+        "alt": "Rahul Mangharam"
+      },
+      "bio": "Rahul Mangharam is a Professor of Electrical and Systems Engineering at the University of Pennsylvania. A founding member of the PRECISE Center, he directs the Safe Autonomous Systems Lab at Penn. His research joins formal methods, machine learning and control for medical devices, energy-efficient buildings and autonomous systems.",
+      "link": "https://xlab.upenn.edu/team/rahul/",
+      "source": "Role and photo: src/components/about/people.json. Bio: the mock's, tightened, 'Associate Professor' corrected. Faculty lead: roboracer-content skill."
+    }
+  ],
+  "faq": [
+    {
+      "id": "length",
+      "q": "How long is the course and how much time does it take?",
+      "a": "Pick 4, 10 or 15 weeks; the full course fills a semester. The syllabus plans two 80-minute classes a week, with labs done outside class.",
+      "note": "TODO(content): add student hours per week once Cedric or Rahul gives them (see plans[].effort_note)."
+    },
+    {
+      "id": "start",
+      "q": "When does it start, and can I join late?",
+      "a": "The material is open on the course site all year, so start whenever you like and go at your own pace. University offerings follow their own term dates."
+    },
+    {
+      "id": "car",
+      "q": "Do I need to buy and build the car?",
+      "a": "Not to start. Tutorial 2 sets up the simulator, and your code runs there first. The course's three races run on the 1/10-scale car; the build docs show how to build one."
+    },
+    {
+      "id": "help",
+      "q": "How do I sign up and get help?",
+      "a": "There is nothing to sign up for: the lectures, slides and labs are open on the course site. Ask questions in the RoboRacer Slack. If your university runs the course, its staff come first."
+    },
+    {
+      "id": "grading",
+      "q": "How am I graded?",
+      "a": "On your own, you are not. Universities that run the course grade their students with their own weights; the course site publishes rubrics for the labs, races and final project."
+    }
+  ],
+  "features": [
+    {
+      "id": "free-to-reuse",
+      "title": "Free to reuse",
+      "short": "Free under CC BY-NC-SA 4.0",
+      "body": "Use, change and share the material under CC BY-NC-SA 4.0. Credit RoboRacer; no commercial use.",
+      "status": "available",
+      "pages": [
+        "teach"
+      ],
+      "source": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/index.html"
+    },
+    {
+      "id": "plans",
+      "title": "Pick your lectures",
+      "short": "4, 10 or 15 weeks",
+      "body": "Start from the 4-, 10- or 15-week plan, then add or drop modules to fit your students and your term.",
+      "status": "available",
+      "pages": [
+        "teach"
+      ],
+      "source": "https://f1tenth-coursekit.readthedocs.io/en/latest/introduction/syllabus.html"
+    },
+    {
+      "id": "slides",
+      "title": "Lecture slides",
+      "short": "Slides for every lecture",
+      "body": "Slides for every lecture in Modules A to F, viewable on the course site.",
+      "status": "available",
+      "pages": [
+        "catalog",
+        "teach"
+      ],
+      "source": "Coursekit lecture pages (embedded Google Slides on 21 of 24 lecture pages; Module G has none)"
+    },
+    {
+      "id": "videos",
+      "title": "Recorded lectures",
+      "short": "Recorded lectures",
+      "body": "12 recorded lectures on YouTube, covering most of Modules A to E, plus two recorded tutorials.",
+      "status": "available",
+      "pages": [
+        "catalog",
+        "teach"
+      ],
+      "source": "Coursekit lecture pages (embedded YouTube)"
+    },
+    {
+      "id": "labs",
+      "title": "Labs with starter code",
+      "short": "Nine labs",
+      "body": "Nine labs, each with a handout and skeleton code on GitHub, from ROS 2 basics to perception and planning.",
+      "status": "available",
+      "pages": [
+        "catalog",
+        "teach"
+      ],
+      "source": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/index.html"
+    },
+    {
+      "id": "rubrics",
+      "title": "Grading rubrics",
+      "short": "Grading rubrics included",
+      "body": "Rubrics for the labs, the three races and the final project, ready to copy and adjust to your track.",
+      "status": "available",
+      "pages": [
+        "catalog",
+        "teach"
+      ],
+      "source": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/grading.html"
+    },
+    {
+      "id": "branding",
+      "title": "Your logo and colors",
+      "short": "Your logo and colors",
+      "body": "Your copy of the course carries your university or lab logo and colors.",
+      "status": "platform",
+      "pages": [
+        "teach"
+      ],
+      "source": "Mock ('Rebrand in minutes'); an Open edX feature"
+    },
+    {
+      "id": "quizzes",
+      "title": "Quizzes",
+      "short": "Quizzes",
+      "body": "Quizzes and coding problems that check understanding as students go.",
+      "status": "platform",
+      "pages": [
+        "catalog",
+        "teach"
+      ],
+      "note": "TODO(content): do quizzes exist for the course yet, or only the Open edX problem types? (Cedric)",
+      "source": "Mock ('Interactive tests & coding')"
+    },
+    {
+      "id": "discussion",
+      "title": "Discussion",
+      "short": "Discussion",
+      "body": "Students ask and answer questions in one place, next to the lectures.",
+      "status": "platform",
+      "pages": [
+        "catalog",
+        "teach"
+      ],
+      "source": "Mock ('Discussion groups'); an Open edX feature. Until then, questions go to Slack."
+    },
+    {
+      "id": "gradebook",
+      "title": "Grading built in",
+      "short": "Grading built in",
+      "body": "Set weights, pass marks and honor-code rules for quizzes, labs and races.",
+      "status": "platform",
+      "pages": [
+        "catalog",
+        "teach"
+      ],
+      "source": "Mock ('Grading built in'); an Open edX feature"
+    },
+    {
+      "id": "lecturer-notes",
+      "title": "Notes for lecturers",
+      "short": "Lecturer notes",
+      "body": "Extra explanations for instructors next to each lecture.",
+      "status": "verify",
+      "pages": [
+        "catalog",
+        "teach"
+      ],
+      "note": "TODO(content): the mock promises lecturer notes; the coursekit has none. Do they exist on the platform? (Cedric)",
+      "source": "Mock only"
+    },
+    {
+      "id": "related-courses",
+      "title": "Background courses",
+      "short": "Background courses",
+      "body": "The background courses a lecture needs, linked next to it.",
+      "status": "verify",
+      "pages": [
+        "catalog",
+        "teach"
+      ],
+      "note": "TODO(content): the mock promises related background courses; nothing on the coursekit. Which courses, and where? (Cedric)",
+      "source": "Mock only"
+    },
+    {
+      "id": "new-content",
+      "title": "New material each month",
+      "short": "Monthly additions",
+      "body": "Expert talks, research updates and industry presentations to add to your course.",
+      "status": "verify",
+      "pages": [
+        "catalog",
+        "teach"
+      ],
+      "note": "TODO(content): the mock promises new content monthly. Is there a real schedule and a place it is published? (Cedric)",
+      "source": "Mock only"
+    }
+  ],
+  "teach": {
+    "hero": {
+      "eyebrow": "For instructors",
+      "title": "Teach the course",
+      "lead": "The full course is ready for your semester. Pick 4, 10 or 15 weeks and the modules that fit.",
+      "primary": {
+        "label": "Email the team",
+        "href": "mailto:contact@roboracer.ai?subject=Teaching%20the%20RoboRacer%20course"
+      },
+      "secondary": {
+        "label": "Open the course material",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/"
+      },
+      "pills": [
+        "free-to-reuse",
+        "plans",
+        "rubrics",
+        "branding"
+      ]
+    },
+    "how_it_works": {
+      "kicker": "How it works",
+      "title": "Six steps to your first class",
+      "lead": "Get your own copy of the course and run it for your students.",
+      "steps": [
+        {
+          "n": 1,
+          "title": "Apply",
+          "body": "Email us your university, your names and what you would like to teach."
+        },
+        {
+          "n": 2,
+          "title": "Get access",
+          "body": "We set you up with an instructor account on the course platform."
+        },
+        {
+          "n": 3,
+          "title": "Customize",
+          "body": "Set dates, logos, instructors and the syllabus."
+        },
+        {
+          "n": 4,
+          "title": "Add material",
+          "body": "Trim units, add your slides, videos and quizzes."
+        },
+        {
+          "n": 5,
+          "title": "Publish",
+          "body": "Release the course to your students."
+        },
+        {
+          "n": 6,
+          "title": "Teach",
+          "body": "Invite students and follow their progress."
+        }
+      ],
+      "portals": [
+        {
+          "id": "studio",
+          "tag": "You edit here",
+          "title": "Studio",
+          "body": "Where instructors build the course: dates, logos, syllabus, units, slides, videos, quizzes and the course team. Students see nothing until you publish."
+        },
+        {
+          "id": "courses",
+          "tag": "Students see this",
+          "title": "Courses portal",
+          "body": "Where students sign in, enroll, watch lectures, take quizzes, join discussions and hand in work. Preview your course here as they see it."
+        }
+      ]
+    },
+    "features": {
+      "kicker": "What you get",
+      "title": "What comes with it",
+      "lead": "Open on the course site today, free to reuse with credit."
+    },
+    "lecture_selection": {
+      "kicker": "Choose your lectures",
+      "title": "Pick a plan, then trim it",
+      "lead": "Each plan is a set of modules and labs from the course site. Start from one, then add or drop modules.",
+      "source": "https://f1tenth-coursekit.readthedocs.io/en/latest/getting_started/index.html"
+    },
+    "steps": {
+      "kicker": "Step by step",
+      "title": "Set up and run your course",
+      "items": [
+        {
+          "n": 1,
+          "title": "Apply for a course",
+          "lead": "One email gets you set up as an instructor.",
+          "checklist": [
+            "Email contact@roboracer.ai with your university, your names and what you would like to teach",
+            "We give you a restricted admin account on the course platform",
+            "A short tour of the Courses portal and Studio"
+          ],
+          "tip": "Write from your university address; it speeds up approval.",
+          "links": []
+        },
+        {
+          "n": 2,
+          "title": "Set up the course information",
+          "lead": "Everything students see on your course's front page.",
+          "checklist": [
+            "Enter the details in Studio",
+            "Set the start and end dates",
+            "Add your university logos",
+            "Add the instructors and their photos",
+            "Attach your syllabus",
+            "Add team members"
+          ],
+          "tip": "Add your logo first. It appears on the course card in the catalog.",
+          "links": [
+            {
+              "label": "Course team and pages",
+              "href": "https://edx.readthedocs.io/projects/edx-partner-course-staff/en/latest/course_assets/pages.html"
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "title": "Change the course itself",
+          "lead": "Keep what you need, add what is missing.",
+          "checklist": [
+            "Delete the material you don't need",
+            "Create a new unit",
+            "Add text",
+            "Add slides and videos",
+            "Add quizzes and other problem types",
+            "Publish the new material"
+          ],
+          "tip": "Students see nothing until you publish, so edit freely.",
+          "links": [
+            {
+              "label": "Add videos",
+              "href": "https://edx.readthedocs.io/projects/edx-partner-course-staff/en/latest/course_components/create_video.html"
+            },
+            {
+              "label": "Create problems and quizzes",
+              "href": "https://edx.readthedocs.io/projects/edx-partner-course-staff/en/latest/course_components/create_problem.html"
+            },
+            {
+              "label": "Text components",
+              "href": "https://edx.readthedocs.io/projects/edx-partner-course-staff/en/latest/course_components/create_html_component.html"
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "title": "Enroll students and run the course",
+          "lead": "Students sign up; you stay in control.",
+          "checklist": [
+            "Manage enrollment from the Courses portal",
+            "Students sign in first",
+            "Invite students with your course link",
+            "Students enroll in your course"
+          ],
+          "tip": "Send the enrollment link in your first class email.",
+          "links": [
+            {
+              "label": "Course enrollment",
+              "href": "https://edx.readthedocs.io/projects/edx-partner-course-staff/en/latest/manage_live_course/course_enrollment.html"
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "title": "See it the way students do",
+          "lead": "Know what your students experience.",
+          "checklist": [
+            "What students see and how they move through the course",
+            "How they ask questions and join discussions",
+            "How they hand in work"
+          ],
+          "tip": "Preview your course in the Courses portal before you announce it.",
+          "links": [
+            {
+              "label": "Discussions",
+              "href": "https://edx.readthedocs.io/projects/edx-partner-course-staff/en/latest/course_components/create_discussion.html"
+            }
+          ]
+        }
+      ]
+    },
+    "recording": {
+      "kicker": "Recording",
+      "title": "Record your lectures",
+      "lead": "Short tips for filming, plus the docs for every Studio task.",
+      "tips": [
+        {
+          "id": "audio",
+          "title": "Sound first",
+          "body": "Use a headset or lapel mic in a quiet room. People forgive average video, not bad sound."
+        },
+        {
+          "id": "segments",
+          "title": "Short segments",
+          "body": "Aim for 5 to 12 minutes per video, one idea each. Easier to re-record, easier to follow."
+        },
+        {
+          "id": "resolution",
+          "title": "Record at 1080p",
+          "body": "Slides plus a small camera view at 1920x1080, 30 fps, with a large font."
+        },
+        {
+          "id": "captions",
+          "title": "Captions and notes",
+          "body": "Add captions or a transcript and short notes so every student can follow."
+        }
+      ]
+    },
+    "resources": {
+      "title": "Docs and tools",
+      "items": [
+        {
+          "id": "edx-video",
+          "title": "Add videos to a unit",
+          "body": "Upload or link lecture videos in Studio.",
+          "href": "https://edx.readthedocs.io/projects/edx-partner-course-staff/en/latest/course_components/create_video.html"
+        },
+        {
+          "id": "edx-problems",
+          "title": "Create quizzes and problems",
+          "body": "Multiple choice, text input and coding-style problems.",
+          "href": "https://edx.readthedocs.io/projects/edx-partner-course-staff/en/latest/course_components/create_problem.html"
+        },
+        {
+          "id": "edx-grading",
+          "title": "Set up grading",
+          "body": "Assignment types, weights and grade cutoffs.",
+          "href": "https://edx.readthedocs.io/projects/edx-partner-course-staff/en/latest/grading/configure_assignment_type.html"
+        },
+        {
+          "id": "edx-accessibility",
+          "title": "Accessible course material",
+          "body": "Make your material usable for every student.",
+          "href": "https://edx.readthedocs.io/projects/edx-partner-course-staff/en/latest/accessibility/best_practices_course_content_dev.html"
+        },
+        {
+          "id": "edx-staff",
+          "title": "Course staff guide",
+          "body": "The full Open edX guide for course teams.",
+          "href": "https://edx.readthedocs.io/projects/edx-partner-course-staff/en/latest/index.html"
+        },
+        {
+          "id": "openedx-educators",
+          "title": "Open edX educators guide",
+          "body": "Official documentation for teaching on Open edX.",
+          "href": "https://docs.openedx.org/en/latest/educators/index.html"
+        },
+        {
+          "id": "obs",
+          "title": "OBS Studio",
+          "body": "Free, open-source software to record your screen and camera.",
+          "href": "https://obsproject.com/"
+        },
+        {
+          "id": "ros",
+          "title": "ROS 2 documentation",
+          "body": "Reference for the framework every lab uses.",
+          "href": "https://docs.ros.org/"
+        },
+        {
+          "id": "github",
+          "title": "RoboRacer on GitHub",
+          "body": "Code, the simulator and the lab templates.",
+          "href": "https://github.com/f1tenth"
+        }
+      ]
+    },
+    "faq_heading": "Instructor questions",
+    "faq": [
+      {
+        "id": "access",
+        "q": "How do I get access as an instructor?",
+        "a": "Email contact@roboracer.ai with your university, your names and what you would like to teach. We set you up with an instructor account on the course platform."
+      },
+      {
+        "id": "whole-course",
+        "q": "Do I have to teach the whole course?",
+        "a": "No. Start from the 4-, 10- or 15-week plan and add or drop modules to fit your students' background, your term and their interests."
+      },
+      {
+        "id": "branding",
+        "q": "Can I use my own logo and colors?",
+        "a": "Yes. Your copy of the course carries your university or lab logo and colors."
+      },
+      {
+        "id": "own-material",
+        "q": "Can I add or replace material?",
+        "a": "Yes. In Studio you delete the units you don't need, add new ones with text, slides, videos and quizzes, and publish when ready."
+      },
+      {
+        "id": "tas",
+        "q": "Do I need teaching assistants?",
+        "a": "That depends on your class size and how many cars you run. Slides, recorded lectures, lab starter code and grading rubrics are ready, so there is less to prepare."
+      },
+      {
+        "id": "grading",
+        "q": "How are students graded, and can I prevent cheating?",
+        "a": "You set the weights for quizzes, labs and races, and the passing grade. Honor-code agreements, randomized question pools and limited attempts help check real understanding."
+      },
+      {
+        "id": "enroll",
+        "q": "How do students enroll?",
+        "a": "Students sign in on the Courses portal and enroll in your course. Send them your course link."
+      },
+      {
+        "id": "rerun",
+        "q": "Can I reuse the course next semester?",
+        "a": "Yes. Re-run it in Studio, rename it, update the dates and the team, and it is ready for a new class."
+      },
+      {
+        "id": "help",
+        "q": "Where can I get help?",
+        "a": "Email contact@roboracer.ai or ask in the RoboRacer Slack. The Open edX course staff guide covers every Studio task."
+      }
+    ],
+    "contact": {
+      "title": "Teach it at your university",
+      "lead": "Tell us your university, your names and what you would like to teach.",
+      "label": "Email the team",
+      "href": "mailto:contact@roboracer.ai?subject=Teaching%20the%20RoboRacer%20course"
+    }
+  }
+}

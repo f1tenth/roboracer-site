@@ -240,8 +240,7 @@
           "body": "Classical perception, then machine learning perception.",
           "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleE/index.html",
           "links": [
-            { "label": "Lab 7: perception and vision", "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab7.html" },
-            { "label": "Lab 8: perception and planning", "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab8.html" }
+            { "label": "Lab 7: perception and vision", "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab7.html" }
           ]
         },
         {
@@ -250,6 +249,7 @@
           "body": "Detection and pose estimation, raceline optimization, model predictive control, moral decision making.",
           "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/index.html",
           "links": [
+            { "label": "Lab 8: perception and planning", "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab8.html" },
             { "label": "Lab 9: robot ethics", "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab9.html" }
           ]
         },
