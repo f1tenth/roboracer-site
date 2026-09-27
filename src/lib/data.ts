@@ -69,7 +69,7 @@ export type Partner = {
 
 /** Numeric width and height for a partner logo drawn at a fixed height, so
  * the box is right before the file arrives (and "width" is never "auto"). */
-export const logoAttrs = (p: Partner, height: number) => ({
+export const logoAttrs = (p: Pick<Partner, "width" | "height">, height: number) => ({
   width: p.width > 0 && p.height > 0 ? Math.round((height * p.width) / p.height) : height,
   height,
 });
@@ -518,7 +518,13 @@ export const loadPaths = () => loadJson<PathsFile>("paths.json");
 export type CourseLink = { label: string; href: string };
 
 /** A section head: small kicker, 2 to 5 word title, one-sentence lead. */
-export type CourseHeading = { kicker?: string; title: string; lead?: string };
+export type CourseHeading = {
+  kicker?: string;
+  title: string;
+  lead?: string;
+  /** Open question about the wording. Not rendered. */
+  note?: string;
+};
 
 export type CourseImage = { src: string; width: number; height: number; alt: string };
 
@@ -730,6 +736,8 @@ export type CoursesFile = {
     hero: CourseHero;
     courses_heading: CourseHeading;
     offerings_heading: CourseHeading;
+    /** The catalog's outline section (modules A to G as folds). */
+    outline_heading: CourseHeading;
     features_heading: CourseHeading;
   };
   /** Page copy for /learn/courses/:id, shared by every plan and offering. */
@@ -742,8 +750,14 @@ export type CoursesFile = {
     outline_heading: string;
     staff_heading: string;
     faq_heading: string;
+    /** The sidebar panel's heading. */
+    glance_heading: string;
     open_material: CourseLink;
     ask: CourseLink;
+    /** /learn/courses/<unknown id>: a short state with a link back. */
+    not_found: { title: string; body: string; back: CourseLink };
+    /** Open question about the labels above. Not rendered. */
+    labels_note?: string;
   };
   stats: CourseStat[];
   plans: CoursePlan[];
@@ -761,6 +775,9 @@ export type CoursesFile = {
     hero: CourseHero & {
       /** features[].id, rendered with their `short` text (respect `status`). */
       pills: string[];
+      /** The hero's ghost link back to the catalog. */
+      plans_link: CourseLink;
+      plans_link_note?: string;
     };
     how_it_works: CourseHeading & {
       steps: { n: number; title: string; body: string }[];

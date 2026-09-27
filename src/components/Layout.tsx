@@ -15,6 +15,8 @@ const TITLES: Record<string, string> = {
   "/about": "About - RoboRacer",
   "/build": "Build the car - RoboRacer",
   "/learn": "Learn - RoboRacer",
+  "/learn/courses": "Courses - RoboRacer",
+  "/learn/teach": "Teach the course - RoboRacer",
   "/news": "News - RoboRacer",
   "/race": "Race - RoboRacer",
   "/research": "Research - RoboRacer",
@@ -27,6 +29,8 @@ const TITLES: Record<string, string> = {
 export default function Layout() {
   const location = useLocation();
   const currentPath = location.pathname;
+  // Exact matches: /learn is the docs frame, one window tall; the course
+  // pages under it (/learn/courses, /learn/teach) scroll with the footer.
   const isAltLayout =
     currentPath === "/learn" ||
     currentPath === "/build" ||

@@ -58,6 +58,12 @@
       "title": "Taught on campus",
       "lead": "Universities that run the course for credit, on their own dates."
     },
+    "outline_heading": {
+      "kicker": "Outline",
+      "title": "What the course covers",
+      "lead": "Modules A to G, as the course site runs them. Every lecture and lab opens there.",
+      "note": "TODO(content): label written by the page builder (2026-09-27), not taken from the mock; confirm the wording (Cedric)."
+    },
     "features_heading": {
       "kicker": "What comes with it",
       "title": "What the course gives you",
@@ -76,6 +82,7 @@
     "outline_heading": "Course outline",
     "staff_heading": "Course staff",
     "faq_heading": "Logistics",
+    "glance_heading": "At a glance",
     "open_material": {
       "label": "Open the course material",
       "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/getting_started/index.html"
@@ -83,7 +90,16 @@
     "ask": {
       "label": "Ask in Slack",
       "href": "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q"
-    }
+    },
+    "not_found": {
+      "title": "No such course",
+      "body": "This link does not match a course. The plans and the universities that teach the course are on the catalog.",
+      "back": {
+        "label": "See all courses",
+        "href": "/learn/courses"
+      }
+    },
+    "labels_note": "TODO(content): glance_heading and not_found were written by the page builder (2026-09-27); confirm the wording (Cedric)."
   },
   "stats": [
     {
@@ -1154,7 +1170,12 @@
         "plans",
         "rubrics",
         "branding"
-      ]
+      ],
+      "plans_link": {
+        "label": "See the course plans",
+        "href": "/learn/courses"
+      },
+      "plans_link_note": "TODO(content): label written by the page builder (2026-09-27), not taken from the mock; confirm the wording (Cedric)."
     },
     "how_it_works": {
       "kicker": "How it works",
