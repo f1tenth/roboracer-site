@@ -47,11 +47,13 @@ export default function Teach() {
         lead={teach.hero.lead}
         meta={
           pills.length > 0 && (
-            <ul className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-small text-text-body">
+            // A dotted line from sm; on a phone, where each pill takes its
+            // own line anyway, a plain stack without leading dots.
+            <ul className="flex flex-col gap-1 font-mono text-small text-text-body sm:flex-row sm:flex-wrap sm:gap-x-3">
               {pills.map((f, i) => (
                 <li key={f.id} className="whitespace-nowrap">
                   {i > 0 && (
-                    <span aria-hidden="true" className="mr-3 text-text-muted">
+                    <span aria-hidden="true" className="mr-3 text-text-muted max-sm:hidden">
                       ·
                     </span>
                   )}

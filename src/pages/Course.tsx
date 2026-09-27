@@ -278,7 +278,9 @@ export default function Course() {
               stays in view beside the long left column from desktop. Null
               dates and effort have no row at all. */}
           <aside aria-labelledby="course-glance" className="max-w-xl lg:col-span-4 lg:col-start-9 lg:max-w-none">
-            <div className="lg:sticky lg:top-[calc(var(--spacing-nav)+2rem)]">
+            {/* Sticky only where the panel fits under the bar (about 34rem
+                tall at most on Penn): a short landscape window scrolls it. */}
+            <div className="lg:top-[calc(var(--spacing-nav)+2rem)] lg:[@media(min-height:40rem)]:sticky">
               <h2 id="course-glance" className="font-display text-lead font-semibold text-text-strong">
                 {copy.glance_heading}
               </h2>
