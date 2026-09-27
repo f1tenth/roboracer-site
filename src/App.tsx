@@ -13,6 +13,7 @@ const About = lazyWithRetry("About", () => import("./pages/About"));
 const Build = lazyWithRetry("Build", () => import("./pages/Build"));
 const Learn = lazyWithRetry("Learn", () => import("./pages/Learn"));
 const Courses = lazyWithRetry("Courses", () => import("./pages/Courses"));
+const Course = lazyWithRetry("Course", () => import("./pages/Course"));
 const News = lazyWithRetry("News", () => import("./pages/News"));
 const RaceCalendar = lazyWithRetry("Race", () => import("./pages/Race"));
 const Research = lazyWithRetry("Research", () => import("./pages/Research"));
@@ -40,6 +41,7 @@ function App() {
                 instructors page (Dhyey Shah's LMS mock, rebuilt from
                 public/data/courses.json). /learn itself stays the docs frame. */}
             <Route path="/learn/courses" element={<Courses />} />
+            <Route path="/learn/courses/:id" element={<Course />} />
             <Route path="/news" element={<News />} />
             <Route path="/race" element={<RaceCalendar />} />
             <Route path="/research" element={<Research />} />
