@@ -15,6 +15,76 @@
       "status": "sourced"
     },
     {
+      "name": "Venkat Krovi",
+      "project_role": "Outreach Director",
+      "project_role_verify": true,
+      "role": "Michelin SmartState Chair Professor of Vehicle Automation, School of Mechanical and Automotive Engineering",
+      "affiliation": "Clemson University (CU-ICAR, ARMLab)",
+      "photo": "/crew/venkat-krovi-400.webp",
+      "link": "https://www.clemson.edu/cecas/departments/automotive-engineering/people/venkat-krovi.html",
+      "source": "https://www.clemson.edu/cecas/departments/automotive-engineering/people/venkat-krovi.html",
+      "note": "Director of ARMLab.",
+      "status": "sourced"
+    },
+    {
+      "name": "Marko Bertogna",
+      "project_role": "Organizer",
+      "project_role_verify": true,
+      "role": "Full Professor and leader of the HiPeRT Lab",
+      "affiliation": "University of Modena and Reggio Emilia (HiPeRT Lab)",
+      "photo": "/crew/marko-bertogna-400.webp",
+      "link": "https://hipert.unimore.it/employees/bertogna/",
+      "source": "https://hipert.unimore.it/employees/bertogna/",
+      "status": "sourced"
+    },
+    {
+      "name": "Paolo Burgio",
+      "project_role": "Organizer",
+      "project_role_verify": true,
+      "role": "Research Fellow, HiPeRT Lab",
+      "affiliation": "University of Modena and Reggio Emilia (HiPeRT Lab)",
+      "photo": "/crew/paolo-burgio-400.webp",
+      "link": "https://www.linkedin.com/in/paoloburgio/",
+      "source": "https://hipert.unimore.it/",
+      "status": "sourced"
+    },
+    {
+      "name": "Radu Grosu",
+      "role": "Full Professor and Head of Research Unit, Research Unit of Cyber-Physical Systems",
+      "affiliation": "TU Wien",
+      "photo": "/crew/radu-grosu-400.webp",
+      "link": "https://informatics.tuwien.ac.at/people/radu-grosu",
+      "source": "https://informatics.tuwien.ac.at/people/radu-grosu",
+      "status": "sourced"
+    },
+    {
+      "name": "Johannes Betz",
+      "role": "Rudolf Mößbauer Professor, Chair of Autonomous Vehicle Systems, TUM School of Engineering and Design",
+      "affiliation": "Technical University of Munich",
+      "photo": "/crew/johannes-betz-400.webp",
+      "link": "https://www.professoren.tum.de/en/betz-johannes",
+      "source": "https://www.professoren.tum.de/en/betz-johannes",
+      "status": "sourced"
+    },
+    {
+      "name": "John M. Dolan",
+      "role": "Principal Systems Scientist, Robotics Institute",
+      "affiliation": "Carnegie Mellon University",
+      "photo": "/crew/john-dolan-400.webp",
+      "link": "https://www.ri.cmu.edu/ri-faculty/john-m-dolan/",
+      "source": "https://iros2026-race.roboracer.ai/",
+      "status": "sourced"
+    },
+    {
+      "name": "Amr El-Wakeel",
+      "role": "Assistant Professor and Director, Intelligent Cyber-Physical Systems Lab, Lane Department of Computer Science and Electrical Engineering",
+      "affiliation": "West Virginia University",
+      "photo": "/crew/amr-el-wakeel-400.webp",
+      "link": "https://directory.statler.wvu.edu/faculty-staff-directory/amr-el-wakeel",
+      "source": "https://directory.statler.wvu.edu/faculty-staff-directory/amr-el-wakeel",
+      "status": "sourced"
+    },
+    {
       "name": "Madhur Behl",
       "project_role": "Crew Chief",
       "project_role_verify": true,
@@ -38,55 +108,6 @@
       "status": "sourced"
     },
     {
-      "name": "Marko Bertogna",
-      "project_role": "Organizer",
-      "project_role_verify": true,
-      "role": "Full Professor and leader of the HiPeRT Lab",
-      "affiliation": "University of Modena and Reggio Emilia (HiPeRT Lab)",
-      "photo": "/crew/marko-bertogna-400.webp",
-      "link": "https://hipert.unimore.it/employees/bertogna/",
-      "source": "https://hipert.unimore.it/employees/bertogna/",
-      "status": "sourced"
-    },
-    {
-      "name": "Johannes Betz",
-      "role": "Rudolf Mößbauer Professor, Chair of Autonomous Vehicle Systems, TUM School of Engineering and Design",
-      "affiliation": "Technical University of Munich",
-      "photo": "/crew/johannes-betz-400.webp",
-      "link": "https://www.professoren.tum.de/en/betz-johannes",
-      "source": "https://www.professoren.tum.de/en/betz-johannes",
-      "status": "sourced"
-    },
-    {
-      "name": "Paolo Burgio",
-      "project_role": "Organizer",
-      "project_role_verify": true,
-      "role": "Research Fellow, HiPeRT Lab",
-      "affiliation": "University of Modena and Reggio Emilia (HiPeRT Lab)",
-      "photo": "/crew/paolo-burgio-400.webp",
-      "link": "https://www.linkedin.com/in/paoloburgio/",
-      "source": "https://hipert.unimore.it/",
-      "status": "sourced"
-    },
-    {
-      "name": "John M. Dolan",
-      "role": "Principal Systems Scientist, Robotics Institute",
-      "affiliation": "Carnegie Mellon University",
-      "photo": "/crew/john-dolan-400.webp",
-      "link": "https://www.ri.cmu.edu/ri-faculty/john-m-dolan/",
-      "source": "https://iros2026-race.roboracer.ai/",
-      "status": "sourced"
-    },
-    {
-      "name": "Amr El-Wakeel",
-      "role": "Assistant Professor and Director, Intelligent Cyber-Physical Systems Lab, Lane Department of Computer Science and Electrical Engineering",
-      "affiliation": "West Virginia University",
-      "photo": "/crew/amr-el-wakeel-400.webp",
-      "link": "https://directory.statler.wvu.edu/faculty-staff-directory/amr-el-wakeel",
-      "source": "https://directory.statler.wvu.edu/faculty-staff-directory/amr-el-wakeel",
-      "status": "sourced"
-    },
-    {
       "name": "Francesco Gatti",
       "project_role": "Organizer",
       "project_role_verify": true,
@@ -94,30 +115,20 @@
       "link": "https://www.linkedin.com/in/francesco-gatti-5234aa163/",
       "source": "https://web.archive.org/web/20240109144454/https://f1tenth.org/about.html",
       "status": "verify"
-    },
-    {
-      "name": "Radu Grosu",
-      "role": "Full Professor and Head of Research Unit, Research Unit of Cyber-Physical Systems",
-      "affiliation": "TU Wien",
-      "photo": "/crew/radu-grosu-400.webp",
-      "link": "https://informatics.tuwien.ac.at/people/radu-grosu",
-      "source": "https://informatics.tuwien.ac.at/people/radu-grosu",
-      "status": "sourced"
-    },
-    {
-      "name": "Venkat Krovi",
-      "project_role": "Outreach Director",
-      "project_role_verify": true,
-      "role": "Michelin SmartState Chair Professor of Vehicle Automation, School of Mechanical and Automotive Engineering",
-      "affiliation": "Clemson University (CU-ICAR, ARMLab)",
-      "photo": "/crew/venkat-krovi-400.webp",
-      "link": "https://www.clemson.edu/cecas/departments/automotive-engineering/people/venkat-krovi.html",
-      "source": "https://www.clemson.edu/cecas/departments/automotive-engineering/people/venkat-krovi.html",
-      "note": "Director of ARMLab.",
-      "status": "sourced"
     }
   ],
   "developers": [
+    {
+      "name": "Hongrui \"Billy\" Zheng",
+      "project_role": "Simulation and Race Infrastructure",
+      "project_role_verify": true,
+      "role": "Ph.D. Student",
+      "affiliation": "University of Pennsylvania (xLAB)",
+      "photo": "/crew/billy-zheng-400.webp",
+      "link": "https://xlab.upenn.edu/members/",
+      "source": "https://xlab.upenn.edu/members/",
+      "status": "sourced"
+    },
     {
       "name": "Ahmad Amine",
       "role": "Ph.D. Student",
@@ -126,41 +137,6 @@
       "link": "https://ahmadamine998.github.io/",
       "source": "https://xlab.upenn.edu/members/",
       "status": "sourced"
-    },
-    {
-      "name": "Mohamed Elgouhary",
-      "role": "Graduate Research Assistant, Lane Department of Computer Science and Electrical Engineering",
-      "affiliation": "West Virginia University",
-      "photo": "/crew/mohamed-elgouhary-400.webp",
-      "link": "https://www.linkedin.com/in/elgouhary-ai",
-      "source": "https://iros2026-race.roboracer.ai/",
-      "status": "sourced"
-    },
-    {
-      "name": "Cedric Hollande",
-      "project_role": "Race Director, IROS 2026",
-      "role": "Researcher, Department of Electrical and Systems Engineering",
-      "affiliation": "University of Pennsylvania",
-      "photo": "/crew/cedric-hollande-400.webp",
-      "link": "https://cedrichollande.com/",
-      "source": "https://iros2026-race.roboracer.ai/",
-      "status": "sourced"
-    },
-    {
-      "name": "Felix Jahncke",
-      "role": "Ph.D. Candidate, Department of Mobility Systems Engineering",
-      "affiliation": "Technical University of Munich",
-      "photo": "/crew/felix-jahncke-400.webp",
-      "link": "https://icra2026-race.roboracer.ai/",
-      "source": "https://icra2026-race.roboracer.ai/",
-      "status": "sourced"
-    },
-    {
-      "name": "Dhruv Jaiswal",
-      "affiliation": "Carnegie Mellon University",
-      "link": "https://iros2026-race.roboracer.ai/",
-      "source": "https://iros2026-race.roboracer.ai/",
-      "status": "verify"
     },
     {
       "name": "Chinmay Samak",
@@ -181,17 +157,13 @@
       "status": "sourced"
     },
     {
-      "name": "Ayagoz Smagulova",
-      "project_role": "Design, roboracer.ai",
-      "source": "CLAUDE.md, 2026-08 (Cedric: Ayagoz Smagulova co-owns the site's design). The content skill lists her in the active roster with no role yet.",
-      "status": "sourced"
-    },
-    {
-      "name": "Johnny Tian",
-      "affiliation": "Carnegie Mellon University",
-      "link": "https://iros2026-race.roboracer.ai/",
-      "source": "https://iros2026-race.roboracer.ai/",
-      "status": "verify"
+      "name": "Zirui Zang",
+      "role": "Ph.D. Student",
+      "affiliation": "University of Pennsylvania (xLAB)",
+      "link": "https://github.com/zzangupenn",
+      "source": "https://xlab.upenn.edu/members/",
+      "status": "sourced",
+      "photo": "/crew/zirui-zang-400.webp"
     },
     {
       "name": "Yon Vanommeslaeghe",
@@ -202,32 +174,37 @@
       "status": "sourced"
     },
     {
-      "name": "Wenshan Wang",
-      "role": "Systems Scientist, Robotics Institute",
-      "affiliation": "Carnegie Mellon University",
-      "photo": "/crew/wenshan-wang-400.webp",
-      "link": "https://www.ri.cmu.edu/ri-faculty/wenshan-wang/",
+      "name": "Cedric Hollande",
+      "project_role": "Race Director, IROS 2026",
+      "role": "Researcher, Department of Electrical and Systems Engineering",
+      "affiliation": "University of Pennsylvania",
+      "photo": "/crew/cedric-hollande-400.webp",
+      "link": "https://cedrichollande.com/",
       "source": "https://iros2026-race.roboracer.ai/",
       "status": "sourced"
     },
     {
-      "name": "Zirui Zang",
-      "role": "Ph.D. Student",
-      "affiliation": "University of Pennsylvania (xLAB)",
-      "link": "https://github.com/zzangupenn",
-      "source": "https://xlab.upenn.edu/members/",
-      "status": "sourced",
-      "photo": "/crew/zirui-zang-400.webp"
+      "name": "Ayagoz Smagulova",
+      "project_role": "Design, roboracer.ai",
+      "source": "CLAUDE.md, 2026-08 (Cedric: Ayagoz Smagulova co-owns the site's design). The content skill lists her in the active roster with no role yet.",
+      "status": "sourced"
     },
     {
-      "name": "Hongrui \"Billy\" Zheng",
-      "project_role": "Simulation and Race Infrastructure",
-      "project_role_verify": true,
-      "role": "Ph.D. Student",
-      "affiliation": "University of Pennsylvania (xLAB)",
-      "photo": "/crew/billy-zheng-400.webp",
-      "link": "https://xlab.upenn.edu/members/",
-      "source": "https://xlab.upenn.edu/members/",
+      "name": "Mohamed Elgouhary",
+      "role": "Graduate Research Assistant, Lane Department of Computer Science and Electrical Engineering",
+      "affiliation": "West Virginia University",
+      "photo": "/crew/mohamed-elgouhary-400.webp",
+      "link": "https://www.linkedin.com/in/elgouhary-ai",
+      "source": "https://iros2026-race.roboracer.ai/",
+      "status": "sourced"
+    },
+    {
+      "name": "Felix Jahncke",
+      "role": "Ph.D. Candidate, Department of Mobility Systems Engineering",
+      "affiliation": "Technical University of Munich",
+      "photo": "/crew/felix-jahncke-400.webp",
+      "link": "https://icra2026-race.roboracer.ai/",
+      "source": "https://icra2026-race.roboracer.ai/",
       "status": "sourced"
     }
   ],
