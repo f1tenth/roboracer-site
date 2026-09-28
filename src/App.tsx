@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
+import ExternalRedirect from "./components/ExternalRedirect";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
 
 // Route-level code splitting: every page is its own chunk so no route pays
@@ -20,11 +21,16 @@ const Chat = lazyWithRetry("Chat", () => import("./pages/Chat"));
 const Assembly = lazyWithRetry("Assembly", () => import("./pages/Assembly"));
 const Styleguide = lazyWithRetry("Styleguide", () => import("./pages/Styleguide"));
 
+/** The courses live on Dhyey Shah's RoboRacer Courses site for now (Cedric,
+ * 2026-09-27); the coursekit sidebar's Courses link points here. */
+const COURSES_URL = "https://dhyeyshah.com/roboracer-lms/";
+
 function App() {
   return (
     <Router>
       <Suspense fallback={null}>
         <Routes>
+          <Route path="/learn/courses" element={<ExternalRedirect to={COURSES_URL} label="the RoboRacer courses" />} />
           {/* Wrap all routes inside Layout */}
           <Route element={<Layout />}>
             <Route path="/" element={<Landing />} />
