@@ -1,5 +1,15 @@
 [
   {
+    "name": "Alliance AI Lab (Johns Hopkins University)",
+    "website": "https://alliance-ai.cs.jhu.edu/robots/",
+    "image": "media/team/alliance-logo.png",
+    "category": "university",
+    "image_rest": "partners/tint/alliance-logo.webp",
+    "image_hover": "partners/color/alliance-logo.webp",
+    "width": 251,
+    "height": 240
+  },
+  {
     "name": "Arizona State University",
     "website": "https://www.asu.edu/",
     "image": "partners/asu.png",

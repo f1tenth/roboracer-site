@@ -8,6 +8,16 @@ Tools available in this environment: `ffmpeg`/`ffprobe` (with `libx264`, `libsvt
 
 ---
 
+## Alliance AI Lab partner logo (2026-09-28)
+
+Added at Ahmad's request, relaying Haimin Hu's request to list the lab with the supplied logo. The lab's [robots page](https://alliance-ai.cs.jhu.edu/robots/) lists RoboRacer as an "Autonomous Racing Car"; its [homepage](https://alliance-ai.cs.jhu.edu/) identifies Alliance AI Lab as part of Johns Hopkins University. Listed under `university` in `public/data/partners.json`, linking to the robots page.
+
+| id | file | type | WxH | size | what it shows | provenance | license/permission | use | notes |
+|---|---|---|---|---|---|---|---|---|---|
+| PARTNER-ALLIANCE-SOURCE | `public/media/team/alliance-logo.png` | png | 1874x1793 | 904,890 B | Alliance AI Lab shield, A and human/robot handshake | user-supplied logo, 2026-09-28 | use authorized by Ahmad, at Haimin's request, for the lab's partner listing | source for partner logo derivatives | original retained for the existing partner pipeline |
+| PARTNER-ALLIANCE-COLOR | `public/partners/color/alliance-logo.webp` | webp | 251x240 | 8,982 B | Alliance AI Lab logo in its original colors | PARTNER-ALLIANCE-SOURCE | same authorization | About partner wall; home partner hover/focus | `scripts/partner-tint.py` fit, WebP quality 88, method 6; no upscaling |
+| PARTNER-ALLIANCE-TINT | `public/partners/tint/alliance-logo.webp` | webp | 251x240 | 8,020 B | Alliance AI Lab logo with the existing partner tint | PARTNER-ALLIANCE-SOURCE | same authorization | home partner rest state | same fit and encoding; existing tint strength 0.04 |
+
 ## 1. Local — `public/` (already in git, current branch)
 
 194 files, 104,767,051 bytes (~99.9 MB) total. Breakdown by extension: 75 png, 53 jpg, 44 jpeg, 8 svg, 8 json (data, not media), 1 mp4, 1 gif, 1 glb, 1 md, 1 html, 1 CNAME.
