@@ -956,7 +956,7 @@ body.panel-open #code-panel { transform: none; visibility: visible; }
       <li>A. Becker, <a href="https://www.youtube.com/watch?v=Ob3BIJkQJEw" target="_blank" rel="noopener">RRT, RRT* &amp; Random Trees</a> (video).</li>
     </ol>
     <h4>About the code</h4>
-    <p>The grid searches are the course's BFS, Dijkstra and A* templates with walls, a zero-cost start and a parent array added so the path can be drawn. The RRT code is the course's interview solution adapted to a 5&nbsp;cm occupancy grid, with RRT*'s cost update and keep-improving loop filled in. Every figure runs a JavaScript copy of the same steps, line for line, which is what lights up the code panel. The Lab 6 planner has no code here on purpose: writing it is the lab.</p>
+    <p>The grid searches are the course's BFS, Dijkstra and A* templates with walls, a zero-cost start and a parent array added so the path can be drawn. The RRT code is the course's interview solution adapted to a 5&nbsp;cm occupancy grid, with RRT*'s cost update and keep-improving loop filled in. Every figure runs a JavaScript copy of the same steps, line for line, which is what lights up the code panel. The Lab 6 planner has no code here on purpose: writing it is the lab. Its figure runs a compiled copy instead.</p>
     <p>Keyboard: <kbd>Space</kbd> play or pause, <kbd>,</kbd> and <kbd>.</kbd> previous and next step, <kbd>&rarr;</kbd> one round, <kbd>&larr;</kbd> back, <kbd>L</kbd> one line, <kbd>R</kbd> reset, <kbd>Esc</kbd> close the code. Keys act on the figure you last touched. Click a step above a figure to jump to it, and drag the History slider to go back to any earlier round.</p>
   </div>
 </footer>
@@ -2407,73 +2407,6 @@ const Lib = (() => {
     yield { l: 'kFail', end: true, found: false };
   }
 
-  // ---------- Lab 6 local planner (no C++ on the page: writing it is the lab) ----------
-  function sampleLocal(car, ahead, halfW, rng) {
-    const lx = rng.uniform(0.0, ahead), ly = rng.uniform(-halfW, halfW);
-    return [car.x + lx * Math.cos(car.th) - ly * Math.sin(car.th), car.y + lx * Math.sin(car.th) + ly * Math.cos(car.th)];
-  }
-  // closest waypoint, then walk forward to the first one at least `look` away
-  function pickGoal(wps, car, look) {
-    const n = wps.length, d2 = wp => (wp[0] - car.x) ** 2 + (wp[1] - car.y) ** 2;
-    let k = 0;
-    for (let i = 1; i < n; i++) if (d2(wps[i]) < d2(wps[k])) k = i;
-    for (let m = 0; m < n; m++) {
-      const j = (k + m) % n;
-      if (d2(wps[j]) >= look * look) return { p: wps[j], k: j };
-    }
-    return { p: wps[k], k };
-  }
-  // one scan of the Lab 6 planner: RRT* from the car toward the lookahead waypoint, samples in the box ahead,
-  // a fixed budget of rounds, then the cheapest node in the goal region
-  function* localPlan(S) {
-    const w = S.world, prm = S.prm, car = S.car;
-    let g = pickGoal(S.wps, car, S.look);
-    for (let m = 0; m < S.wps.length && !w.pointFree(g.p[0], g.p[1]); m++) g = { p: S.wps[(g.k + 1) % S.wps.length], k: (g.k + 1) % S.wps.length };
-    const goal = { x: g.p[0], y: g.p[1] };
-    S.goal = goal;
-    S.hl = { goal };
-    yield { l: 'lGoal' };
-    const rng = Rng(prm.seed + S.scan);
-    const T = S.T = Tree(w);
-    addNode(T, car.x, car.y, -1, 0.0);
-    S.plan = null;
-    const atGoal = [];
-    yield { l: 'lRoot' };
-    for (let it = 1; it <= prm.maxIters; ++it) {
-      const hl = S.hl = { goal, it };
-      const toGoal = rng.u01() < prm.goalBias;
-      const [xr, yr] = toGoal ? [goal.x, goal.y] : sampleLocal(car, S.ahead, S.halfW, rng);
-      hl.rand = [xr, yr];
-      yield { l: 'lSample' };
-      const iN = T.grid.nearest(xr, yr, T.X, T.Y);
-      const [nx, ny] = steer(T.X[iN], T.Y[iN], xr, yr, prm.step);
-      hl.nearest = iN; hl.newPt = [nx, ny];
-      yield { l: 'lSteer' };
-      if (!w.segmentFree(T.X[iN], T.Y[iN], nx, ny)) { hl.blocked = true; yield { l: 'lCheck' }; continue; }
-      let parent = iN, cost = T.C[iN] + dist(T.X[iN], T.Y[iN], nx, ny);
-      const n = T.n, r = Math.min(prm.gamma * Math.sqrt(Math.log(n + 1) / (n + 1)), prm.cap);
-      const near = T.grid.near(nx, ny, r, T.X, T.Y);
-      for (const i of near) {
-        const c = T.C[i] + dist(T.X[i], T.Y[i], nx, ny);
-        if (c < cost && w.segmentFree(T.X[i], T.Y[i], nx, ny)) { cost = c; parent = i; }
-      }
-      hl.r = r; hl.parent = parent;
-      yield { l: 'lParent' };
-      const iNew = addNode(T, nx, ny, parent, cost);
-      hl.added = iNew;
-      yield { l: 'lAdd' };
-      hl.rewires = [];
-      for (const i of near) {
-        const c = cost + dist(nx, ny, T.X[i], T.Y[i]);
-        if (c < T.C[i] && w.segmentFree(nx, ny, T.X[i], T.Y[i])) { hl.rewires.push({ i, from: T.P[i] }); setParent(T, i, iNew); T.C[i] = c; propagate(T, i); }
-      }
-      if (hl.rewires.length) yield { l: 'lRewire' };
-      if (dist(nx, ny, goal.x, goal.y) <= prm.goalTol) atGoal.push(iNew);
-    }
-    const best = bestGoal(T, atGoal);
-    if (best >= 0) { S.plan = pathTo(T, best); S.planCost = T.C[best]; }
-    yield { l: best >= 0 ? 'lFound' : 'lNone', end: true, found: best >= 0 };
-  }
   // a rectangular loop corridor, like Levine's hallways, with a few boxes in it
   function loopTrack() {
     const W = 16, H = 10, w = new World(W, H);
@@ -2496,8 +2429,100 @@ const Lib = (() => {
   return {
     MT, canonical, uniformInt, Rng, MinPQ, WALL, gridMap, gridState, gridSearch, frontierView, pathCost, manhattan,
     World, SCENES, scene, PointGrid, Tree, addNode, steer, dist, pathTo, pathLength, bestGoal, staleCount, trueCost,
-    propagate, rrt, rrtSnap, rrtRestore, smooth, connect, car, localPlan, loopTrack, pickGoal, sampleLocal, sampleInformed, driveStep, setParent,
+    propagate, rrt, rrtSnap, rrtRestore, smooth, connect, car, loopTrack, sampleInformed, driveStep, setParent,
   };
+})();
+</script>
+<script type="application/wasm" id="lab6-wasm">AGFzbQEAAAABPwpgAnx8AXxgAXwBfGAAAX9gA39/fABgAX8AYAR/fHx8AX9gBX9/fHx8AX9gBHx8fHwBf2AAAXxgBX98fHx8AAJGCAFtA3BvdwAAAW0DY29zAAEBbQNzaW4AAQFtA2xvZwABAW0FaHlwb3QAAAFtBGF0YW4AAQFtA3RhbgABAW0FYXRhbjIAAAMQDwIDBAIFBgcEAggCAgICCQQFAXABAQEFBAEBGBgGCAF/AUHAkh0LB3oOBm1lbW9yeQIABmxheW91dAAIBXdvcmxkAAkJd2F5cG9pbnRzAAoJdHJlZV9zaXplAAsEcGljawAMBGdvYWwADgRyb290AA8Gc2FtcGxlABAGcGFyZW50ABIDYWRkABMGcmV3aXJlABQGZmluaXNoABUFZHJpdmUAFgq+Mw+vAgBBAEGhATYCrIiQgABBAEGQy5iAADYCqIiQgABBAEGAt5iAADYCpIiQgABBAEHwrJiAADYCoIiQgABBAEHwq5iAADYCnIiQgABBAEHgoZiAADYCmIiQgABBAEHQnJiAADYClIiQgABBAEHAkpiAADYCkIiQgABBAEGwiJiAADYCjIiQgABBAEGwiJSAADYCiIiQgABBAEGwiJCAADYChIiQgABBAEGAiICAADYCgIiQgABBAEKAgICAgICAiMEANwOYrJiAAEEAQoCAgICAgIDYwAA3A5CsmIAAQQBCs+bMmbPmzOk/NwOIrJiAAEEAQoCAgICAgICywAA3A4CsmIAAQQBCgICAgICAgPg/NwP4q5iAAEEAQoCAgICAgICEwAA3A/CrmIAAQYCIkIAACyMAQQAgATYCpN+YgABBACAANgKg35iAAEEAIAI5A6jfmIAACw0AQQAgADYCsN+YgAALCwBBACgCtN+YgAALFgBBsIiUgAAgACABIAIgAxCNgICAAAuhAgEEf0EAIQUCQCABQQJIDQAgAEEYaiEGQQAhBUEBIQcDQCAHIAUgBkF4aisDACACoUQAAAAAAAAAQBCAgICAACAGKwMAIAOhRAAAAAAAAABAEICAgIAAoCAAIAVBBHRqIggrAwAgAqFEAAAAAAAAAEAQgICAgAAgCEEIaisDACADoUQAAAAAAAAAQBCAgICAAKBjGyEFIAZBEGohBiABIAdBAWoiB0cNAAsLAkAgAUEBTg0AIAUPCyAEIASiIQRBACEGAkADQCAAIAUgBmogAW8iCEEEdGoiBysDACACoUQAAAAAAAAAQBCAgICAACAHQQhqKwMAIAOhRAAAAAAAAABAEICAgIAAoCAEZg0BIAEgBkEBaiIGRw0ACyAFDwsgCAudAwcCfwF8AX8CfAJ/AXwBf0GwiJCAAEEAKAKw35iAACIEIAEgAiAAEI2AgIAAIQUCQCAEQQFIDQBBACsDqN+YgAAhBkEAKAKg35iAACIHtyEIQQAoAqTfmIAAtyEJIAQhCgNAAkAgBUEEdCILQbiIkIAAaisDACAGo5wiAEQAAAAAAAAAAGZFDQAgACAJY0UNACALQbCIkIAAaisDACAGo5wiDEQAAAAAAAAAAGZFDQAgDCAIY0UNAAJAAkAgAJlEAAAAAAAA4EFjRQ0AIACqIQsMAQtBgICAgHghCwsgByALbCELAkACQCAMmUQAAAAAAADgQWNFDQAgDKohDQwBC0GAgICAeCENCyALIA1qQYCIgIAAai0AAEUNAgsgBUEBaiAEbyEFIApBf2oiCg0ACwtBACACOQPA35iAAEEAIAE5A7jfmIAAQQAgAzkDyN+YgABBACAFQQR0IgpBsIiQgABqKwMAIgA5A/CrmIAAQQAgADkD0N+YgABBACAKQbiIkIAAaisDACIAOQP4q5iAAEEAIAA5A9jfmIAAIAULtAIBBH9BASEBQQAgAEEBaiICNgKw6piAAEHA6piAACEDQQQhAAJAA0AgA0F0aiAAIAJBHnYgAnNB5ZKe4AZsakF9aiICNgIAIANBeGogACACQR52IAJzQeWSnuAGbGpBfmoiAjYCACADQXxqIAAgAkEediACc0Hlkp7gBmxqQX9qIgI2AgAgAEHwBEYNASABQQNqIQQgAyAAIAJBHnYgAnNB5ZKe4AZsIgJqNgIAIABBBGohACADQRBqIQMgAUEEaiEBIAIgBGohAgwACwtBAEHwBDYC8P2YgABBAEEBNgK035iAAEEAQX82AtCcmIAAQQBCADcD4KGYgABBAEF/NgKA/piAAEEAQQArA7jfmIAAOQOwiJiAAEEAQQArA8DfmIAAOQPAkpiAAEEAQQA2AuDfmIAAC7AIBQN8BX8CfAJ/BXwCQAJAEJGAgIAARAAAAAAAAAAAoESamZmZmZm5P2NFDQBBACsD2N+YgAAhAEEAKwPQ35iAACEBDAELEJGAgIAAIQAQkYCAgAAhAkEAKwO435iAACAARAAAAAAAAAhAokQAAAAAAAAAAKAiAEEAKwPI35iAABCBgICAAKKgIAIgAqBEAAAAAAAA8L+gIgJBACsDyN+YgAAQgoCAgACioSEBQQArA8DfmIAAIABBACsDyN+YgAAQgoCAgACioCACQQArA8jfmIAAEIGAgIAAoqAhAAtBACAAOQOIrJiAAEEAIAE5A4CsmIAAAkACQEEAKAK035iAACIDQQFODQBBfyEEDAELIANBAXEhBQJAAkAgA0EBRw0ARAAAAAAAAPB/IQJBfyEEQQAhBgwBCyADQX5xIQdEAAAAAAAA8H8hAkF/IQRBACEDQQAhBgNAIANBuIiYgABqKwMAIAGhIgggCKIgA0HIkpiAAGorAwAgAKEiCCAIoqAiCCADQbCImIAAaisDACABoSIJIAmiIANBwJKYgABqKwMAIAChIgkgCaKgIgkgAiAJIAJjIgobIgIgCCACYyILGyECIAZBAWogBiAEIAobIAsbIQQgA0EQaiEDIAZBAmoiBiAHRw0ACwsgBUUNACAGIAQgBkEDdCIDQbCImIAAaisDACABoSIIIAiiIANBwJKYgABqKwMAIAChIgggCKKgIAJjGyEEC0EAIAQ2AuTfmIAAAkAgBEEDdCIDQbCImIAAaisDACIMIAGhIgIgAqIgA0HAkpiAAGorAwAiDSAAoSICIAKioCICRArXo3A9Crc/ZQ0AIA0gDSAAIA2hRDMzMzMzM9M/IAKfoyICoqAiAKEiCCAIoiAMIAwgASAMoSACoqAiAaEiAiACoqAhAgtBACELQQAgADkD8N+YgABBACABOQPo35iAAEEAIAA5A6CsmIAAQQAgATkDmKyYgABBACAEtzkDkKyYgAACQCACn0EAKwOo35iAACIJRAAAAAAAAOA/oqObIghEAAAAAAAAAABmRQ0AIAAgDaEhDiABIAyhIQ9BACgCoN+YgAAiCrchEEEAKAKk35iAALchAUEBIQtBASEDRAAAAAAAAAAAIQIDQCANIA5EAAAAAAAAAAAgAiAIoyAIRAAAAAAAAAAAYRsiAKKgIAmjnCICRAAAAAAAAAAAZkUNASACIAFjRQ0BIAwgDyAAoqAgCaOcIgBEAAAAAAAAAABmRQ0BIAAgEGNFDQECQAJAIAKZRAAAAAAAAOBBY0UNACACqiEGDAELQYCAgIB4IQYLIAogBmwhBgJAAkAgAJlEAAAAAAAA4EFjRQ0AIACqIQQMAQtBgICAgHghBAsgBiAEakGAiICAAGotAAANASADtyECIANBAWohAyAIIAJmDQALQQAPCyALC58EAgZ/AXxBACEAAkACQEEAKALw/ZiAACIBQfAESA0AQbDqmIAAIQEDQCABIABBAWoiAiAAQZF7aiAAQe8ESRtBAnRBsOqYgABqKAIAIgNB/v///wdxIAEoAgBBgICAgHhxckEBdkGNA0GdfiAAQeMBSRsgAGpBAnRBsOqYgABqKAIAcyIAQd/hosh5cyAAIANBAXEbNgIAIAFBBGohASACIQAgAkHwBEcNAAtBACgCsOqYgAAhBEEBIQUMAQsgAUECdEGw6piAAGooAgAhBAJAIAFB7wRGDQAgAUEBaiEFDAELQQAhBUGw6piAACEBQQAhAANAIAEgAEEBaiICIABBkXtqIABB7wRJG0ECdEGw6piAAGooAgAiA0H+////B3EgASgCAEGAgICAeHFyQQF2QY0DQZ1+IABB4wFJGyAAakECdEGw6piAAGooAgBzIgBB3+GiyHlzIAAgA0EBcRs2AgAgAUEEaiEBIAIhACACQfAERw0ACwtBACAFQQFqNgLw/ZiAAET////////vPyAFQQJ0QbDqmIAAaigCACIAQQt2IABzIgBBB3RBgK2x6XlxIABzIgBBD3RBgICY/n5xIABzIgBBEnYgAHO4RAAAAAAAAPBBoiAEQQt2IARzIgBBB3RBgK2x6XlxIABzIgBBD3RBgICY/n5xIABzIgBBEnYgAHO4oEQAAAAAAADwO6IiBiAGRAAAAAAAAPA/ZhsLkwcKAn8CfAJ/BHwCfwN8AX8CfAF/BXxBACEAQQBBACgC5N+YgAAiATYC+N+YgABBACABQQN0IgFB4KGYgABqKwMAIAFBsIiYgABqKwMAQQArA+jfmIAAoSICIAKiIAFBwJKYgABqKwMAQQArA/DfmIAAoSICIAKioJ+gOQOA4JiAAEEAKAK035iAAEEBarciAhCDgICAACACo59EAAAAAAAAEECiIgJEzczMzMzM7D8gAkTNzMzMzMzsP2MbIQMCQAJAQQAoArTfmIAAIgRBAEoNAEEAQQA2AojgmIAAQQAoAvjfmIAAIQVBACsDgOCYgAAhBgwBCyADIAOiIQdBACsD8N+YgAAhCEEAKwPo35iAACEJQQAhAUEAIQoDQAJAIABBsIiYgABqKwMAIAmhIgIgAqIgAEHAkpiAAGorAwAgCKEiAiACoqAgB2VFDQAgCkECdEGQ4JiAAGogATYCACAKQQFqIQoLIABBCGohACAEIAFBAWoiAUcNAAtBACELQQAgCjYCiOCYgABBACgC+N+YgAAhBUEAKwOA4JiAACEGIApBAUgNAEEAKwOo35iAACIJRAAAAAAAAOA/oiEMQQArA/DfmIAAIQ1BACsD6N+YgAAhDkEAKAKg35iAACIPtyEQQQAoAqTfmIAAtyERA0ACQCALQQJ0QZDgmIAAaigCACISQQN0IgBB4KGYgABqKwMAIABBsIiYgABqKwMAIhMgDqEiAiACoiAAQcCSmIAAaisDACIUIA2hIgIgAqKgnyICoCIVIAZjRQ0AAkAgAiAMo5siCEQAAAAAAAAAAGZFDQAgDSAUoSEWIA4gE6EhF0QAAAAAAAAAACECQQEhAANAIBQgFkQAAAAAAAAAACACIAijIAhEAAAAAAAAAABhGyIHoqAgCaOcIgJEAAAAAAAAAABmRQ0CIAIgEWNFDQIgEyAXIAeioCAJo5wiB0QAAAAAAAAAAGZFDQIgByAQY0UNAgJAAkAgAplEAAAAAAAA4EFjRQ0AIAKqIQEMAQtBgICAgHghAQsgDyABbCEBAkACQCAHmUQAAAAAAADgQWNFDQAgB6ohBAwBC0GAgICAeCEECyABIARqQYCIgIAAai0AAA0CIAC3IQIgAEEBaiEAIAggAmYNAAsLIBIhBSAVIQYLIAtBAWoiCyAKRw0ACwtBACAFNgL435iAAEEAIAY5A4DgmIAAQQAgAzkDqKyYgAAgBQvvAQEEf0EAQQAoArTfmIAAIgBBAWo2ArTfmIAAIABBA3QiAUGwiJiAAGpBACsD6N+YgAA5AwAgAUHAkpiAAGpBACsD8N+YgAA5AwAgAEECdCICQdCcmIAAakEAKAL435iAACIDNgIAIAFB4KGYgABqQQArA4DgmIAAOQMAIAJBgP6YgABqQX82AgACQCADQQBIDQAgAkGQg5mAAGpBfzYCACACQaCImYAAaiADQQJ0QYD+mIAAaiIBKAIAIgI2AgACQCACQQBIDQAgAkECdEGQg5mAAGogADYCAAsgASAANgIAC0EAIAA2ApTlmIAAIAALswkLAn8EfAJ/AXwBfwJ8A38EfAF/AnwFf0EAIQACQAJAQQAoAojgmIAAIgFBAEoNAEEAKwPw35iAACECQQArA+jfmIAAIQMMAQtBACsDqN+YgAAiBEQAAAAAAADgP6IhBUEAKAKU5ZiAACIGQQJ0QYD+mIAAaiEHQQArA/DfmIAAIQJBACsD6N+YgAAhA0EAKwOA4JiAACEIQQAoAqDfmIAAIgm3IQpBACgCpN+YgAC3IQtBACEAQQAhDANAAkAgCCADIAxBAnRBkOCYgABqKAIAIg1BA3QiDkGwiJiAAGorAwAiD6EiECAQoiACIA5BwJKYgABqKwMAIhGhIhAgEKKgnyIQoCISIA5B4KGYgABqIhMrAwBjRQ0AAkAgECAFo5siFEQAAAAAAAAAAGZFDQAgESACoSERIA8gA6EhFUQAAAAAAAAAACEQQQEhDgNAIAIgEUQAAAAAAAAAACAQIBSjIBREAAAAAAAAAABhGyIPoqAgBKOcIhBEAAAAAAAAAABmRQ0CIBAgC2NFDQIgAyAVIA+ioCAEo5wiD0QAAAAAAAAAAGZFDQIgDyAKY0UNAgJAAkAgEJlEAAAAAAAA4EFjRQ0AIBCqIRYMAQtBgICAgHghFgsgCSAWbCEWAkACQCAPmUQAAAAAAADgQWNFDQAgD6ohFwwBC0GAgICAeCEXCyAWIBdqQYCIgIAAai0AAA0CIA63IRAgDkEBaiEOIBQgEGYNAAsLIABBA3QiDkHwrJiAAGogDTYCACAOQfSsmIAAaiANQQJ0Ig5B0JyYgABqIhgoAgAiFzYCAAJAIBdBAEgNACAOQaCImYAAaiIZKAIAIRYCQAJAIA5BkIOZgABqKAIAIhpBAEgNACAaQQJ0QaCImYAAaiAWNgIAIBkoAgAhFgwBCyAXQQJ0QYD+mIAAaiAWNgIACyAWQQBIDQAgFkECdEGQg5mAAGogGjYCAAsgGCAGNgIAIA5BkIOZgABqQX82AgAgDkGgiJmAAGogBygCACIONgIAAkAgDkEASA0AIA5BAnRBkIOZgABqIA02AgALIABBAWohACATIBI5AwAgByANNgIAQQAgDTYCsI2ZgABBASEXA0ACQAJAIBdBf2oiFkECdEGwjZmAAGooAgAiE0ECdEGA/piAAGooAgAiDkEATg0AIBYhFwwBCwJAIBdBoQFMDQAgFiEXDAELIBdBAnRBrI2ZgABqIQ0gE0EDdCIXQeChmIAAaiEYIBdBwJKYgABqKwMAIQ8gF0GwiJiAAGorAwAhFANAIA0gDjYCACAOQQN0IhdB4KGYgABqIBgrAwAgFCAXQbCImIAAaisDAKEiECAQoiAPIBdBwJKYgABqKwMAoSIQIBCioJ+gOQMAIBZBAWohFyAOQQJ0QaCImYAAaigCACIOQQBIDQEgDUEEaiENIBZBoAFIIRMgFyEWIBMNAAsLIBcNAAsLIAxBAWoiDCABRw0ACwsCQCADQQArA9DfmIAAoSIQIBCiIAJBACsD2N+YgAChIhAgEKKgn0QAAAAAAADQP2VFDQBBAEEAKALg35iAACIOQQFqNgLg35iAACAOQQJ0QaDlmIAAakEAKAKU5ZiAADYCAAsgAAuXBAEHf0EAIQACQEEAKALg35iAACIBQQFIDQAgAUEBcSECAkACQCABQQFHDQBBfyEBQQAhAAwBCyABQX5xIQNBACEAQaDlmIAAIQRBfyEBA0AgBCgCACEFAkACQCABQX9GDQAgBUEDdEHgoZiAAGorAwAgAUEDdEHgoZiAAGorAwBjRQ0BCyAFIQELIARBBGooAgAhBQJAAkAgAUF/Rg0AIAVBA3RB4KGYgABqKwMAIAFBA3RB4KGYgABqKwMAY0UNAQsgBSEBCyAEQQhqIQQgAyAAQQJqIgBHDQALCwJAIAJFDQAgAEECdEGg5ZiAAGooAgAhBAJAIAFBf0YNACAEQQN0QeChmIAAaisDACABQQN0QeChmIAAaisDAGNFDQELIAQhAQtBACEAIAFBAEgNAEEAIQBBACABQQN0QeChmIAAaisDADkDsKyYgABBACgCtN+YgAAiBkEASA0AQQAhBUHwtpiAACEEIAEhAwJAA0AgBEEQaiEEIAVBAWohACADQQJ0QdCcmIAAaigCACIDQX9GDQEgBSAGTiECIAAhBSACRQ0ACwsgAUF/Rg0AQQAhBSAGQQBIDQADQCAEIAFBA3QiA0GwiJiAAGorAwA5AwAgBEEIaiADQcCSmIAAaisDADkDACABQQJ0QdCcmIAAaigCACIBQX9GDQEgBEFwaiEEIAUgBkghAyAFQQFqIQUgAw0ACwsgAAuWBQIBfwx8IABBBHQiBUGIy5iAAGorAwAhBiAFQYDLmIAAaisDACEHAkAgAEEBSA0AQZDLmIAAIQUCQANAIAUrAwAgAaEgBUEIaisDACACoRCEgICAAESamZmZmZnpP2YNASAFQRBqIQUgAEF/aiIARQ0CDAALCyAFQQhqKwMAIQYgBSsDACEHCyADEIKAgIAAIQggBiACoSIGIAMQgYCAgACiIAggByABoSIHoqFEH4XrUbge5T+iIAcgBhCEgICAACIGRJqZmZmZmck/IAZEmpmZmZmZyT9kGyIGIAaioxCFgICAACEHIAMQgYCAgAAhCCADEIKAgIAAIQkgBESamZmZmZn5P6IiBEQAAAAAAAAUQKMiBiAHRJqZmZmZmdk/IAdEmpmZmZmZ2T9jGyIHRJqZmZmZmdm/IAdEmpmZmZmZ2b9kGyIHEIaAgIAAokQfhetRuB7VP6MgA6AiAxCBgICAACEKIAMQgoCAgAAhCyADIAYgBxCGgICAAKJEH4XrUbge1T+joCIDEIGAgIAAIQwgAxCCgICAACENIAMgBiAHEIaAgIAAokQfhetRuB7VP6OgIgMQgYCAgAAhDiADEIKAgIAAIQ8gAyAGIAcQhoCAgACiRB+F61G4HtU/o6AiAxCBgICAACEQIAMQgoCAgAAhESADIAYgBxCGgICAAKJEH4XrUbge1T+joCIDEIKAgIAAIAMQgYCAgAAQh4CAgAAhA0EAIAQ5A9ismIAAQQAgBzkD0KyYgABBACADOQPIrJiAAEEAIAYgCaIgAqAgBiALoqAgBiANoqAgBiAPoqAgBiARoqA5A8CsmIAAQQAgBiAIoiABoCAGIAqioCAGIAyioCAGIA6ioCAGIBCioDkDuKyYgAAL</script>
+<script id="lab6">
+/* The Lab 6 local planner and its pure pursuit are compiled to WebAssembly: the figure runs them, but their
+   code is not on the page, because writing it is the lab. This is only the glue: it hands over the map and
+   the raceline, steps one scan the way the figure shows it, and reads back the tree. */
+'use strict';
+const Lab6 = (() => {
+  const api = { ok: false };
+  const bytes = Uint8Array.from(atob(document.getElementById('lab6-wasm').textContent.trim()), c => c.charCodeAt(0));
+  const math = { cos: Math.cos, sin: Math.sin, tan: Math.tan, atan: Math.atan, atan2: Math.atan2, log: Math.log, hypot: Math.hypot, pow: Math.pow };
+  let X, mem, at, out, world = null, worldVersion = -1, wps = null;
+  api.ready = WebAssembly.instantiate(bytes, { m: math }).then(({ instance }) => {
+    X = instance.exports; mem = X.memory.buffer;
+    const L = new Int32Array(mem, X.layout(), 12), n = L[11];
+    at = { occ: L[0], wps: L[1], tmp: L[2], rw: L[8], path: L[9], pin: L[10] };
+    out = new Float64Array(mem, L[7], 16);
+    Object.assign(api, { ahead: out[0], halfW: out[1], rounds: out[2], maxW: out[4], maxCells: out[5] });
+    api.tree = { X: new Float64Array(mem, L[3], n), Y: new Float64Array(mem, L[4], n), P: new Int32Array(mem, L[5], n),
+      C: new Float64Array(mem, L[6], n), bad: new Uint8Array(n), get n() { return X.tree_size(); } };
+    api.ok = true;
+  });
+  const points = (ptr, pts) => {
+    if (pts.length > api.maxW) throw new Error('too many points');
+    const f = new Float64Array(mem, ptr, 2 * pts.length);
+    pts.forEach((p, k) => { f[2 * k] = p[0]; f[2 * k + 1] = p[1]; });
+  };
+  function load(w, pts) {
+    if (w !== world || w.version !== worldVersion) {
+      if (w.cols * w.rows > api.maxCells) throw new Error('map too large');
+      new Uint8Array(mem, at.occ, w.cols * w.rows).set(w.occ);
+      X.world(w.cols, w.rows, w.res);
+      world = w; worldVersion = w.version;
+    }
+    if (pts !== wps) { points(at.wps, pts); X.waypoints(pts.length); wps = pts; }
+  }
+  // one scan, with the same events the JavaScript figures yield
+  api.localPlan = function* (S) {
+    load(S.world, S.wps);
+    const car = S.car;
+    X.goal(S.look, car.x, car.y, car.th);
+    const goal = S.goal = { x: out[0], y: out[1] };
+    S.hl = { goal };
+    yield { l: 'lGoal' };
+    X.root(S.scan);
+    S.T = api.tree;
+    S.plan = null;
+    yield { l: 'lRoot' };
+    for (let it = 1; it <= api.rounds; ++it) {
+      const hl = S.hl = { goal, it }, blocked = X.sample();
+      hl.rand = [out[2], out[3]];
+      yield { l: 'lSample' };
+      hl.nearest = out[4]; hl.newPt = [out[5], out[6]];
+      yield { l: 'lSteer' };
+      if (blocked) { hl.blocked = true; yield { l: 'lCheck' }; continue; }
+      const parent = X.parent();
+      hl.r = out[7]; hl.parent = parent;
+      yield { l: 'lParent' };
+      hl.added = X.add();
+      yield { l: 'lAdd' };
+      const n = X.rewire(), rw = new Int32Array(mem, at.rw, 2 * n);
+      hl.rewires = [];
+      for (let k = 0; k < n; k++) hl.rewires.push({ i: rw[2 * k], from: rw[2 * k + 1] });
+      if (n) yield { l: 'lRewire' };
+    }
+    const len = X.finish();
+    if (len) {
+      const f = new Float64Array(mem, at.path, 2 * len);
+      S.plan = Array.from({ length: len }, (_, k) => [f[2 * k], f[2 * k + 1]]);
+      S.planCost = out[8];
+    }
+    yield { l: len ? 'lFound' : 'lNone', end: true, found: len > 0 };
+  };
+  // pure pursuit along the last plan for dt seconds; `raw` is the map without inflation, for crashes
+  api.drive = function (L, dt, raw) {
+    const car = L.car, path = L.last;
+    if (!path || path.length < 2) return;
+    points(at.pin, path);
+    X.drive(path.length, car.x, car.y, car.th, dt);
+    car.x = out[9]; car.y = out[10]; car.th = out[11];
+    L.dist += out[13];
+    L.delta = out[12];
+    L.poses.push([car.x, car.y]);
+    if (!raw.pointFree(car.x, car.y)) L.crashed = true;
+  };
+  // index of the waypoint the planner aims at from `car`
+  api.pick = function (pts, car, look) {
+    points(at.tmp, pts);
+    return X.pick(pts.length, car.x, car.y, look);
+  };
+  return api;
 })();
 </script>
 <script id="ui-core">
@@ -4413,6 +4438,12 @@ class VariantFig {
     this.setVariant('connect');
   }
   setVariant(v) {
+    // the Lab 6 planner is a WebAssembly module that loads with the page
+    this.wanted = v;
+    if (v === 'local' && !Lab6.ok) {
+      Lab6.ready.then(() => { if (this.wanted === v) this.setVariant(v); }, () => Toast.show('This browser could not load the Lab 6 planner'));
+      return;
+    }
     this.variant = v;
     const V = VARIANTS[v];
     $('[data-variant-lead]', this.el).innerHTML = V.lead;
@@ -4513,23 +4544,22 @@ class VariantFig {
   // Lab 6: plan with RRT*, drive a little with pure pursuit, plan again
   makeLocal(z) {
     const tr = this.track, o = this.opt, fig = this;
-    const L = this.L = { world: this.trackInflated, wps: tr.wps, car: { ...tr.start }, carBefore: { ...tr.start }, look: o.look, ahead: 3.0, halfW: 1.0,
-      prm: { step: 0.3, goalTol: 0.25, goalBias: 0.1, maxIters: 160, seed: 1, gamma: 4, cap: 0.9 },
-      scan: 0, poses: [[tr.start.x, tr.start.y]], last: null, misses: 0, dist: 0, crashed: false, delta: 0 };
+    const L = this.L = { world: this.trackInflated, wps: tr.wps, car: { ...tr.start }, carBefore: { ...tr.start }, look: o.look, ahead: Lab6.ahead, halfW: Lab6.halfW,
+      prm: { maxIters: Lab6.rounds }, scan: 0, poses: [[tr.start.x, tr.start.y]], last: null, misses: 0, dist: 0, crashed: false, delta: 0 };
     let first = 0;
     if (z) {
       Object.assign(L, { car: { ...z.car }, carBefore: { ...z.carBefore }, last: z.last, misses: z.misses, dist: z.dist, crashed: z.crashed,
         poses: z.poses.slice(0, z.nPoses), scan: z.scan, delta: z.delta });
       // plan that scan again from where the car was, to show its tree (same seed, same tree)
       const P = { ...L, car: { ...z.carBefore } };
-      for (const _ of Lib.localPlan(P));
+      for (const _ of Lab6.localPlan(P));
       L.T = P.T; L.goal = P.goal; L.plan = P.plan; L.planCost = P.planCost; L.hl = null;
       first = z.scan + 1;
     }
     return (function* () {
       for (let scan = first; ; scan++) {
         L.scan = scan; L.look = fig.opt.look; L.carBefore = { ...L.car };
-        for (const ev of Lib.localPlan(L)) yield { l: ev.l };
+        for (const ev of Lab6.localPlan(L)) yield { l: ev.l };
         if (L.plan) L.last = L.plan; else L.misses++;
         fig.drive(L, 0.05);
         yield { l: 'drive', end: true };
@@ -4537,27 +4567,8 @@ class VariantFig {
       }
     })();
   }
-  // pure pursuit on the last plan, kinematic bicycle
-  drive(L, dt) {
-    const car = L.car, path = L.last;
-    if (!path || path.length < 2) return;
-    const Ld = 0.8, wb = 0.33, v = 1.6;
-    let t = path[path.length - 1];
-    for (const p of path) if (Math.hypot(p[0] - car.x, p[1] - car.y) >= Ld) { t = p; break; }
-    const dx = t[0] - car.x, dy = t[1] - car.y;
-    const ly = -dx * Math.sin(car.th) + dy * Math.cos(car.th), ld = Math.max(0.2, Math.hypot(dx, dy));
-    const delta = Math.max(-0.4, Math.min(0.4, Math.atan(2 * wb * ly / (ld * ld))));
-    for (let k = 0; k < 5; k++) {
-      car.x += v * dt / 5 * Math.cos(car.th);
-      car.y += v * dt / 5 * Math.sin(car.th);
-      car.th += v * dt / 5 * Math.tan(delta) / wb;
-    }
-    car.th = Math.atan2(Math.sin(car.th), Math.cos(car.th));
-    L.dist += v * dt;
-    L.delta = delta;
-    L.poses.push([car.x, car.y]);
-    if (!this.track.world.pointFree(car.x, car.y)) L.crashed = true;
-  }
+  // pure pursuit on the last plan, kinematic bicycle (compiled, like the planner)
+  drive(L, dt) { Lab6.drive(L, dt, this.track.world); }
   wants() { return this.player.playing; }
   tick(dt) { this.player.tick(dt); }
   showSteps() { return !this.player.playing || SPEEDS[this.player.speed].lines || SPEEDS[this.player.speed].rounds <= 6; }
@@ -5194,7 +5205,8 @@ const Quiz = {
       for (let a = 160; a >= 20; a -= 360 * 0.4 / (2 * Math.PI * R)) wps.push([cx + R * Math.cos(a * Math.PI / 180), cy + R * Math.sin(a * Math.PI / 180)]);
       const ang = 128 * Math.PI / 180, car = { x: cx + R * Math.cos(ang), y: cy + R * Math.sin(ang), th: ang - Math.PI / 2 };
       pts = wps;
-      answer = Lib.pickGoal(wps, car, 2.0).k;
+      answer = -1;
+      Lab6.ready.then(() => { answer = Lab6.pick(wps, car, 2.0); });
       extra = { car };
     }
     let mark = null;
