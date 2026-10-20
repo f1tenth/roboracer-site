@@ -176,7 +176,17 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
     (best, p) => (!best || p.modules.length > best.modules.length ? p : best),
     undefined,
   );
-  const ids = parseModules(courses, params.get("modules")) ?? normalizeModules(courses, fullPlan?.modules ?? []);
+  const fromUrl = params.get("modules");
+  // The router applies a navigation as a transition, so a controlled box
+  // would show its old state for a few frames after the click (stage 3 saw
+  // about 75 ms). The pick also lives in local state, keyed to the address it
+  // was made on: it shows in the click's own frame and gives way to the
+  // address as soon as that changes (the catalog's picker does the same).
+  const [picked, setPicked] = useState<{ from: string | null; ids: string[] } | null>(null);
+  const ids =
+    picked && picked.from === fromUrl
+      ? picked.ids
+      : (parseModules(courses, fromUrl) ?? normalizeModules(courses, fullPlan?.modules ?? []));
   const key = ids.join(",");
   const s = planSummary(courses, ids);
   const counts = planCounts(courses, s);
@@ -188,8 +198,11 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
 
   // A replace, so Back leaves the page instead of undoing ticks. No hash: a
   // landing hash would make useScrollToHash glide back to the heading.
-  const select = (next: string[]) =>
-    navigate({ pathname, search: modulesSearch(normalizeModules(courses, next)) }, { replace: true, preventScrollReset: true });
+  const select = (next: string[]) => {
+    const sel = normalizeModules(courses, next);
+    setPicked({ from: fromUrl, ids: sel });
+    navigate({ pathname, search: modulesSearch(sel) }, { replace: true, preventScrollReset: true });
+  };
 
   // Feedback belongs to the selection it was given for: tick something else
   // and it goes, with no effect to clear it.
