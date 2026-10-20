@@ -382,25 +382,30 @@ export default function About() {
           Quanser is not affiliated and is not a spinoff, so the section names
           related platforms and says how each relates. Each entry is a feature
           built from the company's own site at his request (2026-09-25):
-          its car, its mark, and a framed window onto its homepage. */}
+          its car, its mark, and a framed window onto its homepage. Dzik
+          Autonomous Racing (Cedric, 2026-10-20) shows its autonomous lap
+          video playing in place of the car photo; it races 1/8 scale now,
+          hence "small-scale" in the subtitle. */}
       {(spinoffs === null || spinoffs.length > 0) && (
         <Section width="page" aria-labelledby="about-spinoffs" rule>
           <SectionHeader
             index="04"
             id="about-spinoffs"
             title="Related platforms"
-            subtitle="Other one-tenth-scale cars, and how they relate to RoboRacer"
+            subtitle="Other small-scale cars, and how they relate to RoboRacer"
           />
           {spinoffs ? (
             <SpinoffGrid spinoffs={spinoffs} />
           ) : (
-            // The grid's measured height for the two features that render
-            // today (stacked on compact, one row from desktop; 2026-09-25),
-            // so a reader arriving at #about-spinoffs does not watch Videos
-            // jump. compact: is emitted after the breakpoints, so it wins.
+            // The grid's measured height for the three features that render
+            // today (stacked on compact; from desktop a row of two and the
+            // third spanning both, beside its video from xl; 768x1024,
+            // 1024x768, 1440x900 and 390x844, 2026-10-20), so a reader
+            // arriving at #about-spinoffs does not watch Videos jump.
+            // compact: is emitted after the breakpoints, so it wins.
             <div
               aria-busy="true"
-              className="min-h-[52.75rem] rounded-card border border-ink-950/10 lg:min-h-[47rem] xl:min-h-[51.25rem] 2xl:min-h-[53rem] compact:min-h-[95.5rem]"
+              className="min-h-[108.5rem] rounded-card border border-ink-950/10 lg:min-h-[127.75rem] xl:min-h-[89.75rem] compact:min-h-[169.75rem]"
             />
           )}
         </Section>
