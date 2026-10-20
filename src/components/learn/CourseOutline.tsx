@@ -62,7 +62,7 @@ function DoneBox({ item, checked, onChange }: { item: OutlineItem; checked: bool
         />
         <Tick className="pointer-events-none absolute inset-0 m-auto h-3.5 w-3.5 scale-50 text-white opacity-0 transition-[opacity,scale] duration-[var(--duration-fast)] ease-[var(--ease-out-expo)] peer-checked:scale-100 peer-checked:opacity-100 motion-reduce:transition-none" />
       </span>
-      <span className={`max-sm:sr-only ${checked ? "text-rr-violet-deep" : ""}`}>{LABELS.done}</span>
+      <span className={`@max-md:sr-only ${checked ? "text-rr-violet-deep" : ""}`}>{LABELS.done}</span>
     </label>
   );
 }
@@ -138,11 +138,13 @@ export default function CourseOutline({ outline, modules, showLinks = false }: C
     }
   };
 
+  // Laid out against its own width (a container), not the window's: the
+  // catalog gives it the page, the course page a column beside its panel.
   return (
-    <div>
+    <div className="@container">
       {/* Toolbar: the meter, Expand / Collapse all, the local-only note and
           Clear. Its height never depends on the count (no shift on a tick). */}
-      <div className="mb-6 grid gap-x-8 gap-y-3 rounded-card border border-ink-950/10 bg-paper-100 p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:p-5">
+      <div className="mb-6 grid gap-x-8 gap-y-3 rounded-card border border-ink-950/10 bg-paper-100 p-4 @xl:grid-cols-[minmax(0,1fr)_auto] @xl:items-center @xl:p-5">
         <div className="min-w-0">
           <p className="font-mono text-small text-text-strong" aria-live="polite" aria-atomic="true">
             {LABELS.meter.split("{done}").map((part, n) => (
@@ -174,7 +176,7 @@ export default function CourseOutline({ outline, modules, showLinks = false }: C
             {LABELS.clear}
           </button>
         </div>
-        <p className={`${MONO_NOTE} sm:col-span-2`}>{persistent ? LABELS.local : LABELS.blocked}</p>
+        <p className={`${MONO_NOTE} @xl:col-span-2`}>{persistent ? LABELS.local : LABELS.blocked}</p>
       </div>
 
       <div className="border-t border-ink-950/10">
@@ -218,8 +220,8 @@ export default function CourseOutline({ outline, modules, showLinks = false }: C
                   <FoldChevron />
                 </span>
               </summary>
-              <div className="grid gap-8 pb-8 transition-opacity duration-[var(--duration-base)] starting:opacity-0 motion-reduce:transition-none md:pl-16 lg:grid-cols-12 lg:gap-x-10">
-                <ol className="flex flex-col gap-3 lg:col-span-8">
+              <div className="grid gap-8 pb-8 transition-opacity duration-[var(--duration-base)] starting:opacity-0 motion-reduce:transition-none md:pl-16 @5xl:grid-cols-12 @5xl:gap-x-10">
+                <ol className="flex flex-col gap-3 @5xl:col-span-8">
                   {m.items.map((item, n) => {
                     const checked = done.has(item.href);
                     const open = watching === item.href;
@@ -229,7 +231,7 @@ export default function CourseOutline({ outline, modules, showLinks = false }: C
                     return (
                       <li
                         key={item.href}
-                        className={`grid grid-cols-[6.5rem_minmax(0,1fr)] gap-x-3 gap-y-3 rounded-card border p-2.5 transition-[translate,box-shadow,border-color,background-color] duration-[var(--duration-fast)] sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-4 sm:p-3 lg:grid-cols-[11rem_minmax(0,1fr)] motion-reduce:transition-none ${
+                        className={`grid grid-cols-[6.5rem_minmax(0,1fr)] gap-x-3 gap-y-3 rounded-card border p-2.5 transition-[translate,box-shadow,border-color,background-color] duration-[var(--duration-fast)] @md:grid-cols-[9rem_minmax(0,1fr)] @md:gap-x-4 @md:p-3 @2xl:grid-cols-[11rem_minmax(0,1fr)] motion-reduce:transition-none ${
                           checked ? "border-rr-violet/45 bg-rr-violet/[0.04]" : "border-ink-950/10 bg-paper-50"
                         } ${open ? "shadow-card" : "hover:shadow-card-hover motion-safe:hover:-translate-y-0.5"}`}
                       >
@@ -266,7 +268,7 @@ export default function CourseOutline({ outline, modules, showLinks = false }: C
                     );
                   })}
                 </ol>
-                <div className="flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:gap-x-10 lg:col-span-4 lg:flex-col lg:flex-nowrap">
+                <div className="flex flex-col gap-6 @lg:flex-row @lg:flex-wrap @lg:gap-x-10 @5xl:col-span-4 @5xl:flex-col @5xl:flex-nowrap">
                   {labs.length > 0 && (
                     <div>
                       <p className={MONO_NOTE}>Labs</p>

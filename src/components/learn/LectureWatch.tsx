@@ -63,9 +63,9 @@ export function LectureThumb({ item, open, onToggle }: ThumbProps) {
   if (!item.video_id) {
     const number = item.label.replace(/^(Lectures?|Tutorial)\s+/, "");
     return (
-      <div aria-hidden="true" className={`${box} flex flex-col justify-between bg-rr-violet/[0.07] p-2.5 sm:p-3`}>
+      <div aria-hidden="true" className={`${box} flex flex-col justify-between bg-rr-violet/[0.07] p-2.5 @md:p-3`}>
         <span className="font-mono text-eyebrow uppercase text-rr-violet-deep">{item.kind}</span>
-        <span className="font-display text-lead font-semibold leading-none text-rr-violet-deep sm:text-display-s">
+        <span className="font-display text-lead font-semibold leading-none text-rr-violet-deep @md:text-display-s">
           {number}
         </span>
       </div>
@@ -82,7 +82,7 @@ export function LectureThumb({ item, open, onToggle }: ThumbProps) {
       <img
         src={thumb(item.video_id, "mq")}
         srcSet={`${thumb(item.video_id, "mq")} 320w, ${thumb(item.video_id, "hq")} 480w`}
-        sizes="(min-width: 64rem) 11rem, (min-width: 40rem) 9rem, 6.5rem"
+        sizes="(min-width: 48rem) 11rem, (min-width: 30rem) 9rem, 6.5rem"
         alt=""
         width={320}
         height={180}
@@ -92,9 +92,9 @@ export function LectureThumb({ item, open, onToggle }: ThumbProps) {
       />
       {/* The disc sits in the corner so the slide's own title stays legible;
           its ring and fill keep it legible over a bright slide. */}
-      <span className="absolute bottom-1.5 right-1.5 sm:bottom-2 sm:right-2">
+      <span className="absolute bottom-1.5 right-1.5 @md:bottom-2 @md:right-2">
         <span
-          className={`flex h-7 w-7 items-center justify-center rounded-full border shadow-card transition-colors duration-[var(--duration-fast)] sm:h-8 sm:w-8 ${
+          className={`flex h-7 w-7 items-center justify-center rounded-full border shadow-card transition-colors duration-[var(--duration-fast)] @md:h-8 @md:w-8 ${
             open
               ? "border-rr-violet bg-rr-violet text-white"
               : "border-ink-950/10 bg-paper-50/95 text-rr-violet-deep group-hover/thumb:border-rr-violet group-hover/thumb:bg-rr-violet group-hover/thumb:text-white"
@@ -198,15 +198,16 @@ export function LecturePlayer({ item, id }: { item: OutlineItem; id: string }) {
 /**
  * A closed module's preview: its recordings' thumbnails overlapped in a short
  * stack with "4 recorded" under them, so the folded outline already shows
- * which modules can be watched. Decorative (the count is also text in the
- * summary for assistive tech); hidden once the module is open and below md.
+ * which modules can be watched. Decorative (each recording has its own Watch
+ * control inside); hidden once the module is open and where the outline is
+ * narrower than 48rem.
  */
 export function RecordingStack({ items }: { items: OutlineItem[] }) {
   const recorded = items.filter((i) => i.video_id);
   if (recorded.length === 0) return null;
   const shown = recorded.slice(0, 4);
   return (
-    <span aria-hidden="true" className="hidden shrink-0 flex-col items-end gap-1.5 pt-1 md:flex group-open:md:hidden">
+    <span aria-hidden="true" className="hidden shrink-0 flex-col items-end gap-1.5 pt-1 @3xl:flex group-open:hidden">
       <span className="flex">
         {shown.map((i, n) => (
           <img
@@ -217,7 +218,7 @@ export function RecordingStack({ items }: { items: OutlineItem[] }) {
             height={180}
             loading="lazy"
             decoding="async"
-            className={`h-10 w-[4.5rem] rounded-media object-cover shadow-card ring-2 ring-paper-50 lg:h-[4.5rem] lg:w-32 ${n > 0 ? "-ml-5 lg:-ml-12" : ""}`}
+            className={`h-10 w-[4.5rem] rounded-media object-cover shadow-card ring-2 ring-paper-50 @5xl:h-[4.5rem] @5xl:w-32 ${n > 0 ? "-ml-5 @5xl:-ml-12" : ""}`}
           />
         ))}
       </span>
