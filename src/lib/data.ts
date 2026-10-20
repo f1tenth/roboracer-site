@@ -658,7 +658,7 @@ export type OutlineModule = {
 };
 
 export type OutlineLab = {
-  /** "lab-1" to "lab-9", plus "lab-5-optional" (scan matching). */
+  /** "lab-1" to "lab-10" (the coursekit's numbering since 2026-10-19). */
   id: string;
   number: number;
   label: string;

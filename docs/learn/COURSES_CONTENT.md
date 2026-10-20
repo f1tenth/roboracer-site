@@ -158,11 +158,15 @@ Student FAQ rewrites:
 
 ## Found on the coursekit (worth knowing)
 
-- **Lab 8 is in Module F, not E.** Lecture 18 assigns it and the lab page says
-  to review Lectures 17 and 18. `paths.json` and `docs/LEARN_TERRAIN.md` had
-  it under E; both corrected in this branch.
-- **"8 labs total".** The Labs page and the Grading page both say 8 labs; the
-  list has 9 plus an optional Lab 5 (scan matching). `stats` says 9.
+- **Labs renumbered 2026-10-19** (coursekit, mirrored on `main` by PR #31 and
+  in `courses.json` on 2026-10-20): 7 model predictive control, 8 model
+  predictive path integral control and 10 reinforcement learning in Module F,
+  9 perception and vision in Module E (Lectures 13 and 18 assign it; Lecture
+  21 assigns Lab 7). The old Lab 8 (perception and planning) and Lab 9 (robot
+  ethics) are retired, and the optional scan-matching lab page is a 404, so
+  `lab-5-optional` is gone. The Labs page now says "10 labs total"; `stats`
+  says 10. (Before: on 2026-09-26 Lab 8 was filed under F, and the page said
+  "8 labs total" against a list of 9.)
 - **Lecture numbering** runs 1 to 13, then 17 to 28: 14 to 16 do not exist,
   and 23 to 25 are one "Special Topics" page. The public 2024 syllabus sheet
   linked from the coursekit uses yet another order (MPC and ethics before

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-26",
+  "updated": "2026-10-20",
   "checked": "2026-09-26",
   "note": "One file for /learn/courses, /learn/courses/:id and /learn/teach. Ported from Dhyey Shah's LMS mock (github.com/dhyeyshah/roboracer-lms); every fact comes from the coursekit, the roboracer-content skill or Cedric, and docs/learn/COURSES_CONTENT.md lists what was kept, rewritten and dropped. Pages render only offerings with status published and features with status available (platform ones once meta.lms_url is set).",
   "meta": {
@@ -140,9 +140,9 @@
     {
       "id": "labs",
       "group": "course",
-      "value": "9",
+      "value": "10",
       "label": "labs",
-      "source": "Coursekit Labs page, counted 2026-09-26: Labs 1 to 9 plus an optional Lab 5 (scan matching). The page's own text says '8 labs total'; its list has 9."
+      "source": "Coursekit Labs page, counted 2026-10-20: Labs 1 to 10, and the page says '10 labs total' (renumbered 2026-10-19: 7 MPC, 8 MPPI, 9 perception and vision, 10 reinforcement learning). The optional scan-matching lab page is gone (404)."
     },
     {
       "id": "races",
@@ -219,7 +219,7 @@
       "kind": "plan",
       "weeks": 15,
       "title": "15-week course",
-      "blurb": "The full semester. Vision, special topics and a final head-to-head race on top of the 10-week plan. All seven modules, all nine labs.",
+      "blurb": "The full semester. Vision, special topics and a final head-to-head race on top of the 10-week plan. All seven modules, all ten labs.",
       "outcome": "The whole course.",
       "modules": [
         "A",
@@ -239,7 +239,8 @@
         "lab-6",
         "lab-7",
         "lab-8",
-        "lab-9"
+        "lab-9",
+        "lab-10"
       ],
       "starts": null,
       "ends": null,
@@ -567,13 +568,12 @@
             "slides": true,
             "video": true,
             "labs": [
-              "lab-5-optional"
+              "lab-5"
             ]
           }
         ],
         "labs": [
-          "lab-5",
-          "lab-5-optional"
+          "lab-5"
         ],
         "races": []
       },
@@ -636,12 +636,12 @@
             "slides": true,
             "video": true,
             "labs": [
-              "lab-7"
+              "lab-9"
             ]
           }
         ],
         "labs": [
-          "lab-7"
+          "lab-9"
         ],
         "races": []
       },
@@ -669,7 +669,7 @@
             "slides": true,
             "video": false,
             "labs": [
-              "lab-8"
+              "lab-9"
             ]
           },
           {
@@ -679,10 +679,7 @@
             "title": "Project proposal",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture19.html",
             "slides": true,
-            "video": false,
-            "labs": [
-              "lab-9"
-            ]
+            "video": false
           },
           {
             "kind": "lecture",
@@ -700,7 +697,10 @@
             "title": "Model predictive control",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture21.html",
             "slides": true,
-            "video": false
+            "video": false,
+            "labs": [
+              "lab-7"
+            ]
           },
           {
             "kind": "lecture",
@@ -709,10 +709,7 @@
             "title": "Moral decision making",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture22.html",
             "slides": true,
-            "video": false,
-            "labs": [
-              "lab-9"
-            ]
+            "video": false
           },
           {
             "kind": "lecture",
@@ -725,8 +722,9 @@
           }
         ],
         "labs": [
+          "lab-7",
           "lab-8",
-          "lab-9"
+          "lab-10"
         ],
         "races": []
       },
@@ -812,15 +810,6 @@
         "module": "C"
       },
       {
-        "id": "lab-5-optional",
-        "number": 5,
-        "label": "Lab 5 (optional)",
-        "title": "Scan matching",
-        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/optional_lab05.html",
-        "module": "C",
-        "optional": true
-      },
-      {
         "id": "lab-6",
         "number": 6,
         "label": "Lab 6",
@@ -832,15 +821,15 @@
         "id": "lab-7",
         "number": 7,
         "label": "Lab 7",
-        "title": "Perception and vision",
+        "title": "Model predictive control",
         "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab7.html",
-        "module": "E"
+        "module": "F"
       },
       {
         "id": "lab-8",
         "number": 8,
         "label": "Lab 8",
-        "title": "Perception and planning",
+        "title": "Model predictive path integral control",
         "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab8.html",
         "module": "F"
       },
@@ -848,8 +837,16 @@
         "id": "lab-9",
         "number": 9,
         "label": "Lab 9",
-        "title": "Robot ethics",
+        "title": "Perception and vision",
         "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab9.html",
+        "module": "E"
+      },
+      {
+        "id": "lab-10",
+        "number": 10,
+        "label": "Lab 10",
+        "title": "Reinforcement learning",
+        "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/labs/lab10.html",
         "module": "F"
       }
     ],
@@ -1043,8 +1040,8 @@
     {
       "id": "labs",
       "title": "Labs with starter code",
-      "short": "Nine labs",
-      "body": "Nine labs, each with a handout and skeleton code on GitHub, from ROS 2 basics to perception and planning.",
+      "short": "Ten labs",
+      "body": "Ten labs, each with a handout and skeleton code on GitHub, from ROS 2 basics to reinforcement learning.",
       "status": "available",
       "pages": [
         "catalog",
