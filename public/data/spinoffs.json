@@ -1,6 +1,6 @@
 {
-  "note": "About page, section 'Related platforms' (was 'Spinoffs'; Cedric, 2026-09-26: Quanser is not a spinoff, so the section names how each platform relates to RoboRacer). Nothing here is in the roboracer-content skill yet; 'status' records that and is not rendered (verify tags left the site, Cedric 2026-09-25). 'what' and 'origin' are our own words, drafted from the first-party pages in 'source' and 'evidence'; never paste their copy. An 'origin' that starts with TODO(content) is not rendered, but the entry is. 'entries' render on /about; 'candidates' do not render until Cedric moves them into 'entries'. Each entry's feature shows three images from public/media/spinoffs: 'logo' (the company's mark beside the name), 'car' (its car, the main visual, linking to the car's page) and 'preview' (our own 1280x800 capture of its homepage, framed as a browser window that links to 'url'). Rule 8 exception: Cedric, 2026-09-25, asked to feature Neobotics and Quanser with their logo, car and a preview of their website ('embed their website, summarized'), so these images come from neobotics.org and quanser.com; permission status 'Cedric-directed; company not yet asked'. Every image has a provenance row in docs/ASSET_MANIFEST.md (section 'About: spinoff features'). An image field left null or absent drops that slot.",
-  "updated": "2026-09-26",
+  "note": "About page, section 'Related platforms' (was 'Spinoffs'; Cedric, 2026-09-26: Quanser is not a spinoff, so the section names how each platform relates to RoboRacer). Nothing here is in the roboracer-content skill yet; 'status' records that and is not rendered (verify tags left the site, Cedric 2026-09-25). 'what' and 'origin' are our own words, drafted from the first-party pages in 'source' and 'evidence'; never paste their copy. An 'origin' that starts with TODO(content) is not rendered, but the entry is. 'entries' render on /about; 'candidates' do not render until Cedric moves them into 'entries'. Each entry's feature shows three images from public/media/spinoffs: 'logo' (the company's mark beside the name), 'car' (its car, the main visual, linking to the car's page) and 'preview' (our own 1280x800 capture of its homepage, framed as a browser window that links to 'url'). Rule 8 exception: Cedric, 2026-09-25, asked to feature Neobotics and Quanser with their logo, car and a preview of their website ('embed their website, summarized'), so these images come from neobotics.org and quanser.com; permission status 'Cedric-directed; company not yet asked'. Every image has a provenance row in docs/ASSET_MANIFEST.md (section 'About: spinoff features'). An image field left null or absent drops that slot. 'video' (a YouTube video, with our local copy of its thumbnail as 'poster') takes the main visual slot instead of 'car': it plays muted and looped in place once the feature is in view, with a sound toggle and a caption beside it; under reduced motion, before it mounts and if the embed fails, the poster shows with a click-to-play button. 'results' records results we were given and how each checks against our own race data; it is not rendered (the rendered sentence is in 'origin'), and a 'check' starting with TODO(content) marks a result left out of the page until Cedric decides. Dzik Autonomous Racing, Cedric, 2026-10-20: feature the team here with its autonomous lap video playing; that extends the rule 8 exception above to Dzik's logo, our capture of its homepage and the video's thumbnail (manifest SP-08 to SP-10; Cedric-directed, 2026-10-20; team not yet asked).",
+  "updated": "2026-10-20",
   "entries": [
     {
       "name": "Neobotics",
@@ -104,6 +104,108 @@
         }
       ],
       "note": "Cedric, 2026-09-26: Quanser is not affiliated with RoboRacer and is not a spinoff; it is mentioned here as a related platform, with the relation stated plainly. Nothing on the site claims lineage either way. Earlier note: Cedric named Quanser on 2026-09-24; its pages (evidence) do not mention F1TENTH or RoboRacer."
+    },
+    {
+      "name": "Dzik Autonomous Racing",
+      "kind": "team",
+      "label": "independent team",
+      "what": "A two-person team from Warsaw, Poland. Since 2025 its 1/8-scale cars race professional RC drivers on asphalt: human against AI.",
+      "origin": "A competitor team. Won the 21st competition, at IROS 2024 in Abu Dhabi, after second places at ICRA 2022, the Lausitzring in 2022 and ICRA 2024.",
+      "since": 2018,
+      "url": "https://dzik.racing/",
+      "logo": {
+        "src": "/media/spinoffs/spinoff-dzik-icon-96.webp",
+        "width": 106,
+        "height": 96,
+        "alt": "Dzik Autonomous Racing logo",
+        "source": "https://dzik.racing/images/logo.png (the hero mark on https://dzik.racing/)"
+      },
+      "car": null,
+      "video": {
+        "youtube_id": "_RUCcjT7fVQ",
+        "title": "Dzik Autonomous Racing: an autonomous lap at Ruda Śląska, October 4, 2026",
+        "url": "https://www.youtube.com/watch?v=_RUCcjT7fVQ",
+        "channel": "Dzik Autonomous Racing",
+        "channel_url": "https://www.youtube.com/@dzik.racing",
+        "eyebrow": "autonomous lap · Ruda Śląska, Poland · Oct 4, 2026",
+        "caption": "The car drives itself. No driver, no remote control.",
+        "poster": {
+          "src": "/media/spinoffs/spinoff-dzik-lap-poster-960.webp",
+          "width": 960,
+          "height": 540,
+          "alt": "An outdoor asphalt RC track around a grass island, the small autonomous car on its far side, a drivers' stand and trees behind",
+          "source": "the video's YouTube thumbnail, https://i.ytimg.com/vi/_RUCcjT7fVQ/maxresdefault.jpg"
+        }
+      },
+      "preview": {
+        "src": "/media/spinoffs/spinoff-dzik-site-960.webp",
+        "width": 960,
+        "height": 600,
+        "alt": "The dzik.racing homepage: a boar's head mark over the headline 'Dzik Autonomous Racing' and the line '3 first places, 3 second places' on a dark grid",
+        "source": "our capture of https://dzik.racing/ at 1280x800, 2026-10-20"
+      },
+      "results": [
+        {
+          "year": 2024,
+          "place": 1,
+          "event": "IROS",
+          "where": "Abu Dhabi, UAE",
+          "check": "confirmed: news.json iros2024-abudhabi-dzik-ultimate-wins, from the organizers' newsletter of 2024-10-21 (gold Dzik Ultimate, silver Scuderia Segfault, bronze ForzaETH); the 21st competition per events_map.json"
+        },
+        {
+          "year": 2024,
+          "place": 2,
+          "event": "ICRA",
+          "where": "Yokohama, Japan",
+          "check": "consistent: news.json icra2024-yokohama-vaul-wins has VAUL winning the 15th competition and Dzik winning the other semi-final (TU Wien's post); no source of ours names the runner-up outright"
+        },
+        {
+          "year": 2022,
+          "place": 2,
+          "event": "ADAC event",
+          "where": "Lausitzring, Germany",
+          "check": "consistent: our record of the race (events_map.json germany2022, the 'F1TENTH Autonomous Grand Prix Germany 2022', Aug 20-21) holds only ETH Zürich's post that ForzaETH won; no results page survives and no runner-up is recorded"
+        },
+        {
+          "year": 2022,
+          "place": 2,
+          "event": "ICRA",
+          "where": "Philadelphia, USA",
+          "check": "confirmed: news.json icra2022-philadelphia-scatterbrain-wins, from the archived race site's bracket (ScatterBrain beat Dzik 2-0 in the in-person final of the tenth competition)"
+        },
+        {
+          "year": 2019,
+          "place": 1,
+          "event": "ES Week",
+          "where": "New York, USA",
+          "check": "TODO(content): our record of this race (Columbia 2019, the fifth competition: https://f1tenth.github.io/columbia2019.html and news.json columbia2019-fifth-competition) published time trials only. Dzik (Polish Academy of Sciences) is ranked 1 in the Open class at 5.84 s as its only car; SeoulTech and Unimore topped the ten-car Restricted class at 8.4 s; no head-to-head result exists. Count it as a win? Left out of the page until Cedric says."
+        },
+        {
+          "year": 2018,
+          "place": 1,
+          "event": "ES Week",
+          "where": "Turin, Italy",
+          "check": "TODO(content): our record (news.json esweek2018-torino-calvin-wins, https://f1tenth.github.io/torino2018.html) credits team CALVIN from Warsaw: Maciej Dziubiński and Karol Majek on the old race page, with Łukasz Sztyber named in Karol Majek's video. Dzik counts the win as its own. Credit it to Dzik? Left out of the page until Cedric says."
+        }
+      ],
+      "status": "verify",
+      "source": "https://dzik.racing/",
+      "named_by": "Cedric, 2026-10-20",
+      "evidence": [
+        {
+          "url": "https://dzik.racing/",
+          "says": "Based in Warsaw, Poland. Team: Łukasz and Monika Sztyber. Started in 2018 with the Udacity Self-Driving Car Engineer nanodegree; raced F1TENTH, now RoboRacer, indoors at robotics conferences ('F1TENTH / RoboRacer · 2018 to 2024', six podiums: 1st IROS 2024 Abu Dhabi, 2nd ICRA 2024 Yokohama, 2nd ADAC event 2022 Lausitzring, 2nd ICRA 2022 Philadelphia, 1st ES Week 2019 New York, 1st ES Week 2018 Turin). Since 2025 ('Human vs AI'): the cars race in the 1/8 RC class against a professional human driver, indoors or out, on asphalt. Cars Dzik1 and Dzik2 on a PlatformSworkz S35-GT2E chassis with a custom carbon frame."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=_RUCcjT7fVQ",
+          "says": "'2026.10.04 | Autonomous Racing | Ruda Śląska | track perspective (center)', channel Dzik Autonomous Racing (@dzik.racing), 26 s, 1920x1080, uploaded 2026-10-07, public and embeddable. A trackside camera follows one small car around an outdoor asphalt RC track."
+        },
+        {
+          "url": "docs/content/teams.sheet.json",
+          "says": "RoboRacer_Teams_DB: 'Dzik One', affiliation Independent, Poland; attended ICRA 2024, IROS 2024, ICRA 2025 and IV 2025; no-show at ICRA 2026."
+        }
+      ],
+      "note": "Cedric, 2026-10-20: add Dzik to Related platforms with its autonomous lap video playing in the feature, an unmute control, a clear line that the car drives itself, and a brief mention of its results (from his screenshot of dzik.racing/#about). The results are checked one by one in 'results'; the 2018 and 2019 wins are left out of 'origin' until Cedric decides (see their TODO(content)). Not rendered either: dzik.racing says its F1TENTH/RoboRacer years end in 2024, while the Teams DB lists 'Dzik One' at ICRA 2025 and IV 2025. 'since' is the year the team says it started (2018). Its logo, homepage capture and video poster come from dzik.racing and YouTube at Cedric's direction (manifest SP-08 to SP-10; team not yet asked)."
     }
   ],
   "candidates": [
