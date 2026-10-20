@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { LINK, isExternal } from "./learnStyles";
+import { LINK, LINK_INK, isExternal } from "./learnStyles";
 
 /** Stroke arrow in the link's colour: right for a page on this site, up and
  * out for anything that leaves it (StartHere's pair). */
@@ -44,6 +44,8 @@ type LearnLinkProps = {
   className?: string;
   /** Draw the arrow after the label (default). */
   arrow?: boolean;
+  /** The ground it sits on: the ink twin for the catalog's plan section. */
+  on?: "paper" | "ink";
 };
 
 /**
@@ -52,7 +54,7 @@ type LearnLinkProps = {
  * says so to a screen reader; a mailto opens the mail client. The last word
  * and the arrow never part across a line break.
  */
-export default function LearnLink({ href, children, className = "", arrow = true }: LearnLinkProps) {
+export default function LearnLink({ href, children, className = "", arrow = true, on = "paper" }: LearnLinkProps) {
   const out = isExternal(href);
   const web = out && !href.startsWith("mailto:");
   const label =
@@ -70,7 +72,7 @@ export default function LearnLink({ href, children, className = "", arrow = true
         {arrow && <Arrow out={out} />}
       </>
     );
-  const cls = `${LINK} ${className}`;
+  const cls = `${on === "ink" ? LINK_INK : LINK} ${className}`;
   if (!out) {
     return (
       <Link to={href} className={cls}>

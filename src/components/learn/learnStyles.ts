@@ -6,6 +6,13 @@
 export const LINK =
   "text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
 
+/** The same link on ink: light text, light hairline, violet on hover. */
+export const LINK_INK =
+  "text-text-on-ink underline decoration-text-on-ink/30 underline-offset-4 hover:decoration-rr-violet hover:decoration-2 focus-visible:outline-text-on-ink";
+
+/** Mono small annotation on ink (MONO_NOTE's ink twin). */
+export const INK_NOTE = "font-mono text-small text-text-on-ink-muted";
+
 /** A 2.75rem hit area on touch screens that leaves the line box alone. */
 export const TAP = "coarse:inline-block coarse:-my-3 coarse:py-3";
 

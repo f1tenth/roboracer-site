@@ -245,6 +245,22 @@ body {
   color: transparent;
 }
 
+/* The logo gradient laid along a scale, from cyan through the logo's magenta
+   into violet: the plan ladder on /learn/courses and the plan cards' share
+   rules (Cedric, 2026-10-20: "the more you learn the better"). The magenta
+   stop sits at 4/7, where the 10-week plan ends (Modules A to D of A to G),
+   so that bar is the logo's own gradient and the 15-week bar runs on into
+   the purple. A bar shows only its slice by spanning the whole scale and
+   clipping to its run (PlanLadder). Ink context only, as the text utility. */
+@utility bg-gradient-scale {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-rr-cyan) 0%,
+    var(--color-rr-grad-start) 57.14%,
+    var(--color-rr-grad-end) 100%
+  );
+}
+
 /* Marquee (design system "Marquee" pattern; static wrapped grid on reduce) */
 @keyframes rr-marquee {
   from { transform: translateX(0); }

@@ -39,9 +39,18 @@ const ICON_FOR: Record<string, string> = {
   discussion: "bubble",
 };
 
-/** One glyph by stat or feature id, in ink strokes; null for an id it does
- * not know (the tile then shows no icon rather than a wrong one). */
-export function CourseIcon({ id, className = "h-5 w-5" }: { id: string; className?: string }) {
+/** One glyph by stat or feature id, in ink strokes (or `color`, on ink);
+ * null for an id it does not know (the tile then shows no icon rather than a
+ * wrong one). */
+export function CourseIcon({
+  id,
+  className = "h-5 w-5",
+  color = "text-ink-950",
+}: {
+  id: string;
+  className?: string;
+  color?: string;
+}) {
   const d = GLYPHS[ICON_FOR[id]];
   if (!d) return null;
   return (
@@ -52,7 +61,7 @@ export function CourseIcon({ id, className = "h-5 w-5" }: { id: string; classNam
       fill="none"
       aria-hidden="true"
       focusable="false"
-      className={`shrink-0 text-ink-950 ${className}`}
+      className={`shrink-0 ${color} ${className}`}
     >
       <path d={d} stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
