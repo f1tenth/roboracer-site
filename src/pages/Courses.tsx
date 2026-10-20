@@ -13,6 +13,7 @@ import LearnHeader from "../components/learn/LearnHeader";
 import Ledger, { CourseIcon } from "../components/learn/Ledger";
 import LearnLink from "../components/learn/LearnLink";
 import PlanLadder from "../components/learn/PlanLadder";
+import PlanPicker from "../components/learn/PlanPicker";
 import CourseOutline from "../components/learn/CourseOutline";
 import TopicFinder from "../components/learn/TopicFinder";
 import CoursesUnavailable from "../components/learn/CoursesUnavailable";
@@ -234,15 +235,22 @@ export default function Courses() {
         />
       </Section>
 
-      {/* 02 The three plans: the ladder explains them, the sheet under it
-          links each to its page. #courses is the header's "Pick a course". */}
-      <Section width="page" rule aria-labelledby="courses">
+      {/* 02 The three plans, the page's centrepiece (Cedric, 2026-10-20:
+          "needs work, and more visual appeal"): on ink, where the logo
+          gradient of the ladder's bars reads, with the picker in the header,
+          the ladder as the figure, the summary and its button under it, and
+          the plans as picture cards. #courses is the hero's "Pick a course". */}
+      <Section variant="ink" edge width="page" tight aria-labelledby="courses">
         <SectionHeader
+          on="ink"
           index={next()}
           eyebrow={catalog.courses_heading.kicker}
           id="courses"
           title={catalog.courses_heading.title}
           lead={catalog.courses_heading.lead}
+          action={
+            <PlanPicker plans={courses.plans} labels={catalog.picker} selected={selectedPlan} onSelect={selectPlan} />
+          }
         />
         <PlanLadder courses={courses} selected={selectedPlan} onSelect={selectPlan} />
       </Section>
