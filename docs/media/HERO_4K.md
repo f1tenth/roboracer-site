@@ -120,7 +120,11 @@ names are new, so the live site keeps playing the v2 clips until this
 merges). Every file answers 200 on
 `https://pub-1174c726236842f08529a0a5cc0c68fb.r2.dev/media/hero/<name>`
 with the local size, and the cache header comes back (the v2 uploads had
-none, `docs/media/HOSTING.md`). The v1 and v2 IV clips stay on the bucket.
+none, `docs/media/HOSTING.md`). The v1 and v2 IV clips are to be deleted
+from the bucket once the deploy serves the v3 hero (the commands are in
+`docs/media/HOSTING.md`; the agent's tooling refuses cloud deletes); the
+master `GX010088.mp4` moved from Downloads to `_harvest/hero/`
+(git-ignored) until the opening cut is settled.
 
 ## How the hero picks a rung (`src/lib/media.ts`, `HeroChapter.tsx`)
 

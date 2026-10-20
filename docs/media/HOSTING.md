@@ -23,10 +23,26 @@ in a checkout's `public/media/hero/` for localhost.
 
 **2026-10-20 (branch `revamp/hero-4k`):** the FPV clips are the v3 ladder
 from the 4K GoPro lap (`docs/media/HERO_4K.md`), four rungs per clip; the
-hero picks one per clip for the screen and the link. The v2 and v1 IV
-clips stay on the bucket because the live site plays v2 until the branch
-merges. Checked 2026-10-20 after upload: every v3 file 200 with the local
-size and `cache-control: public, max-age=31536000, immutable`.
+hero picks one per clip for the screen and the link. Checked 2026-10-20
+after upload: every v3 file 200 with the local size and `cache-control:
+public, max-age=31536000, immutable`. Cleanup the same day (Cedric: delete
+what nothing uses): the local copies of the v1 and v2 IV clips were
+removed from the checkouts, but the bucket objects are still there: the
+agent's tooling refuses cloud-storage deletes, so they wait for a human.
+Once roboracer.ai serves this branch's hero (check `origin/gh-pages`
+first, then the site: the CDN mixes old and new for about ten minutes),
+run, from a scratch directory, with `npx wrangler@4` or the wrangler the
+memory notes name:
+
+```
+for n in hero-iv-start-1280 hero-iv-start-960 hero-iv-rest-1280 hero-iv-rest-960 \
+         hero-iv-start-v2-1280 hero-iv-start-v2-960 hero-iv-rest-v2-1280 hero-iv-rest-v2-960; do
+  npx wrangler@4 r2 object delete "roboracer-media/media/hero/$n.mp4" --remote
+done
+```
+
+After that the eight v3 rungs and the six race clips are all the bucket
+holds for the hero.
 
 | Path | Size | Served from | On R2 |
 |---|---|---|---|
@@ -39,8 +55,8 @@ size and `cache-control: public, max-age=31536000, immutable`.
 | `/media/hero/hero-fpv-v3-rest-1920.mp4` | 31,871,819 B (8.64 Mbit/s, 60 fps) | R2 via `mediaUrl` | yes |
 | `/media/hero/hero-fpv-v3-rest-2560.mp4` | 45,254,937 B (12.27 Mbit/s, 60 fps) | R2 via `mediaUrl` | yes |
 
-Before 2026-10-20 (the v2 IV clips, still what roboracer.ai plays until the
-merge):
+Before 2026-10-20 (the v2 IV clips; to be deleted from the bucket after
+the 2026-10-20 deploy, see above; kept here for the record):
 
 | Path | Size | Served from | On R2 |
 |---|---|---|---|
