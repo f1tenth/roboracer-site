@@ -35,11 +35,14 @@ import ExplodedModel from "../components/ui/ExplodedModel";
 import StartHere from "../components/ui/StartHere";
 
 const HERO_VIDEO: HeroVideoSources = {
-  mp4_1920: "/media/hero/hero-fpv-loop-1280.mp4",
-  mp4_960: "/media/hero/hero-fpv-loop-960.mp4",
+  // The committed fallback loop only (no clip cycle on the styleguide).
+  sources: [
+    { src: "/media/hero/hero-fpv-loop-960.mp4", width: 960, mbps: 1.25 },
+    { src: "/media/hero/hero-fpv-loop-1280.mp4", width: 1280, mbps: 3.4 },
+  ],
   poster: "/media/hero/hero-fpv-poster.webp",
-  width: 1280,
-  height: 720,
+  width: 1920,
+  height: 1080,
 };
 
 // Landing v3 copy (no comma): line 1 is one gradient unit, the rest is word by word.

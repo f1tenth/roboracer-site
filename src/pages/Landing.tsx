@@ -35,33 +35,71 @@ import PauseToggle from "../components/ui/PauseToggle";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import { useScrollToHash } from "../hooks/useScrollToHash";
 import { MediaHoldContext, mediaUrl } from "../lib/media";
+// The cycle's clips live on Cloudflare R2; mediaUrl resolves to the local
+// public/ copy while VITE_MEDIA_BASE is unset (localhost).
+const R2 = (file: string) => mediaUrl(`/media/hero/${file}`);
+
 const HERO_VIDEO: HeroVideoSources = {
-  mp4_1920: "/media/hero/hero-fpv-loop-1280.mp4",
-  mp4_960: "/media/hero/hero-fpv-loop-960.mp4",
-  mbps: 1.84,
-  // Landing v5 (Cedric, 2026-08-22): a clip cycle with crossfades. The IV
-  // FPV clip opens once (its first 5 s), then three cuts from the Robotics
-  // Club race highlights video (2:29-2:40, 1:04-1:17, 1:21-1:27), then the
-  // IV clip from 6 s to its end; the cycle restarts at the first race cut.
-  // The clip files live on Cloudflare R2 (infra/media-worker); mediaUrl
-  // resolves to the local public/ copy while VITE_MEDIA_BASE is unset.
-  // `mbps` is each desktop encode's average bitrate (ffprobe); on a link
-  // that cannot stream it the 960 encode plays (docs/media/HERO_PERF.md).
-  // The IV clips are the v2 cut (2026-09-24): encoded straight from
-  // FPV_IV.mp4 (frames 90-239 and 270-1080) at crf 25 / crf 26 for the 960,
-  // VMAF 99.8-99.9 against the source where v1 scored 91.6-93.1, at fewer
-  // bytes (docs/media/HERO_PERF.md).
+  // The committed fallback loop (public/media/hero, CLAUDE.md rule 3): the
+  // first 18 s of the GoPro lap at 1280 (two-pass to the 8 MB cap) and 960
+  // (under 3 MB), 30 fps. It plays only when a cycle clip fails to load.
+  sources: [
+    { src: "/media/hero/hero-fpv-loop-960.mp4", width: 960, mbps: 1.21, bytes: 2725455, fps: 30 },
+    { src: "/media/hero/hero-fpv-loop-1280.mp4", width: 1280, mbps: 3.32, bytes: 7469292, fps: 30 },
+  ],
+  // Landing v5 (Cedric, 2026-08-22): a clip cycle with crossfades. The FPV
+  // clip opens once (its first 5 s), then three cuts from the Robotics Club
+  // race highlights video (2:29-2:40, 1:04-1:17, 1:21-1:27), then the FPV lap
+  // from where the opening left off to its end; the cycle restarts at the
+  // first race cut.
+  // The FPV clips are v3 (2026-10-20): the 4K 120 fps GoPro lap
+  // (GX010088.mp4; docs/media/HERO_4K.md) cut 2.0-7.0 s and 7.0-36.5 s as a
+  // four-rung ladder, 960p30, 1280p30, 1920p60 and 2560p60. The race clips
+  // keep their two 30 fps encodes. Every rung carries its average bitrate
+  // and size (ffprobe): HeroChapter picks one per clip for the screen and
+  // the link, and times each download to learn what the link carries.
   clips: [
-    { mp4_1920: mediaUrl("/media/hero/hero-iv-start-v2-1280.mp4"), mp4_960: mediaUrl("/media/hero/hero-iv-start-v2-960.mp4"), mbps: 2.8 },
-    { mp4_1920: mediaUrl("/media/hero/hero-race-01-1920.mp4"), mp4_960: mediaUrl("/media/hero/hero-race-01-960.mp4"), mbps: 6.56 },
-    { mp4_1920: mediaUrl("/media/hero/hero-race-02-1920.mp4"), mp4_960: mediaUrl("/media/hero/hero-race-02-960.mp4"), mbps: 7.32 },
-    { mp4_1920: mediaUrl("/media/hero/hero-race-03-1920.mp4"), mp4_960: mediaUrl("/media/hero/hero-race-03-960.mp4"), mbps: 5.67 },
-    { mp4_1920: mediaUrl("/media/hero/hero-iv-rest-v2-1280.mp4"), mp4_960: mediaUrl("/media/hero/hero-iv-rest-v2-960.mp4"), mbps: 2.92 },
+    {
+      sources: [
+        { src: R2("hero-fpv-v3-start-960.mp4"), width: 960, mbps: 1.56, bytes: 979877, fps: 30 },
+        { src: R2("hero-fpv-v3-start-1280.mp4"), width: 1280, mbps: 3.17, bytes: 1984079, fps: 30 },
+        { src: R2("hero-fpv-v3-start-1920.mp4"), width: 1920, mbps: 7.89, bytes: 4939005, fps: 60 },
+        { src: R2("hero-fpv-v3-start-2560.mp4"), width: 2560, mbps: 11.39, bytes: 7132201, fps: 60 },
+      ],
+    },
+    {
+      sources: [
+        { src: R2("hero-race-01-960.mp4"), width: 960, mbps: 1.94, bytes: 2687154, fps: 30 },
+        { src: R2("hero-race-01-1920.mp4"), width: 1920, mbps: 6.56, bytes: 9082061, fps: 30 },
+      ],
+    },
+    {
+      sources: [
+        { src: R2("hero-race-02-960.mp4"), width: 960, mbps: 2.07, bytes: 3384069, fps: 30 },
+        { src: R2("hero-race-02-1920.mp4"), width: 1920, mbps: 7.32, bytes: 11952683, fps: 30 },
+      ],
+    },
+    {
+      sources: [
+        { src: R2("hero-race-03-960.mp4"), width: 960, mbps: 1.56, bytes: 1182659, fps: 30 },
+        { src: R2("hero-race-03-1920.mp4"), width: 1920, mbps: 5.67, bytes: 4305272, fps: 30 },
+      ],
+    },
+    {
+      sources: [
+        { src: R2("hero-fpv-v3-rest-960.mp4"), width: 960, mbps: 1.74, bytes: 6433173, fps: 30 },
+        { src: R2("hero-fpv-v3-rest-1280.mp4"), width: 1280, mbps: 3.49, bytes: 12887260, fps: 30 },
+        { src: R2("hero-fpv-v3-rest-1920.mp4"), width: 1920, mbps: 8.63, bytes: 31871819, fps: 60 },
+        { src: R2("hero-fpv-v3-rest-2560.mp4"), width: 2560, mbps: 12.26, bytes: 45254937, fps: 60 },
+      ],
+    },
   ],
   loopFrom: 1,
+  // The poster is the opening clip's first frame (1920x1080, 74 KB), so the
+  // first video frame lands on it without a jump.
   poster: "/media/hero/hero-fpv-poster.webp",
-  width: 1280,
-  height: 720,
+  width: 1920,
+  height: 1080,
 };
 
 // Landing-v3 copy: no comma, three authored lines.
