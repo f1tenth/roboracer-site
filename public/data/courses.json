@@ -56,6 +56,16 @@
         "manifest": "CC-01"
       }
     },
+    "leaderboard_heading": {
+      "kicker": "In class",
+      "title": "Race what you learn",
+      "lead": "Penn teaches this course as ESE 6150. Its students race each lab in the grading simulator, and these are their best clean laps, replayed.",
+      "more": {
+        "label": "More lap times on the race page",
+        "href": "/race#leaderboard"
+      },
+      "note": "Written by the stage 4 builder (2026-10-20) from offerings[penn] (ESE 6150) and the /race leaderboard lead (Race.tsx); no new fact. The board itself is src/components/race/Leaderboard.tsx with its feature prop."
+    },
     "courses_heading": {
       "kicker": "Courses",
       "title": "Pick your length",

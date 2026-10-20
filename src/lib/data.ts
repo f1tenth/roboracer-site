@@ -800,6 +800,9 @@ export type CoursesFile = {
   /** Page copy for /learn/courses. */
   catalog: {
     hero: CourseHero;
+    /** The class leaderboard section under the hero (stage 4) and its link
+     * to the race page's board. */
+    leaderboard_heading: CourseHeading & { more: CourseLink };
     courses_heading: CourseHeading;
     offerings_heading: CourseHeading;
     /** The catalog's outline section (modules A to G as folds). */

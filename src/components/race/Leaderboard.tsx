@@ -48,14 +48,33 @@ function Bar({ w }: { w: string }) {
   return <span aria-hidden="true" className={`inline-block h-[0.7em] ${w} rounded-sm bg-paper-200 align-middle`} />;
 }
 
-function BoardLink({ href }: { href?: string }) {
+/** The catalog's variant (/learn/courses): the section's own header in the
+ * first cell, the replay beside it from lg (right after it on a phone), the
+ * table under the header with fewer rows, and the way on to the race page's
+ * board instead of the board's own site. /race leaves it out. */
+export type LeaderboardFeature = {
+  /** The section header, drawn in the grid's first cell. */
+  intro: ReactNode;
+  /** Rows in the table (the config's limit otherwise). */
+  limit: number;
+  /** An internal link that replaces "See the full leaderboard". */
+  more: { href: string; label: string };
+};
+
+function BoardLink({ href, more }: { href?: string; more?: LeaderboardFeature["more"] }) {
   return (
     <div className="mt-8 min-h-[3.1rem]">
-      {href && (
-        <Button href={href} variant="secondary" target="_blank" rel="noopener noreferrer">
-          See the full leaderboard <span aria-hidden="true">↗</span>
-          <span className="sr-only"> (opens in a new tab)</span>
+      {more ? (
+        <Button href={more.href} variant="secondary">
+          {more.label} <span aria-hidden="true">→</span>
         </Button>
+      ) : (
+        href && (
+          <Button href={href} variant="secondary" target="_blank" rel="noopener noreferrer">
+            See the full leaderboard <span aria-hidden="true">↗</span>
+            <span className="sr-only"> (opens in a new tab)</span>
+          </Button>
+        )
       )}
     </div>
   );
@@ -91,10 +110,10 @@ class LeaderboardBoundary extends Component<{ children: ReactNode }, { failed: b
   }
 }
 
-export default function Leaderboard() {
+export default function Leaderboard({ feature }: { feature?: LeaderboardFeature }) {
   return (
     <LeaderboardBoundary>
-      <LeaderboardBlock />
+      <LeaderboardBlock feature={feature} />
     </LeaderboardBoundary>
   );
 }
@@ -124,8 +143,12 @@ export default function Leaderboard() {
  * minute re-reads the board, keeping the last good laps only if that read
  * fails: a board that answers with no ranked lab is empty now. A board
  * switch made while that read runs stands: the read only refreshes the cache.
+ *
+ * With `feature` (the catalog) the same parts are laid out around the
+ * replay: the page's section header first, the replay beside it, the table
+ * under the header, and the link goes to /race#leaderboard.
  */
-function LeaderboardBlock() {
+function LeaderboardBlock({ feature }: { feature?: LeaderboardFeature }) {
   const [cfg, setCfg] = useState<LeaderboardConfig | null>(null);
   const [phase, setPhase] = useState<Phase>("loading");
   const [boards, setBoards] = useState<BoardSummary[]>([]);
@@ -243,21 +266,30 @@ function LeaderboardBlock() {
       });
   };
 
-  const limit = cfg?.limit ?? DEFAULT_LIMIT;
+  const limit = feature?.limit ?? cfg?.limit ?? DEFAULT_LIMIT;
   const href = cfg ? boardHref(cfg, selected ?? undefined) : undefined;
   const summary = boards.find((b) => b.slug === selected);
   const loaded = selected ? files[selected] : undefined;
   const board = loaded && loaded !== "error" ? loaded : undefined;
   const switchFailed = loaded === "error";
 
-  const link = <BoardLink href={href} />;
+  const link = <BoardLink href={href} more={feature?.more} />;
 
   if (phase === "error" || phase === "empty") {
-    return (
+    const notice = (
       <Notice
         text={phase === "error" ? ERROR_TEXT : "No clean laps on the board yet this term."}
         href={boardHref(cfg ?? FALLBACK_CONFIG, selected ?? undefined)}
       />
+    );
+    // The catalog keeps its section header over the notice.
+    return feature ? (
+      <div className="flex flex-col gap-8">
+        {feature.intro}
+        {notice}
+      </div>
+    ) : (
+      notice
     );
   }
 
@@ -314,115 +346,142 @@ function LeaderboardBlock() {
     </>
   );
 
+  const boardBlock = (
+    <>
+      <div className="border-t border-ink-950/10 pt-5">
+        <h3 className="font-display text-display-s font-semibold text-text-strong">
+          {labTitle ?? <Bar w="w-64" />}
+        </h3>
+        {/* The board line and the switch share one minimum height (a chip's),
+            so the skeleton, a one-board lab and a two-board lab line up. */}
+        {boards.length > 1 ? (
+          <div role="group" aria-label="Board" className="mt-3 flex min-h-10 flex-wrap items-center gap-2 coarse:min-h-11">
+            {boards.map((b) => (
+              <button
+                key={b.slug}
+                type="button"
+                aria-pressed={b.slug === selected}
+                onClick={() => choose(b.slug)}
+                className={`${CHIP_BASE} ${b.slug === selected ? CHIP_ON : CHIP_IDLE}`}
+              >
+                {/* Phones get the short label, so the switch stays one row. */}
+                <span className="sm:hidden">{shortBoardLabel(b.board_title ?? b.title)}</span>
+                <span className="hidden sm:inline">{b.board_title ?? b.title}</span>
+              </button>
+            ))}
+          </div>
+        ) : (
+          <p className="mt-3 flex min-h-10 items-center font-mono text-small text-text-muted coarse:min-h-11">
+            {boardTitle ?? <Bar w="w-40" />}
+          </p>
+        )}
+      </div>
+
+      {switchFailed ? (
+        <p className="mt-6 text-body text-text-body">This board did not load here.</p>
+      ) : (
+        <table className="mt-6 w-full border-collapse">
+          <caption className="sr-only">
+            {skeleton
+              ? "Loading lap times"
+              : `${labTitle}, ${boardTitle ?? ""}: the top ${rows.length} of ${total} ${noun}`}
+          </caption>
+          <thead>
+            <tr className="border-b border-ink-950/10 font-mono text-small text-text-muted">
+              <th scope="col" className="w-14 pb-3 pr-4 text-left font-normal">
+                <span aria-hidden="true">#</span>
+                <span className="sr-only">Rank</span>
+              </th>
+              <th scope="col" className="w-full pb-3 pr-4 text-left font-normal">
+                {skeleton ? "" : anonymous ? "Driver" : "Team"}
+              </th>
+              <th scope="col" className="whitespace-nowrap pb-3 pl-4 text-right font-normal">
+                {skeleton ? "" : (metric?.label ?? "Lap time")}
+              </th>
+              {(extra || skeleton) && (
+                <th scope="col" className="hidden whitespace-nowrap pb-3 pl-8 text-right font-normal sm:table-cell">
+                  {skeleton ? "" : (extra?.label ?? "")}
+                </th>
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            {skeleton
+              ? Array.from({ length: limit }, (_, i) => (
+                  <tr key={i} className="border-b border-ink-950/10">
+                    <td className="py-4 pr-4 font-mono text-small tabular-nums text-text-muted">{pad(i + 1)}</td>
+                    <td className="py-4 pr-4 font-display text-lead font-semibold">
+                      <Bar w="w-36" />
+                    </td>
+                    <td className="py-4 pl-4 text-right font-mono text-lead">
+                      <Bar w="w-16" />
+                    </td>
+                    <td className="hidden py-4 pl-8 text-right font-mono text-small sm:table-cell">
+                      <Bar w="w-14" />
+                    </td>
+                  </tr>
+                ))
+              : rows.map((r) => (
+                  <tr key={r.alias} className="border-b border-ink-950/10">
+                    <td className="py-4 pr-4 font-mono text-small tabular-nums text-text-muted">{pad(r.rank)}</td>
+                    {/* A long team name wraps inside its column instead of
+                        widening the table past a phone's width, where the
+                        page's overflow clip would cut the lap times off
+                        (RACE-03). */}
+                    <th
+                      scope="row"
+                      className="py-4 pr-4 text-left font-display text-lead font-semibold text-text-strong [overflow-wrap:anywhere]"
+                    >
+                      {r.alias}
+                    </th>
+                    <td className="whitespace-nowrap py-4 pl-4 text-right font-mono text-lead tabular-nums text-text-strong">
+                      {formatValue(r.metric, metric?.unit ?? "")}
+                    </td>
+                    {extra && (
+                      <td className="hidden whitespace-nowrap py-4 pl-8 text-right font-mono text-small tabular-nums text-text-muted sm:table-cell">
+                        {formatValue(r.extras?.[extra.key], extra.unit)}
+                      </td>
+                    )}
+                  </tr>
+                ))}
+          </tbody>
+        </table>
+      )}
+    </>
+  );
+
+  const player = replay && (
+    <LeaderboardReplay replay={replay} href={replayHref(cfg ?? FALLBACK_CONFIG, replayBoard, replay.compare)} />
+  );
+
+  if (feature) {
+    // Header, replay, table on a phone; from lg the replay takes the right
+    // seven columns over both rows, and any height it has beyond the header
+    // and the table goes under the table, not between them.
+    return (
+      <div
+        className="grid gap-x-10 gap-y-10 lg:grid-cols-12 lg:grid-rows-[auto_1fr]"
+        aria-busy={skeleton && !switchFailed}
+      >
+        <div className={replay ? "lg:col-span-5" : "lg:col-span-8"}>{feature.intro}</div>
+        {player && <div className="lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1">{player}</div>}
+        <div className={`lg:col-start-1 ${replay ? "lg:col-span-5" : "lg:col-span-8"}`}>
+          {boardBlock}
+          <div className="mt-10">{meta}</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="grid gap-x-10 gap-y-10 lg:grid-cols-12" aria-busy={skeleton && !switchFailed}>
       <div className={replay ? "lg:col-span-5" : "lg:col-span-8"}>
-        <div className="border-t border-ink-950/10 pt-5">
-          <h3 className="font-display text-display-s font-semibold text-text-strong">
-            {labTitle ?? <Bar w="w-64" />}
-          </h3>
-          {/* The board line and the switch share one minimum height (a chip's),
-              so the skeleton, a one-board lab and a two-board lab line up. */}
-          {boards.length > 1 ? (
-            <div role="group" aria-label="Board" className="mt-3 flex min-h-10 flex-wrap items-center gap-2 coarse:min-h-11">
-              {boards.map((b) => (
-                <button
-                  key={b.slug}
-                  type="button"
-                  aria-pressed={b.slug === selected}
-                  onClick={() => choose(b.slug)}
-                  className={`${CHIP_BASE} ${b.slug === selected ? CHIP_ON : CHIP_IDLE}`}
-                >
-                  {/* Phones get the short label, so the switch stays one row. */}
-                  <span className="sm:hidden">{shortBoardLabel(b.board_title ?? b.title)}</span>
-                  <span className="hidden sm:inline">{b.board_title ?? b.title}</span>
-                </button>
-              ))}
-            </div>
-          ) : (
-            <p className="mt-3 flex min-h-10 items-center font-mono text-small text-text-muted coarse:min-h-11">
-              {boardTitle ?? <Bar w="w-40" />}
-            </p>
-          )}
-        </div>
-
-        {switchFailed ? (
-          <p className="mt-6 text-body text-text-body">This board did not load here.</p>
-        ) : (
-          <table className="mt-6 w-full border-collapse">
-            <caption className="sr-only">
-              {skeleton
-                ? "Loading lap times"
-                : `${labTitle}, ${boardTitle ?? ""}: the top ${rows.length} of ${total} ${noun}`}
-            </caption>
-            <thead>
-              <tr className="border-b border-ink-950/10 font-mono text-small text-text-muted">
-                <th scope="col" className="w-14 pb-3 pr-4 text-left font-normal">
-                  <span aria-hidden="true">#</span>
-                  <span className="sr-only">Rank</span>
-                </th>
-                <th scope="col" className="w-full pb-3 pr-4 text-left font-normal">
-                  {skeleton ? "" : anonymous ? "Driver" : "Team"}
-                </th>
-                <th scope="col" className="whitespace-nowrap pb-3 pl-4 text-right font-normal">
-                  {skeleton ? "" : (metric?.label ?? "Lap time")}
-                </th>
-                {(extra || skeleton) && (
-                  <th scope="col" className="hidden whitespace-nowrap pb-3 pl-8 text-right font-normal sm:table-cell">
-                    {skeleton ? "" : (extra?.label ?? "")}
-                  </th>
-                )}
-              </tr>
-            </thead>
-            <tbody>
-              {skeleton
-                ? Array.from({ length: limit }, (_, i) => (
-                    <tr key={i} className="border-b border-ink-950/10">
-                      <td className="py-4 pr-4 font-mono text-small tabular-nums text-text-muted">{pad(i + 1)}</td>
-                      <td className="py-4 pr-4 font-display text-lead font-semibold">
-                        <Bar w="w-36" />
-                      </td>
-                      <td className="py-4 pl-4 text-right font-mono text-lead">
-                        <Bar w="w-16" />
-                      </td>
-                      <td className="hidden py-4 pl-8 text-right font-mono text-small sm:table-cell">
-                        <Bar w="w-14" />
-                      </td>
-                    </tr>
-                  ))
-                : rows.map((r) => (
-                    <tr key={r.alias} className="border-b border-ink-950/10">
-                      <td className="py-4 pr-4 font-mono text-small tabular-nums text-text-muted">{pad(r.rank)}</td>
-                      {/* A long team name wraps inside its column instead of
-                          widening the table past a phone's width, where the
-                          page's overflow clip would cut the lap times off
-                          (RACE-03). */}
-                      <th
-                        scope="row"
-                        className="py-4 pr-4 text-left font-display text-lead font-semibold text-text-strong [overflow-wrap:anywhere]"
-                      >
-                        {r.alias}
-                      </th>
-                      <td className="whitespace-nowrap py-4 pl-4 text-right font-mono text-lead tabular-nums text-text-strong">
-                        {formatValue(r.metric, metric?.unit ?? "")}
-                      </td>
-                      {extra && (
-                        <td className="hidden whitespace-nowrap py-4 pl-8 text-right font-mono text-small tabular-nums text-text-muted sm:table-cell">
-                          {formatValue(r.extras?.[extra.key], extra.unit)}
-                        </td>
-                      )}
-                    </tr>
-                  ))}
-            </tbody>
-          </table>
-        )}
+        {boardBlock}
         {replay && <div className="mt-10">{meta}</div>}
       </div>
 
       {replay ? (
-        <div className="lg:col-span-7">
-          <LeaderboardReplay replay={replay} href={replayHref(cfg ?? FALLBACK_CONFIG, replayBoard, replay.compare)} />
-        </div>
+        <div className="lg:col-span-7">{player}</div>
       ) : (
         <div className="lg:col-span-4">{meta}</div>
       )}

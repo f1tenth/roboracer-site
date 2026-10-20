@@ -16,10 +16,15 @@ import PlanLadder from "../components/learn/PlanLadder";
 import CourseOutline from "../components/learn/CourseOutline";
 import TopicFinder from "../components/learn/TopicFinder";
 import CoursesUnavailable from "../components/learn/CoursesUnavailable";
+import Leaderboard from "../components/race/Leaderboard";
 import { LINK, MONO_NOTE, pad2, visibleFeatures } from "../components/learn/learnStyles";
 
 /** Logo box height for a university offering, in px (the About wall's 80). */
 const LOGO_H = 80;
+
+/** Rows of the class leaderboard on the catalog: the podium; /race shows
+ * the board's configured five. */
+const BOARD_ROWS = 3;
 
 /** The plan picker's query parameter: /learn/courses?plan=10-weeks. */
 const PLAN_PARAM = "plan";
@@ -202,12 +207,34 @@ export default function Courses() {
         }
       />
 
-      {/* 01 The three plans: the ladder explains them, the sheet under it
+      {/* 01 The class leaderboard from /race (Cedric, 2026-10-20: "featured
+          at the beginning of the page"): what students of this course do,
+          with the board's replay as the eye-catcher beside the header. The
+          tight top: the stat tiles already end the band with their own
+          overlap, and the full section padding under them read as an empty
+          screen at 1440 (stage 3 review). */}
+      <Section width="page" className="pt-section-tight!" aria-labelledby="courses-board">
+        <Leaderboard
+          feature={{
+            intro: (
+              <SectionHeader
+                index={next()}
+                eyebrow={catalog.leaderboard_heading.kicker}
+                id="courses-board"
+                className="mb-0!"
+                title={catalog.leaderboard_heading.title}
+                lead={catalog.leaderboard_heading.lead}
+              />
+            ),
+            limit: BOARD_ROWS,
+            more: catalog.leaderboard_heading.more,
+          }}
+        />
+      </Section>
+
+      {/* 02 The three plans: the ladder explains them, the sheet under it
           links each to its page. #courses is the header's "Pick a course". */}
-      {/* The tight top: the stat tiles already end the band with their
-          own overlap, and the full section padding under them read as an
-          empty screen at 1440 (stage 3 review). */}
-      <Section width="page" rule className="pt-section-tight!" aria-labelledby="courses">
+      <Section width="page" rule aria-labelledby="courses">
         <SectionHeader
           index={next()}
           eyebrow={catalog.courses_heading.kicker}
