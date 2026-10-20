@@ -29,6 +29,11 @@ export type ReplayConfig = {
   /** One line under the heading. */
   note: string;
   compare: "top3" | "top5";
+  /** A board whose player differs from lab 4's (the bundled posters): its
+   * own posters (paths under public/, as the bundled ones) and the height of
+   * its phone dialog in the board's 440 x 720 window. The catalog's
+   * Spielberg board (docs/ASSET_MANIFEST.md RACE-LB-03/04). */
+  posters?: { wide: string; narrow: string; narrow_height: number };
 };
 
 type MetricInfo = { key: string; label: string; unit: string };

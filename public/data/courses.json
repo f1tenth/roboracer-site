@@ -69,7 +69,12 @@
       "replay": {
         "label": "Top 5, pure pursuit",
         "note": "The best clean laps in the grading simulator, replayed.",
-        "compare": "top5"
+        "compare": "top5",
+        "posters": {
+          "wide": "media/race/race-leaderboard-replay-spielberg-wide.webp",
+          "narrow": "media/race/race-leaderboard-replay-spielberg-narrow.webp",
+          "narrow_height": 696
+        }
       },
       "note": "Written by the stage 4 builder (2026-10-20) from offerings[penn] (ESE 6150) and the /race leaderboard lead (Race.tsx); no new fact. board, rows, replay: Cedric, 2026-10-20 ('the top 5 for Spielberg pure pursuit', his link roboracer-class.github.io/leaderboard/?lab=lab-5-pure-pursuit-spielberg&compare=top5); the board's player follows the car by itself on a track this big (replay.js BIG_TRACK), so no parameter is needed for Follow car. The replay heading names the lab, not the track, because it follows the Levine/Spielberg switch. /race keeps public/data/leaderboard.json."
     },

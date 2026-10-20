@@ -815,7 +815,13 @@ export type CoursesFile = {
        * the replay's heading and comparison (race/leaderboardData BoardPin). */
       board: string;
       rows: number;
-      replay: { label: string; note: string; compare: "top3" | "top5" };
+      replay: {
+        label: string;
+        note: string;
+        compare: "top3" | "top5";
+        /** This board's own replay posters and phone dialog height. */
+        posters?: { wide: string; narrow: string; narrow_height: number };
+      };
     };
     courses_heading: CourseHeading;
     offerings_heading: CourseHeading;

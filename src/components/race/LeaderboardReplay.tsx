@@ -43,6 +43,19 @@ const NARROW: Fit = {
   trackY: "28%",
 };
 
+/** The layout with a board's own posters (ReplayConfig.posters): the wide
+ * dialog is the same size on every board measured; the phone dialog's height
+ * follows the board's own controls. */
+function fitFor(base: Fit, posters: ReplayConfig["posters"]): Fit {
+  if (!posters) return base;
+  if (base === WIDE) return { ...WIDE, poster: { ...WIDE.poster, src: posters.wide } };
+  return {
+    ...NARROW,
+    cropH: posters.narrow_height,
+    poster: { src: posters.narrow, width: NARROW.poster.width, height: posters.narrow_height * 2 },
+  };
+}
+
 /** Below this width (CSS px) the wide player would shrink under two thirds
  * and its type under 9 px: the phone layout instead, never enlarged. */
 const WIDE_FROM = 640;
@@ -214,7 +227,7 @@ export default function LeaderboardReplay({ replay, href }: { replay: ReplayConf
     setRun((n) => n + 1);
   };
 
-  const fit = width !== null && width >= WIDE_FROM ? WIDE : NARROW;
+  const fit = fitFor(width !== null && width >= WIDE_FROM ? WIDE : NARROW, replay.posters);
   const scale = width === null ? 1 : Math.min(1, width / fit.cropW);
   const boxW = fit.cropW * scale;
   const boxH = fit.cropH * scale;
