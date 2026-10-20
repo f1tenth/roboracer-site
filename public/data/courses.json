@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updated": "2026-10-20",
-  "checked": "2026-09-26",
+  "checked": "2026-10-20",
   "note": "One file for /learn/courses, /learn/courses/:id and /learn/teach. Ported from Dhyey Shah's LMS mock (github.com/dhyeyshah/roboracer-lms); every fact comes from the coursekit, the roboracer-content skill or Cedric, and docs/learn/COURSES_CONTENT.md lists what was kept, rewritten and dropped. Pages render only offerings with status published and features with status available (platform ones once meta.lms_url is set).",
   "meta": {
     "lms_url": null,
@@ -397,6 +397,8 @@
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleA/lecture01.html",
             "slides": true,
             "video": true,
+            "video_id": "v6w_zVHL8WQ",
+            "slides_url": "https://docs.google.com/presentation/d/1zfzzjVTbXNIZ75BFtGEwQBJRHlY95VKkFQjJhYfznpI",
             "labs": [
               "lab-1"
             ]
@@ -408,7 +410,9 @@
             "title": "Introduction to ROS 2",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleA/tutorial1.html",
             "slides": true,
-            "video": true
+            "video": true,
+            "video_id": "EU-QaO6xTv4",
+            "slides_url": "https://docs.google.com/presentation/d/1nzzvHQuBJAqdjlPDUl0l2_rU-MAu8jctu1Gt66vlHHM"
           },
           {
             "kind": "lecture",
@@ -418,6 +422,8 @@
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleA/lecture02.html",
             "slides": true,
             "video": true,
+            "video_id": "k4FQ-dZ0Lp8",
+            "slides_url": "https://docs.google.com/presentation/d/1HQSLPLE-fZ3EN-9PyqMd7-ti7JSLKL7qlrouGFEprU0",
             "labs": [
               "lab-2"
             ]
@@ -429,7 +435,8 @@
             "title": "Introduction to the RoboRacer simulator",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleA/tutorial2.html",
             "slides": false,
-            "video": true
+            "video": true,
+            "video_id": "eeV9XHYXMlI"
           },
           {
             "kind": "lecture",
@@ -438,7 +445,9 @@
             "title": "Rigid body transformations",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleA/lecture03.html",
             "slides": true,
-            "video": true
+            "video": true,
+            "video_id": "XwNsJFcSQx4",
+            "slides_url": "https://docs.google.com/presentation/d/1EjfE1qqTyZnc3mkEaEkQWW-xV5lJsn4HRvNcBLVJG6w"
           },
           {
             "kind": "tutorial",
@@ -470,6 +479,8 @@
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleB/lecture04.html",
             "slides": true,
             "video": true,
+            "video_id": "qIpiqhO3ITY",
+            "slides_url": "https://docs.google.com/presentation/d/1O_5WXpdNQkR7d89Zws-nY9YHYhq8oG_l-YkCNiTV8pw",
             "labs": [
               "lab-3"
             ]
@@ -481,7 +492,8 @@
             "title": "Getting to know the car, battery and safety",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleB/tutorial4.html",
             "slides": true,
-            "video": false
+            "video": false,
+            "slides_url": "https://docs.google.com/presentation/d/1UCK95gx2mgJhX8YmabORjkEsaA3jR8FudmndzV3sHY4"
           },
           {
             "kind": "lecture",
@@ -491,6 +503,8 @@
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleB/lecture05.html",
             "slides": true,
             "video": true,
+            "video_id": "5asfD-_Z9x8",
+            "slides_url": "https://docs.google.com/presentation/d/1FfFCUvFKFw_OBWQBlubJjBQ732pGaUKe_vJLXpqb_78",
             "labs": [
               "lab-4"
             ]
@@ -502,7 +516,9 @@
             "title": "Vehicle states and vehicle dynamics",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleB/lecture06.html",
             "slides": true,
-            "video": true
+            "video": true,
+            "video_id": "8zr5NUS05cM",
+            "slides_url": "https://docs.google.com/presentation/d/1dyKDn06MPbjjPVyPGTS7MBuYi2mDyoE-fgn1hM6lf6c"
           }
         ],
         "labs": [
@@ -526,7 +542,9 @@
             "title": "Filtering",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleC/lecture07.html",
             "slides": true,
-            "video": true
+            "video": true,
+            "video_id": "kQi5IGzvr0c",
+            "slides_url": "https://docs.google.com/presentation/d/1qukptv7EQCM9AY_ETyOhsLjPDxadA1zxpBEMbQ8B4IA"
           },
           {
             "kind": "lecture",
@@ -535,7 +553,9 @@
             "title": "Localization: particle filter",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleC/lecture08.html",
             "slides": true,
-            "video": true
+            "video": true,
+            "video_id": "SRBdpoPl57Q",
+            "slides_url": "https://docs.google.com/presentation/d/1hoxNcvdaYTgfU7lC2PPRL_IVfOwLNRD9GfMY1h4T1jQ"
           },
           {
             "kind": "lecture",
@@ -545,6 +565,7 @@
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleC/lecture09.html",
             "slides": true,
             "video": false,
+            "slides_url": "https://docs.google.com/presentation/d/1F92eaq1z98yY0OkGX_mlp3luqChNwqkPMNsiXZcayqM",
             "labs": [
               "lab-5"
             ]
@@ -556,7 +577,8 @@
             "title": "Running slam_toolbox and the particle filter",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleC/tutorial5.html",
             "slides": true,
-            "video": false
+            "video": false,
+            "slides_url": "https://docs.google.com/presentation/d/1NSLurHQVMVvQxcS9Ak_V12aZkTbiSgpLeReDgo2snoU"
           },
           {
             "kind": "lecture",
@@ -567,6 +589,8 @@
             "optional": true,
             "slides": true,
             "video": true,
+            "video_id": "tuQXuTe8KK4",
+            "slides_url": "https://docs.google.com/presentation/d/e/2PACX-1vTJQKzyQOxeJsqH8wkLAE_QtmCWj1FozCkn1_EBZfwOXxwTcyPjRr2OSrjG9rTILg/pub",
             "labs": [
               "lab-5"
             ]
@@ -590,7 +614,9 @@
             "title": "Pure pursuit",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleD/lecture10.html",
             "slides": true,
-            "video": true
+            "video": true,
+            "video_id": "x9s8J4ucgO0",
+            "slides_url": "https://docs.google.com/presentation/d/1MDuQuxs1NZBch-CxDPe7Rneo1BbjWKZxAIbUF93T3_k"
           },
           {
             "kind": "lecture",
@@ -600,6 +626,7 @@
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleD/lecture11.html",
             "slides": true,
             "video": false,
+            "slides_url": "https://docs.google.com/presentation/d/1Q6z5NeoF2kP3zAuVbUPGw7dr8uE4zxZchvR-DGBkW8s",
             "labs": [
               "lab-6"
             ]
@@ -625,7 +652,9 @@
             "title": "Classical perception",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleE/lecture12.html",
             "slides": true,
-            "video": true
+            "video": true,
+            "video_id": "OW6VLFgocDM",
+            "slides_url": "https://docs.google.com/presentation/d/1xkOH_O_t55Tyt321vbhObeMjYezC7rGfnkY1S7WjlNE"
           },
           {
             "kind": "lecture",
@@ -635,6 +664,8 @@
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleE/lecture13.html",
             "slides": true,
             "video": true,
+            "video_id": "_hsDrpZGHtM",
+            "slides_url": "https://docs.google.com/presentation/d/1BkA_adHwjiiIgGW4eW4UaUwkUYhjtwgubvMk6gk2SOE",
             "labs": [
               "lab-9"
             ]
@@ -658,7 +689,8 @@
             "title": "Detection and pose estimation",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture17.html",
             "slides": true,
-            "video": false
+            "video": false,
+            "slides_url": "https://docs.google.com/presentation/d/1oSpFnZb_7pb1eGQSf6hWguI1UWbPNllsweaET4l2qjM"
           },
           {
             "kind": "lecture",
@@ -668,6 +700,7 @@
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture18.html",
             "slides": true,
             "video": false,
+            "slides_url": "https://docs.google.com/presentation/d/1LpPAIEn_P6qRwK6hi82khVdWqADmL23Nhev_t0cEaos",
             "labs": [
               "lab-9"
             ]
@@ -679,7 +712,8 @@
             "title": "Project proposal",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture19.html",
             "slides": true,
-            "video": false
+            "video": false,
+            "slides_url": "https://docs.google.com/presentation/d/1yHPa8g6OKN_rBbTSSBh78RAhun1M_zNsqdhU5tNjnyg"
           },
           {
             "kind": "lecture",
@@ -688,7 +722,8 @@
             "title": "Raceline optimization",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture20.html",
             "slides": true,
-            "video": false
+            "video": false,
+            "slides_url": "https://docs.google.com/presentation/d/e/2PACX-1vTW8y9_8Q5dNpdPWF-rlRD7R9Q4zrkg4QtuoGY_4dcKACpIAHVve-YnYUdjzQWuXQ/pub"
           },
           {
             "kind": "lecture",
@@ -698,6 +733,7 @@
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture21.html",
             "slides": true,
             "video": false,
+            "slides_url": "https://docs.google.com/presentation/d/e/2PACX-1vQ7JoJsHQIr_Mua3P9w2wxH5kosgc4FdDr6Kf940vwfglJ1sZUl3Axlg9rcfnxlXA/pub",
             "labs": [
               "lab-7"
             ]
@@ -709,7 +745,8 @@
             "title": "Moral decision making",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture22.html",
             "slides": true,
-            "video": false
+            "video": false,
+            "slides_url": "https://docs.google.com/presentation/d/1DCj9UqzGHISz4XDN1ZuUdHoB5Kt6VsfNWdaPr7HcmT0"
           },
           {
             "kind": "lecture",
@@ -718,7 +755,8 @@
             "title": "Special topics",
             "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleF/lecture23.html",
             "slides": true,
-            "video": false
+            "video": false,
+            "slides_url": "https://docs.google.com/presentation/d/1mSGs5mL7_dU5h6oRhe0-LwrYicN4Dqe1qR2BNMn8R8g"
           }
         ],
         "labs": [

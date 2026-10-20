@@ -25,6 +25,7 @@ Three pages render from one file:
 | `plans` | The three core offerings (4, 10, 15 weeks). `modules` and `labs` are ids into `outline` | cards on `/learn/courses`, one page each |
 | `offerings` | University offerings. Render only `status: "published"` (Penn today). `plan` points at the plan whose outline the offering follows | cards on `/learn/courses`, one page each |
 | `outline` | The real course: `modules` A to G with their lectures and tutorials (title, URL, `slides` / `video` flags, assigned labs), `labs`, `races`, `final_project`, overview `links` | `/learn/courses/:id` (filter modules by the plan), `/learn/teach` |
+| `outline.modules[].items[].video_id`, `.slides_url` | The recording's YouTube id and the Google Slides deck, from the coursekit page's own embeds (see Lecture media below). Optional: set only where the flag is true and the check passed | the outline's Watch and Slides controls on `/learn/courses` and `/learn/courses/:id` |
 | `learn` | "What you'll learn". Each item has a `module`; a course page shows the items whose module its plan covers | `/learn/courses/:id` |
 | `prerequisites` | Level, what you need, what the course is not | `/learn/courses/:id` |
 | `staff` | Rahul Mangharam. Offerings list staff by id | `/learn/courses/:id` |
@@ -180,6 +181,38 @@ Student FAQ rewrites:
   `f1tenth-teams` workspace, and its Start Here page links
   `http://f1tenth.org/build.html`. Coursekit fixes, not site fixes.
 - License: CC BY-NC-SA 4.0 for all course material (Material Downloads page).
+
+## Lecture media (`video_id`, `slides_url`)
+
+Harvested 2026-10-20 by `docs/learn/tools/harvest_lecture_media.py` (run it
+with `python3 -I` from the repo root and a `--cache` directory outside the
+repo; it changes nothing without `--write`). For every outline item it fetches
+the item's coursekit page (`href`) and reads the embeds the page itself
+carries:
+
+- `video_id`: the `youtube.com/embed/<id>` on the page, only where `video` is
+  true, kept only when YouTube oEmbed answers 200 with a title. 14 of 14:
+  Lectures 1 to 8, 9 (optional), 10, 12, 13 and Tutorials 1 and 2. The
+  videos' own titles use an older numbering ("F1TENTH L09 - Particle
+  Filters" is Lecture 8 here); the site shows the coursekit's titles.
+- `slides_url`: the embedded Google Slides deck as
+  `https://docs.google.com/presentation/d/<id>`, or `.../d/e/<id>/pub` for a
+  deck embedded from its "Publish to the web" copy (Lectures 9 optional, 20
+  and 21), only where `slides` is true and the deck opens on
+  docs.google.com without a sign-in. 24 of 25.
+- **Not set:** Tutorial 3 (ROS 2 and tf2) embeds a deck that answers HTTP 410
+  (deleted); the page shows a dead frame. A coursekit fix, not a site fix.
+  `slides` stays true (the page does embed one); the outline shows no Slides
+  link for it.
+- **One video kept of three:** the Lecture 9 (optional) page embeds the
+  lecture (`tuQXuTe8KK4`, "Scan Matching") and two lab walkthroughs
+  (`WmoOA1XXh_o`, `wnll231Y0LY`, "Scan Matching Lab" Parts I and II);
+  `video_id` holds the lecture.
+
+The run also re-checked every URL in the file and set `checked` to
+2026-10-20: 105 unique URLs, all 200 but the two known exceptions below
+(`www.upenn.edu` refuses a browser user agent from a script and answers a
+plain one; the script retries a 403 that way).
 
 ## Link check
 
