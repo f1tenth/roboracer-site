@@ -271,7 +271,11 @@
       "institutions": [
         "Queen's University"
       ],
-      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.20873v1); resolved through scripts/resolve_paper.py on arXiv 2610.20873 (arXiv API; Semantic Scholar answered 429 all day). Queen's University (Kingston, Canada). The arXiv comment says submitted to IEEE Transactions on Intelligent Vehicles, so the venue stays arXiv until it is accepted. Trains the recovery policy in Gym-Khana, which builds on f1tenth_gym (https://github.com/TeoIlie/Gym-Khana), and deploys it on a physical 1:10-scale F1TENTH car; the PDF names F1TENTH throughout and cites the F1TENTH platform paper. Also a candidate in PR #26 (data/publications.candidates.json, id ilie-2026-race, added 2026-10-19); the first author's thesis \"Race to Recovery: Autonomous Drifting and its Safety Applications\" (QSpace) is a separate candidate there (ilie-2026-race-2). Abstract verbatim from the arXiv API, 2026-10-20."
+      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.20873v1); resolved through scripts/resolve_paper.py on arXiv 2610.20873 (arXiv API; Semantic Scholar answered 429 all day). Queen's University (Kingston, Canada). The arXiv comment says submitted to IEEE Transactions on Intelligent Vehicles, so the venue stays arXiv until it is accepted. Trains the recovery policy in Gym-Khana, which builds on f1tenth_gym (https://github.com/TeoIlie/Gym-Khana), and deploys it on a physical 1:10-scale F1TENTH car; the PDF names F1TENTH throughout and cites the F1TENTH platform paper. Also a candidate in PR #26 (data/publications.candidates.json, id ilie-2026-race, added 2026-10-19); the first author's thesis \"Race to Recovery: Autonomous Drifting and its Safety Applications\" (QSpace) is a separate candidate there (ilie-2026-race-2). Abstract verbatim from the arXiv API, 2026-10-20.",
+      "thumbnail": "/media/research/research-ilie-2026-race-1200.webp",
+      "figure": "/media/research/research-ilie-2026-race-fig-1600.webp",
+      "row_thumbnail": "/media/research/research-ilie-2026-race-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-ilie-2026-race-fig-1600.webp"
     },
     {
       "id": "trisovic-2026-vigor",
@@ -302,7 +306,11 @@
       "institutions": [
         "ETH Zurich"
       ],
-      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.20333v1); resolved through scripts/resolve_paper.py on arXiv 2610.20333 (arXiv API; Semantic Scholar answered 429). Institute for Dynamic Systems and Control, ETH Zurich; author order as on the arXiv record and the PDF title block (Trisovic and Rickenbach share first authorship). Hardware runs on a modified F1TENTH car with an onboard LattePanda Sigma and a RealSense D405 camera as its only exteroceptive sensor; the PDF names F1TENTH and cites the F1TENTH platform paper. Project page https://vigor-mpc.github.io/, code https://github.com/VIGOR-MPC/codebase/. Not in the PR #26 candidates. Abstract verbatim from the arXiv API, 2026-10-20."
+      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.20333v1); resolved through scripts/resolve_paper.py on arXiv 2610.20333 (arXiv API; Semantic Scholar answered 429). Institute for Dynamic Systems and Control, ETH Zurich; author order as on the arXiv record and the PDF title block (Trisovic and Rickenbach share first authorship). Hardware runs on a modified F1TENTH car with an onboard LattePanda Sigma and a RealSense D405 camera as its only exteroceptive sensor; the PDF names F1TENTH and cites the F1TENTH platform paper. Project page https://vigor-mpc.github.io/, code https://github.com/VIGOR-MPC/codebase/. Not in the PR #26 candidates. Abstract verbatim from the arXiv API, 2026-10-20.",
+      "thumbnail": "/media/research/research-trisovic-2026-vigor-1200.webp",
+      "figure": "/media/research/research-trisovic-2026-vigor-fig-1600.webp",
+      "row_thumbnail": "/media/research/research-trisovic-2026-vigor-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-trisovic-2026-vigor-fig-1600.webp"
     },
     {
       "id": "liao-2026-lla",
@@ -331,7 +339,11 @@
       "institutions": [
         "Carnegie Mellon University"
       ],
-      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.03616v1); resolved through scripts/resolve_paper.py on arXiv 2610.03616 (arXiv API; Semantic Scholar answered 429). Carnegie Mellon University (Robotics Institute and ECE). Venue from the arXiv comment: \"accepted in the Sim2Real and Classical Control: From Rigorous Theory to Data-Driven Robotics Workshop at IROS 2026, Pittsburgh\"; no proceedings DOI. Runs on the F1TENTH car (low-friction plastic tires, onboard particle filter, thousands of candidate models on a Jetson Orin Nano); the PDF names F1TENTH and cites the F1TENTH platform paper. Code and videos via https://lla-control.github.io. Also a candidate in PR #26 (data/publications.candidates.json, id liao-2026-lla, added 2026-10-19). Abstract verbatim from the arXiv API, 2026-10-20."
+      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.03616v1); resolved through scripts/resolve_paper.py on arXiv 2610.03616 (arXiv API; Semantic Scholar answered 429). Carnegie Mellon University (Robotics Institute and ECE). Venue from the arXiv comment (accepted in the Sim2Real and Classical Control: From Rigorous Theory to Data-Driven Robotics Workshop at IEEE/RSJ IROS 2026, Pittsburgh); no proceedings DOI. Runs on the F1TENTH car (low-friction plastic tires, onboard particle filter, thousands of candidate models on a Jetson Orin Nano); the PDF names F1TENTH and cites the F1TENTH platform paper. Code and videos via https://lla-control.github.io. Also a candidate in PR #26 (data/publications.candidates.json, id liao-2026-lla, added 2026-10-19). Abstract verbatim from the arXiv API, 2026-10-20.",
+      "thumbnail": "/media/research/research-liao-2026-lla-1200.webp",
+      "figure": "/media/research/research-liao-2026-lla-fig-1600.webp",
+      "row_thumbnail": "/media/research/research-liao-2026-lla-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-liao-2026-lla-fig-1600.webp"
     },
     {
       "id": "cortright-2026-nas",
@@ -392,7 +404,11 @@
       "institutions": [
         "University of Bonn"
       ],
-      "notes": "added 2026-10-20 at Cedric's request (his share link resolves to the arXiv PDF); resolved through scripts/resolve_paper.py on arXiv 2603.07126 (arXiv API, v2 of 2026-05-16; no journal reference or published version on arXiv or OpenAlex; Semantic Scholar answered 429). University of Bonn (Humanoid Robots Lab, Lamarr Institute). Learns a raceline prior from Formula 1 telemetry on 17 tracks and validates it on a self-built RoboRacer 1:10 car; the PDF names RoboRacer throughout and cites the RoboRacer (F1TENTH) survey and the ForzaETH race stack. Code https://github.com/HumanoidsBonn/f1-optimization. Not in the PR #26 candidates. Abstract verbatim from the arXiv API, 2026-10-20."
+      "notes": "added 2026-10-20 at Cedric's request (his share link resolves to the arXiv PDF); resolved through scripts/resolve_paper.py on arXiv 2603.07126 (arXiv API, v2 of 2026-05-16; no journal reference or published version on arXiv or OpenAlex; Semantic Scholar answered 429). University of Bonn (Humanoid Robots Lab, Lamarr Institute). Learns a raceline prior from Formula 1 telemetry on 17 tracks and validates it on a self-built RoboRacer 1:10 car; the PDF names RoboRacer throughout and cites the RoboRacer (F1TENTH) survey and the ForzaETH race stack. Code https://github.com/HumanoidsBonn/f1-optimization. Not in the PR #26 candidates. Abstract verbatim from the arXiv API, 2026-10-20.",
+      "thumbnail": "/media/research/research-shehadeh-2026-efficient-1200.webp",
+      "figure": "/media/research/research-shehadeh-2026-efficient-fig-1600.webp",
+      "row_thumbnail": "/media/research/research-shehadeh-2026-efficient-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-shehadeh-2026-efficient-fig-1600.webp"
     },
     {
       "id": "nguyen-2026-admpcc",
