@@ -256,12 +256,17 @@ export function YouTubeLoop({ videoId, title, url, poster, caption, className = 
   }, [reduced, playing, failed]);
 
   // Posting to the frame before YouTube's page is in it logs an origin error,
-  // so every message waits for the iframe's load event.
+  // so every message waits for the iframe's load event. The "listening" ping
+  // goes to any origin: when the embed is blocked the frame holds an error
+  // page, and a ping aimed at YouTube's origin would log a warning every
+  // 250 ms. It carries nothing but our channel id; commands, sent only once
+  // YouTube's own origin has answered, stay addressed to it.
   const post = useCallback(
     (message: Record<string, unknown>) => {
       const win = iframeRef.current?.contentWindow;
       if (!win || !loaded.current) return;
-      win.postMessage(JSON.stringify({ ...message, id: frameId, channel: "widget" }), YT_ORIGIN);
+      const target = message.event === "listening" ? "*" : YT_ORIGIN;
+      win.postMessage(JSON.stringify({ ...message, id: frameId, channel: "widget" }), target);
     },
     [frameId],
   );
