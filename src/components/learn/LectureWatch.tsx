@@ -217,7 +217,7 @@ export function RecordingStack({ items }: { items: OutlineItem[] }) {
             height={180}
             loading="lazy"
             decoding="async"
-            className={`h-10 w-[4.5rem] rounded-media object-cover shadow-card ring-2 ring-paper-50 lg:h-[3.375rem] lg:w-24 ${n > 0 ? "-ml-5 lg:-ml-7" : ""}`}
+            className={`h-10 w-[4.5rem] rounded-media object-cover shadow-card ring-2 ring-paper-50 lg:h-[4.5rem] lg:w-32 ${n > 0 ? "-ml-5 lg:-ml-12" : ""}`}
           />
         ))}
       </span>
