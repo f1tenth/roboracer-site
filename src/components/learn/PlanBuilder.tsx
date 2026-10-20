@@ -299,7 +299,7 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
           className="sticky bottom-0 z-10 -mx-6 mt-6 flex items-center gap-3 border-t-2 border-rr-violet/40 bg-paper-50 px-6 py-3 font-mono text-small text-text-strong lg:hidden"
         >
           <span className={`shrink-0 rounded-pill px-2.5 py-0.5 font-semibold ${chip}`}>
-            {s.match ? fill(LABELS.weeksOption, { n: s.match.weeks }) : empty ? LABELS.empty : LABELS.custom}
+            {s.match ? fill(LABELS.weeksOption, { n: s.match.weeks }) : empty ? LABELS.emptyShort : LABELS.customShort}
           </span>
           <span className="text-text-body">
             <span className="block">{counts.slice(0, 2).map(countPhrase).join(" · ")}</span>
@@ -354,9 +354,10 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
                   </span>
                 ))}
           </Detail>
-          {/* Up to ten chips: two rows held from md so the card keeps its height. */}
+          {/* Up to ten chips: two rows held from lg, where the card is narrow,
+              so it keeps its height whatever is ticked. */}
           <Detail term={LABELS.detailLabs}>
-            <span className="flex min-h-[1.5rem] flex-wrap content-start gap-1.5 md:min-h-[3.25rem]">
+            <span className="flex min-h-[1.5rem] flex-wrap content-start gap-1.5 lg:min-h-[3.25rem]">
               {s.labs.length
                 ? s.labs.map((l) => (
                     <span key={l.id} className={LAB_CHIP}>
