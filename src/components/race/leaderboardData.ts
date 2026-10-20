@@ -96,6 +96,22 @@ export const FALLBACK_CONFIG: LeaderboardConfig = {
   },
 };
 
+/** A page's own board laid over the config (the catalog, /learn/courses:
+ * Cedric, 2026-10-20, the top 5 on Spielberg, pure pursuit): the board it
+ * pins, the rows it shows and its replay. /race takes leaderboard.json as
+ * it is. */
+export type BoardPin = {
+  /** A board slug from index.json, pinned while it has ranked laps (else
+   * the usual pick: the most recently opened lab with laps). */
+  board: string;
+  rows: number;
+  replay: ReplayConfig;
+};
+
+export function pinBoard(cfg: LeaderboardConfig, pin: BoardPin | undefined): LeaderboardConfig {
+  return pin ? { ...cfg, featured: pin.board, limit: pin.rows, replay: pin.replay } : cfg;
+}
+
 /** The config file, validated; the bundled copy on any failure (HTTP error,
  * the eight-second timeout, a malformed field). Never throws but on abort. */
 export async function loadLeaderboardConfig(signal: AbortSignal): Promise<LeaderboardConfig> {

@@ -809,7 +809,14 @@ export type CoursesFile = {
     hero: CourseHero;
     /** The class leaderboard section under the hero (stage 4) and its link
      * to the race page's board. */
-    leaderboard_heading: CourseHeading & { more: CourseLink };
+    leaderboard_heading: CourseHeading & {
+      more: CourseLink;
+      /** The board this page features (an index.json slug), its rows, and
+       * the replay's heading and comparison (race/leaderboardData BoardPin). */
+      board: string;
+      rows: number;
+      replay: { label: string; note: string; compare: "top3" | "top5" };
+    };
     courses_heading: CourseHeading;
     offerings_heading: CourseHeading;
     /** The catalog's outline section (modules A to G as folds). */

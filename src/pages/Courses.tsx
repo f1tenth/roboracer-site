@@ -23,10 +23,6 @@ import { LINK, MONO_NOTE, pad2, visibleFeatures } from "../components/learn/lear
 /** Logo box height for a university offering, in px (the About wall's 80). */
 const LOGO_H = 80;
 
-/** Rows of the class leaderboard on the catalog: the podium; /race shows
- * the board's configured five. */
-const BOARD_ROWS = 3;
-
 /** The plan picker's query parameter: /learn/courses?plan=10-weeks. */
 const PLAN_PARAM = "plan";
 
@@ -229,7 +225,11 @@ export default function Courses() {
                 lead={catalog.leaderboard_heading.lead}
               />
             ),
-            limit: BOARD_ROWS,
+            pin: {
+              board: catalog.leaderboard_heading.board,
+              rows: catalog.leaderboard_heading.rows,
+              replay: catalog.leaderboard_heading.replay,
+            },
             more: catalog.leaderboard_heading.more,
           }}
         />

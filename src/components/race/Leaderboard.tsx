@@ -13,6 +13,7 @@ import {
   formatValue,
   loadLeaderboardConfig,
   pickFeatured,
+  pinBoard,
   readBoardFile,
   readBoardIndex,
   replayHref,
@@ -20,13 +21,12 @@ import {
   siblingBoards,
   topRows,
   type BoardFile,
+  type BoardPin,
   type BoardSummary,
   type LeaderboardConfig,
 } from "./leaderboardData";
 
 type Phase = "loading" | "ready" | "empty" | "error";
-
-const DEFAULT_LIMIT = 5;
 
 /** A tab that comes back after this long re-reads the board (the board
  * rebuilds every five minutes). */
@@ -50,13 +50,13 @@ function Bar({ w }: { w: string }) {
 
 /** The catalog's variant (/learn/courses): the section's own header in the
  * first cell, the replay beside it from lg (right after it on a phone), the
- * table under the header with fewer rows, and the way on to the race page's
- * board instead of the board's own site. /race leaves it out. */
+ * table under the header, a board of its own, and the way on to the race
+ * page's board instead of the board's own site. /race leaves it out. */
 export type LeaderboardFeature = {
   /** The section header, drawn in the grid's first cell. */
   intro: ReactNode;
-  /** Rows in the table (the config's limit otherwise). */
-  limit: number;
+  /** The board, rows and replay this page shows over leaderboard.json's. */
+  pin: BoardPin;
   /** An internal link that replaces "See the full leaderboard". */
   more: { href: string; label: string };
 };
@@ -149,6 +149,10 @@ export default function Leaderboard({ feature }: { feature?: LeaderboardFeature 
  * under the header, and the link goes to /race#leaderboard.
  */
 function LeaderboardBlock({ feature }: { feature?: LeaderboardFeature }) {
+  // The page's own board over the config (the catalog); read once, as the
+  // config is.
+  const pinRef = useRef(feature?.pin);
+  const fallback = pinBoard(FALLBACK_CONFIG, feature?.pin);
   const [cfg, setCfg] = useState<LeaderboardConfig | null>(null);
   const [phase, setPhase] = useState<Phase>("loading");
   const [boards, setBoards] = useState<BoardSummary[]>([]);
@@ -185,7 +189,7 @@ function LeaderboardBlock({ feature }: { feature?: LeaderboardFeature }) {
       const started = Date.now();
       try {
         if (!config) {
-          config = await loadLeaderboardConfig(signal);
+          config = pinBoard(await loadLeaderboardConfig(signal), pinRef.current);
           if (signal.aborted) return;
           setCfg(config);
         }
@@ -266,7 +270,7 @@ function LeaderboardBlock({ feature }: { feature?: LeaderboardFeature }) {
       });
   };
 
-  const limit = feature?.limit ?? cfg?.limit ?? DEFAULT_LIMIT;
+  const limit = (cfg ?? fallback).limit;
   const href = cfg ? boardHref(cfg, selected ?? undefined) : undefined;
   const summary = boards.find((b) => b.slug === selected);
   const loaded = selected ? files[selected] : undefined;
@@ -279,7 +283,7 @@ function LeaderboardBlock({ feature }: { feature?: LeaderboardFeature }) {
     const notice = (
       <Notice
         text={phase === "error" ? ERROR_TEXT : "No clean laps on the board yet this term."}
-        href={boardHref(cfg ?? FALLBACK_CONFIG, selected ?? undefined)}
+        href={boardHref(cfg ?? fallback, selected ?? undefined)}
       />
     );
     // The catalog keeps its section header over the notice.
@@ -314,8 +318,8 @@ function LeaderboardBlock({ feature }: { feature?: LeaderboardFeature }) {
 
   // The bundled config's replay while the real one loads, so the layout does
   // not change when it arrives; the board shown in the chips, else the pinned one.
-  const replayCfg = (cfg ?? FALLBACK_CONFIG).replay;
-  const replayBoard = selected ?? (cfg ?? FALLBACK_CONFIG).featured ?? undefined;
+  const replayCfg = (cfg ?? fallback).replay;
+  const replayBoard = selected ?? (cfg ?? fallback).featured ?? undefined;
   const replay = replayCfg && (!board || canReplay(board)) ? replayCfg : null;
 
   const meta = (
@@ -451,7 +455,7 @@ function LeaderboardBlock({ feature }: { feature?: LeaderboardFeature }) {
   );
 
   const player = replay && (
-    <LeaderboardReplay replay={replay} href={replayHref(cfg ?? FALLBACK_CONFIG, replayBoard, replay.compare)} />
+    <LeaderboardReplay replay={replay} href={replayHref(cfg ?? fallback, replayBoard, replay.compare)} />
   );
 
   if (feature) {
