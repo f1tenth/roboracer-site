@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import type { ReplayConfig } from "./leaderboardData";
 
@@ -58,6 +58,68 @@ const LINK =
  * (the board reads its data first); the poster stays up that long. */
 const REVEAL_AFTER_MS = 900;
 
+/** A key, wheel, touch or click in this page within this long before focus
+ * enters the frame makes the move the reader's own (Tab into the player). */
+const INPUT_WINDOW_MS = 500;
+/** The page scroll that a focus grab causes lands within a frame or two of
+ * it (20 ms measured); only a scroll that soon is put back. */
+const GRAB_SCROLL_MS = 150;
+
+/**
+ * The board opens its player as a modal dialog with the Play button
+ * autofocused (replay.js), and Chrome scrolls the page to bring a newly
+ * focused element into view, even one inside a cross-origin frame: on
+ * /learn/courses, where the replay sits under the first screen, the page
+ * jumped about 800 px down a second after it opened (Cedric, 2026-10-20).
+ * Neither `inert` nor `visibility: hidden` on the frame stops it (a modal
+ * dialog escapes inertness). So while the frame is up, this puts back the
+ * one page scroll that follows focus moving into the frame by itself: no
+ * key, wheel, touch or click in the page just before it and no pointer over
+ * the replay. Anything the reader does is left alone. The cure is upstream:
+ * the board should not autofocus when it is framed (docs/LEADERBOARD.md).
+ */
+function useFocusGrabGuard(frameRef: RefObject<HTMLIFrameElement | null>, reachedRef: RefObject<boolean>, active: boolean) {
+  useEffect(() => {
+    if (!active) return;
+    let settled = window.scrollY;
+    let grabbedAt = -1;
+    let inputAt = -Infinity;
+    const restore = () => {
+      grabbedAt = -1;
+      window.scrollTo({ top: settled, behavior: "instant" });
+    };
+    const onInput = () => {
+      inputAt = performance.now();
+    };
+    const onBlur = () => {
+      if (document.activeElement !== frameRef.current || reachedRef.current) return;
+      if (performance.now() - inputAt < INPUT_WINDOW_MS) return;
+      grabbedAt = performance.now();
+      if (window.scrollY !== settled) restore();
+    };
+    const onScroll = () => {
+      if (
+        grabbedAt >= 0 &&
+        performance.now() - grabbedAt < GRAB_SCROLL_MS &&
+        document.activeElement === frameRef.current
+      ) {
+        restore();
+        return;
+      }
+      settled = window.scrollY;
+    };
+    const inputs = ["keydown", "wheel", "touchstart", "pointerdown"] as const;
+    inputs.forEach((t) => window.addEventListener(t, onInput, { capture: true, passive: true }));
+    window.addEventListener("blur", onBlur);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      inputs.forEach((t) => window.removeEventListener(t, onInput, { capture: true }));
+      window.removeEventListener("blur", onBlur);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [frameRef, reachedRef, active]);
+}
+
 /**
  * The class board's own replay player, racing the top cars of the board shown
  * in the table (docs/LEADERBOARD.md, "The replay").
@@ -71,7 +133,8 @@ const REVEAL_AFTER_MS = 900;
  * before the capture, manifest RACE-LB-01/02). Under reduced motion nothing
  * loads by itself: the poster stays, with a play disc, until a click (rule 6),
  * and the board's player then opens paused. The link under it opens the same
- * view on the board's site, in every state.
+ * view on the board's site, in every state. The board's own focus grab
+ * never moves the page (useFocusGrabGuard).
  */
 export default function LeaderboardReplay({ replay, href }: { replay: ReplayConfig; href: string }) {
   const measureRef = useRef<HTMLDivElement>(null);
@@ -83,7 +146,11 @@ export default function LeaderboardReplay({ replay, href }: { replay: ReplayConf
   // Bumped by "Restart the replay": a fresh frame, the player open again.
   const [run, setRun] = useState(0);
   const revealTimer = useRef<number | undefined>(undefined);
+  // The pointer has been over the replay (or pressed its poster): from then
+  // on a focus move into the frame is the reader's.
+  const reachedRef = useRef(false);
   const reduced = usePrefersReducedMotion();
+  useFocusGrabGuard(frameRef, reachedRef, on);
 
   // Autoplay: the frame mounts once the box is within 200 px of the viewport
   // (the poster covers its load), never under reduced motion.
@@ -160,7 +227,13 @@ export default function LeaderboardReplay({ replay, href }: { replay: ReplayConf
         <p className="mt-3 flex min-h-10 items-center text-small text-text-muted coarse:min-h-11">{replay.note}</p>
       </div>
 
-      <div ref={measureRef} className="mt-6 w-full">
+      <div
+        ref={measureRef}
+        className="mt-6 w-full"
+        onPointerEnter={() => {
+          reachedRef.current = true;
+        }}
+      >
         {width !== null && (
           <div
             className="relative overflow-hidden bg-paper-100"
