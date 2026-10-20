@@ -197,6 +197,8 @@
       "id": "members",
       "group": "community",
       "value": "3,500+",
+      "value_number": 3500,
+      "suffix": "+",
       "label": "community members",
       "source": "Cedric, 2026-09-26; the same figure as public/data/community.json members_display (render that when it is loaded, so the two never drift)"
     },
@@ -204,6 +206,8 @@
       "id": "universities",
       "group": "community",
       "value": "90+",
+      "value_number": 90,
+      "suffix": "+",
       "label": "universities",
       "source": "roboracer-content skill, Scale statements (keep until Rahul answers)"
     },
@@ -211,6 +215,8 @@
       "id": "countries",
       "group": "community",
       "value": "20+",
+      "value_number": 20,
+      "suffix": "+",
       "label": "countries",
       "source": "roboracer-content skill, Scale statements (keep until Rahul answers)"
     },
@@ -218,6 +224,8 @@
       "id": "modules",
       "group": "course",
       "value": "7",
+      "value_number": 7,
+      "suffix": "",
       "label": "modules",
       "source": "Coursekit sidebar, modules A to G, counted 2026-09-26"
     },
@@ -225,6 +233,8 @@
       "id": "lectures",
       "group": "course",
       "value": "23",
+      "value_number": 23,
+      "suffix": "",
       "label": "lectures",
       "source": "Coursekit module pages, counted 2026-09-26: 23 lecture pages plus 1 optional (Lecture 9, scan matching). Numbering runs 1 to 28: 14 to 16 do not exist and 23 to 25 share one page."
     },
@@ -232,6 +242,8 @@
       "id": "labs",
       "group": "course",
       "value": "10",
+      "value_number": 10,
+      "suffix": "",
       "label": "labs",
       "source": "Coursekit Labs page, counted 2026-10-20: Labs 1 to 10, and the page says '10 labs total' (renumbered 2026-10-19: 7 MPC, 8 MPPI, 9 perception and vision, 10 reinforcement learning). The optional scan-matching lab page is gone (404)."
     },
@@ -239,6 +251,8 @@
       "id": "races",
       "group": "course",
       "value": "3",
+      "value_number": 3,
+      "suffix": "",
       "label": "course races",
       "source": "Coursekit Races page"
     },
@@ -246,6 +260,8 @@
       "id": "recorded",
       "group": "course",
       "value": "12",
+      "value_number": 12,
+      "suffix": "",
       "label": "recorded lectures",
       "source": "Coursekit lecture pages with an embedded YouTube recording, counted 2026-09-26 (12 of 24, Modules A to E; Tutorials 1 and 2 also have one)"
     }

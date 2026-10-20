@@ -580,6 +580,13 @@ export type CourseStat = {
   /** Display string ("3,500+", "7"); never parse it. The "members" stat
    * mirrors community.json members_display: prefer that when it is loaded. */
   value: string;
+  /** The same figure as a number, for the count-up (3500 for "3,500+"); the
+   * count runs only while value_number and suffix spell `value` exactly, and
+   * `value` is what no-JS and reduced motion show. "members" follows
+   * community.json `members` with members_display. */
+  value_number?: number;
+  /** What follows the number in `value` ("+" or ""). */
+  suffix?: string;
   label: string;
   /** Where the figure comes from. Not rendered. */
   source: string;

@@ -7,6 +7,8 @@ import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
 import Reveal from "../components/ui/Reveal";
 import CommunityJoin from "../components/ui/CommunityJoin";
+import { TickerValue } from "../components/ui/StatTicker";
+import { TICK_STAGGER } from "../components/learn/Ledger";
 import NearViewport from "../components/about/NearViewport";
 import LearnLink, { Arrow, WithEmail } from "../components/learn/LearnLink";
 import FaqList from "../components/learn/FaqList";
@@ -198,11 +200,20 @@ export default function Teach() {
           {figures.length > 0 && (
             <div className="mt-12 border-t border-text-on-ink/15 pt-6 lg:mt-auto lg:pt-8">
               <p className="font-mono text-small text-text-on-ink-muted">The course</p>
+              {/* The figures count up as the catalog's tiles do (Cedric,
+                  2026-10-20: every big page's numbers tick up), from each
+                  stat's value_number; the display string is the markup. */}
               <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-5">
-                {figures.map((s) => (
+                {figures.map((s, i) => (
                   <div key={s.id} className="flex flex-col">
                     <dt className="font-mono text-small text-text-on-ink-muted">{s.label}</dt>
-                    <dd className="mt-auto pt-1 font-mono text-display-m font-semibold tabular-nums text-rr-magenta-bright">{s.value}</dd>
+                    <dd className="mt-auto pt-1 font-mono text-display-m font-semibold tabular-nums text-rr-magenta-bright">
+                      {typeof s.value_number === "number" ? (
+                        <TickerValue value={s.value_number} suffix={s.suffix} text={s.value} delay={i * TICK_STAGGER} />
+                      ) : (
+                        s.value
+                      )}
+                    </dd>
                   </div>
                 ))}
               </dl>

@@ -154,11 +154,11 @@ export default function Courses() {
   const [plan, selectPlan] = usePlanParam();
   // The members figure mirrors community.json (COURSES_CONTENT.md): the
   // file's own copy shows until that loads, and if it never does.
-  const [members, setMembers] = useState<string | null>(null);
+  const [members, setMembers] = useState<{ text: string; n: number } | null>(null);
   useEffect(() => {
     let live = true;
     loadCommunity()
-      .then((c) => live && setMembers(c.members_display))
+      .then((c) => live && setMembers({ text: c.members_display, n: c.members }))
       .catch(() => undefined);
     return () => {
       live = false;
@@ -168,7 +168,9 @@ export default function Courses() {
   if (!courses) return <CoursesUnavailable failed={courses === null} />;
 
   const { catalog, meta, teach } = courses;
-  const stats = courses.stats.map((s) => (s.id === "members" && members ? { ...s, value: members } : s));
+  const stats = courses.stats.map((s) =>
+    s.id === "members" && members ? { ...s, value: members.text, value_number: members.n } : s,
+  );
   const hasOfferings = courses.offerings.some((o) => o.status === "published");
   const catalogFeatures = visibleFeatures(courses.features, meta.lms_url).filter((f) => f.pages.includes("catalog"));
   const hasFeatures = catalogFeatures.length > 0;

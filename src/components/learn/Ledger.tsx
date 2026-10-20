@@ -1,4 +1,8 @@
 import type { CourseStat } from "../../lib/data";
+import { TickerValue } from "../ui/StatTicker";
+
+/** The count-up's stagger per tile, in seconds (StatTicker's convention). */
+export const TICK_STAGGER = 0.15;
 
 /** Ink-stroke glyphs (24-unit grid, drawn for this site; never emoji) for
  * the catalog's stat tiles and feature tiles, keyed by stat or feature id. */
@@ -63,10 +67,12 @@ type LedgerProps = {
 /**
  * The catalog's figures as stat tiles riding its photo band: a card per
  * figure with an icon on a tinted square, the course figures in violet, the
- * community's in magenta. The values are the file's display strings
- * ("3,500+"), which the type says never to parse, so they stand as written:
- * the final number is the markup, with or without motion. (The mono list
- * variant the teach page used is gone with its photo header.)
+ * community's in magenta. Each number counts up like the other big pages'
+ * (Cedric, 2026-10-20), 0.15 s after the tile before it, from the stat's
+ * `value_number`; the display string ("3,500+") is the markup, so no-JS and
+ * reduced motion read it as written, and a stat whose number does not spell
+ * its string stands uncounted. (The mono list variant the teach page used is
+ * gone with its photo header.)
  */
 export default function Ledger({ label, stats }: LedgerProps) {
   if (stats.length === 0) return null;
@@ -74,7 +80,7 @@ export default function Ledger({ label, stats }: LedgerProps) {
   // community members"), value first, and the icon can sit beside it.
   return (
     <ul aria-label={label} className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4 xl:grid-cols-8">
-      {stats.map((s) => {
+      {stats.map((s, i) => {
         const community = s.group === "community";
         return (
           <li
@@ -95,7 +101,11 @@ export default function Ledger({ label, stats }: LedgerProps) {
                   community ? "text-rr-magenta-deep" : "text-rr-violet"
                 }`}
               >
-                {s.value}
+                {typeof s.value_number === "number" ? (
+                  <TickerValue value={s.value_number} suffix={s.suffix} text={s.value} delay={i * TICK_STAGGER} />
+                ) : (
+                  s.value
+                )}
               </span>
               <span className="text-small leading-snug text-text-body"> {s.label}</span>
             </p>
