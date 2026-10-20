@@ -167,12 +167,44 @@ export type SpinoffImage = {
   source?: string;
 };
 
-/** One thing that grew out of the car: a company, a product, a team or an
- * initiative (public/data/spinoffs.json, About section "Spinoffs"). `what`
- * and `origin` are our own sentences drafted from the first-party pages in
- * `source` / `evidence`; an `origin` starting with TODO(content) is a question
- * for Cedric and is not rendered (the entry still is). A missing `logo`,
- * `car` or `preview` drops that slot from the feature. */
+/** A YouTube video that takes the feature's main visual slot instead of the
+ * car photo: it plays muted and looped in place once the feature is in view,
+ * with a sound toggle (ui/YouTubeFacade `YouTubeLoop`). */
+export type SpinoffVideo = {
+  youtube_id: string;
+  /** Our own title for the player: the iframe's accessible name. */
+  title: string;
+  /** The video's page on YouTube. */
+  url: string;
+  channel: string;
+  channel_url: string;
+  /** The mono line over the caption, beside the player's controls. */
+  eyebrow: string;
+  /** What the reader is watching, under 10 words. */
+  caption: string;
+  /** Our local copy of the video's thumbnail: shown until the player mounts,
+   * under reduced motion and if the embed fails. */
+  poster: SpinoffImage;
+};
+
+/** A result someone gave us for an entry, checked against our own race data
+ * (news.json, events_map.json, the old race pages). Bookkeeping only: the
+ * rendered sentence lives in `origin`, and a `check` starting with
+ * TODO(content) marks a result left out of it until Cedric decides. */
+export type SpinoffResult = {
+  year: number;
+  place: number;
+  event: string;
+  where: string;
+  check: string;
+};
+
+/** One related platform on /about: a company, a product, a team or an
+ * initiative (public/data/spinoffs.json, About section "Related platforms").
+ * `what` and `origin` are our own sentences drafted from the first-party pages
+ * in `source` / `evidence`; an `origin` starting with TODO(content) is a
+ * question for Cedric and is not rendered (the entry still is). A missing
+ * `logo`, `car`, `video` or `preview` drops that slot from the feature. */
 export type Spinoff = {
   name: string;
   kind: "company" | "product" | "team" | "initiative";
@@ -187,6 +219,10 @@ export type Spinoff = {
   logo?: SpinoffImage | null;
   /** The company's car: the feature's main visual, linking to its page. */
   car?: (SpinoffImage & { name: string; url: string }) | null;
+  /** A video in the main visual slot; it replaces `car` there when both exist. */
+  video?: SpinoffVideo | null;
+  /** Results we were given and how each checks against our data (not rendered). */
+  results?: SpinoffResult[];
   /** Our own 1280x800 capture of the homepage, framed as a browser window. */
   preview?: SpinoffImage | null;
   /** Review state in the JSON only; nothing on the page shows it. */

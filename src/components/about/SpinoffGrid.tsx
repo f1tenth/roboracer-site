@@ -1,4 +1,6 @@
+import { Fragment } from "react";
 import Reveal from "../ui/Reveal";
+import { YouTubeLoop } from "../ui/YouTubeFacade";
 import type { Spinoff, SpinoffImage } from "../../lib/data";
 
 type SpinoffGridProps = {
@@ -17,6 +19,20 @@ const asset = (src: string) => `${import.meta.env.BASE_URL}${src.replace(/^\//, 
 /** An origin still waiting on Cedric reads "TODO(content): ..." in the JSON;
  * the feature leaves the line out rather than print the question. */
 const shown = (text: string | null) => (text && !text.startsWith("TODO(content)") ? text : null);
+
+/** Each piece on one line where it fits: a narrow strip then breaks between
+ * "Ruda Śląska" and "Oct 4, 2026", or between two sentences, not inside one.
+ * A separator glyph stays at the end of the line it closes. */
+const pieces = (parts: string[], glyph = "") =>
+  parts.map((part, i) => (
+    <Fragment key={i}>
+      {i > 0 && " "}
+      <span className="inline-block">
+        {part}
+        {glyph && i < parts.length - 1 && `\u00a0${glyph}`}
+      </span>
+    </Fragment>
+  ));
 
 /** "https://www.quanser.com/" -> "quanser.com", for the address bar. */
 const domainOf = (url: string) => new URL(url).hostname.replace(/^www\./, "");
@@ -64,25 +80,28 @@ function SiteWindow({ name, url, preview }: { name: string; url: string; preview
 }
 
 /**
- * One spinoff as a summarized window onto its website: the company's own car
- * photo is the stage, its homepage rises out of the stage's lower edge as a
- * browser window, and the text says what it makes and, when we have it, how
- * it connects to RoboRacer.
+ * One related platform as a summarized window onto its website: the
+ * company's own car photo, or a video of the car running, is the stage, its
+ * homepage sits under the stage as a browser window, and the text says what
+ * it makes and, when we have it, how it connects to RoboRacer.
  *
  * Layout follows the card's own width (container query), not the viewport:
  * from 40rem the text and the window sit side by side and the window overlaps
- * the photo; narrower (phones, and the two-up tablet grid) it is one column
- * with the window last, so the visual order is the reading order.
+ * the photo (never a video: the window would cover the moving car and the
+ * controls); narrower (phones, and the two-up tablet grid) it is one column
+ * with the window last, so the visual order is the reading order. A card that
+ * spans the whole grid (the odd one out, from 90rem) puts the stage beside
+ * the text instead of above it, so a 16:9 stage never runs the page's width.
  */
 function SpinoffFeature({ spinoff }: { spinoff: Spinoff }) {
-  const { name, kind, label, what, since, url, logo, car, preview } = spinoff;
+  const { name, kind, label, what, since, url, logo, car, video, preview } = spinoff;
   const origin = shown(spinoff.origin);
   return (
     <article className="group/feature @container flex h-full min-w-0 flex-col overflow-hidden rounded-card border border-ink-950/10 bg-paper-50">
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col @[90rem]:grid @[90rem]:grid-cols-2">
         {/* The heading comes first in the DOM; the photo is moved above it
             with `order`, so a screen reader meets the name before the car. */}
-        <div className="order-2 flex flex-1 flex-col gap-6 p-5 sm:p-6 @[40rem]:grid @[40rem]:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] @[40rem]:items-start @[40rem]:gap-x-8">
+        <div className="order-2 flex flex-1 flex-col gap-6 p-5 sm:p-6 @[40rem]:grid @[40rem]:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] @[40rem]:items-start @[40rem]:gap-x-8 @[90rem]:col-start-2 @[90rem]:row-start-1">
           <div className="flex h-full min-w-0 flex-col">
             <p className="font-mono text-eyebrow tracking-normal text-text-muted">
               {label ?? kind}
@@ -112,15 +131,15 @@ function SpinoffFeature({ spinoff }: { spinoff: Spinoff }) {
             {/* Under the text at one rhythm on every card, not pushed to the
                 card's foot: a card without the origin line left 7rem of
                 blank above its link. */}
-            {car && (
+            {(car || video) && (
               <p className="pt-6 text-small">
                 <a
-                  href={car.url}
+                  href={car ? car.url : video?.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`inline-block font-semibold text-text-strong ${TAP} ${LINK}`}
                 >
-                  See the {car.name}
+                  {car ? `See the ${car.name}` : "Watch the lap on YouTube"}
                   <span aria-hidden="true">&nbsp;&#8599;</span>
                   <span className="sr-only"> (opens in a new tab)</span>
                 </a>
@@ -128,14 +147,38 @@ function SpinoffFeature({ spinoff }: { spinoff: Spinoff }) {
             )}
           </div>
           {preview && (
-            // From 40rem the window climbs 4.5rem into the photo above it.
-            <Reveal delay={0.15} className="relative z-10 @[40rem]:-mt-24">
+            // From 40rem the window climbs 6rem into the photo above it; not
+            // into a video, and not when the stage sits beside it.
+            <Reveal
+              delay={0.15}
+              className={`relative z-10 ${video ? "" : "@[40rem]:-mt-24 @[90rem]:mt-0"}`}
+            >
               <SiteWindow name={name} url={url} preview={preview} />
             </Reveal>
           )}
         </div>
-        {car && (
-          <div className="order-1 aspect-[3/2] overflow-hidden @[40rem]:aspect-[16/9] border-b border-ink-950/10 bg-paper-100">
+        {video ? (
+          // The video is the stage: it plays muted in place, and the line
+          // beside its controls says what the reader is watching.
+          <YouTubeLoop
+            className="order-1 border-b border-ink-950/10 @[90rem]:col-start-1 @[90rem]:row-start-1 @[90rem]:border-r @[90rem]:border-b-0"
+            videoId={video.youtube_id}
+            title={video.title}
+            url={video.url}
+            poster={video.poster}
+            caption={
+              <>
+                <p className="font-mono text-eyebrow tracking-normal text-text-muted">
+                  {pieces(video.eyebrow.split(" · "), "·")}
+                </p>
+                <p className="mt-1 text-small font-semibold text-text-strong">
+                  {pieces(video.caption.split(/(?<=\.) /))}
+                </p>
+              </>
+            }
+          />
+        ) : car && (
+          <div className="order-1 aspect-[3/2] overflow-hidden @[40rem]:aspect-[16/9] border-b border-ink-950/10 bg-paper-100 @[90rem]:col-start-1 @[90rem]:row-start-1 @[90rem]:border-r @[90rem]:border-b-0">
             <img
               src={asset(car.src)}
               alt={car.alt}
@@ -153,14 +196,15 @@ function SpinoffFeature({ spinoff }: { spinoff: Spinoff }) {
 }
 
 /**
- * The spinoff features on /about, from public/data/spinoffs.json `entries`
- * (the `candidates` there wait for Cedric). Two across from `desktop:`,
- * stacked on `compact:` (a phone either way round).
+ * The related-platform features on /about, from public/data/spinoffs.json
+ * `entries` (the `candidates` there wait for Cedric). Two across from
+ * `desktop:`, stacked on `compact:` (a phone either way round); an odd last
+ * entry spans both columns rather than leave half a row empty.
  */
 export default function SpinoffGrid({ spinoffs }: SpinoffGridProps) {
   if (spinoffs.length === 0) return null;
   return (
-    <Reveal stagger className="grid gap-6 desktop:grid-cols-2">
+    <Reveal stagger className="grid gap-6 desktop:grid-cols-2 desktop:[&>*:last-child:nth-child(odd)]:col-span-2">
       {spinoffs.map((s) => (
         <SpinoffFeature key={s.name} spinoff={s} />
       ))}
