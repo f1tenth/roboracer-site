@@ -90,8 +90,10 @@ function Row({ icon, term, children }: { icon: keyof typeof GLYPHS; term: string
 
 function NotFound({ courses }: { courses: CoursesFile }) {
   const nf = courses.course.not_found;
+  // As tall as the loading placeholder it replaces, so the footer does not
+  // jump up into view when the file arrives (CLS 0.26 at 768 before).
   return (
-    <div className="pt-nav">
+    <div className="min-h-[100svh] pt-nav">
       <LearnHeader
         id="course-title"
         crumbs={[
