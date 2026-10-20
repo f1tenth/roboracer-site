@@ -562,3 +562,11 @@ Nothing is committed: the course outline on `/learn/courses` and `/learn/courses
 | id | file | type | dims | size | content | source | credit | permission | used by |
 |---|---|---|---|---|---|---|---|---|---|
 | CO-01 | `https://i.ytimg.com/vi/<video_id>/mqdefault.jpg` (srcset adds `hqdefault.jpg`, 480x360 letterboxed, cropped back to 16:9 by object-cover) | jpg, hotlinked | 320x180 | about 10 to 20 KB each | the lecture's title slide (Penn Engineering / F1TENTH Autonomous Racing template, lecturer's photo); Tutorial 2 shows its first content slide | YouTube's own thumbnail of each of the 14 coursekit recordings (12 lectures, Tutorials 1 and 2) | xLAB for Safe Autonomous Systems (oEmbed `author_name` of all 14) | project's own channel; embed face of its own public video | `CourseOutline.tsx` via `LectureWatch.tsx` (`LectureThumb`, `RecordingStack`) |
+
+## Courses: the /learn/teach photo header (revamp/courses-teach, 2026-10-20)
+
+Cedric, 2026-10-20 (relayed by the stage-2 orchestrator): the course pages must stand out, with pictures. No new file: an existing site photo, reused as is (1200x750, no re-encode, no upscaling in the file; the header shows it `object-cover` under an ink scrim, so no text sits on the bare photo).
+
+| id | file | type | dims | size | content | source | credit | permission | used by |
+|---|---|---|---|---|---|---|---|---|---|
+| U3-01 | `public/media/platform/platform-learn-1200.webp` | webp | 1200x750 | 79 KB | two students on the floor at ICRA 2026 fitting the wheels on a car | existing file, provenance row V3-18 (`Felix Jahncke/P1022961.JPG`, 16/10 crop); row V3-19 names the same path for an older RViz frame that the file no longer holds | Photo: Felix Jahncke | granted (as V3-18) | `src/pages/Teach.tsx` header (`HERO_PHOTO`), eager with `fetchpriority="high"` as the page's first view, width and height set |
