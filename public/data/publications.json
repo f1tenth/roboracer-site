@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-21",
+  "updated": "2026-10-20",
   "scholar_query_url": "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=",
   "tags": [
     {
@@ -242,6 +242,177 @@
       "featured_order": 8,
       "row_thumbnail": "/media/research/research-elgouhary-2026-learning-row-320.webp",
       "row_thumbnail_large": "/media/research/research-elgouhary-2026-learning-fig-1600.webp"
+    },
+    {
+      "id": "ilie-2026-race",
+      "title": "Race to Recovery: Designing Advanced Safety Systems for Autonomous Driving via Learning Autonomous Racing",
+      "authors": [
+        "Teodor Ilie",
+        "Kleber Cabral",
+        "Sidney Givigi"
+      ],
+      "year": 2026,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "reinforcement-learning",
+        "safety",
+        "sim-to-real"
+      ],
+      "featured": true,
+      "status": "published",
+      "added": "2026-10-20",
+      "source": "arxiv",
+      "arxiv": "2610.20873",
+      "url": "https://arxiv.org/abs/2610.20873",
+      "pdf": "https://arxiv.org/pdf/2610.20873",
+      "abstract": "Vehicles that lose control at the handling limit through icing, hydroplaning, or an abrupt evasive maneuver fall outside the operating envelope of production safety systems such as electronic stability control, which focus on preventing instability rather than recovering from it. Expert drivers regain authority in these conditions by drifting. Existing autonomous recovery approaches are validated on idealized scenarios, define \"recovered\" states empirically and inconsistently, or rely on offline-planned trajectories rather than acting online. We address these gaps by first training a racing policy with reinforcement learning that learns drifting as a time-optimal maneuver, then adapting it to recovery through continued training with a minimum-time reward. We define recovery relative to a phase-plane-grounded stable equilibrium and introduce Gym-Khana for controller training and evaluation. Across 294 initial loss-of-control states, the transferred policy improves recovery by 186.8% over a Stanley path tracker and outperforms both a nonlinear model predictive controller and a recovery-only policy trained from scratch, while also recovering faster on states the baseline can already handle. An ablation shows that racing pretraining, rather than broader initial-state exposure alone, drives this gain. Deployed on a physical 1:10-scale F1TENTH vehicle using system identification, actuator-lag modelling, and domain randomization, the transferred policy outperforms Stanley on every tested loss-of-control state, including recovering 50% of the time from a hard state the baseline never recovers from.",
+      "institutions": [
+        "Queen's University"
+      ],
+      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.20873v1); resolved through scripts/resolve_paper.py on arXiv 2610.20873 (arXiv API; Semantic Scholar answered 429 all day). Queen's University (Kingston, Canada). The arXiv comment says submitted to IEEE Transactions on Intelligent Vehicles, so the venue stays arXiv until it is accepted. Trains the recovery policy in Gym-Khana, which builds on f1tenth_gym (https://github.com/TeoIlie/Gym-Khana), and deploys it on a physical 1:10-scale F1TENTH car; the PDF names F1TENTH throughout and cites the F1TENTH platform paper. Also a candidate in PR #26 (data/publications.candidates.json, id ilie-2026-race, added 2026-10-19); the first author's thesis \"Race to Recovery: Autonomous Drifting and its Safety Applications\" (QSpace) is a separate candidate there (ilie-2026-race-2). Abstract verbatim from the arXiv API, 2026-10-20. Featured at Cedric's request (2026-10-20).",
+      "thumbnail": "/media/research/research-ilie-2026-race-1200.webp",
+      "figure": "/media/research/research-ilie-2026-race-fig-1600.webp",
+      "row_thumbnail": "/media/research/research-ilie-2026-race-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-ilie-2026-race-fig-1600.webp"
+    },
+    {
+      "id": "trisovic-2026-vigor",
+      "title": "VIGOR-MPC: Vision-Guided Objective Regulation MPC",
+      "authors": [
+        "Jelena Trisovic",
+        "Rahel Rickenbach",
+        "Marek Landert",
+        "Panagiotis Minos",
+        "Melanie N. Zeilinger"
+      ],
+      "year": 2026,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "control-mpc",
+        "perception-estimation"
+      ],
+      "featured": true,
+      "status": "published",
+      "added": "2026-10-20",
+      "source": "arxiv",
+      "arxiv": "2610.20333",
+      "url": "https://arxiv.org/abs/2610.20333",
+      "pdf": "https://arxiv.org/pdf/2610.20333",
+      "abstract": "Controlling an agent in an environment solely perceived through onboard vision is challenging: perception yields noisy, variable-length, and partially occluded context, while onboard compute is shared between perception and control, limiting the planning horizon executable in real time. We propose VIGOR-MPC, a modular student-teacher framework, agnostic to the perception pipeline, which addresses reference tracking across navigation tasks by distilling a privileged, field-of-view-aware long-horizon MPC into a computationally lightweight short-horizon MPC whose cost parameters are determined online from vision. The teacher operates in simulation with full state knowledge and a multi-trajectory formulation that guarantees the agent can stay within its field of view. The student observes only the noisy, occluded context produced by a perception module and learns, via a multi-level recurrent mapping, to infer cost parameters that aim to recover the teacher's behavior despite missing information. We evaluate VIGOR-MPC on vision-based autonomous racing in simulation and on hardware. Using only onboard perception of the track, VIGOR-MPC generalizes to tracks unseen during training and approaches the lap times of the privileged long-horizon teacher while reducing per-step computation by over 90%.",
+      "institutions": [
+        "ETH Zurich"
+      ],
+      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.20333v1); resolved through scripts/resolve_paper.py on arXiv 2610.20333 (arXiv API; Semantic Scholar answered 429). Institute for Dynamic Systems and Control, ETH Zurich; author order as on the arXiv record and the PDF title block (Trisovic and Rickenbach share first authorship). Hardware runs on a modified F1TENTH car with an onboard LattePanda Sigma and a RealSense D405 camera as its only exteroceptive sensor; the PDF names F1TENTH and cites the F1TENTH platform paper. Project page https://vigor-mpc.github.io/, code https://github.com/VIGOR-MPC/codebase/. Not in the PR #26 candidates. Abstract verbatim from the arXiv API, 2026-10-20. Featured at Cedric's request (2026-10-20).",
+      "thumbnail": "/media/research/research-trisovic-2026-vigor-1200.webp",
+      "figure": "/media/research/research-trisovic-2026-vigor-fig-1600.webp",
+      "row_thumbnail": "/media/research/research-trisovic-2026-vigor-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-trisovic-2026-vigor-fig-1600.webp"
+    },
+    {
+      "id": "liao-2026-lla",
+      "title": "LLA-MPC on Embedded Hardware: Rapid Adaptive Control with Thousands of Parallel Models",
+      "authors": [
+        "Henry Z. Liao",
+        "Maitham F. AL-Sunni",
+        "John M. Dolan"
+      ],
+      "year": 2026,
+      "venue": "IROS 2026 Workshop on Sim2Real and Classical Control: From Rigorous Theory to Data-Driven Robotics",
+      "venue_short": "IROS 2026 Workshop",
+      "type": "workshop",
+      "tags": [
+        "control-mpc",
+        "sim-to-real"
+      ],
+      "featured": true,
+      "status": "published",
+      "added": "2026-10-20",
+      "source": "arxiv",
+      "arxiv": "2610.03616",
+      "url": "https://arxiv.org/abs/2610.03616",
+      "pdf": "https://arxiv.org/pdf/2610.03616",
+      "abstract": "We present a generalized implementation of Look-Back and Look-Ahead Adaptive Model Predictive Control (LLA-MPC), a learning-free framework for real-time, rapid adaptive system identification and control. The original formulation was demonstrated only in simulation, for autonomous racing with a fixed model structure. Our implementation has modular dynamics and integrators, and we validate it on the F1TENTH platform under constrained computation and noisy state estimation. The system identifies tire parameters online by evaluating thousands of candidate models in real time on an embedded computer. Experiments with low-friction tires across changing surfaces show that LLA-MPC completes high-speed tracking tasks where a fixed nominal model fails. Code, videos, and our related work are available at: https://lla-control.github.io.",
+      "institutions": [
+        "Carnegie Mellon University"
+      ],
+      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.03616v1); resolved through scripts/resolve_paper.py on arXiv 2610.03616 (arXiv API; Semantic Scholar answered 429). Carnegie Mellon University (Robotics Institute and ECE). Venue from the arXiv comment (accepted in the Sim2Real and Classical Control: From Rigorous Theory to Data-Driven Robotics Workshop at IEEE/RSJ IROS 2026, Pittsburgh); no proceedings DOI. Runs on the F1TENTH car (low-friction plastic tires, onboard particle filter, thousands of candidate models on a Jetson Orin Nano); the PDF names F1TENTH and cites the F1TENTH platform paper. Code and videos via https://lla-control.github.io. Also a candidate in PR #26 (data/publications.candidates.json, id liao-2026-lla, added 2026-10-19). Abstract verbatim from the arXiv API, 2026-10-20. Featured at Cedric's request (2026-10-20).",
+      "thumbnail": "/media/research/research-liao-2026-lla-1200.webp",
+      "figure": "/media/research/research-liao-2026-lla-fig-1600.webp",
+      "row_thumbnail": "/media/research/research-liao-2026-lla-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-liao-2026-lla-fig-1600.webp"
+    },
+    {
+      "id": "cortright-2026-nas",
+      "title": "NAS-in-the-Loop: Trajectory-Driven Neural Architecture Search for Safe Autonomous CPS",
+      "authors": [
+        "Zayah Cortright",
+        "Prateek Ganguli",
+        "Tingan Zhu",
+        "Samarjit Chakraborty"
+      ],
+      "year": 2026,
+      "venue": "2026 Forum on Specification & Design Languages (FDL)",
+      "venue_short": "FDL",
+      "type": "conference",
+      "tags": [
+        "safety",
+        "perception-estimation"
+      ],
+      "featured": true,
+      "status": "published",
+      "added": "2026-10-20",
+      "source": "crossref",
+      "doi": "10.1109/fdl71572.2026.11724696",
+      "url": "https://doi.org/10.1109/fdl71572.2026.11724696",
+      "abstract": "Neural Architecture Search (NAS) is commonly formulated as a supervised learning optimization problem where architectures are ranked using prediction accuracy. However, in cyber-physical systems, perception models operate with closedloop controllers, and small estimation errors can propagate into unsafe system behaviors. This paper therefore proposes a closedloop trajectory-level NAS framework for autonomous systems using the F1TENTH platform. Instead of optimizing prediction accuracy, the proposed method calls perception modules directly in simulation and calculates cross-track error as the NAS objective. Experimental results on multiple racing tracks show the trajectory-driven NAS selects modules that reduce normalized composite safety-cost relative to accuracy-driven NAS and handcrafted baselines. The largest individual improvement is a 36.8% reduction in cross-track error relative to the handcrafted baseline mean, representing an additional 13.2% reduction compared to the accuracy-driven NAS. The results support the central premise that neural architectures for autonomous systems should be selected using closed-loop behavioral evaluation rather than standalone prediction accuracy.",
+      "institutions": [
+        "University of North Carolina at Chapel Hill",
+        "Technical University of Munich"
+      ],
+      "notes": "added 2026-10-20 at Cedric's request (IEEE Xplore document 11724696); DOI 10.1109/FDL71572.2026.11724696 read from the Xplore page's embedded metadata, then resolved through scripts/resolve_paper.py (Crossref, OpenAlex). 2026 Forum on Specification & Design Languages (FDL), Rome, pp. 1-7, published on Xplore 2026-10-14. UNC Chapel Hill (Chakraborty also TUM Institute for Advanced Study). Not open access: no PDF, no arXiv version (arXiv title and author search, OpenAlex, web search, 2026-10-20), so the figure is the paper's figure 1 as IEEE Xplore shows it (the 820x202 graphical-abstract GIF, 11724696-fig-1-source-large.gif), supplied by Cedric on 2026-10-20, upscaled 1.95x and letterboxed on paper-50. F1TENTH is named in the abstract (closed-loop NAS of perception modules in F1TENTH simulation, racing tracks); the full text could not be read. Not in the PR #26 candidates (several earlier Chakraborty-group F1TENTH papers are). Abstract verbatim from the IEEE Xplore page, 2026-10-20 (Crossref has none). Featured at Cedric's request (2026-10-20).",
+      "figure": "/media/research/research-cortright-2026-nas-fig-1600.webp",
+      "thumbnail": "/media/research/research-cortright-2026-nas-1200.webp",
+      "row_thumbnail": "/media/research/research-cortright-2026-nas-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-cortright-2026-nas-fig-1600.webp"
+    },
+    {
+      "id": "shehadeh-2026-efficient",
+      "title": "Efficient Trajectory Optimization for Autonomous Racing via Formula-1 Data-Driven Initialization",
+      "authors": [
+        "Samir Shehadeh",
+        "Lukas Kutsch",
+        "Nils Dengler",
+        "Sicong Pan",
+        "Maren Bennewitz"
+      ],
+      "year": 2026,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "raceline-optimization",
+        "planning"
+      ],
+      "featured": true,
+      "status": "published",
+      "added": "2026-10-20",
+      "source": "arxiv",
+      "arxiv": "2603.07126",
+      "url": "https://arxiv.org/abs/2603.07126",
+      "pdf": "https://arxiv.org/pdf/2603.07126",
+      "abstract": "Trajectory optimization is a central component of fast and efficient autonomous racing. However practical optimization pipelines remain highly sensitive to initialization and may converge slowly or to suboptimal local solutions when seeded with heuristic trajectories such as the centerline or minimum-curvature paths. To address this limitation, we leverage expert driving behavior as a initialization prior and propose a learning-informed initialization strategy based on real-world Formula~1 telemetry. To this end, we first construct a multi-track Formula~1 trajectory dataset by reconstructing and aligning noisy GPS telemetry to a standardized reference-line representation across 17 tracks. Building on this, we present a neural network that predicts an expert-like raceline offset directly from local track geometry, without explicitly modeling vehicle dynamics or forces. The predicted raceline is then used as an informed seed for a minimum-time optimal control solver. Experiments on all 17 tracks demonstrate that the learned initialization accelerates solver convergence and significantly reduces runtime compared to traditional geometric baselines, while preserving the final optimized lap time.",
+      "institutions": [
+        "University of Bonn"
+      ],
+      "notes": "added 2026-10-20 at Cedric's request (his share link resolves to the arXiv PDF); resolved through scripts/resolve_paper.py on arXiv 2603.07126 (arXiv API, v2 of 2026-05-16; no journal reference or published version on arXiv or OpenAlex; Semantic Scholar answered 429). University of Bonn (Humanoid Robots Lab, Lamarr Institute). Learns a raceline prior from Formula 1 telemetry on 17 tracks and validates it on a self-built RoboRacer 1:10 car; the PDF names RoboRacer throughout and cites the RoboRacer (F1TENTH) survey and the ForzaETH race stack. Code https://github.com/HumanoidsBonn/f1-optimization. Not in the PR #26 candidates. Abstract verbatim from the arXiv API, 2026-10-20. Featured at Cedric's request (2026-10-20).",
+      "thumbnail": "/media/research/research-shehadeh-2026-efficient-1200.webp",
+      "figure": "/media/research/research-shehadeh-2026-efficient-fig-1600.webp",
+      "row_thumbnail": "/media/research/research-shehadeh-2026-efficient-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-shehadeh-2026-efficient-fig-1600.webp"
     },
     {
       "id": "nguyen-2026-admpcc",

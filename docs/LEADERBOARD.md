@@ -19,6 +19,7 @@ replay" below).
 | The replay beside the table: poster, loads itself near the viewport (click under reduced motion), clipped frame | `src/components/race/LeaderboardReplay.tsx` |
 | Its two posters | `public/media/race/race-leaderboard-replay-{wide,narrow}.webp` |
 | Where the board lives, what to feature, the replay's copy (data, not code) | `public/data/leaderboard.json` |
+| The catalog's board (section 01 of `/learn/courses`): its own board, rows, replay and posters over the config | `public/data/courses.json` `catalog.leaderboard_heading`, `Leaderboard`'s `feature` prop, `BoardPin` in `leaderboardData.ts`, posters `race-leaderboard-replay-spielberg-{wide,narrow}.webp` |
 
 **Why at the end of /race.** The page answers a competitor's questions in
 order: how to enter, what runs this season, the history, who races. The class
@@ -266,6 +267,53 @@ have it stay on follow the gap:
   the poster moves focus to the frame; Tab walks the player's controls and
   leaves the frame for the page (no trap).
 
+## On /learn/courses (2026-10-20, PR #24 stage 4)
+
+- **Where.** Section 01 of the catalog, right after the hero (Cedric,
+  2026-10-20: the board from `/race` "featured at the beginning of the
+  page"). `Leaderboard` takes a `feature` prop there: the page's section
+  header in the grid's first cell, the replay beside it from lg (before the
+  table on phones), the table under the header, and "More lap times on the
+  race page" to `/race#leaderboard` instead of the board's own site. `/race`
+  passes nothing and is unchanged.
+- **Which board.** Cedric, 2026-10-20: "the top 5 for Spielberg pure
+  pursuit", his link `?lab=lab-5-pure-pursuit-spielberg&compare=top5`. A
+  `BoardPin` (board slug, rows, replay) from `courses.json` is laid over the
+  loaded config before the featured board is picked (`pinBoard()`), so the
+  pick, the Levine / Spielberg switch, the skeleton and the fallbacks all
+  work as on `/race`. If the Spielberg board ever has no ranked lap, the
+  usual rule takes over (the most recently opened lab with laps).
+- **Follow car.** The board has no URL parameter for it: its player opens
+  following the watched car whenever the track is over 30 m across
+  (`replay.js` `BIG_TRACK`), which Spielberg is. Checked in the frame:
+  `.rr-follow` has `aria-pressed="true"` at 1440 and 390, five cars in the
+  standings. Lab 4's hallway track opens on the whole track, as before.
+- **Posters.** RACE-LB-03/04, the RACE-LB-01 recipe on the Spielberg board.
+  Its phone dialog is 402 x 696 (lab 4's is 402 x 647, fewer controls), so
+  a replay config may carry `posters: { wide, narrow, narrow_height }` and
+  `LeaderboardReplay` crops the phone layout to that height
+  (`fitFor()`); without it the bundled lab 4 posters and sizes apply.
+- **The page scrolled itself to the board** (Cedric, 2026-10-20). Cause: the
+  board's player opens as a modal `<dialog>` with its Play button
+  autofocused (`replay.js`), and Chrome scrolls the embedding page to bring a
+  newly focused element into view, even inside a cross-origin frame. On
+  `/race` the frame mounts only once the reader is near it, so the nudge was
+  small; on the catalog it mounts at load under the first screen, and the
+  page jumped about 800 px a second after opening. Neither `inert` nor
+  `visibility: hidden` on the frame stops it (a modal dialog escapes
+  inertness; tested). Old-style headless Chromium does not reproduce it at
+  all; Playwright with `channel="chromium"` (new headless) does.
+  `useFocusGrabGuard` in `LeaderboardReplay` now puts back the one page
+  scroll that follows focus entering the frame without a Tab or a press in
+  the page and without the pointer over the replay, before it is painted (a
+  requestAnimationFrame sampler never sees the jumped offset, nine runs at
+  three window sizes), and hands focus back to the page (the reader's last
+  focus, else the top), so the first Tab starts at the top rather than
+  inside the player. A wheel over the replay, a Tab into it and a click in
+  it are left alone; on `/race` a reader paging down with Space keeps
+  paging the site, not the player. This is a workaround: question 6 (b)
+  below, no autofocus when framed, is the cure.
+
 ## QA (2026-09-24, dev server on 4194)
 
 The replay's QA (2026-09-25) is `docs/qa/p3-leaderboard.md`.
@@ -307,7 +355,9 @@ The replay's QA (2026-09-25) is `docs/qa/p3-leaderboard.md`.
 6. **Board-side fixes (the leaderboard repo, not this site).** (a) Commit
    `docs/data/archive/index.json` as `{"terms": []}` so the board stops
    logging a 404; (b) skip `autofocus` on the player's Play when framed
-   (`window.top !== window`); (c) best, an `?embed=1` mode that hides the
+   (`window.top !== window`): no longer only console noise, it scrolled
+   `/learn/courses` on its own until the site's guard (section "On
+   /learn/courses"); (c) best, an `?embed=1` mode that hides the
    board and opens the player non-modal, without Close, filling its window:
    the section could then drop its measured clip. Recommended: (a) and (b) now,
    (c) when someone next touches the player.
@@ -315,3 +365,8 @@ The replay's QA (2026-09-25) is `docs/qa/p3-leaderboard.md`.
    track above the readout, standings and controls, 550 px tall at 390 wide).
    Keep it inline, or on phones show the poster linking out to the board?
    Recommended: keep it inline, as briefed.
+
+### The replay frame waits for the reader (2026-10-20, later)
+
+Cedric still saw /learn/courses move down by itself with the focus-grab guard in place (headless Chrome blocks the cross-origin focus, so the earlier checks could not reproduce his Chrome). The frame now mounts only when both hold: the reader has scrolled the page (wheel, touch, keyboard, or `scrollY` past 24 px) and at least 60% of the replay box is in the viewport (`LeaderboardReplay.tsx`, the autoplay effect). A box that is mostly in view gives the player's focus nothing to scroll to, and a page that has not been scrolled never gets a frame. Checked headed and headless: no frame and `scrollY` 0 for six seconds without input; after a wheel scroll the frame mounts and the page stays put. The guard stays as a second net.
+
