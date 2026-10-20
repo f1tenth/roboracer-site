@@ -136,11 +136,11 @@ under reduced motion state changes are instant.
 | Sign in, register, role cards, Enroll, "My courses", enrolled badge | Fake accounts; there is no course platform (`meta.lms_url` is null) |
 | Theme toggle | One theme site-wide (CLAUDE.md rule 5) |
 | Course assistant chat | Canned answers, two of them wrong in our test; duplicates the FAQ; a floating button competes with the one CTA per viewport. If Cedric wants an assistant, the site's `/chat` widget is the place, as its own decision |
-| Stat count-up | The motion explains nothing (design principle 2) and the values are display strings the type says never to parse; the mono ledger stays static |
+| Stat count-up | The motion explains nothing (design principle 2) and the values are display strings the type says never to parse; the mono ledger stays static. **Overruled by Cedric, 2026-10-20 (stage 4):** the numbers tick up as on every other big page, from `value_number` beside each display string (`TickerValue`) |
 | Grid / list toggle, sort, institution filter | Four courses and one published university: controls without information. The plan picker and topic finder replace them |
 | Hours per lecture, "% of weekly budget", per-plan hours, start and end dates | Invented; the coursekit gives class time only (`COURSES_CONTENT.md`) |
 | Planner uploads, branding preview, grading weight sliders, admin email | Platform-only or internal; nothing to send them to |
-| Gradient pills, gradient card bars, icon tiles, hero gradient text | Design anti-patterns (no gradient buttons, accent as hairline, icons as ink strokes) |
+| Gradient pills, gradient card bars, icon tiles, hero gradient text | Design anti-patterns (no gradient buttons, accent as hairline, icons as ink strokes). **Changed by Cedric, 2026-10-20:** the plan ladder's bars and the plan cards' top rules take the logo gradient, laid along modules A to G (stage 4); buttons and pills stay solid |
 | His hero photo, logo tiles, icons, copy | Rule 8. If a unit wants a picture, it uses a site asset with a manifest row, such as `/media/platform/platform-learn-1200.webp` from `paths.json` |
 
 ## 3. Work breakdown (four units, parallel)

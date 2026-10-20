@@ -23,7 +23,7 @@ Three pages render from one file:
 | `meta` | Contact, Slack, coursekit URLs, license, class time, `lms_url` (null) and the broken slide-request form | all three |
 | `catalog` | Hero and section heads for the catalog | `/learn/courses` |
 | `course` | Headings, the two "About" paragraphs, the two CTAs every course page shares | `/learn/courses/:id` |
-| `stats` | 8 figures, each with `value` (display string), `label`, `group` (`community` or `course`) and `source`. Pick the ones the design wants | `/learn/courses` |
+| `stats` | 8 figures, each with `value` (display string), `value_number` and `suffix` (the same figure for the count-up, 2026-10-20: 3500 and "+" for "3,500+"; the count runs only while they spell `value` exactly, and `value` is what no-JS and reduced motion show), `label`, `group` (`community` or `course`) and `source`. `members` follows `community.json` (`members`, `members_display`) once it loads | `/learn/courses` tiles, `/learn/teach` strip |
 | `plans` | The three core offerings (4, 10, 15 weeks). `modules` and `labs` are ids into `outline` | cards on `/learn/courses`, one page each |
 | `offerings` | University offerings. Render only `status: "published"` (Penn today). `plan` points at the plan whose outline the offering follows | cards on `/learn/courses`, one page each |
 | `outline` | The real course: `modules` A to G with their lectures and tutorials (title, URL, `slides` / `video` flags, assigned labs), `labs`, `races`, `final_project`, overview `links` | `/learn/courses/:id` (filter modules by the plan), `/learn/teach` |
@@ -34,6 +34,7 @@ Three pages render from one file:
 | `faq` | Student logistics, five questions | `/learn/courses/:id` |
 | `features` | ONE list for both pages. `pages` says where each appears | `/learn/courses`, `/learn/teach` |
 | `teach` | Hero (with `pills`, feature ids), `how_it_works` (6 steps + the two portals), `features` head, `lecture_selection` head, `steps` (5-step guide), `recording` tips, `resources`, instructor `faq`, `contact` CTA | `/learn/teach` |
+| `catalog.leaderboard_heading` | Section 01 (stage 4, 2026-10-20): kicker, title, lead (from Penn's offering and the `/race` board's lead, no new fact), `more` (the link to `/race#leaderboard`), and the board it features: `board` (an index.json slug, `lab-5-pure-pursuit-spielberg`), `rows` (5), `replay` (heading, note, `compare`, and `posters` with the phone dialog's `narrow_height`). Cedric chose the board; see `docs/LEADERBOARD.md`, "On /learn/courses" | `/learn/courses` |
 | `catalog.stats_label`, `catalog.picker`, `catalog.ladder`, `catalog.finder` | Interface labels (2026-10-20): the stat tiles' list name; the plan picker and its summary (with the live-region sentence); the plan cards' chips and "Selected"; the topic finder (field, hint, counts, the miss panel) | `/learn/courses` |
 | `course.ui` | Interface labels: the tab names and the screen-reader nouns after their counts, the chips' list name, the two prerequisite card labels ("You need", "Not covered"), Copy link and its two status lines | `/learn/courses/:id` |
 | `outline.ui` | Interface labels: Expand / Collapse all, the meter and module chips, the done box, the local-storage notes, Clear, and the Watch, Close, Slides and player texts | the outline on `/learn/courses` and `/learn/courses/:id` |

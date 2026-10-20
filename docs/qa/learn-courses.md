@@ -1,27 +1,30 @@
 # QA: the courses pages (PR #24, `revamp/learn-courses`)
 
-The one QA report for PR #24. Last run 2026-10-20 (stage 3, taskmap n382) on Cedric's dev server
+The one QA report for PR #24. Last run 2026-10-20 (stage 4, the catalog, taskmap n394; stage 3, taskmap n382, for the other pages) on Cedric's dev server
 (port 4193, worktree `../roboracer-site-wt/learn-courses`), Python Playwright (Chromium) and
 axe-playwright-python. History: the first port of Dhyey Shah's LMS mock (2026-09-27, the old
 version of this report is in git history), a forward to his site (PR #25, undone 2026-10-20), the
 interactivity study (`docs/learn/COURSES_INTERACTIVITY.md`), four stage 2 build units (appendix),
-and this stage 3 review and polish (`docs/qa/courses-review.md`).
+and this stage 3 review and polish (`docs/qa/courses-review.md`), then stage 4, the catalog's own
+round (section "Stage 4" below).
 
-**Catalog QA is pending stage 4.** Cedric reviewed the merged pages on 4193 on 2026-10-20: the
-course pages are good (4 weeks especially); the catalog gets another round (the class leaderboard
-from `/race` near the top, the stat numbers counting up as on the other big pages, the plan bars in
-the logo gradient, a reworked "Pick your length"). The catalog was checked here only for what
-stage 3 changed (hero photo, the gap under the tiles) and for the merge (every control on one page);
-its full QA comes with stage 4.
+**Catalog: stage 4 done and checked.** Cedric reviewed the merged pages on 4193 on 2026-10-20: the
+course pages are good (4 weeks especially); the catalog got another round: the class leaderboard
+at the top (Spielberg, pure pursuit, top 5), the numbers counting up, the plan bars in the logo
+gradient, "Pick your length" reworked as an ink centrepiece, and the page no longer scrolls itself
+to the board.
 
 ## What the pages are now
 
 - **`/learn/courses`** (`Courses.tsx`): a photo band (the ICRA 2026 car at speed, right 62% from
-  lg) with the headline's last words in the logo gradient and eight stat tiles riding its edge; 01
-  "Pick your length": a plan picker (4, 10, 15 weeks, `?plan=`), the plan ladder over modules A to
-  G, a summary with the one solid CTA, three photo cards; 02 Penn as the one published offering; 03
-  the outline with the topic finder above it; 04 what the course gives as icon tiles; 05 teach it;
-  the shared Join block.
+  lg) with the headline's last words in the logo gradient and eight stat tiles riding its edge that
+  count up on arrival; 01 "Race what you learn": the ESE 6150 board's replay of the top 5 on
+  Spielberg (pure pursuit, Follow car on) beside the header and the top-5 table, a link to
+  `/race#leaderboard`; 02 "Pick your length" on ink: the picker in the header, the ladder with the
+  plan bars in the logo gradient over modules A to G, the summary with the one solid CTA, three
+  photo cards whose top rule is their share of the gradient; 03 Penn as the one published
+  offering; 04 the outline with the topic finder above it; 05 what the course gives as icon tiles;
+  06 teach it; the shared Join block.
 - **`/learn/courses/:id`** (`Course.tsx`; `4-weeks`, `10-weeks`, `15-weeks`, `penn`): a photo
   banner per course with the title in the logo gradient and the facts as chips; four tabs (About,
   Outline, Staff, Logistics) with icons, counts, hash deep links and a sticky bar from lg; a sticky,
@@ -42,6 +45,63 @@ its full QA comes with stage 4.
 - **Routing**: the Learn nav link is current under `/learn/*`; `main.tsx` sends a same-origin
   parent frame to the top level, so a coursekit link to `/learn/courses` from inside the `/learn`
   frame opens the page at the top level.
+
+## Stage 4: the catalog (2026-10-20, taskmap n391 to n394)
+
+Cedric, after seeing the merged pages on 4193: the class leaderboard from `/race` at the beginning
+of the page; every violet number ticking up like a billboard, as on the other big pages; the plan
+bars in the logo gradient ("the more you learn the better"); "Pick your length" with more visual
+appeal. Mid-round, two rulings: the page must not scroll itself down to the leaderboard, and the
+board shown is the top 5 on Spielberg, pure pursuit, with Follow car on.
+
+| commit | what |
+|---|---|
+| `6b5b998` | Section 01 "Race what you learn": `Leaderboard` gains a `feature` prop (the section header in the grid's first cell, the replay beside it from lg and before the table on phones, the link "More lap times on the race page" to `/race#leaderboard`). `/race` unchanged (same 1,080 px section, five rows). Copy in `courses.json` `catalog.leaderboard_heading`, from Penn's offering and the `/race` lead; no new fact |
+| `77966b2` | The eight stat tiles and the teach strip count up: StatTicker's time-mode count is shared as `TickerValue` (1.2 s once fully in view, 0.15 s stagger per tile, width reserved to the final string, mono digits), fed by new `value_number` and `suffix` beside each display string; the count runs only while they spell the string exactly, and the string is the no-JS and reduced-motion text. Members follow `community.json` (`members` 3500, `members_display` "3,500+"). The course pages show no big numbers (only small tab count badges), so nothing changed there. `/research` and `/about` still count |
+| `a4ecace` | `bg-gradient-scale` in `index.css` (an `@utility`): cyan, the logo's magenta at 4/7 (where the 10-week plan ends), violet. Ink twins `LINK_INK` and `INK_NOTE`, `LearnLink on="ink"`, a colour prop on `CourseIcon` |
+| `43e1ad5` | "Pick your length" on ink (`Section variant="ink" edge tight`), because the logo gradient is the logo's ink colouring and its cyan end is 1.9:1 on paper. The picker in the header's action slot; the ladder as the figure: module letters in badges keyed by their colour on the scale (a picked plan's modules fill with it), each plan's bar one gradient over all seven columns clipped to the modules it reaches (4 weeks stays cyan, 10 weeks is the logo's cyan into magenta, 15 weeks runs on into violet), dashed hairlines over the rest, labs and race rows (the picked plan's light up), column guides; the summary ruled under it with the one solid "Open the N-week course"; the plan cards as photo cards on ink (4:3 from lg, on their side 768 to 1023) with the plan's share of the gradient as the top rule (2/7, 4/7, 7/7 of the modules). The bars draw left to right once in view (transform only, 0.15 s apart); under reduced motion they stand drawn. Picked bar full strength, others at 25%; labels at full contrast |
+| `5ad5754`, `e6d0c8c` | **The page scrolled itself to the leaderboard** (Cedric). Cause: the board's player opens as a modal dialog with Play autofocused (`replay.js`), and Chrome scrolls the embedding page to a focus inside a cross-origin frame: about 800 px a second after load, since the frame mounts at load here. `inert` and `visibility: hidden` on the frame do not stop it (tested). `useFocusGrabGuard` puts back the one scroll that follows focus entering the frame without a Tab or a press in the page and without the pointer over the replay, before paint, and hands focus back to the page (the last focus, else the top). Old headless Chromium never reproduced it; new headless (`channel="chromium"`) does, so the checks below use it. The cure is upstream (`docs/LEADERBOARD.md`, question 6 b) |
+| `5669520`, `8010915` | **The catalog's board: top 5, Spielberg, pure pursuit** (Cedric). A `BoardPin` (board slug, rows, replay) from `courses.json` over the loaded config, so the pick, the Levine / Spielberg switch and the fallbacks work as on `/race`, which keeps lab 4. Five rows. Follow car is the player's own default on a track this big (no URL parameter exists); `aria-pressed="true"` read in the frame. Its own posters RACE-LB-03/04 (the RACE-LB-01 recipe; its phone dialog is 696 px tall, not 647, so a replay config may carry `posters.narrow_height`) |
+
+### Checks (stage 4)
+
+New-headless Chromium (`s4-qa.py`, `s4-keys.py`, `s4-scrolltest.py`, `s4-guardcheck.py` in the
+scratchpad), Cedric's dev server on 4193. Catalog states: idle (after 6 s with no input: counters
+finished, board loaded, replay playing), 10 weeks picked with "RRT" in the finder, `?plan=4-weeks`
+restored with "model predictive", "MPC" and "particle", 15 weeks picked with a miss; plus `/learn/teach`
+and `/race`. 1440x900, 768x1024, 390x844.
+
+| check | result |
+|---|---|
+| `scripts/rr.sh check` (lint, `tsc -b`, build) | CHECK OK |
+| axe, 18 states (6 per width) | 0 violations of any impact |
+| Console from site code | none. Third-party only: the board frame's 404 on `data/archive/index.json` and "Blocked autofocusing" (known), and the Join block's YouTube embed "No available adapters." |
+| Failed requests | only the board frame's `data/archive/index.json` |
+| The page moves by itself | never: cold load, reload and a client navigation from `/learn/courses/4-weeks` hold `scrollY` 0 for 6 s at 1440x900, 1440x700, 1280x720, 768x1024 and 390x844; a requestAnimationFrame sampler never sees another offset (nine runs); a wheel over the replay during load still scrolls (960 px) |
+| Focus after load | back on the page (body) at every size; the first Tab goes to the nav, not the player. On `/race` a reader paging down with Space keeps paging the site while the player plays |
+| Board | Lab 5: SLAM and Pure Pursuit, Spielberg selected, top 5 of 14; the frame shows "Top 5 / Spielberg, fastest clean lap", five cars, Follow car pressed, at 1440, 768 and 390. `/race`: lab 4 follow the gap, five rows |
+| Counters | the tiles end on 7, 23, 10, 3, 12, 3,500+, 90+, 20+ (the display strings); 0 to final with the 0.15 s wave; the final strings from the first frame under reduced motion |
+| CLS on load | catalog 0.0002 (1440), 0.0002 to 0.001 (768), 0.0005 (390); teach 0 to 0.0001; `/race` 0.0008 to 0.0028 (font swap in the nav, unchanged code). The tiles reserve their final width; the board draws its skeleton rows and the replay box at its final size before the laps arrive |
+| Finder | "RRT" 2 matches (Lecture 11, Module D), "model predictive" 3, "MPC" 3, "particle" 3, "zzqx" the empty state with the module buttons |
+| `?plan=` | `/learn/courses?plan=4-weeks` restores the pick; the arrow keys move the picker and the address follows (`?plan=10-weeks`) |
+| One h1, overflow | 1 h1; 0 px horizontal overflow in every state |
+| Images | every `img` in `main` has alt, width and height; every one below the first screen is `loading="lazy"` except the shared Join block's 47 post thumbnails, which mount only near the viewport (`NearViewport`) |
+| One solid violet button per viewport | pass in all states (walked in half-viewport steps; the picked segment and "Selected" are spans, selected states) |
+| Reduced motion | catalog and teach at 3 widths: no text invisible, counters final, bars drawn (no transform), the replay a Spielberg poster with a play disc |
+| Keyboard only | catalog at 1440: nav, crumb, Pick a course, Teach the course, then the replay (17 stops inside the player), its two links, the two board chips, the race-page link, the picker (arrow keys pick), Show all three, the three row links, Open the 10-week course, the three card toggles and links: 20 stops in `main`, every one ringed and in view; at 390, 22 stops, the same |
+| Links added | the board's Spielberg and Levine replay links, the Spielberg board JSON, `/race`, the two posters: 200 |
+| Files over 1.5 MB | none; this round adds two WebP posters, 38 KB and 28 KB |
+
+Heights (full page after a walk, Join block and footer included): catalog 9,140 / 11,834 / 14,410
+(1440 / 768 / 390), from 8,279 / 10,269 / 12,671 after stage 3: the leaderboard section is new.
+"Pick your length" is about as tall as before but the figure fills it (1,370 px at 1440, 1,805 at
+768, 2,636 at 390).
+
+Captures (git-ignored, `docs/qa/learn-courses/`, read back): `s4-<state>-<w>.png` full page
+(`catalog`, `catalog-10w-rrt`, `catalog-plan4-mpc`, `catalog-15w-miss`, `teach`, `race`),
+`s4-catalog-<w>-reduced.png`, `s4-teach-<w>-reduced.png`, `s4-replay-playing-<w>.png` (the
+replay in the viewport: full-page captures draw the cross-origin frame blank at 768 and 390),
+`s4-keyboard-picker-<w>.png`, `s4-keyboard-cards-<w>.png`.
 
 ## Stage 3 changes
 
@@ -139,6 +199,25 @@ Git-ignored, in `docs/qa/learn-courses/` of the worktree, all read back:
     now that the form is a 404; the labels the 2026-09-27 build wrote (`catalog.outline_heading`,
     `course.glance_heading`, `course.not_found`, `teach.hero.plans_link`).
 
+From stage 4 (the catalog):
+
+13. **"Pick your length" on ink.** A dark showpiece section on the paper page, because the logo
+    gradient is the logo's ink colouring (its cyan end is 1.9:1 on paper). Keep, or a paper version
+    (the 4-week bar would be pale cyan on white)?
+14. **The leaderboard section's words**: "In class / Race what you learn" and "Penn teaches this
+    course as ESE 6150. Its students race each lab in the grading simulator, and these are their
+    best clean laps, replayed." (ours, from the Penn offering and the `/race` lead). The replay
+    heading says "Top 5, pure pursuit" because it follows the Levine / Spielberg switch.
+15. **"More lap times on the race page"** goes to `/race#leaderboard`, which shows lab 4 (follow
+    the gap), a different board. Fine, or link the board's own Spielberg page instead?
+16. **The board-side fix**: the site's guard works around the player's autofocus; the cure is no
+    autofocus when framed, in `RoboRacer-Class/leaderboard` (`docs/LEADERBOARD.md` question 6).
+    Who can change that repo?
+17. **The cards' top rule** is the plan's share of the modules (2/7, 4/7, 7/7), as the ladder's
+    bars are, not of the weeks (4/15, 10/15, 15/15).
+18. **The outline's "0 of 29 done" meter** is the one violet number that does not count up: it is
+    the reader's own tick count, live. Fine?
+
 ## Appendix: the stage 2 unit notes
 
 Each unit's own QA, decisions and questions (their LABELS lists are now `courses.json` keys):
@@ -151,4 +230,4 @@ Each unit's own QA, decisions and questions (their LABELS lists are now `courses
 
 ## Verdict
 
-Course pages and teach: **ready for Cedric's review on localhost**. Catalog: pending stage 4.
+Course pages, teach and the catalog: **ready for Cedric's review on localhost**.
