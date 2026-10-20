@@ -700,10 +700,54 @@ export type OutlineRace = {
   module: string;
 };
 
+/** Interface labels the course pages render (stage 2 micro-copy, moved out
+ * of the components in stage 3). `{name}` slots are filled at render with
+ * learnStyles' fill(); `note` is bookkeeping and never rendered. */
+type Labels<K extends string> = { [P in K]: string } & { note?: string };
+
+export type PickerLabels = Labels<
+  | "label" | "option" | "clear" | "idle" | "modules" | "labs" | "race" | "races" | "project"
+  | "project_value" | "class_time" | "cta" | "announce" | "announce_labs" | "announce_race"
+  | "announce_races" | "cleared"
+>;
+export type LadderLabels = Labels<"selected" | "weeks" | "modules" | "labs" | "race" | "races" | "chips">;
+export type FinderLabels = Labels<
+  | "label" | "placeholder" | "hint" | "count_one" | "count_many" | "shown" | "more" | "none"
+  | "suggest" | "results" | "in_plans" | "module" | "project"
+>;
+export type CourseUiLabels = Labels<
+  | "tablist" | "facts" | "tab_about" | "tab_outline" | "tab_staff" | "tab_logistics"
+  | "prerequisites_need" | "prerequisites_not_covered" | "copy_link" | "copied" | "copy_failed"
+> & {
+  /** [one, many], for the screen-reader noun after a tab's count. */
+  noun_module: [string, string];
+  noun_person: [string, string];
+  noun_question: [string, string];
+};
+export type OutlineLabels = Labels<
+  | "expand_all" | "collapse_all" | "meter" | "module_done" | "mark" | "done" | "local" | "blocked"
+  | "clear" | "recorded" | "assigns" | "watch" | "close" | "watch_name" | "close_name"
+  | "player_title" | "on_youtube" | "recorded_note" | "slides" | "slides_name" | "recorded_count"
+>;
+export type BuilderLabels = Labels<
+  | "start_legend" | "weeks_option" | "modules_legend" | "module_sr" | "lecture_one" | "lecture_many"
+  | "tutorial_one" | "tutorial_many" | "lab_one" | "lab_many" | "summary_heading" | "matches"
+  | "custom" | "custom_short" | "custom_note" | "empty" | "empty_short" | "empty_note" | "see_plan"
+  | "tutorials" | "detail_modules" | "detail_labs" | "detail_races" | "detail_optional"
+  | "detail_project" | "project_included" | "none" | "email" | "copy" | "share" | "copied"
+  | "link_copied" | "copy_failed" | "share_label" | "stored" | "text_title" | "text_link"
+  | "text_module" | "text_recorded" | "text_material" | "text_license" | "mail_greeting" | "mail_intro"
+> & {
+  /** Blank lines the email asks the sender to fill in. */
+  mail_fields: string[];
+};
+
 /** The real course structure, from the coursekit (source of truth). */
 export type CourseOutline = {
   source: string;
   links: CourseLink[];
+  /** The outline's controls and notes (Expand all, ticks, Watch). */
+  ui: OutlineLabels;
   modules: OutlineModule[];
   labs: OutlineLab[];
   races: OutlineRace[];
@@ -761,6 +805,11 @@ export type CoursesFile = {
     /** The catalog's outline section (modules A to G as folds). */
     outline_heading: CourseHeading;
     features_heading: CourseHeading;
+    /** The stat tiles' list name. */
+    stats_label: string;
+    picker: PickerLabels;
+    ladder: LadderLabels;
+    finder: FinderLabels;
   };
   /** Page copy for /learn/courses/:id, shared by every plan and offering. */
   course: {
@@ -774,6 +823,8 @@ export type CoursesFile = {
     faq_heading: string;
     /** The sidebar panel's heading. */
     glance_heading: string;
+    /** Tabs, chips and Copy link. */
+    ui: CourseUiLabels;
     open_material: CourseLink;
     ask: CourseLink;
     /** /learn/courses/<unknown id>: a short state with a link back. */
@@ -801,6 +852,8 @@ export type CoursesFile = {
       plans_link: CourseLink;
       plans_link_note?: string;
     };
+    /** The section rail's accessible name. */
+    rail_label: string;
     how_it_works: CourseHeading & {
       steps: { n: number; title: string; body: string }[];
       portals: { id: string; tag: string; title: string; body: string }[];
@@ -809,6 +862,8 @@ export type CoursesFile = {
     features: CourseHeading;
     /** Heading only: the table itself comes from lectureSelection(). */
     lecture_selection: CourseHeading & { source: string };
+    /** The plan builder's labels, and the lines of its email and copied plan. */
+    builder: BuilderLabels;
     steps: CourseHeading & {
       items: {
         n: number;

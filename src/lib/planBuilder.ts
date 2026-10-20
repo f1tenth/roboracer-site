@@ -7,7 +7,7 @@ import {
   type OutlineModule,
   type OutlineRace,
 } from "./data";
-import { listWords, numberRange } from "../components/learn/learnStyles";
+import { fill, listWords, numberRange } from "../components/learn/learnStyles";
 
 /**
  * The teach page's plan builder as pure functions: a set of module ids in,
@@ -17,64 +17,6 @@ import { listWords, numberRange } from "../components/learn/learnStyles";
  * catalog's table. A custom selection gets no weeks, hours or dates: only a
  * selection equal to a plan names that plan (and so its weeks).
  */
-
-/**
- * Every micro-label the builder introduces (stage 3 moves them into
- * courses.json). `{name}` slots are filled by fill(). The count labels that
- * courses.json already holds (`stats[].label`) are read from there instead.
- */
-export const LABELS = {
-  startLegend: "Start from a plan",
-  weeksOption: "{n} weeks",
-  modulesLegend: "Modules",
-  moduleSr: "Module {id}: ",
-  lectureOne: "{n} lecture",
-  lectureMany: "{n} lectures",
-  tutorialOne: "{n} tutorial",
-  tutorialMany: "{n} tutorials",
-  labOne: "Lab {list}",
-  labMany: "Labs {list}",
-  summaryHeading: "Your plan",
-  matches: "Matches the {plan}",
-  custom: "Custom selection",
-  customShort: "Custom",
-  customNote: "The course site gives weeks only for its three plans.",
-  empty: "No modules selected",
-  emptyShort: "No modules",
-  emptyNote: "Choose at least one module to copy, share or email a plan.",
-  seePlan: "See the {plan}",
-  tutorials: "tutorials",
-  detailModules: "Modules",
-  detailLabs: "Labs",
-  detailRaces: "Races",
-  detailOptional: "Optional",
-  detailProject: "Final project",
-  projectIncluded: "Included, Modules {modules}",
-  none: "none",
-  email: "Email it to us",
-  copy: "Copy plan",
-  share: "Share link",
-  copied: "Plan copied.",
-  linkCopied: "Link copied.",
-  copyFailed: "Your browser blocked the clipboard. The link below can be selected and copied by hand.",
-  shareLabel: "Link to this plan",
-  stored: "Nothing is stored or sent; Email opens your own mail app.",
-  railLabel: "On this page",
-  textTitle: "RoboRacer course plan",
-  textLink: "Link",
-  textModule: "Module {id}: {title}",
-  textRecorded: "recorded",
-  textMaterial: "Course material",
-  textLicense: "License",
-  mailGreeting: "Hello RoboRacer team,",
-  mailIntro: "We would like to teach the RoboRacer course with this plan.",
-  mailFields: ["University:", "Your names:"],
-} as const;
-
-/** "{n} weeks" + { n: 4 } -> "4 weeks". */
-export function fill(template: string, vars: Record<string, string | number>): string {
-  return template.replace(/\{(\w+)\}/g, (_, k: string) => (k in vars ? String(vars[k]) : `{${k}}`));
-}
 
 /** Known module ids, deduped, in the outline's order. */
 export function normalizeModules(c: CoursesFile, ids: Iterable<string>): string[] {
@@ -166,7 +108,7 @@ export function planCounts(c: CoursesFile, s: PlanSummary): PlanCount[] {
   return [
     { id: "modules", label: statLabel(c, "modules", "modules"), value: s.modules.length },
     { id: "lectures", label: statLabel(c, "lectures", "lectures"), value: s.lectures.length },
-    { id: "tutorials", label: LABELS.tutorials, value: s.tutorials.length },
+    { id: "tutorials", label: c.teach.builder.tutorials, value: s.tutorials.length },
     { id: "recorded", label: statLabel(c, "recorded", "recorded lectures"), value: s.recordedLectures.length },
     { id: "labs", label: statLabel(c, "labs", "labs"), value: s.labs.length },
     { id: "races", label: statLabel(c, "races", "races"), value: s.races.length },
@@ -185,9 +127,10 @@ export function moduleList(c: CoursesFile, ids: string[]): string {
 }
 
 /** "Matches the 10-week course", "Custom selection" or "No modules selected". */
-export function planStatus(s: PlanSummary): string {
-  if (s.ids.length === 0) return LABELS.empty;
-  return s.match ? fill(LABELS.matches, { plan: s.match.title }) : LABELS.custom;
+export function planStatus(c: CoursesFile, s: PlanSummary): string {
+  const L = c.teach.builder;
+  if (s.ids.length === 0) return L.empty;
+  return s.match ? fill(L.matches, { plan: s.match.title }) : L.custom;
 }
 
 /** "1 course race", "3 course races": the labels are plural, so one drops the s. */
@@ -208,12 +151,13 @@ const itemLine = (i: OutlineItem) => `${i.label}: ${i.title}`;
 /** Copy plan: the selection as plain text, every module, lecture, tutorial,
  * lab and race with its course-site link. */
 export function planText(c: CoursesFile, s: PlanSummary, link: string): string {
+  const L = c.teach.builder;
   const rows = lectureSelection(c);
-  const lines: string[] = [LABELS.textTitle, planStatus(s), `${planCountsLine(c, s)}.`, `${LABELS.textLink}: ${link}`];
+  const lines: string[] = [L.text_title, planStatus(c, s), `${planCountsLine(c, s)}.`, `${L.text_link}: ${link}`];
   for (const m of s.modules) {
-    lines.push("", fill(LABELS.textModule, { id: m.id, title: m.title }), m.href);
+    lines.push("", fill(L.text_module, { id: m.id, title: m.title }), m.href);
     for (const i of m.items) {
-      lines.push(`  ${itemLine(i)}${i.video ? ` (${LABELS.textRecorded})` : ""}`, `    ${i.href}`);
+      lines.push(`  ${itemLine(i)}${i.video ? ` (${L.text_recorded})` : ""}`, `    ${i.href}`);
     }
     for (const l of rows.find((r) => r.module.id === m.id)?.labs ?? []) {
       lines.push(`  ${l.label}: ${l.title}`, `    ${l.href}`);
@@ -228,8 +172,8 @@ export function planText(c: CoursesFile, s: PlanSummary, link: string): string {
   }
   lines.push(
     "",
-    `${LABELS.textMaterial}: ${c.meta.coursekit_url}`,
-    `${LABELS.textLicense}: ${c.meta.license.name}. ${c.meta.license.summary}`,
+    `${L.text_material}: ${c.meta.coursekit_url}`,
+    `${L.text_license}: ${c.meta.license.name}. ${c.meta.license.summary}`,
   );
   return lines.join("\n");
 }
@@ -237,19 +181,20 @@ export function planText(c: CoursesFile, s: PlanSummary, link: string): string {
 /** The email body: short enough for every mail client's mailto limit once
  * URL-encoded (checked against MAIL_BODY_MAX for every possible selection). */
 export function mailBody(c: CoursesFile, s: PlanSummary, link: string): string {
+  const L = c.teach.builder;
   const lines = [
-    LABELS.mailGreeting,
+    L.mail_greeting,
     "",
-    LABELS.mailIntro,
+    L.mail_intro,
     "",
-    ...LABELS.mailFields,
+    ...L.mail_fields,
     "",
-    `${LABELS.textTitle}: ${planStatus(s)}`,
-    `${LABELS.detailModules}: ${s.modules.map((m) => `${m.id} ${m.title}`).join("; ")}`,
+    `${L.text_title}: ${planStatus(c, s)}`,
+    `${L.detail_modules}: ${s.modules.map((m) => `${m.id} ${m.title}`).join("; ")}`,
     `${planCountsLine(c, s)}.`,
-    `${LABELS.detailLabs}: ${numberRange(s.labs.map((l) => l.number)) || LABELS.none}`,
-    `${LABELS.detailRaces}: ${numberRange(s.races.map((r) => r.number)) || LABELS.none}`,
-    `${LABELS.textLink}: ${link}`,
+    `${L.detail_labs}: ${numberRange(s.labs.map((l) => l.number)) || L.none}`,
+    `${L.detail_races}: ${numberRange(s.races.map((r) => r.number)) || L.none}`,
+    `${L.text_link}: ${link}`,
   ];
   return lines.join("\r\n");
 }

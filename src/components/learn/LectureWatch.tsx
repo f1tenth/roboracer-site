@@ -1,24 +1,7 @@
-import type { OutlineItem } from "../../lib/data";
+import type { OutlineItem, OutlineLabels } from "../../lib/data";
 import { YouTubePlayer } from "../ui/YouTubeFacade";
 import { Arrow } from "./LearnLink";
-import { LINK } from "./learnStyles";
-
-/** Micro-labels this file introduces (stage 3 moves them into courses.json).
- * `{name}` is replaced by the lecture's label and title. */
-const LABELS = {
-  watch: "Watch",
-  close: "Close",
-  watchName: " {name}",
-  closeName: " the video of {name}",
-  playerTitle: "{name} (recorded lecture)",
-  onYouTube: "Open on YouTube",
-  recordedNote: "Recorded lecture from the coursekit",
-  slides: "Slides",
-  slidesName: " for {name}",
-  recordedCount: "{n} recorded",
-};
-
-const fill = (s: string, name: string) => s.replace("{name}", name);
+import { LINK, fill } from "./learnStyles";
 
 /** "Lecture 3: Rigid body transformations": how a control names its lecture. */
 const lectureName = (item: OutlineItem) => `${item.label}: ${item.title}`;
@@ -109,6 +92,8 @@ export function LectureThumb({ item, open, onToggle }: ThumbProps) {
 
 type WatchButtonProps = {
   item: OutlineItem;
+  /** courses.json outline.ui */
+  labels: OutlineLabels;
   open: boolean;
   panelId: string;
   onToggle: () => void;
@@ -116,7 +101,7 @@ type WatchButtonProps = {
 
 /** The one keyboard and screen-reader control for a recording: a violet
  * outlined pill with a stroke play glyph, filled while its video is open. */
-export function WatchButton({ item, open, panelId, onToggle }: WatchButtonProps) {
+export function WatchButton({ item, labels, open, panelId, onToggle }: WatchButtonProps) {
   const name = lectureName(item);
   return (
     <button
@@ -129,14 +114,14 @@ export function WatchButton({ item, open, panelId, onToggle }: WatchButtonProps)
       }`}
     >
       <Glyph close={open} />
-      {open ? LABELS.close : LABELS.watch}
-      <span className="sr-only">{fill(open ? LABELS.closeName : LABELS.watchName, name)}</span>
+      {open ? labels.close : labels.watch}
+      <span className="sr-only">{` ${fill(open ? labels.close_name : labels.watch_name, { name })}`}</span>
     </button>
   );
 }
 
 /** "Slides" to the lecture's Google Slides deck, in a new tab. */
-export function SlidesLink({ item }: { item: OutlineItem }) {
+export function SlidesLink({ item, labels }: { item: OutlineItem; labels: OutlineLabels }) {
   if (!item.slides_url) return null;
   return (
     <a
@@ -145,10 +130,8 @@ export function SlidesLink({ item }: { item: OutlineItem }) {
       rel="noopener noreferrer"
       className={`${LINK} inline-flex items-center font-mono text-small coarse:min-h-11`}
     >
-      {LABELS.slides}
-      <span className="sr-only">
-        {fill(LABELS.slidesName, lectureName(item))} (opens in a new tab)
-      </span>
+      {labels.slides}
+      <span className="sr-only">{` ${fill(labels.slides_name, { name: lectureName(item) })} (opens in a new tab)`}</span>
       <Arrow out />
     </a>
   );
@@ -161,7 +144,7 @@ export function SlidesLink({ item }: { item: OutlineItem }) {
  * which stops it. Fades in where @starting-style is supported, instantly
  * under reduced motion.
  */
-export function LecturePlayer({ item, id }: { item: OutlineItem; id: string }) {
+export function LecturePlayer({ item, labels, id }: { item: OutlineItem; labels: OutlineLabels; id: string }) {
   if (!item.video_id) return null;
   const name = lectureName(item);
   return (
@@ -172,21 +155,21 @@ export function LecturePlayer({ item, id }: { item: OutlineItem; id: string }) {
       <div className="relative aspect-video overflow-hidden rounded-media bg-ink-950">
         <YouTubePlayer
           videoId={item.video_id}
-          title={fill(LABELS.playerTitle, name)}
+          title={fill(labels.player_title, { name })}
           poster={{ src: thumb(item.video_id, "mq"), width: 320, height: 180 }}
           playing="click"
           onPlay={() => {}}
         />
       </div>
       <p className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 font-mono text-small text-text-muted">
-        <span>{LABELS.recordedNote}</span>
+        <span>{labels.recorded_note}</span>
         <a
           href={`https://www.youtube.com/watch?v=${item.video_id}`}
           target="_blank"
           rel="noopener noreferrer"
           className={`${LINK} inline-flex items-center coarse:min-h-11`}
         >
-          {LABELS.onYouTube}
+          {labels.on_youtube}
           <span className="sr-only"> (opens in a new tab)</span>
           <Arrow out />
         </a>
@@ -202,7 +185,7 @@ export function LecturePlayer({ item, id }: { item: OutlineItem; id: string }) {
  * control inside); hidden once the module is open and where the outline is
  * narrower than 48rem.
  */
-export function RecordingStack({ items }: { items: OutlineItem[] }) {
+export function RecordingStack({ items, labels }: { items: OutlineItem[]; labels: OutlineLabels }) {
   const recorded = items.filter((i) => i.video_id);
   if (recorded.length === 0) return null;
   const shown = recorded.slice(0, 4);
@@ -222,7 +205,7 @@ export function RecordingStack({ items }: { items: OutlineItem[] }) {
           />
         ))}
       </span>
-      <span className="font-mono text-small text-text-muted">{LABELS.recordedCount.replace("{n}", String(recorded.length))}</span>
+      <span className="font-mono text-small text-text-muted">{fill(labels.recorded_count, { n: recorded.length })}</span>
     </span>
   );
 }

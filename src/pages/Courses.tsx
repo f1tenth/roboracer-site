@@ -21,13 +21,6 @@ import { LINK, MONO_NOTE, pad2, visibleFeatures } from "../components/learn/lear
 /** Logo box height for a university offering, in px (the About wall's 80). */
 const LOGO_H = 80;
 
-/** Micro-labels this unit introduced. Stage 3 moves them into courses.json
- * (docs/learn/COURSES_INTERACTIVITY.md, section 3); docs/qa/courses-catalog.md
- * lists them. */
-const LABELS = {
-  stats: "The course and the community in numbers",
-};
-
 /** The plan picker's query parameter: /learn/courses?plan=10-weeks. */
 const PLAN_PARAM = "plan";
 
@@ -203,8 +196,7 @@ export default function Courses() {
         }
         overlap={
           <Ledger
-            variant="tiles"
-            label={LABELS.stats}
+            label={catalog.stats_label}
             stats={[...stats.filter((s) => s.group === "course"), ...stats.filter((s) => s.group === "community")]}
           />
         }

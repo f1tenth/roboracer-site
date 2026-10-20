@@ -2,7 +2,6 @@ import { Link, useLocation } from "react-router-dom";
 import { useScrollToHash } from "../hooks/useScrollToHash";
 import { useCourses } from "../hooks/useCourses";
 import type { CourseFeature, CoursesFile } from "../lib/data";
-import { LABELS } from "../lib/planBuilder";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
@@ -212,7 +211,7 @@ export default function Teach() {
         </div>
       </section>
 
-      <SectionRail items={rail} label={LABELS.railLabel} />
+      <SectionRail items={rail} label={teach.rail_label} />
 
       {/* How it works: six icon steps on one violet rule (vertical on a
           phone), then the two places the work happens as tinted cards. */}

@@ -3,19 +3,7 @@ import { lectureSelection, type CoursesFile, type CoursePlan } from "../../lib/d
 import Reveal from "../ui/Reveal";
 import LearnLink from "./LearnLink";
 import PlanPicker, { PlanSummary, type PlanFacts } from "./PlanPicker";
-import { LINK, MONO_NOTE, moduleRange, numberRange } from "./learnStyles";
-
-/** Micro-labels and pictures this unit introduced. Stage 3 moves them into
- * courses.json (docs/learn/COURSES_INTERACTIVITY.md, section 3);
- * docs/qa/courses-catalog.md lists them. */
-const LABELS = {
-  selected: "Selected",
-  weeks: (n: number) => `${n} weeks`,
-  modules: (ids: string[]) => `Modules ${moduleRange(ids)}`,
-  labs: (ns: number[]) => `Labs ${numberRange(ns)}`,
-  races: (ns: number[]) => `${ns.length === 1 ? "Race" : "Races"} ${numberRange(ns)}`,
-  chips: "At a glance",
-};
+import { LINK, MONO_NOTE, fill, moduleRange, numberRange } from "./learnStyles";
 
 const asset = (src: string) => `${import.meta.env.BASE_URL}${src.replace(/^\//, "")}`;
 
@@ -65,10 +53,12 @@ export default function PlanLadder({ courses, selected, onSelect }: PlanLadderPr
   const racesByModule = new Map(courses.outline.races.map((r) => [r.module, r]));
   const facts = plans.map((p) => planFacts(courses, p));
   const picked = plans.find((p) => p.id === selected);
+  const { picker, ladder } = courses.catalog;
+  const weeks = (n: number) => fill(ladder.weeks, { weeks: n });
 
   return (
     <div className="flex flex-col gap-10 desktop:gap-12">
-      <PlanPicker plans={plans} selected={selected} onSelect={onSelect} />
+      <PlanPicker plans={plans} labels={picker} selected={selected} onSelect={onSelect} />
 
       <Reveal className="flex flex-col gap-8">
         <table className="w-full table-fixed border-collapse">
@@ -190,7 +180,7 @@ export default function PlanLadder({ courses, selected, onSelect }: PlanLadderPr
           </tfoot>
         </table>
 
-        <PlanSummary facts={facts} selected={picked?.id ?? null} classTime={courses.meta.class_time.text} />
+        <PlanSummary facts={facts} labels={picker} selected={picked?.id ?? null} classTime={courses.meta.class_time.text} />
       </Reveal>
 
       {/* The plans as cards: a photo with the length on it, the blurb, the
@@ -238,7 +228,7 @@ export default function PlanLadder({ courses, selected, onSelect }: PlanLadderPr
                   aria-hidden="true"
                   className="absolute bottom-4 left-5 font-display text-display-m font-semibold text-text-on-ink lg:bottom-5 lg:left-6"
                 >
-                  {LABELS.weeks(p.weeks)}
+                  {weeks(p.weeks)}
                 </p>
                 <span
                   className={`absolute top-4 right-4 rounded-pill bg-rr-violet px-3 py-1 font-mono text-small font-semibold text-white ${FADE} ${
@@ -246,7 +236,7 @@ export default function PlanLadder({ courses, selected, onSelect }: PlanLadderPr
                   }`}
                   aria-hidden="true"
                 >
-                  {LABELS.selected}
+                  {ladder.selected}
                 </span>
               </div>
               <div className="flex flex-1 flex-col gap-4 p-6 lg:p-7">
@@ -261,8 +251,13 @@ export default function PlanLadder({ courses, selected, onSelect }: PlanLadderPr
                   </button>
                 </h3>
                 <p className="max-w-[48ch] text-body text-text-body">{p.blurb}</p>
-                <ul aria-label={LABELS.chips} className="flex flex-wrap gap-2">
-                  {[LABELS.weeks(p.weeks), LABELS.modules(p.modules), LABELS.labs(labs), races.length ? LABELS.races(races) : ""]
+                <ul aria-label={ladder.chips} className="flex flex-wrap gap-2">
+                  {[
+                    weeks(p.weeks),
+                    fill(ladder.modules, { modules: moduleRange(p.modules) }),
+                    fill(ladder.labs, { labs: numberRange(labs) }),
+                    races.length ? fill(races.length === 1 ? ladder.race : ladder.races, { races: numberRange(races) }) : "",
+                  ]
                     .filter(Boolean)
                     .map((chip) => (
                       <li

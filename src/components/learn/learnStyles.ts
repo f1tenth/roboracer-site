@@ -53,6 +53,13 @@ export function listWords(words: string[]): string {
 
 export const pad2 = (n: number) => String(n).padStart(2, "0");
 
+/** A label from courses.json with its `{name}` slots filled:
+ * fill("{n} weeks", { n: 4 }) is "4 weeks". An unknown slot stays as written,
+ * so a typo shows on the page instead of vanishing. */
+export function fill(template: string, vars: Record<string, string | number> = {}): string {
+  return template.replace(/\{(\w+)\}/g, (_, k: string) => (k in vars ? String(vars[k]) : `{${k}}`));
+}
+
 /** What a feature may claim today (docs/learn/COURSES_CONTENT.md): `available`
  * always, `platform` once the course platform is public, `verify` never. */
 export function visibleFeatures<T extends { status: "available" | "platform" | "verify" }>(

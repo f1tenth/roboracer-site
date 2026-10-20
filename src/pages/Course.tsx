@@ -1,6 +1,13 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useParams } from "react-router-dom";
-import { findCourse, logoAttrs, type CourseOffering, type CoursePlan, type CoursesFile } from "../lib/data";
+import {
+  findCourse,
+  logoAttrs,
+  type CourseOffering,
+  type CoursePlan,
+  type CoursesFile,
+  type CourseUiLabels,
+} from "../lib/data";
 import { useCourses } from "../hooks/useCourses";
 import Button from "../components/ui/Button";
 import LearnHeader, { type Crumb } from "../components/learn/LearnHeader";
@@ -11,26 +18,6 @@ import FaqList from "../components/learn/FaqList";
 import CoursesUnavailable from "../components/learn/CoursesUnavailable";
 import CourseTabs, { type CourseTab } from "../components/learn/CourseTabs";
 import { LINK, MONO_NOTE, TAP, isTodo, moduleRange, numberRange } from "../components/learn/learnStyles";
-
-/** Micro-labels this page added with the tabs and the banner (U2,
- * 2026-10-20). Stage 3 moves them into courses.json `course`; until then they
- * live here and are listed in docs/qa/courses-page.md. The panels' own
- * headings stay the JSON's. */
-const LABELS = {
-  tablist: "Course sections",
-  facts: "Course facts",
-  tab_about: "About",
-  tab_outline: "Outline",
-  tab_staff: "Staff",
-  tab_logistics: "Logistics",
-  noun_module: ["module", "modules"],
-  noun_person: ["person", "people"],
-  noun_question: ["question", "questions"],
-  copy_link: "Copy link",
-  copied: "Link copied",
-  copy_failed: "Could not copy. The link is in the address bar.",
-} as const;
-
 
 const asset = (src: string) => `${import.meta.env.BASE_URL}${src.replace(/^\//, "")}`;
 
@@ -151,7 +138,7 @@ function selectAndCopy(text: string): boolean {
  * (with the open tab's hash, without any query), said once in a status line
  * that a screen reader announces. The line keeps its height, so nothing moves
  * when it fills or clears. */
-function CopyLink({ children }: { children?: ReactNode }) {
+function CopyLink({ labels, children }: { labels: CourseUiLabels; children?: ReactNode }) {
   const [status, setStatus] = useState<"" | "copied" | "failed">("");
   const timer = useRef<number | undefined>(undefined);
   useEffect(() => () => window.clearTimeout(timer.current), []);
@@ -190,11 +177,11 @@ function CopyLink({ children }: { children?: ReactNode }) {
             strokeLinecap="round"
           />
         </svg>
-        {LABELS.copy_link}
+        {labels.copy_link}
       </button>
       {children}
       <p role="status" className="basis-full min-h-[1.5em] font-mono text-small text-rr-magenta-deep">
-        {status === "copied" ? LABELS.copied : status === "failed" ? LABELS.copy_failed : ""}
+        {status === "copied" ? labels.copied : status === "failed" ? labels.copy_failed : ""}
       </p>
     </>
   );
@@ -230,6 +217,8 @@ export default function Course() {
     course.kind === "plan" ? course : courses.plans.find((p) => p.id === course.plan);
   const { modules, ids, labs, races } = planFacts(courses, plan);
   const copy = courses.course;
+  // Tabs, chips and Copy link (courses.json course.ui).
+  const ui = copy.ui;
   const { meta } = courses;
   const first = modules[0];
   const learn = courses.learn.filter((l) => ids.includes(l.module));
@@ -278,7 +267,7 @@ export default function Course() {
   const tabs: CourseTab[] = [
     {
       id: "about",
-      label: LABELS.tab_about,
+      label: ui.tab_about,
       icon: <Glyph name="book" />,
       panel: (
         <div className="flex flex-col gap-10">
@@ -314,7 +303,7 @@ export default function Course() {
             <p className="max-w-[62ch] text-body text-text-body">{courses.prerequisites.lead}</p>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               <div className="rounded-card border border-rr-violet/20 bg-rr-violet/[0.05] px-5 py-4">
-                <p className="font-mono text-small font-semibold text-rr-magenta-deep">You need</p>
+                <p className="font-mono text-small font-semibold text-rr-magenta-deep">{ui.prerequisites_need}</p>
                 <ul className="mt-2 flex flex-col gap-1.5">
                   {courses.prerequisites.items.map((i) => (
                     <li key={i} className="text-body text-text-strong">
@@ -324,7 +313,7 @@ export default function Course() {
                 </ul>
               </div>
               <div className="rounded-card border border-ink-950/10 bg-paper-100 px-5 py-4">
-                <p className={`${MONO_NOTE} font-semibold`}>Not covered</p>
+                <p className={`${MONO_NOTE} font-semibold`}>{ui.prerequisites_not_covered}</p>
                 <ul className="mt-2 flex flex-col gap-1.5">
                   {courses.prerequisites.not_covered.map((i) => (
                     <li key={i} className="text-body text-text-body">
@@ -340,9 +329,9 @@ export default function Course() {
     },
     {
       id: "outline",
-      label: LABELS.tab_outline,
+      label: ui.tab_outline,
       icon: <Glyph name="layers" />,
-      count: { value: modules.length, noun: plural(modules.length, LABELS.noun_module) },
+      count: { value: modules.length, noun: plural(modules.length, ui.noun_module) },
       panel: (
         <>
           <BlockHeader id="course-outline" title={copy.outline_heading} srOnly />
@@ -368,9 +357,9 @@ export default function Course() {
   if (staff.length > 0) {
     tabs.push({
       id: "staff",
-      label: LABELS.tab_staff,
+      label: ui.tab_staff,
       icon: <Glyph name="person" />,
-      count: { value: staff.length, noun: plural(staff.length, LABELS.noun_person) },
+      count: { value: staff.length, noun: plural(staff.length, ui.noun_person) },
       panel: (
         <>
           <BlockHeader id="course-staff" title={copy.staff_heading} srOnly />
@@ -433,9 +422,9 @@ export default function Course() {
   if (courses.faq.length > 0) {
     tabs.push({
       id: "logistics",
-      label: LABELS.tab_logistics,
+      label: ui.tab_logistics,
       icon: <Glyph name="chat" />,
-      count: { value: courses.faq.length, noun: plural(courses.faq.length, LABELS.noun_question) },
+      count: { value: courses.faq.length, noun: plural(courses.faq.length, ui.noun_question) },
       panel: (
         <>
           <BlockHeader id="course-faq" title={copy.faq_heading} srOnly />
@@ -496,7 +485,7 @@ export default function Course() {
                 <span className="text-gradient-logo -my-[0.15em] inline-block py-[0.15em]">{course.title}</span>
               </h1>
               <p className="mt-4 max-w-[60ch] text-lead text-text-on-ink/90">{course.blurb}</p>
-              <ul className="mt-5 flex flex-wrap gap-2" aria-label={LABELS.facts}>
+              <ul className="mt-5 flex flex-wrap gap-2" aria-label={ui.facts}>
                 {chips.map((c, i) => (
                   <li
                     key={c}
@@ -540,7 +529,7 @@ export default function Course() {
             card follows the tabs instead. */}
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-x-10">
           <div className="min-w-0 lg:col-span-7">
-            <CourseTabs tabs={tabs} label={LABELS.tablist} />
+            <CourseTabs tabs={tabs} label={ui.tablist} />
           </div>
 
           {/* At a glance: the facts a reader scans for, an ink glyph on a
@@ -627,7 +616,7 @@ export default function Course() {
                 ))}
               </ul>
               <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
-                <CopyLink>
+                <CopyLink labels={ui}>
                   <LearnLink href={copy.not_found.back.href} className="text-small font-semibold">
                     {copy.not_found.back.label}
                   </LearnLink>

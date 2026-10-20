@@ -1,29 +1,10 @@
 import { useContext, useId, useState } from "react";
-import type { CourseOutline as Outline, OutlineItem, OutlineModule } from "../../lib/data";
+import type { CourseOutline as Outline, OutlineItem, OutlineLabels, OutlineModule } from "../../lib/data";
 import { useLectureProgress } from "../../hooks/useLectureProgress";
 import LearnLink, { FoldChevron } from "./LearnLink";
 import { LecturePlayer, LectureThumb, RecordingStack, SlidesLink, WatchButton } from "./LectureWatch";
 import { PanelActive } from "./panelActive";
-import { FOLD_SUMMARY, MONO_NOTE, listWords, moduleRange } from "./learnStyles";
-
-/** Micro-labels this unit introduces (stage 3 moves them into courses.json).
- * `{done}`, `{total}` and `{label}` are filled in at render. */
-const LABELS = {
-  expandAll: "Expand all",
-  collapseAll: "Collapse all",
-  meter: "{done} of {total} done in this outline",
-  moduleDone: "{done} of {total} done",
-  mark: "Mark {label} as done",
-  done: "Done",
-  local: "Ticks are saved in this browser only. Nothing is sent.",
-  blocked: "This browser is blocking storage, so these ticks will not be kept. Nothing is sent.",
-  clear: "Clear ticks",
-  recorded: "recorded",
-  assigns: "assigns {labs}",
-};
-
-const fill = (s: string, values: Record<string, string | number>) =>
-  s.replace(/\{(\w+)\}/g, (_, k: string) => String(values[k] ?? ""));
+import { FOLD_SUMMARY, MONO_NOTE, fill, listWords, moduleRange } from "./learnStyles";
 
 type CourseOutlineProps = {
   outline: Outline;
@@ -50,7 +31,17 @@ function Tick({ className = "" }: { className?: string }) {
 
 /** A real checkbox, 2.75rem square to the finger (the padding is taken back
  * by the negative margin), filled violet with a white tick when done. */
-function DoneBox({ item, checked, onChange }: { item: OutlineItem; checked: boolean; onChange: (v: boolean) => void }) {
+function DoneBox({
+  item,
+  labels,
+  checked,
+  onChange,
+}: {
+  item: OutlineItem;
+  labels: OutlineLabels;
+  checked: boolean;
+  onChange: (v: boolean) => void;
+}) {
   return (
     <label className="-m-3 inline-flex shrink-0 cursor-pointer items-center gap-2 p-3 font-mono text-small text-text-muted">
       <span className="relative inline-flex h-5 w-5">
@@ -58,19 +49,19 @@ function DoneBox({ item, checked, onChange }: { item: OutlineItem; checked: bool
           type="checkbox"
           checked={checked}
           onChange={(e) => onChange(e.currentTarget.checked)}
-          aria-label={fill(LABELS.mark, { label: item.label })}
+          aria-label={fill(labels.mark, { label: item.label })}
           className="peer h-5 w-5 cursor-pointer appearance-none rounded-btn border-[1.5px] border-ink-950/35 bg-paper-50 transition-colors duration-[var(--duration-fast)] checked:border-rr-violet checked:bg-rr-violet hover:border-rr-violet motion-reduce:transition-none"
         />
         <Tick className="pointer-events-none absolute inset-0 m-auto h-3.5 w-3.5 scale-50 text-white opacity-0 transition-[opacity,scale] duration-[var(--duration-fast)] ease-[var(--ease-out-expo)] peer-checked:scale-100 peer-checked:opacity-100 motion-reduce:transition-none" />
       </span>
-      <span className={`@max-md:sr-only ${checked ? "text-rr-violet-deep" : ""}`}>{LABELS.done}</span>
+      <span className={`@max-md:sr-only ${checked ? "text-rr-violet-deep" : ""}`}>{labels.done}</span>
     </label>
   );
 }
 
 /** "2 of 3 done": neutral at zero, a magenta-tint chip once something is
  * ticked, filled violet with a tick when the module is complete. */
-function DoneChip({ done, total }: { done: number; total: number }) {
+function DoneChip({ label, done, total }: { label: string; done: number; total: number }) {
   const all = total > 0 && done === total;
   const tone = all
     ? "border-rr-violet bg-rr-violet text-white"
@@ -82,7 +73,7 @@ function DoneChip({ done, total }: { done: number; total: number }) {
       className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-pill border px-2.5 py-0.5 font-mono text-small transition-colors duration-[var(--duration-fast)] motion-reduce:transition-none ${tone}`}
     >
       {all && <Tick className="h-3 w-3" />}
-      {fill(LABELS.moduleDone, { done, total })}
+      {fill(label, { done, total })}
     </span>
   );
 }
@@ -100,6 +91,8 @@ function DoneChip({ done, total }: { done: number; total: number }) {
  */
 export default function CourseOutline({ outline, modules, showLinks = false }: CourseOutlineProps) {
   const uid = useId();
+  // The outline's labels (courses.json outline.ui).
+  const ui = outline.ui;
   const { done, persistent, setDone, clear } = useLectureProgress();
   // The first module starts open so the outline shows its pictures at once.
   const [openIds, setOpenIds] = useState<ReadonlySet<string>>(() => new Set(modules.slice(0, 1).map((m) => m.id)));
@@ -158,7 +151,7 @@ export default function CourseOutline({ outline, modules, showLinks = false }: C
       <div className="mb-6 grid gap-x-8 gap-y-3 rounded-card border border-ink-950/10 bg-paper-100 p-4 @xl:grid-cols-[minmax(0,1fr)_auto] @xl:items-center @xl:p-5">
         <div className="min-w-0">
           <p className="font-mono text-small text-text-strong" aria-live="polite" aria-atomic="true">
-            {LABELS.meter.split("{done}").map((part, n) => (
+            {ui.meter.split("{done}").map((part, n) => (
               <span key={n}>
                 {n > 0 && (
                   <span className="mr-1 font-display text-display-s font-semibold tabular-nums text-rr-violet-deep">
@@ -181,13 +174,13 @@ export default function CourseOutline({ outline, modules, showLinks = false }: C
             <span aria-hidden="true" className="font-display text-lead leading-none">
               {allOpen ? "−" : "+"}
             </span>
-            {allOpen ? LABELS.collapseAll : LABELS.expandAll}
+            {allOpen ? ui.collapse_all : ui.expand_all}
           </button>
           <button type="button" onClick={() => clear(hrefs)} disabled={doneCount === 0} className={TOOL}>
-            {LABELS.clear}
+            {ui.clear}
           </button>
         </div>
-        <p className={`${MONO_NOTE} @xl:col-span-2`}>{persistent ? LABELS.local : LABELS.blocked}</p>
+        <p className={`${MONO_NOTE} @xl:col-span-2`}>{persistent ? ui.local : ui.blocked}</p>
       </div>
 
       <div className="border-t border-ink-950/10">
@@ -223,10 +216,10 @@ export default function CourseOutline({ outline, modules, showLinks = false }: C
                   <span className="mt-1 block max-w-[62ch] text-body text-text-body">{m.summary}</span>
                   <span className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
                     {meta && <span className={MONO_NOTE}>{meta}</span>}
-                    <DoneChip done={moduleDone} total={m.items.length} />
+                    <DoneChip label={ui.module_done} done={moduleDone} total={m.items.length} />
                   </span>
                 </span>
-                <RecordingStack items={m.items} />
+                <RecordingStack items={m.items} labels={ui} />
                 <span className="pt-[0.1em]">
                   <FoldChevron />
                 </span>
@@ -250,7 +243,7 @@ export default function CourseOutline({ outline, modules, showLinks = false }: C
                         <div className="flex min-w-0 flex-col">
                           <div className="flex items-start justify-between gap-3">
                             <span className={`${MONO_NOTE} pt-0.5`}>{item.label}</span>
-                            <DoneBox item={item} checked={checked} onChange={(v) => setDone(item.href, v)} />
+                            <DoneBox item={item} labels={ui} checked={checked} onChange={(v) => setDone(item.href, v)} />
                           </div>
                           <span className="mt-1 text-body font-semibold leading-snug">
                             <LearnLink href={item.href}>{item.title}</LearnLink>
@@ -258,8 +251,8 @@ export default function CourseOutline({ outline, modules, showLinks = false }: C
                           {(item.labs?.length || recordedNote) && (
                             <span className={`mt-1 block ${MONO_NOTE}`}>
                               {[
-                                recordedNote ? LABELS.recorded : "",
-                                item.labs?.length ? fill(LABELS.assigns, { labs: listWords(item.labs.map(labLabel)) }) : "",
+                                recordedNote ? ui.recorded : "",
+                                item.labs?.length ? fill(ui.assigns, { labs: listWords(item.labs.map(labLabel)) }) : "",
                               ]
                                 .filter(Boolean)
                                 .join(" · ")}
@@ -268,13 +261,13 @@ export default function CourseOutline({ outline, modules, showLinks = false }: C
                           {(item.video_id || item.slides_url) && (
                             <span className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-3">
                               {item.video_id && (
-                                <WatchButton item={item} open={open} panelId={panelId} onToggle={toggleWatch} />
+                                <WatchButton item={item} labels={ui} open={open} panelId={panelId} onToggle={toggleWatch} />
                               )}
-                              <SlidesLink item={item} />
+                              <SlidesLink item={item} labels={ui} />
                             </span>
                           )}
                         </div>
-                        {open && <LecturePlayer item={item} id={panelId} />}
+                        {open && <LecturePlayer item={item} labels={ui} id={panelId} />}
                       </li>
                     );
                   })}

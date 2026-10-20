@@ -2,25 +2,7 @@ import { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from "
 import { Link } from "react-router-dom";
 import { lectureSelection, type CoursePlan, type CoursesFile } from "../../lib/data";
 import LearnLink from "./LearnLink";
-import { MONO_NOTE, TAP, moduleRange } from "./learnStyles";
-
-/** Micro-labels this unit introduced. Stage 3 moves them into courses.json
- * (docs/learn/COURSES_INTERACTIVITY.md, section 3); docs/qa/courses-catalog.md
- * lists them. */
-const LABELS = {
-  label: "Find a topic",
-  placeholder: "Try RRT, particle filter, MPC or YOLO",
-  hint: "Searches every module, lecture, tutorial, lab and race in the course.",
-  count: (n: number, q: string) => `${n} ${n === 1 ? "match" : "matches"} for “${q}”`,
-  shown: (n: number) => `, the first ${n} shown`,
-  more: (n: number) => `${n} more. Add a word to narrow it down.`,
-  none: (q: string) => `Nothing in the course matches “${q}”.`,
-  suggest: "Try a module:",
-  results: "Matching topics",
-  inPlans: "In",
-  module: (id: string) => `Module ${id}`,
-  project: "Project",
-};
+import { MONO_NOTE, TAP, fill, moduleRange } from "./learnStyles";
 
 /** A 2.75rem hit area on touch screens for a pill, drawn by an invisible
  * ::after so the pill itself keeps its size (TAP's padding would swell it). */
@@ -78,6 +60,8 @@ const words = (s: string) => norm(s).split(" ").filter(Boolean);
  * project's from the plans that run every module it spans.
  */
 function buildIndex(c: CoursesFile): Entry[] {
+  const L = c.catalog.finder;
+  const moduleName = (id: string) => fill(L.module, { id });
   const entries: Entry[] = [];
   const add = (
     e: Omit<Entry, "key" | "primary" | "secondary" | "titleWords" | "compact" | "wordStarts" | "contextIsProse"> & {
@@ -103,9 +87,9 @@ function buildIndex(c: CoursesFile): Entry[] {
   for (const row of lectureSelection(c)) {
     const m = row.module;
     const plans = c.plans.filter((p) => row.plans.includes(p.id));
-    const moduleLine = `${LABELS.module(m.id)} · ${m.title}`;
+    const moduleLine = `${moduleName(m.id)} · ${m.title}`;
     add({
-      kind: LABELS.module(m.id),
+      kind: moduleName(m.id),
       badge: m.id,
       title: m.title,
       href: m.href,
@@ -142,7 +126,7 @@ function buildIndex(c: CoursesFile): Entry[] {
   }
   const fp = c.outline.final_project;
   add({
-    kind: LABELS.project,
+    kind: L.project,
     badge: moduleRange(fp.modules).replace(" to ", "–"),
     title: fp.title,
     href: fp.href,
@@ -235,6 +219,7 @@ function Marked({ text, tokens }: { text: string; tokens: string[] }) {
  */
 export default function TopicFinder({ courses }: { courses: CoursesFile }) {
   const index = useMemo(() => buildIndex(courses), [courses]);
+  const L = courses.catalog.finder;
   const modules = courses.outline.modules;
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -247,8 +232,9 @@ export default function TopicFinder({ courses }: { courses: CoursesFile }) {
   // below says the rest); the live region says it in words.
   const status = !results
     ? ""
-    : LABELS.count(results.length, trimmed) + (results.length > MAX_SHOWN ? LABELS.shown(MAX_SHOWN) : "");
-  const spoken = results?.length === 0 ? `${LABELS.none(trimmed)} ${LABELS.suggest}` : status;
+    : fill(results.length === 1 ? L.count_one : L.count_many, { n: results.length, q: trimmed }) +
+      (results.length > MAX_SHOWN ? fill(L.shown, { n: MAX_SHOWN }) : "");
+  const spoken = results?.length === 0 ? `${fill(L.none, { q: trimmed })} ${L.suggest}` : status;
 
   // The visible line changes with every key; the live region only once the
   // reader pauses, so a screen reader is not read every keystroke's count.
@@ -258,7 +244,7 @@ export default function TopicFinder({ courses }: { courses: CoursesFile }) {
     return () => window.clearTimeout(t);
   }, [spoken]);
 
-  const fill = (text: string) => {
+  const suggestModule = (text: string) => {
     setQuery(text);
     inputRef.current?.focus();
   };
@@ -267,13 +253,13 @@ export default function TopicFinder({ courses }: { courses: CoursesFile }) {
     <div className="mb-10 desktop:mb-12">
       <form
         role="search"
-        aria-label={LABELS.label}
+        aria-label={L.label}
         onSubmit={(e) => e.preventDefault()}
         className="grid gap-x-10 gap-y-3 md:grid-cols-12 md:items-end"
       >
         <div className="md:col-span-7 lg:col-span-5">
           <label htmlFor="topic-finder" className="eyebrow mb-2 block text-text-muted">
-            {LABELS.label}
+            {L.label}
           </label>
           <div className="relative">
             <svg
@@ -294,7 +280,7 @@ export default function TopicFinder({ courses }: { courses: CoursesFile }) {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder={LABELS.placeholder}
+              placeholder={L.placeholder}
               autoComplete="off"
               spellCheck={false}
               enterKeyHint="search"
@@ -307,7 +293,7 @@ export default function TopicFinder({ courses }: { courses: CoursesFile }) {
         {/* One line, always there: what the finder searches, then the count
             once there is a query, so typing never moves the page. */}
         <p id="topic-finder-status" aria-hidden="true" className={`md:col-span-5 md:pb-3 lg:col-span-7 ${MONO_NOTE}`}>
-          {status || LABELS.hint}
+          {status || L.hint}
         </p>
       </form>
       <p className="sr-only" aria-live="polite" aria-atomic="true">
@@ -317,7 +303,7 @@ export default function TopicFinder({ courses }: { courses: CoursesFile }) {
       <div id="topic-finder-results">
         {shown.length > 0 && (
           <>
-            <ul aria-label={LABELS.results} className="mt-6 border-y border-ink-950/10">
+            <ul aria-label={L.results} className="mt-6 border-y border-ink-950/10">
               {shown.map((e) => (
                 <li
                   key={e.key}
@@ -346,7 +332,7 @@ export default function TopicFinder({ courses }: { courses: CoursesFile }) {
                   </span>
                   {e.plans.length > 0 && (
                     <span className="col-start-2 mt-2 flex flex-wrap items-center gap-1.5 sm:col-start-3 lg:col-start-auto lg:mt-0 lg:justify-end">
-                      <span className={`mr-1 ${MONO_NOTE}`}>{LABELS.inPlans}</span>
+                      <span className={`mr-1 ${MONO_NOTE}`}>{L.in_plans}</span>
                       {e.plans.map((p, i) => (
                         <Fragment key={p.id}>
                           {i > 0 && <span className="sr-only">{i === e.plans.length - 1 ? " and " : ", "}</span>}
@@ -364,20 +350,20 @@ export default function TopicFinder({ courses }: { courses: CoursesFile }) {
               ))}
             </ul>
             {results && results.length > MAX_SHOWN && (
-              <p className={`mt-3 ${MONO_NOTE}`}>{LABELS.more(results.length - MAX_SHOWN)}</p>
+              <p className={`mt-3 ${MONO_NOTE}`}>{fill(L.more, { n: results.length - MAX_SHOWN })}</p>
             )}
           </>
         )}
         {results && results.length === 0 && (
           <div className="mt-6 rounded-card border border-rr-magenta/25 bg-rr-magenta/6 p-5 md:p-6">
-            <p className="text-body text-text-body">{LABELS.none(trimmed)}</p>
-            <p className={`mt-4 ${MONO_NOTE}`}>{LABELS.suggest}</p>
+            <p className="text-body text-text-body">{fill(L.none, { q: trimmed })}</p>
+            <p className={`mt-4 ${MONO_NOTE}`}>{L.suggest}</p>
             <ul className="mt-3 flex flex-wrap gap-2">
               {modules.map((m) => (
                 <li key={m.id}>
                   <button
                     type="button"
-                    onClick={() => fill(m.title)}
+                    onClick={() => suggestModule(m.title)}
                     className="flex items-center gap-2 rounded-pill border border-rr-violet/30 bg-paper-50 py-1.5 pr-4 pl-1.5 text-left text-small font-semibold text-text-strong transition-colors duration-[var(--duration-fast)] hover:border-rr-violet hover:bg-rr-violet/8 motion-reduce:transition-none coarse:min-h-11"
                   >
                     <span
@@ -386,7 +372,7 @@ export default function TopicFinder({ courses }: { courses: CoursesFile }) {
                     >
                       {m.id}
                     </span>
-                    <span className="sr-only">{LABELS.module(m.id)}: </span>
+                    <span className="sr-only">{fill(L.module, { id: m.id })}: </span>
                     {m.title}
                   </button>
                 </li>

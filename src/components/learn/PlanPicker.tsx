@@ -1,34 +1,23 @@
 import { useRef, useState } from "react";
-import type { CoursePlan } from "../../lib/data";
+import type { CoursePlan, PickerLabels } from "../../lib/data";
 import Button from "../ui/Button";
-import { MONO_NOTE, moduleRange, numberRange } from "./learnStyles";
+import { MONO_NOTE, fill, moduleRange, numberRange } from "./learnStyles";
 
-/** Micro-labels this unit introduced. Stage 3 moves them into courses.json
- * (docs/learn/COURSES_INTERACTIVITY.md, section 3); docs/qa/courses-catalog.md
- * lists them. */
-const LABELS = {
-  picker: "Show one plan",
-  option: (p: CoursePlan) => `${p.weeks} weeks`,
-  clear: "Show all three",
-  idle: "Pick a length to see what it covers and open its course.",
-  modules: "Modules",
-  labs: "Labs",
-  race: "Race",
-  races: "Races",
-  project: "Final project",
-  projectValue: (weeks: number) => `${weeks} weeks`,
-  classTime: "Class time",
-  cta: (p: CoursePlan) => `Open the ${p.title}`,
-  announce: (f: PlanFacts) =>
+/** "10-week course: Modules A to D, Labs 1 to 6, Races 1 and 2." for the
+ * live region, from courses.json catalog.picker. */
+function announce(labels: PickerLabels, f: PlanFacts): string {
+  return (
     [
-      `${f.plan.title}: Modules ${moduleRange(f.plan.modules)}`,
-      f.labs.length ? `Labs ${numberRange(f.labs)}` : "",
-      f.races.length ? `${f.races.length === 1 ? "Race" : "Races"} ${numberRange(f.races)}` : "",
+      fill(labels.announce, { title: f.plan.title, modules: moduleRange(f.plan.modules) }),
+      f.labs.length ? fill(labels.announce_labs, { labs: numberRange(f.labs) }) : "",
+      f.races.length
+        ? fill(f.races.length === 1 ? labels.announce_race : labels.announce_races, { races: numberRange(f.races) })
+        : "",
     ]
       .filter(Boolean)
-      .join(", ") + ".",
-  cleared: "All three plans shown.",
-};
+      .join(", ") + "."
+  );
+}
 
 /** What the summary and the cards say about one plan, worked out once by
  * PlanLadder from `plans` and `outline`. */
@@ -44,6 +33,8 @@ export type PlanFacts = {
 
 type PickerProps = {
   plans: CoursePlan[];
+  /** courses.json catalog.picker */
+  labels: PickerLabels;
   selected: string | null;
   onSelect: (id: string | null) => void;
 };
@@ -57,7 +48,7 @@ type PickerProps = {
  * are an accent outline. "Show all three" keeps its place while hidden, so
  * the row never shifts.
  */
-export default function PlanPicker({ plans, selected, onSelect }: PickerProps) {
+export default function PlanPicker({ plans, labels, selected, onSelect }: PickerProps) {
   const groupRef = useRef<HTMLDivElement>(null);
 
   const clear = () => {
@@ -69,7 +60,7 @@ export default function PlanPicker({ plans, selected, onSelect }: PickerProps) {
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6">
       <p id="plan-picker-label" className={MONO_NOTE}>
-        {LABELS.picker}
+        {labels.label}
       </p>
       <div
         ref={groupRef}
@@ -95,7 +86,7 @@ export default function PlanPicker({ plans, selected, onSelect }: PickerProps) {
                   on ? "bg-rr-violet text-white" : "text-text-strong hover:bg-rr-violet/10 hover:text-rr-violet-deep"
                 }`}
               >
-                {LABELS.option(p)}
+                {fill(labels.option, { weeks: p.weeks })}
               </span>
             </label>
           );
@@ -108,7 +99,7 @@ export default function PlanPicker({ plans, selected, onSelect }: PickerProps) {
           selected ? "" : "invisible"
         }`}
       >
-        {LABELS.clear}
+        {labels.clear}
       </button>
     </div>
   );
@@ -116,6 +107,7 @@ export default function PlanPicker({ plans, selected, onSelect }: PickerProps) {
 
 type SummaryProps = {
   facts: PlanFacts[];
+  labels: PickerLabels;
   selected: string | null;
   classTime: string;
 };
@@ -128,7 +120,7 @@ type SummaryProps = {
  * state: picking never moves anything below it. Class time is the same for
  * every plan (the syllabus), so it stays put under the swap.
  */
-export function PlanSummary({ facts, selected, classTime }: SummaryProps) {
+export function PlanSummary({ facts, labels, selected, classTime }: SummaryProps) {
   const current = facts.find((f) => f.plan.id === selected);
   // "All three plans shown" is news only after a pick, never on first paint.
   const [picked, setPicked] = useState(false);
@@ -137,7 +129,7 @@ export function PlanSummary({ facts, selected, classTime }: SummaryProps) {
     <div className="rounded-card border border-rr-violet/20 bg-rr-violet/6 p-5 md:p-6">
       <div className="grid [&>*]:col-start-1 [&>*]:row-start-1">
         <p className={`max-w-[48ch] text-body text-text-body md:self-center ${current ? "invisible" : ""}`}>
-          {LABELS.idle}
+          {labels.idle}
         </p>
         {facts.map((f) => (
           <div
@@ -148,16 +140,16 @@ export function PlanSummary({ facts, selected, classTime }: SummaryProps) {
           >
             <dl className="grid grid-cols-2 gap-x-6 gap-y-4 sm:flex sm:flex-wrap sm:gap-x-10 lg:gap-x-12">
               <div>
-                <dt className={MONO_NOTE}>{LABELS.modules}</dt>
+                <dt className={MONO_NOTE}>{labels.modules}</dt>
                 <dd className="mt-1 font-mono text-body font-semibold sm:text-lead text-rr-violet-deep">{moduleRange(f.plan.modules)}</dd>
               </div>
               <div>
-                <dt className={MONO_NOTE}>{LABELS.labs}</dt>
+                <dt className={MONO_NOTE}>{labels.labs}</dt>
                 <dd className="mt-1 font-mono text-body font-semibold sm:text-lead tabular-nums text-rr-violet-deep">{numberRange(f.labs)}</dd>
               </div>
               {f.races.length > 0 && (
                 <div>
-                  <dt className={MONO_NOTE}>{f.races.length === 1 ? LABELS.race : LABELS.races}</dt>
+                  <dt className={MONO_NOTE}>{f.races.length === 1 ? labels.race : labels.races}</dt>
                   <dd className="mt-1 font-mono text-body font-semibold sm:text-lead tabular-nums text-rr-violet-deep">
                     {numberRange(f.races)}
                   </dd>
@@ -165,29 +157,29 @@ export function PlanSummary({ facts, selected, classTime }: SummaryProps) {
               )}
               {f.projectWeeks !== null && (
                 <div>
-                  <dt className={MONO_NOTE}>{LABELS.project}</dt>
+                  <dt className={MONO_NOTE}>{labels.project}</dt>
                   <dd className="mt-1 font-mono text-body font-semibold sm:text-lead text-rr-violet-deep">
-                    {LABELS.projectValue(f.projectWeeks)}
+                    {fill(labels.project_value, { weeks: f.projectWeeks })}
                   </dd>
                 </div>
               )}
             </dl>
             <Button href={`/learn/courses/${f.plan.id}`} className="w-full sm:w-auto sm:self-start md:self-auto">
-              {LABELS.cta(f.plan)}
+              {fill(labels.cta, { title: f.plan.title })}
             </Button>
           </div>
         ))}
       </div>
       <p className={`mt-5 border-t border-rr-violet/15 pt-4 ${MONO_NOTE}`}>
         <span className="block max-w-[72ch]">
-          <span className="text-text-strong">{LABELS.classTime}</span>
+          <span className="text-text-strong">{labels.class_time}</span>
           <span aria-hidden="true"> · </span>
           <span className="sr-only">: </span>
           {classTime}
         </span>
       </p>
       <p className="sr-only" aria-live="polite">
-        {current ? LABELS.announce(current) : picked ? LABELS.cleared : ""}
+        {current ? announce(labels, current) : picked ? labels.cleared : ""}
       </p>
     </div>
   );

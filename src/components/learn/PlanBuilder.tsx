@@ -3,9 +3,7 @@ import { Link, useLocation, useNavigate, useSearchParams } from "react-router-do
 import type { CoursesFile, OutlineModule } from "../../lib/data";
 import { DURATION, REDUCED_MOTION_QUERY } from "../../lib/motion";
 import {
-  LABELS,
   countPhrase,
-  fill,
   mailtoUrl,
   modulesSearch,
   moduleList,
@@ -21,7 +19,7 @@ import {
 } from "../../lib/planBuilder";
 import Button from "../ui/Button";
 import { SIZE } from "../ui/buttonStyles";
-import { LINK, listWords, numberRange } from "./learnStyles";
+import { LINK, fill, listWords, numberRange } from "./learnStyles";
 
 /** Where a shared link lands: the builder's section heading (Teach.tsx). */
 const LANDING_HASH = "teach-lectures";
@@ -118,17 +116,18 @@ function Counter({ value, label, phrase }: { value: number; label: string; phras
 
 /** The chips under a module's name: what ticking it adds. */
 function ModuleMeta({ courses, m, id }: { courses: CoursesFile; m: OutlineModule; id: string }) {
+  const L = courses.teach.builder;
   const s = planSummary(courses, [m.id]);
   const n = (one: string, many: string, count: number) => fill(count === 1 ? one : many, { n: count });
-  const words = [n(LABELS.lectureOne, LABELS.lectureMany, s.lectures.length)];
-  if (s.tutorials.length) words.push(n(LABELS.tutorialOne, LABELS.tutorialMany, s.tutorials.length));
-  if (s.optional.length) words.push(`${s.optional.length} ${LABELS.detailOptional.toLowerCase()}`);
+  const words = [n(L.lecture_one, L.lecture_many, s.lectures.length)];
+  if (s.tutorials.length) words.push(n(L.tutorial_one, L.tutorial_many, s.tutorials.length));
+  if (s.optional.length) words.push(`${s.optional.length} ${L.detail_optional.toLowerCase()}`);
   return (
     <span id={id} className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1.5">
       <span className="font-mono text-small text-text-body">{words.join(" · ")}</span>
       {s.labs.length > 0 && (
         <span className={LAB_CHIP}>
-          {fill(s.labs.length === 1 ? LABELS.labOne : LABELS.labMany, { list: numberRange(s.labs.map((l) => l.number)) })}
+          {fill(s.labs.length === 1 ? L.lab_one : L.lab_many, { list: numberRange(s.labs.map((l) => l.number)) })}
         </span>
       )}
       {s.races.map((r) => (
@@ -170,6 +169,8 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { plans, outline } = courses;
+  // The builder's labels (courses.json teach.builder).
+  const L = courses.teach.builder;
 
   // No ?modules: start from the full course, the plan that holds every module.
   const fullPlan = plans.reduce<(typeof plans)[number] | undefined>(
@@ -190,7 +191,7 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
   const key = ids.join(",");
   const s = planSummary(courses, ids);
   const counts = planCounts(courses, s);
-  const status = planStatus(s);
+  const status = planStatus(courses, s);
   const empty = ids.length === 0;
 
   const link = shareUrl(window.location.origin, pathname, ids, LANDING_HASH);
@@ -214,7 +215,7 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
     setFeedback({ text, key });
     timer.current = window.setTimeout(() => setFeedback(null), 6000);
   };
-  const copy = async (text: string, done: string) => say((await copyText(text)) ? done : LABELS.copyFailed);
+  const copy = async (text: string, done: string) => say((await copyText(text)) ? done : L.copy_failed);
 
   const chip = empty
     ? "bg-ink-950/[0.06] text-text-body"
@@ -226,7 +227,7 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
     <div className="grid gap-12 lg:grid-cols-12 lg:gap-x-10">
       <div className="lg:col-span-7">
         <fieldset>
-          <legend className="font-mono text-small text-text-body">{LABELS.startLegend}</legend>
+          <legend className="font-mono text-small text-text-body">{L.start_legend}</legend>
           {/* Native radios as a segmented control: arrow keys move between
               them. Checked = the plan the selection equals, so a custom
               selection checks none and every plan is one click away. */}
@@ -245,14 +246,14 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
                   className="sr-only"
                 />
                 <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 bg-rr-violet opacity-0 group-has-checked:opacity-100" />
-                {fill(LABELS.weeksOption, { n: p.weeks })}
+                {fill(L.weeks_option, { n: p.weeks })}
               </label>
             ))}
           </div>
         </fieldset>
 
         <fieldset className="mt-10">
-          <legend className="font-mono text-small text-text-body">{LABELS.modulesLegend}</legend>
+          <legend className="font-mono text-small text-text-body">{L.modules_legend}</legend>
           <ul className="mt-3 grid gap-3 sm:grid-cols-2">
             {outline.modules.map((m) => {
               const on = ids.includes(m.id);
@@ -274,7 +275,7 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
                     </span>
                     <span className="min-w-0 flex-1">
                       <span id={titleId} className="block font-display text-body leading-snug font-semibold text-text-strong md:text-lead md:leading-snug">
-                        <span className="sr-only">{fill(LABELS.moduleSr, { id: m.id })}</span>
+                        <span className="sr-only">{fill(L.module_sr, { id: m.id })}</span>
                         {m.title}
                       </span>
                       <ModuleMeta courses={courses} m={m} id={`${titleId}-meta`} />
@@ -312,7 +313,7 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
           className="sticky bottom-0 z-10 -mx-6 mt-6 flex items-center gap-3 border-t-2 border-rr-violet/40 bg-paper-50 px-6 py-3 font-mono text-small text-text-strong lg:hidden"
         >
           <span className={`shrink-0 rounded-pill px-2.5 py-0.5 font-semibold ${chip}`}>
-            {s.match ? fill(LABELS.weeksOption, { n: s.match.weeks }) : empty ? LABELS.emptyShort : LABELS.customShort}
+            {s.match ? fill(L.weeks_option, { n: s.match.weeks }) : empty ? L.empty_short : L.custom_short}
           </span>
           <span className="text-text-body">
             <span className="block">{counts.slice(0, 2).map(countPhrase).join(" · ")}</span>
@@ -327,7 +328,7 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
       >
         <h3 id="plan-sheet-title" className="flex items-center gap-2 font-mono text-small font-semibold text-rr-violet-deep">
           <span aria-hidden="true" className="h-1 w-1 bg-rr-violet" />
-          {LABELS.summaryHeading}
+          {L.summary_heading}
         </h3>
         <div aria-live="polite" aria-atomic="true" className="mt-4">
           <p
@@ -336,18 +337,18 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
             {s.match && <Icon d={ICON_CHECK} />}
             {status}
           </p>
-          <p className="sr-only">{empty ? LABELS.emptyNote : `${planCountsLine(courses, s)}.`}</p>
+          <p className="sr-only">{empty ? L.empty_note : `${planCountsLine(courses, s)}.`}</p>
         </div>
         {/* Reserved line, whatever the state, so the card never jumps. */}
         <p className="mt-3 min-h-[1.5rem] text-small text-text-body">
           {empty ? (
-            LABELS.emptyNote
+            L.empty_note
           ) : s.match ? (
             <Link to={`/learn/courses/${s.match.id}`} className={`font-semibold ${LINK}`}>
-              {fill(LABELS.seePlan, { plan: s.match.title })}
+              {fill(L.see_plan, { plan: s.match.title })}
             </Link>
           ) : (
-            LABELS.customNote
+            L.custom_note
           )}
         </p>
 
@@ -358,9 +359,9 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
         </dl>
 
         <dl className="mt-6 grid grid-cols-[6.5rem_minmax(0,1fr)] gap-x-4 gap-y-2.5 border-t border-rr-violet/20 pt-5 md:grid-cols-[7.5rem_minmax(0,1fr)]">
-          <Detail term={LABELS.detailModules}>
+          <Detail term={L.detail_modules}>
             {empty
-              ? LABELS.none
+              ? L.none
               : s.modules.map((m) => (
                   <span key={m.id} className={`${CHIP} bg-rr-violet text-white`}>
                     {m.id}
@@ -369,7 +370,7 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
           </Detail>
           {/* Up to ten chips: two rows held from lg, where the card is narrow,
               so it keeps its height whatever is ticked. */}
-          <Detail term={LABELS.detailLabs}>
+          <Detail term={L.detail_labs}>
             <span className="flex min-h-[1.5rem] flex-wrap content-start gap-1.5 lg:min-h-[3.25rem]">
               {s.labs.length
                 ? s.labs.map((l) => (
@@ -377,23 +378,23 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
                       {l.number}
                     </span>
                   ))
-                : LABELS.none}
+                : L.none}
             </span>
           </Detail>
-          <Detail term={LABELS.detailRaces}>
+          <Detail term={L.detail_races}>
             {s.races.length
               ? s.races.map((r) => (
                   <span key={r.id} className={RACE_CHIP}>
                     {r.title}
                   </span>
                 ))
-              : LABELS.none}
+              : L.none}
           </Detail>
-          <Detail term={LABELS.detailOptional}>
-            {s.optional.length ? listWords(s.optional.map((i) => `${i.label.replace(/\s*\(optional\)$/i, "")}, ${i.title}`)) : LABELS.none}
+          <Detail term={L.detail_optional}>
+            {s.optional.length ? listWords(s.optional.map((i) => `${i.label.replace(/\s*\(optional\)$/i, "")}, ${i.title}`)) : L.none}
           </Detail>
-          <Detail term={LABELS.detailProject}>
-            {s.project ? fill(LABELS.projectIncluded, { modules: moduleList(courses, outline.final_project.modules) }) : LABELS.none}
+          <Detail term={L.detail_project}>
+            {s.project ? fill(L.project_included, { modules: moduleList(courses, outline.final_project.modules) }) : L.none}
           </Detail>
         </dl>
 
@@ -401,31 +402,31 @@ export default function PlanBuilder({ courses }: { courses: CoursesFile }) {
           {empty ? (
             <Button disabled className="cursor-not-allowed opacity-50">
               <Icon d={ICON_MAIL} />
-              {LABELS.email}
+              {L.email}
             </Button>
           ) : (
             <Button href={mailtoUrl(courses, s, link)}>
               <Icon d={ICON_MAIL} />
-              {LABELS.email}
+              {L.email}
             </Button>
           )}
-          <button type="button" disabled={empty} className={OUTLINE_BTN} onClick={() => copy(planText(courses, s, link), LABELS.copied)}>
+          <button type="button" disabled={empty} className={OUTLINE_BTN} onClick={() => copy(planText(courses, s, link), L.copied)}>
             <Icon d={ICON_COPY} />
-            {LABELS.copy}
+            {L.copy}
           </button>
-          <button type="button" disabled={empty} className={OUTLINE_BTN} onClick={() => copy(link, LABELS.linkCopied)}>
+          <button type="button" disabled={empty} className={OUTLINE_BTN} onClick={() => copy(link, L.link_copied)}>
             <Icon d={ICON_LINK} />
-            {LABELS.share}
+            {L.share}
           </button>
         </div>
         <p aria-live="polite" className="mt-3 min-h-[1.5rem] font-mono text-small font-semibold text-rr-violet-deep">
           {feedback?.key === key ? feedback.text : ""}
         </p>
         <p className="mt-1 font-mono text-small break-all text-text-body">
-          <span>{LABELS.shareLabel}: </span>
+          <span>{L.share_label}: </span>
           <span className="text-text-strong">{shown}</span>
         </p>
-        <p className="mt-4 border-t border-rr-violet/20 pt-4 text-small text-text-body">{LABELS.stored}</p>
+        <p className="mt-4 border-t border-rr-violet/20 pt-4 text-small text-text-body">{L.stored}</p>
       </section>
     </div>
   );

@@ -76,6 +76,53 @@
       "kicker": "What comes with it",
       "title": "What the course gives you",
       "lead": "Open on the course site today, free to reuse with credit."
+    },
+    "stats_label": "The course and the community in numbers",
+    "picker": {
+      "note": "Interface labels (no facts) written by the stage 2 builders on 2026-10-20 and moved here from the components in stage 3. {placeholders} are filled in at render.",
+      "label": "Show one plan",
+      "option": "{weeks} weeks",
+      "clear": "Show all three",
+      "idle": "Pick a length to see what it covers and open its course.",
+      "modules": "Modules",
+      "labs": "Labs",
+      "race": "Race",
+      "races": "Races",
+      "project": "Final project",
+      "project_value": "{weeks} weeks",
+      "class_time": "Class time",
+      "cta": "Open the {title}",
+      "announce": "{title}: Modules {modules}",
+      "announce_labs": "Labs {labs}",
+      "announce_race": "Race {races}",
+      "announce_races": "Races {races}",
+      "cleared": "All three plans shown."
+    },
+    "ladder": {
+      "note": "Interface labels (no facts) written by the stage 2 builders on 2026-10-20 and moved here from the components in stage 3. {placeholders} are filled in at render.",
+      "selected": "Selected",
+      "weeks": "{weeks} weeks",
+      "modules": "Modules {modules}",
+      "labs": "Labs {labs}",
+      "race": "Race {races}",
+      "races": "Races {races}",
+      "chips": "At a glance"
+    },
+    "finder": {
+      "note": "Interface labels (no facts) written by the stage 2 builders on 2026-10-20 and moved here from the components in stage 3. {placeholders} are filled in at render.",
+      "label": "Find a topic",
+      "placeholder": "Try RRT, particle filter, MPC or YOLO",
+      "hint": "Searches every module, lecture, tutorial, lab and race in the course.",
+      "count_one": "{n} match for “{q}”",
+      "count_many": "{n} matches for “{q}”",
+      "shown": ", the first {n} shown",
+      "more": "{n} more. Add a word to narrow it down.",
+      "none": "Nothing in the course matches “{q}”.",
+      "suggest": "Try a module:",
+      "results": "Matching topics",
+      "in_plans": "In",
+      "module": "Module {id}",
+      "project": "Project"
     }
   },
   "course": {
@@ -91,6 +138,32 @@
     "staff_heading": "Course staff",
     "faq_heading": "Logistics",
     "glance_heading": "At a glance",
+    "ui": {
+      "note": "Interface labels (no facts) written by the stage 2 builders on 2026-10-20 and moved here from the components in stage 3. {placeholders} are filled in at render.",
+      "tablist": "Course sections",
+      "facts": "Course facts",
+      "tab_about": "About",
+      "tab_outline": "Outline",
+      "tab_staff": "Staff",
+      "tab_logistics": "Logistics",
+      "noun_module": [
+        "module",
+        "modules"
+      ],
+      "noun_person": [
+        "person",
+        "people"
+      ],
+      "noun_question": [
+        "question",
+        "questions"
+      ],
+      "prerequisites_need": "You need",
+      "prerequisites_not_covered": "Not covered",
+      "copy_link": "Copy link",
+      "copied": "Link copied",
+      "copy_failed": "Could not copy. The link is in the address bar."
+    },
     "open_material": {
       "label": "Open the course material",
       "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/getting_started/index.html"
@@ -446,6 +519,30 @@
         "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/assignments/grading.html"
       }
     ],
+    "ui": {
+      "note": "Interface labels (no facts) written by the stage 2 builders on 2026-10-20 and moved here from the components in stage 3. {placeholders} are filled in at render.",
+      "expand_all": "Expand all",
+      "collapse_all": "Collapse all",
+      "meter": "{done} of {total} done in this outline",
+      "module_done": "{done} of {total} done",
+      "mark": "Mark {label} as done",
+      "done": "Done",
+      "local": "Ticks are saved in this browser only. Nothing is sent.",
+      "blocked": "This browser is blocking storage, so these ticks will not be kept. Nothing is sent.",
+      "clear": "Clear ticks",
+      "recorded": "recorded",
+      "assigns": "assigns {labs}",
+      "watch": "Watch",
+      "close": "Close",
+      "watch_name": "{name}",
+      "close_name": "the video of {name}",
+      "player_title": "{name} (recorded lecture)",
+      "on_youtube": "Open on YouTube",
+      "recorded_note": "Recorded lecture from the coursekit",
+      "slides": "Slides",
+      "slides_name": "for {name}",
+      "recorded_count": "{n} recorded"
+    },
     "modules": [
       {
         "id": "A",
@@ -1284,6 +1381,7 @@
       },
       "plans_link_note": "TODO(content): label written by the page builder (2026-09-27), not taken from the mock; confirm the wording (Cedric)."
     },
+    "rail_label": "On this page",
     "how_it_works": {
       "kicker": "How it works",
       "title": "Six steps to your first class",
@@ -1345,6 +1443,56 @@
       "title": "Pick a plan, then trim it",
       "lead": "Each plan is a set of modules and labs from the course site. Start from one, then add or drop modules.",
       "source": "https://f1tenth-coursekit.readthedocs.io/en/latest/getting_started/index.html"
+    },
+    "builder": {
+      "note": "Interface labels (no facts) written by the stage 2 builders on 2026-10-20 and moved here from the components in stage 3. {placeholders} are filled in at render. The mail_* and text_* lines go into the email and the copied plan.",
+      "start_legend": "Start from a plan",
+      "weeks_option": "{n} weeks",
+      "modules_legend": "Modules",
+      "module_sr": "Module {id}: ",
+      "lecture_one": "{n} lecture",
+      "lecture_many": "{n} lectures",
+      "tutorial_one": "{n} tutorial",
+      "tutorial_many": "{n} tutorials",
+      "lab_one": "Lab {list}",
+      "lab_many": "Labs {list}",
+      "summary_heading": "Your plan",
+      "matches": "Matches the {plan}",
+      "custom": "Custom selection",
+      "custom_short": "Custom",
+      "custom_note": "The course site gives weeks only for its three plans.",
+      "empty": "No modules selected",
+      "empty_short": "No modules",
+      "empty_note": "Choose at least one module to copy, share or email a plan.",
+      "see_plan": "See the {plan}",
+      "tutorials": "tutorials",
+      "detail_modules": "Modules",
+      "detail_labs": "Labs",
+      "detail_races": "Races",
+      "detail_optional": "Optional",
+      "detail_project": "Final project",
+      "project_included": "Included, Modules {modules}",
+      "none": "none",
+      "email": "Email it to us",
+      "copy": "Copy plan",
+      "share": "Share link",
+      "copied": "Plan copied.",
+      "link_copied": "Link copied.",
+      "copy_failed": "Your browser blocked the clipboard. The link below can be selected and copied by hand.",
+      "share_label": "Link to this plan",
+      "stored": "Nothing is stored or sent; Email opens your own mail app.",
+      "text_title": "RoboRacer course plan",
+      "text_link": "Link",
+      "text_module": "Module {id}: {title}",
+      "text_recorded": "recorded",
+      "text_material": "Course material",
+      "text_license": "License",
+      "mail_greeting": "Hello RoboRacer team,",
+      "mail_intro": "We would like to teach the RoboRacer course with this plan.",
+      "mail_fields": [
+        "University:",
+        "Your names:"
+      ]
     },
     "steps": {
       "kicker": "Step by step",
