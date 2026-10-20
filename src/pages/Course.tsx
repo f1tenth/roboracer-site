@@ -18,6 +18,7 @@ import { LINK, MONO_NOTE, TAP, isTodo, moduleRange, numberRange } from "../compo
  * headings stay the JSON's. */
 const LABELS = {
   tablist: "Course sections",
+  facts: "Course facts",
   tab_about: "About",
   tab_outline: "Outline",
   tab_staff: "Staff",
@@ -526,7 +527,7 @@ export default function Course() {
                 <span className="text-gradient-logo -my-[0.15em] inline-block py-[0.15em]">{course.title}</span>
               </h1>
               <p className="mt-4 max-w-[60ch] text-lead text-text-on-ink/90">{course.blurb}</p>
-              <ul className="mt-5 flex flex-wrap gap-2" aria-label="Course facts">
+              <ul className="mt-5 flex flex-wrap gap-2" aria-label={LABELS.facts}>
                 {chips.map((c, i) => (
                   <li
                     key={c}
