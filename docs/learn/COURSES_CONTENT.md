@@ -1,6 +1,8 @@
 # Courses content audit: the LMS mock, cleaned
 
-Status 2026-09-26, branch `revamp/learn-courses`. Source: Dhyey Shah's mock
+Status 2026-09-26, branch `revamp/learn-courses`; the schema, rendering rules
+and questions updated 2026-10-20 (stage 3 of the interactivity build: the
+interface labels and the photos joined the file). Source: Dhyey Shah's mock
 "RoboRacer LMS portal" (`index.html`, `course.html`, `instructors.html`,
 `assets/js/app.js`; live copy https://dhyeyshah.com/roboracer-lms/index.html,
 last commit "Remove highlight blocks, vary course dates, reword how-it-works
@@ -32,6 +34,11 @@ Three pages render from one file:
 | `faq` | Student logistics, five questions | `/learn/courses/:id` |
 | `features` | ONE list for both pages. `pages` says where each appears | `/learn/courses`, `/learn/teach` |
 | `teach` | Hero (with `pills`, feature ids), `how_it_works` (6 steps + the two portals), `features` head, `lecture_selection` head, `steps` (5-step guide), `recording` tips, `resources`, instructor `faq`, `contact` CTA | `/learn/teach` |
+| `catalog.stats_label`, `catalog.picker`, `catalog.ladder`, `catalog.finder` | Interface labels (2026-10-20): the stat tiles' list name; the plan picker and its summary (with the live-region sentence); the plan cards' chips and "Selected"; the topic finder (field, hint, counts, the miss panel) | `/learn/courses` |
+| `course.ui` | Interface labels: the tab names and the screen-reader nouns after their counts, the chips' list name, the two prerequisite card labels ("You need", "Not covered"), Copy link and its two status lines | `/learn/courses/:id` |
+| `outline.ui` | Interface labels: Expand / Collapse all, the meter and module chips, the done box, the local-storage notes, Clear, and the Watch, Close, Slides and player texts | the outline on `/learn/courses` and `/learn/courses/:id` |
+| `teach.rail_label`, `teach.builder` | The section rail's name; the plan builder's labels and the lines of the email (`mail_*`) and the copied plan (`text_*`) it writes | `/learn/teach` |
+| `catalog.hero.photo`, `teach.hero.photo`, `plans[].banner`, `plans[].card_photo`, `offerings[].banner` | Photos: `src` (an existing file under `public/media`), `width`, `height`, `alt`, `position` (CSS object-position) and `manifest`, the `docs/ASSET_MANIFEST.md` row for that use (CC-01 to CC-04, CP-01 to CP-04, U3-01). Optional: without one a band is plain ink and a card a violet panel | catalog hero and plan cards, course banners, teach header |
 
 Rendering rules:
 
@@ -53,7 +60,16 @@ Rendering rules:
   with `plans`.
 - **Links:** every URL in the file answered 200 on 2026-09-26 except the two
   known cases: `meta.slide_downloads.url` (404, marked `broken`, do not link)
-  and the Slack invite (403 to curl, valid per Cedric 2026-09-26).
+  and the Slack invite (403 to curl, valid per Cedric 2026-09-26). Re-checked
+  2026-10-20 (stage 3): the same, plus `www.upenn.edu`, which refuses a
+  browser user agent from a script and answers a plain one.
+- **Interface labels** (`*.ui`, `catalog.picker` and the rest above) hold no
+  facts. `{name}` slots are filled at render by `fill()` in
+  `src/components/learn/learnStyles.ts`; an unknown slot shows as written, so
+  a typo is visible. Each block's `note` is bookkeeping and never rendered.
+  Plurals are two keys (`count_one`, `count_many`) or a `[one, many]` pair.
+- **Photos** are existing site files only (CLAUDE.md rule 8), each with a
+  manifest row naming its provenance row. A new photo needs a row first.
 
 ## Catalog (`index.html`)
 
@@ -156,6 +172,9 @@ Student FAQ rewrites:
 11. **Background courses.** The mock promises related background courses next to the lectures. Which, and where?
 12. **New content monthly.** Is there a real schedule for expert talks and research updates, and where is it published?
 13. **Instructor and institution counts.** The mock showed 12 instructors and 7 institutions. If you want those on the catalog, give the numbers; they are not on the page now.
+14. **Labels written by the builders** and not yet read by you. From 2026-09-27 (each with a `TODO(content)` note): `catalog.outline_heading`, `course.glance_heading`, `course.not_found`, `teach.hero.plans_link`. From 2026-10-20 (no facts, so a `note` rather than a TODO): `catalog.picker`, `catalog.ladder`, `catalog.finder`, `course.ui`, `outline.ui`, `teach.builder`, including the email the plan builder writes ("We would like to teach the RoboRacer course with this plan." and the University / Your names fields).
+15. **Photo permission notes.** The 10-week banner (`plans[1].banner`, manifest CP-02 from V4-09) is credited to you with "verify: looks like a DSLR frame"; the Penn banner (CP-04 from V4-10) shows an identifiable UPenn student. The other photos are Felix Jahncke's or the Samaks' (granted) or your own.
+16. **Coursekit fixes, not site fixes:** Tutorial 3's embedded deck is deleted (HTTP 410), and the Lecture 9 (optional) page carries two scan-matching lab videos the outline does not show (one `video_id` per item; show them too?).
 
 ## Found on the coursekit (worth knowing)
 
