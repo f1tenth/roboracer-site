@@ -216,7 +216,10 @@ export default function Teach() {
 
       {/* How it works: six icon steps on one violet rule (vertical on a
           phone), then the two places the work happens as tinted cards. */}
-      <Section width="page" aria-labelledby="teach-how">
+      {/* Every teach section takes the tight rhythm: a reference page read
+          with the rail, where the full padding added 240 px of blank per
+          section at 1440 (stage 3 review, the page-length question). */}
+      <Section width="page" tight aria-labelledby="teach-how">
         <SectionHeader
           index={indexOf("teach-how")}
           eyebrow={teach.how_it_works.kicker}
@@ -265,7 +268,7 @@ export default function Teach() {
       </Section>
 
       {features.length > 0 && (
-        <Section width="page" edge rule aria-labelledby="teach-features">
+        <Section width="page" tight edge rule aria-labelledby="teach-features">
           <SectionHeader
             index={indexOf("teach-features")}
             eyebrow={teach.features.kicker}
@@ -274,7 +277,9 @@ export default function Teach() {
             lead={teach.features.lead}
           />
           {/* Icon tiles; each that has a page on the course site opens it
-              (the whole tile is the link, so it lifts like a card). */}
+              (the whole tile is the link, so it lifts like a card). On a
+              phone the icon sits beside the title, which saves a row per
+              tile (six of them stacked). */}
           <Reveal as="ul" stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
             {features.map((f) => {
               const href = featureHref(f, courses, search);
@@ -282,7 +287,7 @@ export default function Teach() {
               return (
                 <li
                   key={f.id}
-                  className={`group relative flex flex-col gap-4 rounded-card border border-ink-950/10 bg-paper-50 p-6 shadow-card ${
+                  className={`group relative grid grid-cols-[3rem_minmax(0,1fr)] items-center gap-x-4 gap-y-3 rounded-card border border-ink-950/10 bg-paper-50 p-5 shadow-card sm:flex sm:flex-col sm:items-stretch sm:gap-4 sm:p-6 ${
                     href
                       ? "transition-[translate,box-shadow,border-color] duration-[var(--duration-fast)] hover:-translate-y-0.5 hover:border-rr-violet/40 hover:shadow-card-hover motion-reduce:transition-none motion-reduce:hover:translate-y-0 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-rr-violet"
                       : ""
@@ -312,7 +317,7 @@ export default function Teach() {
                       f.title
                     )}
                   </h3>
-                  <p className="text-body text-text-body">{f.body}</p>
+                  <p className="col-span-2 text-body text-text-body">{f.body}</p>
                 </li>
               );
             })}
@@ -322,7 +327,7 @@ export default function Teach() {
 
       {/* The guide: every step open, one ruled block each (what it is,
           the checklist, the tip and the Open edX docs), no tabs. */}
-      <Section width="page" rule aria-labelledby="teach-steps">
+      <Section width="page" tight rule aria-labelledby="teach-steps">
         <SectionHeader
           index={indexOf("teach-steps")}
           eyebrow={teach.steps.kicker}
@@ -334,7 +339,7 @@ export default function Teach() {
           {teach.steps.items.map((it) => (
             <li
               key={it.n}
-              className="grid gap-6 border-b border-ink-950/10 py-8 md:grid-cols-12 md:gap-x-10 desktop:py-10"
+              className="grid gap-4 border-b border-ink-950/10 py-6 md:grid-cols-12 md:gap-6 md:gap-x-10 md:py-8 desktop:py-10"
             >
               <div className="md:col-span-4">
                 <p className={NUMBER_BADGE}>{pad2(it.n)}</p>
@@ -373,7 +378,7 @@ export default function Teach() {
         </ol>
       </Section>
 
-      <Section width="page" edge rule aria-labelledby="teach-lectures">
+      <Section width="page" tight edge rule aria-labelledby="teach-lectures">
         <SectionHeader
           index={indexOf("teach-lectures")}
           eyebrow={teach.lecture_selection.kicker}
@@ -389,7 +394,7 @@ export default function Teach() {
         <PlanBuilder courses={courses} />
       </Section>
 
-      <Section width="page" rule aria-labelledby="teach-recording">
+      <Section width="page" tight rule aria-labelledby="teach-recording">
         <SectionHeader
           index={indexOf("teach-recording")}
           eyebrow={teach.recording.kicker}
@@ -432,7 +437,7 @@ export default function Teach() {
         </div>
       </Section>
 
-      <Section width="page" rule aria-labelledby="teach-faq">
+      <Section width="page" tight rule aria-labelledby="teach-faq">
         <SectionHeader
           index={indexOf("teach-faq")}
           id="teach-faq"
