@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
-import ExternalRedirect from "./components/ExternalRedirect";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
 
 // Route-level code splitting: every page is its own chunk so no route pays
@@ -13,6 +12,9 @@ const Landing = lazyWithRetry("Landing", () => import("./pages/Landing"));
 const About = lazyWithRetry("About", () => import("./pages/About"));
 const Build = lazyWithRetry("Build", () => import("./pages/Build"));
 const Learn = lazyWithRetry("Learn", () => import("./pages/Learn"));
+const Courses = lazyWithRetry("Courses", () => import("./pages/Courses"));
+const Course = lazyWithRetry("Course", () => import("./pages/Course"));
+const Teach = lazyWithRetry("Teach", () => import("./pages/Teach"));
 const News = lazyWithRetry("News", () => import("./pages/News"));
 const RaceCalendar = lazyWithRetry("Race", () => import("./pages/Race"));
 const Research = lazyWithRetry("Research", () => import("./pages/Research"));
@@ -21,16 +23,11 @@ const Chat = lazyWithRetry("Chat", () => import("./pages/Chat"));
 const Assembly = lazyWithRetry("Assembly", () => import("./pages/Assembly"));
 const Styleguide = lazyWithRetry("Styleguide", () => import("./pages/Styleguide"));
 
-/** The courses live on Dhyey Shah's RoboRacer Courses site for now (Cedric,
- * 2026-09-27); the coursekit sidebar's Courses link points here. */
-const COURSES_URL = "https://dhyeyshah.com/roboracer-lms/";
-
 function App() {
   return (
     <Router>
       <Suspense fallback={null}>
         <Routes>
-          <Route path="/learn/courses" element={<ExternalRedirect to={COURSES_URL} label="the RoboRacer courses" />} />
           {/* Wrap all routes inside Layout */}
           <Route element={<Layout />}>
             <Route path="/" element={<Landing />} />
@@ -41,6 +38,14 @@ function App() {
                 page now; /course still resolves so no shared link breaks. */}
             <Route path="/course" element={<Navigate to="/learn" replace />} />
             <Route path="/learn" element={<Learn />} />
+            {/* The course catalog, one page per plan or university, and the
+                instructors page, rendered from public/data/courses.json (first
+                ported from Dhyey Shah's LMS mock). Native again since
+                2026-10-20 (Cedric): the coursekit sidebar's Courses link lands
+                here. /learn itself stays the docs frame. */}
+            <Route path="/learn/courses" element={<Courses />} />
+            <Route path="/learn/courses/:id" element={<Course />} />
+            <Route path="/learn/teach" element={<Teach />} />
             <Route path="/news" element={<News />} />
             <Route path="/race" element={<RaceCalendar />} />
             <Route path="/research" element={<Research />} />

@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import type { ReplayConfig } from "./leaderboardData";
 
@@ -43,6 +43,19 @@ const NARROW: Fit = {
   trackY: "28%",
 };
 
+/** The layout with a board's own posters (ReplayConfig.posters): the wide
+ * dialog is the same size on every board measured; the phone dialog's height
+ * follows the board's own controls. */
+function fitFor(base: Fit, posters: ReplayConfig["posters"]): Fit {
+  if (!posters) return base;
+  if (base === WIDE) return { ...WIDE, poster: { ...WIDE.poster, src: posters.wide } };
+  return {
+    ...NARROW,
+    cropH: posters.narrow_height,
+    poster: { src: posters.narrow, width: NARROW.poster.width, height: posters.narrow_height * 2 },
+  };
+}
+
 /** Below this width (CSS px) the wide player would shrink under two thirds
  * and its type under 9 px: the phone layout instead, never enlarged. */
 const WIDE_FROM = 640;
@@ -58,6 +71,105 @@ const LINK =
  * (the board reads its data first); the poster stays up that long. */
 const REVEAL_AFTER_MS = 900;
 
+/** A Tab or a press in this page within this long before focus enters the
+ * frame makes the move the reader's own (Tab into the player). Scrolling
+ * (wheel, touch, Space, the arrows) is not a focus move: a grab during it is
+ * still put back. */
+const INPUT_WINDOW_MS = 500;
+/** The page scroll that a focus grab causes lands within a frame or two of
+ * it (20 ms measured); only a scroll that soon is put back. */
+const GRAB_SCROLL_MS = 150;
+/** When focus is handed back after a grab: the frame's focus change
+ * completes a moment after the page sees it (a hand-back during the blur
+ * itself was undone), so it is tried again while focus is still there. */
+const GIVE_BACK_AT_MS = [100, 300, 800];
+
+/**
+ * The board opens its player as a modal dialog with the Play button
+ * autofocused (replay.js), and Chrome scrolls the page to bring a newly
+ * focused element into view, even one inside a cross-origin frame: on
+ * /learn/courses, where the replay sits under the first screen, the page
+ * jumped about 800 px down a second after it opened (Cedric, 2026-10-20).
+ * Neither `inert` nor `visibility: hidden` on the frame stops it (a modal
+ * dialog escapes inertness). So while the frame is up, this puts back the
+ * one page scroll that follows focus moving into the frame by itself (no Tab
+ * or press in the page just before it and no pointer over the replay), and
+ * hands focus back to where it was in the page, so the next
+ * Tab starts where the reader is, not inside the player. Anything the reader
+ * does is left alone. The cure is upstream: the board should not autofocus
+ * when it is framed (docs/LEADERBOARD.md).
+ */
+function useFocusGrabGuard(frameRef: RefObject<HTMLIFrameElement | null>, reachedRef: RefObject<boolean>, active: boolean) {
+  useEffect(() => {
+    if (!active) return;
+    let settled = window.scrollY;
+    let grabbedAt = -1;
+    let inputAt = -Infinity;
+    let timers: number[] = [];
+    // The last element the reader focused in this page (null: none yet).
+    let lastFocus: HTMLElement | null = null;
+    const restore = () => {
+      grabbedAt = -1;
+      window.scrollTo({ top: settled, behavior: "instant" });
+    };
+    // Focus back in the page without moving it: the reader's last focus, or
+    // the body (made focusable for the call) so Tab starts at the top.
+    const giveFocusBack = () => {
+      if (lastFocus?.isConnected) {
+        lastFocus.focus({ preventScroll: true });
+        return;
+      }
+      const body = document.body;
+      const had = body.getAttribute("tabindex");
+      body.setAttribute("tabindex", "-1");
+      body.focus({ preventScroll: true });
+      if (had === null) body.removeAttribute("tabindex");
+      else body.setAttribute("tabindex", had);
+    };
+    const onInput = (e: Event) => {
+      if (e instanceof KeyboardEvent && e.key !== "Tab") return;
+      inputAt = performance.now();
+      grabbedAt = -1;
+    };
+    const onFocusIn = (e: FocusEvent) => {
+      if (e.target instanceof HTMLElement && e.target !== frameRef.current && e.target !== document.body) lastFocus = e.target;
+    };
+    const onBlur = () => {
+      if (document.activeElement !== frameRef.current || reachedRef.current) return;
+      if (performance.now() - inputAt < INPUT_WINDOW_MS) return;
+      const at = performance.now();
+      grabbedAt = at;
+      if (window.scrollY !== settled) restore();
+      timers.forEach((id) => window.clearTimeout(id));
+      timers = GIVE_BACK_AT_MS.map((ms) =>
+        window.setTimeout(() => {
+          if (inputAt > at || reachedRef.current || document.activeElement !== frameRef.current) return;
+          giveFocusBack();
+        }, ms),
+      );
+    };
+    const onScroll = () => {
+      if (grabbedAt >= 0 && performance.now() - grabbedAt < GRAB_SCROLL_MS) {
+        restore();
+        return;
+      }
+      settled = window.scrollY;
+    };
+    const inputs = ["keydown", "pointerdown"] as const;
+    inputs.forEach((t) => window.addEventListener(t, onInput, { capture: true, passive: true }));
+    window.addEventListener("blur", onBlur);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("focusin", onFocusIn, true);
+    return () => {
+      timers.forEach((id) => window.clearTimeout(id));
+      inputs.forEach((t) => window.removeEventListener(t, onInput, { capture: true }));
+      document.removeEventListener("focusin", onFocusIn, true);
+      window.removeEventListener("blur", onBlur);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [frameRef, reachedRef, active]);
+}
+
 /**
  * The class board's own replay player, racing the top cars of the board shown
  * in the table (docs/LEADERBOARD.md, "The replay").
@@ -71,7 +183,8 @@ const REVEAL_AFTER_MS = 900;
  * before the capture, manifest RACE-LB-01/02). Under reduced motion nothing
  * loads by itself: the poster stays, with a play disc, until a click (rule 6),
  * and the board's player then opens paused. The link under it opens the same
- * view on the board's site, in every state.
+ * view on the board's site, in every state. The board's own focus grab
+ * never moves the page (useFocusGrabGuard).
  */
 export default function LeaderboardReplay({ replay, href }: { replay: ReplayConfig; href: string }) {
   const measureRef = useRef<HTMLDivElement>(null);
@@ -83,10 +196,21 @@ export default function LeaderboardReplay({ replay, href }: { replay: ReplayConf
   // Bumped by "Restart the replay": a fresh frame, the player open again.
   const [run, setRun] = useState(0);
   const revealTimer = useRef<number | undefined>(undefined);
+  // The pointer has been over the replay (or pressed its poster): from then
+  // on a focus move into the frame is the reader's.
+  const reachedRef = useRef(false);
   const reduced = usePrefersReducedMotion();
+  useFocusGrabGuard(frameRef, reachedRef, on);
 
-  // Autoplay: the frame mounts once the box is within 200 px of the viewport
-  // (the poster covers its load), never under reduced motion.
+  // Autoplay: the frame mounts once the reader has scrolled the page and
+  // most of the box is in the viewport (the poster covers its load), never
+  // under reduced motion. Both conditions matter: the board's player focuses
+  // its Play button as it opens, and Chrome scrolls the page to a newly
+  // focused element even inside a cross-origin frame. A frame that mounts
+  // on a page the reader has not scrolled yet (the catalog shows the box
+  // right under the hero) would drag the page down by itself (Cedric,
+  // 2026-10-20: "just let the user scroll down, starting at the top of the
+  // page"); a box that is mostly in view has nothing to scroll to.
   useEffect(() => {
     if (on || reduced) return;
     const el = measureRef.current;
@@ -95,17 +219,43 @@ export default function LeaderboardReplay({ replay, href }: { replay: ReplayConf
       setOn(true);
       return;
     }
+    let scrolled = window.scrollY > 24;
+    let inView = false;
+    const arm = () => {
+      if (scrolled && inView) {
+        setOn(true);
+        cleanup();
+      }
+    };
+    // A real scroll by the reader: the wheel, a touch, the keyboard, or the
+    // page having moved past the top (a route change lands at 0).
+    const onIntent = () => {
+      scrolled = true;
+      arm();
+    };
+    const onScroll = () => {
+      if (window.scrollY > 24) onIntent();
+    };
     const io = new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setOn(true);
-          io.disconnect();
-        }
+        inView = entries.some((e) => e.isIntersecting);
+        arm();
       },
-      { rootMargin: "200px 0px" },
+      { threshold: 0.6 },
     );
+    const cleanup = () => {
+      io.disconnect();
+      window.removeEventListener("wheel", onIntent);
+      window.removeEventListener("touchmove", onIntent);
+      window.removeEventListener("keydown", onIntent);
+      window.removeEventListener("scroll", onScroll);
+    };
     io.observe(el);
-    return () => io.disconnect();
+    window.addEventListener("wheel", onIntent, { passive: true });
+    window.addEventListener("touchmove", onIntent, { passive: true });
+    window.addEventListener("keydown", onIntent);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return cleanup;
   }, [on, reduced]);
 
   useLayoutEffect(() => {
@@ -147,7 +297,7 @@ export default function LeaderboardReplay({ replay, href }: { replay: ReplayConf
     setRun((n) => n + 1);
   };
 
-  const fit = width !== null && width >= WIDE_FROM ? WIDE : NARROW;
+  const fit = fitFor(width !== null && width >= WIDE_FROM ? WIDE : NARROW, replay.posters);
   const scale = width === null ? 1 : Math.min(1, width / fit.cropW);
   const boxW = fit.cropW * scale;
   const boxH = fit.cropH * scale;
@@ -160,7 +310,13 @@ export default function LeaderboardReplay({ replay, href }: { replay: ReplayConf
         <p className="mt-3 flex min-h-10 items-center text-small text-text-muted coarse:min-h-11">{replay.note}</p>
       </div>
 
-      <div ref={measureRef} className="mt-6 w-full">
+      <div
+        ref={measureRef}
+        className="mt-6 w-full"
+        onPointerEnter={() => {
+          reachedRef.current = true;
+        }}
+      >
         {width !== null && (
           <div
             className="relative overflow-hidden bg-paper-100"

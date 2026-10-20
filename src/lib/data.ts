@@ -69,7 +69,7 @@ export type Partner = {
 
 /** Numeric width and height for a partner logo drawn at a fixed height, so
  * the box is right before the file arrives (and "width" is never "auto"). */
-export const logoAttrs = (p: Partner, height: number) => ({
+export const logoAttrs = (p: Pick<Partner, "width" | "height">, height: number) => ({
   width: p.width > 0 && p.height > 0 ? Math.round((height * p.width) / p.height) : height,
   height,
 });
@@ -544,3 +544,418 @@ export type PathsFile = {
 };
 
 export const loadPaths = () => loadJson<PathsFile>("paths.json");
+
+/* public/data/courses.json: the course catalog (/learn/courses), one course
+ * page per plan or offering (/learn/courses/:id) and the instructors page
+ * (/learn/teach). Ported from Dhyey Shah's LMS mock; what was kept, rewritten
+ * and dropped is in docs/learn/COURSES_CONTENT.md. Any string starting with
+ * TODO(content) is a question for Cedric and is never rendered. */
+
+export type CourseLink = { label: string; href: string };
+
+/** A section head: small kicker, 2 to 5 word title, one-sentence lead. */
+export type CourseHeading = {
+  kicker?: string;
+  title: string;
+  lead?: string;
+  /** Open question about the wording. Not rendered. */
+  note?: string;
+};
+
+export type CourseImage = { src: string; width: number; height: number; alt: string };
+
+/** A site photo behind a page top, a banner or a card (an existing file
+ * under public/media). Not rendered: `manifest`, the docs/ASSET_MANIFEST.md
+ * row that records this use. */
+export type CoursePhoto = CourseImage & {
+  /** CSS object-position, to keep the subject clear of the copy. */
+  position?: string;
+  manifest: string;
+};
+
+export type CourseHero = {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  primary: CourseLink;
+  secondary: CourseLink;
+  /** The photo behind the page top (the catalog's band, the teach header). */
+  photo?: CoursePhoto;
+};
+
+export type CoursesMeta = {
+  /** The Open edX course platform. null until it is public: while null, hide
+   * every link to it and every feature with status "platform". */
+  lms_url: string | null;
+  lms_url_note: string;
+  contact: string;
+  /** Subject line for the "Email the team" mailto. */
+  teach_subject: string;
+  slack_url: string;
+  /** The course material itself (f1tenth-coursekit.readthedocs.io). */
+  coursekit_url: string;
+  start_here_url: string;
+  syllabus_url: string;
+  labs_url: string;
+  races_url: string;
+  grading_url: string;
+  downloads_url: string;
+  build_docs_url: string;
+  leaderboard_url: string;
+  license: { name: string; url: string; summary: string; source: string };
+  /** Class time from the syllabus. Not student effort, which is unknown
+   * (see effort_note on each plan). */
+  class_time: { text: string; source: string };
+  /** The coursekit's slide-request form. "broken": do not link it. */
+  slide_downloads: { url: string; status: "ok" | "broken"; note: string };
+};
+
+export type CourseStat = {
+  id: string;
+  group: "community" | "course";
+  /** Display string ("3,500+", "7"); never parse it. The "members" stat
+   * mirrors community.json members_display: prefer that when it is loaded. */
+  value: string;
+  /** The same figure as a number, for the count-up (3500 for "3,500+"); the
+   * count runs only while value_number and suffix spell `value` exactly, and
+   * `value` is what no-JS and reduced motion show. "members" follows
+   * community.json `members` with members_display. */
+  value_number?: number;
+  /** What follows the number in `value` ("+" or ""). */
+  suffix?: string;
+  label: string;
+  /** Where the figure comes from. Not rendered. */
+  source: string;
+};
+
+/** What the course page reads from a plan or an offering. */
+type CourseBase = {
+  /** Route segment: /learn/courses/:id. Unique across plans and offerings. */
+  id: string;
+  title: string;
+  /** Card body, under 25 words. */
+  blurb: string;
+  /** The course page's banner photo, under a dark scrim. */
+  banner?: CoursePhoto;
+  /** ISO dates. null = unknown: render no date line at all (not "TBA");
+   * `dates_note` holds the open question. */
+  starts: string | null;
+  ends: string | null;
+  dates_note: string;
+  /** null = unknown: render no effort line. `effort_note` says why. */
+  effort_hours_per_week: number | null;
+  effort_note: string;
+};
+
+/** One of the three core offerings, cut from the coursekit's Start Here page. */
+export type CoursePlan = CourseBase & {
+  kind: "plan";
+  weeks: number;
+  /** The catalog's plan card photo. */
+  card_photo?: CoursePhoto;
+  outcome: string;
+  /** outline.modules ids the plan covers, in order. */
+  modules: string[];
+  /** outline.labs ids the plan assigns (required labs only). */
+  labs: string[];
+  href: string;
+  source: string;
+};
+
+/** A university that teaches the course on its own dates. */
+export type CourseOffering = CourseBase & {
+  kind: "offering";
+  institution: string;
+  short_name: string;
+  /** Course number ("ESE 6150"); null when unknown. */
+  code: string | null;
+  code_source: string | null;
+  /** plans[].id whose outline this offering follows; null when unknown. */
+  plan: string | null;
+  plan_source: string | null;
+  logo: CourseImage;
+  website: string;
+  links: CourseLink[];
+  /** staff[].id */
+  staff: string[];
+  /** Render only "published". "verify" means the mock listed it but nothing
+   * confirms the university teaches the course: no card, no route. */
+  status: "published" | "verify";
+  note?: string;
+  source: string;
+};
+
+export type OutlineItem = {
+  kind: "lecture" | "tutorial";
+  /** The coursekit's number. Lectures skip 14 to 16 and tutorials count on
+   * their own, so it is not unique: key on href. */
+  number: number;
+  /** Display label: "Lecture 9 (optional)", "Lectures 23 to 25", "Tutorial 2". */
+  label: string;
+  title: string;
+  href: string;
+  optional?: boolean;
+  /** The coursekit page embeds slides / a YouTube recording. */
+  slides: boolean;
+  video: boolean;
+  /** The recording's YouTube id, harvested from the coursekit page's own
+   * embed and checked with YouTube oEmbed (the file's `checked` date); only
+   * where `video` is true. docs/learn/tools/harvest_lecture_media.py */
+  video_id?: string;
+  /** The lecture's Google Slides deck (https://docs.google.com/presentation/d/<id>),
+   * from the same page; only where `slides` is true and the deck opens. */
+  slides_url?: string;
+  /** outline.labs ids this lecture assigns. */
+  labs?: string[];
+};
+
+export type OutlineModule = {
+  /** "A" to "G". */
+  id: string;
+  title: string;
+  summary: string;
+  href: string;
+  items: OutlineItem[];
+  /** outline.labs ids, optional ones included. */
+  labs: string[];
+  /** outline.races ids the module ends with. */
+  races: string[];
+};
+
+export type OutlineLab = {
+  /** "lab-1" to "lab-10" (the coursekit's numbering since 2026-10-19). */
+  id: string;
+  number: number;
+  label: string;
+  title: string;
+  href: string;
+  /** outline.modules id. */
+  module: string;
+  optional?: boolean;
+};
+
+export type OutlineRace = {
+  id: string;
+  number: number;
+  title: string;
+  body: string;
+  href: string;
+  module: string;
+};
+
+/** Interface labels the course pages render (stage 2 micro-copy, moved out
+ * of the components in stage 3). `{name}` slots are filled at render with
+ * learnStyles' fill(); `note` is bookkeeping and never rendered. */
+type Labels<K extends string> = { [P in K]: string } & { note?: string };
+
+export type PickerLabels = Labels<
+  | "label" | "option" | "clear" | "idle" | "modules" | "labs" | "race" | "races" | "project"
+  | "project_value" | "class_time" | "cta" | "announce" | "announce_labs" | "announce_race"
+  | "announce_races" | "cleared"
+>;
+export type LadderLabels = Labels<"selected" | "weeks" | "modules" | "labs" | "race" | "races" | "chips">;
+export type FinderLabels = Labels<
+  | "label" | "placeholder" | "hint" | "count_one" | "count_many" | "shown" | "more" | "none"
+  | "suggest" | "results" | "in_plans" | "module" | "project"
+>;
+export type CourseUiLabels = Labels<
+  | "tablist" | "facts" | "tab_about" | "tab_outline" | "tab_staff" | "tab_logistics"
+  | "prerequisites_need" | "prerequisites_not_covered" | "copy_link" | "copied" | "copy_failed"
+> & {
+  /** [one, many], for the screen-reader noun after a tab's count. */
+  noun_module: [string, string];
+  noun_person: [string, string];
+  noun_question: [string, string];
+};
+export type OutlineLabels = Labels<
+  | "expand_all" | "collapse_all" | "meter" | "module_done" | "mark" | "done" | "local" | "blocked"
+  | "clear" | "recorded" | "assigns" | "watch" | "close" | "watch_name" | "close_name"
+  | "player_title" | "on_youtube" | "recorded_note" | "slides" | "slides_name" | "recorded_count"
+>;
+export type BuilderLabels = Labels<
+  | "start_legend" | "weeks_option" | "modules_legend" | "module_sr" | "lecture_one" | "lecture_many"
+  | "tutorial_one" | "tutorial_many" | "lab_one" | "lab_many" | "summary_heading" | "matches"
+  | "custom" | "custom_short" | "custom_note" | "empty" | "empty_short" | "empty_note" | "see_plan"
+  | "tutorials" | "detail_modules" | "detail_labs" | "detail_races" | "detail_optional"
+  | "detail_project" | "project_included" | "none" | "email" | "copy" | "share" | "copied"
+  | "link_copied" | "copy_failed" | "share_label" | "stored" | "text_title" | "text_link"
+  | "text_module" | "text_recorded" | "text_material" | "text_license" | "mail_greeting" | "mail_intro"
+> & {
+  /** Blank lines the email asks the sender to fill in. */
+  mail_fields: string[];
+};
+
+/** The real course structure, from the coursekit (source of truth). */
+export type CourseOutline = {
+  source: string;
+  links: CourseLink[];
+  /** The outline's controls and notes (Expand all, ticks, Watch). */
+  ui: OutlineLabels;
+  modules: OutlineModule[];
+  labs: OutlineLab[];
+  races: OutlineRace[];
+  final_project: { title: string; body: string; weeks: number; href: string; modules: string[] };
+};
+
+export type CourseFaq = {
+  id: string;
+  q: string;
+  a: string;
+  /** Open question about the answer. Not rendered. */
+  note?: string;
+};
+
+/** One list for both pages: `pages` says where a feature appears. */
+export type CourseFeature = {
+  id: string;
+  title: string;
+  /** Pill text, used by teach.hero.pills. */
+  short: string;
+  body: string;
+  /** available: true on the course site today, render it. platform: true
+   * once the Open edX platform is public, render only when meta.lms_url is
+   * set. verify: a promise from the mock with no source, never render. */
+  status: "available" | "platform" | "verify";
+  pages: ("catalog" | "teach")[];
+  note?: string;
+  source: string;
+};
+
+export type CourseStaff = {
+  id: string;
+  name: string;
+  role: string;
+  affiliation: string;
+  project_role: string;
+  photo: CourseImage;
+  bio: string;
+  link: string;
+  source: string;
+};
+
+export type CoursesFile = {
+  version: number;
+  updated: string;
+  /** Date every link in the file last answered 200. */
+  checked: string;
+  note: string;
+  meta: CoursesMeta;
+  /** Page copy for /learn/courses. */
+  catalog: {
+    hero: CourseHero;
+    /** The class leaderboard section under the hero (stage 4) and its link
+     * to the race page's board. */
+    leaderboard_heading: CourseHeading & {
+      more: CourseLink;
+      /** The board this page features (an index.json slug), its rows, and
+       * the replay's heading and comparison (race/leaderboardData BoardPin). */
+      board: string;
+      rows: number;
+      replay: {
+        label: string;
+        note: string;
+        compare: "top3" | "top5";
+        /** This board's own replay posters and phone dialog height. */
+        posters?: { wide: string; narrow: string; narrow_height: number };
+      };
+    };
+    courses_heading: CourseHeading;
+    offerings_heading: CourseHeading;
+    /** The catalog's outline section (modules A to G as folds). */
+    outline_heading: CourseHeading;
+    features_heading: CourseHeading;
+    /** The stat tiles' list name. */
+    stats_label: string;
+    picker: PickerLabels;
+    ladder: LadderLabels;
+    finder: FinderLabels;
+  };
+  /** Page copy for /learn/courses/:id, shared by every plan and offering. */
+  course: {
+    about_heading: string;
+    about: string[];
+    about_source: string;
+    learn_heading: string;
+    prerequisites_heading: string;
+    outline_heading: string;
+    staff_heading: string;
+    faq_heading: string;
+    /** The sidebar panel's heading. */
+    glance_heading: string;
+    /** Tabs, chips and Copy link. */
+    ui: CourseUiLabels;
+    open_material: CourseLink;
+    ask: CourseLink;
+    /** /learn/courses/<unknown id>: a short state with a link back. */
+    not_found: { title: string; body: string; back: CourseLink };
+    /** Open question about the labels above. Not rendered. */
+    labels_note?: string;
+  };
+  stats: CourseStat[];
+  plans: CoursePlan[];
+  offerings: CourseOffering[];
+  outline: CourseOutline;
+  /** "What you'll learn". A course page lists the items whose module it covers. */
+  learn: { text: string; module: string }[];
+  prerequisites: { lead: string; items: string[]; not_covered: string[]; source: string };
+  staff: CourseStaff[];
+  /** Student logistics, on every course page. */
+  faq: CourseFaq[];
+  features: CourseFeature[];
+  /** Page copy and content for /learn/teach. */
+  teach: {
+    hero: CourseHero & {
+      /** features[].id, rendered with their `short` text (respect `status`). */
+      pills: string[];
+      /** The hero's ghost link back to the catalog. */
+      plans_link: CourseLink;
+      plans_link_note?: string;
+    };
+    /** The section rail's accessible name. */
+    rail_label: string;
+    how_it_works: CourseHeading & {
+      steps: { n: number; title: string; body: string }[];
+      portals: { id: string; tag: string; title: string; body: string }[];
+    };
+    /** Heading for the features list (features with "teach" in `pages`). */
+    features: CourseHeading;
+    /** Heading only: the table itself comes from lectureSelection(). */
+    lecture_selection: CourseHeading & { source: string };
+    /** The plan builder's labels, and the lines of its email and copied plan. */
+    builder: BuilderLabels;
+    steps: CourseHeading & {
+      items: {
+        n: number;
+        title: string;
+        lead: string;
+        checklist: string[];
+        tip: string;
+        links: CourseLink[];
+      }[];
+    };
+    recording: CourseHeading & { tips: { id: string; title: string; body: string }[] };
+    resources: CourseHeading & { items: { id: string; title: string; body: string; href: string }[] };
+    faq_heading: string;
+    faq: CourseFaq[];
+    contact: CourseHeading & CourseLink;
+  };
+};
+
+export const loadCourses = () => loadJson<CoursesFile>("courses.json");
+
+/** A plan or a published offering by route id; undefined for unknown ids and
+ * for offerings still marked "verify". */
+export function findCourse(c: CoursesFile, id: string): CoursePlan | CourseOffering | undefined {
+  return c.plans.find((p) => p.id === id) ?? c.offerings.find((o) => o.id === id && o.status === "published");
+}
+
+/** The teach page's "Choose your lectures" table, derived from `plans` and
+ * `outline` so it can never disagree with them: one row per module, its
+ * required labs, and which plans (by id) include it. */
+export function lectureSelection(c: CoursesFile) {
+  return c.outline.modules.map((m) => ({
+    module: m,
+    labs: c.outline.labs.filter((l) => l.module === m.id && !l.optional),
+    plans: c.plans.filter((p) => p.modules.includes(m.id)).map((p) => p.id),
+  }));
+}

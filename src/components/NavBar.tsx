@@ -26,6 +26,15 @@ const SLACK_URL = "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7i
  */
 const HERO_ROUTES = new Set(["/", "/styleguide"]);
 
+/** The nav link a path belongs to. Exact everywhere, except Learn, which also
+ * covers the course pages under it (/learn/courses, /learn/teach): "page" on
+ * /learn itself, "true" (the current section) below it. */
+function currentFor(href: string, pathname: string): "page" | "true" | undefined {
+  if (pathname === href) return "page";
+  if (href === "/learn" && pathname.startsWith("/learn/")) return "true";
+  return undefined;
+}
+
 /** From lg the full link bar replaces the toggle (index.css .nav-links). */
 const LINK_BAR_QUERY = "(min-width: 64rem)";
 
@@ -313,13 +322,13 @@ export default function Navbar() {
       {/* Desktop Links */}
       <div className="nav-links">
         {links.map((link) => {
-          const active = location.pathname === link.href;
+          const current = currentFor(link.href, location.pathname);
           return (
             <Link
               key={link.href}
               to={link.href}
-              className={`nav-link ${active ? "active" : ""}`}
-              aria-current={active ? "page" : undefined}
+              className={`nav-link ${current ? "active" : ""}`}
+              aria-current={current}
             >
               {link.text}
             </Link>
@@ -395,13 +404,13 @@ export default function Navbar() {
             Start here
           </Link>
           {links.map((link) => {
-            const active = location.pathname === link.href;
+            const current = currentFor(link.href, location.pathname);
             return (
               <Link
                 key={link.href}
                 to={link.href}
                 className="mobile-menu-link"
-                aria-current={active ? "page" : undefined}
+                aria-current={current}
               >
                 {link.text}
               </Link>

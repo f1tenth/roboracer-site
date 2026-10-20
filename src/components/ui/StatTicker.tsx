@@ -1,4 +1,4 @@
-import { useImperativeHandle, useRef, type Ref } from "react";
+import { useImperativeHandle, useRef, type Ref, type RefObject } from "react";
 import { gsap, useGSAP, MOTION_OK_QUERY } from "../../lib/motion";
 
 export type StatTickerHandle = {
@@ -50,6 +50,89 @@ const ease = gsap.parseEase(EASE);
 const format = (n: number) => Math.ceil(n).toLocaleString("en-US");
 
 /**
+ * Time mode's count, shared by StatTicker and TickerValue: from 0 to `value`
+ * once the number is FULLY in view, power2.out, once; nothing at all under
+ * reduced motion, where the markup's final number stands.
+ */
+function useTimeCount(
+  numberRef: RefObject<HTMLSpanElement | null>,
+  value: number,
+  delay: number,
+  duration: number,
+  enabled: boolean,
+) {
+  useGSAP(
+    () => {
+      if (!enabled) return;
+      const el = numberRef.current;
+      if (!el) return;
+      const mm = gsap.matchMedia();
+      mm.add(MOTION_OK_QUERY, () => {
+        const proxy = { n: 0 };
+        gsap.to(proxy, {
+          n: value,
+          duration: Math.min(duration, DURATION),
+          delay,
+          ease: EASE,
+          scrollTrigger: {
+            trigger: el,
+            start: "bottom bottom",
+            once: true,
+            // Zero the tile as soon as the row is in view so a staggered tile
+            // does not show its final number, then 0, then count.
+            onEnter: () => {
+              el.textContent = format(0);
+            },
+          },
+          onUpdate: () => {
+            el.textContent = format(proxy.n);
+          },
+          onComplete: () => {
+            el.textContent = format(value);
+          },
+        });
+      });
+    },
+    { dependencies: [value, delay, duration, enabled], revertOnUpdate: true },
+  );
+}
+
+type TickerValueProps = {
+  value: number;
+  suffix?: string;
+  /** The figure as the data writes it ("3,500+"). When given, the count runs
+   * only if value and suffix spell exactly this string; otherwise the string
+   * stands as written, uncounted, so a number never shows that the data does
+   * not hold. */
+  text?: string;
+  /** Seconds before the count starts (0.15 s stagger per tile). */
+  delay?: number;
+  duration?: number;
+  className?: string;
+};
+
+/**
+ * The counting number alone, for a tile that lays out its own icon and label
+ * (the stat tiles on /learn/courses, the strip on /learn/teach): the same
+ * count as StatTicker's time mode. Its box is as wide as the final string
+ * from the first frame (mono digits are 1ch each), so the suffix and anything
+ * beside the number stay put while it counts.
+ */
+export function TickerValue({ value, suffix = "", text, delay = 0, duration = DURATION, className = "" }: TickerValueProps) {
+  const numberRef = useRef<HTMLSpanElement>(null);
+  const final = `${format(value)}${suffix}`;
+  const counts = text === undefined || text === final;
+  useTimeCount(numberRef, value, delay, duration, counts);
+  if (!counts) return <span className={className}>{text}</span>;
+  return (
+    <span className={`inline-block ${className}`} style={{ minWidth: `${final.length}ch` }}>
+      <span ref={numberRef}>{format(value)}</span>
+      {suffix}
+    </span>
+  );
+}
+
+/**
  * Data-strip stat: mono tabular value over a small mono label - a spec-sheet
  * row, not a hero-metric tile.
  *
@@ -95,40 +178,7 @@ export default function StatTicker({
     [value],
   );
 
-  useGSAP(
-    () => {
-      if (mode !== "time") return;
-      const el = numberRef.current;
-      if (!el) return;
-      const mm = gsap.matchMedia();
-      mm.add(MOTION_OK_QUERY, () => {
-        const proxy = { n: 0 };
-        gsap.to(proxy, {
-          n: value,
-          duration: Math.min(duration, DURATION),
-          delay,
-          ease: EASE,
-          scrollTrigger: {
-            trigger: el,
-            start: "bottom bottom",
-            once: true,
-            // Zero the tile as soon as the row is in view so a staggered tile
-            // does not show its final number, then 0, then count.
-            onEnter: () => {
-              el.textContent = format(0);
-            },
-          },
-          onUpdate: () => {
-            el.textContent = format(proxy.n);
-          },
-          onComplete: () => {
-            el.textContent = format(value);
-          },
-        });
-      });
-    },
-    { dependencies: [value, mode, delay, duration], revertOnUpdate: true },
-  );
+  useTimeCount(numberRef, value, delay, duration, mode === "time");
 
   const ink = on === "ink";
   const numberColor =
