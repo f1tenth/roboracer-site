@@ -11,18 +11,19 @@ import Ledger from "../components/learn/Ledger";
 import LearnLink, { WithEmail } from "../components/learn/LearnLink";
 import FeatureList from "../components/learn/FeatureList";
 import FaqList from "../components/learn/FaqList";
-import LectureSelection from "../components/learn/LectureSelection";
+import PlanBuilder from "../components/learn/PlanBuilder";
 import CoursesUnavailable from "../components/learn/CoursesUnavailable";
 import { BLOCK_TITLE, MONO_NOTE, isTodo, pad2, visibleFeatures } from "../components/learn/learnStyles";
 
 /**
  * /learn/teach: the instructors page from Dhyey Shah's LMS mock, rebuilt on
  * the paper base. How it works (six steps on one ruled line), what comes with
- * the course (the catalog's feature list), the five-step guide, which modules
- * each plan takes, recording tips and the docs, the instructor questions,
- * then the shared Join block. The mock's planner, admin section and sign-in
- * are gone (COURSES_CONTENT.md); the hero's feature pills respect each
- * feature's status like the list does.
+ * the course (the catalog's feature list), the five-step guide, the plan
+ * builder (start from a plan, tick modules, copy, share or email the result;
+ * the honest half of the mock's planner, COURSES_INTERACTIVITY.md), recording
+ * tips and the docs, the instructor questions, then the shared Join block.
+ * The mock's admin section and sign-in are gone (COURSES_CONTENT.md); the
+ * hero's feature pills respect each feature's status like the list does.
  */
 export default function Teach() {
   useScrollToHash();
@@ -192,7 +193,7 @@ export default function Teach() {
             </Button>
           }
         />
-        <LectureSelection courses={courses} />
+        <PlanBuilder courses={courses} />
       </Section>
 
       <Section width="page" rule aria-labelledby="teach-recording">
