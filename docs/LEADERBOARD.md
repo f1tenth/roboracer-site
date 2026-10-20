@@ -365,3 +365,8 @@ The replay's QA (2026-09-25) is `docs/qa/p3-leaderboard.md`.
    track above the readout, standings and controls, 550 px tall at 390 wide).
    Keep it inline, or on phones show the poster linking out to the board?
    Recommended: keep it inline, as briefed.
+
+### The replay frame waits for the reader (2026-10-20, later)
+
+Cedric still saw /learn/courses move down by itself with the focus-grab guard in place (headless Chrome blocks the cross-origin focus, so the earlier checks could not reproduce his Chrome). The frame now mounts only when both hold: the reader has scrolled the page (wheel, touch, keyboard, or `scrollY` past 24 px) and at least 60% of the replay box is in the viewport (`LeaderboardReplay.tsx`, the autoplay effect). A box that is mostly in view gives the player's focus nothing to scroll to, and a page that has not been scrolled never gets a frame. Checked headed and headless: no frame and `scrollY` 0 for six seconds without input; after a wheel scroll the frame mounts and the page stays put. The guard stays as a second net.
+

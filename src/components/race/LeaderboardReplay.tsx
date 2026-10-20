@@ -202,8 +202,15 @@ export default function LeaderboardReplay({ replay, href }: { replay: ReplayConf
   const reduced = usePrefersReducedMotion();
   useFocusGrabGuard(frameRef, reachedRef, on);
 
-  // Autoplay: the frame mounts once the box is within 200 px of the viewport
-  // (the poster covers its load), never under reduced motion.
+  // Autoplay: the frame mounts once the reader has scrolled the page and
+  // most of the box is in the viewport (the poster covers its load), never
+  // under reduced motion. Both conditions matter: the board's player focuses
+  // its Play button as it opens, and Chrome scrolls the page to a newly
+  // focused element even inside a cross-origin frame. A frame that mounts
+  // on a page the reader has not scrolled yet (the catalog shows the box
+  // right under the hero) would drag the page down by itself (Cedric,
+  // 2026-10-20: "just let the user scroll down, starting at the top of the
+  // page"); a box that is mostly in view has nothing to scroll to.
   useEffect(() => {
     if (on || reduced) return;
     const el = measureRef.current;
@@ -212,17 +219,43 @@ export default function LeaderboardReplay({ replay, href }: { replay: ReplayConf
       setOn(true);
       return;
     }
+    let scrolled = window.scrollY > 24;
+    let inView = false;
+    const arm = () => {
+      if (scrolled && inView) {
+        setOn(true);
+        cleanup();
+      }
+    };
+    // A real scroll by the reader: the wheel, a touch, the keyboard, or the
+    // page having moved past the top (a route change lands at 0).
+    const onIntent = () => {
+      scrolled = true;
+      arm();
+    };
+    const onScroll = () => {
+      if (window.scrollY > 24) onIntent();
+    };
     const io = new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setOn(true);
-          io.disconnect();
-        }
+        inView = entries.some((e) => e.isIntersecting);
+        arm();
       },
-      { rootMargin: "200px 0px" },
+      { threshold: 0.6 },
     );
+    const cleanup = () => {
+      io.disconnect();
+      window.removeEventListener("wheel", onIntent);
+      window.removeEventListener("touchmove", onIntent);
+      window.removeEventListener("keydown", onIntent);
+      window.removeEventListener("scroll", onScroll);
+    };
     io.observe(el);
-    return () => io.disconnect();
+    window.addEventListener("wheel", onIntent, { passive: true });
+    window.addEventListener("touchmove", onIntent, { passive: true });
+    window.addEventListener("keydown", onIntent);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return cleanup;
   }, [on, reduced]);
 
   useLayoutEffect(() => {
