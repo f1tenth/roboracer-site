@@ -57,6 +57,7 @@ export const LABELS = {
   copyFailed: "Your browser blocked the clipboard. Select the link above to copy it.",
   shareLabel: "Link to this plan",
   stored: "Nothing is stored or sent; Email opens your own mail app.",
+  railLabel: "On this page",
   liveStatus: "{status}: {counts}.",
   textTitle: "RoboRacer course plan",
   textLink: "Link",
