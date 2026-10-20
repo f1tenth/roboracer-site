@@ -640,6 +640,13 @@ export type OutlineItem = {
   /** The coursekit page embeds slides / a YouTube recording. */
   slides: boolean;
   video: boolean;
+  /** The recording's YouTube id, harvested from the coursekit page's own
+   * embed and checked with YouTube oEmbed (the file's `checked` date); only
+   * where `video` is true. docs/learn/tools/harvest_lecture_media.py */
+  video_id?: string;
+  /** The lecture's Google Slides deck (https://docs.google.com/presentation/d/<id>),
+   * from the same page; only where `slides` is true and the deck opens. */
+  slides_url?: string;
   /** outline.labs ids this lecture assigns. */
   labs?: string[];
 };
