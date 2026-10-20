@@ -56,13 +56,16 @@ const panelId = (id: string) => `course-panel-${id}`;
  */
 export default function CourseTabs({ tabs, label }: CourseTabsProps) {
   const location = useLocation();
-  // A click is remembered against the history entry it was made on: a new
-  // navigation (another course, a link to #outline, Back to another entry)
-  // reads its own hash instead. Keyed rather than reset in an effect, so the
-  // first paint after a navigation already shows the right panel.
-  const [picked, setPicked] = useState<{ key: string; id: string } | null>(null);
+  // A click is remembered against the location it was made on, as the router
+  // saw it: any navigation since (another course, a link to #outline, Back,
+  // a hash typed in the address bar) changes the key or the hash, and the
+  // new hash wins. The key alone is not enough: every entry the router did
+  // not create (a cold load, a typed hash) has the key "default". Derived
+  // rather than reset in an effect, so the first paint after a navigation
+  // already shows the right panel.
+  const [picked, setPicked] = useState<{ key: string; hash: string; id: string } | null>(null);
   const selected =
-    picked && picked.key === location.key && tabs.some((t) => t.id === picked.id)
+    picked && picked.key === location.key && picked.hash === location.hash && tabs.some((t) => t.id === picked.id)
       ? picked.id
       : fromHash(location.hash, tabs);
 
@@ -81,7 +84,7 @@ export default function CourseTabs({ tabs, label }: CourseTabsProps) {
     // where the bar is sticky).
     const stuck = !!bar && !!panels && panels.getBoundingClientRect().top < bar.getBoundingClientRect().bottom - 1;
     chosen.current = { stuck };
-    setPicked({ key: location.key, id });
+    setPicked({ key: location.key, hash: location.hash, id });
     try {
       // Keep React Router's entry state (its key) and the search string.
       window.history.replaceState(window.history.state, "", `${window.location.pathname}${window.location.search}#${id}`);
@@ -130,6 +133,12 @@ export default function CourseTabs({ tabs, label }: CourseTabsProps) {
       });
     }
   }, [selected, tabs]);
+
+  // A navigation (another course, Back, a link to #outline) starts from the
+  // panel's own height: the room a stuck switch reserved is for that switch.
+  useLayoutEffect(() => {
+    if (panelsRef.current) panelsRef.current.style.minHeight = "";
+  }, [location.key, location.pathname, location.hash]);
 
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     const i = tabs.findIndex((t) => t.id === selected);

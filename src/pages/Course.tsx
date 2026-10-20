@@ -444,7 +444,7 @@ export default function Course() {
                       {s.role}, {s.affiliation}
                     </p>
                     <p className="mt-2">
-                      <span className="inline-block rounded-pill bg-rr-violet/10 px-2.5 py-0.5 font-mono text-small text-rr-magenta-deep">
+                      <span className="inline-block rounded-btn bg-rr-violet/10 px-2.5 py-0.5 font-mono text-small text-rr-magenta-deep">
                         {s.project_role}
                       </span>
                     </p>
@@ -497,7 +497,7 @@ export default function Course() {
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 -z-10 bg-linear-to-t from-ink-950/95 via-ink-950/85 to-ink-950/60 lg:bg-linear-to-r lg:from-ink-950/95 lg:from-30% lg:via-ink-950/75 lg:via-55% lg:to-ink-950/10"
+            className="absolute inset-0 -z-10 bg-linear-to-t from-ink-950/95 via-ink-950/90 to-ink-950/75 lg:bg-linear-to-r lg:from-ink-950/95 lg:from-30% lg:via-ink-950/75 lg:via-55% lg:to-ink-950/10"
           />
           <div className="grid gap-6 px-6 py-8 sm:px-10 sm:py-10 lg:grid-cols-12 lg:items-center lg:px-12 lg:py-11">
             <div className="lg:col-span-8">
