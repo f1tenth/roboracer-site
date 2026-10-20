@@ -3,6 +3,9 @@ type PauseToggleProps = {
   onToggle: () => void;
   /** Id of the strip group it pauses. */
   controls: string;
+  /** Shown with a mouse too: for media that has no hover pause (a playing
+   * video), not only on touch screens. */
+  always?: boolean;
   className?: string;
 };
 
@@ -16,13 +19,13 @@ type PauseToggleProps = {
  * changes, so the button is a plain button rather than an aria-pressed
  * toggle (a pressed "Play" would read as playing).
  */
-export default function PauseToggle({ paused, onToggle, controls, className = "" }: PauseToggleProps) {
+export default function PauseToggle({ paused, onToggle, controls, always = false, className = "" }: PauseToggleProps) {
   return (
     <button
       type="button"
       onClick={onToggle}
       aria-controls={controls}
-      className={`hidden min-h-11 min-w-11 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-card border border-ink-950/15 px-3 font-mono text-small text-text-strong transition-colors duration-[var(--duration-fast)] hover:border-ink-950/30 coarse:inline-flex ${className}`}
+      className={`${always ? "inline-flex" : "hidden coarse:inline-flex"} min-h-11 min-w-11 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-card border border-ink-950/15 px-3 font-mono text-small text-text-strong transition-colors duration-[var(--duration-fast)] hover:border-ink-950/30 ${className}`}
     >
       {paused ? (
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
