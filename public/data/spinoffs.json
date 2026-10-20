@@ -15,7 +15,7 @@
         "width": 128,
         "height": 96,
         "alt": "Neobotics logo",
-        "source": "https://neobotics.org/images/logos/neobotics/neobotics-icon-red.webp (same file as public/partners/neobotics.webp)"
+        "source": "https://neobotics.org/images/logos/neobotics/neobotics-icon-red.webp (the partner wall now uses the wordmark instead, Cedric 2026-09-28)"
       },
       "car": {
         "src": "/media/spinoffs/spinoff-neobotics-car-1200.webp",

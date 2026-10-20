@@ -39,8 +39,10 @@ function App() {
             <Route path="/course" element={<Navigate to="/learn" replace />} />
             <Route path="/learn" element={<Learn />} />
             {/* The course catalog, one page per plan or university, and the
-                instructors page (Dhyey Shah's LMS mock, rebuilt from
-                public/data/courses.json). /learn itself stays the docs frame. */}
+                instructors page, rendered from public/data/courses.json (first
+                ported from Dhyey Shah's LMS mock). Native again since
+                2026-10-20 (Cedric): the coursekit sidebar's Courses link lands
+                here. /learn itself stays the docs frame. */}
             <Route path="/learn/courses" element={<Courses />} />
             <Route path="/learn/courses/:id" element={<Course />} />
             <Route path="/learn/teach" element={<Teach />} />
