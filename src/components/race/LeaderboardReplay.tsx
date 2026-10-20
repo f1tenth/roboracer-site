@@ -71,12 +71,18 @@ const LINK =
  * (the board reads its data first); the poster stays up that long. */
 const REVEAL_AFTER_MS = 900;
 
-/** A key, wheel, touch or click in this page within this long before focus
- * enters the frame makes the move the reader's own (Tab into the player). */
+/** A Tab or a press in this page within this long before focus enters the
+ * frame makes the move the reader's own (Tab into the player). Scrolling
+ * (wheel, touch, Space, the arrows) is not a focus move: a grab during it is
+ * still put back. */
 const INPUT_WINDOW_MS = 500;
 /** The page scroll that a focus grab causes lands within a frame or two of
  * it (20 ms measured); only a scroll that soon is put back. */
 const GRAB_SCROLL_MS = 150;
+/** When focus is handed back after a grab: the frame's focus change
+ * completes a moment after the page sees it (a hand-back during the blur
+ * itself was undone), so it is tried again while focus is still there. */
+const GIVE_BACK_AT_MS = [100, 300, 800];
 
 /**
  * The board opens its player as a modal dialog with the Play button
@@ -86,10 +92,12 @@ const GRAB_SCROLL_MS = 150;
  * jumped about 800 px down a second after it opened (Cedric, 2026-10-20).
  * Neither `inert` nor `visibility: hidden` on the frame stops it (a modal
  * dialog escapes inertness). So while the frame is up, this puts back the
- * one page scroll that follows focus moving into the frame by itself: no
- * key, wheel, touch or click in the page just before it and no pointer over
- * the replay. Anything the reader does is left alone. The cure is upstream:
- * the board should not autofocus when it is framed (docs/LEADERBOARD.md).
+ * one page scroll that follows focus moving into the frame by itself (no Tab
+ * or press in the page just before it and no pointer over the replay), and
+ * hands focus back to where it was in the page, so the next
+ * Tab starts where the reader is, not inside the player. Anything the reader
+ * does is left alone. The cure is upstream: the board should not autofocus
+ * when it is framed (docs/LEADERBOARD.md).
  */
 function useFocusGrabGuard(frameRef: RefObject<HTMLIFrameElement | null>, reachedRef: RefObject<boolean>, active: boolean) {
   useEffect(() => {
@@ -97,36 +105,65 @@ function useFocusGrabGuard(frameRef: RefObject<HTMLIFrameElement | null>, reache
     let settled = window.scrollY;
     let grabbedAt = -1;
     let inputAt = -Infinity;
+    let timers: number[] = [];
+    // The last element the reader focused in this page (null: none yet).
+    let lastFocus: HTMLElement | null = null;
     const restore = () => {
       grabbedAt = -1;
       window.scrollTo({ top: settled, behavior: "instant" });
     };
-    const onInput = () => {
+    // Focus back in the page without moving it: the reader's last focus, or
+    // the body (made focusable for the call) so Tab starts at the top.
+    const giveFocusBack = () => {
+      if (lastFocus?.isConnected) {
+        lastFocus.focus({ preventScroll: true });
+        return;
+      }
+      const body = document.body;
+      const had = body.getAttribute("tabindex");
+      body.setAttribute("tabindex", "-1");
+      body.focus({ preventScroll: true });
+      if (had === null) body.removeAttribute("tabindex");
+      else body.setAttribute("tabindex", had);
+    };
+    const onInput = (e: Event) => {
+      if (e instanceof KeyboardEvent && e.key !== "Tab") return;
       inputAt = performance.now();
+      grabbedAt = -1;
+    };
+    const onFocusIn = (e: FocusEvent) => {
+      if (e.target instanceof HTMLElement && e.target !== frameRef.current && e.target !== document.body) lastFocus = e.target;
     };
     const onBlur = () => {
       if (document.activeElement !== frameRef.current || reachedRef.current) return;
       if (performance.now() - inputAt < INPUT_WINDOW_MS) return;
-      grabbedAt = performance.now();
+      const at = performance.now();
+      grabbedAt = at;
       if (window.scrollY !== settled) restore();
+      timers.forEach((id) => window.clearTimeout(id));
+      timers = GIVE_BACK_AT_MS.map((ms) =>
+        window.setTimeout(() => {
+          if (inputAt > at || reachedRef.current || document.activeElement !== frameRef.current) return;
+          giveFocusBack();
+        }, ms),
+      );
     };
     const onScroll = () => {
-      if (
-        grabbedAt >= 0 &&
-        performance.now() - grabbedAt < GRAB_SCROLL_MS &&
-        document.activeElement === frameRef.current
-      ) {
+      if (grabbedAt >= 0 && performance.now() - grabbedAt < GRAB_SCROLL_MS) {
         restore();
         return;
       }
       settled = window.scrollY;
     };
-    const inputs = ["keydown", "wheel", "touchstart", "pointerdown"] as const;
+    const inputs = ["keydown", "pointerdown"] as const;
     inputs.forEach((t) => window.addEventListener(t, onInput, { capture: true, passive: true }));
     window.addEventListener("blur", onBlur);
     window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("focusin", onFocusIn, true);
     return () => {
+      timers.forEach((id) => window.clearTimeout(id));
       inputs.forEach((t) => window.removeEventListener(t, onInput, { capture: true }));
+      document.removeEventListener("focusin", onFocusIn, true);
       window.removeEventListener("blur", onBlur);
       window.removeEventListener("scroll", onScroll);
     };
