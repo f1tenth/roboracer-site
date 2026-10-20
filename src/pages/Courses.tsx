@@ -71,16 +71,22 @@ function usePlanParam(): [string | null, (id: string | null) => void] {
   return [plan, select];
 }
 
-/** The title's last two words in the logo gradient (one display phrase per
- * viewport, Cedric's colour brief of 2026-10-20), cloned per line so a
- * phrase that wraps keeps the whole gradient on each line. */
+/** The title's last two words on their own line in the logo gradient (one
+ * display phrase per viewport, Cedric's colour brief of 2026-10-20), cloned
+ * per line so a phrase that wraps on a phone keeps the whole gradient on each
+ * line. */
 function GradientTail({ text }: { text: string }) {
   const words = text.split(" ");
   const tail = words.slice(-2).join(" ");
   const head = words.slice(0, -2).join(" ");
   return (
     <>
-      {head && `${head} `}
+      {head && (
+        <>
+          {head}
+          <br />
+        </>
+      )}
       <span className="text-gradient-logo box-decoration-clone">{tail}</span>
     </>
   );

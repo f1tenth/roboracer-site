@@ -220,7 +220,8 @@ export default function PlanLadder({ courses, selected, onSelect }: PlanLadderPr
           plan's facts as accent chips. The title is a toggle button stretched
           over the whole card (its ::after), so a click anywhere picks the
           plan and a second click shows all three again; the page link sits
-          above it. Every card carries the 3px accent top rule; the picked one
+          above it. The focus ring is drawn on the card (outside its clipped
+          edge), so it never merges with the picked card's violet border. Every card carries the 3px accent top rule; the picked one
           adds a violet border and a "Selected" badge. */}
       <Reveal stagger className="grid gap-5 lg:grid-cols-3 lg:gap-6">
         {facts.map(({ plan: p, labs, races }) => {
@@ -230,7 +231,7 @@ export default function PlanLadder({ courses, selected, onSelect }: PlanLadderPr
             <article
               key={p.id}
               aria-labelledby={`plan-${p.id}`}
-              className={`relative flex flex-col overflow-hidden rounded-card border-2 md:max-lg:flex-row bg-paper-50 shadow-card transition-[box-shadow,translate,border-color] duration-[var(--duration-fast)] before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-10 before:h-[3px] before:bg-rr-violet hover:shadow-card-hover motion-safe:hover:-translate-y-0.5 motion-reduce:transition-none ${
+              className={`relative flex flex-col overflow-hidden rounded-card border-2 md:max-lg:flex-row bg-paper-50 shadow-card transition-[box-shadow,translate,border-color] duration-[var(--duration-fast)] before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-10 before:h-[3px] before:bg-rr-violet hover:shadow-card-hover has-[button:focus-visible]:outline-2 has-[button:focus-visible]:outline-offset-4 has-[button:focus-visible]:outline-rr-violet motion-safe:hover:-translate-y-0.5 motion-reduce:transition-none ${
                 on ? "border-rr-violet" : "border-transparent"
               }`}
             >
@@ -274,7 +275,7 @@ export default function PlanLadder({ courses, selected, onSelect }: PlanLadderPr
                     type="button"
                     aria-pressed={on}
                     onClick={() => onSelect(on ? null : p.id)}
-                    className="cursor-pointer text-left after:absolute after:inset-0 after:z-[1] after:rounded-card focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-rr-violet"
+                    className="cursor-pointer text-left after:absolute after:inset-0 after:z-[1] after:rounded-card focus-visible:outline-none"
                   >
                     {p.title}
                   </button>

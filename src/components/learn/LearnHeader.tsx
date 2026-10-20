@@ -105,7 +105,7 @@ export default function LearnHeader({ id, crumbs, title, lead, meta, actions, as
               overlap ? "pb-20 md:pb-24 xl:pb-28" : "pb-14 md:pb-20"
             }`}
           >
-            <div className="max-w-[46rem]">
+            <div className="max-w-[60rem]">
               <Crumbs crumbs={crumbs} onInk />
               <h1 id={id} className="max-w-[20ch] font-display text-display-xl font-semibold text-text-on-ink">
                 {title}
