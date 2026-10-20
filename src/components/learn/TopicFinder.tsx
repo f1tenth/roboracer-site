@@ -22,6 +22,11 @@ const LABELS = {
   project: "Project",
 };
 
+/** A 2.75rem hit area on touch screens for a pill, drawn by an invisible
+ * ::after so the pill itself keeps its size (TAP's padding would swell it). */
+const CHIP_TAP =
+  "relative coarse:after:absolute coarse:after:inset-x-0 coarse:after:top-1/2 coarse:after:h-11 coarse:after:-translate-y-1/2";
+
 /** Characters before the finder answers: one letter matches half the course. */
 const MIN_CHARS = 2;
 /** Rows shown; the rest is a count. */
@@ -329,7 +334,7 @@ export default function TopicFinder({ courses }: { courses: CoursesFile }) {
                   <span className={`${MONO_NOTE} sm:pt-[0.15em]`}>{e.kind}</span>
                   <span className="col-start-2 min-w-0 sm:col-start-3">
                     <span className="block text-body">
-                      <LearnLink href={e.href}>
+                      <LearnLink href={e.href} className={TAP}>
                         <Marked text={e.title} tokens={tokens} />
                       </LearnLink>
                     </span>
@@ -347,7 +352,7 @@ export default function TopicFinder({ courses }: { courses: CoursesFile }) {
                           {i > 0 && <span className="sr-only">{i === e.plans.length - 1 ? " and " : ", "}</span>}
                           <Link
                             to={`/learn/courses/${p.id}`}
-                            className={`rounded-pill border border-rr-violet/30 bg-rr-violet/8 px-2.5 py-0.5 font-mono text-small font-semibold whitespace-nowrap text-rr-violet-deep transition-colors duration-[var(--duration-fast)] hover:border-rr-violet hover:bg-rr-violet/15 motion-reduce:transition-none ${TAP}`}
+                            className={`rounded-pill border border-rr-violet/30 bg-rr-violet/8 px-2.5 py-0.5 font-mono text-small font-semibold whitespace-nowrap text-rr-violet-deep transition-colors duration-[var(--duration-fast)] hover:border-rr-violet hover:bg-rr-violet/15 motion-reduce:transition-none ${CHIP_TAP}`}
                           >
                             {p.weeks} weeks
                           </Link>
