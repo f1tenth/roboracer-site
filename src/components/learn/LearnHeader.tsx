@@ -1,19 +1,10 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import type { CoursePhoto } from "../../lib/data";
 import Section from "../ui/Section";
 import { LINK, TAP } from "./learnStyles";
 
 export type Crumb = { label: string; href?: string; current?: boolean };
-
-/** A site photo behind the page top (the catalog's). */
-export type HeaderMedia = {
-  src: string;
-  width: number;
-  height: number;
-  alt: string;
-  /** CSS object-position, to keep the photo's subject clear of the copy. */
-  position?: string;
-};
 
 type LearnHeaderProps = {
   id: string;
@@ -30,7 +21,7 @@ type LearnHeaderProps = {
   aside?: ReactNode;
   /** A photo under the copy: the top becomes a full-width ink band with a
    * scrim, the copy in on-ink colours (actions should pass on="ink"). */
-  media?: HeaderMedia;
+  media?: CoursePhoto;
   /** With `media`: a row that overlaps the band's bottom edge (the catalog's
    * stat tiles). */
   overlap?: ReactNode;
@@ -75,10 +66,11 @@ function Crumbs({ crumbs, onInk }: { crumbs: Crumb[]; onInk: boolean }) {
  * actions, and an optional ledger beside it from lg (under it before). On a phone it starts a rem
  * under the bar, like the /research and /about heroes.
  *
- * With `media` (the catalog): a full-width ink band with a site photo under
- * a scrim (solid enough on a phone, where the copy covers the photo; a left
- * to right fade from md, where the copy sits left and the photo's subject
- * right), and `overlap` riding its bottom edge. The photo is the page's
+ * With `media` (the catalog): a full-width ink band with a site photo. Below
+ * lg the photo fills the band under an 80% scrim (the copy covers it); from
+ * lg it fills the right 62% and fades into the ink under the copy, as the
+ * teach header does, so the photo's subject sits clear of the text whatever
+ * the frame. `overlap` rides the band's bottom edge. The photo is the page's
  * largest paint, so it loads eagerly with a high fetch priority.
  */
 export default function LearnHeader({ id, crumbs, title, lead, meta, actions, aside, media, overlap }: LearnHeaderProps) {
@@ -86,20 +78,22 @@ export default function LearnHeader({ id, crumbs, title, lead, meta, actions, as
     return (
       <Section width="bleed" className="py-0!" aria-labelledby={id}>
         <div className="relative isolate overflow-hidden bg-ink-950">
-          <img
-            src={`${import.meta.env.BASE_URL}${media.src.replace(/^\//, "")}`}
-            alt={media.alt}
-            width={media.width}
-            height={media.height}
-            fetchPriority="high"
-            decoding="async"
-            style={media.position ? { objectPosition: media.position } : undefined}
-            className="absolute inset-0 -z-20 h-full w-full object-cover"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 -z-10 bg-ink-950/80 md:bg-transparent md:bg-linear-to-r md:from-ink-950/95 md:from-25% md:via-ink-950/80 md:via-50% md:to-ink-950/25"
-          />
+          <div className="absolute inset-0 -z-10 lg:left-auto lg:w-[62%]">
+            <img
+              src={`${import.meta.env.BASE_URL}${media.src.replace(/^\//, "")}`}
+              alt={media.alt}
+              width={media.width}
+              height={media.height}
+              fetchPriority="high"
+              decoding="async"
+              style={media.position ? { objectPosition: media.position } : undefined}
+              className="h-full w-full object-cover"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-ink-950/80 lg:bg-transparent lg:bg-linear-to-r lg:from-ink-950 lg:via-ink-950/45 lg:via-35% lg:to-ink-950/5"
+            />
+          </div>
           <div
             className={`mx-auto max-w-page px-6 pt-10 md:pt-16 lg:pt-20 ${
               overlap ? "pb-20 md:pb-24 xl:pb-28" : "pb-14 md:pb-20"

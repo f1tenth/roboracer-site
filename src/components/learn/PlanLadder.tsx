@@ -17,29 +17,6 @@ const LABELS = {
   chips: "At a glance",
 };
 
-/** A competition photo per plan, from public/media (docs/ASSET_MANIFEST.md,
- * "Courses catalog"). A plan id without one gets a violet panel instead. */
-const PLAN_PHOTOS: Record<string, { src: string; width: number; height: number; alt: string }> = {
-  "4-weeks": {
-    src: "/media/platform/platform-learn-1200.webp",
-    width: 1200,
-    height: 750,
-    alt: "Two students assembling a car on the pit floor",
-  },
-  "10-weeks": {
-    src: "/media/highlights/highlight-icra2026-chase-02-poster.webp",
-    width: 960,
-    height: 540,
-    alt: "Two cars nose to tail through a chicane of white boxes at ICRA 2026",
-  },
-  "15-weeks": {
-    src: "/media/highlights/highlight-icra2026-overtake-01-poster.webp",
-    width: 960,
-    height: 540,
-    alt: "Cars racing between the orange barriers at ICRA 2026",
-  },
-};
-
 const asset = (src: string) => `${import.meta.env.BASE_URL}${src.replace(/^\//, "")}`;
 
 type PlanLadderProps = {
@@ -226,7 +203,9 @@ export default function PlanLadder({ courses, selected, onSelect }: PlanLadderPr
       <Reveal stagger className="grid gap-5 lg:grid-cols-3 lg:gap-6">
         {facts.map(({ plan: p, labs, races }) => {
           const on = picked?.id === p.id;
-          const photo = PLAN_PHOTOS[p.id];
+          // courses.json `card_photo` (docs/ASSET_MANIFEST.md CC-02 to CC-04);
+          // a plan without one shows the violet panel.
+          const photo = p.card_photo;
           return (
             <article
               key={p.id}
@@ -246,6 +225,7 @@ export default function PlanLadder({ courses, selected, onSelect }: PlanLadderPr
                     height={photo.height}
                     loading="lazy"
                     decoding="async"
+                    style={photo.position ? { objectPosition: photo.position } : undefined}
                     className="h-full w-full object-cover md:max-lg:absolute md:max-lg:inset-0"
                   />
                 )}

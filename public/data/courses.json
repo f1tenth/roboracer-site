@@ -46,6 +46,14 @@
       "secondary": {
         "label": "Teach the course",
         "href": "/learn/teach"
+      },
+      "photo": {
+        "src": "/media/highlights/highlight-icra2026-car-02-1200.webp",
+        "width": 1200,
+        "height": 800,
+        "alt": "A RoboRacer car at speed on the ICRA 2026 track",
+        "position": "45% 70%",
+        "manifest": "CC-01"
       }
     },
     "courses_heading": {
@@ -166,6 +174,22 @@
       "weeks": 4,
       "title": "4-week course",
       "blurb": "ROS 2, the simulator and reactive driving. Modules A and B, Labs 1 to 4, and your car is race ready.",
+      "banner": {
+        "src": "/media/platform/platform-learn-1200.webp",
+        "width": 1200,
+        "height": 750,
+        "alt": "Two students assembling a RoboRacer car on the pit floor",
+        "position": "50% 35%",
+        "manifest": "CP-01"
+      },
+      "card_photo": {
+        "src": "/media/platform/platform-learn-1200.webp",
+        "width": 1200,
+        "height": 750,
+        "alt": "Two students assembling a car on the pit floor",
+        "position": "50% 50%",
+        "manifest": "CC-02"
+      },
       "outcome": "Enough to get your car race ready.",
       "modules": [
         "A",
@@ -191,6 +215,22 @@
       "weeks": 10,
       "title": "10-week course",
       "blurb": "The 4-week plan plus mapping, localization and planning. Modules A to D, Labs 1 to 6. About one quarter.",
+      "banner": {
+        "src": "/media/highlights/highlight-icra2026-bridge-02-1200.webp",
+        "width": 1200,
+        "height": 800,
+        "alt": "A RoboRacer car in the air off the bridge on the ICRA 2026 track",
+        "position": "70% 45%",
+        "manifest": "CP-02"
+      },
+      "card_photo": {
+        "src": "/media/highlights/highlight-icra2026-chase-02-poster.webp",
+        "width": 960,
+        "height": 540,
+        "alt": "Two cars nose to tail through a chicane of white boxes at ICRA 2026",
+        "position": "50% 50%",
+        "manifest": "CC-03"
+      },
       "outcome": "Teaches you to race efficiently.",
       "modules": [
         "A",
@@ -220,6 +260,22 @@
       "weeks": 15,
       "title": "15-week course",
       "blurb": "The full semester. Vision, special topics and a final head-to-head race on top of the 10-week plan. All seven modules, all ten labs.",
+      "banner": {
+        "src": "/media/highlights/highlight-icra2026-group-02-1200.webp",
+        "width": 1200,
+        "height": 800,
+        "alt": "The ICRA 2026 participants waving behind the orange track",
+        "position": "50% 60%",
+        "manifest": "CP-03"
+      },
+      "card_photo": {
+        "src": "/media/highlights/highlight-icra2026-overtake-01-poster.webp",
+        "width": 960,
+        "height": 540,
+        "alt": "Cars racing between the orange barriers at ICRA 2026",
+        "position": "50% 50%",
+        "manifest": "CC-04"
+      },
       "outcome": "The whole course.",
       "modules": [
         "A",
@@ -259,6 +315,14 @@
       "short_name": "Penn",
       "title": "RoboRacer at Penn",
       "blurb": "Where RoboRacer started in 2016. Penn teaches the full course as ESE 6150, and its class leaderboard is public.",
+      "banner": {
+        "src": "/media/highlights/highlight-icra2026-pitwork-02-1200.webp",
+        "width": 1200,
+        "height": 800,
+        "alt": "The UPenn Autonomous Racing team at work on their cars at ICRA 2026",
+        "position": "50% 40%",
+        "manifest": "CP-04"
+      },
       "code": "ESE 6150",
       "code_source": "docs/LEARN_TERRAIN.md and public/data/leaderboard.json ('ESE 6150 leaderboard')",
       "plan": "15-weeks",
@@ -1199,6 +1263,14 @@
       "secondary": {
         "label": "Open the course material",
         "href": "https://f1tenth-coursekit.readthedocs.io/en/latest/"
+      },
+      "photo": {
+        "src": "/media/highlights/highlight-icra2026-teamtable-01-1200.webp",
+        "width": 1200,
+        "height": 800,
+        "alt": "A team at its pit table at ICRA 2026, laptops open and its car on the floor beside them",
+        "position": "50% 35%",
+        "manifest": "U3-01"
       },
       "pills": [
         "free-to-reuse",

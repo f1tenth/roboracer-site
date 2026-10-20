@@ -31,44 +31,6 @@ const LABELS = {
   copy_failed: "Could not copy. The link is in the address bar.",
 } as const;
 
-/**
- * The banner photo behind each course's header: site photos already on the
- * landing and /about (docs/ASSET_MANIFEST.md, "Course page banners"), under a
- * dark scrim. Keyed by course id; an id without one gets the platform photo.
- * Stage 3 can move these into courses.json with the labels.
- */
-type Banner = { src: string; width: number; height: number; alt: string; position: string };
-const BANNERS: Record<string, Banner> = {
-  "4-weeks": {
-    src: "/media/platform/platform-learn-1200.webp",
-    width: 1200,
-    height: 750,
-    alt: "Two students assembling a RoboRacer car on the pit floor",
-    position: "50% 35%",
-  },
-  "10-weeks": {
-    src: "/media/highlights/highlight-icra2026-bridge-02-1200.webp",
-    width: 1200,
-    height: 800,
-    alt: "A RoboRacer car in the air off the bridge on the ICRA 2026 track",
-    position: "70% 45%",
-  },
-  "15-weeks": {
-    src: "/media/highlights/highlight-icra2026-car-02-1200.webp",
-    width: 1200,
-    height: 800,
-    alt: "A RoboRacer car at speed on the ICRA 2026 track",
-    position: "60% 60%",
-  },
-  penn: {
-    src: "/media/highlights/highlight-icra2026-pitwork-02-1200.webp",
-    width: 1200,
-    height: 800,
-    alt: "The UPenn Autonomous Racing team at work on their cars at ICRA 2026",
-    position: "50% 40%",
-  },
-};
-const DEFAULT_BANNER = BANNERS["4-weeks"];
 
 const asset = (src: string) => `${import.meta.env.BASE_URL}${src.replace(/^\//, "")}`;
 
@@ -278,7 +240,9 @@ export default function Course() {
   const leftOut = courses.outline.modules.filter((m) => !ids.includes(m.id));
   const longer = courses.plans.filter((p) => p.id !== plan?.id && leftOut.some((m) => p.modules.includes(m.id)));
   const dated = course.starts && course.ends;
-  const banner = BANNERS[course.id] ?? DEFAULT_BANNER;
+  // The course's own photo (courses.json `banner`, docs/ASSET_MANIFEST.md
+  // rows CP-01 to CP-04); without one the band is plain ink.
+  const banner = course.banner;
 
   const crumbs: Crumb[] = [
     { label: "Learn", href: "/learn" },
@@ -486,16 +450,18 @@ export default function Course() {
           container from sm. */}
       <section aria-labelledby="course-title" className="mx-auto max-w-page px-0 pt-0 sm:px-6 sm:pt-6 lg:pt-8">
         <div className="relative isolate overflow-hidden bg-ink-950 text-text-on-ink sm:rounded-media">
-          <img
-            src={asset(banner.src)}
-            alt={banner.alt}
-            width={banner.width}
-            height={banner.height}
-            decoding="async"
-            fetchPriority="high"
-            style={{ objectPosition: banner.position }}
-            className="absolute inset-0 -z-10 h-full w-full object-cover"
-          />
+          {banner && (
+            <img
+              src={asset(banner.src)}
+              alt={banner.alt}
+              width={banner.width}
+              height={banner.height}
+              decoding="async"
+              fetchPriority="high"
+              style={{ objectPosition: banner.position }}
+              className="absolute inset-0 -z-10 h-full w-full object-cover"
+            />
+          )}
           <div
             aria-hidden="true"
             className="absolute inset-0 -z-10 bg-linear-to-t from-ink-950/95 via-ink-950/90 to-ink-950/75 lg:bg-linear-to-r lg:from-ink-950/95 lg:from-30% lg:via-ink-950/75 lg:via-55% lg:to-ink-950/10"

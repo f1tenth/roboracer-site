@@ -16,14 +16,7 @@ import SectionRail from "../components/learn/SectionRail";
 import CoursesUnavailable from "../components/learn/CoursesUnavailable";
 import { BLOCK_TITLE, TAP, isExternal, isTodo, pad2, visibleFeatures } from "../components/learn/learnStyles";
 
-/** The header photo: two students building a car at ICRA 2026 (manifest
- * V3-18, Felix Jahncke, granted; row U3-01 for this use). */
-const HERO_PHOTO = {
-  src: "/media/platform/platform-learn-1200.webp",
-  width: 1200,
-  height: 750,
-  alt: "Two students sitting on the floor at ICRA 2026, fitting the wheels on a RoboRacer car",
-};
+const asset = (src: string) => `${import.meta.env.BASE_URL}${src.replace(/^\//, "")}`;
 
 /* Ink-stroke icons on 24px, drawn here (rule 8: none of the mock's). A
  * circle is two arcs so every icon is one path. */
@@ -118,6 +111,8 @@ export default function Teach() {
     .filter((f) => f !== undefined);
   const features = visible.filter((f) => f.pages.includes("teach"));
   const figures = courses.stats.filter((s) => s.group === "course");
+  // courses.json teach.hero.photo (docs/ASSET_MANIFEST.md U3-01).
+  const photo = teach.hero.photo;
 
   // The rail and the section eyebrows share one numbering.
   const rail = [
@@ -137,15 +132,18 @@ export default function Teach() {
           line of text sits on the bare photo. */}
       <section aria-labelledby="teach-title" className="relative isolate overflow-hidden bg-ink-950 text-text-on-ink">
         <div className="relative h-56 sm:h-80 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[62%]">
-          <img
-            src={HERO_PHOTO.src}
-            alt={HERO_PHOTO.alt}
-            width={HERO_PHOTO.width}
-            height={HERO_PHOTO.height}
-            decoding="async"
-            fetchPriority="high"
-            className="h-full w-full object-cover object-[50%_40%]"
-          />
+          {photo && (
+            <img
+              src={asset(photo.src)}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              decoding="async"
+              fetchPriority="high"
+              style={photo.position ? { objectPosition: photo.position } : undefined}
+              className="h-full w-full object-cover"
+            />
+          )}
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/25 to-ink-950/10 lg:hidden" />
           <div
             aria-hidden="true"

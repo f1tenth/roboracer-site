@@ -21,19 +21,11 @@ import { LINK, MONO_NOTE, pad2, visibleFeatures } from "../components/learn/lear
 /** Logo box height for a university offering, in px (the About wall's 80). */
 const LOGO_H = 80;
 
-/** Micro-labels and the hero picture this unit introduced. Stage 3 moves them
- * into courses.json (docs/learn/COURSES_INTERACTIVITY.md, section 3);
- * docs/qa/courses-catalog.md lists them. */
+/** Micro-labels this unit introduced. Stage 3 moves them into courses.json
+ * (docs/learn/COURSES_INTERACTIVITY.md, section 3); docs/qa/courses-catalog.md
+ * lists them. */
 const LABELS = {
   stats: "The course and the community in numbers",
-  /** docs/ASSET_MANIFEST.md, "Courses catalog" (CC-01, from V4-10). */
-  hero: {
-    src: "/media/highlights/highlight-icra2026-pitwork-02-1200.webp",
-    width: 1200,
-    height: 800,
-    alt: "The UPenn Autonomous Racing table at ICRA 2026: students at laptops beside their cars, one soldering",
-    position: "70% 40%",
-  },
 };
 
 /** The plan picker's query parameter: /learn/courses?plan=10-weeks. */
@@ -198,7 +190,7 @@ export default function Courses() {
         crumbs={[{ label: "Learn", href: "/learn" }, { label: catalog.hero.eyebrow, current: true }]}
         title={<GradientTail text={catalog.hero.title} />}
         lead={catalog.hero.lead}
-        media={LABELS.hero}
+        media={catalog.hero.photo}
         actions={
           <>
             <Button href={catalog.hero.primary.href} on="ink">
@@ -220,7 +212,10 @@ export default function Courses() {
 
       {/* 01 The three plans: the ladder explains them, the sheet under it
           links each to its page. #courses is the header's "Pick a course". */}
-      <Section width="page" rule aria-labelledby="courses">
+      {/* The tight top: the stat tiles already end the band with their
+          own overlap, and the full section padding under them read as an
+          empty screen at 1440 (stage 3 review). */}
+      <Section width="page" rule className="pt-section-tight!" aria-labelledby="courses">
         <SectionHeader
           index={next()}
           eyebrow={catalog.courses_heading.kicker}

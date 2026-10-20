@@ -528,12 +528,23 @@ export type CourseHeading = {
 
 export type CourseImage = { src: string; width: number; height: number; alt: string };
 
+/** A site photo behind a page top, a banner or a card (an existing file
+ * under public/media). Not rendered: `manifest`, the docs/ASSET_MANIFEST.md
+ * row that records this use. */
+export type CoursePhoto = CourseImage & {
+  /** CSS object-position, to keep the subject clear of the copy. */
+  position?: string;
+  manifest: string;
+};
+
 export type CourseHero = {
   eyebrow: string;
   title: string;
   lead: string;
   primary: CourseLink;
   secondary: CourseLink;
+  /** The photo behind the page top (the catalog's band, the teach header). */
+  photo?: CoursePhoto;
 };
 
 export type CoursesMeta = {
@@ -581,6 +592,8 @@ type CourseBase = {
   title: string;
   /** Card body, under 25 words. */
   blurb: string;
+  /** The course page's banner photo, under a dark scrim. */
+  banner?: CoursePhoto;
   /** ISO dates. null = unknown: render no date line at all (not "TBA");
    * `dates_note` holds the open question. */
   starts: string | null;
@@ -595,6 +608,8 @@ type CourseBase = {
 export type CoursePlan = CourseBase & {
   kind: "plan";
   weeks: number;
+  /** The catalog's plan card photo. */
+  card_photo?: CoursePhoto;
   outcome: string;
   /** outline.modules ids the plan covers, in order. */
   modules: string[];
