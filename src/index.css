@@ -232,10 +232,12 @@ body {
 }
 
 /* The logo gradient clipped to text. Gradient text is otherwise banned
-   (sharpen v2); the ONE exception is the hero's first line over the darkened
-   video (Cedric, landing v3, 2026-08-21). Ink context only: the cyan stop is
-   1.9:1 on paper. Apply to an inline-block so the gradient spans the words,
-   not the container. */
+   (sharpen v2); the exceptions are the landing hero's first line over the
+   darkened video (Cedric, landing v3, 2026-08-21) and one display phrase per
+   viewport on the courses pages' photo tops (/learn/courses, a course page's
+   title, /learn/teach: Cedric's colour brief, 2026-10-20). Ink context only:
+   the cyan stop is 1.9:1 on paper. Apply to an inline-block so the gradient
+   spans the words, not the container. */
 @utility text-gradient-logo {
   background-image: linear-gradient(90deg, var(--color-rr-cyan) 0%, var(--color-rr-grad-start) 100%);
   -webkit-background-clip: text;
