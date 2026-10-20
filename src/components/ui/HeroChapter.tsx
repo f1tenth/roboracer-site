@@ -1,28 +1,23 @@
 import { Fragment, useCallback, useEffect, useId, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { DESKTOP_QUERY, EASE_IN_OUT_QUART, MOTION_OK_QUERY, gsap, isScrollLocked, useGSAP } from "../../lib/motion";
-import { linkCanStream, linkStalled, markLinkStalled } from "../../lib/media";
+import { isLowest, markStall, pickSource, recordTransfer, type HeroSource } from "../../lib/media";
 
 export type HeroClip = {
-  /** Desktop encode (served where DESKTOP_QUERY matches: 768px wide and
-   * 544px tall; a landscape phone gets the 960); the key keeps the
-   * media-skill name whatever the file's native width. */
-  mp4_1920: string;
-  mp4_960: string;
-  /** Average bitrate of the desktop encode in Mbit/s. On a link that cannot
-   * stream it (Save-Data, slower than 4g, downlink under 1.3x this) the 960
-   * encode plays instead, so the cycle never freezes mid-clip. */
-  mbps?: number;
+  /** The clip's encodes, any number of rungs (sorted by width here). One is
+   * picked per clip as it loads: the first rung that covers the screen's
+   * physical width caps the choice (a phone at 1280), and under that cap the
+   * link decides: measured downloads of the clips played so far, else the
+   * browser's downlink estimate. A stall rules its rung and the ones above
+   * out for the session (lib/media pickSource, docs/media/HERO_4K.md). */
+  sources: HeroSource[];
 };
 
 export type HeroVideoSources = {
-  /** Desktop encode (served where DESKTOP_QUERY matches). The committed file is the
-   * source's native 1280 width; the key keeps the media-skill name. */
-  mp4_1920: string;
-  mp4_960: string;
-  webm_1920?: string;
-  /** Average bitrate of `mp4_1920` in Mbit/s (see HeroClip.mbps). */
-  mbps?: number;
+  /** The committed single loop (public/media/hero, CLAUDE.md rule 3): the
+   * fallback when a cycle clip fails to load, and the whole video where
+   * there are no `clips` (/styleguide). Picked like a clip's rungs. */
+  sources: HeroSource[];
   poster: string;
   width: number;
   height: number;
@@ -150,16 +145,34 @@ const CROSSFADE_S = 0.9;
  * until then the playing clip has the whole connection (docs/media/HERO_PERF.md). */
 const PRELOAD_LEAD_S = 3;
 const CROSSFADE_CLASS = "transition-opacity duration-[900ms] ease-linear";
-/** A clip that sits in `waiting` this long, or a finished clip that holds
- * its last frame this long for the next one, marks the link as stalled: the
- * clips loaded after it use the 960 encode (lib/media markLinkStalled). */
+/** A clip that waits for data this long, in one go or added up over
+ * STALL_WINDOW_MS, or a finished clip that holds its last frame this long
+ * for the next one, marks its rung as stalled: the clips loaded after it
+ * pick a rung below it (lib/media markStall). Added up, because a clip just
+ * over what the link carries stutters in short waits that each end before
+ * a single-gap watch fires (14 s frozen in a 55 s QA run, none caught). */
 const STALL_MS = 1500;
+const STALL_WINDOW_MS = 10_000;
+/** A download burst that buffered less footage than this before the browser
+ * paused it is too short to measure the link on. */
+const MEASURE_MIN_S = 1.5;
+/** A download still running after this long is measured on what it has
+ * buffered so far, so the figure is in before the next clip is picked
+ * (queued 3 s before the current one ends: on a 5 Mbit/s link the opening
+ * clip's whole file landed after that and the first race cut was picked
+ * on the default, docs/qa/hero-4k.md). */
+const MEASURE_AFTER_MS = 1500;
 
-/** The desktop encode, unless the link cannot stream it (or has stalled). */
-const desktopOk = (mbps?: number) => !linkStalled() && (mbps === undefined || linkCanStream(mbps));
+/** Physical pixels the footage covers: a 16:9 frame object-fit cover in the
+ * viewport, at the device pixel ratio capped at 2 (a 3x phone gains nothing
+ * from the rung above). */
+function coverWidth(): number {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  return Math.ceil(Math.max(window.innerWidth, (window.innerHeight * 16) / 9) * dpr);
+}
 
 /** Auto-scroll (Cedric, landing v5 round two): when the clip cycle comes back
- * to the IV FPV clip (the last clip) and the visitor is still at the top,
+ * to the FPV lap clip (the last clip) and the visitor is still at the top,
  * AUTOSCROLL_DELAY_S (1 s) into that clip the page glides to pin progress
  * AUTOSCROLL_TARGET_P, where the headline stands assembled. Once per visit;
  * any wheel, touch, key or scrollbar drag cancels it. Not under reduced
@@ -247,6 +260,8 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
   const clips = video.clips && video.clips.length > 0 ? video.clips : null;
   const loopFrom = Math.min(Math.max(0, video.loopFrom ?? 0), clips ? clips.length - 1 : 0);
   const headingId = useId();
+  // The single loop's rungs, for the markup without a sequencer (below).
+  const ladder = [...video.sources].sort((x, y) => x.width - y.width);
   const Tag = as;
   const sentence = lines.join(" ");
   const [paused, setPaused] = useState(false);
@@ -335,19 +350,24 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       if (a && pausedRef.current) a.pause();
       return;
     }
-    // The desktop zoom, the 1280/1920 encodes and the desktop type all key on
-    // DESKTOP_QUERY (wide AND tall), never on width alone: a landscape phone
-    // is 844 wide but 390 tall, and the width rule put the first headline
-    // line under the nav and streamed it the desktop files (LANDING-03, -25).
-    // Read live, never captured: after a resize or a rotation from desktop
-    // to compact the clips after the current one still asked for the desktop
-    // files. Playback does not restart; the next pick follows the window.
+    // The desktop zoom, the phone cap on the encodes and the desktop type all
+    // key on DESKTOP_QUERY (wide AND tall), never on width alone: a landscape
+    // phone is 844 wide but 390 tall, and the width rule put the first
+    // headline line under the nav and streamed it the desktop files
+    // (LANDING-03, -25). Read live, never captured: after a resize or a
+    // rotation from desktop to compact the clips after the current one still
+    // asked for the desktop files. Playback does not restart; the next pick
+    // follows the window.
     const desktopMql = window.matchMedia(DESKTOP_QUERY);
     const wide = () => desktopMql.matches;
-    // Chosen per clip at load time, so a link that slows down mid-cycle (or
-    // a window that leaves the desktop size) gets the 960 encodes for the
-    // clips after.
-    const srcOf = (c: HeroClip) => (wide() && desktopOk(c.mbps) ? c.mp4_1920 : c.mp4_960);
+    // The rung is chosen per clip at load time, so a link that slows down
+    // mid-cycle (or a window that leaves the desktop size) gets a lower rung
+    // for the clips after, and a link measured faster a higher one.
+    const pick = (sources: HeroSource[]) => pickSource(sources, { coverWidth: coverWidth(), wide: wide() });
+    // What each element is loading: its ladder and rung, when the download
+    // started, and whether it has been measured (below).
+    type Load = { sources: HeroSource[]; source: HeroSource; t0: number; started: boolean; done: boolean };
+    const loads = new Map<HTMLVideoElement, Load>();
     const after = (i: number) => (i + 1 < clips.length ? i + 1 : loopFrom);
     const els = [a, b] as const;
     const held = () => pausedRef.current || hiddenRef.current;
@@ -380,8 +400,12 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       }, AUTOSCROLL_DELAY_S * 1000);
     };
     const setClip = (el: HTMLVideoElement, i: number) => {
+      const sources = clips[i].sources;
+      const source = pick(sources);
+      loads.set(el, { sources, source, t0: performance.now(), started: false, done: false });
+      waits.delete(el);
       el.preload = "auto";
-      el.src = srcOf(clips[i]);
+      el.src = source.src;
       el.load();
     };
     const queueNext = () => {
@@ -393,29 +417,67 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       const r = v.buffered;
       return r.length > 0 && r.end(r.length - 1) >= v.duration - 0.25;
     };
+    // Throughput: what a clip downloaded in its first burst, over the time
+    // it took, feeds the link estimate (lib/media recordTransfer), so the
+    // clips after it can step up a rung, or down. The burst runs from
+    // `loadstart` to the first `suspend`: Chrome stops fetching once it has
+    // buffered enough ahead (a 6 MB clip took 17 s to finish on localhost),
+    // so the time to the whole file says nothing about the link, only the
+    // burst does. The sample is taken at the first of: the whole file down,
+    // the fetch paused, or MEASURE_AFTER_MS elapsed, with bytes as the file
+    // or the buffered share of it; under MEASURE_MIN_S of footage it waits
+    // for more (or is dropped if the fetch paused). A lower bound while two
+    // clips share the connection (the next one preloading as the current
+    // one ends).
+    const measure = (el: HTMLVideoElement, suspended: boolean) => {
+      const l = loads.get(el);
+      if (!l || !l.started || l.done) return;
+      const d = el.duration;
+      const r = el.buffered;
+      if (!Number.isFinite(d) || d <= 0 || r.length === 0) return;
+      const have = r.end(r.length - 1);
+      const full = have >= d - 0.25;
+      const elapsed = performance.now() - l.t0;
+      if (!full && !suspended && elapsed < MEASURE_AFTER_MS) return;
+      if (!full && have < MEASURE_MIN_S) {
+        if (suspended) l.done = true;
+        return;
+      }
+      l.done = true;
+      const file = l.source.bytes ?? (l.source.mbps * 1e6 * d) / 8;
+      recordTransfer(full ? file : (file * have) / d, elapsed, l.source.src);
+    };
+    const onLoadStart = (e: Event) => {
+      const l = loads.get(e.currentTarget as HTMLVideoElement);
+      if (!l) return;
+      l.t0 = performance.now();
+      l.started = true;
+    };
+    const onProgress = (e: Event) => measure(e.currentTarget as HTMLVideoElement, e.type === "suspend");
     // After a stall or a size change, the clip queued next reloads in the
-    // encode srcOf picks now, if it has not started.
+    // rung pick chooses now, if it has not started.
     const reselectQueued = () => {
       const n = els[1 - cur];
       if (!queued || fading || !n.paused) return;
-      const next = srcOf(clips[after(clip)]);
+      const next = pick(clips[after(clip)].sources).src;
       if (n.src !== new URL(next, window.location.href).href) setClip(n, after(clip));
     };
     // Stall between clips: the current clip reaches its end before the next
     // can play, so the picture holds on its last frame and neither element
     // fires `waiting` (the stall watch below never saw it). The hold is timed
     // from the current clip's end (the wait for canplay starts CROSSFADE_S
-    // before it); past STALL_MS the link counts as stalled and the queued
-    // clip drops to its 960 encode. A pause, the next clip becoming playable,
-    // the error fallback and cleanup each stop the clock.
+    // before it); past STALL_MS the queued clip's rung counts as stalled and
+    // the clip reloads in a lower one. A pause, the next clip becoming
+    // playable, the error fallback and cleanup each stop the clock.
     const armGap = () => {
       window.clearTimeout(gapTimer);
-      if (!wide() || linkStalled() || held()) return;
+      const l = loads.get(els[1 - cur]);
+      if (held() || !l || isLowest(l.sources, l.source)) return;
       const v = els[cur];
       const left = Number.isFinite(v.duration) ? Math.max(0, v.duration - v.currentTime) : 0;
       gapTimer = window.setTimeout(() => {
         if (disposed || !waiting || held()) return;
-        markLinkStalled();
+        markStall(l.source.mbps);
         reselectQueued();
       }, left * 1000 + STALL_MS);
     };
@@ -475,7 +537,13 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       }
       raf = requestAnimationFrame(tick);
     };
-    const onEnded = () => advance();
+    // Only the clip on screen: the outgoing clip reaches its end as the
+    // crossfade timer fires, and its `ended` landing just after the flip
+    // used to advance the clip that had just come in (the second cycle's
+    // first race cut played for a second, QA 2026-10-20).
+    const onEnded = (e: Event) => {
+      if (e.currentTarget === els[cur]) advance();
+    };
     // A clip that fails to load (not deployed, network) must not freeze the
     // hero on its poster: fall back to the committed single loop on the
     // visible element and stop sequencing.
@@ -495,7 +563,9 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       keep.style.opacity = "1";
       keep.style.zIndex = "1";
       keep.loop = true;
-      keep.src = wide() && desktopOk(video.mbps) ? video.mp4_1920 : video.mp4_960;
+      loads.delete(keep);
+      loads.delete(other);
+      keep.src = pick(video.sources).src;
       keep.load();
       activeRef.current = [keep];
       if (!held()) void keep.play().catch(() => {});
@@ -523,34 +593,66 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       n.removeAttribute("src");
       n.load();
     };
-    // Stall watch: a clip that waits for data over STALL_MS switches the rest
-    // of the session to the 960 encodes, including the clip already queued
-    // next if it has not started. The clip that stalled moves on at once: it
-    // used to play its desktop file to the end, about 13.6 s frozen over an
-    // 11 s clip at 5 Mbit/s where the browser reports no connection speed
-    // (Safari, Firefox; final QA step 6). The next clip, in its 960 encode,
-    // crossfades in as soon as it can play; until then the current frame
-    // holds, as it did before. Any sign of flow (or a pause) disarms it.
+    // Stall watch: a clip that waits for data over STALL_MS, in one wait or
+    // added up over the last STALL_WINDOW_MS (its start-up wait aside),
+    // rules its rung (and the ones above) out for the rest of the session,
+    // including for the clip already queued next if it has not started. The
+    // clip that stalled moves on at once: it used to play its desktop file
+    // to the end, about 13.6 s frozen over an 11 s clip at 5 Mbit/s where
+    // the browser reports no connection speed (Safari, Firefox; final QA
+    // step 6). The next clip, in a lower rung, crossfades in as soon as it
+    // can play; until then the current frame holds, as it did before. A
+    // pause disarms it. Nothing to do at the lowest rung.
+    type Wait = { since: number | null; started: boolean; past: [number, number][] };
+    const waits = new Map<HTMLVideoElement, Wait>();
     const stallTimers = new Map<HTMLVideoElement, number>();
+    // Waiting time inside the window, the current wait included.
+    const waited = (w: Wait, now: number) => {
+      w.past = w.past.filter(([end]) => now - end < STALL_WINDOW_MS);
+      return w.past.reduce((sum, [, d]) => sum + d, 0) + (w.since === null ? 0 : now - w.since);
+    };
+    const stall = (el: HTMLVideoElement) => {
+      const l = loads.get(el);
+      if (disposed || el.paused || !l) return;
+      markStall(l.source.mbps);
+      reselectQueued();
+      if (el === els[cur] && !fading) advance();
+    };
     const onWaiting = (e: Event) => {
       const el = e.currentTarget as HTMLVideoElement;
-      if (!wide() || linkStalled() || held()) return;
+      const l = loads.get(el);
+      if (held() || !l || isLowest(l.sources, l.source)) return;
+      const w = waits.get(el) ?? { since: null, started: false, past: [] };
+      waits.set(el, w);
+      const now = performance.now();
+      if (w.since === null) w.since = now;
       window.clearTimeout(stallTimers.get(el));
       stallTimers.set(
         el,
-        window.setTimeout(() => {
-          if (disposed || el.paused) return;
-          markLinkStalled();
-          reselectQueued();
-          if (el === els[cur] && !fading) advance();
-        }, STALL_MS),
+        window.setTimeout(() => stall(el), Math.max(0, STALL_MS - waited(w, now))),
       );
     };
-    const onFlowing = (e: Event) => window.clearTimeout(stallTimers.get(e.currentTarget as HTMLVideoElement));
+    const onFlowing = (e: Event) => {
+      const el = e.currentTarget as HTMLVideoElement;
+      window.clearTimeout(stallTimers.get(el));
+      const w = waits.get(el);
+      if (!w || w.since === null) return;
+      const now = performance.now();
+      // The wait before the first frame is start-up, not a stall (a single
+      // long one still trips the timer above).
+      if (w.started) w.past.push([now, now - w.since]);
+      w.since = null;
+      if (e.type !== "playing") return;
+      w.started = true;
+      if (waited(w, now) >= STALL_MS) stall(el);
+    };
     const FLOW_EVENTS = ["playing", "pause", "ended", "emptied"] as const;
+    const LOAD_EVENTS = ["progress", "suspend"] as const;
     for (const el of els) {
       el.addEventListener("waiting", onWaiting);
+      el.addEventListener("loadstart", onLoadStart);
       for (const ev of FLOW_EVENTS) el.addEventListener(ev, onFlowing);
+      for (const ev of LOAD_EVENTS) el.addEventListener(ev, onProgress);
     }
     a.addEventListener("ended", onEnded);
     b.addEventListener("ended", onEnded);
@@ -575,7 +677,9 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       for (const t of stallTimers.values()) window.clearTimeout(t);
       for (const el of els) {
         el.removeEventListener("waiting", onWaiting);
+        el.removeEventListener("loadstart", onLoadStart);
         for (const ev of FLOW_EVENTS) el.removeEventListener(ev, onFlowing);
+        for (const ev of LOAD_EVENTS) el.removeEventListener(ev, onProgress);
       }
       a.removeEventListener("ended", onEnded);
       b.removeEventListener("ended", onEnded);
@@ -583,7 +687,7 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
       b.removeEventListener("error", onError);
       desktopMql.removeEventListener("change", reselectQueued);
     };
-  }, [isStatic, clips, loopFrom, video.mp4_1920, video.mp4_960, video.mbps]);
+  }, [isStatic, clips, loopFrom, video.sources]);
 
   // Plays or stops the footage on screen to match the reader's pause and the
   // hero's visibility; the sequencer follows through holdRef and resumeRef.
@@ -862,9 +966,10 @@ export default function HeroChapter({ video, lines, description, as = "h1", clas
               height={video.height}
               aria-hidden="true"
             >
-              {video.webm_1920 && <source src={video.webm_1920} type="video/webm" media={DESKTOP_QUERY} />}
-              <source src={video.mp4_1920} type="video/mp4" media={DESKTOP_QUERY} />
-              <source src={video.mp4_960} type="video/mp4" />
+              {/* No sequencer here (/styleguide): the top rung where
+                  DESKTOP_QUERY matches, the lowest one elsewhere. */}
+              {ladder.length > 1 && <source src={ladder[ladder.length - 1].src} type="video/mp4" media={DESKTOP_QUERY} />}
+              <source src={ladder[0].src} type="video/mp4" />
             </video>
           )}
         </div>

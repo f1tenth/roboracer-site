@@ -172,6 +172,17 @@ Gap: the master is 720p - ask the videographer for a higher-resolution original;
 
 **2026-09-24, IV clips v2 (landing clip cycle).** `hero-iv-start-v2-{1280,960}.mp4` (FPV_IV.mp4 frames 90-239) and `hero-iv-rest-v2-{1280,960}.mp4` (frames 270-1080), libx264 preset slow, crf 25 (1280, native size) / crf 26 (960, lanczos), 29.97 fps, faststart, no audio. On R2 only (`media/hero/`), not in git. Same provenance as the loop (organizer footage, granted). VMAF 99.8-99.9 against the source where the v1 cuts scored 91.6-93.1; numbers in `docs/media/HERO_PERF.md`.
 
+**2026-10-20, FPV v3 from the 4K GoPro lap (branch `revamp/hero-4k`).** Source `~/Downloads/GX010088.mp4` (GoPro, 3840x2160 HEVC 119.88 fps full-range, 52.1 s, 778,889,236 B), brought by Cedric on 2026-10-20 as a much better FPV clip; the same kind of organizer onboard footage as H-01 and FPV_IV.mp4 (orange-barrier indoor track, people far off in some frames). TODO(content): confirm the event and who shot it before the manifest row says more. Cuts, ladder, VMAF and the picker in `docs/media/HERO_4K.md`; where each file is served in `docs/media/HOSTING.md`.
+
+| id | file | type | WxH | size | what it shows | provenance | permission | use |
+|---|---|---|---|---|---|---|---|---|
+| H-11 | `~/Downloads/GX010088.mp4` | mp4 (hevc+aac) | 3840x2160, 119.88 fps, 52.1 s | 778,889,236 B | FPV lap: start line, black and orange barriers, the far end with the crowd; the car hits the barrier at 40.5 s | Cedric, 2026-10-20 (event TODO) | granted (organizer footage, per Cedric) | source of H-12 to H-15 |
+| H-12 | R2 `media/hero/hero-fpv-v3-start-{960,1280,1920,2560}.mp4` | mp4 h264 (960 and 1280 at 29.97 fps; 1920 and 2560 at 59.94) | 960x540 to 2560x1440 | 979,877 / 1,984,079 / 4,939,005 / 7,132,201 B | source 2.0-7.0 s: the launch from the start line | derived from H-11 | granted | hero cycle, opening clip |
+| H-13 | R2 `media/hero/hero-fpv-v3-rest-{960,1280,1920,2560}.mp4` | mp4 h264, as H-12 | as H-12 | 6,433,173 / 12,887,260 / 31,871,819 / 45,254,937 B | source 7.0-36.5 s: the lap to the start line and a little past it | derived from H-11 | granted | hero cycle, last clip |
+| H-14 | `public/media/hero/hero-fpv-loop-1280.mp4`, `-960.mp4` | mp4 h264 29.97 fps, two-pass | 1280x720, 960x540 | 7,469,292 B, 2,725,455 B | source 2.0-20.0 s | derived from H-11; replaced the IV-clip loops of 2026-08-21 in place (git exception, CLAUDE.md rule 3) | granted | hero fallback, /styleguide |
+| H-15 | `public/media/hero/hero-fpv-poster.webp` | webp q82 | 1920x1080 | 73,536 B | first frame of H-12 (the start line) | derived from H-12 | granted | hero poster (replaced the 1280x720 IV poster) |
+| H-16 | `public/media/highlights/highlight-iv2026-onboard-960.mp4` + `-poster.webp` | mp4 h264 29.97 fps two-pass 1000k / webp | 960x540 | 1,273,508 B / 16,088 B | the IV 2026 onboard lap, source 3.0-13.0 s | `~/Downloads/FPV_IV.mp4` (the 2026-08-21 master, organizer footage) | granted | the "onboard the winning car, IV 2026" highlight tile, which used the old hero loop until 2026-10-20 |
+
 <details><summary>2026-08-20 encode of the older roboracer_fpv.mp4 (superseded)</summary>
 
 
