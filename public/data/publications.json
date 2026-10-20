@@ -260,7 +260,7 @@
         "safety",
         "sim-to-real"
       ],
-      "featured": false,
+      "featured": true,
       "status": "published",
       "added": "2026-10-20",
       "source": "arxiv",
@@ -271,7 +271,7 @@
       "institutions": [
         "Queen's University"
       ],
-      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.20873v1); resolved through scripts/resolve_paper.py on arXiv 2610.20873 (arXiv API; Semantic Scholar answered 429 all day). Queen's University (Kingston, Canada). The arXiv comment says submitted to IEEE Transactions on Intelligent Vehicles, so the venue stays arXiv until it is accepted. Trains the recovery policy in Gym-Khana, which builds on f1tenth_gym (https://github.com/TeoIlie/Gym-Khana), and deploys it on a physical 1:10-scale F1TENTH car; the PDF names F1TENTH throughout and cites the F1TENTH platform paper. Also a candidate in PR #26 (data/publications.candidates.json, id ilie-2026-race, added 2026-10-19); the first author's thesis \"Race to Recovery: Autonomous Drifting and its Safety Applications\" (QSpace) is a separate candidate there (ilie-2026-race-2). Abstract verbatim from the arXiv API, 2026-10-20.",
+      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.20873v1); resolved through scripts/resolve_paper.py on arXiv 2610.20873 (arXiv API; Semantic Scholar answered 429 all day). Queen's University (Kingston, Canada). The arXiv comment says submitted to IEEE Transactions on Intelligent Vehicles, so the venue stays arXiv until it is accepted. Trains the recovery policy in Gym-Khana, which builds on f1tenth_gym (https://github.com/TeoIlie/Gym-Khana), and deploys it on a physical 1:10-scale F1TENTH car; the PDF names F1TENTH throughout and cites the F1TENTH platform paper. Also a candidate in PR #26 (data/publications.candidates.json, id ilie-2026-race, added 2026-10-19); the first author's thesis \"Race to Recovery: Autonomous Drifting and its Safety Applications\" (QSpace) is a separate candidate there (ilie-2026-race-2). Abstract verbatim from the arXiv API, 2026-10-20. Featured at Cedric's request (2026-10-20).",
       "thumbnail": "/media/research/research-ilie-2026-race-1200.webp",
       "figure": "/media/research/research-ilie-2026-race-fig-1600.webp",
       "row_thumbnail": "/media/research/research-ilie-2026-race-row-320.webp",
@@ -295,7 +295,7 @@
         "control-mpc",
         "perception-estimation"
       ],
-      "featured": false,
+      "featured": true,
       "status": "published",
       "added": "2026-10-20",
       "source": "arxiv",
@@ -306,7 +306,7 @@
       "institutions": [
         "ETH Zurich"
       ],
-      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.20333v1); resolved through scripts/resolve_paper.py on arXiv 2610.20333 (arXiv API; Semantic Scholar answered 429). Institute for Dynamic Systems and Control, ETH Zurich; author order as on the arXiv record and the PDF title block (Trisovic and Rickenbach share first authorship). Hardware runs on a modified F1TENTH car with an onboard LattePanda Sigma and a RealSense D405 camera as its only exteroceptive sensor; the PDF names F1TENTH and cites the F1TENTH platform paper. Project page https://vigor-mpc.github.io/, code https://github.com/VIGOR-MPC/codebase/. Not in the PR #26 candidates. Abstract verbatim from the arXiv API, 2026-10-20.",
+      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.20333v1); resolved through scripts/resolve_paper.py on arXiv 2610.20333 (arXiv API; Semantic Scholar answered 429). Institute for Dynamic Systems and Control, ETH Zurich; author order as on the arXiv record and the PDF title block (Trisovic and Rickenbach share first authorship). Hardware runs on a modified F1TENTH car with an onboard LattePanda Sigma and a RealSense D405 camera as its only exteroceptive sensor; the PDF names F1TENTH and cites the F1TENTH platform paper. Project page https://vigor-mpc.github.io/, code https://github.com/VIGOR-MPC/codebase/. Not in the PR #26 candidates. Abstract verbatim from the arXiv API, 2026-10-20. Featured at Cedric's request (2026-10-20).",
       "thumbnail": "/media/research/research-trisovic-2026-vigor-1200.webp",
       "figure": "/media/research/research-trisovic-2026-vigor-fig-1600.webp",
       "row_thumbnail": "/media/research/research-trisovic-2026-vigor-row-320.webp",
@@ -328,7 +328,7 @@
         "control-mpc",
         "sim-to-real"
       ],
-      "featured": false,
+      "featured": true,
       "status": "published",
       "added": "2026-10-20",
       "source": "arxiv",
@@ -339,7 +339,7 @@
       "institutions": [
         "Carnegie Mellon University"
       ],
-      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.03616v1); resolved through scripts/resolve_paper.py on arXiv 2610.03616 (arXiv API; Semantic Scholar answered 429). Carnegie Mellon University (Robotics Institute and ECE). Venue from the arXiv comment (accepted in the Sim2Real and Classical Control: From Rigorous Theory to Data-Driven Robotics Workshop at IEEE/RSJ IROS 2026, Pittsburgh); no proceedings DOI. Runs on the F1TENTH car (low-friction plastic tires, onboard particle filter, thousands of candidate models on a Jetson Orin Nano); the PDF names F1TENTH and cites the F1TENTH platform paper. Code and videos via https://lla-control.github.io. Also a candidate in PR #26 (data/publications.candidates.json, id liao-2026-lla, added 2026-10-19). Abstract verbatim from the arXiv API, 2026-10-20.",
+      "notes": "added 2026-10-20 at Cedric's request (he shared the arXiv PDF 2610.03616v1); resolved through scripts/resolve_paper.py on arXiv 2610.03616 (arXiv API; Semantic Scholar answered 429). Carnegie Mellon University (Robotics Institute and ECE). Venue from the arXiv comment (accepted in the Sim2Real and Classical Control: From Rigorous Theory to Data-Driven Robotics Workshop at IEEE/RSJ IROS 2026, Pittsburgh); no proceedings DOI. Runs on the F1TENTH car (low-friction plastic tires, onboard particle filter, thousands of candidate models on a Jetson Orin Nano); the PDF names F1TENTH and cites the F1TENTH platform paper. Code and videos via https://lla-control.github.io. Also a candidate in PR #26 (data/publications.candidates.json, id liao-2026-lla, added 2026-10-19). Abstract verbatim from the arXiv API, 2026-10-20. Featured at Cedric's request (2026-10-20).",
       "thumbnail": "/media/research/research-liao-2026-lla-1200.webp",
       "figure": "/media/research/research-liao-2026-lla-fig-1600.webp",
       "row_thumbnail": "/media/research/research-liao-2026-lla-row-320.webp",
@@ -362,7 +362,7 @@
         "safety",
         "perception-estimation"
       ],
-      "featured": false,
+      "featured": true,
       "status": "published",
       "added": "2026-10-20",
       "source": "crossref",
@@ -373,7 +373,11 @@
         "University of North Carolina at Chapel Hill",
         "Technical University of Munich"
       ],
-      "notes": "added 2026-10-20 at Cedric's request (IEEE Xplore document 11724696); DOI 10.1109/FDL71572.2026.11724696 read from the Xplore page's embedded metadata, then resolved through scripts/resolve_paper.py (Crossref, OpenAlex). 2026 Forum on Specification & Design Languages (FDL), Rome, pp. 1-7, published on Xplore 2026-10-14. UNC Chapel Hill (Chakraborty also TUM Institute for Advanced Study). Not open access: no PDF, no arXiv version (arXiv title and author search, OpenAlex, web search, 2026-10-20), so no figure; the row shows the placeholder. F1TENTH is named in the abstract (closed-loop NAS of perception modules in F1TENTH simulation, racing tracks); the full text could not be read. Not in the PR #26 candidates (several earlier Chakraborty-group F1TENTH papers are). Abstract verbatim from the IEEE Xplore page, 2026-10-20 (Crossref has none)."
+      "notes": "added 2026-10-20 at Cedric's request (IEEE Xplore document 11724696); DOI 10.1109/FDL71572.2026.11724696 read from the Xplore page's embedded metadata, then resolved through scripts/resolve_paper.py (Crossref, OpenAlex). 2026 Forum on Specification & Design Languages (FDL), Rome, pp. 1-7, published on Xplore 2026-10-14. UNC Chapel Hill (Chakraborty also TUM Institute for Advanced Study). Not open access: no PDF, no arXiv version (arXiv title and author search, OpenAlex, web search, 2026-10-20), so the figure is the paper's figure 1 as IEEE Xplore shows it (the 820x202 graphical-abstract GIF, 11724696-fig-1-source-large.gif), supplied by Cedric on 2026-10-20, upscaled 1.95x and letterboxed on paper-50. F1TENTH is named in the abstract (closed-loop NAS of perception modules in F1TENTH simulation, racing tracks); the full text could not be read. Not in the PR #26 candidates (several earlier Chakraborty-group F1TENTH papers are). Abstract verbatim from the IEEE Xplore page, 2026-10-20 (Crossref has none). Featured at Cedric's request (2026-10-20).",
+      "figure": "/media/research/research-cortright-2026-nas-fig-1600.webp",
+      "thumbnail": "/media/research/research-cortright-2026-nas-1200.webp",
+      "row_thumbnail": "/media/research/research-cortright-2026-nas-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-cortright-2026-nas-fig-1600.webp"
     },
     {
       "id": "shehadeh-2026-efficient",
@@ -393,7 +397,7 @@
         "raceline-optimization",
         "planning"
       ],
-      "featured": false,
+      "featured": true,
       "status": "published",
       "added": "2026-10-20",
       "source": "arxiv",
@@ -404,7 +408,7 @@
       "institutions": [
         "University of Bonn"
       ],
-      "notes": "added 2026-10-20 at Cedric's request (his share link resolves to the arXiv PDF); resolved through scripts/resolve_paper.py on arXiv 2603.07126 (arXiv API, v2 of 2026-05-16; no journal reference or published version on arXiv or OpenAlex; Semantic Scholar answered 429). University of Bonn (Humanoid Robots Lab, Lamarr Institute). Learns a raceline prior from Formula 1 telemetry on 17 tracks and validates it on a self-built RoboRacer 1:10 car; the PDF names RoboRacer throughout and cites the RoboRacer (F1TENTH) survey and the ForzaETH race stack. Code https://github.com/HumanoidsBonn/f1-optimization. Not in the PR #26 candidates. Abstract verbatim from the arXiv API, 2026-10-20.",
+      "notes": "added 2026-10-20 at Cedric's request (his share link resolves to the arXiv PDF); resolved through scripts/resolve_paper.py on arXiv 2603.07126 (arXiv API, v2 of 2026-05-16; no journal reference or published version on arXiv or OpenAlex; Semantic Scholar answered 429). University of Bonn (Humanoid Robots Lab, Lamarr Institute). Learns a raceline prior from Formula 1 telemetry on 17 tracks and validates it on a self-built RoboRacer 1:10 car; the PDF names RoboRacer throughout and cites the RoboRacer (F1TENTH) survey and the ForzaETH race stack. Code https://github.com/HumanoidsBonn/f1-optimization. Not in the PR #26 candidates. Abstract verbatim from the arXiv API, 2026-10-20. Featured at Cedric's request (2026-10-20).",
       "thumbnail": "/media/research/research-shehadeh-2026-efficient-1200.webp",
       "figure": "/media/research/research-shehadeh-2026-efficient-fig-1600.webp",
       "row_thumbnail": "/media/research/research-shehadeh-2026-efficient-row-320.webp",
