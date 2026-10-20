@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { loadCommunity, logoAttrs, type CoursesFile } from "../lib/data";
 import { useCourses } from "../hooks/useCourses";
 import { useScrollToHash } from "../hooks/useScrollToHash";
@@ -10,16 +10,81 @@ import Reveal from "../components/ui/Reveal";
 import CommunityJoin from "../components/ui/CommunityJoin";
 import NearViewport from "../components/about/NearViewport";
 import LearnHeader from "../components/learn/LearnHeader";
-import Ledger from "../components/learn/Ledger";
+import Ledger, { CourseIcon } from "../components/learn/Ledger";
 import LearnLink from "../components/learn/LearnLink";
 import PlanLadder from "../components/learn/PlanLadder";
 import CourseOutline from "../components/learn/CourseOutline";
-import FeatureList from "../components/learn/FeatureList";
+import TopicFinder from "../components/learn/TopicFinder";
 import CoursesUnavailable from "../components/learn/CoursesUnavailable";
 import { LINK, MONO_NOTE, pad2, visibleFeatures } from "../components/learn/learnStyles";
 
 /** Logo box height for a university offering, in px (the About wall's 80). */
 const LOGO_H = 80;
+
+/** Micro-labels and the hero picture this unit introduced. Stage 3 moves them
+ * into courses.json (docs/learn/COURSES_INTERACTIVITY.md, section 3);
+ * docs/qa/courses-catalog.md lists them. */
+const LABELS = {
+  stats: "The course and the community in numbers",
+  /** docs/ASSET_MANIFEST.md, "Courses catalog" (CC-01, from V4-10). */
+  hero: {
+    src: "/media/highlights/highlight-icra2026-pitwork-02-1200.webp",
+    width: 1200,
+    height: 800,
+    alt: "The UPenn Autonomous Racing table at ICRA 2026: students at laptops beside their cars, one soldering",
+    position: "70% 40%",
+  },
+};
+
+/** The plan picker's query parameter: /learn/courses?plan=10-weeks. */
+const PLAN_PARAM = "plan";
+
+/**
+ * The picked plan, kept in the address (?plan=) so a link or a reload
+ * restores it. Picking replaces the history entry rather than adding one:
+ * Back leaves the page, as it did before the picker, and Back onto this page
+ * restores the plan from the address. The pick also lives in local state,
+ * because the router's own update is a transition and a controlled radio
+ * must change in the same frame as the click.
+ */
+function usePlanParam(): [string | null, (id: string | null) => void] {
+  const [params, setParams] = useSearchParams();
+  const fromUrl = params.get(PLAN_PARAM);
+  const [plan, setPlan] = useState(fromUrl);
+  // The address changed under the page (Back, Forward, a link): follow it.
+  useEffect(() => setPlan(fromUrl), [fromUrl]);
+  const select = useCallback(
+    (id: string | null) => {
+      setPlan(id);
+      setParams(
+        (prev) => {
+          const next = new URLSearchParams(prev);
+          if (id) next.set(PLAN_PARAM, id);
+          else next.delete(PLAN_PARAM);
+          return next;
+        },
+        { replace: true },
+      );
+    },
+    [setParams],
+  );
+  return [plan, select];
+}
+
+/** The title's last two words in the logo gradient (one display phrase per
+ * viewport, Cedric's colour brief of 2026-10-20), cloned per line so a
+ * phrase that wraps keeps the whole gradient on each line. */
+function GradientTail({ text }: { text: string }) {
+  const words = text.split(" ");
+  const tail = words.slice(-2).join(" ");
+  const head = words.slice(0, -2).join(" ");
+  return (
+    <>
+      {head && `${head} `}
+      <span className="text-gradient-logo box-decoration-clone">{tail}</span>
+    </>
+  );
+}
 
 function Offerings({ courses }: { courses: CoursesFile }) {
   // Only offerings a source confirms (COURSES_CONTENT.md): Penn today. With
@@ -90,6 +155,7 @@ function Offerings({ courses }: { courses: CoursesFile }) {
 export default function Courses() {
   useScrollToHash();
   const courses = useCourses();
+  const [plan, selectPlan] = usePlanParam();
   // The members figure mirrors community.json (COURSES_CONTENT.md): the
   // file's own copy shows until that loads, and if it never does.
   const [members, setMembers] = useState<string | null>(null);
@@ -108,7 +174,9 @@ export default function Courses() {
   const { catalog, meta, teach } = courses;
   const stats = courses.stats.map((s) => (s.id === "members" && members ? { ...s, value: members } : s));
   const hasOfferings = courses.offerings.some((o) => o.status === "published");
-  const hasFeatures = visibleFeatures(courses.features, meta.lms_url).some((f) => f.pages.includes("catalog"));
+  const catalogFeatures = visibleFeatures(courses.features, meta.lms_url).filter((f) => f.pages.includes("catalog"));
+  const hasFeatures = catalogFeatures.length > 0;
+  const selectedPlan = courses.plans.some((p) => p.id === plan) ? plan : null;
   // Sections number themselves, so a section the data leaves out (no
   // published offering yet) does not leave a gap in 01, 02, 03.
   let n = 0;
@@ -116,24 +184,31 @@ export default function Courses() {
 
   return (
     <div className="pt-nav">
+      {/* The page top as a photo band (Cedric's colour brief, 2026-10-20):
+          the headline's last words in the logo gradient, and the figures as
+          stat tiles riding the band's bottom edge. */}
       <LearnHeader
         id="courses-title"
         crumbs={[{ label: "Learn", href: "/learn" }, { label: catalog.hero.eyebrow, current: true }]}
-        title={catalog.hero.title}
+        title={<GradientTail text={catalog.hero.title} />}
         lead={catalog.hero.lead}
+        media={LABELS.hero}
         actions={
           <>
-            <Button href={catalog.hero.primary.href}>{catalog.hero.primary.label}</Button>
-            <Button href={catalog.hero.secondary.href} variant="ghost" className="px-0!">
+            <Button href={catalog.hero.primary.href} on="ink">
+              {catalog.hero.primary.label}
+            </Button>
+            <Button href={catalog.hero.secondary.href} variant="ghost" on="ink" className="px-0!">
               {catalog.hero.secondary.label}
             </Button>
           </>
         }
-        aside={
-          <div className="flex flex-col gap-8">
-            <Ledger label="The course" stats={stats.filter((s) => s.group === "course")} />
-            <Ledger label="The community" stats={stats.filter((s) => s.group === "community")} />
-          </div>
+        overlap={
+          <Ledger
+            variant="tiles"
+            label={LABELS.stats}
+            stats={[...stats.filter((s) => s.group === "course"), ...stats.filter((s) => s.group === "community")]}
+          />
         }
       />
 
@@ -147,7 +222,7 @@ export default function Courses() {
           title={catalog.courses_heading.title}
           lead={catalog.courses_heading.lead}
         />
-        <PlanLadder courses={courses} />
+        <PlanLadder courses={courses} selected={selectedPlan} onSelect={selectPlan} />
       </Section>
 
       {hasOfferings && (
@@ -173,6 +248,7 @@ export default function Courses() {
           title={catalog.outline_heading.title}
           lead={catalog.outline_heading.lead}
         />
+        <TopicFinder courses={courses} />
         <CourseOutline outline={courses.outline} modules={courses.outline.modules} showLinks />
       </Section>
 
@@ -185,7 +261,25 @@ export default function Courses() {
             title={catalog.features_heading.title}
             lead={catalog.features_heading.lead}
           />
-          <FeatureList features={courses.features} page="catalog" lmsUrl={meta.lms_url} />
+          {/* What the course site gives, as icon tiles: an ink-stroke glyph
+              on a violet-tinted square, the name, one sentence. */}
+          <Reveal as="ul" stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {catalogFeatures.map((f) => (
+              <li
+                key={f.id}
+                className="flex flex-col gap-4 rounded-card border border-ink-950/10 bg-paper-50 p-6 shadow-card"
+              >
+                <span
+                  aria-hidden="true"
+                  className="flex h-12 w-12 items-center justify-center rounded-card bg-rr-violet/12"
+                >
+                  <CourseIcon id={f.id} className="h-6 w-6" />
+                </span>
+                <h3 className="font-display text-lead font-semibold text-text-strong">{f.title}</h3>
+                <p className="text-body text-text-body">{f.body}</p>
+              </li>
+            ))}
+          </Reveal>
           <p className={`mt-8 ${MONO_NOTE}`}>
             <a
               href={meta.license.url}
