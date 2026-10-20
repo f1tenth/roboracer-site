@@ -8,6 +8,9 @@ type BlockHeaderProps = {
   title: ReactNode;
   lead?: ReactNode;
   as?: "h2" | "h3";
+  /** For screen readers only: a tab panel's first heading, which the tab
+   * above it already names on screen ("Logistics" under "Logistics"). */
+  srOnly?: boolean;
 };
 
 /**
@@ -15,9 +18,9 @@ type BlockHeaderProps = {
  * the mono index with the 4px ink marker, as SectionHeader draws it, over a
  * display-s title.
  */
-export default function BlockHeader({ id, index, title, lead, as: Tag = "h2" }: BlockHeaderProps) {
+export default function BlockHeader({ id, index, title, lead, as: Tag = "h2", srOnly = false }: BlockHeaderProps) {
   return (
-    <header className="mb-6">
+    <header className={srOnly ? "sr-only" : "mb-6"}>
       {index && (
         <p className="mb-3 flex items-center gap-2 font-mono text-small text-text-muted">
           <span aria-hidden="true" className="h-1 w-1 bg-ink-950" />

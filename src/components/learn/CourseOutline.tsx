@@ -1,8 +1,9 @@
-import { useId, useState } from "react";
+import { useContext, useId, useState } from "react";
 import type { CourseOutline as Outline, OutlineItem, OutlineModule } from "../../lib/data";
 import { useLectureProgress } from "../../hooks/useLectureProgress";
 import LearnLink, { FoldChevron } from "./LearnLink";
 import { LecturePlayer, LectureThumb, RecordingStack, SlidesLink, WatchButton } from "./LectureWatch";
+import { PanelActive } from "./panelActive";
 import { FOLD_SUMMARY, MONO_NOTE, listWords, moduleRange } from "./learnStyles";
 
 /** Micro-labels this unit introduces (stage 3 moves them into courses.json).
@@ -104,6 +105,16 @@ export default function CourseOutline({ outline, modules, showLinks = false }: C
   const [openIds, setOpenIds] = useState<ReadonlySet<string>>(() => new Set(modules.slice(0, 1).map((m) => m.id)));
   // href of the one recording playing, if any.
   const [watching, setWatching] = useState<string | null>(null);
+  // On the course page the outline is a tab panel: leaving the tab hides it,
+  // and a hidden panel must not keep playing out of sight, so the recording
+  // closes then (adjusted while rendering, React's pattern for state that
+  // follows a value from above; nothing replays when the tab comes back).
+  const active = useContext(PanelActive);
+  const [wasActive, setWasActive] = useState(active);
+  if (wasActive !== active) {
+    setWasActive(active);
+    if (!active) setWatching(null);
+  }
 
   const labsById = new Map(outline.labs.map((l) => [l.id, l]));
   const racesById = new Map(outline.races.map((r) => [r.id, r]));

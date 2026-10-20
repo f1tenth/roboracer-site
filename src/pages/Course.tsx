@@ -269,9 +269,12 @@ export default function Course() {
     </Button>
   );
 
-  // The panels. Each opens with its JSON heading as the page's h2 (the tab
-  // names the panel, the heading keeps the outline for a screen reader's
-  // heading list). No block numbers: the tab bar is the page's index now.
+  // The panels. Each opens with its JSON heading as the page's h2, for
+  // screen readers only: the tab above already names the panel on screen
+  // ("Logistics" twice read as a stutter), and the heading keeps the outline
+  // for a screen reader's heading list. The About panel's later headings
+  // (What you'll learn, Before you start) stay visible. No block numbers: the
+  // tab bar is the page's index now.
   const tabs: CourseTab[] = [
     {
       id: "about",
@@ -280,7 +283,7 @@ export default function Course() {
       panel: (
         <div className="flex flex-col gap-10">
           <section aria-labelledby="course-about">
-            <BlockHeader id="course-about" title={copy.about_heading} />
+            <BlockHeader id="course-about" title={copy.about_heading} srOnly />
             <div className="flex max-w-[62ch] flex-col gap-3">
               {copy.about.map((p) => (
                 <p key={p} className="text-lead text-text-body">
@@ -342,7 +345,7 @@ export default function Course() {
       count: { value: modules.length, noun: plural(modules.length, LABELS.noun_module) },
       panel: (
         <>
-          <BlockHeader id="course-outline" title={copy.outline_heading} />
+          <BlockHeader id="course-outline" title={copy.outline_heading} srOnly />
           <CourseOutline outline={courses.outline} modules={modules} />
           {leftOut.length > 0 && (
             <p className="mt-6 flex flex-wrap items-baseline gap-x-6 gap-y-2 text-small">
@@ -370,7 +373,7 @@ export default function Course() {
       count: { value: staff.length, noun: plural(staff.length, LABELS.noun_person) },
       panel: (
         <>
-          <BlockHeader id="course-staff" title={copy.staff_heading} />
+          <BlockHeader id="course-staff" title={copy.staff_heading} srOnly />
           <ul className="flex flex-col gap-5">
             {staff.map((s) => {
               const initials = s.name
@@ -435,7 +438,7 @@ export default function Course() {
       count: { value: courses.faq.length, noun: plural(courses.faq.length, LABELS.noun_question) },
       panel: (
         <>
-          <BlockHeader id="course-faq" title={copy.faq_heading} />
+          <BlockHeader id="course-faq" title={copy.faq_heading} srOnly />
           <FaqList items={courses.faq} email={meta.contact} cards />
         </>
       ),

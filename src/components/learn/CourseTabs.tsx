@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import { DURATION, MOTION_OK_QUERY, ScrollTrigger } from "../../lib/motion";
+import { PanelActive } from "./panelActive";
 
 export type CourseTab = {
   /** The hash that opens the tab (#outline) and the stem of its element ids. */
@@ -225,7 +226,9 @@ export default function CourseTabs({ tabs, label }: CourseTabsProps) {
             tabIndex={0}
             className="pt-8 focus-visible:outline-offset-4 lg:pt-10"
           >
-            {t.panel}
+            {/* A hidden panel tells what it holds, so the outline closes a
+                playing lecture when the reader leaves Outline. */}
+            <PanelActive.Provider value={t.id === selected}>{t.panel}</PanelActive.Provider>
           </div>
         ))}
       </div>
