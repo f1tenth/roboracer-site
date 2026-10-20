@@ -21,12 +21,16 @@ const asset = (src: string) => `${import.meta.env.BASE_URL}${src.replace(/^\//, 
 const shown = (text: string | null) => (text && !text.startsWith("TODO(content)") ? text : null);
 
 /** Each piece on one line where it fits: a narrow strip then breaks between
- * "Ruda Śląska" and "Oct 4, 2026", or between two sentences, not inside one. */
-const pieces = (parts: string[], sep: string) =>
+ * "Ruda Śląska" and "Oct 4, 2026", or between two sentences, not inside one.
+ * A separator glyph stays at the end of the line it closes. */
+const pieces = (parts: string[], glyph = "") =>
   parts.map((part, i) => (
     <Fragment key={i}>
-      {i > 0 && sep}
-      <span className="inline-block">{part}</span>
+      {i > 0 && " "}
+      <span className="inline-block">
+        {part}
+        {glyph && i < parts.length - 1 && `\u00a0${glyph}`}
+      </span>
     </Fragment>
   ));
 
@@ -165,10 +169,10 @@ function SpinoffFeature({ spinoff }: { spinoff: Spinoff }) {
             caption={
               <>
                 <p className="font-mono text-eyebrow tracking-normal text-text-muted">
-                  {pieces(video.eyebrow.split(" · "), " · ")}
+                  {pieces(video.eyebrow.split(" · "), "·")}
                 </p>
                 <p className="mt-1 text-small font-semibold text-text-strong">
-                  {pieces(video.caption.split(/(?<=\.) /), " ")}
+                  {pieces(video.caption.split(/(?<=\.) /))}
                 </p>
               </>
             }
