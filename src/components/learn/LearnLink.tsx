@@ -38,23 +38,6 @@ export function FoldChevron() {
   );
 }
 
-/** An ink stroke tick for "What you'll learn" (never an emoji). */
-export function CheckMark() {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      width="16"
-      height="16"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
-      className="mt-[0.3em] h-[1em] w-[1em] shrink-0 text-text-strong"
-    >
-      <path d="M2.5 8.5 6.5 12.5 13.5 3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 type LearnLinkProps = {
   href: string;
   children: ReactNode;

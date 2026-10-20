@@ -1,5 +1,4 @@
 import type { CourseStat } from "../../lib/data";
-import { MONO_NOTE } from "./learnStyles";
 
 /** Ink-stroke glyphs (24-unit grid, drawn for this site; never emoji) for
  * the catalog's stat tiles and feature tiles, keyed by stat or feature id. */
@@ -59,71 +58,50 @@ export function CourseIcon({ id, className = "h-5 w-5" }: { id: string; classNam
 type LedgerProps = {
   label: string;
   stats: CourseStat[];
-  /** "list" (default): the /research masthead's mono ledger, as the teach
-   * page shows it. "tiles": a card per figure with an icon on a tinted
-   * square, for the catalog's photo top; the course figures in violet, the
-   * community's in magenta. */
-  variant?: "list" | "tiles";
 };
 
 /**
- * One group of a page top's ledger (the /research masthead): a mono label,
- * then each figure's label over its value in violet mono. The values are the
- * file's display strings ("3,500+"), which the type says never to parse, so
- * they stand as written: the final number is the markup, with or without
- * motion.
+ * The catalog's figures as stat tiles riding its photo band: a card per
+ * figure with an icon on a tinted square, the course figures in violet, the
+ * community's in magenta. The values are the file's display strings
+ * ("3,500+"), which the type says never to parse, so they stand as written:
+ * the final number is the markup, with or without motion. (The mono list
+ * variant the teach page used is gone with its photo header.)
  */
-export default function Ledger({ label, stats, variant = "list" }: LedgerProps) {
+export default function Ledger({ label, stats }: LedgerProps) {
   if (stats.length === 0) return null;
-  if (variant === "tiles") {
-    // A list, not a dl: each tile reads as one phrase ("7 modules", "3,500+
-    // community members"), value first, and the icon can sit beside it.
-    return (
-      <ul aria-label={label} className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4 xl:grid-cols-8">
-        {stats.map((s) => {
-          const community = s.group === "community";
-          return (
-            <li
-              key={s.id}
-              className="flex items-center gap-3 rounded-card border border-ink-950/10 bg-paper-50 p-3 shadow-card sm:p-4 xl:flex-col xl:items-start"
+  // A list, not a dl: each tile reads as one phrase ("7 modules", "3,500+
+  // community members"), value first, and the icon can sit beside it.
+  return (
+    <ul aria-label={label} className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4 xl:grid-cols-8">
+      {stats.map((s) => {
+        const community = s.group === "community";
+        return (
+          <li
+            key={s.id}
+            className="flex items-center gap-3 rounded-card border border-ink-950/10 bg-paper-50 p-3 shadow-card sm:p-4 xl:flex-col xl:items-start"
+          >
+            <span
+              aria-hidden="true"
+              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-card ${
+                community ? "bg-rr-magenta/15" : "bg-rr-violet/12"
+              }`}
             >
+              <CourseIcon id={s.id} />
+            </span>
+            <p className="flex min-w-0 flex-col">
               <span
-                aria-hidden="true"
-                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-card ${
-                  community ? "bg-rr-magenta/15" : "bg-rr-violet/12"
+                className={`font-mono text-display-s font-semibold tabular-nums ${
+                  community ? "text-rr-magenta-deep" : "text-rr-violet"
                 }`}
               >
-                <CourseIcon id={s.id} />
+                {s.value}
               </span>
-              <p className="flex min-w-0 flex-col">
-                <span
-                  className={`font-mono text-display-s font-semibold tabular-nums ${
-                    community ? "text-rr-magenta-deep" : "text-rr-violet"
-                  }`}
-                >
-                  {s.value}
-                </span>
-                <span className="text-small leading-snug text-text-body"> {s.label}</span>
-              </p>
-            </li>
-          );
-        })}
-      </ul>
-    );
-  }
-  return (
-    <div className="border-t border-ink-950/10 pt-5">
-      <p className={MONO_NOTE}>{label}</p>
-      <dl className="mt-4 grid grid-cols-3 gap-x-6 gap-y-5">
-        {stats.map((s) => (
-          // A label that wraps on a phone ("recorded lectures") pushes its
-          // own value down only as far as the row's: values share a baseline.
-          <div key={s.id} className="flex flex-col">
-            <dt className={MONO_NOTE}>{s.label}</dt>
-            <dd className="mt-auto pt-1 font-mono text-display-m font-semibold tabular-nums text-rr-violet">{s.value}</dd>
-          </div>
-        ))}
-      </dl>
-    </div>
+              <span className="text-small leading-snug text-text-body"> {s.label}</span>
+            </p>
+          </li>
+        );
+      })}
+    </ul>
   );
 }

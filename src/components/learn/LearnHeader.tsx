@@ -9,16 +9,12 @@ export type Crumb = { label: string; href?: string; current?: boolean };
 type LearnHeaderProps = {
   id: string;
   crumbs: Crumb[];
-  /** A string on the course and teach pages; the catalog passes one phrase
+  /** A string on the no-such-course page; the catalog passes one phrase
    * wrapped in the gradient. */
   title: ReactNode;
   lead?: ReactNode;
-  /** A mono line under the lead (the course page's weeks, modules, labs). */
-  meta?: ReactNode;
   /** The buttons: one primary, one ghost. */
   actions?: ReactNode;
-  /** The right-hand column from md (the catalog's ledger). */
-  aside?: ReactNode;
   /** A photo under the copy: the top becomes a full-width ink band with a
    * scrim, the copy in on-ink colours (actions should pass on="ink"). */
   media?: CoursePhoto;
@@ -61,10 +57,11 @@ function Crumbs({ crumbs, onInk }: { crumbs: Crumb[]; onInk: boolean }) {
 }
 
 /**
- * The page top the three course pages share, on paper like /research: a mono
- * crumb trail with the 4px ink marker, the one h1, a lead under 60ch, the
- * actions, and an optional ledger beside it from lg (under it before). On a phone it starts a rem
- * under the bar, like the /research and /about heroes.
+ * A courses page top. Without `media` (the no-such-course page) it is on
+ * paper like /research: a mono crumb trail with the 4px ink marker, the one
+ * h1, a lead under 60ch and the actions; on a phone it starts a rem under the
+ * bar, like the /research and /about heroes. The course pages and teach draw
+ * their own photo tops.
  *
  * With `media` (the catalog): a full-width ink band with a site photo. Below
  * lg the photo fills the band under an 80% scrim (the copy covers it); from
@@ -73,7 +70,7 @@ function Crumbs({ crumbs, onInk }: { crumbs: Crumb[]; onInk: boolean }) {
  * the frame. `overlap` rides the band's bottom edge. The photo is the page's
  * largest paint, so it loads eagerly with a high fetch priority.
  */
-export default function LearnHeader({ id, crumbs, title, lead, meta, actions, aside, media, overlap }: LearnHeaderProps) {
+export default function LearnHeader({ id, crumbs, title, lead, actions, media, overlap }: LearnHeaderProps) {
   if (media) {
     return (
       <Section width="bleed" className="py-0!" aria-labelledby={id}>
@@ -105,7 +102,6 @@ export default function LearnHeader({ id, crumbs, title, lead, meta, actions, as
                 {title}
               </h1>
               {lead && <p className="mt-6 max-w-[52ch] text-lead text-text-on-ink">{lead}</p>}
-              {meta && <div className="mt-5">{meta}</div>}
               {actions && <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">{actions}</div>}
             </div>
           </div>
@@ -117,19 +113,15 @@ export default function LearnHeader({ id, crumbs, title, lead, meta, actions, as
 
   return (
     <Section width="page" className="compact:pt-4" aria-labelledby={id}>
-      {/* The split waits for lg: at 768 a five-column ledger squeezed
-          "3,500+" into "90+" (the numbers stack under the copy until then). */}
       <div className="grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-x-10">
-        <div className={aside ? "lg:col-span-7" : "lg:col-span-10"}>
+        <div className="lg:col-span-10">
           <Crumbs crumbs={crumbs} onInk={false} />
           <h1 id={id} className="max-w-[18ch] font-display text-display-xl font-semibold text-text-strong">
             {title}
           </h1>
           {lead && <p className="mt-6 max-w-[60ch] text-lead text-text-body">{lead}</p>}
-          {meta && <div className="mt-5">{meta}</div>}
           {actions && <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">{actions}</div>}
         </div>
-        {aside && <div className="lg:col-span-5 lg:col-start-8">{aside}</div>}
       </div>
     </Section>
   );
