@@ -13,16 +13,17 @@ const LABELS = {
   idle: "Pick a length to see what it covers and open its course.",
   modules: "Modules",
   labs: "Labs",
+  race: "Race",
   races: "Races",
-  project: "Project",
-  projectValue: (weeks: number) => `Final project, ${weeks} weeks`,
+  project: "Final project",
+  projectValue: (weeks: number) => `${weeks} weeks`,
   classTime: "Class time",
   cta: (p: CoursePlan) => `Open the ${p.title}`,
   announce: (f: PlanFacts) =>
     [
       `${f.plan.title}: Modules ${moduleRange(f.plan.modules)}`,
       f.labs.length ? `Labs ${numberRange(f.labs)}` : "",
-      f.races.length ? `Races ${numberRange(f.races)}` : "",
+      f.races.length ? `${f.races.length === 1 ? "Race" : "Races"} ${numberRange(f.races)}` : "",
     ]
       .filter(Boolean)
       .join(", ") + ".",
@@ -135,29 +136,29 @@ export function PlanSummary({ facts, selected, classTime }: SummaryProps) {
   return (
     <div className="rounded-card border border-rr-violet/20 bg-rr-violet/6 p-5 md:p-6">
       <div className="grid [&>*]:col-start-1 [&>*]:row-start-1">
-        <p className={`max-w-[48ch] text-body text-text-body lg:self-center ${current ? "invisible" : ""}`}>
+        <p className={`max-w-[48ch] text-body text-text-body md:self-center ${current ? "invisible" : ""}`}>
           {LABELS.idle}
         </p>
         {facts.map((f) => (
           <div
             key={f.plan.id}
-            className={`flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-10 ${
+            className={`flex flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-10 ${
               current === f ? "" : "invisible"
             }`}
           >
-            <dl className="grid grid-cols-2 gap-x-6 gap-y-4 sm:flex sm:flex-wrap sm:gap-x-12">
+            <dl className="grid grid-cols-2 gap-x-6 gap-y-4 sm:flex sm:flex-wrap sm:gap-x-10 lg:gap-x-12">
               <div>
                 <dt className={MONO_NOTE}>{LABELS.modules}</dt>
-                <dd className="mt-1 font-mono text-lead font-semibold text-rr-violet-deep">{moduleRange(f.plan.modules)}</dd>
+                <dd className="mt-1 font-mono text-body font-semibold sm:text-lead text-rr-violet-deep">{moduleRange(f.plan.modules)}</dd>
               </div>
               <div>
                 <dt className={MONO_NOTE}>{LABELS.labs}</dt>
-                <dd className="mt-1 font-mono text-lead font-semibold tabular-nums text-rr-violet-deep">{numberRange(f.labs)}</dd>
+                <dd className="mt-1 font-mono text-body font-semibold sm:text-lead tabular-nums text-rr-violet-deep">{numberRange(f.labs)}</dd>
               </div>
               {f.races.length > 0 && (
                 <div>
-                  <dt className={MONO_NOTE}>{LABELS.races}</dt>
-                  <dd className="mt-1 font-mono text-lead font-semibold tabular-nums text-rr-violet-deep">
+                  <dt className={MONO_NOTE}>{f.races.length === 1 ? LABELS.race : LABELS.races}</dt>
+                  <dd className="mt-1 font-mono text-body font-semibold sm:text-lead tabular-nums text-rr-violet-deep">
                     {numberRange(f.races)}
                   </dd>
                 </div>
@@ -165,13 +166,13 @@ export function PlanSummary({ facts, selected, classTime }: SummaryProps) {
               {f.projectWeeks !== null && (
                 <div>
                   <dt className={MONO_NOTE}>{LABELS.project}</dt>
-                  <dd className="mt-1 font-mono text-lead font-semibold text-rr-violet-deep">
+                  <dd className="mt-1 font-mono text-body font-semibold sm:text-lead text-rr-violet-deep">
                     {LABELS.projectValue(f.projectWeeks)}
                   </dd>
                 </div>
               )}
             </dl>
-            <Button href={`/learn/courses/${f.plan.id}`} className="w-full sm:w-auto">
+            <Button href={`/learn/courses/${f.plan.id}`} className="w-full sm:w-auto sm:self-start md:self-auto">
               {LABELS.cta(f.plan)}
             </Button>
           </div>

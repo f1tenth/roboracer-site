@@ -238,19 +238,20 @@ export default function TopicFinder({ courses }: { courses: CoursesFile }) {
   const tokens = found?.tokens ?? [];
   const trimmed = query.trim();
   const shown = results?.slice(0, MAX_SHOWN) ?? [];
+  // The line beside the field counts (a miss says "0 matches": the panel
+  // below says the rest); the live region says it in words.
   const status = !results
     ? ""
-    : results.length === 0
-      ? LABELS.none(trimmed)
-      : LABELS.count(results.length, trimmed) + (results.length > MAX_SHOWN ? LABELS.shown(MAX_SHOWN) : "");
+    : LABELS.count(results.length, trimmed) + (results.length > MAX_SHOWN ? LABELS.shown(MAX_SHOWN) : "");
+  const spoken = results?.length === 0 ? `${LABELS.none(trimmed)} ${LABELS.suggest}` : status;
 
   // The visible line changes with every key; the live region only once the
   // reader pauses, so a screen reader is not read every keystroke's count.
   const [announced, setAnnounced] = useState("");
   useEffect(() => {
-    const t = window.setTimeout(() => setAnnounced(status), ANNOUNCE_MS);
+    const t = window.setTimeout(() => setAnnounced(spoken), ANNOUNCE_MS);
     return () => window.clearTimeout(t);
-  }, [status]);
+  }, [spoken]);
 
   const fill = (text: string) => {
     setQuery(text);

@@ -222,7 +222,7 @@ export default function PlanLadder({ courses, selected, onSelect }: PlanLadderPr
           plan and a second click shows all three again; the page link sits
           above it. Every card carries the 3px accent top rule; the picked one
           adds a violet border and a "Selected" badge. */}
-      <Reveal stagger className="grid gap-5 md:grid-cols-3 lg:gap-6">
+      <Reveal stagger className="grid gap-5 lg:grid-cols-3 lg:gap-6">
         {facts.map(({ plan: p, labs, races }) => {
           const on = picked?.id === p.id;
           const photo = PLAN_PHOTOS[p.id];
@@ -230,11 +230,13 @@ export default function PlanLadder({ courses, selected, onSelect }: PlanLadderPr
             <article
               key={p.id}
               aria-labelledby={`plan-${p.id}`}
-              className={`relative flex flex-col overflow-hidden rounded-card border-2 bg-paper-50 shadow-card transition-[box-shadow,translate,border-color] duration-[var(--duration-fast)] before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-10 before:h-[3px] before:bg-rr-violet hover:shadow-card-hover motion-safe:hover:-translate-y-0.5 motion-reduce:transition-none ${
+              className={`relative flex flex-col overflow-hidden rounded-card border-2 md:max-lg:flex-row bg-paper-50 shadow-card transition-[box-shadow,translate,border-color] duration-[var(--duration-fast)] before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-10 before:h-[3px] before:bg-rr-violet hover:shadow-card-hover motion-safe:hover:-translate-y-0.5 motion-reduce:transition-none ${
                 on ? "border-rr-violet" : "border-transparent"
               }`}
             >
-              <div className="relative aspect-[16/9] overflow-hidden bg-rr-violet">
+              {/* From 768 to 1023 the card lies on its side (photo left), as
+                  three columns there wrapped the blurb into a ribbon. */}
+              <div className="relative aspect-[16/9] overflow-hidden bg-rr-violet md:max-lg:aspect-auto md:max-lg:min-h-60 md:max-lg:w-2/5 md:max-lg:shrink-0">
                 {photo && (
                   <img
                     src={asset(photo.src)}
@@ -243,7 +245,7 @@ export default function PlanLadder({ courses, selected, onSelect }: PlanLadderPr
                     height={photo.height}
                     loading="lazy"
                     decoding="async"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover md:max-lg:absolute md:max-lg:inset-0"
                   />
                 )}
                 {/* The scrim under the length, so white type reads on any frame. */}
