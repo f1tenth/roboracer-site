@@ -1,6 +1,71 @@
 import type { CourseStat } from "../../lib/data";
 import { MONO_NOTE } from "./learnStyles";
 
+/** Ink-stroke glyphs (24-unit grid, drawn for this site; never emoji) for
+ * the catalog's stat tiles and feature tiles, keyed by stat or feature id. */
+const GLYPHS: Record<string, string> = {
+  layers: "M12 3 3 7.5l9 4.5 9-4.5L12 3Z M3 12l9 4.5 9-4.5 M3 16.5 12 21l9-4.5",
+  board: "M3 4h18 M4.5 4v11h15V4 M12 15v4 M8 21l4-2 4 2",
+  code: "M8 7l-5 5 5 5 M16 7l5 5-5 5 M13.5 5l-3 14",
+  flag: "M5 21V4 M5 4h12l-2.5 4 2.5 4H5",
+  play: "M5 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z M10 9.25v5.5L14.75 12 10 9.25Z",
+  people:
+    "M9 11.5a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z M3 19.5c.7-3.4 3.1-5.5 6-5.5s5.3 2.1 6 5.5 M16.5 11a2.5 2.5 0 1 0 0-5 M17 14.2c2.2.4 3.6 2.2 4 5.3",
+  columns: "M3 9.5 12 4l9 5.5 M5.5 10.5v7 M10 10.5v7 M14 10.5v7 M18.5 10.5v7 M3 20h18",
+  globe:
+    "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z M3 12h18 M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3Z",
+  checklist: "M7 4h10a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z M9 3h6v2.5H9z M8.5 13l2.2 2.2 4.8-4.8",
+  question: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4v.8 M12 17h.01",
+  bubble: "M4 5h16v11H9l-5 4V5Z M8 9.5h8 M8 12.5h5",
+};
+
+const ICON_FOR: Record<string, string> = {
+  modules: "layers",
+  lectures: "board",
+  slides: "board",
+  labs: "code",
+  races: "flag",
+  recorded: "play",
+  videos: "play",
+  members: "people",
+  universities: "columns",
+  countries: "globe",
+  rubrics: "checklist",
+  gradebook: "checklist",
+  quizzes: "question",
+  discussion: "bubble",
+};
+
+/** One glyph by stat or feature id, in ink strokes; null for an id it does
+ * not know (the tile then shows no icon rather than a wrong one). */
+export function CourseIcon({ id, className = "h-5 w-5" }: { id: string; className?: string }) {
+  const d = GLYPHS[ICON_FOR[id]];
+  if (!d) return null;
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+      className={`shrink-0 text-ink-950 ${className}`}
+    >
+      <path d={d} stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+type LedgerProps = {
+  label: string;
+  stats: CourseStat[];
+  /** "list" (default): the /research masthead's mono ledger, as the teach
+   * page shows it. "tiles": a card per figure with an icon on a tinted
+   * square, for the catalog's photo top; the course figures in violet, the
+   * community's in magenta. */
+  variant?: "list" | "tiles";
+};
+
 /**
  * One group of a page top's ledger (the /research masthead): a mono label,
  * then each figure's label over its value in violet mono. The values are the
@@ -8,8 +73,44 @@ import { MONO_NOTE } from "./learnStyles";
  * they stand as written: the final number is the markup, with or without
  * motion.
  */
-export default function Ledger({ label, stats }: { label: string; stats: CourseStat[] }) {
+export default function Ledger({ label, stats, variant = "list" }: LedgerProps) {
   if (stats.length === 0) return null;
+  if (variant === "tiles") {
+    // A list, not a dl: each tile reads as one phrase ("7 modules", "3,500+
+    // community members"), value first, and the icon can sit beside it.
+    return (
+      <ul aria-label={label} className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4 xl:grid-cols-8">
+        {stats.map((s) => {
+          const community = s.group === "community";
+          return (
+            <li
+              key={s.id}
+              className="flex items-center gap-3 rounded-card border border-ink-950/10 bg-paper-50 p-3 shadow-card sm:p-4 xl:flex-col xl:items-start"
+            >
+              <span
+                aria-hidden="true"
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-card ${
+                  community ? "bg-rr-magenta/15" : "bg-rr-violet/12"
+                }`}
+              >
+                <CourseIcon id={s.id} />
+              </span>
+              <p className="flex min-w-0 flex-col">
+                <span
+                  className={`font-mono text-display-s font-semibold tabular-nums ${
+                    community ? "text-rr-magenta-deep" : "text-rr-violet"
+                  }`}
+                >
+                  {s.value}
+                </span>
+                <span className="text-small leading-snug text-text-body"> {s.label}</span>
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
   return (
     <div className="border-t border-ink-950/10 pt-5">
       <p className={MONO_NOTE}>{label}</p>
