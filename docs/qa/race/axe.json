@@ -1351,7 +1351,7 @@
          ]
         },
         {
-         "html": "<h3><a href=\"https://events.vtsociety.org/vtc2026-fall/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-display text-lead font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2\">VTC 2026 Fall</a></h3>",
+         "html": "<h3><a href=\"https://vtc2026-race.roboracer.ai/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-display text-lead font-semibold text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2\">VTC 2026 Fall</a></h3>",
          "target": [
           ".gap-y-2.md\\:items-baseline.py-6:nth-child(2) > .md\\:col-span-5 > h3"
          ]
