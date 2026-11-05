@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600&display=swap" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=5" />
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
   <script>
 window.MathJax = {
@@ -43,10 +43,6 @@ window.MathJax = {
     <symbol id="icon-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
       <path d="M8.5 8 4.5 12l4 4M15.5 8l4 4-4 4M13.5 6 10.5 18"/>
     </symbol>
-    <symbol id="icon-watch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="8.4"/>
-      <path d="M10 8.7v6.6l5.6-3.3-5.6-3.3Z" fill="currentColor" stroke="none"/>
-    </symbol>
     <symbol id="icon-read" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
       <path d="M6.5 3.5h7.4L18.5 8.6V20.5h-12V3.5Z"/>
       <path d="M13.6 3.5V8.6h4.9"/>
@@ -63,6 +59,9 @@ window.MathJax = {
       <circle cx="7.6" cy="19.4" r="1.3" fill="currentColor" stroke="none"/>
       <circle cx="16.4" cy="19.4" r="1.3" fill="currentColor" stroke="none"/>
     </symbol>
+    <symbol id="icon-bolt" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M13.2 2 4.6 13.6a1 1 0 0 0 .8 1.6h5.1l-1.1 6.4a1 1 0 0 0 1.78.78L19.4 10.4a1 1 0 0 0-.78-1.62h-5.1l1.1-6.4A1 1 0 0 0 13.2 2Z"/>
+    </symbol>
   </svg>
 
   <header class="hero static" id="hero">
@@ -75,8 +74,8 @@ window.MathJax = {
           <a href="#modules">Modules</a>
           <a href="#overview">Overview</a>
           <a href="#roadmap">Roadmap</a>
-          <a href="#recordings">Recordings</a>
-          <a href="#materials">Materials</a>
+          <a href="#slides">Slides</a>
+          <a href="#materials">Notebooks</a>
           <a href="#speakers">Teaching Staff</a>
           <a href="#setup">Setup</a>
           <a href="#references">References</a>
@@ -88,8 +87,8 @@ window.MathJax = {
         <div class="hero-desc">
           <p class="subtitle">Hands-on RL: From Sim to Real Autonomous Racing</p>
           <div class="button-row">
-            <a class="button primary" href="#recordings">Watch recordings</a>
-            <a class="button" href="#materials">Slides &amp; Colab</a>
+            <a class="button primary" href="#slides">View slides</a>
+            <a class="button" href="#materials">Notebooks</a>
             <a class="button"
                href="https://github.com/dhyeyshah28/RL_for_Roboracer"
                target="_blank"
@@ -106,58 +105,67 @@ window.MathJax = {
 
   <main>
     <section id="modules" class="section alt">
-      <h2>The Three Modules</h2>
+      <h2 class="reveal-up">The Three Modules</h2>
       <p>From a car that can barely stay on track to one that beats the field, each module builds on the last.</p>
       <div class="cards three">
-        <article class="card module">
+        <article class="card module reveal">
           <div class="avatar"><span>1</span></div>
           <h3>Learn to Drive</h3>
-          <div class="badge-row"><span class="speed-badge">FAST!</span></div>
+          <div class="badge-row"><span class="speed-badge">FAST<svg class="icon bolt"><use href="#icon-bolt"/></svg></span></div>
           <p>Train a policy from scratch, then with Stable-Baselines3, until the car laps without crashing.</p>
           <ul>
             <li>MDP formulation &amp; reward basics</li>
             <li>PPO from scratch: actor-critic, GAE</li>
             <li>Practical training with SB3</li>
           </ul>
+          <div class="module-gif">
+            <img src="assets/images/spielbergzoomedcrop.gif?v=2" alt="Module 1: trained policy lapping the Spielberg track" loading="lazy" />
+          </div>
         </article>
 
-        <article class="card module">
+        <article class="card module reveal">
           <div class="avatar"><span>2</span></div>
           <h3>Learn to Race</h3>
-          <div class="badge-row"><span class="speed-badge">FASTER!!</span></div>
-          <p>Shape the reward for speed and smoothness, then deploy the policy on the real car.</p>
+          <div class="badge-row"><span class="speed-badge">FASTER<svg class="icon bolt"><use href="#icon-bolt"/></svg><svg class="icon bolt"><use href="#icon-bolt"/></svg></span></div>
+          <p>Shape the reward for speed, dodge static and dynamic obstacles, then deploy on the real car.</p>
           <ul>
             <li>Reward shaping for fast, smooth laps</li>
-            <li>Sim-to-real transfer</li>
+            <li>Static &amp; dynamic obstacle avoidance</li>
             <li>ROS&nbsp;2 deployment on hardware</li>
           </ul>
+          <div class="module-gif">
+            <img src="assets/images/dynamic_obscrop.gif?v=2" alt="Module 2: avoiding a dynamic obstacle on track" loading="lazy" />
+          </div>
         </article>
 
-        <article class="card module">
+        <article class="card module reveal">
           <div class="avatar"><span>3</span></div>
           <h3>Learn to Win</h3>
-          <div class="badge-row"><span class="speed-badge">FASTEST!!!</span></div>
-          <p>Race against opponents: combine RL with planning and control to overtake and win.</p>
+          <div class="badge-row"><span class="speed-badge">FASTEST<svg class="icon bolt"><use href="#icon-bolt"/></svg><svg class="icon bolt"><use href="#icon-bolt"/></svg><svg class="icon bolt"><use href="#icon-bolt"/></svg></span></div>
+          <p>Optimize the raceline, learn residual policies on classical controllers, and see RL for everything.</p>
           <ul>
-            <li>Residual policies on classical controllers</li>
             <li>Trajectory &amp; raceline optimization</li>
-            <li>Multi-agent racing</li>
+            <li>Residual policies on classical controllers</li>
+            <li>Learning dynamics</li>
           </ul>
+          <div class="module-gif">
+            <img src="assets/images/trajcrop.gif" alt="Module 3: optimized raceline trajectory" loading="lazy" />
+          </div>
         </article>
       </div>
     </section>
 
     <section id="overview" class="section">
-      <h2>Overview</h2>
+      <h2 class="reveal-up">Overview</h2>
       <p>
         This course introduces reinforcement learning (RL) as a practical framework for autonomous racing on the Roboracer platform, treating learned
         policies as a principled extension of classical planning and control rather than a replacement for them. We frame perception, planning, and control
         as a single closed-loop decision problem in which a parametric policy maps raw LiDAR scans and odometry directly to steering and speed commands,
-        while vehicle dynamics, actuator limits, and track geometry enter as explicit domain priors. Content is organized into three progressive modules
-        &mdash; <strong>Learn to Drive</strong>, <strong>Learn to Race</strong>, and <strong>Learn to Win</strong> &mdash; each shipped as a recorded
-        lecture, a slide deck, and one or more hands-on Colab notebooks, so participants build a policy from scratch, shape it into a competitive racer, and
-        see where RL fits alongside classical planning and control. Emphasis throughout is on reward design, domain randomization, and safety filtering, so
-        that learned policies remain data-efficient, robust, and deployable on the physical car at the limits of handling.
+        while vehicle dynamics, actuator limits, and track geometry enter as explicit domain priors. The course content is organized into three progressive
+        modules &mdash; <strong>Learn to Drive</strong>, <strong>Learn to Race</strong>, and <strong>Learn to Win</strong> &mdash; each shipped as a slide
+        deck and one or more hands-on Colab notebooks, so you build a policy from scratch, shape it into a competitive racer, and deploy it on the
+        physical Roboracer car. Emphasis throughout is on reward design, domain randomization, and safety filtering, so that learned policies stay
+        data-efficient, robust, and deployable on real hardware &mdash; the same ideas that carry over to RL applications well beyond racing.
       </p>
 
 
@@ -219,38 +227,27 @@ a_t = (\delta_t,\, v_t)
 
 
     <section id="roadmap" class="section alt">
-      <h2>How This Course Works</h2>
+      <h2 class="reveal-up">How This Course Works</h2>
       <p>
-        Every module ships as a recorded lecture, a slide deck, and one or more
+        Every module ships as a slide deck and one or more
         Colab notebooks you run end to end in the browser, no local install or GPU required. Here is what to expect from each module.
       </p>
 
       <div class="timeline">
-        <div class="slot">
+        <div class="slot reveal">
           <div class="step-meta">
             <div class="time">Step 1</div>
-            <div class="step-icon"><svg class="icon"><use href="#icon-watch"/></svg></div>
-          </div>
-          <div class="details">
-            <h3>Watch</h3>
-            <p>Start with the recorded lecture for the module. It builds the intuition &mdash; why the reward is shaped the way it is, why the observation looks the way it does &mdash; before you see a single line of code.</p>
-          </div>
-        </div>
-
-        <div class="slot">
-          <div class="step-meta">
-            <div class="time">Step 2</div>
             <div class="step-icon"><svg class="icon"><use href="#icon-read"/></svg></div>
           </div>
           <div class="details">
             <h3>Read</h3>
-            <p>Skim the slide deck for the formal treatment: the MDP formulation, the network architecture, and the exact PPO update rule used in the notebook.</p>
+            <p>Start with the slide deck for the formal treatment: the MDP formulation, the network architecture, and the exact PPO update rule used in the notebook. The deck also gives a simple, section-by-section walkthrough of the notebook, so you know what each part does before you run it.</p>
           </div>
         </div>
 
-        <div class="slot">
+        <div class="slot reveal">
           <div class="step-meta">
-            <div class="time">Step 3</div>
+            <div class="time">Step 2</div>
             <div class="step-icon"><svg class="icon"><use href="#icon-run"/></svg></div>
           </div>
           <div class="details">
@@ -259,9 +256,9 @@ a_t = (\delta_t,\, v_t)
           </div>
         </div>
 
-        <div class="slot">
+        <div class="slot reveal">
           <div class="step-meta">
-            <div class="time">Step 4</div>
+            <div class="time">Step 3</div>
             <div class="step-icon"><svg class="icon"><use href="#icon-deploy"/></svg></div>
           </div>
           <div class="details">
@@ -274,128 +271,90 @@ a_t = (\delta_t,\, v_t)
     </section>
 
 
-    <section id="recordings" class="section alt">
-  <h2>Tutorial Recordings</h2>
+    <section id="slides" class="section alt">
+  <h2 class="reveal-up">Tutorial Slides</h2>
 
   <p>
-    Each module's lecture is recorded and posted here on YouTube.
+    Each module's slide deck opens in the browser with its own page-by-page viewer.
   </p>
 
   <div class="cards three">
 
-    <article class="material">
-      <h3>Module 1: Learn to Drive</h3>
-
-      <iframe
-        width="100%"
-        height="315"
-        src="https://www.youtube.com/embed/kTGOpzSsUBA"
-        title="RL for Roboracer — Module 1: Learn to Drive"
-        frameborder="0"
-        allowfullscreen>
-      </iframe>
-
-      <div class="link-row">
-        <a href="https://youtu.be/kTGOpzSsUBA"
-           target="_blank"
-           rel="noopener">
-          Watch on YouTube
-        </a>
+    <a class="card slide-card reveal" href="slides/module1.html">
+      <div class="slide-thumb">
+        <img src="assets/slides/module1-learn-to-drive/slide-001.png" alt="Module 1: Learn to Drive — first slide" loading="lazy" />
+        <span class="slide-thumb-play"><svg class="icon"><use href="#icon-slides"/></svg>View slides</span>
       </div>
-    </article>
+      <h3>Module 1: Learn to Drive</h3>
+    </a>
 
-    <article class="material">
+    <a class="card slide-card reveal" href="slides/module2.html">
+      <div class="slide-thumb">
+        <img src="assets/slides/module2-learn-to-race/slide-001.png" alt="Module 2: Learn to Race — first slide" loading="lazy" />
+        <span class="slide-thumb-play"><svg class="icon"><use href="#icon-slides"/></svg>View slides</span>
+      </div>
       <h3>Module 2: Learn to Race</h3>
+    </a>
 
-      <div class="video-placeholder">Tutorial coming soon</div>
-    </article>
-
-    <article class="material">
+    <a class="card slide-card reveal" href="slides/module3.html">
+      <div class="slide-thumb">
+        <img src="assets/slides/module3-learn-to-win/slide-001.png" alt="Module 3: Learn to Win — first slide" loading="lazy" />
+        <span class="slide-thumb-play"><svg class="icon"><use href="#icon-slides"/></svg>View slides</span>
+      </div>
       <h3>Module 3: Learn to Win</h3>
-
-      <div class="video-placeholder">Tutorial coming soon</div>
-    </article>
+    </a>
 
   </div>
 </section>
 
     <section id="materials" class="section">
-      <h2>Slides and notebooks</h2>
-      <p>Tutorial slides and coding examples in Google Colab are available below.</p>
+      <h2 class="reveal-up">Interactive Notebooks</h2>
+      <p>Run every module's code end to end in Google Colab &mdash; no local install or GPU required.</p>
 
       <div class="materials-grid">
-        <article class="material">
+        <article class="material reveal">
           <div class="material-head">
             <span class="material-icon"><svg class="icon"><use href="#icon-book"/></svg></span>
             <h3>Module 1: Learn to Drive</h3>
           </div>
-          <div class="material-groups">
-          <div class="material-group">
-            <div class="material-label">Slides</div>
-            <ul class="material-list">
-              <li><a href="slides/module1_learn_to_drive.pdf"><svg class="icon link-icon"><use href="#icon-slides"/></svg>Slides</a></li>
-            </ul>
-          </div>
-          <div class="material-group">
-            <div class="material-label">Notebooks</div>
-            <ul class="material-list">
-              <li><a href="https://colab.research.google.com/github/dhyeyshah28/RL_for_Roboracer/blob/main/notebooks/PPO_from_Scratch_LearnToDrive_Student.ipynb" target="_blank" rel="noopener"><svg class="icon link-icon"><use href="#icon-colab"/></svg>PPO from Scratch</a></li>
-            </ul>
-          </div>
-          </div>
+          <ul class="material-list">
+            <li><a href="https://colab.research.google.com/github/dhyeyshah28/RL_for_Roboracer/blob/main/notebooks/Mod1_LearnToDrive.ipynb" target="_blank" rel="noopener"><svg class="icon link-icon"><use href="#icon-colab"/></svg>PPO from Scratch</a></li>
+            <li><a href="https://github.com/dhyeyshah28/RL_for_Roboracer/blob/main/notebooks/export_ppo_onnx.py" target="_blank" rel="noopener"><svg class="icon link-icon"><use href="#icon-code"/></svg>Export to ONNX</a></li>
+            <li><a href="https://github.com/dhyeyshah28/RL_for_Roboracer/blob/main/notebooks/ppo_deploy_node.py" target="_blank" rel="noopener"><svg class="icon link-icon"><use href="#icon-code"/></svg>Deployment Node</a></li>
+          </ul>
         </article>
 
-        <article class="material">
+        <article class="material reveal">
           <div class="material-head">
             <span class="material-icon"><svg class="icon"><use href="#icon-book"/></svg></span>
             <h3>Module 2: Learn to Race</h3>
           </div>
-          <div class="material-groups">
-          <div class="material-group">
-            <div class="material-label">Slides</div>
-            <ul class="material-list">
-              <li><a href="slides/module2_learn_to_race.pdf"><svg class="icon link-icon"><use href="#icon-slides"/></svg>Slides</a></li>
-            </ul>
-          </div>
-          <div class="material-group">
-            <div class="material-label">Notebooks</div>
-            <ul class="material-list">
-              <li><a href="https://colab.research.google.com/github/dhyeyshah28/RL_for_Roboracer/blob/main/notebooks/Mod2_LearnToRace_Student.ipynb" target="_blank" rel="noopener"><svg class="icon link-icon"><use href="#icon-colab"/></svg>Reward Shaping</a></li>
-            </ul>
-          </div>
-          </div>
+          <ul class="material-list">
+            <li><a href="https://colab.research.google.com/github/dhyeyshah28/RL_for_Roboracer/blob/main/notebooks/Mod2_LearnToRace.ipynb" target="_blank" rel="noopener"><svg class="icon link-icon"><use href="#icon-colab"/></svg>Reward Shaping</a></li>
+            <li><a href="https://colab.research.google.com/github/dhyeyshah28/RL_for_Roboracer/blob/main/notebooks/Mod2.1_StaticObsAvoidance.ipynb" target="_blank" rel="noopener"><svg class="icon link-icon"><use href="#icon-colab"/></svg>Static Obstacles</a></li>
+            <li><a href="https://colab.research.google.com/github/dhyeyshah28/RL_for_Roboracer/blob/main/notebooks/Mod2.2_DynamicObsAvoidance.ipynb" target="_blank" rel="noopener"><svg class="icon link-icon"><use href="#icon-colab"/></svg>Dynamic Obstacles</a></li>
+          </ul>
         </article>
 
-        <article class="material">
+        <article class="material reveal">
           <div class="material-head">
             <span class="material-icon"><svg class="icon"><use href="#icon-book"/></svg></span>
             <h3>Module 3: Learn to Win</h3>
           </div>
-          <div class="material-groups">
-          <div class="material-group">
-            <div class="material-label">Slides</div>
-            <ul class="material-list">
-              <li><span class="note-item">Slides coming soon</span></li>
-            </ul>
-          </div>
-          <div class="material-group">
-            <div class="material-label">Notebooks</div>
-            <ul class="material-list">
-              <li><a href="https://colab.research.google.com/github/dhyeyshah28/RL_for_Roboracer/blob/main/notebooks/PPO_from_Scratch_StaticObstacleAvoidance_Student.ipynb" target="_blank" rel="noopener"><svg class="icon link-icon"><use href="#icon-colab"/></svg>Static Obstacles</a></li>
-              <li><a href="https://colab.research.google.com/github/dhyeyshah28/RL_for_Roboracer/blob/main/notebooks/PPO_from_Scratch_DynamicObstacleAvoidance_Student.ipynb" target="_blank" rel="noopener"><svg class="icon link-icon"><use href="#icon-colab"/></svg>Dynamic Obstacles</a></li>
-            </ul>
-          </div>
-          </div>
+          <ul class="material-list">
+            <li><a href="https://colab.research.google.com/github/dhyeyshah28/RL_for_Roboracer/blob/main/notebooks/Mod3.1_TrajOptimization.ipynb" target="_blank" rel="noopener"><svg class="icon link-icon"><use href="#icon-colab"/></svg>Trajectory Opt.</a></li>
+            <li><a href="https://colab.research.google.com/github/dhyeyshah28/RL_for_Roboracer/blob/main/notebooks/Mod3.2_ResidualMPC_RL.ipynb" target="_blank" rel="noopener"><svg class="icon link-icon"><use href="#icon-colab"/></svg>Residual MPC+RL</a></li>
+          </ul>
         </article>
       </div>
     </section>
 
    <section id="speakers" class="section alt">
-  <h2>Teaching Staff</h2>
+  <h2 class="reveal-up">Teaching Staff</h2>
 
-  <div class="cards five">
+  <div class="cards six">
 
-    <article class="card speaker">
+    <article class="card speaker reveal">
       <img class="speaker-photo"
            src="assets/images/rahul-mangharam.png"
            alt="Rahul Mangharam headshot" />
@@ -408,20 +367,20 @@ a_t = (\delta_t,\, v_t)
       </p>
     </article>
 
-    <article class="card speaker">
+    <article class="card speaker reveal">
       <img class="speaker-photo"
-           src="assets/images/dhyey.jpeg"
-           alt="Dhyey Shah headshot" />
+           src="assets/images/Ahmad.png?v=2"
+           alt="Ahmad Amine headshot" />
 
-      <h3>Dhyey Shah</h3>
+      <h3>Ahmad Amine</h3>
 
       <p class="speaker-affiliation">
         Teaching Assistant<br>
-        Robotics<br>University of Pennsylvania
+        Electrical and Systems Engineering<br>University of Pennsylvania
       </p>
     </article>
 
-    <article class="card speaker">
+    <article class="card speaker reveal">
       <img class="speaker-photo"
            src="assets/images/cedric.jpg"
            alt="Cedric Hollande headshot" />
@@ -434,7 +393,7 @@ a_t = (\delta_t,\, v_t)
       </p>
     </article>
 
-    <article class="card speaker">
+    <article class="card speaker reveal">
       <img class="speaker-photo"
            src="assets/images/mansi.jpg"
            alt="Mansi Shekhar headshot" />
@@ -447,7 +406,7 @@ a_t = (\delta_t,\, v_t)
       </p>
     </article>
 
-    <article class="card speaker">
+    <article class="card speaker reveal">
       <img class="speaker-photo"
            src="assets/images/milan.jpg"
            alt="Milan Manoj headshot" />
@@ -460,27 +419,45 @@ a_t = (\delta_t,\, v_t)
       </p>
     </article>
 
+    <article class="card speaker reveal">
+      <img class="speaker-photo"
+           src="assets/images/dhyey.jpeg"
+           alt="Dhyey Shah headshot" />
+
+      <h3>Dhyey Shah</h3>
+
+      <p class="speaker-affiliation">
+        Teaching Assistant<br>
+        Robotics<br>University of Pennsylvania
+      </p>
+    </article>
+
   </div>
 </section>
 
     <section id="setup" class="section">
-      <h2>Setup</h2>
+      <h2 class="reveal-up">Setup</h2>
       <p>
-        Participants can run all examples directly in Google Colab. For local execution, clone the repository
-        and install the Python dependencies below.
+        You can run every notebook directly in Google Colab &mdash; no local install needed. If you'd rather work
+        locally, clone the repository and install the Python dependencies below.
       </p>
       <pre><code>git clone https://github.com/dhyeyshah28/RL_for_Roboracer.git
 cd RL_for_Roboracer
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt</code></pre>
+      <p>
+        <code>notebooks/</code> holds the Colab notebooks plus Module 1's <code>export_ppo_onnx.py</code> and
+        <code>ppo_deploy_node.py</code> scripts; <code>slides/</code> holds the in-browser slide deck for each module.
+      </p>
       <p class="note">
-        Deployment on the physical vehicle additionally requires ROS 2 and the Roboracer system stack on the onboard computer.
+        Deploying a trained policy on the physical car additionally requires ROS&nbsp;2 and the Roboracer system
+        stack on the onboard computer &mdash; see <code>notebooks/ppo_deploy_node.py</code> for the deployment node.
       </p>
     </section>
 
     <section id="references" class="section alt">
-      <h2>References and resources</h2>
+      <h2 class="reveal-up">References and resources</h2>
       <ul class="resource-list">
         <li><a href="https://roboracer.ai/" target="_blank" rel="noopener">Roboracer</a> &mdash; the 1:10 scale autonomous racing platform and community (formerly F1TENTH).</li>
         <li><a href="https://github.com/f1tenth/f1tenth_gym" target="_blank" rel="noopener">Roboracer Gym</a> &mdash; the simulation environment used throughout the tutorial.</li>
@@ -586,6 +563,29 @@ pip install -r requirements.txt</code></pre>
       measure();
       shown = target; exitShown = exitT;
       render();
+    })();
+  </script>
+
+  <script>
+    // Fade/rise elements in as they enter the viewport. Respects
+    // reduced-motion (the CSS media query already forces them visible,
+    // so skipping the observer there is just avoiding unnecessary work).
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var els = document.querySelectorAll('.reveal, .reveal-up');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function (el) { io.observe(el); });
     })();
   </script>
 </body>
