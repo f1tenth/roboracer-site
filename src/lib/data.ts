@@ -461,6 +461,27 @@ export const loadEventsMap = async (): Promise<EventsMap> => {
 export const loadCommunity = () => loadJson<Community>("community.json");
 export const loadSpinoffs = () => loadJson<SpinoffsFile>("spinoffs.json");
 
+/** A part's picture, or a muted loop when `video` is set (`src` is then its
+ * poster). Null in the JSON until the media exists. */
+export type OffroadMedia = { src: string; width: number; height: number; alt: string; video?: string };
+
+export type OffroadPart = {
+  /** Anchor id on /offroad (#platform, #stack, #simulator). */
+  id: string;
+  title: string;
+  subtitle: string;
+  body: string;
+  media: OffroadMedia | null;
+};
+
+/** /offroad, the teaser page: every line of copy lives here. */
+export type OffroadFile = {
+  hero: { eyebrow: string; title: string; lead: string };
+  parts: OffroadPart[];
+  closing: { title: string; lead: string; cta_label: string; cta_href: string };
+};
+export const loadOffroad = () => loadJson<OffroadFile>("offroad.json");
+
 
 /** One way in's picture. The landing's phone rows show `thumb`; its tiles
  * (from `desktop:`) show `src` in a 16/10 frame and play `video` over it. */

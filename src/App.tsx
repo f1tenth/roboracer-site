@@ -19,6 +19,7 @@ const News = lazyWithRetry("News", () => import("./pages/News"));
 const RaceCalendar = lazyWithRetry("Race", () => import("./pages/Race"));
 const Research = lazyWithRetry("Research", () => import("./pages/Research"));
 const Rules = lazyWithRetry("Rules", () => import("./pages/Rules"));
+const Offroad = lazyWithRetry("Offroad", () => import("./pages/Offroad"));
 const Chat = lazyWithRetry("Chat", () => import("./pages/Chat"));
 const Assembly = lazyWithRetry("Assembly", () => import("./pages/Assembly"));
 const Styleguide = lazyWithRetry("Styleguide", () => import("./pages/Styleguide"));
@@ -50,6 +51,7 @@ function App() {
             <Route path="/race" element={<RaceCalendar />} />
             <Route path="/research" element={<Research />} />
             <Route path="/rules" element={<Rules />} />
+            <Route path="/offroad" element={<Offroad />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/assembly" element={<Assembly />} />
             <Route path="/styleguide" element={<Styleguide />} />

@@ -1,0 +1,52 @@
+{
+  "_note": "Teaser for /offroad. Unlisted: nothing links here yet. This file is served publicly, so keep internal notes out of it. Copy is not in the roboracer-content skill yet: Cedric confirms it before merge. Parts render in array order. A part's media is { src, width, height, alt }, plus video (an mp4 path) for a muted loop with src as its poster.",
+  "hero": {
+    "eyebrow": "Coming soon",
+    "title": "RoboRacer Offroad",
+    "lead": "Autonomous racing, off the flat track."
+  },
+  "parts": [
+    {
+      "id": "platform",
+      "title": "Reference platform",
+      "subtitle": "The car.",
+      "body": "Made for tracks that rise and fall. It sees in 3D with stereo vision and carries more compute.",
+      "media": {
+        "src": "/media/offroad/offroad-platform-1420.webp",
+        "width": 1420,
+        "height": 799,
+        "alt": "An off-road RoboRacer car edging into frame, its pink stereo camera head glaring out across a stone plaza toward a lit glass entrance"
+      }
+    },
+    {
+      "id": "stack",
+      "title": "Reference stack",
+      "subtitle": "The software that drives it.",
+      "body": "New software for a 3D world: visual-inertial positioning and 3D planning.",
+      "media": {
+        "src": "/media/offroad/offroad-stack-938.webp",
+        "width": 938,
+        "height": 528,
+        "alt": "A map of the simulated off-road track: the car's position, the point cloud from its stereo depth, and the planned route bending through an S-curve"
+      }
+    },
+    {
+      "id": "simulator",
+      "title": "Reference simulator",
+      "subtitle": "Where it races before it reaches the terrain.",
+      "body": "Test your code on hilly terrain before a real car moves.",
+      "media": {
+        "src": "/media/offroad/offroad-simulator-1000.webp",
+        "width": 1000,
+        "height": 562,
+        "alt": "A simulated RoboRacer car cresting a hump in a wavy asphalt track, with grassy hills and trees behind it"
+      }
+    }
+  ],
+  "closing": {
+    "title": "More information soon",
+    "lead": "Until then, the RoboRacer community talks on Slack.",
+    "cta_label": "Join the Slack",
+    "cta_href": "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q"
+  }
+}

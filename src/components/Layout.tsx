@@ -21,6 +21,7 @@ const TITLES: Record<string, string> = {
   "/race": "Race - RoboRacer",
   "/research": "Research - RoboRacer",
   "/rules": "Competition rules - RoboRacer",
+  "/offroad": "RoboRacer Offroad - coming soon",
   "/chat": "Chat - RoboRacer",
   "/assembly": "The car, part by part - RoboRacer",
   "/styleguide": "Style guide - RoboRacer",
