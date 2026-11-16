@@ -42,7 +42,7 @@ export default function Layout() {
   const hideFooter = isHiddenRoute || currentPath === "/assembly";
 
   useLayoutEffect(() => {
-    document.title = TITLES[currentPath] ?? "RoboRacer";
+    document.title = TITLES[currentPath] ?? (currentPath.startsWith("/learn-new") ? "Learn (preview) - RoboRacer" : "RoboRacer");
   }, [currentPath]);
 
   // A client-side navigation keeps the window's scroll position: every route

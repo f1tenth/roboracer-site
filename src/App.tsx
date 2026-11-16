@@ -12,6 +12,12 @@ const Landing = lazyWithRetry("Landing", () => import("./pages/Landing"));
 const About = lazyWithRetry("About", () => import("./pages/About"));
 const Build = lazyWithRetry("Build", () => import("./pages/Build"));
 const Learn = lazyWithRetry("Learn", () => import("./pages/Learn"));
+const LearnNew = lazyWithRetry("LearnNew", () => import("./pages/LearnNew"));
+const LearnIntro = lazyWithRetry("LearnIntro", () => import("./pages/learn-new/LearnIntro"));
+const LearnSyllabus = lazyWithRetry("LearnSyllabus", () => import("./pages/learn-new/LearnSyllabus"));
+const LearnModule = lazyWithRetry("LearnModule", () => import("./pages/learn-new/LearnModule"));
+const LearnLecture = lazyWithRetry("LearnLecture", () => import("./pages/learn-new/LearnLecture"));
+const LearnDoc = lazyWithRetry("LearnDoc", () => import("./pages/learn-new/LearnDoc"));
 const Courses = lazyWithRetry("Courses", () => import("./pages/Courses"));
 const Course = lazyWithRetry("Course", () => import("./pages/Course"));
 const Teach = lazyWithRetry("Teach", () => import("./pages/Teach"));
@@ -46,6 +52,16 @@ function App() {
             <Route path="/learn/courses" element={<Courses />} />
             <Route path="/learn/courses/:id" element={<Course />} />
             <Route path="/learn/teach" element={<Teach />} />
+            {/* Preview of the rebuilt course docs, for internal review before it
+                replaces /learn. Every docs page is native; exported bodies load
+                from public/data/learn-new/pages. */}
+            <Route path="/learn-new" element={<LearnNew />}>
+              <Route index element={<LearnIntro />} />
+              <Route path="syllabus" element={<LearnSyllabus />} />
+              <Route path=":moduleSlug" element={<LearnModule />} />
+              <Route path=":moduleSlug/:lectureId" element={<LearnLecture />} />
+              <Route path="doc/*" element={<LearnDoc />} />
+            </Route>
             <Route path="/news" element={<News />} />
             <Route path="/race" element={<RaceCalendar />} />
             <Route path="/research" element={<Research />} />
