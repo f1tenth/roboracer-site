@@ -88,7 +88,6 @@ export default function LearnLecture() {
           <Embed
             src={l.slides_embed}
             title={`Slides: ${l.title}`}
-            tone="ink"
             caption={
               <>
                 Slides ·{" "}
@@ -99,7 +98,7 @@ export default function LearnLecture() {
               </>
             }
           />
-          <Embed src={`https://www.youtube.com/embed/${l.video_id}`} title={l.video_title} caption="Video" tone="ink" />
+          <Embed src={`https://www.youtube.com/embed/${l.video_id}`} title={l.video_title} caption="Video" />
         </div>
       </DocSection>
 

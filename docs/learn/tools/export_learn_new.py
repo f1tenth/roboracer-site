@@ -83,9 +83,9 @@ def slug(t):
     return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
 
 
-def make_block(soup, label, nodes, media=False):
+def make_block(soup, label, nodes):
     div = soup.new_tag("div")
-    div["class"] = "doc-block" + (" doc-block--media" if media else "")
+    div["class"] = "doc-block"
     h = soup.new_tag("h2")
     h["class"] = "doc-block-label"
     h["id"] = slug(label)
@@ -138,8 +138,7 @@ def make_blocks(art, soup):
         nxt = p.find_next_sibling()
         if nxt is None or nxt.name != "blockquote":
             continue
-        media = nxt.find("iframe") is not None
-        blk = make_block(soup, txt.rstrip(":").strip(), list(nxt.children), media=media)
+        blk = make_block(soup, txt.rstrip(":").strip(), list(nxt.children))
         p.insert_before(blk)
         nxt.decompose()
         p.decompose()

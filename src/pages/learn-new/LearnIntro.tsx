@@ -45,33 +45,30 @@ export default function LearnIntro() {
 
       <DocSection id="intro-watch" title="Watch the introduction">
         <div className="grid gap-8">
-          <Embed src={`https://www.youtube.com/embed/${intro.video_id}`} title={intro.video_title} caption="Video" tone="ink" />
+          <Embed src={`https://www.youtube.com/embed/${intro.video_id}`} title={intro.video_title} caption="Video" />
         </div>
       </DocSection>
 
       <DocSection id="intro-path" title="Course path" lead="Seven modules. Open one to see its lectures, tutorials and labs.">
-        <div className="overflow-hidden rounded-card bg-ink-950">
-          <span aria-hidden="true" className="block h-0.5 bg-gradient-scale" />
-          <ol className="grid grid-cols-2 gap-2 p-4 sm:grid-cols-4 lg:grid-cols-7">
-            {modules.map((m) => (
-              <li key={m.to}>
-                <Link
-                  to={m.to}
-                  className="group block h-full rounded-media p-4 transition-colors hover:bg-ink-800 focus-visible:outline-text-on-ink"
-                >
-                  <span className="flex h-11 w-11 flex-col items-center justify-center rounded-btn border border-ink-700 font-mono text-body font-semibold text-text-on-ink">
-                    {m.id}
-                  </span>
-                  <span aria-hidden="true" className="mt-2 block h-0.5 w-11 bg-gradient-scale" />
-                  <span className="mt-3 block text-small text-text-on-ink-muted group-hover:text-text-on-ink">
-                    <span className="sr-only">Module {m.id}: </span>
-                    {m.title}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ol>
-        </div>
+        <ol className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
+          {modules.map((m) => (
+            <li key={m.to}>
+              <Link
+                to={m.to}
+                className="group block h-full rounded-media border border-ink-950/10 bg-paper-50 p-4 transition-colors hover:border-rr-violet hover:bg-paper-100"
+              >
+                <span className="flex h-11 w-11 items-center justify-center rounded-btn border border-ink-950/15 bg-paper-100 font-mono text-body font-semibold text-text-strong">
+                  {m.id}
+                </span>
+                <span aria-hidden="true" className="mt-2 block h-0.5 w-11 bg-gradient-scale" />
+                <span className="mt-3 block text-small text-text-body group-hover:text-text-strong">
+                  <span className="sr-only">Module {m.id}: </span>
+                  {m.title}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ol>
       </DocSection>
 
       <DocSection id="intro-fit" title="Is it for you" lead={intro.note}>

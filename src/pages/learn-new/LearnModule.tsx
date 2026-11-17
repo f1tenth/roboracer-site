@@ -99,7 +99,7 @@ export default function LearnModule() {
         title={
           <>
             <span className="mb-5 block w-14">
-              <span className="flex h-14 w-14 items-center justify-center rounded-btn bg-ink-900 font-mono text-display-s font-semibold text-text-on-ink">
+              <span className="flex h-14 w-14 items-center justify-center rounded-btn border border-ink-950/15 bg-paper-100 font-mono text-display-s font-semibold text-text-strong">
                 {mod.id}
               </span>
               <span aria-hidden="true" className="mt-1.5 block h-0.5 w-14 bg-gradient-scale" />
