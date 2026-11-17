@@ -1022,28 +1022,8 @@
      "title": "Final project"
     },
     {
-     "to": "/learn-new/doc/assignments/grading",
-     "title": "Grading Rubrics",
-     "children": [
-      {
-       "to": "/learn-new/doc/assignments/grading",
-       "title": "Labs & Final Project"
-      },
-      {
-       "to": "/learn-new/doc/assignments/grading",
-       "title": "Races",
-       "children": [
-        {
-         "to": "/learn-new/doc/assignments/grading",
-         "title": "Race 1 and Race 2"
-        },
-        {
-         "to": "/learn-new/doc/assignments/grading",
-         "title": "Race 3"
-        }
-       ]
-      }
-     ]
+     "to": "/learn-new/grading",
+     "title": "Grading"
     }
    ]
   },
@@ -1077,10 +1057,10 @@
    "native": false
   },
   "assignments/grading": {
-   "title": "Grading Rubrics",
-   "to": "/learn-new/doc/assignments/grading",
+   "title": "Grading",
+   "to": "/learn-new/grading",
    "module": null,
-   "native": false
+   "native": true
   },
   "assignments/labs/index": {
    "title": "Labs",
@@ -1436,5 +1416,398 @@
    "module": null,
    "native": false
   }
+ },
+ "grading": {
+  "title": "Grading",
+  "lead": "An autograder builds your code and runs it in the simulator, and TAs grade the videos. Your score appears on your repository minutes after you submit.",
+  "submit": {
+   "title": "How a submission works",
+   "lead": "Submissions are managed with Classroom 50. Push your work as often as you like; only a tag counts.",
+   "steps": [
+    {
+     "title": "Push your work",
+     "body": "Commit and push as often as you need. A plain push does not count as a submission."
+    },
+    {
+     "title": "Push the submission tag",
+     "body": "Pushing a tag named submission starts the autograder."
+    },
+    {
+     "title": "Read your score",
+     "body": "The autograder builds your package, checks it, runs it in the simulator, and posts your score as a Release on your repository a few minutes later."
+    },
+    {
+     "title": "Resubmit by moving the tag",
+     "body": "Move the tag to a newer commit and push it again. Your best scored submission is the one that counts."
+    }
+   ],
+   "code": "git push\ngit tag submission\ngit push origin submission\n\n# to resubmit\ngit tag -f submission\ngit push --force origin submission",
+   "team_note": "From Lab 4 on, labs are done in teams. One repository per team, any member can push the tag, and it counts for the whole team.",
+   "names_note": "The autograder finds your work by name, so use the package, node, topic and launch file names each lab specifies."
+  },
+  "checks": {
+   "title": "What the autograder checks",
+   "items": [
+    {
+     "title": "It builds",
+     "body": "Compilation is worth 10 to 30 points depending on the lab."
+    },
+    {
+     "title": "Logic, without the simulator",
+     "body": "Your node is fed scans or poses (a corridor, a dead end, a car off its path) and must steer the right way each time."
+    },
+    {
+     "title": "Runs in the simulator",
+     "body": "Your code drives laps in the grading simulator without touching a wall. A run that ends early earns partial credit for the distance covered."
+    },
+    {
+     "title": "TA-graded videos",
+     "body": "Videos are linked from SUBMISSION.md: unlisted on YouTube, or on Google Drive shared as Anyone with the link can view."
+    }
+   ]
+  },
+  "sim": {
+   "title": "Simulator evaluations",
+   "lead": "Every lab that drives is graded the same way: your node runs on a track in the grading simulator while the autograder times the laps. The fastest clean lap goes to the class leaderboard, and the board replays the best runs.",
+   "maps": [
+    {
+     "name": "levine_blocked",
+     "body": "The Levine Hall loop with its doorways sealed. Three laps in a row."
+    },
+    {
+     "name": "levine_obs",
+     "body": "The same loop with obstacles added, for follow the gap and motion planning."
+    },
+    {
+     "name": "Spielberg",
+     "body": "A larger race track. One lap."
+    }
+   ],
+   "replay": {
+    "label": "Top 5, pure pursuit",
+    "note": "The best clean laps in the grading simulator, replayed.",
+    "compare": "top5",
+    "board": "lab-5-pure-pursuit-spielberg",
+    "posters": {
+     "wide": "media/race/race-leaderboard-replay-spielberg-wide.webp",
+     "narrow": "media/race/race-leaderboard-replay-spielberg-narrow.webp",
+     "narrow_height": 696
+    }
+   },
+   "board_url": "https://roboracer-class.github.io/leaderboard/",
+   "board_label": "Open the class leaderboard",
+   "board_note": "A row is a team's best full-score lap, graded before the deadline. The TA reference lap is on the board too."
+  },
+  "rubric": {
+   "title": "Rubric by lab",
+   "lead": "Points from the lab handouts. Each lab totals 100, bonus points on top.",
+   "labs": [
+    {
+     "number": 1,
+     "title": "Introduction to ROS 2",
+     "items": [
+      {
+       "points": 25,
+       "text": "Package created correctly"
+      },
+      {
+       "points": 25,
+       "text": "Nodes created correctly"
+      },
+      {
+       "points": 25,
+       "text": "Launch file created correctly"
+      },
+      {
+       "points": 25,
+       "text": "Written questions"
+      }
+     ]
+    },
+    {
+     "number": 2,
+     "title": "Automatic emergency braking",
+     "items": [
+      {
+       "points": 30,
+       "text": "Compilation",
+       "how": "auto"
+      },
+      {
+       "points": 30,
+       "text": "Stops before a collision",
+       "how": "sim"
+      },
+      {
+       "points": 10,
+       "text": "Calculates time to collision correctly",
+       "how": "sim"
+      },
+      {
+       "points": 10,
+       "text": "Navigates the hallway",
+       "how": "sim"
+      },
+      {
+       "points": 20,
+       "text": "Video",
+       "how": "ta"
+      }
+     ]
+    },
+    {
+     "number": 3,
+     "title": "Wall following",
+     "items": [
+      {
+       "points": 10,
+       "text": "Compilation",
+       "how": "auto"
+      },
+      {
+       "points": 40,
+       "text": "PID implemented: the node is fed scans of a straight corridor and must steer the right way each time",
+       "how": "auto"
+      },
+      {
+       "points": 40,
+       "text": "PID tuned: one counter-clockwise lap of the grading map without touching a wall, with partial credit for the fraction covered",
+       "how": "sim"
+      },
+      {
+       "points": 10,
+       "text": "Video",
+       "how": "ta"
+      }
+     ]
+    },
+    {
+     "number": 4,
+     "title": "Follow the gap",
+     "team": true,
+     "items": [
+      {
+       "points": 10,
+       "text": "Compilation",
+       "how": "auto"
+      },
+      {
+       "points": 30,
+       "text": "Find-max gap: scans of a pillar and of a corridor, each with its mirror image",
+       "how": "auto"
+      },
+      {
+       "points": 30,
+       "text": "Find best point: a dead end with the corridor continuing to one side, mirrored",
+       "how": "auto"
+      },
+      {
+       "points": 10,
+       "text": "Levine blocked: three counter-clockwise laps in a row without touching a wall",
+       "how": "sim"
+      },
+      {
+       "points": 5,
+       "text": "Levine obstacles: through at least 3 corners without touching anything",
+       "how": "sim"
+      },
+      {
+       "points": 5,
+       "text": "Bonus: a full clean lap of the obstacle map",
+       "how": "sim",
+       "bonus": true
+      },
+      {
+       "points": 15,
+       "text": "Real-car video",
+       "how": "ta"
+      }
+     ]
+    },
+    {
+     "number": 5,
+     "title": "SLAM and pure pursuit",
+     "team": true,
+     "items": [
+      {
+       "points": 10,
+       "text": "Compilation",
+       "how": "auto"
+      },
+      {
+       "points": 10,
+       "text": "A valid map made with slam_toolbox",
+       "how": "auto"
+      },
+      {
+       "points": 10,
+       "text": "Particle filter running, from the real-car video",
+       "how": "ta"
+      },
+      {
+       "points": 20,
+       "text": "Pure pursuit steers the right way from a few fixed poses",
+       "how": "auto"
+      },
+      {
+       "points": 20,
+       "text": "Three laps of Levine in a row without touching a wall",
+       "how": "sim"
+      },
+      {
+       "points": 10,
+       "text": "One lap of Spielberg without touching a wall",
+       "how": "sim"
+      },
+      {
+       "points": 10,
+       "text": "Video in the simulator, waypoints visualized",
+       "how": "ta"
+      },
+      {
+       "points": 10,
+       "text": "Video on the car",
+       "how": "ta"
+      }
+     ]
+    },
+    {
+     "number": 6,
+     "title": "Motion planning",
+     "team": true,
+     "items": [
+      {
+       "points": 30,
+       "text": "Compilation",
+       "how": "auto"
+      },
+      {
+       "points": 20,
+       "text": "Straight path: the north hallway of the obstacle map",
+       "how": "sim"
+      },
+      {
+       "points": 20,
+       "text": "Turn: the north-east corner of the obstacle map",
+       "how": "sim"
+      },
+      {
+       "points": 10,
+       "text": "A full lap of the obstacle map past every obstacle",
+       "how": "sim"
+      },
+      {
+       "points": 10,
+       "text": "Video in the simulator",
+       "how": "ta"
+      },
+      {
+       "points": 10,
+       "text": "Video on the car, avoiding at least one obstacle",
+       "how": "ta"
+      },
+      {
+       "points": 10,
+       "text": "Extra credit: RRT* or another improved RRT",
+       "how": "ta",
+       "bonus": true
+      }
+     ]
+    },
+    {
+     "number": 7,
+     "title": "Model predictive control",
+     "team": true,
+     "items": [
+      {
+       "points": 10,
+       "text": "Compilation",
+       "how": "auto"
+      },
+      {
+       "points": 50,
+       "text": "Correct objectives and constraints, 10 per check: the node is given poses to the left and right of the path, turned either way, mid-corner, standing still and 60 degrees off",
+       "how": "auto"
+      },
+      {
+       "points": 20,
+       "text": "Three laps of Levine in a row without touching a wall",
+       "how": "sim"
+      },
+      {
+       "points": 10,
+       "text": "One lap of Spielberg without touching a wall",
+       "how": "sim"
+      },
+      {
+       "points": 5,
+       "text": "Video in the simulator",
+       "how": "ta"
+      },
+      {
+       "points": 5,
+       "text": "Video on the car",
+       "how": "ta"
+      }
+     ]
+    },
+    {
+     "number": 8,
+     "title": "Model predictive path integral control",
+     "team": true,
+     "items": [
+      {
+       "points": 10,
+       "text": "Compilation",
+       "how": "auto"
+      },
+      {
+       "points": 50,
+       "text": "Correct dynamics, cost and update, 10 per check: random poses, steering the right way within the acceleration and steering limits",
+       "how": "auto"
+      },
+      {
+       "points": 10,
+       "text": "Three laps of Levine in a row without touching a wall",
+       "how": "sim"
+      },
+      {
+       "points": 10,
+       "text": "One lap of Spielberg without touching a wall",
+       "how": "sim"
+      },
+      {
+       "points": 10,
+       "text": "Video in the simulator",
+       "how": "ta"
+      },
+      {
+       "points": 10,
+       "text": "Video on the car",
+       "how": "ta"
+      },
+      {
+       "points": 5,
+       "text": "Bonus: RK4 discretization",
+       "how": "ta",
+       "bonus": true
+      },
+      {
+       "points": 5,
+       "text": "Bonus: truncated proposal distribution",
+       "how": "ta",
+       "bonus": true
+      },
+      {
+       "points": 5,
+       "text": "Bonus: covariance update",
+       "how": "ta",
+       "bonus": true
+      }
+     ]
+    }
+   ]
+  },
+  "source": "Lab template READMEs (f1tenth_lab1_template to f1tenth_lab8_template) and the leaderboard README, read 2026-11-17."
  }
 }
