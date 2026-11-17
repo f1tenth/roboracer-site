@@ -23,8 +23,10 @@ const LINK =
  * /research pattern: four fills two rows of the two-column grid). */
 const PER_YEAR = 4;
 /** The newest year opens with more: Cedric's call (2026-09-26), so its visible
- * run ends at UPenn's ICRA 2026 post and only the last two 2026 items fold. */
-const NEWEST_YEAR_OPEN = 14;
+ * run ends at UPenn's ICRA 2026 post and only the last two 2026 items fold.
+ * Fifteen since the AuRoRus post took the lead (2026-11-17): the IFAC 2026
+ * story it replaced there is a card in this run again. */
+const NEWEST_YEAR_OPEN = 15;
 /** On a phone only the newest years open; every older year is its heading,
  * its count and a closed fold. With the history back to 2016 (74 items) the
  * phone page was far past 12,000 px with every year open. */
@@ -307,7 +309,7 @@ export default function News() {
                   sticks only where the window is tall enough to spare the
                   band (a landscape phone lost 38% of its height to bar plus
                   year), flush under the bar so no card text shows between.
-                  The newest year opens with fourteen, every other year with
+                  The newest year opens with fifteen, every other year with
                   four, and each folds the rest; on a phone the years before
                   the newest two are closed folds. A filter shows every match. */}
               {byYear.map(([year, group], index) => (

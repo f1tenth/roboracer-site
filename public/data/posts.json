@@ -1,0 +1,95 @@
+{
+  "updated": "2026-11-17",
+  "posts": [
+    {
+      "slug": "aurorus",
+      "label": "Guest post",
+      "title": "AuRoRus: our RoboRacer stack, open-sourced and written in Rust",
+      "title_accent": "AuRoRus",
+      "date": "2026-11-17",
+      "date_display": "Nov 17, 2026",
+      "author": {
+        "name": "Enrico Mannocci",
+        "url": "https://github.com/Noce99",
+        "role": "PhD student and leader of the 1:10 Scale Driverless division",
+        "affiliation": "University of Bologna"
+      },
+      "cover": {
+        "src": "/media/news/news-aurorus-cover-1600.webp",
+        "width": 1600,
+        "height": 1200,
+        "alt": "A RoboRacer car with its cover off, showing the LiDAR, the onboard computer and the motor controller, beside a car-shaped trophy engraved 2nd place Master Cup, ICRA 2026, Vienna.",
+        "caption": "UBM-Atlas with the second-place Master Cup trophy from ICRA 2026 in Vienna."
+      },
+      "body": "posts/aurorus.md",
+      "facts": [
+        { "label": "Code", "value": "github.com/Noce99/AuRoRus", "href": "https://github.com/Noce99/AuRoRus" },
+        { "label": "Tutorials", "value": "Gap follower and pure pursuit", "href": "https://github.com/Noce99/AuRoRus/tree/master/tutorials" },
+        { "label": "Language", "value": "Rust, ROS 2-free" },
+        { "label": "License", "value": "MIT or Apache-2.0" }
+      ],
+      "cta": { "label": "Get AuRoRus on GitHub", "href": "https://github.com/Noce99/AuRoRus" },
+      "credit": "Photos and videos courtesy of Enrico Mannocci and the University of Bologna team.",
+      "media": {
+        "/media/news/news-aurorus-sim-frenet-vs-mpc-544.mp4": {
+          "kind": "clip",
+          "width": 544,
+          "height": 416,
+          "poster": "/media/news/news-aurorus-sim-frenet-vs-mpc-poster.webp"
+        },
+        "/media/news/news-aurorus-team-atlanta-964.webp": {
+          "kind": "image",
+          "width": 964,
+          "height": 1280,
+          "size": "narrow"
+        },
+        "youtube:cEtLJ8aXSXk": {
+          "kind": "youtube",
+          "video_id": "cEtLJ8aXSXk",
+          "url": "https://www.youtube.com/shorts/cEtLJ8aXSXk",
+          "width": 1080,
+          "height": 1920,
+          "poster": "https://i.ytimg.com/vi/cEtLJ8aXSXk/oardefault.jpg",
+          "size": "narrow"
+        },
+        "/media/news/news-aurorus-team-vienna-1200.webp": {
+          "kind": "image",
+          "width": 1200,
+          "height": 900
+        },
+        "/media/news/news-aurorus-track-atlanta-366.webp": {
+          "kind": "image",
+          "width": 366,
+          "height": 514,
+          "size": "narrow"
+        },
+        "/media/news/news-aurorus-track-vienna-final-1830.webp": {
+          "kind": "image",
+          "width": 1830,
+          "height": 1087,
+          "frame": false
+        },
+        "/media/news/news-aurorus-bridge-jump-800.mp4": {
+          "kind": "clip",
+          "width": 800,
+          "height": 450,
+          "poster": "/media/news/news-aurorus-bridge-jump-poster.webp"
+        },
+        "/media/news/news-aurorus-gui-pure-pursuit-1512.webp": {
+          "kind": "image",
+          "width": 1512,
+          "height": 808,
+          "zoom": true
+        },
+        "/media/news/news-aurorus-real-world-360.mp4": {
+          "kind": "clip",
+          "width": 360,
+          "height": 640,
+          "poster": "/media/news/news-aurorus-real-world-poster.webp",
+          "size": "narrow"
+        }
+      },
+      "sources": "Text and media: Enrico Mannocci's post repository, https://github.com/Noce99/AuRoRus_Roboracer_Post (README.md and assets/, commit 361f7ad, 2026-10-28), handed over on Slack and passed on by Cedric, 2026-11-17. The body file is the README as written: only its H1 is dropped (this file carries the title) and the media paths point at our encodes. Added by us, for Enrico to confirm: the Atlanta final video (his own YouTube Short, https://youtube.com/shorts/cEtLJ8aXSXk, suggested on Slack) with its caption, the cover caption (the plate in the photo reads UBM-Atlas; the trophy reads 2nd place Master Cup, ICRA 2026; teams.json has UBM-Atlas second) and the byline role (from his own second paragraph). DATE: the day of this draft; set it to the day the post goes live."
+    }
+  ]
+}
