@@ -1,0 +1,314 @@
+/* The post writer's text (/news/write). The editor draws its own elements,
+   so they cannot take Tailwind classes one by one: this sheet gives them the
+   published post's typography instead, value for value from PostBody.tsx, so
+   the text being written already looks like the page it will become. If
+   PostBody's type changes, change it here too (the Preview tab renders the
+   real PostBody, so a drift shows there).
+
+   Scoped under .rr-write and inside @layer components, like rules.css: route
+   chunks are never unloaded, and unlayered CSS would outrank every utility. */
+@layer components {
+  .rr-write .rr-write-body {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--color-text-body);
+    outline: none;
+    /* Room to click below the last line, and to drop a picture there. */
+    min-height: 22rem;
+    padding-bottom: 4rem;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  @media (min-width: 64rem) {
+    .rr-write .rr-write-body {
+      font-size: 1.125rem;
+    }
+  }
+
+  .rr-write .rr-write-body > * + * {
+    margin-top: 1.25rem;
+  }
+
+  /* The first paragraph is the post's lead. */
+  .rr-write .rr-write-body > p:first-child {
+    font-size: var(--text-lead);
+    line-height: var(--text-lead--line-height);
+    color: var(--color-text-strong);
+  }
+
+  .rr-write .rr-write-body h2,
+  .rr-write .rr-write-body h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-text-strong);
+  }
+
+  .rr-write .rr-write-body h2 {
+    margin-top: 3.5rem;
+    font-size: var(--text-display-s);
+    line-height: var(--text-display-s--line-height);
+    letter-spacing: var(--text-display-s--letter-spacing);
+  }
+
+  .rr-write .rr-write-body h3 {
+    margin-top: 2.5rem;
+    font-size: 1.25rem;
+    line-height: 1.375;
+  }
+
+  .rr-write .rr-write-body > h2:first-child,
+  .rr-write .rr-write-body > h3:first-child {
+    margin-top: 0;
+  }
+
+  .rr-write .rr-write-body strong {
+    font-weight: 600;
+    color: var(--color-text-strong);
+  }
+
+  .rr-write .rr-write-body a {
+    color: var(--color-text-strong);
+    text-decoration: underline;
+    text-decoration-color: rgb(7 7 13 / 0.25);
+    text-underline-offset: 4px;
+    cursor: text;
+  }
+
+  .rr-write .rr-write-body :not(pre) > code {
+    border-radius: 0.25rem;
+    background: var(--color-paper-100);
+    padding: 0.1em 0.35em;
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    color: var(--color-text-strong);
+  }
+
+  .rr-write .rr-write-body ul,
+  .rr-write .rr-write-body ol {
+    padding-left: 1.5rem;
+  }
+
+  .rr-write .rr-write-body ul {
+    list-style: disc;
+  }
+
+  .rr-write .rr-write-body ol {
+    list-style: decimal;
+  }
+
+  .rr-write .rr-write-body li {
+    padding-left: 0.25rem;
+  }
+
+  .rr-write .rr-write-body li + li {
+    margin-top: 0.5rem;
+  }
+
+  .rr-write .rr-write-body li::marker {
+    color: var(--color-text-muted);
+  }
+
+  .rr-write .rr-write-body ol > li::marker {
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+  }
+
+  .rr-write .rr-write-body li > p + p {
+    margin-top: 0.75rem;
+  }
+
+  .rr-write .rr-write-body li > ul,
+  .rr-write .rr-write-body li > ol {
+    margin-top: 0.5rem;
+  }
+
+  .rr-write .rr-write-body blockquote {
+    margin-top: 1.5rem;
+    border-left: 2px solid var(--color-rr-violet);
+    padding-left: 1.25rem;
+    color: var(--color-text-strong);
+  }
+
+  .rr-write .rr-write-body blockquote > * + * {
+    margin-top: 0.75rem;
+  }
+
+  .rr-write .rr-write-body hr {
+    margin-top: 2.5rem;
+    border: 0;
+    border-top: 1px solid rgb(7 7 13 / 0.1);
+  }
+
+  .rr-write .rr-write-body hr.ProseMirror-selectednode {
+    border-top-color: var(--color-rr-violet);
+  }
+
+  /* A code block on ink, with the strip the published block carries. */
+  .rr-write .rr-write-body pre {
+    margin-top: 1.5rem;
+    overflow-x: auto;
+    border-radius: var(--radius-media);
+    background: var(--color-ink-900);
+    padding: 0 1rem 1rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    line-height: 1.625;
+    color: var(--color-text-on-ink);
+    white-space: pre;
+  }
+
+  .rr-write .rr-write-body pre::before {
+    content: "Code";
+    display: block;
+    margin: 0 -1rem 1rem;
+    border-bottom: 1px solid rgb(245 245 250 / 0.1);
+    padding: 0.5rem 1rem;
+    font-size: var(--text-eyebrow);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-on-ink-muted);
+  }
+
+  .rr-write .rr-write-body pre code {
+    font: inherit;
+    color: inherit;
+    background: none;
+    padding: 0;
+  }
+
+  /* The hint in an empty text. */
+  .rr-write .rr-write-body p.is-editor-empty:first-child::before,
+  .rr-write .rr-write-body h2.is-empty::before,
+  .rr-write .rr-write-body h3.is-empty::before {
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+    color: var(--color-text-muted);
+    opacity: 0.75;
+  }
+
+  /* ---- Pictures and videos ---- */
+  .rr-write .rr-write-body > .rr-media {
+    margin-top: 2rem;
+  }
+
+  .rr-write .rr-write-body > .rr-media:first-child {
+    margin-top: 0;
+  }
+
+  /* A narrow figure alone is capped, as PostBody caps it (NARROW_REM). */
+  .rr-write .rr-media[data-size="narrow"]:not(.rr-pair) {
+    max-width: 24rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Two narrow figures in a row share the line, each as wide as its own
+     proportions, so both come out the same height. */
+  @media (min-width: 40rem) {
+    .rr-write .rr-media.rr-pair {
+      display: inline-block;
+      vertical-align: top;
+      width: calc((100% - 1.5rem) * var(--pair-share, 0.5));
+    }
+
+    .rr-write .rr-media.rr-pair-first {
+      margin-right: 1.5rem;
+    }
+  }
+
+  @media not all and (min-width: 40rem) {
+    .rr-write .rr-media.rr-pair {
+      max-width: 24rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .rr-write .rr-figure {
+    position: relative;
+    margin: 0;
+  }
+
+  /* Selected: by a click (the editor's node selection) or by the keyboard
+     reaching one of its own fields. */
+  .rr-write .ProseMirror-selectednode .rr-figure-frame,
+  .rr-write .rr-figure:focus-within .rr-figure-frame {
+    outline: 2px solid var(--color-rr-violet);
+    outline-offset: 2px;
+  }
+
+  /* The block's bar and handle stay out of the way until the block is
+     hovered, selected or reached by the keyboard. They are always in the
+     tab order, so they appear the moment focus lands in them. */
+  .rr-write .rr-media-bar,
+  .rr-write .rr-resize-handle {
+    opacity: 0;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .rr-write .rr-figure:hover .rr-media-bar,
+  .rr-write .rr-figure:focus-within .rr-media-bar,
+  .rr-write .ProseMirror-selectednode .rr-media-bar,
+  .rr-write .rr-figure:hover .rr-resize-handle,
+  .rr-write .ProseMirror-selectednode .rr-resize-handle {
+    opacity: 1;
+  }
+
+  /* Touch screens have no hover: the bar shows once the block is tapped. */
+  @media (hover: none) {
+    .rr-write .rr-media-bar {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .rr-write .ProseMirror-selectednode .rr-media-bar,
+    .rr-write .rr-figure:focus-within .rr-media-bar {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rr-write .rr-media-bar,
+    .rr-write .rr-resize-handle {
+      transition: none;
+    }
+  }
+
+  .rr-write .rr-text-button {
+    cursor: pointer;
+    color: var(--color-text-strong);
+    text-decoration: underline;
+    text-decoration-color: rgb(7 7 13 / 0.25);
+    text-underline-offset: 4px;
+  }
+
+  .rr-write .rr-text-button:hover {
+    text-decoration-color: var(--color-rr-violet);
+    text-decoration-thickness: 2px;
+  }
+
+  /* The line that shows where a dragged picture will land. */
+  .rr-write .ProseMirror-gapcursor::after {
+    border-top-color: var(--color-rr-violet);
+  }
+
+  /* The headline grows with its text; no scrollbar, no resize grip. */
+  .rr-write .rr-headline {
+    display: block;
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+    background: transparent;
+    outline: none;
+    field-sizing: content;
+  }
+
+  .rr-write .rr-headline::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.55;
+  }
+}

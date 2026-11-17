@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
@@ -180,10 +181,28 @@ export default function News() {
       <Section width="page" className="compact:pt-4" aria-labelledby="news-title">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
-            <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-muted">
-              <span aria-hidden="true" className="h-1 w-1 bg-ink-950" />
-              <span>News</span>
-            </p>
+            {/* Beside the page's label, a quiet way in to the post writer
+                (Cedric, 2026-11-17: a badge, nothing obnoxious): a hairline
+                pill with one violet dot, no fill, no motion. */}
+            <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+              <p className="flex items-center gap-2 font-mono text-small text-text-muted">
+                <span aria-hidden="true" className="h-1 w-1 bg-ink-950" />
+                <span>News</span>
+              </p>
+              <Link
+                to="/news/write"
+                className="group inline-flex items-center gap-2 rounded-pill border border-ink-950/15 py-1 pl-2.5 pr-3 font-mono text-small text-text-strong transition-colors duration-[var(--duration-fast)] hover:border-rr-violet motion-reduce:transition-none coarse:py-2.5"
+              >
+                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-pill bg-rr-violet" />
+                <span>Write your own post</span>
+                <span
+                  aria-hidden="true"
+                  className="text-text-muted transition-[color,translate] duration-[var(--duration-fast)] group-hover:translate-x-0.5 group-hover:text-rr-violet motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
+                >
+                  &rarr;
+                </span>
+              </Link>
+            </div>
             <h1
               id="news-title"
               className="max-w-[18ch] font-display text-display-xl font-semibold text-text-strong"
@@ -362,6 +381,13 @@ export default function News() {
                 <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" className={LINK}>
                   Slack
                 </a>
+                .
+              </p>
+              <p className="text-small text-text-body">
+                A longer story to tell?{" "}
+                <Link to="/news/write" className={LINK}>
+                  Write your own post
+                </Link>
                 .
               </p>
             </div>
