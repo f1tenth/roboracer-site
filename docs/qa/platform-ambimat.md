@@ -7,14 +7,22 @@ asked that the official BOM point there for the power board. Cedric, the same da
 good as the other three, with their website featured. Review server for this QA:
 http://localhost:4196/about#about-spinoffs.
 
+## Cedric's rulings after the localhost review (2026-11-17)
+
+- **Order:** Dzik first (its video is the strongest opener), Neobotics second, Ambimat third, Quanser
+  last. This replaces Rahul's "list at the top".
+- **Wording:** "an official vendor", never "the official vendor".
+- **Description rewritten:** he did not like "Its RoboRacer Core Kit is the car, assembled and tested. Its
+  shop sells the power board."
+
 ## What was built
 
-- **Entry** (`public/data/spinoffs.json`, first in `entries`): kind `company`, label "official vendor", no
-  `since` (beside that label "since 1982" would date the vendor role, not the company).
-  - what: "An electronics company in Ahmedabad, India, since 1982. Its RoboRacer Core Kit is the car,
-    assembled and tested. Its shop sells the power board." (24 words)
-  - and RoboRacer: "The official vendor for RoboRacer. Ambimat designed the car's power board with Penn's
-    xLAB in 2024."
+- **Entry** (`public/data/spinoffs.json`, third in `entries`): kind `company`, label "official vendor"
+  (the eyebrow carries no article), no `since` (beside that label "since 1982" would date the vendor role,
+  not the company).
+  - what: "An electronics company in Ahmedabad, India, since 1982. It makes the RoboRacer power board and
+    sells ready-built cars as the RoboRacer Core Kit." (23 words)
+  - and RoboRacer: "An official vendor for RoboRacer. It designed the power board with Penn's xLAB in 2024."
   - Both are our own words from the pages in the entry's `evidence` (ambimat.com, roboracer.ambimat.com,
     orders.ambimat.com, the power board repo and our own 2024 news item). No price on the card: the shop's
     prices change, and the news item left them out too.
@@ -29,11 +37,11 @@ http://localhost:4196/about#about-spinoffs.
   stage image is now `object-left`: wide, the whole canvas shows and the car sits left of centre, clear of
   the window; stacked, the left 3:2 shows and the car is centred. The other two cars' canvases are exactly
   3:2 (1200x800), so nothing of theirs overflows sideways in either stage and `object-left` moves nothing.
-- **Section.** Four cards now sit two by two from `desktop:`, so Dzik no longer spans the grid. Subtitle:
-  "The official vendor, and how other small-scale cars relate to RoboRacer" (was "Other small-scale cars,
-  and how they relate to RoboRacer"; Ambimat sells the RoboRacer car itself). The loading placeholder's
-  min-heights were re-measured for four cards: 122rem (768x1024), 108rem (1024x768), 112.5rem (1440x900),
-  228.5rem (390x844), in the root's own rem (12px at the two middle sizes).
+- **Section.** Four cards now sit two by two from `desktop:`: Dzik and Neobotics, then Ambimat and Quanser.
+  Dzik no longer spans the grid. The subtitle is unchanged ("Other small-scale cars, and how they relate
+  to RoboRacer"). The loading placeholder's min-heights were re-measured for four cards in this order:
+  120.75rem (768x1024), 106.75rem (1024x768), 111rem (1440x900), 227.25rem (390x844), in the root's own
+  rem (12px at the two middle sizes).
 
 ## Media and provenance
 
@@ -67,20 +75,20 @@ Two limits of what is public today:
   change the link to `https://orders.ambimat.com/`, and check the price ($125.00 is today's per-board price
   in the RoHS pack of three; one board is $145 non-RoHS or $165 RoHS).
 - Done here: https://github.com/f1tenth/f1tenth_doc/pull/86 adds one note to the BOM page, above the
-  table: Ambimat is the official RoboRacer vendor, order the Powerboard from orders.ambimat.com, and the
+  table: Ambimat is an official RoboRacer vendor, order the Powerboard from orders.ambimat.com, and the
   car is sold assembled as the RoboRacer Core Kit. The page parses with docutils without warnings. Nothing
   else in the docs links a place to buy the board.
 - Seen, not changed: the README of `f1tenth/f1tenth_powerboard_v10` links
   `https://orders.ambimat.com/product/f1tenth-power-board/`, which also redirects (to the non-RoHS pack of
   three).
 
-## Checks
+## Checks (re-run after the reorder)
 
 - `npm run lint` and `npm run build`: green.
-- Layout, Playwright (new-headless Chromium) at 1440x900, 1024x768, 768x1024 and 390x844: Ambimat is the
-  first card, eyebrow "official vendor"; no horizontal overflow; every image in the section loads. Card
-  sizes at 1440: four of 648 px wide, rows 639 and 691 px tall. The window clears the kit at 1440; at 1024
-  its corner covers the last few pixels of the front bumper.
+- Layout, Playwright (new-headless Chromium) at 1440x900, 1024x768, 768x1024 and 390x844: the order is
+  Dzik, Neobotics, Ambimat, Quanser; Ambimat's eyebrow reads "official vendor"; no horizontal overflow;
+  every image in the section loads. Card sizes at 1440: four of 648 px wide, rows 691 and 624 px tall. The
+  window clears the kit at 1440; at 1024 its corner covers the last few pixels of the front bumper.
 - axe on /about at 1440x900, 390x844 and 1440x900 reduced motion: zero violations of any impact. One `h1`.
 - Console on /about: no errors. The only warning, "No available adapters.", comes from inside the YouTube
   player on Dzik's card (its WebGPU probe in headless Chromium), as before. No request answers 400 or
@@ -102,11 +110,9 @@ The fixed nav is hidden in these captures only, so it is not painted across the 
 
 1. Two links on the card: the kit guide and the shop. Should the window go to the shop
    (orders.ambimat.com) instead of roboracer.ambimat.com?
-2. The subtitle now names the vendor. Keep it, or go back to the old line?
-3. Ambimat is the first of four, so the grid is two by two. Give it the full width as a lead card instead?
-4. Permission: ask Neel to confirm the logo, kit photo and homepage capture, and for a vector logo and a
-   landscape photo of the current kit (the reply drafted for Neel asks).
-5. CLAUDE.md rule 8 and the media skill still name only Neobotics and Quanser in the exception; this
+2. Permission: ask Neel to confirm the logo, kit photo and homepage capture, and for a vector logo and a
+   landscape photo of the current kit.
+3. CLAUDE.md rule 8 and the media skill still name only Neobotics and Quanser in the exception; this
    section now carries Dzik and Ambimat on the same terms. Extend the wording?
-6. The sheet's Powerboard cell needs an editor (Ahmad, or you from an account with edit rights).
-7. The power board repo's README link: fix it in a small PR?
+4. The sheet's Powerboard cell needs an editor (Ahmad, or you from an account with edit rights).
+5. The power board repo's README link: fix it in a small PR?

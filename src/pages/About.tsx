@@ -386,16 +386,16 @@ export default function About() {
           Autonomous Racing (Cedric, 2026-10-20) shows its autonomous lap
           video playing in place of the car photo; it races 1/8 scale now,
           hence "small-scale" in the subtitle. Ambimat Electronics (Rahul
-          Mangharam via Cedric, 2026-11-17) is listed first as the official
-          vendor: it sells the RoboRacer car itself, so the subtitle names
-          the vendor before the other cars. */}
+          Mangharam via Cedric, 2026-11-17) is an official vendor, "an" and
+          not "the" (Cedric). Order, Cedric the same day: Dzik first for its
+          video, then Neobotics, Ambimat, Quanser. */}
       {(spinoffs === null || spinoffs.length > 0) && (
         <Section width="page" aria-labelledby="about-spinoffs" rule>
           <SectionHeader
             index="04"
             id="about-spinoffs"
             title="Related platforms"
-            subtitle="The official vendor, and how other small-scale cars relate to RoboRacer"
+            subtitle="Other small-scale cars, and how they relate to RoboRacer"
           />
           {spinoffs ? (
             <SpinoffGrid spinoffs={spinoffs} />
@@ -408,7 +408,7 @@ export default function About() {
             // jump. compact: is emitted after the breakpoints, so it wins.
             <div
               aria-busy="true"
-              className="min-h-[122rem] rounded-card border border-ink-950/10 lg:min-h-[108rem] xl:min-h-[112.5rem] compact:min-h-[228.5rem]"
+              className="min-h-[120.75rem] rounded-card border border-ink-950/10 lg:min-h-[106.75rem] xl:min-h-[111rem] compact:min-h-[227.25rem]"
             />
           )}
         </Section>
