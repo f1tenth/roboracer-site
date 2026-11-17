@@ -385,27 +385,30 @@ export default function About() {
           its car, its mark, and a framed window onto its homepage. Dzik
           Autonomous Racing (Cedric, 2026-10-20) shows its autonomous lap
           video playing in place of the car photo; it races 1/8 scale now,
-          hence "small-scale" in the subtitle. */}
+          hence "small-scale" in the subtitle. Ambimat Electronics (Rahul
+          Mangharam via Cedric, 2026-11-17) is listed first as the official
+          vendor: it sells the RoboRacer car itself, so the subtitle names
+          the vendor before the other cars. */}
       {(spinoffs === null || spinoffs.length > 0) && (
         <Section width="page" aria-labelledby="about-spinoffs" rule>
           <SectionHeader
             index="04"
             id="about-spinoffs"
             title="Related platforms"
-            subtitle="Other small-scale cars, and how they relate to RoboRacer"
+            subtitle="The official vendor, and how other small-scale cars relate to RoboRacer"
           />
           {spinoffs ? (
             <SpinoffGrid spinoffs={spinoffs} />
           ) : (
-            // The grid's measured height for the three features that render
-            // today (stacked on compact; from desktop a row of two and the
-            // third spanning both, beside its video from xl; 768x1024,
-            // 1024x768, 1440x900 and 390x844, 2026-10-20), so a reader
-            // arriving at #about-spinoffs does not watch Videos jump.
-            // compact: is emitted after the breakpoints, so it wins.
+            // The grid's measured height for the four features that render
+            // today (stacked on compact; from desktop two rows of two;
+            // 768x1024, 1024x768, 1440x900 and 390x844, 2026-11-17, in the
+            // root's own rem: 16px on the first and last, 12px between), so
+            // a reader arriving at #about-spinoffs does not watch Videos
+            // jump. compact: is emitted after the breakpoints, so it wins.
             <div
               aria-busy="true"
-              className="min-h-[108.5rem] rounded-card border border-ink-950/10 lg:min-h-[127.75rem] xl:min-h-[89.75rem] compact:min-h-[169.75rem]"
+              className="min-h-[122rem] rounded-card border border-ink-950/10 lg:min-h-[108rem] xl:min-h-[112.5rem] compact:min-h-[228.5rem]"
             />
           )}
         </Section>

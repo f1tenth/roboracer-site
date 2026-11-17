@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, type ReactNode } from "react";
 import Reveal from "../ui/Reveal";
 import { YouTubeLoop } from "../ui/YouTubeFacade";
 import type { Spinoff, SpinoffImage } from "../../lib/data";
@@ -33,6 +33,22 @@ const pieces = (parts: string[], glyph = "") =>
       </span>
     </Fragment>
   ));
+
+/** A text link under a feature's copy, to the company's own page. */
+function OutLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`inline-block font-semibold text-text-strong ${TAP} ${LINK}`}
+    >
+      {children}
+      <span aria-hidden="true">&nbsp;&#8599;</span>
+      <span className="sr-only"> (opens in a new tab)</span>
+    </a>
+  );
+}
 
 /** "https://www.quanser.com/" -> "quanser.com", for the address bar. */
 const domainOf = (url: string) => new URL(url).hostname.replace(/^www\./, "");
@@ -94,7 +110,7 @@ function SiteWindow({ name, url, preview }: { name: string; url: string; preview
  * the text instead of above it, so a 16:9 stage never runs the page's width.
  */
 function SpinoffFeature({ spinoff }: { spinoff: Spinoff }) {
-  const { name, kind, label, what, since, url, logo, car, video, preview } = spinoff;
+  const { name, kind, label, what, since, url, logo, car, video, preview, links = [] } = spinoff;
   const origin = shown(spinoff.origin);
   return (
     <article className="group/feature @container flex h-full min-w-0 flex-col overflow-hidden rounded-card border border-ink-950/10 bg-paper-50">
@@ -131,18 +147,21 @@ function SpinoffFeature({ spinoff }: { spinoff: Spinoff }) {
             {/* Under the text at one rhythm on every card, not pushed to the
                 card's foot: a card without the origin line left 7rem of
                 blank above its link. */}
-            {(car || video) && (
-              <p className="pt-6 text-small">
-                <a
-                  href={car ? car.url : video?.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`inline-block font-semibold text-text-strong ${TAP} ${LINK}`}
-                >
-                  {car ? `See the ${car.name}` : "Watch the lap on YouTube"}
-                  <span aria-hidden="true">&nbsp;&#8599;</span>
-                  <span className="sr-only"> (opens in a new tab)</span>
-                </a>
+            {/* The car or video link, then whatever else the entry offers
+                (`links`). They wrap as whole links; on touch screens the
+                wider row gap keeps two wrapped hit areas apart. */}
+            {(car || video || links.length > 0) && (
+              <p className="flex flex-wrap gap-x-6 gap-y-2 pt-6 text-small coarse:gap-y-6">
+                {car ? (
+                  <OutLink href={car.url}>See the {car.name}</OutLink>
+                ) : (
+                  video && <OutLink href={video.url}>Watch the lap on YouTube</OutLink>
+                )}
+                {links.map((link) => (
+                  <OutLink key={link.url} href={link.url}>
+                    {link.label}
+                  </OutLink>
+                ))}
               </p>
             )}
           </div>
@@ -178,6 +197,10 @@ function SpinoffFeature({ spinoff }: { spinoff: Spinoff }) {
             }
           />
         ) : car && (
+          // `object-left` only shows on a canvas wider than 3:2 (the others
+          // are exactly 3:2): the 16:9 stage shows it whole, so a car set
+          // left of centre stays clear of the window, and the stacked 3:2
+          // stage keeps the canvas's left 3:2, where that car is centred.
           <div className="order-1 aspect-[3/2] overflow-hidden @[40rem]:aspect-[16/9] border-b border-ink-950/10 bg-paper-100 @[90rem]:col-start-1 @[90rem]:row-start-1 @[90rem]:border-r @[90rem]:border-b-0">
             <img
               src={asset(car.src)}
@@ -186,7 +209,7 @@ function SpinoffFeature({ spinoff }: { spinoff: Spinoff }) {
               height={car.height}
               loading="lazy"
               decoding="async"
-              className="size-full object-cover motion-safe:transition-transform motion-safe:duration-[var(--duration-slow)] motion-safe:ease-[var(--ease-out-expo)] motion-safe:group-hover/feature:scale-[1.03]"
+              className="size-full object-cover object-left motion-safe:transition-transform motion-safe:duration-[var(--duration-slow)] motion-safe:ease-[var(--ease-out-expo)] motion-safe:group-hover/feature:scale-[1.03]"
             />
           </div>
         )}

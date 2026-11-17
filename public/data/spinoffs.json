@@ -1,7 +1,75 @@
 {
-  "note": "About page, section 'Related platforms' (was 'Spinoffs'; Cedric, 2026-09-26: Quanser is not a spinoff, so the section names how each platform relates to RoboRacer). Nothing here is in the roboracer-content skill yet; 'status' records that and is not rendered (verify tags left the site, Cedric 2026-09-25). 'what' and 'origin' are our own words, drafted from the first-party pages in 'source' and 'evidence'; never paste their copy. An 'origin' that starts with TODO(content) is not rendered, but the entry is. 'entries' render on /about; 'candidates' do not render until Cedric moves them into 'entries'. Each entry's feature shows three images from public/media/spinoffs: 'logo' (the company's mark beside the name), 'car' (its car, the main visual, linking to the car's page) and 'preview' (our own 1280x800 capture of its homepage, framed as a browser window that links to 'url'). Rule 8 exception: Cedric, 2026-09-25, asked to feature Neobotics and Quanser with their logo, car and a preview of their website ('embed their website, summarized'), so these images come from neobotics.org and quanser.com; permission status 'Cedric-directed; company not yet asked'. Every image has a provenance row in docs/ASSET_MANIFEST.md (section 'About: spinoff features'). An image field left null or absent drops that slot. 'video' (a YouTube video, with our local copy of its thumbnail as 'poster') takes the main visual slot instead of 'car': it plays muted and looped in place once the feature is in view, with a sound toggle and a caption beside it; under reduced motion, before it mounts and if the embed fails, the poster shows with a click-to-play button. 'results' records results we were given and how each checks against our own race data; it is not rendered (the rendered sentence is in 'origin'), and a 'check' starting with TODO(content) marks a result left out of the page until Cedric decides. Dzik Autonomous Racing, Cedric, 2026-10-20: feature the team here with its autonomous lap video playing; that extends the rule 8 exception above to Dzik's logo, our capture of its homepage and the video's thumbnail (manifest SP-08 to SP-10; Cedric-directed, 2026-10-20; team not yet asked).",
-  "updated": "2026-10-20",
+  "note": "About page, section 'Related platforms' (was 'Spinoffs'; Cedric, 2026-09-26: Quanser is not a spinoff, so the section names how each platform relates to RoboRacer). Nothing here is in the roboracer-content skill yet; 'status' records that and is not rendered (verify tags left the site, Cedric 2026-09-25). 'what' and 'origin' are our own words, drafted from the first-party pages in 'source' and 'evidence'; never paste their copy. An 'origin' that starts with TODO(content) is not rendered, but the entry is. 'entries' render on /about; 'candidates' do not render until Cedric moves them into 'entries'. Each entry's feature shows three images from public/media/spinoffs: 'logo' (the company's mark beside the name), 'car' (its car, the main visual, linking to the car's page) and 'preview' (our own 1280x800 capture of its homepage, framed as a browser window that links to 'url'). Rule 8 exception: Cedric, 2026-09-25, asked to feature Neobotics and Quanser with their logo, car and a preview of their website ('embed their website, summarized'), so these images come from neobotics.org and quanser.com; permission status 'Cedric-directed; company not yet asked'. Every image has a provenance row in docs/ASSET_MANIFEST.md (section 'About: spinoff features'). An image field left null or absent drops that slot. 'video' (a YouTube video, with our local copy of its thumbnail as 'poster') takes the main visual slot instead of 'car': it plays muted and looped in place once the feature is in view, with a sound toggle and a caption beside it; under reduced motion, before it mounts and if the embed fails, the poster shows with a click-to-play button. 'results' records results we were given and how each checks against our own race data; it is not rendered (the rendered sentence is in 'origin'), and a 'check' starting with TODO(content) marks a result left out of the page until Cedric decides. Dzik Autonomous Racing, Cedric, 2026-10-20: feature the team here with its autonomous lap video playing; that extends the rule 8 exception above to Dzik's logo, our capture of its homepage and the video's thumbnail (manifest SP-08 to SP-10; Cedric-directed, 2026-10-20; team not yet asked). 'links' (label and url) adds text links under the car link for what else the entry sells or runs ('Order the power board'). Ambimat Electronics, Rahul Mangharam via Cedric, 2026-11-17: listed first as the official vendor for RoboRacer, with its logo, its kit photo and our capture of roboracer.ambimat.com (manifest SP-11 to SP-13; requested by Rahul with Ambimat's Neel Shah in the thread; the files not yet cleared with Neel by name).",
+  "updated": "2026-11-17",
   "entries": [
+    {
+      "name": "Ambimat Electronics",
+      "kind": "company",
+      "label": "official vendor",
+      "what": "An electronics company in Ahmedabad, India, since 1982. Its RoboRacer Core Kit is the car, assembled and tested. Its shop sells the power board.",
+      "origin": "The official vendor for RoboRacer. Ambimat designed the car's power board with Penn's xLAB in 2024.",
+      "since": null,
+      "url": "https://roboracer.ambimat.com/",
+      "logo": {
+        "src": "/media/spinoffs/spinoff-ambimat-icon-48.webp",
+        "width": 53,
+        "height": 48,
+        "alt": "Ambimat Electronics logo",
+        "source": "the red triangle mark of https://ambimat.com/wp-content/uploads/2017/07/ambimat-logo.png (209x48, the header logo of ambimat.com, roboracer.ambimat.com and orders.ambimat.com), at its native 48 px; no larger or vector file is public"
+      },
+      "car": {
+        "src": "/media/spinoffs/spinoff-ambimat-kit-1260.webp",
+        "width": 1260,
+        "height": 700,
+        "alt": "A RoboRacer car built by Ambimat, seen from the front without its body: an orange-capped lidar, a Jetson computer and the power board on a deck over blue suspension arms",
+        "name": "RoboRacer Core Kit",
+        "url": "https://roboracer.ambimat.com/autonomous-racing-robotics-kit.html",
+        "source": "https://roboracer.ambimat.com/assets/img/roboracer-core-kit-cutout.png (600x800, the hero image of https://roboracer.ambimat.com/): the car at its native size on a 1260x700 clear canvas with a soft ground shadow added, centred in the canvas's left 3:2 so the 16:9 stage keeps it clear of the site window and the stacked stage centres it"
+      },
+      "links": [
+        {
+          "label": "Order the power board",
+          "url": "https://orders.ambimat.com/"
+        }
+      ],
+      "preview": {
+        "src": "/media/spinoffs/spinoff-ambimat-site-960.webp",
+        "width": 960,
+        "height": 600,
+        "alt": "The roboracer.ambimat.com homepage: the Ambimat Electronics header and menu over the headline 'RoboRacer Core Kit', a description of the kit and the car beside it",
+        "source": "our capture of https://roboracer.ambimat.com/ at 1280x800, 2026-11-17"
+      },
+      "status": "published",
+      "source": "https://roboracer.ambimat.com/",
+      "named_by": "Rahul Mangharam, Slack (relayed by Cedric, 2026-11-17)",
+      "evidence": [
+        {
+          "url": "Slack, Rahul Mangharam to Neel Shah (Ambimat), pasted by Cedric 2026-11-17",
+          "says": "'Let's list Ambimat in Related Platforms in the About page ... You are the official vendor for RoboRacer. List at the top.' Neel Shah then gave orders.ambimat.com as the shop and asked that the official BOM point there for the power board; Rahul: 'Cedric and Ayagoz can update the site and docs.'"
+        },
+        {
+          "url": "https://roboracer.ambimat.com/",
+          "says": "RoboRacer Core Kit: a fully assembled, pre-tested 1:10-scale vehicle (Jetson Orin Nano Super, Hokuyo 2D LiDAR, TRAMPA VESC 6 MkVI, the Ambimat AE170 power distribution board, Traxxas Slash 4X4 Brushless chassis). Core Kit and Core Kit Pro (the Pro adds software setup and 60 days of remote support) are sold against an emailed quotation, not an online checkout. Ambimat calls itself 'an official and authorised supplier of RoboRacer / F1TENTH kits'. The hero image is captioned as a reference image of an earlier chassis."
+        },
+        {
+          "url": "https://orders.ambimat.com/",
+          "says": "The shop: ten products, the RoboRacer Core Kit and Core Kit Pro (quote by email) and eight RoboRacer Power Board listings (single or pack of three, RoHS or not, standard or high current) with an online checkout."
+        },
+        {
+          "url": "https://ambimat.com/",
+          "says": "'Ambimat Electronics has offered engineering services to the leading PSUs as well as private sector companies and startups in India since 1982.' Address: Ahmedabad 380015, Gujarat, India."
+        },
+        {
+          "url": "https://github.com/f1tenth/f1tenth_powerboard_v10",
+          "says": "Powerboard v10 design files and manual: 'Developed by a collaboration between Ambimat Electronics and the University of Pennsylvania.' The board files are named AE170_PDU_02.04; the shop's render of the board is marked 'MARCH - 24'."
+        },
+        {
+          "url": "public/data/news.json power-board-2024",
+          "says": "Rahul Mangharam's post of 2024-02-14 invited the community into a shared order for the new power board from Ambimat Electronics and Penn's xLAB; the newsletter of 2024-09-24 says Ambimat 'in collaboration with University of Pennsylvania-X Lab has designed the Power Supply Board'."
+        }
+      ],
+      "note": "Rahul Mangharam, Slack (pasted by Cedric, 2026-11-17): list Ambimat under Related platforms, at the top, as the official vendor for RoboRacer; Neel Shah of Ambimat is in the thread and asked for the listing and the BOM link, and will link back to roboracer.ai. 'what' and 'origin' are our own words from the pages in evidence. No price is on the card: the shop's prices change and the news item left them out too. 'since' stays null: the label reads 'official vendor' and 'since 1982' beside it would date the vendor role, not the company (1982 is in 'what'). The kit photo is Ambimat's own hero cutout, which their page captions as a reference image of an earlier chassis; current kits use the Traxxas Slash 4X4 Brushless. Images come from Ambimat's sites (manifest SP-11 to SP-13): requested by Rahul with Ambimat in the thread; Neel has not yet been asked for these files by name, nor for a vector logo (the public one is 48 px tall)."
+    },
     {
       "name": "Neobotics",
       "kind": "company",
