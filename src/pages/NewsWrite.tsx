@@ -9,14 +9,16 @@ import {
   type DragEvent as ReactDragEvent,
 } from "react";
 import type { JSONContent } from "@tiptap/core";
+import type { Slice } from "@tiptap/pm/model";
 import { NodeSelection } from "@tiptap/pm/state";
 import { EditorContent, useEditor } from "@tiptap/react";
 import Button from "../components/ui/Button";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import { formatIsoDate } from "../components/news/newsData";
+import { WRAP_SPAN } from "../components/news/postData";
 import { PostCrumbs } from "../components/news/PostArticle";
-import { afterBlockAt, insertMedia } from "../components/news/write/blockMoves";
+import { blockEdgeNear, insertMedia, nextSide } from "../components/news/write/blockMoves";
 import CoverField from "../components/news/write/CoverField";
 import { clearDraft, loadDraft, pruneImages, putImage, saveDraft } from "../components/news/write/draftStore";
 import FactsEditor from "../components/news/write/FactsEditor";
@@ -167,7 +169,7 @@ export default function NewsWrite() {
   // current page state through this ref.
   const hooks = useRef<{
     paste: (event: ClipboardEvent) => boolean;
-    drop: (event: DragEvent, moved: boolean) => boolean;
+    drop: (event: DragEvent, moved: boolean, slice: Slice) => boolean;
   }>({ paste: () => false, drop: () => false });
 
   const editor = useEditor({
@@ -186,7 +188,7 @@ export default function NewsWrite() {
       scrollThreshold: { top: 220, bottom: 80, left: 0, right: 0 },
       transformPastedHTML: cleanPastedHTML,
       handlePaste: (_view, event) => hooks.current.paste(event),
-      handleDrop: (_view, event, _slice, moved) => hooks.current.drop(event, moved),
+      handleDrop: (_view, event, slice, moved) => hooks.current.drop(event, moved, slice),
     },
     onUpdate: bump,
   });
@@ -200,11 +202,20 @@ export default function NewsWrite() {
       for (const file of files.slice(0, room)) {
         try {
           const image = await addImage(file, file.name);
-          // A portrait or a small picture starts narrow, as the post page
-          // would show it; the writer can widen it.
+          // A new picture sits beside the text, on the other side from the
+          // one before it. `size` is what it becomes if the writer takes it
+          // out of the text: a portrait or a small picture is narrow.
           const size = image.height > image.width * 1.1 || image.width < 720 ? "narrow" : "column";
           at = Math.min(at, editor.state.doc.content.size);
-          insertMedia(editor, at, "figure", { imageId: image.id, alt: "", caption: "", size, zoom: false });
+          insertMedia(editor, at, "figure", {
+            imageId: image.id,
+            alt: "",
+            caption: "",
+            wrap: nextSide(editor, at),
+            span: WRAP_SPAN,
+            size,
+            zoom: false,
+          });
           at += 1;
         } catch (err) {
           notify(err instanceof Error ? err.message : "That picture could not be read.");
@@ -217,7 +228,7 @@ export default function NewsWrite() {
   const addVideo = useCallback(
     (video: YouTubeRef) => {
       if (!editor) return;
-      insertMedia(editor, afterBlockAt(editor, editor.state.selection.from), "video", {
+      insertMedia(editor, blockEdgeNear(editor, editor.state.selection.from), "video", {
         videoId: video.videoId,
         title: "",
         caption: "",
@@ -237,7 +248,7 @@ export default function NewsWrite() {
     // that only points back at it: take the file.
     if (files.length > 0 && (!html || !new DOMParser().parseFromString(html, "text/html").body.textContent?.trim())) {
       event.preventDefault();
-      void addFiles(files, afterBlockAt(editor, editor.state.selection.from));
+      void addFiles(files, blockEdgeNear(editor, editor.state.selection.from));
       return true;
     }
     if (!html && text) {
@@ -257,8 +268,25 @@ export default function NewsWrite() {
     return false;
   };
 
-  hooks.current.drop = (event, moved) => {
-    if (moved || !editor) return false;
+  hooks.current.drop = (event, moved, slice) => {
+    if (!editor) return false;
+    if (moved) {
+      // A picture dragged within the text: the editor moves it. If it sits
+      // beside the text, the half of the column it was dropped on is the
+      // side it takes, so one drag places it.
+      const dragged = slice.content.firstChild;
+      if (dragged?.type.name === "figure" && dragged.attrs.wrap !== "none") {
+        const box = editor.view.dom.getBoundingClientRect();
+        const side = event.clientX < box.left + box.width / 2 ? "left" : "right";
+        window.setTimeout(() => {
+          const { selection } = editor.state;
+          if (!(selection instanceof NodeSelection) || selection.node.type.name !== "figure") return;
+          if (selection.node.attrs.wrap === "none" || selection.node.attrs.wrap === side) return;
+          editor.view.dispatch(editor.state.tr.setNodeAttribute(selection.from, "wrap", side));
+        }, 0);
+      }
+      return false;
+    }
     const types = event.dataTransfer?.types ?? [];
     if (!types.includes("Files")) return false;
     event.preventDefault();
@@ -268,7 +296,7 @@ export default function NewsWrite() {
       return true;
     }
     const hit = editor.view.posAtCoords({ left: event.clientX, top: event.clientY });
-    void addFiles(files, afterBlockAt(editor, hit ? hit.pos : editor.state.doc.content.size));
+    void addFiles(files, blockEdgeNear(editor, hit ? hit.pos : editor.state.doc.content.size, event.clientY));
     return true;
   };
 
@@ -792,7 +820,7 @@ export default function NewsWrite() {
           onChange={(e) => {
             const files = [...(e.target.files ?? [])];
             e.target.value = "";
-            if (editor) void addFiles(files, afterBlockAt(editor, editor.state.selection.from));
+            if (editor) void addFiles(files, blockEdgeNear(editor, editor.state.selection.from));
           }}
         />
 

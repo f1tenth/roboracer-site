@@ -13,6 +13,8 @@
     line-height: 1.75;
     color: var(--color-text-body);
     outline: none;
+    /* The text holds the pictures that float in it. */
+    display: flow-root;
     /* Room to click below the last line, and to drop a picture there. */
     min-height: 22rem;
     padding-bottom: 4rem;
@@ -196,6 +198,53 @@
 
   .rr-write .rr-write-body > .rr-media:first-child {
     margin-top: 0;
+  }
+
+  /* Beside the text (a picture's default): the block floats to its side at
+     its share of the column and the paragraphs after it flow around it, as
+     PostBody lays a wrapped figure out. The top margin is a paragraph's gap
+     plus the half-leading, so the picture and the first line start level.
+     Below 640px there is no room for both and it takes its own line. */
+  @media (min-width: 40rem) {
+    .rr-write .rr-write-body > .rr-media[data-wrap="left"],
+    .rr-write .rr-write-body > .rr-media[data-wrap="right"] {
+      width: calc(var(--span, 0.42) * 100%);
+      margin-top: 1.7rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* clear: both, not just its own side: a picture starts below any other
+       still beside the text. Two face to face would leave the words a
+       sliver between them, one to a line. */
+    .rr-write .rr-write-body > .rr-media[data-wrap="left"] {
+      float: left;
+      clear: both;
+      margin-right: 1.75rem;
+    }
+
+    .rr-write .rr-write-body > .rr-media[data-wrap="right"] {
+      float: right;
+      clear: both;
+      margin-left: 1.75rem;
+    }
+  }
+
+  /* What starts under a wrapped picture rather than beside it: a heading, a
+     code block, a rule, and a picture on its own line. */
+  .rr-write .rr-write-body > h2,
+  .rr-write .rr-write-body > h3,
+  .rr-write .rr-write-body > pre,
+  .rr-write .rr-write-body > hr,
+  .rr-write .rr-write-body > .rr-media[data-wrap="none"] {
+    clear: both;
+  }
+
+  /* A list or a quote beside a wrapped picture is its own column, so its
+     markers and its rule never land on the picture. */
+  .rr-write .rr-write-body > ul,
+  .rr-write .rr-write-body > ol,
+  .rr-write .rr-write-body > blockquote {
+    display: flow-root;
   }
 
   /* A narrow figure alone is capped, as PostBody caps it (NARROW_REM). */

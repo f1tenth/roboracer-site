@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { NodeViewWrapper, type ReactNodeViewProps } from "@tiptap/react";
 import { canMove, moveBlock } from "./blockMoves";
 import { ALT_FIELD, AttrField, BarButton, BarRule, CAPTION_FIELD, MediaBar } from "./MediaParts";
-import { IconDown, IconGrip, IconTrash, IconUp } from "./WriterIcons";
+import { IconDown, IconTrash, IconUp } from "./WriterIcons";
 import { useWriter } from "./writerContext";
 import { probeHd, youTubeThumb } from "./youtube";
 import type { VideoAttrs } from "./types";
@@ -69,9 +69,6 @@ export default function VideoView({ node, updateAttributes, selected, editor, ge
         </div>
         {editable && (
           <MediaBar label="Video">
-            <span aria-hidden="true" className="flex h-9 w-7 items-center justify-center text-text-on-ink-muted coarse:hidden">
-              <IconGrip />
-            </span>
             <BarButton label="A wide video (16:9)" pressed={!attrs.portrait} onClick={() => updateAttributes({ portrait: false })}>
               Wide
             </BarButton>

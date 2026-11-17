@@ -866,7 +866,7 @@ function checkMedia(raw) {
         problem(where, `a picture's kind is "image", not ${q(m.kind)}`);
         continue;
       }
-      onlyKeys(where, m, ["kind", "width", "height", "size", "frame", "zoom"]);
+      onlyKeys(where, m, ["kind", "width", "height", "size", "frame", "zoom", "wrap", "span"]);
       const width = intField(`${where}.width`, m.width, 1, MAX_IMAGE_WIDTH);
       const height = intField(`${where}.height`, m.height, 1, MAX_IMAGE_HEIGHT);
       if (m.size !== undefined && m.size !== null && m.size !== "narrow") problem(`${where}.size`, `may only be "narrow", not ${q(m.size)}`);
@@ -874,6 +874,18 @@ function checkMedia(raw) {
       const zoom = boolField(`${where}.zoom`, m.zoom);
       const entry = { kind: "image", width, height };
       if (m.size === "narrow") entry.size = "narrow";
+      // Beside the text: a side, and a share of the column within the range
+      // the post page lays out. Never together with a size.
+      if (m.wrap !== undefined && m.wrap !== null) {
+        if (m.wrap !== "left" && m.wrap !== "right") problem(`${where}.wrap`, `may only be "left" or "right", not ${q(m.wrap)}`);
+        else if (m.size === "narrow") problem(`${where}.wrap`, "a wrapped picture has a span, not a size");
+        else if (typeof m.span !== "number" || !Number.isFinite(m.span) || m.span < 0.25 || m.span > 0.65)
+          problem(`${where}.span`, `a wrapped picture's span is a number from 0.25 to 0.65, not ${q(m.span)}`);
+        else {
+          entry.wrap = m.wrap;
+          entry.span = Math.round(m.span * 100) / 100;
+        }
+      } else if (m.span !== undefined && m.span !== null) problem(`${where}.span`, "only a wrapped picture has a span");
       if (frame === false) entry.frame = false;
       if (zoom === true) entry.zoom = true;
       media[key] = entry;

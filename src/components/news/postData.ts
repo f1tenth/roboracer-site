@@ -27,7 +27,17 @@ export type PostMedia = {
   /** A screenshot whose detail is lost at column width: the picture links to
    * its full-size file. */
   zoom?: boolean;
+  /** The figure sits on this side of the reading column and the text that
+   * follows flows around it (from 640 px up; on a phone it takes its own
+   * line). Written by the post writer, where it is a picture's default. */
+  wrap?: "left" | "right";
+  /** With `wrap`: the share of the reading column the figure takes, 0.25 to
+   * 0.65 (WRAP_SPAN when absent). */
+  span?: number;
 };
+
+/** A wrapped figure's share of the reading column when the post names none. */
+export const WRAP_SPAN = 0.42;
 
 export type PostFact = { label: string; value: string; href?: string | null };
 
@@ -172,7 +182,8 @@ export function parsePost(markdown: string, media: Record<string, PostMedia> = {
         media: media[image.href],
       };
       const last = blocks[blocks.length - 1];
-      const narrow = figure.media?.size === "narrow";
+      // A figure the text wraps around is never half of a pair.
+      const narrow = figure.media?.size === "narrow" && !figure.media.wrap;
       if (narrow && last?.type === "figures" && last.items.length === 1 && last.items[0].media?.size === "narrow") {
         last.items.push(figure);
       } else {

@@ -72,6 +72,27 @@ def main():
         page.wait_for_timeout(1500)
         scan(page, "/news")
 
+        # ---- the note on /news: closed with its cross, and it stays closed
+        note = page.locator('aside[aria-label="Write your own post"]')
+        check("the note is there, and the top of the page has no second way in", note.is_visible() and page.get_by_role("link", name="Write your own post").count() == 1)
+        page.evaluate("window.scrollTo(0, document.documentElement.scrollHeight)")
+        page.wait_for_timeout(700)
+        check("the note steps aside at the footer", note.evaluate("e => getComputedStyle(e).opacity") == "0" and note.evaluate("e => e.inert") is True)
+        page.evaluate("window.scrollTo(0, 0)")
+        page.wait_for_timeout(700)
+        note.get_by_role("button", name="Close").click()
+        page.wait_for_timeout(300)
+        top = page.get_by_role("link", name="Write your own post").first
+        check("closing it leaves a button at the top right", note.count() == 0 and top.is_visible() and top.bounding_box()["x"] > 1000, json.dumps(top.bounding_box()))
+        page.screenshot(path=str(OUT / "news-closed-1440.png"), clip={"x": 0, "y": 0, "width": 1440, "height": 520})
+        page.reload(wait_until="networkidle")
+        page.wait_for_timeout(800)
+        check("it stays closed after a reload", page.locator('aside[aria-label="Write your own post"]').count() == 0 and page.get_by_role("link", name="Write your own post").first.is_visible())
+        scan(page, "/news with the note closed")
+        page.get_by_role("link", name="Write your own post").first.click()
+        page.wait_for_url("**/news/write")
+        check("the button opens the writer", True)
+
         # ---- empty writer
         page.goto(f"{BASE}/news/write", wait_until="networkidle")
         page.wait_for_selector("#post-text")
@@ -119,18 +140,31 @@ def main():
         page.wait_for_function("document.querySelectorAll('.rr-figure img').length >= 2", timeout=20000)
         check("picture pasted from the clipboard", True)
 
-        # ---- resize with the corner handle
-        wide = page.locator('.rr-media[data-size="column"]').first
-        wide.locator("img").scroll_into_view_if_needed()
-        wide.locator("img").click()
+        # ---- resize with the corner that faces the text
+        pic = page.locator('.rr-media[data-wrap="right"], .rr-media[data-wrap="left"]').first
+        pic.locator("img").scroll_into_view_if_needed()
+        pic.locator("img").click()
         page.wait_for_timeout(200)
-        hb = wide.locator(".rr-resize-handle").bounding_box()
+        side = pic.get_attribute("data-wrap")
+        w0 = pic.bounding_box()["width"]
+        hb = pic.locator(".rr-resize-handle").bounding_box()
         page.mouse.move(hb["x"] + 4, hb["y"] + 4)
         page.mouse.down()
-        page.mouse.move(hb["x"] - 220, hb["y"] - 80, steps=10)
+        page.mouse.move(hb["x"] + (140 if side == "right" else -140), hb["y"] - 40, steps=10)
         page.mouse.up()
-        page.wait_for_timeout(200)
-        check("dragging the corner in makes it narrow", page.locator('.rr-media[data-size="column"]').count() == 0)
+        page.wait_for_timeout(300)
+        w1 = pic.bounding_box()["width"]
+        check("dragging the inner corner makes a wrapped picture smaller", w1 < w0 - 60, f"{w0:.0f} -> {w1:.0f}")
+        page.mouse.move(hb["x"] + (140 if side == "right" else -140) + 4, hb["y"] - 36)
+        hb2 = pic.locator(".rr-resize-handle").bounding_box()
+        page.mouse.move(hb2["x"] + 4, hb2["y"] + 4)
+        page.mouse.down()
+        page.mouse.move(hb2["x"] + (-900 if side == "right" else 900), hb2["y"] + 40, steps=10)
+        page.mouse.up()
+        page.wait_for_timeout(300)
+        col = page.locator("#post-text").bounding_box()["width"]
+        w2 = pic.bounding_box()["width"]
+        check("and it never takes more than about two thirds of the column", w2 <= col * 0.66 and w2 > w1, f"{w2:.0f} of {col:.0f}")
         page.screenshot(path=str(OUT / "after-resize-1440.png"))
 
         # ---- keyboard reaches a picture's own controls, and they show
@@ -244,6 +278,14 @@ def main():
         )
         check("phone: controls are at least 40px tall", len(small) == 0, json.dumps(small[:10]))
         scan(page, "/news/write phone")
+        page.goto(f"{BASE}/news", wait_until="networkidle")
+        page.wait_for_timeout(1200)
+        note = page.locator('aside[aria-label="Write your own post"]')
+        nb = note.bounding_box()
+        wide = page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+        check("phone: the note fits the screen", note.is_visible() and nb["x"] >= 0 and nb["x"] + nb["width"] <= 390 and wide <= 0, json.dumps(nb))
+        page.screenshot(path=str(OUT / "news-note-390.png"))
+        scan(page, "/news phone with the note")
         browser.close()
 
     (OUT / "axe.json").write_text(json.dumps(axe_report, indent=1))

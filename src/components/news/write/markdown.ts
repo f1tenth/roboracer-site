@@ -14,7 +14,7 @@
 
 import type { JSONContent } from "@tiptap/core";
 import { Lexer, type Token, type Tokens } from "marked";
-import type { PostMedia } from "../postData";
+import { WRAP_SPAN, type PostMedia } from "../postData";
 import type { FigureAttrs, PublishedImages, VideoAttrs } from "./types";
 
 export type SerializedPost = {
@@ -549,11 +549,15 @@ function writeFigure(node: JSONContent, ctx: Ctx): Written[] {
     ctx.problems.push(`${name} could not be prepared for the site. Remove it and add it again.`);
     return [];
   }
+  // Beside the text or on its own line, never both: a wrapped figure carries
+  // its side and its share of the column, an unwrapped one its size.
+  const wrap = attrs.wrap === "left" || attrs.wrap === "right" ? attrs.wrap : null;
+  const span = Math.round(Math.min(0.65, Math.max(0.25, Number(attrs.span) || WRAP_SPAN)) * 100) / 100;
   const media: PostMedia = {
     kind: "image",
     width,
     height,
-    ...(attrs.size === "narrow" ? { size: "narrow" as const } : {}),
+    ...(wrap ? { wrap, span } : attrs.size === "narrow" ? { size: "narrow" as const } : {}),
     ...(attrs.zoom === true ? { zoom: true } : {}),
   };
   return finishFigure(ctx, name, image.path, alt, media, attrs.caption);

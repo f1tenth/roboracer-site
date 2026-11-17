@@ -113,16 +113,21 @@ export function BarButton({
   );
 }
 
-/** The bar that rides on a selected picture or video: ink, so it reads on
- * any photograph. */
-export function MediaBar({ label, children }: { label: string; children: ReactNode }) {
+/** A selected picture's or video's own bar. It sits just above the block
+ * (never on the picture, which would hide what is being placed), on the side
+ * the block is on, and is ink so it reads over the text it covers meanwhile.
+ * The padding under it bridges the gap, so the pointer can travel from the
+ * picture to a button without the bar going away. */
+export function MediaBar({ label, align = "left", children }: { label: string; align?: "left" | "right"; children: ReactNode }) {
   return (
-    <div
-      role="toolbar"
-      aria-label={label}
-      className="rr-media-bar absolute left-2 top-2 z-10 flex max-w-[calc(100%-1rem)] flex-wrap items-center gap-0.5 rounded-btn bg-ink-950/90 p-1 shadow-card"
-    >
-      {children}
+    <div className={`rr-media-bar absolute bottom-full z-20 pb-1.5 ${align === "right" ? "right-0" : "left-0"}`}>
+      <div
+        role="toolbar"
+        aria-label={label}
+        className="flex w-max max-w-[min(30rem,calc(100vw-3rem))] flex-wrap items-center gap-0.5 rounded-btn bg-ink-950/95 p-1 shadow-card-hover"
+      >
+        {children}
+      </div>
     </div>
   );
 }

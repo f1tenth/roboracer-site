@@ -102,9 +102,41 @@ export const IconTrash = () => (
     <path d="M4 6h12M8 6V4h4v2M6 6l.7 10h6.6L14 6" />
   </Icon>
 );
-export const IconGrip = () => (
+/* Where a picture sits: the filled box is the picture, the lines the text. */
+export const IconWrapLeft = () => (
   <Icon>
-    <path d="M7.5 5h.01M12.5 5h.01M7.5 10h.01M12.5 10h.01M7.5 15h.01M12.5 15h.01" strokeWidth="2.5" />
+    <rect x="2.5" y="4" width="7" height="7" rx="1" fill="currentColor" stroke="none" />
+    <path d="M12.5 5h5M12.5 8.5h5M2.5 13.5h15M2.5 16.5h10" />
+  </Icon>
+);
+export const IconWrapRight = () => (
+  <Icon>
+    <rect x="10.5" y="4" width="7" height="7" rx="1" fill="currentColor" stroke="none" />
+    <path d="M2.5 5h5M2.5 8.5h5M2.5 13.5h15M2.5 16.5h10" />
+  </Icon>
+);
+export const IconCentre = () => (
+  <Icon>
+    <rect x="6.5" y="6.5" width="7" height="7" rx="1" fill="currentColor" stroke="none" />
+    <path d="M2.5 3.5h15M2.5 16.5h15" />
+  </Icon>
+);
+export const IconFull = () => (
+  <Icon>
+    <rect x="2.5" y="6.5" width="15" height="7" rx="1" fill="currentColor" stroke="none" />
+    <path d="M2.5 3.5h15M2.5 16.5h15" />
+  </Icon>
+);
+export const IconZoom = () => (
+  <Icon>
+    <circle cx="8.5" cy="8.5" r="5" />
+    <path d="M12.5 12.5l4.5 4.5M8.5 6.5v4M6.5 8.5h4" />
+  </Icon>
+);
+export const IconSwap = () => (
+  <Icon>
+    <path d="M4 7h11M12 4l3 3-3 3" />
+    <path d="M16 13H5M8 10l-3 3 3 3" />
   </Icon>
 );
 export const IconCheck = () => (

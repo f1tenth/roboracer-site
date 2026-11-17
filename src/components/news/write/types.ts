@@ -32,8 +32,13 @@ export type FigureAttrs = {
   alt: string;
   /** The line under the picture; empty for none. Plain text. */
   caption: string;
-  /** column: the reading column's width. narrow: capped small, and two narrow
-   * figures in a row share a line (PostBody's rule). */
+  /** Where the picture sits. left or right: beside the text, which flows
+   * around it (a new picture's default). none: on its own line, at `size`. */
+  wrap: "left" | "right" | "none";
+  /** With left or right: the share of the reading column it takes, 0.25 to 0.65. */
+  span: number;
+  /** On its own line. column: the reading column's width. narrow: capped
+   * small, and two narrow figures in a row share a line (PostBody's rule). */
   size: "column" | "narrow";
   /** A screenshot whose detail matters: the published figure links to the file. */
   zoom: boolean;

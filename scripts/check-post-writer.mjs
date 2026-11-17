@@ -75,6 +75,8 @@ const IMAGES = {
   img1: { path: "/media/news/news-test-1.webp", width: 1600, height: 900 },
   img2: { path: "/media/news/news-test-2.webp", width: 900, height: 1200 },
   img3: { path: "/media/news/news-test-3.jpg", width: 640, height: 480 },
+  img4: { path: "/media/news/news-test-4.webp", width: 1200, height: 800 },
+  img5: { path: "/media/news/news-test-5.webp", width: 1200, height: 1500 },
 };
 
 /* ------------------------------------------- the oracle: from the draft alone */
@@ -204,7 +206,10 @@ function expectBlocks(nodes, media, nested) {
         const image = Object.prototype.hasOwnProperty.call(IMAGES, node.attrs.imageId) ? IMAGES[node.attrs.imageId] : null;
         if (nested || !image) break;
         const entry = { kind: "image", width: image.width, height: image.height };
-        if (node.attrs.size === "narrow") entry.size = "narrow";
+        if (node.attrs.wrap === "left" || node.attrs.wrap === "right") {
+          entry.wrap = node.attrs.wrap;
+          entry.span = Math.round(Math.min(0.65, Math.max(0.25, Number(node.attrs.span) || 0.42)) * 100) / 100;
+        } else if (node.attrs.size === "narrow") entry.size = "narrow";
         if (node.attrs.zoom === true) entry.zoom = true;
         media[image.path] ??= entry;
         out.push({ type: "figure", src: image.path, alt: expectAlt(node.attrs.alt), caption: plain(node.attrs.caption) || null, media: media[image.path] });
@@ -520,6 +525,10 @@ const CASES = [
       fig({ imageId: "img2", alt: "A narrow, zoomable one", caption: "Its caption", size: "narrow", zoom: true }),
       fig({ imageId: "img3", alt: "A second narrow one", size: "narrow" }),
       p(t("A normal paragraph under a figure with no caption.")),
+      fig({ imageId: "img4", alt: "Beside the text, on the left", caption: "Wrapped", wrap: "left", span: 0.5, size: "narrow" }),
+      p(t("The text that flows around the picture on the left.")),
+      fig({ imageId: "img5", alt: "Beside the text, on the right, too wide", wrap: "right", span: 3 }),
+      p(t("The text that flows around the picture on the right.")),
       vid({ title: "A landscape video", caption: "Watch it" }),
       vid({ videoId: "dQw4w9WgXcQ", title: "A Short", portrait: true }),
       fig({ imageId: "nope", alt: "Missing file" }),
@@ -530,9 +539,12 @@ const CASES = [
       fig({ imageId: "img1", alt: "Same file, other size", size: "narrow" }),
       fig({ imageId: "img1", alt: "Trailing backslash \\", caption: "# not a heading\n- not a list" }),
     ),
-    problems: [/Picture 3 \("Missing file"\) has no picture file/, /Video 3 \("Bad id"\) is not a YouTube video/, /Video 4 \("Too short"\)/, /Picture 4 \("Prototype key"\) has no picture file/, /Picture 6 .* same file as an earlier one/],
+    problems: [/Picture 5 \("Missing file"\) has no picture file/, /Video 3 \("Bad id"\) is not a YouTube video/, /Video 4 \("Too short"\)/, /Picture 6 \("Prototype key"\) has no picture file/, /Picture 8 .* same file as an earlier one/],
     checks: [
-      (r) => (r.markdown.match(/^!\[/gm) ?? []).length === 7 || "expected seven figure lines",
+      (r) => (r.markdown.match(/^!\[/gm) ?? []).length === 9 || "expected nine figure lines",
+      // Beside the text: the side and a share of the column, clamped; never a size as well.
+      (r) => JSON.stringify(r.media["/media/news/news-test-4.webp"]) === '{"kind":"image","width":1200,"height":800,"wrap":"left","span":0.5}' || "left-wrapped figure's media",
+      (r) => JSON.stringify(r.media["/media/news/news-test-5.webp"]) === '{"kind":"image","width":1200,"height":1500,"wrap":"right","span":0.65}' || "right-wrapped figure's span is clamped",
       (r) => !r.markdown.includes(SEPARATOR) || "no separator was needed here",
     ],
   },

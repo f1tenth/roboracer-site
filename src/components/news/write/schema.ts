@@ -15,7 +15,12 @@ import { ReactNodeViewRenderer } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import FigureView from "./FigureView";
 import VideoView from "./VideoView";
+import { WRAP_SPAN } from "../postData";
 import { imageSize } from "./imageRegistry";
+
+/** A figure the text flows around (left or right), not one on its own line. */
+const isWrapped = (node: { type: { name: string }; attrs: Record<string, unknown> }) =>
+  node.type.name === "figure" && (node.attrs.wrap === "left" || node.attrs.wrap === "right");
 
 /** An attribute kept in a data- attribute, so a figure cut and pasted inside
  * the editor comes back whole. `null` when absent lets a parse rule's own
@@ -60,6 +65,17 @@ export const Figure = Node.create({
       imageId: dataAttr("imageId", "data-image-id", ""),
       alt: dataAttr("alt", "data-alt", ""),
       caption: dataAttr("caption", "data-caption", ""),
+      // Beside the text by default (Cedric, 2026-11-17: that is what the
+      // pictures are for); "none" puts it on its own line at `size`.
+      wrap: dataAttr("wrap", "data-wrap", "right"),
+      span: {
+        default: WRAP_SPAN,
+        parseHTML: (el: HTMLElement) => {
+          const share = parseFloat(el.getAttribute("data-span") ?? "");
+          return Number.isFinite(share) ? Math.min(0.65, Math.max(0.25, share)) : null;
+        },
+        renderHTML: (attrs: Record<string, unknown>) => ({ "data-span": String(attrs.span ?? WRAP_SPAN) }),
+      },
       size: dataAttr("size", "data-size", "column"),
       zoom: flagAttr("zoom", "data-zoom"),
       src: { default: null, rendered: false, parseHTML: () => null },
@@ -91,7 +107,10 @@ export const Figure = Node.create({
     // (and the pairing marks below) can reach it.
     return ReactNodeViewRenderer(FigureView, {
       className: "rr-media",
-      attrs: ({ node }) => ({ "data-size": String(node.attrs.size) }),
+      attrs: ({ node }) => ({
+        "data-wrap": isWrapped(node) ? String(node.attrs.wrap) : "none",
+        "data-size": isWrapped(node) ? "wrap" : String(node.attrs.size),
+      }),
     });
   },
 });
@@ -139,7 +158,7 @@ function ratioOf(node: { type: { name: string }; attrs: Record<string, unknown> 
 }
 
 const isNarrow = (node: { type: { name: string }; attrs: Record<string, unknown> }) =>
-  (node.type.name === "figure" && node.attrs.size === "narrow") ||
+  (node.type.name === "figure" && !isWrapped(node) && node.attrs.size === "narrow") ||
   (node.type.name === "video" && node.attrs.portrait === true);
 
 /**
@@ -156,6 +175,13 @@ const PairNarrowFigures = new Plugin({
       const decorations: Decoration[] = [];
       let open: { pos: number; size: number; ratio: number } | null = null;
       state.doc.forEach((node, pos) => {
+        // A figure beside the text carries its share of the column. Here,
+        // not on the block's own attributes: the editor rewrites those, and
+        // a decoration's style is the one it leaves alone.
+        if (isWrapped(node)) {
+          const span = Math.min(0.65, Math.max(0.25, Number(node.attrs.span) || WRAP_SPAN));
+          decorations.push(Decoration.node(pos, pos + node.nodeSize, { style: `--span: ${span.toFixed(3)}` }));
+        }
         if (!isNarrow(node)) {
           open = null;
           return;

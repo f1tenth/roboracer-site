@@ -97,7 +97,10 @@ export default function PostArticle({ post, parsed, className }: { post: Post; p
             post's links in the right one (both from xl only). */}
         <div className="grid gap-x-12 xl:grid-cols-[minmax(12.5rem,1fr)_minmax(0,46rem)_minmax(12.5rem,1fr)]">
           <DocsToc items={parsed.toc} />
-          <div className="mx-auto w-full min-w-0 max-w-[46rem]">
+          {/* Named columns, not the order they come in: a post with fewer
+              than two headings has no "On this page", and the text would
+              otherwise take that narrow first column. */}
+          <div className="mx-auto w-full min-w-0 max-w-[46rem] xl:col-start-2">
             <PostBody blocks={parsed.blocks} />
             {post.credit && (
               <p className="mt-12 border-t border-ink-950/10 pt-6 font-mono text-small text-text-muted">
@@ -108,7 +111,7 @@ export default function PostArticle({ post, parsed, className }: { post: Post; p
           {post.facts && post.facts.length > 0 && (
             <aside
               aria-label="About this project"
-              className="sticky top-[calc(var(--spacing-nav)+1.5rem)] hidden w-full max-w-[19rem] self-start justify-self-end xl:block"
+              className="sticky top-[calc(var(--spacing-nav)+1.5rem)] hidden w-full max-w-[19rem] self-start justify-self-end xl:col-start-3 xl:block"
             >
               <dl className="rule-card grid gap-y-5 p-6 pt-7">
                 {post.facts.map((fact) => (

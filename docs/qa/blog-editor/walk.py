@@ -86,16 +86,24 @@ def main():
         page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
         page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
 
-        # ---- the way in from /news
+        # ---- the way in from /news: a note that stays in the corner
         page.goto(f"{BASE}/news", wait_until="networkidle")
-        badge = page.get_by_role("link", name="Write your own post").first
-        check("news page shows the badge", badge.is_visible())
+        note = page.locator('aside[aria-label="Write your own post"]')
+        note.wait_for(state="visible")
+        page.wait_for_timeout(600)
+        check("news page shows the note", note.is_visible())
         if SHOTS:
-            page.screenshot(path=str(OUT / "news-badge-1440.png"), clip={"x": 0, "y": 0, "width": 1440, "height": 520})
-        badge.click()
+            page.screenshot(path=str(OUT / "news-note-1440.png"))
+        page.mouse.wheel(0, 2400)
+        page.wait_for_timeout(500)
+        box = note.bounding_box()
+        check("the note stays in the corner while scrolling", note.is_visible() and box["x"] + box["width"] > 1440 - 40 and box["y"] + box["height"] > 900 - 40, json.dumps(box))
+        if SHOTS:
+            page.screenshot(path=str(OUT / "news-note-scrolled-1440.png"))
+        note.get_by_role("link", name="Start writing").click()
         page.wait_for_url("**/news/write")
         page.wait_for_selector("#post-text")
-        check("badge opens the writer", True)
+        check("the note opens the writer", True)
         check("one h1", page.locator("h1").count() == 1, page.locator("h1").first.inner_text())
         check("title", page.title() == "Write a post - RoboRacer", page.title())
 
@@ -142,15 +150,36 @@ def main():
         page.wait_for_timeout(300)
         check("markdown paste becomes structure" if ENGINE == "chromium" else "(markdown paste not driven in this engine; same text pasted as HTML)", ed.locator("h2", has_text="Results").count() == 1 and ed.locator("code", has_text="code").count() == 1 and ed.locator('a[href="https://github.com/example/repo"]').count() == 1)
 
-        # ---- pictures: picker, then drop
+        # ---- pictures: beside the text by default
         page.keyboard.press("Control+End")
+        page.keyboard.press("Enter")
+        page.keyboard.type("WRAPMARK " + "The car held the racing line through the hairpin and the planner kept it there lap after lap. " * 9)
+        # The cursor at the start of that paragraph (set through the editor:
+        # a click near a paragraph's top can land under the sticky bars).
+        page.evaluate(
+            """() => { const e = document.querySelector('#post-text').editor; let at = -1;
+                       e.state.doc.forEach((n, pos) => { if (n.textContent.includes('WRAPMARK')) at = pos + 1; });
+                       e.chain().focus().setTextSelection(at).run(); }"""
+        )
         page.set_input_files('input[type=file][multiple]', [str(HERE / "landscape.jpg")])
         page.wait_for_selector(".rr-figure img", timeout=15000)
         fig = page.locator(".rr-media").first
         check("picture added by the picker", fig.locator("img").count() == 1)
-        check("landscape starts column-wide", fig.get_attribute("data-size") == "column")
+        page.wait_for_timeout(300)
+        geo = page.evaluate(
+            """() => {
+                const fig = document.querySelector('#post-text > .rr-media');
+                const para = [...document.querySelectorAll('#post-text > p')].find(p => p.textContent.includes('WRAPMARK'));
+                const f = fig.getBoundingClientRect(), p = para.getBoundingClientRect();
+                const range = document.createRange(); range.selectNodeContents(para);
+                const first = range.getClientRects()[0];
+                return { float: getComputedStyle(fig).float, wrap: fig.dataset.wrap, before: !!(fig.compareDocumentPosition(para) & 4),
+                         beside: p.top < f.bottom && p.bottom > f.top, lineEndsBeforePicture: first.right <= f.left + 2, share: f.width / p.width };
+            }"""
+        )
+        check("a new picture sits on the right with the text flowing around it", geo["float"] == "right" and geo["wrap"] == "right" and geo["before"] and geo["beside"] and geo["lineEndsBeforePicture"], json.dumps(geo))
 
-        # drop two portraits at the end of the text
+        # drop two portraits onto the top of the same paragraph
         page.evaluate(
             """async (urls) => {
                 const dt = new DataTransfer();
@@ -159,8 +188,11 @@ def main():
                     dt.items.add(new File([bin], name, { type }));
                 }
                 const el = document.querySelector('#post-text');
-                const r = el.getBoundingClientRect();
-                const init = { dataTransfer: dt, bubbles: true, cancelable: true, clientX: r.left + 40, clientY: r.bottom - 10 };
+                const para = [...document.querySelectorAll('#post-text > p')].find(p => p.textContent.includes('WRAPMARK'));
+                para.scrollIntoView({ block: 'center' });
+                await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+                const r = para.getBoundingClientRect();
+                const init = { dataTransfer: dt, bubbles: true, cancelable: true, clientX: r.left + 30, clientY: r.top + 6 };
                 el.dispatchEvent(new DragEvent('dragover', init));
                 el.dispatchEvent(new DragEvent('drop', init));
             }""",
@@ -170,10 +202,22 @@ def main():
             ],
         )
         page.wait_for_function("document.querySelectorAll('.rr-figure img').length >= 3", timeout=20000)
-        narrow = page.locator('.rr-media[data-size="narrow"]')
-        check("dropped portraits start narrow", narrow.count() == 2, str(narrow.count()))
         page.wait_for_timeout(400)
-        check("two narrow pictures pair on one line", page.locator(".rr-pair").count() == 2)
+        sides = page.evaluate("[...document.querySelectorAll('#post-text > .rr-media')].map(e => e.dataset.wrap)")
+        check("pictures alternate sides down the text", sides == ["right", "left", "right"], json.dumps(sides))
+        if SHOTS:
+            page.locator("#post-text > .rr-media").first.scroll_into_view_if_needed()
+            page.mouse.wheel(0, -200)
+            page.wait_for_timeout(300)
+            page.screenshot(path=str(OUT / "wrap-1440.png"))
+
+        # two small pictures on their own line share it
+        for i in (1, 2):
+            m = page.locator("#post-text > .rr-media").nth(i)
+            m.locator("img").click()
+            m.get_by_role("button", name="Small, on its own line", exact=False).click()
+        page.wait_for_timeout(400)
+        check("two small pictures pair on one line", page.locator(".rr-pair").count() == 2)
         if page.locator(".rr-pair").count() == 2:
             a = page.locator(".rr-pair-first").bounding_box()
             b = page.locator(".rr-pair-second").bounding_box()
@@ -187,35 +231,41 @@ def main():
         first.locator('input[aria-label^="Describe the picture"]').fill("A small autonomous car on a track")
         page.keyboard.press("Tab")
 
-        # ---- move with the buttons, resize with the button
+        # ---- move and place with the bar
         before = page.evaluate("[...document.querySelectorAll('#post-text > *')].findIndex(e => e.classList.contains('rr-media'))")
         first.locator("img").click()
         first.get_by_role("button", name="Move up").click()
         after = page.evaluate("[...document.querySelectorAll('#post-text > *')].findIndex(e => e.classList.contains('rr-media'))")
         check("Move up moves the picture", after == before - 1, f"{before} -> {after}")
-        page.locator(".rr-media").first.get_by_role("button", name="Narrow", exact=False).click()
-        check("Narrow button narrows", page.locator(".rr-media").first.get_attribute("data-size") == "narrow")
-        page.locator(".rr-media").first.get_by_role("button", name="Column width").click()
-        check("Wide button widens", page.locator(".rr-media").first.get_attribute("data-size") == "column")
+        top = page.locator("#post-text > .rr-media").first
+        top.get_by_role("button", name="Full width, on its own line").click()
+        check("Full width takes it out of the text", top.get_attribute("data-wrap") == "none" and top.get_attribute("data-size") == "column")
+        top.get_by_role("button", name="Left, with the text flowing around it").click()
+        page.wait_for_timeout(150)
+        check("Left puts it beside the text on the left", top.get_attribute("data-wrap") == "left" and top.evaluate("e => getComputedStyle(e).float") == "left")
 
-        # ---- drag a picture to another place
-        handle = page.locator(".rr-media").first.locator("[data-drag-handle]")
+        # ---- drag a picture to another place: the half it lands on is its side
+        handle = top.locator("[data-drag-handle]")
         target = ed.locator("h2", has_text="Results")
-        hb = handle.bounding_box()
         target.scroll_into_view_if_needed()
         hb = handle.bounding_box()
         tb = target.bounding_box()
+        col = ed.bounding_box()
         idx_before = page.evaluate("[...document.querySelectorAll('#post-text > *')].findIndex(e => e.classList.contains('rr-media'))")
         if hb and tb:
             page.mouse.move(hb["x"] + hb["width"] / 2, hb["y"] + hb["height"] / 2)
             page.mouse.down()
             page.mouse.move(hb["x"] + hb["width"] / 2 + 5, hb["y"] + hb["height"] / 2 + 5, steps=3)
-            page.mouse.move(tb["x"] + 30, tb["y"] + tb["height"] + 6, steps=12)
+            page.mouse.move(col["x"] + col["width"] - 60, tb["y"] + tb["height"] + 6, steps=14)
             page.wait_for_timeout(150)
             page.mouse.up()
-            page.wait_for_timeout(300)
-        idx_after = page.evaluate("[...document.querySelectorAll('#post-text > *')].findIndex(e => e.classList.contains('rr-media'))")
-        check("dragging moves the picture", idx_after != idx_before, f"{idx_before} -> {idx_after}")
+            page.wait_for_timeout(400)
+        moved = page.evaluate(
+            """() => { const all = [...document.querySelectorAll('#post-text > *')]; const i = all.findIndex(e => e.classList.contains('rr-media'));
+                       const sel = document.querySelector('#post-text > .rr-media.ProseMirror-selectednode'); return { i, wrap: sel ? sel.dataset.wrap : null }; }"""
+        )
+        check("dragging moves the picture", moved["i"] != idx_before or moved["wrap"] is not None, f"{idx_before} -> {moved['i']}")
+        check("dropped on the right half, it takes the right side", moved["wrap"] == "right", json.dumps(moved))
 
         # ---- a YouTube link pasted on an empty line
         page.keyboard.press("Control+End")
@@ -274,6 +324,8 @@ def main():
         check("preview shows figures and captions", page.locator("article figure img").count() >= 4 and page.locator("article figcaption", has_text="The car on the back straight.").count() == 1)
         broken = page.evaluate("[...document.querySelectorAll('article img')].filter(i => i.complete && i.naturalWidth === 0 && !i.src.includes('ytimg')).length")
         check("preview pictures all load", broken == 0, str(broken))
+        floats = page.evaluate("[...document.querySelectorAll('article figure')].map(f => getComputedStyle(f).float).filter(f => f !== 'none')")
+        check("preview shows a picture beside the text", len(floats) >= 1, json.dumps(floats))
         if SHOTS:
             page.screenshot(path=str(OUT / "preview-1440.png"), full_page=True)
         page.get_by_role("button", name="Write", exact=True).click()

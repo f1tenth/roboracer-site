@@ -26,16 +26,40 @@ export function moveBlock(editor: Editor, pos: number | undefined, dir: -1 | 1):
   view.dispatch(tr.scrollIntoView());
 }
 
-/** The position just after the top-level block that holds `pos`: where a
- * dropped or chosen picture goes, so it never lands inside a sentence. */
-export function afterBlockAt(editor: Editor, pos: number): number {
+/** The top-level position a new picture or video takes near `pos`, so it
+ * never lands inside a sentence: in place of an empty paragraph, otherwise
+ * just before or just after the block that holds `pos`, whichever half of
+ * that block was aimed at (`clientY` for a drop, the cursor's place in the
+ * text otherwise). Before matters: a picture beside the text is wrapped by
+ * the paragraph that follows it. */
+export function blockEdgeNear(editor: Editor, pos: number, clientY?: number): number {
   const { doc } = editor.state;
   const $pos = doc.resolve(Math.min(Math.max(pos, 0), doc.content.size));
   if ($pos.depth === 0) return $pos.pos;
-  // An empty paragraph is replaced by the picture rather than left above it.
   const block = $pos.node(1);
   if (block.type.name === "paragraph" && block.content.size === 0) return $pos.before(1);
-  return $pos.after(1);
+  let before = $pos.pos - $pos.start(1) <= block.content.size / 2;
+  if (clientY !== undefined) {
+    const dom = editor.view.nodeDOM($pos.before(1));
+    if (dom instanceof HTMLElement) {
+      const box = dom.getBoundingClientRect();
+      before = clientY < box.top + box.height / 2;
+    }
+  }
+  return before ? $pos.before(1) : $pos.after(1);
+}
+
+/** The side a new picture takes at `pos`: the one opposite the wrapped
+ * picture before it, so a run of pictures alternates down the text; right
+ * for the first. */
+export function nextSide(editor: Editor, pos: number): "left" | "right" {
+  let side: "left" | "right" = "right";
+  editor.state.doc.forEach((node, offset) => {
+    if (offset >= pos || node.type.name !== "figure") return;
+    if (node.attrs.wrap === "right") side = "left";
+    else if (node.attrs.wrap === "left") side = "right";
+  });
+  return side;
 }
 
 /** Put a media node at a top-level position and select it. Replaces an empty

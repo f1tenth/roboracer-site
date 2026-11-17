@@ -139,9 +139,9 @@ export function checkDraft(
     const any = fact.label.trim() || fact.value.trim() || fact.href.trim();
     if (!any) return;
     if (!fact.label.trim() || !fact.value.trim())
-      errors.push({ message: `Row ${i + 1} of the links card needs both a label and a value.`, target: "post-facts" });
+      errors.push({ message: `Link ${i + 1} on the links card needs both a Link title and a Link display.`, target: "post-facts" });
     else if (fact.href.trim() && !validUrl(fact.href.trim()))
-      errors.push({ message: `Row ${i + 1} of the links card: the link should be a full web address (https://...).`, target: "post-facts" });
+      errors.push({ message: `Link ${i + 1} on the links card: the Link should be a full web address (https://...).`, target: "post-facts" });
   });
 
   return { errors, notes };
