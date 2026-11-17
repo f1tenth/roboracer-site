@@ -16,6 +16,7 @@ SPECIAL = {
     "introduction/syllabus": f"{ROOT}/syllabus",
     "lectures/ModuleA/index": f"{ROOT}/module-a",
     "lectures/ModuleA/lecture01": f"{ROOT}/module-a/lecture-1",
+    "assignments/grading": f"{ROOT}/grading",
 }
 NATIVE = set(SPECIAL)
 
