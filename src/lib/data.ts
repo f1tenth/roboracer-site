@@ -221,6 +221,9 @@ export type Spinoff = {
   car?: (SpinoffImage & { name: string; url: string }) | null;
   /** A video in the main visual slot; it replaces `car` there when both exist. */
   video?: SpinoffVideo | null;
+  /** What else the entry sells or runs, as text links beside the car link
+   * ("Order the power board"). Verb + object labels, opened in a new tab. */
+  links?: { label: string; url: string }[];
   /** Results we were given and how each checks against our data (not rendered). */
   results?: SpinoffResult[];
   /** Our own 1280x800 capture of the homepage, framed as a browser window. */

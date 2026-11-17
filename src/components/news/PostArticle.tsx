@@ -2,24 +2,10 @@ import { Link } from "react-router-dom";
 import Section from "../ui/Section";
 import Button from "../ui/Button";
 import DocsToc from "../learn/docs/DocsToc";
+import AccentTitle from "./AccentTitle";
 import PostBody from "./PostBody";
 import type { ParsedPost, Post } from "./postData";
 import { LINK, TAP, isExternal } from "../learn/learnStyles";
-
-/** The title with its accent words in the logo gradient: one display phrase
- * per page (the course pages' rule), and only if the title contains it. */
-function Title({ post }: { post: Post }) {
-  const accent = post.title_accent;
-  const at = accent ? post.title.indexOf(accent) : -1;
-  if (!accent || at < 0) return <>{post.title}</>;
-  return (
-    <>
-      {post.title.slice(0, at)}
-      <span className="text-gradient-logo -my-[0.15em] inline-block py-[0.15em]">{accent}</span>
-      {post.title.slice(at + accent.length)}
-    </>
-  );
-}
 
 export function PostCrumbs({ label }: { label: string }) {
   return (
@@ -61,7 +47,7 @@ export default function PostArticle({ post, parsed, className }: { post: Post; p
           <header className="lg:col-span-7">
             <PostCrumbs label={post.label} />
             <h1 id="post-title" className="max-w-[20ch] font-display text-display-l font-semibold text-text-strong">
-              <Title post={post} />
+              <AccentTitle title={post.title} accent={post.title_accent} />
             </h1>
             <div className="mt-8 flex flex-wrap items-end justify-between gap-x-10 gap-y-4 border-t border-ink-950/10 pt-6">
               <p>

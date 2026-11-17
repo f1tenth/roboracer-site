@@ -25,6 +25,8 @@ Checked on the production build (`npm run build`, `vite preview`), Chromium new 
 2. The card text on `/news`: "The University of Bologna team that won ICRA 2025 and placed 2nd at ICRA 2026 opens its race stack."
 3. The flagship picture is the Atlanta team photo with the cheque, cropped to landscape (`news-aurorus-team-atlanta-wide-964.webp`): the lead picture on `/news`, where it now links to the post, and the post's cover. The README's own cover photo (the car and the trophy) moved into the text, after the introduction.
 
+4. The post's name carries the logo gradient in the lead headline on `/news` too, as in the post's own title (`title_accent` on the news item; a follow-up the same day).
+
 ## What differs from Enrico's README
 
 1. The title is printed by the page (from `posts.json`), with "a" for "our" (note 1); the README's H1 line is not in the body file.
