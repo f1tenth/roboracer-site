@@ -4,7 +4,7 @@
     {
       "slug": "aurorus",
       "label": "Guest post",
-      "title": "AuRoRus: our RoboRacer stack, open-sourced and written in Rust",
+      "title": "AuRoRus: a RoboRacer stack, open-sourced and written in Rust",
       "title_accent": "AuRoRus",
       "date": "2026-11-17",
       "date_display": "Nov 17, 2026",
@@ -15,22 +15,44 @@
         "affiliation": "University of Bologna"
       },
       "cover": {
-        "src": "/media/news/news-aurorus-cover-1600.webp",
-        "width": 1600,
-        "height": 1200,
-        "alt": "A RoboRacer car with its cover off, showing the LiDAR, the onboard computer and the motor controller, beside a car-shaped trophy engraved 2nd place Master Cup, ICRA 2026, Vienna.",
-        "caption": "UBM-Atlas with the second-place Master Cup trophy from ICRA 2026 in Vienna."
+        "src": "/media/news/news-aurorus-team-atlanta-wide-964.webp",
+        "width": 964,
+        "height": 642,
+        "alt": "The UniBo team with the trophy, the winner's cheque and the car at ICRA 2025 in Atlanta",
+        "caption": "The University of Bologna team after winning at ICRA 2025 in Atlanta."
       },
       "body": "posts/aurorus.md",
       "facts": [
-        { "label": "Code", "value": "github.com/Noce99/AuRoRus", "href": "https://github.com/Noce99/AuRoRus" },
-        { "label": "Tutorials", "value": "Gap follower and pure pursuit", "href": "https://github.com/Noce99/AuRoRus/tree/master/tutorials" },
-        { "label": "Language", "value": "Rust, ROS 2-free" },
-        { "label": "License", "value": "MIT or Apache-2.0" }
+        {
+          "label": "Code",
+          "value": "github.com/Noce99/AuRoRus",
+          "href": "https://github.com/Noce99/AuRoRus"
+        },
+        {
+          "label": "Tutorials",
+          "value": "Gap follower and pure pursuit",
+          "href": "https://github.com/Noce99/AuRoRus/tree/master/tutorials"
+        },
+        {
+          "label": "Language",
+          "value": "Rust, ROS 2-free"
+        },
+        {
+          "label": "License",
+          "value": "MIT or Apache-2.0"
+        }
       ],
-      "cta": { "label": "Get AuRoRus on GitHub", "href": "https://github.com/Noce99/AuRoRus" },
+      "cta": {
+        "label": "Get AuRoRus on GitHub",
+        "href": "https://github.com/Noce99/AuRoRus"
+      },
       "credit": "Photos and videos courtesy of Enrico Mannocci and the University of Bologna team.",
       "media": {
+        "/media/news/news-aurorus-car-trophy-1600.webp": {
+          "kind": "image",
+          "width": 1600,
+          "height": 1200
+        },
         "/media/news/news-aurorus-sim-frenet-vs-mpc-544.mp4": {
           "kind": "clip",
           "width": 544,
@@ -89,7 +111,7 @@
           "size": "narrow"
         }
       },
-      "sources": "Text and media: Enrico Mannocci's post repository, https://github.com/Noce99/AuRoRus_Roboracer_Post (README.md and assets/, commit 361f7ad, 2026-10-28), handed over on Slack and passed on by Cedric, 2026-11-17. The body file is the README as written: only its H1 is dropped (this file carries the title) and the media paths point at our encodes. Added by us, for Enrico to confirm: the Atlanta final video (his own YouTube Short, https://youtube.com/shorts/cEtLJ8aXSXk, suggested on Slack) with its caption, the cover caption (the plate in the photo reads UBM-Atlas; the trophy reads 2nd place Master Cup, ICRA 2026; teams.json has UBM-Atlas second) and the byline role (from his own second paragraph). DATE: the day of this draft; set it to the day the post goes live."
+      "sources": "Text and media: Enrico Mannocci's post repository, https://github.com/Noce99/AuRoRus_Roboracer_Post (README.md and assets/, commit 361f7ad, 2026-10-28), handed over on Slack and passed on by Cedric, 2026-11-17. The body file is the README as written, with its H1 dropped (this file carries the title) and the media paths pointing at our encodes. Cedric's rulings, 2026-11-17, after reviewing the preview: the title reads 'a RoboRacer stack' (the README says 'our'); the flagship picture, here and on the news card, is a landscape crop of the Atlanta team photo; the README's own cover photo (the car and the trophy) moves into the text, after the introduction. Added by us: the Atlanta final video (Enrico's own YouTube Short, https://youtube.com/shorts/cEtLJ8aXSXk, suggested on Slack) with its caption, the two cover captions (the plate in the car photo reads UBM-Atlas; the trophy reads 2nd place Master Cup, ICRA 2026; teams.json has UBM-Atlas second) and the byline role (from his own second paragraph). DATE: 2026-11-17, the day it went live."
     }
   ]
 }

@@ -20,6 +20,10 @@ cargo build --release
 My name is Enrico Mannocci. I'm a third-year PhD student, and I have been the leader of the University of Bologna 1:10 Scale Driverless division since 2024. After winning the RoboRacer competition at ICRA 2025 in Atlanta, and taking second and third place in the Master Cup with our two cars at ICRA 2026 in Vienna, we are ready to open-source our race stack for everyone.
 In this post we present AuRoRus: an independent autonomous RoboRacer stack whose every node is written in Rust (ROS 2-free).
 
+![A RoboRacer car with its cover off, showing the LiDAR, the onboard computer and the motor controller, beside a car-shaped trophy engraved 2nd place Master Cup, ICRA 2026, Vienna](/media/news/news-aurorus-car-trophy-1600.webp)
+
+*UBM-Atlas with the second-place Master Cup trophy from ICRA 2026 in Vienna.*
+
 ## Why we built AuRoRus
 
 Too many beginner students were quitting our autonomous driving group early, after struggling for hours to get the whole ROS 2 pipeline working on their laptops. They joined to make a car race, and they left before writing a single line of racing code. We wanted a stack that a new member can build with one command and drive in simulation within the first afternoon, so that the hours go into the algorithms and not into the setup.
