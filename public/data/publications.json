@@ -1046,7 +1046,9 @@
       "institutions": [
         "Nanyang Technological University"
       ],
-      "summary": "Presents Apex, a learning-based racing agent for a full-scale autonomous Super Formula car: a physics-informed network trained on real track data models the vehicle, constrained RL cuts lap times, and imitation learning handles multi-car attack and defense in simulation."
+      "summary": "Presents Apex, a learning-based racing agent for a full-scale autonomous Super Formula car: a physics-informed network trained on real track data models the vehicle, constrained RL cuts lap times, and imitation learning handles multi-car attack and defense in simulation.",
+      "row_thumbnail": "/media/research/research-zhou-2026-push-row-320.webp",
+      "row_thumbnail_large": "/media/research/research-zhou-2026-push-fig-1600.webp"
     },
     {
       "id": "charles-2025-advancing",
