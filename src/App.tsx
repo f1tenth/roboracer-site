@@ -17,6 +17,7 @@ const LearnIntro = lazyWithRetry("LearnIntro", () => import("./pages/learn-new/L
 const LearnSyllabus = lazyWithRetry("LearnSyllabus", () => import("./pages/learn-new/LearnSyllabus"));
 const LearnModule = lazyWithRetry("LearnModule", () => import("./pages/learn-new/LearnModule"));
 const LearnLecture = lazyWithRetry("LearnLecture", () => import("./pages/learn-new/LearnLecture"));
+const LearnGrading = lazyWithRetry("LearnGrading", () => import("./pages/learn-new/LearnGrading"));
 const LearnDoc = lazyWithRetry("LearnDoc", () => import("./pages/learn-new/LearnDoc"));
 const Courses = lazyWithRetry("Courses", () => import("./pages/Courses"));
 const Course = lazyWithRetry("Course", () => import("./pages/Course"));
@@ -58,6 +59,7 @@ function App() {
             <Route path="/learn-new" element={<LearnNew />}>
               <Route index element={<LearnIntro />} />
               <Route path="syllabus" element={<LearnSyllabus />} />
+              <Route path="grading" element={<LearnGrading />} />
               <Route path=":moduleSlug" element={<LearnModule />} />
               <Route path=":moduleSlug/:lectureId" element={<LearnLecture />} />
               <Route path="doc/*" element={<LearnDoc />} />

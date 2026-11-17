@@ -1022,6 +1022,43 @@ export type DocsPageInfo = { title: string; to: string; module: string | null; n
 export type DocsLink = { label: string; href: string };
 export type DocsDue = { label: string; title: string; when: string; href: string };
 
+/** Who grades a rubric item: the autograder alone, the autograder in the
+ * simulator, or a TA from a video or the code. Absent: not stated. */
+export type DocsGradeHow = "auto" | "sim" | "ta";
+export type DocsRubricItem = { points: number; text: string; how?: DocsGradeHow; bonus?: boolean };
+export type DocsRubricLab = { number: number; title: string; team?: boolean; items: DocsRubricItem[] };
+
+export type DocsGrading = {
+  title: string;
+  lead: string;
+  submit: {
+    title: string;
+    lead: string;
+    steps: { title: string; body: string }[];
+    code: string;
+    team_note: string;
+    names_note: string;
+  };
+  checks: { title: string; items: { title: string; body: string }[] };
+  sim: {
+    title: string;
+    lead: string;
+    maps: { name: string; body: string }[];
+    replay: {
+      label: string;
+      note: string;
+      compare: "top3" | "top5";
+      board: string;
+      posters: { wide: string; narrow: string; narrow_height: number };
+    };
+    board_url: string;
+    board_label: string;
+    board_note: string;
+  };
+  rubric: { title: string; lead: string; labs: DocsRubricLab[] };
+  source: string;
+};
+
 export type LearnDocsFile = {
   updated: string;
   meta: {
@@ -1053,6 +1090,7 @@ export type LearnDocsFile = {
   pages: Record<string, DocsPageInfo>;
   schedule: DocsSession[];
   schedule_note: string;
+  grading: DocsGrading;
   lecture1: {
     module: string;
     number: number;
