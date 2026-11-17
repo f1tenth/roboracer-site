@@ -27,11 +27,12 @@ const SLACK_URL = "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7i
 const HERO_ROUTES = new Set(["/", "/styleguide"]);
 
 /** The nav link a path belongs to. Exact everywhere, except Learn, which also
- * covers the course pages under it (/learn/courses, /learn/teach): "page" on
- * /learn itself, "true" (the current section) below it. */
+ * covers the course pages under it (/learn/courses, /learn/teach), and News,
+ * which covers its posts (/news/<slug>): "page" on the route itself, "true"
+ * (the current section) below it. */
 function currentFor(href: string, pathname: string): "page" | "true" | undefined {
   if (pathname === href) return "page";
-  if (href === "/learn" && pathname.startsWith("/learn/")) return "true";
+  if ((href === "/learn" || href === "/news") && pathname.startsWith(`${href}/`)) return "true";
   return undefined;
 }
 

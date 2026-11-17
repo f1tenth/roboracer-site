@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { eventLabel, youTubePoster, type NewsImage, type NewsItem, type NewsYouTubeEmbed } from "./newsData";
+import { eventLabel, isSitePath, youTubePoster, type NewsImage, type NewsItem, type NewsYouTubeEmbed } from "./newsData";
 import LinkedInEmbed from "./LinkedInEmbed";
+import NewsAnchor from "./NewsAnchor";
 import { YouTubePlayer } from "../ui/YouTubeFacade";
 
 const TITLE_LINK = "underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
@@ -67,21 +68,23 @@ export default function NewsLead({ item }: { item: NewsItem }) {
         image || item.embed?.provider === "youtube" ? "mt-4 text-display-m" : "mt-5 text-display-m"
       }`}
     >
-      <a href={item.link} target="_blank" rel="noopener noreferrer" className={TITLE_LINK}>
+      <NewsAnchor href={item.link} className={TITLE_LINK}>
         {item.title}
-      </a>
+      </NewsAnchor>
     </h2>
   );
 
+  // A post hosted here is read in place: no publisher to name, and the
+  // plain arrow (the up-right one says "leaves the site").
+  const here = isSitePath(item.link);
   const action = (
-    <a
+    <NewsAnchor
       href={item.link}
-      target="_blank"
-      rel="noopener noreferrer"
       className={`text-small font-semibold text-text-strong underline underline-offset-4 decoration-rr-magenta hover:decoration-2 ${TAP}`}
     >
-      {ACTION[item.kind] ?? "Read the source"} on {item.publisher} ↗
-    </a>
+      {ACTION[item.kind] ?? "Read the source"}
+      {here ? " →" : ` on ${item.publisher} ↗`}
+    </NewsAnchor>
   );
 
   if (item.embed?.provider === "linkedin") {
@@ -162,7 +165,14 @@ export default function NewsLead({ item }: { item: NewsItem }) {
           <LeadVideo video={video} image={image} />
         ) : (
           image && (
-            <div className="overflow-hidden rounded-media border border-ink-950/10 bg-paper-100">
+            // The picture opens the story too (Cedric, 2026-11-17). It keeps
+            // its alt text, so it is a named link; the keyboard meets the
+            // headline link only, the same target.
+            <NewsAnchor
+              href={item.link}
+              tabIndex={-1}
+              className="block overflow-hidden rounded-media border border-ink-950/10 bg-paper-100 transition-colors duration-[var(--duration-fast)] hover:border-ink-950/40"
+            >
               <img
                 src={image.src}
                 alt={image.alt}
@@ -172,7 +182,7 @@ export default function NewsLead({ item }: { item: NewsItem }) {
                 decoding="async"
                 className="block aspect-[3/2] w-full object-cover"
               />
-            </div>
+            </NewsAnchor>
           )
         )}
         {item.credit && (
