@@ -1,6 +1,31 @@
 {
-  "updated": "2026-09-26",
+  "updated": "2026-11-17",
   "items": [
+    {
+      "id": "post-aurorus",
+      "date": "2026-11-17",
+      "date_display": "Nov 17, 2026",
+      "date_precision": "day",
+      "title": "AuRoRus: a RoboRacer stack, open-sourced and written in Rust",
+      "excerpt": "The University of Bologna team that won ICRA 2025 and placed 2nd at ICRA 2026 opens its race stack.",
+      "kind": "post",
+      "event": null,
+      "link": "/news/aurorus",
+      "author": "Enrico Mannocci",
+      "author_url": "https://github.com/Noce99",
+      "affiliation": "University of Bologna",
+      "publisher": "RoboRacer blog",
+      "credit": "Photo: courtesy of Enrico Mannocci, University of Bologna",
+      "image": {
+        "src": "/media/news/news-aurorus-team-atlanta-wide-964.webp",
+        "width": 964,
+        "height": 642,
+        "alt": "The UniBo team with the trophy, the winner's cheque and the car at ICRA 2025 in Atlanta."
+      },
+      "featured": true,
+      "status": "published",
+      "sources": "A post hosted on the site: public/data/posts.json (slug aurorus) and public/data/posts/aurorus.md, Enrico Mannocci's text from https://github.com/Noce99/AuRoRus_Roboracer_Post. Title ('a RoboRacer stack'; the README says 'our'), excerpt and picture (a landscape crop of the Atlanta team photo): Cedric, 2026-11-17. Excerpt facts: ICRA 2025 win (this file, icra2025-atlanta-unibo-wins); second at ICRA 2026 (teams.json: UBM-Atlas, 2nd, Master Cup). featured: the newest item leads the page (drop the flag to return the lead to IFAC 2026). Live 2026-11-17."
+    },
     {
       "id": "iros2026-sim-league-siga-siga-wins",
       "date": "2026-09-24",
