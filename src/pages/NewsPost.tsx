@@ -3,26 +3,12 @@ import { Link, useParams } from "react-router-dom";
 import Section from "../components/ui/Section";
 import Button from "../components/ui/Button";
 import DocsToc from "../components/learn/docs/DocsToc";
+import AccentTitle from "../components/news/AccentTitle";
 import PostBody from "../components/news/PostBody";
 import { loadPost, parsePost, type Post } from "../components/news/postData";
 import { LINK, TAP, isExternal } from "../components/learn/learnStyles";
 
 type Loaded = { slug: string; post: Post; markdown: string };
-
-/** The title with its accent words in the logo gradient: one display phrase
- * per page (the course pages' rule), and only if the title contains it. */
-function Title({ post }: { post: Post }) {
-  const accent = post.title_accent;
-  const at = accent ? post.title.indexOf(accent) : -1;
-  if (!accent || at < 0) return <>{post.title}</>;
-  return (
-    <>
-      {post.title.slice(0, at)}
-      <span className="text-gradient-logo -my-[0.15em] inline-block py-[0.15em]">{accent}</span>
-      {post.title.slice(at + accent.length)}
-    </>
-  );
-}
 
 function Crumbs({ label }: { label: string }) {
   return (
@@ -115,7 +101,7 @@ export default function NewsPost() {
           <header className="lg:col-span-7">
             <Crumbs label={post.label} />
             <h1 id="post-title" className="max-w-[20ch] font-display text-display-l font-semibold text-text-strong">
-              <Title post={post} />
+              <AccentTitle title={post.title} accent={post.title_accent} />
             </h1>
             <div className="mt-8 flex flex-wrap items-end justify-between gap-x-10 gap-y-4 border-t border-ink-950/10 pt-6">
               <p>
