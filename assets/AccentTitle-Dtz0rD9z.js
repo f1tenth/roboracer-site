@@ -1,0 +1,1 @@
+import{j as n}from"./index-D9E2nB5G.js";function m({title:r,accent:e}){const s=e?r.indexOf(e):-1;return!e||s<0?n.jsx(n.Fragment,{children:r}):n.jsxs(n.Fragment,{children:[r.slice(0,s),n.jsx("span",{className:"text-gradient-logo -my-[0.15em] inline-block py-[0.15em]",children:e}),r.slice(s+e.length)]})}export{m as A};
