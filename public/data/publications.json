@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-20",
+  "updated": "2026-11-17",
   "scholar_query_url": "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=f1tenth+%7C+roboracer+&btnG=",
   "tags": [
     {
@@ -1006,6 +1006,47 @@
       "featured_order": 6,
       "row_thumbnail": "/media/research/research-piccinini-2026-trajectory-row-320.webp",
       "row_thumbnail_large": "/media/research/research-piccinini-2026-trajectory-fig-1600.webp"
+    },
+    {
+      "id": "zhou-2026-push",
+      "title": "Push the Limits: Human‐Like Multimodal Extreme Embodied Intelligence for Autonomous Racing",
+      "authors": [
+        "Yanxin Zhou",
+        "Baichuan Lou",
+        "Wenhui Huang",
+        "Binbin Hu",
+        "Haohan Yang",
+        "Haochen Liu",
+        "Xiangkun He",
+        "Chee Kiong Ong",
+        "Yiran Zhang",
+        "Tianchu Su",
+        "Bolin Zhao",
+        "Xiaoyu Mo",
+        "Holden King Ho Li",
+        "Chen Lv"
+      ],
+      "year": 2026,
+      "venue": "Advanced Robotics Research",
+      "venue_short": "Advanced Robotics Research",
+      "type": "journal",
+      "tags": [
+        "reinforcement-learning",
+        "multi-agent",
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "published",
+      "added": "2026-11-17",
+      "source": "manual",
+      "doi": "10.1002/adrr.202500210",
+      "url": "https://doi.org/10.1002/adrr.202500210",
+      "pdf": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/adrr.202500210",
+      "abstract": "Autonomous racing serves as a platform for testing embodied intelligence under extreme control conditions. It requires systems to operate at the limits of speed, actuation, and decision‐making. Inspired by human multimodality, which is the ability to integrate sensory inputs, learn adaptively, and transfer knowledge across domains for holistic situational awareness and optimal performance, we present Apex, an embodied intelligent agent that is implemented on an autonomous super‐formula racing vehicle on the Abu Dhabi Yas Marina F1 circuit. Apex integrates physics‐informed neural network‐enhanced perception, multimodal learning, and tasking capabilities to achieve high performance under extreme conditions. Leveraging real‐world data collected by a racing vehicle, Apex reduces lap times by 15% in time trials and achieves an 81% success rate in multivehicle attack‐defense scenarios, thus surpassing state‐of‐the‐art systems. This work not only underscores the transformative potential of multimodal embodied intelligence to master physical limits, but also addresses broader challenges in high‐performance robotic systems.",
+      "institutions": [
+        "Nanyang Technological University"
+      ],
+      "summary": "Presents Apex, a learning-based racing agent for a full-scale autonomous Super Formula car: a physics-informed network trained on real track data models the vehicle, constrained RL cuts lap times, and imitation learning handles multi-car attack and defense in simulation."
     },
     {
       "id": "charles-2025-advancing",
