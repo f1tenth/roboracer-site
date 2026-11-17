@@ -841,3 +841,72 @@ body {
   scrollbar-width: none;
 }
 
+
+/* ---- Course docs article body (/learn-new): the coursekit's exported HTML,
+   restyled with the site's tokens. Scoped to .doc-prose so nothing else moves. */
+.doc-prose { max-width: 62rem; color: var(--color-text-body); font-size: var(--text-body); line-height: 1.7; }
+.doc-prose > :first-child { margin-top: 0; }
+.doc-prose p { margin: 0 0 1rem; }
+.doc-prose h2 { margin: 3rem 0 1rem; font-family: var(--font-display); font-size: var(--text-display-s); font-weight: 600; line-height: 1.1; color: var(--color-text-strong); scroll-margin-top: calc(var(--spacing-nav) + 1rem); }
+.doc-prose h3 { margin: 2rem 0 .75rem; font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--color-text-strong); scroll-margin-top: calc(var(--spacing-nav) + 1rem); }
+.doc-prose a { color: var(--color-text-strong); text-decoration: underline; text-decoration-color: rgb(7 7 13 / .25); text-underline-offset: 4px; }
+.doc-prose a:hover { text-decoration-color: var(--color-rr-violet); text-decoration-thickness: 2px; }
+.doc-prose ul, .doc-prose ol { margin: 0 0 1rem; padding-left: 1.4rem; }
+.doc-prose ul { list-style: disc; }
+.doc-prose ol { list-style: decimal; }
+.doc-prose li { margin: .25rem 0; }
+.doc-prose li > p { margin: 0; }
+.doc-prose strong { color: var(--color-text-strong); }
+/* The lecture template: bold labels (Overview, Topics Covered, ...) as definition lists. */
+.doc-prose dl { margin: 0 0 1.5rem; }
+.doc-prose dt { margin-top: 1.75rem; font-size: var(--text-small); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); }
+.doc-prose dt strong { color: inherit; font-weight: inherit; }
+.doc-prose dd { margin: .5rem 0 0; }
+.doc-prose blockquote { margin: 0; padding: 0; border: 0; }
+.doc-prose blockquote > div { margin: 0; }
+.doc-prose iframe { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 16 / 9; margin: .5rem 0 1.5rem; border: 1px solid rgb(7 7 13 / .1); border-radius: .75rem; background: var(--color-paper-100); }
+.doc-prose img { max-width: 100%; height: auto; border-radius: .5rem; }
+.doc-prose code { padding: .1em .35em; border-radius: .25rem; background: var(--color-paper-100); font-family: var(--font-mono); font-size: .9em; }
+.doc-prose pre { margin: 0 0 1.25rem; padding: 1rem; overflow-x: auto; border-radius: .5rem; background: var(--color-ink-900); color: var(--color-text-on-ink); }
+.doc-prose pre code { padding: 0; background: none; color: inherit; }
+.doc-prose .admonition, .doc-prose .note, .doc-prose .attention, .doc-prose .warning, .doc-prose .tip, .doc-prose .important { margin: 1.5rem 0; padding: 1rem 1.25rem; border: 1px solid rgb(7 7 13 / .1); border-left: 3px solid var(--color-rr-violet); border-radius: .5rem; background: var(--color-paper-100); }
+.doc-prose .admonition > :last-child, .doc-prose .note > :last-child, .doc-prose .attention > :last-child, .doc-prose .warning > :last-child, .doc-prose .tip > :last-child, .doc-prose .important > :last-child { margin-bottom: 0; }
+.doc-prose .admonition-title { margin-bottom: .5rem; font-weight: 700; color: var(--color-text-strong); }
+.doc-prose table { width: 100%; margin: 0 0 1.5rem; border-collapse: collapse; font-size: var(--text-small); }
+.doc-prose th, .doc-prose td { padding: .6rem .75rem; border: 1px solid rgb(7 7 13 / .1); text-align: left; vertical-align: top; }
+.doc-prose th { background: var(--color-paper-100); color: var(--color-text-strong); }
+/* A toctree (a module's lectures, the labs, the races) as a list of ruled rows. */
+.doc-prose .toctree-wrapper ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgb(7 7 13 / .1); }
+.doc-prose .toctree-wrapper li { margin: 0; border-bottom: 1px solid rgb(7 7 13 / .1); }
+.doc-prose .toctree-wrapper li > a { display: block; padding: .85rem .25rem; font-weight: 600; text-decoration: none; }
+.doc-prose .toctree-wrapper li > a:hover { color: var(--color-rr-violet-deep); }
+.doc-prose .toctree-wrapper ul ul { margin-left: 1.5rem; border-top: 0; }
+.doc-prose dd .toctree-wrapper { margin: 0; }
+.doc-prose .align-center, .doc-prose .centered { text-align: center; }
+.doc-prose .align-center { display: block; margin-inline: auto; }
+@media (prefers-reduced-motion: reduce) { .doc-prose * { scroll-behavior: auto !important; } }
+
+/* Course docs: the lecture template's sections as boxes. Text sections are light
+   cards under a thin logo-gradient rule; embeds (slides, video) sit on ink. */
+.doc-prose .doc-block { margin: 0 0 1.25rem; overflow: hidden; border: 1px solid rgb(7 7 13 / .1); border-radius: .75rem; background: var(--color-paper-50); }
+.doc-prose .doc-block::before { content: ""; display: block; height: 2px; background: linear-gradient(90deg, var(--color-rr-cyan), var(--color-rr-grad-start), var(--color-rr-grad-end)); }
+.doc-prose .doc-block-label { margin: 0; padding: 1rem 1.5rem 0; font-family: var(--font-sans); font-size: var(--text-small); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--color-text-muted); scroll-margin-top: calc(var(--spacing-nav) + 1rem); }
+.doc-prose .doc-block-body { padding: .75rem 1.5rem 1.25rem; }
+.doc-prose .doc-block-body > :last-child { margin-bottom: 0; }
+.doc-prose .doc-block-body iframe { margin-bottom: 0; }
+
+/* The logos page. */
+.doc-prose .logo-grid { display: grid; gap: 1.25rem; margin-top: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); }
+.doc-prose .logo-card { margin: 0; overflow: hidden; border: 1px solid rgb(7 7 13 / .1); border-radius: .75rem; background: var(--color-paper-50); }
+.doc-prose .logo-card__stage { display: flex; height: 11rem; align-items: center; justify-content: center; padding: 1.5rem; }
+.doc-prose .logo-card__stage--light { background: #fff; }
+.doc-prose .logo-card__stage--dark { background: var(--color-ink-900); }
+.doc-prose .logo-card__stage img { width: 100%; height: 100%; border-radius: 0; object-fit: contain; }
+.doc-prose .logo-card__meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .75rem; padding: .9rem 1.1rem; border-top: 1px solid rgb(7 7 13 / .1); font-size: var(--text-small); }
+.doc-prose .logo-card__name { font-weight: 600; color: var(--color-text-strong); }
+.doc-prose .logo-card__fmt { color: var(--color-text-muted); }
+.doc-prose .logo-card__meta a { margin-left: auto; }
+
+/* A plain card with the thin logo-gradient rule: the same box as the exported lecture sections. */
+.rule-card { position: relative; overflow: hidden; border: 1px solid rgb(7 7 13 / .1); border-radius: .75rem; background: var(--color-paper-50); }
+.rule-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 2px; background: linear-gradient(90deg, var(--color-rr-cyan), var(--color-rr-grad-start), var(--color-rr-grad-end)); }

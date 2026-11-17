@@ -1,0 +1,1440 @@
+{
+ "updated": "2026-11-08",
+ "source": "Course outline sheet 1wQHe5NhgHJOZHu-soy2mrQD2J2Q5w6LgNwgiwY_NwrY (gid 1495810379), read 2026-11-08; prose adapted from f1tenth_coursekit introduction/overview.rst, introduction/syllabus.rst and lectures/ModuleA.",
+ "meta": {
+  "courses_url": "/learn/courses",
+  "slack_url": "https://join.slack.com/t/f1tenth-teams/shared_invite/enQtMzc3ODU2ODM1NzE3LTBjMmVkMzZjZTJiNWUzZDFhZTJiODgzMjg0MTA1MDAxZTUxMzkwMDRhNTM2NzdjNDc5MTk5YTc5YmNhNTdhMTUs",
+  "sheet_url": "https://docs.google.com/spreadsheets/d/1wQHe5NhgHJOZHu-soy2mrQD2J2Q5w6LgNwgiwY_NwrY/edit?gid=1495810379",
+  "sample_syllabus_url": "https://drive.google.com/file/d/1RP3umXQuymEi8qzeLRBn8AtH99lDwLUv/view?usp=drive_link",
+  "license": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+ },
+ "intro": {
+  "title": "Learn autonomous racing",
+  "overview": "RoboRacer is a hands-on course in the foundations of autonomy: perception, planning and control, practiced on a 1/10-scale race car. Start in the simulator with ROS 2, build up through mapping, optimal control and reinforcement learning, then race what you wrote. Built for graduate and senior undergraduate students.",
+  "video_id": "hXmGTKom4O8",
+  "video_title": "RoboRacer course introduction",
+  "teaches": [
+   "Perception",
+   "Planning",
+   "Control",
+   "Analytic skills to recognize and reason about situations with moral content in the design of autonomous systems"
+  ],
+  "not": [
+   "Mechatronics",
+   "A deep learning course",
+   "A replacement for the semester-long graduate courses in the topics we cover",
+   "Easy"
+  ],
+  "prerequisites": [
+   "Basic knowledge of Linux",
+   "Optimization theory",
+   "Programming skills (preferably C++ or Python)"
+  ],
+  "note": "This course integrates the concepts above and is not a beginner course in any of them. The material is best suited to graduate level, or at the very least a senior undergraduate course.",
+  "community": "Join the discussion on Slack. The workspace is for educators, collaborators and organizers."
+ },
+ "syllabus": {
+  "lead": "A semester-long course. Run it as it stands, or pick and choose lectures to fit a quarter or shorter.",
+  "components": [
+   {
+    "title": "Lectures",
+    "body": "Taught clab-style (classroom plus lab): each session pairs a lecture with tutorial or lab time."
+   },
+   {
+    "title": "Labs",
+    "body": "Done outside class time. This is where students apply what the lectures teach."
+   },
+   {
+    "title": "Races",
+    "body": "Three races, each testing a different part of the class: Race 1 on basic methods, Race 2 on advanced control, and the final race."
+   },
+   {
+    "title": "Final project",
+    "body": "Students propose a problem and solve it on the RoboRacer vehicle system, in teams of 3 to 4 with different skills."
+   }
+  ],
+  "outline_title": "Fall 2026 outline"
+ },
+ "schedule": [
+  {
+   "module": "A",
+   "date": "2026-08-26",
+   "kind": "lecture",
+   "lecture": 1,
+   "title": "Intro to Autonomous Driving: Perception, Planning Control",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "",
+   "out": "",
+   "due": "Lab 0",
+   "href": "/learn-new/module-a/lecture-1"
+  },
+  {
+   "module": "A",
+   "date": "2026-08-28",
+   "kind": "lecture",
+   "lecture": 2,
+   "title": "Automatic Emergency Braking",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "T0: Setting Up a VMWare VM",
+   "out": "Lab 1: ROS 2",
+   "due": "",
+   "href": "/learn-new/doc/lectures/ModuleA/lecture02"
+  },
+  {
+   "module": "A",
+   "date": "2026-08-31",
+   "kind": "session",
+   "lecture": null,
+   "title": "T1: Intro to ROS 2, T2: Intro to Git",
+   "materials": [],
+   "tutorial": "",
+   "out": "",
+   "due": ""
+  },
+  {
+   "module": "A",
+   "date": "2026-09-02",
+   "kind": "lecture",
+   "lecture": 3,
+   "title": "PID for Wall Following",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "T2: Intro to Git",
+   "out": "",
+   "due": "",
+   "href": "/learn-new/doc/lectures/ModuleB/lecture04"
+  },
+  {
+   "module": "A",
+   "date": "2026-09-04",
+   "kind": "recitation",
+   "lecture": null,
+   "title": "Friday Recitation: RoboRacer Sim Tutorial",
+   "materials": [],
+   "tutorial": "T3: Intro to RoboRacer Sim",
+   "out": "Lab 2: Automatic Emergency Braking",
+   "due": "Lab 1"
+  },
+  {
+   "module": "A",
+   "date": "2026-09-09",
+   "kind": "lecture",
+   "lecture": 4,
+   "title": "Follow the Gap: Obstacle Avoidance",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "Intro to Leaderboard",
+   "out": "Lab 3: Wall Following",
+   "due": "",
+   "href": "/learn-new/doc/lectures/ModuleB/lecture05"
+  },
+  {
+   "module": "A",
+   "date": "2026-09-11",
+   "kind": "session",
+   "lecture": null,
+   "title": "T4: Setting Up the car",
+   "materials": [
+    "Slides"
+   ],
+   "tutorial": "T4: Debugging ROS Nodes",
+   "out": "Teams Formed",
+   "due": "Lab 2"
+  },
+  {
+   "module": "A",
+   "date": "2026-09-14",
+   "kind": "lecture",
+   "lecture": 5,
+   "title": "Rigid Body Transforms",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "T5: ROS 2 and tf2",
+   "out": "",
+   "due": "",
+   "href": "/learn-new/doc/lectures/ModuleA/lecture03"
+  },
+  {
+   "module": "A",
+   "date": "2026-09-16",
+   "kind": "lecture",
+   "lecture": 6,
+   "title": "Vehicle States and Vehicle Dynamics",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "T6: Know the car and battery safety",
+   "out": "Lab 4: Follow the Gap",
+   "due": "",
+   "href": "/learn-new/doc/lectures/ModuleB/lecture06"
+  },
+  {
+   "module": "A",
+   "date": "2026-09-18",
+   "kind": "recitation",
+   "lecture": null,
+   "title": "Friday Recitation: VESC Tuning",
+   "materials": [],
+   "tutorial": "T6: Setting Up the car, Remote",
+   "out": "",
+   "due": "Lab 3"
+  },
+  {
+   "module": "B",
+   "date": "2026-09-21",
+   "kind": "lecture",
+   "lecture": 7,
+   "title": "Localization I: Map Making and Particle Filters",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "T6: Setting Up the car",
+   "out": "",
+   "due": ""
+  },
+  {
+   "module": "B",
+   "date": "2026-09-23",
+   "kind": "lecture",
+   "lecture": 8,
+   "title": "Introduction to Graph-based SLAM",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "T7: Running slam_toolbox and pf",
+   "out": "Lab 5: SLAM & Pure Pursuit",
+   "due": ""
+  },
+  {
+   "module": "B",
+   "date": "2026-09-25",
+   "kind": "lecture",
+   "lecture": 9,
+   "title": "Pure Pursuit",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "T7: Running slam_toolbox and pf",
+   "out": "",
+   "due": "Lab 4"
+  },
+  {
+   "module": "B",
+   "date": "2026-09-28",
+   "kind": "lecture",
+   "lecture": 10,
+   "title": "Localization II: Analysis of Bayes and Particle Filters",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "T7: Running slam_toolbox and pf",
+   "out": "",
+   "due": ""
+  },
+  {
+   "module": "B",
+   "date": "2026-09-30",
+   "kind": "office-hours",
+   "lecture": null,
+   "title": "Race Preparation Office Hours (OH)",
+   "materials": [],
+   "tutorial": "",
+   "out": "",
+   "due": ""
+  },
+  {
+   "module": "B",
+   "date": "2026-10-02",
+   "kind": "break",
+   "lecture": null,
+   "title": "FALL BREAK",
+   "materials": [],
+   "tutorial": "",
+   "out": "",
+   "due": ""
+  },
+  {
+   "module": "B",
+   "date": "2026-10-05",
+   "kind": "office-hours",
+   "lecture": null,
+   "title": "Race Preparation Office Hours (OH)",
+   "materials": [],
+   "tutorial": "",
+   "out": "",
+   "due": ""
+  },
+  {
+   "module": "B",
+   "date": "2026-10-07",
+   "kind": "race",
+   "lecture": null,
+   "title": "Race 1: Basic Methods in Racing",
+   "materials": [],
+   "tutorial": "",
+   "out": "",
+   "due": "Lab 5",
+   "note": "Practice on Mon to Tue in Levine Lobby"
+  },
+  {
+   "module": "B",
+   "date": "2026-10-09",
+   "kind": "recitation",
+   "lecture": null,
+   "title": "Friday Recitation: Code Review",
+   "materials": [],
+   "tutorial": "Code Review",
+   "out": "",
+   "due": ""
+  },
+  {
+   "module": "C",
+   "date": "2026-10-12",
+   "kind": "lecture",
+   "lecture": 11,
+   "title": "Local Planning: RRT, Spline Based Planner",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "T8: Intro to RRT*",
+   "out": "Lab 6: Motion Planning",
+   "due": ""
+  },
+  {
+   "module": "C",
+   "date": "2026-10-14",
+   "kind": "lecture",
+   "lecture": 12,
+   "title": "Optimization & Control I: Optimization Basics and LQR",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "",
+   "out": "",
+   "due": ""
+  },
+  {
+   "module": "C",
+   "date": "2026-10-16",
+   "kind": "project",
+   "lecture": null,
+   "title": "Final Project Overview",
+   "materials": [
+    "Slides"
+   ],
+   "tutorial": "",
+   "out": "",
+   "due": ""
+  },
+  {
+   "module": "C",
+   "date": "2026-10-19",
+   "kind": "lecture",
+   "lecture": 13,
+   "title": "Optimization & Control II: Model Predictive Control",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "",
+   "out": "Lab 7: MPC",
+   "due": ""
+  },
+  {
+   "module": "C",
+   "date": "2026-10-21",
+   "kind": "lecture",
+   "lecture": 14,
+   "title": "Optimization & Control III: Stochastic Optimal Control & MPPI",
+   "materials": [
+    "Slides"
+   ],
+   "tutorial": "T10: Introduction to Jax",
+   "out": "",
+   "due": "Lab 6"
+  },
+  {
+   "module": "C",
+   "date": "2026-10-23",
+   "kind": "lecture",
+   "lecture": 15,
+   "title": "Reinforcement Learning is Data Driven Optimal Control",
+   "materials": [
+    "Slides"
+   ],
+   "tutorial": "",
+   "out": "Optional Lab 8: MPPI",
+   "due": ""
+  },
+  {
+   "module": "C",
+   "date": "2026-10-26",
+   "kind": "lecture",
+   "lecture": 16,
+   "title": "Reinforcement Learning and Imitation Learning",
+   "materials": [
+    "Slides"
+   ],
+   "tutorial": "",
+   "out": "Final Project",
+   "due": ""
+  },
+  {
+   "module": "C",
+   "date": "2026-10-28",
+   "kind": "lecture",
+   "lecture": 17,
+   "title": "Practical Reinforcement Learning",
+   "materials": [
+    "Slides"
+   ],
+   "tutorial": "T11: Train RL Policies in RoboRacer gym",
+   "out": "Optional Lab 10: Reinforcement Learning",
+   "due": ""
+  },
+  {
+   "module": "C",
+   "date": "2026-10-30",
+   "kind": "lecture",
+   "lecture": 18,
+   "title": "Raceline Optimization",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "",
+   "out": "",
+   "due": ""
+  },
+  {
+   "module": "C",
+   "date": "2026-11-02",
+   "kind": "session",
+   "lecture": null,
+   "title": "Ethics - Moral Decision Making with Autonomous Systems",
+   "materials": [
+    "Slides",
+    "Video"
+   ],
+   "tutorial": "",
+   "out": "Debate: Ethics for AVs",
+   "due": "Debate Summary"
+  },
+  {
+   "module": "C",
+   "date": "2026-11-04",
+   "kind": "race",
+   "lecture": null,
+   "title": "Race 2: Advanced Control for Racing",
+   "materials": [],
+   "tutorial": "",
+   "out": "",
+   "due": "Lab 7",
+   "note": "Sun to Tue in Levine Lobby"
+  },
+  {
+   "module": "C",
+   "date": "2026-11-06",
+   "kind": "project",
+   "lecture": null,
+   "title": "Final Project Proposal Pitches - Round I",
+   "materials": [],
+   "tutorial": "Final Project pitches",
+   "out": "",
+   "due": "Final Project Proposal"
+  },
+  {
+   "module": "C",
+   "date": "2026-11-09",
+   "kind": "lecture",
+   "lecture": 19,
+   "title": "Computer Perception for RoboRacer",
+   "materials": [
+    "Slides",
+    "Video",
+    "Part II video"
+   ],
+   "tutorial": "",
+   "out": "Lab 9: Perception & Vision",
+   "due": ""
+  },
+  {
+   "module": "C",
+   "date": "2026-11-11",
+   "kind": "lecture",
+   "lecture": 20,
+   "title": "Intro to World Models",
+   "materials": [
+    "Slides"
+   ],
+   "tutorial": "",
+   "out": "",
+   "due": ""
+  },
+  {
+   "module": "D",
+   "date": "2026-11-13",
+   "kind": "project",
+   "lecture": 21,
+   "title": "Final Project Pitches - Round II",
+   "materials": [],
+   "tutorial": "",
+   "out": "",
+   "due": ""
+  },
+  {
+   "module": "D",
+   "date": "2026-11-16",
+   "kind": "lecture",
+   "lecture": 22,
+   "title": "xLAB Autonomous Racing Research",
+   "materials": [
+    "Video"
+   ],
+   "tutorial": "",
+   "out": "Final Project",
+   "due": "Lab 9"
+  },
+  {
+   "module": "D",
+   "date": "2026-11-18",
+   "kind": "lecture",
+   "lecture": 23,
+   "title": "Special Topic 1: Guest Speaker - Nic Baumann (ETHz) and Owen Shaffer",
+   "materials": [],
+   "tutorial": "",
+   "out": "Final Project",
+   "due": ""
+  },
+  {
+   "module": "D",
+   "date": "2026-11-23",
+   "kind": "lecture",
+   "lecture": 24,
+   "title": "Special Topic 2: MIND-Stack: Modular, Interpretable, End-to-End Differentiability for Autonomous Racing - Felix Jahncke (TU Munich)",
+   "materials": [],
+   "tutorial": "",
+   "out": "Final Project",
+   "due": ""
+  },
+  {
+   "module": "D",
+   "date": "2026-11-25",
+   "kind": "lecture",
+   "lecture": 25,
+   "title": "Special Topic 3: Guest speaker",
+   "materials": [],
+   "tutorial": "",
+   "out": "Final Project",
+   "due": ""
+  },
+  {
+   "module": "D",
+   "date": "2026-11-27",
+   "kind": "office-hours",
+   "lecture": null,
+   "title": "Project Office Hours",
+   "materials": [],
+   "tutorial": "",
+   "out": "",
+   "due": "Lab 8, Lab 10"
+  },
+  {
+   "module": "E",
+   "date": "2026-11-30",
+   "kind": "project",
+   "lecture": null,
+   "title": "Project Demo Prep Day",
+   "materials": [],
+   "tutorial": "",
+   "out": "",
+   "due": "",
+   "note": "Levine Lobby Reserved as backup"
+  },
+  {
+   "module": "E",
+   "date": "2026-12-02",
+   "kind": "project",
+   "lecture": 26,
+   "title": "Project Demo Day",
+   "materials": [],
+   "tutorial": "",
+   "out": "",
+   "due": ""
+  },
+  {
+   "module": "E",
+   "date": "2026-12-06",
+   "kind": "race",
+   "lecture": null,
+   "title": "Final Race Competition",
+   "materials": [],
+   "tutorial": "",
+   "out": "",
+   "due": "",
+   "note": "Dec 5 to 6 in Houston Hall"
+  },
+  {
+   "module": "E",
+   "date": "2026-12-10",
+   "kind": "project",
+   "lecture": null,
+   "title": "Final Project Documentation Submission Deadline",
+   "materials": [],
+   "tutorial": "",
+   "out": "",
+   "due": "Project report submission"
+  }
+ ],
+ "schedule_note": "Demos and final project dates are firm. No extensions.",
+ "lecture1": {
+  "module": "A",
+  "number": 1,
+  "title": "Introduction to Autonomous Driving: Perception, Planning, Control",
+  "overview": "An introduction to the RoboRacer autonomous vehicle community. We give a brief tour of the world of autonomous racing and step through each lecture on perception, planning and control. By the end you will have had your first taste of the exciting world of autonomous systems.",
+  "topics": [
+   "Course logistics",
+   "Course support",
+   "Intro to autonomous systems"
+  ],
+  "slides_embed": "https://docs.google.com/presentation/d/1zfzzjVTbXNIZ75BFtGEwQBJRHlY95VKkFQjJhYfznpI/embed?start=false&loop=false&delayms=60000",
+  "slides_open": "https://docs.google.com/presentation/d/1zfzzjVTbXNIZ75BFtGEwQBJRHlY95VKkFQjJhYfznpI",
+  "video_id": "v6w_zVHL8WQ",
+  "video_title": "RoboRacer L01 - Course Overview",
+  "tutorial": {
+   "label": "Tutorial 1",
+   "title": "Introduction to ROS 2",
+   "when": "2026-08-31",
+   "href": "/learn-new/doc/lectures/ModuleA/tutorial1"
+  },
+  "lab": {
+   "label": "Lab 1",
+   "title": "ROS 2",
+   "when": "2026-08-28",
+   "href": "/learn-new/doc/assignments/labs/lab1"
+  },
+  "next": {
+   "label": "Lecture 2",
+   "title": "Automatic Emergency Braking",
+   "href": "/learn-new/doc/lectures/ModuleA/lecture02"
+  },
+  "resources": [
+   {
+    "label": "RoboRacer home",
+    "href": "/"
+   },
+   {
+    "label": "Courses: 4, 10 and 15 weeks",
+    "href": "/learn/courses"
+   }
+  ]
+ },
+ "outline": [
+  {
+   "id": "A",
+   "slug": "module-a",
+   "title": "Introduction to ROS, RoboRacer, Simulator & Reactive Methods",
+   "summary": "ROS 2, the car and the simulator, then your first reactive drivers: emergency braking, wall following and follow the gap.",
+   "short": "ROS and reactive methods"
+  },
+  {
+   "id": "B",
+   "slug": "module-b",
+   "title": "Mapping & Localization",
+   "summary": "Maps, particle filters and graph SLAM, then pure pursuit. The module ends with Race 1.",
+   "short": "Mapping and localization"
+  },
+  {
+   "id": "C",
+   "slug": "module-c",
+   "title": "Perception, Planning & Control",
+   "summary": "Planning, optimal control and learning: RRT, LQR, MPC, MPPI, reinforcement learning, perception and world models. It ends with Race 2.",
+   "short": "Perception, planning and control"
+  },
+  {
+   "id": "D",
+   "slug": "module-d",
+   "title": "Special Topics",
+   "summary": "Research talks and guest speakers while the final projects come together.",
+   "short": "Special topics"
+  },
+  {
+   "id": "E",
+   "slug": "module-e",
+   "title": "RoboRacer Final Race & Project",
+   "summary": "Project demo day, the final race and the project report.",
+   "short": "Final race and project"
+  }
+ ],
+ "nav": [
+  {
+   "group": "Getting started",
+   "items": [
+    {
+     "to": "/learn-new/doc/getting_started/index",
+     "title": "Start here"
+    }
+   ]
+  },
+  {
+   "group": "Overview",
+   "items": [
+    {
+     "to": "/learn-new",
+     "title": "Introduction"
+    },
+    {
+     "to": "/learn-new/syllabus",
+     "title": "Syllabus"
+    },
+    {
+     "to": "/learn/courses",
+     "title": "Courses"
+    }
+   ]
+  },
+  {
+   "group": "Modules",
+   "items": [
+    {
+     "to": "/learn-new/module-a",
+     "id": "A",
+     "title": "Introduction to ROS, RoboRacer & Simulator",
+     "children": [
+      {
+       "kind": "lecture",
+       "num": "1",
+       "title": "Intro to Autonomous Driving: Perception, Planning Control",
+       "to": "/learn-new/module-a/lecture-1"
+      },
+      {
+       "kind": "lecture",
+       "num": "2",
+       "title": "Automatic Emergency Braking",
+       "to": "/learn-new/doc/lectures/ModuleA/lecture02"
+      },
+      {
+       "kind": "lecture",
+       "num": "3",
+       "title": "PID for Wall Following",
+       "to": "/learn-new/doc/lectures/ModuleB/lecture04"
+      },
+      {
+       "kind": "lecture",
+       "num": "4",
+       "title": "Follow the Gap: Obstacle Avoidance",
+       "to": "/learn-new/doc/lectures/ModuleB/lecture05"
+      },
+      {
+       "kind": "lecture",
+       "num": "5",
+       "title": "Rigid Body Transforms",
+       "to": "/learn-new/doc/lectures/ModuleA/lecture03"
+      },
+      {
+       "kind": "lecture",
+       "num": "6",
+       "title": "Vehicle States and Vehicle Dynamics",
+       "to": "/learn-new/doc/lectures/ModuleB/lecture06"
+      }
+     ]
+    },
+    {
+     "to": "/learn-new/doc/lectures/ModuleB/index",
+     "id": "B",
+     "title": "Reactive Methods",
+     "children": [
+      {
+       "to": "/learn-new/doc/lectures/ModuleB/lecture04",
+       "kind": "lecture",
+       "num": "4",
+       "title": "Laplace Domain Dynamics & PID",
+       "children": [
+        {
+         "to": "/learn-new/doc/lectures/ModuleB/tutorial4",
+         "kind": "tutorial",
+         "num": "4",
+         "title": "Getting to know the car and battery & safety"
+        }
+       ]
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleB/lecture05",
+       "kind": "lecture",
+       "num": "5",
+       "title": "Follow the Gap: Obstacle Avoidance"
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleB/lecture06",
+       "kind": "lecture",
+       "num": "6",
+       "title": "Vehicle States and Vehicle Dynamics"
+      }
+     ]
+    },
+    {
+     "to": "/learn-new/doc/lectures/ModuleC/index",
+     "id": "C",
+     "title": "Mapping & Localization",
+     "children": [
+      {
+       "to": "/learn-new/doc/lectures/ModuleC/lecture07",
+       "kind": "lecture",
+       "num": "7",
+       "title": "Filtering"
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleC/lecture08",
+       "kind": "lecture",
+       "num": "8",
+       "title": "Localization: Particle Filter"
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleC/lecture09",
+       "kind": "lecture",
+       "num": "9",
+       "title": "Introduction to Graph-based SLAM",
+       "children": [
+        {
+         "to": "/learn-new/doc/lectures/ModuleC/tutorial5",
+         "kind": "tutorial",
+         "num": "5",
+         "title": "Running slam_toolbox and pf"
+        }
+       ]
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleC/lecture09optional",
+       "kind": "lecture",
+       "num": "9",
+       "title": "Scan Matching I & II",
+       "optional": true
+      }
+     ]
+    },
+    {
+     "to": "/learn-new/doc/lectures/ModuleD/index",
+     "id": "D",
+     "title": "Planning & Control",
+     "children": [
+      {
+       "to": "/learn-new/doc/lectures/ModuleD/lecture10",
+       "kind": "lecture",
+       "num": "10",
+       "title": "Pure Pursuit"
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleD/lecture11",
+       "kind": "lecture",
+       "num": "11",
+       "title": "Local Planning: RRT, Spline Based Planner"
+      }
+     ]
+    },
+    {
+     "to": "/learn-new/doc/lectures/ModuleE/index",
+     "id": "E",
+     "title": "Vision",
+     "children": [
+      {
+       "to": "/learn-new/doc/lectures/ModuleE/lecture12",
+       "kind": "lecture",
+       "num": "12",
+       "title": "Classical Perception"
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleE/lecture13",
+       "kind": "lecture",
+       "num": "13",
+       "title": "Machine Learning Perception"
+      }
+     ]
+    },
+    {
+     "to": "/learn-new/doc/lectures/ModuleF/index",
+     "id": "F",
+     "title": "Special Topics",
+     "children": [
+      {
+       "to": "/learn-new/doc/lectures/ModuleF/lecture17",
+       "kind": "lecture",
+       "num": "17",
+       "title": "Detection and Pose Estimation"
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleF/lecture18",
+       "kind": "lecture",
+       "num": "18",
+       "title": "Extending Single View and YOLO"
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleF/lecture19",
+       "kind": "lecture",
+       "num": "19",
+       "title": "Project Proposal"
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleF/lecture20",
+       "kind": "lecture",
+       "num": "20",
+       "title": "Raceline Optimization"
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleF/lecture21",
+       "kind": "lecture",
+       "num": "21",
+       "title": "Model Predictive Control"
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleF/lecture22",
+       "kind": "lecture",
+       "num": "22",
+       "title": "Moral Decision Making"
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleF/lecture23",
+       "kind": "lecture",
+       "num": "23-25",
+       "title": "Special Topics"
+      }
+     ]
+    },
+    {
+     "to": "/learn-new/doc/lectures/ModuleG/index",
+     "id": "G",
+     "title": "RoboRacer Grand Prix",
+     "children": [
+      {
+       "to": "/learn-new/doc/lectures/ModuleG/lecture26",
+       "kind": "lecture",
+       "num": "26",
+       "title": "Project Demos"
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleG/lecture27",
+       "kind": "lecture",
+       "num": "27",
+       "title": "Race Prep"
+      },
+      {
+       "to": "/learn-new/doc/lectures/ModuleG/lecture28",
+       "kind": "lecture",
+       "num": "28",
+       "title": "Race 3: RoboRacer Grand Prix!"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "group": "Assignments",
+   "items": [
+    {
+     "to": "/learn-new/doc/assignments/labs/index",
+     "title": "Labs",
+     "children": [
+      {
+       "to": "/learn-new/doc/assignments/labs/lab1",
+       "title": "Lab 1 - Introduction to ROS2"
+      },
+      {
+       "to": "/learn-new/doc/assignments/labs/lab2",
+       "title": "Lab 2 - Automatic Emergency Braking"
+      },
+      {
+       "to": "/learn-new/doc/assignments/labs/lab3",
+       "title": "Lab 3 - Wall Following"
+      },
+      {
+       "to": "/learn-new/doc/assignments/labs/lab4",
+       "title": "Lab 4 - Follow the Gap"
+      },
+      {
+       "to": "/learn-new/doc/assignments/labs/lab5",
+       "title": "Lab 5 - SLAM and Pure Pursuit"
+      },
+      {
+       "to": "/learn-new/doc/assignments/labs/lab6",
+       "title": "Lab 6 - Motion Planning"
+      },
+      {
+       "to": "/learn-new/doc/assignments/labs/lab7",
+       "title": "Lab 7 - Model Predictive Control"
+      },
+      {
+       "to": "/learn-new/doc/assignments/labs/lab8",
+       "title": "Lab 8 - Model Predictive Path Integral Control"
+      },
+      {
+       "to": "/learn-new/doc/assignments/labs/lab9",
+       "title": "Lab 9 - Perception & Vision"
+      },
+      {
+       "to": "/learn-new/doc/assignments/labs/lab10",
+       "title": "Lab 10 - Reinforcement Learning"
+      },
+      {
+       "to": "/learn-new/doc/assignments/labs/solutions",
+       "title": "Solutions"
+      }
+     ]
+    },
+    {
+     "to": "/learn-new/doc/assignments/races/index",
+     "title": "Races",
+     "children": [
+      {
+       "to": "/learn-new/doc/assignments/races/race1",
+       "title": "Race 1"
+      },
+      {
+       "to": "/learn-new/doc/assignments/races/race2",
+       "title": "Race 2"
+      },
+      {
+       "to": "/learn-new/doc/assignments/races/race3",
+       "title": "Race 3"
+      }
+     ]
+    },
+    {
+     "to": "/learn-new/doc/assignments/final_project",
+     "title": "Final project"
+    },
+    {
+     "to": "/learn-new/doc/assignments/grading",
+     "title": "Grading Rubrics",
+     "children": [
+      {
+       "to": "/learn-new/doc/assignments/grading",
+       "title": "Labs & Final Project"
+      },
+      {
+       "to": "/learn-new/doc/assignments/grading",
+       "title": "Races",
+       "children": [
+        {
+         "to": "/learn-new/doc/assignments/grading",
+         "title": "Race 1 and Race 2"
+        },
+        {
+         "to": "/learn-new/doc/assignments/grading",
+         "title": "Race 3"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "group": "Support",
+   "items": [
+    {
+     "to": "/learn-new/doc/lectures/index",
+     "title": "Material Downloads"
+    },
+    {
+     "to": "/learn-new/doc/press/logos",
+     "title": "Logos"
+    },
+    {
+     "to": "/learn-new/doc/support/contact",
+     "title": "Contact"
+    },
+    {
+     "to": "/learn-new/doc/support/acknowledgment",
+     "title": "Acknowledgments"
+    }
+   ]
+  }
+ ],
+ "pages": {
+  "assignments/final_project": {
+   "title": "Final Project",
+   "to": "/learn-new/doc/assignments/final_project",
+   "module": null,
+   "native": false
+  },
+  "assignments/grading": {
+   "title": "Grading Rubrics",
+   "to": "/learn-new/doc/assignments/grading",
+   "module": null,
+   "native": false
+  },
+  "assignments/labs/index": {
+   "title": "Labs",
+   "to": "/learn-new/doc/assignments/labs/index",
+   "module": null,
+   "native": false
+  },
+  "assignments/labs/lab1": {
+   "title": "Lab 1 - Introduction to ROS2",
+   "to": "/learn-new/doc/assignments/labs/lab1",
+   "module": null,
+   "native": false
+  },
+  "assignments/labs/lab10": {
+   "title": "Lab 10 - Reinforcement Learning",
+   "to": "/learn-new/doc/assignments/labs/lab10",
+   "module": null,
+   "native": false
+  },
+  "assignments/labs/lab2": {
+   "title": "Lab 2 - Automatic Emergency Braking",
+   "to": "/learn-new/doc/assignments/labs/lab2",
+   "module": null,
+   "native": false
+  },
+  "assignments/labs/lab3": {
+   "title": "Lab 3 - Wall Following",
+   "to": "/learn-new/doc/assignments/labs/lab3",
+   "module": null,
+   "native": false
+  },
+  "assignments/labs/lab4": {
+   "title": "Lab 4 - Follow the Gap",
+   "to": "/learn-new/doc/assignments/labs/lab4",
+   "module": null,
+   "native": false
+  },
+  "assignments/labs/lab5": {
+   "title": "Lab 5 - SLAM and Pure Pursuit",
+   "to": "/learn-new/doc/assignments/labs/lab5",
+   "module": null,
+   "native": false
+  },
+  "assignments/labs/lab6": {
+   "title": "Lab 6 - Motion Planning",
+   "to": "/learn-new/doc/assignments/labs/lab6",
+   "module": null,
+   "native": false
+  },
+  "assignments/labs/lab7": {
+   "title": "Lab 7 - Model Predictive Control",
+   "to": "/learn-new/doc/assignments/labs/lab7",
+   "module": null,
+   "native": false
+  },
+  "assignments/labs/lab8": {
+   "title": "Lab 8 - Model Predictive Path Integral Control",
+   "to": "/learn-new/doc/assignments/labs/lab8",
+   "module": null,
+   "native": false
+  },
+  "assignments/labs/lab9": {
+   "title": "Lab 9 - Perception & Vision",
+   "to": "/learn-new/doc/assignments/labs/lab9",
+   "module": null,
+   "native": false
+  },
+  "assignments/labs/solutions": {
+   "title": "Solutions",
+   "to": "/learn-new/doc/assignments/labs/solutions",
+   "module": null,
+   "native": false
+  },
+  "assignments/races/index": {
+   "title": "Races",
+   "to": "/learn-new/doc/assignments/races/index",
+   "module": null,
+   "native": false
+  },
+  "assignments/races/race1": {
+   "title": "Race 1",
+   "to": "/learn-new/doc/assignments/races/race1",
+   "module": null,
+   "native": false
+  },
+  "assignments/races/race2": {
+   "title": "Race 2",
+   "to": "/learn-new/doc/assignments/races/race2",
+   "module": null,
+   "native": false
+  },
+  "assignments/races/race3": {
+   "title": "Race 3",
+   "to": "/learn-new/doc/assignments/races/race3",
+   "module": null,
+   "native": false
+  },
+  "getting_started/index": {
+   "title": "Start Here!",
+   "to": "/learn-new/doc/getting_started/index",
+   "module": null,
+   "native": false
+  },
+  "introduction/overview": {
+   "title": "Introduction",
+   "to": "/learn-new",
+   "module": null,
+   "native": true
+  },
+  "introduction/syllabus": {
+   "title": "Syllabus",
+   "to": "/learn-new/syllabus",
+   "module": null,
+   "native": true
+  },
+  "lectures/ModuleA/index": {
+   "title": "Module A: Introduction to ROS, RoboRacer & the Simulator",
+   "to": "/learn-new/module-a",
+   "module": "A",
+   "native": true
+  },
+  "lectures/ModuleA/lecture01": {
+   "title": "Lecture 1 - Introduction to Autonomous Driving: Perception, Planning Control",
+   "to": "/learn-new/module-a/lecture-1",
+   "module": "A",
+   "native": true
+  },
+  "lectures/ModuleA/lecture02": {
+   "title": "Lecture 2 - Automatic Emergency Braking",
+   "to": "/learn-new/doc/lectures/ModuleA/lecture02",
+   "module": "A",
+   "native": false
+  },
+  "lectures/ModuleA/lecture03": {
+   "title": "Lecture 3 - Rigid Body Transformation",
+   "to": "/learn-new/doc/lectures/ModuleA/lecture03",
+   "module": "A",
+   "native": false
+  },
+  "lectures/ModuleA/tutorial1": {
+   "title": "Tutorial 1: Introduction to ROS2",
+   "to": "/learn-new/doc/lectures/ModuleA/tutorial1",
+   "module": "A",
+   "native": false
+  },
+  "lectures/ModuleA/tutorial2": {
+   "title": "Tutorial 2 - Introduction to RoboRacer Simulator",
+   "to": "/learn-new/doc/lectures/ModuleA/tutorial2",
+   "module": "A",
+   "native": false
+  },
+  "lectures/ModuleA/tutorial3": {
+   "title": "Tutorial 3 - ROS2 and tf2",
+   "to": "/learn-new/doc/lectures/ModuleA/tutorial3",
+   "module": "A",
+   "native": false
+  },
+  "lectures/ModuleB/index": {
+   "title": "Module B: Reactive Methods",
+   "to": "/learn-new/doc/lectures/ModuleB/index",
+   "module": "B",
+   "native": false
+  },
+  "lectures/ModuleB/lecture04": {
+   "title": "Lecture 4 - Laplace Domain Dynamics & PID",
+   "to": "/learn-new/doc/lectures/ModuleB/lecture04",
+   "module": "B",
+   "native": false
+  },
+  "lectures/ModuleB/lecture05": {
+   "title": "Lecture 5 - Follow the Gap: Obstacle Avoidance",
+   "to": "/learn-new/doc/lectures/ModuleB/lecture05",
+   "module": "B",
+   "native": false
+  },
+  "lectures/ModuleB/lecture06": {
+   "title": "Lecture 6 - Vehicle States and Vehicle Dynamics",
+   "to": "/learn-new/doc/lectures/ModuleB/lecture06",
+   "module": "B",
+   "native": false
+  },
+  "lectures/ModuleB/tutorial4": {
+   "title": "Tutorial 4 - Getting to know the car and battery & safety",
+   "to": "/learn-new/doc/lectures/ModuleB/tutorial4",
+   "module": "B",
+   "native": false
+  },
+  "lectures/ModuleC/index": {
+   "title": "Module C: Mapping & Localization",
+   "to": "/learn-new/doc/lectures/ModuleC/index",
+   "module": "C",
+   "native": false
+  },
+  "lectures/ModuleC/lecture07": {
+   "title": "Lecture 7 - Filtering",
+   "to": "/learn-new/doc/lectures/ModuleC/lecture07",
+   "module": "C",
+   "native": false
+  },
+  "lectures/ModuleC/lecture08": {
+   "title": "Lecture 8 - Localization: Particle Filter",
+   "to": "/learn-new/doc/lectures/ModuleC/lecture08",
+   "module": "C",
+   "native": false
+  },
+  "lectures/ModuleC/lecture09": {
+   "title": "Lecture 9 - Introduction to Graph-based SLAM",
+   "to": "/learn-new/doc/lectures/ModuleC/lecture09",
+   "module": "C",
+   "native": false
+  },
+  "lectures/ModuleC/lecture09optional": {
+   "title": "Lecture 9 (Optional) - Scan Matching I & II",
+   "to": "/learn-new/doc/lectures/ModuleC/lecture09optional",
+   "module": "C",
+   "native": false
+  },
+  "lectures/ModuleC/tutorial5": {
+   "title": "Tutorial 5 - Running slam_toolbox and pf",
+   "to": "/learn-new/doc/lectures/ModuleC/tutorial5",
+   "module": "C",
+   "native": false
+  },
+  "lectures/ModuleD/index": {
+   "title": "Module D: Planning & Control",
+   "to": "/learn-new/doc/lectures/ModuleD/index",
+   "module": "D",
+   "native": false
+  },
+  "lectures/ModuleD/lecture10": {
+   "title": "Lecture 10 - Pure Pursuit",
+   "to": "/learn-new/doc/lectures/ModuleD/lecture10",
+   "module": "D",
+   "native": false
+  },
+  "lectures/ModuleD/lecture11": {
+   "title": "Lecture 11 - Local Planning: RRT, Spline Based Planner",
+   "to": "/learn-new/doc/lectures/ModuleD/lecture11",
+   "module": "D",
+   "native": false
+  },
+  "lectures/ModuleE/index": {
+   "title": "Module E: Vision",
+   "to": "/learn-new/doc/lectures/ModuleE/index",
+   "module": "E",
+   "native": false
+  },
+  "lectures/ModuleE/lecture12": {
+   "title": "Lecture 12 - Classical Perception",
+   "to": "/learn-new/doc/lectures/ModuleE/lecture12",
+   "module": "E",
+   "native": false
+  },
+  "lectures/ModuleE/lecture13": {
+   "title": "Lecture 13 - Machine Learning Perception",
+   "to": "/learn-new/doc/lectures/ModuleE/lecture13",
+   "module": "E",
+   "native": false
+  },
+  "lectures/ModuleF/index": {
+   "title": "Module F: Special Topics",
+   "to": "/learn-new/doc/lectures/ModuleF/index",
+   "module": "F",
+   "native": false
+  },
+  "lectures/ModuleF/lecture17": {
+   "title": "Lecture 17 - Detection and Pose Estimation",
+   "to": "/learn-new/doc/lectures/ModuleF/lecture17",
+   "module": "F",
+   "native": false
+  },
+  "lectures/ModuleF/lecture18": {
+   "title": "Lecture 18 - Extending Single View and YOLO",
+   "to": "/learn-new/doc/lectures/ModuleF/lecture18",
+   "module": "F",
+   "native": false
+  },
+  "lectures/ModuleF/lecture19": {
+   "title": "Lecture 19 - Project Proposal",
+   "to": "/learn-new/doc/lectures/ModuleF/lecture19",
+   "module": "F",
+   "native": false
+  },
+  "lectures/ModuleF/lecture20": {
+   "title": "Lecture 20 - Raceline Optimization",
+   "to": "/learn-new/doc/lectures/ModuleF/lecture20",
+   "module": "F",
+   "native": false
+  },
+  "lectures/ModuleF/lecture21": {
+   "title": "Lecture 21 - Model Predictive Control",
+   "to": "/learn-new/doc/lectures/ModuleF/lecture21",
+   "module": "F",
+   "native": false
+  },
+  "lectures/ModuleF/lecture22": {
+   "title": "Lectures 22 - Moral Decision Making",
+   "to": "/learn-new/doc/lectures/ModuleF/lecture22",
+   "module": "F",
+   "native": false
+  },
+  "lectures/ModuleF/lecture23": {
+   "title": "Lectures 23-25 - Special Topics",
+   "to": "/learn-new/doc/lectures/ModuleF/lecture23",
+   "module": "F",
+   "native": false
+  },
+  "lectures/ModuleG/index": {
+   "title": "Module G: RoboRacer Grand Prix!!",
+   "to": "/learn-new/doc/lectures/ModuleG/index",
+   "module": "G",
+   "native": false
+  },
+  "lectures/ModuleG/lecture26": {
+   "title": "Lecture 26 - Project Demos",
+   "to": "/learn-new/doc/lectures/ModuleG/lecture26",
+   "module": "G",
+   "native": false
+  },
+  "lectures/ModuleG/lecture27": {
+   "title": "Lecture 27 - Race Prep",
+   "to": "/learn-new/doc/lectures/ModuleG/lecture27",
+   "module": "G",
+   "native": false
+  },
+  "lectures/ModuleG/lecture28": {
+   "title": "Lecture 28 - Race 3: RoboRacer Grand Prix!",
+   "to": "/learn-new/doc/lectures/ModuleG/lecture28",
+   "module": "G",
+   "native": false
+  },
+  "lectures/index": {
+   "title": "Material Downloads",
+   "to": "/learn-new/doc/lectures/index",
+   "module": null,
+   "native": false
+  },
+  "press/logos": {
+   "title": "Logos",
+   "to": "/learn-new/doc/press/logos",
+   "module": null,
+   "native": false
+  },
+  "support/acknowledgment": {
+   "title": "Acknowledgements",
+   "to": "/learn-new/doc/support/acknowledgment",
+   "module": null,
+   "native": false
+  },
+  "support/contact": {
+   "title": "Contact",
+   "to": "/learn-new/doc/support/contact",
+   "module": null,
+   "native": false
+  }
+ }
+}

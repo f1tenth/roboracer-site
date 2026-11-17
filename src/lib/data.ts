@@ -959,3 +959,122 @@ export function lectureSelection(c: CoursesFile) {
     plans: c.plans.filter((p) => p.modules.includes(m.id)).map((p) => p.id),
   }));
 }
+
+/* public/data/learn-docs.json: the native course docs at /learn (introduction,
+ * syllabus, modules, lectures). Prose adapted from the f1tenth_coursekit
+ * Sphinx source; the schedule is the Fall 2026 outline sheet. */
+
+export type DocsSessionKind =
+  | "lecture"
+  | "session"
+  | "recitation"
+  | "race"
+  | "break"
+  | "office-hours"
+  | "project";
+
+export type DocsSession = {
+  module: string;
+  /** ISO date, 2026. The weekday is computed from it, not read from the sheet. */
+  date: string;
+  kind: DocsSessionKind;
+  lecture: number | null;
+  title: string;
+  /** What the sheet links for the session: "Slides", "Video", "Part II video". */
+  materials: string[];
+  tutorial: string;
+  out: string;
+  due: string;
+  note?: string;
+  /** The session's page, where there is one. */
+  href?: string;
+};
+
+/** A module of the Fall 2026 outline (A to E), as the syllabus groups it. */
+export type DocsOutlineModule = {
+  id: string;
+  slug: string;
+  title: string;
+  /** A few words for chips. */
+  short: string;
+  summary: string;
+};
+
+/** One entry of the side panel. Modules carry `id` and their lectures (and
+ * the tutorials under a lecture) as `children`. */
+export type DocsNavItem = {
+  id?: string;
+  title: string;
+  to: string;
+  kind?: "lecture" | "tutorial";
+  /** "4", "9", "23-25". */
+  num?: string;
+  optional?: boolean;
+  children?: DocsNavItem[];
+};
+export type DocsNavGroup = { group: string; items: DocsNavItem[] };
+
+/** Every page of the docs by key ("lectures/ModuleB/lecture04"): its title,
+ * route, module letter, and whether it is a native React page (the rest are
+ * HTML fragments in public/data/learn-new/pages). */
+export type DocsPageInfo = { title: string; to: string; module: string | null; native: boolean };
+
+export type DocsLink = { label: string; href: string };
+export type DocsDue = { label: string; title: string; when: string; href: string };
+
+export type LearnDocsFile = {
+  updated: string;
+  meta: {
+    courses_url: string;
+    slack_url: string;
+    sheet_url: string;
+    sample_syllabus_url: string;
+    license: string;
+    license_url: string;
+  };
+  intro: {
+    title: string;
+    overview: string;
+    video_id: string;
+    video_title: string;
+    teaches: string[];
+    not: string[];
+    prerequisites: string[];
+    note: string;
+    community: string;
+  };
+  syllabus: {
+    lead: string;
+    components: { title: string; body: string }[];
+    outline_title: string;
+  };
+  outline: DocsOutlineModule[];
+  nav: DocsNavGroup[];
+  pages: Record<string, DocsPageInfo>;
+  schedule: DocsSession[];
+  schedule_note: string;
+  lecture1: {
+    module: string;
+    number: number;
+    title: string;
+    overview: string;
+    topics: string[];
+    slides_embed: string;
+    slides_open: string;
+    video_id: string;
+    video_title: string;
+    tutorial: DocsDue;
+    lab: DocsDue;
+    next: { label: string; title: string; href: string };
+    resources: DocsLink[];
+  };
+};
+
+/** The HTML body of a docs page, exported from the coursekit (public/data/learn-new/pages). */
+export const loadDocsPage = async (key: string): Promise<string> => {
+  const res = await fetch(`${import.meta.env.BASE_URL}data/learn-new/pages/${key}.html`);
+  if (!res.ok) throw new Error(`docs page ${key}: ${res.status}`);
+  return res.text();
+};
+
+export const loadLearnDocs = () => loadJson<LearnDocsFile>("learn-docs.json");
