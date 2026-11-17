@@ -111,10 +111,13 @@ function expectAlt(raw) {
   return alt;
 }
 
+/** Marks a case expects the serializer to give up (and say so). */
+let without = [];
+
 function marksOf(list, inherited) {
   const m = { ...inherited };
   for (const mark of list ?? []) {
-    if (["bold", "italic", "strike", "code"].includes(mark.type)) m[mark.type] = true;
+    if (["bold", "italic", "strike", "code"].includes(mark.type) && !without.includes(mark.type)) m[mark.type] = true;
     if (mark.type === "link") {
       const href = expectHref(mark.attrs?.href);
       if (href) m.href = href;
@@ -138,7 +141,7 @@ function expectLines(nodes, oneLine = false, extra = {}) {
             if (oneLine || m.code) lines[lines.length - 1].push({ ch: " ", m });
             else lines.push([]);
           }
-          for (const ch of noControls(part)) lines[lines.length - 1].push({ ch, m });
+          for (const ch of noControls(part)) lines[lines.length - 1].push({ ch: ch === "\t" ? " " : ch, m });
         });
       } else walk(node.content, m);
     }
@@ -478,8 +481,27 @@ const CASES = [
       ul(...HOSTILE.map((s) => li(p(t(s))))),
       ol(1, ...HOSTILE.map((s) => li(p(t(s)), p(t("and"), br, t(s))))),
       quote(...HOSTILE.map((s) => p(t(s), br, t(s)))),
-      ...HOSTILE.map((s) => p(t("x "), t(s, "bold"), t(" y "), t(s, "italic"), t(" z "), t(s, "code"), t(" "), t(s, link("https://example.com/ok")), t(" w"))),
+      ...HOSTILE.flatMap((s) => [
+        p(t("x "), t(s, "bold"), t(" y")),
+        p(t("x "), t(s, "italic"), t(" y")),
+        p(t("x "), t(s, "strike"), t(" y")),
+        p(t("x "), t(s, "code"), t(" y")),
+        p(t("x "), t(s, link("https://example.com/ok")), t(" y")),
+        p(t("x "), t(s, "bold", link("https://example.com/ok")), t(" y")),
+      ]),
     ),
+  },
+  {
+    // marked hides emphasis between two literal backticks, or between < and
+    // >, even escaped ones (its blockSkip mask), so such a paragraph keeps
+    // its words and loses its emphasis, and the writer is told.
+    name: "emphasis marked cannot read",
+    doc: doc(
+      p(t("1 < 2 and "), t("bold", "bold"), t(" and 3 > 2")),
+      p(t("a ` b "), t("italic", "italic"), t(" c ` d")),
+    ),
+    without: ["bold", "italic", "strike"],
+    problems: [/starts "1 < 2 and bold and 3 > 2" has bold, italic/, /starts "a ` b italic c ` d" has bold, italic/],
   },
   {
     name: "punctuation at emphasis edges",
@@ -567,8 +589,8 @@ const CASES = [
     checks: [
       (r) => r.excerpt.length <= 200 || `excerpt is ${r.excerpt.length} characters`,
       (r) => r.excerpt.endsWith("...") || "a cut excerpt ends with three dots",
-      (r) => r.excerpt === "RoboRacer is an open platform for autonomous racing at one tenth scale. Students build the car, write the stack, and race it against other teams at conferences around the world, from Atlanta to Vienna..." || `excerpt: ${JSON.stringify(r.excerpt)}`,
-      (r) => r.words === 49 || `words: ${r.words}`,
+      (r) => r.excerpt === "RoboRacer is an open platform for autonomous racing at one tenth scale. Students build the car, write the stack, and race it against other teams at conferences around the world, from Atlanta to..." || `excerpt: ${JSON.stringify(r.excerpt)}`,
+      (r) => r.words === 43 || `words: ${r.words}`,
       (r) => !r.words || plainText(r.doc).split(/\s+/).filter(Boolean).length === r.words || "words disagree with plainText",
     ],
   },
@@ -594,6 +616,7 @@ for (const c of CASES) {
   const bad = [];
   const parsed = parsePost(out.markdown, out.media);
   const media = {};
+  without = c.without ?? [];
   const expected = JSON.stringify(canon(expectBlocks(c.doc.content, media, false), c.lenient), null, 2);
   const actual = JSON.stringify(canon(readPost(parsed, bad), c.lenient), null, 2);
 

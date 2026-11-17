@@ -14,7 +14,8 @@ request that changes it is not a post submission.
 
 Community members write a post in the post writer at `/news/write`. Its Submit
 step builds a post package and the writer's own GitHub account opens a pull
-request from their fork that adds one folder, `submissions/<slug>/`, holding:
+request from their fork that adds one folder under `submissions/` (named
+`roboracer-post-<slug>`, as the download unzips), holding:
 
 - `post.md`: the text, in the site's Markdown dialect (`src/components/news/postData.ts`)
 - `post.json`: the posts.json entry, the card's excerpt, the file list, and the writer's consent
@@ -28,16 +29,16 @@ through the script below.
 ## Reviewing a submission
 
 1. Read the pull request's file list first (`gh pr view <n> --json files`). A
-   post submission adds files under `submissions/<slug>/` and nothing else.
+   post submission adds files in one folder under `submissions/` and nothing else.
    Anything outside it (a workflow, a script, `package.json`, `public/`) means
    it is not a post submission: close it, and do not approve its workflow runs.
 2. `gh pr checkout <n>`
-3. `node scripts/publish-post.mjs submissions/<slug> --pr <pull request URL> --dry-run`
+3. `node scripts/publish-post.mjs submissions/<folder> --pr <pull request URL> --dry-run`
 4. If it refuses, ask the writer to fix the package in the post writer and
    push again; do not repair a package by hand. If it passes, run it again
    without `--dry-run` (add `--date YYYY-MM-DD` for the day the post goes
    live). It writes the post into `public/`, adds the provenance rows to
-   `docs/ASSET_MANIFEST.md`, and removes `submissions/<slug>/`.
+   `docs/ASSET_MANIFEST.md`, and removes the submission's folder.
 5. `npm run dev` and read `/news/<slug>` and `/news` on localhost, top to bottom.
 6. Commit the result, push it to the pull request branch, and merge.
 

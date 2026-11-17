@@ -92,7 +92,7 @@ function Field({
         maxLength={maxLength}
         autoComplete={autoComplete}
         aria-invalid={invalid || undefined}
-        className={`${UNDER_BARS} w-full border-b border-ink-950/20 bg-transparent py-1.5 text-body font-semibold text-text-strong placeholder:font-normal placeholder:text-text-muted/70 focus:border-rr-violet focus:outline-none aria-[invalid=true]:border-rr-magenta-deep`}
+        className={`${UNDER_BARS} w-full border-b border-ink-950/20 bg-transparent py-1.5 text-body font-semibold text-text-strong placeholder:font-normal placeholder:text-text-muted/70 focus:border-rr-violet focus:outline-none aria-[invalid=true]:border-rr-magenta-deep coarse:min-h-11`}
       />
     </label>
   );
@@ -554,7 +554,7 @@ export default function NewsWrite() {
                     type="button"
                     aria-pressed={mode === m}
                     onClick={() => setMode(m)}
-                    className={`h-9 cursor-pointer rounded-[3px] px-4 text-small font-semibold transition-colors duration-[var(--duration-fast)] motion-reduce:transition-none coarse:h-10 ${
+                    className={`h-9 cursor-pointer rounded-[3px] px-4 text-small font-semibold transition-colors duration-[var(--duration-fast)] motion-reduce:transition-none coarse:h-11 ${
                       mode === m ? "bg-rr-violet text-white" : "text-text-strong hover:bg-ink-950/[0.06]"
                     }`}
                   >
@@ -570,22 +570,22 @@ export default function NewsWrite() {
               {confirmReset ? (
                 <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-small text-text-strong">
                   <span>Delete this draft from this browser?</span>
-                  <button type="button" onClick={startOver} className="rr-text-button font-semibold">
+                  <button type="button" onClick={startOver} className="rr-text-button font-semibold coarse:min-h-11">
                     Delete it
                   </button>
-                  <button type="button" onClick={() => setConfirmReset(false)} className="rr-text-button">
+                  <button type="button" onClick={() => setConfirmReset(false)} className="rr-text-button coarse:min-h-11">
                     Keep writing
                   </button>
                 </p>
               ) : (
                 <>
                   {!empty && (
-                    <button type="button" onClick={() => setConfirmReset(true)} className="rr-text-button text-small max-sm:hidden">
+                    <button type="button" onClick={() => setConfirmReset(true)} className="rr-text-button text-small max-sm:hidden coarse:min-h-11">
                       Start over
                     </button>
                   )}
                   <Button
-                    className="max-sm:ml-auto"
+                    className="max-sm:ml-auto coarse:min-h-11"
                     size="sm"
                     onClick={() => {
                       setShowProblems(true);
@@ -729,7 +729,7 @@ export default function NewsWrite() {
                       placeholder="Photos courtesy of ..."
                       maxLength={300}
                       autoComplete="off"
-                      className="w-full border-b border-dashed border-ink-950/20 bg-transparent py-1 font-mono text-small text-text-muted placeholder:text-text-muted/70 focus:border-solid focus:border-rr-violet focus:outline-none"
+                      className="w-full border-b border-dashed border-ink-950/20 bg-transparent py-1 font-mono text-small text-text-muted placeholder:text-text-muted/70 focus:border-solid focus:border-rr-violet focus:outline-none coarse:min-h-11"
                     />
                   </label>
                 </div>

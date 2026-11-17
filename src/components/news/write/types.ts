@@ -48,6 +48,9 @@ export type VideoAttrs = {
   caption: string;
   /** A Short (9:16): shown narrow, like a portrait photo. */
   portrait: boolean;
+  /** Whether YouTube has a full-size thumbnail for this video (not every
+   * video does). The editor finds out once; the post's poster follows it. */
+  hd?: boolean;
 };
 
 export type DraftFact = { label: string; value: string; href: string };

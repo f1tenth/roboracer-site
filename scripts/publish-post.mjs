@@ -1580,7 +1580,9 @@ function main() {
 
   if (pkg.kind === "folder" && slug) {
     const top = basename(pkg.wrapper ?? pkg.dir);
-    if (top !== slug) warn(shown, `the folder is named ${q(top)} but the post's slug is ${q(slug)}`);
+    // The writer's download unzips to roboracer-post-<slug>, and that folder
+    // is what gets dragged onto GitHub: both names are the expected ones.
+    if (top !== slug && top !== `roboracer-post-${slug}`) warn(shown, `the folder is named ${q(top)} but the post's slug is ${q(slug)}`);
   }
 
   const tellAddressed = () => {

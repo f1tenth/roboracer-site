@@ -2,7 +2,7 @@ import type { DraftFact } from "./types";
 
 const MAX_ROWS = 4;
 const FIELD =
-  "w-full min-w-0 border-b border-dashed border-ink-950/20 bg-transparent py-1 text-small text-text-strong placeholder:text-text-muted/70 focus:border-solid focus:border-rr-violet focus:outline-none";
+  "w-full min-w-0 border-b border-dashed border-ink-950/20 bg-transparent py-1 text-small text-text-strong placeholder:text-text-muted/70 focus:border-solid focus:border-rr-violet focus:outline-none coarse:min-h-11";
 
 const HINTS: DraftFact[] = [
   { label: "Code", value: "github.com/your-team/project", href: "https://github.com/..." },
@@ -45,7 +45,7 @@ export default function FactsEditor({ facts, onChange }: { facts: DraftFact[]; o
                   type="button"
                   onClick={() => onChange(facts.filter((_, j) => j !== i))}
                   aria-label={`Remove row ${i + 1}`}
-                  className="rr-text-button shrink-0 font-mono text-small"
+                  className="rr-text-button shrink-0 font-mono text-small coarse:min-h-11"
                 >
                   Remove
                 </button>

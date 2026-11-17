@@ -58,9 +58,9 @@ function Tool({
 const Rule = () => <span aria-hidden="true" className="mx-1.5 h-5 w-px shrink-0 bg-ink-950/15" />;
 
 const FIELD =
-  "h-10 min-w-0 flex-1 rounded-btn border border-ink-950/20 bg-paper-50 px-3 text-small text-text-strong placeholder:text-text-muted focus:border-rr-violet focus:outline-none";
+  "h-10 min-w-0 flex-1 rounded-btn border border-ink-950/20 bg-paper-50 px-3 text-small text-text-strong placeholder:text-text-muted focus:border-rr-violet focus:outline-none coarse:h-11";
 const SMALL_BUTTON =
-  "inline-flex h-10 shrink-0 cursor-pointer items-center rounded-btn border border-ink-950/20 px-4 text-small font-semibold text-text-strong hover:border-ink-950/50";
+  "inline-flex h-10 shrink-0 cursor-pointer items-center rounded-btn border border-ink-950/20 px-4 text-small font-semibold text-text-strong hover:border-ink-950/50 coarse:h-11";
 
 /** What a writer types for a link, as an address the post may carry: a bare
  * "example.org" gets https, an email gets mailto, anything that is not web
@@ -278,7 +278,7 @@ export default function WriterToolbar({
             aria-describedby={error ? "writer-panel-error" : undefined}
             className={`${FIELD} max-w-[36rem]`}
           />
-          <button type="submit" className={`${SMALL_BUTTON} border-rr-violet bg-rr-violet text-white hover:border-rr-violet-deep hover:bg-rr-violet-deep`}>
+          <button type="submit" className={`${SMALL_BUTTON} border-ink-950 bg-ink-950 text-text-on-ink hover:border-ink-800 hover:bg-ink-800`}>
             {panel === "link" ? "Apply" : "Add video"}
           </button>
           {panel === "link" && state.link && (

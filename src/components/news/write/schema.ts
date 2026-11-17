@@ -111,6 +111,7 @@ export const Video = Node.create({
       title: dataAttr("title", "data-title", ""),
       caption: dataAttr("caption", "data-caption", ""),
       portrait: flagAttr("portrait", "data-portrait"),
+      hd: flagAttr("hd", "data-hd"),
     };
   },
 

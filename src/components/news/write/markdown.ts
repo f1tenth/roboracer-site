@@ -143,7 +143,9 @@ const isInline = (node: JSONContent | undefined) =>
 /**
  * Inline content as lines of marked characters. A hard break, or a newline
  * pasted into a text node, starts a new line; a heading is one line, so
- * there it is a space. Unknown inline nodes keep their text.
+ * there it is a space. A tab is a space: the page shows it as one, and
+ * marked turns it into four inside a list item. Unknown inline nodes keep
+ * their text.
  */
 function collectLines(nodes: JSONContent[] | undefined, oneLine: boolean, extra: Marks = {}): Line[] {
   const lines: Line[] = [[]];
@@ -162,7 +164,7 @@ function collectLines(nodes: JSONContent[] | undefined, oneLine: boolean, extra:
             if (oneLine || marks.code) push(" ", marks);
             else lines.push([]);
           }
-          for (const ch of part) if (!isControl(ch)) push(ch, marks);
+          for (const ch of part) if (!isControl(ch)) push(ch === "\t" ? " " : ch, marks);
         });
       } else {
         walk(node.content, marks);
@@ -265,10 +267,13 @@ function runsOf(line: Line): Run[] {
  * matter at the start of a line (a heading, a list, a table's rule, a setext
  * underline) are escaped there. URLs and email addresses are kept from
  * becoming links on their own: marked would show any backslash inside them.
+ * Inside a link's text marked unescapes \[ and \] once before it reads the
+ * text, so there "(" is escaped too, or `[x](javascript:...)` typed as text
+ * would come back as a link.
  */
-function escapeText(text: string, lineStart: boolean): string {
+function escapeText(text: string, lineStart: boolean, inLink: boolean): string {
   let out = text
-    .replace(/[\\`*_[\]<>~|]/g, "\\$&")
+    .replace(inLink ? /[\\`*_[\]<>~|(]/g : /[\\`*_[\]<>~|]/g, "\\$&")
     .replace(/&(?=#?[A-Za-z0-9]+;)/g, "\\&")
     .replace(/@/g, "\\@")
     .replace(/(https?|ftp):(?=\/\/)/gi, "$1\\:")
@@ -277,11 +282,14 @@ function escapeText(text: string, lineStart: boolean): string {
   return out;
 }
 
+/** The longest run of backticks in `text` (a reduce, not a spread: pasted
+ * code can hold more runs than a function takes arguments). */
+const longestTicks = (text: string) => (text.match(/`+/g) ?? []).reduce((max, run) => Math.max(max, run.length), 0);
+
 /** Inline code: a fence longer than any run of backticks inside, padded where
  * Markdown would otherwise eat a space or a backtick at the edge. */
 function codeSpan(text: string): string {
-  const longest = Math.max(0, ...(text.match(/`+/g) ?? []).map((run) => run.length));
-  const fence = "`".repeat(longest + 1);
+  const fence = "`".repeat(longestTicks(text) + 1);
   const pad = text.startsWith("`") || text.endsWith("`") || (text.startsWith(" ") && text.endsWith(" ") && /[^ ]/.test(text)) ? " " : "";
   return `${fence}${pad}${text}${pad}${fence}`;
 }
@@ -333,7 +341,7 @@ function emitLine(line: Line, italic: Italic, lineStart: boolean): string {
       out += opener(key, italic);
       stack.push(key);
     }
-    out += code ? codeSpan(core) : escapeText(core, lineStart && out === "");
+    out += code ? codeSpan(core) : escapeText(core, lineStart && out === "", stack.some((key) => key[0] === "l"));
   });
   while (stack.length) out += closer(stack.pop() as string, italic);
   return out + pending;
@@ -450,7 +458,9 @@ function writeInline(lines: Line[], kind: "paragraph" | "heading", ctx: Ctx): { 
     const tokens = readBack(kind === "heading" ? `## ${md}` : md, kind);
     if (!tokens || !sameLines(flatten(tokens), model)) continue;
     if (attempt.drop === "emphasis")
-      ctx.problems.push(`${where} has bold, italic or crossed-out words the post format cannot hold here; they were kept as plain text.`);
+      ctx.problems.push(
+        `${where} has bold, italic or crossed-out words the post format cannot hold there (backticks or < and > around them are the usual cause); they were kept as plain text.`,
+      );
     if (attempt.drop === "all") ctx.problems.push(`${where} has formatting or links the post format cannot hold; it was kept as plain text.`);
     return { md, tokens };
   }
@@ -577,7 +587,9 @@ function writeVideo(node: JSONContent, ctx: Ctx): Written[] {
           url: `https://www.youtube.com/watch?v=${id}`,
           width: 1280,
           height: 720,
-          poster: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+          // The full-size thumbnail where the editor found one (VideoView
+          // asks YouTube once); the small one every video has otherwise.
+          poster: `https://i.ytimg.com/vi/${id}/${attrs.hd === true ? "maxresdefault" : "hqdefault"}.jpg`,
         };
   return finishFigure(ctx, name, `youtube:${id}`, title, media, attrs.caption);
 }
@@ -627,8 +639,7 @@ function writeCode(node: JSONContent): Written[] {
   if (!text.trim()) return [];
   const given = typeof node.attrs?.language === "string" ? node.attrs.language.trim() : "";
   const language = LANGUAGE.test(given) ? given : "";
-  const longest = Math.max(0, ...(text.match(/`+/g) ?? []).map((run) => run.length));
-  const fence = "`".repeat(Math.max(3, longest + 1));
+  const fence = "`".repeat(Math.max(3, longestTicks(text) + 1));
   return [{ md: `${fence}${language}\n${text}\n${fence}`, kind: "other" }];
 }
 

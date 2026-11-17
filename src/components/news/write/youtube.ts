@@ -31,6 +31,21 @@ export function parseYouTube(input: string): YouTubeRef | null {
   return id && ID.test(id) ? { videoId: id, portrait } : null;
 }
 
-/** The thumbnail shown before a click: the only thing loaded from YouTube. */
-export const youTubeThumb = (videoId: string, portrait: boolean) =>
-  `https://i.ytimg.com/vi/${videoId}/${portrait ? "oardefault" : "hqdefault"}.jpg`;
+/** The thumbnail shown before a click: the only thing loaded from YouTube.
+ * A Short has its own upright one. A wide video always has the small
+ * "hqdefault" (480 px, letterboxed) and usually, not always, the full-size
+ * "maxresdefault": `hd` says whether this one does (see probeHd). */
+export const youTubeThumb = (videoId: string, portrait: boolean, hd = false) =>
+  `https://i.ytimg.com/vi/${videoId}/${portrait ? "oardefault" : hd ? "maxresdefault" : "hqdefault"}.jpg`;
+
+/** Whether the full-size thumbnail exists. YouTube answers a missing one
+ * with a 120 px grey placeholder, so the picture's own width is the test. */
+export function probeHd(videoId: string): Promise<boolean> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.referrerPolicy = "no-referrer";
+    img.onload = () => resolve(img.naturalWidth > 320);
+    img.onerror = () => resolve(false);
+    img.src = youTubeThumb(videoId, false, true);
+  });
+}

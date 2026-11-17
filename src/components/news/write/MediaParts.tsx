@@ -132,6 +132,6 @@ export const BarRule = () => <span aria-hidden="true" className="mx-1 h-5 w-px b
 /** The classes the caption and description fields share: they read as the
  * published caption does, with a hairline that shows they can be typed in. */
 export const CAPTION_FIELD =
-  "w-full border-b border-dashed border-ink-950/20 bg-transparent py-1 font-mono text-small text-text-muted placeholder:text-text-muted/70 focus:border-solid focus:border-rr-violet focus:outline-none";
+  "w-full border-b border-dashed border-ink-950/20 bg-transparent py-1 font-mono text-small text-text-muted placeholder:text-text-muted/70 focus:border-solid focus:border-rr-violet focus:outline-none coarse:min-h-11";
 export const ALT_FIELD =
-  "w-full min-w-0 border-b border-dashed border-ink-950/20 bg-transparent py-1 text-small text-text-body placeholder:text-text-muted/70 focus:border-solid focus:border-rr-violet focus:outline-none aria-[invalid=true]:border-solid aria-[invalid=true]:border-rr-magenta-deep";
+  "w-full min-w-0 border-b border-dashed border-ink-950/20 bg-transparent py-1 text-small text-text-body placeholder:text-text-muted/70 focus:border-solid focus:border-rr-violet focus:outline-none aria-[invalid=true]:border-solid aria-[invalid=true]:border-rr-magenta-deep coarse:min-h-11";

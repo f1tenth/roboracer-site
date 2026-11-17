@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import { NodeViewWrapper, type ReactNodeViewProps } from "@tiptap/react";
 import { canMove, moveBlock } from "./blockMoves";
 import { ALT_FIELD, AttrField, BarButton, BarRule, CAPTION_FIELD, MediaBar } from "./MediaParts";
 import { IconDown, IconGrip, IconTrash, IconUp } from "./WriterIcons";
 import { useWriter } from "./writerContext";
-import { youTubeThumb } from "./youtube";
+import { probeHd, youTubeThumb } from "./youtube";
 import type { VideoAttrs } from "./types";
 
 /**
@@ -18,6 +19,23 @@ export default function VideoView({ node, updateAttributes, selected, editor, ge
   const editable = editor.isEditable;
   const pos = getPos();
   const titleMissing = showProblems && attrs.title.trim() === "";
+
+  // Ask once whether this video has a full-size thumbnail, and remember the
+  // answer on the block (outside the undo history: it is not an edit).
+  useEffect(() => {
+    if (attrs.hd || attrs.portrait || !editor.isEditable) return;
+    let live = true;
+    void probeHd(attrs.videoId).then((hd) => {
+      const at = getPos();
+      if (!live || !hd || at === undefined) return;
+      const node = editor.state.doc.nodeAt(at);
+      if (node?.type.name !== "video" || node.attrs.videoId !== attrs.videoId) return;
+      editor.view.dispatch(editor.state.tr.setNodeAttribute(at, "hd", true).setMeta("addToHistory", false));
+    });
+    return () => {
+      live = false;
+    };
+  }, [attrs.videoId, attrs.hd, attrs.portrait, editor, getPos]);
   // A Short is shown narrow, like a portrait photo (and pairs like one).
   const cap = attrs.portrait ? "24rem" : undefined;
 
@@ -32,7 +50,7 @@ export default function VideoView({ node, updateAttributes, selected, editor, ge
           style={{ aspectRatio: attrs.portrait ? "9 / 16" : "16 / 9" }}
         >
           <img
-            src={youTubeThumb(attrs.videoId, attrs.portrait)}
+            src={youTubeThumb(attrs.videoId, attrs.portrait, attrs.hd)}
             alt=""
             draggable={false}
             loading="lazy"

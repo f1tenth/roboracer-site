@@ -17,6 +17,12 @@ const NARROW_REM = 24;
 /** A link in the text: a site path navigates in place, anything else opens
  * in a new tab, a mailto stays a plain link. */
 function ProseLink({ href, children }: { href: string; children: ReactNode }) {
+  // A post can come from outside the project (the post writer, /news/write).
+  // scripts/publish-post.mjs refuses any other kind of address before a post
+  // is published; this is the same rule at the last step, so a link that is
+  // not a site path, a web address or an email is shown as plain text and
+  // can never run as script.
+  if (!/^(\/(?!\/)|https?:\/\/|mailto:)/i.test(href)) return <>{children}</>;
   if (href.startsWith("/") && !href.startsWith("//")) {
     return (
       <Link to={href} className={LINK}>

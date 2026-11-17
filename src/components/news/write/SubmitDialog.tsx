@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { buttonClasses } from "../../ui/buttonStyles";
 import { IconArrow, IconCheck } from "./WriterIcons";
 import {
   MAIL_TO,
   REPO_NAME,
   buildPackage,
+  buildPost,
   forkUrl,
   githubUserFrom,
   isGithubUser,
@@ -117,6 +118,9 @@ export default function SubmitDialog({
   };
 
   const pictures = usedImageIds(draft).filter((id) => images.has(id)).length;
+  // What the post format could not keep exactly as written (rare: emphasis
+  // in a spot Markdown cannot express). Worked out only while the box is open.
+  const lost = useMemo(() => (open ? buildPost(draft, images).problems : []), [open, draft, images]);
   const blocked = errors.length > 0;
 
   return (
@@ -179,12 +183,12 @@ export default function SubmitDialog({
               {words} words · {pictures} {pictures === 1 ? "picture" : "pictures"}
               {built ? ` · ${kb(built.zip.size)}` : ""}
             </p>
-            {notes.length > 0 && (
+            {notes.length + lost.length > 0 && (
               <ul className="mt-3 grid gap-1 text-small text-text-muted">
-                {notes.map((note, i) => (
+                {[...notes.map((note) => note.message), ...lost].map((message, i) => (
                   <li key={i} className="flex gap-2">
                     <span aria-hidden="true">·</span>
-                    <span>{note.message}</span>
+                    <span>{message}</span>
                   </li>
                 ))}
               </ul>
