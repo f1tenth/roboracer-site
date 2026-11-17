@@ -165,7 +165,14 @@ export default function NewsLead({ item }: { item: NewsItem }) {
           <LeadVideo video={video} image={image} />
         ) : (
           image && (
-            <div className="overflow-hidden rounded-media border border-ink-950/10 bg-paper-100">
+            // The picture opens the story too (Cedric, 2026-11-17). It keeps
+            // its alt text, so it is a named link; the keyboard meets the
+            // headline link only, the same target.
+            <NewsAnchor
+              href={item.link}
+              tabIndex={-1}
+              className="block overflow-hidden rounded-media border border-ink-950/10 bg-paper-100 transition-colors duration-[var(--duration-fast)] hover:border-ink-950/40"
+            >
               <img
                 src={image.src}
                 alt={image.alt}
@@ -175,7 +182,7 @@ export default function NewsLead({ item }: { item: NewsItem }) {
                 decoding="async"
                 className="block aspect-[3/2] w-full object-cover"
               />
-            </div>
+            </NewsAnchor>
           )
         )}
         {item.credit && (

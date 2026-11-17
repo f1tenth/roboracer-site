@@ -6,8 +6,8 @@
       "date": "2026-11-17",
       "date_display": "Nov 17, 2026",
       "date_precision": "day",
-      "title": "AuRoRus: our RoboRacer stack, open-sourced and written in Rust",
-      "excerpt": "The University of Bologna team that won ICRA 2025 opens its race stack: every node in Rust, no ROS 2, one cargo build.",
+      "title": "AuRoRus: a RoboRacer stack, open-sourced and written in Rust",
+      "excerpt": "The University of Bologna team that won ICRA 2025 and placed 2nd at ICRA 2026 opens its race stack.",
       "kind": "post",
       "event": null,
       "link": "/news/aurorus",
@@ -17,14 +17,14 @@
       "publisher": "RoboRacer blog",
       "credit": "Photo: courtesy of Enrico Mannocci, University of Bologna",
       "image": {
-        "src": "/media/news/news-aurorus-cover-1080.webp",
-        "width": 1080,
-        "height": 810,
-        "alt": "A RoboRacer car with its cover off beside a car-shaped trophy engraved 2nd place Master Cup, ICRA 2026, Vienna."
+        "src": "/media/news/news-aurorus-team-atlanta-wide-964.webp",
+        "width": 964,
+        "height": 642,
+        "alt": "The UniBo team with the trophy, the winner's cheque and the car at ICRA 2025 in Atlanta."
       },
       "featured": true,
-      "status": "verify",
-      "sources": "A post hosted on the site: public/data/posts.json (slug aurorus) and public/data/posts/aurorus.md, Enrico Mannocci's text from https://github.com/Noce99/AuRoRus_Roboracer_Post. The card title is the post's own. Excerpt facts: ICRA 2025 win (this file, icra2025-atlanta-unibo-wins); Rust, ROS 2-free, one cargo build (the post). DATE is the draft's; set it to the day the post goes live. featured: the newest item leads the page (drop the flag to return the lead to IFAC 2026)."
+      "status": "published",
+      "sources": "A post hosted on the site: public/data/posts.json (slug aurorus) and public/data/posts/aurorus.md, Enrico Mannocci's text from https://github.com/Noce99/AuRoRus_Roboracer_Post. Title ('a RoboRacer stack'; the README says 'our'), excerpt and picture (a landscape crop of the Atlanta team photo): Cedric, 2026-11-17. Excerpt facts: ICRA 2025 win (this file, icra2025-atlanta-unibo-wins); second at ICRA 2026 (teams.json: UBM-Atlas, 2nd, Master Cup). featured: the newest item leads the page (drop the flag to return the lead to IFAC 2026). Live 2026-11-17."
     },
     {
       "id": "iros2026-sim-league-siga-siga-wins",
