@@ -18,6 +18,7 @@ const TITLES: Record<string, string> = {
   "/learn/courses": "Courses - RoboRacer",
   "/learn/teach": "Teach the course - RoboRacer",
   "/news": "News - RoboRacer",
+  "/news/write": "Write a post - RoboRacer",
   "/race": "Race - RoboRacer",
   "/research": "Research - RoboRacer",
   "/rules": "Competition rules - RoboRacer",

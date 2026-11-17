@@ -1,0 +1,4 @@
+# Test pictures and run output: made by make_pictures.py and the walks.
+*.jpg
+*.svg
+out/

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
@@ -8,6 +9,8 @@ import TagFilter from "../components/ui/TagFilter";
 import NewsCard from "../components/news/NewsCard";
 import NewsLead from "../components/news/NewsLead";
 import NewsEmpty from "../components/news/NewsEmpty";
+import WriteNudge from "../components/news/WriteNudge";
+import { nudgeWasClosed, rememberNudgeClosed } from "../components/news/nudgeState";
 import { eventLabel, formatIsoDate, loadNewsFeed, type NewsFeed, type NewsItem } from "../components/news/newsData";
 import { useDesktop } from "../lib/motion";
 
@@ -111,6 +114,7 @@ export default function News() {
   const [feed, setFeed] = useState<NewsFeed | null>(null);
   const [failed, setFailed] = useState(false);
   const [tag, setTag] = useState<string | null>(null);
+  const [nudgeClosed, setNudgeClosed] = useState(nudgeWasClosed);
 
   useEffect(() => {
     let live = true;
@@ -178,12 +182,24 @@ export default function News() {
           phone it starts a rem under the bar, like the About and Race heroes,
           instead of a full section's padding down. */}
       <Section width="page" className="compact:pt-4" aria-labelledby="news-title">
+        {/* The page's label, and across from it the way in to the post
+            writer once the floating note (WriteNudge, below) has been
+            closed: the note is the invitation, this button is what is left
+            of it, so the way in never disappears and is never shown twice. */}
+        <div className="mb-4 flex min-h-9 flex-wrap items-center justify-between gap-x-6 gap-y-3">
+          <p className="flex items-center gap-2 font-mono text-small text-text-muted">
+            <span aria-hidden="true" className="h-1 w-1 bg-ink-950" />
+            <span>News</span>
+          </p>
+          {nudgeClosed && (
+            <Button href="/news/write" size="sm" className="coarse:min-h-11">
+              Write your own post
+              <span aria-hidden="true">&rarr;</span>
+            </Button>
+          )}
+        </div>
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
-            <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-muted">
-              <span aria-hidden="true" className="h-1 w-1 bg-ink-950" />
-              <span>News</span>
-            </p>
             <h1
               id="news-title"
               className="max-w-[18ch] font-display text-display-xl font-semibold text-text-strong"
@@ -364,9 +380,25 @@ export default function News() {
                 </a>
                 .
               </p>
+              <p className="text-small text-text-body">
+                A longer story to tell?{" "}
+                <Link to="/news/write" className={LINK}>
+                  Write your own post
+                </Link>
+                .
+              </p>
             </div>
           </div>
         </Section>
+      )}
+
+      {!nudgeClosed && (
+        <WriteNudge
+          onClose={() => {
+            rememberNudgeClosed();
+            setNudgeClosed(true);
+          }}
+        />
       )}
     </div>
   );

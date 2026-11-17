@@ -5,7 +5,7 @@ import PauseToggle from "../ui/PauseToggle";
 import { YouTubePlayer } from "../ui/YouTubeFacade";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { LINK, UNDER_NAV } from "../learn/learnStyles";
-import type { PostBlock, PostFigure, PostMedia } from "./postData";
+import { WRAP_SPAN, type PostBlock, type PostFigure, type PostMedia } from "./postData";
 
 const CODE_CHIP = "rounded-[0.25rem] bg-paper-100 px-[0.35em] py-[0.1em] font-mono text-[0.9em] text-text-strong";
 const CAPTION = "mt-3 font-mono text-small text-text-muted";
@@ -17,6 +17,12 @@ const NARROW_REM = 24;
 /** A link in the text: a site path navigates in place, anything else opens
  * in a new tab, a mailto stays a plain link. */
 function ProseLink({ href, children }: { href: string; children: ReactNode }) {
+  // A post can come from outside the project (the post writer, /news/write).
+  // scripts/publish-post.mjs refuses any other kind of address before a post
+  // is published; this is the same rule at the last step, so a link that is
+  // not a site path, a web address or an email is shown as plain text and
+  // can never run as script.
+  if (!/^(\/(?!\/)|https?:\/\/|mailto:)/i.test(href)) return <>{children}</>;
   if (href.startsWith("/") && !href.startsWith("//")) {
     return (
       <Link to={href} className={LINK}>
@@ -103,7 +109,7 @@ function CodeBlock({ text, lang }: { text: string; lang?: string }) {
   };
 
   return (
-    <div className="mt-6 overflow-hidden rounded-media bg-ink-900 text-text-on-ink">
+    <div className="clear-both mt-6 overflow-hidden rounded-media bg-ink-900 text-text-on-ink">
       <div className="flex items-center justify-between gap-4 border-b border-text-on-ink/10 px-4 py-1.5">
         <span className="font-mono text-eyebrow uppercase tracking-[0.14em] text-text-on-ink-muted">{label}</span>
         <button
@@ -235,7 +241,7 @@ function Figure({ figure, paired }: { figure: PostFigure; paired: boolean }) {
   // still shows, lazily, without a reserved box.
   if (!media) {
     return (
-      <figure className={paired ? "" : "mt-8"}>
+      <figure className={paired ? "" : "mt-8 clear-both"}>
         <img src={figure.src} alt={figure.alt} loading="lazy" decoding="async" className={`${FRAME} block h-auto w-full`} />
         {caption && <figcaption className={CAPTION}>{caption}</figcaption>}
       </figure>
@@ -245,8 +251,22 @@ function Figure({ figure, paired }: { figure: PostFigure; paired: boolean }) {
   // and a narrow one is capped again unless it shares its line.
   const cap = Math.min(media.width / 16, !paired && media.size === "narrow" ? NARROW_REM : Infinity);
   const style: CSSProperties = Number.isFinite(cap) ? { maxWidth: `${cap}rem` } : {};
+  // Beside the text: the figure floats to its side at its share of the
+  // column and the paragraphs after it flow around it. Its top margin is a
+  // paragraph's gap plus the half-leading, so the picture's edge and the
+  // first line's letters start level. It starts below any other figure
+  // still beside the text (clear-both): two face to face would leave the
+  // words a sliver between them. Below 640 px there is no room for a
+  // picture and text side by side, and it is a figure on its own line.
+  const wrap = paired ? undefined : media.wrap;
+  const share = Math.min(0.65, Math.max(0.25, media.span ?? WRAP_SPAN));
+  const place = wrap
+    ? `mx-auto mt-8 w-full sm:mb-3 sm:mt-[1.7rem] sm:w-[var(--wrap-span)] ${
+        wrap === "left" ? "sm:float-left sm:clear-both sm:mr-7" : "sm:float-right sm:clear-both sm:ml-7"
+      }`
+    : `mx-auto w-full ${paired ? "" : "mt-8 clear-both"}`;
   return (
-    <figure className={`mx-auto w-full ${paired ? "" : "mt-8"}`} style={style}>
+    <figure className={place} style={wrap ? ({ ...style, "--wrap-span": `${(share * 100).toFixed(2)}%` } as CSSProperties) : style}>
       {media.kind === "clip" ? (
         <Clip figure={figure} media={media} caption={caption} />
       ) : (
@@ -283,7 +303,7 @@ function Figures({ items }: { items: PostFigure[] }) {
   const cols = items.map((f) => `${((f.media?.width ?? 1) / (f.media?.height ?? 1)).toFixed(4)}fr`).join(" ");
   return (
     <div
-      className="mt-8 grid items-start gap-6 max-sm:mx-auto max-sm:max-w-[24rem] sm:[grid-template-columns:var(--pair-cols)]"
+      className="clear-both mt-8 grid items-start gap-6 max-sm:mx-auto max-sm:max-w-[24rem] sm:[grid-template-columns:var(--pair-cols)]"
       style={{ "--pair-cols": cols } as CSSProperties}
     >
       {items.map((figure) => (
@@ -324,7 +344,9 @@ function Block({ token, nested = false, lead = false }: { token: Token; nested?:
     }
     case "list": {
       const list = token as Tokens.List;
-      const cls = `${nested ? "mt-2" : "mt-5"} space-y-2 pl-6 marker:text-text-muted`;
+      // flow-root: beside a wrapped figure a list is its own column, so its
+      // markers never land on the picture.
+      const cls = `${nested ? "mt-2" : "mt-5 flow-root"} space-y-2 pl-6 marker:text-text-muted`;
       return list.ordered ? (
         <ol start={typeof list.start === "number" ? list.start : undefined} className={`${cls} list-decimal marker:font-mono marker:text-small`}>
           <ListItems list={list} />
@@ -343,7 +365,7 @@ function Block({ token, nested = false, lead = false }: { token: Token; nested?:
       const table = token as Tokens.Table;
       return (
         // Focusable for the same reason as a code block: it can scroll.
-        <div tabIndex={0} role="group" aria-label="Table" className={`${FRAME} mt-6 overflow-x-auto`}>
+        <div tabIndex={0} role="group" aria-label="Table" className={`${FRAME} clear-both mt-6 overflow-x-auto`}>
           <table className="w-full border-collapse text-left text-small">
             <thead>
               <tr>
@@ -371,23 +393,23 @@ function Block({ token, nested = false, lead = false }: { token: Token; nested?:
     }
     case "blockquote":
       return (
-        <blockquote className="mt-6 border-l-2 border-rr-violet pl-5 text-text-strong">
+        <blockquote className="mt-6 flow-root border-l-2 border-rr-violet pl-5 text-text-strong">
           {(token as Tokens.Blockquote).tokens.map((child, i) => (
             <Block key={i} token={child} nested />
           ))}
         </blockquote>
       );
     case "hr":
-      return <hr className="mt-10 border-ink-950/10" />;
+      return <hr className="clear-both mt-10 border-ink-950/10" />;
     default:
       return null;
   }
 }
 
 const HEADING: Record<2 | 3 | 4, string> = {
-  2: `mt-14 font-display text-display-s font-semibold text-text-strong ${UNDER_NAV}`,
-  3: `mt-10 font-display text-[1.25rem] font-semibold leading-snug text-text-strong ${UNDER_NAV}`,
-  4: `mt-8 font-semibold text-text-strong ${UNDER_NAV}`,
+  2: `clear-both mt-14 font-display text-display-s font-semibold text-text-strong ${UNDER_NAV}`,
+  3: `clear-both mt-10 font-display text-[1.25rem] font-semibold leading-snug text-text-strong ${UNDER_NAV}`,
+  4: `clear-both mt-8 font-semibold text-text-strong ${UNDER_NAV}`,
 };
 
 /**
@@ -398,7 +420,7 @@ const HEADING: Record<2 | 3 | 4, string> = {
  */
 export default function PostBody({ blocks }: { blocks: PostBlock[] }) {
   return (
-    <div className="text-[1.0625rem] leading-[1.75] text-text-body lg:text-[1.125rem]">
+    <div className="flow-root text-[1.0625rem] leading-[1.75] text-text-body lg:text-[1.125rem]">
       {blocks.map((block, i) => {
         if (block.type === "heading") {
           const Tag = `h${block.depth}` as "h2" | "h3" | "h4";

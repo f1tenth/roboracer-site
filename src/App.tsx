@@ -23,6 +23,7 @@ const Course = lazyWithRetry("Course", () => import("./pages/Course"));
 const Teach = lazyWithRetry("Teach", () => import("./pages/Teach"));
 const News = lazyWithRetry("News", () => import("./pages/News"));
 const NewsPost = lazyWithRetry("NewsPost", () => import("./pages/NewsPost"));
+const NewsWrite = lazyWithRetry("NewsWrite", () => import("./pages/NewsWrite"));
 const RaceCalendar = lazyWithRetry("Race", () => import("./pages/Race"));
 const Research = lazyWithRetry("Research", () => import("./pages/Research"));
 const Rules = lazyWithRetry("Rules", () => import("./pages/Rules"));
@@ -66,6 +67,10 @@ function App() {
             <Route path="/news" element={<News />} />
             {/* A post hosted here (public/data/posts.json and its Markdown
                 file); its card on /news links to it. */}
+            {/* The post writer: its own address under News. A static segment
+                outranks :slug, so no post can ever be called "write"
+                (the writer and scripts/publish-post.mjs both refuse it). */}
+            <Route path="/news/write" element={<NewsWrite />} />
             <Route path="/news/:slug" element={<NewsPost />} />
             <Route path="/race" element={<RaceCalendar />} />
             <Route path="/research" element={<Research />} />

@@ -27,7 +27,17 @@ export type PostMedia = {
   /** A screenshot whose detail is lost at column width: the picture links to
    * its full-size file. */
   zoom?: boolean;
+  /** The figure sits on this side of the reading column and the text that
+   * follows flows around it (from 640 px up; on a phone it takes its own
+   * line). Written by the post writer, where it is a picture's default. */
+  wrap?: "left" | "right";
+  /** With `wrap`: the share of the reading column the figure takes, 0.25 to
+   * 0.65 (WRAP_SPAN when absent). */
+  span?: number;
 };
+
+/** A wrapped figure's share of the reading column when the post names none. */
+export const WRAP_SPAN = 0.42;
 
 export type PostFact = { label: string; value: string; href?: string | null };
 
@@ -114,6 +124,19 @@ const slugify = (text: string) =>
     .replace(/[^\w\s-]/g, "")
     .replace(/\s+/g, "-");
 
+/** A heading's words as a reader sees them: the text of its inline tokens,
+ * without the Markdown that marks them up (`heading.text` is the source
+ * line, so an escaped character or a bold word would show its syntax in
+ * "On this page"). */
+const inlineText = (tokens: Token[] | undefined): string =>
+  (tokens ?? [])
+    .map((t) => {
+      const kids = (t as { tokens?: Token[] }).tokens;
+      if (kids && kids.length > 0) return inlineText(kids);
+      return t.type === "br" ? " " : ((t as { text?: string }).text ?? "");
+    })
+    .join("");
+
 const soleChild = (token: Token | undefined, type: string): Token | null => {
   if (!token || token.type !== "paragraph") return null;
   const kids = (token as Tokens.Paragraph).tokens;
@@ -137,13 +160,14 @@ export function parsePost(markdown: string, media: Record<string, PostMedia> = {
     const token = tokens[i];
     if (token.type === "heading") {
       const heading = token as Tokens.Heading;
-      const base = slugify(heading.text) || "section";
+      const label = inlineText(heading.tokens).trim() || heading.text;
+      const base = slugify(label) || "section";
       let id = base;
       for (let n = 2; used.has(id); n += 1) id = `${base}-${n}`;
       used.add(id);
       // The page's h1 is the title, so a stray "# " in the text is an h2.
       const depth = Math.min(Math.max(heading.depth, 2), 4) as 2 | 3 | 4;
-      if (depth === 2) toc.push({ id, label: heading.text });
+      if (depth === 2) toc.push({ id, label });
       blocks.push({ type: "heading", depth, id, tokens: heading.tokens });
       continue;
     }
@@ -158,7 +182,8 @@ export function parsePost(markdown: string, media: Record<string, PostMedia> = {
         media: media[image.href],
       };
       const last = blocks[blocks.length - 1];
-      const narrow = figure.media?.size === "narrow";
+      // A figure the text wraps around is never half of a pair.
+      const narrow = figure.media?.size === "narrow" && !figure.media.wrap;
       if (narrow && last?.type === "figures" && last.items.length === 1 && last.items[0].media?.size === "narrow") {
         last.items.push(figure);
       } else {
