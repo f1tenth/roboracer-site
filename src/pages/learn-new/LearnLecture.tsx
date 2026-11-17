@@ -66,10 +66,10 @@ export default function LearnLecture() {
       </DocHeader>
 
       <DocSection id="lec-overview" title="Overview">
-        <div className="grid gap-10 rounded-card border border-ink-950/10 bg-paper-100 p-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+        <div className="rule-card grid gap-10 p-6 pt-7 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
           <p className="max-w-[62ch] text-lead text-text-body">{l.overview}</p>
           <div>
-            <h3 className="border-b border-ink-950/10 pb-3 font-mono text-small font-semibold text-text-strong">
+            <h3 className="border-b border-ink-950/10 pb-3 text-small font-bold uppercase tracking-[0.1em] text-text-muted">
               Topics covered
             </h3>
             <ul className="divide-y divide-ink-950/10">

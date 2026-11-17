@@ -13,7 +13,7 @@ const TOC = [
 
 function Checklist({ title, items, tone }: { title: string; items: string[]; tone: "yes" | "no" }) {
   return (
-    <div className={`rounded-media border p-5 ${tone === "yes" ? "border-ink-950/10 bg-paper-100" : "border-ink-950/10"}`}>
+    <div className="rule-card p-5 pt-6">
       <h3 className="font-display text-lead font-semibold text-text-strong">{title}</h3>
       <ul className="mt-3 space-y-2 text-body text-text-body">
         {items.map((it) => (
@@ -57,7 +57,7 @@ export default function LearnIntro() {
                 to={m.to}
                 className="group block h-full rounded-media border border-ink-950/10 bg-paper-50 p-4 transition-colors hover:border-rr-violet hover:bg-paper-100"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-btn border border-ink-950/15 bg-paper-100 font-mono text-body font-semibold text-text-strong">
+                <span className="flex h-11 w-11 items-center justify-center rounded-btn border border-ink-950/15 bg-paper-50 font-mono text-body font-semibold text-text-strong">
                   {m.id}
                 </span>
                 <span aria-hidden="true" className="mt-2 block h-0.5 w-11 bg-gradient-scale" />

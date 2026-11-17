@@ -98,9 +98,8 @@ export function Embed({ src, title, caption }: { src: string; title: string; cap
 /** The facts of a page in one bordered row, under a thin logo-gradient rule. */
 export function Glance({ items }: { items: { label: string; value: ReactNode }[] }) {
   return (
-    <div className="mt-10 overflow-hidden rounded-card border border-ink-950/10 bg-paper-100">
-      <span aria-hidden="true" className="block h-0.5 bg-gradient-scale" />
-      <dl className="grid grid-cols-2 gap-x-8 gap-y-5 p-6 md:grid-cols-[repeat(auto-fit,minmax(10rem,1fr))]">
+    <div className="rule-card mt-10">
+      <dl className="grid grid-cols-2 gap-x-8 gap-y-5 p-6 pt-7 md:grid-cols-[repeat(auto-fit,minmax(10rem,1fr))]">
         {items.map((it) => (
           <div key={it.label}>
             <dt className="text-small text-text-muted">{it.label}</dt>

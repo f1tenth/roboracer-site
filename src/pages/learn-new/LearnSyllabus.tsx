@@ -97,7 +97,7 @@ export default function LearnSyllabus() {
       <DocSection id="syl-how" title="How the course runs" lead="Four parts work together.">
         <ol className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {syllabus.components.map((c) => (
-            <li key={c.title} className="rounded-media border border-ink-950/10 bg-paper-100 p-5">
+            <li key={c.title} className="rule-card p-5 pt-6">
               <h3 className="font-display text-lead font-semibold text-text-strong">{c.title}</h3>
               <p className="mt-2 text-body text-text-body">{c.body}</p>
             </li>

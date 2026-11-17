@@ -906,3 +906,7 @@ body {
 .doc-prose .logo-card__name { font-weight: 600; color: var(--color-text-strong); }
 .doc-prose .logo-card__fmt { color: var(--color-text-muted); }
 .doc-prose .logo-card__meta a { margin-left: auto; }
+
+/* A plain card with the thin logo-gradient rule: the same box as the exported lecture sections. */
+.rule-card { position: relative; overflow: hidden; border: 1px solid rgb(7 7 13 / .1); border-radius: .75rem; background: var(--color-paper-50); }
+.rule-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 2px; background: linear-gradient(90deg, var(--color-rr-cyan), var(--color-rr-grad-start), var(--color-rr-grad-end)); }
