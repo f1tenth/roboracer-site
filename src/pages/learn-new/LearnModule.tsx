@@ -98,8 +98,11 @@ export default function LearnModule() {
         crumbs={[{ label: "Learn", href: ROOT }, { label: `Module ${mod.id}` }]}
         title={
           <>
-            <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-btn bg-rr-violet font-mono text-display-s font-semibold text-white">
-              {mod.id}
+            <span className="mb-5 block w-14">
+              <span className="flex h-14 w-14 items-center justify-center rounded-btn bg-ink-900 font-mono text-display-s font-semibold text-text-on-ink">
+                {mod.id}
+              </span>
+              <span aria-hidden="true" className="mt-1.5 block h-0.5 w-14 bg-gradient-scale" />
             </span>
             {mod.title}
           </>

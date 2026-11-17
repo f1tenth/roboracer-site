@@ -76,35 +76,63 @@ export function DocSection({
   );
 }
 
-/** A 16:9 embed (YouTube or Google Slides), lazy, with a caption row. */
-export function Embed({ src, title, caption }: { src: string; title: string; caption?: ReactNode }) {
+/** A 16:9 embed (YouTube or Google Slides), lazy, with a caption row. On
+ * `tone="ink"` it sits on a dark panel under the logo-gradient rule: the one
+ * place the docs borrow the courses pages' dark contrast. */
+export function Embed({
+  src,
+  title,
+  caption,
+  tone = "paper",
+}: {
+  src: string;
+  title: string;
+  caption?: ReactNode;
+  tone?: "paper" | "ink";
+}) {
+  const ink = tone === "ink";
   return (
-    <figure>
-      <div className="aspect-video w-full overflow-hidden rounded-media border border-ink-950/10 bg-paper-100">
-        <iframe
-          src={src}
-          title={title}
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
-          allowFullScreen
-          className="h-full w-full border-none"
-        />
+    <figure className={ink ? "overflow-hidden rounded-card border border-ink-700 bg-ink-900" : ""}>
+      {ink && <span aria-hidden="true" className="block h-0.5 bg-gradient-scale" />}
+      <div className={ink ? "p-4 sm:p-5" : ""}>
+        <div
+          className={`aspect-video w-full overflow-hidden rounded-media border ${
+            ink ? "border-ink-700 bg-ink-950" : "border-ink-950/10 bg-paper-100"
+          }`}
+        >
+          <iframe
+            src={src}
+            title={title}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+            allowFullScreen
+            className="h-full w-full border-none"
+          />
+        </div>
+        {caption && (
+          <figcaption className={`mt-3 text-small ${ink ? "text-text-on-ink-muted" : "text-text-muted"}`}>
+            {caption}
+          </figcaption>
+        )}
       </div>
-      {caption && <figcaption className="mt-3 text-small text-text-muted">{caption}</figcaption>}
     </figure>
   );
 }
 
-/** A mono key / value strip: the facts of a page in one ruled row. */
+/** The facts of a page on a dark panel with the logo-gradient rule: the same
+ * panel on the intro, syllabus, module and lecture pages. */
 export function Glance({ items }: { items: { label: string; value: ReactNode }[] }) {
   return (
-    <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-ink-950/10 pt-6 md:grid-cols-4">
-      {items.map((it) => (
-        <div key={it.label}>
-          <dt className="text-small text-text-muted">{it.label}</dt>
-          <dd className="mt-1 text-body font-semibold text-text-strong">{it.value}</dd>
-        </div>
-      ))}
-    </dl>
+    <div className="mt-10 overflow-hidden rounded-card bg-ink-900">
+      <span aria-hidden="true" className="block h-0.5 bg-gradient-scale" />
+      <dl className="grid grid-cols-2 gap-x-8 gap-y-5 p-6 md:grid-cols-[repeat(auto-fit,minmax(10rem,1fr))]">
+        {items.map((it) => (
+          <div key={it.label}>
+            <dt className="text-small text-text-on-ink-muted">{it.label}</dt>
+            <dd className="mt-1 text-body font-semibold text-text-on-ink">{it.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
   );
 }

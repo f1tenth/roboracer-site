@@ -1,6 +1,6 @@
 import { Link, useOutletContext } from "react-router-dom";
 import type { DocsSession, LearnDocsFile } from "../../lib/data";
-import { DocPage, DocHeader, DocSection } from "../../components/learn/docs/DocParts";
+import { DocPage, DocHeader, DocSection, Glance } from "../../components/learn/docs/DocParts";
 import {
   KIND_TAG,
   ROOT,
@@ -85,6 +85,13 @@ export default function LearnSyllabus() {
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
+        <Glance
+          items={[
+            { label: "Term", value: `${fmtDate(docs.schedule[0].date)} to ${fmtDate(docs.schedule[docs.schedule.length - 1].date)}` },
+            { label: "Modules", value: String(docs.outline.length) },
+            { label: "Races", value: String(docs.schedule.filter((s) => s.kind === "race").length) },
+          ]}
+        />
       </DocHeader>
 
       <DocSection id="syl-how" title="How the course runs" lead="Four parts work together.">

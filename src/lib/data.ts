@@ -1037,8 +1037,6 @@ export type LearnDocsFile = {
     overview: string;
     video_id: string;
     video_title: string;
-    slides_embed: string;
-    slides_title: string;
     teaches: string[];
     not: string[];
     prerequisites: string[];

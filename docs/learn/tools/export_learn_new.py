@@ -79,6 +79,72 @@ def clean_title(t):
     return rename(re.sub(r"[\s]+$", "", t.replace("\xb6", "")).strip())
 
 
+def slug(t):
+    return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
+
+
+def make_block(soup, label, nodes, media=False):
+    div = soup.new_tag("div")
+    div["class"] = "doc-block" + (" doc-block--media" if media else "")
+    h = soup.new_tag("h2")
+    h["class"] = "doc-block-label"
+    h["id"] = slug(label)
+    h.string = label
+    body = soup.new_tag("div")
+    body["class"] = "doc-block-body"
+    for n in nodes:
+        body.append(n.extract() if hasattr(n, "extract") else n)
+    div.append(h)
+    div.append(body)
+    return div
+
+
+def make_blocks(art, soup):
+    """The lecture template (bold labels as definition lists, or a bold line
+    followed by an indented embed) becomes boxed sections; embeds go on dark panels."""
+    # definition lists: one block per term / description pair
+    for dl in list(art.find_all("dl")):
+        if dl.find_parent("dl") is not None or dl.find_parent(class_="doc-block"):
+            continue
+        blocks, prev_overview = [], None
+        for dt in dl.find_all("dt", recursive=False):
+            label = dt.get_text(" ", strip=True).rstrip(":").strip()
+            dd = dt.find_next_sibling("dd")
+            if dd is None:
+                continue
+            nodes = list(dd.children)
+            blk = make_block(soup, label, nodes)
+            blocks.append(blk)
+            if label.lower().startswith("overview"):
+                prev_overview = blk
+        if not blocks:
+            continue
+        # stray list right after an "Overview" list belongs to the overview
+        if prev_overview is not None:
+            nxt = dl.find_next_sibling()
+            while nxt is not None and nxt.name in ("ol", "ul"):
+                n2 = nxt.find_next_sibling()
+                prev_overview.find(class_="doc-block-body").append(nxt.extract())
+                nxt = n2
+        for b in blocks:
+            dl.insert_before(b)
+        dl.decompose()
+    # "Slides:" / "Video:" lines followed by an indented embed
+    for p in list(art.find_all("p")):
+        strong = p.find("strong", recursive=False)
+        txt = p.get_text(" ", strip=True)
+        if strong is None or not txt.endswith(":") or txt != strong.get_text(" ", strip=True):
+            continue
+        nxt = p.find_next_sibling()
+        if nxt is None or nxt.name != "blockquote":
+            continue
+        media = nxt.find("iframe") is not None
+        blk = make_block(soup, txt.rstrip(":").strip(), list(nxt.children), media=media)
+        p.insert_before(blk)
+        nxt.decompose()
+        p.decompose()
+
+
 pages = {}
 for f in sorted(glob.glob(os.path.join(RAW, "*.html"))):
     key = os.path.basename(f)[:-5].replace("__", "/")
@@ -93,7 +159,7 @@ for f in sorted(glob.glob(os.path.join(RAW, "*.html"))):
     if m:
         module = m.group(1)
     pages[key] = {"title": title, "to": route(key), "module": module, "native": key in NATIVE}
-    if key in NATIVE:
+    if key in NATIVE or key == "press/logos":
         continue
 
     # headings get ids from their section so the page TOC can jump
@@ -130,7 +196,7 @@ for f in sorted(glob.glob(os.path.join(RAW, "*.html"))):
         im["src"] = fetch_img(im["src"], key)
         im["loading"] = "lazy"
         im["decoding"] = "async"
-        if im.get("alt") is None or im.get("alt") == "":
+        if not im.get("alt") or re.search(r"\.(png|gif|jpe?g)$", im["alt"], re.I) or im["alt"].startswith(".."):
             im["alt"] = f"Figure from {title}"
         for att in ("width", "height"):
             if im.has_attr(att) and not str(im[att]).isdigit():
@@ -145,6 +211,7 @@ for f in sorted(glob.glob(os.path.join(RAW, "*.html"))):
             fr["title"] = "Slides" if "docs.google.com" in fr.get("src", "") else "Embedded content"
         fr["allowfullscreen"] = ""
     rename_tree(art)
+    make_blocks(art, soup)
 
     out = os.path.join(OUTD, "pages", key + ".html")
     os.makedirs(os.path.dirname(out), exist_ok=True)

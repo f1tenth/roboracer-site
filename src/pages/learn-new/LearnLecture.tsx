@@ -66,7 +66,7 @@ export default function LearnLecture() {
       </DocHeader>
 
       <DocSection id="lec-overview" title="Overview">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+        <div className="grid gap-10 rounded-card border border-ink-950/10 bg-paper-100 p-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
           <p className="max-w-[62ch] text-lead text-text-body">{l.overview}</p>
           <div>
             <h3 className="border-b border-ink-950/10 pb-3 font-mono text-small font-semibold text-text-strong">
@@ -88,6 +88,7 @@ export default function LearnLecture() {
           <Embed
             src={l.slides_embed}
             title={`Slides: ${l.title}`}
+            tone="ink"
             caption={
               <>
                 Slides ·{" "}
@@ -98,7 +99,7 @@ export default function LearnLecture() {
               </>
             }
           />
-          <Embed src={`https://www.youtube.com/embed/${l.video_id}`} title={l.video_title} caption="Video" />
+          <Embed src={`https://www.youtube.com/embed/${l.video_id}`} title={l.video_title} caption="Video" tone="ink" />
         </div>
       </DocSection>
 

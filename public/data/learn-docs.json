@@ -14,8 +14,6 @@
   "overview": "RoboRacer is a hands-on course in the foundations of autonomy: perception, planning and control, practiced on a 1/10-scale race car. Start in the simulator with ROS 2, build up through mapping, optimal control and reinforcement learning, then race what you wrote. Built for graduate and senior undergraduate students.",
   "video_id": "hXmGTKom4O8",
   "video_title": "RoboRacer course introduction",
-  "slides_embed": "https://docs.google.com/presentation/d/e/2PACX-1vTCwyQ5XAae2FpuUS64vCq4f_TZHtzXg_7G4aSgioYSi_54t1pvIAjT0sPt2nqFFA/embed?start=false&loop=false&delayms=3000&slide=id.p1",
-  "slides_title": "RoboRacer course overview slides",
   "teaches": [
    "Perception",
    "Planning",
