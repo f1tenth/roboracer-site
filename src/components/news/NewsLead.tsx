@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { eventLabel, isSitePath, youTubePoster, type NewsImage, type NewsItem, type NewsYouTubeEmbed } from "./newsData";
 import LinkedInEmbed from "./LinkedInEmbed";
+import AccentTitle from "./AccentTitle";
 import NewsAnchor from "./NewsAnchor";
 import { YouTubePlayer } from "../ui/YouTubeFacade";
 
@@ -69,7 +70,7 @@ export default function NewsLead({ item }: { item: NewsItem }) {
       }`}
     >
       <NewsAnchor href={item.link} className={TITLE_LINK}>
-        {item.title}
+        <AccentTitle title={item.title} accent={item.title_accent} />
       </NewsAnchor>
     </h2>
   );

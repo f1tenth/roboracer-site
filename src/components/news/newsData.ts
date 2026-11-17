@@ -45,6 +45,10 @@ export type NewsItem = {
   date_display: string;
   date_precision: "day" | "month";
   title: string;
+  /** The words of the title that carry the logo gradient while the item is
+   * the lead (one display phrase per page): a hosted post's name, as on its
+   * own page. Cards never show it. */
+  title_accent?: string | null;
   excerpt?: string | null;
   kind: NewsKind;
   /** Competition id: icra2026, iv2026, ifac2026, iros2026, ... */
