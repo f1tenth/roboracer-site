@@ -1,6 +1,7 @@
 import { useId, useState } from "react";
-import { eventLabel, youTubePoster, type NewsItem, type NewsLinkedInEmbed } from "./newsData";
+import { eventLabel, isSitePath, youTubePoster, type NewsItem, type NewsLinkedInEmbed } from "./newsData";
 import LinkedInEmbed from "./LinkedInEmbed";
+import NewsAnchor from "./NewsAnchor";
 import { YouTubePlayer } from "../ui/YouTubeFacade";
 
 // Site-wide link contract (landing-v2): ink text, underline, violet on hover.
@@ -53,15 +54,16 @@ function Byline({ item }: { item: NewsItem }) {
 }
 
 /** The headline with its arrow glued to the last word in one no-wrap span, so
- * the arrow never starts a line alone. */
-function ArrowTitle({ title }: { title: string }) {
+ * the arrow never starts a line alone. A post hosted here takes the plain
+ * arrow: the up-right one says "leaves the site". */
+function ArrowTitle({ title, here = false }: { title: string; here?: boolean }) {
   const cut = title.lastIndexOf(" ");
   return (
     <>
       {cut > 0 && title.slice(0, cut + 1)}
       <span className="whitespace-nowrap">
         {title.slice(cut + 1)}
-        <span aria-hidden="true">&nbsp;↗</span>
+        <span aria-hidden="true">&nbsp;{here ? "→" : "↗"}</span>
       </span>
     </>
   );
@@ -135,15 +137,10 @@ export default function NewsCard({ item, titleAs = "h3" }: NewsCardProps) {
     <Title
       className={`font-display font-semibold leading-snug text-text-strong ${pictured ? "" : "text-lead"}`}
     >
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`${TITLE_LINK} ${TITLE_TAP} group-hover:underline`}
-      >
-        <ArrowTitle title={item.title} />
+      <NewsAnchor href={href} className={`${TITLE_LINK} ${TITLE_TAP} group-hover:underline`}>
+        <ArrowTitle title={item.title} here={isSitePath(href)} />
         {item.archive && <span className="sr-only"> (archived copy)</span>}
-      </a>
+      </NewsAnchor>
     </Title>
   );
 
@@ -191,14 +188,7 @@ export default function NewsCard({ item, titleAs = "h3" }: NewsCardProps) {
           >
             {/* Same target as the headline, hidden from assistive tech so the
                 card announces one link, not two. */}
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              tabIndex={-1}
-              aria-hidden="true"
-              className="block h-full"
-            >
+            <NewsAnchor href={href} tabIndex={-1} aria-hidden="true" className="block h-full">
               <img
                 src={image.src}
                 alt=""
@@ -208,7 +198,7 @@ export default function NewsCard({ item, titleAs = "h3" }: NewsCardProps) {
                 decoding="async"
                 className={`block h-full w-full ${banner ? "object-contain" : "object-cover"}`}
               />
-            </a>
+            </NewsAnchor>
           </div>
         )}
         {body}

@@ -49,7 +49,8 @@ export type NewsItem = {
   kind: NewsKind;
   /** Competition id: icra2026, iv2026, ifac2026, iros2026, ... */
   event?: string | null;
-  /** Where the card sends the reader. Always external. */
+  /** Where the card sends the reader: the source elsewhere, or a site path
+   * (/news/<slug>) for a post hosted here (see postData.ts). */
   link: string;
   /** Wayback capture of `link`, which the card links instead when the source
    * no longer answers (the race timeline's rule). */
@@ -82,6 +83,9 @@ export type NewsFeed = {
   updated?: string;
   items: NewsItem[];
 };
+
+/** A link that stays on this site: opened through the router, in place. */
+export const isSitePath = (href: string) => href.startsWith("/") && !href.startsWith("//");
 
 const SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 

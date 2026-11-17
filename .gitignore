@@ -49,6 +49,8 @@ __pycache__/
 # landing v4 (2026-08-22): next-race video (up to 2.5 MB, Cedric's exception) and the Join post-card clip
 !public/media/race/*.mp4
 !public/media/join/*.mp4
+# posts on /news (2026-11-17): the clips a post shows, each under 1.5 MB
+!public/media/news/*.mp4
 
 # section 14.1: QA builds go to their own dir so a rebuild never empties the dist a preview server is serving
 dist-preview/
