@@ -57,6 +57,12 @@ Screenshots (git-ignored, kept in this worktree): `docs/qa/blog-editor/*.png`. T
 
 Found on the way and fixed in the shared post page: a post with fewer than two headings has no "On this page" list, and its text took that narrow first column instead of the reading column (`PostArticle`, columns now named).
 
+## Follow-up, 2026-11-17: a word longer than a line
+
+Cedric saw a blank beside a wrapped picture in Firefox. The text under test was one unbroken run of letters, wider than the room beside the picture: Firefox moves such a word under the picture, Chromium breaks it there. Sentences wrap in both, so the writer is unchanged (Cedric: it works as intended).
+
+What it turned up is on the published layout. `PostBody` had no `overflow-wrap`, so on a phone a word longer than the line ran off the screen and was cut there. Chromium at 390 px: a web address by 382 px, a ROS topic name by 138 px, a 45-character parameter name by 52 px. Firefox breaks at the slashes, so only the parameter name ran over. `PostBody` now carries `break-words` (not `anywhere`, which would let a table squeeze its columns instead of scrolling in its frame). At 390 and 360 px every one of those fits, in both browsers; `/news/aurorus` lays out block for block as before at 1440, 768 and 390; `walk2.py` gained the phone check (38/38); lint and build pass.
+
 ## Changed outside the writer's own folder
 
 - `src/pages/NewsPost.tsx`: the article layout moved into `src/components/news/PostArticle.tsx`, so the writer's preview and the published page are one component; its text and links card are pinned to their columns.
