@@ -21,7 +21,7 @@ layer down, for the rebuilt pages.
 | # | Stage | Step | Goes to |
 |---|---|---|---|
 | 01 | Simulate | Run the simulator | [f1tenth_gym_ros](https://github.com/f1tenth/f1tenth_gym_ros) (the gym behind a ROS 2 bridge). Also: the course's [simulator tutorial](https://f1tenth-coursekit.readthedocs.io/en/latest/lectures/ModuleA/tutorial2.html), [f1tenth_gym](https://github.com/f1tenth/f1tenth_gym) on its own, [AutoDRIVE](https://autodrive-ecosystem.github.io/) for the Sim Racing League |
-| 02 | Build | Order the parts | [Bill of materials](https://f1tenth.readthedocs.io/en/main/getting_started/build_car/bom.html) |
+| 02 | Build | Order the parts | [Bill of materials](https://f1tenth.readthedocs.io/en/main/getting_started/build_car/bom.html); where to buy a part is `public/data/vendors.json` (the power board, since 2026-11-17: the Vendors band on `/build`) |
 | 03 | Build | Build the car | [Building the car](https://f1tenth.readthedocs.io/en/main/getting_started/build_car/index.html) (lower chassis, autonomy elements, upper chassis, wiring); on this site, [/assembly](/assembly) shows every part in 3D |
 | 04 | System | Set up the Jetson | [Configure Jetson and peripherals](https://f1tenth.readthedocs.io/en/main/getting_started/software_setup/index.html) |
 | 05 | System | Install the driver stack | [Driver stack](https://f1tenth.readthedocs.io/en/main/getting_started/firmware/index.html) (VESC, ROS 2 Humble, LiDAR) |

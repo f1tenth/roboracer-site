@@ -18,6 +18,7 @@ import {
 } from "../components/racecarAssemblyData";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import { lazyWithRetry } from "../lib/lazyWithRetry";
+import { sellerOfPart } from "../lib/vendors";
 
 // three.js, R3F and the part meshes load in their own chunk, so the heading
 // and the part list paint first (design system: three.js never in the
@@ -78,6 +79,10 @@ function ExternalMark() {
 }
 
 const pad = (n: number) => String(n).padStart(2, "0");
+
+/** A link under a selected row: its build-guide section, or where to buy it. */
+const ROW_LINK =
+  "relative block scroll-my-2 py-1 text-small font-semibold [@media(pointer:coarse)]:-my-2 [@media(pointer:coarse)]:py-3 text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2";
 
 /**
  * /assembly: the car, part by part. A newcomer sees what is in a RoboRacer,
@@ -200,7 +205,9 @@ export default function Assembly() {
             {CAR_PARTS.map((entry, index) => {
               const selected = selectedId === entry.id;
               const lit = hoveredId === entry.id;
-              const detail = selected && (entry.note || entry.guide);
+              // Where to buy the part, when a vendor in vendors.json sells it.
+              const seller = sellerOfPart(entry.id);
+              const detail = selected && (entry.note || entry.guide || seller);
               return (
                 <li
                   key={entry.id}
@@ -248,11 +255,23 @@ export default function Assembly() {
                           href={entry.guide.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="relative block scroll-my-2 py-1 text-small font-semibold [@media(pointer:coarse)]:-my-2 [@media(pointer:coarse)]:py-3 text-text-strong underline decoration-ink-950/25 underline-offset-4 hover:decoration-rr-violet hover:decoration-2"
+                          className={ROW_LINK}
                         >
                           {/* Text flow, not flex: a wrapped label keeps the
                               arrow on its last word (no-break space). */}
                           Build guide: {entry.guide.label}
+                          {"\u00a0"}
+                          <ExternalMark />
+                        </a>
+                      )}
+                      {seller && (
+                        <a
+                          href={seller.product.order.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={ROW_LINK}
+                        >
+                          Where to buy: {seller.vendor.name}
                           {"\u00a0"}
                           <ExternalMark />
                         </a>
