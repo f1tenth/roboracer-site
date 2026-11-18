@@ -420,7 +420,11 @@ const HEADING: Record<2 | 3 | 4, string> = {
  */
 export default function PostBody({ blocks }: { blocks: PostBlock[] }) {
   return (
-    <div className="flow-root text-[1.0625rem] leading-[1.75] text-text-body lg:text-[1.125rem]">
+    // break-words: a word longer than a whole line (a web address or a topic
+    // name, on a phone) breaks instead of running off the screen, as it does
+    // in the writer. Not `anywhere`, which would also let a table squeeze
+    // its columns instead of scrolling in its frame.
+    <div className="flow-root break-words text-[1.0625rem] leading-[1.75] text-text-body lg:text-[1.125rem]">
       {blocks.map((block, i) => {
         if (block.type === "heading") {
           const Tag = `h${block.depth}` as "h2" | "h3" | "h4";

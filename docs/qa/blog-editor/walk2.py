@@ -278,6 +278,23 @@ def main():
         )
         check("phone: controls are at least 40px tall", len(small) == 0, json.dumps(small[:10]))
         scan(page, "/news/write phone")
+        # A word longer than a phone's line (a web address, a topic name)
+        # breaks in the published layout instead of running off the screen.
+        page.fill("#post-headline", "A headline")
+        page.locator("#post-text").click()
+        page.keyboard.insert_text(
+            "The code is at https://github.com/f1tenth/f1tenth_gym_ros/blob/main/launch/gym_bridge_launch.py"
+            " and it listens on /ego_racecar/particle_filter/inferred_pose_with_covariance for the pose."
+        )
+        page.get_by_role("button", name="Preview", exact=True).click()
+        page.wait_for_timeout(600)
+        over = page.evaluate(
+            """() => { const p = [...document.querySelectorAll('p')].find(el => el.textContent.startsWith('The code is at')
+                         && !el.closest('#post-text') && el.getClientRects().length > 0);
+                       const r = document.createRange(); r.selectNodeContents(p);
+                       return Math.round(Math.max(...[...r.getClientRects()].map(x => x.right)) - p.parentElement.getBoundingClientRect().right); }"""
+        )
+        check("phone: a word longer than the line stays on the screen in the preview", over <= 1, str(over))
         page.goto(f"{BASE}/news", wait_until="networkidle")
         page.wait_for_timeout(1200)
         note = page.locator('aside[aria-label="Write your own post"]')
