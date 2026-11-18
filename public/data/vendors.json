@@ -1,21 +1,38 @@
 {
-  "_about": "Where a builder buys a part of the car. Rendered on /build as the Vendors band above the docs frame (src/components/build/VendorBand.tsx) and, for a product that names a `part`, as the 'Where to buy' link on that part's row on /assembly. Both import `heading`, `summary` and `vendors` at build time through src/lib/vendors.ts, so the band is in the first paint and never moves the frame under it; the copy served at /data/vendors.json is this same file. Asked for by Rahul Mangharam in Slack (pasted by Cedric, 2026-11-17): 'we can add the powerboard under vendors: buy a powerboard from certified RoboRacer vendors', with a link to one listing (`named_by_rahul` under `sources`). Wording follows Cedric's ruling of the same day for the Ambimat card on /about: 'an official vendor', never 'the official vendor'. No price is shown: the shop's prices change. `heading`, `summary`, and each product's `name`, `line`, link labels and image alt are rendered and are our own words. `checked` and `sources` (per product id: where the picture comes from, the shop's listings on the `checked` date, and the evidence for each statement) are bookkeeping, not rendered and not bundled. Only parts a builder has to buy belong here; ready-built cars stay on /about (the Ambimat card under Related platforms). The build page rebuild (docs/LEARN_TERRAIN.md, step 'Order the parts') can take this file as its vendor list.",
+  "_about": "Where a builder buys the car or a part of it. Rendered on /build as the Vendors band above the docs frame (src/components/build/VendorBand.tsx): each vendor is named once with its `standing`, then one tile per product. A product that names a `part` also gets a 'Where to buy' link, and its `links`, on that part's row on /assembly. Both pages import `heading`, `summary` and `vendors` at build time through src/lib/vendors.ts, so the band is in the first paint and never moves the frame under it; the copy served at /data/vendors.json is this same file. Asked for by Rahul Mangharam in Slack (pasted by Cedric, 2026-11-17): 'we can add the powerboard under vendors: buy a powerboard from certified RoboRacer vendors', with a link to one listing (`named_by_rahul` under `sources`). Cedric, the same day, after seeing the band live with the power board alone: 'It should not just be power board but cars and powerboard', so the ready-built car (Ambimat's RoboRacer Core Kit) is the first tile. Wording follows Cedric's ruling of the same day for the Ambimat card on /about: 'an official vendor', never 'the official vendor'. No price is shown: the shop's prices change. `heading`, `summary`, each vendor's `name` and `standing`, and each product's `name`, `line`, button labels (`order.short` replaces `order.label` on a phone, where a tile is one line) and image alt are rendered and are our own words; `links` render on /assembly only. `checked` and `sources` (per product id: where the picture comes from, the shop's listings on the `checked` date, and the evidence for each statement) are bookkeeping, not rendered and not bundled. The build page rebuild (docs/LEARN_TERRAIN.md, step 'Order the parts') can take this file as its vendor list.",
   "checked": "2026-11-17",
   "heading": "Vendors",
-  "summary": "Where to buy the power board",
+  "summary": "Where to buy a ready-built car or the power board",
   "vendors": [
     {
       "id": "ambimat",
       "name": "Ambimat Electronics",
+      "standing": "An official RoboRacer vendor.",
       "url": "https://roboracer.ambimat.com/",
       "products": [
+        {
+          "id": "core-kit",
+          "name": "Ready-built car",
+          "line": "Sold ready-built as the RoboRacer Core Kit.",
+          "order": {
+            "label": "See the Core Kit",
+            "href": "https://roboracer.ambimat.com/autonomous-racing-robotics-kit.html"
+          },
+          "image": {
+            "src": "/media/build/build-car-360.webp",
+            "width": 360,
+            "height": 240,
+            "alt": "A 3D render of an assembled RoboRacer car without its body: a teal deck carrying the computer and an orange-ringed LiDAR, on four wheels"
+          }
+        },
         {
           "id": "power-board",
           "part": "pcb",
           "name": "Power board",
-          "line": "Powers the Jetson and the LiDAR. Made by Ambimat Electronics, an official RoboRacer vendor.",
+          "line": "Powers the Jetson and the LiDAR.",
           "order": {
             "label": "Order the power board",
+            "short": "Order the board",
             "href": "https://orders.ambimat.com/"
           },
           "links": [
@@ -35,6 +52,23 @@
     }
   ],
   "sources": {
+    "core-kit": {
+      "image": "our own capture of the /assembly 3D viewer (the site's model of the car, assembled view, default camera) at 1600x1000 on 2026-11-17, cropped to 720x480 around the car and resized to 360x240. It is the site's model, not a photo of Ambimat's kit: rule 8 allows Ambimat's own kit photo on /about only.",
+      "evidence": [
+        {
+          "url": "Cedric, 2026-11-17",
+          "says": "'It should not just be power board but cars and powerboard in that notification.'"
+        },
+        {
+          "url": "https://roboracer.ambimat.com/autonomous-racing-robotics-kit.html",
+          "says": "Ambimat's page for the RoboRacer Core Kit, the address the /about card's 'See the RoboRacer Core Kit' link uses. The kit is the car fully assembled; Core Kit and Core Kit Pro are sold against an emailed quotation (public/data/spinoffs.json, Ambimat Electronics, evidence)."
+        },
+        {
+          "url": "public/data/spinoffs.json",
+          "says": "The /about card's wording, approved by Cedric on 2026-11-17: Ambimat 'sells ready-built cars as the RoboRacer Core Kit'."
+        }
+      ]
+    },
     "power-board": {
       "image": "Figure 3 ('PCB top view', 762x384) of Powerboard_v10_1_User_Manual.pdf in https://github.com/f1tenth/f1tenth_powerboard_v10 (the F1TENTH team's manual, author University of Pennsylvania, June 2024, CC BY-SA badge on its first page), cropped to its right three quarters and resized to 360x240",
       "listings": [

@@ -1,7 +1,7 @@
 import { heading, summary, vendors } from "../../public/data/vendors.json";
 
 /**
- * Where a builder buys a part of the car: public/data/vendors.json, read at
+ * Where a builder buys the car or a part of it: public/data/vendors.json, read at
  * build time. The Vendors band on /build sits above a frame one window tall,
  * so it has to be in the first paint (a fetched band would push the frame
  * down when it arrived); /assembly reads the same list for its part rows.
@@ -9,6 +9,10 @@ import { heading, summary, vendors } from "../../public/data/vendors.json";
  * bundle. `_about` says what belongs in the file and who asked for it.
  */
 export type VendorLink = { label: string; href: string };
+
+/** The one action on a product. `short` replaces `label` on a phone, where
+ * a tile is a single line. */
+export type VendorOrder = VendorLink & { short?: string };
 
 export type VendorImage = { src: string; width: number; height: number; alt: string };
 
@@ -19,11 +23,12 @@ export type VendorProduct = {
   part?: string;
   /** Plain name, as the part list spells it. */
   name: string;
-  /** What it does and who makes it, under 25 words. */
+  /** One short sentence: what it is or does. Not shown on a phone. */
   line: string;
-  /** The one action: the vendor's shop page for this product. */
-  order: VendorLink;
-  /** Anything else worth a text link (verb + object labels). */
+  /** The one action: the vendor's page for this product. */
+  order: VendorOrder;
+  /** Anything else worth a text link (verb + object labels). Shown on the
+   * part's row on /assembly, not in the band. */
   links?: VendorLink[];
   image?: VendorImage;
 };
@@ -31,6 +36,8 @@ export type VendorProduct = {
 export type Vendor = {
   id: string;
   name: string;
+  /** One sentence beside the name: how the vendor stands to RoboRacer. */
+  standing: string;
   /** The vendor's own page about RoboRacer. */
   url: string;
   products: VendorProduct[];

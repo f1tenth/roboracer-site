@@ -276,6 +276,13 @@ export default function Assembly() {
                           <ExternalMark />
                         </a>
                       )}
+                      {seller?.product.links?.map((link) => (
+                        <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className={ROW_LINK}>
+                          {link.label}
+                          {"\u00a0"}
+                          <ExternalMark />
+                        </a>
+                      ))}
                     </div>
                   )}
                 </li>
