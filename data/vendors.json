@@ -1,0 +1,95 @@
+{
+  "_about": "Where a builder buys a part of the car. Rendered on /build as the Vendors band above the docs frame (src/components/build/VendorBand.tsx) and, for a product that names a `part`, as the 'Where to buy' link on that part's row on /assembly. Both import `heading`, `summary` and `vendors` at build time through src/lib/vendors.ts, so the band is in the first paint and never moves the frame under it; the copy served at /data/vendors.json is this same file. Asked for by Rahul Mangharam in Slack (pasted by Cedric, 2026-11-17): 'we can add the powerboard under vendors: buy a powerboard from certified RoboRacer vendors', with a link to one listing (`named_by_rahul` under `sources`). Wording follows Cedric's ruling of the same day for the Ambimat card on /about: 'an official vendor', never 'the official vendor'. No price is shown: the shop's prices change. `heading`, `summary`, and each product's `name`, `line`, link labels and image alt are rendered and are our own words. `checked` and `sources` (per product id: where the picture comes from, the shop's listings on the `checked` date, and the evidence for each statement) are bookkeeping, not rendered and not bundled. Only parts a builder has to buy belong here; ready-built cars stay on /about (the Ambimat card under Related platforms). The build page rebuild (docs/LEARN_TERRAIN.md, step 'Order the parts') can take this file as its vendor list.",
+  "checked": "2026-11-17",
+  "heading": "Vendors",
+  "summary": "Where to buy the power board",
+  "vendors": [
+    {
+      "id": "ambimat",
+      "name": "Ambimat Electronics",
+      "url": "https://roboracer.ambimat.com/",
+      "products": [
+        {
+          "id": "power-board",
+          "part": "pcb",
+          "name": "Power board",
+          "line": "Powers the Jetson and the LiDAR. Made by Ambimat Electronics, an official RoboRacer vendor.",
+          "order": {
+            "label": "Order the power board",
+            "href": "https://orders.ambimat.com/"
+          },
+          "links": [
+            {
+              "label": "Get the design files",
+              "href": "https://github.com/f1tenth/f1tenth_powerboard_v10"
+            }
+          ],
+          "image": {
+            "src": "/media/build/build-power-board-360.webp",
+            "width": 360,
+            "height": 240,
+            "alt": "A render of the power board from above: a blue circuit board with green screw terminals, two toggle switches and two power jacks"
+          }
+        }
+      ]
+    }
+  ],
+  "sources": {
+    "power-board": {
+      "image": "Figure 3 ('PCB top view', 762x384) of Powerboard_v10_1_User_Manual.pdf in https://github.com/f1tenth/f1tenth_powerboard_v10 (the F1TENTH team's manual, author University of Pennsylvania, June 2024, CC BY-SA badge on its first page), cropped to its right three quarters and resized to 360x240",
+      "listings": [
+        {
+          "name": "1 Qty, Non-RoHS",
+          "href": "https://orders.ambimat.com/product/roboracer-power-board-1-qty-non-rohs-compliant/"
+        },
+        {
+          "name": "1 Qty, Non-RoHS, High Current",
+          "href": "https://orders.ambimat.com/product/roboracer-power-board-1-qty-non-rohs-high-current/"
+        },
+        {
+          "name": "1 Qty, RoHS Compliant",
+          "href": "https://orders.ambimat.com/product/roboracer-power-board-1-qty-rohs-compliant/"
+        },
+        {
+          "name": "1 Qty, RoHS Compliant, High Current",
+          "href": "https://orders.ambimat.com/product/roboracer-power-board-1-qty-rohs-compliant-high-current/"
+        },
+        {
+          "name": "3 Qty, Non-RoHS, Bulk Pack",
+          "href": "https://orders.ambimat.com/product/roboracer-power-board-multi-qty-non-rohs-compliant/",
+          "named_by_rahul": true
+        },
+        {
+          "name": "3 Qty, Non-RoHS, High Current, Bulk Pack",
+          "href": "https://orders.ambimat.com/product/roboracer-power-board-3-qty-non-rohs-high-current-bulk-pack/"
+        },
+        {
+          "name": "3 Qty, RoHS Compliant, Bulk Pack",
+          "href": "https://orders.ambimat.com/product/roboracer-power-board-multi-qty-rohs-compliant/"
+        },
+        {
+          "name": "3 Qty, RoHS Compliant, High Current, Bulk Pack",
+          "href": "https://orders.ambimat.com/product/roboracer-power-board-3-qty-rohs-compliant-high-current-bulk-pack/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "Slack, Rahul Mangharam, pasted by Cedric 2026-11-17",
+          "says": "'we can add the powerboard under vendors. buy a powerboard from certified RoboRacer vendors', linking the three-board Non-RoHS listing. Cedric then asked whether the power board should get a section somewhere on the site, beside the Ambimat card on /about; Rahul: 'Yes.'"
+        },
+        {
+          "url": "https://orders.ambimat.com/",
+          "says": "The shop Neel Shah of Ambimat named for the power board (Slack, 2026-11-17). On 2026-11-17 it lists the eight power board listings above (one board or three, RoHS or not, standard or high current) with an online checkout; `order` points here so a builder picks the listing, and the /about card and the build docs note link the same address."
+        },
+        {
+          "url": "https://github.com/f1tenth/f1tenth_powerboard_v10",
+          "says": "Public repository: the user manual, schematics, bill of materials, Altium layout, Gerber and drill files and the mechanical drawing. 'Developed by a collaboration between Ambimat Electronics and the University of Pennsylvania.' The manual lists the outputs: a 19 V jack for the Jetson, 12 V and 5 V terminal blocks, and headers for the Hokuyo 10LX and 30LX."
+        },
+        {
+          "url": "src/components/racecarAssemblyData.ts",
+          "says": "The /assembly part list's own line for the power board, from the build guide: 'Feeds battery power to the Jetson and LiDAR.'"
+        }
+      ]
+    }
+  }
+}
