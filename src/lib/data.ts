@@ -973,6 +973,10 @@ export type DocsSessionKind =
   | "office-hours"
   | "project";
 
+export type DocsSheetLink = { label: string; url: string };
+/** A tutorial named in the schedule, with the links the sheet gives it. */
+export type DocsTutorial = { text: string; links: DocsSheetLink[] };
+
 export type DocsSession = {
   module: string;
   /** ISO date, 2026. The weekday is computed from it, not read from the sheet. */
@@ -982,7 +986,10 @@ export type DocsSession = {
   title: string;
   /** What the sheet links for the session: "Slides", "Video", "Part II video". */
   materials: string[];
+  /** The same labels with their URLs: slides, video, notebook, repo. */
+  links: DocsSheetLink[];
   tutorial: string;
+  tutorials: DocsTutorial[];
   out: string;
   due: string;
   note?: string;

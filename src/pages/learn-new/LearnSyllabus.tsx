@@ -109,7 +109,15 @@ export default function LearnSyllabus() {
         id="syl-outline"
        
         title={syllabus.outline_title}
-        lead="Every session, by module."
+        lead={
+          <>
+            Every session, by module. The{" "}
+            <Link to={`${ROOT}/schedule`} className={LINK}>
+              full schedule
+            </Link>{" "}
+            adds links to each tutorial and lab.
+          </>
+        }
       >
         <nav aria-label="Jump to a module" className="mb-8 flex flex-wrap gap-2">
           {docs.outline.map((m) => (

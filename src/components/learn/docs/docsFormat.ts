@@ -64,3 +64,40 @@ export function moduleOfPath(pathname: string, docs: LearnDocsFile): string | nu
   const key = pathname.startsWith(`${ROOT}/doc/`) ? pathname.slice(`${ROOT}/doc/`.length) : null;
   return key ? (docs.pages[key]?.module ?? null) : null;
 }
+
+const labNorm = (t: string) =>
+  t.toLowerCase().replace(/^(optional )?lab \d+\s*[-:]?\s*/, "").replace(/&/g, "and").replace(/[^a-z0-9]+/g, " ").trim();
+
+/** The docs page for "Lab N". The sheet numbers the later labs differently
+ * from the older docs (its Lab 9 is the docs' Lab 10), so a lab the schedule
+ * names is matched by title first; a bare number falls back to the same page
+ * number only through Lab 8, where the two agree. */
+function labPage(docs: LearnDocsFile, n: number): string | null {
+  const named = docs.schedule
+    .flatMap((s) => entriesOf(s.out))
+    .find((e) => new RegExp(`^(?:Optional )?Lab ${n}:`).test(e));
+  const keys = Object.keys(docs.pages).filter((k) => /^assignments\/labs\/lab\d+$/.test(k));
+  if (named) {
+    const want = labNorm(named);
+    const hit = keys.find((k) => labNorm(docs.pages[k].title) === want);
+    if (hit) return hit;
+  }
+  const byNumber = `assignments/labs/lab${n}`;
+  return n <= 8 && docs.pages[byNumber] ? byNumber : null;
+}
+
+/** The page a schedule entry (a lab, race or the project) points to, or null
+ * where the docs have no page for it. Only pages that exist are linked. */
+export function entryHref(docs: LearnDocsFile, text: string): string | null {
+  const page = (key: string | null) => (key && docs.pages[key] ? `${ROOT}/doc/${key}` : null);
+  const lab = /^(?:Optional )?Lab (\d+)\b/.exec(text);
+  if (lab) return page(labPage(docs, Number(lab[1])));
+  const race = /^Race (\d)\b/.exec(text);
+  if (race) return page(`assignments/races/race${race[1]}`);
+  if (/^Final Race/.test(text)) return page("assignments/races/race3");
+  if (/^Final Project\b/.test(text)) return page("assignments/final_project");
+  return null;
+}
+
+/** A comma-separated schedule cell ("Lab 4, Lab 5") as separate entries. */
+export const entriesOf = (cell: string) => cell.split(/,\s*/).filter(Boolean);
