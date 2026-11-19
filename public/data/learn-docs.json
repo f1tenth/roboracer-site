@@ -1200,10 +1200,6 @@
      "title": "Syllabus"
     },
     {
-     "to": "/learn-new/schedule",
-     "title": "Schedule"
-    },
-    {
      "to": "/learn/courses",
      "title": "Courses"
     }
@@ -1911,12 +1907,6 @@
    "to": "/learn-new/doc/support/contact",
    "module": null,
    "native": false
-  },
-  "introduction/schedule": {
-   "title": "Schedule",
-   "to": "/learn-new/schedule",
-   "module": null,
-   "native": true
   }
  },
  "grading": {

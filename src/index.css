@@ -911,16 +911,16 @@ body {
 .rule-card { position: relative; overflow: hidden; border: 1px solid rgb(7 7 13 / .1); border-radius: .75rem; background: var(--color-paper-50); }
 .rule-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 2px; background: linear-gradient(90deg, var(--color-rr-cyan), var(--color-rr-grad-start), var(--color-rr-grad-end)); }
 
-/* Schedule: one hue per module, all drawn from the logo gradient. Colour only
+/* Syllabus outline: one hue per module, all drawn from the logo gradient. Colour only
    tints the band and chip; text stays ink so contrast never depends on it. */
-.sched-A { --m: var(--color-rr-cyan); }
-.sched-B { --m: var(--color-rr-violet); }
-.sched-C { --m: var(--color-rr-magenta); }
-.sched-D { --m: color-mix(in oklab, var(--color-rr-cyan) 50%, var(--color-rr-violet)); }
-.sched-E { --m: var(--color-ink-700); }
-.sched-mod { border: 1px solid rgb(7 7 13 / .1); border-radius: .75rem; background: var(--color-paper-50); overflow: hidden; }
-.sched-mod__head { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid rgb(7 7 13 / .1); background: color-mix(in oklab, var(--m) 10%, var(--color-paper-50)); border-left: 4px solid var(--m); }
-.sched-chip { display: inline-grid; place-items: center; width: 2rem; height: 2rem; border-radius: .5rem; background: var(--m); color: var(--color-text-strong); font-family: var(--font-mono); font-weight: 700; }
-.sched-B .sched-chip, .sched-E .sched-chip { color: #fff; }
-.sched-row { border-left: 4px solid color-mix(in oklab, var(--m) 55%, transparent); }
-.sched-row--race { background: color-mix(in oklab, var(--m) 9%, transparent); }
+.syl-A { --m: var(--color-rr-cyan); }
+.syl-B { --m: var(--color-rr-violet); }
+.syl-C { --m: var(--color-rr-magenta); }
+.syl-D { --m: color-mix(in oklab, var(--color-rr-cyan) 50%, var(--color-rr-violet)); }
+.syl-E { --m: var(--color-ink-700); }
+.syl-mod { border: 1px solid rgb(7 7 13 / .1); border-radius: .75rem; background: var(--color-paper-50); overflow: hidden; }
+.syl-mod__head { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid rgb(7 7 13 / .1); background: color-mix(in oklab, var(--m) 10%, var(--color-paper-50)); border-left: 4px solid var(--m); }
+.syl-chip { display: inline-grid; place-items: center; width: 2rem; height: 2rem; border-radius: .5rem; background: var(--m); color: var(--color-text-strong); font-family: var(--font-mono); font-weight: 700; }
+.syl-B .syl-chip, .syl-E .syl-chip { color: #fff; }
+.syl-row { border-left: 4px solid color-mix(in oklab, var(--m) 55%, transparent); }
+.syl-row--race { background: color-mix(in oklab, var(--m) 9%, transparent); }
