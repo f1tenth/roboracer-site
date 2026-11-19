@@ -1,12 +1,7 @@
 import { Link, useOutletContext } from "react-router-dom";
-import type { DocsSession, LearnDocsFile } from "../../lib/data";
+import type { DocsSheetLink, DocsSession, LearnDocsFile } from "../../lib/data";
 import { DocPage, DocHeader, DocSection, Glance } from "../../components/learn/docs/DocParts";
-import {
-  KIND_TAG,
-  ROOT,
-  fmtDate,
-  sessionsOf,
-} from "../../components/learn/docs/docsFormat";
+import { KIND_TAG, ROOT, entriesOf, entryHref, fmtDate, sessionsOf } from "../../components/learn/docs/docsFormat";
 import { LINK, pad2 } from "../../components/learn/learnStyles";
 
 const TOC = [
@@ -14,53 +9,99 @@ const TOC = [
   { id: "syl-outline", label: "Fall 2026 outline" },
 ];
 
-const TD = "px-4 py-3 align-top max-md:flex max-md:gap-4 max-md:px-0 max-md:py-1 max-md:before:w-20 max-md:before:shrink-0 max-md:before:font-mono max-md:before:text-small max-md:before:text-text-muted max-md:before:content-[attr(data-label)] max-md:empty:hidden";
+const TD =
+  "px-4 py-3 align-top max-md:flex max-md:gap-4 max-md:px-0 max-md:py-1 max-md:before:w-20 max-md:before:shrink-0 max-md:before:font-mono max-md:before:text-small max-md:before:text-text-muted max-md:before:content-[attr(data-label)] max-md:empty:hidden";
 
-function Row({ s }: { s: DocsSession }) {
+/** Slides, video, notebook and repo links the sheet gives a session. */
+function Chips({ links }: { links: DocsSheetLink[] }) {
+  if (links.length === 0) return null;
+  return (
+    <span className="mt-1.5 flex flex-wrap gap-1.5">
+      {links.map((l) => (
+        <a
+          key={l.url}
+          href={l.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-6 items-center rounded-pill border border-ink-950/15 px-2.5 font-mono text-eyebrow text-text-strong transition-colors hover:border-rr-violet hover:text-rr-violet-deep coarse:min-h-9"
+        >
+          {l.label}
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      ))}
+    </span>
+  );
+}
+
+/** A schedule cell: each entry a link where the docs have a page for it. */
+function Entries({ docs, cell }: { docs: LearnDocsFile; cell: string }) {
+  return (
+    <>
+      {entriesOf(cell).map((t) => {
+        const href = entryHref(docs, t);
+        return (
+          <span key={t} className="block">
+            {href ? (
+              <Link to={href} className={LINK}>
+                {t}
+              </Link>
+            ) : (
+              t
+            )}
+          </span>
+        );
+      })}
+    </>
+  );
+}
+
+function Row({ docs, s }: { docs: LearnDocsFile; s: DocsSession }) {
   const tag = KIND_TAG[s.kind];
-  const live = !!s.href;
   const quiet = s.kind === "break" || s.kind === "office-hours";
-  const tint = s.kind === "race" ? "bg-rr-violet/[0.07]" : "";
+  const href = s.href ?? entryHref(docs, s.title);
   return (
     <tr
-      className={`border-b border-ink-950/10 max-md:block max-md:px-4 max-md:py-4 ${tint} ${quiet ? "text-text-muted" : ""}`}
+      className={`syl-row border-b border-ink-950/10 last:border-b-0 max-md:block max-md:px-4 max-md:py-4 ${
+        s.kind === "race" ? "syl-row--race" : ""
+      } ${quiet ? "text-text-muted" : ""}`}
     >
-      <td data-label="Date" className={`${TD} whitespace-nowrap font-mono text-small md:w-36`}>
+      <td data-label="Date" className={`${TD} whitespace-nowrap font-mono text-small md:w-32`}>
         {fmtDate(s.date)}
       </td>
-      <td data-label="Lecture" className={`${TD} font-mono text-small tabular-nums md:w-16`}>
+      <td data-label="Lecture" className={`${TD} font-mono text-small tabular-nums md:w-14`}>
         {s.lecture !== null ? pad2(s.lecture) : ""}
       </td>
-      <td data-label="Topic" className={`${TD} md:w-[34%]`}>
+      <td data-label="Session" className={`${TD} md:w-[32%]`}>
+        <div className="min-w-0">
         {tag && (
-          <span
-            className={`mr-2 inline-block rounded-pill px-2 py-0.5 font-mono text-eyebrow ${
-              s.kind === "race" ? "bg-rr-violet text-white" : "border border-ink-950/20 text-text-muted"
-            }`}
-          >
+          <span className="mr-2 inline-block rounded-pill border border-ink-950/20 px-2 py-0.5 font-mono text-eyebrow text-text-muted">
             {tag}
           </span>
         )}
-        {live ? (
-          <Link to={s.href as string} className={`${LINK} font-semibold`}>
+        {href ? (
+          <Link to={href} className={`${LINK} font-semibold`}>
             {s.title}
           </Link>
         ) : (
           <span className={quiet ? "" : "font-semibold text-text-strong"}>{s.title}</span>
         )}
-        {s.materials.length > 0 && (
-          <span className="mt-1 block font-mono text-small text-text-muted">{s.materials.join(" · ")}</span>
-        )}
+        <Chips links={s.links} />
         {s.note && <span className="mt-1 block text-small text-text-muted">{s.note}</span>}
+        </div>
       </td>
       <td data-label="Tutorial" className={`${TD} text-small`}>
-        {s.tutorial}
+        {s.tutorials.map((t) => (
+          <span key={t.text} className="mb-2 block last:mb-0">
+            {t.text}
+            <Chips links={t.links} />
+          </span>
+        ))}
       </td>
-      <td data-label="Out" className={`${TD} text-small`}>
-        {s.out}
+      <td data-label="Lab out" className={`${TD} text-small`}>
+        <Entries docs={docs} cell={s.out} />
       </td>
-      <td data-label="Due" className={`${TD} whitespace-nowrap text-small`}>
-        {s.due}
+      <td data-label="Due" className={`${TD} text-small`}>
+        <Entries docs={docs} cell={s.due} />
       </td>
     </tr>
   );
@@ -107,28 +148,34 @@ export default function LearnSyllabus() {
 
       <DocSection
         id="syl-outline"
-       
         title={syllabus.outline_title}
-        lead="Every session, by module."
+        lead="Every session, by module, with its slides, video, tutorial and lab. Titles link to their pages where the docs have one."
       >
         <nav aria-label="Jump to a module" className="mb-8 flex flex-wrap gap-2">
           {docs.outline.map((m) => (
             <a
               key={m.id}
               href={`#syl-${m.slug}`}
-              className="inline-flex min-h-9 items-center gap-2 rounded-pill border border-ink-950/20 px-4 text-small font-semibold text-text-strong transition-colors hover:border-rr-violet hover:text-rr-violet-deep coarse:min-h-11"
+              className={`syl-${m.id} inline-flex min-h-9 items-center gap-2 rounded-pill border border-ink-950/15 py-1 pl-1 pr-4 text-small font-semibold text-text-strong transition-colors hover:border-rr-violet coarse:min-h-11`}
             >
-              <span className="font-mono">{m.id}</span>
+              <span className="syl-chip !h-7 !w-7 !rounded-full text-small">{m.id}</span>
               <span className="hidden sm:inline">{m.short}</span>
             </a>
           ))}
         </nav>
-
-        <div className="space-y-12">
+        <div className="space-y-10">
           {docs.outline.map((m) => (
-            <div key={m.id} id={`syl-${m.slug}`} className="scroll-mt-[calc(var(--spacing-nav)+1rem)]">
-              <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                <h3 className="font-display text-lead font-semibold text-text-strong">
+            <section
+              key={m.id}
+              id={`syl-${m.slug}`}
+              aria-labelledby={`syl-h-${m.id}`}
+              className={`syl-${m.id} syl-mod scroll-mt-[calc(var(--spacing-nav)+1rem)]`}
+            >
+              <div className="syl-mod__head">
+                <span className="syl-chip" aria-hidden="true">
+                  {m.id}
+                </span>
+                <h3 id={`syl-h-${m.id}`} className="font-display text-lead font-semibold text-text-strong">
                   <span className="mr-3 text-small font-medium text-text-muted">Module {m.id}</span>
                   {m.id === "A" ? (
                     <Link to={`${ROOT}/module-a`} className={LINK}>
@@ -139,27 +186,25 @@ export default function LearnSyllabus() {
                   )}
                 </h3>
               </div>
-              <div className="overflow-hidden rounded-media border border-ink-950/10 bg-paper-50">
-                <table className="w-full border-collapse text-left text-body max-md:block">
-                  <caption className="sr-only">{`Module ${m.id}: ${m.title}`}</caption>
-                  <thead className="max-md:sr-only">
-                    <tr className="border-b border-ink-950/15 bg-paper-100 font-mono text-small text-text-muted">
-                      <th scope="col" className="px-4 py-2 font-medium">Date</th>
-                      <th scope="col" className="px-4 py-2 font-medium">Lecture</th>
-                      <th scope="col" className="px-4 py-2 font-medium">Topic</th>
-                      <th scope="col" className="px-4 py-2 font-medium">Tutorial</th>
-                      <th scope="col" className="px-4 py-2 font-medium">Out</th>
-                      <th scope="col" className="px-4 py-2 font-medium">Due</th>
-                    </tr>
-                  </thead>
-                  <tbody className="max-md:block">
-                    {sessionsOf(docs, m.id).map((s) => (
-                      <Row key={`${s.date}-${s.title}`} s={s} />
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+              <table className="w-full border-collapse text-left text-body max-md:block">
+                <caption className="sr-only">{`Module ${m.id}: ${m.title}`}</caption>
+                <thead className="max-md:sr-only">
+                  <tr className="border-b border-ink-950/15 bg-paper-100 font-mono text-small text-text-muted">
+                    <th scope="col" className="px-4 py-2 font-medium">Date</th>
+                    <th scope="col" className="px-4 py-2 font-medium">Lecture</th>
+                    <th scope="col" className="px-4 py-2 font-medium">Session</th>
+                    <th scope="col" className="px-4 py-2 font-medium">Tutorial</th>
+                    <th scope="col" className="px-4 py-2 font-medium">Lab out</th>
+                    <th scope="col" className="px-4 py-2 font-medium">Due</th>
+                  </tr>
+                </thead>
+                <tbody className="max-md:block">
+                  {sessionsOf(docs, m.id).map((s) => (
+                    <Row key={`${s.date}-${s.title}`} docs={docs} s={s} />
+                  ))}
+                </tbody>
+              </table>
+            </section>
           ))}
         </div>
         <p className="mt-8 font-mono text-small text-text-muted">{docs.schedule_note}</p>

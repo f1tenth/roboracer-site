@@ -67,7 +67,18 @@
     "Slides",
     "Video"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1Kc6U_4yhbaS9SMmjSVcjJwh-BURlcqa1w9yTJ2sAEug/edit?usp=sharing"
+    },
+    {
+     "label": "Video",
+     "url": "https://youtu.be/v6w_zVHL8WQ"
+    }
+   ],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
    "due": "Lab 0",
    "href": "/learn-new/module-a/lecture-1"
@@ -82,7 +93,28 @@
     "Slides",
     "Video"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1do6wtOgYfrkKrExHBKasSwfMYlNnMKhFhdqT74YbPp4/edit?usp=sharing"
+    },
+    {
+     "label": "Video",
+     "url": "https://youtu.be/k4FQ-dZ0Lp8"
+    }
+   ],
    "tutorial": "T0: Setting Up a VMWare VM",
+   "tutorials": [
+    {
+     "text": "T0: Setting Up a VMWare VM",
+     "links": [
+      {
+       "label": "PDF",
+       "url": "https://drive.google.com/file/d/1GlG5n8OF_yHmLyuCIox7ySRfHCW7mXl8/view?usp=sharing"
+      }
+     ]
+    }
+   ],
    "out": "Lab 1: ROS 2",
    "due": "",
    "href": "/learn-new/doc/lectures/ModuleA/lecture02"
@@ -94,7 +126,28 @@
    "lecture": null,
    "title": "T1: Intro to ROS 2, T2: Intro to Git",
    "materials": [],
-   "tutorial": "",
+   "links": [],
+   "tutorial": "T1: Intro to ROS 2, T2: Intro to Git",
+   "tutorials": [
+    {
+     "text": "T1: Intro to ROS 2",
+     "links": [
+      {
+       "label": "Slides",
+       "url": "https://docs.google.com/presentation/d/1-ow1h-DCF_a7EnmRN9TXf27P5pIw-KHp/edit?usp=sharing&ouid=107763294645015179311&rtpof=true&sd=true"
+      }
+     ]
+    },
+    {
+     "text": "T2: Intro to Git",
+     "links": [
+      {
+       "label": "Slides",
+       "url": "https://docs.google.com/presentation/d/1LSaBnTtZqiwFQrhGdX4iEQM7tfGKXZgY/edit?usp=sharing&ouid=117915165821576918029&rtpof=true&sd=true"
+      }
+     ]
+    }
+   ],
    "out": "",
    "due": ""
   },
@@ -108,7 +161,28 @@
     "Slides",
     "Video"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1mcTAjenxqv7qxfq48RX01U8G4HA9V1Ekihy6ukMEfWM/edit?usp=sharing"
+    },
+    {
+     "label": "Video",
+     "url": "https://youtu.be/qIpiqhO3ITY"
+    }
+   ],
    "tutorial": "T2: Intro to Git",
+   "tutorials": [
+    {
+     "text": "T2: Intro to Git",
+     "links": [
+      {
+       "label": "Slides",
+       "url": "https://docs.google.com/presentation/d/1LSaBnTtZqiwFQrhGdX4iEQM7tfGKXZgY/edit?usp=sharing&ouid=117915165821576918029&rtpof=true&sd=true"
+      }
+     ]
+    }
+   ],
    "out": "",
    "due": "",
    "href": "/learn-new/doc/lectures/ModuleB/lecture04"
@@ -120,7 +194,23 @@
    "lecture": null,
    "title": "Friday Recitation: RoboRacer Sim Tutorial",
    "materials": [],
+   "links": [],
    "tutorial": "T3: Intro to RoboRacer Sim",
+   "tutorials": [
+    {
+     "text": "T3: Intro to RoboRacer Sim",
+     "links": [
+      {
+       "label": "Slides",
+       "url": "https://docs.google.com/presentation/d/1ZH0S_Dn8dQs1g3JOH7Dz7HEdvfNYPRSv/edit?usp=sharing&ouid=117915165821576918029&rtpof=true&sd=true"
+      },
+      {
+       "label": "Repo",
+       "url": "https://github.com/f1tenth/f1tenth_gym_ros/tree/dev-humble"
+      }
+     ]
+    }
+   ],
    "out": "Lab 2: Automatic Emergency Braking",
    "due": "Lab 1"
   },
@@ -134,7 +224,28 @@
     "Slides",
     "Video"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1XpnhYtEQGOtLsssqdCyHb3tn4yGiPlDAO_7olg0_-v8/edit?usp=sharing"
+    },
+    {
+     "label": "Video",
+     "url": "https://youtu.be/5asfD-_Z9x8"
+    }
+   ],
    "tutorial": "Intro to Leaderboard",
+   "tutorials": [
+    {
+     "text": "Intro to Leaderboard",
+     "links": [
+      {
+       "label": "Link",
+       "url": "https://roboracer-class.github.io/leaderboard/"
+      }
+     ]
+    }
+   ],
    "out": "Lab 3: Wall Following",
    "due": "",
    "href": "/learn-new/doc/lectures/ModuleB/lecture05"
@@ -148,7 +259,24 @@
    "materials": [
     "Slides"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1qHHgZ1h3grANN1Z5K00dOuNCsI0A0cVurFC_wawmUes/edit?usp=sharing"
+    }
+   ],
    "tutorial": "T4: Debugging ROS Nodes",
+   "tutorials": [
+    {
+     "text": "T4: Debugging ROS Nodes",
+     "links": [
+      {
+       "label": "Slides",
+       "url": "https://docs.google.com/presentation/d/1NLcUiPg_YGCON99LmDb-7EUwnsPacHPOjEwSlTdlkCM/edit?slide=id.g394186c5871_1_0#slide=id.g394186c5871_1_0"
+      }
+     ]
+    }
+   ],
    "out": "Teams Formed",
    "due": "Lab 2"
   },
@@ -162,7 +290,28 @@
     "Slides",
     "Video"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1HYkxOZHEi2SIP5jbmS11Hfaou1eoUcuJ4QPjADKRv1M/edit?usp=sharing"
+    },
+    {
+     "label": "Video",
+     "url": "https://youtu.be/XwNsJFcSQx4"
+    }
+   ],
    "tutorial": "T5: ROS 2 and tf2",
+   "tutorials": [
+    {
+     "text": "T5: ROS 2 and tf2",
+     "links": [
+      {
+       "label": "Slides",
+       "url": "https://docs.google.com/presentation/d/1FYhqu2brVKMVi0uCPoa5PyaNU1vTJqHRf5oPmQRQgfk/edit?usp=sharing"
+      }
+     ]
+    }
+   ],
    "out": "",
    "due": "",
    "href": "/learn-new/doc/lectures/ModuleA/lecture03"
@@ -177,7 +326,28 @@
     "Slides",
     "Video"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1gZmsBL91Uon8F8b15OKA7k0X3H4nU-iWgRggQuGgBW8/edit?usp=sharing"
+    },
+    {
+     "label": "Video",
+     "url": "https://www.youtube.com/watch?v=8zr5NUS05cM"
+    }
+   ],
    "tutorial": "T6: Know the car and battery safety",
+   "tutorials": [
+    {
+     "text": "T6: Know the car and battery safety",
+     "links": [
+      {
+       "label": "Slides",
+       "url": "https://docs.google.com/presentation/d/1qHHgZ1h3grANN1Z5K00dOuNCsI0A0cVurFC_wawmUes/edit?usp=sharing"
+      }
+     ]
+    }
+   ],
    "out": "Lab 4: Follow the Gap",
    "due": "",
    "href": "/learn-new/doc/lectures/ModuleB/lecture06"
@@ -189,7 +359,23 @@
    "lecture": null,
    "title": "Friday Recitation: VESC Tuning",
    "materials": [],
-   "tutorial": "T6: Setting Up the car, Remote",
+   "links": [],
+   "tutorial": "T6: Setting Up the car",
+   "tutorials": [
+    {
+     "text": "T6: Setting Up the car",
+     "links": [
+      {
+       "label": "Slides",
+       "url": "https://docs.google.com/presentation/d/1qHHgZ1h3grANN1Z5K00dOuNCsI0A0cVurFC_wawmUes/edit?usp=sharing"
+      },
+      {
+       "label": "Remote",
+       "url": "https://drive.google.com/file/d/1rITguVopXJRC7aJc6ohtkfmKLkyxJBLd/view?usp=sharing"
+      }
+     ]
+    }
+   ],
    "out": "",
    "due": "Lab 3"
   },
@@ -203,7 +389,28 @@
     "Slides",
     "Video"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1T6xbFmE36B_T02oVlQ8PmabKnVybTH_vigQDqw4AjCs/edit?usp=sharing"
+    },
+    {
+     "label": "Video",
+     "url": "https://youtu.be/SRBdpoPl57Q?si=ox18NP0NXlf2X7mp"
+    }
+   ],
    "tutorial": "T6: Setting Up the car",
+   "tutorials": [
+    {
+     "text": "T6: Setting Up the car",
+     "links": [
+      {
+       "label": "Slides",
+       "url": "https://docs.google.com/presentation/d/1qHHgZ1h3grANN1Z5K00dOuNCsI0A0cVurFC_wawmUes/edit?usp=sharing"
+      }
+     ]
+    }
+   ],
    "out": "",
    "due": ""
   },
@@ -214,12 +421,29 @@
    "lecture": 8,
    "title": "Introduction to Graph-based SLAM",
    "materials": [
-    "Slides",
-    "Video"
+    "Slides"
+   ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1slG1VtNN69xpUztTa9DkfsJq5QEi-mev-BDLA4XAbPM/edit?usp=sharing"
+    }
    ],
    "tutorial": "T7: Running slam_toolbox and pf",
+   "tutorials": [
+    {
+     "text": "T7: Running slam_toolbox and pf",
+     "links": [
+      {
+       "label": "Slides",
+       "url": "https://docs.google.com/presentation/d/1MjgUMsUASPYMLtZ1bKrF7CEdn8pBhxS-u9xVrfE9vHs/edit?usp=sharing"
+      }
+     ]
+    }
+   ],
    "out": "Lab 5: SLAM & Pure Pursuit",
-   "due": ""
+   "due": "",
+   "href": "/learn-new/doc/lectures/ModuleC/lecture09"
   },
   {
    "module": "B",
@@ -231,9 +455,31 @@
     "Slides",
     "Video"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1BUviES3ltgnQJ0QDPHwwBgy3KnQ87ziV4O9nc33Zv0s/edit?usp=sharing"
+    },
+    {
+     "label": "Video",
+     "url": "https://www.youtube.com/watch?v=x9s8J4ucgO0&list=PL7rtKJAz_mPdFDJtufKmqfWRNu55s_LMc&index=13"
+    }
+   ],
    "tutorial": "T7: Running slam_toolbox and pf",
+   "tutorials": [
+    {
+     "text": "T7: Running slam_toolbox and pf",
+     "links": [
+      {
+       "label": "Slides",
+       "url": "https://docs.google.com/presentation/d/1MjgUMsUASPYMLtZ1bKrF7CEdn8pBhxS-u9xVrfE9vHs/edit?usp=sharing"
+      }
+     ]
+    }
+   ],
    "out": "",
-   "due": "Lab 4"
+   "due": "Lab 4",
+   "href": "/learn-new/doc/lectures/ModuleD/lecture10"
   },
   {
    "module": "B",
@@ -245,7 +491,28 @@
     "Slides",
     "Video"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1e__42u7XhSrEsaZofIUmoVeeMuWlk57LzWzcdvGS67Q/edit?usp=sharing"
+    },
+    {
+     "label": "Video",
+     "url": "https://www.youtube.com/watch?v=kQi5IGzvr0c&list=PL7rtKJAz_mPdFDJtufKmqfWRNu55s_LMc&index=23"
+    }
+   ],
    "tutorial": "T7: Running slam_toolbox and pf",
+   "tutorials": [
+    {
+     "text": "T7: Running slam_toolbox and pf",
+     "links": [
+      {
+       "label": "Slides",
+       "url": "https://docs.google.com/presentation/d/1MjgUMsUASPYMLtZ1bKrF7CEdn8pBhxS-u9xVrfE9vHs/edit?usp=sharing"
+      }
+     ]
+    }
+   ],
    "out": "",
    "due": ""
   },
@@ -256,7 +523,9 @@
    "lecture": null,
    "title": "Race Preparation Office Hours (OH)",
    "materials": [],
+   "links": [],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
    "due": ""
   },
@@ -267,7 +536,9 @@
    "lecture": null,
    "title": "FALL BREAK",
    "materials": [],
+   "links": [],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
    "due": ""
   },
@@ -278,7 +549,9 @@
    "lecture": null,
    "title": "Race Preparation Office Hours (OH)",
    "materials": [],
+   "links": [],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
    "due": ""
   },
@@ -289,10 +562,12 @@
    "lecture": null,
    "title": "Race 1: Basic Methods in Racing",
    "materials": [],
+   "links": [],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
    "due": "Lab 5",
-   "note": "Practice on Mon to Tue in Levine Lobby"
+   "note": "Practice on Mon-Tu in Levine Lobby"
   },
   {
    "module": "B",
@@ -301,7 +576,14 @@
    "lecture": null,
    "title": "Friday Recitation: Code Review",
    "materials": [],
+   "links": [],
    "tutorial": "Code Review",
+   "tutorials": [
+    {
+     "text": "Code Review",
+     "links": []
+    }
+   ],
    "out": "",
    "due": ""
   },
@@ -312,12 +594,29 @@
    "lecture": 11,
    "title": "Local Planning: RRT, Spline Based Planner",
    "materials": [
-    "Slides",
-    "Video"
+    "Slides"
+   ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1q3tFFA5ZswzOiyGoY2hudhapEuJOCGdxtuDkPPGdZCk/edit?usp=sharing"
+    }
    ],
    "tutorial": "T8: Intro to RRT*",
+   "tutorials": [
+    {
+     "text": "T8: Intro to RRT*",
+     "links": [
+      {
+       "label": "Link",
+       "url": "https://roboracer.ai/learn/rrt/"
+      }
+     ]
+    }
+   ],
    "out": "Lab 6: Motion Planning",
-   "due": ""
+   "due": "",
+   "href": "/learn-new/doc/lectures/ModuleD/lecture11"
   },
   {
    "module": "C",
@@ -326,10 +625,16 @@
    "lecture": 12,
    "title": "Optimization & Control I: Optimization Basics and LQR",
    "materials": [
-    "Slides",
-    "Video"
+    "Slides"
+   ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1gDLDeSZ7T9COVrHDrw1w5xL3hELehDIBND3bQZkpc34/edit?usp=sharing"
+    }
    ],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
    "due": ""
   },
@@ -340,9 +645,31 @@
    "lecture": null,
    "title": "Final Project Overview",
    "materials": [
-    "Slides"
+    "Slides",
+    "2023 Projects",
+    "2024 Projects",
+    "2025 Projects"
+   ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/16IN3Zbmoo3hFWnI3oQxEPkTAdTINFtdA_34jwu5gmw4/edit?usp=sharing"
+    },
+    {
+     "label": "2023 Projects",
+     "url": "https://docs.google.com/presentation/d/1GPdBi5ZYA87KyAxkepwiUVQ8fyWVw7nZ_xOPzUZbgDI/edit?usp=sharing"
+    },
+    {
+     "label": "2024 Projects",
+     "url": "https://docs.google.com/presentation/d/1QZ5EgNsQSaLdd-AwyH1Ktz35QiReJLCa4Emd39t6MTI/edit?usp=sharing"
+    },
+    {
+     "label": "2025 Projects",
+     "url": "https://docs.google.com/presentation/d/17DvoFVa-WeyxRWmQeFFZG2J2njX-bs7Brm2jC4Z0a7E/edit?usp=sharing"
+    }
    ],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
    "due": ""
   },
@@ -353,12 +680,29 @@
    "lecture": 13,
    "title": "Optimization & Control II: Model Predictive Control",
    "materials": [
-    "Slides",
-    "Video"
+    "Slides"
    ],
-   "tutorial": "",
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1D2iLDV3Zit_tELMWB8PFOVlfNVikmD7S49MQxj8-Z7k/edit?usp=sharing"
+    }
+   ],
+   "tutorial": "Optimization & Control II: Model Predictive Control",
+   "tutorials": [
+    {
+     "text": "Optimization & Control II: Model Predictive Control",
+     "links": [
+      {
+       "label": "Slides",
+       "url": "https://docs.google.com/presentation/d/1D2iLDV3Zit_tELMWB8PFOVlfNVikmD7S49MQxj8-Z7k/edit?usp=sharing"
+      }
+     ]
+    }
+   ],
    "out": "Lab 7: MPC",
-   "due": ""
+   "due": "",
+   "href": "/learn-new/doc/lectures/ModuleF/lecture21"
   },
   {
    "module": "C",
@@ -369,7 +713,24 @@
    "materials": [
     "Slides"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1lPDVdd-H1W4ZKbaA7sgCj3z68n6X_la_/edit?usp=sharing&ouid=117915165821576918029&rtpof=true&sd=true"
+    }
+   ],
    "tutorial": "T10: Introduction to Jax",
+   "tutorials": [
+    {
+     "text": "T10: Introduction to Jax",
+     "links": [
+      {
+       "label": "Notebook",
+       "url": "https://drive.google.com/file/d/1EmycnNpKB7qEzKDwzq70mN7OVCqIn1OX/view?usp=sharing"
+      }
+     ]
+    }
+   ],
    "out": "",
    "due": "Lab 6"
   },
@@ -382,7 +743,14 @@
    "materials": [
     "Slides"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1svzGdH1BGijG7vQ2Y9in_rsBJU4tomMsfQTAHxmAqAk/edit?usp=sharing"
+    }
+   ],
    "tutorial": "",
+   "tutorials": [],
    "out": "Optional Lab 8: MPPI",
    "due": ""
   },
@@ -393,9 +761,26 @@
    "lecture": 16,
    "title": "Reinforcement Learning and Imitation Learning",
    "materials": [
+    "RL slides",
+    "IL slides",
     "Slides"
    ],
+   "links": [
+    {
+     "label": "RL slides",
+     "url": "https://docs.google.com/presentation/d/10vXkEHW0N2_iSEbaRRmU92YXNGEwUcrx/edit?usp=sharing&ouid=104540726019799501996&rtpof=true&sd=true"
+    },
+    {
+     "label": "IL slides",
+     "url": "https://docs.google.com/presentation/d/13LyWu7WN-oiyWthY-beNRetgm0RnZRfyAR1nFKAO33k/edit?usp=sharing"
+    },
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1IEO9AzjnXSeCO3CRZWtjw35-sI7jcUXIuL_UAPy5EMg/edit?usp=sharing"
+    }
+   ],
    "tutorial": "",
+   "tutorials": [],
    "out": "Final Project",
    "due": ""
   },
@@ -406,10 +791,27 @@
    "lecture": 17,
    "title": "Practical Reinforcement Learning",
    "materials": [
-    "Slides"
+    "Slides",
+    "F1tenth_rl code"
+   ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1138OfOmO0tKPte7UgAUmIplyf-PNQB0qgcKWo2vD91I/edit?usp=sharing"
+    },
+    {
+     "label": "F1tenth_rl code",
+     "url": "https://github.com/JeffersonKoumbaMoussadjiLu/f1tenth_rl_humble/tree/main"
+    }
    ],
    "tutorial": "T11: Train RL Policies in RoboRacer gym",
-   "out": "Optional Lab 10: Reinforcement Learning",
+   "tutorials": [
+    {
+     "text": "T11: Train RL Policies in RoboRacer gym",
+     "links": []
+    }
+   ],
+   "out": "",
    "due": ""
   },
   {
@@ -422,9 +824,21 @@
     "Slides",
     "Video"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1d_rk98s5h1at5dR9lmczST3FDW32Mrgzu2BVcfAEHjQ/edit?usp=sharing"
+    },
+    {
+     "label": "Video",
+     "url": "https://www.youtube.com/watch?v=Pf4p3bR7AAQ"
+    }
+   ],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
-   "due": ""
+   "due": "",
+   "href": "/learn-new/doc/lectures/ModuleF/lecture20"
   },
   {
    "module": "C",
@@ -436,9 +850,21 @@
     "Slides",
     "Video"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1BU-PVYwIdqWcBy3389LpD1qVFZKl9N_NDRH8Jg4WAa4/edit?usp=sharing"
+    },
+    {
+     "label": "Video",
+     "url": "https://youtu.be/TfYVs9g35ZI"
+    }
+   ],
    "tutorial": "",
+   "tutorials": [],
    "out": "Debate: Ethics for AVs",
-   "due": "Debate Summary"
+   "due": "Debate Summary",
+   "href": "/learn-new/doc/lectures/ModuleF/lecture22"
   },
   {
    "module": "C",
@@ -447,10 +873,12 @@
    "lecture": null,
    "title": "Race 2: Advanced Control for Racing",
    "materials": [],
+   "links": [],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
    "due": "Lab 7",
-   "note": "Sun to Tue in Levine Lobby"
+   "note": "Sun - Tue in Levine Lobby"
   },
   {
    "module": "C",
@@ -459,7 +887,14 @@
    "lecture": null,
    "title": "Final Project Proposal Pitches - Round I",
    "materials": [],
+   "links": [],
    "tutorial": "Final Project pitches",
+   "tutorials": [
+    {
+     "text": "Final Project pitches",
+     "links": []
+    }
+   ],
    "out": "",
    "due": "Final Project Proposal"
   },
@@ -474,8 +909,23 @@
     "Video",
     "Part II video"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/154-auH5id2--QoN5FOVwhwv7df68O56urYLT36zIl2k/edit?pli=1&slide=id.h37971b5323428e4e_1_1274#slide=id.h37971b5323428e4e_1_1274"
+    },
+    {
+     "label": "Video",
+     "url": "https://youtu.be/OW6VLFgocDM?si=djeMWWIu_Xr7a-BA"
+    },
+    {
+     "label": "Part II video",
+     "url": "https://www.youtube.com/watch?v=_hsDrpZGHtM&list=PL7rtKJAz_mPdFDJtufKmqfWRNu55s_LMc&index=16"
+    }
+   ],
    "tutorial": "",
-   "out": "Lab 9: Perception & Vision",
+   "tutorials": [],
+   "out": "",
    "due": ""
   },
   {
@@ -487,8 +937,15 @@
    "materials": [
     "Slides"
    ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1UR_wHYX01_kEPDhoSkkpUODv633_ZfJhYU8knbvzDZs/edit?usp=sharing"
+    }
+   ],
    "tutorial": "",
-   "out": "",
+   "tutorials": [],
+   "out": "Optional Lab 9: Reinforcement Learning, Lab 10: Perception & Vision",
    "due": ""
   },
   {
@@ -498,7 +955,9 @@
    "lecture": 21,
    "title": "Final Project Pitches - Round II",
    "materials": [],
+   "links": [],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
    "due": ""
   },
@@ -511,9 +970,16 @@
    "materials": [
     "Video"
    ],
+   "links": [
+    {
+     "label": "Video",
+     "url": "https://www.youtube.com/watch?v=ZCv595-lBk0"
+    }
+   ],
    "tutorial": "",
+   "tutorials": [],
    "out": "Final Project",
-   "due": "Lab 9"
+   "due": ""
   },
   {
    "module": "D",
@@ -521,10 +987,20 @@
    "kind": "lecture",
    "lecture": 23,
    "title": "Special Topic 1: Guest Speaker - Nic Baumann (ETHz) and Owen Shaffer",
-   "materials": [],
+   "materials": [
+    "Slides"
+   ],
+   "links": [
+    {
+     "label": "Slides",
+     "url": "https://docs.google.com/presentation/d/1lV8NBrIJpiRhksVC53Io72I5Y0j6GFWjt9JJa0OVn3I/edit?usp=drivesdk"
+    }
+   ],
    "tutorial": "",
+   "tutorials": [],
    "out": "Final Project",
-   "due": ""
+   "due": "",
+   "href": "/learn-new/doc/lectures/ModuleF/lecture23"
   },
   {
    "module": "D",
@@ -533,7 +1009,9 @@
    "lecture": 24,
    "title": "Special Topic 2: MIND-Stack: Modular, Interpretable, End-to-End Differentiability for Autonomous Racing - Felix Jahncke (TU Munich)",
    "materials": [],
+   "links": [],
    "tutorial": "",
+   "tutorials": [],
    "out": "Final Project",
    "due": ""
   },
@@ -542,11 +1020,13 @@
    "date": "2026-11-25",
    "kind": "lecture",
    "lecture": 25,
-   "title": "Special Topic 3: Guest speaker",
+   "title": "Special Topic 3: Guest Speaker",
    "materials": [],
+   "links": [],
    "tutorial": "",
+   "tutorials": [],
    "out": "Final Project",
-   "due": ""
+   "due": "Lab 10"
   },
   {
    "module": "D",
@@ -555,9 +1035,11 @@
    "lecture": null,
    "title": "Project Office Hours",
    "materials": [],
+   "links": [],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
-   "due": "Lab 8, Lab 10"
+   "due": "Lab 8, Lab 9"
   },
   {
    "module": "E",
@@ -566,7 +1048,9 @@
    "lecture": null,
    "title": "Project Demo Prep Day",
    "materials": [],
+   "links": [],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
    "due": "",
    "note": "Levine Lobby Reserved as backup"
@@ -578,9 +1062,12 @@
    "lecture": 26,
    "title": "Project Demo Day",
    "materials": [],
+   "links": [],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
-   "due": ""
+   "due": "",
+   "href": "/learn-new/doc/lectures/ModuleG/lecture26"
   },
   {
    "module": "E",
@@ -589,10 +1076,13 @@
    "lecture": null,
    "title": "Final Race Competition",
    "materials": [],
+   "links": [],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
    "due": "",
-   "note": "Dec 5 to 6 in Houston Hall"
+   "note": "Dec 5-6 in Houston Hall",
+   "href": "/learn-new/doc/lectures/ModuleG/lecture28"
   },
   {
    "module": "E",
@@ -601,12 +1091,14 @@
    "lecture": null,
    "title": "Final Project Documentation Submission Deadline",
    "materials": [],
+   "links": [],
    "tutorial": "",
+   "tutorials": [],
    "out": "",
    "due": "Project report submission"
   }
  ],
- "schedule_note": "Demos and final project dates are firm. No extensions.",
+ "schedule_note": "Demos and Final project dates are firm. No extensions.",
  "lecture1": {
   "module": "A",
   "number": 1,
