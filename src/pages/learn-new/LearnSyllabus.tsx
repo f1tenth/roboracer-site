@@ -85,15 +85,15 @@ function Row({ docs, s }: { docs: LearnDocsFile; s: DocsSession }) {
         ) : (
           <span className={quiet ? "" : "font-semibold text-text-strong"}>{s.title}</span>
         )}
-        <Chips links={s.links} />
+        <Chips links={s.links ?? []} />
         {s.note && <span className="mt-1 block text-small text-text-muted">{s.note}</span>}
         </div>
       </td>
       <td data-label="Tutorial" className={`${TD} text-small`}>
-        {s.tutorials.map((t) => (
+        {(s.tutorials ?? []).map((t) => (
           <span key={t.text} className="mb-2 block last:mb-0">
             {t.text}
-            <Chips links={t.links} />
+            <Chips links={t.links ?? []} />
           </span>
         ))}
       </td>
