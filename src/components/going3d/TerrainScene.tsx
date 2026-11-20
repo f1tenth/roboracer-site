@@ -5,12 +5,12 @@ import PauseToggle from "../ui/PauseToggle";
 import { drawCar, CAR_ACCENTS, type CarPose, type V3 } from "./rcCar";
 
 /* ---------------------------------------------------------------------------
- * The scene: a track and the floor grid around it, in 3D, drawn on a canvas
+ * The scene: a track over a plain floor, in 3D, drawn on a canvas
  * with a plain perspective camera (no three.js on this page).
  *
  * The trick behind "2D": a flat world seen exactly edge-on, from its own
  * height, collapses into one line. So at p = 0 the camera sits on the floor
- * and the whole track and grid read as a single line across the screen. As p
+ * and the whole track reads as a single line across the screen. As p
  * grows the camera rises and tilts down (the line opens into a plane running
  * to the horizon), then bumps grow out of the track and the camera drifts.
  * ------------------------------------------------------------------------- */
@@ -19,7 +19,6 @@ const N = 600;            // track samples
 const WIDTH = 1.8;        // track width
 const ROLLER = 0.45;      // tallest roller at full height
 const BANK_MAX = 0.5;     // ~29 degrees through the middle of the turn
-const GRID = { x0: -90, x1: 90, z0: -80, z1: 120, step: 3 };
 const NEAR = 0.2;         // near clipping plane, metres in front of the camera
 
 const ease = (t: number) => (t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t));
@@ -456,17 +455,6 @@ function draw(canvas: HTMLCanvasElement, p: number, cars: Car[] = []) {
   const ox = W / 2;
   const oy = H * 0.55;
   const screen = (k: { x: number; y: number; d: number }) => ({ sx: ox + (F * k.x) / k.d, sy: oy - (F * k.y) / k.d });
-  /** A line, cut at the near plane so nothing behind the camera is drawn. */
-  const line = (q0: Pt, q1: Pt) => {
-    let a0 = v(q0), a1 = v(q1);
-    if (a0.d <= NEAR && a1.d <= NEAR) return null;
-    if (a0.d <= NEAR || a1.d <= NEAR) {
-      const t = (NEAR - a0.d) / (a1.d - a0.d);
-      const m = { x: a0.x + t * (a1.x - a0.x), y: a0.y + t * (a1.y - a0.y), d: NEAR };
-      if (a0.d <= NEAR) a0 = m; else a1 = m;
-    }
-    return [screen(a0), screen(a1)] as const;
-  };
   const thin = Math.max(1, W / 1600);
 
   ctx.clearRect(0, 0, W, H);
@@ -486,33 +474,69 @@ function draw(canvas: HTMLCanvasElement, p: number, cars: Car[] = []) {
     ctx.fillRect(0, hy - H * 0.22, W, H * 0.67);
   }
 
-  // Floor grid, in violet; it bunches into a brighter band towards the horizon.
-  ctx.strokeStyle = tint([238, 240, 247, 0.12], [167, 139, 250, 0.2]);
-  ctx.beginPath();
+  /** A polygon in the world on screen, cut at the near plane (null if all behind). */
+  const screenPoly = (pts: Pt[]) => {
+    const c = pts.map(v);
+    const out: { x: number; y: number; d: number }[] = [];
+    for (let i = 0; i < c.length; i++) {
+      const a = c[i], e = c[(i + 1) % c.length];
+      if (a.d > NEAR) out.push(a);
+      if (a.d > NEAR !== e.d > NEAR) {
+        const t = (NEAR - a.d) / (e.d - a.d);
+        out.push({ x: a.x + t * (e.x - a.x), y: a.y + t * (e.y - a.y), d: NEAR });
+      }
+    }
+    return out.length > 2 ? out.map(screen) : null;
+  };
+  /** Add a polygon in the world to the current path, always wound the same way (so
+   * overlapping pieces of one fill merge instead of cancelling). */
+  const addPoly = (pts: Pt[]) => {
+    const P = screenPoly(pts);
+    if (!P) return;
+    let area = 0;
+    for (let i = 0; i < P.length; i++) { const a = P[i], e = P[(i + 1) % P.length]; area += a.sx * e.sy - e.sx * a.sy; }
+    const Q = area < 0 ? [...P].reverse() : P;
+    ctx.moveTo(Q[0].sx, Q[0].sy);
+    for (const q of Q.slice(1)) ctx.lineTo(q.sx, q.sy);
+    ctx.closePath();
+  };
+  // No grid in the site's look: the floor is the page's own flat ink-900.
   const seg = (s: readonly [{ sx: number; sy: number }, { sx: number; sy: number }] | null) => {
     if (s) { ctx.moveTo(s[0].sx, s[0].sy); ctx.lineTo(s[1].sx, s[1].sy); }
   };
-  for (let gx = GRID.x0; gx <= GRID.x1; gx += GRID.step) seg(line({ x: gx, y: 0, z: GRID.z0 }, { x: gx, y: 0, z: GRID.z1 }));
-  for (let gz = GRID.z0; gz <= GRID.z1; gz += GRID.step) seg(line({ x: GRID.x0, y: 0, z: gz }, { x: GRID.x1, y: 0, z: gz }));
-  ctx.stroke();
 
   const { L, R, C } = track(b);
   const VL = L.map(v), VR = R.map(v);
   const SL = VL.map((k) => (k.d > NEAR ? screen(k) : null));
   const SR = VR.map((k) => (k.d > NEAR ? screen(k) : null));
 
-  // Supports under any edge that is off the floor.
+  // Under the raised track: its shadow on the floor (the footprint), and a
+  // curtain of cyan light from each raised edge down to the floor, fading
+  // towards it (four bands, each one path so overlaps never double up).
   if (b > 0.01) {
-    ctx.strokeStyle = `rgba(0,209,218,${0.45 * b})`;
+    const raised = (i: number) => L[i].y > 0.02 || R[i].y > 0.02 || L[i + 1].y > 0.02 || R[i + 1].y > 0.02;
+    const flat = (q: Pt): Pt => ({ x: q.x, y: 0, z: q.z });
+    ctx.fillStyle = `rgba(6,4,16,${0.3 * b})`;
     ctx.beginPath();
-    for (let i = 0; i <= N; i += 6) {
-      for (const e of [L[i], R[i]]) {
-        if (e.y < 0.05) continue;
-        const s = line(e, { x: e.x, y: 0, z: e.z });
-        if (s) { ctx.moveTo(s[0].sx, s[0].sy); ctx.lineTo(s[1].sx, s[1].sy); }
-      }
+    for (let i = 0; i < N; i++) {
+      if (!raised(i)) continue;
+      addPoly([flat(L[i]), flat(R[i]), flat(R[i + 1]), flat(L[i + 1])]);
     }
-    ctx.stroke();
+    ctx.fill();
+    const BANDS = [0.22, 0.14, 0.08, 0.03];
+    BANDS.forEach((alpha, j) => {
+      const t0 = 1 - j / BANDS.length, t1 = 1 - (j + 1) / BANDS.length;
+      const at = (q: Pt, t: number): Pt => ({ x: q.x, y: q.y * t, z: q.z });
+      ctx.fillStyle = `rgba(0,209,218,${alpha * b})`;
+      ctx.beginPath();
+      for (let i = 0; i < N; i++) {
+        for (const E of [L, R]) {
+          if (E[i].y < 0.02 && E[i + 1].y < 0.02) continue;
+          addPoly([at(E[i], t0), at(E[i + 1], t0), at(E[i + 1], t1), at(E[i], t1)]);
+        }
+      }
+      ctx.fill();
+    });
   }
 
   // Track surface, farthest pieces first, lit by the slope along it and the bank across it.
@@ -977,7 +1001,7 @@ export default function TerrainScene({ variant, header, label, className = "" }:
         className={`${pinned ? "sticky top-0 h-[100svh]" : "h-[85svh] min-h-[32rem]"} relative w-full overflow-hidden`}
       >
         {canvas}
-        {/* Keeps the copy readable where the far grid and track run behind it. */}
+        {/* Keeps the copy readable where the far track runs behind it. */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-linear-to-b from-ink-900 via-ink-900/40 via-35% to-transparent to-60%"
