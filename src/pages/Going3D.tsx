@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
@@ -28,8 +27,6 @@ const EXTERNAL = { target: "_blank", rel: "noopener noreferrer" } as const;
 export default function Going3D() {
   const [data, setData] = useState<Going3DFile | null>(null);
   const [failed, setFailed] = useState(false);
-  // Review aid while the banner is being chosen: /3d?banner=<id> shows another candidate.
-  const [params] = useSearchParams();
 
   useEffect(() => {
     let live = true;
@@ -57,10 +54,7 @@ export default function Going3D() {
   if (!data) return <div className="min-h-[100svh] bg-ink-900" />;
 
   const { hero, terrain, car, next, race } = data;
-  const banner =
-    hero.banners.find((b) => b.id === params.get("banner")) ??
-    hero.banners.find((b) => b.id === hero.banner) ??
-    hero.banners[0];
+  const { banner } = hero;
   const wide = [...banner.wide].sort((a, b) => a.width - b.width);
   const largest = wide[wide.length - 1];
 

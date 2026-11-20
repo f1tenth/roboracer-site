@@ -1142,18 +1142,14 @@ export type Going3DFile = {
     meta: string[];
     cta_primary: Going3DLink;
     cta_secondary: Going3DLink;
-    /** Id of the banner shown; `?banner=<id>` previews another while the set is under review. */
-    banner: string;
-    banners: {
-      id: string;
-      /** For the review only, never rendered. */
-      label: string;
+    /** The photo across the top on wider screens. */
+    banner: {
       alt: string;
       /** Height over width, for the reserved box. */
       ratio: number;
       /** The banner at each width, for srcset. */
       wide: { src: string; width: number }[];
-    }[];
+    };
     /** Phones (below 48rem) get this portrait crop instead. */
     portrait: Going3DImage & { alt: string };
   };
