@@ -1,0 +1,158 @@
+{
+  "_note": "First teaser for RoboRacer going 3D (route /3d, branch revamp/going-3d). Unlisted: nothing links here yet. This file is served publicly, so keep internal notes out of it. Copy is not in the roboracer-content skill yet: Cedric confirms it before merge. hero.banners is a temporary set of candidates for review (?banner=<id> switches them); trim to the chosen one before merge.",
+  "hero": {
+    "title_lead": "RoboRacer is going",
+    "title_accent": "3D",
+    "tagline": "Autonomous racing, off the flat track.",
+    "meta": [
+      "First 3D race",
+      "ICRA 2027",
+      "Seoul, Korea"
+    ],
+    "cta_primary": {
+      "label": "Join the Slack",
+      "href": "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q"
+    },
+    "cta_secondary": {
+      "label": "See the car",
+      "href": "#car"
+    },
+    "banner": {
+      "alt": "The RoboRacer off-road car head-on atop a red hump, campus buildings blurred behind",
+      "ratio": 0.4285,
+      "wide": [
+        {
+          "src": "/media/going3d/hero-buildings-full-warm2-1280.webp",
+          "width": 1280
+        },
+        {
+          "src": "/media/going3d/hero-buildings-full-warm2-2400.webp",
+          "width": 2400
+        }
+      ]
+    },
+    "portrait": {
+      "src": "/media/going3d/hero-4x5-960.webp",
+      "width": 960,
+      "height": 1200,
+      "alt": "The RoboRacer off-road car on top of a red hump, front 3/4, campus buildings behind"
+    }
+  },
+  "terrain": {
+    "index": "01",
+    "title": "Off the flat track",
+    "lead": "Since 2016, RoboRacer has raced on flat floors. The next tracks rise and fall.",
+    "label_before": "2D",
+    "label_before_note": "z = 0",
+    "label_after": "3D",
+    "label_after_note": "z ≠ 0"
+  },
+  "car": {
+    "index": "02",
+    "title": "A first look",
+    "lead": "A retrofit of the RoboRacer car, not a redesign. Full specs later.",
+    "hint": "Scroll to turn it",
+    "alt": "The RoboRacer off-road car turning on a dark stage, from one front quarter past its face to the other: a stereo camera and two antennas on top, knobby tires, red shocks",
+    "frames": {
+      "ext": ".webp",
+      "count": 51,
+      "digits": 2,
+      "sets": [
+        {
+          "base": "/media/going3d/car-1152/car-",
+          "width": 1152,
+          "height": 576
+        },
+        {
+          "base": "/media/going3d/car-2304/car-",
+          "width": 2304,
+          "height": 1152
+        }
+      ],
+      "display_width": 1152,
+      "degrees_per_frame": 2,
+      "angle_start": -50,
+      "still": 25
+    },
+    "callouts": [
+      {
+        "title": "Vision-based",
+        "body": "Stereo cameras see the track in 3D."
+      },
+      {
+        "title": "3D positioning",
+        "body": "Visual-inertial: the cameras plus an IMU."
+      },
+      {
+        "title": "3D planning",
+        "body": "It plans its path over the terrain."
+      },
+      {
+        "title": "1/10 scale",
+        "body": "Still 1/10, with more compute on board."
+      }
+    ]
+  },
+  "next": {
+    "index": "03",
+    "title": "Coming next",
+    "subtitle": "A first glimpse of each.",
+    "lead": "Full details soon.",
+    "tag": "Soon",
+    "items": [
+      {
+        "id": "simulator",
+        "title": "The simulator",
+        "body": "Test your code on hilly terrain.",
+        "image": {
+          "src": "/media/going3d/soon-simulator.webp",
+          "width": 960,
+          "height": 540,
+          "alt": "A simulated RoboRacer car on a wavy asphalt track over grassy hills, trees behind"
+        }
+      },
+      {
+        "id": "stack",
+        "title": "The stack",
+        "body": "New software for a 3D world.",
+        "image": {
+          "src": "/media/going3d/soon-stack.webp",
+          "width": 960,
+          "height": 540,
+          "alt": "The car's live map of an indoor track, turned to fill the frame: the planned route, its position and the point cloud it builds"
+        },
+        "video": {
+          "webm": "/media/going3d/soon-stack.webm",
+          "mp4": "/media/going3d/soon-stack.mp4"
+        }
+      },
+      {
+        "id": "car",
+        "title": "The car",
+        "body": "The full specs of the retrofit.",
+        "image": {
+          "src": "/media/going3d/soon-car.webp",
+          "width": 960,
+          "height": 540,
+          "alt": "The RoboRacer off-road car from the front 3/4 on a red hump, its stereo camera and antennas on top, campus buildings behind"
+        }
+      }
+    ]
+  },
+  "race": {
+    "index": "04",
+    "eyebrow": "The first 3D race",
+    "event": "ICRA 2027",
+    "place": "Seoul, Korea",
+    "title": "See you in Seoul",
+    "lead": "Dates, rules and registration to be announced. Until then, the RoboRacer community talks on Slack.",
+    "cta": {
+      "label": "Join the Slack",
+      "href": "https://join.slack.com/t/robo-racer/shared_invite/zt-47c2yt7if-BGnqzoPjipFh1HwiDazE3Q"
+    },
+    "event_link": {
+      "label": "See it on the ICRA 2027 site",
+      "href": "https://2027.ieee-icra.org/program/competitions/#RoboRacerAutonomous"
+    }
+  }
+}
