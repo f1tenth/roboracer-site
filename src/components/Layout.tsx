@@ -25,6 +25,7 @@ const TITLES: Record<string, string> = {
   "/chat": "Chat - RoboRacer",
   "/assembly": "The car, part by part - RoboRacer",
   "/styleguide": "Style guide - RoboRacer",
+  "/3d": "RoboRacer is going 3D",
 };
 
 export default function Layout() {
