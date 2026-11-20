@@ -1126,3 +1126,95 @@ export const loadDocsPage = async (key: string): Promise<string> => {
 };
 
 export const loadLearnDocs = () => loadJson<LearnDocsFile>("learn-docs.json");
+
+/** /3d, the first "RoboRacer is going 3D" teaser: every line of copy and
+ * every media path lives in public/data/going3d.json. */
+export type Going3DLink = { label: string; href: string };
+export type Going3DImage = { src: string; width: number; height: number };
+
+export type Going3DFile = {
+  hero: {
+    title_lead: string;
+    /** The one word set in the logo gradient. */
+    title_accent: string;
+    tagline: string;
+    /** Mono line under the tagline, joined with middots. */
+    meta: string[];
+    cta_primary: Going3DLink;
+    cta_secondary: Going3DLink;
+    /** Id of the banner shown; `?banner=<id>` previews another while the set is under review. */
+    banner: string;
+    banners: {
+      id: string;
+      /** For the review only, never rendered. */
+      label: string;
+      alt: string;
+      /** Height over width, for the reserved box. */
+      ratio: number;
+      /** The banner at each width, for srcset. */
+      wide: { src: string; width: number }[];
+    }[];
+    /** Phones (below 48rem) get this portrait crop instead. */
+    portrait: Going3DImage & { alt: string };
+  };
+  terrain: {
+    index: string;
+    title: string;
+    lead: string;
+    label_before: string;
+    label_before_note: string;
+    label_after: string;
+    label_after_note: string;
+  };
+  car: {
+    index: string;
+    title: string;
+    lead: string;
+    hint: string;
+    alt: string;
+    /** Turntable frames: `${set.base}${zero-padded i}${ext}`, i = 0..count-1. The same
+     * frames at several sizes; each visitor loads the smallest set that is sharp on
+     * their screen (display width x pixel density). */
+    frames: {
+      ext: string;
+      count: number;
+      digits: number;
+      sets: { base: string; width: number; height: number }[];
+      /** Largest CSS width the turntable is shown at. */
+      display_width: number;
+      degrees_per_frame: number;
+      /** Camera angle of frame 0 relative to the face-on view (the readout shows −50° … 0° … +50°). */
+      angle_start: number;
+      /** The frame shown under reduced motion (the face-on view). */
+      still: number;
+    };
+    callouts: { title: string; body: string }[];
+  };
+  next: {
+    index: string;
+    title: string;
+    subtitle: string;
+    lead: string;
+    tag: string;
+    items: {
+      id: string;
+      title: string;
+      body: string;
+      image: Going3DImage & { alt: string };
+      /** A muted loop in place of the still (the still is its poster and first frame). */
+      video?: { webm: string; mp4: string };
+    }[];
+  };
+  race: {
+    index: string;
+    eyebrow: string;
+    event: string;
+    place: string;
+    title: string;
+    lead: string;
+    cta: Going3DLink;
+    /** The competition's listing on the conference site. */
+    event_link: Going3DLink;
+  };
+};
+export const loadGoing3D = () => loadJson<Going3DFile>("going3d.json");

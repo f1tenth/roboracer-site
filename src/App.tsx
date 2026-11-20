@@ -31,6 +31,7 @@ const Rules = lazyWithRetry("Rules", () => import("./pages/Rules"));
 const Chat = lazyWithRetry("Chat", () => import("./pages/Chat"));
 const Assembly = lazyWithRetry("Assembly", () => import("./pages/Assembly"));
 const Styleguide = lazyWithRetry("Styleguide", () => import("./pages/Styleguide"));
+const Going3D = lazyWithRetry("Going3D", () => import("./pages/Going3D"));
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
             <Route path="/chat" element={<Chat />} />
             <Route path="/assembly" element={<Assembly />} />
             <Route path="/styleguide" element={<Styleguide />} />
+            <Route path="/3d" element={<Going3D />} />
           </Route>
         </Routes>
       </Suspense>
