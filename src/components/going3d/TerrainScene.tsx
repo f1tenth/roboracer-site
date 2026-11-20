@@ -260,16 +260,19 @@ function carHeight(c: Car, s: number, b: number): number {
 /* Traffic: cars enter at the start of the track and leave at its end (both
  * out of sight). A spawn tick comes round on a fixed schedule; each one
  * brings, after a random delay within the tick, either one car in a random
- * lane, a pair (one in each lane, from wheel to wheel to a few lengths
- * apart; never two pairs in a row), or nothing. The schedule never drifts; the delays and choices make the
- * gaps uneven. There is no set number of cars, only a cap. */
+ * lane or a pair (one in each lane, from wheel to wheel to a few lengths
+ * apart; never two pairs in a row). The schedule never drifts; the delays and
+ * pairs make the gaps uneven. There is no set number of cars, only a cap. */
 
-/** Seconds between spawn ticks; the longest random delay, as a share of a tick. */
-const SPAWN_EVERY = 1.65;
-const SPAWN_DELAY = 0.8;
-/** Chance of a pair, and of a single car, per tick (the rest: nothing). */
+/** Seconds between spawn ticks; the longest random delay, as a share of a
+ * tick. Every tick brings a car, so two cars are never more than
+ * SPAWN_EVERY * (1 + SPAWN_DELAY) = 3.0 s apart: about 26 m, so by the time
+ * the last car on screen reaches the banked turn the next one is coming on
+ * (the track comes into view 31 to 42 m along, the turn is at 54 m). */
+const SPAWN_EVERY = 1.9;
+const SPAWN_DELAY = 0.6;
+/** Chance of a pair per tick (otherwise a single car). */
 const P_PAIR = 0.18;
-const P_SINGLE = 0.55;
 /** How far the second car of a pair trails the first, in seconds (0.05 s is
  * about half a metre, 0.6 s about 5 m). */
 const PAIR_LAG: [number, number] = [0.05, 0.6];
@@ -302,11 +305,13 @@ function stepTraffic(tr: Traffic, dt: number) {
   while (tr.t >= tr.tick) {
     const roll = tr.rand();
     const at = tr.tick + tr.rand() * SPAWN_DELAY * SPAWN_EVERY;
-    const lane = tr.rand() < 0.5 ? 0 : 1;
+    let lane = tr.rand() < 0.5 ? 0 : 1;
     const pair = roll < P_PAIR && !tr.pair;
     if (pair) {
       tr.due.push({ at, lane }, { at: at + lerp(PAIR_LAG[0], PAIR_LAG[1], tr.rand()), lane: 1 - lane });
-    } else if (roll < P_PAIR + P_SINGLE) {
+    } else {
+      // A single car too close behind the last in its lane takes the other one.
+      if ((at - tr.last[lane]) * v < MIN_GAP) lane = 1 - lane;
       tr.due.push({ at, lane });
     }
     tr.pair = pair;
@@ -821,7 +826,7 @@ function extrusion(depth: number): string {
 type Label = { before: string; after: string; noteBefore: string; noteAfter: string };
 
 type TerrainSceneProps = {
-  /** "pinned": the full-screen chapter (pins on desktop, scrubbed). "inline": the finished track as a small mark, like a logo. */
+  /** "pinned": the full-screen chapter (pins on desktop, scrubbed). "inline": the finished track as a mark, like a logo, as wide as className makes it. */
   variant: "pinned" | "inline";
   /** Section header, drawn over the scene's top-left (pinned only). */
   header?: ReactNode;
@@ -958,7 +963,7 @@ export default function TerrainScene({ variant, header, label, className = "" }:
   if (variant === "inline") {
     return (
       <div ref={wrapRef} className={className}>
-        <div ref={stageRef} className="relative aspect-[5/2] w-full max-w-[26rem]">
+        <div ref={stageRef} className="relative aspect-[21/10] w-full">
           {canvas}
         </div>
       </div>

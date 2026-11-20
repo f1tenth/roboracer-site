@@ -95,8 +95,10 @@ function disc(cx: number, y: number, cz: number, r: number, col: RGB): Face {
 }
 
 /** One solid piece of the car (convex, so culling alone orders its own faces),
- * or the antennas (lines). min/max: its bounds in the car's frame. */
-type Part = { faces: Face[]; lines?: [V3, V3][]; min: V3; max: V3 };
+ * or the antennas (lines). min/max: its bounds in the car's frame. round: a
+ * wheel drawn as line art, its tread as one outline (the silhouette of both
+ * rims) under its visible rim, so no facet seams show. */
+type Part = { faces: Face[]; lines?: [V3, V3][]; min: V3; max: V3; round?: boolean };
 
 function part(faces: Face[], lines?: [V3, V3][]): Part {
   const sc = (q: V3) => q.map((v) => v * SCALE) as V3;
@@ -135,13 +137,13 @@ function mesh(accent: RGB): Part[] {
   ];
 }
 
-/** The same car pared down for line art (the ICRA mark): six-sided wheels,
+/** The same car pared down for line art (the ICRA mark): round wheels,
  * one tapered chassis block, the rear box, the computer and the camera. */
 const SIMPLE: Part[] = (() => {
   const r = 0.05, w = 0.05, ax = 0.164, az = 0.112;
+  const round = (cx: number, cz: number, side: 1 | -1): Part => ({ ...part(wheel(cx, cz, r, w, side, 32, false)), round: true });
   return [
-    part(wheel(ax, az, r, w, 1, 6, false)), part(wheel(ax, -az, r, w, -1, 6, false)),
-    part(wheel(-ax, az, r, w, 1, 6, false)), part(wheel(-ax, -az, r, w, -1, 6, false)),
+    round(ax, az, 1), round(ax, -az, -1), round(-ax, az, 1), round(-ax, -az, -1),
     part(slab([[-0.2, -0.083], [0.05, -0.083], [0.22, -0.045], [0.22, 0.045], [0.05, 0.083], [-0.2, 0.083]], 0.03, 0.1, WHITE)),
     part(box(-0.13, -0.035, 0.1, 0.165, -0.08, 0.08, WHITE)),
     part(box(-0.035, 0.065, 0.1, 0.165, -0.075, 0.075, WHITE)),
@@ -257,7 +259,16 @@ export function drawCar(
   const all: Projected[] = [];
   for (const P of parts) {
     const faces: Drawn[] = [];
+    if (P.round) {
+      // The tread: the outline around both rims (all the wheel's points).
+      const s = P.faces.flatMap((face) => face.pts.map((q) => project(world(q))));
+      if (s.some((q) => !q)) return null;
+      const pts = hull(s as Projected[]);
+      faces.push({ pts, fill: "" });
+      all.push(...pts);
+    }
     for (const face of P.faces) {
+      if (P.round && face.n[2] === 0) continue;
       const w = face.pts.map(world);
       const c = w.reduce((a, q) => [a[0] + q[0] / w.length, a[1] + q[1] / w.length, a[2] + q[2] / w.length] as V3, [0, 0, 0] as V3);
       const n = turn(face.n);

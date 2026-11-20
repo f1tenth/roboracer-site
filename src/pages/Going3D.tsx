@@ -175,32 +175,39 @@ export default function Going3D() {
 
       {/* 04: the first 3D race. */}
       <Section variant="ink" width="page" aria-labelledby="g3d-race">
-        <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-on-ink-muted">
-          <span aria-hidden="true" className="h-1 w-1 bg-text-on-ink" />
-          <span>{race.index}</span>
-          <span aria-hidden="true">/</span>
-          <span>{race.eyebrow}</span>
-        </p>
-        <p className="font-display text-display-xl font-semibold text-text-on-ink">
-          {race.event}
-        </p>
-        <p className="mt-3 font-mono text-lead text-text-on-ink-muted">{race.place}</p>
-        {/* The finished 3D track again, as a still: where the shift ends up. */}
-        <TerrainScene variant="inline" className="mt-6" />
-        <div className="mt-10 flex flex-wrap items-end justify-between gap-8">
-          <div className="max-w-2xl">
+        {/* Desktop: the words on the left, the track mark large on the right
+            across both their rows. Narrower: the mark between them, full width. */}
+        <div className="grid items-center gap-x-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+          <div>
+            <p className="mb-4 flex items-center gap-2 font-mono text-small text-text-on-ink-muted">
+              <span aria-hidden="true" className="h-1 w-1 bg-text-on-ink" />
+              <span>{race.index}</span>
+              <span aria-hidden="true">/</span>
+              <span>{race.eyebrow}</span>
+            </p>
+            <p className="font-display text-display-xl font-semibold text-text-on-ink">
+              {race.event}
+            </p>
+            <p className="mt-3 font-mono text-lead text-text-on-ink-muted">{race.place}</p>
+          </div>
+          {/* The finished 3D track again, as a still: where the shift ends up. */}
+          <TerrainScene
+            variant="inline"
+            className="mt-8 w-full max-w-[40rem] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:max-w-none"
+          />
+          <div className="mt-10 lg:col-start-1 lg:row-start-2">
             <h2 id="g3d-race" className="font-display text-display-m font-semibold text-text-on-ink">
               {race.title}
             </h2>
             <p className="mt-4 max-w-[52ch] text-lead text-text-on-ink-muted">{race.lead}</p>
-          </div>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-            <Button href={race.cta.href} on="ink" {...EXTERNAL}>
-              {race.cta.label}
-            </Button>
-            <Button href={race.event_link.href} variant="ghost" on="ink" {...EXTERNAL}>
-              {race.event_link.label}
-            </Button>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <Button href={race.cta.href} on="ink" {...EXTERNAL}>
+                {race.cta.label}
+              </Button>
+              <Button href={race.event_link.href} variant="ghost" on="ink" {...EXTERNAL}>
+                {race.event_link.label}
+              </Button>
+            </div>
           </div>
         </div>
       </Section>
