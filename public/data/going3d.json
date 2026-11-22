@@ -50,7 +50,7 @@
   "car": {
     "index": "02",
     "title": "A first look",
-    "lead": "A retrofit of the RoboRacer car, not a redesign. Full specs later.",
+    "lead": "The same 1/10-scale chassis. Swap the 2D LiDAR for a 3D depth camera: a small change to the hardware, but a big transition to end-to-end perception, planning and control algorithms.",
     "hint": "Scroll to turn it",
     "alt": "The RoboRacer off-road car turning on a dark stage, from one front quarter past its face to the other: a stereo camera and two antennas on top, knobby tires, red shocks",
     "frames": {
@@ -77,11 +77,11 @@
     "callouts": [
       {
         "title": "Vision-based",
-        "body": "Stereo cameras see the track in 3D."
+        "body": "A stereo depth camera sees the track in 3D."
       },
       {
         "title": "3D positioning",
-        "body": "Visual-inertial: the cameras plus an IMU."
+        "body": "Visual-inertial: the camera plus an IMU."
       },
       {
         "title": "3D planning",
@@ -89,7 +89,7 @@
       },
       {
         "title": "1/10 scale",
-        "body": "Still 1/10, with more compute on board."
+        "body": "The same chassis as before."
       }
     ]
   },
