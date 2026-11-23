@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-21",
+  "updated": "2026-11-23",
   "items": [
     {
       "id": "koirala-2024-f1tenth",
@@ -2647,6 +2647,313 @@
       "url": "https://www.semanticscholar.org/paper/685a7aaeafcec81ae0f748a3e81fc203fe83ee5a",
       "pdf": "https://doi.org/10.1109/access.2026.3702246",
       "abstract": "Future Cooperative Intelligent Transport Systems (C-ITSs) will impose stringent requirements on 6G mobile networks in terms of latency, data rate, and reliability. These requirements must be met in rapidly changing wireless channel conditions. Hence, their fulfillment requires rigorous and reproducible testing environments that enable a seamless transition from simulation to real-world deployment. However, existing testbeds and simulation environments either lack physical realism or fail to scale cost-effectively, hindering comprehensive C-ITS evaluation. To overcome these limitations, we implement the concept of a Digital Triplet, comprising three complementary layers: a full-scale real-world test field, a co-simulation environment for integrating additional simulated entities, and a scaled-down replica of the test field. This architecture enables reliable, reproducible, and scalable testing of future 6G-enabled C-ITS applications across different levels of abstraction. We demonstrate the applicability of the Digital Triplet through multiple case studies. For remote driving, we deploy and optimize a low-latency video streaming system and simulate a mmWave communication channel incorporating Reconfigurable Intelligent Surfaces (RISs). An up to 74% reduced median Glass-to-Glass (G2G) latency is achieved in a mobile network compared to related work using a local network. Moreover, emulating real-world vehicle localization in the scaled test field enables the implementation of cross-domain Nonlinear Model Predictive Control (NMPC)-based vehicular platooning. Finally, we evaluate the NMPC platooning controller in both decentralized (on-vehicle) and centralized (edge cloud) configurations. The results highlight the strong potential of the Digital Triplet to accelerate the development and validation of C-ITS applications within future 6G networks. Video abstract: tiny.cc/digitaltriplet"
+    },
+    {
+      "id": "ganguli-2026-f1tenth",
+      "title": "F1Tenth.jl",
+      "authors": [
+        "Prateek Ganguli"
+      ],
+      "year": 2026,
+      "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+      "venue_short": "Zenodo (CERN European Organization fo...",
+      "type": "conference",
+      "tags": [
+        "sim-to-real",
+        "perception-estimation"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-11-23",
+      "source": "openalex",
+      "notes": "relevance score 5",
+      "doi": "10.5281/zenodo.24285206",
+      "url": "https://doi.org/10.5281/zenodo.24285206",
+      "pdf": "https://doi.org/10.5281/zenodo.24285206",
+      "abstract": "F1Tenth.jl is an F1TENTH simulator in Julia. It is a port of the Python f1tenth_gym, and it keeps the API of the Python code. It simulates one real F1TENTH car, ForzaETH's NUC5, from published values: Magic Formula tires with a friction ellipse, the low-level actuator chain of the car (command limiter, steering servo and VESC speed loop), and its Hokuyo UST-10LX LiDAR as its specification describes it.",
+      "institutions": [
+        "University of North Carolina at Chapel Hill"
+      ]
+    },
+    {
+      "id": "gupta-2026-demo",
+      "title": "Demo: Deadline-Aware Real-Time Planning on F1TENTH",
+      "authors": [
+        "Samir Gupta",
+        "Michael Yuhas",
+        "Qiao-Si Lei",
+        "Abhishek Dubey"
+      ],
+      "year": 2026,
+      "venue": "IEEE International Conference on Embedded and Real-Time Computing Systems and Applications",
+      "venue_short": "IEEE International Conference on Embe...",
+      "type": "conference",
+      "tags": [
+        "planning",
+        "systems-platform",
+        "raceline-optimization"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-11-23",
+      "source": "semanticscholar",
+      "notes": "relevance score 5",
+      "doi": "10.1109/rtcsa71153.2026.00037",
+      "url": "https://www.semanticscholar.org/paper/184908533297bff7c7a2a0f76a4861e8faa88cbc",
+      "abstract": "We demonstrate a complete, real-time autonomous racing stack that deploys Deadline-Aware Monte Carlo Tree Search (DA-MCTS) on physical F1TENTH hardware powered by an NVIDIA Jetson Orin Nano. DA-MCTS adapts the risk profile of its sampled actions to the compute budget available at runtime, letting a sampling-based planner meet a hard control deadline on a resource-constrained processor without retuning. On F1TENTH hardware, DA-MCTS computes a racing line online and attains lap times competitive with pure-pursuit and Stanley baselines that require a precomputed reference line. Demo video link: https://youtu.be/vgiwadLAvKs and source code link: https://github.com/scope-lab-vu/RTCSA_Demo_ws."
+    },
+    {
+      "id": "kim-2026-reinforcement",
+      "title": "A Reinforcement Learning-Guided Switching Model Predictive Control System for Autonomous Head-to-Head Racing",
+      "authors": [
+        "Geon-Woo Kim",
+        "Minseok Kim",
+        "Tae-Hyoung Park"
+      ],
+      "year": 2026,
+      "venue": "2026 IEEE Intelligent Vehicles Symposium (IV)",
+      "venue_short": "IV",
+      "type": "conference",
+      "tags": [
+        "control-mpc",
+        "multi-agent",
+        "reinforcement-learning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-11-23",
+      "source": "semanticscholar",
+      "notes": "relevance score 3",
+      "doi": "10.1109/iv66570.2026.11624045",
+      "url": "https://www.semanticscholar.org/paper/c149571c9b68d296b0d1ad5f5bea2f90d8136fef",
+      "abstract": "In autonomous head-to-head racing, maximizing hardware performance and executing collision-free overtaking maneuvers are critical for achieving competitive lap times. Model Predictive Control (MPC) is a powerful framework for such tasks, however, its reliance on a single set of parameters makes it difficult to adapt to diverse driving scenarios. This paper presents a Reinforcement Learning (RL)-guided Switching Model Predictive Control (SMPC) framework designed to address this challenge. The proposed system defines three types of specialized MPC controllers, each optimized for a different racing strategy. An RL-guided decision-making module dynamically selects the most suitable controller based on the current driving context. The reward function is carefully designed to consider overtaking success, collision avoidance, smooth control, and overall racing performance. Experiments conducted in the F1TENTH GYM simulator demonstrate that the proposed method achieves a 34% improvement in overtaking success rate compared to a baseline."
+    },
+    {
+      "id": "oh-2026-winning",
+      "title": "Winning a Won Game: Strict Reach-Avoid-Stay Control Barrier Functions for High-Dimensional Black-Box Systems",
+      "authors": [
+        "Donggeon David Oh",
+        "D. Nguyen",
+        "Gong-Kai Yuan",
+        "Qing-Chen Li",
+        "J. F. Fisac",
+        "Hai-Min Hu"
+      ],
+      "year": 2026,
+      "venue": "arXiv.org",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "safety",
+        "multi-agent",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-11-23",
+      "source": "semanticscholar",
+      "notes": "relevance score 2",
+      "doi": "10.48550/arxiv.2609.19449",
+      "arxiv": "2609.19449",
+      "url": "https://www.semanticscholar.org/paper/afc2374e9a2899fc1bef9bb1b8cffe732890b85f",
+      "abstract": "Robots must complete their tasks and maintain the achieved outcomes while avoiding safety failures at all times. Strict reach-avoid-stay (sRAS) formalizes this requirement: safely reaching a target and remaining there indefinitely after first entry. We propose an sRAS Q-control barrier function (CBF) safety filter for high-dimensional black-box systems under bounded uncertainty. Our construction combines a stay value encoding safe permanent residence in a target subset with a reach-avoid value encoding safe reachability of this subset while avoiding target states from which safe permanent residence cannot be guaranteed. We prove that these values jointly yield a valid robust discrete-time CBF and lift them to state-action Q-functions for runtime intervention. For exact values and under a measure-zero condition, our filter preserves sRAS feasibility from almost every winnable initial state and keeps the system safely within the target after first entry, against all admissible uncertainty realizations. We adopt reachability-based adversarial reinforcement learning for scalable value approximation using only black-box interactions. Notably, neither synthesis nor deployment of our filter requires known dynamics, affine structure, value derivatives, or hand-designed barriers. We validate our framework in quadruped gap jumping in simulation and hardware, where the robot crosses the gap, lands safely, and remains safe afterward. Simulated F1TENTH races further demonstrate safe overtaking and lead retention.",
+      "citations": 2
+    },
+    {
+      "id": "al-sunni-2026-lba",
+      "title": "LBA-CBF: Rapidly Adaptive Safety Filters via Parallel Dynamics Inference",
+      "authors": [
+        "Maitham F. al-Sunni",
+        "Timeea-Andreea Radu",
+        "H. Almubarak",
+        "He-You Liao",
+        "Michael Görner",
+        "F. Maurelli",
+        "John M. Dolan"
+      ],
+      "year": 2026,
+      "venue": "arXiv preprint",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "safety",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-11-23",
+      "source": "semanticscholar",
+      "notes": "relevance score 2",
+      "arxiv": "2610.08765",
+      "url": "https://www.semanticscholar.org/paper/f94575fdb7ce865d240ac5b3d5b5f084924144d4",
+      "abstract": "Control barrier functions (CBFs) certify commands through an assumed dynamics model, so an abrupt, unmeasured regime change can undermine the certificate exactly when safety matters most. We present Look-Back Adaptive Control Barrier Functions (LBA-CBF), which rank a finite bank of candidate dynamics by recent prediction error over a short look-back window and enforce the high-order CBF condition against every model within a tolerance of the best, spanning best-fit adaptation to full-bank robust filtering. The dynamics may depend nonlinearly on the unknown parameters, and no switching model or continuously parameterized estimator is required. We prove that any feasible filtered input satisfies the true CBF condition whenever a safety-representative candidate is retained. In quadrotor simulation with abrupt wind reversals and an unknown payload, LBA-CBF is safe and reaches the goal from all random initial conditions, matching an oracle, while adaptive and robust baselines achieve 0-88% success. Banks of up to 250,000 models run inside the control loop, and Crazyflie 2.1 and F1TENTH experiments demonstrate adaptation to wind, payload release, and varying tire-road friction. Code, videos, and project details are available at: https://lla-control.github.io",
+      "citations": 1
+    },
+    {
+      "id": "gupta-2026-da",
+      "title": "DA-MCTS: Deadline-Aware Action Exploration for Safe Real-Time Planning",
+      "authors": [
+        "Samir Gupta",
+        "Michael Yuhas",
+        "Abhishek Dubey"
+      ],
+      "year": 2026,
+      "venue": "IEEE International Conference on Embedded and Real-Time Computing Systems and Applications",
+      "venue_short": "IEEE International Conference on Embe...",
+      "type": "conference",
+      "tags": [
+        "safety",
+        "systems-platform",
+        "planning"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-11-23",
+      "source": "semanticscholar",
+      "notes": "relevance score 2",
+      "doi": "10.1109/rtcsa71153.2026.00015",
+      "url": "https://www.semanticscholar.org/paper/3ccc5cb7561caf2b20b51c0948974d23bd35ff24",
+      "abstract": "Real-time motion planning for autonomous racing must operate under strict computational deadlines while maintaining safe and reliable behavior. However, the quality and safety of planning algorithms depend heavily on the computational budget available on the deployment hardware. Policies tuned on powerful systems can become unsafe on resource-constrained platforms, where limited planning iterations leave aggressive actions insufficiently explored. While existing planning approaches may limit the size of their search space, they do not explicitly adapt the risk profile of sampled actions to the available relative deadline. These approaches overlook how limited computational resources leave aggressive actions insufficiently explored, thereby compromising safety. We present Deadline-Aware MCTS (DA-MCTS), which adapts action exploration in continuous-space MCTS according to the available relative deadline. Our approach partitions the action space into conservative, aggressive, and Gaussian prior sampling categories, and uses a neural network that maps runtime features to a probability distribution over these categories. This enables safe behavior under tight budgets, where sampling shifts toward conservative actions, and improved performance as additional compute becomes available. We further extend DA-MCTS with a friction-aware feature representation that allows the planner to adapt its behavior and generalize to previously unseen friction conditions. In F1TENTH racing simulations with varying maps, friction conditions, and deadlines, we demonstrate that DA-MCTS drives conservatively and collisionfree across a wide range of friction conditions under tight deadlines while achieving progressively faster lap times as deadlines increase. We further validate these results with F1TENTH hardware-in-the-loop experiments. Source code is available at https://github.com/scope-lab-vu/DA_MCTS_RTCSA_2026",
+      "citations": 1
+    },
+    {
+      "id": "borquez-2026-confidence",
+      "title": "Confidence-Modulated Safety Filtering for End-to-End Policies",
+      "authors": [
+        "Javier Borquez",
+        "Jaime F. Fisac"
+      ],
+      "year": 2026,
+      "venue": "arXiv (Cornell University)",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "safety",
+        "control-mpc",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-11-23",
+      "source": "openalex",
+      "notes": "relevance score 2",
+      "doi": "10.48550/arxiv.2610.40922",
+      "arxiv": "2610.40922",
+      "url": "https://doi.org/10.48550/arxiv.2610.40922",
+      "pdf": "https://arxiv.org/pdf/2610.40922",
+      "abstract": "End-to-end policies, from task-specific controllers to robot foundation models, learn complex behavior from raw observations but are not guaranteed to remain safe, so they are often wrapped in a safety filter. The resulting system operates under two domains: the filter's operational design domain (ODD), where its assumptions hold and safety is certified, and the policy's competence domain, where it is reliable. Filters typically fix their conservativeness regardless of the policy's competence, trading performance inside the ODD against margin beyond it. We ask whether the policy's confidence should set that level, and propose a filter-agnostic pipeline that modulates it at runtime: inside the ODD, where every setting is safe, confidence buys performance; beyond it, low confidence adds margin, which helps when it flags where the filter's model fails. Preliminary F1TENTH simulations, where this holds, show the modulated filter combining the strengths of permissive and conservative filters.",
+      "institutions": [
+        "Princeton University"
+      ]
+    },
+    {
+      "id": "sarantinoudis-2026-creating",
+      "title": "Creating and Importing Environments",
+      "authors": [
+        "Nikolaos Sarantinoudis"
+      ],
+      "year": 2026,
+      "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+      "venue_short": "Zenodo (CERN European Organization fo...",
+      "type": "journal",
+      "tags": [
+        "systems-platform",
+        "sim-to-real"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-11-23",
+      "source": "openalex",
+      "notes": "relevance score 2",
+      "doi": "10.5281/zenodo.24056294",
+      "url": "https://doi.org/10.5281/zenodo.24056294",
+      "pdf": "https://doi.org/10.5281/zenodo.24056294",
+      "abstract": "Supplementary guide accompanying “A new open-source RoboRacer simulator using ROS2 and Gazebo”. It explains occupancy-map creation, conversion to STL meshes using map2gazebo, and the configuration of custom Gazebo environments.",
+      "institutions": [
+        "Technical University of Crete"
+      ]
+    },
+    {
+      "id": "yao-2026-atom",
+      "title": "ATOM: Abstract Transition and Option Modeling - Experience-Informed Hierarchical Navigation",
+      "authors": [
+        "Changxuan Yao",
+        "Panagiotis Tsiotras"
+      ],
+      "year": 2026,
+      "venue": "arXiv (Cornell University)",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-11-23",
+      "source": "openalex",
+      "notes": "relevance score 2",
+      "doi": "10.48550/arxiv.2610.17555",
+      "arxiv": "2610.17555",
+      "url": "https://doi.org/10.48550/arxiv.2610.17555",
+      "pdf": "https://arxiv.org/pdf/2610.17555",
+      "abstract": "We propose ATOM (Abstract Transition and Option Modeling), a hierarchical navigation framework that combines higher-level graph planning with reusable lower-level option policies for efficient repeated navigation in large-scale 3D environments represented by hierarchical structures such as 3D scene graphs (3DSGs). ATOM operates on a hierarchical graph representation, implemented using, for instance, the Rooms and Places layers of a 3DSG, where each directed abstract transition is associated with a navigation option. For each transition, ATOM computes and stores a reusable option policy along with its state-dependent cost-to-go. Across repeated navigation tasks, ATOM maintains a smoothed empirical distribution over option initiation states and uses it to progressively refine the corresponding abstract transition cost. Ablation studies show that ATOM reduces cumulative repeated-planning time by 97.5% relative to a monolithic MDP baseline while maintaining trajectories within approximately 7% of a Global Places A* shortest-path reference. Experience-informed refinement further reduces abstract transition-cost estimation error by 10.3%. Physical experiments validate ATOM on an F1Tenth vehicle, successfully completing all five navigation queries with 43% of inter-region option executions reusing previously generated solutions.",
+      "institutions": [
+        "Georgia Institute of Technology"
+      ]
+    },
+    {
+      "id": "rajagopal-2026-fastfunnels",
+      "title": "FASTFUNNELS: Agile Multi Robot Navigation in Narrow Spaces via Adaptive Dynamic Funnels",
+      "authors": [
+        "Vignesh Rajagopal",
+        "Rohan Chandra"
+      ],
+      "year": 2026,
+      "venue": "arXiv (Cornell University)",
+      "venue_short": "arXiv",
+      "type": "preprint",
+      "tags": [
+        "control-mpc",
+        "reinforcement-learning",
+        "safety"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-11-23",
+      "source": "openalex",
+      "notes": "relevance score 2",
+      "doi": "10.48550/arxiv.2611.09005",
+      "arxiv": "2611.09005",
+      "url": "https://doi.org/10.48550/arxiv.2611.09005",
+      "pdf": "https://arxiv.org/pdf/2611.09005",
+      "abstract": "We focus on the problem of high-speed multi-robot navigation in cluttered spaces with tight spatial constraints. A key challenge is balancing safety with agility, as existing methods often trade one for the other (slowing down near a bottleneck to avoid collisions versus failing to swerve in time at high speeds), especially for car-like systems. Our approach belongs to the family of formation control methods, in which Ackermann-steering agents coordinate while navigating tight spaces. However, current formation control techniques rely on rigid, pre-defined shapes and transitions that depend on initial conditions, the environment, and vehicle dynamics, and are impractical to maintain at high speeds. For example, agents passing through a small gap must first form a square, transform into a line using analytical equations, and then return to a square. In contrast, our approach is inspired by a droplet of water that continuously adapts its shape to the space it flows through without slowing down. We propose a hierarchical algorithm in which, at the high level, a reinforcement learning policy produces a dynamic, blob-like elliptical patch that morphs its shape in real time, squeezing, stretching, and orienting itself around obstacles and through tight spaces. At the low level, the robots are controlled via distributed model predictive control (DMPC) to stay inside the patch, which acts as a soft forcing function, while avoiding collisions with each other. We evaluate our approach, FastFunnels, on simulated F1TENTH racing cars across 14 scenarios with N=1 to N=6 robots, averaged over 20 trials each. FastFunnels achieves an 89% completion rate at 7.73 m/s, while all baselines either fail to complete the track or succeed only at very low speeds (0.07-1.79 m/s, about 40% completion rate)."
+    },
+    {
+      "id": "baykal-2026-cloud",
+      "title": "Cloud-on-Demand: Automating Safety-Aware Cloud DNN Invocation for Edge-Cloud Hybrid CPS",
+      "authors": [
+        "Cem Baykal",
+        "Prateek Ganguli",
+        "Ting-An Zhu",
+        "Samarjit Chakraborty"
+      ],
+      "year": 2026,
+      "venue": "Coins",
+      "venue_short": "Coins",
+      "type": "conference",
+      "tags": [
+        "safety",
+        "perception-estimation",
+        "systems-platform"
+      ],
+      "featured": false,
+      "status": "candidate",
+      "added": "2026-11-23",
+      "source": "semanticscholar",
+      "notes": "relevance score 2",
+      "doi": "10.1109/coins69995.2026.11715565",
+      "url": "https://www.semanticscholar.org/paper/e2b294acafb6adbae25ceb4ef8560660ef44f5f4",
+      "abstract": "Hybrid edge-cloud perception DNNs combine fast on-board inference with more accurate but delayed cloud assistance for learning-enabled CPS. The key challenge is deciding when cloud inference should be invoked: always-on cloud usage improves information quality but increases latency, bandwidth, and monetary cost, while fixed schedules ignore time-varying control difficulty. We formulate this problem as runtime design automation for safety-aware cloud invocation in delayed edge-cloud CPS. To this end, we propose Cloud-on-Demand, a lightweight scheduling framework based on the Shift-Response Policy (SRP) and its causal refinement SRP-o. The method uses self-normalized feature-shift and control-response-shift signals with cloud-freshness safeguards to adapt cloud invocations online. We also compare against an approximate Bayesian neural network (BNN) baseline using Monte Carlo dropout to convert predictive uncertainty into a cloud-query signal. We evaluate the approach on a delayed F1Tenth edge-cloud autonomous racing stack using cloud-call rate, maximum cross-track error, RMSE, and failure-related outcomes. Results show that SRP-family methods substantially reduce cloud usage while remaining competitive with fixed-interval, probabilistic, and BNN-based baselines in worst-case tracking performance; at Dcloud = 20, SRP operates at about 4.4% cloud-call rate, while the BNN baseline achieves lower maximum cross-track error only by using substantially more cloud budget (≈ 15.9% CCR) and worse RMSE. These results demonstrate that automated, safety-aware cloud invocation improves the cost-performance tradeoff in CPS with hybrid edge-cloud perception DNNs."
     }
   ]
 }
