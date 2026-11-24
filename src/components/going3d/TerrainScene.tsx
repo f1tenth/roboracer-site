@@ -334,7 +334,7 @@ function stepTraffic(tr: Traffic, dt: number) {
 
 /** The traffic as the page opens: run from empty (fixed seed, so every load
  * starts the same) until the track is full and a car is in the air between
- * the first two rollers (also the still under reduced motion); random after. */
+ * the first two rollers; random after. */
 function startingTraffic(): Traffic {
   const tr: Traffic = { cars: [], t: 0, tick: 0, due: [], last: [-1e9, -1e9], pair: false, rand: seeded(11) };
   const flying = () => tr.cars.some((c) => c.s > STRAIGHT - 10 && c.s < STRAIGHT - 7.5 && liftAt(c.lane, c.s) > 0.25);
@@ -343,6 +343,30 @@ function startingTraffic(): Traffic {
   tr.rand = Math.random;
   return tr;
 }
+
+/** The still under reduced motion: cars set by hand along their rails, as in
+ * the promotional images. One on the first rollers; one just leaving the
+ * third (0.2 m into its jump, in the lane that keeps it over the track); one
+ * in the banked turn; one climbing the first roller after it; one past the
+ * second; one starting down the exit straight. The far end stays clear. */
+const STILL_CARS: Car[] = (() => {
+  /** The first point at or after s where a car in this lane is on the surface. */
+  const grounded = (lane: number, s: number) => {
+    while (liftAt(lane, s) > 0.005) s += RAIL_STEP;
+    return s;
+  };
+  /** The take-off from the third roller, then a little way into the flight. */
+  let jump = STRAIGHT - 3.8;
+  while (jump < STRAIGHT && liftAt(1, jump) < 0.01) jump += RAIL_STEP;
+  return [
+    { s: grounded(0, 44), lane: 0, tint: 1 },
+    { s: jump + 0.2, lane: 1, tint: 0 },
+    { s: STRAIGHT + ARC * 0.55, lane: 1, tint: 2 },
+    { s: 71, lane: 0, tint: 3 },
+    { s: grounded(1, 79), lane: 1, tint: 1 },
+    { s: grounded(0, 96), lane: 0, tint: 0 },
+  ];
+})();
 
 /** A car's pose on the track: ground point, forward (pitched along its
  * path), left (rolled with the banking), up. */
@@ -962,7 +986,7 @@ export default function TerrainScene({ variant, header, label, className = "" }:
     const c = canvasRef.current;
     if (c) {
       if (variant === "inline") drawMark(c);
-      else draw(c, p, trafficRef.current?.cars ?? [], underRef.current);
+      else draw(c, p, reduced ? STILL_CARS : (trafficRef.current?.cars ?? []), underRef.current);
     }
     // The label only changes with the scroll: leave it alone otherwise, as
     // restyling its layered shadow every frame is costly.
