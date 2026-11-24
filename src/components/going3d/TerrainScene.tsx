@@ -153,6 +153,11 @@ const LOOP = TOTAL + 60;
  * so on tall screens, where all of it is in view, the track never just
  * stops; cars fade with it. */
 const FADE_OUT: [number, number] = [TOTAL - 50, TOTAL - 16];
+/** The edges' glow, as [extra width in units of the glow radius, opacity]:
+ * stacked from wide and faint to narrow, their opacities add up to the
+ * falloff of the blur they replace (a Gaussian of sigma r / 2, peaking at
+ * about 13% magenta on the line). */
+const GLOW: [number, number][] = [[2.4, 0.016], [1.8, 0.028], [1.2, 0.038], [0.7, 0.032], [0.3, 0.016]];
 const endFade = (s: number) => 1 - ease((s - FADE_OUT[0]) / (FADE_OUT[1] - FADE_OUT[0]));
 
 /** Floor position, direction (t) and left (n) at s metres along the track; past the end it runs straight on. */
@@ -329,7 +334,7 @@ function stepTraffic(tr: Traffic, dt: number) {
 
 /** The traffic as the page opens: run from empty (fixed seed, so every load
  * starts the same) until the track is full and a car is in the air between
- * the first two rollers (also the still under reduced motion); random after. */
+ * the first two rollers; random after. */
 function startingTraffic(): Traffic {
   const tr: Traffic = { cars: [], t: 0, tick: 0, due: [], last: [-1e9, -1e9], pair: false, rand: seeded(11) };
   const flying = () => tr.cars.some((c) => c.s > STRAIGHT - 10 && c.s < STRAIGHT - 7.5 && liftAt(c.lane, c.s) > 0.25);
@@ -338,6 +343,30 @@ function startingTraffic(): Traffic {
   tr.rand = Math.random;
   return tr;
 }
+
+/** The still under reduced motion: cars set by hand along their rails, as in
+ * the promotional images. One on the first rollers; one just leaving the
+ * third (0.2 m into its jump, in the lane that keeps it over the track); one
+ * in the banked turn; one climbing the first roller after it; one past the
+ * second; one starting down the exit straight. The far end stays clear. */
+const STILL_CARS: Car[] = (() => {
+  /** The first point at or after s where a car in this lane is on the surface. */
+  const grounded = (lane: number, s: number) => {
+    while (liftAt(lane, s) > 0.005) s += RAIL_STEP;
+    return s;
+  };
+  /** The take-off from the third roller, then a little way into the flight. */
+  let jump = STRAIGHT - 3.8;
+  while (jump < STRAIGHT && liftAt(1, jump) < 0.01) jump += RAIL_STEP;
+  return [
+    { s: grounded(0, 44), lane: 0, tint: 1 },
+    { s: jump + 0.2, lane: 1, tint: 0 },
+    { s: STRAIGHT + ARC * 0.55, lane: 1, tint: 2 },
+    { s: 71, lane: 0, tint: 3 },
+    { s: grounded(1, 79), lane: 1, tint: 1 },
+    { s: grounded(0, 96), lane: 0, tint: 0 },
+  ];
+})();
 
 /** A car's pose on the track: ground point, forward (pitched along its
  * path), left (rolled with the banking), up. */
@@ -437,11 +466,45 @@ function seeded(seed: number) {
 }
 
 /** The full scene for the chapter at progress p. */
-function draw(canvas: HTMLCanvasElement, p: number, cars: Car[] = []) {
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
+/** The veil that keeps the copy readable over the top of the scene: ink,
+ * opaque at the top, 40% a third of the way down, gone by 60% (t: 0 at the
+ * top, 1 at the bottom). Painted into the canvas rather than laid over it as
+ * a gradient element: re-blending a full-screen overlay on every frame of the
+ * animation halved Firefox's frame rate. */
+const veilAt = (t: number) => (t < 0.35 ? 1 - 0.6 * (t / 0.35) : t < 0.6 ? 0.4 * (1 - (t - 0.35) / 0.25) : 0);
+
+/** What each track canvas (under the cars) last showed: the scroll and size
+ * it was painted for. */
+const UNDER_KEYS = new WeakMap<HTMLCanvasElement, string>();
+
+/** A stand-in context that paints nothing (while the track's canvas is still
+ * good): reads go to the real one, and gradients come from it, so the code
+ * that builds the scene runs unchanged. */
+function noPaint(real: CanvasRenderingContext2D): CanvasRenderingContext2D {
+  return new Proxy(real, {
+    get(target, prop) {
+      if (prop === "createLinearGradient" || prop === "createRadialGradient") return (target[prop] as (...a: number[]) => CanvasGradient).bind(target);
+      const v = (target as unknown as Record<string | symbol, unknown>)[prop];
+      return typeof v === "function" ? () => undefined : v;
+    },
+    set: () => true,
+  });
+}
+
+function draw(canvas: HTMLCanvasElement, p: number, cars: Car[] = [], under: HTMLCanvasElement | null = null) {
+  const main = canvas.getContext("2d");
+  if (!main) return;
   const W = canvas.width;
   const H = canvas.height;
+  // Everything up to the cars depends only on the scroll and the canvas size,
+  // so it goes on a canvas of its own under this one, repainted only when one
+  // of those changes; each frame only the cars are drawn afresh, on top. (No
+  // copying between canvases: that stalls Firefox.)
+  const uctx = under ? under.getContext("2d") : null;
+  const key = uctx ? `${p}|${W}|${H}` : "";
+  const fresh = !key || UNDER_KEYS.get(under!) !== key;
+  if (uctx) UNDER_KEYS.set(under!, key);
+  let ctx: CanvasRenderingContext2D = !uctx ? main : fresh ? uctx : noPaint(main);
   const { b, c, k } = phases(p);
   const cam = cameraAt(p);
   /** Neutral (the plain 2D line) blended towards a colour by k. */
@@ -464,7 +527,7 @@ function draw(canvas: HTMLCanvasElement, p: number, cars: Car[] = []) {
   // Horizon glow, synthwave-style: magenta at the horizon line fading into
   // violet below it. Only when the horizon is anywhere near the frame.
   const hy = oy - F * Math.tan(cam.pitch);
-  if (k > 0.001 && hy > -H * 0.3 && hy < H * 1.3) {
+  if (fresh && k > 0.001 && hy > -H * 0.3 && hy < H * 1.3) {
     const g = ctx.createLinearGradient(0, hy - H * 0.22, 0, hy + H * 0.45);
     g.addColorStop(0, "rgba(251,0,255,0)");
     g.addColorStop(0.32, `rgba(251,0,255,${0.16 * k})`);
@@ -513,7 +576,7 @@ function draw(canvas: HTMLCanvasElement, p: number, cars: Car[] = []) {
   // Under the raised track: its shadow on the floor (the footprint), and a
   // curtain of cyan light from each raised edge down to the floor, fading
   // towards it (four bands, each one path so overlaps never double up).
-  if (b > 0.01) {
+  if (fresh && b > 0.01) {
     const raised = (i: number) => L[i].y > 0.02 || R[i].y > 0.02 || L[i + 1].y > 0.02 || R[i + 1].y > 0.02;
     const flat = (q: Pt): Pt => ({ x: q.x, y: 0, z: q.z });
     ctx.fillStyle = `rgba(6,4,16,${0.3 * b})`;
@@ -596,7 +659,7 @@ function draw(canvas: HTMLCanvasElement, p: number, cars: Car[] = []) {
   const carItems: { d: number; car: Car; pose: CarPose }[] = [];
   for (const { d, i, car, pose } of items) {
     if (car && pose) carItems.push({ d, car, pose });
-    else piece(i);
+    else if (fresh) piece(i);
   }
 
   // The two edges in the logo gradient across the track (cyan, magenta,
@@ -639,21 +702,51 @@ function draw(canvas: HTMLCanvasElement, p: number, cars: Car[] = []) {
     }
   };
   // White first (the plain 2D line), fading out as the colour comes in.
-  if (k < 1) {
+  if (fresh && k < 1) {
     ctx.globalAlpha = 1 - k;
     ctx.strokeStyle = "rgba(238,240,247,0.95)";
     edges();
   }
-  if (k > 0) {
+  if (fresh && k > 0) {
+    // The magenta glow: a few soft, wide strokes under the edge, widest and
+    // faintest first (no canvas blur: shadowBlur costs Firefox and Safari
+    // tens of milliseconds a frame). It grows as the track turns 3D.
+    const base = ctx.lineWidth;
+    const r = (W / 140) * (0.35 + 0.65 * b);
+    ctx.lineCap = "butt";
+    ctx.strokeStyle = "rgb(251,0,255)";
+    for (const [wide, a] of GLOW) {
+      ctx.globalAlpha = k * a;
+      ctx.lineWidth = base + r * wide;
+      edges();
+    }
+    ctx.lineCap = "round";
+    ctx.lineWidth = base;
     ctx.globalAlpha = k;
     ctx.strokeStyle = edge;
-    ctx.shadowColor = "rgba(251,0,255,0.75)";
-    ctx.shadowBlur = (W / 140) * (0.35 + 0.65 * b);
     edges();
   }
 
   ctx.globalAlpha = 1;
   ctx.shadowBlur = 0;
+
+  // The veil over the top of the track.
+  if (fresh) {
+    const g = ctx.createLinearGradient(0, 0, 0, H * 0.6);
+    g.addColorStop(0, "rgba(14,15,26,1)");
+    g.addColorStop(0.35 / 0.6, "rgba(14,15,26,0.4)");
+    g.addColorStop(1, "rgba(14,15,26,0)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H * 0.6);
+  }
+
+  // The track is done (on its own canvas): the cars go on this one, over it.
+  if (uctx) {
+    ctx = main;
+    main.clearRect(0, 0, W, H);
+    main.lineCap = "round";
+    main.lineJoin = "round";
+  }
 
   // Cars last, on top of the edges' glow, far to near. Any track clearly
   // nearer than a car (a crest, the high side of the banking) is then painted
@@ -663,7 +756,10 @@ function draw(canvas: HTMLCanvasElement, p: number, cars: Car[] = []) {
     // Fading in (as the track turns 3D, or past the start) and out (with the
     // end of the track) blends the car's colours towards the floor rather than
     // making it see-through, so its hidden faces never show.
-    const fade = carAlpha * Math.min(1, car.s / 8) * endFade(car.s);
+    // The veil too: a car under it fades towards the floor just as far.
+    const at = project(pose.p);
+    const veiled = at ? veilAt(at.sy / H) : 0;
+    const fade = carAlpha * Math.min(1, car.s / 8) * endFade(car.s) * (1 - veiled);
     if (fade < 0.01) continue;
     ctx.save();
     ctx.shadowBlur = 0;
@@ -866,6 +962,8 @@ export default function TerrainScene({ variant, header, label, className = "" }:
   const wrapRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  /** The track, under the cars' canvas (the pinned scene only). */
+  const underRef = useRef<HTMLCanvasElement>(null);
   const progressRef = useRef(1);
   const beforeRef = useRef<HTMLSpanElement>(null);
   const afterRef = useRef<HTMLSpanElement>(null);
@@ -882,13 +980,18 @@ export default function TerrainScene({ variant, header, label, className = "" }:
   const renderRef = useRef((p: number) => {
     void p;
   });
+  const labelKeyRef = useRef("");
   renderRef.current = (p: number) => {
     progressRef.current = p;
     const c = canvasRef.current;
     if (c) {
       if (variant === "inline") drawMark(c);
-      else draw(c, p, trafficRef.current?.cars ?? []);
+      else draw(c, p, reduced ? STILL_CARS : (trafficRef.current?.cars ?? []), underRef.current);
     }
+    // The label only changes with the scroll: leave it alone otherwise, as
+    // restyling its layered shadow every frame is costly.
+    if (String(p) === labelKeyRef.current) return;
+    labelKeyRef.current = String(p);
     // Digit swap in the middle of the shift, depth as the bumps grow.
     const t = Math.max(0, Math.min(1, (p - 0.46) / 0.14));
     const swap = t * t * (3 - 2 * t);
@@ -943,8 +1046,12 @@ export default function TerrainScene({ variant, header, label, className = "" }:
     if (!c) return;
     const fit = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      c.width = Math.round(c.clientWidth * dpr);
-      c.height = Math.round(c.clientHeight * dpr);
+      for (const el of [c, underRef.current]) {
+        if (!el) continue;
+        el.width = Math.round(c.clientWidth * dpr);
+        el.height = Math.round(c.clientHeight * dpr);
+        UNDER_KEYS.delete(el);
+      }
       renderRef.current(progressRef.current);
     };
     fit();
@@ -983,6 +1090,7 @@ export default function TerrainScene({ variant, header, label, className = "" }:
   );
 
   const canvas = <canvas ref={canvasRef} id={canvasId} aria-hidden="true" className="absolute inset-0 h-full w-full" />;
+  const underCanvas = <canvas ref={underRef} aria-hidden="true" className="absolute inset-0 h-full w-full" />;
 
   if (variant === "inline") {
     return (
@@ -1000,12 +1108,9 @@ export default function TerrainScene({ variant, header, label, className = "" }:
         ref={stageRef}
         className={`${pinned ? "sticky top-0 h-[100svh]" : "h-[85svh] min-h-[32rem]"} relative w-full overflow-hidden`}
       >
+        {underCanvas}
         {canvas}
-        {/* Keeps the copy readable where the far track runs behind it. */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-linear-to-b from-ink-900 via-ink-900/40 via-35% to-transparent to-60%"
-        />
+        {/* The veil that keeps the copy readable is painted into the canvas (see veilAt). */}
         <div className="relative mx-auto flex h-full max-w-page flex-col justify-between px-6 pb-10 pt-[calc(var(--spacing-nav)+2rem)]">
           <div className="max-w-md">{header}</div>
           {label && (
